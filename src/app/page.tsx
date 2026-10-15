@@ -1325,6 +1325,59 @@ export default function Home() {
               </div>
             </div>
 
+            <div className="bg-neutral-950 border border-white/10 overflow-hidden mb-4">
+              <img src="/tip-fuse.jpg" alt="Fuse box" className="w-full h-48 object-cover cursor-pointer" onClick={() => setLightbox('/tip-fuse.jpg')} />
+              <div className="p-4">
+                <h3 className="font-semibold text-amber-400 mb-2">7. SKRZYNKA BEZPIECZNIKÓW POD MASKĄ</h3>
+                <p className="text-sm text-neutral-300 mb-2">Lokalizacja: tył komory silnika, przy zbiorniku hamulcowym.</p>
+                <ul className="text-sm text-neutral-300 space-y-1">
+                  <li>• <strong>ECM-B</strong> — pompa paliwa, PCM</li>
+                  <li>• <strong>HORN</strong> — klakson, lampy pod maską</li>
+                  <li>• <strong>GLOW PLUG</strong> — świece żarowe (diesel)</li>
+                  <li>• <strong>FUEL SOL</strong> — solenoid paliwa (diesel)</li>
+                </ul>
+                <p className="text-xs text-neutral-500 mt-2">Schemat na wewnętrznej stronie pokrywy</p>
+              </div>
+            </div>
+
+            <div className="bg-neutral-950 border border-white/10 overflow-hidden mb-4">
+              <img src="/tip-tailgate.jpg" alt="Tailgate" className="w-full h-48 object-cover cursor-pointer" onClick={() => setLightbox('/tip-tailgate.jpg')} />
+              <div className="p-4">
+                <h3 className="font-semibold text-amber-400 mb-2">8. KLAPA NIE OTWIERA SIĘ — TRIK</h3>
+                <p className="text-sm text-neutral-300 mb-2">Typowy problem: zacięty mechanizm lub zerwane klipsy.</p>
+                <ol className="text-sm text-neutral-300 space-y-1 list-decimal list-inside">
+                  <li>Zdejmij osłonę klamki (3 śruby Torx)</li>
+                  <li>Sprawdź klipsy łączące drążki</li>
+                  <li>Nasmaruj mechanizm WD-40</li>
+                  <li>Jeśli zerwane — wymień klipsy (OEM: 15991785)</li>
+                </ol>
+                <p className="text-xs text-neutral-500 mt-2">Trik awaryjny: wciśnij zatrzaski z boków jednocześnie</p>
+              </div>
+            </div>
+
+            <div className="bg-neutral-950 border border-white/10 p-4 mb-4">
+              <h3 className="font-semibold text-amber-400 mb-2">9. UKRYTY BEZPIECZNIK POMPY PALIWA</h3>
+              <p className="text-sm text-neutral-300 mb-2">Jeśli silnik nie odpala — sprawdź ten bezpiecznik.</p>
+              <ul className="text-sm text-neutral-300 space-y-1">
+                <li>• Lokalizacja: skrzynka pod deską, bezpiecznik ECM-B</li>
+                <li>• Wartość: 20A</li>
+                <li>• Zasila: pompę paliwa i PCM</li>
+              </ul>
+              <p className="text-xs text-neutral-500 mt-2">Częsta przyczyna "nie odpala" — prosty test</p>
+            </div>
+
+            <div className="bg-neutral-950 border border-white/10 p-4 mb-4">
+              <h3 className="font-semibold text-amber-400 mb-2">10. TEST KOMPRESJI BEZ NARZĘDZI</h3>
+              <p className="text-sm text-neutral-300 mb-2">Szybki test stanu silnika.</p>
+              <ol className="text-sm text-neutral-300 space-y-1 list-decimal list-inside">
+                <li>Wykręć wszystkie świece</li>
+                <li>Zakryj otwór świecy kciukiem</li>
+                <li>Kręć rozrusznikiem 2-3 sekundy</li>
+                <li>Porównaj ciśnienie na każdym cylindrze</li>
+              </ol>
+              <p className="text-xs text-neutral-500 mt-2">Słabe ciśnienie = zużyte pierścienie lub zawory</p>
+            </div>
+
             <div className="bg-neutral-950 border border-white/10 p-4">
               <h3 className="font-semibold text-amber-400 mb-2">6. RESET ADAPTACJI SKRZYNI 4L60E</h3>
               <p className="text-sm text-neutral-300 mb-2">Po wymianie ATF skrzynia "uczy się" od nowa.</p>
