@@ -1,0 +1,37 @@
+name: Prepare import JSX fix
+on:
+  push:
+    branches: [seo-sitemap-robots]
+    paths: [.github/workflows/fix-import-jsx.yml]
+permissions:
+  contents: write
+jobs:
+  prepare-fix:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - name: Fix exact JSX text and push separate branch
+        shell: bash
+        run: |
+          set -euo pipefail
+          git switch -c fix-import-jsx-threshold
+          python3 - <<'PY'
+          from pathlib import Path
+          p = Path('src/app/page.tsx')
+          text = p.read_text(encoding='utf-8')
+          old = 'Osobowy >2000cm³'
+          new = 'Osobowy &gt;2000cm³'
+          if text.count(old) != 1:
+              raise SystemExit('Expected exactly one match; no files changed')
+          p.write_text(text.replace(old, new, 1), encoding='utf-8')
+          PY
+          git diff --check
+          git diff -- src/app/page.tsx
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add src/app/page.tsx
+          git commit -m 'Fix unescaped greater-than sign in import table'
+          git push origin HEAD:refs/heads/fix-import-jsx-threshold
