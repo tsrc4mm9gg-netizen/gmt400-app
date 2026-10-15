@@ -1696,6 +1696,82 @@ export default function Home() {
           </div>
         )}
 
+        {tab === 'dziennik' && (
+          <div>
+            <h2 className="text-2xl mb-6" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>DZIENNIK SERWISOWY</h2>
+            <div className="bg-neutral-950 border border-white/10 p-4 mb-4">
+              <h3 className="font-semibold text-amber-400 mb-3">HARMONOGRAM WYMIAN</h3>
+              <div className="space-y-3">
+                <div className="flex items-center justify-between border-b border-white/5 pb-2">
+                  <div>
+                    <p className="text-sm font-medium">Olej silnikowy</p>
+                    <p className="text-xs text-neutral-500">Co 5-8 tys. km lub 6 miesięcy</p>
+                  </div>
+                  <span className="text-amber-400 text-sm">PF1218</span>
+                </div>
+                <div className="flex items-center justify-between border-b border-white/5 pb-2">
+                  <div>
+                    <p className="text-sm font-medium">Filtr powietrza</p>
+                    <p className="text-xs text-neutral-500">Co 30 tys. km</p>
+                  </div>
+                  <span className="text-amber-400 text-sm">A1163C</span>
+                </div>
+                <div className="flex items-center justify-between border-b border-white/5 pb-2">
+                  <div>
+                    <p className="text-sm font-medium">Filtr paliwa</p>
+                    <p className="text-xs text-neutral-500">Co 50 tys. km</p>
+                  </div>
+                  <span className="text-amber-400 text-sm">GF626</span>
+                </div>
+                <div className="flex items-center justify-between border-b border-white/5 pb-2">
+                  <div>
+                    <p className="text-sm font-medium">Świece zapłonowe</p>
+                    <p className="text-xs text-neutral-500">Co 50 tys. km</p>
+                  </div>
+                  <span className="text-amber-400 text-sm">41-932</span>
+                </div>
+                <div className="flex items-center justify-between border-b border-white/5 pb-2">
+                  <div>
+                    <p className="text-sm font-medium">ATF 4L60E</p>
+                    <p className="text-xs text-neutral-500">Co 50 tys. km</p>
+                  </div>
+                  <span className="text-amber-400 text-sm">TF289</span>
+                </div>
+                <div className="flex items-center justify-between border-b border-white/5 pb-2">
+                  <div>
+                    <p className="text-sm font-medium">Płyn chłodzący</p>
+                    <p className="text-xs text-neutral-500">Co 5 lat lub 100 tys. km</p>
+                  </div>
+                  <span className="text-amber-400 text-sm">Dex-Cool</span>
+                </div>
+                <div className="flex items-center justify-between border-b border-white/5 pb-2">
+                  <div>
+                    <p className="text-sm font-medium">Płyn hamulcowy</p>
+                    <p className="text-xs text-neutral-500">Co 2 lata</p>
+                  </div>
+                  <span className="text-amber-400 text-sm">DOT 3</span>
+                </div>
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-sm font-medium">Rozrząd</p>
+                    <p className="text-xs text-neutral-500">Co 100 tys. km</p>
+                  </div>
+                  <span className="text-amber-400 text-sm">Gates</span>
+                </div>
+              </div>
+            </div>
+            <div className="bg-neutral-950 border border-amber-400/30 p-4">
+              <h3 className="font-semibold text-amber-400 mb-3">KOSZTY ROCZNE (szacunek)</h3>
+              <div className="space-y-2 text-sm">
+                <div className="flex justify-between"><span>Olej + filtr (2x)</span><span>400 PLN</span></div>
+                <div className="flex justify-between"><span>Filtry (powietrze, paliwo)</span><span>150 PLN</span></div>
+                <div className="flex justify-between"><span>Drobne naprawy</span><span>500 PLN</span></div>
+                <div className="flex justify-between font-bold border-t border-amber-400/30 pt-2"><span>RAZEM / ROK</span><span className="text-amber-400">~1050 PLN</span></div>
+              </div>
+            </div>
+          </div>
+        )}
+
         {tab === 'historia' && (
           <div>
             <h2 className="text-2xl mb-6" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>HISTORIA GMT400</h2>
