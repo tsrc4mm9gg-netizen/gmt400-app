@@ -29,9 +29,11 @@ function getModelImage(nazwa: string): string | null {
 
 function getTipImage(nazwa: string): string | null {
   const n = nazwa.toLowerCase();
+  if (n.includes('4l60e') && (n.includes('filtr') || n.includes('płyn') || n.includes('wymiana'))) return '/diy-4l60e-pan.jpg';
   if (n.includes('4l60e') || n.includes('atf') || n.includes('skrzyni')) return '/diy-4l60e.jpg';
-  if (n.includes('kolektor') || n.includes('intake') || n.includes('uszczelk')) return '/diy-intake.jpg';
-  if (n.includes('np231') || n.includes('4x4') || n.includes('rozdzielcz')) return '/diy-np231.jpg';
+  if (n.includes('kolektor') || n.includes('uszczelk') || n.includes('intake')) return '/diy-intake-gasket.jpg';
+  if (n.includes('np231') || n.includes('4x4') || n.includes('rozdzielcz')) return '/diy-np231-detail.jpg';
+  if (n.includes('czujnik') || n.includes('maf') || n.includes('sonda')) return '/diy-sensors.jpg';
   return null;
 }
 
