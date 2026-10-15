@@ -12,12 +12,20 @@ type Item = {
   Lata?: string;
 };
 
-const modelImages: Record<string, string> = {
-  'Tahoe': '/tahoe.jpg',
-  'Suburban': '/suburban.jpg',
-  'C/K': '/ck.jpg',
-  'Yukon': '/yukon.jpg',
-};
+function getModelImage(nazwa: string): string | null {
+  const n = nazwa.toLowerCase();
+  if (n.includes('tahoe') && n.includes('2-drzwi')) return '/tahoe-2d.jpg';
+  if (n.includes('tahoe') && n.includes('4-drzwi')) return '/tahoe-4d.jpg';
+  if (n.includes('tahoe')) return '/tahoe-4d.jpg';
+  if (n.includes('suburban')) return '/suburban.jpg';
+  if (n.includes('sierra')) return '/sierra.jpg';
+  if (n.includes('yukon') && n.includes('2-drzwi')) return '/yukon-2d.jpg';
+  if (n.includes('yukon')) return '/yukon-4d.jpg';
+  if (n.includes('extended cab') || n.includes('extended')) return '/ck-ext.jpg';
+  if (n.includes('regular cab') || n.includes('c/k 1500')) return '/ck-reg.jpg';
+  if (n.includes('c/k') || n.includes('1500') || n.includes('2500') || n.includes('3500')) return '/ck-reg.jpg';
+  return null;
+}
 
 export default function Home() {
   const [items, setItems] = useState<Item[]>([]);
@@ -142,30 +150,22 @@ export default function Home() {
 
         {tab === 'modele' && (
           <div className="grid md:grid-cols-2 gap-4">
-            {filteredModels.map((m, idx) => (
-              <div key={idx} className="bg-neutral-900 border border-neutral-800 rounded-xl overflow-hidden hover:border-amber-400 transition">
-                {modelImages[m.Model] && (
-                  <img 
-                    src={modelImages[m.Model]} 
-                    alt={m.Nazwa} 
-                    className="w-full h-48 object-cover bg-neutral-800"
-                  />
-                )}
-                <div className="p-5">
-                  <h3 className="text-amber-400 font-semibold text-lg" style={{ fontFamily: "'Oswald', sans-serif" }}>{m.Nazwa}</h3>
-                  <p className="text-sm text-neutral-500 mb-2">{m.Lata} • {m.Model}</p>
-                  <p className={`text-neutral-300 text-sm ${
-                    expanded === idx ? '' : 'line-clamp-3'
-                  }`}>{m.Opis}</p>
-                  <button
-                    onClick={() => setExpanded(expanded === idx ? null : idx)}
-                    className="mt-3 text-amber-400 text-sm font-medium"
-                  >
-                    {expanded === idx ? 'Zwiń' : 'Rozwiń więcej'}
-                  </button>
+            {filteredModels.map((m, idx) => {
+              const img = getModelImage(m.Nazwa);
+              return (
+                <div key={idx} className="bg-neutral-900 border border-neutral-800 rounded-xl overflow-hidden hover:border-amber-400 transition">
+                  {img && <img src={img} alt={m.Nazwa} className="w-full h-48 object-cover bg-neutral-800" />}
+                  <div className="p-5">
+                    <h3 className="text-amber-400 font-semibold text-lg" style={{ fontFamily: "'Oswald', sans-serif" }}>{m.Nazwa}</h3>
+                    <p className="text-sm text-neutral-500 mb-2">{m.Lata} • {m.Model}</p>
+                    <p className={`text-neutral-300 text-sm ${expanded === idx ? '' : 'line-clamp-3'}`}>{m.Opis}</p>
+                    <button onClick={() => setExpanded(expanded === idx ? null : idx)} className="mt-3 text-amber-400 text-sm font-medium">
+                      {expanded === idx ? 'Zwiń' : 'Rozwiń więcej'}
+                    </button>
+                  </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         )}
 
