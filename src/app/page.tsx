@@ -601,16 +601,58 @@ export default function Home() {
             </div>
 
             {vinResult && (
+              <div className="space-y-4">
               <div className="bg-neutral-950 border border-amber-400/30 p-4">
-                <h3 className="text-lg font-bold text-amber-400 mb-4">Wynik dekodowania</h3>
+                <h3 className="text-lg font-bold text-amber-400 mb-4">PODSTAWOWE DANE</h3>
                 <div className="grid sm:grid-cols-2 gap-3">
-                  {Object.entries(vinResult).map(([key, val]) => (
+                  {Object.entries(vinResult).slice(0, 8).map(([key, val]) => (
                     <div key={key} className="flex justify-between border-b border-white/10 pb-2">
                       <span className="text-neutral-500">{key}:</span>
                       <span className="text-white font-medium">{val}</span>
                     </div>
                   ))}
                 </div>
+              </div>
+              
+              <div className="bg-neutral-950 border border-white/10 p-4">
+                <h3 className="text-lg font-bold text-amber-400 mb-4">SPECYFIKACJA TECHNICZNA</h3>
+                <div className="grid sm:grid-cols-2 gap-3">
+                  {Object.entries(vinResult).slice(8).map(([key, val]) => (
+                    <div key={key} className="flex justify-between border-b border-white/10 pb-2">
+                      <span className="text-neutral-500">{key}:</span>
+                      <span className="text-white font-medium">{val}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="bg-neutral-950 border border-white/10 p-4">
+                <h3 className="text-lg font-bold text-amber-400 mb-4">NUMERY OEM CZĘŚCI</h3>
+                <div className="grid sm:grid-cols-2 gap-2 text-sm">
+                  <div className="flex justify-between"><span className="text-neutral-400">Filtr oleju</span><span className="text-amber-400">AC Delco PF1218</span></div>
+                  <div className="flex justify-between"><span className="text-neutral-400">Filtr powietrza</span><span className="text-amber-400">AC Delco A1163C</span></div>
+                  <div className="flex justify-between"><span className="text-neutral-400">Filtr paliwa</span><span className="text-amber-400">AC Delco GF626</span></div>
+                  <div className="flex justify-between"><span className="text-neutral-400">Filtr ATF</span><span className="text-amber-400">AC Delco TF289</span></div>
+                  <div className="flex justify-between"><span className="text-neutral-400">Świece (5.7L)</span><span className="text-amber-400">AC Delco 41-932</span></div>
+                  <div className="flex justify-between"><span className="text-neutral-400">Termostat</span><span className="text-amber-400">AC Delco 131-113</span></div>
+                  <div className="flex justify-between"><span className="text-neutral-400">Pompa wody</span><span className="text-amber-400">AC Delco 252-611</span></div>
+                  <div className="flex justify-between"><span className="text-neutral-400">Czujnik MAF</span><span className="text-amber-400">AC Delco 213-252</span></div>
+                </div>
+              </div>
+
+              <div className="bg-neutral-950 border border-white/10 p-4">
+                <h3 className="text-lg font-bold text-amber-400 mb-4">POJEMNOŚCI PŁYNÓW</h3>
+                <div className="grid sm:grid-cols-2 gap-2 text-sm">
+                  <div className="flex justify-between"><span className="text-neutral-400">Olej silnikowy</span><span>4.7 L (5W-30)</span></div>
+                  <div className="flex justify-between"><span className="text-neutral-400">ATF 4L60E</span><span>5.0 L (Dexron VI)</span></div>
+                  <div className="flex justify-between"><span className="text-neutral-400">Płyn chłodzący</span><span>15 L (Dex-Cool)</span></div>
+                  <div className="flex justify-between"><span className="text-neutral-400">Olej dyferencjału</span><span>2.0 L (75W-90)</span></div>
+                  <div className="flex justify-between"><span className="text-neutral-400">Płyn hamulcowy</span><span>0.5 L (DOT 3)</span></div>
+                  <div className="flex justify-between"><span className="text-neutral-400">Olej NP231</span><span>1.2 L (ATF)</span></div>
+                  <div className="flex justify-between"><span className="text-neutral-400">Płyn wspomagania</span><span>1.0 L</span></div>
+                  <div className="flex justify-between"><span className="text-neutral-400">Paliwo</span><span>98-114 L</span></div>
+                </div>
+              </div>
                 <div className="mt-4 p-3 bg-neutral-900 text-sm text-neutral-400">
                   <p className="mb-2"><strong className="text-white">Struktura VIN GMT400:</strong></p>
                   <p>Poz. 1: Kraj | Poz. 2: Producent | Poz. 4-5: Model</p>
