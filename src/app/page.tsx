@@ -72,6 +72,8 @@ export default function Home() {
   const [items, setItems] = useState<Item[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [ratings, setRatings] = useState<Record<string, number>>({});
+  const [touchStart, setTouchStart] = useState(0);
+  const [touchEnd, setTouchEnd] = useState(0);
   const [loading, setLoading] = useState(true);
   const [query, setQuery] = useState('');
   const [tab, setTab] = useState(() => {
@@ -112,6 +114,17 @@ export default function Home() {
     } else {
       navigator.clipboard.writeText(url);
       alert('Link skopiowany!');
+    }
+  };
+
+  const handleSwipe = () => {
+    const diff = touchStart - touchEnd;
+    const tabs = CATEGORIES.map(c => c.id);
+    const currentIndex = tabs.indexOf(tab);
+    if (diff > 50 && currentIndex < tabs.length - 1) {
+      setTab(tabs[currentIndex + 1]);
+    } else if (diff < -50 && currentIndex > 0) {
+      setTab(tabs[currentIndex - 1]);
     }
   };
 
@@ -278,7 +291,7 @@ export default function Home() {
       
       {lightbox && (
         <div className="fixed inset-0 bg-black/95 z-[100] flex items-center justify-center p-4" onClick={() => setLightbox(null)}>
-          <img src={lightbox} alt="powiększony" className="max-w-full max-h-full object-contain" />
+          <img loading="lazy" src={lightbox} alt="powiększony" className="max-w-full max-h-full object-contain" />
           <button className="absolute top-6 right-6 text-white text-4xl" onClick={() => setLightbox(null)}>×</button>
         </div>
       )}
@@ -365,7 +378,7 @@ export default function Home() {
 
       <section className="relative min-h-[40vh] flex items-center pt-16">
         <div className="absolute inset-0 bg-gradient-to-r from-black via-black/70 to-transparent z-10" />
-        <img 
+        <img loading="lazy" 
           src={selectedModelItem ? (getModelImage(selectedModelItem.Nazwa) || '/tahoe-4d.jpg') : '/tahoe-4d.jpg'} 
           alt="GMT400" 
           className="absolute inset-0 w-full h-full object-cover opacity-50"
@@ -469,7 +482,7 @@ export default function Home() {
                 const img = getModelImage(m.Nazwa);
                 return (
                   <div key={idx} className="bg-neutral-950 border border-white/10 overflow-hidden hover:border-amber-400/50 transition">
-                    {img && <img src={img} alt={m.Nazwa} className="w-full h-44 object-cover cursor-pointer" onClick={() => selectModel(m.Model, m)} />}
+                    {img && <img loading="lazy" src={img} alt={m.Nazwa} className="w-full h-44 object-cover cursor-pointer" onClick={() => selectModel(m.Model, m)} />}
                     <div className="p-4">
                       <h3 className="font-semibold text-lg mb-1" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>{m.Nazwa}</h3>
                       <p className="text-amber-400 text-sm mb-2">{m.Lata} • {m.Model}</p>
@@ -560,7 +573,7 @@ export default function Home() {
                   const issueImg = i.Nazwa.toLowerCase().includes('kolektor') ? '/issue-intake.jpg' : i.Nazwa.toLowerCase().includes('4l60') ? '/issue-4l60e.jpg' : null;
                   return (
                     <div key={idx} className="bg-neutral-950 border border-white/10 overflow-hidden">
-                      {issueImg && <img src={issueImg} alt="schemat" className="w-full max-h-48 object-contain bg-white cursor-pointer" onClick={() => setLightbox(issueImg)} />}
+                      {issueImg && <img loading="lazy" src={issueImg} alt="schemat" className="w-full max-h-48 object-contain bg-white cursor-pointer" onClick={() => setLightbox(issueImg)} />}
                       <div className="p-4">
                         <div className="flex justify-between items-start mb-2">
                           <h3 className="font-semibold">{i.Nazwa}</h3>
@@ -622,7 +635,7 @@ export default function Home() {
                 const tipImg = getTipImage(t.Nazwa);
                 return (
                   <div key={idx} className="bg-neutral-950 border border-white/10 overflow-hidden">
-                    {tipImg && <img src={tipImg} alt="diagram" className="w-full max-h-64 object-contain bg-white cursor-pointer" onClick={() => setLightbox(tipImg)} />}
+                    {tipImg && <img loading="lazy" src={tipImg} alt="diagram" className="w-full max-h-64 object-contain bg-white cursor-pointer" onClick={() => setLightbox(tipImg)} />}
                     <div className="p-4">
                       <h3 className="font-semibold mb-2">{t.Nazwa}</h3>
                       <p className="text-neutral-300 text-sm whitespace-pre-line">{t.Rozwiązanie}</p>
@@ -796,7 +809,7 @@ export default function Home() {
                   <h3 className="font-semibold text-amber-400">CIEKAWOSTKI — HISTORIA POJAZDU</h3>
                   {vinWarning && (
                     <div className="flex items-center gap-2 animate-pulse">
-                      <img src="/warning-icon.jpg" alt="Uwaga" className="w-8 h-8" />
+                      <img loading="lazy" src="/warning-icon.jpg" alt="Uwaga" className="w-8 h-8" />
                       <span className="text-red-500 font-bold text-sm">UWAGA!</span>
                     </div>
                   )}
@@ -985,7 +998,7 @@ export default function Home() {
                 { kat: 'filtry', nazwa: 'Filtr paliwa Diesel', oem: 'AC Delco TP1006', opis: 'Filtr paliwa 6.5L', model: '6.5L' },
               ].filter(p => (partsFilter === 'wszystkie' || p.kat === partsFilter) && (!partsQuery || p.nazwa.toLowerCase().includes(partsQuery.toLowerCase()) || p.oem.toLowerCase().includes(partsQuery.toLowerCase()))).map((p, idx) => (
                 <div key={idx} className="bg-neutral-950 border border-white/10 overflow-hidden">
-                  {p.img && <img src={p.img} alt={p.nazwa} className="w-full h-32 object-contain bg-white cursor-pointer" onClick={() => setLightbox(p.img)} />}
+                  {p.img && <img loading="lazy" src={p.img} alt={p.nazwa} className="w-full h-32 object-contain bg-white cursor-pointer" onClick={() => setLightbox(p.img)} />}
                   <div className="p-4">
                   <div className="flex justify-between items-start mb-2">
                     <h3 className="font-semibold">{p.nazwa}</h3>
@@ -1015,7 +1028,7 @@ export default function Home() {
               ].map(e => (
                 <button key={e.id} onClick={() => setSelectedEngine(selectedEngine === e.id ? '' : e.id)}
                   className={`p-3 text-center transition ${selectedEngine === e.id ? 'bg-amber-400 text-black' : 'bg-neutral-900 hover:bg-neutral-800'}`}>
-                  <img src={e.img} alt={e.name} className="w-full h-20 object-contain mb-2" />
+                  <img loading="lazy" src={e.img} alt={e.name} className="w-full h-20 object-contain mb-2" />
                   <div className="font-semibold text-sm">{e.name}</div>
                   <div className="text-xs opacity-70">{e.power}</div>
                 </button>
@@ -1024,7 +1037,7 @@ export default function Home() {
 
             {selectedEngine === '57vortec' && (
               <div className="bg-neutral-950 border border-white/10 p-4 mb-6">
-                <img src="/engine-vortec.jpg" alt="5.7L Vortec" className="w-full max-h-48 object-contain mb-4" />
+                <img loading="lazy" src="/engine-vortec.jpg" alt="5.7L Vortec" className="w-full max-h-48 object-contain mb-4" />
                 <h3 className="text-xl font-bold text-amber-400 mb-3">5.7L Vortec V8 (L31)</h3>
                 <div className="grid sm:grid-cols-2 gap-4 text-sm">
                   <div><span className="text-neutral-500">Moc:</span> <span className="text-white">255 KM @ 4600 rpm</span></div>
@@ -1045,7 +1058,7 @@ export default function Home() {
 
             {selectedEngine === '65d' && (
               <div className="bg-neutral-950 border border-white/10 p-4 mb-6">
-                <img src="/engine-diesel.jpg" alt="6.5L Diesel" className="w-full max-h-48 object-contain mb-4" />
+                <img loading="lazy" src="/engine-diesel.jpg" alt="6.5L Diesel" className="w-full max-h-48 object-contain mb-4" />
                 <h3 className="text-xl font-bold text-amber-400 mb-3">6.5L Turbodiesel</h3>
                 <div className="grid sm:grid-cols-2 gap-4 text-sm">
                   <div><span className="text-neutral-500">Moc:</span> <span className="text-white">180–215 KM</span></div>
@@ -1063,7 +1076,7 @@ export default function Home() {
 
             {selectedEngine === '43' && (
               <div className="bg-neutral-950 border border-white/10 p-4 mb-6">
-                <img src="/engine-43.jpg" alt="4.3L V6" className="w-full max-h-48 object-contain mb-4" />
+                <img loading="lazy" src="/engine-43.jpg" alt="4.3L V6" className="w-full max-h-48 object-contain mb-4" />
                 <h3 className="text-xl font-bold text-amber-400 mb-3">4.3L V6</h3>
                 <div className="grid sm:grid-cols-2 gap-4 text-sm">
                   <div><span className="text-neutral-500">Moc:</span> <span className="text-white">160–200 KM</span></div>
@@ -1082,7 +1095,7 @@ export default function Home() {
               <p className="text-neutral-500 text-center py-4">Wybierz silnik powyżej aby zobaczyć szczegóły.</p>
             )}
 
-            <img src="/spec-fluids-map.jpg" alt="Lokalizacje płynów" className="w-full mb-6 cursor-pointer" onClick={() => setLightbox('/spec-fluids-map.jpg')} />
+            <img loading="lazy" src="/spec-fluids-map.jpg" alt="Lokalizacje płynów" className="w-full mb-6 cursor-pointer" onClick={() => setLightbox('/spec-fluids-map.jpg')} />
 
             <div className="bg-neutral-950 border border-white/10 p-4 mb-6">
               <h3 className="font-semibold text-amber-400 mb-4">Płyny eksploatacyjne — interwały</h3>
@@ -1211,7 +1224,7 @@ export default function Home() {
             <h2 className="text-2xl mb-6" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>PORADNIK KUPUJĄCEGO</h2>
             
             <div className="bg-neutral-950 border border-white/10 overflow-hidden mb-4">
-              <img src="/guide-rust.jpg" alt="Rdza GMT400" className="w-full h-48 object-cover cursor-pointer" onClick={() => setLightbox('/guide-rust.jpg')} />
+              <img loading="lazy" src="/guide-rust.jpg" alt="Rdza GMT400" className="w-full h-48 object-cover cursor-pointer" onClick={() => setLightbox('/guide-rust.jpg')} />
               <div className="p-4">
                 <h3 className="font-semibold text-amber-400 mb-2">1. RDZA — NAJWIĘKSZY WRÓG</h3>
                 <ul className="text-sm text-neutral-300 space-y-1">
@@ -1226,7 +1239,7 @@ export default function Home() {
             </div>
 
             <div className="bg-neutral-950 border border-white/10 overflow-hidden mb-4">
-              <img src="/guide-frame.jpg" alt="Rama GMT400" className="w-full h-48 object-cover cursor-pointer" onClick={() => setLightbox('/guide-frame.jpg')} />
+              <img loading="lazy" src="/guide-frame.jpg" alt="Rama GMT400" className="w-full h-48 object-cover cursor-pointer" onClick={() => setLightbox('/guide-frame.jpg')} />
               <div className="p-4">
                 <h3 className="font-semibold text-amber-400 mb-2">2. RAMA — SPRAWDŹ DOKŁADNIE</h3>
                 <ul className="text-sm text-neutral-300 space-y-1">
@@ -1240,7 +1253,7 @@ export default function Home() {
             </div>
 
             <div className="bg-neutral-950 border border-white/10 overflow-hidden mb-4">
-              <img src="/guide-engine.jpg" alt="Silnik 5.7L" className="w-full h-48 object-cover cursor-pointer" onClick={() => setLightbox('/guide-engine.jpg')} />
+              <img loading="lazy" src="/guide-engine.jpg" alt="Silnik 5.7L" className="w-full h-48 object-cover cursor-pointer" onClick={() => setLightbox('/guide-engine.jpg')} />
               <div className="p-4">
                 <h3 className="font-semibold text-amber-400 mb-2">3. SILNIK — CO SPRAWDZIĆ</h3>
                 <ul className="text-sm text-neutral-300 space-y-1">
@@ -1341,7 +1354,7 @@ export default function Home() {
                 { kat: 'zawieszenie', nazwa: 'Polyurethane bushings', efekt: 'Sztywniejsze zawieszenie', czesci: 'Energy Suspension', koszt: '400-800 PLN', opis: 'Zamiana gumowych tulei na poliuretanowe. Lepsza kontrola.', model: 'Wszystkie' },
               ].filter(m => (tuningFilter === 'wszystkie' || m.kat === tuningFilter) && (!tuningQuery || m.nazwa.toLowerCase().includes(tuningQuery.toLowerCase()) || m.opis.toLowerCase().includes(tuningQuery.toLowerCase()))).map((m, idx) => (
                 <div key={idx} className="bg-neutral-950 border border-white/10 overflow-hidden">
-                  {m.img && <img src={m.img} alt={m.nazwa} className="w-full h-40 object-cover cursor-pointer" onClick={() => setLightbox(m.img)} />}
+                  {m.img && <img loading="lazy" src={m.img} alt={m.nazwa} className="w-full h-40 object-cover cursor-pointer" onClick={() => setLightbox(m.img)} />}
                   <div className="p-4">
                   <div className="flex justify-between items-start mb-2">
                     <h3 className="font-semibold text-lg">{m.nazwa}</h3>
@@ -1460,7 +1473,7 @@ export default function Home() {
             <h2 className="text-2xl mb-6" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>TIPS & TRICKS</h2>
             
             <div className="bg-neutral-950 border border-white/10 overflow-hidden mb-4">
-              <img src="/tip-obd.jpg" alt="OBD1" className="w-full h-48 object-cover cursor-pointer" onClick={() => setLightbox('/tip-obd.jpg')} />
+              <img loading="lazy" src="/tip-obd.jpg" alt="OBD1" className="w-full h-48 object-cover cursor-pointer" onClick={() => setLightbox('/tip-obd.jpg')} />
               <div className="p-4">
                 <h3 className="font-semibold text-amber-400 mb-2">1. KODY OBD-I BEZ SKANERA (1988-1995)</h3>
                 <p className="text-sm text-neutral-300 mb-2">Odczytaj kody błędów spinaczem — bez skanera!</p>
@@ -1475,7 +1488,7 @@ export default function Home() {
             </div>
 
             <div className="bg-neutral-950 border border-white/10 overflow-hidden mb-4">
-              <img src="/tip-torsion.jpg" alt="Torsion" className="w-full h-48 object-cover cursor-pointer" onClick={() => setLightbox('/tip-torsion.jpg')} />
+              <img loading="lazy" src="/tip-torsion.jpg" alt="Torsion" className="w-full h-48 object-cover cursor-pointer" onClick={() => setLightbox('/tip-torsion.jpg')} />
               <div className="p-4">
                 <h3 className="font-semibold text-amber-400 mb-2">2. POZIOMOWANIE 4x4 (TORSION CRANK)</h3>
                 <p className="text-sm text-neutral-300 mb-2">Podnieś przód o 1-2" bez kitów — fabryczne torsion bars.</p>
@@ -1526,7 +1539,7 @@ export default function Home() {
             </div>
 
             <div className="bg-neutral-950 border border-white/10 overflow-hidden mb-4">
-              <img src="/tip-fuse.jpg" alt="Fuse box" className="w-full h-48 object-cover cursor-pointer" onClick={() => setLightbox('/tip-fuse.jpg')} />
+              <img loading="lazy" src="/tip-fuse.jpg" alt="Fuse box" className="w-full h-48 object-cover cursor-pointer" onClick={() => setLightbox('/tip-fuse.jpg')} />
               <div className="p-4">
                 <h3 className="font-semibold text-amber-400 mb-2">7. SKRZYNKA BEZPIECZNIKÓW POD MASKĄ</h3>
                 <p className="text-sm text-neutral-300 mb-2">Lokalizacja: tył komory silnika, przy zbiorniku hamulcowym.</p>
@@ -1541,7 +1554,7 @@ export default function Home() {
             </div>
 
             <div className="bg-neutral-950 border border-white/10 overflow-hidden mb-4">
-              <img src="/tip-tailgate.jpg" alt="Tailgate" className="w-full h-48 object-cover cursor-pointer" onClick={() => setLightbox('/tip-tailgate.jpg')} />
+              <img loading="lazy" src="/tip-tailgate.jpg" alt="Tailgate" className="w-full h-48 object-cover cursor-pointer" onClick={() => setLightbox('/tip-tailgate.jpg')} />
               <div className="p-4">
                 <h3 className="font-semibold text-amber-400 mb-2">8. KLAPA NIE OTWIERA SIĘ — TRIK</h3>
                 <p className="text-sm text-neutral-300 mb-2">Typowy problem: zacięty mechanizm lub zerwane klipsy.</p>
