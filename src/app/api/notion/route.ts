@@ -21,15 +21,15 @@ export async function GET() {
 
     if (!res.ok) {
       const err = await res.text();
-      return NextResponse.json({ error: 'Notion API error', details: err }, { status: res.status });
+      return NextResponse.json({ error: 'Notion API error', status: res.status, details: err }, { status: 500 });
     }
 
     const data = await res.json();
 
     const results = (data.results || []).map((page: any) => {
-      const props = page.properties;
+      const props = page.properties || {};
       return {
-        Nazwa: props.Nazwa?.title?.[0]?.plain_text || '',
+        Nazwa: props.Nazwa?.title?.[0]?.plain_text || props.Nazwa?.rich_text?.[0]?.plain_text || '',
         Typ: props.Typ?.select?.name || '',
         Model: props.Model?.select?.name || '',
         Opis: props.Opis?.rich_text?.[0]?.plain_text || '',
@@ -39,7 +39,12 @@ export async function GET() {
       };
     });
 
-    return NextResponse.json({ results });
+    return NextResponse.json({ 
+      results, 
+      count: results.length,
+      hasMore: data.has_more,
+      rawCount: (data.results || []).length 
+    });
   } catch (e: any) {
     return NextResponse.json({ error: 'Błąd pobierania z Notion', details: e.message }, { status: 500 });
   }
