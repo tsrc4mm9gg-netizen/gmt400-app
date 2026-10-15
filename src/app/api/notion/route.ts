@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 
-const DATABASE_ID = '5df8fc48-8753-4653-aa0d-3e302858f4e1';
+const DATABASE_ID = '746973771d604f1e8276502851176af2';
 
 export async function GET() {
   const token = process.env.NOTION_TOKEN;
@@ -19,6 +19,11 @@ export async function GET() {
       body: JSON.stringify({ page_size: 100 }),
     });
 
+    if (!res.ok) {
+      const err = await res.text();
+      return NextResponse.json({ error: 'Notion API error', details: err }, { status: res.status });
+    }
+
     const data = await res.json();
 
     const results = (data.results || []).map((page: any) => {
@@ -35,7 +40,7 @@ export async function GET() {
     });
 
     return NextResponse.json({ results });
-  } catch (e) {
-    return NextResponse.json({ error: 'Błąd pobierania z Notion' }, { status: 500 });
+  } catch (e: any) {
+    return NextResponse.json({ error: 'Błąd pobierania z Notion', details: e.message }, { status: 500 });
   }
 }
