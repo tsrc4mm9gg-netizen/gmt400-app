@@ -84,6 +84,8 @@ export default function Home() {
   const [partsQuery, setPartsQuery] = useState('');
   const [tuningFilter, setTuningFilter] = useState('wszystkie');
   const [tuningQuery, setTuningQuery] = useState('');
+  const [importPrice, setImportPrice] = useState(30000);
+  const [importEngine, setImportEngine] = useState('v8');
   const [selectedEngine, setSelectedEngine] = useState('');
 
   useEffect(() => {
@@ -1036,13 +1038,83 @@ export default function Home() {
         {tab === 'import' && (
           <div>
             <h2 className="text-2xl mb-6" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>IMPORT DO POLSKI</h2>
-            <div className="bg-neutral-950 border border-white/10 p-4">
-              {filteredTips.filter(t => t.Nazwa.toLowerCase().includes('import') || t.Nazwa.toLowerCase().includes('polski')).map((t, idx) => (
-                <div key={idx}>
-                  <h3 className="font-semibold mb-2">{t.Nazwa}</h3>
-                  <p className="text-neutral-300 text-sm whitespace-pre-line">{t.Rozwiązanie}</p>
+            
+            <div className="bg-neutral-950 border border-amber-400/30 p-4 mb-6">
+              <h3 className="font-semibold text-amber-400 mb-4">KALKULATOR IMPORTU</h3>
+              <div className="grid sm:grid-cols-2 gap-4 mb-4">
+                <div>
+                  <label className="text-xs text-neutral-500 block mb-1">Cena zakupu (PLN)</label>
+                  <input type="number" value={importPrice} onChange={(e) => setImportPrice(Number(e.target.value))}
+                    className="w-full bg-neutral-900 border border-white/10 px-3 py-2 text-sm" />
                 </div>
-              ))}
+                <div>
+                  <label className="text-xs text-neutral-500 block mb-1">Silnik</label>
+                  <select value={importEngine} onChange={(e) => setImportEngine(e.target.value)}
+                    className="w-full bg-neutral-900 border border-white/10 px-3 py-2 text-sm">
+                    <option value="v6">4.3L V6 (do 2000cm³) — 3.1%</option>
+                    <option value="v8">5.0/5.7/7.4L V8 (powyżej 2000cm³) — 18.6%</option>
+                    <option value="diesel">6.5L Diesel — 18.6%</option>
+                    <option value="pickup">Pickup CN 8704 — 0% akcyza</option>
+                  </select>
+                </div>
+              </div>
+              {(() => {
+                const clo = importPrice * 0.10;
+                const akcyzaRate = importEngine === 'v6' ? 0.031 : importEngine === 'pickup' ? 0 : 0.186;
+                const akcyza = (importPrice + clo) * akcyzaRate;
+                const vat = (importPrice + clo + akcyza) * 0.23;
+                const total = importPrice + clo + akcyza + vat;
+                return (
+                  <div className="grid sm:grid-cols-2 gap-2 text-sm">
+                    <div className="flex justify-between"><span className="text-neutral-400">Cło 10%:</span><span>{clo.toFixed(0)} PLN</span></div>
+                    <div className="flex justify-between"><span className="text-neutral-400">Akcyza {(akcyzaRate*100).toFixed(1)}%:</span><span>{akcyza.toFixed(0)} PLN</span></div>
+                    <div className="flex justify-between"><span className="text-neutral-400">VAT 23%:</span><span>{vat.toFixed(0)} PLN</span></div>
+                    <div className="flex justify-between font-bold text-amber-400"><span>RAZEM:</span><span>{total.toFixed(0)} PLN</span></div>
+                  </div>
+                );
+              })()}
+            </div>
+
+            <div className="bg-neutral-950 border border-white/10 p-4 mb-4">
+              <h3 className="font-semibold text-amber-400 mb-3">STAWKI 2026</h3>
+              <div className="overflow-x-auto">
+                <table className="w-full text-sm">
+                  <thead><tr className="border-b border-white/10 text-amber-400"><th className="p-2 text-left">Typ</th><th className="p-2 text-left">Cło</th><th className="p-2 text-left">Akcyza</th><th className="p-2 text-left">VAT</th></tr></thead>
+                  <tbody className="text-neutral-300">
+                    <tr className="border-b border-white/5"><td className="p-2">Osobowy ≤2000cm³</td><td className="p-2">10%</td><td className="p-2">3.1%</td><td className="p-2">23%</td></tr>
+                    <tr className="border-b border-white/5"><td className="p-2">Osobowy >2000cm³</td><td className="p-2">10%</td><td className="p-2 text-red-400">18.6%</td><td className="p-2">23%</td></tr>
+                    <tr className="border-b border-white/5"><td className="p-2">Pickup CN 8704</td><td className="p-2">22%</td><td className="p-2 text-green-400">0%</td><td className="p-2">23%</td></tr>
+                    <tr><td className="p-2">Zabytkowy 30+ lat</td><td className="p-2 text-green-400">0%</td><td className="p-2">—</td><td className="p-2">—</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <p className="text-xs text-neutral-500 mt-2">* GMT400 z 5.7L/7.4L = 18.6% akcyza. Pickup może być CN 8704 (0% akcyza).</p>
+            </div>
+
+            <div className="bg-neutral-950 border border-white/10 p-4 mb-4">
+              <h3 className="font-semibold text-amber-400 mb-3">PROCEDURA KROK PO KROKU</h3>
+              <ol className="text-sm text-neutral-300 space-y-2 list-decimal list-inside">
+                <li><strong>Zakup w USA</strong> — aukcja (Copart, IAAI) lub dealer</li>
+                <li><strong>Transport morski</strong> — 2-8 tygodni, koszt 4000-8000 PLN</li>
+                <li><strong>Odprawa celna</strong> — cło 10% + VAT 23%</li>
+                <li><strong>Akcyza</strong> — deklaracja AKC-U/S w 14 dni, płatność w 30 dni</li>
+                <li><strong>Tłumaczenia</strong> — title, faktura (300-600 PLN)</li>
+                <li><strong>Przystosowanie</strong> — światła ECE, prędkościomierz km/h (2000-5000 PLN)</li>
+                <li><strong>Badanie techniczne</strong> — 149 PLN (z LPG 245 PLN)</li>
+                <li><strong>Rejestracja</strong> — wydział komunikacji (160-250 PLN)</li>
+              </ol>
+            </div>
+
+            <div className="bg-neutral-950 border border-white/10 p-4">
+              <h3 className="font-semibold text-amber-400 mb-3">TIPSY Z FORÓW</h3>
+              <ul className="text-sm text-neutral-300 space-y-2">
+                <li>• <strong>Pickup = 0% akcyza</strong> — jeśli sklasyfikowany jako CN 8704 (ciężarowy)</li>
+                <li>• <strong>Homologacja nie wymagana</strong> — dla używanych aut z title wystarczy przystosowanie</li>
+                <li>• <strong>Światła</strong> — wymiana na ECE lub naklejki korekcyjne</li>
+                <li>• <strong>Prędkościomierz</strong> — wymiana skali lub przeprogramowanie</li>
+                <li>• <strong>LPG</strong> — instalacja 3000-6000 PLN, oszczędność ~40% na paliwie</li>
+                <li>• <strong>Mienie przesiedleńcze</strong> — 0% cło/VAT/akcyza przy 12 mies. pobytu w USA</li>
+              </ul>
             </div>
           </div>
         )}
