@@ -128,6 +128,12 @@ export default function Home() {
   const [selectedEngine, setSelectedEngine] = useState('');
 
   useEffect(() => {
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/sw.js');
+    }
+  }, []);
+
+  useEffect(() => {
     localStorage.setItem('gmt400_tab', tab);
   }, [tab]);
 
@@ -578,6 +584,24 @@ export default function Home() {
         )}
 
         {tab === 'diy' && (
+          <div className="mb-6 bg-neutral-950 border border-white/10 p-4">
+            <h3 className="font-semibold text-amber-400 mb-3">PORADNIKI WIDEO</h3>
+            <div className="grid sm:grid-cols-2 gap-4">
+              <div className="aspect-video bg-neutral-900 flex items-center justify-center">
+                <a href="https://www.youtube.com/results?search_query=GMT400+DIY+repair" target="_blank" className="text-amber-400 hover:underline">
+                  ▶ YouTube: GMT400 DIY
+                </a>
+              </div>
+              <div className="aspect-video bg-neutral-900 flex items-center justify-center">
+                <a href="https://www.youtube.com/results?search_query=GMT400+4L60E+rebuild" target="_blank" className="text-amber-400 hover:underline">
+                  ▶ YouTube: 4L60E
+                </a>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {tab === 'diy_content' && (
           <div>
             <h2 className="text-2xl mb-6" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>PORADNIKI DIY</h2>
             <input 
