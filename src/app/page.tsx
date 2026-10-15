@@ -60,8 +60,15 @@ export default function Home() {
   const filteredCodes = useMemo(() =>
     codes.filter(c =>
       c.Nazwa.toLowerCase().includes(query.toLowerCase()) ||
-      (c.Opis || '').toLowerCase().includes(query.toLowerCase())
+      (c.Opis || '').toLowerCase().includes(query.toLowerCase()) ||
+      (c.Rozwiązanie || '').toLowerCase().includes(query.toLowerCase())
     ), [codes, query]);
+
+  const filteredTips = useMemo(() =>
+    tips.filter(t =>
+      t.Nazwa.toLowerCase().includes(query.toLowerCase()) ||
+      (t.Rozwiązanie || '').toLowerCase().includes(query.toLowerCase())
+    ), [tips, query]);
 
   const categories = ['Wszystkie', ...Array.from(new Set(issues.map(i => i.Model).filter(Boolean)))];
 
@@ -145,8 +152,8 @@ export default function Home() {
                     <h3 className="font-semibold text-amber-400">{i.Nazwa}</h3>
                     <span className="text-xs bg-neutral-800 px-2 py-1 rounded">{i.Model}</span>
                   </div>
-                  {i.Objawy && <p className="text-sm text-neutral-400 mb-1"><strong>Objawy:</strong> {i.Objawy}</p>}
-                  {i.Rozwiązanie && <p className="text-neutral-300 text-sm">{i.Rozwiązanie}</p>}
+                  {i.Objawy && <p className="text-sm text-neutral-400 mb-2"><strong>Objawy:</strong> {i.Objawy}</p>}
+                  {i.Rozwiązanie && <p className="text-neutral-300 text-sm whitespace-pre-line">{i.Rozwiązanie}</p>}
                 </div>
               ))}
             </div>
@@ -160,35 +167,35 @@ export default function Home() {
               <img src="https://www.sonnax.com/tech_resources/images/614/4L60E-Valve-Body.jpg" alt="4L60E solenoids" className="w-full max-w-2xl mx-auto rounded" />
               <p className="text-sm text-neutral-400 mt-2">Lokalizacja cewek w skrzyni 4L60E (pomocne przy kodach P07xx)</p>
             </div>
-            <div className="bg-neutral-900 border border-neutral-800 rounded-xl overflow-hidden">
-              <table className="w-full text-sm">
-                <thead className="bg-neutral-800">
-                  <tr>
-                    <th className="text-left p-3 text-amber-400">Kod</th>
-                    <th className="text-left p-3 text-amber-400">Opis</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {filteredCodes.map((c, idx) => (
-                    <tr key={idx} className="border-t border-neutral-800">
-                      <td className="p-3 font-mono">{c.Nazwa}</td>
-                      <td className="p-3 text-neutral-300">{c.Opis}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+            <div className="space-y-4">
+              {filteredCodes.map((c, idx) => (
+                <div key={idx} className="bg-neutral-900 border border-neutral-800 rounded-xl p-5">
+                  <h3 className="font-semibold text-amber-400 mb-1">{c.Nazwa}</h3>
+                  {c.Opis && <p className="text-sm text-neutral-400 mb-2">{c.Opis}</p>}
+                  {c.Rozwiązanie && <p className="text-neutral-300 text-sm whitespace-pre-line">{c.Rozwiązanie}</p>}
+                  {c.Lata && <p className="text-xs text-neutral-500 mt-2">Lata: {c.Lata}</p>}
+                </div>
+              ))}
             </div>
           </div>
         )}
 
         {tab === 'porady' && (
-          <div className="space-y-4">
-            {tips.map((t, idx) => (
-              <div key={idx} className="bg-neutral-900 border border-neutral-800 rounded-xl p-5">
-                <h3 className="font-semibold text-amber-400 mb-2">{t.Nazwa}</h3>
-                <p className="text-neutral-300 text-sm">{t.Rozwiązanie}</p>
-              </div>
-            ))}
+          <div>
+            <div className="mb-6 bg-neutral-900 border border-neutral-800 rounded-xl p-4">
+              <h3 className="text-amber-400 font-semibold mb-3">Schemat filtra i miski 4L60E</h3>
+              <img src="https://www.wittrans.com/images/4L60E_filter_diagram.jpg" alt="4L60E filter" className="w-full max-w-xl mx-auto rounded bg-white p-2" />
+              <p className="text-sm text-neutral-400 mt-2">Pomocne przy wymianie ATF i filtra</p>
+            </div>
+            <div className="space-y-4">
+              {filteredTips.map((t, idx) => (
+                <div key={idx} className="bg-neutral-900 border border-neutral-800 rounded-xl p-5">
+                  <h3 className="font-semibold text-amber-400 mb-2">{t.Nazwa}</h3>
+                  <p className="text-neutral-300 text-sm whitespace-pre-line">{t.Rozwiązanie}</p>
+                  {t.Lata && <p className="text-xs text-neutral-500 mt-2">Lata: {t.Lata}</p>}
+                </div>
+              ))}
+            </div>
           </div>
         )}
       </div>
