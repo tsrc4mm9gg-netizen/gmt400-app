@@ -64,6 +64,8 @@ export default function Home() {
   const [expanded, setExpanded] = useState<number | null>(null);
   const [lightbox, setLightbox] = useState<string | null>(null);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [issueYear, setIssueYear] = useState('');
+  const [issueModel, setIssueModel] = useState('');
 
   useEffect(() => {
     fetch('/api/notion')
@@ -81,6 +83,7 @@ export default function Home() {
   const tips = useMemo(() => items.filter(i => i.Typ === 'Porada'), [items]);
 
   const uniqueModels = ['Wszystkie', ...Array.from(new Set(models.map(m => m.Model).filter(Boolean)))];
+  const years = ['1988', '1989', '1990', '1991', '1992', '1993', '1994', '1995', '1996', '1997', '1998', '1999', '2000'];
 
   const filterByModel = (list: Item[]) => {
     if (selectedModel === 'Wszystkie') return list;
@@ -94,9 +97,11 @@ export default function Home() {
   }, [models, query, selectedModel]);
 
   const filteredIssues = useMemo(() => {
-    let result = filterByModel(issues);
+    let result = issues;
+    if (issueModel) result = result.filter(i => i.Model === issueModel || i.Model === 'Wszystkie');
+    if (selectedModel !== 'Wszystkie' && !issueModel) result = result.filter(i => i.Model === selectedModel || i.Model === 'Wszystkie');
     return result.filter(i => i.Nazwa.toLowerCase().includes(query.toLowerCase()) || (i.Objawy || '').toLowerCase().includes(query.toLowerCase()) || (i.Rozwiązanie || '').toLowerCase().includes(query.toLowerCase()));
-  }, [issues, query, selectedModel]);
+  }, [issues, query, selectedModel, issueModel]);
 
   const filteredCodes = useMemo(() => {
     let result = filterByModel(codes);
@@ -184,30 +189,60 @@ export default function Home() {
         )}
       </header>
 
-      <section className="relative min-h-[45vh] flex items-center pt-16">
+      <section className="relative min-h-[40vh] flex items-center pt-16">
         <div className="absolute inset-0 bg-gradient-to-r from-black via-black/70 to-transparent z-10" />
         <img 
           src={selectedModelItem ? (getModelImage(selectedModelItem.Nazwa) || '/tahoe-4d.jpg') : '/tahoe-4d.jpg'} 
           alt="GMT400" 
           className="absolute inset-0 w-full h-full object-cover opacity-50"
         />
-        <div className="relative z-20 max-w-7xl mx-auto px-4 py-10">
+        <div className="relative z-20 max-w-7xl mx-auto px-4 py-8">
           <div className="max-w-xl">
-            <div className="flex items-center gap-2 mb-3">
+            <div className="flex items-center gap-2 mb-2">
               <div className="w-8 h-px bg-amber-400" />
               <span className="text-amber-400 text-xs tracking-widest uppercase">
                 {selectedModel === 'Wszystkie' ? '1988–2000' : selectedModel}
               </span>
             </div>
-            <h1 className="text-3xl sm:text-4xl font-bold leading-none mb-3" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>
+            <h1 className="text-2xl sm:text-3xl font-bold leading-none mb-2" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>
               {selectedModelItem ? selectedModelItem.Nazwa : 'ENCYKLOPEDIA GMT400'}
             </h1>
-            <p className="text-neutral-300 text-sm max-w-md">
-              {selectedModelItem ? (selectedModelItem.Opis?.slice(0, 150) + '...') : 'Kompletna baza wiedzy o Chevrolet C/K, Tahoe, Suburban i GMC.'}
-            </p>
           </div>
         </div>
       </section>
+
+      {selectedModel !== 'Wszystkie' && (
+        <div className="bg-neutral-900 border-y border-white/5 py-4">
+          <div className="max-w-7xl mx-auto px-4">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+              <button onClick={() => setTab('modele')} className={`p-4 text-center transition ${
+                tab === 'modele' ? 'bg-amber-400 text-black' : 'bg-neutral-800 hover:bg-neutral-700'
+              }`}>
+                <div className="text-2xl font-bold" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>{filteredModels.length}</div>
+                <div className="text-xs uppercase mt-1">Modele</div>
+              </button>
+              <button onClick={() => setTab('usterki')} className={`p-4 text-center transition ${
+                tab === 'usterki' ? 'bg-amber-400 text-black' : 'bg-neutral-800 hover:bg-neutral-700'
+              }`}>
+                <div className="text-2xl font-bold" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>{filteredIssues.length}</div>
+                <div className="text-xs uppercase mt-1">Usterki</div>
+              </button>
+              <button onClick={() => setTab('kody')} className={`p-4 text-center transition ${
+                tab === 'kody' ? 'bg-amber-400 text-black' : 'bg-neutral-800 hover:bg-neutral-700'
+              }`}>
+                <div className="text-2xl font-bold" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>{filteredCodes.length}</div>
+                <div className="text-xs uppercase mt-1">Kody</div>
+              </button>
+              <button onClick={() => setTab('diy')} className={`p-4 text-center transition ${
+                tab === 'diy' ? 'bg-amber-400 text-black' : 'bg-neutral-800 hover:bg-neutral-700'
+              }`}>
+                <div className="text-2xl font-bold" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>{filteredTips.length}</div>
+                <div className="text-xs uppercase mt-1">Porady</div>
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       <div className="bg-neutral-950 border-y border-white/5 py-3">
         <div className="max-w-7xl mx-auto px-4 flex gap-2 overflow-x-auto">
@@ -260,7 +295,7 @@ export default function Home() {
                 const img = getModelImage(m.Nazwa);
                 return (
                   <div key={idx} className="bg-neutral-950 border border-white/10 overflow-hidden hover:border-amber-400/50 transition">
-                    {img && <img src={img} alt={m.Nazwa} className="w-full h-44 object-cover cursor-pointer" onClick={() => setLightbox(img)} />}
+                    {img && <img src={img} alt={m.Nazwa} className="w-full h-44 object-cover cursor-pointer" onClick={() => selectModel(m.Model, m)} />}
                     <div className="p-4">
                       <h3 className="font-semibold text-lg mb-1" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>{m.Nazwa}</h3>
                       <p className="text-amber-400 text-sm mb-2">{m.Lata} • {m.Model}</p>
@@ -268,9 +303,6 @@ export default function Home() {
                       <div className="flex gap-3 mt-3">
                         <button onClick={() => setExpanded(expanded === idx ? null : idx)} className="text-amber-400 text-sm">
                           {expanded === idx ? 'Zwiń' : 'Czytaj więcej'}
-                        </button>
-                        <button onClick={() => selectModel(m.Model, m)} className="text-neutral-500 text-sm hover:text-white">
-                          Filtruj →
                         </button>
                       </div>
                     </div>
@@ -298,19 +330,59 @@ export default function Home() {
 
         {tab === 'usterki' && (
           <div>
-            <h2 className="text-2xl mb-6" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>USTERKI ({filteredIssues.length})</h2>
-            <div className="space-y-3">
-              {filteredIssues.map((i, idx) => (
-                <div key={idx} className="bg-neutral-950 border border-white/10 p-4">
-                  <div className="flex justify-between items-start mb-2">
-                    <h3 className="font-semibold">{i.Nazwa}</h3>
-                    <span className="text-xs bg-white/10 px-2 py-0.5 text-neutral-400">{i.Model}</span>
-                  </div>
-                  {i.Objawy && <p className="text-neutral-400 text-sm mb-2"><span className="text-amber-400">Objawy:</span> {i.Objawy}</p>}
-                  {i.Rozwiązanie && <p className="text-neutral-300 text-sm whitespace-pre-line">{i.Rozwiązanie}</p>}
+            <h2 className="text-2xl mb-6" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>USTERKI</h2>
+            
+            <div className="bg-neutral-950 border border-white/10 p-4 mb-6">
+              <p className="text-neutral-400 text-sm mb-4">Wybierz model i rocznik aby zobaczyć usterki:</p>
+              <div className="grid sm:grid-cols-2 gap-4">
+                <div>
+                  <label className="text-xs text-neutral-500 block mb-2">MODEL</label>
+                  <select 
+                    value={issueModel} 
+                    onChange={(e) => setIssueModel(e.target.value)}
+                    className="w-full bg-neutral-900 border border-white/10 px-3 py-2 text-sm focus:outline-none focus:border-amber-400"
+                  >
+                    <option value="">Wszystkie modele</option>
+                    {uniqueModels.filter(m => m !== 'Wszystkie').map(m => (
+                      <option key={m} value={m}>{m}</option>
+                    ))}
+                  </select>
                 </div>
-              ))}
+                <div>
+                  <label className="text-xs text-neutral-500 block mb-2">ROCZNIK</label>
+                  <select 
+                    value={issueYear} 
+                    onChange={(e) => setIssueYear(e.target.value)}
+                    className="w-full bg-neutral-900 border border-white/10 px-3 py-2 text-sm focus:outline-none focus:border-amber-400"
+                  >
+                    <option value="">Wszystkie roczniki</option>
+                    {years.map(y => (
+                      <option key={y} value={y}>{y}</option>
+                    ))}
+                  </select>
+                </div>
+              </div>
             </div>
+
+            {(issueModel || issueYear || selectedModel !== 'Wszystkie') && (
+              <div className="space-y-3">
+                <p className="text-neutral-500 text-sm mb-4">Znaleziono: {filteredIssues.length} usterek</p>
+                {filteredIssues.map((i, idx) => (
+                  <div key={idx} className="bg-neutral-950 border border-white/10 p-4">
+                    <div className="flex justify-between items-start mb-2">
+                      <h3 className="font-semibold">{i.Nazwa}</h3>
+                      <span className="text-xs bg-white/10 px-2 py-0.5 text-neutral-400">{i.Model}</span>
+                    </div>
+                    {i.Objawy && <p className="text-neutral-400 text-sm mb-2"><span className="text-amber-400">Objawy:</span> {i.Objawy}</p>}
+                    {i.Rozwiązanie && <p className="text-neutral-300 text-sm whitespace-pre-line">{i.Rozwiązanie}</p>}
+                  </div>
+                ))}
+              </div>
+            )}
+
+            {!issueModel && !issueYear && selectedModel === 'Wszystkie' && (
+              <p className="text-neutral-500 text-center py-8">Wybierz model lub rocznik powyżej aby zobaczyć usterki.</p>
+            )}
           </div>
         )}
 
@@ -337,8 +409,7 @@ export default function Home() {
         {tab === 'schematy' && (
           <div>
             <h2 className="text-2xl mb-6" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>SCHEMATY ELEKTRYCZNE</h2>
-            <div className="bg-neutral-950 border border-white/10 p-6">
-              <p className="text-neutral-400 mb-4">Sekcja w rozbudowie.</p>
+            <div className="bg-neutral-950 border border-white/10 p-4">
               {filteredTips.filter(t => t.Nazwa.toLowerCase().includes('punkt') || t.Nazwa.toLowerCase().includes('masa') || t.Nazwa.toLowerCase().includes('schemat')).map((t, idx) => (
                 <div key={idx} className="mb-4 pb-4 border-b border-white/10 last:border-0">
                   <h3 className="font-semibold mb-2">{t.Nazwa}</h3>
