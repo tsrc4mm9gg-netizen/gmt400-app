@@ -50,11 +50,11 @@ function getModelImage(nazwa: string): string | null {
 
 function getTipImage(nazwa: string): string | null {
   const n = nazwa.toLowerCase();
-  if (n.includes('4l60e') || n.includes('skrzyni') || n.includes('atf') || n.includes('filtr')) return '/diy-4l60e-pl.jpg';
+  if (n.includes('4l60e') || n.includes('skrzyni') || n.includes('atf') || n.includes('miska')) return '/diy-4l60e-pan-pl.jpg';
   if (n.includes('kolektor') || n.includes('uszczelk') || n.includes('intake')) return '/diy-intake-pl.jpg';
   if (n.includes('np231') || n.includes('4x4') || n.includes('rozdzielcz')) return '/diy-np231-pl.jpg';
+  if (n.includes('hamulc') || n.includes('przewod')) return '/diy-brakes-pl.jpg';
   if (n.includes('chłodz') || n.includes('płyn chłod') || n.includes('termostat')) return '/diy-cooling-pl.jpg';
-  if (n.includes('hamulc') || n.includes('klock') || n.includes('tarcze')) return '/diy-brakes-pl.jpg';
   if (n.includes('czujnik') || n.includes('maf') || n.includes('sonda')) return '/diy-sensors.jpg';
   return null;
 }
