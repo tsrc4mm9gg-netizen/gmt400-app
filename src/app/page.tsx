@@ -71,6 +71,7 @@ function getTipImage(nazwa: string): string | null {
 export default function Home() {
   const [items, setItems] = useState<Item[]>([]);
   const [error, setError] = useState<string | null>(null);
+  const [ratings, setRatings] = useState<Record<string, number>>({});
   const [loading, setLoading] = useState(true);
   const [query, setQuery] = useState('');
   const [tab, setTab] = useState(() => {
@@ -112,6 +113,10 @@ export default function Home() {
       navigator.clipboard.writeText(url);
       alert('Link skopiowany!');
     }
+  };
+
+  const rateDiy = (id: string, rating: number) => {
+    setRatings(prev => ({ ...prev, [id]: rating }));
   };
 
   const toggleFavorite = (id: string) => {
