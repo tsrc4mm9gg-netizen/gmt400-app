@@ -112,7 +112,7 @@ export default function Home() {
     setSelectedModel(model);
     setSelectedModelItem(item || null);
     setTab('modele');
-    document.getElementById('content')?.scrollIntoView({ behavior: 'smooth' });
+    setTimeout(() => document.getElementById('content')?.scrollIntoView({ behavior: 'smooth' }), 100);
   };
 
   if (loading) {
@@ -200,36 +200,29 @@ export default function Home() {
         )}
       </header>
 
-      <section className="relative min-h-[70vh] flex items-center pt-20">
+      <section className="relative min-h-[60vh] flex items-center pt-20">
         <div className="absolute inset-0 bg-gradient-to-r from-black via-black/80 to-transparent z-10" />
         <img 
           src={selectedModelItem ? (getModelImage(selectedModelItem.Nazwa) || '/tahoe-4d.jpg') : '/tahoe-4d.jpg'} 
           alt="GMT400" 
           className="absolute inset-0 w-full h-full object-cover object-center opacity-60"
         />
-        <div className="relative z-20 max-w-7xl mx-auto px-6 py-20">
+        <div className="relative z-20 max-w-7xl mx-auto px-6 py-16">
           <div className="max-w-2xl">
-            <div className="flex items-center gap-3 mb-6">
+            <div className="flex items-center gap-3 mb-4">
               <div className="w-12 h-px bg-amber-400" />
               <span className="text-amber-400 text-sm tracking-widest uppercase">
                 {selectedModel === 'Wszystkie' ? '1988–2000' : selectedModel}
               </span>
             </div>
-            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold leading-none tracking-tight mb-6" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>
-              {selectedModelItem ? selectedModelItem.Nazwa : 'GMT400'}<br />
-              {selectedModelItem ? '' : 'ENCYKLOPEDIA'}
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-none tracking-tight mb-4" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>
+              {selectedModelItem ? selectedModelItem.Nazwa : 'GMT400 ENCYKLOPEDIA'}
             </h1>
-            <p className="text-neutral-300 text-lg max-w-md mb-8">
+            <p className="text-neutral-300 text-base max-w-md mb-6">
               {selectedModelItem 
-                ? (selectedModelItem.Opis?.slice(0, 150) + '...') 
-                : 'Kompletna baza wiedzy o Chevrolet C/K, Tahoe, Suburban i GMC Yukon. Modele, usterki, kody, porady.'}
+                ? (selectedModelItem.Opis?.slice(0, 200) + '...') 
+                : 'Kompletna baza wiedzy o Chevrolet C/K, Tahoe, Suburban i GMC Yukon.'}
             </p>
-            <button 
-              onClick={() => document.getElementById('content')?.scrollIntoView({ behavior: 'smooth' })}
-              className="bg-amber-400 text-black px-8 py-4 font-semibold tracking-wider uppercase text-sm hover:bg-amber-300 transition flex items-center gap-2"
-            >
-              {selectedModel === 'Wszystkie' ? 'Przeglądaj bazę' : `Zobacz ${selectedModel}`} <span>→</span>
-            </button>
           </div>
         </div>
       </section>
@@ -252,25 +245,61 @@ export default function Home() {
         </div>
       </div>
 
-      <div id="content" className="max-w-7xl mx-auto px-6 py-16">
+      <div id="content" className="max-w-7xl mx-auto px-6 py-12">
         
         {selectedModel !== 'Wszystkie' && (
-          <div className="mb-8 p-4 bg-amber-400/10 border border-amber-400/30 flex items-center justify-between">
-            <span className="text-amber-400">Filtrowanie: <strong>{selectedModel}</strong></span>
-            <button onClick={() => selectModel('Wszystkie')} className="text-sm text-neutral-400 hover:text-white">
-              Wyczyść filtr ×
+          <div className="mb-8">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6">
+              <button 
+                onClick={() => setTab('modele')}
+                className={`p-4 border text-center transition ${
+                  tab === 'modele' ? 'bg-amber-400 text-black border-amber-400' : 'bg-neutral-950 border-white/10 hover:border-amber-400/50'
+                }`}
+              >
+                <div className="text-2xl font-bold" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>{filteredModels.length}</div>
+                <div className="text-xs uppercase tracking-wide mt-1">Modele</div>
+              </button>
+              <button 
+                onClick={() => setTab('usterki')}
+                className={`p-4 border text-center transition ${
+                  tab === 'usterki' ? 'bg-amber-400 text-black border-amber-400' : 'bg-neutral-950 border-white/10 hover:border-amber-400/50'
+                }`}
+              >
+                <div className="text-2xl font-bold" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>{filteredIssues.length}</div>
+                <div className="text-xs uppercase tracking-wide mt-1">Usterki</div>
+              </button>
+              <button 
+                onClick={() => setTab('kody')}
+                className={`p-4 border text-center transition ${
+                  tab === 'kody' ? 'bg-amber-400 text-black border-amber-400' : 'bg-neutral-950 border-white/10 hover:border-amber-400/50'
+                }`}
+              >
+                <div className="text-2xl font-bold" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>{filteredCodes.length}</div>
+                <div className="text-xs uppercase tracking-wide mt-1">Kody</div>
+              </button>
+              <button 
+                onClick={() => setTab('porady')}
+                className={`p-4 border text-center transition ${
+                  tab === 'porady' ? 'bg-amber-400 text-black border-amber-400' : 'bg-neutral-950 border-white/10 hover:border-amber-400/50'
+                }`}
+              >
+                <div className="text-2xl font-bold" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>{filteredTips.length}</div>
+                <div className="text-xs uppercase tracking-wide mt-1">Porady</div>
+              </button>
+            </div>
+            <button onClick={() => selectModel('Wszystkie')} className="text-sm text-neutral-500 hover:text-white">
+              ← Wróć do wszystkich modeli
             </button>
           </div>
         )}
 
         {tab === 'modele' && (
           <div>
-            <div className="flex items-center gap-4 mb-10">
+            <div className="flex items-center gap-4 mb-8">
               <div className="w-8 h-px bg-amber-400" />
-              <h2 className="text-3xl tracking-wide" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>
-                {selectedModel === 'Wszystkie' ? 'MODELE' : selectedModel.toUpperCase()}
+              <h2 className="text-2xl tracking-wide" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>
+                {selectedModel === 'Wszystkie' ? 'WSZYSTKIE MODELE' : selectedModel.toUpperCase()}
               </h2>
-              <span className="text-neutral-500 text-sm">({filteredModels.length})</span>
             </div>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {filteredModels.map((m, idx) => {
@@ -282,7 +311,7 @@ export default function Home() {
                     onClick={() => selectModel(m.Model, m)}
                   >
                     {img && (
-                      <div className="relative h-56 overflow-hidden">
+                      <div className="relative h-48 overflow-hidden">
                         <img 
                           src={img} 
                           alt={m.Nazwa} 
@@ -290,13 +319,16 @@ export default function Home() {
                         />
                       </div>
                     )}
-                    <div className="p-6">
-                      <h3 className="text-xl font-semibold mb-1" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>{m.Nazwa}</h3>
-                      <p className="text-amber-400 text-sm mb-3">{m.Lata} • {m.Model}</p>
-                      <p className="text-neutral-400 text-sm leading-relaxed line-clamp-3">{m.Opis}</p>
-                      <span className="mt-4 inline-block text-amber-400 text-sm tracking-wide uppercase">
-                        Zobacz więcej →
-                      </span>
+                    <div className="p-5">
+                      <h3 className="text-lg font-semibold mb-1" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>{m.Nazwa}</h3>
+                      <p className="text-amber-400 text-sm mb-2">{m.Lata}</p>
+                      <p className={`text-neutral-400 text-sm leading-relaxed ${expanded === idx ? '' : 'line-clamp-4'}`}>{m.Opis}</p>
+                      <button 
+                        onClick={(e) => { e.stopPropagation(); setExpanded(expanded === idx ? null : idx); }}
+                        className="mt-3 text-amber-400 text-xs tracking-wide uppercase hover:text-amber-300"
+                      >
+                        {expanded === idx ? 'Zwiń' : 'Czytaj więcej'}
+                      </button>
                     </div>
                   </div>
                 );
@@ -307,19 +339,18 @@ export default function Home() {
 
         {tab === 'usterki' && (
           <div>
-            <div className="flex items-center gap-4 mb-10">
+            <div className="flex items-center gap-4 mb-8">
               <div className="w-8 h-px bg-amber-400" />
-              <h2 className="text-3xl tracking-wide" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>USTERKI</h2>
-              <span className="text-neutral-500 text-sm">({filteredIssues.length})</span>
+              <h2 className="text-2xl tracking-wide" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>USTERKI</h2>
             </div>
             <div className="space-y-4">
               {filteredIssues.map((i, idx) => (
-                <div key={idx} className="bg-neutral-950 border border-white/10 p-6 hover:border-white/20 transition">
-                  <div className="flex justify-between items-start mb-3">
+                <div key={idx} className="bg-neutral-950 border border-white/10 p-5 hover:border-white/20 transition">
+                  <div className="flex justify-between items-start mb-2">
                     <h3 className="text-lg font-semibold">{i.Nazwa}</h3>
-                    <span className="text-xs bg-white/10 px-3 py-1 text-neutral-400">{i.Model}</span>
+                    <span className="text-xs bg-white/10 px-2 py-1 text-neutral-400">{i.Model}</span>
                   </div>
-                  {i.Objawy && <p className="text-neutral-400 text-sm mb-3"><span className="text-amber-400">Objawy:</span> {i.Objawy}</p>}
+                  {i.Objawy && <p className="text-neutral-400 text-sm mb-2"><span className="text-amber-400">Objawy:</span> {i.Objawy}</p>}
                   {i.Rozwiązanie && <p className="text-neutral-300 text-sm whitespace-pre-line leading-relaxed">{i.Rozwiązanie}</p>}
                 </div>
               ))}
@@ -329,16 +360,15 @@ export default function Home() {
 
         {tab === 'kody' && (
           <div>
-            <div className="flex items-center gap-4 mb-10">
+            <div className="flex items-center gap-4 mb-8">
               <div className="w-8 h-px bg-amber-400" />
-              <h2 className="text-3xl tracking-wide" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>KODY BŁĘDÓW</h2>
-              <span className="text-neutral-500 text-sm">({filteredCodes.length})</span>
+              <h2 className="text-2xl tracking-wide" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>KODY BŁĘDÓW</h2>
             </div>
             <div className="space-y-4">
               {filteredCodes.map((c, idx) => (
-                <div key={idx} className="bg-neutral-950 border border-white/10 p-6 hover:border-white/20 transition">
+                <div key={idx} className="bg-neutral-950 border border-white/10 p-5 hover:border-white/20 transition">
                   <h3 className="text-lg font-semibold text-amber-400 mb-2">{c.Nazwa}</h3>
-                  {c.Opis && <p className="text-neutral-400 text-sm mb-3">{c.Opis}</p>}
+                  {c.Opis && <p className="text-neutral-400 text-sm mb-2">{c.Opis}</p>}
                   {c.Rozwiązanie && <p className="text-neutral-300 text-sm whitespace-pre-line leading-relaxed">{c.Rozwiązanie}</p>}
                 </div>
               ))}
@@ -348,10 +378,9 @@ export default function Home() {
 
         {tab === 'porady' && (
           <div>
-            <div className="flex items-center gap-4 mb-10">
+            <div className="flex items-center gap-4 mb-8">
               <div className="w-8 h-px bg-amber-400" />
-              <h2 className="text-3xl tracking-wide" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>PORADY DIY</h2>
-              <span className="text-neutral-500 text-sm">({filteredTips.length})</span>
+              <h2 className="text-2xl tracking-wide" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>PORADY DIY</h2>
             </div>
             <div className="space-y-6">
               {filteredTips.map((t, idx) => {
@@ -362,14 +391,14 @@ export default function Home() {
                       <img 
                         src={tipImg} 
                         alt="diagram" 
-                        className="w-full max-h-80 object-contain bg-white cursor-pointer hover:opacity-90 transition" 
+                        className="w-full max-h-72 object-contain bg-white cursor-pointer hover:opacity-90 transition" 
                         onClick={() => setLightbox(tipImg)}
                       />
                     )}
-                    <div className="p-6">
-                      <h3 className="text-lg font-semibold mb-3">{t.Nazwa}</h3>
+                    <div className="p-5">
+                      <h3 className="text-lg font-semibold mb-2">{t.Nazwa}</h3>
                       <p className="text-neutral-300 text-sm whitespace-pre-line leading-relaxed">{t.Rozwiązanie}</p>
-                      {tipImg && <p className="text-xs text-neutral-600 mt-4 uppercase tracking-wide">Kliknij diagram aby powiększyć</p>}
+                      {tipImg && <p className="text-xs text-neutral-600 mt-3 uppercase tracking-wide">Kliknij diagram aby powiększyć</p>}
                     </div>
                   </div>
                 );
@@ -379,9 +408,9 @@ export default function Home() {
         )}
       </div>
 
-      <footer className="border-t border-white/10 py-12">
+      <footer className="border-t border-white/10 py-10">
         <div className="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row justify-between items-center gap-4">
-          <div className="text-2xl font-bold tracking-wider" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>
+          <div className="text-xl font-bold tracking-wider" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>
             GMT<span className="text-amber-400">400</span>
           </div>
           <div className="text-neutral-500 text-sm">
