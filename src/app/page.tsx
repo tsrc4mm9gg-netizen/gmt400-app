@@ -71,6 +71,7 @@ export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [issueYear, setIssueYear] = useState('');
   const [issueModel, setIssueModel] = useState('');
+  const [issueQuery, setIssueQuery] = useState('');
   const [selectedEngine, setSelectedEngine] = useState('');
 
   useEffect(() => {
@@ -392,7 +393,14 @@ export default function Home() {
             <h2 className="text-2xl mb-6" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>USTERKI</h2>
             
             <div className="bg-neutral-950 border border-white/10 p-4 mb-6">
-              <p className="text-neutral-400 text-sm mb-4">Wybierz model i rocznik aby zobaczyć usterki:</p>
+              <input 
+                type="text" 
+                placeholder="Szukaj usterki (np. wyciek, 4L60E, kolektor)..." 
+                value={issueQuery}
+                onChange={(e) => setIssueQuery(e.target.value)}
+                className="w-full bg-neutral-900 border border-white/10 px-4 py-3 text-sm focus:outline-none focus:border-amber-400 mb-4"
+              />
+              <p className="text-neutral-400 text-sm mb-4">Lub filtruj po modelu i roczniku:</p>
               <div className="grid sm:grid-cols-2 gap-4">
                 <div>
                   <label className="text-xs text-neutral-500 block mb-2">MODEL</label>
@@ -423,24 +431,37 @@ export default function Home() {
               </div>
             </div>
 
-            {(issueModel || issueYear || selectedModel !== 'Wszystkie') && (
+            {(issueModel || issueYear || issueQuery || selectedModel !== 'Wszystkie') && (
               <div className="space-y-3">
-                <p className="text-neutral-500 text-sm mb-4">Znaleziono: {filteredIssues.length} usterek</p>
-                {filteredIssues.map((i, idx) => (
-                  <div key={idx} className="bg-neutral-950 border border-white/10 p-4">
-                    <div className="flex justify-between items-start mb-2">
-                      <h3 className="font-semibold">{i.Nazwa}</h3>
-                      <span className="text-xs bg-white/10 px-2 py-0.5 text-neutral-400">{i.Model}</span>
+                <p className="text-neutral-500 text-sm mb-4">Znaleziono: {filteredIssues.filter(i => !issueQuery || i.Nazwa.toLowerCase().includes(issueQuery.toLowerCase()) || (i.Objawy && i.Objawy.toLowerCase().includes(issueQuery.toLowerCase())) || (i.Rozwiązanie && i.Rozwiązanie.toLowerCase().includes(issueQuery.toLowerCase()))).length} usterek</p>
+                {filteredIssues.filter(i => !issueQuery || i.Nazwa.toLowerCase().includes(issueQuery.toLowerCase()) || (i.Objawy && i.Objawy.toLowerCase().includes(issueQuery.toLowerCase())) || (i.Rozwiązanie && i.Rozwiązanie.toLowerCase().includes(issueQuery.toLowerCase()))).map((i, idx) => {
+                  const issueImg = i.Nazwa.toLowerCase().includes('kolektor') ? '/issue-intake.jpg' : i.Nazwa.toLowerCase().includes('4l60') ? '/issue-4l60e.jpg' : null;
+                  return (
+                    <div key={idx} className="bg-neutral-950 border border-white/10 overflow-hidden">
+                      {issueImg && <img src={issueImg} alt="schemat" className="w-full max-h-48 object-contain bg-white cursor-pointer" onClick={() => setLightbox(issueImg)} />}
+                      <div className="p-4">
+                        <div className="flex justify-between items-start mb-2">
+                          <h3 className="font-semibold">{i.Nazwa}</h3>
+                          <span className="text-xs bg-white/10 px-2 py-0.5 text-neutral-400">{i.Model}</span>
+                        </div>
+                        {i.Objawy && <p className="text-neutral-400 text-sm mb-2"><span className="text-amber-400">Objawy:</span> {i.Objawy}</p>}
+                        {i.Rozwiązanie && <p className="text-neutral-300 text-sm whitespace-pre-line">{i.Rozwiązanie}</p>}
+                      </div>
                     </div>
-                    {i.Objawy && <p className="text-neutral-400 text-sm mb-2"><span className="text-amber-400">Objawy:</span> {i.Objawy}</p>}
-                    {i.Rozwiązanie && <p className="text-neutral-300 text-sm whitespace-pre-line">{i.Rozwiązanie}</p>}
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             )}
 
-            {!issueModel && !issueYear && selectedModel === 'Wszystkie' && (
-              <p className="text-neutral-500 text-center py-8">Wybierz model lub rocznik powyżej aby zobaczyć usterki.</p>
+            {!issueModel && !issueYear && !issueQuery && selectedModel === 'Wszystkie' && (
+              <div className="text-center py-8">
+                <p className="text-neutral-500 mb-4">Wpisz słowo kluczowe lub wybierz model aby zobaczyć usterki.</p>
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 text-sm">
+                  {['wyciek', '4L60E', 'kolektor', 'hamulce', '4x4', 'pompa'].map(k => (
+                    <button key={k} onClick={() => setIssueQuery(k)} className="bg-neutral-800 hover:bg-neutral-700 px-3 py-2">{k}</button>
+                  ))}
+                </div>
+              </div>
             )}
           </div>
         )}
