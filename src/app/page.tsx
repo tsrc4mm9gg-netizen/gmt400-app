@@ -771,6 +771,17 @@ export default function Home() {
                 { kat: 'zawieszenie', nazwa: 'Końcówka drążka', oem: 'AC Delco 45A0526', opis: 'Końcówka drążka kierowniczego', model: 'Wszystkie' },
                 { kat: 'skrzynia', nazwa: 'Uszczelka miski', oem: 'AC Delco 24206182', opis: 'Uszczelka miski 4L60E', model: '4L60E' },
                 { kat: 'skrzynia', nazwa: 'Solenoid EPC', oem: 'AC Delco 24230298', opis: 'Solenoid ciśnienia', model: '4L60E' },
+                { kat: 'silnik', nazwa: 'Wtryskiwacz', oem: 'AC Delco 217-3028', opis: 'Wtryskiwacz paliwa', model: '5.7L Vortec' },
+                { kat: 'silnik', nazwa: 'Regulator ciśnienia', oem: 'AC Delco 217-3074', opis: 'Regulator ciśnienia paliwa', model: 'Vortec' },
+                { kat: 'silnik', nazwa: 'Czujnik wału', oem: 'AC Delco 213-324', opis: 'Czujnik położenia wału (CKP)', model: 'Vortec' },
+                { kat: 'silnik', nazwa: 'Czujnik wałka', oem: 'AC Delco 213-920', opis: 'Czujnik położenia wałka (CMP)', model: 'Vortec' },
+                { kat: 'hamulce', nazwa: 'Cylinder hamulcowy', oem: 'AC Delco 18M1165', opis: 'Pompa hamulcowa główna', model: 'Wszystkie' },
+                { kat: 'hamulce', nazwa: 'Cylinder koła', oem: 'AC Delco 18E1277', opis: 'Cylinder hamulcowy tył', model: '1500' },
+                { kat: 'zawieszenie', nazwa: 'Amortyzator przód', oem: 'AC Delco 504-1079', opis: 'Amortyzator przedni', model: '1500' },
+                { kat: 'zawieszenie', nazwa: 'Amortyzator tył', oem: 'AC Delco 504-1080', opis: 'Amortyzator tylny', model: '1500' },
+                { kat: 'zawieszenie', nazwa: 'Sprężyna przód', oem: 'AC Delco 45H0065', opis: 'Sprężyna przednia', model: 'C1500' },
+                { kat: 'filtry', nazwa: 'Filtr oleju Diesel', oem: 'AC Delco PF1218', opis: 'Filtr oleju 6.5L', model: '6.5L' },
+                { kat: 'filtry', nazwa: 'Filtr paliwa Diesel', oem: 'AC Delco TP1006', opis: 'Filtr paliwa 6.5L', model: '6.5L' },
               ].filter(p => (partsFilter === 'wszystkie' || p.kat === partsFilter) && (!partsQuery || p.nazwa.toLowerCase().includes(partsQuery.toLowerCase()) || p.oem.toLowerCase().includes(partsQuery.toLowerCase()))).map((p, idx) => (
                 <div key={idx} className="bg-neutral-950 border border-white/10 p-4">
                   <div className="flex justify-between items-start mb-2">
