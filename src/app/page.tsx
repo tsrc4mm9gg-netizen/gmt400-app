@@ -1008,13 +1008,90 @@ export default function Home() {
         {tab === 'kupujacy' && (
           <div>
             <h2 className="text-2xl mb-6" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>PORADNIK KUPUJĄCEGO</h2>
-            <div className="bg-neutral-950 border border-white/10 p-4">
-              {filteredTips.filter(t => t.Nazwa.toLowerCase().includes('kupuj') || t.Nazwa.toLowerCase().includes('checklist')).map((t, idx) => (
-                <div key={idx}>
-                  <h3 className="font-semibold mb-2">{t.Nazwa}</h3>
-                  <p className="text-neutral-300 text-sm whitespace-pre-line">{t.Rozwiązanie}</p>
-                </div>
-              ))}
+            
+            <div className="bg-neutral-950 border border-white/10 overflow-hidden mb-4">
+              <img src="/guide-rust.jpg" alt="Rdza GMT400" className="w-full h-48 object-cover cursor-pointer" onClick={() => setLightbox('/guide-rust.jpg')} />
+              <div className="p-4">
+                <h3 className="font-semibold text-amber-400 mb-2">1. RDZA — NAJWIĘKSZY WRÓG</h3>
+                <ul className="text-sm text-neutral-300 space-y-1">
+                  <li>• <strong>Progi</strong> — sprawdź od spodu, rdza często ukryta pod listwami</li>
+                  <li>• <strong>Nadkola</strong> — szczególnie tylne, woda zbiera się za błotnikiem</li>
+                  <li>• <strong>Podłoga kabiny</strong> — pod dywanikami, przy pedałach</li>
+                  <li>• <strong>Rama</strong> — przy mocowaniach resorów, za kołami</li>
+                  <li>• <strong>Klapa</strong> — dolna krawędź, zawiasy</li>
+                </ul>
+                <p className="text-xs text-neutral-500 mt-2">Koszt naprawy: 2000-8000 PLN za progi, 5000-15000 PLN za ramę</p>
+              </div>
+            </div>
+
+            <div className="bg-neutral-950 border border-white/10 overflow-hidden mb-4">
+              <img src="/guide-frame.jpg" alt="Rama GMT400" className="w-full h-48 object-cover cursor-pointer" onClick={() => setLightbox('/guide-frame.jpg')} />
+              <div className="p-4">
+                <h3 className="font-semibold text-amber-400 mb-2">2. RAMA — SPRAWDŹ DOKŁADNIE</h3>
+                <ul className="text-sm text-neutral-300 space-y-1">
+                  <li>• <strong>Pęknięcia</strong> — przy mocowaniach zawieszenia, za kabiną</li>
+                  <li>• <strong>Korozja</strong> — szczególnie przy spawach i otworach</li>
+                  <li>• <strong>Naprawy</strong> — świeże spawy = ukryta historia wypadku</li>
+                  <li>• <strong>Numer ramy</strong> — musi zgadzać się z VIN</li>
+                </ul>
+                <p className="text-xs text-neutral-500 mt-2">Rama to szkielet auta — uszkodzona = duży problem</p>
+              </div>
+            </div>
+
+            <div className="bg-neutral-950 border border-white/10 overflow-hidden mb-4">
+              <img src="/guide-engine.jpg" alt="Silnik 5.7L" className="w-full h-48 object-cover cursor-pointer" onClick={() => setLightbox('/guide-engine.jpg')} />
+              <div className="p-4">
+                <h3 className="font-semibold text-amber-400 mb-2">3. SILNIK — CO SPRAWDZIĆ</h3>
+                <ul className="text-sm text-neutral-300 space-y-1">
+                  <li>• <strong>Olej</strong> — mleczny = uszczelka głowicy, metaliczne = zużycie</li>
+                  <li>• <strong>Wycieki</strong> — uszczelka kolektora (typowy problem Vortec)</li>
+                  <li>• <strong>Dym</strong> — niebieski = olej, biały = płyn, czarny = paliwo</li>
+                  <li>• <strong>Kompresja</strong> — min. 10 bar na każdym cylindrze</li>
+                  <li>• <strong>Rozruch</strong> — powinien odpalić w 2-3 sekundy</li>
+                </ul>
+                <p className="text-xs text-neutral-500 mt-2">Uszczelka kolektora: 1500-3000 PLN. Silnik: 5000-15000 PLN</p>
+              </div>
+            </div>
+
+            <div className="bg-neutral-950 border border-white/10 p-4 mb-4">
+              <h3 className="font-semibold text-amber-400 mb-2">4. SKRZYNIA BIEGÓW</h3>
+              <ul className="text-sm text-neutral-300 space-y-1">
+                <li>• <strong>4L60E</strong> — szarpanie przy zmianie 2-3 = typowy problem</li>
+                <li>• <strong>ATF</strong> — ciemny/spalony = zużycie, metaliczne = problem</li>
+                <li>• <strong>Opóźnienie</strong> — długie przejście D-R = zużyta skrzynia</li>
+                <li>• <strong>Jazda próbna</strong> — sprawdź wszystkie biegi, szczególnie 4.</li>
+              </ul>
+              <p className="text-xs text-neutral-500 mt-2">Regeneracja 4L60E: 3000-6000 PLN</p>
+            </div>
+
+            <div className="bg-neutral-950 border border-white/10 p-4 mb-4">
+              <h3 className="font-semibold text-amber-400 mb-2">5. ZAWIESZENIE I HAMULCE</h3>
+              <ul className="text-sm text-neutral-300 space-y-1">
+                <li>• <strong>Tuleje</strong> — stukanie na nierównościach = zużyte</li>
+                <li>• <strong>Sworznie</strong> — luz na kole = wymiana</li>
+                <li>• <strong>Amortyzatory</strong> — kołysanie po naciśnięciu = zużyte</li>
+                <li>• <strong>Hamulce</strong> — tarcze min. 28mm, klocki min. 3mm</li>
+                <li>• <strong>Przewody</strong> — rdza na przewodach hamulcowych = wymiana</li>
+              </ul>
+              <p className="text-xs text-neutral-500 mt-2">Komplet zawieszenia: 2000-4000 PLN. Hamulce: 1000-2000 PLN</p>
+            </div>
+
+            <div className="bg-neutral-950 border border-amber-400/30 p-4">
+              <h3 className="font-semibold text-amber-400 mb-2">CHECKLIST PRZED ZAKUPEM</h3>
+              <div className="grid sm:grid-cols-2 gap-2 text-sm text-neutral-300">
+                <div>☐ VIN zgodny z dokumentami</div>
+                <div>☐ Numer ramy zgodny z VIN</div>
+                <div>☐ Brak poważnej rdzy na ramie</div>
+                <div>☐ Silnik odpala bez problemu</div>
+                <div>☐ Brak dymu z wydechu</div>
+                <div>☐ Skrzynia zmienia biegi płynnie</div>
+                <div>☐ Brak stuków w zawieszeniu</div>
+                <div>☐ Hamulce działają prawidłowo</div>
+                <div>☐ Klimatyzacja działa (jeśli jest)</div>
+                <div>☐ Wszystkie światła działają</div>
+                <div>☐ Szyby otwierają się</div>
+                <div>☐ Brak wycieków płynów</div>
+              </div>
             </div>
           </div>
         )}
