@@ -29,11 +29,11 @@ function getModelImage(nazwa: string): string | null {
 
 function getTipImage(nazwa: string): string | null {
   const n = nazwa.toLowerCase();
-  if (n.includes('4l60e') && (n.includes('filtr') || n.includes('płyn') || n.includes('wymiana'))) return '/diy-4l60e-pan.jpg';
-  if (n.includes('4l60e') || n.includes('atf') || n.includes('skrzyni')) return '/diy-4l60e.jpg';
-  if (n.includes('kolektor') || n.includes('uszczelk') || n.includes('intake')) return '/diy-intake-gasket.jpg';
-  if (n.includes('np231') || n.includes('4x4') || n.includes('rozdzielcz')) return '/diy-np231-detail.jpg';
-  if (n.includes('czujnik') || n.includes('maf') || n.includes('sonda')) return '/diy-sensors.jpg';
+  if (n.includes('4l60e') && (n.includes('filtr') || n.includes('płyn') || n.includes('wymiana') || n.includes('misk'))) return '/diy-4l60e-pl.jpg';
+  if (n.includes('4l60e') || n.includes('skrzyni') || n.includes('atf')) return '/diy-4l60e-pl.jpg';
+  if (n.includes('kolektor') || n.includes('uszczelk') || n.includes('intake')) return '/diy-intake-pl.jpg';
+  if (n.includes('np231') || n.includes('4x4') || n.includes('rozdzielcz')) return '/diy-np231-pl.jpg';
+  if (n.includes('czujnik') || n.includes('maf') || n.includes('sonda') || n.includes('lean') || n.includes('p0171')) return '/diy-sensors.jpg';
   return null;
 }
 
@@ -44,6 +44,7 @@ export default function Home() {
   const [tab, setTab] = useState('modele');
   const [selectedModel, setSelectedModel] = useState('Wszystkie');
   const [expanded, setExpanded] = useState<number | null>(null);
+  const [lightbox, setLightbox] = useState<string | null>(null);
 
   useEffect(() => {
     fetch('/api/notion')
@@ -107,6 +108,13 @@ export default function Home() {
     <div className="min-h-screen bg-neutral-950 text-neutral-100">
       <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@500;700&display=swap" rel="stylesheet" />
       
+      {lightbox && (
+        <div className="fixed inset-0 bg-black/90 z-[100] flex items-center justify-center p-4" onClick={() => setLightbox(null)}>
+          <img src={lightbox} alt="powiększony diagram" className="max-w-full max-h-full object-contain" />
+          <button className="absolute top-4 right-4 text-white text-3xl" onClick={() => setLightbox(null)}>×</button>
+        </div>
+      )}
+
       <header className="border-b border-neutral-800 bg-neutral-950/90 backdrop-blur sticky top-0 z-50">
         <div className="max-w-6xl mx-auto px-4 py-4 flex flex-col sm:flex-row items-center justify-between gap-3">
           <h1 className="text-3xl tracking-wider" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>
@@ -164,7 +172,7 @@ export default function Home() {
               const img = getModelImage(m.Nazwa);
               return (
                 <div key={idx} className="bg-neutral-900 border border-neutral-800 rounded-xl overflow-hidden hover:border-amber-400 transition">
-                  {img && <img src={img} alt={m.Nazwa} className="w-full h-48 object-cover bg-neutral-800" />}
+                  {img && <img src={img} alt={m.Nazwa} className="w-full h-48 object-cover bg-neutral-800 cursor-pointer" onClick={() => setLightbox(img)} />}
                   <div className="p-5">
                     <h3 className="text-amber-400 font-semibold text-lg" style={{ fontFamily: "'Oswald', sans-serif" }}>{m.Nazwa}</h3>
                     <p className="text-sm text-neutral-500 mb-2">{m.Lata} • {m.Model}</p>
@@ -212,10 +220,18 @@ export default function Home() {
               const tipImg = getTipImage(t.Nazwa);
               return (
                 <div key={idx} className="bg-neutral-900 border border-neutral-800 rounded-xl overflow-hidden">
-                  {tipImg && <img src={tipImg} alt="diagram" className="w-full max-h-64 object-contain bg-white" />}
+                  {tipImg && (
+                    <img 
+                      src={tipImg} 
+                      alt="diagram" 
+                      className="w-full max-h-64 object-contain bg-white cursor-pointer hover:opacity-90 transition" 
+                      onClick={() => setLightbox(tipImg)}
+                    />
+                  )}
                   <div className="p-5">
                     <h3 className="font-semibold text-amber-400 mb-2">{t.Nazwa}</h3>
                     <p className="text-neutral-300 text-sm whitespace-pre-line">{t.Rozwiązanie}</p>
+                    {tipImg && <p className="text-xs text-neutral-500 mt-2">Kliknij diagram aby powiększyć</p>}
                   </div>
                 </div>
               );
