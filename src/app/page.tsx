@@ -278,7 +278,10 @@ export default function Home() {
   }
 
   return (
-    <div className="min-h-screen bg-black text-white">
+    <div className="min-h-screen bg-black text-white" style={{ paddingBottom: "env(safe-area-inset-bottom)" }}>
+      <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+      <meta name="apple-mobile-web-app-capable" content="yes" />
+      <meta name="mobile-web-app-capable" content="yes" />
       <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
       <link rel="manifest" href="/manifest.json" />
       <script type="application/ld+json" dangerouslySetInnerHTML={{__html: JSON.stringify({
@@ -340,7 +343,7 @@ export default function Home() {
                 <button
                   key={cat.id}
                   onClick={() => { setTab(cat.id); setMenuOpen(false); }}
-                  className={`px-4 py-3 text-sm font-medium rounded transition ${
+                  className={`px-4 py-4 text-base font-medium rounded transition active:scale-95 ${
                     tab === cat.id ? 'bg-amber-400 text-black' : 'bg-white/10 text-white hover:bg-white/20'
                   }`}
                 >
