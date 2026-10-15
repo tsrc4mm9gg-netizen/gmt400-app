@@ -1000,22 +1000,24 @@ export default function Home() {
 
             <div className="space-y-4">
               {[
-                { kat: 'zawieszenie', nazwa: 'Lift 4-6 cali', efekt: '+4-6" wysokości, większe opony 33-35"', czesci: 'Rough Country / BDS kit', koszt: '3000-6000 PLN', opis: 'Pełny kit z krzyżownicami, wahaczami i blokami. Najpopularniejszy lift dla K1500.' },
+                { kat: 'zawieszenie', nazwa: 'Lift 4-6 cali', efekt: '+4-6" wysokości, większe opony 33-35"', czesci: 'Rough Country / BDS kit', koszt: '3000-6000 PLN', opis: 'Pełny kit z krzyżownicami, wahaczami i blokami.', model: 'K1500 4x4', img: '/mod-lift.jpg' },
                 { kat: 'zawieszenie', nazwa: 'Leveling kit (torsion crank)', efekt: '+1-2" przód, poziomowanie', czesci: 'Fabryczne klucze torsion', koszt: '0 PLN (DIY)', opis: 'Kręcenie kluczy torsion bars. Max 2" bez problemów. Więcej = zużycie części.' },
-                { kat: 'zawieszenie', nazwa: 'Drop 4/6 (obniżenie)', efekt: '-4" przód, -6" tył', czesci: 'CPP Drop Springs + Flip Kit', koszt: '2000-4000 PLN', opis: 'Obniżenie dla stylu street. Drop springs + flip kit + shackles.' },
+                { kat: 'zawieszenie', nazwa: 'Drop 4/6 (obniżenie)', efekt: '-4" przód, -6" tył', czesci: 'CPP Drop Springs + Flip Kit', koszt: '2000-4000 PLN', opis: 'Obniżenie dla stylu street. Drop springs + flip kit + shackles.', model: 'C1500 2WD', img: '/mod-drop.jpg' },
                 { kat: 'zawieszenie', nazwa: 'Coilover conversion', efekt: 'Regulowana wysokość, lepsza jazda', czesci: 'QA1 / Ridetech kit', koszt: '8000-15000 PLN', opis: 'Zamiana sprężyn na coilover. Pełna regulacja i lepsza kontrola.' },
-                { kat: 'silnik', nazwa: 'LS Swap 5.3L', efekt: '+100-150 KM, nowoczesność', czesci: '5.3L LM7 + 4L60E/4L80E', koszt: '8000-15000 PLN', opis: 'Najpopularniejszy swap. 5.3L z GMT800. Wymaga okablowania i ECU.' },
+                { kat: 'silnik', nazwa: 'LS Swap 5.3L', efekt: '+100-150 KM, nowoczesność', czesci: '5.3L LM7 + 4L60E/4L80E', koszt: '8000-15000 PLN', opis: 'Najpopularniejszy swap. 5.3L z GMT800. Wymaga okablowania i ECU.', model: 'Wszystkie GMT400', img: '/mod-ls.jpg' },
                 { kat: 'silnik', nazwa: 'LS Swap 6.0L', efekt: '+150-200 KM, moment do holowania', czesci: '6.0L LQ4 + 4L80E', koszt: '12000-20000 PLN', opis: 'Dla cięższych aut i holowania. Więcej momentu niż 5.3L.' },
                 { kat: 'silnik', nazwa: 'Headers (kolektory)', efekt: '+10-20 KM, lepszy dźwięk', czesci: 'Flowtech / Hedman headers', koszt: '800-2000 PLN', opis: 'Zamiana fabrycznych kolektorów. Shorty lub long tube.' },
                 { kat: 'silnik', nazwa: 'Cold Air Intake', efekt: '+5-10 KM, lepszy dźwięk', czesci: 'K&N / Airaid kit', koszt: '400-800 PLN', opis: 'Zimne powietrze do silnika. Prosty montaż.' },
                 { kat: 'wydech', nazwa: 'Cat-back exhaust', efekt: 'Lepszy dźwięk, +5-10 KM', czesci: 'Magnaflow / Flowmaster', koszt: '1500-3000 PLN', opis: 'Wydech od katalizatora. 2.5" lub 3" średnica.' },
-                { kat: 'wydech', nazwa: 'Pełny wydech 3"', efekt: '+15-25 KM z headers', czesci: 'Headers + 3" system', koszt: '3000-5000 PLN', opis: 'Headers + Y-pipe + 3" cat-back. Maksymalny przepływ.' },
+                { kat: 'wydech', nazwa: 'Pełny wydech 3"', efekt: '+15-25 KM z headers', czesci: 'Headers + 3" system', koszt: '3000-5000 PLN', opis: 'Headers + Y-pipe + 3" cat-back. Maksymalny przepływ.', model: 'Wszystkie V8', img: '/mod-exhaust.jpg' },
                 { kat: 'skrzynia', nazwa: '4L60E rebuild', efekt: 'Niezawodność, trzymanie mocy', czesci: 'Sonnax kit + frictions', koszt: '3000-6000 PLN', opis: 'Regeneracja z ulepszonymi częściami. Shift kit, hardened sun shell.' },
                 { kat: 'skrzynia', nazwa: '4L80E swap', efekt: 'Wytrzymałość na moc', czesci: '4L80E + crossmember + shaft', koszt: '5000-10000 PLN', opis: 'Dla LS swap i mocy powyżej 400 KM. Wymaga modyfikacji.' },
                 { kat: 'hamulce', nazwa: 'Big brake kit', efekt: 'Krótsza droga hamowania', czesci: 'Wilwood / Pro Performance', koszt: '3000-6000 PLN', opis: 'Większe tarcze i zaciski. Dla obniżonych i szybkich aut.' },
                 { kat: 'hamulce', nazwa: 'Tarcze tył (zamiast bębnów)', efekt: 'Lepsze hamowanie tyłu', czesci: 'Disc conversion kit', koszt: '1500-3000 PLN', opis: 'Zamiana bębnów na tarcze. Lepsze hamowanie i łatwiejszy serwis.' },
               ].filter(m => (tuningFilter === 'wszystkie' || m.kat === tuningFilter) && (!tuningQuery || m.nazwa.toLowerCase().includes(tuningQuery.toLowerCase()) || m.opis.toLowerCase().includes(tuningQuery.toLowerCase()))).map((m, idx) => (
-                <div key={idx} className="bg-neutral-950 border border-white/10 p-4">
+                <div key={idx} className="bg-neutral-950 border border-white/10 overflow-hidden">
+                  {m.img && <img src={m.img} alt={m.nazwa} className="w-full h-40 object-cover cursor-pointer" onClick={() => setLightbox(m.img)} />}
+                  <div className="p-4">
                   <div className="flex justify-between items-start mb-2">
                     <h3 className="font-semibold text-lg">{m.nazwa}</h3>
                     <span className="text-xs bg-amber-400 text-black px-2 py-0.5">{m.koszt}</span>
@@ -1023,6 +1025,8 @@ export default function Home() {
                   <p className="text-amber-400 text-sm mb-2">Efekt: {m.efekt}</p>
                   <p className="text-neutral-300 text-sm mb-2">{m.opis}</p>
                   <p className="text-neutral-500 text-xs">Części: {m.czesci}</p>
+                  {m.model && <p className="text-amber-400 text-xs mt-1">Model: {m.model}</p>}
+                  </div>
                 </div>
               ))}
             </div>
