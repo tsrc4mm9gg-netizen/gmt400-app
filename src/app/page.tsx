@@ -12,6 +12,13 @@ type Item = {
   Lata?: string;
 };
 
+const modelImages: Record<string, string> = {
+  'Tahoe': 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/1997_Chevrolet_Tahoe.jpg/800px-1997_Chevrolet_Tahoe.jpg',
+  'Suburban': 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/1999_Chevrolet_Suburban.jpg/800px-1999_Chevrolet_Suburban.jpg',
+  'C/K': 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/1995_Chevrolet_C1500.jpg/800px-1995_Chevrolet_C1500.jpg',
+  'Yukon': 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/1998_GMC_Yukon.jpg/800px-1998_GMC_Yukon.jpg',
+};
+
 export default function Home() {
   const [items, setItems] = useState<Item[]>([]);
   const [loading, setLoading] = useState(true);
@@ -102,10 +109,15 @@ export default function Home() {
         {tab === 'modele' && (
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
             {filteredModels.map((m, idx) => (
-              <div key={idx} className="bg-neutral-900 border border-neutral-800 rounded-xl p-5 hover:border-amber-400 transition">
-                <h3 className="text-amber-400 font-semibold text-lg">{m.Nazwa}</h3>
-                <p className="text-sm text-neutral-500 mb-1">{m.Lata} • {m.Model}</p>
-                <p className="text-neutral-300 text-sm">{m.Opis}</p>
+              <div key={idx} className="bg-neutral-900 border border-neutral-800 rounded-xl overflow-hidden hover:border-amber-400 transition">
+                {modelImages[m.Model] && (
+                  <img src={modelImages[m.Model]} alt={m.Nazwa} className="w-full h-40 object-cover" />
+                )}
+                <div className="p-5">
+                  <h3 className="text-amber-400 font-semibold text-lg">{m.Nazwa}</h3>
+                  <p className="text-sm text-neutral-500 mb-1">{m.Lata} • {m.Model}</p>
+                  <p className="text-neutral-300 text-sm">{m.Opis}</p>
+                </div>
               </div>
             ))}
           </div>
@@ -142,23 +154,30 @@ export default function Home() {
         )}
 
         {tab === 'kody' && (
-          <div className="bg-neutral-900 border border-neutral-800 rounded-xl overflow-hidden">
-            <table className="w-full text-sm">
-              <thead className="bg-neutral-800">
-                <tr>
-                  <th className="text-left p-3 text-amber-400">Kod</th>
-                  <th className="text-left p-3 text-amber-400">Opis</th>
-                </tr>
-              </thead>
-              <tbody>
-                {filteredCodes.map((c, idx) => (
-                  <tr key={idx} className="border-t border-neutral-800">
-                    <td className="p-3 font-mono">{c.Nazwa}</td>
-                    <td className="p-3 text-neutral-300">{c.Opis}</td>
+          <div>
+            <div className="mb-6 bg-neutral-900 border border-neutral-800 rounded-xl p-4">
+              <h3 className="text-amber-400 font-semibold mb-3">Schemat cewek 4L60E</h3>
+              <img src="https://www.sonnax.com/tech_resources/images/614/4L60E-Valve-Body.jpg" alt="4L60E solenoids" className="w-full max-w-2xl mx-auto rounded" />
+              <p className="text-sm text-neutral-400 mt-2">Lokalizacja cewek w skrzyni 4L60E (pomocne przy kodach P07xx)</p>
+            </div>
+            <div className="bg-neutral-900 border border-neutral-800 rounded-xl overflow-hidden">
+              <table className="w-full text-sm">
+                <thead className="bg-neutral-800">
+                  <tr>
+                    <th className="text-left p-3 text-amber-400">Kod</th>
+                    <th className="text-left p-3 text-amber-400">Opis</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  {filteredCodes.map((c, idx) => (
+                    <tr key={idx} className="border-t border-neutral-800">
+                      <td className="p-3 font-mono">{c.Nazwa}</td>
+                      <td className="p-3 text-neutral-300">{c.Opis}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
         )}
 
