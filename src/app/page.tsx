@@ -24,7 +24,8 @@ export default function Home() {
   const [loading, setLoading] = useState(true);
   const [query, setQuery] = useState('');
   const [tab, setTab] = useState('modele');
-  const [category, setCategory] = useState('Wszystkie');
+  const [selectedModel, setSelectedModel] = useState('Wszystkie');
+  const [expanded, setExpanded] = useState<number | null>(null);
 
   useEffect(() => {
     fetch('/api/notion')
@@ -41,6 +42,13 @@ export default function Home() {
   const codes = useMemo(() => items.filter(i => i.Typ === 'Kod błędu'), [items]);
   const tips = useMemo(() => items.filter(i => i.Typ === 'Porada'), [items]);
 
+  const uniqueModels = ['Wszystkie', ...Array.from(new Set(models.map(m => m.Model).filter(Boolean)))];
+
+  const filterByModel = (list: Item[]) => {
+    if (selectedModel === 'Wszystkie') return list;
+    return list.filter(i => i.Model === selectedModel || i.Model === 'Wszystkie');
+  };
+
   const filteredModels = useMemo(() =>
     models.filter(m =>
       m.Nazwa.toLowerCase().includes(query.toLowerCase()) ||
@@ -48,29 +56,30 @@ export default function Home() {
     ), [models, query]);
 
   const filteredIssues = useMemo(() => {
-    let result = issues;
-    if (category !== 'Wszystkie') result = result.filter(i => i.Model === category);
+    let result = filterByModel(issues);
     return result.filter(i =>
       i.Nazwa.toLowerCase().includes(query.toLowerCase()) ||
       (i.Objawy || '').toLowerCase().includes(query.toLowerCase()) ||
       (i.Rozwiązanie || '').toLowerCase().includes(query.toLowerCase())
     );
-  }, [issues, query, category]);
+  }, [issues, query, selectedModel]);
 
-  const filteredCodes = useMemo(() =>
-    codes.filter(c =>
+  const filteredCodes = useMemo(() => {
+    let result = filterByModel(codes);
+    return result.filter(c =>
       c.Nazwa.toLowerCase().includes(query.toLowerCase()) ||
       (c.Opis || '').toLowerCase().includes(query.toLowerCase()) ||
       (c.Rozwiązanie || '').toLowerCase().includes(query.toLowerCase())
-    ), [codes, query]);
+    );
+  }, [codes, query, selectedModel]);
 
-  const filteredTips = useMemo(() =>
-    tips.filter(t =>
+  const filteredTips = useMemo(() => {
+    let result = filterByModel(tips);
+    return result.filter(t =>
       t.Nazwa.toLowerCase().includes(query.toLowerCase()) ||
       (t.Rozwiązanie || '').toLowerCase().includes(query.toLowerCase())
-    ), [tips, query]);
-
-  const categories = ['Wszystkie', ...Array.from(new Set(issues.map(i => i.Model).filter(Boolean)))];
+    );
+  }, [tips, query, selectedModel]);
 
   if (loading) {
     return <div className="min-h-screen bg-neutral-950 text-neutral-100 flex items-center justify-center">Ładowanie bazy...</div>;
@@ -83,7 +92,7 @@ export default function Home() {
           <h1 className="text-2xl font-bold tracking-tight">GMT<span className="text-amber-400">400</span></h1>
           <input
             type="search"
-            placeholder="Szukaj modelu, usterki, kodu, porady..."
+            placeholder="Szukaj..."
             className="bg-neutral-900 border border-neutral-700 rounded-lg px-4 py-2 text-sm w-full sm:w-80 focus:outline-none focus:border-amber-400"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
@@ -91,11 +100,23 @@ export default function Home() {
         </div>
       </header>
 
-      <section className="bg-gradient-to-b from-neutral-900 to-neutral-950 py-16 px-4 text-center">
+      <section className="bg-gradient-to-b from-neutral-900 to-neutral-950 py-12 px-4 text-center">
         <h2 className="text-4xl sm:text-5xl font-extrabold mb-4">Encyklopedia GMT400</h2>
-        <p className="text-neutral-400 max-w-2xl mx-auto text-lg">
-          Dane z bazy Notion • Chevrolet C/K, Tahoe, Suburban, Yukon (1988–2000)
-        </p>
+        <p className="text-neutral-400 max-w-2xl mx-auto">Chevrolet C/K, Tahoe, Suburban, Yukon (1988–2000)</p>
+
+        <div className="mt-6 flex flex-wrap justify-center gap-2">
+          {uniqueModels.map(m => (
+            <button
+              key={m}
+              onClick={() => setSelectedModel(m)}
+              className={`px-3 py-1 rounded-full text-sm ${
+                selectedModel === m ? 'bg-amber-400 text-black' : 'bg-neutral-800 text-neutral-300'
+              }`}
+            >
+              {m}
+            </button>
+          ))}
+        </div>
       </section>
 
       <div className="max-w-6xl mx-auto px-4 py-8">
@@ -114,16 +135,24 @@ export default function Home() {
         </div>
 
         {tab === 'modele' && (
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="grid md:grid-cols-2 gap-4">
             {filteredModels.map((m, idx) => (
               <div key={idx} className="bg-neutral-900 border border-neutral-800 rounded-xl overflow-hidden hover:border-amber-400 transition">
                 {modelImages[m.Model] && (
-                  <img src={modelImages[m.Model]} alt={m.Nazwa} className="w-full h-40 object-cover" />
+                  <img src={modelImages[m.Model]} alt={m.Nazwa} className="w-full h-48 object-cover" />
                 )}
                 <div className="p-5">
                   <h3 className="text-amber-400 font-semibold text-lg">{m.Nazwa}</h3>
-                  <p className="text-sm text-neutral-500 mb-1">{m.Lata} • {m.Model}</p>
-                  <p className="text-neutral-300 text-sm">{m.Opis}</p>
+                  <p className="text-sm text-neutral-500 mb-2">{m.Lata} • {m.Model}</p>
+                  <p className={`text-neutral-300 text-sm ${
+                    expanded === idx ? '' : 'line-clamp-3'
+                  }`}>{m.Opis}</p>
+                  <button
+                    onClick={() => setExpanded(expanded === idx ? null : idx)}
+                    className="mt-3 text-amber-400 text-sm font-medium"
+                  >
+                    {expanded === idx ? 'Zwiń' : 'Rozwiń więcej'}
+                  </button>
                 </div>
               </div>
             ))}
@@ -131,71 +160,40 @@ export default function Home() {
         )}
 
         {tab === 'usterki' && (
-          <div>
-            <div className="flex gap-2 mb-4 overflow-x-auto">
-              {categories.map(cat => (
-                <button
-                  key={cat}
-                  onClick={() => setCategory(cat)}
-                  className={`px-3 py-1 rounded-full text-sm whitespace-nowrap ${
-                    category === cat ? 'bg-amber-400 text-black' : 'bg-neutral-800 text-neutral-300'
-                  }`}
-                >
-                  {cat}
-                </button>
-              ))}
-            </div>
-            <div className="space-y-4">
-              {filteredIssues.map((i, idx) => (
-                <div key={idx} className="bg-neutral-900 border border-neutral-800 rounded-xl p-5">
-                  <div className="flex justify-between items-start mb-1">
-                    <h3 className="font-semibold text-amber-400">{i.Nazwa}</h3>
-                    <span className="text-xs bg-neutral-800 px-2 py-1 rounded">{i.Model}</span>
-                  </div>
-                  {i.Objawy && <p className="text-sm text-neutral-400 mb-2"><strong>Objawy:</strong> {i.Objawy}</p>}
-                  {i.Rozwiązanie && <p className="text-neutral-300 text-sm whitespace-pre-line">{i.Rozwiązanie}</p>}
+          <div className="space-y-4">
+            {filteredIssues.map((i, idx) => (
+              <div key={idx} className="bg-neutral-900 border border-neutral-800 rounded-xl p-5">
+                <div className="flex justify-between items-start mb-1">
+                  <h3 className="font-semibold text-amber-400">{i.Nazwa}</h3>
+                  <span className="text-xs bg-neutral-800 px-2 py-1 rounded">{i.Model}</span>
                 </div>
-              ))}
-            </div>
+                {i.Objawy && <p className="text-sm text-neutral-400 mb-2"><strong>Objawy:</strong> {i.Objawy}</p>}
+                {i.Rozwiązanie && <p className="text-neutral-300 text-sm whitespace-pre-line">{i.Rozwiązanie}</p>}
+              </div>
+            ))}
           </div>
         )}
 
         {tab === 'kody' && (
-          <div>
-            <div className="mb-6 bg-neutral-900 border border-neutral-800 rounded-xl p-4">
-              <h3 className="text-amber-400 font-semibold mb-3">Schemat cewek 4L60E</h3>
-              <img src="https://www.sonnax.com/tech_resources/images/614/4L60E-Valve-Body.jpg" alt="4L60E solenoids" className="w-full max-w-2xl mx-auto rounded" />
-              <p className="text-sm text-neutral-400 mt-2">Lokalizacja cewek w skrzyni 4L60E (pomocne przy kodach P07xx)</p>
-            </div>
-            <div className="space-y-4">
-              {filteredCodes.map((c, idx) => (
-                <div key={idx} className="bg-neutral-900 border border-neutral-800 rounded-xl p-5">
-                  <h3 className="font-semibold text-amber-400 mb-1">{c.Nazwa}</h3>
-                  {c.Opis && <p className="text-sm text-neutral-400 mb-2">{c.Opis}</p>}
-                  {c.Rozwiązanie && <p className="text-neutral-300 text-sm whitespace-pre-line">{c.Rozwiązanie}</p>}
-                  {c.Lata && <p className="text-xs text-neutral-500 mt-2">Lata: {c.Lata}</p>}
-                </div>
-              ))}
-            </div>
+          <div className="space-y-4">
+            {filteredCodes.map((c, idx) => (
+              <div key={idx} className="bg-neutral-900 border border-neutral-800 rounded-xl p-5">
+                <h3 className="font-semibold text-amber-400 mb-1">{c.Nazwa}</h3>
+                {c.Opis && <p className="text-sm text-neutral-400 mb-2">{c.Opis}</p>}
+                {c.Rozwiązanie && <p className="text-neutral-300 text-sm whitespace-pre-line">{c.Rozwiązanie}</p>}
+              </div>
+            ))}
           </div>
         )}
 
         {tab === 'porady' && (
-          <div>
-            <div className="mb-6 bg-neutral-900 border border-neutral-800 rounded-xl p-4">
-              <h3 className="text-amber-400 font-semibold mb-3">Schemat filtra i miski 4L60E</h3>
-              <img src="https://www.wittrans.com/images/4L60E_filter_diagram.jpg" alt="4L60E filter" className="w-full max-w-xl mx-auto rounded bg-white p-2" />
-              <p className="text-sm text-neutral-400 mt-2">Pomocne przy wymianie ATF i filtra</p>
-            </div>
-            <div className="space-y-4">
-              {filteredTips.map((t, idx) => (
-                <div key={idx} className="bg-neutral-900 border border-neutral-800 rounded-xl p-5">
-                  <h3 className="font-semibold text-amber-400 mb-2">{t.Nazwa}</h3>
-                  <p className="text-neutral-300 text-sm whitespace-pre-line">{t.Rozwiązanie}</p>
-                  {t.Lata && <p className="text-xs text-neutral-500 mt-2">Lata: {t.Lata}</p>}
-                </div>
-              ))}
-            </div>
+          <div className="space-y-4">
+            {filteredTips.map((t, idx) => (
+              <div key={idx} className="bg-neutral-900 border border-neutral-800 rounded-xl p-5">
+                <h3 className="font-semibold text-amber-400 mb-2">{t.Nazwa}</h3>
+                <p className="text-neutral-300 text-sm whitespace-pre-line">{t.Rozwiązanie}</p>
+              </div>
+            ))}
           </div>
         )}
       </div>
