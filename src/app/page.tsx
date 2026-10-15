@@ -13,10 +13,10 @@ type Item = {
 };
 
 const modelImages: Record<string, string> = {
-  'Tahoe': 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/1997_Chevrolet_Tahoe.jpg/800px-1997_Chevrolet_Tahoe.jpg',
-  'Suburban': 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/1999_Chevrolet_Suburban.jpg/800px-1999_Chevrolet_Suburban.jpg',
-  'C/K': 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/1995_Chevrolet_C1500.jpg/800px-1995_Chevrolet_C1500.jpg',
-  'Yukon': 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/1998_GMC_Yukon.jpg/800px-1998_GMC_Yukon.jpg',
+  'Tahoe': 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800',
+  'Suburban': 'https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=800',
+  'C/K': 'https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=800',
+  'Yukon': 'https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=800',
 };
 
 export default function Home() {
@@ -87,9 +87,13 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-neutral-950 text-neutral-100">
+      <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@500;700&display=swap" rel="stylesheet" />
+      
       <header className="border-b border-neutral-800 bg-neutral-950/90 backdrop-blur sticky top-0 z-50">
         <div className="max-w-6xl mx-auto px-4 py-4 flex flex-col sm:flex-row items-center justify-between gap-3">
-          <h1 className="text-2xl font-bold tracking-tight">GMT<span className="text-amber-400">400</span></h1>
+          <h1 className="text-3xl tracking-wider" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>
+            GMT<span className="text-amber-400">400</span>
+          </h1>
           <input
             type="search"
             placeholder="Szukaj..."
@@ -101,7 +105,9 @@ export default function Home() {
       </header>
 
       <section className="bg-gradient-to-b from-neutral-900 to-neutral-950 py-12 px-4 text-center">
-        <h2 className="text-4xl sm:text-5xl font-extrabold mb-4">Encyklopedia GMT400</h2>
+        <h2 className="text-5xl sm:text-6xl mb-4 tracking-wide" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>
+          Encyklopedia GMT400
+        </h2>
         <p className="text-neutral-400 max-w-2xl mx-auto">Chevrolet C/K, Tahoe, Suburban, Yukon (1988–2000)</p>
 
         <div className="mt-6 flex flex-wrap justify-center gap-2">
@@ -139,10 +145,15 @@ export default function Home() {
             {filteredModels.map((m, idx) => (
               <div key={idx} className="bg-neutral-900 border border-neutral-800 rounded-xl overflow-hidden hover:border-amber-400 transition">
                 {modelImages[m.Model] && (
-                  <img src={modelImages[m.Model]} alt={m.Nazwa} className="w-full h-48 object-cover" />
+                  <img 
+                    src={modelImages[m.Model]} 
+                    alt={m.Nazwa} 
+                    className="w-full h-48 object-cover bg-neutral-800"
+                    onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
+                  />
                 )}
                 <div className="p-5">
-                  <h3 className="text-amber-400 font-semibold text-lg">{m.Nazwa}</h3>
+                  <h3 className="text-amber-400 font-semibold text-lg" style={{ fontFamily: "'Oswald', sans-serif" }}>{m.Nazwa}</h3>
                   <p className="text-sm text-neutral-500 mb-2">{m.Lata} • {m.Model}</p>
                   <p className={`text-neutral-300 text-sm ${
                     expanded === idx ? '' : 'line-clamp-3'
