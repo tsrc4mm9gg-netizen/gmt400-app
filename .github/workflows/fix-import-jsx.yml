@@ -1,4 +1,4 @@
-name: Diagnose main JSX
+name: Prepare validated JSX structure fix
 on:
   push:
     branches: [seo-sitemap-robots]
@@ -6,40 +6,39 @@ on:
 permissions:
   contents: write
 jobs:
-  diagnose:
+  prepare-fix:
     runs-on: ubuntu-latest
     timeout-minutes: 3
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: main
-      - name: Parse current source and publish diagnostic branch
+          ref: fc77794d43d7dfd728151802d7f2871823fdc1ba
+      - name: Apply minimal fixes and validate parser
         shell: bash
         run: |
           set -euo pipefail
-          git switch -c diagnose-main-jsx
+          git switch -c fix-main-jsx-structure
           npm install --prefix /tmp/gmt400-parser --ignore-scripts --no-audit --no-fund typescript@5
-          mkdir -p .diagnostics
-          node <<'JS' > .diagnostics/jsx.txt
-          const ts = require('/tmp/gmt400-parser/node_modules/typescript');
+          node <<'JS'
           const fs = require('fs');
-          const cp = require('child_process');
-          const name = 'src/app/page.tsx';
-          const text = fs.readFileSync(name, 'utf8');
-          const lines = text.split('\n');
-          const source = ts.createSourceFile(name, text, ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX);
-          console.log('Source commit:', cp.execSync('git rev-parse HEAD').toString().trim());
-          console.log('Parse errors:', source.parseDiagnostics.length);
-          for (const d of source.parseDiagnostics.slice(0, 8)) {
-            const pos = source.getLineAndCharacterOfPosition(d.start || 0);
-            console.log('ERROR', pos.line + 1, pos.character + 1, ts.flattenDiagnosticMessageText(d.messageText, '\n'));
-            for (let i = Math.max(0, pos.line - 20); i <= Math.min(lines.length - 1, pos.line + 8); i++) console.log((i + 1) + ': ' + lines[i]);
-          }
-          console.log('COMPONENT END');
-          lines.slice(-25).forEach((line, i) => console.log((lines.length - 24 + i) + ': ' + line));
+          const ts = require('/tmp/gmt400-parser/node_modules/typescript');
+          const path = 'src/app/page.tsx';
+          let text = fs.readFileSync(path, 'utf8');
+          const old = '            <div className="bg-neutral-950 border border-white/10 p-4">\n              <div className="bg-neutral-950 border border-white/10 p-4 mb-4">\n              <h3 className="font-semibold text-amber-400 mb-2">11. TEST POMPY PALIWA</h3>';
+          const replacement = '            <div className="bg-neutral-950 border border-white/10 p-4 mb-4">\n              <h3 className="font-semibold text-amber-400 mb-2">11. TEST POMPY PALIWA</h3>';
+          if (text.split(old).length !== 2) throw new Error('Expected unique extra container; stopping');
+          if (!text.trimEnd().endsWith(');')) throw new Error('Unexpected component ending; stopping');
+          text = text.replace(old, replacement).trimEnd() + '\n}\n';
+          const source = ts.createSourceFile(path, text, ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX);
+          for (const d of source.parseDiagnostics) console.log(ts.flattenDiagnosticMessageText(d.messageText, '\n'));
+          if (source.parseDiagnostics.length) throw new Error('Parser validation failed; no file written');
+          fs.writeFileSync(path, text, 'utf8');
+          console.log('Parser validation passed: 0 syntax errors');
           JS
+          git diff --check
+          git diff -- src/app/page.tsx
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add .diagnostics/jsx.txt
-          git commit -m 'Record parser diagnostics for current main'
-          git push origin HEAD:refs/heads/diagnose-main-jsx
+          git add src/app/page.tsx
+          git commit -m 'Fix extra Tips container and close Home function'
+          git push origin HEAD:refs/heads/fix-main-jsx-structure
