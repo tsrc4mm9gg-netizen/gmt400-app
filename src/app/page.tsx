@@ -1177,7 +1177,3 @@ export default function Home() {
       </footer>
     </div>
   );
-}
-// cache bust 1792074178
-
-// v1792089555
