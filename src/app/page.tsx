@@ -672,6 +672,32 @@ export default function Home() {
             )}
 
             {vinResult && (
+              <div className="mt-4 bg-neutral-950 border border-amber-400/30 p-4">
+                <h3 className="font-semibold text-amber-400 mb-3">CIEKAWOSTKI — ZNALEZIONE ZDJĘCIA</h3>
+                <p className="text-sm text-neutral-400 mb-3">Szukaj zdjęć tego modelu z aukcji, ogłoszeń i ubezpieczalni:</p>
+                <div className="grid grid-cols-2 gap-2 mb-4">
+                  <a href={`https://www.google.com/search?q=${vinResult['Rok'] || ''} ${vinResult['Model'] || 'GMT400'} ${vinResult['Silnik'] || ''} site:copart.com&tbm=isch`} target="_blank" className="bg-neutral-900 p-3 text-center text-sm hover:bg-neutral-800">
+                    <span className="text-amber-400">Copart</span>
+                    <p className="text-xs text-neutral-500">Aukcje USA</p>
+                  </a>
+                  <a href={`https://www.google.com/search?q=${vinResult['Rok'] || ''} ${vinResult['Model'] || 'GMT400'} for sale&tbm=isch`} target="_blank" className="bg-neutral-900 p-3 text-center text-sm hover:bg-neutral-800">
+                    <span className="text-amber-400">Ogłoszenia</span>
+                    <p className="text-xs text-neutral-500">Google Images</p>
+                  </a>
+                  <a href={`https://www.google.com/search?q=${vinResult['Rok'] || ''} Chevrolet ${vinResult['Model'] || 'C1500'} auction&tbm=isch`} target="_blank" className="bg-neutral-900 p-3 text-center text-sm hover:bg-neutral-800">
+                    <span className="text-amber-400">Aukcje</span>
+                    <p className="text-xs text-neutral-500">IAAI / Manheim</p>
+                  </a>
+                  <a href={`https://www.google.com/search?q=${vinResult['Rok'] || ''} ${vinResult['Model'] || 'GMT400'} damage&tbm=isch`} target="_blank" className="bg-neutral-900 p-3 text-center text-sm hover:bg-neutral-800">
+                    <span className="text-amber-400">Ubezpieczalnia</span>
+                    <p className="text-xs text-neutral-500">Zdjęcia szkód</p>
+                  </a>
+                </div>
+                <p className="text-xs text-neutral-500">Kliknij aby zobaczyć zdjęcia podobnych aut z aukcji i ogłoszeń</p>
+              </div>
+            )}
+
+            {vinResult && (
               <div className="mt-4 bg-neutral-950 border border-white/10 p-4">
                 <h3 className="font-semibold text-amber-400 mb-3">Typowe usterki dla tego rocznika</h3>
                 <ul className="text-sm text-neutral-300 space-y-2">
