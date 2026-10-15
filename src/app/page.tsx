@@ -30,17 +30,22 @@ const CATEGORIES = [
 
 function getModelImage(nazwa: string): string | null {
   const n = nazwa.toLowerCase();
-  if (n.includes('tahoe') && n.includes('2-drzwi')) return '/tahoe-2d-red.jpg';
-  if (n.includes('tahoe') && n.includes('4-drzwi')) return '/tahoe-4d-green.jpg';
+  // Tahoe
+  if (n.includes('tahoe') && (n.includes('2-drzwi') || n.includes('2 drzwi'))) return '/tahoe-2d-red.jpg';
+  if (n.includes('tahoe') && (n.includes('4-drzwi') || n.includes('4 drzwi'))) return '/tahoe-4d-green.jpg';
   if (n.includes('tahoe')) return '/tahoe-4d-green.jpg';
+  // Suburban
   if (n.includes('suburban')) return '/suburban-beige.jpg';
+  // Sierra / GMC
   if (n.includes('sierra')) return '/sierra-burgundy.jpg';
-  if (n.includes('yukon') && n.includes('2-drzwi')) return '/yukon-white.jpg';
+  // Yukon
   if (n.includes('yukon')) return '/yukon-white.jpg';
-  if (n.includes('extended cab') || n.includes('extended')) return '/ck-ext.jpg';
-  if (n.includes('regular cab') || n.includes('c/k 1500')) return '/ck-reg.jpg';
-  if (n.includes('c/k') || n.includes('1500') || n.includes('2500') || n.includes('3500')) return '/ck-reg.jpg';
-  return null;
+  // C/K pickups
+  if (n.includes('3500') && (n.includes('dually') || n.includes('dual'))) return '/ck-3500-dually.jpg';
+  if (n.includes('k1500') || (n.includes('4x4') && !n.includes('tahoe'))) return '/k1500-black.jpg';
+  if (n.includes('extended')) return '/k1500-black.jpg';
+  if (n.includes('regular cab') || n.includes('c/k') || n.includes('1500') || n.includes('2500') || n.includes('3500')) return '/ck-1500-blue.jpg';
+  return '/tahoe-4d-green.jpg';
 }
 
 function getTipImage(nazwa: string): string | null {
