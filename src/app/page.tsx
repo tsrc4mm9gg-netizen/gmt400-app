@@ -92,6 +92,11 @@ export default function Home() {
   const [fuelKm, setFuelKm] = useState(500);
   const [fuelLiters, setFuelLiters] = useState(50);
   const [fuelPrice, setFuelPrice] = useState(6.5);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [showSearch, setShowSearch] = useState(false);
+  const [darkMode, setDarkMode] = useState(true);
+  const [favorites, setFavorites] = useState<string[]>([]);
+  const [showBackTop, setShowBackTop] = useState(false);
   const [partsFilter, setPartsFilter] = useState('wszystkie');
   const [partsQuery, setPartsQuery] = useState('');
   const [tuningFilter, setTuningFilter] = useState('wszystkie');
@@ -101,6 +106,12 @@ export default function Home() {
   const [importSource, setImportSource] = useState('copart');
   const [importTransport, setImportTransport] = useState('roro');
   const [selectedEngine, setSelectedEngine] = useState('');
+
+  useEffect(() => {
+    const handleScroll = () => setShowBackTop(window.scrollY > 300);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   useEffect(() => {
     fetch('/api/notion')
@@ -233,6 +244,12 @@ export default function Home() {
             <span className="text-xl font-bold tracking-wider" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>
               GMT<span className="text-amber-400">400</span>
             </span>
+            <button onClick={(e) => { e.stopPropagation(); setShowSearch(!showSearch); }} className="ml-4 text-neutral-400 hover:text-white">
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
+            </button>
+            <button onClick={(e) => { e.stopPropagation(); setDarkMode(!darkMode); }} className="text-neutral-400 hover:text-white text-lg">
+              {darkMode ? '☀️' : '🌙'}
+            </button>
           </div>
           
           <div className="flex items-center gap-3">
@@ -276,6 +293,24 @@ export default function Home() {
           </div>
         )}
       </header>
+
+      {showSearch && (
+        <div className="fixed top-14 left-0 right-0 z-40 bg-neutral-900 border-b border-white/10 p-4">
+          <input
+            type="text"
+            placeholder="Szukaj w całej stronie..."
+            value={searchQuery}
+            onChange={e => setSearchQuery(e.target.value)}
+            className="w-full bg-neutral-800 border border-white/10 p-3 text-sm"
+            autoFocus
+          />
+          {searchQuery.length > 2 && (
+            <div className="mt-2 text-sm text-neutral-400">
+              Szukaj: "{searchQuery}" — przejdź do odpowiedniej sekcji
+            </div>
+          )}
+        </div>
+      )}
 
       <section className="relative min-h-[40vh] flex items-center pt-16">
         <div className="absolute inset-0 bg-gradient-to-r from-black via-black/70 to-transparent z-10" />
