@@ -878,13 +878,74 @@ export default function Home() {
         {tab === 'serwis' && (
           <div>
             <h2 className="text-2xl mb-6" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>HARMONOGRAM SERWISOWY</h2>
-            <div className="bg-neutral-950 border border-white/10 p-4">
-              {filteredTips.filter(t => t.Nazwa.toLowerCase().includes('harmonogram') || t.Nazwa.toLowerCase().includes('serwis') || t.Nazwa.toLowerCase().includes('wymiana') || t.Nazwa.toLowerCase().includes('chłodz')).map((t, idx) => (
-                <div key={idx} className="mb-4 pb-4 border-b border-white/10 last:border-0">
-                  <h3 className="font-semibold mb-2">{t.Nazwa}</h3>
-                  <p className="text-neutral-300 text-sm whitespace-pre-line">{t.Rozwiązanie}</p>
-                </div>
-              ))}
+            
+            <div className="bg-neutral-950 border border-white/10 overflow-x-auto mb-6">
+              <table className="w-full text-sm">
+                <thead>
+                  <tr className="border-b border-white/10 text-amber-400">
+                    <th className="p-3 text-left">Czynność</th>
+                    <th className="p-3 text-left">Interwał</th>
+                    <th className="p-3 text-left">Specyfikacja</th>
+                    <th className="p-3 text-left">Część OEM</th>
+                  </tr>
+                </thead>
+                <tbody className="text-neutral-300">
+                  <tr className="border-b border-white/5"><td className="p-3">Olej silnikowy</td><td className="p-3">5-8 tys. km</td><td className="p-3">5W-30 / 10W-30</td><td className="p-3 text-amber-400">PF1218</td></tr>
+                  <tr className="border-b border-white/5"><td className="p-3">Filtr oleju</td><td className="p-3">Przy wymianie oleju</td><td className="p-3">AC Delco</td><td className="p-3 text-amber-400">PF1218</td></tr>
+                  <tr className="border-b border-white/5"><td className="p-3">Filtr powietrza</td><td className="p-3">30 tys. km</td><td className="p-3">AC Delco</td><td className="p-3 text-amber-400">A1163C</td></tr>
+                  <tr className="border-b border-white/5"><td className="p-3">Filtr paliwa</td><td className="p-3">50 tys. km</td><td className="p-3">AC Delco</td><td className="p-3 text-amber-400">GF626</td></tr>
+                  <tr className="border-b border-white/5"><td className="p-3">ATF 4L60E</td><td className="p-3">50 tys. km</td><td className="p-3">Dexron VI</td><td className="p-3 text-amber-400">TF289</td></tr>
+                  <tr className="border-b border-white/5"><td className="p-3">Płyn chłodzący</td><td className="p-3">5 lat / 150 tys.</td><td className="p-3">Dex-Cool</td><td className="p-3 text-amber-400">—</td></tr>
+                  <tr className="border-b border-white/5"><td className="p-3">Płyn hamulcowy</td><td className="p-3">2 lata</td><td className="p-3">DOT 3</td><td className="p-3 text-amber-400">—</td></tr>
+                  <tr className="border-b border-white/5"><td className="p-3">Świece zapłonowe</td><td className="p-3">50 tys. km</td><td className="p-3">Gap 1.5mm</td><td className="p-3 text-amber-400">41-932</td></tr>
+                  <tr className="border-b border-white/5"><td className="p-3">Pasek klinowy</td><td className="p-3">100 tys. km</td><td className="p-3">Gates/Dayco</td><td className="p-3 text-amber-400">—</td></tr>
+                  <tr className="border-b border-white/5"><td className="p-3">Olej dyferencjału</td><td className="p-3">50 tys. km</td><td className="p-3">75W-90 GL-5</td><td className="p-3 text-amber-400">—</td></tr>
+                  <tr className="border-b border-white/5"><td className="p-3">Olej NP231</td><td className="p-3">50 tys. km</td><td className="p-3">ATF Dexron</td><td className="p-3 text-amber-400">—</td></tr>
+                  <tr className="border-b border-white/5"><td className="p-3">Termostat</td><td className="p-3">Przy problemach</td><td className="p-3">195°F (91°C)</td><td className="p-3 text-amber-400">131-113</td></tr>
+                  <tr className="border-b border-white/5"><td className="p-3">Klocki hamulcowe</td><td className="p-3">Wg zużycia</td><td className="p-3">Ceramiczne</td><td className="p-3 text-amber-400">17D473CH</td></tr>
+                  <tr><td className="p-3">Amortyzatory</td><td className="p-3">100 tys. km</td><td className="p-3">AC Delco</td><td className="p-3 text-amber-400">504-1079</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div className="grid sm:grid-cols-2 gap-4">
+              <div className="bg-neutral-950 border border-white/10 p-4">
+                <h3 className="font-semibold text-amber-400 mb-3">Co 5-8 tys. km</h3>
+                <ul className="text-sm text-neutral-300 space-y-1">
+                  <li>• Wymiana oleju silnikowego (4.7 L)</li>
+                  <li>• Wymiana filtra oleju (PF1218)</li>
+                  <li>• Sprawdzenie poziomu płynów</li>
+                  <li>• Kontrola ciśnienia opon</li>
+                </ul>
+              </div>
+              <div className="bg-neutral-950 border border-white/10 p-4">
+                <h3 className="font-semibold text-amber-400 mb-3">Co 30-50 tys. km</h3>
+                <ul className="text-sm text-neutral-300 space-y-1">
+                  <li>• Filtr powietrza (A1163C)</li>
+                  <li>• Filtr paliwa (GF626)</li>
+                  <li>• ATF + filtr (TF289)</li>
+                  <li>• Świece zapłonowe (41-932)</li>
+                  <li>• Olej dyferencjału</li>
+                </ul>
+              </div>
+              <div className="bg-neutral-950 border border-white/10 p-4">
+                <h3 className="font-semibold text-amber-400 mb-3">Co 100 tys. km</h3>
+                <ul className="text-sm text-neutral-300 space-y-1">
+                  <li>• Pasek klinowy</li>
+                  <li>• Amortyzatory</li>
+                  <li>• Płyn chłodzący (jeśli nie wcześniej)</li>
+                  <li>• Kontrola zawieszenia</li>
+                </ul>
+              </div>
+              <div className="bg-neutral-950 border border-white/10 p-4">
+                <h3 className="font-semibold text-amber-400 mb-3">Sezonowo</h3>
+                <ul className="text-sm text-neutral-300 space-y-1">
+                  <li>• Płyn hamulcowy (co 2 lata)</li>
+                  <li>• Płyn chłodzący (co 5 lat)</li>
+                  <li>• Kontrola przewodów hamulcowych</li>
+                  <li>• Smarowanie zawiasów</li>
+                </ul>
+              </div>
             </div>
           </div>
         )}
