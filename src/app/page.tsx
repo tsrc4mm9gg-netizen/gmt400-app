@@ -602,6 +602,10 @@ export default function Home() {
                       'Ładowność': vinInput[4] === 'R' ? '1500+ kg' : '500-800 kg',
                     };
                     setVinResult(result);
+      // Check for warning conditions
+      const hasWarning = Math.random() > 0.7; // Placeholder - replace with real check
+      setVinWarning(hasWarning);
+      if (hasWarning) playGong();
                   }
                 }}
                 className="w-full bg-amber-400 text-black py-3 font-semibold hover:bg-amber-300 transition"
