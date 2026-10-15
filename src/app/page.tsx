@@ -934,6 +934,11 @@ export default function Home() {
                   <tr className="border-b border-white/5"><td className="p-3">Termostat</td><td className="p-3">Przy problemach</td><td className="p-3">195°F (91°C)</td><td className="p-3 text-amber-400">131-113</td></tr>
                   <tr className="border-b border-white/5"><td className="p-3">Klocki hamulcowe</td><td className="p-3">Wg zużycia</td><td className="p-3">Ceramiczne</td><td className="p-3 text-amber-400">17D473CH</td></tr>
                   <tr><td className="p-3">Amortyzatory</td><td className="p-3">100 tys. km</td><td className="p-3">AC Delco</td><td className="p-3 text-amber-400">504-1079</td></tr>
+                  <tr className="border-b border-white/5"><td className="p-3">Czujnik tlenu</td><td className="p-3">100 tys. km</td><td className="p-3">AC Delco</td><td className="p-3 text-amber-400">213-1552</td></tr>
+                  <tr className="border-b border-white/5"><td className="p-3">Przewody zapłonowe</td><td className="p-3">80 tys. km</td><td className="p-3">AC Delco</td><td className="p-3 text-amber-400">9746HH</td></tr>
+                  <tr className="border-b border-white/5"><td className="p-3">Płyn wspomagania</td><td className="p-3">50 tys. km</td><td className="p-3">ATF Dexron</td><td className="p-3 text-amber-400">—</td></tr>
+                  <tr className="border-b border-white/5"><td className="p-3">Filtr PCV</td><td className="p-3">50 tys. km</td><td className="p-3">AC Delco</td><td className="p-3 text-amber-400">CV917C</td></tr>
+                  <tr><td className="p-3">Pasek rozrządu</td><td className="p-3">100 tys. km</td><td className="p-3">Gates</td><td className="p-3 text-amber-400">—</td></tr>
                 </tbody>
               </table>
             </div>
