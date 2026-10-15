@@ -758,6 +758,19 @@ export default function Home() {
                 { kat: 'zawieszenie', nazwa: 'Sworznie wahaczy', oem: 'AC Delco 45D2278', opis: 'Sworznie wahaczy górnych', model: '1500' },
                 { kat: 'zawieszenie', nazwa: 'Tuleje wahaczy', oem: 'AC Delco 45G11040', opis: 'Tuleje wahaczy', model: '1500' },
                 { kat: 'filtry', nazwa: 'Filtr kabinowy', oem: 'AC Delco CF101', opis: 'Filtr powietrza kabiny', model: '1996+' },
+                { kat: 'silnik', nazwa: 'Czujnik MAP', oem: 'AC Delco 213-1545', opis: 'Czujnik ciśnienia kolektora', model: 'Wszystkie' },
+                { kat: 'silnik', nazwa: 'Czujnik IAT', oem: 'AC Delco 213-243', opis: 'Czujnik temperatury powietrza', model: 'Wszystkie' },
+                { kat: 'silnik', nazwa: 'Czujnik ECT', oem: 'AC Delco 213-928', opis: 'Czujnik temperatury płynu', model: 'Wszystkie' },
+                { kat: 'silnik', nazwa: 'Czujnik tlenu', oem: 'AC Delco 213-1552', opis: 'Sonda lambda', model: 'Wszystkie' },
+                { kat: 'silnik', nazwa: 'Pompa wodna', oem: 'AC Delco 252-707', opis: 'Pompa wody', model: '5.7L' },
+                { kat: 'silnik', nazwa: 'Termostat', oem: 'AC Delco 131-113', opis: 'Termostat 195°F', model: 'Wszystkie' },
+                { kat: 'hamulce', nazwa: 'Zacisk przedni', oem: 'AC Delco 18FR1247', opis: 'Zacisk hamulcowy przód', model: '1500' },
+                { kat: 'hamulce', nazwa: 'Tarcza przednia', oem: 'AC Delco 18A1532', opis: 'Tarcza hamulcowa przód', model: '1500' },
+                { kat: 'zawieszenie', nazwa: 'Wahacz górny', oem: 'AC Delco 45D2278', opis: 'Wahacz górny z sworzniem', model: '1500' },
+                { kat: 'zawieszenie', nazwa: 'Wahacz dolny', oem: 'AC Delco 45D2279', opis: 'Wahacz dolny', model: '1500' },
+                { kat: 'zawieszenie', nazwa: 'Końcówka drążka', oem: 'AC Delco 45A0526', opis: 'Końcówka drążka kierowniczego', model: 'Wszystkie' },
+                { kat: 'skrzynia', nazwa: 'Uszczelka miski', oem: 'AC Delco 24206182', opis: 'Uszczelka miski 4L60E', model: '4L60E' },
+                { kat: 'skrzynia', nazwa: 'Solenoid EPC', oem: 'AC Delco 24230298', opis: 'Solenoid ciśnienia', model: '4L60E' },
               ].filter(p => (partsFilter === 'wszystkie' || p.kat === partsFilter) && (!partsQuery || p.nazwa.toLowerCase().includes(partsQuery.toLowerCase()) || p.oem.toLowerCase().includes(partsQuery.toLowerCase()))).map((p, idx) => (
                 <div key={idx} className="bg-neutral-950 border border-white/10 p-4">
                   <div className="flex justify-between items-start mb-2">
