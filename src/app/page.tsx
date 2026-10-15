@@ -27,6 +27,14 @@ function getModelImage(nazwa: string): string | null {
   return null;
 }
 
+function getTipImage(nazwa: string): string | null {
+  const n = nazwa.toLowerCase();
+  if (n.includes('4l60e') || n.includes('atf') || n.includes('skrzyni')) return '/diy-4l60e.jpg';
+  if (n.includes('kolektor') || n.includes('intake') || n.includes('uszczelk')) return '/diy-intake.jpg';
+  if (n.includes('np231') || n.includes('4x4') || n.includes('rozdzielcz')) return '/diy-np231.jpg';
+  return null;
+}
+
 export default function Home() {
   const [items, setItems] = useState<Item[]>([]);
   const [loading, setLoading] = useState(true);
@@ -198,12 +206,18 @@ export default function Home() {
 
         {tab === 'porady' && (
           <div className="space-y-4">
-            {filteredTips.map((t, idx) => (
-              <div key={idx} className="bg-neutral-900 border border-neutral-800 rounded-xl p-5">
-                <h3 className="font-semibold text-amber-400 mb-2">{t.Nazwa}</h3>
-                <p className="text-neutral-300 text-sm whitespace-pre-line">{t.Rozwiązanie}</p>
-              </div>
-            ))}
+            {filteredTips.map((t, idx) => {
+              const tipImg = getTipImage(t.Nazwa);
+              return (
+                <div key={idx} className="bg-neutral-900 border border-neutral-800 rounded-xl overflow-hidden">
+                  {tipImg && <img src={tipImg} alt="diagram" className="w-full max-h-64 object-contain bg-white" />}
+                  <div className="p-5">
+                    <h3 className="font-semibold text-amber-400 mb-2">{t.Nazwa}</h3>
+                    <p className="text-neutral-300 text-sm whitespace-pre-line">{t.Rozwiązanie}</p>
+                  </div>
+                </div>
+              );
+            })}
           </div>
         )}
       </div>
