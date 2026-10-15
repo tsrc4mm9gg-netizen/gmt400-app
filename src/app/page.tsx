@@ -44,6 +44,7 @@ export default function Home() {
   const [query, setQuery] = useState('');
   const [tab, setTab] = useState('modele');
   const [selectedModel, setSelectedModel] = useState('Wszystkie');
+  const [selectedModelItem, setSelectedModelItem] = useState<Item | null>(null);
   const [expanded, setExpanded] = useState<number | null>(null);
   const [lightbox, setLightbox] = useState<string | null>(null);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -70,11 +71,16 @@ export default function Home() {
     return list.filter(i => i.Model === selectedModel || i.Model === 'Wszystkie');
   };
 
-  const filteredModels = useMemo(() =>
-    models.filter(m =>
+  const filteredModels = useMemo(() => {
+    let result = models;
+    if (selectedModel !== 'Wszystkie') {
+      result = result.filter(m => m.Model === selectedModel);
+    }
+    return result.filter(m =>
       m.Nazwa.toLowerCase().includes(query.toLowerCase()) ||
       (m.Opis || '').toLowerCase().includes(query.toLowerCase())
-    ), [models, query]);
+    );
+  }, [models, query, selectedModel]);
 
   const filteredIssues = useMemo(() => {
     let result = filterByModel(issues);
@@ -102,6 +108,13 @@ export default function Home() {
     );
   }, [tips, query, selectedModel]);
 
+  const selectModel = (model: string, item?: Item) => {
+    setSelectedModel(model);
+    setSelectedModelItem(item || null);
+    setTab('modele');
+    document.getElementById('content')?.scrollIntoView({ behavior: 'smooth' });
+  };
+
   if (loading) {
     return (
       <div className="min-h-screen bg-black text-white flex items-center justify-center">
@@ -124,10 +137,9 @@ export default function Home() {
         </div>
       )}
 
-      {/* Header */}
       <header className="fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-md border-b border-white/10">
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-3 cursor-pointer" onClick={() => { setSelectedModel('Wszystkie'); setSelectedModelItem(null); setTab('modele'); }}>
             <span className="text-2xl font-bold tracking-wider" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>
               GMT<span className="text-amber-400">400</span>
             </span>
@@ -188,11 +200,10 @@ export default function Home() {
         )}
       </header>
 
-      {/* Hero */}
-      <section className="relative min-h-[85vh] flex items-center pt-20">
+      <section className="relative min-h-[70vh] flex items-center pt-20">
         <div className="absolute inset-0 bg-gradient-to-r from-black via-black/80 to-transparent z-10" />
         <img 
-          src="/tahoe-4d.jpg" 
+          src={selectedModelItem ? (getModelImage(selectedModelItem.Nazwa) || '/tahoe-4d.jpg') : '/tahoe-4d.jpg'} 
           alt="GMT400" 
           className="absolute inset-0 w-full h-full object-cover object-center opacity-60"
         />
@@ -200,31 +211,35 @@ export default function Home() {
           <div className="max-w-2xl">
             <div className="flex items-center gap-3 mb-6">
               <div className="w-12 h-px bg-amber-400" />
-              <span className="text-amber-400 text-sm tracking-widest uppercase">1988–2000</span>
+              <span className="text-amber-400 text-sm tracking-widest uppercase">
+                {selectedModel === 'Wszystkie' ? '1988–2000' : selectedModel}
+              </span>
             </div>
-            <h1 className="text-6xl sm:text-7xl lg:text-8xl font-bold leading-none tracking-tight mb-6" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>
-              GMT400<br />ENCYKLOPEDIA
+            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold leading-none tracking-tight mb-6" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>
+              {selectedModelItem ? selectedModelItem.Nazwa : 'GMT400'}<br />
+              {selectedModelItem ? '' : 'ENCYKLOPEDIA'}
             </h1>
             <p className="text-neutral-300 text-lg max-w-md mb-8">
-              Kompletna baza wiedzy o Chevrolet C/K, Tahoe, Suburban i GMC Yukon. Modele, usterki, kody, porady.
+              {selectedModelItem 
+                ? (selectedModelItem.Opis?.slice(0, 150) + '...') 
+                : 'Kompletna baza wiedzy o Chevrolet C/K, Tahoe, Suburban i GMC Yukon. Modele, usterki, kody, porady.'}
             </p>
             <button 
               onClick={() => document.getElementById('content')?.scrollIntoView({ behavior: 'smooth' })}
               className="bg-amber-400 text-black px-8 py-4 font-semibold tracking-wider uppercase text-sm hover:bg-amber-300 transition flex items-center gap-2"
             >
-              Przeglądaj bazę <span>→</span>
+              {selectedModel === 'Wszystkie' ? 'Przeglądaj bazę' : `Zobacz ${selectedModel}`} <span>→</span>
             </button>
           </div>
         </div>
       </section>
 
-      {/* Model filter */}
-      <div className="bg-neutral-950 border-y border-white/5 py-4">
+      <div className="bg-neutral-950 border-y border-white/5 py-4 sticky top-[73px] z-40">
         <div className="max-w-7xl mx-auto px-6 flex gap-2 overflow-x-auto">
           {uniqueModels.map(m => (
             <button
               key={m}
-              onClick={() => setSelectedModel(m)}
+              onClick={() => selectModel(m)}
               className={`px-4 py-2 text-sm whitespace-nowrap tracking-wide transition ${
                 selectedModel === m 
                   ? 'bg-amber-400 text-black' 
@@ -237,40 +252,51 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Content */}
       <div id="content" className="max-w-7xl mx-auto px-6 py-16">
         
+        {selectedModel !== 'Wszystkie' && (
+          <div className="mb-8 p-4 bg-amber-400/10 border border-amber-400/30 flex items-center justify-between">
+            <span className="text-amber-400">Filtrowanie: <strong>{selectedModel}</strong></span>
+            <button onClick={() => selectModel('Wszystkie')} className="text-sm text-neutral-400 hover:text-white">
+              Wyczyść filtr ×
+            </button>
+          </div>
+        )}
+
         {tab === 'modele' && (
           <div>
             <div className="flex items-center gap-4 mb-10">
               <div className="w-8 h-px bg-amber-400" />
-              <h2 className="text-3xl tracking-wide" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>MODELE</h2>
+              <h2 className="text-3xl tracking-wide" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>
+                {selectedModel === 'Wszystkie' ? 'MODELE' : selectedModel.toUpperCase()}
+              </h2>
+              <span className="text-neutral-500 text-sm">({filteredModels.length})</span>
             </div>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {filteredModels.map((m, idx) => {
                 const img = getModelImage(m.Nazwa);
                 return (
-                  <div key={idx} className="group bg-neutral-950 border border-white/10 overflow-hidden hover:border-amber-400/50 transition">
+                  <div 
+                    key={idx} 
+                    className="group bg-neutral-950 border border-white/10 overflow-hidden hover:border-amber-400/50 transition cursor-pointer"
+                    onClick={() => selectModel(m.Model, m)}
+                  >
                     {img && (
                       <div className="relative h-56 overflow-hidden">
                         <img 
                           src={img} 
                           alt={m.Nazwa} 
-                          className="w-full h-full object-cover group-hover:scale-105 transition duration-500 cursor-pointer" 
-                          onClick={() => setLightbox(img)} 
+                          className="w-full h-full object-cover group-hover:scale-105 transition duration-500" 
                         />
                       </div>
                     )}
                     <div className="p-6">
                       <h3 className="text-xl font-semibold mb-1" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>{m.Nazwa}</h3>
                       <p className="text-amber-400 text-sm mb-3">{m.Lata} • {m.Model}</p>
-                      <p className={`text-neutral-400 text-sm leading-relaxed ${expanded === idx ? '' : 'line-clamp-3'}`}>{m.Opis}</p>
-                      <button 
-                        onClick={() => setExpanded(expanded === idx ? null : idx)} 
-                        className="mt-4 text-amber-400 text-sm tracking-wide uppercase hover:text-amber-300 transition"
-                      >
-                        {expanded === idx ? 'Zwiń' : 'Więcej →'}
-                      </button>
+                      <p className="text-neutral-400 text-sm leading-relaxed line-clamp-3">{m.Opis}</p>
+                      <span className="mt-4 inline-block text-amber-400 text-sm tracking-wide uppercase">
+                        Zobacz więcej →
+                      </span>
                     </div>
                   </div>
                 );
@@ -284,6 +310,7 @@ export default function Home() {
             <div className="flex items-center gap-4 mb-10">
               <div className="w-8 h-px bg-amber-400" />
               <h2 className="text-3xl tracking-wide" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>USTERKI</h2>
+              <span className="text-neutral-500 text-sm">({filteredIssues.length})</span>
             </div>
             <div className="space-y-4">
               {filteredIssues.map((i, idx) => (
@@ -305,6 +332,7 @@ export default function Home() {
             <div className="flex items-center gap-4 mb-10">
               <div className="w-8 h-px bg-amber-400" />
               <h2 className="text-3xl tracking-wide" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>KODY BŁĘDÓW</h2>
+              <span className="text-neutral-500 text-sm">({filteredCodes.length})</span>
             </div>
             <div className="space-y-4">
               {filteredCodes.map((c, idx) => (
@@ -323,6 +351,7 @@ export default function Home() {
             <div className="flex items-center gap-4 mb-10">
               <div className="w-8 h-px bg-amber-400" />
               <h2 className="text-3xl tracking-wide" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>PORADY DIY</h2>
+              <span className="text-neutral-500 text-sm">({filteredTips.length})</span>
             </div>
             <div className="space-y-6">
               {filteredTips.map((t, idx) => {
@@ -350,7 +379,6 @@ export default function Home() {
         )}
       </div>
 
-      {/* Footer */}
       <footer className="border-t border-white/10 py-12">
         <div className="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row justify-between items-center gap-4">
           <div className="text-2xl font-bold tracking-wider" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>
