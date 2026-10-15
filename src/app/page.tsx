@@ -13,10 +13,10 @@ type Item = {
 };
 
 const modelImages: Record<string, string> = {
-  'Tahoe': 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/97-99_Chevrolet_Tahoe_4-Door.JPG/800px-97-99_Chevrolet_Tahoe_4-Door.JPG',
-  'Suburban': 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/1st-Chevrolet-Tahoe-4door.jpg/800px-1st-Chevrolet-Tahoe-4door.jpg',
-  'C/K': 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/1995_Chevrolet_CK.jpg/800px-1995_Chevrolet_CK.jpg',
-  'Yukon': 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/GMC_Yukon_GT_1993-1997.jpg/800px-GMC_Yukon_GT_1993-1997.jpg',
+  'Tahoe': 'https://i.imgur.com/8kZqX9L.jpg',
+  'Suburban': 'https://i.imgur.com/9vLmN2P.jpg',
+  'C/K': 'https://i.imgur.com/3mKpQ7R.jpg',
+  'Yukon': 'https://i.imgur.com/5nRtY8W.jpg',
 };
 
 export default function Home() {
@@ -144,14 +144,9 @@ export default function Home() {
           <div className="grid md:grid-cols-2 gap-4">
             {filteredModels.map((m, idx) => (
               <div key={idx} className="bg-neutral-900 border border-neutral-800 rounded-xl overflow-hidden hover:border-amber-400 transition">
-                {modelImages[m.Model] && (
-                  <img 
-                    src={modelImages[m.Model]} 
-                    alt={m.Nazwa} 
-                    className="w-full h-48 object-cover bg-neutral-800"
-                    onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
-                  />
-                )}
+                <div className="w-full h-48 bg-neutral-800 flex items-center justify-center text-neutral-500 text-sm">
+                  {m.Model}
+                </div>
                 <div className="p-5">
                   <h3 className="text-amber-400 font-semibold text-lg" style={{ fontFamily: "'Oswald', sans-serif" }}>{m.Nazwa}</h3>
                   <p className="text-sm text-neutral-500 mb-2">{m.Lata} • {m.Model}</p>
