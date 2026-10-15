@@ -1379,6 +1379,34 @@ export default function Home() {
             </div>
 
             <div className="bg-neutral-950 border border-white/10 p-4">
+              <div className="bg-neutral-950 border border-white/10 p-4 mb-4">
+              <h3 className="font-semibold text-amber-400 mb-2">11. TEST POMPY PALIWA</h3>
+              <p className="text-sm text-neutral-300 mb-2">Szybki test czy pompa dziala.</p>
+              <ol className="text-sm text-neutral-300 space-y-1 list-decimal list-inside">
+                <li>Znajdz przekaznik pompy (skrzynka pod maska)</li>
+                <li>Wyjmij przekaznik</li>
+                <li>Zewrzyj piny 30 i 87 drutem</li>
+                <li>Sluchaj buczenia pompy</li>
+              </ol>
+            </div>
+            <div className="bg-neutral-950 border border-white/10 p-4 mb-4">
+              <h3 className="font-semibold text-amber-400 mb-2">12. TEMPOMAT — JAK UZYWAC</h3>
+              <ul className="text-sm text-neutral-300 space-y-1">
+                <li>ON — przesun przelacznik w strone kolumny</li>
+                <li>SET — przycisk na koncu dzwigni</li>
+                <li>RESUME — przesun ponownie</li>
+                <li>Dziala od 25 mph</li>
+              </ul>
+            </div>
+            <div className="bg-neutral-950 border border-white/10 p-4 mb-4">
+              <h3 className="font-semibold text-amber-400 mb-2">13. 4x4 — PRAWIDLOWE PRZELACZANIE</h3>
+              <ul className="text-sm text-neutral-300 space-y-1">
+                <li>4HI — mozna w trakcie jazdy (do 80 km/h)</li>
+                <li>4LO — tylko na postoju, skrzynia w N</li>
+                <li>Przesun dzwignie jednym plynny ruchem</li>
+              </ul>
+            </div>
+            <div className="bg-neutral-950 border border-white/10 p-4">
               <h3 className="font-semibold text-amber-400 mb-2">6. RESET ADAPTACJI SKRZYNI 4L60E</h3>
               <p className="text-sm text-neutral-300 mb-2">Po wymianie ATF skrzynia "uczy się" od nowa.</p>
               <ol className="text-sm text-neutral-300 space-y-1 list-decimal list-inside">
