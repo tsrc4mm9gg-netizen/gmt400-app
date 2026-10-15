@@ -1567,7 +1567,10 @@ export default function Home() {
 
         {tab === 'kalkulator' && (
           <div>
-            <h2 className="text-2xl mb-6" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>KALKULATOR KOSZTÓW NAPRAWY</h2>
+            <div className="flex items-center justify-between mb-6">
+              <h2 className="text-2xl" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>KALKULATOR KOSZTÓW NAPRAWY</h2>
+              <button onClick={() => shareSection('kalkulator')} className="text-neutral-400 hover:text-amber-400 text-sm">Udostępnij</button>
+            </div>
             <div className="bg-neutral-950 border border-white/10 p-4 mb-4">
               <label className="text-sm text-neutral-400 block mb-2">Wybierz naprawę:</label>
               <select value={repairType} onChange={e => setRepairType(e.target.value)} className="w-full bg-neutral-900 border border-white/10 p-2 text-sm">
