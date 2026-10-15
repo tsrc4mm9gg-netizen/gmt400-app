@@ -72,6 +72,9 @@ export default function Home() {
   const [issueYear, setIssueYear] = useState('');
   const [issueModel, setIssueModel] = useState('');
   const [issueQuery, setIssueQuery] = useState('');
+  const [codeQuery, setCodeQuery] = useState('');
+  const [diyQuery, setDiyQuery] = useState('');
+  const [schemaQuery, setSchemaQuery] = useState('');
   const [selectedEngine, setSelectedEngine] = useState('');
 
   useEffect(() => {
@@ -375,9 +378,17 @@ export default function Home() {
 
         {tab === 'kody' && (
           <div>
-            <h2 className="text-2xl mb-6" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>KODY OBD ({filteredCodes.length})</h2>
+            <h2 className="text-2xl mb-6" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>KODY OBD</h2>
+            <input 
+              type="text" 
+              placeholder="Szukaj kodu (np. P0171, P0300, 12)..." 
+              value={codeQuery}
+              onChange={(e) => setCodeQuery(e.target.value)}
+              className="w-full bg-neutral-900 border border-white/10 px-4 py-3 text-sm focus:outline-none focus:border-amber-400 mb-4"
+            />
+            <p className="text-neutral-500 text-sm mb-4">Znaleziono: {filteredCodes.filter(c => !codeQuery || c.Nazwa.toLowerCase().includes(codeQuery.toLowerCase()) || (c.Opis && c.Opis.toLowerCase().includes(codeQuery.toLowerCase()))).length}</p>
             <div className="space-y-3">
-              {filteredCodes.map((c, idx) => (
+              {filteredCodes.filter(c => !codeQuery || c.Nazwa.toLowerCase().includes(codeQuery.toLowerCase()) || (c.Opis && c.Opis.toLowerCase().includes(codeQuery.toLowerCase()))).map((c, idx) => (
                 <div key={idx} className="bg-neutral-950 border border-white/10 p-4">
                   <h3 className="font-semibold text-amber-400 mb-1">{c.Nazwa}</h3>
                   {c.Opis && <p className="text-neutral-400 text-sm mb-2">{c.Opis}</p>}
@@ -468,9 +479,17 @@ export default function Home() {
 
         {tab === 'diy' && (
           <div>
-            <h2 className="text-2xl mb-6" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>PORADNIKI DIY ({filteredTips.length})</h2>
+            <h2 className="text-2xl mb-6" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>PORADNIKI DIY</h2>
+            <input 
+              type="text" 
+              placeholder="Szukaj porady (np. 4L60E, filtr, kolektor)..." 
+              value={diyQuery}
+              onChange={(e) => setDiyQuery(e.target.value)}
+              className="w-full bg-neutral-900 border border-white/10 px-4 py-3 text-sm focus:outline-none focus:border-amber-400 mb-4"
+            />
+            <p className="text-neutral-500 text-sm mb-4">Znaleziono: {filteredTips.filter(t => !diyQuery || t.Nazwa.toLowerCase().includes(diyQuery.toLowerCase()) || (t.Rozwiązanie && t.Rozwiązanie.toLowerCase().includes(diyQuery.toLowerCase()))).length}</p>
             <div className="space-y-4">
-              {filteredTips.map((t, idx) => {
+              {filteredTips.filter(t => !diyQuery || t.Nazwa.toLowerCase().includes(diyQuery.toLowerCase()) || (t.Rozwiązanie && t.Rozwiązanie.toLowerCase().includes(diyQuery.toLowerCase()))).map((t, idx) => {
                 const tipImg = getTipImage(t.Nazwa);
                 return (
                   <div key={idx} className="bg-neutral-950 border border-white/10 overflow-hidden">
@@ -489,8 +508,15 @@ export default function Home() {
         {tab === 'schematy' && (
           <div>
             <h2 className="text-2xl mb-6" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>SCHEMATY ELEKTRYCZNE</h2>
+            <input 
+              type="text" 
+              placeholder="Szukaj schematu (np. masa, punkt, zegary)..." 
+              value={schemaQuery}
+              onChange={(e) => setSchemaQuery(e.target.value)}
+              className="w-full bg-neutral-900 border border-white/10 px-4 py-3 text-sm focus:outline-none focus:border-amber-400 mb-4"
+            />
             <div className="bg-neutral-950 border border-white/10 p-4">
-              {filteredTips.filter(t => t.Nazwa.toLowerCase().includes('punkt') || t.Nazwa.toLowerCase().includes('masa') || t.Nazwa.toLowerCase().includes('schemat')).map((t, idx) => (
+              {filteredTips.filter(t => (t.Nazwa.toLowerCase().includes('punkt') || t.Nazwa.toLowerCase().includes('masa') || t.Nazwa.toLowerCase().includes('schemat')) && (!schemaQuery || t.Nazwa.toLowerCase().includes(schemaQuery.toLowerCase()) || (t.Rozwiązanie && t.Rozwiązanie.toLowerCase().includes(schemaQuery.toLowerCase())))).map((t, idx) => (
                 <div key={idx} className="mb-4 pb-4 border-b border-white/10 last:border-0">
                   <h3 className="font-semibold mb-2">{t.Nazwa}</h3>
                   <p className="text-neutral-300 text-sm whitespace-pre-line">{t.Rozwiązanie}</p>
