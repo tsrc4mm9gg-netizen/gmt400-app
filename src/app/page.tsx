@@ -733,7 +733,27 @@ export default function Home() {
                     <p className="text-xs text-neutral-500">Zdjęcia szkód</p>
                   </a>
                 </div>
-                <p className="text-xs text-neutral-500">Kliknij aby zobaczyć zdjęcia podobnych aut z aukcji i ogłoszeń</p>
+                <p className="text-xs text-neutral-500 mb-4">Kliknij aby zobaczyć zdjęcia podobnych aut z aukcji i ogłoszeń</p>
+                
+                <h4 className="font-semibold text-amber-400 mb-2">POWIĄZANE INFORMACJE</h4>
+                <div className="space-y-2">
+                  <a href={`https://www.gmt400.com/search/search?keywords=${vinResult['Rok'] || ''} ${vinResult['Model'] || ''}`} target="_blank" className="block bg-neutral-900 p-3 hover:bg-neutral-800">
+                    <p className="text-sm font-medium text-amber-400">Forum GMT400.com</p>
+                    <p className="text-xs text-neutral-500">Dyskusje o tym roczniku i modelu</p>
+                  </a>
+                  <a href={`https://www.google.com/search?q=${vinResult['Rok'] || ''} ${vinResult['Model'] || 'GMT400'} recall`} target="_blank" className="block bg-neutral-900 p-3 hover:bg-neutral-800">
+                    <p className="text-sm font-medium text-amber-400">Akcje serwisowe</p>
+                    <p className="text-xs text-neutral-500">Sprawdź recall dla tego rocznika</p>
+                  </a>
+                  <a href={`https://www.google.com/search?q=${vinResult['Rok'] || ''} ${vinResult['Model'] || 'GMT400'} common problems`} target="_blank" className="block bg-neutral-900 p-3 hover:bg-neutral-800">
+                    <p className="text-sm font-medium text-amber-400">Typowe problemy</p>
+                    <p className="text-xs text-neutral-500">Najczęstsze usterki tego modelu</p>
+                  </a>
+                  <a href={`https://www.youtube.com/results?search_query=${vinResult['Rok'] || ''} ${vinResult['Model'] || 'GMT400'} review`} target="_blank" className="block bg-neutral-900 p-3 hover:bg-neutral-800">
+                    <p className="text-sm font-medium text-amber-400">YouTube</p>
+                    <p className="text-xs text-neutral-500">Recenzje i poradniki wideo</p>
+                  </a>
+                </div>
               </div>
             )}
 
