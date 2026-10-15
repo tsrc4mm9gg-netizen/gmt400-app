@@ -2,6 +2,11 @@ import { NextResponse } from 'next/server';
 
 const DATABASE_ID = '746973771d604f1e8276502851176af2';
 
+function getRichText(prop: any): string {
+  if (!prop?.rich_text) return '';
+  return prop.rich_text.map((t: any) => t.plain_text || '').join('');
+}
+
 export async function GET() {
   const token = process.env.NOTION_TOKEN;
   if (!token) {
@@ -13,7 +18,7 @@ export async function GET() {
     let startCursor: string | undefined = undefined;
     let hasMore = true;
 
-    while (hasMore && allResults.length < 300) {
+    while (hasMore && allResults.length < 500) {
       const body: any = { page_size: 100 };
       if (startCursor) body.start_cursor = startCursor;
 
@@ -44,10 +49,10 @@ export async function GET() {
         Nazwa: props.Nazwa?.title?.[0]?.plain_text || props.Nazwa?.rich_text?.[0]?.plain_text || '',
         Typ: props.Typ?.select?.name || '',
         Model: props.Model?.select?.name || '',
-        Opis: props.Opis?.rich_text?.[0]?.plain_text || '',
-        Objawy: props.Objawy?.rich_text?.[0]?.plain_text || '',
-        Rozwiązanie: props['Rozwiązanie']?.rich_text?.[0]?.plain_text || '',
-        Lata: props.Lata?.rich_text?.[0]?.plain_text || '',
+        Opis: getRichText(props.Opis),
+        Objawy: getRichText(props.Objawy),
+        Rozwiązanie: getRichText(props['Rozwiązanie']),
+        Lata: getRichText(props.Lata),
       };
     });
 
