@@ -97,6 +97,20 @@ export default function Home() {
   const [darkMode, setDarkMode] = useState(true);
   const [favorites, setFavorites] = useState<string[]>([]);
   const [showBackTop, setShowBackTop] = useState(false);
+
+  const shareSection = (section: string) => {
+    const url = window.location.origin + '?tab=' + section;
+    if (navigator.share) {
+      navigator.share({ title: 'GMT400.pl - ' + section, url });
+    } else {
+      navigator.clipboard.writeText(url);
+      alert('Link skopiowany!');
+    }
+  };
+
+  const toggleFavorite = (id: string) => {
+    setFavorites(prev => prev.includes(id) ? prev.filter(f => f !== id) : [...prev, id]);
+  };
   const [partsFilter, setPartsFilter] = useState('wszystkie');
   const [partsQuery, setPartsQuery] = useState('');
   const [tuningFilter, setTuningFilter] = useState('wszystkie');
