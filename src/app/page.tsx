@@ -589,6 +589,32 @@ export default function Home() {
               <p className="text-neutral-500 text-center py-4">Wybierz silnik powyżej aby zobaczyć szczegóły.</p>
             )}
 
+            <img src="/spec-fluids-map.jpg" alt="Lokalizacje płynów" className="w-full mb-6 cursor-pointer" onClick={() => setLightbox('/spec-fluids-map.jpg')} />
+
+            <div className="bg-neutral-950 border border-white/10 p-4 mb-6">
+              <h3 className="font-semibold text-amber-400 mb-4">Płyny eksploatacyjne — interwały</h3>
+              <div className="overflow-x-auto">
+                <table className="w-full text-sm">
+                  <thead>
+                    <tr className="border-b border-white/10 text-amber-400">
+                      <th className="p-2 text-left">Płyn</th>
+                      <th className="p-2 text-left">Specyfikacja</th>
+                      <th className="p-2 text-left">Pojemność</th>
+                      <th className="p-2 text-left">Interwał</th>
+                    </tr>
+                  </thead>
+                  <tbody className="text-neutral-300">
+                    <tr className="border-b border-white/5"><td className="p-2">Olej silnikowy</td><td className="p-2">5W-30 / 10W-30</td><td className="p-2">4.3–6.6 L</td><td className="p-2">5–8 tys. km</td></tr>
+                    <tr className="border-b border-white/5"><td className="p-2">ATF 4L60E</td><td className="p-2">Dexron VI</td><td className="p-2">5.0 L</td><td className="p-2">50 tys. km</td></tr>
+                    <tr className="border-b border-white/5"><td className="p-2">Płyn chłodzący</td><td className="p-2">Dex-Cool</td><td className="p-2">15 L</td><td className="p-2">5 lat / 150 tys.</td></tr>
+                    <tr className="border-b border-white/5"><td className="p-2">Płyn hamulcowy</td><td className="p-2">DOT 3</td><td className="p-2">0.5 L</td><td className="p-2">2 lata</td></tr>
+                    <tr className="border-b border-white/5"><td className="p-2">Olej dyferencjału</td><td className="p-2">75W-90 GL-5</td><td className="p-2">2.0 L</td><td className="p-2">50 tys. km</td></tr>
+                    <tr><td className="p-2">Olej NP231</td><td className="p-2">ATF Dexron</td><td className="p-2">1.2 L</td><td className="p-2">50 tys. km</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
             <div className="bg-neutral-950 border border-white/10 p-4 mt-6">
               <h3 className="font-semibold text-amber-400 mb-3">Numery OEM — filtry</h3>
               <div className="text-sm text-neutral-300 space-y-2">
