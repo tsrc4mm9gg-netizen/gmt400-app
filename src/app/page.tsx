@@ -1031,6 +1031,11 @@ export default function Home() {
                 { kat: 'skrzynia', nazwa: '4L80E swap', efekt: 'Wytrzymałość na moc', czesci: '4L80E + crossmember + shaft', koszt: '5000-10000 PLN', opis: 'Dla LS swap i mocy powyżej 400 KM. Wymaga modyfikacji.' },
                 { kat: 'hamulce', nazwa: 'Big brake kit', efekt: 'Krótsza droga hamowania', czesci: 'Wilwood / Pro Performance', koszt: '3000-6000 PLN', opis: 'Większe tarcze i zaciski. Dla obniżonych i szybkich aut.' },
                 { kat: 'hamulce', nazwa: 'Tarcze tył (zamiast bębnów)', efekt: 'Lepsze hamowanie tyłu', czesci: 'Disc conversion kit', koszt: '1500-3000 PLN', opis: 'Zamiana bębnów na tarcze. Lepsze hamowanie i łatwiejszy serwis.' },
+                { kat: 'silnik', nazwa: 'Chip/tuner', efekt: '+15-30 KM', czesci: 'Hypertech / DiabloSport', koszt: '800-1500 PLN', opis: 'Zmiana mapy silnika. Więcej mocy bez modyfikacji mechanicznych.', model: 'Vortec 1996+' },
+                { kat: 'silnik', nazwa: 'Przepustnica większa', efekt: '+5-10 KM', czesci: 'BBK / Edelbrock', koszt: '600-1200 PLN', opis: 'Większa przepustnica = więcej powietrza. Wymaga tuningu.', model: 'Vortec' },
+                { kat: 'wydech', nazwa: 'Usunięcie katalizatora', efekt: '+10-15 KM', czesci: 'Test pipe', koszt: '300-600 PLN', opis: 'Tylko na tor! Nielegalne na drodze w PL.', model: 'Wszystkie' },
+                { kat: 'zawieszenie', nazwa: 'Sway bar (stabilizator)', efekt: 'Mniej przechyłów', czesci: 'Hellwig / Addco', koszt: '800-1500 PLN', opis: 'Grubszy stabilizator = mniej przechyłów w zakrętach.', model: 'Wszystkie' },
+                { kat: 'zawieszenie', nazwa: 'Polyurethane bushings', efekt: 'Sztywniejsze zawieszenie', czesci: 'Energy Suspension', koszt: '400-800 PLN', opis: 'Zamiana gumowych tulei na poliuretanowe. Lepsza kontrola.', model: 'Wszystkie' },
               ].filter(m => (tuningFilter === 'wszystkie' || m.kat === tuningFilter) && (!tuningQuery || m.nazwa.toLowerCase().includes(tuningQuery.toLowerCase()) || m.opis.toLowerCase().includes(tuningQuery.toLowerCase()))).map((m, idx) => (
                 <div key={idx} className="bg-neutral-950 border border-white/10 overflow-hidden">
                   {m.img && <img src={m.img} alt={m.nazwa} className="w-full h-40 object-cover cursor-pointer" onClick={() => setLightbox(m.img)} />}
