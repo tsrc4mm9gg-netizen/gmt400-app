@@ -783,13 +783,16 @@ export default function Home() {
                 { kat: 'filtry', nazwa: 'Filtr oleju Diesel', oem: 'AC Delco PF1218', opis: 'Filtr oleju 6.5L', model: '6.5L' },
                 { kat: 'filtry', nazwa: 'Filtr paliwa Diesel', oem: 'AC Delco TP1006', opis: 'Filtr paliwa 6.5L', model: '6.5L' },
               ].filter(p => (partsFilter === 'wszystkie' || p.kat === partsFilter) && (!partsQuery || p.nazwa.toLowerCase().includes(partsQuery.toLowerCase()) || p.oem.toLowerCase().includes(partsQuery.toLowerCase()))).map((p, idx) => (
-                <div key={idx} className="bg-neutral-950 border border-white/10 p-4">
+                <div key={idx} className="bg-neutral-950 border border-white/10 overflow-hidden">
+                  {p.img && <img src={p.img} alt={p.nazwa} className="w-full h-32 object-contain bg-white cursor-pointer" onClick={() => setLightbox(p.img)} />}
+                  <div className="p-4">
                   <div className="flex justify-between items-start mb-2">
                     <h3 className="font-semibold">{p.nazwa}</h3>
                     <span className="text-xs bg-amber-400 text-black px-2 py-0.5">{p.oem}</span>
                   </div>
                   <p className="text-neutral-400 text-sm mb-1">{p.opis}</p>
                   <p className="text-neutral-500 text-xs">Model: {p.model}</p>
+                  </div>
                 </div>
               ))}
             </div>
