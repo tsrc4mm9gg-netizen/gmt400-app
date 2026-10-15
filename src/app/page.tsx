@@ -583,6 +583,13 @@ export default function Home() {
                       'Numer seryjny': vinInput.slice(11),
                       'ATF': trans.includes('4L80') ? '6.5 L Dexron VI' : '5.0 L Dexron VI',
                       'Płyn chłodzący': '15 L Dex-Cool',
+                      'Hamulce': vinInput[4] === 'R' ? 'Tarcze + bębny (HD)' : 'Tarcze przód + bębny tył',
+                      'Zawieszenie': vinInput[4] === 'K' ? '4x4 (torsion bars)' : '2WD (sprężyny)',
+                      'Paliwo': engCode === 'F' || engCode === 'S' ? 'Diesel' : 'Benzyna 95',
+                      'Pojemność zbiornika': '98-114 L',
+                      'Opony': vinInput[4] === 'R' ? 'LT245/75R16' : 'P235/75R15',
+                      'Masa własna': vinInput[4] === 'R' ? '2400-2800 kg' : '1800-2200 kg',
+                      'Ładowność': vinInput[4] === 'R' ? '1500+ kg' : '500-800 kg',
                     };
                     setVinResult(result);
                   }
@@ -610,6 +617,28 @@ export default function Home() {
                   <p>Poz. 8: Silnik | Poz. 10: Rok | Poz. 11: Fabryka</p>
                   <p>Poz. 12-17: Numer seryjny</p>
                 </div>
+              </div>
+            )}
+
+            {vinResult && (
+              <div className="mt-4 bg-neutral-950 border border-white/10 p-4">
+                <h3 className="font-semibold text-amber-400 mb-3">Typowe usterki dla tego rocznika</h3>
+                <ul className="text-sm text-neutral-300 space-y-2">
+                  <li>• Uszczelki kolektora dolotowego (wyciek płynu)</li>
+                  <li>• Korozja przewodów hamulcowych</li>
+                  <li>• 4L60E — ślizganie 3-4 biegu</li>
+                  <li>• Pompa paliwa (w zbiorniku)</li>
+                  <li>• Czujnik MAF (kody P0171/P0174)</li>
+                  <li>• Punkty masy (korozja)</li>
+                </ul>
+                <h3 className="font-semibold text-amber-400 mt-4 mb-3">Zalecany serwis</h3>
+                <ul className="text-sm text-neutral-300 space-y-2">
+                  <li>• Olej silnikowy: co 5-8 tys. km</li>
+                  <li>• ATF: co 50 tys. km</li>
+                  <li>• Płyn chłodzący: co 5 lat</li>
+                  <li>• Płyn hamulcowy: co 2 lata</li>
+                  <li>• Świece: co 50 tys. km</li>
+                </ul>
               </div>
             )}
 
