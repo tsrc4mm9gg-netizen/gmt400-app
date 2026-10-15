@@ -13,10 +13,10 @@ type Item = {
 };
 
 const modelImages: Record<string, string> = {
-  'Tahoe': 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800',
-  'Suburban': 'https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=800',
-  'C/K': 'https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=800',
-  'Yukon': 'https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=800',
+  'Tahoe': 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/97-99_Chevrolet_Tahoe_4-Door.JPG/800px-97-99_Chevrolet_Tahoe_4-Door.JPG',
+  'Suburban': 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/1st-Chevrolet-Tahoe-4door.jpg/800px-1st-Chevrolet-Tahoe-4door.jpg',
+  'C/K': 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/1995_Chevrolet_CK.jpg/800px-1995_Chevrolet_CK.jpg',
+  'Yukon': 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/GMC_Yukon_GT_1993-1997.jpg/800px-GMC_Yukon_GT_1993-1997.jpg',
 };
 
 export default function Home() {
