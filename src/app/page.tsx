@@ -72,7 +72,12 @@ export default function Home() {
   const [items, setItems] = useState<Item[]>([]);
   const [loading, setLoading] = useState(true);
   const [query, setQuery] = useState('');
-  const [tab, setTab] = useState('modele');
+  const [tab, setTab] = useState(() => {
+    if (typeof window !== 'undefined') {
+      return localStorage.getItem('gmt400_tab') || 'modele';
+    }
+    return 'modele';
+  });
   const [selectedModel, setSelectedModel] = useState('Wszystkie');
   const [selectedModelItem, setSelectedModelItem] = useState<Item | null>(null);
   const [expanded, setExpanded] = useState<number | null>(null);
@@ -120,6 +125,10 @@ export default function Home() {
   const [importSource, setImportSource] = useState('copart');
   const [importTransport, setImportTransport] = useState('roro');
   const [selectedEngine, setSelectedEngine] = useState('');
+
+  useEffect(() => {
+    localStorage.setItem('gmt400_tab', tab);
+  }, [tab]);
 
   useEffect(() => {
     const handleScroll = () => setShowBackTop(window.scrollY > 300);
@@ -235,8 +244,10 @@ export default function Home() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-black text-white flex items-center justify-center">
+      <div className="min-h-screen bg-black text-white flex flex-col items-center justify-center gap-4">
         <div className="text-4xl font-bold tracking-widest" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>GMT400</div>
+        <div className="w-8 h-8 border-2 border-amber-400 border-t-transparent rounded-full animate-spin"></div>
+        <p className="text-sm text-neutral-500">Ładowanie...</p>
       </div>
     );
   }
@@ -307,6 +318,12 @@ export default function Home() {
           </div>
         )}
       </header>
+
+      <div className="bg-neutral-900/50 border-b border-white/5 px-4 py-2 text-xs text-neutral-500">
+        <span className="hover:text-white cursor-pointer" onClick={() => setTab('modele')}>Strona główna</span>
+        <span className="mx-2">›</span>
+        <span className="text-amber-400">{CATEGORIES.find(c => c.id === tab)?.label || tab}</span>
+      </div>
 
       {showSearch && (
         <div className="fixed top-14 left-0 right-0 z-40 bg-neutral-900 border-b border-white/10 p-4">
