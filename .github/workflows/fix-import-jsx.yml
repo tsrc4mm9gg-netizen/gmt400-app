@@ -1,4 +1,4 @@
-name: Prepare import JSX fix
+name: Diagnose main JSX
 on:
   push:
     branches: [seo-sitemap-robots]
@@ -6,37 +6,40 @@ on:
 permissions:
   contents: write
 jobs:
-  prepare-fix:
+  diagnose:
     runs-on: ubuntu-latest
     timeout-minutes: 3
     steps:
       - uses: actions/checkout@v4
         with:
           ref: main
-      - name: Fix exact JSX text and push separate branch
+      - name: Parse current source and publish diagnostic branch
         shell: bash
         run: |
           set -euo pipefail
-          git switch -c fix-import-jsx-threshold
-          python3 - <<'PY'
-          from pathlib import Path
-          p = Path('src/app/page.tsx')
-          text = p.read_text(encoding='utf-8')
-          old = 'Osobowy >2000cm³'
-          new = 'Osobowy &gt;2000cm³'
-          count = text.count(old)
-          print(f'Exact matches: {count}')
-          if count == 0:
-              for number, line in enumerate(text.splitlines(), 1):
-                  if '2000' in line:
-                      print(f'{number}: {line}')
-              raise SystemExit('No exact matches; no files changed')
-          p.write_text(text.replace(old, new), encoding='utf-8')
-          PY
-          git diff --check
-          git diff -- src/app/page.tsx
+          git switch -c diagnose-main-jsx
+          npm install --prefix /tmp/gmt400-parser --ignore-scripts --no-audit --no-fund typescript@5
+          mkdir -p .diagnostics
+          node <<'JS' > .diagnostics/jsx.txt
+          const ts = require('/tmp/gmt400-parser/node_modules/typescript');
+          const fs = require('fs');
+          const cp = require('child_process');
+          const name = 'src/app/page.tsx';
+          const text = fs.readFileSync(name, 'utf8');
+          const lines = text.split('\n');
+          const source = ts.createSourceFile(name, text, ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX);
+          console.log('Source commit:', cp.execSync('git rev-parse HEAD').toString().trim());
+          console.log('Parse errors:', source.parseDiagnostics.length);
+          for (const d of source.parseDiagnostics.slice(0, 8)) {
+            const pos = source.getLineAndCharacterOfPosition(d.start || 0);
+            console.log('ERROR', pos.line + 1, pos.character + 1, ts.flattenDiagnosticMessageText(d.messageText, '\n'));
+            for (let i = Math.max(0, pos.line - 20); i <= Math.min(lines.length - 1, pos.line + 8); i++) console.log((i + 1) + ': ' + lines[i]);
+          }
+          console.log('COMPONENT END');
+          lines.slice(-25).forEach((line, i) => console.log((lines.length - 24 + i) + ': ' + line));
+          JS
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add src/app/page.tsx
-          git commit -m 'Fix unescaped greater-than signs in import table'
-          git push origin HEAD:refs/heads/fix-import-jsx-threshold
+          git add .diagnostics/jsx.txt
+          git commit -m 'Record parser diagnostics for current main'
+          git push origin HEAD:refs/heads/diagnose-main-jsx
