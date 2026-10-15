@@ -550,15 +550,39 @@ export default function Home() {
                     const engineCodes: Record<string, string> = { 'Z': '4.3L V6 TBI', 'H': '5.0L V8 TBI', 'K': '5.7L V8 TBI', 'R': '5.7L Vortec V8', 'N': '7.4L V8', 'F': '6.5L Diesel', 'S': '6.5L Turbodiesel', 'C': '4.3L V6 CPI', 'W': '4.3L V6 Vortec' };
                     const plantCodes: Record<string, string> = { '1': 'Oshawa, Kanada', 'Z': 'Fort Wayne, Indiana', 'E': 'Pontiac, Michigan', 'J': 'Janesville, Wisconsin', 'G': 'Flint, Michigan' };
                     const modelCodes: Record<string, string> = { 'C': 'C/K 1500', 'K': 'K1500 4x4', 'V': 'C/K 2500', 'R': 'C/K 3500', 'S': 'Suburban', 'T': 'Tahoe' };
+                    const engCode = vinInput[7];
+                    const year = yearCodes[vinInput[9]] || 'Nieznany';
+                    const engineSpecs: Record<string, {moc: string, moment: string, olej: string, filtr: string}> = {
+                      'Z': {moc: '160-200 KM', moment: '230-260 Nm', olej: '4.3 L 5W-30', filtr: 'PF47'},
+                      'H': {moc: '175-190 KM', moment: '270 Nm', olej: '4.7 L 5W-30', filtr: 'PF1218'},
+                      'K': {moc: '210 KM', moment: '300 Nm', olej: '4.7 L 5W-30', filtr: 'PF1218'},
+                      'R': {moc: '255 KM', moment: '330 Nm', olej: '4.7 L 5W-30', filtr: 'PF1218'},
+                      'N': {moc: '230-290 KM', moment: '385-410 Nm', olej: '5.7 L 10W-30', filtr: 'PF1218'},
+                      'F': {moc: '180 KM', moment: '360 Nm', olej: '6.6 L 15W-40', filtr: 'PF1218'},
+                      'S': {moc: '215 KM', moment: '440 Nm', olej: '6.6 L 15W-40', filtr: 'PF1218'},
+                      'C': {moc: '200 KM', moment: '260 Nm', olej: '4.3 L 5W-30', filtr: 'PF47'},
+                      'W': {moc: '200 KM', moment: '260 Nm', olej: '4.3 L 5W-30', filtr: 'PF47'},
+                    };
+                    const spec = engineSpecs[engCode] || {moc: '?', moment: '?', olej: '?', filtr: '?'};
+                    const trans = engCode === 'N' || engCode === 'F' || engCode === 'S' ? '4L80E (wzmocniona)' : '4L60E';
+                    const axle = vinInput[4] === 'R' || vinInput[4] === 'V' ? '14-bolt (2500/3500)' : '10-bolt (1500)';
                     const result: Record<string, string> = {
                       'VIN': vinInput,
-                      'Kraj': vinInput[0] === '1' ? 'USA' : vinInput[0] === '2' ? 'Kanada' : 'Inny',
+                      'Kraj': vinInput[0] === '1' ? 'USA' : vinInput[0] === '2' ? 'Kanada' : 'Meksyk',
                       'Producent': vinInput[1] === 'G' ? 'General Motors' : 'Inny',
-                      'Rok': yearCodes[vinInput[9]] || 'Nieznany',
-                      'Silnik': engineCodes[vinInput[7]] || 'Nieznany (' + vinInput[7] + ')',
+                      'Rok produkcji': year,
+                      'Model': modelCodes[vinInput[4]] || 'Sprawdź RPO',
+                      'Silnik': engineCodes[engCode] || 'Nieznany (' + engCode + ')',
+                      'Moc': spec.moc,
+                      'Moment': spec.moment,
+                      'Skrzynia biegów': trans,
+                      'Oś tylna': axle,
+                      'Olej silnikowy': spec.olej,
+                      'Filtr oleju': 'AC Delco ' + spec.filtr,
                       'Fabryka': plantCodes[vinInput[10]] || 'Nieznana',
                       'Numer seryjny': vinInput.slice(11),
-                      'Model': modelCodes[vinInput[4]] || 'Sprawdź tabliczkę',
+                      'ATF': trans.includes('4L80') ? '6.5 L Dexron VI' : '5.0 L Dexron VI',
+                      'Płyn chłodzący': '15 L Dex-Cool',
                     };
                     setVinResult(result);
                   }
