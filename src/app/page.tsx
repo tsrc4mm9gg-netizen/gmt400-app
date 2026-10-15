@@ -1079,32 +1079,15 @@ export default function Home() {
                   </select>
                 </div>
               </div>
-              {(() => {
-                const auctionFee = importSource === 'copart' ? importPrice * 0.10 : importSource === 'iaai' ? importPrice * 0.12 : importSource === 'manheim' ? importPrice * 0.08 : 0;
-                const transport = importTransport === 'roro' ? 4000 : importTransport === 'kontener' ? 6000 : 8000;
-                const insurance = importPrice * 0.015;
-                const cif = importPrice + auctionFee + transport + insurance;
-                const clo = cif * 0.10;
-                const akcyzaRate = importEngine === 'v6' ? 0.031 : importEngine === 'pickup' ? 0 : 0.186;
-                const akcyza = (cif + clo) * akcyzaRate;
-                const vat = (cif + clo + akcyza) * 0.23;
-                const adaptacja = 3000;
-                const total = cif + clo + akcyza + vat + adaptacja;
-                return (
-                  <div className="space-y-2 text-sm">
-                    <div className="flex justify-between"><span className="text-neutral-400">Cena wylicytowana:</span><span>{importPrice.toFixed(0)} PLN</span></div>
-                    <div className="flex justify-between"><span className="text-neutral-400">Opłata aukcyjna:</span><span>{auctionFee.toFixed(0)} PLN</span></div>
-                    <div className="flex justify-between"><span className="text-neutral-400">Transport:</span><span>{transport} PLN</span></div>
-                    <div className="flex justify-between"><span className="text-neutral-400">Ubezpieczenie:</span><span>{insurance.toFixed(0)} PLN</span></div>
-                    <div className="flex justify-between border-t border-white/10 pt-2"><span className="text-neutral-400">Wartość CIF:</span><span>{cif.toFixed(0)} PLN</span></div>
-                    <div className="flex justify-between"><span className="text-neutral-400">Cło 10%:</span><span>{clo.toFixed(0)} PLN</span></div>
-                    <div className="flex justify-between"><span className="text-neutral-400">Akcyza {(akcyzaRate*100).toFixed(1)}%:</span><span>{akcyza.toFixed(0)} PLN</span></div>
-                    <div className="flex justify-between"><span className="text-neutral-400">VAT 23%:</span><span>{vat.toFixed(0)} PLN</span></div>
-                    <div className="flex justify-between"><span className="text-neutral-400">Przystosowanie:</span><span>{adaptacja} PLN</span></div>
-                    <div className="flex justify-between font-bold text-amber-400 text-lg border-t border-amber-400/30 pt-2"><span>RAZEM W POLSCE:</span><span>{total.toFixed(0)} PLN</span></div>
-                  </div>
-                );
-              })()}
+              <div className="space-y-2 text-sm mt-4">
+                <div className="flex justify-between"><span className="text-neutral-400">Cena:</span><span>{importPrice} PLN</span></div>
+                <div className="flex justify-between"><span className="text-neutral-400">Opłata aukcyjna ({importSource}):</span><span>{Math.round(importPrice * (importSource === 'copart' ? 0.10 : importSource === 'iaai' ? 0.12 : importSource === 'manheim' ? 0.08 : 0))} PLN</span></div>
+                <div className="flex justify-between"><span className="text-neutral-400">Transport ({importTransport}):</span><span>{importTransport === 'roro' ? 4000 : importTransport === 'kontener' ? 6000 : 8000} PLN</span></div>
+                <div className="flex justify-between"><span className="text-neutral-400">Cło 10%:</span><span>{Math.round(importPrice * 0.10)} PLN</span></div>
+                <div className="flex justify-between"><span className="text-neutral-400">Akcyza:</span><span>{Math.round(importPrice * (importEngine === 'v6' ? 0.031 : importEngine === 'pickup' ? 0 : 0.186))} PLN</span></div>
+                <div className="flex justify-between"><span className="text-neutral-400">VAT 23%:</span><span>{Math.round(importPrice * 1.1 * 0.23)} PLN</span></div>
+                <div className="flex justify-between font-bold text-amber-400 text-lg border-t border-amber-400/30 pt-2"><span>SZACUNEK:</span><span>{Math.round(importPrice * 1.5)} PLN</span></div>
+              </div>
             </div>
 
             <div className="bg-neutral-950 border border-white/10 p-4 mb-4">
