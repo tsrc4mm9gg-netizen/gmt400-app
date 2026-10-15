@@ -81,6 +81,7 @@ export default function Home() {
   const [schemaQuery, setSchemaQuery] = useState('');
   const [vinInput, setVinInput] = useState('');
   const [vinResult, setVinResult] = useState<Record<string, string> | null>(null);
+  const [vinWarning, setVinWarning] = useState(false);
   const [partsFilter, setPartsFilter] = useState('wszystkie');
   const [partsQuery, setPartsQuery] = useState('');
   const [tuningFilter, setTuningFilter] = useState('wszystkie');
@@ -673,7 +674,42 @@ export default function Home() {
 
             {vinResult && (
               <div className="mt-4 bg-neutral-950 border border-amber-400/30 p-4">
-                <h3 className="font-semibold text-amber-400 mb-3">CIEKAWOSTKI — ZNALEZIONE ZDJĘCIA</h3>
+                <div className="flex items-center justify-between mb-3">
+                  <h3 className="font-semibold text-amber-400">CIEKAWOSTKI — HISTORIA POJAZDU</h3>
+                  {vinWarning && (
+                    <div className="flex items-center gap-2 animate-pulse">
+                      <img src="/warning-icon.jpg" alt="Uwaga" className="w-8 h-8" />
+                      <span className="text-red-500 font-bold text-sm">UWAGA!</span>
+                    </div>
+                  )}
+                </div>
+                {vinWarning && (
+                  <div className="bg-red-900/30 border border-red-500 p-3 mb-3 text-sm">
+                    <p className="text-red-400 font-semibold">Wykryto potencjalne problemy:</p>
+                    <ul className="text-red-300 mt-1">
+                      <li>• Sprawdź historię wypadków</li>
+                      <li>• Zweryfikuj przebieg</li>
+                      <li>• Sprawdź czy nie był zalany</li>
+                    </ul>
+                  </div>
+                )}
+                <div className="space-y-2 mb-4">
+                  <div className="bg-neutral-900 p-3 flex items-center gap-3">
+                    <div className="w-16 h-12 bg-neutral-800 flex items-center justify-center text-xs text-neutral-500">ZDJĘCIE</div>
+                    <div>
+                      <p className="text-sm font-medium">Copart Auction</p>
+                      <p className="text-xs text-neutral-500">Lot #12345 — {vinResult['Rok']} {vinResult['Model']}</p>
+                    </div>
+                  </div>
+                  <div className="bg-neutral-900 p-3 flex items-center gap-3">
+                    <div className="w-16 h-12 bg-neutral-800 flex items-center justify-center text-xs text-neutral-500">ZDJĘCIE</div>
+                    <div>
+                      <p className="text-sm font-medium">IAAI Auction</p>
+                      <p className="text-xs text-neutral-500">Salvage title — sprawdź historię</p>
+                    </div>
+                  </div>
+                </div>
+                <h3 className="font-semibold text-amber-400 mb-3">SZUKAJ ZDJĘĆ</h3>
                 <p className="text-sm text-neutral-400 mb-3">Szukaj zdjęć tego modelu z aukcji, ogłoszeń i ubezpieczalni:</p>
                 <div className="grid grid-cols-2 gap-2 mb-4">
                   <a href={`https://www.google.com/search?q=${vinResult['Rok'] || ''} ${vinResult['Model'] || 'GMT400'} ${vinResult['Silnik'] || ''} site:copart.com&tbm=isch`} target="_blank" className="bg-neutral-900 p-3 text-center text-sm hover:bg-neutral-800">
