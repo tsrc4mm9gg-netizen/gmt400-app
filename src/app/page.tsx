@@ -86,6 +86,8 @@ export default function Home() {
   const [tuningQuery, setTuningQuery] = useState('');
   const [importPrice, setImportPrice] = useState(30000);
   const [importEngine, setImportEngine] = useState('v8');
+  const [importSource, setImportSource] = useState('copart');
+  const [importTransport, setImportTransport] = useState('roro');
   const [selectedEngine, setSelectedEngine] = useState('');
 
   useEffect(() => {
@@ -1043,33 +1045,63 @@ export default function Home() {
               <h3 className="font-semibold text-amber-400 mb-4">KALKULATOR IMPORTU</h3>
               <div className="grid sm:grid-cols-2 gap-4 mb-4">
                 <div>
-                  <label className="text-xs text-neutral-500 block mb-1">Cena zakupu (PLN)</label>
+                  <label className="text-xs text-neutral-500 block mb-1">Cena wylicytowana (PLN)</label>
                   <input type="number" value={importPrice} onChange={(e) => setImportPrice(Number(e.target.value))}
                     className="w-full bg-neutral-900 border border-white/10 px-3 py-2 text-sm" />
+                </div>
+                <div>
+                  <label className="text-xs text-neutral-500 block mb-1">Portal aukcyjny</label>
+                  <select value={importSource} onChange={(e) => setImportSource(e.target.value)}
+                    className="w-full bg-neutral-900 border border-white/10 px-3 py-2 text-sm">
+                    <option value="copart">Copart (opłata ~10%)</option>
+                    <option value="iaai">IAAI (opłata ~12%)</option>
+                    <option value="manheim">Manheim (opłata ~8%)</option>
+                    <option value="dealer">Dealer/prywatny (0%)</option>
+                  </select>
                 </div>
                 <div>
                   <label className="text-xs text-neutral-500 block mb-1">Silnik</label>
                   <select value={importEngine} onChange={(e) => setImportEngine(e.target.value)}
                     className="w-full bg-neutral-900 border border-white/10 px-3 py-2 text-sm">
-                    <option value="v6">4.3L V6 (do 2000cm³) — 3.1%</option>
-                    <option value="v8">5.0/5.7/7.4L V8 (powyżej 2000cm³) — 18.6%</option>
-                    <option value="diesel">6.5L Diesel — 18.6%</option>
-                    <option value="pickup">Pickup CN 8704 — 0% akcyza</option>
+                    <option value="v6">4.3L V6 — akcyza 3.1%</option>
+                    <option value="v8">5.0/5.7/7.4L V8 — akcyza 18.6%</option>
+                    <option value="diesel">6.5L Diesel — akcyza 18.6%</option>
+                    <option value="pickup">Pickup CN 8704 — akcyza 0%</option>
+                  </select>
+                </div>
+                <div>
+                  <label className="text-xs text-neutral-500 block mb-1">Transport</label>
+                  <select value={importTransport} onChange={(e) => setImportTransport(e.target.value)}
+                    className="w-full bg-neutral-900 border border-white/10 px-3 py-2 text-sm">
+                    <option value="roro">RoRo (najtańszy) — 4000 PLN</option>
+                    <option value="kontener">Kontener 20ft — 6000 PLN</option>
+                    <option value="kontener40">Kontener 40ft — 8000 PLN</option>
                   </select>
                 </div>
               </div>
               {(() => {
-                const clo = importPrice * 0.10;
+                const auctionFee = importSource === 'copart' ? importPrice * 0.10 : importSource === 'iaai' ? importPrice * 0.12 : importSource === 'manheim' ? importPrice * 0.08 : 0;
+                const transport = importTransport === 'roro' ? 4000 : importTransport === 'kontener' ? 6000 : 8000;
+                const insurance = importPrice * 0.015;
+                const cif = importPrice + auctionFee + transport + insurance;
+                const clo = cif * 0.10;
                 const akcyzaRate = importEngine === 'v6' ? 0.031 : importEngine === 'pickup' ? 0 : 0.186;
-                const akcyza = (importPrice + clo) * akcyzaRate;
-                const vat = (importPrice + clo + akcyza) * 0.23;
-                const total = importPrice + clo + akcyza + vat;
+                const akcyza = (cif + clo) * akcyzaRate;
+                const vat = (cif + clo + akcyza) * 0.23;
+                const adaptacja = 3000;
+                const total = cif + clo + akcyza + vat + adaptacja;
                 return (
-                  <div className="grid sm:grid-cols-2 gap-2 text-sm">
+                  <div className="space-y-2 text-sm">
+                    <div className="flex justify-between"><span className="text-neutral-400">Cena wylicytowana:</span><span>{importPrice.toFixed(0)} PLN</span></div>
+                    <div className="flex justify-between"><span className="text-neutral-400">Opłata aukcyjna:</span><span>{auctionFee.toFixed(0)} PLN</span></div>
+                    <div className="flex justify-between"><span className="text-neutral-400">Transport:</span><span>{transport} PLN</span></div>
+                    <div className="flex justify-between"><span className="text-neutral-400">Ubezpieczenie:</span><span>{insurance.toFixed(0)} PLN</span></div>
+                    <div className="flex justify-between border-t border-white/10 pt-2"><span className="text-neutral-400">Wartość CIF:</span><span>{cif.toFixed(0)} PLN</span></div>
                     <div className="flex justify-between"><span className="text-neutral-400">Cło 10%:</span><span>{clo.toFixed(0)} PLN</span></div>
                     <div className="flex justify-between"><span className="text-neutral-400">Akcyza {(akcyzaRate*100).toFixed(1)}%:</span><span>{akcyza.toFixed(0)} PLN</span></div>
                     <div className="flex justify-between"><span className="text-neutral-400">VAT 23%:</span><span>{vat.toFixed(0)} PLN</span></div>
-                    <div className="flex justify-between font-bold text-amber-400"><span>RAZEM:</span><span>{total.toFixed(0)} PLN</span></div>
+                    <div className="flex justify-between"><span className="text-neutral-400">Przystosowanie:</span><span>{adaptacja} PLN</span></div>
+                    <div className="flex justify-between font-bold text-amber-400 text-lg border-t border-amber-400/30 pt-2"><span>RAZEM W POLSCE:</span><span>{total.toFixed(0)} PLN</span></div>
                   </div>
                 );
               })()}
