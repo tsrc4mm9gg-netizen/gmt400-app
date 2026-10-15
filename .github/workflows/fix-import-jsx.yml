@@ -1,4 +1,4 @@
-name: Prepare validated JSX structure fix
+name: Diagnose fixed application build
 on:
   push:
     branches: [seo-sitemap-robots]
@@ -6,39 +6,38 @@ on:
 permissions:
   contents: write
 jobs:
-  prepare-fix:
+  build-report:
     runs-on: ubuntu-latest
-    timeout-minutes: 3
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: fc77794d43d7dfd728151802d7f2871823fdc1ba
-      - name: Apply minimal fixes and validate parser
+          ref: fabea2eab55ce195d5df37dcc46241e65151ff50
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Build without Vercel secrets and publish report
         shell: bash
+        env:
+          NEXT_TELEMETRY_DISABLED: '1'
         run: |
-          set -euo pipefail
-          git switch -c fix-main-jsx-structure
-          npm install --prefix /tmp/gmt400-parser --ignore-scripts --no-audit --no-fund typescript@5
-          node <<'JS'
-          const fs = require('fs');
-          const ts = require('/tmp/gmt400-parser/node_modules/typescript');
-          const path = 'src/app/page.tsx';
-          let text = fs.readFileSync(path, 'utf8');
-          const old = '            <div className="bg-neutral-950 border border-white/10 p-4">\n              <div className="bg-neutral-950 border border-white/10 p-4 mb-4">\n              <h3 className="font-semibold text-amber-400 mb-2">11. TEST POMPY PALIWA</h3>';
-          const replacement = '            <div className="bg-neutral-950 border border-white/10 p-4 mb-4">\n              <h3 className="font-semibold text-amber-400 mb-2">11. TEST POMPY PALIWA</h3>';
-          if (text.split(old).length !== 2) throw new Error('Expected unique extra container; stopping');
-          if (!text.trimEnd().endsWith(');')) throw new Error('Unexpected component ending; stopping');
-          text = text.replace(old, replacement).trimEnd() + '\n}\n';
-          const source = ts.createSourceFile(path, text, ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX);
-          for (const d of source.parseDiagnostics) console.log(ts.flattenDiagnosticMessageText(d.messageText, '\n'));
-          if (source.parseDiagnostics.length) throw new Error('Parser validation failed; no file written');
-          fs.writeFileSync(path, text, 'utf8');
-          console.log('Parser validation passed: 0 syntax errors');
-          JS
-          git diff --check
-          git diff -- src/app/page.tsx
+          set -uo pipefail
+          git switch -c diagnose-fixed-build || exit 1
+          printf 'Source commit: ' > /tmp/gmt400-build.log
+          git rev-parse HEAD >> /tmp/gmt400-build.log
+          npm install --no-audit --no-fund >> /tmp/gmt400-build.log 2>&1
+          install_status=$?
+          printf '\nINSTALL_EXIT_CODE=%s\n' "$install_status" >> /tmp/gmt400-build.log
+          if [ "$install_status" -eq 0 ]; then
+            npm run build >> /tmp/gmt400-build.log 2>&1
+            build_status=$?
+            printf '\nBUILD_EXIT_CODE=%s\n' "$build_status" >> /tmp/gmt400-build.log
+          fi
+          set -e
+          mkdir -p .diagnostics
+          tail -c 18000 /tmp/gmt400-build.log > .diagnostics/build.txt
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add src/app/page.tsx
-          git commit -m 'Fix extra Tips container and close Home function'
-          git push origin HEAD:refs/heads/fix-main-jsx-structure
+          git add .diagnostics/build.txt
+          git commit -m 'Record full build result for JSX fix'
+          git push origin HEAD:refs/heads/diagnose-fixed-build
