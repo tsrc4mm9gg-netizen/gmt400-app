@@ -80,6 +80,8 @@ export default function Home() {
   const [schemaQuery, setSchemaQuery] = useState('');
   const [vinInput, setVinInput] = useState('');
   const [vinResult, setVinResult] = useState<Record<string, string> | null>(null);
+  const [partsFilter, setPartsFilter] = useState('wszystkie');
+  const [partsQuery, setPartsQuery] = useState('');
   const [selectedEngine, setSelectedEngine] = useState('');
 
   useEffect(() => {
@@ -700,12 +702,53 @@ export default function Home() {
 
         {tab === 'czesci' && (
           <div>
-            <h2 className="text-2xl mb-6" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>BAZA CZĘŚCI</h2>
-            <div className="bg-neutral-950 border border-white/10 p-4">
-              {filteredTips.filter(t => t.Nazwa.toLowerCase().includes('części') || t.Nazwa.toLowerCase().includes('numer') || t.Nazwa.toLowerCase().includes('filtr')).map((t, idx) => (
-                <div key={idx} className="mb-4 pb-4 border-b border-white/10 last:border-0">
-                  <h3 className="font-semibold mb-2">{t.Nazwa}</h3>
-                  <p className="text-neutral-300 text-sm whitespace-pre-line">{t.Rozwiązanie}</p>
+            <h2 className="text-2xl mb-6" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>BAZA CZĘŚCI OEM</h2>
+            
+            <input 
+              type="text" 
+              placeholder="Szukaj części (np. filtr, świece, pompa)..." 
+              value={partsQuery}
+              onChange={(e) => setPartsQuery(e.target.value)}
+              className="w-full bg-neutral-900 border border-white/10 px-4 py-3 text-sm focus:outline-none focus:border-amber-400 mb-4"
+            />
+            
+            <div className="flex flex-wrap gap-2 mb-6">
+              {['wszystkie', 'filtry', 'silnik', 'skrzynia', 'hamulce', 'zawieszenie'].map(f => (
+                <button key={f} onClick={() => setPartsFilter(f)}
+                  className={`px-3 py-1 text-sm ${partsFilter === f ? 'bg-amber-400 text-black' : 'bg-neutral-800 hover:bg-neutral-700'}`}>
+                  {f.charAt(0).toUpperCase() + f.slice(1)}
+                </button>
+              ))}
+            </div>
+
+            <div className="space-y-3">
+              {[
+                { kat: 'filtry', nazwa: 'Filtr oleju 5.7L', oem: 'AC Delco PF1218', opis: 'Filtr oleju silnikowego dla 5.0/5.7/7.4L V8', model: 'Wszystkie V8' },
+                { kat: 'filtry', nazwa: 'Filtr oleju 4.3L', oem: 'AC Delco PF47', opis: 'Filtr oleju silnikowego dla 4.3L V6', model: 'C/K 1500' },
+                { kat: 'filtry', nazwa: 'Filtr powietrza', oem: 'AC Delco A1163C', opis: 'Filtr powietrza silnika', model: 'Wszystkie' },
+                { kat: 'filtry', nazwa: 'Filtr paliwa', oem: 'AC Delco GF626', opis: 'Filtr paliwa w linii', model: 'Wszystkie' },
+                { kat: 'filtry', nazwa: 'Filtr ATF 4L60E', oem: 'AC Delco TF289', opis: 'Filtr oleju skrzyni biegów', model: 'Wszystkie' },
+                { kat: 'silnik', nazwa: 'Świece zapłonowe 5.7L', oem: 'AC Delco 41-932', opis: 'Świece irydowe, gap 1.5mm', model: 'Wszystkie V8' },
+                { kat: 'silnik', nazwa: 'Termostat', oem: 'AC Delco 131-113', opis: 'Termostat 195°F (91°C)', model: 'Wszystkie' },
+                { kat: 'silnik', nazwa: 'Pompa wody', oem: 'AC Delco 252-611', opis: 'Pompa wody silnika', model: 'Wszystkie V8' },
+                { kat: 'silnik', nazwa: 'Czujnik MAF', oem: 'AC Delco 213-252', opis: 'Czujnik przepływu powietrza', model: '1996-2000' },
+                { kat: 'silnik', nazwa: 'Czujnik O2', oem: 'AC Delco 213-1555', opis: 'Sonda lambda', model: 'Wszystkie' },
+                { kat: 'skrzynia', nazwa: 'Uszczelka miski 4L60E', oem: 'Fel-Pro TOS18722', opis: 'Uszczelka miski oleju skrzyni', model: 'Wszystkie' },
+                { kat: 'skrzynia', nazwa: 'Solenoid 4L60E', oem: 'AC Delco 24230298', opis: 'Solenoid zmiany biegów', model: 'Wszystkie' },
+                { kat: 'hamulce', nazwa: 'Klocki hamulcowe przód', oem: 'AC Delco 17D473CH', opis: 'Klocki hamulcowe przednie', model: '1500' },
+                { kat: 'hamulce', nazwa: 'Tarcze hamulcowe przód', oem: 'AC Delco 18A2491', opis: 'Tarcze hamulcowe przednie', model: '1500' },
+                { kat: 'hamulce', nazwa: 'Cylinderki hamulcowe', oem: 'AC Delco 18E660', opis: 'Cylinderki bębnów tylnych', model: '1500' },
+                { kat: 'zawieszenie', nazwa: 'Amortyzatory przód', oem: 'AC Delco 504-1079', opis: 'Amortyzatory przednie', model: '1500' },
+                { kat: 'zawieszenie', nazwa: 'Amortyzatory tył', oem: 'AC Delco 504-1080', opis: 'Amortyzatory tylne', model: '1500' },
+                { kat: 'zawieszenie', nazwa: 'Końcówki drążków', oem: 'AC Delco 45A0526', opis: 'Końcówki drążków kierowniczych', model: 'Wszystkie' },
+              ].filter(p => (partsFilter === 'wszystkie' || p.kat === partsFilter) && (!partsQuery || p.nazwa.toLowerCase().includes(partsQuery.toLowerCase()) || p.oem.toLowerCase().includes(partsQuery.toLowerCase()))).map((p, idx) => (
+                <div key={idx} className="bg-neutral-950 border border-white/10 p-4">
+                  <div className="flex justify-between items-start mb-2">
+                    <h3 className="font-semibold">{p.nazwa}</h3>
+                    <span className="text-xs bg-amber-400 text-black px-2 py-0.5">{p.oem}</span>
+                  </div>
+                  <p className="text-neutral-400 text-sm mb-1">{p.opis}</p>
+                  <p className="text-neutral-500 text-xs">Model: {p.model}</p>
                 </div>
               ))}
             </div>
