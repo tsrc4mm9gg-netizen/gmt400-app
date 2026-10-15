@@ -304,7 +304,7 @@ export default function Home() {
                     <div className="p-4">
                       <h3 className="font-semibold text-lg mb-1" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>{m.Nazwa}</h3>
                       <p className="text-amber-400 text-sm mb-2">{m.Lata} • {m.Model}</p>
-                      <p className={`text-neutral-400 text-sm leading-relaxed ${expanded === idx ? '' : 'line-clamp-4'}`}>{m.Opis}</p>
+                      <p className={`text-neutral-400 text-sm leading-relaxed whitespace-pre-line ${expanded === idx ? '' : 'line-clamp-6'}`}>{m.Opis}</p>
                       <div className="flex gap-3 mt-3">
                         <button onClick={() => setExpanded(expanded === idx ? null : idx)} className="text-amber-400 text-sm">
                           {expanded === idx ? 'Zwiń' : 'Czytaj więcej'}
