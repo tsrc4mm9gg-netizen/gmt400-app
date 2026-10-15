@@ -1,0 +1,164 @@
+Source commit: fc77794d43d7dfd728151802d7f2871823fdc1ba
+Parse errors: 5
+ERROR 1637 10 Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+1617:             <div className="bg-neutral-950 border border-white/10 p-4 mb-4">
+1618:               <h3 className="font-semibold text-amber-400 mb-2">13. 4x4 — PRAWIDLOWE PRZELACZANIE</h3>
+1619:               <ul className="text-sm text-neutral-300 space-y-1">
+1620:                 <li>4HI — mozna w trakcie jazdy (do 80 km/h)</li>
+1621:                 <li>4LO — tylko na postoju, skrzynia w N</li>
+1622:                 <li>Przesun dzwignie jednym plynny ruchem</li>
+1623:               </ul>
+1624:             </div>
+1625:             <div className="bg-neutral-950 border border-white/10 p-4">
+1626:               <h3 className="font-semibold text-amber-400 mb-2">6. RESET ADAPTACJI SKRZYNI 4L60E</h3>
+1627:               <p className="text-sm text-neutral-300 mb-2">Po wymianie ATF skrzynia "uczy się" od nowa.</p>
+1628:               <ol className="text-sm text-neutral-300 space-y-1 list-decimal list-inside">
+1629:                 <li>Odłącz akumulator na 30 minut</li>
+1630:                 <li>Podłącz i uruchom silnik</li>
+1631:                 <li>Przełącz wszystkie biegi po 5 sekund</li>
+1632:                 <li>Przejedź 50 km w różnych warunkach</li>
+1633:               </ol>
+1634:               <p className="text-xs text-neutral-500 mt-2">Poprawia jakość zmiany biegów</p>
+1635:             </div>
+1636:           </div>
+1637:         )}
+1638: 
+1639:         {tab === 'kalkulator' && (
+1640:           <div>
+1641:             <div className="flex items-center justify-between mb-6">
+1642:               <h2 className="text-2xl" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>KALKULATOR KOSZTÓW NAPRAWY</h2>
+1643:               <button onClick={() => shareSection('kalkulator')} className="text-neutral-400 hover:text-amber-400 text-sm">Udostępnij</button>
+1644:             </div>
+1645:             <div className="bg-neutral-950 border border-white/10 p-4 mb-4">
+ERROR 1475 11 JSX expressions must have one parent element.
+1455:                 <li><strong>Badanie techniczne</strong> — 149 PLN (z LPG 245 PLN)</li>
+1456:                 <li><strong>Rejestracja</strong> — wydział komunikacji (160-250 PLN)</li>
+1457:               </ol>
+1458:             </div>
+1459: 
+1460:             <div className="bg-neutral-950 border border-white/10 p-4">
+1461:               <h3 className="font-semibold text-amber-400 mb-3">TIPSY Z FORÓW</h3>
+1462:               <ul className="text-sm text-neutral-300 space-y-2">
+1463:                 <li>• <strong>Pickup = 0% akcyza</strong> — jeśli sklasyfikowany jako CN 8704 (ciężarowy)</li>
+1464:                 <li>• <strong>Homologacja nie wymagana</strong> — dla używanych aut z title wystarczy przystosowanie</li>
+1465:                 <li>• <strong>Światła</strong> — wymiana na ECE lub naklejki korekcyjne</li>
+1466:                 <li>• <strong>Prędkościomierz</strong> — wymiana skali lub przeprogramowanie</li>
+1467:                 <li>• <strong>LPG</strong> — instalacja 3000-6000 PLN, oszczędność ~40% na paliwie</li>
+1468:                 <li>• <strong>Mienie przesiedleńcze</strong> — 0% cło/VAT/akcyza przy 12 mies. pobytu w USA</li>
+1469:               </ul>
+1470:             </div>
+1471:           </div>
+1472:         )}
+1473: 
+1474:         {tab === 'tips' && (
+1475:           <div>
+1476:             <h2 className="text-2xl mb-6" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>TIPS & TRICKS</h2>
+1477:             
+1478:             <div className="bg-neutral-950 border border-white/10 overflow-hidden mb-4">
+1479:               <img loading="lazy" src="/tip-obd.jpg" alt="OBD1" className="w-full h-48 object-cover cursor-pointer" onClick={() => setLightbox('/tip-obd.jpg')} />
+1480:               <div className="p-4">
+1481:                 <h3 className="font-semibold text-amber-400 mb-2">1. KODY OBD-I BEZ SKANERA (1988-1995)</h3>
+1482:                 <p className="text-sm text-neutral-300 mb-2">Odczytaj kody błędów spinaczem — bez skanera!</p>
+1483:                 <ol className="text-sm text-neutral-300 space-y-1 list-decimal list-inside">
+ERROR 1922 5 ')' expected.
+1902:               <p className="text-neutral-300 mb-4">Platforma GMT400 była produkowana w latach 1988–2000.</p>
+1903:               <div className="space-y-2 text-sm text-neutral-400">
+1904:                 <p><span className="text-amber-400">1988:</span> Debiut C/K 1500/2500/3500</p>
+1905:                 <p><span className="text-amber-400">1992:</span> Suburban na platformie GMT400</p>
+1906:                 <p><span className="text-amber-400">1995:</span> Debiut Tahoe i Yukon</p>
+1907:                 <p><span className="text-amber-400">1996:</span> Wprowadzenie silników Vortec</p>
+1908:                 <p><span className="text-amber-400">1999:</span> Ostatni rok Tahoe 2-drzwi</p>
+1909:                 <p><span className="text-amber-400">2000:</span> Koniec produkcji</p>
+1910:               </div>
+1911:             </div>
+1912:           </div>
+1913:         )}
+1914:       </div>
+1915: 
+1916:       <footer className="border-t border-white/10 py-8">
+1917:         <div className="max-w-7xl mx-auto px-4 flex justify-between items-center">
+1918:           <div className="font-bold tracking-wider" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>GMT<span className="text-amber-400">400</span></div>
+1919:           <div className="text-neutral-500 text-xs">gmt400.pl</div>
+1920:         </div>
+1921:       </footer>
+1922:     </div>
+1923:   );
+1924: 
+ERROR 281 6 JSX element 'div' has no corresponding closing tag.
+261:   }, [tips, query, selectedModel]);
+262: 
+263:   const selectModel = (model: string, item?: Item) => {
+264:     setSelectedModel(model);
+265:     setSelectedModelItem(item || null);
+266:     setTab('modele');
+267:     setTimeout(() => document.getElementById('content')?.scrollIntoView({ behavior: 'smooth' }), 100);
+268:   };
+269: 
+270:   if (loading) {
+271:     return (
+272:       <div className="min-h-screen bg-black text-white flex flex-col items-center justify-center gap-4">
+273:         <div className="text-4xl font-bold tracking-widest" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>GMT400</div>
+274:         <div className="w-8 h-8 border-2 border-amber-400 border-t-transparent rounded-full animate-spin"></div>
+275:         <p className="text-sm text-neutral-500">Ładowanie...</p>
+276:       </div>
+277:     );
+278:   }
+279: 
+280:   return (
+281:     <div className="min-h-screen bg-black text-white" style={{ paddingBottom: "env(safe-area-inset-bottom)" }}>
+282:       <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+283:       <meta name="apple-mobile-web-app-capable" content="yes" />
+284:       <meta name="mobile-web-app-capable" content="yes" />
+285:       <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+286:       <link rel="manifest" href="/manifest.json" />
+287:       <script type="application/ld+json" dangerouslySetInnerHTML={{__html: JSON.stringify({
+288:         "@context": "https://schema.org",
+289:         "@type": "WebSite",
+ERROR 1924 1 '</' expected.
+1904:                 <p><span className="text-amber-400">1988:</span> Debiut C/K 1500/2500/3500</p>
+1905:                 <p><span className="text-amber-400">1992:</span> Suburban na platformie GMT400</p>
+1906:                 <p><span className="text-amber-400">1995:</span> Debiut Tahoe i Yukon</p>
+1907:                 <p><span className="text-amber-400">1996:</span> Wprowadzenie silników Vortec</p>
+1908:                 <p><span className="text-amber-400">1999:</span> Ostatni rok Tahoe 2-drzwi</p>
+1909:                 <p><span className="text-amber-400">2000:</span> Koniec produkcji</p>
+1910:               </div>
+1911:             </div>
+1912:           </div>
+1913:         )}
+1914:       </div>
+1915: 
+1916:       <footer className="border-t border-white/10 py-8">
+1917:         <div className="max-w-7xl mx-auto px-4 flex justify-between items-center">
+1918:           <div className="font-bold tracking-wider" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>GMT<span className="text-amber-400">400</span></div>
+1919:           <div className="text-neutral-500 text-xs">gmt400.pl</div>
+1920:         </div>
+1921:       </footer>
+1922:     </div>
+1923:   );
+1924: 
+COMPONENT END
+1900:             <h2 className="text-2xl mb-6" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>HISTORIA GMT400</h2>
+1901:             <div className="bg-neutral-950 border border-white/10 p-6">
+1902:               <p className="text-neutral-300 mb-4">Platforma GMT400 była produkowana w latach 1988–2000.</p>
+1903:               <div className="space-y-2 text-sm text-neutral-400">
+1904:                 <p><span className="text-amber-400">1988:</span> Debiut C/K 1500/2500/3500</p>
+1905:                 <p><span className="text-amber-400">1992:</span> Suburban na platformie GMT400</p>
+1906:                 <p><span className="text-amber-400">1995:</span> Debiut Tahoe i Yukon</p>
+1907:                 <p><span className="text-amber-400">1996:</span> Wprowadzenie silników Vortec</p>
+1908:                 <p><span className="text-amber-400">1999:</span> Ostatni rok Tahoe 2-drzwi</p>
+1909:                 <p><span className="text-amber-400">2000:</span> Koniec produkcji</p>
+1910:               </div>
+1911:             </div>
+1912:           </div>
+1913:         )}
+1914:       </div>
+1915: 
+1916:       <footer className="border-t border-white/10 py-8">
+1917:         <div className="max-w-7xl mx-auto px-4 flex justify-between items-center">
+1918:           <div className="font-bold tracking-wider" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>GMT<span className="text-amber-400">400</span></div>
+1919:           <div className="text-neutral-500 text-xs">gmt400.pl</div>
+1920:         </div>
+1921:       </footer>
+1922:     </div>
+1923:   );
+1924: 
