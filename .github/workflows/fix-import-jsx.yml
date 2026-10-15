@@ -24,14 +24,19 @@ jobs:
           text = p.read_text(encoding='utf-8')
           old = 'Osobowy >2000cm³'
           new = 'Osobowy &gt;2000cm³'
-          if text.count(old) != 1:
-              raise SystemExit('Expected exactly one match; no files changed')
-          p.write_text(text.replace(old, new, 1), encoding='utf-8')
+          count = text.count(old)
+          print(f'Exact matches: {count}')
+          if count == 0:
+              for number, line in enumerate(text.splitlines(), 1):
+                  if '2000' in line:
+                      print(f'{number}: {line}')
+              raise SystemExit('No exact matches; no files changed')
+          p.write_text(text.replace(old, new), encoding='utf-8')
           PY
           git diff --check
           git diff -- src/app/page.tsx
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add src/app/page.tsx
-          git commit -m 'Fix unescaped greater-than sign in import table'
+          git commit -m 'Fix unescaped greater-than signs in import table'
           git push origin HEAD:refs/heads/fix-import-jsx-threshold
