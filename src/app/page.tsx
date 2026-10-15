@@ -26,6 +26,7 @@ const CATEGORIES = [
   { id: 'tuning', label: 'Tuning' },
   { id: 'import', label: 'Import' },
   { id: 'historia', label: 'Historia' },
+    { id: 'tips', label: 'Tips' },
 ];
 
 function getModelImage(nazwa: string): string | null {
@@ -1250,6 +1251,90 @@ export default function Home() {
                 <li>• <strong>LPG</strong> — instalacja 3000-6000 PLN, oszczędność ~40% na paliwie</li>
                 <li>• <strong>Mienie przesiedleńcze</strong> — 0% cło/VAT/akcyza przy 12 mies. pobytu w USA</li>
               </ul>
+            </div>
+          </div>
+        )}
+
+        {tab === 'tips' && (
+          <div>
+            <h2 className="text-2xl mb-6" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>TIPS & TRICKS</h2>
+            
+            <div className="bg-neutral-950 border border-white/10 overflow-hidden mb-4">
+              <img src="/tip-obd.jpg" alt="OBD1" className="w-full h-48 object-cover cursor-pointer" onClick={() => setLightbox('/tip-obd.jpg')} />
+              <div className="p-4">
+                <h3 className="font-semibold text-amber-400 mb-2">1. KODY OBD-I BEZ SKANERA (1988-1995)</h3>
+                <p className="text-sm text-neutral-300 mb-2">Odczytaj kody błędów spinaczem — bez skanera!</p>
+                <ol className="text-sm text-neutral-300 space-y-1 list-decimal list-inside">
+                  <li>Znajdź złącze ALDL pod deską (12-pin)</li>
+                  <li>Zewrzyj piny A i B spinaczem</li>
+                  <li>Włącz zapłon (nie uruchamiaj silnika)</li>
+                  <li>Licz mignięcia kontrolki Check Engine</li>
+                </ol>
+                <p className="text-xs text-neutral-500 mt-2">Kod 12 = system OK. 1 mignięcie + pauza + 2 = kod 12</p>
+              </div>
+            </div>
+
+            <div className="bg-neutral-950 border border-white/10 overflow-hidden mb-4">
+              <img src="/tip-torsion.jpg" alt="Torsion" className="w-full h-48 object-cover cursor-pointer" onClick={() => setLightbox('/tip-torsion.jpg')} />
+              <div className="p-4">
+                <h3 className="font-semibold text-amber-400 mb-2">2. POZIOMOWANIE 4x4 (TORSION CRANK)</h3>
+                <p className="text-sm text-neutral-300 mb-2">Podnieś przód o 1-2" bez kitów — fabryczne torsion bars.</p>
+                <ol className="text-sm text-neutral-300 space-y-1 list-decimal list-inside">
+                  <li>Znajdź śruby regulacyjne przy krzyżownicy (18mm)</li>
+                  <li>Kręć zgodnie z ruchem wskazówek = wyżej</li>
+                  <li>2-3 obroty = ~1" wysokości</li>
+                  <li>Kręć równo po obu stronach</li>
+                  <li>Zrób geometrię po regulacji</li>
+                </ol>
+                <p className="text-xs text-neutral-500 mt-2">Max 2" — więcej = zużycie części i twarda jazda</p>
+              </div>
+            </div>
+
+            <div className="bg-neutral-950 border border-white/10 p-4 mb-4">
+              <h3 className="font-semibold text-amber-400 mb-2">3. SPRAWDŹ PRZEŁOŻENIE OSI BEZ ROZBIERANIA</h3>
+              <p className="text-sm text-neutral-300 mb-2">Metoda "spin test" — bez demontażu dyferencjału.</p>
+              <ol className="text-sm text-neutral-300 space-y-1 list-decimal list-inside">
+                <li>Podnieś tył na kobyłkach</li>
+                <li>Zaznacz kredą wał i oponę</li>
+                <li>Obróć oponę o 1 pełny obrót</li>
+                <li>Policz obroty wału napędowego</li>
+              </ol>
+              <div className="text-xs text-neutral-500 mt-2">
+                <p>~3.4 obrotu = 3.42 | ~3.7 = 3.73 | ~4.1 = 4.10</p>
+              </div>
+            </div>
+
+            <div className="bg-neutral-950 border border-white/10 p-4 mb-4">
+              <h3 className="font-semibold text-amber-400 mb-2">4. UKRYTY KLUCZ POD ZDERZAKIEM</h3>
+              <p className="text-sm text-neutral-300 mb-2">Niektóre GMT400 mają schowek na klucz awaryjny.</p>
+              <ul className="text-sm text-neutral-300 space-y-1">
+                <li>• Sprawdź pod przednim zderzakiem przy ramie</li>
+                <li>• Często przywiązany drutem do wspornika</li>
+                <li>• Otwiera tylko drzwi, nie zapłon</li>
+              </ul>
+            </div>
+
+            <div className="bg-neutral-950 border border-white/10 p-4 mb-4">
+              <h3 className="font-semibold text-amber-400 mb-2">5. KODY RPO W SCHOWKU</h3>
+              <p className="text-sm text-neutral-300 mb-2">Naklejka w schowku zawiera wszystkie opcje fabryczne.</p>
+              <div className="text-sm text-neutral-300">
+                <p className="mb-1"><strong>Przełożenia:</strong></p>
+                <p>GU6 = 3.42 | GT4 = 3.73 | GT5 = 4.10 | HC4 = 4.56</p>
+                <p className="mt-2 mb-1"><strong>Silniki:</strong></p>
+                <p>L35 = 4.3L | L30 = 5.0L | L31 = 5.7L Vortec</p>
+              </div>
+            </div>
+
+            <div className="bg-neutral-950 border border-white/10 p-4">
+              <h3 className="font-semibold text-amber-400 mb-2">6. RESET ADAPTACJI SKRZYNI 4L60E</h3>
+              <p className="text-sm text-neutral-300 mb-2">Po wymianie ATF skrzynia "uczy się" od nowa.</p>
+              <ol className="text-sm text-neutral-300 space-y-1 list-decimal list-inside">
+                <li>Odłącz akumulator na 30 minut</li>
+                <li>Podłącz i uruchom silnik</li>
+                <li>Przełącz wszystkie biegi po 5 sekund</li>
+                <li>Przejedź 50 km w różnych warunkach</li>
+              </ol>
+              <p className="text-xs text-neutral-500 mt-2">Poprawia jakość zmiany biegów</p>
             </div>
           </div>
         )}
