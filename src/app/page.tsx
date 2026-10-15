@@ -70,6 +70,7 @@ function getTipImage(nazwa: string): string | null {
 
 export default function Home() {
   const [items, setItems] = useState<Item[]>([]);
+  const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [query, setQuery] = useState('');
   const [tab, setTab] = useState(() => {
@@ -255,6 +256,14 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-black text-white">
       <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+      <link rel="manifest" href="/manifest.json" />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{__html: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "GMT400.pl",
+        "description": "Encyklopedia Chevrolet/GMC GMT400 1988-2000",
+        "url": "https://gmt400.pl"
+      })}} />
       
       {lightbox && (
         <div className="fixed inset-0 bg-black/95 z-[100] flex items-center justify-center p-4" onClick={() => setLightbox(null)}>
