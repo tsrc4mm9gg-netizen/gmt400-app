@@ -950,6 +950,12 @@ export default function Home() {
                   <tr className="border-b border-white/5"><td className="p-3">Płyn wspomagania</td><td className="p-3">50 tys. km</td><td className="p-3">ATF Dexron</td><td className="p-3 text-amber-400">—</td></tr>
                   <tr className="border-b border-white/5"><td className="p-3">Filtr PCV</td><td className="p-3">50 tys. km</td><td className="p-3">AC Delco</td><td className="p-3 text-amber-400">CV917C</td></tr>
                   <tr><td className="p-3">Pasek rozrządu</td><td className="p-3">100 tys. km</td><td className="p-3">Gates</td><td className="p-3 text-amber-400">—</td></tr>
+                  <tr className="border-b border-white/5"><td className="p-3">Olej silnikowy 4.3L</td><td className="p-3">5-8 tys. km</td><td className="p-3">4.3 L 5W-30</td><td className="p-3 text-amber-400">PF47</td></tr>
+                  <tr className="border-b border-white/5"><td className="p-3">Olej silnikowy 5.7L</td><td className="p-3">5-8 tys. km</td><td className="p-3">4.7 L 5W-30</td><td className="p-3 text-amber-400">PF1218</td></tr>
+                  <tr className="border-b border-white/5"><td className="p-3">Olej silnikowy 7.4L</td><td className="p-3">5-8 tys. km</td><td className="p-3">5.7 L 10W-30</td><td className="p-3 text-amber-400">PF1218</td></tr>
+                  <tr className="border-b border-white/5"><td className="p-3">Olej silnikowy 6.5L</td><td className="p-3">5-8 tys. km</td><td className="p-3">6.6 L 15W-40</td><td className="p-3 text-amber-400">PF1218</td></tr>
+                  <tr className="border-b border-white/5"><td className="p-3">ATF 4L80E</td><td className="p-3">50 tys. km</td><td className="p-3">6.5 L Dexron VI</td><td className="p-3 text-amber-400">—</td></tr>
+                  <tr><td className="p-3">Olej NP241</td><td className="p-3">50 tys. km</td><td className="p-3">2.0 L ATF</td><td className="p-3 text-amber-400">—</td></tr>
                 </tbody>
               </table>
             </div>
