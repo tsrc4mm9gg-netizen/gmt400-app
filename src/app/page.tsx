@@ -78,6 +78,8 @@ export default function Home() {
   const [codeQuery, setCodeQuery] = useState('');
   const [diyQuery, setDiyQuery] = useState('');
   const [schemaQuery, setSchemaQuery] = useState('');
+  const [vinInput, setVinInput] = useState('');
+  const [vinResult, setVinResult] = useState<Record<string, string> | null>(null);
   const [selectedEngine, setSelectedEngine] = useState('');
 
   useEffect(() => {
@@ -531,14 +533,72 @@ export default function Home() {
 
         {tab === 'vin' && (
           <div>
-            <h2 className="text-2xl mb-6" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>DEKODER VIN / RPO</h2>
-            <div className="bg-neutral-950 border border-white/10 p-4">
-              {filteredTips.filter(t => t.Nazwa.toLowerCase().includes('vin') || t.Nazwa.toLowerCase().includes('rpo')).map((t, idx) => (
-                <div key={idx} className="mb-4 pb-4 border-b border-white/10 last:border-0">
-                  <h3 className="font-semibold mb-2">{t.Nazwa}</h3>
-                  <p className="text-neutral-300 text-sm whitespace-pre-line">{t.Rozwiązanie}</p>
+            <h2 className="text-2xl mb-6" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>DEKODER VIN</h2>
+            <div className="bg-neutral-950 border border-white/10 p-4 mb-6">
+              <input 
+                type="text" 
+                placeholder="Wpisz 17-znakowy VIN..." 
+                value={vinInput}
+                onChange={(e) => setVinInput(e.target.value.toUpperCase())}
+                maxLength={17}
+                className="w-full bg-neutral-900 border border-white/10 px-4 py-3 text-lg font-mono tracking-wider focus:outline-none focus:border-amber-400 mb-4"
+              />
+              <button 
+                onClick={() => {
+                  if (vinInput.length === 17) {
+                    const yearCodes: Record<string, string> = { 'J': '1988', 'K': '1989', 'L': '1990', 'M': '1991', 'N': '1992', 'P': '1993', 'R': '1994', 'S': '1995', 'T': '1996', 'V': '1997', 'W': '1998', 'X': '1999', 'Y': '2000' };
+                    const engineCodes: Record<string, string> = { 'Z': '4.3L V6 TBI', 'H': '5.0L V8 TBI', 'K': '5.7L V8 TBI', 'R': '5.7L Vortec V8', 'N': '7.4L V8', 'F': '6.5L Diesel', 'S': '6.5L Turbodiesel', 'C': '4.3L V6 CPI', 'W': '4.3L V6 Vortec' };
+                    const plantCodes: Record<string, string> = { '1': 'Oshawa, Kanada', 'Z': 'Fort Wayne, Indiana', 'E': 'Pontiac, Michigan', 'J': 'Janesville, Wisconsin', 'G': 'Flint, Michigan' };
+                    const modelCodes: Record<string, string> = { 'C': 'C/K 1500', 'K': 'K1500 4x4', 'V': 'C/K 2500', 'R': 'C/K 3500', 'S': 'Suburban', 'T': 'Tahoe' };
+                    const result: Record<string, string> = {
+                      'VIN': vinInput,
+                      'Kraj': vinInput[0] === '1' ? 'USA' : vinInput[0] === '2' ? 'Kanada' : 'Inny',
+                      'Producent': vinInput[1] === 'G' ? 'General Motors' : 'Inny',
+                      'Rok': yearCodes[vinInput[9]] || 'Nieznany',
+                      'Silnik': engineCodes[vinInput[7]] || 'Nieznany (' + vinInput[7] + ')',
+                      'Fabryka': plantCodes[vinInput[10]] || 'Nieznana',
+                      'Numer seryjny': vinInput.slice(11),
+                      'Model': modelCodes[vinInput[4]] || 'Sprawdź tabliczkę',
+                    };
+                    setVinResult(result);
+                  }
+                }}
+                className="w-full bg-amber-400 text-black py-3 font-semibold hover:bg-amber-300 transition"
+              >
+                DEKODUJ VIN
+              </button>
+            </div>
+
+            {vinResult && (
+              <div className="bg-neutral-950 border border-amber-400/30 p-4">
+                <h3 className="text-lg font-bold text-amber-400 mb-4">Wynik dekodowania</h3>
+                <div className="grid sm:grid-cols-2 gap-3">
+                  {Object.entries(vinResult).map(([key, val]) => (
+                    <div key={key} className="flex justify-between border-b border-white/10 pb-2">
+                      <span className="text-neutral-500">{key}:</span>
+                      <span className="text-white font-medium">{val}</span>
+                    </div>
+                  ))}
                 </div>
-              ))}
+                <div className="mt-4 p-3 bg-neutral-900 text-sm text-neutral-400">
+                  <p className="mb-2"><strong className="text-white">Struktura VIN GMT400:</strong></p>
+                  <p>Poz. 1: Kraj | Poz. 2: Producent | Poz. 4-5: Model</p>
+                  <p>Poz. 8: Silnik | Poz. 10: Rok | Poz. 11: Fabryka</p>
+                  <p>Poz. 12-17: Numer seryjny</p>
+                </div>
+              </div>
+            )}
+
+            <div className="mt-6 bg-neutral-950 border border-white/10 p-4">
+              <h3 className="font-semibold text-amber-400 mb-3">Kody silników GMT400</h3>
+              <div className="grid sm:grid-cols-2 gap-2 text-sm">
+                <div className="flex justify-between"><span className="text-neutral-400">Z</span><span>4.3L V6 TBI</span></div>
+                <div className="flex justify-between"><span className="text-neutral-400">H</span><span>5.0L V8 TBI</span></div>
+                <div className="flex justify-between"><span className="text-neutral-400">K</span><span>5.7L V8 TBI</span></div>
+                <div className="flex justify-between"><span className="text-neutral-400">R</span><span>5.7L Vortec V8</span></div>
+                <div className="flex justify-between"><span className="text-neutral-400">N</span><span>7.4L V8</span></div>
+                <div className="flex justify-between"><span className="text-neutral-400">F/S</span><span>6.5L Diesel</span></div>
+              </div>
             </div>
           </div>
         )}
