@@ -29,10 +29,11 @@ function getModelImage(nazwa: string): string | null {
 
 function getTipImage(nazwa: string): string | null {
   const n = nazwa.toLowerCase();
-  if (n.includes('4l60e') && (n.includes('filtr') || n.includes('płyn') || n.includes('wymiana') || n.includes('misk'))) return '/diy-4l60e-pl.jpg';
-  if (n.includes('4l60e') || n.includes('skrzyni') || n.includes('atf')) return '/diy-4l60e-pl.jpg';
+  if (n.includes('4l60e') || n.includes('skrzyni') || n.includes('atf') || n.includes('filtr')) return '/diy-4l60e-pl.jpg';
   if (n.includes('kolektor') || n.includes('uszczelk') || n.includes('intake')) return '/diy-intake-pl.jpg';
   if (n.includes('np231') || n.includes('4x4') || n.includes('rozdzielcz')) return '/diy-np231-pl.jpg';
+  if (n.includes('chłodz') || n.includes('płyn chłod') || n.includes('termostat') || n.includes('pompa wody')) return '/diy-cooling-pl.jpg';
+  if (n.includes('hamulc') || n.includes('klock') || n.includes('tarcze') || n.includes('bęben')) return '/diy-brakes-pl.jpg';
   if (n.includes('czujnik') || n.includes('maf') || n.includes('sonda') || n.includes('lean') || n.includes('p0171')) return '/diy-sensors.jpg';
   return null;
 }
