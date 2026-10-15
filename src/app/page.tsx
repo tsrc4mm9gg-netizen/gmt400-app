@@ -1601,6 +1601,101 @@ export default function Home() {
           </div>
         )}
 
+        {tab === 'porownaj' && (
+          <div>
+            <h2 className="text-2xl mb-6" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>PORÓWNYWARKA MODELI</h2>
+            <div className="overflow-x-auto">
+              <table className="w-full text-sm">
+                <thead>
+                  <tr className="border-b border-amber-400/30">
+                    <th className="text-left p-2">Parametr</th>
+                    <th className="text-center p-2 text-amber-400">C1500</th>
+                    <th className="text-center p-2 text-amber-400">K1500</th>
+                    <th className="text-center p-2 text-amber-400">Tahoe</th>
+                    <th className="text-center p-2 text-amber-400">Suburban</th>
+                  </tr>
+                </thead>
+                <tbody className="text-neutral-300">
+                  <tr className="border-b border-white/5"><td className="p-2">Napęd</td><td className="text-center">2WD</td><td className="text-center">4WD</td><td className="text-center">2WD/4WD</td><td className="text-center">2WD/4WD</td></tr>
+                  <tr className="border-b border-white/5"><td className="p-2">Długość</td><td className="text-center">4.9-5.5m</td><td className="text-center">4.9-5.5m</td><td className="text-center">4.8m</td><td className="text-center">5.6m</td></tr>
+                  <tr className="border-b border-white/5"><td className="p-2">Ładowność</td><td className="text-center">700-900 kg</td><td className="text-center">650-850 kg</td><td className="text-center">600 kg</td><td className="text-center">700 kg</td></tr>
+                  <tr className="border-b border-white/5"><td className="p-2">Miejsca</td><td className="text-center">3-6</td><td className="text-center">3-6</td><td className="text-center">5-6</td><td className="text-center">6-9</td></tr>
+                  <tr className="border-b border-white/5"><td className="p-2">Silniki</td><td className="text-center">4.3-5.7L</td><td className="text-center">4.3-5.7L</td><td className="text-center">5.7L</td><td className="text-center">5.7-7.4L</td></tr>
+                  <tr className="border-b border-white/5"><td className="p-2">Spalanie</td><td className="text-center">12-15 L</td><td className="text-center">14-17 L</td><td className="text-center">14-16 L</td><td className="text-center">15-18 L</td></tr>
+                  <tr className="border-b border-white/5"><td className="p-2">Cena części</td><td className="text-center text-green-400">Niska</td><td className="text-center text-yellow-400">Średnia</td><td className="text-center text-yellow-400">Średnia</td><td className="text-center text-red-400">Wyższa</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        )}
+
+        {tab === 'paliwo' && (
+          <div>
+            <h2 className="text-2xl mb-6" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>KALKULATOR ZUŻYCIA PALIWA</h2>
+            <div className="bg-neutral-950 border border-white/10 p-4 mb-4 space-y-4">
+              <div>
+                <label className="text-sm text-neutral-400 block mb-1">Przejechane km:</label>
+                <input type="number" value={fuelKm} onChange={e => setFuelKm(Number(e.target.value))} className="w-full bg-neutral-900 border border-white/10 p-2 text-sm" />
+              </div>
+              <div>
+                <label className="text-sm text-neutral-400 block mb-1">Zatankowane litry:</label>
+                <input type="number" value={fuelLiters} onChange={e => setFuelLiters(Number(e.target.value))} className="w-full bg-neutral-900 border border-white/10 p-2 text-sm" />
+              </div>
+              <div>
+                <label className="text-sm text-neutral-400 block mb-1">Cena za litr (PLN):</label>
+                <input type="number" step="0.1" value={fuelPrice} onChange={e => setFuelPrice(Number(e.target.value))} className="w-full bg-neutral-900 border border-white/10 p-2 text-sm" />
+              </div>
+            </div>
+            <div className="bg-neutral-950 border border-amber-400/30 p-4">
+              <h3 className="font-semibold text-amber-400 mb-4">WYNIKI</h3>
+              <div className="space-y-2 text-sm">
+                <div className="flex justify-between"><span>Średnie spalanie:</span><span className="text-amber-400 font-bold">{((fuelLiters / fuelKm) * 100).toFixed(1)} L/100km</span></div>
+                <div className="flex justify-between"><span>Koszt na 100 km:</span><span className="text-amber-400 font-bold">{(((fuelLiters / fuelKm) * 100) * fuelPrice).toFixed(0)} PLN</span></div>
+                <div className="flex justify-between"><span>Koszt na km:</span><span>{((fuelLiters / fuelKm) * fuelPrice).toFixed(2)} PLN</span></div>
+                <div className="flex justify-between border-t border-white/10 pt-2"><span>Koszt tankowania:</span><span>{(fuelLiters * fuelPrice).toFixed(0)} PLN</span></div>
+              </div>
+              <div className="mt-4 text-xs text-neutral-500">
+                <p>Porównanie GMT400: 4.3L ~13L | 5.7L ~15L | 7.4L ~18L | 6.5D ~12L</p>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {tab === 'mojeauto' && (
+          <div>
+            <h2 className="text-2xl mb-6" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>MOJE AUTO</h2>
+            <div className="bg-neutral-950 border border-white/10 p-4 mb-4">
+              <label className="text-sm text-neutral-400 block mb-2">Zapisz VIN swojego auta:</label>
+              <input type="text" value={myVin} onChange={e => setMyVin(e.target.value.toUpperCase())} placeholder="Wpisz 17-znakowy VIN" maxLength={17} className="w-full bg-neutral-900 border border-white/10 p-2 text-sm font-mono" />
+              {myVin.length === 17 && (
+                <p className="text-green-400 text-xs mt-2">VIN zapisany lokalnie</p>
+              )}
+            </div>
+            {myVin.length === 17 && (
+              <div className="space-y-4">
+                <div className="bg-neutral-950 border border-amber-400/30 p-4">
+                  <h3 className="font-semibold text-amber-400 mb-2">SZYBKI DOSTĘP</h3>
+                  <div className="grid grid-cols-2 gap-2">
+                    <button onClick={() => setTab('czesci')} className="bg-neutral-900 p-3 text-sm hover:bg-neutral-800">Części dla mojego auta</button>
+                    <button onClick={() => setTab('diy')} className="bg-neutral-900 p-3 text-sm hover:bg-neutral-800">Poradniki DIY</button>
+                    <button onClick={() => setTab('usterki')} className="bg-neutral-900 p-3 text-sm hover:bg-neutral-800">Typowe usterki</button>
+                    <button onClick={() => setTab('kalkulator')} className="bg-neutral-900 p-3 text-sm hover:bg-neutral-800">Koszty napraw</button>
+                  </div>
+                </div>
+                <div className="bg-neutral-950 border border-white/10 p-4">
+                  <h3 className="font-semibold text-amber-400 mb-2">PRZYPOMNIENIA</h3>
+                  <ul className="text-sm text-neutral-300 space-y-1">
+                    <li>• Wymiana oleju — co 5-8 tys. km</li>
+                    <li>• Filtr powietrza — co 30 tys. km</li>
+                    <li>• Świece — co 50 tys. km</li>
+                    <li>• ATF — co 50 tys. km</li>
+                  </ul>
+                </div>
+              </div>
+            )}
+          </div>
+        )}
+
         {tab === 'historia' && (
           <div>
             <h2 className="text-2xl mb-6" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>HISTORIA GMT400</h2>
