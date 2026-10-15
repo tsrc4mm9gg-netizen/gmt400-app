@@ -82,6 +82,59 @@ export default function Home() {
       .catch(() => setLoading(false));
   }, []);
 
+  // Swipe from left edge to go back
+  useEffect(() => {
+    let startX = 0;
+    let startY = 0;
+    const threshold = 80;
+    const edgeZone = 40;
+
+    const handleTouchStart = (e: TouchEvent) => {
+      startX = e.touches[0].clientX;
+      startY = e.touches[0].clientY;
+    };
+
+    const handleTouchEnd = (e: TouchEvent) => {
+      const endX = e.changedTouches[0].clientX;
+      const endY = e.changedTouches[0].clientY;
+      const deltaX = endX - startX;
+      const deltaY = Math.abs(endY - startY);
+
+      // Swipe right from left edge
+      if (startX < edgeZone && deltaX > threshold && deltaY < 100) {
+        // Close lightbox first
+        if (lightbox) {
+          setLightbox(null);
+          return;
+        }
+        // Close menu
+        if (menuOpen) {
+          setMenuOpen(false);
+          return;
+        }
+        // Go back to all models
+        if (selectedModel !== 'Wszystkie') {
+          setSelectedModel('Wszystkie');
+          setSelectedModelItem(null);
+          return;
+        }
+        // Go back to modele tab
+        if (tab !== 'modele') {
+          setTab('modele');
+          return;
+        }
+      }
+    };
+
+    document.addEventListener('touchstart', handleTouchStart, { passive: true });
+    document.addEventListener('touchend', handleTouchEnd, { passive: true });
+
+    return () => {
+      document.removeEventListener('touchstart', handleTouchStart);
+      document.removeEventListener('touchend', handleTouchEnd);
+    };
+  }, [lightbox, menuOpen, selectedModel, tab]);
+
   const models = useMemo(() => items.filter(i => i.Typ === 'Model'), [items]);
   const issues = useMemo(() => items.filter(i => i.Typ === 'Usterka'), [items]);
   const codes = useMemo(() => items.filter(i => i.Typ === 'Kod błędu'), [items]);
