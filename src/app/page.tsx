@@ -71,6 +71,7 @@ export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [issueYear, setIssueYear] = useState('');
   const [issueModel, setIssueModel] = useState('');
+  const [selectedEngine, setSelectedEngine] = useState('');
 
   useEffect(() => {
     fetch('/api/notion')
@@ -508,46 +509,87 @@ export default function Home() {
 
         {tab === 'specyfikacje' && (
           <div>
-            <h2 className="text-2xl mb-6" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>SPECYFIKACJE</h2>
+            <h2 className="text-2xl mb-6" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>SPECYFIKACJE SILNIKÓW</h2>
             
-            <img src="/spec-engines.jpg" alt="Silniki" className="w-full mb-6 cursor-pointer" onClick={() => setLightbox('/spec-engines.jpg')} />
-            
-            <div className="bg-neutral-950 border border-white/10 overflow-x-auto mb-6">
-              <table className="w-full text-sm">
-                <thead>
-                  <tr className="border-b border-white/10 text-amber-400">
-                    <th className="p-3 text-left">Silnik</th>
-                    <th className="p-3 text-left">Moc</th>
-                    <th className="p-3 text-left">Moment</th>
-                    <th className="p-3 text-left">Lata</th>
-                  </tr>
-                </thead>
-                <tbody className="text-neutral-300">
-                  <tr className="border-b border-white/5"><td className="p-3">4.3L V6</td><td className="p-3">160–200 KM</td><td className="p-3">230–260 Nm</td><td className="p-3">1988–2000</td></tr>
-                  <tr className="border-b border-white/5"><td className="p-3">5.0L V8</td><td className="p-3">175–230 KM</td><td className="p-3">270–285 Nm</td><td className="p-3">1988–1995</td></tr>
-                  <tr className="border-b border-white/5"><td className="p-3">5.7L TBI</td><td className="p-3">210 KM</td><td className="p-3">300 Nm</td><td className="p-3">1988–1995</td></tr>
-                  <tr className="border-b border-white/5"><td className="p-3">5.7L Vortec</td><td className="p-3">255 KM</td><td className="p-3">330 Nm</td><td className="p-3">1996–2000</td></tr>
-                  <tr className="border-b border-white/5"><td className="p-3">7.4L V8</td><td className="p-3">230–290 KM</td><td className="p-3">385–410 Nm</td><td className="p-3">1988–2000</td></tr>
-                  <tr><td className="p-3">6.5L Diesel</td><td className="p-3">180–215 KM</td><td className="p-3">360–440 Nm</td><td className="p-3">1992–2000</td></tr>
-                </tbody>
-              </table>
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-6">
+              {[
+                { id: '43', name: '4.3L V6', img: '/engine-43.jpg', power: '160–200 KM' },
+                { id: '50', name: '5.0L V8', img: '/engine-43.jpg', power: '175–230 KM' },
+                { id: '57tbi', name: '5.7L TBI', img: '/engine-vortec.jpg', power: '210 KM' },
+                { id: '57vortec', name: '5.7L Vortec', img: '/engine-vortec.jpg', power: '255 KM' },
+                { id: '74', name: '7.4L V8', img: '/engine-vortec.jpg', power: '230–290 KM' },
+                { id: '65d', name: '6.5L Diesel', img: '/engine-diesel.jpg', power: '180–215 KM' },
+              ].map(e => (
+                <button key={e.id} onClick={() => setSelectedEngine(selectedEngine === e.id ? '' : e.id)}
+                  className={`p-3 text-center transition ${selectedEngine === e.id ? 'bg-amber-400 text-black' : 'bg-neutral-900 hover:bg-neutral-800'}`}>
+                  <img src={e.img} alt={e.name} className="w-full h-20 object-contain mb-2" />
+                  <div className="font-semibold text-sm">{e.name}</div>
+                  <div className="text-xs opacity-70">{e.power}</div>
+                </button>
+              ))}
             </div>
 
-            <img src="/spec-fluids.jpg" alt="Płyny" className="w-full mb-6 cursor-pointer" onClick={() => setLightbox('/spec-fluids.jpg')} />
-
-            <div className="bg-neutral-950 border border-white/10 p-4 mb-6">
-              <h3 className="font-semibold text-amber-400 mb-3">Pojemności płynów</h3>
-              <div className="grid sm:grid-cols-2 gap-3 text-sm text-neutral-300">
-                <div className="flex justify-between"><span>Olej silnikowy (5.7L)</span><span className="text-white">4.7 L</span></div>
-                <div className="flex justify-between"><span>ATF 4L60E</span><span className="text-white">5.0 L</span></div>
-                <div className="flex justify-between"><span>Płyn chłodzący</span><span className="text-white">15 L</span></div>
-                <div className="flex justify-between"><span>Olej dyferencjału</span><span className="text-white">2.0 L</span></div>
-                <div className="flex justify-between"><span>Płyn hamulcowy</span><span className="text-white">DOT 3</span></div>
-                <div className="flex justify-between"><span>Olej NP231</span><span className="text-white">1.2 L ATF</span></div>
+            {selectedEngine === '57vortec' && (
+              <div className="bg-neutral-950 border border-white/10 p-4 mb-6">
+                <img src="/engine-vortec.jpg" alt="5.7L Vortec" className="w-full max-h-48 object-contain mb-4" />
+                <h3 className="text-xl font-bold text-amber-400 mb-3">5.7L Vortec V8 (L31)</h3>
+                <div className="grid sm:grid-cols-2 gap-4 text-sm">
+                  <div><span className="text-neutral-500">Moc:</span> <span className="text-white">255 KM @ 4600 rpm</span></div>
+                  <div><span className="text-neutral-500">Moment:</span> <span className="text-white">330 Nm @ 2800 rpm</span></div>
+                  <div><span className="text-neutral-500">Lata:</span> <span className="text-white">1996–2000</span></div>
+                  <div><span className="text-neutral-500">Kod:</span> <span className="text-white">L31</span></div>
+                  <div><span className="text-neutral-500">Wtrysk:</span> <span className="text-white">Sekwencyjny (SFI)</span></div>
+                  <div><span className="text-neutral-500">Kompresja:</span> <span className="text-white">9.4:1</span></div>
+                </div>
+                <div className="mt-4 text-neutral-300 text-sm">
+                  <p className="mb-2"><strong>Cechy:</strong> Najpopularniejszy silnik GMT400. Wprowadzony w 1996 jako zamiennik TBI.</p>
+                  <p className="mb-2"><strong>Filtr oleju:</strong> AC Delco PF1218</p>
+                  <p className="mb-2"><strong>Świece:</strong> AC Delco 41-932 (gap 1.5mm)</p>
+                  <p><strong>Olej:</strong> 4.7 L, 5W-30 lub 10W-30</p>
+                </div>
               </div>
-            </div>
+            )}
 
-            <div className="bg-neutral-950 border border-white/10 p-4">
+            {selectedEngine === '65d' && (
+              <div className="bg-neutral-950 border border-white/10 p-4 mb-6">
+                <img src="/engine-diesel.jpg" alt="6.5L Diesel" className="w-full max-h-48 object-contain mb-4" />
+                <h3 className="text-xl font-bold text-amber-400 mb-3">6.5L Turbodiesel</h3>
+                <div className="grid sm:grid-cols-2 gap-4 text-sm">
+                  <div><span className="text-neutral-500">Moc:</span> <span className="text-white">180–215 KM</span></div>
+                  <div><span className="text-neutral-500">Moment:</span> <span className="text-white">360–440 Nm</span></div>
+                  <div><span className="text-neutral-500">Lata:</span> <span className="text-white">1992–2000</span></div>
+                  <div><span className="text-neutral-500">Typ:</span> <span className="text-white">Turbodiesel</span></div>
+                </div>
+                <div className="mt-4 text-neutral-300 text-sm">
+                  <p className="mb-2"><strong>Cechy:</strong> Jedyny diesel w GMT400. Popularny do holowania.</p>
+                  <p className="mb-2"><strong>Problemy:</strong> Pompa wtryskowa, głowice (pękanie)</p>
+                  <p><strong>Olej:</strong> 6.6 L, 15W-40 diesel</p>
+                </div>
+              </div>
+            )}
+
+            {selectedEngine === '43' && (
+              <div className="bg-neutral-950 border border-white/10 p-4 mb-6">
+                <img src="/engine-43.jpg" alt="4.3L V6" className="w-full max-h-48 object-contain mb-4" />
+                <h3 className="text-xl font-bold text-amber-400 mb-3">4.3L V6</h3>
+                <div className="grid sm:grid-cols-2 gap-4 text-sm">
+                  <div><span className="text-neutral-500">Moc:</span> <span className="text-white">160–200 KM</span></div>
+                  <div><span className="text-neutral-500">Moment:</span> <span className="text-white">230–260 Nm</span></div>
+                  <div><span className="text-neutral-500">Lata:</span> <span className="text-white">1988–2000</span></div>
+                  <div><span className="text-neutral-500">Typ:</span> <span className="text-white">V6 TBI/CPI</span></div>
+                </div>
+                <div className="mt-4 text-neutral-300 text-sm">
+                  <p className="mb-2"><strong>Cechy:</strong> Podstawowy silnik. Ekonomiczny, ale słabszy.</p>
+                  <p><strong>Olej:</strong> 4.3 L, 5W-30</p>
+                </div>
+              </div>
+            )}
+
+            {!selectedEngine && (
+              <p className="text-neutral-500 text-center py-4">Wybierz silnik powyżej aby zobaczyć szczegóły.</p>
+            )}
+
+            <div className="bg-neutral-950 border border-white/10 p-4 mt-6">
               <h3 className="font-semibold text-amber-400 mb-3">Numery OEM — filtry</h3>
               <div className="text-sm text-neutral-300 space-y-2">
                 <div className="flex justify-between"><span>Filtr oleju 5.7L</span><span className="text-amber-400">AC Delco PF1218</span></div>
