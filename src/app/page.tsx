@@ -12,11 +12,11 @@ type Item = {
   Lata?: string;
 };
 
-const modelColors: Record<string, string> = {
-  'Tahoe': 'bg-emerald-900',
-  'Suburban': 'bg-red-900',
-  'C/K': 'bg-neutral-800',
-  'Yukon': 'bg-rose-900',
+const modelImages: Record<string, string> = {
+  'Tahoe': '/tahoe.jpg',
+  'Suburban': '/suburban.jpg',
+  'C/K': '/ck.jpg',
+  'Yukon': '/yukon.jpg',
 };
 
 export default function Home() {
@@ -144,11 +144,13 @@ export default function Home() {
           <div className="grid md:grid-cols-2 gap-4">
             {filteredModels.map((m, idx) => (
               <div key={idx} className="bg-neutral-900 border border-neutral-800 rounded-xl overflow-hidden hover:border-amber-400 transition">
-                <div className={`w-full h-40 flex items-center justify-center text-2xl font-bold tracking-wider ${
-                  modelColors[m.Model] || 'bg-neutral-800'
-                }`} style={{ fontFamily: "'Bebas Neue', sans-serif" }}>
-                  {m.Model}
-                </div>
+                {modelImages[m.Model] && (
+                  <img 
+                    src={modelImages[m.Model]} 
+                    alt={m.Nazwa} 
+                    className="w-full h-48 object-cover bg-neutral-800"
+                  />
+                )}
                 <div className="p-5">
                   <h3 className="text-amber-400 font-semibold text-lg" style={{ fontFamily: "'Oswald', sans-serif" }}>{m.Nazwa}</h3>
                   <p className="text-sm text-neutral-500 mb-2">{m.Lata} • {m.Model}</p>
