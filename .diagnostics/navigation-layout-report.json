@@ -1,0 +1,17 @@
+{
+  "codeSha": "306345fbc0616da5b718f6c101b5c6a51d152aa8",
+  "checkedAt": "2026-10-16T14:41:48.040Z",
+  "scope": "Chromium mocked fixtures; geometry at 375/390/430px; screenshots retained as Actions artifact; no claim of visual approval",
+  "passed": true,
+  "build": "success",
+  "browser": "success",
+  "stats": {
+    "startTime": "2026-10-16T14:41:39.750Z",
+    "duration": 6848.88,
+    "expected": 19,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "failures": []
+}
