@@ -1,41 +1,57 @@
 {
-  "codeSha": "6916d8e15bc9be440f357a3bb6a4f887cc25f6d6",
-  "runId": "38958288462",
-  "checkedAt": "2026-10-16T19:57:36.049Z",
+  "codeSha": "0bd8fcfc35f4631c5eae25ae179cb375a5d1692d",
+  "runId": "38961482641",
+  "checkedAt": "2026-10-16T20:23:34.116Z",
   "scope": "Roadmap packages 1-2: navigation history, compact profile and unified typography; Chromium and mobile WebKit controlled-data regressions, not live deployment or content verification",
-  "passed": true,
-  "integrationApplied": true,
+  "passed": false,
+  "integrationApplied": false,
   "stages": {
     "patch": "success",
     "build": "success",
-    "chromium": "success",
-    "webkit": "success"
+    "chromium": "failure",
+    "webkit": "failure"
   },
   "buildDiagnostics": "",
   "reports": {
     "chromium": {
-      "passed": true,
+      "passed": false,
       "stats": {
-        "startTime": "2026-10-16T19:56:06.492Z",
-        "duration": 19174.456000000002,
-        "expected": 38,
+        "startTime": "2026-10-16T20:22:27.341Z",
+        "duration": 18129.609,
+        "expected": 37,
         "skipped": 0,
-        "unexpected": 0,
+        "unexpected": 1,
         "flaky": 0
       },
-      "failures": []
+      "failures": [
+        {
+          "title": "main categories and subsections have distinct hierarchy and tactile selection styles",
+          "status": "unexpected",
+          "errors": [
+            "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoContain\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // indexOf\u001b[22m\n\nExpected substring: \u001b[32m\"linear-gradient\"\u001b[39m\nReceived string:    \u001b[31m\"none\"\u001b[39m"
+          ]
+        }
+      ]
     },
     "webkit": {
-      "passed": true,
+      "passed": false,
       "stats": {
-        "startTime": "2026-10-16T19:56:27.032Z",
-        "duration": 67918.85,
-        "expected": 38,
+        "startTime": "2026-10-16T20:22:46.601Z",
+        "duration": 45680.465,
+        "expected": 37,
         "skipped": 0,
-        "unexpected": 0,
+        "unexpected": 1,
         "flaky": 0
       },
-      "failures": []
+      "failures": [
+        {
+          "title": "main categories and subsections have distinct hierarchy and tactile selection styles",
+          "status": "unexpected",
+          "errors": [
+            "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoContain\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // indexOf\u001b[22m\n\nExpected substring: \u001b[32m\"linear-gradient\"\u001b[39m\nReceived string:    \u001b[31m\"none\"\u001b[39m"
+          ]
+        }
+      ]
     }
   }
 }
