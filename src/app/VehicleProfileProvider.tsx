@@ -1,6 +1,6 @@
 'use client';
 import { createContext, useContext, useEffect, useRef, useState, type ReactNode } from 'react';
-
+import { createPortal } from 'react-dom';
 export type VehicleProfile = { brand: string; model: string; year: string; engine: string; drive: string; transmission: string };
 const KEY = 'gmt400_vehicle_profile_v1';
 const EMPTY: VehicleProfile = { brand: '', model: '', year: '', engine: '', drive: '', transmission: '' };
@@ -20,12 +20,12 @@ function parseProfile(raw: string | null): VehicleProfile | null {
 }
 const Context = createContext<{ profile: VehicleProfile | null; ready: boolean }>({ profile: null, ready: false });
 export const useVehicleProfile = () => useContext(Context);
-
 export default function VehicleProfileProvider({ children }: { children: ReactNode }) {
   const [profile, setProfile] = useState<VehicleProfile | null>(null);
   const [ready, setReady] = useState(false);
   const [draft, setDraft] = useState<VehicleProfile>({ ...EMPTY });
   const [message, setMessage] = useState('');
+  const [slot, setSlot] = useState<HTMLElement | null>(null);
   const dialog = useRef<HTMLDialogElement>(null);
   const trigger = useRef<HTMLButtonElement>(null);
   useEffect(() => {
@@ -36,8 +36,15 @@ export default function VehicleProfileProvider({ children }: { children: ReactNo
     window.addEventListener('storage', sync);
     return () => window.removeEventListener('storage', sync);
   }, []);
+  useEffect(() => {
+    const syncSlot = () => { const next = document.getElementById('vehicle-profile-launcher'); setSlot(previous => previous === next ? previous : next); };
+    const observer = new MutationObserver(syncSlot);
+    observer.observe(document.body, { childList: true, subtree: true });
+    syncSlot();
+    return () => observer.disconnect();
+  }, []);
   const update = (key: keyof VehicleProfile, value: string) => setDraft(p => ({ ...p, [key]: value.slice(0, 80) }));
-  const close = () => { dialog.current?.close(); trigger.current?.focus(); };
+  const close = () => { dialog.current?.close(); trigger.current?.focus({ preventScroll: true }); };
   const open = () => { setDraft({ ...(profile || EMPTY) }); dialog.current?.showModal(); };
   const save = () => {
     const clean = Object.fromEntries(Object.entries(draft).map(([key, value]) => [key, value.trim()])) as VehicleProfile;
@@ -51,12 +58,11 @@ export default function VehicleProfileProvider({ children }: { children: ReactNo
     catch { setMessage('Nie udało się usunąć zapisu z pamięci. Profil wyłączono tylko w tej sesji.'); }
     setProfile(null); setDraft({ ...EMPTY }); close();
   };
+  const launcher = <button ref={trigger} type="button" disabled={!ready} onClick={open} className="gmt-profile-trigger" aria-haspopup="dialog">{profile ? `Moje auto: ${profile.brand} ${profile.model}${profile.year ? ' ' + profile.year : ''}` : 'Ustaw profil auta'}</button>;
   return <Context.Provider value={{ profile, ready }}>
     {children}
-    <button ref={trigger} type="button" disabled={!ready} onClick={open} className="fixed left-4 z-[60] rounded-lg border border-amber-400 bg-neutral-950 px-3 py-2 text-sm text-amber-400 shadow-lg disabled:opacity-50" style={{ bottom: 'calc(env(safe-area-inset-bottom, 0px) + 16px)' }} aria-haspopup="dialog">
-      {profile ? `Moje auto: ${profile.brand} ${profile.model}${profile.year ? ' ' + profile.year : ''}` : 'Ustaw profil auta'}
-    </button>
-    <dialog ref={dialog} onClose={() => trigger.current?.focus()} className="m-auto w-[calc(100%-2rem)] max-w-lg max-h-[85dvh] overflow-y-auto rounded-xl border border-amber-400 bg-neutral-950 p-5 text-white backdrop:bg-black/80" aria-labelledby="vehicle-profile-title">
+    {slot ? createPortal(launcher, slot) : <div style={{ maxWidth: 1280, margin: '0 auto', padding: '16px 16px 24px' }}>{launcher}</div>}
+    <dialog ref={dialog} onClose={() => trigger.current?.focus({ preventScroll: true })} className="m-auto w-[calc(100%-2rem)] max-w-lg max-h-[85dvh] overflow-y-auto rounded-xl border border-amber-400 bg-neutral-950 p-5 text-white backdrop:bg-black/80" aria-labelledby="vehicle-profile-title">
       <div className="flex items-start justify-between gap-3"><h2 id="vehicle-profile-title" className="text-xl text-amber-400">Moje auto — wspólny profil</h2><button type="button" onClick={close} aria-label="Zamknij profil" className="px-3 py-1">×</button></div>
       <p className="my-3 text-sm text-neutral-400">Dane wpisujesz samodzielnie. Nie ustalamy skrzyni ani innych opcji na podstawie przypuszczeń. Nieznane pola pozostaw puste.</p>
       <form onSubmit={event => { event.preventDefault(); save(); }} className="space-y-3">

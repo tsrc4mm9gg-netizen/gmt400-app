@@ -2,7 +2,6 @@
 import { useMemo, useState } from 'react';
 import { useVehicleProfile } from './VehicleProfileProvider';
 import { matchVehicle, type Applicability, type MatchResult } from '../lib/vehicle-compatibility';
-
 const EMPTY: Applicability = { brand: [], model: [], years: [], engine: [], drive: [], transmission: [] };
 const LABELS = { all: 'Wszystkie', within_scope: 'Zgodne z zakresem', general: 'Ogólne', unknown: 'Nieustalone', outside_scope: 'Poza zakresem' };
 type Mode = keyof typeof LABELS;
@@ -31,7 +30,8 @@ export function useVehicleMaterialFilter<T extends Material>(items: T[]) {
   }, [items, active, mode, evaluated]);
   const panel = <section className="mb-6 rounded-lg border border-amber-400/30 bg-neutral-950 p-4" aria-label="Filtrowanie według profilu auta">
     <h3 className="font-semibold text-amber-400">Materiały według profilu auta</h3>
-    {!active ? <p className="mt-2 text-sm text-neutral-400">Ustaw profil auta przyciskiem w lewym dolnym rogu. Obecnie nie ograniczamy list według konfiguracji.</p> : <>
+    <div id="vehicle-profile-launcher" style={{ marginTop: 12, marginBottom: 12 }} />
+    {!active ? <p className="mt-2 text-sm text-neutral-400">Ustaw profil auta w tym panelu. Bez profilu nie ograniczamy list według konfiguracji.</p> : <>
       <p className="mt-2 text-sm">{[profile?.brand, profile?.model, profile?.year, profile?.engine, profile?.drive, profile?.transmission].filter(Boolean).join(' · ')}</p>
       <div className="mt-3 flex flex-wrap gap-2">{(Object.keys(LABELS) as Mode[]).map(value => <button key={value} type="button" aria-pressed={mode === value} onClick={() => setMode(value)} className={`rounded px-3 py-2 text-sm ${mode === value ? 'bg-amber-400 text-black' : 'bg-neutral-800 text-white'}`}>{LABELS[value]} ({counts[value]})</button>)}</div>
       <p className="mt-2 text-xs text-neutral-400">Liczniki obejmują wszystkie usterki, kody OBD i porady z pobranej bazy, przed wyszukiwaniem i pozostałymi filtrami sekcji. Schematy korzystają z tej samej listy porad. Statyczne części i specyfikacje nie są objęte tym filtrem.</p>
