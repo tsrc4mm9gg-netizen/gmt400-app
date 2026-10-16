@@ -1,18 +1,26 @@
 {
-  "codeSha": "99fb58fcf0e1873a7db124c03d44b1df210b4362",
-  "runId": "38970535860",
-  "checkedAt": "2026-10-16T21:38:24.965Z",
+  "codeSha": "003450be2dc69c5e2cec39c6de5e456c541ef4d1",
+  "runId": "38971955300",
+  "checkedAt": "2026-10-16T21:51:42.169Z",
   "scope": "Chromium mocked fixtures, navigation geometry, tactile styles, profile launcher and category counters; not live Safari",
-  "passed": true,
+  "passed": false,
   "build": "success",
-  "browser": "success",
+  "browser": "failure",
   "stats": {
-    "startTime": "2026-10-16T21:38:10.875Z",
-    "duration": 12645.135,
-    "expected": 22,
+    "startTime": "2026-10-16T21:51:21.563Z",
+    "duration": 19380.790999999997,
+    "expected": 21,
     "skipped": 0,
-    "unexpected": 0,
+    "unexpected": 1,
     "flaky": 0
   },
-  "failures": []
+  "failures": [
+    {
+      "title": "profile counters and default filtering are scoped to the current knowledge category",
+      "status": "unexpected",
+      "errors": [
+        "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveAttribute\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('region', { name: 'Filtrowanie według profilu auta' }).getByRole('button', { name: 'Dla mojego auta (2)', exact: true })\nExpected: \u001b[32m\"true\"\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toHaveAttribute\" getByRole('region', { name: 'Filtrowanie według profilu auta' }).getByRole('button', { name: 'Dla mojego auta (2)', exact: true }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('region', { name: 'Filtrowanie według profilu auta' }).getByRole('button', { name: 'Dla mojego auta (2)', exact: true })\u001b[22m\n"
+      ]
+    }
+  ]
 }
