@@ -29,18 +29,18 @@ test('DIY restores instructions, existing graphic, lightbox and full-material li
 test('vehicle change updates DIY defaults without hiding unknown instructions or counting codes', async ({ page }) => {
   await prepare(page, true);
   const panel = page.getByRole('region', { name: 'Filtrowanie według profilu auta', exact: true });
-  await expect(panel.getByRole('button', { name: 'Dla mojego auta (2)', exact: true })).toHaveAttribute('aria-pressed', 'true');
+  await expect(panel.getByRole('button', { name: 'Dla mojego auta (1)', exact: true })).toHaveAttribute('aria-pressed', 'true');
   await expect(panel.getByRole('button', { name: 'Wszystkie (3)', exact: true })).toBeVisible();
   await expect(page.getByRole('heading', { name: fixtures[0].Nazwa, exact: true })).toBeVisible();
   await expect(page.getByRole('heading', { name: fixtures[1].Nazwa, exact: true })).toHaveCount(0);
-  await expect(page.getByRole('heading', { name: fixtures[2].Nazwa, exact: true })).toBeVisible();
+  await expect(page.getByRole('heading', { name: fixtures[2].Nazwa, exact: true })).toHaveCount(0);
   await panel.getByRole('button', { name: 'Moje auto: Chevrolet Suburban 1999', exact: true }).click();
   const dialog = page.getByRole('dialog', { name: 'Moje auto — wspólny profil' });
   await dialog.getByRole('combobox', { name: /^Model/ }).selectOption('Tahoe');
   await dialog.getByRole('button', { name: 'Zapisz profil', exact: true }).click();
   await expect(page.getByRole('heading', { name: fixtures[0].Nazwa, exact: true })).toHaveCount(0);
   await expect(page.getByRole('heading', { name: fixtures[1].Nazwa, exact: true })).toBeVisible();
-  await expect(page.getByRole('heading', { name: fixtures[2].Nazwa, exact: true })).toBeVisible();
+  await expect(page.getByRole('heading', { name: fixtures[2].Nazwa, exact: true })).toHaveCount(0);
   await panel.getByRole('button', { name: 'Wszystkie (3)', exact: true }).click();
   for (const item of fixtures.filter(item => item.Typ === 'Porada')) await expect(page.getByRole('heading', { name: item.Nazwa, exact: true })).toBeVisible();
 });

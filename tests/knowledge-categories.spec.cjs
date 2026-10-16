@@ -66,6 +66,9 @@ test('profile counters and default filtering are scoped to the current knowledge
   await page.route('**/api/notion', route => route.fulfill({ json: { results: data, count: data.length, complete: true } }));
   await page.goto(`${BASE}/poradniki`);
   const panel = page.getByRole('region', { name: 'Filtrowanie według profilu auta' });
+  await expect(panel).toBeVisible();
+  const buttons = await panel.getByRole('button').allTextContents();
+  console.log('WEBKIT_FILTER_BUTTONS', JSON.stringify(buttons));
   await expect(panel.getByRole('button', { name: 'Dla mojego auta (2)', exact: true })).toHaveAttribute('aria-pressed', 'true');
   await expect(panel.getByRole('button', { name: 'Wszystkie (2)', exact: true })).toBeVisible();
 await panel.getByRole('button', { name: 'Filtry zaawansowane', exact: true }).click();
