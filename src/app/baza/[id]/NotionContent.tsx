@@ -25,8 +25,10 @@ export async function readNotionBlocks(id: string, token: string): Promise<any[]
         output.push({ ...block, children: block.has_children ? await read(block.id, depth + 1) : [] });
       }
       if (!data.has_more) return output;
-      if (typeof data.next_cursor !== 'string' || !data.next_cursor || cursors.has(data.next_cursor)) throw new Error('Nieprawidłowa paginacja bloków Notion.');
-      cursor = data.next_cursor; cursors.add(cursor);
+      const nextCursor: unknown = data.next_cursor;
+      if (typeof nextCursor !== 'string' || !nextCursor || cursors.has(nextCursor)) throw new Error('Nieprawidłowa paginacja bloków Notion.');
+      cursors.add(nextCursor);
+      cursor = nextCursor;
     }
   }
   return read(id, 0);
