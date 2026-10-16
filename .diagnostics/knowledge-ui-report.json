@@ -1,22 +1,22 @@
 {
-  "codeSha": "70ebcdede60ef9288529b72ca5108e6e76a0c78a",
-  "runId": "38916580809",
-  "checkedAt": "2026-10-16T14:33:50.799Z",
+  "codeSha": "c3d3e6daf0f4f00139935a94c360c9711371f0cf",
+  "runId": "38920401660",
+  "checkedAt": "2026-10-16T15:02:22.177Z",
   "scope": "Production build; Chromium with mocked Notion fixtures, not live Notion or Vercel",
-  "passed": true,
+  "passed": false,
   "stages": {
     "install": "success",
     "build": "success",
     "tooling": "success",
     "server": "success",
-    "browser": "success"
+    "browser": "failure"
   },
   "stats": {
-    "startTime": "2026-10-16T14:33:45.907Z",
-    "duration": 4516.107999999999,
-    "expected": 13,
+    "startTime": "2026-10-16T15:02:08.122Z",
+    "duration": 13974.392,
+    "expected": 12,
     "skipped": 0,
-    "unexpected": 0,
+    "unexpected": 1,
     "flaky": 0
   },
   "tests": [
@@ -27,7 +27,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 454
+          "durationMs": 708
         }
       ]
     },
@@ -38,7 +38,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 249
+          "durationMs": 435
         }
       ]
     },
@@ -49,7 +49,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 271
+          "durationMs": 432
         }
       ]
     },
@@ -60,7 +60,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 186
+          "durationMs": 287
         }
       ]
     },
@@ -71,7 +71,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 213
+          "durationMs": 270
         }
       ]
     },
@@ -82,7 +82,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 182
+          "durationMs": 278
         }
       ]
     },
@@ -93,7 +93,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 179
+          "durationMs": 272
         }
       ]
     },
@@ -104,7 +104,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 181
+          "durationMs": 279
         }
       ]
     },
@@ -115,7 +115,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 230
+          "durationMs": 325
         }
       ]
     },
@@ -126,7 +126,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 274
+          "durationMs": 325
         }
       ]
     },
@@ -137,18 +137,18 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 508
+          "durationMs": 594
         }
       ]
     },
     {
       "title": "without profile nothing is excluded",
       "file": "tests/vehicle-filters.spec.cjs",
-      "status": "expected",
+      "status": "unexpected",
       "attempts": [
         {
-          "status": "passed",
-          "durationMs": 212
+          "status": "failed",
+          "durationMs": 5337
         }
       ]
     },
@@ -159,7 +159,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 463
+          "durationMs": 1026
         }
       ]
     }
