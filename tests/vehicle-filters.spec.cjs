@@ -36,11 +36,12 @@ test('profile editor persists configuration across reload', async ({ page }) => 
   await prepare(page, null);
   await page.getByRole('button', { name: 'Ustaw profil auta', exact: true }).click();
   const dialog = page.getByRole('dialog', { name: 'Moje auto — wspólny profil' });
-  await dialog.getByLabel('Marka', { exact: true }).selectOption('Chevrolet');
-  await dialog.getByLabel('Model', { exact: true }).selectOption('Suburban');
+  await expect(dialog).toBeVisible();
+  await dialog.getByRole('combobox', { name: /^Marka/ }).selectOption('Chevrolet');
+  await dialog.getByRole('combobox', { name: /^Model/ }).selectOption('Suburban');
   await dialog.getByLabel('Rocznik', { exact: true }).fill('1999');
   await dialog.getByLabel('Silnik', { exact: true }).fill('L31');
-  await dialog.getByLabel('Napęd', { exact: true }).selectOption('4WD');
+  await dialog.getByRole('combobox', { name: /^Napęd/ }).selectOption('4WD');
   await dialog.getByRole('button', { name: 'Zapisz profil', exact: true }).click();
   await expect(dialog).not.toBeVisible();
   await page.reload();
