@@ -1,23 +1,23 @@
 {
-  "codeSha": "b287bd867655a2ec899f9716216bf637b489e3a1",
-  "runId": "38946985232",
-  "checkedAt": "2026-10-16T18:27:08.444Z",
+  "codeSha": "a942101ccd5712b8079d3cc79ba7feca6f699c4c",
+  "runId": "38948480415",
+  "checkedAt": "2026-10-16T18:38:54.806Z",
   "scope": "Roadmap package 1: URL section state, browser history, scroll restoration and compact profile; Chromium and mobile WebKit controlled-data regressions, not live deployment or content verification",
-  "passed": false,
-  "integrationApplied": false,
+  "passed": true,
+  "integrationApplied": true,
   "stages": {
     "patch": "success",
     "build": "success",
     "chromium": "success",
-    "webkit": "failure"
+    "webkit": "success"
   },
   "buildDiagnostics": "",
   "reports": {
     "chromium": {
       "passed": true,
       "stats": {
-        "startTime": "2026-10-16T18:25:48.460Z",
-        "duration": 15451.935,
+        "startTime": "2026-10-16T18:37:20.109Z",
+        "duration": 19592.084000000003,
         "expected": 37,
         "skipped": 0,
         "unexpected": 0,
@@ -26,24 +26,16 @@
       "failures": []
     },
     "webkit": {
-      "passed": false,
+      "passed": true,
       "stats": {
-        "startTime": "2026-10-16T18:26:04.967Z",
-        "duration": 61785.614,
-        "expected": 36,
+        "startTime": "2026-10-16T18:37:41.187Z",
+        "duration": 71799.356,
+        "expected": 37,
         "skipped": 0,
-        "unexpected": 1,
+        "unexpected": 0,
         "flaky": 0
       },
-      "failures": [
-        {
-          "title": "back restores saved reading position after section change through the header",
-          "status": "unexpected",
-          "errors": [
-            "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: < \u001b[32m12\u001b[39m\nReceived:   \u001b[31m506\u001b[39m\n\nCall Log:\n- Timeout 10000ms exceeded while waiting on the predicate"
-          ]
-        }
-      ]
+      "failures": []
     }
   }
 }

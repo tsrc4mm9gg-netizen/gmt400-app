@@ -16,6 +16,7 @@ async function prepare(page, profile) {
 test('filters visible lists and restores all materials', async ({ page }) => {
   await prepare(page, PROFILE);
   const panel = page.getByRole('region', { name: 'Filtrowanie według profilu auta' });
+  await panel.getByRole('button', { name: 'Filtry zaawansowane', exact: true }).click();
   for (const [label, shown] of [['Zgodne z zakresem', 'TEST MATCH'], ['Ogólne', 'TEST GENERAL'], ['Nieustalone', 'TEST UNKNOWN'], ['Poza zakresem', 'TEST OUTSIDE']]) {
     await panel.getByRole('button', { name: `${label} (1)`, exact: true }).click();
     for (const item of fixtures) {

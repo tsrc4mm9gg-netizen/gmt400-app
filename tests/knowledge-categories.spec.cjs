@@ -68,6 +68,7 @@ test('profile counters and default filtering are scoped to the current knowledge
   const panel = page.getByRole('region', { name: 'Filtrowanie według profilu auta' });
   await expect(panel.getByRole('button', { name: 'Dla mojego auta (2)', exact: true })).toHaveAttribute('aria-pressed', 'true');
   await expect(panel.getByRole('button', { name: 'Wszystkie (2)', exact: true })).toBeVisible();
+await panel.getByRole('button', { name: 'Filtry zaawansowane', exact: true }).click();
   await expect(panel.getByRole('button', { name: 'Zgodne z zakresem (0)', exact: true })).toBeVisible();
   await expect(page.getByRole('heading', { name: 'TEST PORADA', exact: true })).toBeVisible();
   await expect(page.getByRole('heading', { name: 'TEST Punkty masy', exact: true })).toBeVisible();

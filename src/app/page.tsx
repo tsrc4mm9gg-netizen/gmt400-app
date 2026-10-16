@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useMemo } from 'react';
 import GroupedNavigation from './GroupedNavigation';
+import useSectionNavigation from './useSectionNavigation';
 import ModelCatalog from './ModelCatalog';
 import GlobalSearch from './GlobalSearch';
 import { useVehicleMaterialFilter, VehicleMatchBadge } from './VehicleMaterialFilter';
@@ -105,12 +106,7 @@ export default function Home() {
   const [touchEnd, setTouchEnd] = useState(0);
   const [loading, setLoading] = useState(true);
   const [query, setQuery] = useState('');
-  const [tab, setTab] = useState(() => {
-    if (typeof window !== 'undefined') {
-      return localStorage.getItem('gmt400_tab') || 'modele';
-    }
-    return 'modele';
-  });
+  const [tab, setTab] = useSectionNavigation(CATEGORIES.map(category => category.id));
   const materialScope = tab === 'diy' || tab === 'schematy' ? ['Porada'] : tab === 'kody' ? ['Kod błędu'] : tab === 'usterki' ? ['Usterka'] : undefined;
   const { visibleItems, panel: vehicleFilterPanel } = useVehicleMaterialFilter(items, materialScope);
   const [selectedModel, setSelectedModel] = useState('Wszystkie');
@@ -182,9 +178,7 @@ export default function Home() {
     }
   }, []);
 
-  useEffect(() => {
-    localStorage.setItem('gmt400_tab', tab);
-  }, [tab]);
+
 
   useEffect(() => {
     const handleScroll = () => setShowBackTop(window.scrollY > 300);
