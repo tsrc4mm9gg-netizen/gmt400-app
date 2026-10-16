@@ -1,22 +1,22 @@
 {
-  "codeSha": "32b52b6ab4fd0359c5ed43e07f659027a19d0d9c",
-  "runId": "38942886264",
-  "checkedAt": "2026-10-16T17:54:55.693Z",
+  "codeSha": "0a9bb975970bdf1e1b2259f8ffbefd5615fad3b2",
+  "runId": "38963162126",
+  "checkedAt": "2026-10-16T20:36:58.914Z",
   "scope": "Grouped source records; Chromium and mobile WebKit mocked-fixture regressions, not a live Notion or historical-accuracy audit",
-  "passed": true,
-  "integrationApplied": true,
+  "passed": false,
+  "integrationApplied": false,
   "stages": {
     "patch": "success",
     "build": "success",
     "chromium": "success",
-    "webkit": "success"
+    "webkit": "failure"
   },
   "reports": {
     "chromium": {
       "passed": true,
       "stats": {
-        "startTime": "2026-10-16T17:53:33.592Z",
-        "duration": 19706.376,
+        "startTime": "2026-10-16T20:35:50.353Z",
+        "duration": 16545.573,
         "expected": 33,
         "skipped": 0,
         "unexpected": 0,
@@ -25,16 +25,24 @@
       "failures": []
     },
     "webkit": {
-      "passed": true,
+      "passed": false,
       "stats": {
-        "startTime": "2026-10-16T17:53:55.451Z",
-        "duration": 58218.488,
-        "expected": 33,
+        "startTime": "2026-10-16T20:36:08.335Z",
+        "duration": 49403.001000000004,
+        "expected": 32,
         "skipped": 0,
-        "unexpected": 0,
+        "unexpected": 1,
         "flaky": 0
       },
-      "failures": []
+      "failures": [
+        {
+          "title": "main categories and subsections have distinct hierarchy and tactile selection styles",
+          "status": "unexpected",
+          "errors": [
+            "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mnot\u001b[2m.\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: not \u001b[32m\"rgb(231, 185, 94)\"\u001b[39m"
+          ]
+        }
+      ]
     }
   }
 }
