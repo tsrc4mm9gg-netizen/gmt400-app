@@ -27,6 +27,7 @@ export default function GlobalSearch({ items, onClose }: { items: Entry[]; onClo
       <button type="button" className="text-amber-400 underline" onClick={() => setSelected(null)}>Wróć do wyników</button>
       <p className="text-sm text-neutral-400">{selected.Typ} · {selected.Model} {selected.Lata}</p>
       <h3 className="text-xl">{selected.Nazwa}</h3><VehicleMatchBadge item={selected} />
+      {selected.id && <a className="inline-block text-amber-400 underline" href={'/baza/' + encodeURIComponent(selected.id)}>Otwórz stronę materiału — stały link</a>}
       {selected.Opis && <section><h4>Opis</h4><p className="whitespace-pre-line text-neutral-300">{selected.Opis}</p></section>}
       {selected.Objawy && <section><h4>Objawy</h4><p className="whitespace-pre-line text-neutral-300">{selected.Objawy}</p></section>}
       {selected.Rozwiązanie && <section><h4>Rozwiązanie</h4><p className="whitespace-pre-line text-neutral-300">{selected.Rozwiązanie}</p></section>}
