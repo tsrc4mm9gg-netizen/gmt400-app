@@ -1,6 +1,6 @@
 # Plan ulepszeń GMT400 — wszystkie 29 punktów audytu
 
-Statusów nie zamykamy na podstawie samego zapisu kodu. Rozróżniamy implementację, testy i potwierdzenie wdrożenia. Bieżąca paczka rozpoczyna punkty 1–4; wynik zapisuje .diagnostics/navigation-context-report.json. Nie uruchamia się żaden agent pracujący bez końca w tle.
+Statusów nie zamykamy na podstawie samego zapisu kodu. Rozróżniamy implementację, testy i potwierdzenie wdrożenia. Paczki 1–2 przeszły 38 testów w Chromium i WebKit; orchestrator przygotowuje audyt paczki 3. Nie uruchamia się żaden agent pracujący bez końca w tle.
 
 ## Etap 1: działanie i czytelny kontekst
 - [ ] 1. Krótsza droga od wyboru sekcji do właściwej treści; poprawne adresy i historia nawigacji.
