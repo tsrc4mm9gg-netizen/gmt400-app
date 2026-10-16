@@ -1,0 +1,11 @@
+{
+  "codeSha": "282cf913f2312770a7ac4c136ba1b98c7c814e46",
+  "runId": "38933044563",
+  "checkedAt": "2026-10-16T16:35:24.769Z",
+  "scope": "Existing Chromium regressions plus mocked Notion pagination and server HTML rendering; not complete live Notion or Safari verification",
+  "passed": false,
+  "build": "failure",
+  "tests": "skipped",
+  "stats": {},
+  "failures": []
+}
