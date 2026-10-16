@@ -1594,8 +1594,7 @@ export default function Home() {
               <p className="text-xs text-neutral-500 mt-2">Słabe ciśnienie = zużyte pierścienie lub zawory</p>
             </div>
 
-            <div className="bg-neutral-950 border border-white/10 p-4">
-              <div className="bg-neutral-950 border border-white/10 p-4 mb-4">
+            <div className="bg-neutral-950 border border-white/10 p-4 mb-4">
               <h3 className="font-semibold text-amber-400 mb-2">11. TEST POMPY PALIWA</h3>
               <p className="text-sm text-neutral-300 mb-2">Szybki test czy pompa dziala.</p>
               <ol className="text-sm text-neutral-300 space-y-1 list-decimal list-inside">
@@ -1921,3 +1920,4 @@ export default function Home() {
       </footer>
     </div>
   );
+}
