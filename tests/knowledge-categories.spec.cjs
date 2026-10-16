@@ -48,8 +48,13 @@ test('fetch failure is distinct from empty data and retry works', async ({ page 
     return requests === 1 ? route.fulfill({ status: 503, json: { error: 'test' } }) : route.fulfill({ json: { results: data, count: data.length } });
   });
   await page.goto(`${BASE}/usterki`);
-  await expect(page.getByRole('alert')).toContainText('Nie udało się pobrać treści');
-  await page.getByRole('button', { name: 'Ponów pobieranie', exact: true }).click();
+  const fetchError = page.getByRole('alert').filter({ hasText: 'Nie udało się pobrać treści' });
+  await expect(fetchError).toHaveCount(1);
+  await expect(fetchError).toBeVisible();
+  await expect(fetchError).toContainText('To nie oznacza braku materiałów w bazie.');
+  await expect(page.getByText('W pobranej bazie nie ma wpisów tej kategorii.', { exact: true })).toHaveCount(0);
+  await fetchError.getByRole('button', { name: 'Ponów pobieranie', exact: true }).click();
   await expect(page.getByRole('heading', { name: 'TEST USTERKA', exact: true })).toBeVisible();
-  await expect(page.getByRole('alert')).toHaveCount(0);
+  await expect(fetchError).toHaveCount(0);
+  expect(requests).toBeGreaterThanOrEqual(2);
 });
