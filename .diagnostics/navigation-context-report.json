@@ -1,7 +1,7 @@
 {
-  "codeSha": "b39bae44aa33f31a01c8b85c7622e7cfddfd7c93",
-  "runId": "38955768962",
-  "checkedAt": "2026-10-16T19:35:57.340Z",
+  "codeSha": "6916d8e15bc9be440f357a3bb6a4f887cc25f6d6",
+  "runId": "38958288462",
+  "checkedAt": "2026-10-16T19:57:36.049Z",
   "scope": "Roadmap packages 1-2: navigation history, compact profile and unified typography; Chromium and mobile WebKit controlled-data regressions, not live deployment or content verification",
   "passed": true,
   "integrationApplied": true,
@@ -16,8 +16,8 @@
     "chromium": {
       "passed": true,
       "stats": {
-        "startTime": "2026-10-16T19:34:58.776Z",
-        "duration": 13406.796,
+        "startTime": "2026-10-16T19:56:06.492Z",
+        "duration": 19174.456000000002,
         "expected": 38,
         "skipped": 0,
         "unexpected": 0,
@@ -28,8 +28,8 @@
     "webkit": {
       "passed": true,
       "stats": {
-        "startTime": "2026-10-16T19:35:13.028Z",
-        "duration": 43051.97,
+        "startTime": "2026-10-16T19:56:27.032Z",
+        "duration": 67918.85,
         "expected": 38,
         "skipped": 0,
         "unexpected": 0,
