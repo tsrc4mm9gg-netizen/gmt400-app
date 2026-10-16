@@ -1,9 +1,9 @@
 {
-  "codeSha": "fe9be5be0b4eb9d83bfac58a50125f49194cc6e0",
-  "runId": "38937057680",
-  "checkedAt": "2026-10-16T17:07:38.806Z",
+  "codeSha": "0ccc98cbffeccbe2bdd8012055ac6efd3b1266c7",
+  "runId": "38938327543",
+  "checkedAt": "2026-10-16T17:17:20.171Z",
   "scope": "Production build; Chromium with mocked Notion fixtures, not live Notion or Vercel",
-  "passed": true,
+  "passed": false,
   "stages": {
     "install": "success",
     "build": "success",
@@ -12,9 +12,9 @@
     "browser": "success"
   },
   "stats": {
-    "startTime": "2026-10-16T17:07:31.950Z",
-    "duration": 6782.46,
-    "expected": 13,
+    "startTime": "2026-10-16T17:17:13.312Z",
+    "duration": 6803.683,
+    "expected": 14,
     "skipped": 0,
     "unexpected": 0,
     "flaky": 0
@@ -27,7 +27,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 724
+          "durationMs": 523
         }
       ]
     },
@@ -38,7 +38,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 467
+          "durationMs": 327
         }
       ]
     },
@@ -49,7 +49,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 433
+          "durationMs": 297
         }
       ]
     },
@@ -60,7 +60,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 270
+          "durationMs": 209
         }
       ]
     },
@@ -71,7 +71,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 289
+          "durationMs": 215
         }
       ]
     },
@@ -82,7 +82,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 268
+          "durationMs": 221
         }
       ]
     },
@@ -93,7 +93,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 269
+          "durationMs": 224
         }
       ]
     },
@@ -104,7 +104,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 332
+          "durationMs": 226
         }
       ]
     },
@@ -115,7 +115,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 332
+          "durationMs": 285
         }
       ]
     },
@@ -126,7 +126,18 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 309
+          "durationMs": 254
+        }
+      ]
+    },
+    {
+      "title": "profile counters and default filtering are scoped to the current knowledge category",
+      "file": "tests/knowledge-categories.spec.cjs",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "durationMs": 373
         }
       ]
     },
@@ -137,7 +148,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 602
+          "durationMs": 691
         }
       ]
     },
@@ -148,7 +159,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 336
+          "durationMs": 307
         }
       ]
     },
@@ -159,7 +170,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 676
+          "durationMs": 530
         }
       ]
     }
