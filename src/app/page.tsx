@@ -1424,16 +1424,15 @@ export default function Home() {
 
             <div className="bg-neutral-950 border border-white/10 p-4 mb-4">
               <h3 className="font-semibold text-amber-400 mb-2">3. SPRAWDŹ PRZEŁOŻENIE OSI BEZ ROZBIERANIA</h3>
-              <p className="text-sm text-neutral-300 mb-2">Metoda "spin test" — bez demontażu dyferencjału.</p>
-              <ol className="text-sm text-neutral-300 space-y-1 list-decimal list-inside">
-                <li>Podnieś tył na kobyłkach</li>
-                <li>Zaznacz kredą wał i oponę</li>
-                <li>Obróć oponę o 1 pełny obrót</li>
-                <li>Policz obroty wału napędowego</li>
-              </ol>
-              <div className="text-xs text-neutral-500 mt-2">
-                <p>~3.4 obrotu = 3.42 | ~3.7 = 3.73 | ~4.1 = 4.10</p>
-              </div>
+              <button type="button" onClick={() => setLightbox('/tip-axle-ratio-guide.svg')} aria-label="Powiększ schemat testu przełożenia" className="block w-full my-4"><img src="/tip-axle-ratio-guide.svg" alt="Otwarty mechanizm: jedno koło nieruchome, drugie dwa obroty; liczymy obroty wału" className="w-full h-auto" /></button>
+              <p className="text-sm text-neutral-300 mb-2">Najpierw odczytaj RPO. Jeśli most był zmieniany, kod może nie odpowiadać obecnemu przełożeniu.</p>
+              <p className="text-sm text-amber-200 mb-2">Próba wymaga rozpoznania mechanizmu i bezpiecznego podparcia auta. Równe, twarde podłoże, kliny pod kołami pozostającymi na ziemi i podpory o odpowiedniej nośności w punktach zalecanych przez producenta. Nie pracuj pod autem opartym wyłącznie na podnośniku. Silnik wyłączony; koła obracaj tylko ręcznie. Zabezpiecz auto przed przetoczeniem przed ustawieniem skrzyni w N i zwolnieniem hamulca postojowego. Jeśli nie potrafisz bezpiecznie przygotować auta, zleć próbę warsztatowi.</p>
+              <ul className="text-sm text-neutral-300 space-y-2 list-disc list-inside">
+                <li>Otwarty mechanizm, drugie koło nieruchome: oznacz oponę i wał, obróć swobodne koło o dwa pełne obroty i policz obroty wału.</li>
+                <li>Gdy oba koła rzeczywiście obracają się razem w tę samą stronę: jeden pełny obrót obu kół odpowiada liczbie obrotów wału równej przełożeniu. Nie zakładaj automatycznie takiego zachowania przy każdym mechanizmie z blokadą.</li>
+                <li>Przykładowo około 3,73 obrotu wału oznacza około 3,73:1. To oszacowanie, nie dokładny pomiar liczby zębów.</li>
+              </ul>
+              <p className="text-xs text-neutral-400 mt-3">Schemat poglądowy, bez wskazania punktów podparcia. <a href="https://differentials.com/technical-help-2/differential-faqs/" target="_blank" rel="noopener noreferrer" className="underline">Źródło: West Coast Differentials — What gear ratio do I have?</a></p>
             </div>
 
             <div className="bg-neutral-950 border border-white/10 p-4 mb-4">
@@ -1448,6 +1447,8 @@ export default function Home() {
 
             <div className="bg-neutral-950 border border-white/10 p-4 mb-4">
               <h3 className="font-semibold text-amber-400 mb-2">5. KODY RPO W SCHOWKU</h3>
+              <button type="button" onClick={() => setLightbox('/tip-rpo-guide.svg')} aria-label="Powiększ schemat naklejki RPO" className="block w-full my-4"><img src="/tip-rpo-guide.svg" alt="Schemat schowka pasażera i przykładowej naklejki: GT4 oznacza przełożenie 3,73" className="w-full h-auto" /></button>
+              <p className="text-xs text-neutral-400 mb-3">Schemat lokalizacji jest poglądowy. Kody na ilustracji są przykładem, nie danymi Twojego auta. RPO opisuje wyposażenie fabryczne, nie późniejsze przeróbki. <a href="https://differentials.com/gm-axle-ratio-identification-codes/" target="_blank" rel="noopener noreferrer" className="underline">Źródło kodów przełożeń</a></p>
               <p className="text-sm text-neutral-300 mb-2">Naklejka w schowku zawiera wszystkie opcje fabryczne.</p>
               <div className="text-sm text-neutral-300">
                 <p className="mb-1"><strong>Przełożenia:</strong></p>
