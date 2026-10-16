@@ -1,32 +1,24 @@
 {
-  "codeSha": "0a9bb975970bdf1e1b2259f8ffbefd5615fad3b2",
-  "runId": "38963162217",
-  "checkedAt": "2026-10-16T20:35:58.617Z",
+  "codeSha": "d71aec15d84bedd20883788702db1d57d9a932a9",
+  "runId": "38967429402",
+  "checkedAt": "2026-10-16T21:11:49.177Z",
   "scope": "Chromium regressions with category-scoped counters, mocked Notion pagination and server HTML rendering; not complete live Notion or Safari verification",
-  "passed": false,
+  "passed": true,
   "stages": {
     "install": "success",
     "build": "success",
     "tooling": "success",
     "server": "success",
-    "tests": "failure"
+    "tests": "success"
   },
   "buildDiagnostics": "",
   "stats": {
-    "startTime": "2026-10-16T20:35:39.145Z",
-    "duration": 17744.36,
-    "expected": 28,
+    "startTime": "2026-10-16T21:11:31.845Z",
+    "duration": 16416.449,
+    "expected": 29,
     "skipped": 0,
-    "unexpected": 1,
+    "unexpected": 0,
     "flaky": 0
   },
-  "failures": [
-    {
-      "title": "main categories and subsections have distinct hierarchy and tactile selection styles",
-      "status": "unexpected",
-      "errors": [
-        "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mnot\u001b[2m.\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: not \u001b[32m\"rgb(231, 185, 94)\"\u001b[39m"
-      ]
-    }
-  ]
+  "failures": []
 }
