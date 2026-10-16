@@ -1,0 +1,38 @@
+name: Vehicle filter browser regression tests
+on:
+  push:
+    branches: [main]
+    paths: ['src/app/VehicleMaterialFilter.tsx', 'src/app/VehicleProfileProvider.tsx', 'src/lib/vehicle-compatibility.ts', 'src/app/page.tsx', 'tests/vehicle-filters.spec.cjs', '.github/workflows/vehicle-filter-browser-tests.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  browser-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm ci
+      - run: npm run build
+      - name: Install browser test tooling only in CI
+        run: npm install --no-save --package-lock=false @playwright/test
+      - run: npx playwright install --with-deps chromium
+      - name: Start application
+        run: |
+          npm run start -- --hostname 127.0.0.1 --port 3100 > /tmp/gmt400-app.log 2>&1 &
+          for i in $(seq 1 60); do
+            if curl -fsS http://127.0.0.1:3100 > /dev/null; then exit 0; fi
+            sleep 1
+          done
+          cat /tmp/gmt400-app.log
+          exit 1
+      - run: npx playwright test tests/vehicle-filters.spec.cjs --workers=1 --reporter=line
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: vehicle-filter-test-results
+          path: test-results/
+          if-no-files-found: ignore

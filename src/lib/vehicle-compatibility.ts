@@ -3,6 +3,19 @@ export type Applicability = { brand: string[]; model: string[]; years: string[];
 export type MatchResult = { status: 'within_scope' | 'general' | 'unknown' | 'outside_scope'; reasons: string[] };
 const normalize = (value: string) => value.trim().toLocaleLowerCase('pl').normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/ł/g, 'l').replace(/\s+/g, ' ');
 const general = (value: string) => ['wszystkie', 'wszystkie modele', 'ogolne', 'all'].includes(normalize(value));
+const canonical = (field: string, value: string) => {
+  const text = normalize(value);
+  if (field === 'drive' && ['4x4', '4×4', '4wd'].includes(text.replace(/\s/g, ''))) return '4wd';
+  return text;
+};
+const comparable = (field: string, value: string) => {
+  const text = canonical(field, value);
+  if (field === 'brand') return ['chevrolet', 'gmc'].includes(text);
+  if (field === 'model') return ['c/k', 'suburban', 'tahoe', 'sierra', 'yukon'].includes(text);
+  if (field === 'drive') return ['2wd', '4wd'].includes(text);
+  if (field === 'engine') return /^[a-z][0-9]{2}$/.test(text);
+  return /^4l(?:60|80)e$/.test(text);
+};
 export function matchVehicle(profile: VehicleSelection, rules: Applicability): MatchResult {
   const unknown: string[] = [];
   const outside: string[] = [];
@@ -14,8 +27,9 @@ export function matchVehicle(profile: VehicleSelection, rules: Applicability): M
     if (!values.length) { unknown.push(label + ': brak zakresu w materiale'); continue; }
     if (values.some(general)) { wildcards++; continue; }
     if (!profile[field]) { unknown.push(label + ': nieuzupełniony profil'); continue; }
-    if (values.some(value => normalize(value) === normalize(profile[field]))) explicit++;
-    else outside.push(label + ': poza opisanym zakresem');
+    if (values.some(value => canonical(field, value) === canonical(field, profile[field]))) explicit++;
+    else if (comparable(field, profile[field]) && values.every(value => comparable(field, value))) outside.push(label + ': poza opisanym zakresem');
+    else unknown.push(label + ': niejednoznaczne oznaczenia wymagają sprawdzenia');
   }
   if (!rules.years?.length) unknown.push('Rocznik: brak zakresu w materiale');
   else if (rules.years.some(general)) wildcards++;
