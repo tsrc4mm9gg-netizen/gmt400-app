@@ -11,6 +11,7 @@ export default function useSectionNavigation(allowed: string[]) {
   const persist = useCallback((value: string) => { try { localStorage.setItem('gmt400_tab', value); } catch {} }, []);
   const savePosition = useCallback(() => { if (!ready.current || restoring.current) return; window.history.replaceState({ ...window.history.state, gmt400Section: current.current, gmt400ScrollY: window.scrollY }, '', window.location.href); }, []);
   useEffect(() => {
+    const bootScroll = window.scrollY;
     const url = new URL(window.location.href);
     const explicit = valid(url.searchParams.get('tab'));
     let saved: string | null = null;
@@ -25,21 +26,26 @@ export default function useSectionNavigation(allowed: string[]) {
     window.history.scrollRestoration = 'manual';
     let timer: ReturnType<typeof setTimeout> | undefined;
     let stopped = false;
+    let initialAllowed = true;
     let observer: MutationObserver | undefined;
     let observerTimer: ReturnType<typeof setTimeout> | undefined;
+    const cancelInitial = () => { initialAllowed = false; observer?.disconnect(); if (observerTimer) clearTimeout(observerTimer); };
     const restoreInitial = () => {
       const content = document.getElementById('content');
       if (!content) return false;
       observer?.disconnect();
+      if (observerTimer) clearTimeout(observerTimer);
       requestAnimationFrame(() => requestAnimationFrame(() => {
-        if (stopped) return;
+        if (stopped || !initialAllowed || restoring.current || current.current !== initial || Math.abs(window.scrollY - bootScroll) > 2) return;
+        initialAllowed = false;
         if (position !== null) window.scrollTo({ top: position, behavior: 'instant' });
         else if (explicit) { const target = content.querySelector<HTMLElement>('h2, h1') || content; const header = Math.max(0, document.querySelector('header')?.getBoundingClientRect().bottom || 0); window.scrollTo({ top: Math.max(0, window.scrollY + target.getBoundingClientRect().top - header - 16), behavior: 'instant' }); }
       }));
       return true;
     };
-    if (explicit || position !== null) { if (!restoreInitial()) { observer = new MutationObserver(restoreInitial); observer.observe(document.body, { childList: true, subtree: true }); observerTimer = setTimeout(() => observer?.disconnect(), 30000); } }
+    if (explicit || position !== null) { if (!restoreInitial()) { observer = new MutationObserver(restoreInitial); observer.observe(document.body, { childList: true, subtree: true }); observerTimer = setTimeout(cancelInitial, 30000); } }
     const pop = (event: PopStateEvent) => {
+      cancelInitial();
       if (timer) clearTimeout(timer);
       restoring.current = true;
       const next = valid(new URL(window.location.href).searchParams.get('tab')) || fallback;
@@ -47,11 +53,16 @@ export default function useSectionNavigation(allowed: string[]) {
       const top = typeof event.state?.gmt400ScrollY === 'number' ? event.state.gmt400ScrollY : 0;
       requestAnimationFrame(() => requestAnimationFrame(() => { if (!stopped) { window.scrollTo({ top, behavior: 'instant' }); restoring.current = false; } }));
     };
-    const scroll = () => { if (timer) clearTimeout(timer); timer = setTimeout(savePosition, 180); };
+    const scroll = () => { if (initialAllowed && Math.abs(window.scrollY - bootScroll) > 2) cancelInitial(); if (timer) clearTimeout(timer); timer = setTimeout(savePosition, 180); };
+    const intent = () => cancelInitial();
     window.addEventListener('popstate', pop);
     window.addEventListener('scroll', scroll, { passive: true });
+    window.addEventListener('wheel', intent, { passive: true });
+    window.addEventListener('touchstart', intent, { passive: true });
+    window.addEventListener('pointerdown', intent, { passive: true });
+    window.addEventListener('keydown', intent);
     window.addEventListener('pagehide', savePosition);
-    return () => { stopped = true; if (timer) clearTimeout(timer); if (observerTimer) clearTimeout(observerTimer); observer?.disconnect(); window.removeEventListener('popstate', pop); window.removeEventListener('scroll', scroll); window.removeEventListener('pagehide', savePosition); window.history.scrollRestoration = previousRestoration; };
+    return () => { stopped = true; cancelInitial(); if (timer) clearTimeout(timer); window.removeEventListener('popstate', pop); window.removeEventListener('scroll', scroll); window.removeEventListener('wheel', intent); window.removeEventListener('touchstart', intent); window.removeEventListener('pointerdown', intent); window.removeEventListener('keydown', intent); window.removeEventListener('pagehide', savePosition); window.history.scrollRestoration = previousRestoration; };
   }, [valid, fallback, persist, savePosition]);
   const navigate = useCallback((value: SetStateAction<string>) => {
     const next = valid(typeof value === 'function' ? value(current.current) : value);
