@@ -1,0 +1,47 @@
+{
+  "auditorCodeSha": "5a8fd708676046fbd8103c86f19e79a0dfe7bbd5",
+  "runId": "38944028765",
+  "checkedAt": "2026-10-16T18:02:40.397Z",
+  "origin": "https://www.gmt400.pl",
+  "scope": "Actual public API and one actual production instruction in Linux mobile WebKit, no route mocks; not all instructions or a physical iPhone",
+  "passed": true,
+  "stages": {
+    "install": "success",
+    "tooling": "success",
+    "tests": "success"
+  },
+  "stats": {
+    "startTime": "2026-10-16T18:02:28.807Z",
+    "duration": 10790.414999999999,
+    "expected": 1,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "tests": [
+    {
+      "title": "real production instruction has its visible title, original text and no missing-body warning",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "error": "",
+          "diagnostics": [
+            {
+              "origin": "https://www.gmt400.pl",
+              "articleId": "3fad7bf1-c139-8122-90d6-dbb1bf5d3cb9",
+              "apiStatus": 200,
+              "pageStatus": 200,
+              "expectedTitle": "Wymiana amortyzatorów GMT400",
+              "finalUrl": "https://www.gmt400.pl/baza/3fad7bf1-c139-8122-90d6-dbb1bf5d3cb9",
+              "h1": [
+                "Wymiana amortyzatorów GMT400"
+              ],
+              "pageErrors": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
