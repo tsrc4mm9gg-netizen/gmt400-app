@@ -9,20 +9,16 @@ const GROUPS = [
 ];
 const grid: CSSProperties = { display: 'grid', gridTemplateColumns: 'repeat(2, minmax(0, 1fr))', gap: 10, minWidth: 0, width: '100%' };
 const tile: CSSProperties = { boxSizing: 'border-box', display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%', minWidth: 0, height: 72, padding: '10px 12px', margin: 0, border: '1px solid #353537', borderRadius: 10, background: '#232325', color: '#eeeeef', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: 14, fontWeight: 500, lineHeight: '20px', textAlign: 'center', whiteSpace: 'normal', overflowWrap: 'anywhere', cursor: 'pointer', WebkitTapHighlightColor: 'transparent' };
-const chosen: CSSProperties = { background: '#f4b900', color: '#111111', borderColor: '#f4b900' };
+const chosen: CSSProperties = { color: '#f0cf88', borderColor: '#76603a' };
 export default function GroupedNavigation({ categories, active, onSelect, instance }: { categories: Category[]; active: string; onSelect: (id: string) => void; instance: 'menu' | 'sections' }) {
-  const [expanded, setExpanded] = useState<string | null>(null);
+  const [menuGroup, setMenuGroup] = useState<string | null>(null);
   const wrapper = useRef<HTMLDivElement>(null);
   const nav = useRef<HTMLElement>(null);
   const items = useRef<HTMLDivElement>(null);
   const [frame, setFrame] = useState({ pinned: false, covered: false, top: 0, left: 0, width: 0, height: 0 });
   const activeGroup = GROUPS.find(group => group.ids.includes(active));
-  const selected = GROUPS.find(group => group.id === expanded);
-  const highlighted = expanded ?? activeGroup?.id;
+  const selected = instance === 'menu' ? GROUPS.find(group => group.id === menuGroup) ?? activeGroup : activeGroup;
   const entries = selected?.ids.map(id => categories.find(category => category.id === id)).filter((category): category is Category => Boolean(category)) ?? [];
-  useEffect(() => {
-    setExpanded(previous => previous === null ? null : GROUPS.find(group => group.ids.includes(active))?.id ?? null);
-  }, [active]);
   useEffect(() => {
     if (instance !== 'sections') return;
     let raf = 0;
@@ -50,15 +46,6 @@ export default function GroupedNavigation({ categories, active, onSelect, instan
     measure();
     return () => { cancelAnimationFrame(raf); resize.disconnect(); mutation.disconnect(); window.removeEventListener('scroll', schedule); window.removeEventListener('resize', schedule); window.visualViewport?.removeEventListener('resize', schedule); };
   }, [instance]);
-  function browse(id: string) {
-    setExpanded(previous => previous === id ? null : id);
-    if (items.current) items.current.scrollTop = 0;
-    if (instance === 'sections' && !frame.pinned) requestAnimationFrame(() => {
-      const r = wrapper.current?.getBoundingClientRect();
-      const top = Math.max(0, document.querySelector('header')?.getBoundingClientRect().bottom ?? 0) + 6;
-      if (r) window.scrollTo({ top: Math.max(0, window.scrollY + r.top - top), behavior: 'instant' });
-    });
-  }
   function enter(id: string) {
     onSelect(id);
     requestAnimationFrame(() => requestAnimationFrame(() => {
@@ -73,11 +60,18 @@ export default function GroupedNavigation({ categories, active, onSelect, instan
       target.focus({ preventScroll: true });
     }));
   }
+  function chooseGroup(id: string) {
+    const group = GROUPS.find(entry => entry.id === id);
+    if (!group) return;
+    if (items.current) items.current.scrollTop = 0;
+    if (instance === 'menu') { setMenuGroup(id); return; }
+    const first = group.ids.find(section => categories.some(category => category.id === section));
+    if (first) enter(activeGroup?.id === id ? active : first);
+  }
   return <div ref={wrapper} style={{ gridColumn: '1 / -1', width: '100%', minWidth: 0, ...(instance === 'sections' && frame.pinned ? { height: frame.height } : {}) }}>
-    <style>{'.gmt-navigation button:focus{outline:none}.gmt-navigation button:focus-visible{outline:2px solid #f5c445;outline-offset:-4px}'}</style>
     <nav ref={nav} className="gmt-navigation" aria-label={instance === 'menu' ? 'Menu główne' : 'Skróty sekcji'} aria-hidden={instance === 'sections' && frame.covered ? true : undefined} data-pinned={instance === 'sections' && frame.pinned ? 'true' : 'false'} style={{ boxSizing: 'border-box', display: 'block', width: '100%', minWidth: 0, padding: 6, background: '#171717', borderRadius: 10, ...(instance === 'sections' && frame.pinned ? { position: 'fixed', top: frame.top, left: frame.left, width: frame.width, zIndex: 40, boxShadow: '0 8px 18px #0008' } : {}), ...(instance === 'sections' && frame.covered ? { visibility: 'hidden', pointerEvents: 'none' } : {}), ...(instance === 'menu' ? { maxHeight: '65dvh', overflowY: 'auto' } : {}) }}>
-      <div data-navigation-groups style={grid}>{GROUPS.map(group => <button key={group.id} type="button" data-active={highlighted === group.id ? 'true' : 'false'} aria-expanded={expanded === group.id} aria-controls={`nav-${instance}-items`} onClick={() => browse(group.id)} style={{ ...tile, ...(highlighted === group.id ? chosen : {}) }}>{group.label}</button>)}</div>
-      <p aria-live="polite" style={{ margin: '8px 0 0', color: '#b8b8bd', fontSize: 12, lineHeight: '18px' }}>Aktualnie: {activeGroup?.label ?? 'Sekcja'} / {categories.find(category => category.id === active)?.label ?? active}</p>
+      <div data-navigation-groups style={grid}>{GROUPS.map(group => <button key={group.id} type="button" data-active={selected?.id === group.id ? 'true' : 'false'} aria-expanded={selected?.id === group.id} aria-controls={`nav-${instance}-items`} onClick={() => chooseGroup(group.id)} style={{ ...tile, ...(selected?.id === group.id ? chosen : {}) }}>{group.label}</button>)}</div>
+      <p aria-live="polite" style={{ margin: '8px 0 0', color: '#b8b8bd', fontSize: 12, lineHeight: '18px' }}>{instance === 'menu' ? `Wybierz sekcję: ${selected?.label ?? 'Kategorie'}` : `Aktualnie: ${activeGroup?.label ?? 'Sekcja'} / ${categories.find(category => category.id === active)?.label ?? active}`}</p>
       <div id={`nav-${instance}-items`} hidden={!selected} style={{ marginTop: selected ? 10 : 0, borderTop: selected ? '1px solid #353537' : undefined, paddingTop: selected ? 10 : 0 }}>
         <div ref={items} style={{ maxHeight: 'min(22dvh, 180px)', overflowY: 'auto', overscrollBehaviorY: 'contain', padding: 2 }}>
           <ul data-navigation-items style={{ ...grid, margin: 0, padding: 0, listStyle: 'none' }}>{entries.map(category => <li key={category.id} style={{ minWidth: 0, height: 52, margin: 0, padding: 0, listStyle: 'none' }}>
