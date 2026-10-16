@@ -1,0 +1,44 @@
+{
+  "codeSha": "11ff0300ee7afb3294aa7c47e98a23f3b5bcc4c7",
+  "apiBlobSha": "55d10bdfa911fddf10ed26c58a13558a91e3fa0e",
+  "runId": "38931931498",
+  "checkedAt": "2026-10-16T16:27:25.568Z",
+  "scope": "Direct GET handler tests with mocked Notion responses; 501 entries, complete titles, repeated-cursor rejection; not live Notion or browser tests",
+  "passed": true,
+  "stages": {
+    "install": "success",
+    "build": "success",
+    "tooling": "success",
+    "tests": "success"
+  },
+  "stats": {
+    "startTime": "2026-10-16T16:27:24.358Z",
+    "duration": 1127.936,
+    "expected": 2,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "tests": [
+    {
+      "title": "API returns all 501 materials and concatenates title fragments",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "error": ""
+        }
+      ]
+    },
+    {
+      "title": "repeated cursor fails explicitly instead of returning an incomplete successful list",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "error": ""
+        }
+      ]
+    }
+  ]
+}
