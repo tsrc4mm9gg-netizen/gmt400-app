@@ -8,6 +8,7 @@ import type { Applicability } from '../lib/vehicle-compatibility';
 import VinHistorySummary from './VinHistorySummary';
 
 type Item = {
+  id?: string;
   applicability?: Applicability;
   Nazwa: string;
   Typ: string;
@@ -97,7 +98,6 @@ function playGong(): void {
 
 export default function Home() {
   const [items, setItems] = useState<Item[]>([]);
-  const { visibleItems, panel: vehicleFilterPanel } = useVehicleMaterialFilter(items);
   const [error, setError] = useState<string | null>(null);
   const [ratings, setRatings] = useState<Record<string, number>>({});
   const [touchStart, setTouchStart] = useState(0);
@@ -110,6 +110,8 @@ export default function Home() {
     }
     return 'modele';
   });
+  const materialScope = tab === 'diy' || tab === 'schematy' ? ['Porada'] : tab === 'kody' ? ['Kod błędu'] : tab === 'usterki' ? ['Usterka'] : undefined;
+  const { visibleItems, panel: vehicleFilterPanel } = useVehicleMaterialFilter(items, materialScope);
   const [selectedModel, setSelectedModel] = useState('Wszystkie');
   const [selectedModelItem, setSelectedModelItem] = useState<Item | null>(null);
   const [expanded, setExpanded] = useState<number | null>(null);
@@ -600,24 +602,6 @@ export default function Home() {
         )}
 
         {tab === 'diy' && (
-          <div className="mb-6 bg-neutral-950 border border-white/10 p-4">
-            <h3 className="font-semibold text-amber-400 mb-3">PORADNIKI WIDEO</h3>
-            <div className="grid sm:grid-cols-2 gap-4">
-              <div className="aspect-video bg-neutral-900 flex items-center justify-center">
-                <a href="https://www.youtube.com/results?search_query=GMT400+DIY+repair" target="_blank" className="text-amber-400 hover:underline">
-                  ▶ YouTube: GMT400 DIY
-                </a>
-              </div>
-              <div className="aspect-video bg-neutral-900 flex items-center justify-center">
-                <a href="https://www.youtube.com/results?search_query=GMT400+4L60E+rebuild" target="_blank" className="text-amber-400 hover:underline">
-                  ▶ YouTube: 4L60E
-                </a>
-              </div>
-            </div>
-          </div>
-        )}
-
-        {tab === 'diy_content' && (
           <div>
             <h2 className="text-2xl mb-6" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>PORADNIKI DIY</h2>
             <input 
@@ -637,11 +621,32 @@ export default function Home() {
                     <div className="p-4">
                       <h3 className="font-semibold mb-2">{t.Nazwa}</h3>
                       <VehicleMatchBadge item={t} />
+                      <VehicleMatchBadge item={t} />
+                      {t.Opis && <p className="mb-3 text-neutral-400 text-sm whitespace-pre-line">{t.Opis}</p>}
                       <p className="text-neutral-300 text-sm whitespace-pre-line">{t.Rozwiązanie}</p>
+                      {t.id && <a className="mt-3 inline-block text-sm text-amber-400 underline" href={'/baza/' + encodeURIComponent(t.id)}>Otwórz pełną instrukcję z ilustracjami</a>}
                     </div>
                   </div>
                 );
               })}
+            </div>
+          </div>
+        )}
+
+        {tab === 'diy' && (
+          <div className="mb-6 bg-neutral-950 border border-white/10 p-4">
+            <h3 className="font-semibold text-amber-400 mb-3">PORADNIKI WIDEO</h3>
+            <div className="grid sm:grid-cols-2 gap-4">
+              <div className="aspect-video bg-neutral-900 flex items-center justify-center">
+                <a href="https://www.youtube.com/results?search_query=GMT400+DIY+repair" target="_blank" className="text-amber-400 hover:underline">
+                  ▶ YouTube: GMT400 DIY
+                </a>
+              </div>
+              <div className="aspect-video bg-neutral-900 flex items-center justify-center">
+                <a href="https://www.youtube.com/results?search_query=GMT400+4L60E+rebuild" target="_blank" className="text-amber-400 hover:underline">
+                  ▶ YouTube: 4L60E
+                </a>
+              </div>
             </div>
           </div>
         )}
