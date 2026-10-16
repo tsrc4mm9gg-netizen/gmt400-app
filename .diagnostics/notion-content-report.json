@@ -1,7 +1,7 @@
 {
-  "codeSha": "0bd8fcfc35f4631c5eae25ae179cb375a5d1692d",
-  "runId": "38961482810",
-  "checkedAt": "2026-10-16T20:22:01.564Z",
+  "codeSha": "0a9bb975970bdf1e1b2259f8ffbefd5615fad3b2",
+  "runId": "38963162217",
+  "checkedAt": "2026-10-16T20:35:58.617Z",
   "scope": "Chromium regressions with category-scoped counters, mocked Notion pagination and server HTML rendering; not complete live Notion or Safari verification",
   "passed": false,
   "stages": {
@@ -13,8 +13,8 @@
   },
   "buildDiagnostics": "",
   "stats": {
-    "startTime": "2026-10-16T20:21:44.852Z",
-    "duration": 15773.032000000001,
+    "startTime": "2026-10-16T20:35:39.145Z",
+    "duration": 17744.36,
     "expected": 28,
     "skipped": 0,
     "unexpected": 1,
@@ -25,7 +25,7 @@
       "title": "main categories and subsections have distinct hierarchy and tactile selection styles",
       "status": "unexpected",
       "errors": [
-        "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoContain\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // indexOf\u001b[22m\n\nExpected substring: \u001b[32m\"linear-gradient\"\u001b[39m\nReceived string:    \u001b[31m\"none\"\u001b[39m"
+        "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mnot\u001b[2m.\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: not \u001b[32m\"rgb(231, 185, 94)\"\u001b[39m"
       ]
     }
   ]
