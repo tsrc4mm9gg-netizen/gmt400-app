@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, useMemo } from 'react';
+import RepairCostCalculator from './RepairCostCalculator';
 import GroupedNavigation from './GroupedNavigation';
 import useSectionNavigation from './useSectionNavigation';
 import ModelCatalog from './ModelCatalog';
@@ -123,7 +124,6 @@ export default function Home() {
   const [vinInput, setVinInput] = useState('');
   const [vinResult, setVinResult] = useState<Record<string, string> | null>(null);
   const [vinWarning, setVinWarning] = useState(false);
-  const [repairType, setRepairType] = useState('uszczelka');
   const [myVin, setMyVin] = useState('');
   const [fuelKm, setFuelKm] = useState(500);
   const [fuelLiters, setFuelLiters] = useState(50);
@@ -1551,93 +1551,7 @@ export default function Home() {
           </div>
         )}
 
-        {tab === 'kalkulator' && (
-          <div>
-            <div className="flex items-center justify-between mb-6">
-              <h2 className="text-2xl" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>KALKULATOR KOSZTÓW NAPRAWY</h2>
-              <button onClick={() => shareSection('kalkulator')} className="text-neutral-400 hover:text-amber-400 text-sm">Udostępnij</button>
-            </div>
-            <div className="bg-neutral-950 border border-white/10 p-4 mb-4">
-              <label className="text-sm text-neutral-400 block mb-2">Wybierz naprawę:</label>
-              <select value={repairType} onChange={e => setRepairType(e.target.value)} className="w-full bg-neutral-900 border border-white/10 p-2 text-sm">
-                <option value="uszczelka">Uszczelka kolektora</option>
-                <option value="hamulce">Klocki + tarcze przód</option>
-                <option value="amortyzatory">Amortyzatory (4 szt.)</option>
-                <option value="skrzynia">Regeneracja 4L60E</option>
-                <option value="rozrzad">Rozrząd</option>
-                <option value="zawieszenie">Komplet zawieszenia</option>
-              </select>
-            </div>
-            <div className="bg-neutral-950 border border-amber-400/30 p-4">
-              <h3 className="font-semibold text-amber-400 mb-4">KOSZTY</h3>
-              {repairType === 'uszczelka' && (
-                <div className="space-y-2 text-sm">
-                  <div className="flex justify-between"><span>Uszczelka kolektora (OEM)</span><span>150 PLN</span></div>
-                  <div className="flex justify-between"><span>Uszczelki dodatkowe</span><span>50 PLN</span></div>
-                  <div className="flex justify-between"><span>Płyn chłodzący</span><span>80 PLN</span></div>
-                  <div className="flex justify-between border-t border-white/10 pt-2"><span>Części razem</span><span className="text-amber-400">280 PLN</span></div>
-                  <div className="flex justify-between"><span>Robocizna (4h x 150 PLN)</span><span>600 PLN</span></div>
-                  <div className="flex justify-between font-bold text-lg border-t border-amber-400/30 pt-2"><span>RAZEM</span><span className="text-amber-400">880 PLN</span></div>
-                  <p className="text-xs text-neutral-500 mt-2">DIY: 280 PLN | Warsztat: 880 PLN | Oszczędność: 600 PLN</p>
-                </div>
-              )}
-              {repairType === 'hamulce' && (
-                <div className="space-y-2 text-sm">
-                  <div className="flex justify-between"><span>Klocki przód (AC Delco)</span><span>180 PLN</span></div>
-                  <div className="flex justify-between"><span>Tarcze przód (2 szt.)</span><span>300 PLN</span></div>
-                  <div className="flex justify-between border-t border-white/10 pt-2"><span>Części razem</span><span className="text-amber-400">480 PLN</span></div>
-                  <div className="flex justify-between"><span>Robocizna (2h x 150 PLN)</span><span>300 PLN</span></div>
-                  <div className="flex justify-between font-bold text-lg border-t border-amber-400/30 pt-2"><span>RAZEM</span><span className="text-amber-400">780 PLN</span></div>
-                  <p className="text-xs text-neutral-500 mt-2">DIY: 480 PLN | Warsztat: 780 PLN | Oszczędność: 300 PLN</p>
-                </div>
-              )}
-              {repairType === 'amortyzatory' && (
-                <div className="space-y-2 text-sm">
-                  <div className="flex justify-between"><span>Amortyzatory (4 szt. AC Delco)</span><span>800 PLN</span></div>
-                  <div className="flex justify-between"><span>Tuleje mocujące</span><span>100 PLN</span></div>
-                  <div className="flex justify-between border-t border-white/10 pt-2"><span>Części razem</span><span className="text-amber-400">900 PLN</span></div>
-                  <div className="flex justify-between"><span>Robocizna (3h x 150 PLN)</span><span>450 PLN</span></div>
-                  <div className="flex justify-between font-bold text-lg border-t border-amber-400/30 pt-2"><span>RAZEM</span><span className="text-amber-400">1350 PLN</span></div>
-                  <p className="text-xs text-neutral-500 mt-2">DIY: 900 PLN | Warsztat: 1350 PLN | Oszczędność: 450 PLN</p>
-                </div>
-              )}
-              {repairType === 'skrzynia' && (
-                <div className="space-y-2 text-sm">
-                  <div className="flex justify-between"><span>Zestaw regeneracyjny 4L60E</span><span>1500 PLN</span></div>
-                  <div className="flex justify-between"><span>ATF Dexron VI (6L)</span><span>180 PLN</span></div>
-                  <div className="flex justify-between"><span>Filtr + uszczelka</span><span>80 PLN</span></div>
-                  <div className="flex justify-between border-t border-white/10 pt-2"><span>Części razem</span><span className="text-amber-400">1760 PLN</span></div>
-                  <div className="flex justify-between"><span>Robocizna (8h x 200 PLN)</span><span>1600 PLN</span></div>
-                  <div className="flex justify-between font-bold text-lg border-t border-amber-400/30 pt-2"><span>RAZEM</span><span className="text-amber-400">3360 PLN</span></div>
-                  <p className="text-xs text-neutral-500 mt-2">DIY: 1760 PLN | Warsztat: 3360 PLN | Oszczędność: 1600 PLN</p>
-                </div>
-              )}
-              {repairType === 'rozrzad' && (
-                <div className="space-y-2 text-sm">
-                  <div className="flex justify-between"><span>Zestaw rozrządu (Gates)</span><span>400 PLN</span></div>
-                  <div className="flex justify-between"><span>Pompa wody</span><span>200 PLN</span></div>
-                  <div className="flex justify-between"><span>Płyn chłodzący</span><span>80 PLN</span></div>
-                  <div className="flex justify-between border-t border-white/10 pt-2"><span>Części razem</span><span className="text-amber-400">680 PLN</span></div>
-                  <div className="flex justify-between"><span>Robocizna (5h x 150 PLN)</span><span>750 PLN</span></div>
-                  <div className="flex justify-between font-bold text-lg border-t border-amber-400/30 pt-2"><span>RAZEM</span><span className="text-amber-400">1430 PLN</span></div>
-                  <p className="text-xs text-neutral-500 mt-2">DIY: 680 PLN | Warsztat: 1430 PLN | Oszczędność: 750 PLN</p>
-                </div>
-              )}
-              {repairType === 'zawieszenie' && (
-                <div className="space-y-2 text-sm">
-                  <div className="flex justify-between"><span>Wahacze (4 szt.)</span><span>600 PLN</span></div>
-                  <div className="flex justify-between"><span>Końcówki drążków (2 szt.)</span><span>150 PLN</span></div>
-                  <div className="flex justify-between"><span>Tuleje stabilizatora</span><span>80 PLN</span></div>
-                  <div className="flex justify-between"><span>Łączniki stabilizatora</span><span>100 PLN</span></div>
-                  <div className="flex justify-between border-t border-white/10 pt-2"><span>Części razem</span><span className="text-amber-400">930 PLN</span></div>
-                  <div className="flex justify-between"><span>Robocizna (4h x 150 PLN)</span><span>600 PLN</span></div>
-                  <div className="flex justify-between font-bold text-lg border-t border-amber-400/30 pt-2"><span>RAZEM</span><span className="text-amber-400">1530 PLN</span></div>
-                  <p className="text-xs text-neutral-500 mt-2">DIY: 930 PLN | Warsztat: 1530 PLN | Oszczędność: 600 PLN</p>
-                </div>
-              )}
-            </div>
-          </div>
-        )}
+        {tab === 'kalkulator' && (<div><button onClick={() => shareSection('kalkulator')} className="text-sm text-neutral-400 mb-4">Udostępnij</button><RepairCostCalculator /></div>)}
 
         {tab === 'porownaj' && (
           <div>
