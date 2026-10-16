@@ -7,6 +7,14 @@ function getRichText(prop: any): string {
   return prop.rich_text.map((t: any) => t.plain_text || '').join('');
 }
 
+function getValues(prop: any): string[] {
+  if (!prop) return [];
+  if (Array.isArray(prop.multi_select)) return prop.multi_select.map((v: any) => v.name).filter((v: unknown): v is string => typeof v === 'string' && v.trim().length > 0);
+  if (typeof prop.select?.name === 'string') return [prop.select.name];
+  const text = getRichText(prop).trim();
+  return text ? text.split(/[;\n]+/).map(value => value.trim()).filter(Boolean) : [];
+}
+
 export async function GET() {
   const token = process.env.NOTION_TOKEN;
   if (!token) {
@@ -53,6 +61,15 @@ export async function GET() {
         Objawy: getRichText(props.Objawy),
         Rozwiązanie: getRichText(props['Rozwiązanie']),
         Lata: getRichText(props.Lata),
+        id: page.id,
+        applicability: {
+          brand: getValues(props.Marka),
+          model: getValues(props.Model),
+          years: getValues(props.Lata),
+          engine: getValues(props.Silnik),
+          drive: getValues(props['Napęd']),
+          transmission: getValues(props.Skrzynia),
+        },
       };
     });
 
