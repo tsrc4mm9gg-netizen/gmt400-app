@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, useMemo } from 'react';
+import GlobalSearch from './GlobalSearch';
 import { useVehicleMaterialFilter, VehicleMatchBadge } from './VehicleMaterialFilter';
 import type { Applicability } from '../lib/vehicle-compatibility';
 import VinHistorySummary from './VinHistorySummary';
@@ -387,23 +388,7 @@ export default function Home() {
         <span className="text-amber-400">{CATEGORIES.find(c => c.id === tab)?.label || tab}</span>
       </div>
 
-      {showSearch && (
-        <div className="fixed top-14 left-0 right-0 z-40 bg-neutral-900 border-b border-white/10 p-4">
-          <input
-            type="text"
-            placeholder="Szukaj w całej stronie..."
-            value={searchQuery}
-            onChange={e => setSearchQuery(e.target.value)}
-            className="w-full bg-neutral-800 border border-white/10 p-3 text-sm"
-            autoFocus
-          />
-          {searchQuery.length > 2 && (
-            <div className="mt-2 text-sm text-neutral-400">
-              Szukaj: "{searchQuery}" — przejdź do odpowiedniej sekcji
-            </div>
-          )}
-        </div>
-      )}
+      {showSearch && <GlobalSearch items={items} onClose={() => setShowSearch(false)} />}
 
       <section className="relative min-h-[40vh] flex items-center pt-16">
         <div className="absolute inset-0 bg-gradient-to-r from-black via-black/70 to-transparent z-10" />
