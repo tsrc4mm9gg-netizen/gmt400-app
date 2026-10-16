@@ -14,7 +14,7 @@ export default function KnowledgeCategory({ section }: { section: string }) {
   const [attempt, setAttempt] = useState(0);
   const [query, setQuery] = useState('');
   const targetType = section === 'modele' ? 'Model' : section === 'usterki' ? 'Usterka' : section === 'kody-obd' ? 'Kod błędu' : 'Porada';
-  const { visibleItems, panel } = useVehicleMaterialFilter(items, [targetType]);
+  const { visibleItems, panel } = useVehicleMaterialFilter(items, section === 'modele' ? ['Model'] : [targetType]);
   useEffect(() => {
     let active = true;
     const controller = new AbortController();
@@ -40,7 +40,7 @@ export default function KnowledgeCategory({ section }: { section: string }) {
   };
   const categoryTotal = items.filter(belongs).length;
   const matchingCategory = useMemo(() => items.filter(belongs), [items, section]);
-  const { visibleItems: profileVisible, panel: profilePanel } = useVehicleMaterialFilter(matchingCategory, [targetType]);
+  const { visibleItems: profileVisible, panel: profilePanel } = useVehicleMaterialFilter(matchingCategory, section === 'modele' ? ['Model'] : [targetType]);
   const results = useMemo(() => profileVisible.filter(item => normalize([item.Nazwa, item.Opis, item.Objawy, item.Rozwiązanie, item.Model, item.Lata].filter(Boolean).join(' ')).includes(normalize(query.trim()))), [profileVisible, query]);
   const matches = useMemo(() => new Map<string, MatchResult>(items.filter(item => item.id && item.applicability).map(item => [item.id as string, { status: 'unknown', reasons: [] } as MatchResult])), [items]);
   const related = useMemo(() => results.length ? getRelatedMaterials(results[0], items, matches) : [], [results, items, matches]);
@@ -49,7 +49,7 @@ export default function KnowledgeCategory({ section }: { section: string }) {
     <nav aria-label="Kategorie bazy wiedzy" className="flex flex-wrap gap-3">{LINKS.map(([path, title]) => <a key={path} href={'/' + path} aria-current={section === path ? 'page' : undefined} className={section === path ? 'text-amber-400 underline' : 'text-neutral-300 underline'}>{title}</a>)}</nav>
     <p className="text-xs text-neutral-400">Listy pobieramy w przeglądarce z kompletnej bazy. Osobne strony wpisów pokazują pola i zawartość materiału Notion.</p>
     {loading ? <p role="status">Ładowanie materiałów…</p> : error ? <div role="alert"><p>{error}</p><button type="button" onClick={() => setAttempt(n => n + 1)} className="mt-3 rounded bg-amber-400 px-4 py-2 text-black">Ponów pobieranie</button></div> : <>
-      {section !== 'modele' && profilePanel}
+      {profilePanel}
       <label htmlFor="category-query" className="block">Szukaj w tej kategorii</label>
       <input id="category-query" type="search" maxLength={120} value={query} onChange={event => setQuery(event.target.value)} className="w-full rounded border border-white/20 bg-neutral-900 p-3" />
       <p role="status">Widoczne: {results.length}. Materiały tej kategorii przed filtrowaniem: {categoryTotal}.</p>

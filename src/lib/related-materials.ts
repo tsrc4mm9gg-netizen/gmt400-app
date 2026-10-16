@@ -30,6 +30,8 @@ const keywords = (entry: KnowledgeEntry) => {
   return new Set(text.split(' ').filter(word => word.length > 3 && !STOP_WORDS.has(word)));
 };
 
+const matchWeight = (status?: MatchResult['status']) => status === 'within_scope' ? 40 : status === 'general' ? 20 : status === 'unknown' ? 5 : 0;
+
 export function getRelatedMaterials(current: KnowledgeEntry, candidates: KnowledgeEntry[], matches: Map<string, MatchResult>, limit = 3): RelatedMaterial[] {
   if (!current.id) return [];
   const currentKeywords = keywords(current);
@@ -43,7 +45,7 @@ export function getRelatedMaterials(current: KnowledgeEntry, candidates: Knowled
       const shared = [...currentKeywords].filter(word => candidateKeywords.has(word));
       const sameType = candidate.Typ === current.Typ;
       const sameModel = normalize(candidate.Model) === normalize(current.Model);
-      const score = (match?.status === 'within_scope' ? 40 : match?.status === 'general' ? 20 : 0) + (sameType ? 25 : 0) + (sameModel ? 20 : 0) + Math.min(shared.length, 5) * 3;
+      const score = matchWeight(match?.status) + (sameType ? 25 : 0) + (sameModel ? 20 : 0) + Math.min(shared.length, 5) * 3;
       if (score < 23) return null;
       const reason = sameType && sameModel ? 'Ten sam typ i model' : sameType ? 'Ten sam typ materiału' : sameModel ? 'Ten sam model' : 'Wspólne zagadnienie';
       seen.add(candidate.id as string);

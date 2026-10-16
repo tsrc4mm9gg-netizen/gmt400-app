@@ -7,7 +7,7 @@ const EMPTY: Applicability = { brand: [], model: [], years: [], engine: [], driv
 const LABELS = { relevant: 'Dla mojego auta', all: 'Wszystkie', within_scope: 'Zgodne z zakresem', general: 'Ogólne', unknown: 'Nieustalone', outside_scope: 'Poza zakresem' };
 type Mode = keyof typeof LABELS;
 type Material = { Typ?: string; applicability?: Applicability };
-const SUPPORTED = new Set(['Usterka', 'Kod błędu', 'Porada']);
+const SUPPORTED = new Set(['Usterka', 'Kod błędu', 'Porada', 'Model']);
 export function VehicleMatchBadge({ item }: { item: Material }) {
   const { profile, ready } = useVehicleProfile();
   if (!ready || !profile) return null;
@@ -27,13 +27,13 @@ export function useVehicleMaterialFilter<T extends Material>(items: T[], scopeTy
   const counts = useMemo(() => {
     const output: Record<Mode, number> = { relevant: 0, all: evaluated.length, within_scope: 0, general: 0, unknown: 0, outside_scope: 0 };
     for (const row of evaluated) if (row.match) output[row.match.status]++;
-    output.relevant = output.all - output.outside_scope;
+    output.relevant = output.within_scope + output.general;
     return output;
   }, [evaluated]);
   const visibleItems = useMemo(() => {
     if (!active || mode === 'all') return items;
     const scoped = new Set(evaluated.map(row => row.item));
-    const allowed = new Set(evaluated.filter(row => mode === 'relevant' ? row.match?.status !== 'outside_scope' : row.match?.status === mode).map(row => row.item));
+    const allowed = new Set(evaluated.filter(row => mode === 'relevant' ? row.match?.status === 'within_scope' || row.match?.status === 'general' : row.match?.status === mode).map(row => row.item));
     return items.filter(item => !scoped.has(item) || allowed.has(item));
   }, [items, active, mode, evaluated]);
   const panel = <CompactVehicleFilterPanel profile={profile} active={active} mode={mode} counts={counts} onModeChange={setMode} />;
