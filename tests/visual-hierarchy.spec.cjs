@@ -7,7 +7,7 @@ test('navigation hierarchy distinguishes groups and reserves gold for active sel
   const menu=page.getByRole('navigation',{name:'Menu główne',exact:true});
   await expect(menu).toBeVisible();
   const group=menu.locator('[data-navigation-groups] > button').first();
-  const item=menu.locator('[data-navigation-items] button').first();
+  const item=menu.locator('[data-navigation-items] button[aria-pressed="false"]').first();
   const groupStyle=await group.evaluate(node=>{const style=getComputedStyle(node);return{background:style.backgroundColor,border:style.borderColor,weight:Number(style.fontWeight)};});
   const itemStyle=await item.evaluate(node=>{const style=getComputedStyle(node);return{background:style.backgroundColor,border:style.borderColor,weight:Number(style.fontWeight)};});
   expect(groupStyle.background).not.toBe(itemStyle.background);
