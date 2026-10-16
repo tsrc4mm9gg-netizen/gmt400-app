@@ -1,9 +1,12 @@
 'use client';
 
 import { useState, useEffect, useMemo } from 'react';
+import { useVehicleMaterialFilter, VehicleMatchBadge } from './VehicleMaterialFilter';
+import type { Applicability } from '../lib/vehicle-compatibility';
 import VinHistorySummary from './VinHistorySummary';
 
 type Item = {
+  applicability?: Applicability;
   Nazwa: string;
   Typ: string;
   Model: string;
@@ -92,6 +95,7 @@ function playGong(): void {
 
 export default function Home() {
   const [items, setItems] = useState<Item[]>([]);
+  const { visibleItems, panel: vehicleFilterPanel } = useVehicleMaterialFilter(items);
   const [error, setError] = useState<string | null>(null);
   const [ratings, setRatings] = useState<Record<string, number>>({});
   const [touchStart, setTouchStart] = useState(0);
@@ -247,9 +251,9 @@ export default function Home() {
   }, [lightbox, menuOpen, selectedModel, tab]);
 
   const models = useMemo(() => items.filter(i => i.Typ === 'Model'), [items]);
-  const issues = useMemo(() => items.filter(i => i.Typ === 'Usterka'), [items]);
-  const codes = useMemo(() => items.filter(i => i.Typ === 'Kod błędu'), [items]);
-  const tips = useMemo(() => items.filter(i => i.Typ === 'Porada'), [items]);
+  const issues = useMemo(() => visibleItems.filter(i => i.Typ === 'Usterka'), [visibleItems]);
+  const codes = useMemo(() => visibleItems.filter(i => i.Typ === 'Kod błędu'), [visibleItems]);
+  const tips = useMemo(() => visibleItems.filter(i => i.Typ === 'Porada'), [visibleItems]);
 
   const uniqueModels = ['Wszystkie', ...Array.from(new Set(models.map(m => m.Model).filter(Boolean)))];
   const years = ['1988', '1989', '1990', '1991', '1992', '1993', '1994', '1995', '1996', '1997', '1998', '1999', '2000'];
@@ -491,6 +495,7 @@ export default function Home() {
       </div>
 
       <div id="content" className="max-w-7xl mx-auto px-4 py-8">
+        {['usterki', 'kody', 'diy', 'schematy'].includes(tab) && vehicleFilterPanel}
         
         {selectedModel !== 'Wszystkie' && (
           <div className="mb-6 flex items-center justify-between bg-amber-400/10 border border-amber-400/30 p-3">
@@ -540,6 +545,7 @@ export default function Home() {
               {filteredCodes.filter(c => !codeQuery || c.Nazwa.toLowerCase().includes(codeQuery.toLowerCase()) || (c.Opis && c.Opis.toLowerCase().includes(codeQuery.toLowerCase()))).map((c, idx) => (
                 <div key={idx} className="bg-neutral-950 border border-white/10 p-4">
                   <h3 className="font-semibold text-amber-400 mb-1">{c.Nazwa}</h3>
+                      <VehicleMatchBadge item={c} />
                   {c.Opis && <p className="text-neutral-400 text-sm mb-2">{c.Opis}</p>}
                   {c.Rozwiązanie && <p className="text-neutral-300 text-sm whitespace-pre-line">{c.Rozwiązanie}</p>}
                 </div>
@@ -602,6 +608,7 @@ export default function Home() {
                       <div className="p-4">
                         <div className="flex justify-between items-start mb-2">
                           <h3 className="font-semibold">{i.Nazwa}</h3>
+                      <VehicleMatchBadge item={i} />
                           <span className="text-xs bg-white/10 px-2 py-0.5 text-neutral-400">{i.Model}</span>
                         </div>
                         {i.Objawy && <p className="text-neutral-400 text-sm mb-2"><span className="text-amber-400">Objawy:</span> {i.Objawy}</p>}
@@ -663,6 +670,7 @@ export default function Home() {
                     {tipImg && <img loading="lazy" src={tipImg} alt="diagram" className="w-full max-h-64 object-contain bg-white cursor-pointer" onClick={() => setLightbox(tipImg)} />}
                     <div className="p-4">
                       <h3 className="font-semibold mb-2">{t.Nazwa}</h3>
+                      <VehicleMatchBadge item={t} />
                       <p className="text-neutral-300 text-sm whitespace-pre-line">{t.Rozwiązanie}</p>
                     </div>
                   </div>
@@ -686,6 +694,7 @@ export default function Home() {
               {filteredTips.filter(t => (t.Nazwa.toLowerCase().includes('punkt') || t.Nazwa.toLowerCase().includes('masa') || t.Nazwa.toLowerCase().includes('schemat')) && (!schemaQuery || t.Nazwa.toLowerCase().includes(schemaQuery.toLowerCase()) || (t.Rozwiązanie && t.Rozwiązanie.toLowerCase().includes(schemaQuery.toLowerCase())))).map((t, idx) => (
                 <div key={idx} className="mb-4 pb-4 border-b border-white/10 last:border-0">
                   <h3 className="font-semibold mb-2">{t.Nazwa}</h3>
+                      <VehicleMatchBadge item={t} />
                   <p className="text-neutral-300 text-sm whitespace-pre-line">{t.Rozwiązanie}</p>
                 </div>
               ))}
