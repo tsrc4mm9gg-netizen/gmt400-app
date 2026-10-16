@@ -1,0 +1,93 @@
+name: Verify navigation history and compact profile
+on:
+  push:
+    branches: [main]
+    paths: ['src/app/useSectionNavigation.ts','src/app/CompactVehicleFilterPanel.tsx','scripts/connect-navigation-context.cjs','tests/navigation-context.spec.cjs','docs/ROADMAP.md','.github/workflows/navigation-context.yml']
+permissions:
+  contents: write
+concurrency:
+  group: navigation-context-integration
+  cancel-in-progress: false
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - id: patch
+        run: node scripts/connect-navigation-context.cjs
+      - run: npm ci
+      - id: build
+        shell: bash
+        run: |
+          set -o pipefail
+          npm run build 2>&1 | tee /tmp/context-build.log
+      - run: |
+          npm install --no-save --package-lock=false @playwright/test
+          npx playwright install --with-deps chromium webkit
+      - id: server
+        run: |
+          npm run start -- --hostname 127.0.0.1 --port 3100 > /tmp/context-server.log 2>&1 &
+          for i in $(seq 1 60); do
+            if curl -fsS http://127.0.0.1:3100 > /dev/null; then exit 0; fi
+            sleep 1
+          done
+          exit 1
+      - id: chromium
+        continue-on-error: true
+        run: npx playwright test tests/vehicle-filters.spec.cjs tests/global-search.spec.cjs tests/knowledge-categories.spec.cjs tests/navigation.spec.cjs tests/navigation-polish.spec.cjs tests/diy-restoration.spec.cjs tests/notion-pagination.spec.cjs tests/notion-content.spec.cjs tests/model-catalog.spec.cjs tests/navigation-context.spec.cjs --workers=1 --output=test-results/chromium --reporter=json > /tmp/context-chromium.json
+      - id: webkit
+        continue-on-error: true
+        run: |
+          node -e "const fs=require('node:fs');const base=require('./playwright.webkit.config.cjs');fs.writeFileSync('playwright.context.generated.config.cjs','module.exports = '+JSON.stringify({...base,testMatch:[...base.testMatch,'model-catalog.spec.cjs','navigation-context.spec.cjs']})+';')"
+          npx playwright test --config=playwright.context.generated.config.cjs --output=test-results/webkit --reporter=json > /tmp/context-webkit.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: navigation-context-diagnostics
+          path: |
+            test-results
+            /tmp/context-build.log
+            /tmp/context-server.log
+          if-no-files-found: ignore
+      - name: Report and activate only after both browsers pass
+        if: always()
+        env:
+          PATCH_RESULT: ${{ steps.patch.outcome }}
+          BUILD_RESULT: ${{ steps.build.outcome }}
+          CHROMIUM_RESULT: ${{ steps.chromium.outcome }}
+          WEBKIT_RESULT: ${{ steps.webkit.outcome }}
+        run: |
+          node <<'NODE'
+          const fs=require('node:fs');
+          const reports={};
+          for(const browser of ['chromium','webkit']) {
+            let raw={};try{raw=JSON.parse(fs.readFileSync('/tmp/context-'+browser+'.json','utf8'));}catch{}
+            const stats=raw.stats||{};const failures=[];
+            function walk(suites){for(const suite of suites||[]){for(const spec of suite.specs||[])for(const test of spec.tests||[])if(test.status!=='expected')failures.push({title:spec.title,status:test.status,errors:(test.results||[]).map(result=>String(result.error?.message||'').slice(0,4000))});walk(suite.suites);}}
+            walk(raw.suites);reports[browser]={passed:stats.expected===37&&stats.unexpected===0&&stats.skipped===0&&stats.flaky===0,stats,failures};
+          }
+          const stages={patch:process.env.PATCH_RESULT,build:process.env.BUILD_RESULT,chromium:process.env.CHROMIUM_RESULT,webkit:process.env.WEBKIT_RESULT};
+          const passed=Object.values(stages).every(value=>value==='success')&&Object.values(reports).every(report=>report.passed);
+          let buildDiagnostics='';try{buildDiagnostics=fs.readFileSync('/tmp/context-build.log','utf8').slice(-12000);}catch{}
+          fs.mkdirSync('.diagnostics',{recursive:true});
+          fs.writeFileSync('.diagnostics/navigation-context-report.json',JSON.stringify({codeSha:process.env.GITHUB_SHA,runId:process.env.GITHUB_RUN_ID,checkedAt:new Date().toISOString(),scope:'Roadmap package 1: URL section state, browser history, scroll restoration and compact profile; Chromium and mobile WebKit controlled-data regressions, not live deployment or content verification',passed,integrationApplied:passed,stages,buildDiagnostics:process.env.BUILD_RESULT==='failure'?buildDiagnostics:'',reports},null,2)+'\n');
+          NODE
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add .diagnostics/navigation-context-report.json
+          if node -e "process.exit(require('./.diagnostics/navigation-context-report.json').passed?0:1)"; then
+            git add src/app/page.tsx src/app/VehicleMaterialFilter.tsx tests/vehicle-filters.spec.cjs tests/knowledge-categories.spec.cjs
+            git commit -m 'Activate verified section history and compact profile controls'
+          else
+            git commit -m 'ci: publish failed navigation context verification [skip ci]'
+          fi
+          git pull --rebase --autostash origin main
+          git push origin HEAD:main
+      - if: always()
+        run: node -e "if(!require('./.diagnostics/navigation-context-report.json').passed) process.exit(1)"
