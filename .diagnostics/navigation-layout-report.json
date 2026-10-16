@@ -1,14 +1,15 @@
 {
-  "codeSha": "75e7efe7818e09d183d93b38c0cf90e6347c446b",
-  "checkedAt": "2026-10-16T14:51:01.327Z",
-  "scope": "Chromium mocked fixtures; geometry at 375/390/430px; screenshots retained as Actions artifact; no claim of visual approval",
+  "codeSha": "67ce1fd4816097147c7942cfef5d0761dbe64af5",
+  "runId": "38939077410",
+  "checkedAt": "2026-10-16T17:23:39.198Z",
+  "scope": "Chromium mocked fixtures, navigation geometry, tactile styles, profile launcher and category counters; not live Safari",
   "passed": true,
   "build": "success",
   "browser": "success",
   "stats": {
-    "startTime": "2026-10-16T14:50:53.186Z",
-    "duration": 7044.468,
-    "expected": 19,
+    "startTime": "2026-10-16T17:23:24.068Z",
+    "duration": 14206.873,
+    "expected": 22,
     "skipped": 0,
     "unexpected": 0,
     "flaky": 0
