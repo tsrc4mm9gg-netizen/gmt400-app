@@ -1,7 +1,7 @@
 {
-  "codeSha": "003450be2dc69c5e2cec39c6de5e456c541ef4d1",
-  "runId": "38971955504",
-  "checkedAt": "2026-10-16T21:54:20.230Z",
+  "codeSha": "552e6a5a34e3d082e5ecd056f5f9f193be09fb97",
+  "runId": "38973395049",
+  "checkedAt": "2026-10-16T22:07:14.215Z",
   "scope": "Roadmap packages 1-2: navigation history, compact profile and unified typography; Chromium and mobile WebKit controlled-data regressions, not live deployment or content verification",
   "passed": false,
   "integrationApplied": false,
@@ -16,11 +16,11 @@
     "chromium": {
       "passed": false,
       "stats": {
-        "startTime": "2026-10-16T21:52:01.277Z",
-        "duration": 42376.83,
-        "expected": 35,
+        "startTime": "2026-10-16T22:05:24.864Z",
+        "duration": 29842.204,
+        "expected": 36,
         "skipped": 0,
-        "unexpected": 3,
+        "unexpected": 2,
         "flaky": 0
       },
       "failures": [
@@ -37,24 +37,17 @@
           "errors": [
             "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveAttribute\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('region', { name: 'Filtrowanie według profilu auta' }).getByRole('button', { name: 'Dla mojego auta (2)', exact: true })\nExpected: \u001b[32m\"true\"\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toHaveAttribute\" getByRole('region', { name: 'Filtrowanie według profilu auta' }).getByRole('button', { name: 'Dla mojego auta (2)', exact: true }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('region', { name: 'Filtrowanie według profilu auta' }).getByRole('button', { name: 'Dla mojego auta (2)', exact: true })\u001b[22m\n"
           ]
-        },
-        {
-          "title": "compact profile exposes two basic modes and preserves advanced matching controls",
-          "status": "unexpected",
-          "errors": [
-            "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('region', { name: 'Filtrowanie według profilu auta' }).getByRole('button', { name: 'Dla mojego auta (2)', exact: true })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" getByRole('region', { name: 'Filtrowanie według profilu auta' }).getByRole('button', { name: 'Dla mojego auta (2)', exact: true }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('region', { name: 'Filtrowanie według profilu auta' }).getByRole('button', { name: 'Dla mojego auta (2)', exact: true })\u001b[22m\n"
-          ]
         }
       ]
     },
     "webkit": {
       "passed": false,
       "stats": {
-        "startTime": "2026-10-16T21:52:45.770Z",
-        "duration": 92144.053,
-        "expected": 35,
+        "startTime": "2026-10-16T22:05:55.897Z",
+        "duration": 76184.77900000001,
+        "expected": 36,
         "skipped": 0,
-        "unexpected": 3,
+        "unexpected": 2,
         "flaky": 0
       },
       "failures": [
@@ -70,13 +63,6 @@
           "status": "unexpected",
           "errors": [
             "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveAttribute\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('region', { name: 'Filtrowanie według profilu auta' }).getByRole('button', { name: 'Dla mojego auta (2)', exact: true })\nExpected: \u001b[32m\"true\"\u001b[39m\nTimeout: 10000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toHaveAttribute\" getByRole('region', { name: 'Filtrowanie według profilu auta' }).getByRole('button', { name: 'Dla mojego auta (2)', exact: true }) with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('region', { name: 'Filtrowanie według profilu auta' }).getByRole('button', { name: 'Dla mojego auta (2)', exact: true })\u001b[22m\n"
-          ]
-        },
-        {
-          "title": "compact profile exposes two basic modes and preserves advanced matching controls",
-          "status": "unexpected",
-          "errors": [
-            "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('region', { name: 'Filtrowanie według profilu auta' }).getByRole('button', { name: 'Dla mojego auta (2)', exact: true })\nExpected: visible\nTimeout: 10000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" getByRole('region', { name: 'Filtrowanie według profilu auta' }).getByRole('button', { name: 'Dla mojego auta (2)', exact: true }) with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('region', { name: 'Filtrowanie według profilu auta' }).getByRole('button', { name: 'Dla mojego auta (2)', exact: true })\u001b[22m\n"
           ]
         }
       ]
