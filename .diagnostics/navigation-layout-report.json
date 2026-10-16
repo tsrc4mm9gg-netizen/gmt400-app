@@ -1,13 +1,13 @@
 {
-  "codeSha": "306345fbc0616da5b718f6c101b5c6a51d152aa8",
-  "checkedAt": "2026-10-16T14:41:48.040Z",
+  "codeSha": "75e7efe7818e09d183d93b38c0cf90e6347c446b",
+  "checkedAt": "2026-10-16T14:51:01.327Z",
   "scope": "Chromium mocked fixtures; geometry at 375/390/430px; screenshots retained as Actions artifact; no claim of visual approval",
   "passed": true,
   "build": "success",
   "browser": "success",
   "stats": {
-    "startTime": "2026-10-16T14:41:39.750Z",
-    "duration": 6848.88,
+    "startTime": "2026-10-16T14:50:53.186Z",
+    "duration": 7044.468,
     "expected": 19,
     "skipped": 0,
     "unexpected": 0,
