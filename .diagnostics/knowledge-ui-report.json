@@ -1,22 +1,22 @@
 {
-  "codeSha": "99fb58fcf0e1873a7db124c03d44b1df210b4362",
-  "runId": "38970535933",
-  "checkedAt": "2026-10-16T21:38:04.270Z",
+  "codeSha": "003450be2dc69c5e2cec39c6de5e456c541ef4d1",
+  "runId": "38971955353",
+  "checkedAt": "2026-10-16T21:51:33.051Z",
   "scope": "Chromium with mocked Notion fixtures; category-scoped profile counters; not live Notion or Safari",
-  "passed": true,
+  "passed": false,
   "stages": {
     "install": "success",
     "build": "success",
     "tooling": "success",
     "server": "success",
-    "browser": "success"
+    "browser": "failure"
   },
   "stats": {
-    "startTime": "2026-10-16T21:37:58.931Z",
-    "duration": 5255.851000000001,
-    "expected": 14,
+    "startTime": "2026-10-16T21:51:19.603Z",
+    "duration": 13375.211,
+    "expected": 13,
     "skipped": 0,
-    "unexpected": 0,
+    "unexpected": 1,
     "flaky": 0
   },
   "tests": [
@@ -27,7 +27,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 499,
+          "durationMs": 781,
           "error": ""
         }
       ]
@@ -39,7 +39,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 319,
+          "durationMs": 448,
           "error": ""
         }
       ]
@@ -51,7 +51,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 276,
+          "durationMs": 434,
           "error": ""
         }
       ]
@@ -63,7 +63,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 222,
+          "durationMs": 311,
           "error": ""
         }
       ]
@@ -75,7 +75,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 215,
+          "durationMs": 299,
           "error": ""
         }
       ]
@@ -87,7 +87,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 206,
+          "durationMs": 330,
           "error": ""
         }
       ]
@@ -99,7 +99,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 202,
+          "durationMs": 290,
           "error": ""
         }
       ]
@@ -111,7 +111,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 206,
+          "durationMs": 304,
           "error": ""
         }
       ]
@@ -123,7 +123,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 269,
+          "durationMs": 403,
           "error": ""
         }
       ]
@@ -135,7 +135,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 269,
+          "durationMs": 349,
           "error": ""
         }
       ]
@@ -143,12 +143,12 @@
     {
       "title": "profile counters and default filtering are scoped to the current knowledge category",
       "file": "tests/knowledge-categories.spec.cjs",
-      "status": "expected",
+      "status": "unexpected",
       "attempts": [
         {
-          "status": "passed",
-          "durationMs": 384,
-          "error": ""
+          "status": "failed",
+          "durationMs": 5228,
+          "error": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveAttribute\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('region', { name: 'Filtrowanie według profilu auta' }).getByRole('button', { name: 'Dla mojego auta (2)', exact: true })\nExpected: \u001b[32m\"true\"\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toHaveAttribute\" getByRole('region', { name: 'Filtrowanie według profilu auta' }).getByRole('button', { name: 'Dla mojego auta (2)', exact: true }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('region', { name: 'Filtrowanie według profilu auta' }).getByRole('button', { name: 'Dla mojego auta (2)', exact: true })\u001b[22m\n"
         }
       ]
     },
@@ -159,7 +159,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 485,
+          "durationMs": 934,
           "error": ""
         }
       ]
@@ -171,7 +171,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 242,
+          "durationMs": 374,
           "error": ""
         }
       ]
@@ -183,7 +183,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 520,
+          "durationMs": 709,
           "error": ""
         }
       ]
