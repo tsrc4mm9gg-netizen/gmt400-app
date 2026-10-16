@@ -68,6 +68,27 @@ function getTipImage(nazwa: string): string | null {
   return null;
 }
 
+function playGong(): void {
+  if (typeof window === 'undefined' || !window.AudioContext) return;
+  try {
+    const context = new window.AudioContext();
+    const oscillator = context.createOscillator();
+    const gain = context.createGain();
+    oscillator.type = 'sine';
+    oscillator.frequency.setValueAtTime(440, context.currentTime);
+    gain.gain.setValueAtTime(0.15, context.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.001, context.currentTime + 0.8);
+    oscillator.connect(gain);
+    gain.connect(context.destination);
+    oscillator.onended = () => { void context.close().catch(() => {}); };
+    void context.resume().catch(() => {});
+    oscillator.start();
+    oscillator.stop(context.currentTime + 0.8);
+  } catch {
+    // Audio is optional; VIN results must remain usable.
+  }
+}
+
 export default function Home() {
   const [items, setItems] = useState<Item[]>([]);
   const [error, setError] = useState<string | null>(null);
