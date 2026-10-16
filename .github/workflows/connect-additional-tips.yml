@@ -1,0 +1,28 @@
+name: Connect additional Suburban tips
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/connect-additional-tips.yml']
+permissions:
+  contents: write
+jobs:
+  connect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: python3 scripts/connect-additional-tips.py
+      - run: npm ci
+      - run: npm run build
+      - name: Commit checked integration
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add src/app/page.tsx
+          git commit -m 'feat(tips): connect five sourced ownership tips'
+          git push origin HEAD:main
