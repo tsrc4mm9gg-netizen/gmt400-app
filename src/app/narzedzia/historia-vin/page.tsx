@@ -18,13 +18,20 @@ type HistoryAlert = {
   message: string;
 };
 
+type HistoryImage = {
+  url: string;
+  sourceUrl: string;
+  sourceTitle: string;
+};
+
 type HistoryResponse = {
   status: string;
   vin?: string;
   message?: string;
-  manualLinks?: { web: string; images: string };
   results?: HistoryResult[];
   alerts?: HistoryAlert[];
+  images?: HistoryImage[];
+  imageSummary?: string;
   disclaimer?: string;
   error?: string;
 };
@@ -95,7 +102,7 @@ export default function VinHistoryPage() {
     <main className="mx-auto max-w-4xl px-4 py-10">
       <h1 className="text-3xl font-bold">Historia i zdjęcia po numerze VIN</h1>
       <p className="mt-2 text-slate-600">
-        Wpisz pełny 17-znakowy numer VIN, aby wyszukać publiczne ślady tego konkretnego pojazdu: ogłoszenia, aukcje oraz informacje o możliwych szkodach.
+        Wpisz pełny 17-znakowy numer VIN, aby wyszukać publiczne ślady tego konkretnego pojazdu: ogłoszenia, aukcje, możliwe szkody oraz zdjęcia z dostępnych stron.
       </p>
 
       <form onSubmit={checkVin} className="mt-6 flex flex-col gap-3 sm:flex-row">
@@ -118,21 +125,6 @@ export default function VinHistoryPage() {
 
       {error && (
         <div className="mt-6 rounded-lg border border-red-300 bg-red-50 p-4 text-red-800">{error}</div>
-      )}
-
-      {data?.status === 'not_configured' && (
-        <div className="mt-6 rounded-lg border border-amber-300 bg-amber-50 p-4">
-          <p className="font-semibold text-amber-900">Automatyczne wyszukiwanie nie jest skonfigurowane</p>
-          <p className="mt-1 text-amber-800">{data.message}</p>
-          <div className="mt-3 flex flex-wrap gap-3">
-            <a className="underline" href={data.manualLinks?.web} target="_blank" rel="noreferrer">
-              Szukaj VIN w internecie
-            </a>
-            <a className="underline" href={data.manualLinks?.images} target="_blank" rel="noreferrer">
-              Szukaj zdjęć po VIN
-            </a>
-          </div>
-        </div>
       )}
 
       {data?.status === 'search_error' && (
@@ -171,7 +163,7 @@ export default function VinHistoryPage() {
           <h2 className="text-xl font-bold">Znalezione wyniki ({data.results.length})</h2>
           {data.results.length === 0 ? (
             <p className="mt-3 text-slate-600">
-              Nie znaleziono publicznych wyników dla tego VIN w aktualnie skonfigurowanym źródle wyszukiwania.
+              Nie znaleziono publicznych wyników dla tego VIN.
             </p>
           ) : (
             <ul className="mt-3 space-y-3">
@@ -192,6 +184,39 @@ export default function VinHistoryPage() {
                 </li>
               ))}
             </ul>
+          )}
+        </section>
+      )}
+
+      {data?.images && (
+        <section className="mt-10 rounded-lg border border-slate-200 bg-slate-50 p-4">
+          <h2 className="text-xl font-bold">Podsumowanie zdjęć i grafik</h2>
+          <p className="mt-2 text-slate-700">{data.imageSummary}</p>
+
+          {data.images.length > 0 ? (
+            <div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-3">
+              {data.images.map((image, index) => (
+                <figure key={index} className="overflow-hidden rounded-lg border border-slate-200 bg-white">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={image.url}
+                    alt={`Potencjalne zdjęcie powiązane z VIN ${data.vin}`}
+                    className="h-40 w-full object-cover"
+                    loading="lazy"
+                    referrerPolicy="no-referrer"
+                  />
+                  <figcaption className="p-2 text-xs text-slate-600">
+                    <a className="line-clamp-2 underline" href={image.sourceUrl} target="_blank" rel="noreferrer">
+                      {image.sourceTitle}
+                    </a>
+                  </figcaption>
+                </figure>
+              ))}
+            </div>
+          ) : (
+            <p className="mt-3 text-slate-600">
+              Nie znaleziono zdjęć ani grafik w publicznie dostępnych źródłach dla tego VIN.
+            </p>
           )}
         </section>
       )}
