@@ -1,8 +1,8 @@
 {
-  "codeSha": "fe9be5be0b4eb9d83bfac58a50125f49194cc6e0",
-  "runId": "38937057666",
-  "checkedAt": "2026-10-16T17:08:04.451Z",
-  "scope": "Existing Chromium regressions plus mocked Notion pagination and server HTML rendering; not complete live Notion or Safari verification",
+  "codeSha": "67ce1fd4816097147c7942cfef5d0761dbe64af5",
+  "runId": "38939077383",
+  "checkedAt": "2026-10-16T17:23:31.050Z",
+  "scope": "Chromium regressions with category-scoped counters, mocked Notion pagination and server HTML rendering; not complete live Notion or Safari verification",
   "passed": true,
   "stages": {
     "install": "success",
@@ -13,9 +13,9 @@
   },
   "buildDiagnostics": "",
   "stats": {
-    "startTime": "2026-10-16T17:07:46.806Z",
-    "duration": 15796.321999999998,
-    "expected": 28,
+    "startTime": "2026-10-16T17:23:14.833Z",
+    "duration": 14630.551000000001,
+    "expected": 29,
     "skipped": 0,
     "unexpected": 0,
     "flaky": 0
