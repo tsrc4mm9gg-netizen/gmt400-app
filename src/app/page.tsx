@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, useMemo } from 'react';
+import AdditionalTips from './AdditionalTips';
 import RepairCostCalculator from './RepairCostCalculator';
 import GroupedNavigation from './GroupedNavigation';
 import useSectionNavigation from './useSectionNavigation';
@@ -1390,6 +1391,7 @@ export default function Home() {
         {tab === 'tips' && (
           <div>
             <h2 className="text-2xl mb-6" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>TIPS & TRICKS</h2>
+            <AdditionalTips />
             
             <div className="bg-neutral-950 border border-white/10 overflow-hidden mb-4">
               <img loading="lazy" src="/tip-obd.jpg" alt="OBD1" className="w-full h-48 object-cover cursor-pointer" onClick={() => setLightbox('/tip-obd.jpg')} />
