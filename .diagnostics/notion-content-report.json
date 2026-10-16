@@ -1,7 +1,7 @@
 {
-  "codeSha": "552e6a5a34e3d082e5ecd056f5f9f193be09fb97",
-  "runId": "38973395053",
-  "checkedAt": "2026-10-16T22:05:31.906Z",
+  "codeSha": "ac7b622bf0979e31976df02dd31a69df9a3e52eb",
+  "runId": "38974234082",
+  "checkedAt": "2026-10-16T22:13:19.369Z",
   "scope": "Chromium regressions with category-scoped counters, mocked Notion pagination and server HTML rendering; not complete live Notion or Safari verification",
   "passed": false,
   "stages": {
@@ -13,21 +13,14 @@
   },
   "buildDiagnostics": "",
   "stats": {
-    "startTime": "2026-10-16T22:05:03.359Z",
-    "duration": 27270.246,
-    "expected": 27,
+    "startTime": "2026-10-16T22:12:57.839Z",
+    "duration": 20387.285,
+    "expected": 28,
     "skipped": 0,
-    "unexpected": 2,
+    "unexpected": 1,
     "flaky": 0
   },
   "failures": [
-    {
-      "title": "vehicle change updates DIY defaults without hiding unknown instructions or counting codes",
-      "status": "unexpected",
-      "errors": [
-        "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveAttribute\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('region', { name: 'Filtrowanie według profilu auta', exact: true }).getByRole('button', { name: 'Dla mojego auta (2)', exact: true })\nExpected: \u001b[32m\"true\"\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toHaveAttribute\" getByRole('region', { name: 'Filtrowanie według profilu auta', exact: true }).getByRole('button', { name: 'Dla mojego auta (2)', exact: true }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('region', { name: 'Filtrowanie według profilu auta', exact: true }).getByRole('button', { name: 'Dla mojego auta (2)', exact: true })\u001b[22m\n"
-      ]
-    },
     {
       "title": "profile counters and default filtering are scoped to the current knowledge category",
       "status": "unexpected",
