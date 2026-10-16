@@ -14,13 +14,19 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - run: npm ci
+      - id: install
+        run: npm ci
       - id: build
-        run: npm run build
-      - run: |
+        shell: bash
+        run: |
+          set -o pipefail
+          npm run build 2>&1 | tee /tmp/notion-content-build.log
+      - id: tooling
+        run: |
           npm install --no-save --package-lock=false @playwright/test
           npx playwright install --with-deps chromium
-      - run: |
+      - id: server
+        run: |
           npm run start -- --hostname 127.0.0.1 --port 3100 > /tmp/content-app.log 2>&1 &
           for i in $(seq 1 60); do
             if curl -fsS http://127.0.0.1:3100 > /dev/null; then exit 0; fi
@@ -34,30 +40,38 @@ jobs:
         if: always()
         with:
           name: instruction-verification-artifacts
-          path: test-results
+          path: |
+            test-results
+            /tmp/notion-content-build.log
           if-no-files-found: ignore
       - name: Publish verification report
         if: always()
         env:
+          INSTALL_RESULT: ${{ steps.install.outcome }}
           BUILD_RESULT: ${{ steps.build.outcome }}
+          TOOLING_RESULT: ${{ steps.tooling.outcome }}
+          SERVER_RESULT: ${{ steps.server.outcome }}
           TEST_RESULT: ${{ steps.tests.outcome }}
         run: |
           node <<'NODE'
           const fs = require('node:fs');
           let raw = {};
+          let buildDiagnostics = '';
           try { raw = JSON.parse(fs.readFileSync('/tmp/notion-content-tests.json', 'utf8')); } catch {}
+          try { buildDiagnostics = fs.readFileSync('/tmp/notion-content-build.log', 'utf8').replace(/\u001b\[[0-9;]*m/g, '').slice(-12000); } catch {}
           const stats = raw.stats || {};
-          const passed = process.env.BUILD_RESULT === 'success' && process.env.TEST_RESULT === 'success' && stats.expected === 28 && stats.unexpected === 0 && stats.skipped === 0 && stats.flaky === 0;
+          const stages = { install: process.env.INSTALL_RESULT, build: process.env.BUILD_RESULT, tooling: process.env.TOOLING_RESULT, server: process.env.SERVER_RESULT, tests: process.env.TEST_RESULT };
+          const passed = Object.values(stages).every(value => value === 'success') && stats.expected === 28 && stats.unexpected === 0 && stats.skipped === 0 && stats.flaky === 0;
           const failures = [];
           function walk(suites) { for (const suite of suites || []) { for (const spec of suite.specs || []) for (const test of spec.tests || []) if (test.status !== 'expected') failures.push({ title: spec.title, status: test.status, errors: (test.results || []).map(result => String(result.error?.message || '').slice(0, 3000)) }); walk(suite.suites); } }
           walk(raw.suites);
           fs.mkdirSync('.diagnostics', { recursive: true });
-          fs.writeFileSync('.diagnostics/notion-content-report.json', JSON.stringify({ codeSha: process.env.GITHUB_SHA, runId: process.env.GITHUB_RUN_ID, checkedAt: new Date().toISOString(), scope: 'Existing Chromium regressions plus mocked Notion pagination and server HTML rendering; not complete live Notion or Safari verification', passed, build: process.env.BUILD_RESULT, tests: process.env.TEST_RESULT, stats, failures }, null, 2) + '\n');
+          fs.writeFileSync('.diagnostics/notion-content-report.json', JSON.stringify({ codeSha: process.env.GITHUB_SHA, runId: process.env.GITHUB_RUN_ID, checkedAt: new Date().toISOString(), scope: 'Existing Chromium regressions plus mocked Notion pagination and server HTML rendering; not complete live Notion or Safari verification', passed, stages, buildDiagnostics: process.env.BUILD_RESULT === 'failure' ? buildDiagnostics : '', stats, failures }, null, 2) + '\n');
           NODE
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add .diagnostics/notion-content-report.json
-          git commit -m 'ci: publish instruction rendering verification [skip ci]'
+          git commit -m 'ci: publish instruction rendering diagnostics [skip ci]'
           git pull --rebase --autostash origin main
           git push origin HEAD:main
       - if: always()
