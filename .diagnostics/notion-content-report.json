@@ -1,11 +1,17 @@
 {
-  "codeSha": "282cf913f2312770a7ac4c136ba1b98c7c814e46",
-  "runId": "38933044563",
-  "checkedAt": "2026-10-16T16:35:24.769Z",
+  "codeSha": "736e597d67af4075f85c6ff1b66efa11cd1b14d2",
+  "runId": "38934962561",
+  "checkedAt": "2026-10-16T16:50:27.741Z",
   "scope": "Existing Chromium regressions plus mocked Notion pagination and server HTML rendering; not complete live Notion or Safari verification",
   "passed": false,
-  "build": "failure",
-  "tests": "skipped",
+  "stages": {
+    "install": "success",
+    "build": "failure",
+    "tooling": "skipped",
+    "server": "skipped",
+    "tests": "skipped"
+  },
+  "buildDiagnostics": "\n> gmt400-app@0.1.0 build\n> next build\n\n▲ Next.js 16.4.1 (Turbopack)\n✓ Running next.config.ts took 36ms\n⚠ No build cache found. Please configure build caching for faster rebuilds. Read more: https://nextjs.org/docs/messages/no-cache\nAttention: Next.js now collects completely anonymous telemetry regarding usage.\nThis information is used to shape Next.js' roadmap and prioritize features.\nYou can learn more, including how to opt-out if you'd not like to participate in this anonymous program, by visiting the following URL:\nhttps://nextjs.org/telemetry\n\n- Cache Components enabled\n- Partial Prefetching enabled\n\n  Creating an optimized production build ...\n✓ Compiled successfully in 7.5s\n  Running TypeScript ...\nsrc/app/baza/[id]/NotionContent.tsx(29,46): error TS2345: Argument of type 'string | undefined' is not assignable to parameter of type 'string'.\n  Type 'undefined' is not assignable to type 'string'.\nFailed to type check.\n\n",
   "stats": {},
   "failures": []
 }
