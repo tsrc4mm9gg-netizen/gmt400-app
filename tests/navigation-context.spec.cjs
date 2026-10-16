@@ -59,11 +59,11 @@ test('back restores saved reading position after section change through the head
 test('compact profile exposes two basic modes and preserves advanced matching controls',async({page})=>{
   await prepare(page,'/?tab=kody',true);
   const panel=page.getByRole('region',{name:'Filtrowanie według profilu auta'});
-  await expect(panel.getByRole('button',{name:'Dla mojego auta (2)',exact:true})).toBeVisible();
+  await expect(panel.getByRole('button',{name:'Dla mojego auta (1)',exact:true})).toBeVisible();
   await expect(panel.getByRole('button',{name:'Wszystkie (3)',exact:true})).toBeVisible();
   await expect(panel.getByRole('button',{name:'Zgodne z zakresem (1)',exact:true})).toHaveCount(0);
   expect(await panel.evaluate(node=>node.getBoundingClientRect().height)).toBeLessThan(300);
-  await expect(panel).toContainText('nie oznaczają potwierdzonego dopasowania');
+  await expect(panel).toContainText('Materiały z nieustalonym zakresem znajdują się w „Nieustalone”.');
   await panel.getByRole('button',{name:'Filtry zaawansowane',exact:true}).click();
   await panel.getByRole('button',{name:'Zgodne z zakresem (1)',exact:true}).click();
   await expect(page.getByRole('heading',{name:'MATCH',exact:true})).toBeVisible();
