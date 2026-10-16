@@ -1,4 +1,4 @@
-name: Diagnose fixed application build
+name: Fix missing playGong and test build
 on:
   push:
     branches: [seo-sitemap-robots]
@@ -6,25 +6,57 @@ on:
 permissions:
   contents: write
 jobs:
-  build-report:
+  prepare:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: fabea2eab55ce195d5df37dcc46241e65151ff50
+          ref: d0e2457563aaead05e6f010c1555adeb72ce6ec0
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: Build without Vercel secrets and publish report
+      - name: Add function and record full build result
         shell: bash
         env:
           NEXT_TELEMETRY_DISABLED: '1'
         run: |
-          set -uo pipefail
-          git switch -c diagnose-fixed-build || exit 1
-          printf 'Source commit: ' > /tmp/gmt400-build.log
-          git rev-parse HEAD >> /tmp/gmt400-build.log
+          set -euo pipefail
+          git switch -c fix-play-gong
+          python3 - <<'PY'
+          from pathlib import Path
+          p = Path('src/app/page.tsx')
+          text = p.read_text(encoding='utf-8')
+          marker = 'export default function Home() {'
+          if text.count(marker) != 1 or 'function playGong(' in text or 'const playGong =' in text:
+              raise SystemExit('Unexpected source; stopping without changes')
+          helper = '''function playGong(): void {
+            if (typeof window === 'undefined' || !window.AudioContext) return;
+            try {
+              const context = new window.AudioContext();
+              const oscillator = context.createOscillator();
+              const gain = context.createGain();
+              oscillator.type = 'sine';
+              oscillator.frequency.setValueAtTime(440, context.currentTime);
+              gain.gain.setValueAtTime(0.15, context.currentTime);
+              gain.gain.exponentialRampToValueAtTime(0.001, context.currentTime + 0.8);
+              oscillator.connect(gain);
+              gain.connect(context.destination);
+              oscillator.onended = () => { void context.close().catch(() => {}); };
+              void context.resume().catch(() => {});
+              oscillator.start();
+              oscillator.stop(context.currentTime + 0.8);
+            } catch {
+              // Audio is optional; VIN results must remain usable.
+            }
+          }
+
+          '''
+          p.write_text(text.replace(marker, helper + marker, 1), encoding='utf-8')
+          PY
+          git diff --check
+          printf 'Source: d0e2457 plus playGong implementation\n' > /tmp/gmt400-build.log
+          set +e
           npm install --no-audit --no-fund >> /tmp/gmt400-build.log 2>&1
           install_status=$?
           printf '\nINSTALL_EXIT_CODE=%s\n' "$install_status" >> /tmp/gmt400-build.log
@@ -35,9 +67,9 @@ jobs:
           fi
           set -e
           mkdir -p .diagnostics
-          tail -c 18000 /tmp/gmt400-build.log > .diagnostics/build.txt
+          tail -c 18000 /tmp/gmt400-build.log > .diagnostics/play-gong-build.txt
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add .diagnostics/build.txt
-          git commit -m 'Record full build result for JSX fix'
-          git push origin HEAD:refs/heads/diagnose-fixed-build
+          git add src/app/page.tsx .diagnostics/play-gong-build.txt
+          git commit -m 'Implement missing playGong and record build result'
+          git push origin HEAD:refs/heads/fix-play-gong
