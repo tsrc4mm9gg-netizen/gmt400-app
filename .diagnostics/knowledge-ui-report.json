@@ -1,7 +1,7 @@
 {
-  "codeSha": "7a510d26256eefe6227ddb15a56dd2372b8aedf8",
-  "runId": "38977275167",
-  "checkedAt": "2026-10-16T22:43:30.987Z",
+  "codeSha": "b45e35ec5e2ae6aff13954f6cf2e1df4aabe15e4",
+  "runId": "38978502866",
+  "checkedAt": "2026-10-16T22:56:26.363Z",
   "scope": "Chromium with mocked Notion fixtures; category-scoped profile counters; not live Notion or Safari",
   "passed": false,
   "stages": {
@@ -12,8 +12,8 @@
     "browser": "failure"
   },
   "stats": {
-    "startTime": "2026-10-16T22:43:18.954Z",
-    "duration": 11963.501999999999,
+    "startTime": "2026-10-16T22:56:12.566Z",
+    "duration": 13697.222,
     "expected": 13,
     "skipped": 0,
     "unexpected": 1,
@@ -27,7 +27,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 552,
+          "durationMs": 747,
           "error": ""
         }
       ]
@@ -39,7 +39,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 368,
+          "durationMs": 499,
           "error": ""
         }
       ]
@@ -51,7 +51,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 345,
+          "durationMs": 459,
           "error": ""
         }
       ]
@@ -63,7 +63,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 296,
+          "durationMs": 311,
           "error": ""
         }
       ]
@@ -75,7 +75,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 255,
+          "durationMs": 313,
           "error": ""
         }
       ]
@@ -87,7 +87,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 245,
+          "durationMs": 306,
           "error": ""
         }
       ]
@@ -99,7 +99,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 244,
+          "durationMs": 304,
           "error": ""
         }
       ]
@@ -111,7 +111,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 259,
+          "durationMs": 318,
           "error": ""
         }
       ]
@@ -123,7 +123,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 313,
+          "durationMs": 375,
           "error": ""
         }
       ]
@@ -135,7 +135,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 283,
+          "durationMs": 355,
           "error": ""
         }
       ]
@@ -147,7 +147,7 @@
       "attempts": [
         {
           "status": "failed",
-          "durationMs": 5252,
+          "durationMs": 5317,
           "error": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveAttribute\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('region', { name: 'Filtrowanie według profilu auta' }).getByRole('button', { name: 'Dla mojego auta (2)', exact: true })\nExpected: \u001b[32m\"true\"\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toHaveAttribute\" getByRole('region', { name: 'Filtrowanie według profilu auta' }).getByRole('button', { name: 'Dla mojego auta (2)', exact: true }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('region', { name: 'Filtrowanie według profilu auta' }).getByRole('button', { name: 'Dla mojego auta (2)', exact: true })\u001b[22m\n"
         }
       ]
@@ -159,7 +159,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 817,
+          "durationMs": 972,
           "error": ""
         }
       ]
@@ -171,7 +171,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 288,
+          "durationMs": 402,
           "error": ""
         }
       ]
@@ -183,7 +183,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 595,
+          "durationMs": 787,
           "error": ""
         }
       ]
