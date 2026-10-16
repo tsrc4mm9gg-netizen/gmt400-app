@@ -8,6 +8,7 @@ test('main categories and subsections have distinct hierarchy and tactile select
   await page.goto('http://127.0.0.1:3100');
   const nav = page.getByRole('navigation', { name: 'Skróty sekcji', exact: true });
   const service = nav.getByRole('button', { name: 'Serwis i części', exact: true });
+  const inactiveStyles = await service.evaluate(node => { const s = getComputedStyle(node); return { background: s.backgroundColor, borderColor: s.borderColor, outline: s.outlineStyle, weight: Number(s.fontWeight) }; });
   await service.click();
   await expect(nav.getByText('Kategorie główne', { exact: true })).toBeVisible();
   await expect(service.locator('svg')).toHaveCount(1);
@@ -15,14 +16,13 @@ test('main categories and subsections have distinct hierarchy and tactile select
   await expect(panel).toBeVisible();
   const subsection = panel.getByRole('button', { name: 'Usterki', exact: true });
   await expect(subsection.locator('svg')).toHaveCount(0);
-  const styles = await service.evaluate(node => { const s = getComputedStyle(node); return { background: s.backgroundColor, borderColor: s.borderColor, outline: s.outlineStyle, weight: Number(s.fontWeight) }; });
-  expect(styles.background).not.toBe('rgb(244, 185, 0)');
-  expect(styles.borderColor).not.toBe('rgb(231, 185, 94)');
-  expect(styles.outline).toBe('none');
-  expect(styles.weight).toBeGreaterThanOrEqual(600);
+  expect(inactiveStyles.background).not.toBe('rgb(244, 185, 0)');
+  expect(inactiveStyles.borderColor).not.toBe('rgb(231, 185, 94)');
+  expect(inactiveStyles.outline).toBe('none');
+  expect(inactiveStyles.weight).toBeGreaterThanOrEqual(600);
   const childStyles = await subsection.evaluate(node => { const s = getComputedStyle(node); return { background: s.backgroundColor, borderColor: s.borderColor, height: node.getBoundingClientRect().height }; });
-  expect(childStyles.background).not.toBe(styles.background);
-  expect(childStyles.borderColor).not.toBe(styles.borderColor);
+  expect(childStyles.background).not.toBe(inactiveStyles.background);
+  expect(childStyles.borderColor).not.toBe(inactiveStyles.borderColor);
   expect(childStyles.height).toBe(48);
   const marker = await subsection.evaluate(node => getComputedStyle(node, '::after').width);
   expect(marker).toBe('3px');
