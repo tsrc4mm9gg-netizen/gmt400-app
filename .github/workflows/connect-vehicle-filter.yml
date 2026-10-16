@@ -1,0 +1,49 @@
+name: Connect vehicle filters once
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/connect-vehicle-filter.yml']
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: connect-vehicle-filters
+  cancel-in-progress: false
+jobs:
+  connect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node scripts/connect-vehicle-filter.cjs
+      - run: npm ci
+      - name: Compile matcher for isolated tests
+        run: npx tsc src/lib/vehicle-compatibility.ts --target ES2020 --module commonjs --skipLibCheck --outDir /tmp/gmt400-filter-tests
+      - name: Check matching and unknown metadata
+        run: |
+          node <<'NODE'
+          const assert = require('node:assert/strict');
+          const { matchVehicle } = require('/tmp/gmt400-filter-tests/vehicle-compatibility.js');
+          const p = { brand: 'Chevrolet', model: 'Suburban', year: '1999', engine: 'L31', drive: '4WD', transmission: '' };
+          const empty = { brand: [], model: [], years: [], engine: [], drive: [], transmission: [] };
+          const all = Object.fromEntries(Object.keys(empty).map(k => [k, ['Wszystkie']]));
+          assert.equal(matchVehicle(p, empty).status, 'unknown');
+          assert.equal(matchVehicle(p, all).status, 'general');
+          assert.equal(matchVehicle(p, { ...all, model: ['Suburban'], years: ['1988–2000'] }).status, 'within_scope');
+          assert.equal(matchVehicle(p, { ...all, model: ['Yukon'] }).status, 'outside_scope');
+          assert.equal(matchVehicle(p, { ...all, transmission: ['4L60E'] }).status, 'unknown');
+          assert.equal(matchVehicle(p, { ...all, years: ['1990-1998'] }).status, 'outside_scope');
+          assert.equal(matchVehicle(p, { ...all, years: ['nieustalone'] }).status, 'unknown');
+          NODE
+      - run: npm run build
+      - name: Commit tested source integration
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add src/app/page.tsx src/app/VehicleProfileProvider.tsx
+          git commit -m 'Activate profile filtering and applicability badges in existing material lists'
+          git push origin HEAD:main
