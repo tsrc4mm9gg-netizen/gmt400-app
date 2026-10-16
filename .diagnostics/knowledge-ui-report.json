@@ -1,0 +1,167 @@
+{
+  "codeSha": "7c531cef09a8c58155f2d9fe652cef6ff445aa86",
+  "runId": "38895239718",
+  "checkedAt": "2026-10-16T11:41:28.244Z",
+  "scope": "Production build; Chromium with mocked Notion fixtures, not live Notion or Vercel",
+  "passed": false,
+  "stages": {
+    "install": "success",
+    "build": "success",
+    "tooling": "success",
+    "server": "success",
+    "browser": "failure"
+  },
+  "stats": {
+    "startTime": "2026-10-16T11:41:20.163Z",
+    "duration": 8003.568000000001,
+    "expected": 12,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  },
+  "tests": [
+    {
+      "title": "code search opens full material",
+      "file": "tests/global-search.spec.cjs",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "durationMs": 739
+        }
+      ]
+    },
+    {
+      "title": "finds symptoms without Polish accents and handles no matches",
+      "file": "tests/global-search.spec.cjs",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "durationMs": 449
+        }
+      ]
+    },
+    {
+      "title": "supports explicit automatic-transmission synonym",
+      "file": "tests/global-search.spec.cjs",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "durationMs": 432
+        }
+      ]
+    },
+    {
+      "title": "category modele shows correct entries and permalinks",
+      "file": "tests/knowledge-categories.spec.cjs",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "durationMs": 344
+        }
+      ]
+    },
+    {
+      "title": "category usterki shows correct entries and permalinks",
+      "file": "tests/knowledge-categories.spec.cjs",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "durationMs": 303
+        }
+      ]
+    },
+    {
+      "title": "category kody-obd shows correct entries and permalinks",
+      "file": "tests/knowledge-categories.spec.cjs",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "durationMs": 289
+        }
+      ]
+    },
+    {
+      "title": "category poradniki shows correct entries and permalinks",
+      "file": "tests/knowledge-categories.spec.cjs",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "durationMs": 283
+        }
+      ]
+    },
+    {
+      "title": "category schematy shows correct entries and permalinks",
+      "file": "tests/knowledge-categories.spec.cjs",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "durationMs": 292
+        }
+      ]
+    },
+    {
+      "title": "category search and clearing query restore visible entries",
+      "file": "tests/knowledge-categories.spec.cjs",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "durationMs": 381
+        }
+      ]
+    },
+    {
+      "title": "fetch failure is distinct from empty data and retry works",
+      "file": "tests/knowledge-categories.spec.cjs",
+      "status": "unexpected",
+      "attempts": [
+        {
+          "status": "failed",
+          "durationMs": 282
+        }
+      ]
+    },
+    {
+      "title": "filters visible lists and restores all materials",
+      "file": "tests/vehicle-filters.spec.cjs",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "durationMs": 999
+        }
+      ]
+    },
+    {
+      "title": "without profile nothing is excluded",
+      "file": "tests/vehicle-filters.spec.cjs",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "durationMs": 380
+        }
+      ]
+    },
+    {
+      "title": "profile editor persists configuration across reload",
+      "file": "tests/vehicle-filters.spec.cjs",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "durationMs": 700
+        }
+      ]
+    }
+  ]
+}
