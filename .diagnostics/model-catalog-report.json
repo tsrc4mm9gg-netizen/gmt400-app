@@ -1,0 +1,40 @@
+{
+  "codeSha": "32b52b6ab4fd0359c5ed43e07f659027a19d0d9c",
+  "runId": "38942886264",
+  "checkedAt": "2026-10-16T17:54:55.693Z",
+  "scope": "Grouped source records; Chromium and mobile WebKit mocked-fixture regressions, not a live Notion or historical-accuracy audit",
+  "passed": true,
+  "integrationApplied": true,
+  "stages": {
+    "patch": "success",
+    "build": "success",
+    "chromium": "success",
+    "webkit": "success"
+  },
+  "reports": {
+    "chromium": {
+      "passed": true,
+      "stats": {
+        "startTime": "2026-10-16T17:53:33.592Z",
+        "duration": 19706.376,
+        "expected": 33,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "failures": []
+    },
+    "webkit": {
+      "passed": true,
+      "stats": {
+        "startTime": "2026-10-16T17:53:55.451Z",
+        "duration": 58218.488,
+        "expected": 33,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "failures": []
+    }
+  }
+}

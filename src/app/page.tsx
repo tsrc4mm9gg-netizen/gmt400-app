@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useMemo } from 'react';
 import GroupedNavigation from './GroupedNavigation';
+import ModelCatalog from './ModelCatalog';
 import GlobalSearch from './GlobalSearch';
 import { useVehicleMaterialFilter, VehicleMatchBadge } from './VehicleMaterialFilter';
 import type { Applicability } from '../lib/vehicle-compatibility';
@@ -472,31 +473,7 @@ export default function Home() {
           </div>
         )}
 
-        {tab === 'modele' && (
-          <div>
-            <h2 className="text-2xl mb-6" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>MODELE ({filteredModels.length})</h2>
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              {filteredModels.map((m, idx) => {
-                const img = getModelImage(m.Nazwa);
-                return (
-                  <div key={idx} className="bg-neutral-950 border border-white/10 overflow-hidden hover:border-amber-400/50 transition">
-                    {img && <img loading="lazy" src={img} alt={m.Nazwa} className="w-full h-44 object-cover cursor-pointer" onClick={() => selectModel(m.Model, m)} />}
-                    <div className="p-4">
-                      <h3 className="font-semibold text-lg mb-1" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>{m.Nazwa}</h3>
-                      <p className="text-amber-400 text-sm mb-2">{m.Lata} • {m.Model}</p>
-                      <p className={`text-neutral-400 text-sm leading-relaxed whitespace-pre-line ${expanded === idx ? '' : 'line-clamp-6'}`}>{m.Opis}</p>
-                      <div className="flex gap-3 mt-3">
-                        <button onClick={() => setExpanded(expanded === idx ? null : idx)} className="text-amber-400 text-sm">
-                          {expanded === idx ? 'Zwiń' : 'Czytaj więcej'}
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-        )}
+        {tab === 'modele' && <ModelCatalog items={filteredModels} onChoose={item => selectModel(item.Model, item)} />}
 
         {tab === 'kody' && (
           <div>
