@@ -2,9 +2,12 @@ name: Verify complete instruction rendering
 on:
   push:
     branches: [main]
-    paths: ['src/app/baza/**', 'tests/notion-content.spec.cjs', '.github/workflows/notion-content.yml']
+    paths: ['src/**', 'tests/**', 'package.json', 'package-lock.json', 'next.config.ts', '.github/workflows/notion-content.yml']
 permissions:
   contents: write
+concurrency:
+  group: complete-instruction-verification
+  cancel-in-progress: false
 jobs:
   verify:
     runs-on: ubuntu-latest
@@ -61,17 +64,17 @@ jobs:
           try { buildDiagnostics = fs.readFileSync('/tmp/notion-content-build.log', 'utf8').replace(/\u001b\[[0-9;]*m/g, '').slice(-12000); } catch {}
           const stats = raw.stats || {};
           const stages = { install: process.env.INSTALL_RESULT, build: process.env.BUILD_RESULT, tooling: process.env.TOOLING_RESULT, server: process.env.SERVER_RESULT, tests: process.env.TEST_RESULT };
-          const passed = Object.values(stages).every(value => value === 'success') && stats.expected === 28 && stats.unexpected === 0 && stats.skipped === 0 && stats.flaky === 0;
+          const passed = Object.values(stages).every(value => value === 'success') && stats.expected === 29 && stats.unexpected === 0 && stats.skipped === 0 && stats.flaky === 0;
           const failures = [];
           function walk(suites) { for (const suite of suites || []) { for (const spec of suite.specs || []) for (const test of spec.tests || []) if (test.status !== 'expected') failures.push({ title: spec.title, status: test.status, errors: (test.results || []).map(result => String(result.error?.message || '').slice(0, 3000)) }); walk(suite.suites); } }
           walk(raw.suites);
           fs.mkdirSync('.diagnostics', { recursive: true });
-          fs.writeFileSync('.diagnostics/notion-content-report.json', JSON.stringify({ codeSha: process.env.GITHUB_SHA, runId: process.env.GITHUB_RUN_ID, checkedAt: new Date().toISOString(), scope: 'Existing Chromium regressions plus mocked Notion pagination and server HTML rendering; not complete live Notion or Safari verification', passed, stages, buildDiagnostics: process.env.BUILD_RESULT === 'failure' ? buildDiagnostics : '', stats, failures }, null, 2) + '\n');
+          fs.writeFileSync('.diagnostics/notion-content-report.json', JSON.stringify({ codeSha: process.env.GITHUB_SHA, runId: process.env.GITHUB_RUN_ID, checkedAt: new Date().toISOString(), scope: 'Chromium regressions with category-scoped counters, mocked Notion pagination and server HTML rendering; not complete live Notion or Safari verification', passed, stages, buildDiagnostics: process.env.BUILD_RESULT === 'failure' ? buildDiagnostics : '', stats, failures }, null, 2) + '\n');
           NODE
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add .diagnostics/notion-content-report.json
-          git commit -m 'ci: publish instruction rendering diagnostics [skip ci]'
+          git commit -m 'ci: publish complete regression diagnostics [skip ci]'
           git pull --rebase --autostash origin main
           git push origin HEAD:main
       - if: always()
