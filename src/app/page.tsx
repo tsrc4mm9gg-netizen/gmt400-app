@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, useMemo } from 'react';
+import VinHistorySummary from './VinHistorySummary';
 
 type Item = {
   Nazwa: string;
@@ -753,10 +754,7 @@ export default function Home() {
                       'Ładowność': vinInput[4] === 'R' ? '1500+ kg' : '500-800 kg',
                     };
                     setVinResult(result);
-      // Check for warning conditions
-      const hasWarning = Math.random() > 0.7; // Placeholder - replace with real check
-      setVinWarning(hasWarning);
-      if (hasWarning) playGong();
+      setVinWarning(false);
                   }
                 }}
                 className="w-full bg-amber-400 text-black py-3 font-semibold hover:bg-amber-300 transition"
@@ -829,63 +827,9 @@ export default function Home() {
 
             {vinResult && (
               <div className="mt-4 bg-neutral-950 border border-amber-400/30 p-4">
-                <div className="flex items-center justify-between mb-3">
-                  <h3 className="font-semibold text-amber-400">CIEKAWOSTKI — HISTORIA POJAZDU</h3>
-                  {vinWarning && (
-                    <div className="flex items-center gap-2 animate-pulse">
-                      <img loading="lazy" src="/warning-icon.jpg" alt="Uwaga" className="w-8 h-8" />
-                      <span className="text-red-500 font-bold text-sm">UWAGA!</span>
-                    </div>
-                  )}
-                </div>
-                {vinWarning && (
-                  <div className="bg-red-900/30 border border-red-500 p-3 mb-3 text-sm">
-                    <p className="text-red-400 font-semibold">Wykryto potencjalne problemy:</p>
-                    <ul className="text-red-300 mt-1">
-                      <li>• Sprawdź historię wypadków</li>
-                      <li>• Zweryfikuj przebieg</li>
-                      <li>• Sprawdź czy nie był zalany</li>
-                    </ul>
-                  </div>
-                )}
-                <div className="space-y-2 mb-4">
-                  <div className="bg-neutral-900 p-3 flex items-center gap-3">
-                    <div className="w-16 h-12 bg-neutral-800 flex items-center justify-center text-xs text-neutral-500">ZDJĘCIE</div>
-                    <div>
-                      <p className="text-sm font-medium">Copart Auction</p>
-                      <p className="text-xs text-neutral-500">Lot #12345 — {vinResult['Rok']} {vinResult['Model']}</p>
-                    </div>
-                  </div>
-                  <div className="bg-neutral-900 p-3 flex items-center gap-3">
-                    <div className="w-16 h-12 bg-neutral-800 flex items-center justify-center text-xs text-neutral-500">ZDJĘCIE</div>
-                    <div>
-                      <p className="text-sm font-medium">IAAI Auction</p>
-                      <p className="text-xs text-neutral-500">Salvage title — sprawdź historię</p>
-                    </div>
-                  </div>
-                </div>
-                <h3 className="font-semibold text-amber-400 mb-3">SZUKAJ ZDJĘĆ</h3>
-                <p className="text-sm text-neutral-400 mb-3">Szukaj zdjęć tego modelu z aukcji, ogłoszeń i ubezpieczalni:</p>
-                <div className="grid grid-cols-2 gap-2 mb-4">
-                  <a href={`https://www.google.com/search?q=${vinResult['Rok'] || ''} ${vinResult['Model'] || 'GMT400'} ${vinResult['Silnik'] || ''} site:copart.com&tbm=isch`} target="_blank" className="bg-neutral-900 p-3 text-center text-sm hover:bg-neutral-800">
-                    <span className="text-amber-400">Copart</span>
-                    <p className="text-xs text-neutral-500">Aukcje USA</p>
-                  </a>
-                  <a href={`https://www.google.com/search?q=${vinResult['Rok'] || ''} ${vinResult['Model'] || 'GMT400'} for sale&tbm=isch`} target="_blank" className="bg-neutral-900 p-3 text-center text-sm hover:bg-neutral-800">
-                    <span className="text-amber-400">Ogłoszenia</span>
-                    <p className="text-xs text-neutral-500">Google Images</p>
-                  </a>
-                  <a href={`https://www.google.com/search?q=${vinResult['Rok'] || ''} Chevrolet ${vinResult['Model'] || 'C1500'} auction&tbm=isch`} target="_blank" className="bg-neutral-900 p-3 text-center text-sm hover:bg-neutral-800">
-                    <span className="text-amber-400">Aukcje</span>
-                    <p className="text-xs text-neutral-500">IAAI / Manheim</p>
-                  </a>
-                  <a href={`https://www.google.com/search?q=${vinResult['Rok'] || ''} ${vinResult['Model'] || 'GMT400'} damage&tbm=isch`} target="_blank" className="bg-neutral-900 p-3 text-center text-sm hover:bg-neutral-800">
-                    <span className="text-amber-400">Ubezpieczalnia</span>
-                    <p className="text-xs text-neutral-500">Zdjęcia szkód</p>
-                  </a>
-                </div>
-                <p className="text-xs text-neutral-500 mb-4">Kliknij aby zobaczyć zdjęcia podobnych aut z aukcji i ogłoszeń</p>
-                
+                <h3 className="font-semibold text-amber-400 mb-3">HISTORIA I ZDJĘCIA TEGO VIN</h3>
+                <VinHistorySummary key={vinResult.VIN} vin={vinResult.VIN} />
+
                 <h4 className="font-semibold text-amber-400 mb-2">POWIĄZANE INFORMACJE</h4>
                 <div className="space-y-2">
                   <a href={`https://www.gmt400.com/search/search?keywords=${vinResult['Rok'] || ''} ${vinResult['Model'] || ''}`} target="_blank" className="block bg-neutral-900 p-3 hover:bg-neutral-800">
