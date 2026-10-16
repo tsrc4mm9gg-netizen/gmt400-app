@@ -6,6 +6,9 @@ on:
   workflow_dispatch:
 permissions:
   contents: write
+concurrency:
+  group: vin-source-migration
+  cancel-in-progress: false
 jobs:
   integrate:
     runs-on: ubuntu-latest
@@ -16,13 +19,40 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - run: python3 scripts/integrate-vin-history.py
-      - run: npm ci
-      - run: npm run build
-      - name: Commit verified decoder integration
+      - name: Persist decoder integration in source
+        run: |
+          if [ -f scripts/integrate-vin-history.cjs ]; then
+            node scripts/integrate-vin-history.cjs
+          else
+            grep -F '<VinHistorySummary key={vinResult.VIN} vin={vinResult.VIN} />' src/app/page.tsx
+          fi
+      - name: Restore standard scripts and remove migration helpers
+        run: |
+          node <<'NODE'
+          const fs = require('node:fs');
+          const pkg = JSON.parse(fs.readFileSync('package.json', 'utf8'));
+          pkg.scripts.dev = 'next dev';
+          pkg.scripts.build = 'next build';
+          fs.writeFileSync('package.json', JSON.stringify(pkg, null, 2) + '\n');
+          for (const path of ['scripts/integrate-vin-history.cjs', 'scripts/integrate-vin-history.py']) {
+            fs.rmSync(path, { force: true });
+          }
+          NODE
+      - name: Generate missing lockfile
+        run: npm install --package-lock-only --ignore-scripts
+      - name: Verify reproducible installation
+        run: npm ci
+      - name: Build without source rewriting
+        run: npm run build
+      - name: Commit tested source and dependency lock
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add src/app/page.tsx
-          git commit -m 'Connect VIN history and image summary directly to decoder'
+          git add src/app/page.tsx package.json package-lock.json
+          git add -u -- scripts
+          if git diff --cached --quiet; then
+            echo 'Source integration already committed; build passed.'
+            exit 0
+          fi
+          git commit -m 'Persist VIN decoder integration; remove build patch and lock dependencies'
           git push origin HEAD:main
