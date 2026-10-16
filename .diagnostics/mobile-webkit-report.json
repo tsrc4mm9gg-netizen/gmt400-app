@@ -1,7 +1,7 @@
 {
-  "codeSha": "552e6a5a34e3d082e5ecd056f5f9f193be09fb97",
-  "runId": "38973395078",
-  "checkedAt": "2026-10-16T22:06:24.701Z",
+  "codeSha": "ac7b622bf0979e31976df02dd31a69df9a3e52eb",
+  "runId": "38974234048",
+  "checkedAt": "2026-10-16T22:14:55.491Z",
   "scope": "Linux WebKit with mobile viewport, touch enabled, mocked Notion fixtures and existing direct server tests; not physical iPhone or live Safari certification",
   "passed": false,
   "stages": {
@@ -13,11 +13,11 @@
   },
   "buildDiagnostics": "",
   "stats": {
-    "startTime": "2026-10-16T22:05:16.460Z",
-    "duration": 66492.287,
-    "expected": 27,
+    "startTime": "2026-10-16T22:14:01.752Z",
+    "duration": 52702.58,
+    "expected": 28,
     "skipped": 0,
-    "unexpected": 2,
+    "unexpected": 1,
     "flaky": 0
   },
   "tests": [
@@ -35,11 +35,11 @@
     {
       "title": "vehicle change updates DIY defaults without hiding unknown instructions or counting codes",
       "file": "diy-restoration.spec.cjs",
-      "status": "unexpected",
+      "status": "expected",
       "attempts": [
         {
-          "status": "failed",
-          "error": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveAttribute\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('region', { name: 'Filtrowanie według profilu auta', exact: true }).getByRole('button', { name: 'Dla mojego auta (2)', exact: true })\nExpected: \u001b[32m\"true\"\u001b[39m\nTimeout: 10000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toHaveAttribute\" getByRole('region', { name: 'Filtrowanie według profilu auta', exact: true }).getByRole('button', { name: 'Dla mojego auta (2)', exact: true }) with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('region', { name: 'Filtrowanie według profilu auta', exact: true }).getByRole('button', { name: 'Dla mojego auta (2)', exact: true })\u001b[22m\n"
+          "status": "passed",
+          "error": ""
         }
       ]
     },
