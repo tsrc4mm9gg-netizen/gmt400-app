@@ -1,26 +1,18 @@
 {
-  "codeSha": "0bd8fcfc35f4631c5eae25ae179cb375a5d1692d",
-  "runId": "38961482790",
-  "checkedAt": "2026-10-16T20:21:58.571Z",
+  "codeSha": "0a9bb975970bdf1e1b2259f8ffbefd5615fad3b2",
+  "runId": "38963162192",
+  "checkedAt": "2026-10-16T20:35:28.791Z",
   "scope": "Chromium mocked fixtures, navigation geometry, tactile styles, profile launcher and category counters; not live Safari",
-  "passed": false,
+  "passed": true,
   "build": "success",
-  "browser": "failure",
+  "browser": "success",
   "stats": {
-    "startTime": "2026-10-16T20:21:43.472Z",
-    "duration": 14267.962,
-    "expected": 21,
+    "startTime": "2026-10-16T20:35:17.411Z",
+    "duration": 10247.427,
+    "expected": 22,
     "skipped": 0,
-    "unexpected": 1,
+    "unexpected": 0,
     "flaky": 0
   },
-  "failures": [
-    {
-      "title": "main categories and subsections have distinct hierarchy and tactile selection styles",
-      "status": "unexpected",
-      "errors": [
-        "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoContain\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // indexOf\u001b[22m\n\nExpected substring: \u001b[32m\"linear-gradient\"\u001b[39m\nReceived string:    \u001b[31m\"none\"\u001b[39m"
-      ]
-    }
-  ]
+  "failures": []
 }
