@@ -1,5 +1,6 @@
 'use client';
 import { useEffect, useState } from 'react';
+import OfficialVehicleData from './OfficialVehicleData';
 export default function VinHistorySummary({ vin }: { vin: string }) {
   const [data, setData] = useState<any>(null);
   const [error, setError] = useState('');
@@ -25,6 +26,8 @@ export default function VinHistorySummary({ vin }: { vin: string }) {
   const sources = new Set(results.map((r: any) => r.url));
   const images = (data?.images || []).filter((image: any) => sources.has(image.sourceUrl) && safe(image.url) !== '#');
   return <section className="space-y-4" aria-live="polite">
+    <OfficialVehicleData key={vin} vin={vin}/>
+    <h3 className="text-lg text-amber-400">Publiczna historia i zdjęcia — oddzielne wyszukiwanie</h3>
     <p className="text-sm text-neutral-400">Pełny VIN: <span className="font-mono text-white">{vin}</span></p>
     {loading && <p role="status">Wyszukuję publiczne informacje i zdjęcia…</p>}
     {error && <div role="alert"><p>{error}</p><button type="button" className="underline" onClick={() => setAttempt(n => n + 1)}>Ponów wyszukiwanie</button></div>}
