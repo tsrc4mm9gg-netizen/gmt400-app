@@ -1,22 +1,22 @@
 {
-  "codeSha": "7c531cef09a8c58155f2d9fe652cef6ff445aa86",
-  "runId": "38895239718",
-  "checkedAt": "2026-10-16T11:41:28.244Z",
+  "codeSha": "f0cfca8e5da50a05f5ca646cb7471fa598080d1c",
+  "runId": "38895797818",
+  "checkedAt": "2026-10-16T11:46:18.496Z",
   "scope": "Production build; Chromium with mocked Notion fixtures, not live Notion or Vercel",
-  "passed": false,
+  "passed": true,
   "stages": {
     "install": "success",
     "build": "success",
     "tooling": "success",
     "server": "success",
-    "browser": "failure"
+    "browser": "success"
   },
   "stats": {
-    "startTime": "2026-10-16T11:41:20.163Z",
-    "duration": 8003.568000000001,
-    "expected": 12,
+    "startTime": "2026-10-16T11:46:12.558Z",
+    "duration": 5637.37,
+    "expected": 13,
     "skipped": 0,
-    "unexpected": 1,
+    "unexpected": 0,
     "flaky": 0
   },
   "tests": [
@@ -27,7 +27,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 739
+          "durationMs": 653
         }
       ]
     },
@@ -38,7 +38,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 449
+          "durationMs": 340
         }
       ]
     },
@@ -49,7 +49,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 432
+          "durationMs": 324
         }
       ]
     },
@@ -60,7 +60,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 344
+          "durationMs": 233
         }
       ]
     },
@@ -71,7 +71,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 303
+          "durationMs": 236
         }
       ]
     },
@@ -82,7 +82,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 289
+          "durationMs": 234
         }
       ]
     },
@@ -93,7 +93,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 283
+          "durationMs": 224
         }
       ]
     },
@@ -104,7 +104,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 292
+          "durationMs": 235
         }
       ]
     },
@@ -115,18 +115,18 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 381
+          "durationMs": 314
         }
       ]
     },
     {
       "title": "fetch failure is distinct from empty data and retry works",
       "file": "tests/knowledge-categories.spec.cjs",
-      "status": "unexpected",
+      "status": "expected",
       "attempts": [
         {
-          "status": "failed",
-          "durationMs": 282
+          "status": "passed",
+          "durationMs": 274
         }
       ]
     },
@@ -137,7 +137,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 999
+          "durationMs": 560
         }
       ]
     },
@@ -148,7 +148,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 380
+          "durationMs": 262
         }
       ]
     },
@@ -159,7 +159,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 700
+          "durationMs": 510
         }
       ]
     }
