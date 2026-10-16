@@ -4,17 +4,28 @@ test.beforeEach(async ({ page }) => {
   await page.addInitScript(() => localStorage.setItem('gmt400_tab', 'modele'));
   await page.route('**/api/notion', route => route.fulfill({ json: { results: [], count: 0 } }));
 });
-test('navigation has tactile gradients instead of flat yellow and white outlines', async ({ page }, info) => {
+test('main categories and subsections have distinct hierarchy and tactile selection styles', async ({ page }, info) => {
   await page.goto('http://127.0.0.1:3100');
   const nav = page.getByRole('navigation', { name: 'Skróty sekcji', exact: true });
   const service = nav.getByRole('button', { name: 'Serwis i części', exact: true });
   await service.click();
+  await expect(nav.getByText('Kategorie główne', { exact: true })).toBeVisible();
+  await expect(service.locator('svg')).toHaveCount(1);
+  const panel = nav.getByRole('group', { name: 'Sekcje w kategorii: Serwis i części', exact: true });
+  await expect(panel).toBeVisible();
+  const subsection = panel.getByRole('button', { name: 'Usterki', exact: true });
+  await expect(subsection.locator('svg')).toHaveCount(0);
   const styles = await service.evaluate(node => { const s = getComputedStyle(node); return { image: s.backgroundImage, shadow: s.boxShadow, background: s.backgroundColor, outline: s.outlineStyle }; });
   expect(styles.image).toContain('linear-gradient');
   expect(styles.shadow).toContain('inset');
   expect(styles.background).not.toBe('rgb(244, 185, 0)');
   expect(styles.outline).toBe('none');
-  await page.screenshot({ path: info.outputPath('tactile-navigation.png'), fullPage: true });
+  const childStyles = await subsection.evaluate(node => { const s = getComputedStyle(node); return { image: s.backgroundImage, height: node.getBoundingClientRect().height }; });
+  expect(childStyles.image).not.toBe(styles.image);
+  expect(childStyles.height).toBe(48);
+  const marker = await subsection.evaluate(node => getComputedStyle(node, '::after').width);
+  expect(marker).toBe('3px');
+  await page.screenshot({ path: info.outputPath('navigation-hierarchy.png'), fullPage: true });
 });
 test('profile launcher sits inside its panel rather than floating over content', async ({ page }) => {
   await page.goto('http://127.0.0.1:3100/usterki');
