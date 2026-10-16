@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, useMemo } from 'react';
+import GroupedNavigation from './GroupedNavigation';
 import GlobalSearch from './GlobalSearch';
 import { useVehicleMaterialFilter, VehicleMatchBadge } from './VehicleMaterialFilter';
 import type { Applicability } from '../lib/vehicle-compatibility';
@@ -348,7 +349,7 @@ export default function Home() {
               value={query}
               onChange={(e) => setQuery(e.target.value)}
             />
-            <button className="text-white" onClick={() => setMenuOpen(!menuOpen)}>
+            <button className="text-white" aria-label={menuOpen ? 'Zamknij menu' : 'Otwórz menu'} aria-expanded={menuOpen} onClick={() => setMenuOpen(!menuOpen)}>
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
               </svg>
@@ -366,17 +367,7 @@ export default function Home() {
               onChange={(e) => setQuery(e.target.value)}
             />
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
-              {CATEGORIES.map((cat) => (
-                <button
-                  key={cat.id}
-                  onClick={() => { setTab(cat.id); setMenuOpen(false); }}
-                  className={`px-4 py-4 text-base font-medium rounded transition active:scale-95 ${
-                    tab === cat.id ? 'bg-amber-400 text-black' : 'bg-white/10 text-white hover:bg-white/20'
-                  }`}
-                >
-                  {cat.label}
-                </button>
-              ))}
+              <GroupedNavigation categories={CATEGORIES} active={tab} instance="menu" onSelect={(id) => { setTab(id); setMenuOpen(false); }} />
             </div>
           </div>
         )}
@@ -464,17 +455,7 @@ export default function Home() {
       <div className="bg-neutral-900 py-4">
         <div className="max-w-7xl mx-auto px-4">
           <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-7 gap-2">
-            {CATEGORIES.map((cat) => (
-              <button
-                key={cat.id}
-                onClick={() => setTab(cat.id)}
-                className={`px-3 py-3 text-sm font-medium text-center transition ${
-                  tab === cat.id ? 'bg-amber-400 text-black' : 'bg-neutral-800 text-neutral-300 hover:bg-neutral-700'
-                }`}
-              >
-                {cat.label}
-              </button>
-            ))}
+            <GroupedNavigation categories={CATEGORIES} active={tab} instance="sections" onSelect={setTab} />
           </div>
         </div>
       </div>
