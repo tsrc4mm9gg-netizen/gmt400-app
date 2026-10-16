@@ -1,0 +1,63 @@
+name: Verify four-tile navigation layout
+on:
+  push:
+    branches: [main]
+    paths: ['src/app/GroupedNavigation.tsx', 'tests/navigation.spec.cjs', '.github/workflows/navigation-layout.yml']
+permissions:
+  contents: write
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm ci
+      - id: build
+        run: npm run build
+      - run: |
+          npm install --no-save --package-lock=false @playwright/test
+          npx playwright install --with-deps chromium
+      - run: |
+          npm run start -- --hostname 127.0.0.1 --port 3100 > /tmp/navigation-app.log 2>&1 &
+          for i in $(seq 1 60); do
+            if curl -fsS http://127.0.0.1:3100 > /dev/null; then exit 0; fi
+            sleep 1
+          done
+          exit 1
+      - id: browser
+        continue-on-error: true
+        run: npx playwright test tests/vehicle-filters.spec.cjs tests/global-search.spec.cjs tests/knowledge-categories.spec.cjs tests/navigation.spec.cjs --workers=1 --reporter=json > /tmp/navigation-layout-tests.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: navigation-layout-screenshots
+          path: test-results
+          if-no-files-found: ignore
+      - name: Publish verification report
+        if: always()
+        env:
+          BUILD_RESULT: ${{ steps.build.outcome }}
+          BROWSER_RESULT: ${{ steps.browser.outcome }}
+        run: |
+          node <<'NODE'
+          const fs = require('node:fs');
+          let raw = {};
+          try { raw = JSON.parse(fs.readFileSync('/tmp/navigation-layout-tests.json', 'utf8')); } catch {}
+          const stats = raw.stats || {};
+          const failures = [];
+          function walk(suites) { for (const suite of suites || []) { for (const spec of suite.specs || []) for (const test of spec.tests || []) if (test.status !== 'expected') failures.push({ title: spec.title, status: test.status, errors: (test.results || []).map(result => String(result.error?.message || '').slice(0, 2000)) }); walk(suite.suites); } }
+          walk(raw.suites);
+          const passed = process.env.BUILD_RESULT === 'success' && process.env.BROWSER_RESULT === 'success' && stats.expected === 19 && stats.unexpected === 0 && stats.skipped === 0 && stats.flaky === 0;
+          fs.mkdirSync('.diagnostics', { recursive: true });
+          fs.writeFileSync('.diagnostics/navigation-layout-report.json', JSON.stringify({ codeSha: process.env.GITHUB_SHA, checkedAt: new Date().toISOString(), scope: 'Chromium mocked fixtures; geometry at 375/390/430px; screenshots retained as Actions artifact; no claim of visual approval', passed, build: process.env.BUILD_RESULT, browser: process.env.BROWSER_RESULT, stats, failures }, null, 2) + '\n');
+          NODE
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add .diagnostics/navigation-layout-report.json
+          git commit -m 'ci: publish four-tile navigation verification [skip ci]'
+          git push origin HEAD:main
+      - if: always()
+        run: node -e "if (!require('./.diagnostics/navigation-layout-report.json').passed) process.exit(1)"
