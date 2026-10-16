@@ -1,0 +1,17 @@
+const fs = require('node:fs');
+const crypto = require('node:crypto');
+const assert = require('node:assert/strict');
+const path = 'src/app/page.tsx';
+const bytes = fs.readFileSync(path);
+assert.equal(crypto.createHash('sha1').update(Buffer.from('blob ' + bytes.length + '\0')).update(bytes).digest('hex'), 'babb4b82b84cdec82a780e0be79ec4b71d7bda85', 'Source changed; refusing to overwrite');
+let text = bytes.toString('utf8');
+const anchor = "import { useState, useEffect, useMemo } from 'react';";
+assert.equal(text.split(anchor).length - 1, 1);
+text = text.replace(anchor, anchor + "\nimport GlobalSearch from './GlobalSearch';");
+const start = text.indexOf('      {showSearch && (');
+const end = text.indexOf('      <section className="relative min-h-[40vh]', start);
+assert.ok(start >= 0 && end > start);
+assert.ok(text.slice(start, end).includes('przejdź do odpowiedniej sekcji'));
+text = text.slice(0, start) + '      {showSearch && <GlobalSearch items={items} onClose={() => setShowSearch(false)} />}\n\n' + text.slice(end);
+assert.ok(!text.includes('przejdź do odpowiedniej sekcji'));
+fs.writeFileSync(path, text);
