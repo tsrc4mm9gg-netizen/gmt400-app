@@ -1,23 +1,23 @@
 {
-  "codeSha": "c23691c5dff7b148c6be7d341c622f7f26660a89",
-  "runId": "38969788614",
-  "checkedAt": "2026-10-16T21:32:22.707Z",
+  "codeSha": "99fb58fcf0e1873a7db124c03d44b1df210b4362",
+  "runId": "38970538292",
+  "checkedAt": "2026-10-16T21:39:27.524Z",
   "scope": "Linux WebKit with mobile viewport, touch enabled, mocked Notion fixtures and existing direct server tests; not physical iPhone or live Safari certification",
-  "passed": false,
+  "passed": true,
   "stages": {
     "install": "success",
     "build": "success",
     "tooling": "success",
     "server": "success",
-    "tests": "failure"
+    "tests": "success"
   },
   "buildDiagnostics": "",
   "stats": {
-    "startTime": "2026-10-16T21:31:45.918Z",
-    "duration": 35460.581000000006,
-    "expected": 28,
+    "startTime": "2026-10-16T21:38:41.626Z",
+    "duration": 44874.212999999996,
+    "expected": 29,
     "skipped": 0,
-    "unexpected": 1,
+    "unexpected": 0,
     "flaky": 0
   },
   "tests": [
@@ -167,11 +167,11 @@
     {
       "title": "main categories and subsections have distinct hierarchy and tactile selection styles",
       "file": "navigation-polish.spec.cjs",
-      "status": "unexpected",
+      "status": "expected",
       "attempts": [
         {
-          "status": "failed",
-          "error": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mnot\u001b[2m.\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: not \u001b[32m\"rgb(231, 185, 94)\"\u001b[39m"
+          "status": "passed",
+          "error": ""
         }
       ]
     },
