@@ -1,0 +1,61 @@
+name: Advance verified roadmap packages
+on:
+  workflow_run:
+    workflows: ['Verify navigation history and compact profile']
+    types: [completed]
+permissions:
+  contents: write
+  issues: write
+concurrency:
+  group: roadmap-progression
+  cancel-in-progress: false
+jobs:
+  advance:
+    if: github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.head_branch == 'main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Download latest verification report
+        uses: dawidd6/action-download-artifact@v6
+        with:
+          workflow: navigation-context.yml
+          run_id: ${{ github.event.workflow_run.id }}
+          name: navigation-context-diagnostics
+          path: downloaded
+          if_no_artifact_found: fail
+      - name: Restore report
+        run: |
+          mkdir -p .diagnostics
+          find downloaded -name 'navigation-context-report.json' -print -quit | xargs -I{} cp {} .diagnostics/navigation-context-report.json
+      - id: progression
+        run: node scripts/roadmap-orchestrator.cjs
+      - name: Commit roadmap progression and audit
+        id: commit
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add docs/ROADMAP.md .diagnostics/roadmap-queue.json .diagnostics/roadmap-progression.json .diagnostics/visual-hierarchy-audit.json
+          if git diff --cached --quiet; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          else
+            git commit -m 'chore: advance roadmap after verified package and prepare visual hierarchy audit'
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+      - if: steps.commit.outputs.changed == 'true'
+        run: git push origin HEAD:main
+      - name: Create next package task
+        if: steps.commit.outputs.changed == 'true'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('node:fs');
+            const audit = JSON.parse(fs.readFileSync('.diagnostics/visual-hierarchy-audit.json', 'utf8'));
+            const body = ['## Paczka 3: hierarchia wizualna i ograniczenie akcentu', '', 'Automatycznie utworzone po zaliczeniu paczki 1.', '', '- Punkty roadmapy: 5, 6, 7', '- Audyt źródeł: `' + JSON.stringify(audit.summary) + '`', '- Zakres: odróżnienie kategorii, podsekcji, kart i ustawień; subtelna głębia tylko dla głównych działań; złoty akcent tylko dla wyboru i ważnych działań.', '', 'Zmiany UI powstaną jako osobna paczka po analizie audytu i zostaną poddane testom regresyjnym.'].join('\n');
+            await github.rest.issues.create({ owner: context.repo.owner, repo: context.repo.repo, title: 'Paczka 3: hierarchia wizualna i ograniczenie akcentu', body, labels: [] });
