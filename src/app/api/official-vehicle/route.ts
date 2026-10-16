@@ -1,5 +1,4 @@
 import { NextResponse } from 'next/server';
-export const runtime = 'nodejs';
 export const maxDuration = 30;
 const bad = (message: string, status = 400) => NextResponse.json({ error: message }, { status, headers: { 'Cache-Control': 'no-store' } });
 async function handle(p: URLSearchParams, privateVin = false) {
