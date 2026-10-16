@@ -1,0 +1,77 @@
+name: Knowledge UI verification and report
+on:
+  push:
+    branches: [main]
+    paths: ['src/**', 'tests/**', 'package.json', 'package-lock.json', 'next.config.ts', '.github/workflows/knowledge-verification.yml']
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: knowledge-verification
+  cancel-in-progress: false
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - id: install
+        run: npm ci
+      - id: build
+        run: npm run build
+      - id: tooling
+        run: |
+          npm install --no-save --package-lock=false @playwright/test
+          npx playwright install --with-deps chromium
+      - id: server
+        run: |
+          npm run start -- --hostname 127.0.0.1 --port 3100 > /tmp/knowledge-app.log 2>&1 &
+          for i in $(seq 1 60); do
+            if curl -fsS http://127.0.0.1:3100 > /dev/null; then exit 0; fi
+            sleep 1
+          done
+          cat /tmp/knowledge-app.log
+          exit 1
+      - id: browser
+        continue-on-error: true
+        run: npx playwright test tests/vehicle-filters.spec.cjs tests/global-search.spec.cjs tests/knowledge-categories.spec.cjs --workers=1 --reporter=json > /tmp/knowledge-tests.json
+      - name: Publish verification summary for connector read access
+        if: always()
+        env:
+          CODE_SHA: ${{ github.sha }}
+          RUN_ID: ${{ github.run_id }}
+          INSTALL_RESULT: ${{ steps.install.outcome }}
+          BUILD_RESULT: ${{ steps.build.outcome }}
+          TOOLING_RESULT: ${{ steps.tooling.outcome }}
+          SERVER_RESULT: ${{ steps.server.outcome }}
+          BROWSER_RESULT: ${{ steps.browser.outcome }}
+        run: |
+          node <<'NODE'
+          const fs = require('node:fs');
+          let raw = {};
+          try { raw = JSON.parse(fs.readFileSync('/tmp/knowledge-tests.json', 'utf8')); } catch {}
+          const tests = [];
+          function walk(suites) {
+            for (const suite of suites || []) {
+              for (const spec of suite.specs || []) for (const test of spec.tests || []) tests.push({ title: spec.title, file: spec.file, status: test.status, attempts: (test.results || []).map(result => ({ status: result.status, durationMs: result.duration })) });
+              walk(suite.suites);
+            }
+          }
+          walk(raw.suites);
+          const stages = { install: process.env.INSTALL_RESULT, build: process.env.BUILD_RESULT, tooling: process.env.TOOLING_RESULT, server: process.env.SERVER_RESULT, browser: process.env.BROWSER_RESULT };
+          const passed = Object.values(stages).every(result => result === 'success') && tests.length === 13 && tests.every(test => test.status === 'expected');
+          const report = { codeSha: process.env.CODE_SHA, runId: process.env.RUN_ID, checkedAt: new Date().toISOString(), scope: 'Production build; Chromium with mocked Notion fixtures, not live Notion or Vercel', passed, stages, stats: raw.stats || null, tests };
+          fs.mkdirSync('.diagnostics', { recursive: true });
+          fs.writeFileSync('.diagnostics/knowledge-ui-report.json', JSON.stringify(report, null, 2) + '\n');
+          NODE
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add .diagnostics/knowledge-ui-report.json
+          git commit -m 'ci: publish knowledge UI verification report [skip ci]'
+          git push origin HEAD:main
+      - name: Fail if verification did not fully pass
+        if: always()
+        run: node -e "if (!require('./.diagnostics/knowledge-ui-report.json').passed) process.exit(1)"
