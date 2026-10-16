@@ -1,0 +1,77 @@
+name: Connect grouped navigation after tests
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/connect-grouped-navigation.yml']
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: connect-grouped-navigation
+  cancel-in-progress: false
+jobs:
+  connect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - id: patch
+        run: node scripts/connect-grouped-navigation.cjs
+      - id: install
+        run: npm ci
+      - id: build
+        run: npm run build
+      - id: tooling
+        run: |
+          npm install --no-save --package-lock=false @playwright/test
+          npx playwright install --with-deps chromium
+      - id: server
+        run: |
+          npm run start -- --hostname 127.0.0.1 --port 3100 > /tmp/navigation-app.log 2>&1 &
+          for i in $(seq 1 60); do
+            if curl -fsS http://127.0.0.1:3100 > /dev/null; then exit 0; fi
+            sleep 1
+          done
+          cat /tmp/navigation-app.log
+          exit 1
+      - id: browser
+        continue-on-error: true
+        run: npx playwright test tests/vehicle-filters.spec.cjs tests/global-search.spec.cjs tests/knowledge-categories.spec.cjs tests/navigation.spec.cjs --workers=1 --reporter=json > /tmp/navigation-tests.json
+      - name: Publish report and commit source only on success
+        if: always()
+        env:
+          CODE_SHA: ${{ github.sha }}
+          BROWSER_RESULT: ${{ steps.browser.outcome }}
+          BUILD_RESULT: ${{ steps.build.outcome }}
+          PATCH_RESULT: ${{ steps.patch.outcome }}
+        run: |
+          node <<'NODE'
+          const fs = require('node:fs');
+          let raw = {};
+          try { raw = JSON.parse(fs.readFileSync('/tmp/navigation-tests.json', 'utf8')); } catch {}
+          const stats = raw.stats || {};
+          const passed = process.env.PATCH_RESULT === 'success' && process.env.BUILD_RESULT === 'success' && process.env.BROWSER_RESULT === 'success' && stats.expected === 16 && stats.unexpected === 0 && stats.skipped === 0;
+          const failures = [];
+          function walk(suites) { for (const suite of suites || []) { for (const spec of suite.specs || []) for (const test of spec.tests || []) if (test.status !== 'expected') failures.push({ title: spec.title, file: spec.file, status: test.status, errors: (test.results || []).map(result => String(result.error?.message || '').slice(0, 2000)) }); walk(suite.suites); } }
+          walk(raw.suites);
+          fs.mkdirSync('.diagnostics', { recursive: true });
+          fs.writeFileSync('.diagnostics/navigation-report.json', JSON.stringify({ codeSha: process.env.CODE_SHA, checkedAt: new Date().toISOString(), scope: 'Chromium with mocked Notion fixtures; not live Notion', passed, integrationApplied: passed, patch: process.env.PATCH_RESULT, build: process.env.BUILD_RESULT, browser: process.env.BROWSER_RESULT, stats, failures }, null, 2) + '\n');
+          NODE
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add .diagnostics/navigation-report.json
+          if node -e "process.exit(require('./.diagnostics/navigation-report.json').passed ? 0 : 1)"; then
+            git add src/app/page.tsx
+            git commit -m 'Activate browser-tested grouped navigation and publish report'
+          else
+            git commit -m 'ci: publish failed navigation verification [skip ci]'
+          fi
+          git push origin HEAD:main
+      - name: Require successful integration
+        if: always()
+        run: node -e "if (!require('./.diagnostics/navigation-report.json').passed) process.exit(1)"
