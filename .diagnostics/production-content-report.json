@@ -1,0 +1,103 @@
+{
+  "auditorCodeSha": "989636538583d837a9fe9cea239a40fbc55dcefb",
+  "runId": "38941773444",
+  "checkedAt": "2026-10-16T17:42:57.728Z",
+  "origin": "https://www.gmt400.pl",
+  "scope": "Read-only live HTTP audit; compares counts with Notion inventory checked on 2026-10-16, validates IDs, one real article and four local graphics; not per-entry identity reconciliation, technical verification or Safari visual approval",
+  "baseline": {
+    "Model": 39,
+    "Usterka": 80,
+    "Kod błędu": 202,
+    "Porada": 177
+  },
+  "checks": [
+    {
+      "name": "api_http",
+      "passed": true,
+      "status": 200
+    },
+    {
+      "name": "api_complete",
+      "passed": true
+    },
+    {
+      "name": "api_count_consistent",
+      "passed": true,
+      "count": 498,
+      "rows": 498
+    },
+    {
+      "name": "inventory_counts_match_notion_snapshot",
+      "passed": true,
+      "expectedTotal": 498,
+      "actualTotal": 498,
+      "actualByType": {
+        "Porada": 177,
+        "Usterka": 80,
+        "Kod błędu": 202,
+        "Model": 39
+      },
+      "note": "A difference requires investigation; it may also reflect a later legitimate Notion edit."
+    },
+    {
+      "name": "unique_valid_entry_ids",
+      "passed": true,
+      "uniqueIds": 498
+    },
+    {
+      "name": "entry_names_present",
+      "passed": true
+    },
+    {
+      "name": "guide_instruction_fields_present",
+      "passed": true,
+      "guides": 177,
+      "missingInstructionFields": 0,
+      "note": "Non-empty text does not establish that a procedure is detailed or technically verified."
+    },
+    {
+      "name": "real_article_http_and_title",
+      "passed": false,
+      "status": 200,
+      "articleId": "3fad7bf1-c139-8122-90d6-dbb1bf5d3cb9"
+    },
+    {
+      "name": "real_article_preserves_api_instruction",
+      "passed": true,
+      "articleId": "3fad7bf1-c139-8122-90d6-dbb1bf5d3cb9"
+    },
+    {
+      "name": "real_article_has_no_body_fetch_warning",
+      "passed": true,
+      "articleId": "3fad7bf1-c139-8122-90d6-dbb1bf5d3cb9"
+    },
+    {
+      "name": "graphic_diy-4l60e-pan-pl.jpg",
+      "passed": true,
+      "status": 200,
+      "bytes": 218074
+    },
+    {
+      "name": "graphic_diy-intake-pl.jpg",
+      "passed": true,
+      "status": 200,
+      "bytes": 264627
+    },
+    {
+      "name": "graphic_diy-np231-pl.jpg",
+      "passed": true,
+      "status": 200,
+      "bytes": 311776
+    },
+    {
+      "name": "graphic_diy-brakes-pl.jpg",
+      "passed": true,
+      "status": 200,
+      "bytes": 216533
+    }
+  ],
+  "errors": [
+    "real_article_http_and_title"
+  ],
+  "passed": false
+}
