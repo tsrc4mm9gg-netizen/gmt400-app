@@ -1,8 +1,8 @@
 {
-  "auditorCodeSha": "6f1b32415abae522ccf52e72ab55e9aa2faf73d9",
-  "deployedSha": "b682013000bb3dae5163c20654ea0972e7c0b724",
-  "runId": "39058635792",
-  "checkedAt": "2026-10-17T18:35:50.667Z",
+  "auditorCodeSha": "e2d5d9c0a491a1c5a5728e4aeb215c4d1673dafc",
+  "deployedSha": "d09f5e515b1539841ec9522ede08248d48f697dc",
+  "runId": "39064417281",
+  "checkedAt": "2026-10-17T19:56:02.464Z",
   "origin": "https://www.gmt400.pl",
   "applicationPassed": false,
   "catalogsVerified": false,
@@ -12,8 +12,8 @@
   "checks": [
     {
       "name": "Deployment contains audited application version",
-      "expectedSha": "6f1b32415abae522ccf52e72ab55e9aa2faf73d9",
-      "deployedSha": "b682013000bb3dae5163c20654ea0972e7c0b724",
+      "expectedSha": "e2d5d9c0a491a1c5a5728e4aeb215c4d1673dafc",
+      "deployedSha": "d09f5e515b1539841ec9522ede08248d48f697dc",
       "passed": false,
       "reason": "deployed_commit_does_not_include_audited_commit"
     },
@@ -21,7 +21,7 @@
       "name": "Pressure conversion",
       "path": "/api/units?type=pressure&value=32",
       "passed": true,
-      "checkedAt": "2026-10-17T18:35:39.790Z",
+      "checkedAt": "2026-10-17T19:55:50.670Z",
       "status": 200,
       "reason": "response_contract_passed"
     },
@@ -29,7 +29,7 @@
       "name": "Polish decimal comma",
       "path": "/api/units?type=length&value=1%2C5",
       "passed": true,
-      "checkedAt": "2026-10-17T18:35:39.832Z",
+      "checkedAt": "2026-10-17T19:55:50.754Z",
       "status": 200,
       "reason": "response_contract_passed"
     },
@@ -37,7 +37,7 @@
       "name": "Invalid conversion type",
       "path": "/api/units?type=constructor&value=1",
       "passed": true,
-      "checkedAt": "2026-10-17T18:35:39.857Z",
+      "checkedAt": "2026-10-17T19:55:50.821Z",
       "status": 400,
       "reason": "response_contract_passed"
     },
@@ -45,7 +45,7 @@
       "name": "RPO lookup",
       "path": "/api/rpo?q=G80%20Z71",
       "passed": true,
-      "checkedAt": "2026-10-17T18:35:39.894Z",
+      "checkedAt": "2026-10-17T19:55:50.883Z",
       "status": 200,
       "reason": "response_contract_passed"
     },
@@ -53,7 +53,7 @@
       "name": "RPO invalid limit",
       "path": "/api/rpo?q=G80&limit=-1",
       "passed": true,
-      "checkedAt": "2026-10-17T18:35:40.041Z",
+      "checkedAt": "2026-10-17T19:55:51.075Z",
       "status": 400,
       "reason": "response_contract_passed"
     },
@@ -61,7 +61,7 @@
       "name": "Polish diagnostic search",
       "path": "/api/diagnostics?q=wypadanie%20zaplonow&system=OBD-II",
       "passed": true,
-      "checkedAt": "2026-10-17T18:35:40.068Z",
+      "checkedAt": "2026-10-17T19:55:51.137Z",
       "status": 200,
       "reason": "response_contract_passed"
     },
@@ -69,7 +69,7 @@
       "name": "OBD combined filter",
       "path": "/api/diagnostics?q=P0300&system=OBD-I",
       "passed": true,
-      "checkedAt": "2026-10-17T18:35:40.101Z",
+      "checkedAt": "2026-10-17T19:55:51.206Z",
       "status": 200,
       "reason": "response_contract_passed"
     },
@@ -77,7 +77,7 @@
       "name": "Tire calculation",
       "path": "/api/calculators?tool=tire&width=265&aspect=75&rim=16&oldWidth=235&oldAspect=75&oldRim=16&speed=60&axleRatio=3.73",
       "passed": true,
-      "checkedAt": "2026-10-17T18:35:40.127Z",
+      "checkedAt": "2026-10-17T19:55:51.267Z",
       "status": 200,
       "reason": "response_contract_passed"
     },
@@ -85,7 +85,7 @@
       "name": "Negative tire speed rejected",
       "path": "/api/calculators?tool=tire&width=265&aspect=75&rim=16&speed=-1",
       "passed": true,
-      "checkedAt": "2026-10-17T18:35:40.152Z",
+      "checkedAt": "2026-10-17T19:55:51.332Z",
       "status": 400,
       "reason": "response_contract_passed"
     },
@@ -93,7 +93,7 @@
       "name": "Gear ratio",
       "path": "/api/calculators?tool=gear-ratio&tireDiameterInches=31.6&engineRpm=2000&transmissionRatio=1&axleRatio=3.73",
       "passed": true,
-      "checkedAt": "2026-10-17T18:35:40.174Z",
+      "checkedAt": "2026-10-17T19:55:51.389Z",
       "status": 200,
       "reason": "response_contract_passed"
     },
@@ -101,7 +101,7 @@
       "name": "Compression ratio",
       "path": "/api/calculators?tool=compression-ratio&cylinderVolumeCc=716&combustionChamberCc=64",
       "passed": true,
-      "checkedAt": "2026-10-17T18:35:40.286Z",
+      "checkedAt": "2026-10-17T19:55:51.457Z",
       "status": 200,
       "reason": "response_contract_passed"
     },
@@ -109,7 +109,7 @@
       "name": "1999 Suburban 2WD catalog links",
       "path": "/api/parts?model=Suburban%201500&year=1999&engine=5.7L%20V8&drivetrain=2wd",
       "passed": true,
-      "checkedAt": "2026-10-17T18:35:40.308Z",
+      "checkedAt": "2026-10-17T19:55:51.519Z",
       "status": 200,
       "reason": "response_contract_passed"
     }
