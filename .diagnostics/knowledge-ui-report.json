@@ -1,7 +1,7 @@
 {
-  "codeSha": "9effba7ec8823e5165089b9a51983605dde5dfc2",
-  "runId": "38993642491",
-  "checkedAt": "2026-10-17T02:07:39.053Z",
+  "codeSha": "d9e1784f4f54983b29a07bc470dc0e2afa33eda8",
+  "runId": "38993926095",
+  "checkedAt": "2026-10-17T02:11:52.999Z",
   "scope": "Chromium with mocked Notion fixtures; category-scoped profile counters; not live Notion or Safari",
   "passed": false,
   "stages": {
