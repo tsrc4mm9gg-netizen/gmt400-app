@@ -1,5 +1,6 @@
 'use client';
 import { useRef, useState, type CSSProperties } from 'react';
+import Link from 'next/link';
 type Category = { id: string; label: string };
 const GROUPS = [
   { id: 'garage', label: 'Moje GMT400', icon: 'M3 10l9-7 9 7v11h-6v-7H9v7H3z', ids: ['mojeauto', 'dziennik', 'paliwo'] },
@@ -47,5 +48,9 @@ export default function GroupedNavigation({ categories, active, onSelect, instan
         <button type="button" aria-pressed={active === category.id} onClick={() => enter(category.id)} style={{ ...tile, height: 48, borderRadius: 7, fontSize: 13 }}>{category.label}</button>
       </li>)}</ul>
     </div>
+    {['vin', 'usterki', 'paliwo', 'mojeauto', 'kupujacy'].includes(active) && <div style={{ marginTop: 12, padding: 12, border: '1px solid #554a30', borderRadius: 8 }}>
+      <Link href="/narzedzia/dane-pojazdu" prefetch={false} style={{ display: 'flex', alignItems: 'center', minHeight: 44, color: '#f2cf85', fontSize: 14, lineHeight: '20px', textDecoration: 'underline' }}>Oficjalne dane VIN, NHTSA i EPA</Link>
+      <p style={{ margin: '4px 0 0', color: '#a7adb7', fontSize: 12, lineHeight: '18px' }}>Dekoder VIN, kampanie bezpieczeństwa, zgłoszenia właścicieli i spalanie. Dostęp także bez wpisywania VIN; wybierz model i rocznik w narzędziu.</p>
+    </div>}
   </nav>;
 }
