@@ -14,7 +14,7 @@ export async function GET() {
  return NextResponse.json({
  status: 'ok',
  service: 'GMT400 Knowledge API',
- version: '1.5.0',
+ version: '1.6.0',
  data: {
  rpoRecords: RPO_CATALOG.length,
  uniqueRpoCodes: rpoCodes.size,
