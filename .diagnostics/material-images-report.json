@@ -1,7 +1,7 @@
 {
-  "auditorCodeSha": "660fe5bef67c401abb6020c6ddd113d0a7dbfd71",
-  "runId": "39046583187",
-  "checkedAt": "2026-10-17T15:49:21.328Z",
+  "auditorCodeSha": "b682013000bb3dae5163c20654ea0972e7c0b724",
+  "runId": "39055166372",
+  "checkedAt": "2026-10-17T17:47:58.809Z",
   "passed": true,
   "scope": "Local synthetic illustrations rendered through candidate Notion renderer, Chromium and Linux WebKit plus existing renderer security tests. No Notion writes; no production signed image availability or physical iPhone certification.",
   "stages": {
@@ -26,8 +26,8 @@
   ],
   "parseError": "",
   "stats": {
-    "startTime": "2026-10-17T15:49:09.575Z",
-    "duration": 11698.944,
+    "startTime": "2026-10-17T17:47:49.423Z",
+    "duration": 9314.989,
     "expected": 16,
     "skipped": 0,
     "unexpected": 0,
