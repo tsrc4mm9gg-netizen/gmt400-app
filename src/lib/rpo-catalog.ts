@@ -1,6 +1,7 @@
 import { RPO_BATCH_2 } from './rpo-batch-2';
 import { RPO_BATCH_3 } from './rpo-batch-3';
 import { RPO_BATCH_4 } from './rpo-batch-4';
+import { RPO_BATCH_5 } from './rpo-batch-5';
 export type RpoCategory = 'Osie' | 'Silniki' | 'Skrzynie' | 'Wyposażenie' | 'Nadwozie' | 'Klimatyzacja' | 'Masy' | 'Lusterka i wnętrze' | 'Zawieszenie' | 'Osprzęt' | 'Napęd' | 'Emisja' | 'Koła' | 'Pakiety' | 'Kolory i tapicerki' | 'Hamulce';
 export type RpoEntry = { code: string; category: RpoCategory; description: string; original: string; years: [number, number] | null; models: string[]; source: string; sourceTitle: string; status: 'reference'; notes: string; ratio?: string };
 const AXLE = 'https://differentials.com/gm-axle-ratio-identification-codes/';
@@ -18,6 +19,7 @@ export const RPO_CATALOG: RpoEntry[] = [
  ...RPO_BATCH_2,
  ...RPO_BATCH_3,
  ...RPO_BATCH_4,
+ ...RPO_BATCH_5,
 ];
 export function decodeRpo(input: string) {
  const tokens = [...new Set(input.toUpperCase().trim().split(/[\s,;|]+/).filter(Boolean))];
