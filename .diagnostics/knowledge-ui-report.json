@@ -1,22 +1,22 @@
 {
-  "codeSha": "ae607576ea2337034051fca467060206c244662d",
-  "runId": "39031538231",
-  "checkedAt": "2026-10-17T12:13:27.757Z",
+  "codeSha": "653d437b8e05490878d2f74816816c74d6082446",
+  "runId": "39031999377",
+  "checkedAt": "2026-10-17T12:20:13.494Z",
   "scope": "Local production build and Chromium; mocked Notion fixtures plus local API, tools appearance, parts and maintenance tests. Not live deployment or physical iPhone verification.",
-  "passed": false,
+  "passed": true,
   "stages": {
     "install": "success",
     "build": "success",
     "tooling": "success",
     "server": "success",
-    "browser": "failure"
+    "browser": "success"
   },
   "stats": {
-    "startTime": "2026-10-17T12:12:49.797Z",
-    "duration": 37883.275,
-    "expected": 40,
+    "startTime": "2026-10-17T12:19:54.853Z",
+    "duration": 18579.453999999998,
+    "expected": 43,
     "skipped": 0,
-    "unexpected": 3,
+    "unexpected": 0,
     "flaky": 0
   },
   "coverage": [
@@ -82,7 +82,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 829,
+          "durationMs": 788,
           "error": ""
         }
       ]
@@ -94,7 +94,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 511,
+          "durationMs": 506,
           "error": ""
         }
       ]
@@ -106,7 +106,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 464,
+          "durationMs": 430,
           "error": ""
         }
       ]
@@ -118,7 +118,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 339,
+          "durationMs": 331,
           "error": ""
         }
       ]
@@ -130,7 +130,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 347,
+          "durationMs": 299,
           "error": ""
         }
       ]
@@ -142,7 +142,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 351,
+          "durationMs": 313,
           "error": ""
         }
       ]
@@ -154,7 +154,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 331,
+          "durationMs": 302,
           "error": ""
         }
       ]
@@ -166,7 +166,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 334,
+          "durationMs": 303,
           "error": ""
         }
       ]
@@ -178,7 +178,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 395,
+          "durationMs": 393,
           "error": ""
         }
       ]
@@ -190,7 +190,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 404,
+          "durationMs": 353,
           "error": ""
         }
       ]
@@ -202,7 +202,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 703,
+          "durationMs": 661,
           "error": ""
         }
       ]
@@ -214,7 +214,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 44,
+          "durationMs": 37,
           "error": ""
         }
       ]
@@ -226,7 +226,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 15,
+          "durationMs": 12,
           "error": ""
         }
       ]
@@ -238,7 +238,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 29,
+          "durationMs": 26,
           "error": ""
         }
       ]
@@ -250,7 +250,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 62,
+          "durationMs": 44,
           "error": ""
         }
       ]
@@ -262,7 +262,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 591,
+          "durationMs": 584,
           "error": ""
         }
       ]
@@ -274,7 +274,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 454,
+          "durationMs": 395,
           "error": ""
         }
       ]
@@ -286,7 +286,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 2173,
+          "durationMs": 2068,
           "error": ""
         }
       ]
@@ -298,7 +298,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 771,
+          "durationMs": 692,
           "error": ""
         }
       ]
@@ -310,7 +310,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 696,
+          "durationMs": 718,
           "error": ""
         }
       ]
@@ -322,7 +322,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 514,
+          "durationMs": 499,
           "error": ""
         }
       ]
@@ -334,7 +334,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 519,
+          "durationMs": 505,
           "error": ""
         }
       ]
@@ -358,7 +358,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 28,
+          "durationMs": 41,
           "error": ""
         }
       ]
@@ -370,7 +370,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 30,
+          "durationMs": 16,
           "error": ""
         }
       ]
@@ -382,7 +382,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 11,
+          "durationMs": 10,
           "error": ""
         }
       ]
@@ -406,7 +406,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 538,
+          "durationMs": 475,
           "error": ""
         }
       ]
@@ -418,7 +418,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 332,
+          "durationMs": 328,
           "error": ""
         }
       ]
@@ -430,7 +430,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 449,
+          "durationMs": 403,
           "error": ""
         }
       ]
@@ -442,7 +442,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 438,
+          "durationMs": 443,
           "error": ""
         }
       ]
@@ -454,7 +454,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 467,
+          "durationMs": 424,
           "error": ""
         }
       ]
@@ -462,36 +462,36 @@
     {
       "title": "dark readable form and results for rpo",
       "file": "tests/new-tools.spec.cjs",
-      "status": "unexpected",
+      "status": "expected",
       "attempts": [
         {
-          "status": "failed",
-          "durationMs": 5298,
-          "error": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCSS\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('[data-tool-theme=\"dark-v1\"]').locator('main > section').first()\nExpected: \u001b[32m\"rgb(2\u001b[7m3\u001b[27m, 2\u001b[7m9, 37\u001b[27m)\"\u001b[39m\nReceived: \u001b[31m\"rgb(2\u001b[7m55\u001b[27m, 2\u001b[7m55, 255\u001b[27m)\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCSS\" locator('[data-tool-theme=\"dark-v1\"]').locator('main > section').first() with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('[data-tool-theme=\"dark-v1\"]').locator('main > section').first()\u001b[22m\n\u001b[2m    14 × locator resolved to <section class=\"rounded-xl border border-slate-200 bg-white p-5 shadow-sm\">…</section>\u001b[22m\n\u001b[2m       - unexpected value \"rgb(255, 255, 255)\"\u001b[22m\n"
+          "status": "passed",
+          "durationMs": 426,
+          "error": ""
         }
       ]
     },
     {
       "title": "dark readable form and results for diagnostyka",
       "file": "tests/new-tools.spec.cjs",
-      "status": "unexpected",
+      "status": "expected",
       "attempts": [
         {
-          "status": "failed",
-          "durationMs": 5453,
-          "error": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCSS\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('[data-tool-theme=\"dark-v1\"]').locator('main > section').first()\nExpected: \u001b[32m\"rgb(2\u001b[7m3\u001b[27m, 2\u001b[7m9, 37\u001b[27m)\"\u001b[39m\nReceived: \u001b[31m\"rgb(2\u001b[7m55\u001b[27m, 2\u001b[7m55, 255\u001b[27m)\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCSS\" locator('[data-tool-theme=\"dark-v1\"]').locator('main > section').first() with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('[data-tool-theme=\"dark-v1\"]').locator('main > section').first()\u001b[22m\n\u001b[2m    14 × locator resolved to <section class=\"rounded-xl border border-slate-200 bg-white p-5 shadow-sm\">…</section>\u001b[22m\n\u001b[2m       - unexpected value \"rgb(255, 255, 255)\"\u001b[22m\n"
+          "status": "passed",
+          "durationMs": 410,
+          "error": ""
         }
       ]
     },
     {
       "title": "dark readable form and results for kalkulatory",
       "file": "tests/new-tools.spec.cjs",
-      "status": "unexpected",
+      "status": "expected",
       "attempts": [
         {
-          "status": "failed",
-          "durationMs": 5506,
-          "error": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCSS\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('[data-tool-theme=\"dark-v1\"]').locator('main > section').first()\nExpected: \u001b[32m\"rgb(2\u001b[7m3\u001b[27m, 2\u001b[7m9, 37\u001b[27m)\"\u001b[39m\nReceived: \u001b[31m\"rgb(2\u001b[7m55\u001b[27m, 2\u001b[7m55, 255\u001b[27m)\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCSS\" locator('[data-tool-theme=\"dark-v1\"]').locator('main > section').first() with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('[data-tool-theme=\"dark-v1\"]').locator('main > section').first()\u001b[22m\n\u001b[2m    14 × locator resolved to <section class=\"rounded-xl border border-slate-200 bg-white p-5 shadow-sm\">…</section>\u001b[22m\n\u001b[2m       - unexpected value \"rgb(255, 255, 255)\"\u001b[22m\n"
+          "status": "passed",
+          "durationMs": 545,
+          "error": ""
         }
       ]
     },
@@ -502,7 +502,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 77,
+          "durationMs": 16,
           "error": ""
         }
       ]
@@ -514,7 +514,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 64,
+          "durationMs": 19,
           "error": ""
         }
       ]
@@ -526,7 +526,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 21,
+          "durationMs": 8,
           "error": ""
         }
       ]
@@ -538,7 +538,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 583,
+          "durationMs": 333,
           "error": ""
         }
       ]
@@ -550,7 +550,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 389,
+          "durationMs": 363,
           "error": ""
         }
       ]
@@ -562,7 +562,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 715,
+          "durationMs": 642,
           "error": ""
         }
       ]
@@ -574,7 +574,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 431,
+          "durationMs": 331,
           "error": ""
         }
       ]
@@ -586,7 +586,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 808,
+          "durationMs": 704,
           "error": ""
         }
       ]
