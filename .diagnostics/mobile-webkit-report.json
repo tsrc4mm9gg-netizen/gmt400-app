@@ -1,22 +1,22 @@
 {
-  "codeSha": "f49353b38c4e247ef5a9b413ea9a4f0766d91f5e",
-  "runId": "39053713315",
-  "checkedAt": "2026-10-17T17:28:35.433Z",
+  "codeSha": "b682013000bb3dae5163c20654ea0972e7c0b724",
+  "runId": "39055166430",
+  "checkedAt": "2026-10-17T17:49:06.132Z",
   "scope": "Linux WebKit with mobile viewport and touch; local production build, tools API tests and mocked Notion fixtures. Not physical iPhone, production Safari or live provider certification.",
-  "passed": true,
+  "passed": false,
   "stages": {
     "INSTALL": "success",
     "BUILD": "success",
     "TOOLING": "success",
     "SERVER": "success",
-    "TESTS": "success"
+    "TESTS": "failure"
   },
   "stats": {
-    "startTime": "2026-10-17T17:27:40.415Z",
-    "duration": 54949.008,
-    "expected": 65,
+    "startTime": "2026-10-17T17:47:43.568Z",
+    "duration": 82477.593,
+    "expected": 64,
     "skipped": 0,
-    "unexpected": 0,
+    "unexpected": 1,
     "flaky": 0
   },
   "coverage": [
@@ -109,11 +109,11 @@
     {
       "title": "code search opens full material",
       "file": "global-search.spec.cjs",
-      "status": "expected",
+      "status": "unexpected",
       "attempts": [
         {
-          "status": "passed",
-          "error": ""
+          "status": "failed",
+          "error": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('dialog', { name: 'Szukaj w bazie wiedzy' })\nExpected: visible\nTimeout: 10000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" getByRole('dialog', { name: 'Szukaj w bazie wiedzy' }) with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('dialog', { name: 'Szukaj w bazie wiedzy' })\u001b[22m\n"
         }
       ]
     },
