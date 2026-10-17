@@ -11,12 +11,6 @@ type Props = {
  onSelect: (id: string) => void;
 };
 
-const TOOL_LINKS = [
- { href: '/narzedzia/rpo', label: 'Wyszukiwarka RPO' },
- { href: '/narzedzia/kalkulatory', label: 'Kalkulator opon' },
- { href: '/narzedzia/diagnostyka', label: 'Kody OBD' }
-];
-
 export default function GroupedNavigation({ categories, active, instance = 'default', onSelect }: Props) {
  return (
  <>
@@ -30,16 +24,9 @@ export default function GroupedNavigation({ categories, active, instance = 'defa
  {category.label}
  </button>
  ))}
- <div className="col-span-full mt-2 border-t border-white/10 pt-3">
- <p className="mb-2 text-xs uppercase tracking-wide text-neutral-500">Narzędzia</p>
- <div className="flex flex-wrap gap-2">
- {TOOL_LINKS.map(link => (
- <Link key={link.href} href={link.href} className="rounded-lg bg-white/5 px-3 py-2 text-sm text-neutral-300 transition hover:bg-white/10 hover:text-white">
- {link.label}
+ <Link href="/narzedzia" className="col-span-full mt-2 rounded-lg bg-amber-400 px-3 py-2 text-center text-sm font-semibold text-black transition hover:bg-amber-300">
+ Narzędzia: kody RPO, OBD i kalkulatory
  </Link>
- ))}
- </div>
- </div>
  </>
  );
 }
