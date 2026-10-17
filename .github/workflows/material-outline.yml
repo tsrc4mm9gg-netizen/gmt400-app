@@ -27,7 +27,7 @@ jobs:
           const fs=require('node:fs');const path='src/app/baza/[id]/page.tsx';let text=fs.readFileSync(path,'utf8');
           const statement="import MaterialContents from '../../MaterialContents';";
           if(!text.includes(statement)){const anchor="import { NotionContent, readNotionBlocks } from './NotionContent';";const badge='<VehicleMatchBadge item={entry} />';if(text.split(anchor).length!==2||text.split(badge).length!==2)throw new Error('Missing or ambiguous entry-page anchors.');text=text.replace(anchor,anchor+'\n'+statement).replace(badge,badge+'\n      <MaterialContents entryId={entry.id} />');fs.writeFileSync(path,text);}
-          const fixture='src/app/__outline-check/page.tsx';if(fs.existsSync(fixture))throw new Error('Refusing to replace an existing route.');fs.mkdirSync('src/app/__outline-check',{recursive:true});
+          const fixture='src/app/%5F_outline-check/page.tsx';if(fs.existsSync(fixture))throw new Error('Refusing to replace an existing route.');fs.mkdirSync('src/app/%5F_outline-check',{recursive:true});
           fs.writeFileSync(fixture,`import Link from 'next/link';
           import MaterialContents from '../MaterialContents';
           export const dynamic='force-dynamic';
