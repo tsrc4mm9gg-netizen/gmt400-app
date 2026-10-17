@@ -1,71 +1,595 @@
 {
-  "codeSha": "2c7683456b0a13fafecbb49cd2e79031b5a9948d",
-  "runId": "39058126430",
-  "checkedAt": "2026-10-17T18:27:30.282Z",
+  "codeSha": "b4608a990143f1150e6287f56d13f84926427694",
+  "runId": "39058295000",
+  "checkedAt": "2026-10-17T18:30:54.350Z",
   "scope": "Local production build and Chromium; mocked Notion fixtures plus local API, tools appearance, parts and maintenance tests. Not live deployment or physical iPhone verification.",
-  "passed": false,
+  "passed": true,
   "stages": {
     "install": "success",
-    "build": "failure",
-    "tooling": "skipped",
-    "server": "skipped",
-    "browser": "skipped"
+    "build": "success",
+    "tooling": "success",
+    "server": "success",
+    "browser": "success"
   },
-  "stats": {},
+  "stats": {
+    "startTime": "2026-10-17T18:30:36.980Z",
+    "duration": 17305.536,
+    "expected": 43,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
   "coverage": [
     {
       "file": "vehicle-filters.spec.cjs",
       "minimum": 3,
-      "count": 0,
-      "covered": false
+      "count": 3,
+      "covered": true
     },
     {
       "file": "global-search.spec.cjs",
       "minimum": 3,
-      "count": 0,
-      "covered": false
+      "count": 3,
+      "covered": true
     },
     {
       "file": "knowledge-categories.spec.cjs",
       "minimum": 8,
-      "count": 0,
-      "covered": false
+      "count": 8,
+      "covered": true
     },
     {
       "file": "navigation.spec.cjs",
       "minimum": 6,
-      "count": 0,
-      "covered": false
+      "count": 6,
+      "covered": true
     },
     {
       "file": "navigation-polish.spec.cjs",
       "minimum": 2,
-      "count": 0,
-      "covered": false
+      "count": 2,
+      "covered": true
     },
     {
       "file": "new-tools.spec.cjs",
       "minimum": 9,
-      "count": 0,
-      "covered": false
+      "count": 12,
+      "covered": true
     },
     {
       "file": "parts-api.spec.cjs",
       "minimum": 4,
-      "count": 0,
-      "covered": false
+      "count": 5,
+      "covered": true
     },
     {
       "file": "maintenance-api.spec.cjs",
       "minimum": 4,
-      "count": 0,
-      "covered": false
+      "count": 4,
+      "covered": true
     }
   ],
-  "parseError": "ENOENT: no such file or directory, open '/tmp/knowledge-tests.json'",
+  "parseError": "",
   "runnerErrors": [],
-  "buildDiagnostics": "\n> gmt400-app@0.1.0 build\n> next build\n\n▲ Next.js 16.4.1 (Turbopack)\n✓ Running next.config.ts took 41ms\n⚠ No build cache found. Please configure build caching for faster rebuilds. Read more: https://nextjs.org/docs/messages/no-cache\nAttention: Next.js now collects completely anonymous telemetry regarding usage.\nThis information is used to shape Next.js' roadmap and prioritize features.\nYou can learn more, including how to opt-out if you'd not like to participate in this anonymous program, by visiting the following URL:\nhttps://nextjs.org/telemetry\n\n\n  Creating an optimized production build ...\n\n> Build error occurred\nError: Turbopack build failed with 2 errors:\n./src/app/MaterialImage.tsx:1:10\nError: You're importing a module that depends on `useEffect` into a React Server Component module. This API is only available in Client Components. To fix, mark the file (or its parent) with the `\"use client\"` directive.\n    Learn more: https://nextjs.org/docs/app/api-reference/directives/use-client\n> 1 | import { useEffect, useRef } from 'react';\n    |          ^^^^^^^^^\n  2 | import type { CSSProperties } from 'react';\n  3 | const button:CSSProperties={minHeight:44,padding:'10px 14px',border:'1px solid #596371',bor...\n  4 | function safe(src:string){try{const url=new URL(src,'https://example.invalid');return ['htt...\n\nEcmascript file had an error\n\nImport trace:\n  Server Component:\n    ./src/app/MaterialImage.tsx\n    ./src/app/baza/[id]/NotionContent.tsx\n    ./src/app/baza/[id]/page.tsx\n\n\n./src/app/MaterialImage.tsx:1:21\nError: You're importing a module that depends on `useRef` into a React Server Component module. This API is only available in Client Components. To fix, mark the file (or its parent) with the `\"use client\"` directive.\n    Learn more: https://nextjs.org/docs/app/api-reference/directives/use-client\n> 1 | import { useEffect, useRef } from 'react';\n    |                     ^^^^^^\n  2 | import type { CSSProperties } from 'react';\n  3 | const button:CSSProperties={minHeight:44,padding:'10px 14px',border:'1px solid #596371',bor...\n  4 | function safe(src:string){try{const url=new URL(src,'https://example.invalid');return ['htt...\n\nEcmascript file had an error\n\nImport trace:\n  Server Component:\n    ./src/app/MaterialImage.tsx\n    ./src/app/baza/[id]/NotionContent.tsx\n    ./src/app/baza/[id]/page.tsx\n\n\n    at ignore-listed frames\n",
+  "buildDiagnostics": "",
   "serverDiagnostics": "",
   "testDiagnostics": "",
-  "tests": []
+  "tests": [
+    {
+      "title": "code search opens full material",
+      "file": "tests/global-search.spec.cjs",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "durationMs": 659,
+          "error": ""
+        }
+      ]
+    },
+    {
+      "title": "finds symptoms without Polish accents and handles no matches",
+      "file": "tests/global-search.spec.cjs",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "durationMs": 390,
+          "error": ""
+        }
+      ]
+    },
+    {
+      "title": "supports explicit automatic-transmission synonym",
+      "file": "tests/global-search.spec.cjs",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "durationMs": 365,
+          "error": ""
+        }
+      ]
+    },
+    {
+      "title": "category modele shows correct entries and permalinks",
+      "file": "tests/knowledge-categories.spec.cjs",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "durationMs": 268,
+          "error": ""
+        }
+      ]
+    },
+    {
+      "title": "category usterki shows correct entries and permalinks",
+      "file": "tests/knowledge-categories.spec.cjs",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "durationMs": 288,
+          "error": ""
+        }
+      ]
+    },
+    {
+      "title": "category kody-obd shows correct entries and permalinks",
+      "file": "tests/knowledge-categories.spec.cjs",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "durationMs": 256,
+          "error": ""
+        }
+      ]
+    },
+    {
+      "title": "category poradniki shows correct entries and permalinks",
+      "file": "tests/knowledge-categories.spec.cjs",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "durationMs": 278,
+          "error": ""
+        }
+      ]
+    },
+    {
+      "title": "category schematy shows correct entries and permalinks",
+      "file": "tests/knowledge-categories.spec.cjs",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "durationMs": 259,
+          "error": ""
+        }
+      ]
+    },
+    {
+      "title": "category search and clearing query restore visible entries",
+      "file": "tests/knowledge-categories.spec.cjs",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "durationMs": 326,
+          "error": ""
+        }
+      ]
+    },
+    {
+      "title": "fetch failure is distinct from empty data and retry works",
+      "file": "tests/knowledge-categories.spec.cjs",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "durationMs": 299,
+          "error": ""
+        }
+      ]
+    },
+    {
+      "title": "profile counters and default filtering are scoped to the current knowledge category",
+      "file": "tests/knowledge-categories.spec.cjs",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "durationMs": 572,
+          "error": ""
+        }
+      ]
+    },
+    {
+      "title": "full vehicle filters retain general tasks and automatic transmission",
+      "file": "tests/maintenance-api.spec.cjs",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "durationMs": 32,
+          "error": ""
+        }
+      ]
+    },
+    {
+      "title": "two wheel drive excludes transfer case and manual filter accepts Polish spelling",
+      "file": "tests/maintenance-api.spec.cjs",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "durationMs": 10,
+          "error": ""
+        }
+      ]
+    },
+    {
+      "title": "unsupported parameters are rejected instead of silently returning no results",
+      "file": "tests/maintenance-api.spec.cjs",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "durationMs": 21,
+          "error": ""
+        }
+      ]
+    },
+    {
+      "title": "unverified intervals and misleading citations are not published",
+      "file": "tests/maintenance-api.spec.cjs",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "durationMs": 42,
+          "error": ""
+        }
+      ]
+    },
+    {
+      "title": "main categories and subsections have distinct hierarchy and tactile selection styles",
+      "file": "tests/navigation-polish.spec.cjs",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "durationMs": 486,
+          "error": ""
+        }
+      ]
+    },
+    {
+      "title": "profile launcher sits inside its panel rather than floating over content",
+      "file": "tests/navigation-polish.spec.cjs",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "durationMs": 563,
+          "error": ""
+        }
+      ]
+    },
+    {
+      "title": "category and active content remain synchronized for all nineteen sections",
+      "file": "tests/navigation.spec.cjs",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "durationMs": 1979,
+          "error": ""
+        }
+      ]
+    },
+    {
+      "title": "all service tiles use page flow and move away when the page is scrolled without clicking",
+      "file": "tests/navigation.spec.cjs",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "durationMs": 613,
+          "error": ""
+        }
+      ]
+    },
+    {
+      "title": "header menu remains available while reading content",
+      "file": "tests/navigation.spec.cjs",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "durationMs": 597,
+          "error": ""
+        }
+      ]
+    },
+    {
+      "title": "symmetric compact tiles and no clipped rows at 375px",
+      "file": "tests/navigation.spec.cjs",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "durationMs": 568,
+          "error": ""
+        }
+      ]
+    },
+    {
+      "title": "symmetric compact tiles and no clipped rows at 390px",
+      "file": "tests/navigation.spec.cjs",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "durationMs": 601,
+          "error": ""
+        }
+      ]
+    },
+    {
+      "title": "symmetric compact tiles and no clipped rows at 430px",
+      "file": "tests/navigation.spec.cjs",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "durationMs": 606,
+          "error": ""
+        }
+      ]
+    },
+    {
+      "title": "RPO decodes multiple codes, filters categories and reports ratio conflicts",
+      "file": "tests/new-tools.spec.cjs",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "durationMs": 21,
+          "error": ""
+        }
+      ]
+    },
+    {
+      "title": "unit conversion has correct direction and rejects missing values",
+      "file": "tests/new-tools.spec.cjs",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "durationMs": 15,
+          "error": ""
+        }
+      ]
+    },
+    {
+      "title": "VIN checksum and returned identifier lengths are correct",
+      "file": "tests/new-tools.spec.cjs",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "durationMs": 11,
+          "error": ""
+        }
+      ]
+    },
+    {
+      "title": "larger tires lower effective ratio and increase actual speed",
+      "file": "tests/new-tools.spec.cjs",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "durationMs": 8,
+          "error": ""
+        }
+      ]
+    },
+    {
+      "title": "Tools button is visible and opens the hub and RPO page",
+      "file": "tests/new-tools.spec.cjs",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "durationMs": 412,
+          "error": ""
+        }
+      ]
+    },
+    {
+      "title": "Polish OBD search displays the P0300 result",
+      "file": "tests/new-tools.spec.cjs",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "durationMs": 280,
+          "error": ""
+        }
+      ]
+    },
+    {
+      "title": "Tools cards have visible styling and fit viewport 320",
+      "file": "tests/new-tools.spec.cjs",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "durationMs": 395,
+          "error": ""
+        }
+      ]
+    },
+    {
+      "title": "Tools cards have visible styling and fit viewport 390",
+      "file": "tests/new-tools.spec.cjs",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "durationMs": 372,
+          "error": ""
+        }
+      ]
+    },
+    {
+      "title": "Tools cards have visible styling and fit viewport 768",
+      "file": "tests/new-tools.spec.cjs",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "durationMs": 389,
+          "error": ""
+        }
+      ]
+    },
+    {
+      "title": "dark readable form and results for rpo",
+      "file": "tests/new-tools.spec.cjs",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "durationMs": 396,
+          "error": ""
+        }
+      ]
+    },
+    {
+      "title": "dark readable form and results for diagnostyka",
+      "file": "tests/new-tools.spec.cjs",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "durationMs": 375,
+          "error": ""
+        }
+      ]
+    },
+    {
+      "title": "dark readable form and results for kalkulatory",
+      "file": "tests/new-tools.spec.cjs",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "durationMs": 478,
+          "error": ""
+        }
+      ]
+    },
+    {
+      "title": "1999 and 2000 are accepted without extending catalog fitments",
+      "file": "tests/parts-api.spec.cjs",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "durationMs": 14,
+          "error": ""
+        }
+      ]
+    },
+    {
+      "title": "malformed and out of range years are rejected",
+      "file": "tests/parts-api.spec.cjs",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "durationMs": 19,
+          "error": ""
+        }
+      ]
+    },
+    {
+      "title": "reference results do not assert verified fitment",
+      "file": "tests/parts-api.spec.cjs",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "durationMs": 9,
+          "error": ""
+        }
+      ]
+    },
+    {
+      "title": "parts form offers 1999 and 2000 and explains missing data",
+      "file": "tests/parts-api.spec.cjs",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "durationMs": 327,
+          "error": ""
+        }
+      ]
+    },
+    {
+      "title": "1999 Suburban 5.7 offers separate catalog links without false local matches",
+      "file": "tests/parts-api.spec.cjs",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "durationMs": 341,
+          "error": ""
+        }
+      ]
+    },
+    {
+      "title": "filters visible lists and restores all materials",
+      "file": "tests/vehicle-filters.spec.cjs",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "durationMs": 627,
+          "error": ""
+        }
+      ]
+    },
+    {
+      "title": "without profile nothing is excluded",
+      "file": "tests/vehicle-filters.spec.cjs",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "durationMs": 360,
+          "error": ""
+        }
+      ]
+    },
+    {
+      "title": "profile editor persists configuration across reload",
+      "file": "tests/vehicle-filters.spec.cjs",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "durationMs": 691,
+          "error": ""
+        }
+      ]
+    }
+  ]
 }
