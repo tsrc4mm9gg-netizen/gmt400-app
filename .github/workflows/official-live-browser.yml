@@ -1,0 +1,62 @@
+name: Official tools live mobile browser verification
+on:
+  push:
+    branches: [main]
+    paths: ['playwright.official-live.config.cjs', 'tests/official-live.spec.cjs', '.github/workflows/official-live-browser.yml']
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: official-live-browser
+  cancel-in-progress: false
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - id: install
+        run: npm ci
+      - id: tooling
+        run: |
+          npm install --no-save --package-lock=false @playwright/test
+          npx playwright install --with-deps webkit
+      - id: tests
+        continue-on-error: true
+        run: npx playwright test --config=playwright.official-live.config.cjs --reporter=json > /tmp/official-live-tests.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: official-live-browser-${{ github.sha }}
+          path: |
+            test-results
+            /tmp/official-live-tests.json
+          if-no-files-found: ignore
+      - name: Publish report only
+        if: always()
+        env:
+          INSTALL_RESULT: ${{ steps.install.outcome }}
+          TOOLING_RESULT: ${{ steps.tooling.outcome }}
+          TEST_RESULT: ${{ steps.tests.outcome }}
+        run: |
+          node <<'NODE'
+          const fs = require('node:fs');
+          let raw = {}; try { raw = JSON.parse(fs.readFileSync('/tmp/official-live-tests.json', 'utf8')); } catch {}
+          const stats = raw.stats || {}; const stages = { install: process.env.INSTALL_RESULT, tooling: process.env.TOOLING_RESULT, tests: process.env.TEST_RESULT };
+          const tests = []; function walk(suites) { for (const suite of suites || []) { for (const spec of suite.specs || []) for (const test of spec.tests || []) tests.push({ title: spec.title, status: test.status, attempts: (test.results || []).map(result => ({ status: result.status, error: String(result.error?.message || '').slice(0, 4000) })) }); walk(suite.suites); } } walk(raw.suites);
+          const passed = Object.values(stages).every(value => value === 'success') && stats.expected === 2 && stats.unexpected === 0 && stats.skipped === 0 && stats.flaky === 0;
+          fs.mkdirSync('.diagnostics', { recursive: true }); fs.writeFileSync('.diagnostics/official-live-browser-report.json', JSON.stringify({ auditorCodeSha: process.env.GITHUB_SHA, runId: process.env.GITHUB_RUN_ID, checkedAt: new Date().toISOString(), origin: 'https://www.gmt400.pl', scope: 'Live public forms in Linux mobile WebKit, no mocked providers. Chevrolet 1999 sample. Synthetic VIN only; not a verification of a real vehicle. No token management, no physical iPhone certification and no deployed commit identification.', passed, stages, stats, tests }, null, 2) + '\n');
+          NODE
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add .diagnostics/official-live-browser-report.json
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'ci: publish live official tools browser report [skip ci]'
+          git pull --rebase --autostash origin main
+          git push origin HEAD:main
+      - name: Require passed live browser checks
+        if: always()
+        run: node -e "if(!require('./.diagnostics/official-live-browser-report.json').passed) process.exit(1)"
