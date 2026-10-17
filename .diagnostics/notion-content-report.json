@@ -1,32 +1,24 @@
 {
-  "codeSha": "b4608a990143f1150e6287f56d13f84926427694",
-  "runId": "39058294898",
-  "checkedAt": "2026-10-17T18:31:06.726Z",
+  "codeSha": "6f1b32415abae522ccf52e72ab55e9aa2faf73d9",
+  "runId": "39058635935",
+  "checkedAt": "2026-10-17T18:35:28.302Z",
   "scope": "Chromium regressions with category-scoped counters, mocked Notion pagination and server HTML rendering; not complete live Notion or Safari verification",
-  "passed": false,
+  "passed": true,
   "stages": {
     "install": "success",
     "build": "success",
     "tooling": "success",
     "server": "success",
-    "tests": "failure"
+    "tests": "success"
   },
   "buildDiagnostics": "",
   "stats": {
-    "startTime": "2026-10-17T18:30:44.899Z",
-    "duration": 20756.327,
-    "expected": 28,
+    "startTime": "2026-10-17T18:35:11.212Z",
+    "duration": 16007.172999999999,
+    "expected": 29,
     "skipped": 0,
-    "unexpected": 1,
+    "unexpected": 0,
     "flaky": 0
   },
-  "failures": [
-    {
-      "title": "renderer retains text, formatting and image captions without executable links or HTML",
-      "status": "unexpected",
-      "errors": [
-        "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mnot\u001b[2m.\u001b[22mtoContain\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // indexOf\u001b[22m\n\nExpected substring: not \u001b[32m\"<script>\"\u001b[39m\nReceived string:        \u001b[31m\"<link rel=\\\"preload\\\" as=\\\"image\\\" href=\\\"https://example.com/diagram.png\\\"/><div class=\\\"my-3\\\"><p class=\\\"whitespace-pre-wrap leading-relaxed\\\"><span><strong>&lt;script&gt;bad()&lt;/script&gt;</strong></span></p></div><div class=\\\"my-3\\\"><figure data-material-image=\\\"true\\\" style=\\\"margin:16px 0;min-width:0;background:#171d25;color:#ededed;padding:12px;border:1px solid #343a43;border-radius:10px\\\"><button type=\\\"button\\\" data-material-image-open=\\\"true\\\" aria-label=\\\"Powiększ ilustrację\\\" style=\\\"display:block;width:100%;padding:0;border:1px solid #596371;border-radius:7px;background:#101317;cursor:zoom-in\\\"><img src=\\\"https://example.com/diagram.png\\\" alt=\\\"Podpis ilustracji\\\" loading=\\\"lazy\\\" style=\\\"display:block;width:100%;height:auto;max-height:480px;object-fit:contain\\\"/></button><figcaption style=\\\"color:#d0d5dc;line-height:1.6;margin-top:10px;overflow-wrap:anywhere\\\">Podpis ilustracji</figcaption><p style=\\\"color:#bdc6d2;font-size:13px;margin:8px 0\\\">Ilustracja z materiału Notion. Obecność w materiale nie potwierdza zgodności z konkretnym autem.</p><a href=\\\"https://example.com/diagram.png\\\" target=\\\"_blank\\\" rel=\\\"noopener noreferrer\\\" style=\\\"color:#f2cf85;display:inline-block;min-height:44px;padding:10px 0\\\">Otwórz plik źródłowy</a><div data-material-image-dialog=\\\"true\\\" role=\\\"dialog\\\" aria-modal=\\\"true\\\" aria-label=\\\"Powiększona ilustracja\\\" hidden=\\\"\\\" data-zoom=\\\"100\\\" style=\\\"position:fixed;inset:0;z-index:1000;display:grid;place-items:center;padding:16px;background:#000b\\\"><div style=\\\"box-sizing:border-box;width:min(96vw,1100px);max-width:96vw;max-height:92dvh;overflow:auto;padding:16px;border:1px solid #596371;border-radius:10px;background:#101317;color:#fafafa;box-shadow:0 0 0 100vmax #000b\\\"><div style=\\\"display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:12px\\\"><button type=\\\"button\\\" data-material-image-close=\\\"true\\\" style=\\\"min-height:44px;padding:10px 14px;border:1px solid #596371;border-radius:7px;background:#171d25;color:#f2cf85;font-size:16px\\\">Zamknij podgląd</button><button type=\\\"button\\\" data-material-image-zoom-out=\\\"true\\\" aria-label=\\\"Zmniejsz powiększenie\\\" disabled=\\\"\\\" style=\\\"min-height:44px;padding:10px 14px;border:1px solid #596371;border-radius:7px;background:#171d25;color:#f2cf85;font-size:16px\\\">−</button><button type=\\\"button\\\" data-material-image-zoom-in=\\\"true\\\" aria-label=\\\"Zwiększ powiększenie\\\" style=\\\"min-height:44px;padding:10px 14px;border:1px solid #596371;border-radius:7px;background:#171d25;color:#f2cf85;font-size:16px\\\">+</button><span data-material-image-zoom-label=\\\"true\\\" aria-live=\\\"polite\\\">Powiększenie: 100%</span></div><div style=\\\"max-height:65dvh;overflow:auto;min-width:0\\\"><img data-material-image-dialog-image=\\\"true\\\" src=\\\"https://example.com/diagram.png\\\" alt=\\"
-      ]
-    }
-  ]
+  "failures": []
 }
