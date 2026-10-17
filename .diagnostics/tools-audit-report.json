@@ -1,7 +1,7 @@
 {
-  "codeSha": "26828becd3c4b2a1a313fe9e14c60d3b8e9bb4ba",
-  "runId": "39041052301",
-  "checkedAt": "2026-10-17T14:32:07.486Z",
+  "codeSha": "e61cecdc0c06d57d1f420ee20ef93a4704cfa303",
+  "runId": "39041520060",
+  "checkedAt": "2026-10-17T14:39:05.383Z",
   "passed": true,
   "scope": "Local production build, Chromium, numerical and validation cases, mocked official APIs and Notion fixtures. External catalog destinations, live providers, physical iPhone and all legacy inline calculators are not certified by this report.",
   "stages": {
@@ -46,8 +46,8 @@
     }
   ],
   "stats": {
-    "startTime": "2026-10-17T14:31:56.589Z",
-    "duration": 10845.218,
+    "startTime": "2026-10-17T14:38:47.601Z",
+    "duration": 17704.811,
     "expected": 58,
     "skipped": 0,
     "unexpected": 0,
