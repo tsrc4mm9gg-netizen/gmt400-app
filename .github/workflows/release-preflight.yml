@@ -1,0 +1,61 @@
+name: Release preflight without deployment
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'src/**'
+      - 'package.json'
+      - 'package-lock.json'
+      - 'next.config.ts'
+      - 'tsconfig.json'
+      - 'tests/related-materials-rules.test.cjs'
+      - '.github/workflows/release-preflight.yml'
+permissions:
+  contents: read
+concurrency:
+  group: release-preflight-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Install locked dependencies
+        id: install
+        run: npm ci
+      - name: Verify recommendation rules
+        id: rules
+        run: node --test tests/related-materials-rules.test.cjs
+      - name: Verify production build and TypeScript
+        id: build
+        run: |
+          set -o pipefail
+          npm run build 2>&1 | tee /tmp/release-build.log
+      - name: Record scoped result
+        if: always()
+        env:
+          INSTALL: ${{ steps.install.outcome }}
+          RULES: ${{ steps.rules.outcome }}
+          BUILD: ${{ steps.build.outcome }}
+        run: |
+          node <<'NODE'
+          const fs = require('node:fs');
+          const stages = Object.fromEntries(['INSTALL','RULES','BUILD'].map(key => [key,process.env[key]]));
+          const passed = Object.values(stages).every(value => value === 'success');
+          const report = { codeSha: process.env.GITHUB_SHA, runId: process.env.GITHUB_RUN_ID, checkedAt: new Date().toISOString(), passed, stages, scope: 'Dependency install, related-material unit rules and Next.js production build only. No browser UI, live Notion, production deployment or content accuracy certification.', deploymentPerformed: false };
+          fs.writeFileSync('/tmp/release-preflight.json', JSON.stringify(report,null,2));
+          fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, '## Release preflight\nCommit: '+report.codeSha+'\n\nResult: '+(passed?'PASS (limited scope)':'FAIL')+'\n\nNo deployment performed. Browser UI and live production verification remain separate.\n');
+          NODE
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: release-preflight-${{ github.sha }}-${{ github.run_attempt }}
+          path: |
+            /tmp/release-preflight.json
+            /tmp/release-build.log
+          if-no-files-found: warn
