@@ -1,16 +1,192 @@
 {
-  "codeSha": "ddb978d7d3485191a03d1aeacb473d472c9f11b3",
-  "runId": "39021053777",
-  "checkedAt": "2026-10-17T09:25:50.618Z",
+  "codeSha": "cd96ef102cf95315aaeb2662046f96dfaab65a69",
+  "runId": "39022036776",
+  "checkedAt": "2026-10-17T09:42:21.769Z",
   "scope": "Chromium with mocked Notion fixtures; category-scoped profile counters; not live Notion or Safari",
-  "passed": false,
+  "passed": true,
   "stages": {
     "install": "success",
-    "build": "failure",
-    "tooling": "skipped",
-    "server": "skipped",
-    "browser": "skipped"
+    "build": "success",
+    "tooling": "success",
+    "server": "success",
+    "browser": "success"
   },
-  "stats": {},
-  "tests": []
+  "stats": {
+    "startTime": "2026-10-17T09:42:13.394Z",
+    "duration": 8304.182999999999,
+    "expected": 14,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "tests": [
+    {
+      "title": "code search opens full material",
+      "file": "tests/global-search.spec.cjs",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "durationMs": 673,
+          "error": ""
+        }
+      ]
+    },
+    {
+      "title": "finds symptoms without Polish accents and handles no matches",
+      "file": "tests/global-search.spec.cjs",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "durationMs": 472,
+          "error": ""
+        }
+      ]
+    },
+    {
+      "title": "supports explicit automatic-transmission synonym",
+      "file": "tests/global-search.spec.cjs",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "durationMs": 467,
+          "error": ""
+        }
+      ]
+    },
+    {
+      "title": "category modele shows correct entries and permalinks",
+      "file": "tests/knowledge-categories.spec.cjs",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "durationMs": 327,
+          "error": ""
+        }
+      ]
+    },
+    {
+      "title": "category usterki shows correct entries and permalinks",
+      "file": "tests/knowledge-categories.spec.cjs",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "durationMs": 328,
+          "error": ""
+        }
+      ]
+    },
+    {
+      "title": "category kody-obd shows correct entries and permalinks",
+      "file": "tests/knowledge-categories.spec.cjs",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "durationMs": 322,
+          "error": ""
+        }
+      ]
+    },
+    {
+      "title": "category poradniki shows correct entries and permalinks",
+      "file": "tests/knowledge-categories.spec.cjs",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "durationMs": 320,
+          "error": ""
+        }
+      ]
+    },
+    {
+      "title": "category schematy shows correct entries and permalinks",
+      "file": "tests/knowledge-categories.spec.cjs",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "durationMs": 320,
+          "error": ""
+        }
+      ]
+    },
+    {
+      "title": "category search and clearing query restore visible entries",
+      "file": "tests/knowledge-categories.spec.cjs",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "durationMs": 367,
+          "error": ""
+        }
+      ]
+    },
+    {
+      "title": "fetch failure is distinct from empty data and retry works",
+      "file": "tests/knowledge-categories.spec.cjs",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "durationMs": 389,
+          "error": ""
+        }
+      ]
+    },
+    {
+      "title": "profile counters and default filtering are scoped to the current knowledge category",
+      "file": "tests/knowledge-categories.spec.cjs",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "durationMs": 710,
+          "error": ""
+        }
+      ]
+    },
+    {
+      "title": "filters visible lists and restores all materials",
+      "file": "tests/vehicle-filters.spec.cjs",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "durationMs": 760,
+          "error": ""
+        }
+      ]
+    },
+    {
+      "title": "without profile nothing is excluded",
+      "file": "tests/vehicle-filters.spec.cjs",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "durationMs": 446,
+          "error": ""
+        }
+      ]
+    },
+    {
+      "title": "profile editor persists configuration across reload",
+      "file": "tests/vehicle-filters.spec.cjs",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "durationMs": 764,
+          "error": ""
+        }
+      ]
+    }
+  ]
 }
