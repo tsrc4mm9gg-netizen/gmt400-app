@@ -1,15 +1,15 @@
 {
-  "codeSha": "460ac7046a6814d784dfd95300ca56bb30fa05ff",
-  "runId": "39030090373",
-  "checkedAt": "2026-10-17T11:50:00.816Z",
-  "passed": true,
+  "codeSha": "ae607576ea2337034051fca467060206c244662d",
+  "runId": "39031538149",
+  "checkedAt": "2026-10-17T12:13:11.572Z",
+  "passed": false,
   "scope": "Local production build, Chromium, numerical and validation cases, mocked official APIs and Notion fixtures. External catalog destinations, live providers, physical iPhone and all legacy inline calculators are not certified by this report.",
   "stages": {
     "INSTALL": "success",
     "BUILD": "success",
     "TOOLING": "success",
     "SERVER": "success",
-    "TESTS": "success"
+    "TESTS": "failure"
   },
   "coverage": [
     {
@@ -18,7 +18,7 @@
     },
     {
       "file": "new-tools.spec.cjs",
-      "count": 9
+      "count": 12
     },
     {
       "file": "parts-api.spec.cjs",
@@ -46,11 +46,11 @@
     }
   ],
   "stats": {
-    "startTime": "2026-10-17T11:49:49.209Z",
-    "duration": 11547.506,
+    "startTime": "2026-10-17T12:12:41.879Z",
+    "duration": 29628.344,
     "expected": 55,
     "skipped": 0,
-    "unexpected": 0,
+    "unexpected": 3,
     "flaky": 0
   },
   "parseError": "",
@@ -317,6 +317,39 @@
         {
           "status": "passed",
           "error": ""
+        }
+      ]
+    },
+    {
+      "title": "dark readable form and results for rpo",
+      "file": "tests/new-tools.spec.cjs",
+      "status": "unexpected",
+      "attempts": [
+        {
+          "status": "failed",
+          "error": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCSS\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('[data-tool-theme=\"dark-v1\"]').locator('main > section').first()\nExpected: \u001b[32m\"rgb(2\u001b[7m3\u001b[27m, 2\u001b[7m9, 37\u001b[27m)\"\u001b[39m\nReceived: \u001b[31m\"rgb(2\u001b[7m55\u001b[27m, 2\u001b[7m55, 255\u001b[27m)\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCSS\" locator('[data-tool-theme=\"dark-v1\"]').locator('main > section').first() with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('[data-tool-theme=\"dark-v1\"]').locator('main > section').first()\u001b[22m\n\u001b[2m    14 × locator resolved to <section class=\"rounded-xl border border-slate-200 bg-white p-5 shadow-sm\">…</section>\u001b[22m\n\u001b[2m       - unexpected value \"rgb(255, 255, 255)\"\u001b[22m\n"
+        }
+      ]
+    },
+    {
+      "title": "dark readable form and results for diagnostyka",
+      "file": "tests/new-tools.spec.cjs",
+      "status": "unexpected",
+      "attempts": [
+        {
+          "status": "failed",
+          "error": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCSS\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('[data-tool-theme=\"dark-v1\"]').locator('main > section').first()\nExpected: \u001b[32m\"rgb(2\u001b[7m3\u001b[27m, 2\u001b[7m9, 37\u001b[27m)\"\u001b[39m\nReceived: \u001b[31m\"rgb(2\u001b[7m55\u001b[27m, 2\u001b[7m55, 255\u001b[27m)\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCSS\" locator('[data-tool-theme=\"dark-v1\"]').locator('main > section').first() with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('[data-tool-theme=\"dark-v1\"]').locator('main > section').first()\u001b[22m\n\u001b[2m    14 × locator resolved to <section class=\"rounded-xl border border-slate-200 bg-white p-5 shadow-sm\">…</section>\u001b[22m\n\u001b[2m       - unexpected value \"rgb(255, 255, 255)\"\u001b[22m\n"
+        }
+      ]
+    },
+    {
+      "title": "dark readable form and results for kalkulatory",
+      "file": "tests/new-tools.spec.cjs",
+      "status": "unexpected",
+      "attempts": [
+        {
+          "status": "failed",
+          "error": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCSS\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('[data-tool-theme=\"dark-v1\"]').locator('main > section').first()\nExpected: \u001b[32m\"rgb(2\u001b[7m3\u001b[27m, 2\u001b[7m9, 37\u001b[27m)\"\u001b[39m\nReceived: \u001b[31m\"rgb(2\u001b[7m55\u001b[27m, 2\u001b[7m55, 255\u001b[27m)\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCSS\" locator('[data-tool-theme=\"dark-v1\"]').locator('main > section').first() with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('[data-tool-theme=\"dark-v1\"]').locator('main > section').first()\u001b[22m\n\u001b[2m    14 × locator resolved to <section class=\"rounded-xl border border-slate-200 bg-white p-5 shadow-sm\">…</section>\u001b[22m\n\u001b[2m       - unexpected value \"rgb(255, 255, 255)\"\u001b[22m\n"
         }
       ]
     },
