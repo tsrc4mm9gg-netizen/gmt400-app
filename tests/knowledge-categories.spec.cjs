@@ -1,6 +1,7 @@
 const { test, expect } = require('@playwright/test');
 const BASE = 'http://127.0.0.1:3100';
-const fixture = (Nazwa, Typ, id) => ({ Nazwa, Typ, id, Model: 'Wszystkie', Opis: 'Treść testowa kategorii.' });
+const generalRules = () => Object.fromEntries(['brand', 'model', 'years', 'engine', 'drive', 'transmission'].map(key => [key, ['Wszystkie']]));
+const fixture = (Nazwa, Typ, id) => ({ Nazwa, Typ, id, Model: 'Wszystkie', Opis: 'Treść testowa kategorii.', applicability: generalRules() });
 const data = [
   fixture('TEST MODEL', 'Model', '00000000-0000-0000-0000-000000000001'),
   fixture('TEST USTERKA', 'Usterka', '00000000-0000-0000-0000-000000000002'),
@@ -63,22 +64,34 @@ test('profile counters and default filtering are scoped to the current knowledge
     localStorage.setItem('gmt400_tab', 'modele');
     localStorage.setItem('gmt400_vehicle_profile_v1', JSON.stringify({ version: 1, profile: { brand: 'Chevrolet', model: 'Suburban', year: '1999', engine: '', drive: '', transmission: '' } }));
   });
-  await page.route('**/api/notion', route => route.fulfill({ json: { results: data, count: data.length, complete: true } }));
+  const unknown = { Nazwa: 'TEST NIEUSTALONA', Typ: 'Porada', id: '00000000-0000-0000-0000-000000000006', Model: 'Wszystkie', Opis: 'Brak metadanych nie potwierdza zgodności.' };
+  const scopedData = [...data, unknown];
+  await page.route('**/api/notion', route => route.fulfill({ json: { results: scopedData, count: scopedData.length, complete: true } }));
   await page.goto(`${BASE}/poradniki`);
   const panel = page.getByRole('region', { name: 'Filtrowanie według profilu auta' });
   await expect(panel).toBeVisible();
-  const buttons = await panel.getByRole('button').allTextContents();
-  console.log('WEBKIT_FILTER_BUTTONS', JSON.stringify(buttons));
   await expect(panel.getByRole('button', { name: 'Dla mojego auta (2)', exact: true })).toHaveAttribute('aria-pressed', 'true');
-  await expect(panel.getByRole('button', { name: 'Wszystkie (2)', exact: true })).toBeVisible();
-await panel.getByRole('button', { name: 'Filtry zaawansowane', exact: true }).click();
+  await expect(panel.getByRole('button', { name: 'Wszystkie (3)', exact: true })).toBeVisible();
+  await panel.getByRole('button', { name: 'Filtry zaawansowane', exact: true }).click();
   await expect(panel.getByRole('button', { name: 'Zgodne z zakresem (0)', exact: true })).toBeVisible();
+  await expect(panel.getByRole('button', { name: 'Ogólne (2)', exact: true })).toBeVisible();
+  await expect(panel.getByRole('button', { name: 'Nieustalone (1)', exact: true })).toBeVisible();
   await expect(page.getByRole('heading', { name: 'TEST PORADA', exact: true })).toBeVisible();
   await expect(page.getByRole('heading', { name: 'TEST Punkty masy', exact: true })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'TEST NIEUSTALONA', exact: true })).toHaveCount(0);
   await expect(page.getByRole('heading', { name: 'TEST P0300', exact: true })).toHaveCount(0);
-  await page.getByRole('link', { name: 'Schematy', exact: true }).click();
+  await panel.getByRole('button', { name: 'Nieustalone (1)', exact: true }).click();
+  await expect(page.getByRole('heading', { name: 'TEST NIEUSTALONA', exact: true })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'TEST PORADA', exact: true })).toHaveCount(0);
+  await panel.getByRole('button', { name: 'Wszystkie (3)', exact: true }).click();
+  await expect(page.getByRole('heading', { name: 'TEST PORADA', exact: true })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'TEST Punkty masy', exact: true })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'TEST NIEUSTALONA', exact: true })).toBeVisible();
+  await page.getByRole('navigation', { name: 'Kategorie bazy wiedzy' }).getByRole('link', { name: 'Schematy', exact: true }).click();
   const diagramPanel = page.getByRole('region', { name: 'Filtrowanie według profilu auta' });
+  await expect(diagramPanel.getByRole('button', { name: 'Dla mojego auta (1)', exact: true })).toHaveAttribute('aria-pressed', 'true');
   await expect(diagramPanel.getByRole('button', { name: 'Wszystkie (1)', exact: true })).toBeVisible();
   await expect(page.getByRole('heading', { name: 'TEST Punkty masy', exact: true })).toBeVisible();
   await expect(page.getByRole('heading', { name: 'TEST USTERKA', exact: true })).toHaveCount(0);
+  await expect(page.getByRole('heading', { name: 'TEST NIEUSTALONA', exact: true })).toHaveCount(0);
 });
