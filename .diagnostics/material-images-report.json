@@ -1,8 +1,8 @@
 {
-  "auditorCodeSha": "e5773ea4e4ecb6bda33b6f87e3ee1b58806dff9b",
-  "runId": "39042647093",
-  "checkedAt": "2026-10-17T14:55:45.300Z",
-  "passed": false,
+  "auditorCodeSha": "660fe5bef67c401abb6020c6ddd113d0a7dbfd71",
+  "runId": "39046583187",
+  "checkedAt": "2026-10-17T15:49:21.328Z",
+  "passed": true,
   "scope": "Local synthetic illustrations rendered through candidate Notion renderer, Chromium and Linux WebKit plus existing renderer security tests. No Notion writes; no production signed image availability or physical iPhone certification.",
   "stages": {
     "INSTALL": "success",
@@ -10,7 +10,7 @@
     "BUILD": "success",
     "TOOLING": "success",
     "SERVER": "success",
-    "TESTS": "failure"
+    "TESTS": "success"
   },
   "coverage": [
     {
@@ -26,11 +26,11 @@
   ],
   "parseError": "",
   "stats": {
-    "startTime": "2026-10-17T14:55:08.293Z",
-    "duration": 36923.447,
-    "expected": 14,
+    "startTime": "2026-10-17T15:49:09.575Z",
+    "duration": 11698.944,
+    "expected": 16,
     "skipped": 0,
-    "unexpected": 2,
+    "unexpected": 0,
     "flaky": 0
   },
   "runnerErrors": [],
@@ -75,9 +75,9 @@
       "title": "broken image shows explanation and safe source link",
       "file": "material-images.spec.cjs",
       "project": "chromium",
-      "status": "unexpected",
+      "status": "expected",
       "errors": [
-        "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('[data-material-image]').getByRole('status')\nExpected substring: \u001b[32m\"Nie udało się wczytać ilustracji\"\u001b[39m\nTimeout: 10000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" locator('[data-material-image]').getByRole('status') with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for locator('[data-material-image]').getByRole('status')\u001b[22m\n"
+        ""
       ]
     },
     {
@@ -120,9 +120,9 @@
       "title": "broken image shows explanation and safe source link",
       "file": "material-images.spec.cjs",
       "project": "webkit",
-      "status": "unexpected",
+      "status": "expected",
       "errors": [
-        "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('[data-material-image]').getByRole('status')\nExpected substring: \u001b[32m\"Nie udało się wczytać ilustracji\"\u001b[39m\nTimeout: 10000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" locator('[data-material-image]').getByRole('status') with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for locator('[data-material-image]').getByRole('status')\u001b[22m\n"
+        ""
       ]
     },
     {

@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react';
+import MaterialImage from '../../MaterialImage';
 export function safeUrl(value: unknown): string | null {
   if (typeof value !== 'string') return null;
   try { const url = new URL(value); return ['https:', 'http:'].includes(url.protocol) ? url.href : null; } catch { return null; }
@@ -60,7 +61,7 @@ export function NotionContent({ blocks }: { blocks: any[] }): ReactNode {
       case 'code': content = <pre className="overflow-x-auto rounded bg-neutral-900 p-3"><code>{rich}</code></pre>; break;
       case 'divider': content = <hr className="border-white/20" />; break;
       case 'to_do': content = <p>{data.checked ? '☑' : '☐'} {rich}</p>; break;
-      case 'image': { const src = safeUrl(data.file?.url || data.external?.url); const caption = (data.caption || []).map((part: any) => part.plain_text || part.text?.content || '').join(''); content = src ? <figure><a href={src} target="_blank" rel="noopener noreferrer"><img src={src} alt={caption || 'Ilustracja z materiału Notion'} loading="lazy" className="h-auto w-full rounded object-contain" /></a>{caption && <figcaption className="mt-2 text-sm text-neutral-400">{caption}</figcaption>}</figure> : <p>Ilustracja ma niedostępny adres.</p>; break; }
+      case 'image': { const src = safeUrl(data.file?.url || data.external?.url); const caption = (data.caption || []).map((part: any) => part.plain_text || part.text?.content || '').join(''); content = src ? <MaterialImage src={src} caption={caption} /> : <p>Ilustracja ma niedostępny adres.</p>; break; }
       case 'table': content = <div className="overflow-x-auto"><table className="w-full border-collapse text-sm"><tbody>{(block.children || []).map((row: any) => <tr key={row.id}>{(row.table_row?.cells || []).map((cell: any[], column: number) => <td key={column} className="border border-white/20 p-2"><Rich parts={cell} /></td>)}</tr>)}</tbody></table></div>; break;
       case 'column_list': case 'column': content = null; break;
       case 'toggle': content = <p className="font-semibold">{rich}</p>; break;
