@@ -1,7 +1,7 @@
 {
-  "auditorCodeSha": "653d437b8e05490878d2f74816816c74d6082446",
-  "runId": "39031999413",
-  "checkedAt": "2026-10-17T12:20:40.367Z",
+  "auditorCodeSha": "c361e8e2a04fecf06614c830b7e88c19271dde7d",
+  "runId": "39037756303",
+  "checkedAt": "2026-10-17T13:44:34.002Z",
   "origin": "https://www.gmt400.pl",
   "passed": true,
   "scope": "Live public HTTP and JSON response checks; Chevrolet 1999 sample only. No browser interaction, no VIN submission, no Notion requests, no authentication tokens. This does not identify the deployed commit or certify all GMT400 variants.",
@@ -9,110 +9,110 @@
     {
       "name": "Official data tool page",
       "path": "/narzedzia/dane-pojazdu",
-      "checkedAt": "2026-10-17T12:20:37.364Z",
+      "checkedAt": "2026-10-17T13:44:25.840Z",
       "passed": true,
       "status": 200,
       "contentType": "text/html; charset=utf-8",
       "reason": "response_contract_passed",
-      "durationMs": 246
+      "durationMs": 334
     },
     {
       "name": "NBP USD",
       "path": "/api/exchange-rate?currency=USD",
-      "checkedAt": "2026-10-17T12:20:37.610Z",
+      "checkedAt": "2026-10-17T13:44:26.174Z",
       "passed": true,
       "status": 200,
       "contentType": "application/json",
       "reason": "response_contract_passed",
       "effectiveDate": "2026-10-16",
-      "durationMs": 836
+      "durationMs": 900
     },
     {
       "name": "NBP EUR",
       "path": "/api/exchange-rate?currency=EUR",
-      "checkedAt": "2026-10-17T12:20:38.446Z",
+      "checkedAt": "2026-10-17T13:44:27.074Z",
       "passed": true,
       "status": 200,
       "contentType": "application/json",
       "reason": "response_contract_passed",
       "effectiveDate": "2026-10-16",
-      "durationMs": 135
+      "durationMs": 293
     },
     {
       "name": "NHTSA recalls model list",
       "path": "/api/official-vehicle?make=Chevrolet&year=1999&action=recallModels",
-      "checkedAt": "2026-10-17T12:20:38.582Z",
+      "checkedAt": "2026-10-17T13:44:27.368Z",
       "passed": true,
       "status": 200,
       "contentType": "application/json",
       "reason": "response_contract_passed",
       "recordCount": 72,
-      "durationMs": 825
+      "durationMs": 3201
     },
     {
       "name": "NHTSA recalls sample records",
       "path": "/api/official-vehicle?make=Chevrolet&year=1999&action=recalls&model=SUBURBAN",
-      "checkedAt": "2026-10-17T12:20:39.407Z",
+      "checkedAt": "2026-10-17T13:44:30.569Z",
       "passed": true,
       "status": 200,
       "contentType": "application/json",
       "reason": "response_contract_passed",
       "recordCount": 2,
-      "durationMs": 136
+      "durationMs": 278
     },
     {
       "name": "NHTSA complaints model list",
       "path": "/api/official-vehicle?make=Chevrolet&year=1999&action=complaintModels",
-      "checkedAt": "2026-10-17T12:20:39.543Z",
+      "checkedAt": "2026-10-17T13:44:30.847Z",
       "passed": true,
       "status": 200,
       "contentType": "application/json",
       "reason": "response_contract_passed",
       "recordCount": 72,
-      "durationMs": 114
+      "durationMs": 238
     },
     {
       "name": "NHTSA complaints sample records",
       "path": "/api/official-vehicle?make=Chevrolet&year=1999&action=complaints&model=SUBURBAN",
-      "checkedAt": "2026-10-17T12:20:39.657Z",
+      "checkedAt": "2026-10-17T13:44:31.085Z",
       "passed": true,
       "status": 200,
       "contentType": "application/json",
       "reason": "response_contract_passed",
       "recordCount": 757,
-      "durationMs": 353
+      "durationMs": 2295
     },
     {
       "name": "EPA model list",
       "path": "/api/official-vehicle?make=Chevrolet&year=1999&action=epaModels",
-      "checkedAt": "2026-10-17T12:20:40.010Z",
+      "checkedAt": "2026-10-17T13:44:33.380Z",
       "passed": true,
       "status": 200,
       "contentType": "application/json",
       "reason": "response_contract_passed",
       "recordCount": 30,
-      "durationMs": 127
+      "durationMs": 339
     },
     {
       "name": "EPA variant list",
       "path": "/api/official-vehicle?make=Chevrolet&year=1999&action=epaOptions&model=Suburban+1500+2WD",
-      "checkedAt": "2026-10-17T12:20:40.137Z",
+      "checkedAt": "2026-10-17T13:44:33.719Z",
       "passed": true,
       "status": 200,
       "contentType": "application/json",
       "reason": "response_contract_passed",
       "recordCount": 1,
-      "durationMs": 115
+      "durationMs": 142
     },
     {
       "name": "EPA sample vehicle record",
       "path": "/api/official-vehicle?action=epaVehicle&id=15444",
-      "checkedAt": "2026-10-17T12:20:40.252Z",
+      "checkedAt": "2026-10-17T13:44:33.861Z",
       "passed": true,
       "status": 200,
       "contentType": "application/json",
       "reason": "response_contract_passed",
-      "durationMs": 115
+      "durationMs": 140
     }
   ]
 }
