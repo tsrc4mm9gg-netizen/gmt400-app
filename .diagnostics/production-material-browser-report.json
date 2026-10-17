@@ -1,10 +1,10 @@
 {
-  "auditorCodeSha": "2c7683456b0a13fafecbb49cd2e79031b5a9948d",
-  "observedDeploymentSha": "b682013000bb3dae5163c20654ea0972e7c0b724",
-  "deploymentShaAfter": "b682013000bb3dae5163c20654ea0972e7c0b724",
+  "auditorCodeSha": "778a3afc3edb251b3fef7413e34bd965fe8a52fb",
+  "observedDeploymentSha": "1e3beb471c4140b5b38b0da224d0d90ba03ed52e",
+  "deploymentShaAfter": "1e3beb471c4140b5b38b0da224d0d90ba03ed52e",
   "stableDeployment": true,
-  "runId": "39058126432",
-  "checkedAt": "2026-10-17T18:36:28.521Z",
+  "runId": "39063623649",
+  "checkedAt": "2026-10-17T19:50:52.630Z",
   "origin": "https://www.gmt400.pl",
   "passed": false,
   "scope": "Actual known public instruction, its contents navigation and bounded discovery of one real Notion image in up to five public instructions per browser. Chromium and Linux mobile WebKit, no mocks, no Notion writes or VIN submission. Missing eligible sample is unverified, not a pass. Not physical iPhone or all-material certification.",
@@ -17,11 +17,11 @@
   "parseError": "",
   "statusError": "",
   "stats": {
-    "startTime": "2026-10-17T18:28:39.348Z",
-    "duration": 468763.66500000004,
-    "expected": 0,
+    "startTime": "2026-10-17T19:44:09.271Z",
+    "duration": 402885.61,
+    "expected": 2,
     "skipped": 0,
-    "unexpected": 6,
+    "unexpected": 4,
     "flaky": 0
   },
   "runnerErrors": [],
@@ -48,16 +48,20 @@
     {
       "title": "live 4L60E contents targets real unique sections",
       "project": "chromium",
-      "status": "unexpected",
+      "status": "expected",
       "attempts": [
         {
-          "status": "failed",
-          "error": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('article').first().getByRole('navigation', { name: 'Spis treści materiału', exact: true })\nExpected: visible\nTimeout: 30000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" locator('article').first().getByRole('navigation', { name: 'Spis treści materiału', exact: true }) with timeout 30000ms\u001b[22m\n\u001b[2m  - waiting for locator('article').first().getByRole('navigation', { name: 'Spis treści materiału', exact: true })\u001b[22m\n",
+          "status": "passed",
+          "error": "",
           "diagnostics": [
             {
               "articleId": "3fad7bf1-c139-8194-b00a-cf6404bfe8f9",
               "pageErrors": [],
-              "headingCount": 2
+              "headingCount": 2,
+              "targets": [
+                "#material-3fad7bf1-c139-8194-b00a-cf6404bfe8f9-1",
+                "#material-3fad7bf1-c139-8194-b00a-cf6404bfe8f9-2"
+              ]
             }
           ]
         }
@@ -106,16 +110,20 @@
     {
       "title": "live 4L60E contents targets real unique sections",
       "project": "webkit",
-      "status": "unexpected",
+      "status": "expected",
       "attempts": [
         {
-          "status": "failed",
-          "error": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('article').first().getByRole('navigation', { name: 'Spis treści materiału', exact: true })\nExpected: visible\nTimeout: 30000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" locator('article').first().getByRole('navigation', { name: 'Spis treści materiału', exact: true }) with timeout 30000ms\u001b[22m\n\u001b[2m  - waiting for locator('article').first().getByRole('navigation', { name: 'Spis treści materiału', exact: true })\u001b[22m\n",
+          "status": "passed",
+          "error": "",
           "diagnostics": [
             {
               "articleId": "3fad7bf1-c139-8194-b00a-cf6404bfe8f9",
               "pageErrors": [],
-              "headingCount": 2
+              "headingCount": 2,
+              "targets": [
+                "#material-3fad7bf1-c139-8194-b00a-cf6404bfe8f9-1",
+                "#material-3fad7bf1-c139-8194-b00a-cf6404bfe8f9-2"
+              ]
             }
           ]
         }
