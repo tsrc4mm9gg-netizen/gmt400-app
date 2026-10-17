@@ -1,0 +1,311 @@
+{
+  "auditorCodeSha": "26828becd3c4b2a1a313fe9e14c60d3b8e9bb4ba",
+  "runId": "39041052253",
+  "checkedAt": "2026-10-17T14:33:05.495Z",
+  "passed": true,
+  "scope": "Candidate removal of homepage viewport override; local Chromium and Linux WebKit metadata, width and existing tool contrast/function tests. Not physical pinch-zoom, full 200-percent reflow audit or production certification.",
+  "stages": {
+    "INSTALL": "success",
+    "CANDIDATE": "success",
+    "BUILD": "success",
+    "TOOLING": "success",
+    "SERVER": "success",
+    "TESTS": "success"
+  },
+  "coverage": [
+    {
+      "project": "chromium",
+      "viewport": 5,
+      "tools": 12
+    },
+    {
+      "project": "webkit",
+      "viewport": 5,
+      "tools": 12
+    }
+  ],
+  "parseError": "",
+  "stats": {
+    "startTime": "2026-10-17T14:32:35.412Z",
+    "duration": 30009.397,
+    "expected": 34,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "runnerErrors": [],
+  "tests": [
+    {
+      "title": "RPO decodes multiple codes, filters categories and reports ratio conflicts",
+      "project": "chromium",
+      "status": "expected",
+      "errors": [
+        ""
+      ]
+    },
+    {
+      "title": "unit conversion has correct direction and rejects missing values",
+      "project": "chromium",
+      "status": "expected",
+      "errors": [
+        ""
+      ]
+    },
+    {
+      "title": "VIN checksum and returned identifier lengths are correct",
+      "project": "chromium",
+      "status": "expected",
+      "errors": [
+        ""
+      ]
+    },
+    {
+      "title": "larger tires lower effective ratio and increase actual speed",
+      "project": "chromium",
+      "status": "expected",
+      "errors": [
+        ""
+      ]
+    },
+    {
+      "title": "Tools button is visible and opens the hub and RPO page",
+      "project": "chromium",
+      "status": "expected",
+      "errors": [
+        ""
+      ]
+    },
+    {
+      "title": "Polish OBD search displays the P0300 result",
+      "project": "chromium",
+      "status": "expected",
+      "errors": [
+        ""
+      ]
+    },
+    {
+      "title": "Tools cards have visible styling and fit viewport 320",
+      "project": "chromium",
+      "status": "expected",
+      "errors": [
+        ""
+      ]
+    },
+    {
+      "title": "Tools cards have visible styling and fit viewport 390",
+      "project": "chromium",
+      "status": "expected",
+      "errors": [
+        ""
+      ]
+    },
+    {
+      "title": "Tools cards have visible styling and fit viewport 768",
+      "project": "chromium",
+      "status": "expected",
+      "errors": [
+        ""
+      ]
+    },
+    {
+      "title": "dark readable form and results for rpo",
+      "project": "chromium",
+      "status": "expected",
+      "errors": [
+        ""
+      ]
+    },
+    {
+      "title": "dark readable form and results for diagnostyka",
+      "project": "chromium",
+      "status": "expected",
+      "errors": [
+        ""
+      ]
+    },
+    {
+      "title": "dark readable form and results for kalkulatory",
+      "project": "chromium",
+      "status": "expected",
+      "errors": [
+        ""
+      ]
+    },
+    {
+      "title": "RPO decodes multiple codes, filters categories and reports ratio conflicts",
+      "project": "webkit",
+      "status": "expected",
+      "errors": [
+        ""
+      ]
+    },
+    {
+      "title": "unit conversion has correct direction and rejects missing values",
+      "project": "webkit",
+      "status": "expected",
+      "errors": [
+        ""
+      ]
+    },
+    {
+      "title": "VIN checksum and returned identifier lengths are correct",
+      "project": "webkit",
+      "status": "expected",
+      "errors": [
+        ""
+      ]
+    },
+    {
+      "title": "larger tires lower effective ratio and increase actual speed",
+      "project": "webkit",
+      "status": "expected",
+      "errors": [
+        ""
+      ]
+    },
+    {
+      "title": "Tools button is visible and opens the hub and RPO page",
+      "project": "webkit",
+      "status": "expected",
+      "errors": [
+        ""
+      ]
+    },
+    {
+      "title": "Polish OBD search displays the P0300 result",
+      "project": "webkit",
+      "status": "expected",
+      "errors": [
+        ""
+      ]
+    },
+    {
+      "title": "Tools cards have visible styling and fit viewport 320",
+      "project": "webkit",
+      "status": "expected",
+      "errors": [
+        ""
+      ]
+    },
+    {
+      "title": "Tools cards have visible styling and fit viewport 390",
+      "project": "webkit",
+      "status": "expected",
+      "errors": [
+        ""
+      ]
+    },
+    {
+      "title": "Tools cards have visible styling and fit viewport 768",
+      "project": "webkit",
+      "status": "expected",
+      "errors": [
+        ""
+      ]
+    },
+    {
+      "title": "dark readable form and results for rpo",
+      "project": "webkit",
+      "status": "expected",
+      "errors": [
+        ""
+      ]
+    },
+    {
+      "title": "dark readable form and results for diagnostyka",
+      "project": "webkit",
+      "status": "expected",
+      "errors": [
+        ""
+      ]
+    },
+    {
+      "title": "dark readable form and results for kalkulatory",
+      "project": "webkit",
+      "status": "expected",
+      "errors": [
+        ""
+      ]
+    },
+    {
+      "title": "one viewport without zoom restrictions at /",
+      "project": "chromium",
+      "status": "expected",
+      "errors": [
+        ""
+      ]
+    },
+    {
+      "title": "one viewport without zoom restrictions at /narzedzia/rpo",
+      "project": "chromium",
+      "status": "expected",
+      "errors": [
+        ""
+      ]
+    },
+    {
+      "title": "one viewport without zoom restrictions at /narzedzia/diagnostyka",
+      "project": "chromium",
+      "status": "expected",
+      "errors": [
+        ""
+      ]
+    },
+    {
+      "title": "one viewport without zoom restrictions at /narzedzia/kalkulatory",
+      "project": "chromium",
+      "status": "expected",
+      "errors": [
+        ""
+      ]
+    },
+    {
+      "title": "one viewport without zoom restrictions at /narzedzia/czesci",
+      "project": "chromium",
+      "status": "expected",
+      "errors": [
+        ""
+      ]
+    },
+    {
+      "title": "one viewport without zoom restrictions at /",
+      "project": "webkit",
+      "status": "expected",
+      "errors": [
+        ""
+      ]
+    },
+    {
+      "title": "one viewport without zoom restrictions at /narzedzia/rpo",
+      "project": "webkit",
+      "status": "expected",
+      "errors": [
+        ""
+      ]
+    },
+    {
+      "title": "one viewport without zoom restrictions at /narzedzia/diagnostyka",
+      "project": "webkit",
+      "status": "expected",
+      "errors": [
+        ""
+      ]
+    },
+    {
+      "title": "one viewport without zoom restrictions at /narzedzia/kalkulatory",
+      "project": "webkit",
+      "status": "expected",
+      "errors": [
+        ""
+      ]
+    },
+    {
+      "title": "one viewport without zoom restrictions at /narzedzia/czesci",
+      "project": "webkit",
+      "status": "expected",
+      "errors": [
+        ""
+      ]
+    }
+  ]
+}
