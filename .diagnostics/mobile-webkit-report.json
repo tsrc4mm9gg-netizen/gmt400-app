@@ -1,17 +1,344 @@
 {
-  "codeSha": "cb5e6656920565c364f32bd0cbacd408e27bc54e",
-  "runId": "38992200365",
-  "checkedAt": "2026-10-17T01:46:07.308Z",
+  "codeSha": "9002d9ee6ba1e7d98580ccbd914a1efcf4f807e2",
+  "runId": "38992669456",
+  "checkedAt": "2026-10-17T01:55:08.712Z",
   "scope": "Linux WebKit with mobile viewport, touch enabled, mocked Notion fixtures and existing direct server tests; not physical iPhone or live Safari certification",
-  "passed": false,
+  "passed": true,
   "stages": {
     "install": "success",
-    "build": "failure",
-    "tooling": "skipped",
-    "server": "skipped",
-    "tests": "skipped"
+    "build": "success",
+    "tooling": "success",
+    "server": "success",
+    "tests": "success"
   },
-  "buildDiagnostics": "\n> gmt400-app@0.1.0 build\n> next build\n\n▲ Next.js 16.4.1 (Turbopack)\n✓ Running next.config.ts took 30ms\n⚠ No build cache found. Please configure build caching for faster rebuilds. Read more: https://nextjs.org/docs/messages/no-cache\nAttention: Next.js now collects completely anonymous telemetry regarding usage.\nThis information is used to shape Next.js' roadmap and prioritize features.\nYou can learn more, including how to opt-out if you'd not like to participate in this anonymous program, by visiting the following URL:\nhttps://nextjs.org/telemetry\n\n- Cache Components enabled\n- Partial Prefetching enabled\n\n  Creating an optimized production build ...\n✓ Compiled successfully in 6.4s\n  Running TypeScript ...\nsrc/lib/rpo-batch-2.ts(107,11): error TS2345: Argument of type '\"Hamulce\"' is not assignable to parameter of type 'RpoCategory'.\nFailed to type check.\n\n",
-  "stats": {},
-  "tests": []
+  "buildDiagnostics": "",
+  "stats": {
+    "startTime": "2026-10-17T01:54:19.939Z",
+    "duration": 46949.01,
+    "expected": 29,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "tests": [
+    {
+      "title": "DIY restores instructions, existing graphic, lightbox and full-material link before videos",
+      "file": "diy-restoration.spec.cjs",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "error": ""
+        }
+      ]
+    },
+    {
+      "title": "vehicle change updates DIY defaults without hiding unknown instructions or counting codes",
+      "file": "diy-restoration.spec.cjs",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "error": ""
+        }
+      ]
+    },
+    {
+      "title": "code search opens full material",
+      "file": "global-search.spec.cjs",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "error": ""
+        }
+      ]
+    },
+    {
+      "title": "finds symptoms without Polish accents and handles no matches",
+      "file": "global-search.spec.cjs",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "error": ""
+        }
+      ]
+    },
+    {
+      "title": "supports explicit automatic-transmission synonym",
+      "file": "global-search.spec.cjs",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "error": ""
+        }
+      ]
+    },
+    {
+      "title": "category modele shows correct entries and permalinks",
+      "file": "knowledge-categories.spec.cjs",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "error": ""
+        }
+      ]
+    },
+    {
+      "title": "category usterki shows correct entries and permalinks",
+      "file": "knowledge-categories.spec.cjs",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "error": ""
+        }
+      ]
+    },
+    {
+      "title": "category kody-obd shows correct entries and permalinks",
+      "file": "knowledge-categories.spec.cjs",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "error": ""
+        }
+      ]
+    },
+    {
+      "title": "category poradniki shows correct entries and permalinks",
+      "file": "knowledge-categories.spec.cjs",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "error": ""
+        }
+      ]
+    },
+    {
+      "title": "category schematy shows correct entries and permalinks",
+      "file": "knowledge-categories.spec.cjs",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "error": ""
+        }
+      ]
+    },
+    {
+      "title": "category search and clearing query restore visible entries",
+      "file": "knowledge-categories.spec.cjs",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "error": ""
+        }
+      ]
+    },
+    {
+      "title": "fetch failure is distinct from empty data and retry works",
+      "file": "knowledge-categories.spec.cjs",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "error": ""
+        }
+      ]
+    },
+    {
+      "title": "profile counters and default filtering are scoped to the current knowledge category",
+      "file": "knowledge-categories.spec.cjs",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "error": ""
+        }
+      ]
+    },
+    {
+      "title": "main categories and subsections have distinct hierarchy and tactile selection styles",
+      "file": "navigation-polish.spec.cjs",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "error": ""
+        }
+      ]
+    },
+    {
+      "title": "profile launcher sits inside its panel rather than floating over content",
+      "file": "navigation-polish.spec.cjs",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "error": ""
+        }
+      ]
+    },
+    {
+      "title": "category and active content remain synchronized for all nineteen sections",
+      "file": "navigation.spec.cjs",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "error": ""
+        }
+      ]
+    },
+    {
+      "title": "all service tiles use page flow and move away when the page is scrolled without clicking",
+      "file": "navigation.spec.cjs",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "error": ""
+        }
+      ]
+    },
+    {
+      "title": "header menu remains available while reading content",
+      "file": "navigation.spec.cjs",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "error": ""
+        }
+      ]
+    },
+    {
+      "title": "symmetric compact tiles and no clipped rows at 375px",
+      "file": "navigation.spec.cjs",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "error": ""
+        }
+      ]
+    },
+    {
+      "title": "symmetric compact tiles and no clipped rows at 390px",
+      "file": "navigation.spec.cjs",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "error": ""
+        }
+      ]
+    },
+    {
+      "title": "symmetric compact tiles and no clipped rows at 430px",
+      "file": "navigation.spec.cjs",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "error": ""
+        }
+      ]
+    },
+    {
+      "title": "instruction body follows pagination and reads nested illustrations",
+      "file": "notion-content.spec.cjs",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "error": ""
+        }
+      ]
+    },
+    {
+      "title": "repeated content cursor fails rather than silently returning partial instructions",
+      "file": "notion-content.spec.cjs",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "error": ""
+        }
+      ]
+    },
+    {
+      "title": "renderer retains text, formatting and image captions without executable links or HTML",
+      "file": "notion-content.spec.cjs",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "error": ""
+        }
+      ]
+    },
+    {
+      "title": "API returns all 501 materials and concatenates title fragments",
+      "file": "notion-pagination.spec.cjs",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "error": ""
+        }
+      ]
+    },
+    {
+      "title": "repeated cursor fails explicitly instead of returning an incomplete successful list",
+      "file": "notion-pagination.spec.cjs",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "error": ""
+        }
+      ]
+    },
+    {
+      "title": "filters visible lists and restores all materials",
+      "file": "vehicle-filters.spec.cjs",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "error": ""
+        }
+      ]
+    },
+    {
+      "title": "without profile nothing is excluded",
+      "file": "vehicle-filters.spec.cjs",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "error": ""
+        }
+      ]
+    },
+    {
+      "title": "profile editor persists configuration across reload",
+      "file": "vehicle-filters.spec.cjs",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "error": ""
+        }
+      ]
+    }
+  ]
 }
