@@ -1,23 +1,23 @@
 {
-  "codeSha": "cd96ef102cf95315aaeb2662046f96dfaab65a69",
-  "runId": "39022036772",
-  "checkedAt": "2026-10-17T09:44:58.520Z",
+  "codeSha": "5f45f51da08621a7add2401c197cadba0a1172be",
+  "runId": "39022502311",
+  "checkedAt": "2026-10-17T09:50:48.711Z",
   "scope": "Linux WebKit with mobile viewport, touch enabled, mocked Notion fixtures and existing direct server tests; not physical iPhone or live Safari certification",
-  "passed": false,
+  "passed": true,
   "stages": {
     "install": "success",
     "build": "success",
     "tooling": "success",
     "server": "success",
-    "tests": "failure"
+    "tests": "success"
   },
   "buildDiagnostics": "",
   "stats": {
-    "startTime": "2026-10-17T09:42:27.076Z",
-    "duration": 149917.812,
-    "expected": 22,
+    "startTime": "2026-10-17T09:49:55.303Z",
+    "duration": 52163.011,
+    "expected": 29,
     "skipped": 0,
-    "unexpected": 7,
+    "unexpected": 0,
     "flaky": 0
   },
   "tests": [
@@ -167,11 +167,11 @@
     {
       "title": "main categories and subsections have distinct hierarchy and tactile selection styles",
       "file": "navigation-polish.spec.cjs",
-      "status": "unexpected",
+      "status": "expected",
       "attempts": [
         {
-          "status": "timedOut",
-          "error": "\u001b[31mTest timeout of 45000ms exceeded.\u001b[39m"
+          "status": "passed",
+          "error": ""
         }
       ]
     },
@@ -189,66 +189,66 @@
     {
       "title": "category and active content remain synchronized for all nineteen sections",
       "file": "navigation.spec.cjs",
-      "status": "unexpected",
+      "status": "expected",
       "attempts": [
         {
-          "status": "failed",
-          "error": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('navigation', { name: 'Skróty sekcji', exact: true })\nExpected: visible\nTimeout: 10000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" getByRole('navigation', { name: 'Skróty sekcji', exact: true }) with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('navigation', { name: 'Skróty sekcji', exact: true })\u001b[22m\n"
+          "status": "passed",
+          "error": ""
         }
       ]
     },
     {
       "title": "all service tiles use page flow and move away when the page is scrolled without clicking",
       "file": "navigation.spec.cjs",
-      "status": "unexpected",
+      "status": "expected",
       "attempts": [
         {
-          "status": "failed",
-          "error": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('navigation', { name: 'Skróty sekcji', exact: true })\nExpected: visible\nTimeout: 10000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" getByRole('navigation', { name: 'Skróty sekcji', exact: true }) with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('navigation', { name: 'Skróty sekcji', exact: true })\u001b[22m\n"
+          "status": "passed",
+          "error": ""
         }
       ]
     },
     {
       "title": "header menu remains available while reading content",
       "file": "navigation.spec.cjs",
-      "status": "unexpected",
+      "status": "expected",
       "attempts": [
         {
-          "status": "failed",
-          "error": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('navigation', { name: 'Skróty sekcji', exact: true })\nExpected: visible\nTimeout: 10000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" getByRole('navigation', { name: 'Skróty sekcji', exact: true }) with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('navigation', { name: 'Skróty sekcji', exact: true })\u001b[22m\n"
+          "status": "passed",
+          "error": ""
         }
       ]
     },
     {
       "title": "symmetric compact tiles and no clipped rows at 375px",
       "file": "navigation.spec.cjs",
-      "status": "unexpected",
+      "status": "expected",
       "attempts": [
         {
-          "status": "failed",
-          "error": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('navigation', { name: 'Skróty sekcji', exact: true })\nExpected: visible\nTimeout: 10000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" getByRole('navigation', { name: 'Skróty sekcji', exact: true }) with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('navigation', { name: 'Skróty sekcji', exact: true })\u001b[22m\n"
+          "status": "passed",
+          "error": ""
         }
       ]
     },
     {
       "title": "symmetric compact tiles and no clipped rows at 390px",
       "file": "navigation.spec.cjs",
-      "status": "unexpected",
+      "status": "expected",
       "attempts": [
         {
-          "status": "failed",
-          "error": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('navigation', { name: 'Skróty sekcji', exact: true })\nExpected: visible\nTimeout: 10000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" getByRole('navigation', { name: 'Skróty sekcji', exact: true }) with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('navigation', { name: 'Skróty sekcji', exact: true })\u001b[22m\n"
+          "status": "passed",
+          "error": ""
         }
       ]
     },
     {
       "title": "symmetric compact tiles and no clipped rows at 430px",
       "file": "navigation.spec.cjs",
-      "status": "unexpected",
+      "status": "expected",
       "attempts": [
         {
-          "status": "failed",
-          "error": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('navigation', { name: 'Skróty sekcji', exact: true })\nExpected: visible\nTimeout: 10000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" getByRole('navigation', { name: 'Skróty sekcji', exact: true }) with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('navigation', { name: 'Skróty sekcji', exact: true })\u001b[22m\n"
+          "status": "passed",
+          "error": ""
         }
       ]
     },
