@@ -1,0 +1,43 @@
+{
+  "auditorCodeSha": "28d96554ea2ca7802892977e1b78c2532d63786d",
+  "runId": "38990065365",
+  "checkedAt": "2026-10-17T01:20:56.018Z",
+  "origin": "https://www.gmt400.pl",
+  "scope": "Live public forms in Linux mobile WebKit, no mocked providers. Chevrolet 1999 sample. Synthetic VIN only; not a verification of a real vehicle. No token management, no physical iPhone certification and no deployed commit identification.",
+  "passed": false,
+  "stages": {
+    "install": "success",
+    "tooling": "success",
+    "tests": "failure"
+  },
+  "stats": {
+    "startTime": "2026-10-17T01:16:52.906Z",
+    "duration": 241992.038,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 2,
+    "flaky": 0
+  },
+  "tests": [
+    {
+      "title": "live official data forms return provider results in mobile WebKit",
+      "status": "unexpected",
+      "attempts": [
+        {
+          "status": "timedOut",
+          "error": "\u001b[31mTest timeout of 120000ms exceeded.\u001b[39m"
+        }
+      ]
+    },
+    {
+      "title": "live repair converter supports manual calculation and NBP without changing repair total",
+      "status": "unexpected",
+      "attempts": [
+        {
+          "status": "timedOut",
+          "error": "\u001b[31mTest timeout of 120000ms exceeded.\u001b[39m"
+        }
+      ]
+    }
+  ]
+}
