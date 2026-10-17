@@ -30,9 +30,10 @@ export default function RootLayout({
         <VehicleProfileProvider>{children}</VehicleProfileProvider>
         <Link
           href="/narzedzia"
-          className="fixed bottom-4 right-4 z-[90] rounded-full bg-amber-400 px-4 py-3 text-sm font-bold text-black shadow-lg transition hover:bg-amber-300"
+          className="fixed bottom-4 right-4 z-[9999] flex items-center gap-2 rounded-full bg-amber-400 px-5 py-4 text-base font-bold text-black shadow-2xl ring-4 ring-black/20 transition hover:bg-amber-300"
         >
-          🧰 Narzędzia
+          <span className="text-xl">🧰</span>
+          <span>Narzędzia</span>
         </Link>
       </body>
     </html>
