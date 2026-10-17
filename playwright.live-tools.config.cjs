@@ -1,0 +1,2 @@
+const { defineConfig } = require('@playwright/test');
+module.exports = defineConfig({testDir:'./tests',testMatch:'production-tools-live.spec.cjs',timeout:60000,expect:{timeout:15000},workers:1,retries:0,use:{viewport:{width:390,height:844},trace:'retain-on-failure',screenshot:'only-on-failure'},projects:[{name:'chromium-mobile',use:{browserName:'chromium'}},{name:'webkit-mobile',use:{browserName:'webkit',isMobile:true,hasTouch:true,deviceScaleFactor:2}}]});
