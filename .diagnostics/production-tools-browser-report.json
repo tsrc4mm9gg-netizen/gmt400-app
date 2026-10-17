@@ -1,0 +1,184 @@
+{
+  "auditorCodeSha": "5d4bd8ae1eabb531c7bab487da055df34c3d6bb1",
+  "observedDeploymentSha": "5d4bd8ae1eabb531c7bab487da055df34c3d6bb1",
+  "deploymentShaAfter": "5d4bd8ae1eabb531c7bab487da055df34c3d6bb1",
+  "stableDeployment": true,
+  "runId": "39040454709",
+  "checkedAt": "2026-10-17T14:24:36.642Z",
+  "origin": "https://www.gmt400.pl",
+  "passed": true,
+  "scope": "Real public page interactions in Chromium and Linux mobile WebKit, no route mocks. Includes live Notion-backed page loading and NBP quote. No VIN submission or saved user records. Does not certify a physical iPhone or that observed deployment equals auditor SHA.",
+  "stages": {
+    "INSTALL": "success",
+    "TOOLING": "success",
+    "BEFORE": "success",
+    "TESTS": "success"
+  },
+  "parseError": "",
+  "statusError": "",
+  "stats": {
+    "startTime": "2026-10-17T14:23:53.141Z",
+    "duration": 43206.359,
+    "expected": 14,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "runnerErrors": [],
+  "tests": [
+    {
+      "title": "live hub opens readable working rpo",
+      "project": "chromium-mobile",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "error": ""
+        }
+      ]
+    },
+    {
+      "title": "live hub opens readable working diagnostyka",
+      "project": "chromium-mobile",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "error": ""
+        }
+      ]
+    },
+    {
+      "title": "live hub opens readable working kalkulatory",
+      "project": "chromium-mobile",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "error": ""
+        }
+      ]
+    },
+    {
+      "title": "live import calculator is integrated and recalculates",
+      "project": "chromium-mobile",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "error": ""
+        }
+      ]
+    },
+    {
+      "title": "live repair budget changes without saving user data",
+      "project": "chromium-mobile",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "error": ""
+        }
+      ]
+    },
+    {
+      "title": "live manual currency estimate stays separate from repair budget",
+      "project": "chromium-mobile",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "error": ""
+        }
+      ]
+    },
+    {
+      "title": "live NBP quote loads and changing currency clears old quote",
+      "project": "chromium-mobile",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "error": ""
+        }
+      ]
+    },
+    {
+      "title": "live hub opens readable working rpo",
+      "project": "webkit-mobile",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "error": ""
+        }
+      ]
+    },
+    {
+      "title": "live hub opens readable working diagnostyka",
+      "project": "webkit-mobile",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "error": ""
+        }
+      ]
+    },
+    {
+      "title": "live hub opens readable working kalkulatory",
+      "project": "webkit-mobile",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "error": ""
+        }
+      ]
+    },
+    {
+      "title": "live import calculator is integrated and recalculates",
+      "project": "webkit-mobile",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "error": ""
+        }
+      ]
+    },
+    {
+      "title": "live repair budget changes without saving user data",
+      "project": "webkit-mobile",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "error": ""
+        }
+      ]
+    },
+    {
+      "title": "live manual currency estimate stays separate from repair budget",
+      "project": "webkit-mobile",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "error": ""
+        }
+      ]
+    },
+    {
+      "title": "live NBP quote loads and changing currency clears old quote",
+      "project": "webkit-mobile",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "error": ""
+        }
+      ]
+    }
+  ]
+}
