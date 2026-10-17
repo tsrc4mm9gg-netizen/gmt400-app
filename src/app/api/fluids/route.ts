@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { findFluids } from '@/lib/fluids';
 
-export const dynamic = 'force-static';
+export const dynamic = 'force-dynamic';
 
 export async function GET(request: Request) {
  const { searchParams } = new URL(request.url);

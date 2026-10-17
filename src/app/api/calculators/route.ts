@@ -1,93 +1,86 @@
 import { NextResponse } from 'next/server';
 
-export const dynamic = 'force-static';
+export const dynamic = 'force-dynamic';
 
 const INCH_TO_MM = 25.4;
-
-function tireDiameterMm(widthMm: number, aspectRatio: number, rimInches: number) {
- return rimInches * INCH_TO_MM + 2 * (widthMm * aspectRatio / 100);
-}
+const tireDiameterMm = (widthMm: number, aspect: number, rimInches: number) => rimInches * INCH_TO_MM + 2 * (widthMm * aspect / 100);
+const num = (value: string | null, fallback?: number) => value === null || value.trim() === '' ? (fallback ?? NaN) : Number(value);
 
 export async function GET(request: Request) {
  const { searchParams } = new URL(request.url);
  const tool = searchParams.get('tool');
 
  if (tool === 'tire') {
- const width = Number(searchParams.get('width'));
- const aspect = Number(searchParams.get('aspect'));
- const rim = Number(searchParams.get('rim'));
- const oldWidth = Number(searchParams.get('oldWidth') ?? width);
- const oldAspect = Number(searchParams.get('oldAspect') ?? aspect);
- const oldRim = Number(searchParams.get('oldRim') ?? rim);
- const speed = Number(searchParams.get('speed') ?? 0);
- const axleRatio = Number(searchParams.get('axleRatio') ?? 0);
+ const width = num(searchParams.get('width'));
+ const aspect = num(searchParams.get('aspect'));
+ const rim = num(searchParams.get('rim'));
+ const oldWidth = num(searchParams.get('oldWidth'), width);
+ const oldAspect = num(searchParams.get('oldAspect'), aspect);
+ const oldRim = num(searchParams.get('oldRim'), rim);
+ const speed = num(searchParams.get('speed'), 0);
+ const axleRatio = num(searchParams.get('axleRatio'), 0);
 
- if (![width, aspect, rim, oldWidth, oldAspect, oldRim].every(Number.isFinite) || width <= 0 || aspect <= 0 || rim <= 0 || oldWidth <= 0 || oldAspect <= 0 || oldRim <= 0) {
+ if (![width, aspect, rim, oldWidth, oldAspect, oldRim, speed, axleRatio].every(Number.isFinite) || [width, aspect, rim, oldWidth, oldAspect, oldRim].some(value => value <= 0)) {
  return NextResponse.json({ error: 'Podaj prawidłowe wymiary opon: width, aspect, rim.' }, { status: 400 });
  }
 
  const newDiameter = tireDiameterMm(width, aspect, rim);
  const oldDiameter = tireDiameterMm(oldWidth, oldAspect, oldRim);
- const diameterChangePercent = (newDiameter / oldDiameter - 1) * 100;
- const effectiveAxleRatio = axleRatio > 0 ? axleRatio * (newDiameter / oldDiameter) : null;
- const speedAtSameEngine = speed > 0 && axleRatio > 0 ? speed * (newDiameter / oldDiameter) : null;
+ const ratio = newDiameter / oldDiameter;
 
  return NextResponse.json({
  tool: 'tire',
  input: { width, aspect, rim, oldWidth, oldAspect, oldRim, speed, axleRatio },
  newTireDiameterMm: Number(newDiameter.toFixed(1)),
  oldTireDiameterMm: Number(oldDiameter.toFixed(1)),
- diameterChangePercent: Number(diameterChangePercent.toFixed(2)),
- effectiveAxleRatio: effectiveAxleRatio ? Number(effectiveAxleRatio.toFixed(3)) : null,
- indicatedSpeedAtSameEngineRpm: speedAtSameEngine ? Number(speedAtSameEngine.toFixed(1)) : null,
- note: 'Obliczenie geometryczne. Nie zastępuje kontroli prześwitu, nośności opon, ET, rozstawu śrub ani homologacji.'
+ diameterChangePercent: Number(((ratio - 1) * 100).toFixed(2)),
+ effectiveAxleRatio: axleRatio > 0 ? Number((axleRatio / ratio).toFixed(3)) : null,
+ actualSpeedAtIndicatedSpeed: speed > 0 ? Number((speed * ratio).toFixed(1)) : null,
+ note: 'Obliczenie geometryczne. Efektywne przełożenie maleje przy większej oponie. Nie zastępuje kontroli prześwitu, nośności opon, ET, rozstawu śrub ani homologacji.'
  });
  }
 
  if (tool === 'gear-ratio') {
- const tireDiameterInches = Number(searchParams.get('tireDiameterInches'));
- const engineRpm = Number(searchParams.get('engineRpm'));
- const transmissionRatio = Number(searchParams.get('transmissionRatio'));
- const axleRatio = Number(searchParams.get('axleRatio'));
+ const tireDiameterInches = num(searchParams.get('tireDiameterInches'));
+ const engineRpm = num(searchParams.get('engineRpm'));
+ const transmissionRatio = num(searchParams.get('transmissionRatio'));
+ const axleRatio = num(searchParams.get('axleRatio'));
 
- if (![tireDiameterInches, engineRpm, transmissionRatio, axleRatio].every(Number.isFinite) || tireDiameterInches <= 0 || engineRpm <= 0 || transmissionRatio <= 0 || axleRatio <= 0) {
+ if (![tireDiameterInches, engineRpm, transmissionRatio, axleRatio].every(value => Number.isFinite(value) && value > 0)) {
  return NextResponse.json({ error: 'Podaj dodatnie wartości: tireDiameterInches, engineRpm, transmissionRatio, axleRatio.' }, { status: 400 });
  }
 
  const speedMph = (engineRpm * tireDiameterInches) / (transmissionRatio * axleRatio * 336.13);
- const speedKmh = speedMph * 1.609344;
-
  return NextResponse.json({
  tool: 'gear-ratio',
  input: { tireDiameterInches, engineRpm, transmissionRatio, axleRatio },
  speedMph: Number(speedMph.toFixed(1)),
- speedKmh: Number(speedKmh.toFixed(1)),
+ speedKmh: Number((speedMph * 1.609344).toFixed(1)),
  note: 'Obliczenie teoretyczne bez poślizgu konwertera i rzeczywistej średnicy opony pod obciążeniem.'
  });
  }
 
  if (tool === 'compression-ratio') {
- const cylinderVolumeCc = Number(searchParams.get('cylinderVolumeCc'));
- const combustionChamberCc = Number(searchParams.get('combustionChamberCc'));
- const pistonDomeCc = Number(searchParams.get('pistonDomeCc') ?? 0);
- const gasketVolumeCc = Number(searchParams.get('gasketVolumeCc') ?? 0);
+ const cylinderVolumeCc = num(searchParams.get('cylinderVolumeCc'));
+ const combustionChamberCc = num(searchParams.get('combustionChamberCc'));
+ const pistonDomeCc = num(searchParams.get('pistonDomeCc'), 0);
+ const gasketVolumeCc = num(searchParams.get('gasketVolumeCc'), 0);
 
  if (![cylinderVolumeCc, combustionChamberCc, pistonDomeCc, gasketVolumeCc].every(Number.isFinite) || cylinderVolumeCc <= 0 || combustionChamberCc < 0) {
  return NextResponse.json({ error: 'Podaj prawidłowe wartości objętości w cm³.' }, { status: 400 });
  }
 
- const clearanceVolume = combustionChamberCc + pistonDomeCc + gasketVolumeCc;
- if (clearanceVolume <= 0) {
+ const clearance = combustionChamberCc + gasketVolumeCc - pistonDomeCc;
+ if (clearance <= 0) {
  return NextResponse.json({ error: 'Objętość przestrzeni spalania musi być większa od zera.' }, { status: 400 });
  }
 
- const ratio = (cylinderVolumeCc + clearanceVolume) / clearanceVolume;
  return NextResponse.json({
  tool: 'compression-ratio',
  input: { cylinderVolumeCc, combustionChamberCc, pistonDomeCc, gasketVolumeCc },
- compressionRatio: Number(ratio.toFixed(2)),
- clearanceVolumeCc: Number(clearanceVolume.toFixed(2)),
- note: 'Obliczenie uproszczone. Rzeczywisty stopień sprężania zależy od ustawienia tłoków, uszczelki i wypełnienia komory spalania.'
+ compressionRatio: Number(((cylinderVolumeCc + clearance) / clearance).toFixed(2)),
+ clearanceVolumeCc: Number(clearance.toFixed(2)),
+ note: 'Obliczenie uproszczone. pistonDomeCc to objętość wypukłości tłoka (zmniejsza przestrzeń spalania); dla zagłębienia podaj wartość ujemną.'
  });
  }
 
