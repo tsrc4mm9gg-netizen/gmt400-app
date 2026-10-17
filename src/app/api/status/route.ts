@@ -14,7 +14,7 @@ export async function GET() {
  return NextResponse.json({
  status: 'ok',
  service: 'GMT400 Knowledge API',
- version: '1.6.0',
+ version: '1.7.0',
  data: {
  rpoRecords: RPO_CATALOG.length,
  uniqueRpoCodes: rpoCodes.size,
@@ -28,7 +28,8 @@ export async function GET() {
  tools: '/narzedzia',
  rpo: '/narzedzia/rpo',
  calculators: '/narzedzia/kalkulatory',
- diagnostics: '/narzedzia/diagnostyka'
+ diagnostics: '/narzedzia/diagnostyka',
+ parts: '/narzedzia/czesci'
  },
  endpoints: {
  rpoSearch: '/api/rpo?q=Z71',
