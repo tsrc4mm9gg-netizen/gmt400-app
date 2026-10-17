@@ -1,31 +1,183 @@
 {
-  "auditorCodeSha": "2c7683456b0a13fafecbb49cd2e79031b5a9948d",
-  "runId": "39058126476",
-  "checkedAt": "2026-10-17T18:27:27.368Z",
+  "auditorCodeSha": "b4608a990143f1150e6287f56d13f84926427694",
+  "runId": "39058295125",
+  "checkedAt": "2026-10-17T18:31:23.281Z",
   "passed": false,
   "scope": "Local synthetic illustrations rendered through candidate Notion renderer, Chromium and Linux WebKit plus existing renderer security tests. No Notion writes; no production signed image availability or physical iPhone certification.",
   "stages": {
     "INSTALL": "success",
     "CANDIDATE": "success",
-    "BUILD": "failure",
-    "TOOLING": "skipped",
-    "SERVER": "skipped",
-    "TESTS": "skipped"
+    "BUILD": "success",
+    "TOOLING": "success",
+    "SERVER": "success",
+    "TESTS": "failure"
   },
   "coverage": [
     {
       "project": "chromium",
-      "images": 0,
-      "renderer": 0
+      "images": 5,
+      "renderer": 3
     },
     {
       "project": "webkit",
-      "images": 0,
-      "renderer": 0
+      "images": 5,
+      "renderer": 3
     }
   ],
-  "parseError": "ENOENT: no such file or directory, open '/tmp/material-images-tests.json'",
-  "stats": {},
+  "parseError": "",
+  "stats": {
+    "startTime": "2026-10-17T18:30:52.900Z",
+    "duration": 30321.255,
+    "expected": 12,
+    "skipped": 0,
+    "unexpected": 4,
+    "flaky": 0
+  },
   "runnerErrors": [],
-  "tests": []
+  "tests": [
+    {
+      "title": "image retains caption and position between text blocks",
+      "file": "material-images.spec.cjs",
+      "project": "chromium",
+      "status": "expected",
+      "errors": [
+        ""
+      ]
+    },
+    {
+      "title": "keyboard opens preview and Escape restores opener focus",
+      "file": "material-images.spec.cjs",
+      "project": "chromium",
+      "status": "expected",
+      "errors": [
+        ""
+      ]
+    },
+    {
+      "title": "preview zooms and closes without leaving material",
+      "file": "material-images.spec.cjs",
+      "project": "chromium",
+      "status": "expected",
+      "errors": [
+        ""
+      ]
+    },
+    {
+      "title": "unsafe image URL does not create an image or executable link",
+      "file": "material-images.spec.cjs",
+      "project": "chromium",
+      "status": "expected",
+      "errors": [
+        ""
+      ]
+    },
+    {
+      "title": "broken image shows explanation and safe source link",
+      "file": "material-images.spec.cjs",
+      "project": "chromium",
+      "status": "unexpected",
+      "errors": [
+        "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('[data-material-image]').getByRole('status')\nExpected substring: \u001b[32m\"Nie udało się wczytać ilustracji\"\u001b[39m\nTimeout: 10000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" locator('[data-material-image]').getByRole('status') with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for locator('[data-material-image]').getByRole('status')\u001b[22m\n"
+      ]
+    },
+    {
+      "title": "image retains caption and position between text blocks",
+      "file": "material-images.spec.cjs",
+      "project": "webkit",
+      "status": "expected",
+      "errors": [
+        ""
+      ]
+    },
+    {
+      "title": "keyboard opens preview and Escape restores opener focus",
+      "file": "material-images.spec.cjs",
+      "project": "webkit",
+      "status": "expected",
+      "errors": [
+        ""
+      ]
+    },
+    {
+      "title": "preview zooms and closes without leaving material",
+      "file": "material-images.spec.cjs",
+      "project": "webkit",
+      "status": "expected",
+      "errors": [
+        ""
+      ]
+    },
+    {
+      "title": "unsafe image URL does not create an image or executable link",
+      "file": "material-images.spec.cjs",
+      "project": "webkit",
+      "status": "expected",
+      "errors": [
+        ""
+      ]
+    },
+    {
+      "title": "broken image shows explanation and safe source link",
+      "file": "material-images.spec.cjs",
+      "project": "webkit",
+      "status": "unexpected",
+      "errors": [
+        "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('[data-material-image]').getByRole('status')\nExpected substring: \u001b[32m\"Nie udało się wczytać ilustracji\"\u001b[39m\nTimeout: 10000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" locator('[data-material-image]').getByRole('status') with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for locator('[data-material-image]').getByRole('status')\u001b[22m\n"
+      ]
+    },
+    {
+      "title": "instruction body follows pagination and reads nested illustrations",
+      "file": "notion-content.spec.cjs",
+      "project": "chromium",
+      "status": "expected",
+      "errors": [
+        ""
+      ]
+    },
+    {
+      "title": "repeated content cursor fails rather than silently returning partial instructions",
+      "file": "notion-content.spec.cjs",
+      "project": "chromium",
+      "status": "expected",
+      "errors": [
+        ""
+      ]
+    },
+    {
+      "title": "renderer retains text, formatting and image captions without executable links or HTML",
+      "file": "notion-content.spec.cjs",
+      "project": "chromium",
+      "status": "unexpected",
+      "errors": [
+        "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mnot\u001b[2m.\u001b[22mtoContain\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // indexOf\u001b[22m\n\nExpected substring: not \u001b[32m\"<script>\"\u001b[39m\nReceived string:        \u001b[31m\"<link rel=\\\"preload\\\" as=\\\"image\\\" href=\\\"https://example.com/diagram.png\\\"/><div class=\\\"my-3\\\"><p class=\\\"whitespace-pre-wrap leading-relaxed\\\"><span><strong>&lt;script&gt;bad()&lt;/script&gt;</strong></span></p></div><div class=\\\"my-3\\\"><figure data-material-image=\\\"true\\\" style=\\\"margin:16px 0;min-width:0;background:#171d25;color:#ededed;padding:12px;border:1px solid #343a43;border-radius:10px\\\"><button type=\\\"button\\\" data-material-image-open=\\\"true\\\" aria-label=\\\"Powiększ ilustrację\\\" style=\\\"display:block;width:100%;padding:0;border:1px solid #596371;border-radius:7px;background:#101317;cursor:zoom-in\\\"><img src=\\\"https://example.com/diagram.png\\\" alt=\\\"Podpis ilustracji\\\" loading=\\\"lazy\\\" style=\\\"display:block;width:100%;height:auto;max-height:480px;object-fit:contain\\\"/></button><figcaption style=\\\"color:#d0d5dc;line-height:1.6;margin-top:10px;overflow-wrap:anywhere\\\">Podpis ilustracji</figcaption><p style=\\\"color:#bdc6d2;font-size:13px;margin:8px 0\\\">Ilustracja z materiału Notion. Obecność w materiale nie potwierdza zgodności z konkretnym autem.</p><a href=\\\"https://example.com/diagram.png\\\" target=\\\"_blank\\\" rel=\\\"noopener noreferrer\\\" style=\\\"color:#f2cf85;display:inline-block;min-height:44px;padding:10px 0\\\">Otwórz plik źródłowy</a><div data-material-image-dialog=\\\"true\\\" role=\\\"dialog\\\" aria-modal=\\\"true\\\" aria-label=\\\"Powiększona ilustracja\\\" hidden=\\\"\\\" data-zoom=\\\"100\\\" style=\\\"position:fixed;inset:0;z-index:1000;display:grid;place-items:center;padding:16px;background:#000b\\\"><div style=\\\"box-sizing:border-box;width:min(96vw,1100px);max-width:96vw;max-height:92dvh;overflow:auto;padding:16px;border:1px solid #596371;border-radius:10px;background:#101317;color:#fafafa;box-shadow:0 0 0 100vmax #000b\\\"><div style=\\\"display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:12px\\\"><button type=\\\"button\\\" data-material-image-close=\\\"true\\\" style=\\\"min-height:44px;padding:10px 14px;border:1px solid #596371;border-radius:7px;background:#171d25;color:#f2cf85;font-size:16px\\\">Zamknij podgląd</button><button type=\\\"button\\\" data-material-image-zoom-out=\\\"true\\\" aria-label=\\\"Zmniejsz powiększenie\\\" disabled=\\\"\\\" style=\\\"min-height:44px;padding:10px 14px;border:1px solid #596371;border-radius:7px;background:#171d25;color:#f2cf85;font-size:16px\\\">−</button><button type=\\\"button\\\" data-material-image-zoom-in=\\\"true\\\" aria-label=\\\"Zwiększ powiększenie\\\" style=\\\"min-height:44px;padding:10px 14px;border:1px solid #596371;border-radius:7px;background:#171d25;color:#f2cf85;font-size:16px\\\">+</button><span data-material-image-zoom-label=\\\"true\\\" aria-live=\\\"polite\\\">Powiększenie: 100%</span></div><div style=\\\"max-height:65dvh;overflow:auto;min-width:0\\\"><img data-material-image-dialog-image=\\\"true\\\" src=\\\"https://example.com/diagram.png\\\" alt=\\\"Podpis ilustracji\\\" style=\\\"display:block;width:100%;max-width:none;height:auto\\\"/></div><p style=\\\"color:#d0d5dc;line-height:1.6;overflow-wrap:anywhere;margin-top:12px\\\">Podpis ilustracji</p></div></div>\u001b[7m<script>\u001b[27m(function(){if(window.__gmt400MaterialImageController)return;window.__gmt400MaterialImageController=true;function dialogFor(element){return element.closest('[data-material-image]')?.querySelector('[data-material-image-dialog]');}function openerFor(dialog){return dialog.closest('[data-material-image]')?.querySelector('[data-material-image-open]');}function setZoom(dialog,value){const zoom=Math.max(100,Math.min(300,value));dialog.dataset.zoom=String(zoom);const image=dialog.querySelector('[data-material-image-dialog-image]');if(image)image.style.width=zoom+'%';const label=dialog.querySelector('[data-material-image-zoom-label]');if(label)label.textContent='Powiększenie: '+zoom+'%';const decrease=dialog.querySelector('[data-material-image-zoom-out]');const increase=dialog.querySelector('[data-material-image-zoom-in]');if(decrease)decrease.disabled=zoom<=100;if(increase)increase.disabled=zoom>=300;}function openDialog(dialog){const opener=openerFor(dialog);if(opener instanceof HTMLElement){if(!opener.id)opener.id='material-image-opener-'+Math.random().toString(36).slice(2);dialog.dataset.previousFocus=opener.id;}dialog.hidden=false;setZoom(dialog,100);const close=dialog.querySelector('[data-material-image-close]');if(close instanceof HTMLElement)close.focus();}function closeDialog(dialog){dialog.hidden=true;const previousId=dialog.dataset.previousFocus;const previous=previousId?document.getElementById(previousId):null;if(previous instanceof HTMLElement)previous.focus();}document.addEventListener('click',function(event){const target=event.target;if(!(target instanceof Element))return;const openButton=target.closest('[data-material-image-open]');if(openButton){const dialog=dialogFor(openButton);if(dialog instanceof HTMLElement)openDialog(dialog);return;}const closeButton=target.closest('[data-material-image-close]');if(closeButton){const dialog=dialogFor(closeButton);if(dialog instanceof HTMLElement)closeDialog(dialog);return;}const increase=target.closest('[data-material-image-zoom-in]');if(increase){const dialog=dialogFor(increase);if(dialog instanceof HTMLElement)setZoom(dialog,Number(dialog.dataset.zoom||100)+50);return;}const decrease=target.closest('[data-material-image-zoom-out]');if(decrease){const dialog=dialogFor(decrease);if(dialog instanceof HTMLElement)setZoom(dialog,Number(dialog.dataset.zoom||100)-50);}});document.addEventListener('keydown',function(event){if(event.key!=='Escape')return;const dialog=document.querySelector('[data-material-image-dialog]:not([hidden])');if(dialog instanceof HTMLElement){event.preventDefault();closeDialog(dialog);}});})();</script></figure></div>\"\u001b[39m"
+      ]
+    },
+    {
+      "title": "instruction body follows pagination and reads nested illustrations",
+      "file": "notion-content.spec.cjs",
+      "project": "webkit",
+      "status": "expected",
+      "errors": [
+        ""
+      ]
+    },
+    {
+      "title": "repeated content cursor fails rather than silently returning partial instructions",
+      "file": "notion-content.spec.cjs",
+      "project": "webkit",
+      "status": "expected",
+      "errors": [
+        ""
+      ]
+    },
+    {
+      "title": "renderer retains text, formatting and image captions without executable links or HTML",
+      "file": "notion-content.spec.cjs",
+      "project": "webkit",
+      "status": "unexpected",
+      "errors": [
+        "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mnot\u001b[2m.\u001b[22mtoContain\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // indexOf\u001b[22m\n\nExpected substring: not \u001b[32m\"<script>\"\u001b[39m\nReceived string:        \u001b[31m\"<link rel=\\\"preload\\\" as=\\\"image\\\" href=\\\"https://example.com/diagram.png\\\"/><div class=\\\"my-3\\\"><p class=\\\"whitespace-pre-wrap leading-relaxed\\\"><span><strong>&lt;script&gt;bad()&lt;/script&gt;</strong></span></p></div><div class=\\\"my-3\\\"><figure data-material-image=\\\"true\\\" style=\\\"margin:16px 0;min-width:0;background:#171d25;color:#ededed;padding:12px;border:1px solid #343a43;border-radius:10px\\\"><button type=\\\"button\\\" data-material-image-open=\\\"true\\\" aria-label=\\\"Powiększ ilustrację\\\" style=\\\"display:block;width:100%;padding:0;border:1px solid #596371;border-radius:7px;background:#101317;cursor:zoom-in\\\"><img src=\\\"https://example.com/diagram.png\\\" alt=\\\"Podpis ilustracji\\\" loading=\\\"lazy\\\" style=\\\"display:block;width:100%;height:auto;max-height:480px;object-fit:contain\\\"/></button><figcaption style=\\\"color:#d0d5dc;line-height:1.6;margin-top:10px;overflow-wrap:anywhere\\\">Podpis ilustracji</figcaption><p style=\\\"color:#bdc6d2;font-size:13px;margin:8px 0\\\">Ilustracja z materiału Notion. Obecność w materiale nie potwierdza zgodności z konkretnym autem.</p><a href=\\\"https://example.com/diagram.png\\\" target=\\\"_blank\\\" rel=\\\"noopener noreferrer\\\" style=\\\"color:#f2cf85;display:inline-block;min-height:44px;padding:10px 0\\\">Otwórz plik źródłowy</a><div data-material-image-dialog=\\\"true\\\" role=\\\"dialog\\\" aria-modal=\\\"true\\\" aria-label=\\\"Powiększona ilustracja\\\" hidden=\\\"\\\" data-zoom=\\\"100\\\" style=\\\"position:fixed;inset:0;z-index:1000;display:grid;place-items:center;padding:16px;background:#000b\\\"><div style=\\\"box-sizing:border-box;width:min(96vw,1100px);max-width:96vw;max-height:92dvh;overflow:auto;padding:16px;border:1px solid #596371;border-radius:10px;background:#101317;color:#fafafa;box-shadow:0 0 0 100vmax #000b\\\"><div style=\\\"display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:12px\\\"><button type=\\\"button\\\" data-material-image-close=\\\"true\\\" style=\\\"min-height:44px;padding:10px 14px;border:1px solid #596371;border-radius:7px;background:#171d25;color:#f2cf85;font-size:16px\\\">Zamknij podgląd</button><button type=\\\"button\\\" data-material-image-zoom-out=\\\"true\\\" aria-label=\\\"Zmniejsz powiększenie\\\" disabled=\\\"\\\" style=\\\"min-height:44px;padding:10px 14px;border:1px solid #596371;border-radius:7px;background:#171d25;color:#f2cf85;font-size:16px\\\">−</button><button type=\\\"button\\\" data-material-image-zoom-in=\\\"true\\\" aria-label=\\\"Zwiększ powiększenie\\\" style=\\\"min-height:44px;padding:10px 14px;border:1px solid #596371;border-radius:7px;background:#171d25;color:#f2cf85;font-size:16px\\\">+</button><span data-material-image-zoom-label=\\\"true\\\" aria-live=\\\"polite\\\">Powiększenie: 100%</span></div><div style=\\\"max-height:65dvh;overflow:auto;min-width:0\\\"><img data-material-image-dialog-image=\\\"true\\\" src=\\\"https://example.com/diagram.png\\\" alt=\\\"Podpis ilustracji\\\" style=\\\"display:block;width:100%;max-width:none;height:auto\\\"/></div><p style=\\\"color:#d0d5dc;line-height:1.6;overflow-wrap:anywhere;margin-top:12px\\\">Podpis ilustracji</p></div></div>\u001b[7m<script>\u001b[27m(function(){if(window.__gmt400MaterialImageController)return;window.__gmt400MaterialImageController=true;function dialogFor(element){return element.closest('[data-material-image]')?.querySelector('[data-material-image-dialog]');}function openerFor(dialog){return dialog.closest('[data-material-image]')?.querySelector('[data-material-image-open]');}function setZoom(dialog,value){const zoom=Math.max(100,Math.min(300,value));dialog.dataset.zoom=String(zoom);const image=dialog.querySelector('[data-material-image-dialog-image]');if(image)image.style.width=zoom+'%';const label=dialog.querySelector('[data-material-image-zoom-label]');if(label)label.textContent='Powiększenie: '+zoom+'%';const decrease=dialog.querySelector('[data-material-image-zoom-out]');const increase=dialog.querySelector('[data-material-image-zoom-in]');if(decrease)decrease.disabled=zoom<=100;if(increase)increase.disabled=zoom>=300;}function openDialog(dialog){const opener=openerFor(dialog);if(opener instanceof HTMLElement){if(!opener.id)opener.id='material-image-opener-'+Math.random().toString(36).slice(2);dialog.dataset.previousFocus=opener.id;}dialog.hidden=false;setZoom(dialog,100);const close=dialog.querySelector('[data-material-image-close]');if(close instanceof HTMLElement)close.focus();}function closeDialog(dialog){dialog.hidden=true;const previousId=dialog.dataset.previousFocus;const previous=previousId?document.getElementById(previousId):null;if(previous instanceof HTMLElement)previous.focus();}document.addEventListener('click',function(event){const target=event.target;if(!(target instanceof Element))return;const openButton=target.closest('[data-material-image-open]');if(openButton){const dialog=dialogFor(openButton);if(dialog instanceof HTMLElement)openDialog(dialog);return;}const closeButton=target.closest('[data-material-image-close]');if(closeButton){const dialog=dialogFor(closeButton);if(dialog instanceof HTMLElement)closeDialog(dialog);return;}const increase=target.closest('[data-material-image-zoom-in]');if(increase){const dialog=dialogFor(increase);if(dialog instanceof HTMLElement)setZoom(dialog,Number(dialog.dataset.zoom||100)+50);return;}const decrease=target.closest('[data-material-image-zoom-out]');if(decrease){const dialog=dialogFor(decrease);if(dialog instanceof HTMLElement)setZoom(dialog,Number(dialog.dataset.zoom||100)-50);}});document.addEventListener('keydown',function(event){if(event.key!=='Escape')return;const dialog=document.querySelector('[data-material-image-dialog]:not([hidden])');if(dialog instanceof HTMLElement){event.preventDefault();closeDialog(dialog);}});})();</script></figure></div>\"\u001b[39m"
+      ]
+    }
+  ]
 }
