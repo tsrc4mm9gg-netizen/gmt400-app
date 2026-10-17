@@ -1,0 +1,106 @@
+name: Deploy verified tools theme via existing credentials
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/deploy-verified-tools.yml']
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: deploy-verified-tools-theme
+  cancel-in-progress: false
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      SOURCE_SHA: 653d437b8e05490878d2f74816816c74d6082446
+      VERCEL_ORG_ID: team_RE16MjOtyTfSC3mHJvBF7LFE
+      VERCEL_PROJECT_ID: prj_QDy2DhLpYy0CKhHhEv5sVeRyx4r6
+      VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: '653d437b8e05490878d2f74816816c74d6082446'
+      - id: credentials
+        name: Require existing deployment token without exposing it
+        run: |
+          if [ -z "$VERCEL_TOKEN" ]; then
+            echo '::error::Missing repository secret VERCEL_TOKEN. No deployment was attempted.'
+            echo 'Existing deployment credential is unavailable. No token was printed and no production deployment was attempted.' >> "$GITHUB_STEP_SUMMARY"
+            exit 1
+          fi
+          test "$(git rev-parse HEAD)" = "$SOURCE_SHA"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - id: install
+        run: npm ci
+      - id: build
+        run: npm run build
+      - id: tooling
+        run: |
+          npm install --no-save --package-lock=false @playwright/test
+          npx playwright install --with-deps chromium
+      - id: server
+        run: |
+          npm run start -- --hostname 127.0.0.1 --port 3100 > /tmp/deploy-tools-server.log 2>&1 &
+          for i in $(seq 1 60); do
+            if curl -fsS http://127.0.0.1:3100 >/dev/null; then exit 0; fi
+            sleep 1
+          done
+          exit 1
+      - id: tests
+        run: |
+          npx playwright test tests/new-tools.spec.cjs --workers=1 --reporter=json > /tmp/deploy-tools-tests.json
+          node <<'NODE'
+          const report = require('/tmp/deploy-tools-tests.json');
+          if (report.stats?.expected < 12 || report.stats?.unexpected !== 0 || report.stats?.skipped !== 0 || report.stats?.flaky !== 0 || (report.errors || []).length) process.exit(1);
+          NODE
+      - id: publish
+        name: Deploy pinned tested source to existing production project
+        run: |
+          npx --yes vercel deploy --prod --yes --token "$VERCEL_TOKEN" --meta githubCommitSha="$SOURCE_SHA" --meta githubCommitRef=main > /tmp/deploy-tools-url.txt
+          URL="$(tail -n 1 /tmp/deploy-tools-url.txt | tr -d '\r')"
+          if ! [[ "$URL" =~ ^https://[a-zA-Z0-9.-]+\.vercel\.app/?$ ]]; then
+            echo '::error::Deployment command completed but URL could not be verified.'
+            exit 1
+          fi
+          echo "url=$URL" >> "$GITHUB_OUTPUT"
+      - name: Generate credential-free deployment report
+        if: always()
+        env:
+          CREDENTIALS_RESULT: ${{ steps.credentials.outcome }}
+          BUILD_RESULT: ${{ steps.build.outcome }}
+          TEST_RESULT: ${{ steps.tests.outcome }}
+          PUBLISH_RESULT: ${{ steps.publish.outcome }}
+          DEPLOYMENT_URL: ${{ steps.publish.outputs.url }}
+        run: |
+          node <<'NODE'
+          const fs = require('node:fs');
+          const report = {sourceSha:process.env.SOURCE_SHA,workflowSha:process.env.GITHUB_SHA,runId:process.env.GITHUB_RUN_ID,checkedAt:new Date().toISOString(),stages:{credentials:process.env.CREDENTIALS_RESULT,build:process.env.BUILD_RESULT,tests:process.env.TEST_RESULT,publish:process.env.PUBLISH_RESULT},deploymentUrl:process.env.DEPLOYMENT_URL || null,reason:process.env.CREDENTIALS_RESULT !== 'success' ? 'deployment_credentials_unavailable_or_source_not_verified' : process.env.PUBLISH_RESULT === 'success' ? 'cli_deployment_completed_production_domain_and_browser_check_still_required' : 'build_tests_or_deployment_failed',scope:'Pinned source, local Chromium theme tests and production deployment through existing repository credential. Does not certify public domain mapping or physical iPhone.'};
+          report.deploymentCompleted = report.stages.publish === 'success' && Boolean(report.deploymentUrl);
+          fs.mkdirSync('.diagnostics',{recursive:true});
+          fs.writeFileSync('.diagnostics/fallback-deployment-report.json',JSON.stringify(report,null,2)+'\n');
+          fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY,'### Verified tools deployment\nSource: '+report.sourceSha+'\nResult: '+report.reason+'\n');
+          NODE
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: verified-tools-deployment-${{ github.run_id }}
+          path: .diagnostics/fallback-deployment-report.json
+      - name: Publish credential-free report only
+        if: always()
+        run: |
+          test -s .diagnostics/fallback-deployment-report.json
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add .diagnostics/fallback-deployment-report.json
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'ci: publish fallback deployment result [skip ci]'
+          for i in 1 2 3 4; do
+            if git pull --rebase --autostash origin main && git push origin HEAD:main; then exit 0; fi
+            git rebase --abort || true
+            sleep 2
+          done
+          exit 1
