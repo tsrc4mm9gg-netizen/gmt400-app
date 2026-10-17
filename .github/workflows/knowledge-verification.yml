@@ -8,11 +8,11 @@ permissions:
   contents: write
 concurrency:
   group: knowledge-verification
-  cancel-in-progress: false
+  cancel-in-progress: true
 jobs:
   verify:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 25
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -21,7 +21,10 @@ jobs:
       - id: install
         run: npm ci
       - id: build
-        run: npm run build
+        shell: bash
+        run: |
+          set -o pipefail
+          npm run build 2>&1 | tee /tmp/knowledge-build.log
       - id: tooling
         run: |
           npm install --no-save --package-lock=false @playwright/test
@@ -30,15 +33,15 @@ jobs:
         run: |
           npm run start -- --hostname 127.0.0.1 --port 3100 > /tmp/knowledge-app.log 2>&1 &
           for i in $(seq 1 60); do
-            if curl -fsS http://127.0.0.1:3100 > /dev/null; then exit 0; fi
+            if curl -fsS http://127.0.0.1:3100 >/dev/null; then exit 0; fi
             sleep 1
           done
           cat /tmp/knowledge-app.log
           exit 1
       - id: browser
         continue-on-error: true
-        run: npx playwright test tests/vehicle-filters.spec.cjs tests/global-search.spec.cjs tests/knowledge-categories.spec.cjs --workers=1 --reporter=json > /tmp/knowledge-tests.json
-      - name: Publish verification summary
+        run: npx playwright test tests/vehicle-filters.spec.cjs tests/global-search.spec.cjs tests/knowledge-categories.spec.cjs tests/navigation.spec.cjs tests/navigation-polish.spec.cjs tests/new-tools.spec.cjs tests/parts-api.spec.cjs tests/maintenance-api.spec.cjs --workers=1 --reporter=json > /tmp/knowledge-tests.json 2>/tmp/knowledge-tests-errors.log
+      - name: Generate readable verification report
         if: always()
         env:
           INSTALL_RESULT: ${{ steps.install.outcome }}
@@ -49,22 +52,53 @@ jobs:
         run: |
           node <<'NODE'
           const fs = require('node:fs');
+          function read(path, limit = 16000) { try { return fs.readFileSync(path, 'utf8').replace(/\u001b\[[0-9;]*m/g, '').slice(-limit); } catch { return ''; } }
           let raw = {};
-          try { raw = JSON.parse(fs.readFileSync('/tmp/knowledge-tests.json', 'utf8')); } catch {}
+          let parseError = '';
+          try { raw = JSON.parse(fs.readFileSync('/tmp/knowledge-tests.json', 'utf8')); } catch (error) { parseError = String(error.message); }
           const tests = [];
-          function walk(suites) { for (const suite of suites || []) { for (const spec of suite.specs || []) for (const test of spec.tests || []) tests.push({ title: spec.title, file: spec.file, status: test.status, attempts: (test.results || []).map(result => ({ status: result.status, durationMs: result.duration, error: String(result.error?.message || '').slice(0, 3000) })) }); walk(suite.suites); } }
+          function walk(suites) { for (const suite of suites || []) { for (const spec of suite.specs || []) for (const test of spec.tests || []) tests.push({ title: spec.title, file: spec.file || suite.file || '', status: test.status, attempts: (test.results || []).map(result => ({ status: result.status, durationMs: result.duration, error: String(result.error?.message || '').slice(0, 5000) })) }); walk(suite.suites); } }
           walk(raw.suites);
           const stages = { install: process.env.INSTALL_RESULT, build: process.env.BUILD_RESULT, tooling: process.env.TOOLING_RESULT, server: process.env.SERVER_RESULT, browser: process.env.BROWSER_RESULT };
+          const minimumCounts = { 'vehicle-filters.spec.cjs': 3, 'global-search.spec.cjs': 3, 'knowledge-categories.spec.cjs': 8, 'navigation.spec.cjs': 6, 'navigation-polish.spec.cjs': 2, 'new-tools.spec.cjs': 9, 'parts-api.spec.cjs': 4, 'maintenance-api.spec.cjs': 4 };
+          const coverage = Object.entries(minimumCounts).map(([file, minimum]) => { const count = tests.filter(test => test.file.replace(/\\/g, '/').split('/').pop() === file).length; return { file, minimum, count, covered: count >= minimum }; });
           const stats = raw.stats || {};
-          const passed = Object.values(stages).every(result => result === 'success') && tests.length === 14 && stats.expected === 14 && stats.unexpected === 0 && stats.skipped === 0 && stats.flaky === 0 && tests.every(test => test.status === 'expected');
+          const runnerErrors = raw.errors || [];
+          const passed = Object.values(stages).every(value => value === 'success') && !parseError && runnerErrors.length === 0 && coverage.every(entry => entry.covered) && stats.expected === tests.length && stats.unexpected === 0 && stats.skipped === 0 && stats.flaky === 0 && tests.every(test => test.status === 'expected');
+          const report = { codeSha: process.env.GITHUB_SHA, runId: process.env.GITHUB_RUN_ID, checkedAt: new Date().toISOString(), scope: 'Local production build and Chromium; mocked Notion fixtures plus local API, tools appearance, parts and maintenance tests. Not live deployment or physical iPhone verification.', passed, stages, stats, coverage, parseError, runnerErrors, buildDiagnostics: stages.build === 'failure' ? read('/tmp/knowledge-build.log') : '', serverDiagnostics: stages.server === 'failure' ? read('/tmp/knowledge-app.log') : '', testDiagnostics: passed ? '' : read('/tmp/knowledge-tests-errors.log'), tests };
           fs.mkdirSync('.diagnostics', { recursive: true });
-          fs.writeFileSync('.diagnostics/knowledge-ui-report.json', JSON.stringify({ codeSha: process.env.GITHUB_SHA, runId: process.env.GITHUB_RUN_ID, checkedAt: new Date().toISOString(), scope: 'Chromium with mocked Notion fixtures; category-scoped profile counters; not live Notion or Safari', passed, stages, stats, tests }, null, 2) + '\n');
+          fs.writeFileSync('.diagnostics/knowledge-ui-report.json', JSON.stringify(report, null, 2) + '\n');
+          fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, '### Combined regression verification\nCommit: `' + report.codeSha + '`\nResult: ' + (passed ? 'PASS' : 'FAIL') + '\nTests discovered: ' + tests.length + '\nScope: ' + report.scope + '\n');
           NODE
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: combined-regression-${{ github.run_id }}-${{ github.run_attempt }}
+          retention-days: 14
+          path: |
+            .diagnostics/knowledge-ui-report.json
+            /tmp/knowledge-build.log
+            /tmp/knowledge-app.log
+            /tmp/knowledge-tests.json
+            /tmp/knowledge-tests-errors.log
+            test-results
+          if-no-files-found: warn
+      - name: Publish readable report
+        if: always()
+        shell: bash
+        run: |
+          test -s .diagnostics/knowledge-ui-report.json
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add .diagnostics/knowledge-ui-report.json
-          git commit -m 'ci: publish knowledge UI verification report [skip ci]'
-          git pull --rebase --autostash origin main
-          git push origin HEAD:main
-      - if: always()
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'ci: publish combined regression report [skip ci]'
+          for attempt in 1 2 3 4; do
+            if git pull --rebase --autostash origin main && git push origin HEAD:main; then exit 0; fi
+            if test -d .git/rebase-merge || test -d .git/rebase-apply; then git rebase --abort; fi
+            sleep 2
+          done
+          exit 1
+      - name: Require complete verification
+        if: always()
         run: node -e "if (!require('./.diagnostics/knowledge-ui-report.json').passed) process.exit(1)"
