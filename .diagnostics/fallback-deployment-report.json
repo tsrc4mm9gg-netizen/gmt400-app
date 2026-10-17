@@ -1,0 +1,16 @@
+{
+  "sourceSha": "653d437b8e05490878d2f74816816c74d6082446",
+  "workflowSha": "1f1458a1e99ab09e9c77477b55d64faf5c2974d1",
+  "runId": "39032691688",
+  "checkedAt": "2026-10-17T12:29:06.113Z",
+  "stages": {
+    "credentials": "failure",
+    "build": "skipped",
+    "tests": "skipped",
+    "publish": "skipped"
+  },
+  "deploymentUrl": null,
+  "reason": "deployment_credentials_unavailable_or_source_not_verified",
+  "scope": "Pinned source, local Chromium theme tests and production deployment through existing repository credential. Does not certify public domain mapping or physical iPhone.",
+  "deploymentCompleted": false
+}
