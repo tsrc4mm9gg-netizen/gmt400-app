@@ -14,7 +14,7 @@ export async function GET() {
  return NextResponse.json({
  status: 'ok',
  service: 'GMT400 Knowledge API',
- version: '1.4.0',
+ version: '1.5.0',
  data: {
  rpoRecords: RPO_CATALOG.length,
  uniqueRpoCodes: rpoCodes.size,
@@ -25,6 +25,7 @@ export async function GET() {
  diagnosticCodes: DIAGNOSTIC_CODES.length
  },
  pages: {
+ tools: '/narzedzia',
  rpo: '/narzedzia/rpo',
  calculators: '/narzedzia/kalkulatory',
  diagnostics: '/narzedzia/diagnostyka'
