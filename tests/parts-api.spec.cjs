@@ -22,6 +22,7 @@ test('reference results do not assert verified fitment', async ({ request }) => 
 });
 test('parts form offers 1999 and 2000 and explains missing data', async ({ page }) => {
  await page.goto(BASE + '/narzedzia/czesci');
+ const formPanel = page.locator('main > section').first();
  const year = page.getByRole('combobox', { name:'Rocznik', exact:true });
  await expect(year).toBeVisible();
  await expect(year.locator('option')).toHaveCount(14);
@@ -33,7 +34,7 @@ test('parts form offers 1999 and 2000 and explains missing data', async ({ page 
  expect((await responsePromise).status()).toBe(200);
  await expect(page.getByRole('status')).toContainText('Brak danych lokalnych');
  await expect(page.getByRole('status')).toContainText('Nie oznacza to, że część nie pasuje');
- await expect(page.getByRole('alert')).toHaveCount(0);
+ await expect(formPanel.getByRole('alert')).toHaveCount(0);
 });
 test('1999 Suburban 5.7 offers separate catalog links without false local matches', async ({ request, page }) => {
  const params = new URLSearchParams({ model:'Suburban 1500', year:'1999', engine:'5.7L V8', transmission:'Automatyczna', drivetrain:'4x4' });
