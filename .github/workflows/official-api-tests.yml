@@ -1,0 +1,32 @@
+name: Isolated official vehicle API contracts
+on:
+  push:
+    branches: [main]
+    paths: ['src/app/api/official-vehicle/**', 'tests/official-vehicle-api.spec.cjs', 'playwright.official-api.config.cjs', 'package.json', 'package-lock.json', '.github/workflows/official-api-tests.yml']
+  pull_request:
+    paths: ['src/app/api/official-vehicle/**', 'tests/official-vehicle-api.spec.cjs', 'playwright.official-api.config.cjs', 'package.json', 'package-lock.json', '.github/workflows/official-api-tests.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: official-api-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  contracts:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - run: npm ci
+      - run: npm install --no-save --package-lock=false @playwright/test
+      - name: Test handlers with mocked providers; no tokens or network calls to providers
+        run: npx playwright test --config=playwright.official-api.config.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: official-api-contracts-${{ github.sha }}
+          path: test-results/official-api/report.json
+          if-no-files-found: warn
