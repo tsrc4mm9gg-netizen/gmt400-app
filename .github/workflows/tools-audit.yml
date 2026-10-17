@@ -1,0 +1,91 @@
+name: Broad calculators and search audit
+on:
+  push:
+    branches: [main]
+    paths: ['src/**', 'tests/**', 'package.json', 'package-lock.json', '.github/workflows/tools-audit.yml']
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: broad-tools-audit
+  cancel-in-progress: true
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - id: install
+        run: npm ci
+      - id: build
+        run: npm run build
+      - id: tooling
+        run: |
+          npm install --no-save --package-lock=false @playwright/test
+          npx playwright install --with-deps chromium
+      - id: server
+        run: |
+          npm run start -- --hostname 127.0.0.1 --port 3100 > /tmp/tools-audit-server.log 2>&1 &
+          for i in $(seq 1 60); do
+            if curl -fsS http://127.0.0.1:3100 >/dev/null; then exit 0; fi
+            sleep 1
+          done
+          cat /tmp/tools-audit-server.log
+          exit 1
+      - id: tests
+        continue-on-error: true
+        run: npx playwright test tests/tools-audit.spec.cjs tests/new-tools.spec.cjs tests/parts-api.spec.cjs tests/maintenance-api.spec.cjs tests/global-search.spec.cjs tests/knowledge-categories.spec.cjs tests/vehicle-filters.spec.cjs tests/official-vehicle-api.spec.cjs --workers=1 --reporter=json > /tmp/tools-audit.json 2>/tmp/tools-audit-errors.log
+      - name: Generate audit report
+        if: always()
+        env:
+          INSTALL: ${{ steps.install.outcome }}
+          BUILD: ${{ steps.build.outcome }}
+          TOOLING: ${{ steps.tooling.outcome }}
+          SERVER: ${{ steps.server.outcome }}
+          TESTS: ${{ steps.tests.outcome }}
+        run: |
+          node <<'NODE'
+          const fs = require('node:fs');
+          let raw = {}, parseError = '';
+          try { raw = JSON.parse(fs.readFileSync('/tmp/tools-audit.json', 'utf8')); } catch (error) { parseError = error.message; }
+          const tests = [];
+          function walk(suites) { for (const suite of suites || []) { for (const spec of suite.specs || []) for (const test of spec.tests || []) tests.push({ title:spec.title, file:spec.file || suite.file || '', status:test.status, attempts:(test.results || []).map(result => ({ status:result.status, error:String(result.error?.message || '').slice(0, 6000) })) }); walk(suite.suites); } }
+          walk(raw.suites);
+          const stages = Object.fromEntries(['INSTALL','BUILD','TOOLING','SERVER','TESTS'].map(key => [key, process.env[key]]));
+          const required = ['tools-audit.spec.cjs', 'new-tools.spec.cjs', 'parts-api.spec.cjs', 'maintenance-api.spec.cjs', 'global-search.spec.cjs', 'knowledge-categories.spec.cjs', 'vehicle-filters.spec.cjs', 'official-vehicle-api.spec.cjs'];
+          const coverage = required.map(file => ({ file, count:tests.filter(test => test.file.split(/[\\/]/).pop() === file).length }));
+          const passed = Object.values(stages).every(value => value === 'success') && !parseError && !(raw.errors || []).length && coverage.every(item => item.count > 0) && tests.length > 0 && raw.stats?.expected === tests.length && raw.stats?.unexpected === 0 && raw.stats?.skipped === 0 && raw.stats?.flaky === 0 && tests.every(test => test.status === 'expected');
+          const report = { codeSha:process.env.GITHUB_SHA, runId:process.env.GITHUB_RUN_ID, checkedAt:new Date().toISOString(), passed, scope:'Local production build, Chromium, numerical and validation cases, mocked official APIs and Notion fixtures. External catalog destinations, live providers, physical iPhone and all legacy inline calculators are not certified by this report.', stages, coverage, stats:raw.stats || {}, parseError, runnerErrors:raw.errors || [], tests };
+          fs.mkdirSync('.diagnostics', { recursive:true }); fs.writeFileSync('.diagnostics/tools-audit-report.json', JSON.stringify(report, null, 2) + '\n');
+          fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, 'Tools audit: ' + (passed ? 'PASS' : 'FAIL') + '\nCommit: ' + report.codeSha + '\nTests: ' + tests.length + '\n' + report.scope);
+          NODE
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: tools-audit-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            .diagnostics/tools-audit-report.json
+            /tmp/tools-audit.json
+            /tmp/tools-audit-errors.log
+            /tmp/tools-audit-server.log
+            test-results
+      - name: Publish report
+        if: always()
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add .diagnostics/tools-audit-report.json
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'ci: publish tools audit report [skip ci]'
+          for i in 1 2 3 4; do
+            if git pull --rebase --autostash origin main && git push origin HEAD:main; then exit 0; fi
+            git rebase --abort || true
+            sleep 2
+          done
+          exit 1
+      - name: Require complete audit
+        if: always()
+        run: node -e "if (!require('./.diagnostics/tools-audit-report.json').passed) process.exit(1)"
