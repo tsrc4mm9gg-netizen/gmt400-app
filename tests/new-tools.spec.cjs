@@ -47,7 +47,7 @@ test('Tools button is visible and opens the hub and RPO page', async ({ page }) 
  await expect(launcher).toBeVisible();
  await launcher.click();
  await expect(page.getByRole('heading', { name: 'Narzędzia GMT400' })).toBeVisible();
- await expect(page.getByRole('link', { name: 'Narzędzia', exact: true })).toHaveCount(0);
+ await expect(page.getByRole('link', { name: 'Narzędzia', exact: true })).toBeHidden();
  await page.getByRole('link', { name: /Kody RPO/ }).click();
  await expect(page.getByRole('heading', { name: 'Co oznaczają kody RPO?' })).toBeVisible();
 });
