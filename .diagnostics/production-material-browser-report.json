@@ -1,27 +1,27 @@
 {
-  "auditorCodeSha": "778a3afc3edb251b3fef7413e34bd965fe8a52fb",
-  "observedDeploymentSha": "1e3beb471c4140b5b38b0da224d0d90ba03ed52e",
-  "deploymentShaAfter": "1e3beb471c4140b5b38b0da224d0d90ba03ed52e",
+  "auditorCodeSha": "13ef78e18a97b796d1774d8d33be3520b2ec2cd2",
+  "observedDeploymentSha": "d09f5e515b1539841ec9522ede08248d48f697dc",
+  "deploymentShaAfter": "d09f5e515b1539841ec9522ede08248d48f697dc",
   "stableDeployment": true,
-  "runId": "39063623649",
-  "checkedAt": "2026-10-17T19:50:52.630Z",
+  "runId": "39064958367",
+  "checkedAt": "2026-10-17T20:03:36.710Z",
   "origin": "https://www.gmt400.pl",
-  "passed": false,
+  "passed": true,
   "scope": "Actual known public instruction, its contents navigation and bounded discovery of one real Notion image in up to five public instructions per browser. Chromium and Linux mobile WebKit, no mocks, no Notion writes or VIN submission. Missing eligible sample is unverified, not a pass. Not physical iPhone or all-material certification.",
   "stages": {
     "INSTALL": "success",
     "TOOLING": "success",
     "BEFORE": "success",
-    "TESTS": "failure"
+    "TESTS": "success"
   },
   "parseError": "",
   "statusError": "",
   "stats": {
-    "startTime": "2026-10-17T19:44:09.271Z",
-    "duration": 402885.61,
-    "expected": 2,
+    "startTime": "2026-10-17T20:03:16.808Z",
+    "duration": 19650.137,
+    "expected": 6,
     "skipped": 0,
-    "unexpected": 4,
+    "unexpected": 0,
     "flaky": 0
   },
   "runnerErrors": [],
@@ -29,16 +29,18 @@
     {
       "title": "live 4L60E preserves title and solution content",
       "project": "chromium",
-      "status": "unexpected",
+      "status": "expected",
       "attempts": [
         {
-          "status": "failed",
-          "error": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('article').first().getByText('Magnes w misce zbiera opiłki — dużo opiłków = zużycie wewnętrzne.', { exact: true })\nExpected: visible\nTimeout: 15000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" locator('article').first().getByText('Magnes w misce zbiera opiłki — dużo opiłków = zużycie wewnętrzne.', { exact: true }) with timeout 15000ms\u001b[22m\n\u001b[2m  - waiting for locator('article').first().getByText('Magnes w misce zbiera opiłki — dużo opiłków = zużycie wewnętrzne.', { exact: true })\u001b[22m\n",
+          "status": "passed",
+          "error": "",
           "diagnostics": [
             {
               "articleId": "3fad7bf1-c139-8194-b00a-cf6404bfe8f9",
               "pageErrors": [],
               "title": "Wymiana oleju i filtra 4L60E — pełna instrukcja",
+              "solutionText": "Wymiana oleju i filtra 4L60E — pełna instrukcja\n\nCo potrzebujesz:\n\n5–6 L ATF Dexron VI (lub Dexron III)\nFiltr 4L60E (OEM lub dobry zamiennik)\nUszczelka miski\nKlucz 13 mm, śrubokręt\nPojemnik na olej\n\nKroki:\n\nRozgrzej skrzynię (jazda 10 min)\nPodnieś auto, zabezpiecz\nOdkręć korek spustowy (jeśli jest) lub poluzuj śruby miski\nSpuść olej do pojemnika\nOdkręć wszystkie śruby miski\nZdejmij miskę, sprawdź osad na magnesie\nWyjmij stary filtr\nWyczyść miskę i powierzchnie\nZałóż nowy filtr i uszczelkę\nPrzykręć miskę (moment 11 Nm)\nWlej 4 L oleju\nUruchom silnik, sprawdź poziom na gorąco\nUzupełnij do prawidłowego poziomu\n\nCzęste problemy:\n\nŚlizganie 3-4 biegu — zużyte sprzęgła, wymiana oleju nie pomoże\nSzarpanie — brudny filtr lub zużyty olej\nWyciek z miski — zła uszczelka lub nierówne dokręcenie\n\nTip: Magnes w misce zbiera opiłki — dużo opiłków = zużycie wewnętrzne.",
+              "sourceSolution": "Wymiana oleju i filtra 4L60E — pełna instrukcja\n\nCo potrzebujesz:\n- 5–6 L ATF Dexron VI (lub Dexron III)\n- Filtr 4L60E (OEM lub dobry zamiennik)\n- Uszczelka miski\n- Klucz 13 mm, śrubokręt\n- Pojemnik na olej\n\nKroki:\n1. Rozgrzej skrzynię (jazda 10 min)\n2. Podnieś auto, zabezpiecz\n3. Odkręć korek spustowy (jeśli jest) lub poluzuj śruby miski\n4. Spuść olej do pojemnika\n5. Odkręć wszystkie śruby miski\n6. Zdejmij miskę, sprawdź osad na magnesie\n7. Wyjmij stary filtr\n8. Wyczyść miskę i powierzchnie\n9. Załóż nowy filtr i uszczelkę\n10. Przykręć miskę (moment 11 Nm)\n11. Wlej 4 L oleju\n12. Uruchom silnik, sprawdź poziom na gorąco\n13. Uzupełnij do prawidłowego poziomu\n\nCzęste problemy:\n- Ślizganie 3-4 biegu — zużyte sprzęgła, wymiana oleju nie pomoże\n- Szarpanie — brudny filtr lub zużyty olej\n- Wyciek z miski — zła uszczelka lub nierówne dokręcenie\n\nTip: Magnes w misce zbiera opiłki — dużo opiłków = zużycie wewnętrzne.",
               "finalUrl": "https://www.gmt400.pl/baza/3fad7bf1-c139-8194-b00a-cf6404bfe8f9"
             }
           ]
@@ -70,16 +72,16 @@
     {
       "title": "live 4L60E illustration loads zooms and closes",
       "project": "chromium",
-      "status": "unexpected",
+      "status": "expected",
       "attempts": [
         {
-          "status": "timedOut",
-          "error": "\u001b[31mTest timeout of 180000ms exceeded.\u001b[39m",
+          "status": "passed",
+          "error": "",
           "diagnostics": [
             {
               "articleId": "3fad7bf1-c139-8194-b00a-cf6404bfe8f9",
               "pageErrors": [],
-              "stage": "dialog-open",
+              "stage": "complete",
               "previewCount": 1,
               "caption": null,
               "finalUrl": "https://www.gmt400.pl/baza/3fad7bf1-c139-8194-b00a-cf6404bfe8f9"
@@ -91,16 +93,18 @@
     {
       "title": "live 4L60E preserves title and solution content",
       "project": "webkit",
-      "status": "unexpected",
+      "status": "expected",
       "attempts": [
         {
-          "status": "failed",
-          "error": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('article').first().getByText('Magnes w misce zbiera opiłki — dużo opiłków = zużycie wewnętrzne.', { exact: true })\nExpected: visible\nTimeout: 15000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" locator('article').first().getByText('Magnes w misce zbiera opiłki — dużo opiłków = zużycie wewnętrzne.', { exact: true }) with timeout 15000ms\u001b[22m\n\u001b[2m  - waiting for locator('article').first().getByText('Magnes w misce zbiera opiłki — dużo opiłków = zużycie wewnętrzne.', { exact: true })\u001b[22m\n",
+          "status": "passed",
+          "error": "",
           "diagnostics": [
             {
               "articleId": "3fad7bf1-c139-8194-b00a-cf6404bfe8f9",
               "pageErrors": [],
               "title": "Wymiana oleju i filtra 4L60E — pełna instrukcja",
+              "solutionText": "Wymiana oleju i filtra 4L60E — pełna instrukcja\n\nCo potrzebujesz:\n\n5–6 L ATF Dexron VI (lub Dexron III)\nFiltr 4L60E (OEM lub dobry zamiennik)\nUszczelka miski\nKlucz 13 mm, śrubokręt\nPojemnik na olej\n\nKroki:\n\nRozgrzej skrzynię (jazda 10 min)\nPodnieś auto, zabezpiecz\nOdkręć korek spustowy (jeśli jest) lub poluzuj śruby miski\nSpuść olej do pojemnika\nOdkręć wszystkie śruby miski\nZdejmij miskę, sprawdź osad na magnesie\nWyjmij stary filtr\nWyczyść miskę i powierzchnie\nZałóż nowy filtr i uszczelkę\nPrzykręć miskę (moment 11 Nm)\nWlej 4 L oleju\nUruchom silnik, sprawdź poziom na gorąco\nUzupełnij do prawidłowego poziomu\n\nCzęste problemy:\n\nŚlizganie 3-4 biegu — zużyte sprzęgła, wymiana oleju nie pomoże\nSzarpanie — brudny filtr lub zużyty olej\nWyciek z miski — zła uszczelka lub nierówne dokręcenie\n\nTip: Magnes w misce zbiera opiłki — dużo opiłków = zużycie wewnętrzne.",
+              "sourceSolution": "Wymiana oleju i filtra 4L60E — pełna instrukcja\n\nCo potrzebujesz:\n- 5–6 L ATF Dexron VI (lub Dexron III)\n- Filtr 4L60E (OEM lub dobry zamiennik)\n- Uszczelka miski\n- Klucz 13 mm, śrubokręt\n- Pojemnik na olej\n\nKroki:\n1. Rozgrzej skrzynię (jazda 10 min)\n2. Podnieś auto, zabezpiecz\n3. Odkręć korek spustowy (jeśli jest) lub poluzuj śruby miski\n4. Spuść olej do pojemnika\n5. Odkręć wszystkie śruby miski\n6. Zdejmij miskę, sprawdź osad na magnesie\n7. Wyjmij stary filtr\n8. Wyczyść miskę i powierzchnie\n9. Załóż nowy filtr i uszczelkę\n10. Przykręć miskę (moment 11 Nm)\n11. Wlej 4 L oleju\n12. Uruchom silnik, sprawdź poziom na gorąco\n13. Uzupełnij do prawidłowego poziomu\n\nCzęste problemy:\n- Ślizganie 3-4 biegu — zużyte sprzęgła, wymiana oleju nie pomoże\n- Szarpanie — brudny filtr lub zużyty olej\n- Wyciek z miski — zła uszczelka lub nierówne dokręcenie\n\nTip: Magnes w misce zbiera opiłki — dużo opiłków = zużycie wewnętrzne.",
               "finalUrl": "https://www.gmt400.pl/baza/3fad7bf1-c139-8194-b00a-cf6404bfe8f9"
             }
           ]
@@ -132,16 +136,16 @@
     {
       "title": "live 4L60E illustration loads zooms and closes",
       "project": "webkit",
-      "status": "unexpected",
+      "status": "expected",
       "attempts": [
         {
-          "status": "timedOut",
-          "error": "\u001b[31mTest timeout of 180000ms exceeded.\u001b[39m",
+          "status": "passed",
+          "error": "",
           "diagnostics": [
             {
               "articleId": "3fad7bf1-c139-8194-b00a-cf6404bfe8f9",
               "pageErrors": [],
-              "stage": "dialog-open",
+              "stage": "complete",
               "previewCount": 1,
               "caption": null,
               "finalUrl": "https://www.gmt400.pl/baza/3fad7bf1-c139-8194-b00a-cf6404bfe8f9"
