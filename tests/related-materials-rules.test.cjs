@@ -46,3 +46,25 @@ test('results respect limit without mutating candidates', () => {
   assert.equal(run(entry('a', 'P0300'), candidates, new Map(), 1).length, 1);
   assert.equal(JSON.stringify(candidates), before);
 });
+test('vehicle profile within scope boosts ranking', () => {
+  const current = entry('a', 'P0300 nierowna praca silnika');
+  const candidates = [entry('b', 'P0300 diagnostyka'), entry('c', 'P0300 diagnostyka')];
+  const matches = new Map([['b', { status: 'general', reasons: [] }], ['c', { status: 'within_scope', reasons: [] }]]);
+  const result = run(current, candidates, matches);
+  assert.deepEqual(result.map(item => item.id), ['c', 'b']);
+});
+test('same model adds a small advantage without overriding identifier match', () => {
+  const current = entry('a', 'P0300 nierowna praca silnika');
+  const candidates = [entry('b', 'P0300 diagnostyka', { Model: 'Suburban' }), entry('c', 'P0300 diagnostyka', { Model: 'Tahoe' })];
+  const result = run(current, candidates);
+  assert.deepEqual(result.map(item => item.id), ['b', 'c']);
+});
+test('identifier match outweighs many ordinary shared words', () => {
+  const current = entry('a', 'P0300 nierowna praca silnika pompa paliwa filtr');
+  const candidates = [entry('b', 'nierowna praca silnika pompa paliwa filtr'), entry('c', 'P0300 diagnostyka')];
+  const result = run(current, candidates);
+  assert.deepEqual(result.map(item => item.id), ['c', 'b']);
+});
+test('single shared word does not create a relationship', () => {
+  assert.deepEqual(run(entry('a', 'P0300'), [entry('b', 'P0300 opis')]), []);
+});
