@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import Link from "next/link";
 import "./globals.css";
 import VehicleProfileProvider from "./VehicleProfileProvider";
+import ToolsLauncher from "./ToolsLauncher";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -28,13 +28,7 @@ export default function RootLayout({
     <html lang="pl">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <VehicleProfileProvider>{children}</VehicleProfileProvider>
-        <Link
-          href="/narzedzia"
-          className="fixed bottom-4 right-4 z-[9999] flex items-center gap-2 rounded-full bg-amber-400 px-5 py-4 text-base font-bold text-black shadow-2xl ring-4 ring-black/20 transition hover:bg-amber-300"
-        >
-          <span className="text-xl">🧰</span>
-          <span>Narzędzia</span>
-        </Link>
+        <ToolsLauncher />
       </body>
     </html>
   );
