@@ -1,0 +1,101 @@
+name: Integrate and verify legacy cost calculators
+on:
+  push:
+    branches: [main]
+    paths: ['src/app/ImportCostCalculator.tsx','src/lib/import-budget.ts','tests/legacy-costs.spec.cjs','.github/workflows/legacy-costs.yml']
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: legacy-costs-integration
+  cancel-in-progress: false
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - id: install
+        run: npm ci
+      - id: integrate
+        run: |
+          node <<'NODE'
+          const fs = require('node:fs'), ts = require('typescript');
+          const path = 'src/app/page.tsx'; let text = fs.readFileSync(path,'utf8');
+          if (!text.includes("import ImportCostCalculator from './ImportCostCalculator';")) {
+            const file = ts.createSourceFile(path,text,ts.ScriptTarget.Latest,true,ts.ScriptKind.TSX), targets = [];
+            function visit(node) { if (ts.isJsxElement(node) && node.openingElement.tagName.getText(file) === 'div' && node.children.some(child => ts.isJsxElement(child) && child.openingElement.tagName.getText(file) === 'h3' && child.children.some(value => ts.isJsxText(value) && value.text.trim() === 'KALKULATOR IMPORTU'))) targets.push(node); ts.forEachChild(node,visit); }
+            visit(file);
+            if (targets.length !== 1) throw new Error('Expected exactly one legacy import calculator; refusing broad page modification.');
+            const target = targets[0]; text = text.slice(0,target.getStart(file))+'<ImportCostCalculator />'+text.slice(target.end);
+            const anchor = "import RepairCostCalculator from './RepairCostCalculator';";
+            if (text.split(anchor).length !== 2) throw new Error('Import anchor missing or ambiguous.');
+            text = text.replace(anchor,anchor+"\nimport ImportCostCalculator from './ImportCostCalculator';");
+            fs.writeFileSync(path,text);
+          }
+          NODE
+      - id: build
+        run: npm run build
+      - id: tooling
+        run: |
+          npm install --no-save --package-lock=false @playwright/test
+          npx playwright install --with-deps chromium
+      - id: server
+        run: |
+          npm run start -- --hostname 127.0.0.1 --port 3100 > /tmp/legacy-costs-server.log 2>&1 &
+          for i in $(seq 1 60); do
+            if curl -fsS http://127.0.0.1:3100 >/dev/null; then exit 0; fi
+            sleep 1
+          done
+          exit 1
+      - id: tests
+        continue-on-error: true
+        run: npx playwright test tests/legacy-costs.spec.cjs --workers=1 --reporter=json > /tmp/legacy-costs-tests.json
+      - name: Generate report
+        if: always()
+        env:
+          INTEGRATE: ${{ steps.integrate.outcome }}
+          BUILD: ${{ steps.build.outcome }}
+          TESTS: ${{ steps.tests.outcome }}
+        run: |
+          node <<'NODE'
+          const fs = require('node:fs'); let raw = {}, parseError = '';
+          try {raw = JSON.parse(fs.readFileSync('/tmp/legacy-costs-tests.json','utf8'));} catch (error) {parseError = error.message;}
+          const tests = []; function walk(suites) {for (const suite of suites || []) {for (const spec of suite.specs || []) for (const test of spec.tests || []) tests.push({title:spec.title,status:test.status,errors:(test.results || []).map(result => result.error?.message || '')}); walk(suite.suites);}} walk(raw.suites);
+          const passed = ['INTEGRATE','BUILD','TESTS'].every(key => process.env[key] === 'success') && !parseError && !(raw.errors || []).length && tests.length >= 8 && raw.stats?.expected === tests.length && raw.stats?.unexpected === 0 && raw.stats?.skipped === 0 && raw.stats?.flaky === 0;
+          fs.mkdirSync('.diagnostics',{recursive:true}); fs.writeFileSync('.diagnostics/legacy-costs-report.json',JSON.stringify({auditorCodeSha:process.env.GITHUB_SHA,runId:process.env.GITHUB_RUN_ID,checkedAt:new Date().toISOString(),passed,scope:'Candidate main-page import integration, local build and Chromium tests with mocked Notion. Manual customs/VAT inputs, not automated tax assessment or production certification.',parseError,stats:raw.stats || {},tests},null,2)+'\n');
+          NODE
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: legacy-costs-${{ github.run_id }}
+          path: |
+            .diagnostics/legacy-costs-report.json
+            /tmp/legacy-costs-tests.json
+            /tmp/legacy-costs-server.log
+            test-results
+      - name: Publish report and only verified integration
+        if: always()
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add .diagnostics/legacy-costs-report.json
+          if node -e "if (!require('./.diagnostics/legacy-costs-report.json').passed) process.exit(1)"; then
+            git add src/app/page.tsx
+          else
+            git restore src/app/page.tsx
+          fi
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'ci: publish verified legacy costs integration and report'
+          for i in 1 2 3 4; do
+            if git pull --rebase --autostash origin main && git push origin HEAD:main; then exit 0; fi
+            git rebase --abort || true
+            sleep 2
+          done
+          exit 1
+      - name: Require successful verification
+        if: always()
+        run: node -e "if (!require('./.diagnostics/legacy-costs-report.json').passed) process.exit(1)"
