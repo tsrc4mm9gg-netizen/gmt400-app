@@ -1,183 +1,31 @@
 {
-  "auditorCodeSha": "24d7a4b5a9a464d2859ee67c6d282a1095035cab",
-  "runId": "39041902865",
-  "checkedAt": "2026-10-17T14:45:05.311Z",
-  "passed": true,
+  "auditorCodeSha": "2c7683456b0a13fafecbb49cd2e79031b5a9948d",
+  "runId": "39058126437",
+  "checkedAt": "2026-10-17T18:27:32.442Z",
+  "passed": false,
   "scope": "Synthetic local article interactions in Chromium and Linux WebKit plus existing Notion renderer tests. Candidate integration only; no Notion writes, no production article or physical iPhone certification.",
   "stages": {
     "INSTALL": "success",
     "CANDIDATE": "success",
-    "BUILD": "success",
-    "TOOLING": "success",
-    "SERVER": "success",
-    "TESTS": "success"
+    "BUILD": "failure",
+    "TOOLING": "skipped",
+    "SERVER": "skipped",
+    "TESTS": "skipped"
   },
   "coverage": [
     {
       "project": "chromium",
-      "outline": 5,
-      "renderer": 3
+      "outline": 0,
+      "renderer": 0
     },
     {
       "project": "webkit",
-      "outline": 5,
-      "renderer": 3
+      "outline": 0,
+      "renderer": 0
     }
   ],
-  "parseError": "",
-  "stats": {
-    "startTime": "2026-10-17T14:44:51.859Z",
-    "duration": 13378.442000000001,
-    "expected": 16,
-    "skipped": 0,
-    "unexpected": 0,
-    "flaky": 0
-  },
+  "parseError": "ENOENT: no such file or directory, open '/tmp/material-outline-tests.json'",
+  "stats": {},
   "runnerErrors": [],
-  "tests": [
-    {
-      "title": "contents uses visible headings and unique targets for repeated titles",
-      "file": "material-outline.spec.cjs",
-      "project": "chromium",
-      "status": "expected",
-      "errors": [
-        ""
-      ]
-    },
-    {
-      "title": "contents link updates hash and focuses destination",
-      "file": "material-outline.spec.cjs",
-      "project": "chromium",
-      "status": "expected",
-      "errors": [
-        ""
-      ]
-    },
-    {
-      "title": "contents summary and first link work from keyboard",
-      "file": "material-outline.spec.cjs",
-      "project": "chromium",
-      "status": "expected",
-      "errors": [
-        ""
-      ]
-    },
-    {
-      "title": "short article does not show unnecessary contents",
-      "file": "material-outline.spec.cjs",
-      "project": "chromium",
-      "status": "expected",
-      "errors": [
-        ""
-      ]
-    },
-    {
-      "title": "client navigation rebuilds contents for another entry",
-      "file": "material-outline.spec.cjs",
-      "project": "chromium",
-      "status": "expected",
-      "errors": [
-        ""
-      ]
-    },
-    {
-      "title": "contents uses visible headings and unique targets for repeated titles",
-      "file": "material-outline.spec.cjs",
-      "project": "webkit",
-      "status": "expected",
-      "errors": [
-        ""
-      ]
-    },
-    {
-      "title": "contents link updates hash and focuses destination",
-      "file": "material-outline.spec.cjs",
-      "project": "webkit",
-      "status": "expected",
-      "errors": [
-        ""
-      ]
-    },
-    {
-      "title": "contents summary and first link work from keyboard",
-      "file": "material-outline.spec.cjs",
-      "project": "webkit",
-      "status": "expected",
-      "errors": [
-        ""
-      ]
-    },
-    {
-      "title": "short article does not show unnecessary contents",
-      "file": "material-outline.spec.cjs",
-      "project": "webkit",
-      "status": "expected",
-      "errors": [
-        ""
-      ]
-    },
-    {
-      "title": "client navigation rebuilds contents for another entry",
-      "file": "material-outline.spec.cjs",
-      "project": "webkit",
-      "status": "expected",
-      "errors": [
-        ""
-      ]
-    },
-    {
-      "title": "instruction body follows pagination and reads nested illustrations",
-      "file": "notion-content.spec.cjs",
-      "project": "chromium",
-      "status": "expected",
-      "errors": [
-        ""
-      ]
-    },
-    {
-      "title": "repeated content cursor fails rather than silently returning partial instructions",
-      "file": "notion-content.spec.cjs",
-      "project": "chromium",
-      "status": "expected",
-      "errors": [
-        ""
-      ]
-    },
-    {
-      "title": "renderer retains text, formatting and image captions without executable links or HTML",
-      "file": "notion-content.spec.cjs",
-      "project": "chromium",
-      "status": "expected",
-      "errors": [
-        ""
-      ]
-    },
-    {
-      "title": "instruction body follows pagination and reads nested illustrations",
-      "file": "notion-content.spec.cjs",
-      "project": "webkit",
-      "status": "expected",
-      "errors": [
-        ""
-      ]
-    },
-    {
-      "title": "repeated content cursor fails rather than silently returning partial instructions",
-      "file": "notion-content.spec.cjs",
-      "project": "webkit",
-      "status": "expected",
-      "errors": [
-        ""
-      ]
-    },
-    {
-      "title": "renderer retains text, formatting and image captions without executable links or HTML",
-      "file": "notion-content.spec.cjs",
-      "project": "webkit",
-      "status": "expected",
-      "errors": [
-        ""
-      ]
-    }
-  ]
+  "tests": []
 }
