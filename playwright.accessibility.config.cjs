@@ -1,0 +1,2 @@
+const {defineConfig}=require('@playwright/test');
+module.exports=defineConfig({testDir:'./tests',testMatch:['viewport-accessibility.spec.cjs','new-tools.spec.cjs'],timeout:45000,expect:{timeout:10000},workers:1,retries:0,use:{viewport:{width:390,height:844},trace:'retain-on-failure',screenshot:'only-on-failure'},projects:[{name:'chromium',use:{browserName:'chromium'}},{name:'webkit',use:{browserName:'webkit',isMobile:true,hasTouch:true}}]});

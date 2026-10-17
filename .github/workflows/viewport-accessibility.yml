@@ -1,0 +1,100 @@
+name: Verify zoom configuration and tool contrast before integration
+on:
+  push:
+    branches: [main]
+    paths: ['playwright.accessibility.config.cjs','tests/viewport-accessibility.spec.cjs','.github/workflows/viewport-accessibility.yml']
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: viewport-accessibility
+  cancel-in-progress: false
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - id: install
+        run: npm ci
+      - id: candidate
+        name: Remove only manually declared homepage viewport
+        run: |
+          node <<'NODE'
+          const fs=require('node:fs'),ts=require('typescript');const path='src/app/page.tsx';const text=fs.readFileSync(path,'utf8');
+          const file=ts.createSourceFile(path,text,ts.ScriptTarget.Latest,true,ts.ScriptKind.TSX),targets=[];
+          function visit(node){if(ts.isJsxSelfClosingElement(node)&&node.tagName.getText(file)==='meta'&&node.attributes.properties.some(attr=>ts.isJsxAttribute(attr)&&attr.name.getText(file)==='name'&&attr.initializer&&ts.isStringLiteral(attr.initializer)&&attr.initializer.text==='viewport')) targets.push(node);ts.forEachChild(node,visit);}visit(file);
+          if(targets.length>1)throw new Error('Multiple manual viewport elements: refusing ambiguous modification.');
+          if(targets.length===1){const node=targets[0];fs.writeFileSync(path,text.slice(0,node.getStart(file))+text.slice(node.end));}
+          NODE
+      - id: build
+        run: npm run build
+      - id: tooling
+        run: |
+          npm install --no-save --package-lock=false @playwright/test
+          npx playwright install --with-deps chromium webkit
+      - id: server
+        run: |
+          npm run start -- --hostname 127.0.0.1 --port 3100 > /tmp/viewport-server.log 2>&1 &
+          for i in $(seq 1 60); do
+            if curl -fsS http://127.0.0.1:3100 >/dev/null; then exit 0; fi
+            sleep 1
+          done
+          exit 1
+      - id: tests
+        continue-on-error: true
+        run: npx playwright test --config=playwright.accessibility.config.cjs --reporter=json > /tmp/viewport-tests.json 2>/tmp/viewport-errors.log
+      - name: Generate report
+        if: always()
+        env:
+          INSTALL: ${{ steps.install.outcome }}
+          CANDIDATE: ${{ steps.candidate.outcome }}
+          BUILD: ${{ steps.build.outcome }}
+          TOOLING: ${{ steps.tooling.outcome }}
+          SERVER: ${{ steps.server.outcome }}
+          TESTS: ${{ steps.tests.outcome }}
+        run: |
+          node <<'NODE'
+          const fs=require('node:fs');let raw={},parseError='';try{raw=JSON.parse(fs.readFileSync('/tmp/viewport-tests.json','utf8'));}catch(error){parseError=error.message;}
+          const tests=[];function walk(suites){for(const suite of suites||[]){for(const spec of suite.specs||[])for(const test of spec.tests||[])tests.push({title:spec.title,project:test.projectName,status:test.status,errors:(test.results||[]).map(result=>String(result.error?.message||'').slice(0,5000))});walk(suite.suites);}}walk(raw.suites);
+          const stages=Object.fromEntries(['INSTALL','CANDIDATE','BUILD','TOOLING','SERVER','TESTS'].map(key=>[key,process.env[key]]));
+          const coverage=['chromium','webkit'].map(project=>({project,viewport:tests.filter(test=>test.project===project&&test.title.startsWith('one viewport')).length,tools:tests.filter(test=>test.project===project&&!test.title.startsWith('one viewport')).length}));
+          const passed=Object.values(stages).every(value=>value==='success')&&!parseError&&!(raw.errors||[]).length&&coverage.every(item=>item.viewport===5&&item.tools>=12)&&raw.stats?.expected===tests.length&&raw.stats?.unexpected===0&&raw.stats?.skipped===0&&raw.stats?.flaky===0&&tests.every(test=>test.status==='expected');
+          fs.mkdirSync('.diagnostics',{recursive:true});fs.writeFileSync('.diagnostics/viewport-accessibility-report.json',JSON.stringify({auditorCodeSha:process.env.GITHUB_SHA,runId:process.env.GITHUB_RUN_ID,checkedAt:new Date().toISOString(),passed,scope:'Candidate removal of homepage viewport override; local Chromium and Linux WebKit metadata, width and existing tool contrast/function tests. Not physical pinch-zoom, full 200-percent reflow audit or production certification.',stages,coverage,parseError,stats:raw.stats||{},runnerErrors:raw.errors||[],tests},null,2)+'\n');
+          NODE
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: viewport-accessibility-${{ github.run_id }}
+          path: |
+            .diagnostics/viewport-accessibility-report.json
+            /tmp/viewport-tests.json
+            /tmp/viewport-errors.log
+            /tmp/viewport-server.log
+            test-results
+      - name: Publish report and only verified homepage change
+        if: always()
+        run: |
+          test -s .diagnostics/viewport-accessibility-report.json
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add .diagnostics/viewport-accessibility-report.json
+          if node -e "if(!require('./.diagnostics/viewport-accessibility-report.json').passed)process.exit(1)"; then
+            git add src/app/page.tsx
+          else
+            git restore src/app/page.tsx
+          fi
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'ci: publish verified viewport accessibility integration and report'
+          for i in 1 2 3 4; do
+            if git pull --rebase --autostash origin main && git push origin HEAD:main; then exit 0; fi
+            git rebase --abort || true
+            sleep 2
+          done
+          exit 1
+      - name: Require successful accessibility configuration checks
+        if: always()
+        run: node -e "if(!require('./.diagnostics/viewport-accessibility-report.json').passed)process.exit(1)"
