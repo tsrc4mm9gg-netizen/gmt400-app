@@ -1,0 +1,198 @@
+{
+  "auditorCodeSha": "8f4d78a26ebe17013d2b7681e89ff3016ca65585",
+  "observedDeploymentSha": "8f4d78a26ebe17013d2b7681e89ff3016ca65585",
+  "deploymentShaAfter": "db451c4729449160b1fcb0ba489a0a86d7b39541",
+  "stableDeployment": false,
+  "runId": "39045519848",
+  "checkedAt": "2026-10-17T15:35:10.507Z",
+  "origin": "https://www.gmt400.pl",
+  "passed": false,
+  "scope": "Actual known public instruction, its contents navigation and bounded discovery of one real Notion image in up to five public instructions per browser. Chromium and Linux mobile WebKit, no mocks, no Notion writes or VIN submission. Missing eligible sample is unverified, not a pass. Not physical iPhone or all-material certification.",
+  "stages": {
+    "INSTALL": "success",
+    "TOOLING": "success",
+    "BEFORE": "success",
+    "TESTS": "failure"
+  },
+  "parseError": "",
+  "statusError": "",
+  "stats": {
+    "startTime": "2026-10-17T15:34:43.131Z",
+    "duration": 27096.309,
+    "expected": 2,
+    "skipped": 0,
+    "unexpected": 4,
+    "flaky": 0
+  },
+  "runnerErrors": [],
+  "tests": [
+    {
+      "title": "live known instruction preserves title and original solution",
+      "project": "chromium",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "error": "",
+          "diagnostics": [
+            {
+              "articleId": "3fad7bf1-c139-8122-90d6-dbb1bf5d3cb9",
+              "pageErrors": [],
+              "title": "Wymiana amortyzatorów GMT400",
+              "finalUrl": "https://www.gmt400.pl/baza/3fad7bf1-c139-8122-90d6-dbb1bf5d3cb9"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "live known instruction contents targets real unique sections",
+      "project": "chromium",
+      "status": "unexpected",
+      "attempts": [
+        {
+          "status": "failed",
+          "error": "Error: Selected production entry has fewer than three visible sections; contents interaction cannot be certified for this sample.",
+          "diagnostics": [
+            {
+              "articleId": "3fad7bf1-c139-8122-90d6-dbb1bf5d3cb9",
+              "headingCount": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "live Notion illustration loads zooms and closes on a real entry",
+      "project": "chromium",
+      "status": "unexpected",
+      "attempts": [
+        {
+          "status": "failed",
+          "error": "Error: No eligible Notion-image preview found in the bounded sample of five real instructions; feature remains unverified.",
+          "diagnostics": [
+            {
+              "candidates": [
+                {
+                  "id": "3fad7bf1-c139-81eb-a9f4-e8594aedf23c",
+                  "title": "Import GMT400 do Polski — formalności",
+                  "previewCount": 0,
+                  "rawImageCount": 0
+                },
+                {
+                  "id": "3fad7bf1-c139-8145-9035-cdba26f7e501",
+                  "title": "Poradnik kupującego GMT400 — checklista",
+                  "previewCount": 0,
+                  "rawImageCount": 0
+                },
+                {
+                  "id": "3fad7bf1-c139-8194-b00a-cf6404bfe8f9",
+                  "title": "Wymiana oleju i filtra 4L60E — pełna instrukcja",
+                  "previewCount": 0,
+                  "rawImageCount": 0
+                },
+                {
+                  "id": "3fad7bf1-c139-814a-99e2-e5659d4385e2",
+                  "title": "Wymiana uszczelek kolektora Vortec L31 — pełna procedura",
+                  "previewCount": 0,
+                  "rawImageCount": 0
+                },
+                {
+                  "id": "3fad7bf1-c139-8113-8178-ff23af30df67",
+                  "title": "Specyfikacje silników GMT400 — tabela",
+                  "previewCount": 0,
+                  "rawImageCount": 0
+                }
+              ],
+              "selectedId": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "live known instruction preserves title and original solution",
+      "project": "webkit",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "error": "",
+          "diagnostics": [
+            {
+              "articleId": "3fad7bf1-c139-8122-90d6-dbb1bf5d3cb9",
+              "pageErrors": [],
+              "title": "Wymiana amortyzatorów GMT400",
+              "finalUrl": "https://www.gmt400.pl/baza/3fad7bf1-c139-8122-90d6-dbb1bf5d3cb9"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "live known instruction contents targets real unique sections",
+      "project": "webkit",
+      "status": "unexpected",
+      "attempts": [
+        {
+          "status": "failed",
+          "error": "Error: Selected production entry has fewer than three visible sections; contents interaction cannot be certified for this sample.",
+          "diagnostics": [
+            {
+              "articleId": "3fad7bf1-c139-8122-90d6-dbb1bf5d3cb9",
+              "headingCount": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "live Notion illustration loads zooms and closes on a real entry",
+      "project": "webkit",
+      "status": "unexpected",
+      "attempts": [
+        {
+          "status": "failed",
+          "error": "Error: No eligible Notion-image preview found in the bounded sample of five real instructions; feature remains unverified.",
+          "diagnostics": [
+            {
+              "candidates": [
+                {
+                  "id": "3fad7bf1-c139-81eb-a9f4-e8594aedf23c",
+                  "title": "Import GMT400 do Polski — formalności",
+                  "previewCount": 0,
+                  "rawImageCount": 0
+                },
+                {
+                  "id": "3fad7bf1-c139-8145-9035-cdba26f7e501",
+                  "title": "Poradnik kupującego GMT400 — checklista",
+                  "previewCount": 0,
+                  "rawImageCount": 0
+                },
+                {
+                  "id": "3fad7bf1-c139-8194-b00a-cf6404bfe8f9",
+                  "title": "Wymiana oleju i filtra 4L60E — pełna instrukcja",
+                  "previewCount": 0,
+                  "rawImageCount": 0
+                },
+                {
+                  "id": "3fad7bf1-c139-814a-99e2-e5659d4385e2",
+                  "title": "Wymiana uszczelek kolektora Vortec L31 — pełna procedura",
+                  "previewCount": 0,
+                  "rawImageCount": 0
+                },
+                {
+                  "id": "3fad7bf1-c139-8113-8178-ff23af30df67",
+                  "title": "Specyfikacje silników GMT400 — tabela",
+                  "previewCount": 0,
+                  "rawImageCount": 0
+                }
+              ],
+              "selectedId": null
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
