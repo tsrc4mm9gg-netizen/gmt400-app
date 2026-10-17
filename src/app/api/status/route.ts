@@ -14,7 +14,7 @@ export async function GET() {
  return NextResponse.json({
  status: 'ok',
  service: 'GMT400 Knowledge API',
- version: '1.1.0',
+ version: '1.2.0',
  data: {
  rpoRecords: RPO_CATALOG.length,
  uniqueRpoCodes: rpoCodes.size,
@@ -31,6 +31,7 @@ export async function GET() {
  maintenance: '/api/maintenance?fuel=benzyna&drivetrain=4x4',
  fluids: '/api/fluids?system=olej&powertrain=5.7l',
  diagnostics: '/api/diagnostics?q=P0300',
+ calculators: '/api/calculators?tool=tire&width=265&aspect=75&rim=16',
  units: '/api/units?type=pressure&value=32',
  vinValidation: '/api/vin/validate?vin=YOUR17CHARVIN'
  },
