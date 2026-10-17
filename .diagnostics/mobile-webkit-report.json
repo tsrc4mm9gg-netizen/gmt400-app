@@ -1,23 +1,23 @@
 {
-  "codeSha": "2b7d6c70fa9eca73ab22bdbf198d81aae0e58bac",
-  "runId": "38982147278",
-  "checkedAt": "2026-10-16T23:37:11.717Z",
+  "codeSha": "4167b4cfe84932c28a4655f9e7c6e230fd2264a8",
+  "runId": "38986503711",
+  "checkedAt": "2026-10-17T00:30:44.987Z",
   "scope": "Linux WebKit with mobile viewport, touch enabled, mocked Notion fixtures and existing direct server tests; not physical iPhone or live Safari certification",
-  "passed": false,
+  "passed": true,
   "stages": {
     "install": "success",
     "build": "success",
     "tooling": "success",
     "server": "success",
-    "tests": "failure"
+    "tests": "success"
   },
   "buildDiagnostics": "",
   "stats": {
-    "startTime": "2026-10-16T23:36:11.921Z",
-    "duration": 58201.82,
-    "expected": 28,
+    "startTime": "2026-10-17T00:30:01.367Z",
+    "duration": 42643.445,
+    "expected": 29,
     "skipped": 0,
-    "unexpected": 1,
+    "unexpected": 0,
     "flaky": 0
   },
   "tests": [
@@ -156,11 +156,11 @@
     {
       "title": "profile counters and default filtering are scoped to the current knowledge category",
       "file": "knowledge-categories.spec.cjs",
-      "status": "unexpected",
+      "status": "expected",
       "attempts": [
         {
-          "status": "failed",
-          "error": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveAttribute\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('region', { name: 'Filtrowanie według profilu auta' }).getByRole('button', { name: 'Dla mojego auta (2)', exact: true })\nExpected: \u001b[32m\"true\"\u001b[39m\nTimeout: 10000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toHaveAttribute\" getByRole('region', { name: 'Filtrowanie według profilu auta' }).getByRole('button', { name: 'Dla mojego auta (2)', exact: true }) with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('region', { name: 'Filtrowanie według profilu auta' }).getByRole('button', { name: 'Dla mojego auta (2)', exact: true })\u001b[22m\n"
+          "status": "passed",
+          "error": ""
         }
       ]
     },
