@@ -1,5 +1,6 @@
 'use client';
 import { useState } from 'react';
+import PartsCurrencyConverter from './PartsCurrencyConverter';
 
 type Part = { name: string; quantity: string; budget: number; oem?: string; source?: string };
 type Repair = { id: string; name: string; hours: number; parts: Part[]; note?: string };
@@ -57,5 +58,6 @@ export default function RepairCostCalculator() {
       </dl>
       <p className="text-sm text-neutral-400">Czas to założenie kalkulacji, nie norma warsztatowa. Zestawienie pomaga planować budżet; nie zastępuje diagnozy ani procedury naprawy.</p>
     </div>
+    <PartsCurrencyConverter />
   </section>;
 }
