@@ -1,7 +1,7 @@
 {
-  "codeSha": "9002d9ee6ba1e7d98580ccbd914a1efcf4f807e2",
-  "runId": "38992669427",
-  "checkedAt": "2026-10-17T01:54:36.271Z",
+  "codeSha": "b444fcd5227fdfc6a2ad951c18c7b98a821845aa",
+  "runId": "38992842308",
+  "checkedAt": "2026-10-17T01:56:38.351Z",
   "scope": "Chromium regressions with category-scoped counters, mocked Notion pagination and server HTML rendering; not complete live Notion or Safari verification",
   "passed": true,
   "stages": {
@@ -13,8 +13,8 @@
   },
   "buildDiagnostics": "",
   "stats": {
-    "startTime": "2026-10-17T01:54:17.487Z",
-    "duration": 17563.098,
+    "startTime": "2026-10-17T01:56:24.523Z",
+    "duration": 12628.792,
     "expected": 29,
     "skipped": 0,
     "unexpected": 0,
