@@ -1,0 +1,74 @@
+{
+  "auditorCodeSha": "c361e8e2a04fecf06614c830b7e88c19271dde7d",
+  "runId": "39037756263",
+  "checkedAt": "2026-10-17T13:45:52.695Z",
+  "passed": false,
+  "scope": "Candidate main-page import integration, local build and Chromium tests with mocked Notion. Manual customs/VAT inputs, not automated tax assessment or production certification.",
+  "parseError": "",
+  "stats": {
+    "startTime": "2026-10-17T13:45:17.962Z",
+    "duration": 34646.531,
+    "expected": 7,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  },
+  "tests": [
+    {
+      "title": "import budget uses 18.6 percent and never adds tax base twice",
+      "status": "expected",
+      "errors": [
+        ""
+      ]
+    },
+    {
+      "title": "import budget accepts decimal comma and explicit manual zero",
+      "status": "expected",
+      "errors": [
+        ""
+      ]
+    },
+    {
+      "title": "import budget rejects unknown classification blank negative malformed and huge values",
+      "status": "expected",
+      "errors": [
+        ""
+      ]
+    },
+    {
+      "title": "import form recalculates after a price change",
+      "status": "unexpected",
+      "errors": [
+        "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+      ]
+    },
+    {
+      "title": "import form hides total for blank price and does not offer automatic pickup exemption",
+      "status": "expected",
+      "errors": [
+        ""
+      ]
+    },
+    {
+      "title": "import calculator fits mobile viewport",
+      "status": "expected",
+      "errors": [
+        ""
+      ]
+    },
+    {
+      "title": "repair budget changes with repair and labor rate",
+      "status": "expected",
+      "errors": [
+        ""
+      ]
+    },
+    {
+      "title": "parts currency estimate is independent of repair total",
+      "status": "expected",
+      "errors": [
+        ""
+      ]
+    }
+  ]
+}
