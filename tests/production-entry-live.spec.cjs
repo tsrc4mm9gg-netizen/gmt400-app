@@ -1,3 +1,4 @@
+const {assertMaterialSource}=require('./assert-material-source.cjs');
 const { test, expect } = require('@playwright/test');
 const ORIGIN = 'https://www.gmt400.pl';
 const ID = '3fad7bf1-c139-8122-90d6-dbb1bf5d3cb9';
@@ -28,7 +29,7 @@ test('real production instruction has its visible title, original text and no mi
     await expect(title).toBeVisible();
     const article = page.locator('article').filter({ has: title });
     await expect(article).toHaveCount(1);
-    await expect(article.getByText(entry.Rozwiązanie, { exact: true })).toBeVisible();
+    await assertMaterialSource(article,entry.Rozwiązanie);
     await expect(article.getByRole('alert').filter({ hasText: 'Nie udało się pobrać dodatkowej zawartości strony Notion.' })).toHaveCount(0);
     expect(pageErrors).toEqual([]);
   } finally {

@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation';
 import { VehicleMatchBadge } from '../../VehicleMaterialFilter';
 import { NotionContent, readNotionBlocks } from './NotionContent';
 import MaterialContents from '../../MaterialContents';
+import MaterialText from '../../MaterialText';
 const DATABASE = '746973771d604f1e8276502851176af2';
 const cleanId = (id: string) => id.replace(/-/g, '').toLowerCase();
 const text = (property: any) => (property?.title || property?.rich_text || []).map((part: any) => part.plain_text || part.text?.content || '').join('');
@@ -63,9 +64,9 @@ export default async function KnowledgeEntry({ params }: Props) {
       <VehicleMatchBadge item={entry} />
       <MaterialContents entryId={entry.id} />
       <p className="rounded border border-white/20 p-3 text-sm text-neutral-400">Dopasowanie do profilu opiera się na metadanych i nie potwierdza poprawności technicznej. Przed naprawą sprawdź zgodność procedury z pojazdem i dokumentacją serwisową.</p>
-      {entry.Opis && <section><h2 className="mb-2 text-xl">Opis</h2><p className="whitespace-pre-line text-neutral-300">{entry.Opis}</p></section>}
-      {entry.Objawy && <section><h2 className="mb-2 text-xl">Objawy</h2><p className="whitespace-pre-line text-neutral-300">{entry.Objawy}</p></section>}
-      {entry.Rozwiązanie && <section><h2 className="mb-2 text-xl">Rozwiązanie</h2><p className="whitespace-pre-line text-neutral-300">{entry.Rozwiązanie}</p></section>}
+      {entry.Opis && <section><h2 className="mb-2 text-xl">Opis</h2><MaterialText text={entry.Opis} field="Opis" /></section>}
+      {entry.Objawy && <section><h2 className="mb-2 text-xl">Objawy</h2><MaterialText text={entry.Objawy} field="Objawy" /></section>}
+      {entry.Rozwiązanie && <section><h2 className="mb-2 text-xl">Rozwiązanie</h2><MaterialText text={entry.Rozwiązanie} field="Rozwiązanie" /></section>}
       {contentError && <p role="alert" className="rounded border border-amber-400/40 p-3">Nie udało się pobrać dodatkowej zawartości strony Notion. Powyższe pola są dostępne, ale materiał może być niekompletny. Odśwież stronę, aby ponowić pobieranie.</p>}
       {blocks.length > 0 && <section aria-label="Zawartość strony Notion"><h2 className="mb-3 text-xl">Treść materiału i ilustracje</h2><NotionContent blocks={blocks} /></section>}
       {diagram && <figure><a href={diagram} target="_blank" rel="noopener noreferrer"><img src={diagram} alt="Grafika pomocnicza z biblioteki GMT400" loading="lazy" className="h-auto w-full rounded object-contain" /></a><figcaption className="mt-2 text-xs text-neutral-400">Grafika pomocnicza z biblioteki aplikacji, nie ilustracja przypisana w Notion do tego wpisu. Sprawdź jej zgodność z konkretnym pojazdem i procedurą.</figcaption></figure>}
