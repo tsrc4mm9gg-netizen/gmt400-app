@@ -1,0 +1,103 @@
+name: Verify material contents before integration
+on:
+  push:
+    branches: [main]
+    paths: ['src/app/MaterialContents.tsx','tests/material-outline.spec.cjs','playwright.material-outline.config.cjs','.github/workflows/material-outline.yml']
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: material-outline-integration
+  cancel-in-progress: false
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - id: install
+        run: npm ci
+      - id: candidate
+        name: Prepare narrowly scoped integration and untracked synthetic fixture
+        run: |
+          node <<'NODE'
+          const fs=require('node:fs');const path='src/app/baza/[id]/page.tsx';let text=fs.readFileSync(path,'utf8');
+          const statement="import MaterialContents from '../../MaterialContents';";
+          if(!text.includes(statement)){const anchor="import { NotionContent, readNotionBlocks } from './NotionContent';";const badge='<VehicleMatchBadge item={entry} />';if(text.split(anchor).length!==2||text.split(badge).length!==2)throw new Error('Missing or ambiguous entry-page anchors.');text=text.replace(anchor,anchor+'\n'+statement).replace(badge,badge+'\n      <MaterialContents entryId={entry.id} />');fs.writeFileSync(path,text);}
+          const fixture='src/app/__outline-check/page.tsx';if(fs.existsSync(fixture))throw new Error('Refusing to replace an existing route.');fs.mkdirSync('src/app/__outline-check',{recursive:true});
+          fs.writeFileSync(fixture,`import Link from 'next/link';
+          import MaterialContents from '../MaterialContents';
+          export const dynamic='force-dynamic';
+          export default async function Fixture({searchParams}:{searchParams:Promise<{short?:string}>}){const short=(await searchParams).short==='1';return <main style={{padding:16,maxWidth:390}}><Link href="/__outline-check?short=1">Pokaż krótki materiał</Link><br/><Link href="/__outline-check">Pokaż długi materiał</Link><article><h1>{short?'Krótki materiał':'Długi materiał'}</h1><MaterialContents entryId={short?'short':'long'}/>{short?<><h2>Krótki opis</h2><h2>Uwagi</h2></>:<><h2 id="existing-step">Zakres</h2><p style={{minHeight:500}}>Treść syntetyczna do testu, nie instrukcja naprawy.</p><h2>Kontrola</h2><p style={{minHeight:500}}>Druga sekcja testowa.</p><h3 id="existing-step">Kontrola</h3><p style={{minHeight:500}}>Trzecia sekcja testowa.</p><h2 hidden>Ukryte</h2><h2> </h2></>}</article></main>;}`);
+          NODE
+      - id: build
+        run: npm run build
+      - id: tooling
+        run: |
+          npm install --no-save --package-lock=false @playwright/test
+          npx playwright install --with-deps chromium webkit
+      - id: server
+        run: |
+          npm run start -- --hostname 127.0.0.1 --port 3100 > /tmp/material-outline-server.log 2>&1 &
+          for i in $(seq 1 60); do
+            if curl -fsS http://127.0.0.1:3100 >/dev/null; then exit 0; fi
+            sleep 1
+          done
+          exit 1
+      - id: tests
+        continue-on-error: true
+        run: npx playwright test --config=playwright.material-outline.config.cjs --reporter=json > /tmp/material-outline-tests.json 2>/tmp/material-outline-errors.log
+      - name: Generate report
+        if: always()
+        env:
+          INSTALL: ${{ steps.install.outcome }}
+          CANDIDATE: ${{ steps.candidate.outcome }}
+          BUILD: ${{ steps.build.outcome }}
+          TOOLING: ${{ steps.tooling.outcome }}
+          SERVER: ${{ steps.server.outcome }}
+          TESTS: ${{ steps.tests.outcome }}
+        run: |
+          node <<'NODE'
+          const fs=require('node:fs');let raw={},parseError='';try{raw=JSON.parse(fs.readFileSync('/tmp/material-outline-tests.json','utf8'));}catch(error){parseError=error.message;}
+          const tests=[];function walk(suites){for(const suite of suites||[]){for(const spec of suite.specs||[])for(const test of spec.tests||[])tests.push({title:spec.title,file:spec.file||suite.file||'',project:test.projectName,status:test.status,errors:(test.results||[]).map(result=>String(result.error?.message||'').slice(0,6000))});walk(suite.suites);}}walk(raw.suites);
+          const stages=Object.fromEntries(['INSTALL','CANDIDATE','BUILD','TOOLING','SERVER','TESTS'].map(key=>[key,process.env[key]]));
+          const coverage=['chromium','webkit'].map(project=>({project,outline:tests.filter(test=>test.project===project&&test.file.endsWith('material-outline.spec.cjs')).length,renderer:tests.filter(test=>test.project===project&&test.file.endsWith('notion-content.spec.cjs')).length}));
+          const passed=Object.values(stages).every(value=>value==='success')&&!parseError&&!(raw.errors||[]).length&&coverage.every(item=>item.outline===5&&item.renderer===3)&&raw.stats?.expected===tests.length&&raw.stats?.unexpected===0&&raw.stats?.skipped===0&&raw.stats?.flaky===0&&tests.every(test=>test.status==='expected');
+          fs.mkdirSync('.diagnostics',{recursive:true});fs.writeFileSync('.diagnostics/material-outline-report.json',JSON.stringify({auditorCodeSha:process.env.GITHUB_SHA,runId:process.env.GITHUB_RUN_ID,checkedAt:new Date().toISOString(),passed,scope:'Synthetic local article interactions in Chromium and Linux WebKit plus existing Notion renderer tests. Candidate integration only; no Notion writes, no production article or physical iPhone certification.',stages,coverage,parseError,stats:raw.stats||{},runnerErrors:raw.errors||[],tests},null,2)+'\n');
+          NODE
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: material-outline-${{ github.run_id }}
+          path: |
+            .diagnostics/material-outline-report.json
+            /tmp/material-outline-tests.json
+            /tmp/material-outline-errors.log
+            /tmp/material-outline-server.log
+            test-results
+      - name: Publish report and only verified entry integration
+        if: always()
+        run: |
+          test -s .diagnostics/material-outline-report.json
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add .diagnostics/material-outline-report.json
+          if node -e "if(!require('./.diagnostics/material-outline-report.json').passed)process.exit(1)"; then
+            git add 'src/app/baza/[id]/page.tsx'
+          else
+            git restore 'src/app/baza/[id]/page.tsx'
+          fi
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'ci: publish verified material contents integration and report'
+          for i in 1 2 3 4; do
+            if git pull --rebase --autostash origin main && git push origin HEAD:main; then exit 0; fi
+            git rebase --abort || true
+            sleep 2
+          done
+          exit 1
+      - name: Require successful verification
+        if: always()
+        run: node -e "if(!require('./.diagnostics/material-outline-report.json').passed)process.exit(1)"
