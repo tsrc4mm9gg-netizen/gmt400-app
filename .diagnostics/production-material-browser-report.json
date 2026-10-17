@@ -1,10 +1,10 @@
 {
-  "auditorCodeSha": "501f480eba9981b3ccef84080b583b79ce3e05c2",
-  "observedDeploymentSha": "45aa7b756596774a0db8d8c476baa22cd5b9e43d",
-  "deploymentShaAfter": "45aa7b756596774a0db8d8c476baa22cd5b9e43d",
+  "auditorCodeSha": "f49353b38c4e247ef5a9b413ea9a4f0766d91f5e",
+  "observedDeploymentSha": "f49353b38c4e247ef5a9b413ea9a4f0766d91f5e",
+  "deploymentShaAfter": "f49353b38c4e247ef5a9b413ea9a4f0766d91f5e",
   "stableDeployment": true,
-  "runId": "39051230436",
-  "checkedAt": "2026-10-17T16:59:40.620Z",
+  "runId": "39053713221",
+  "checkedAt": "2026-10-17T17:35:11.562Z",
   "origin": "https://www.gmt400.pl",
   "passed": false,
   "scope": "Actual known public instruction, its contents navigation and bounded discovery of one real Notion image in up to five public instructions per browser. Chromium and Linux mobile WebKit, no mocks, no Notion writes or VIN submission. Missing eligible sample is unverified, not a pass. Not physical iPhone or all-material certification.",
@@ -17,8 +17,8 @@
   "parseError": "",
   "statusError": "",
   "stats": {
-    "startTime": "2026-10-17T16:52:58.503Z",
-    "duration": 401600.89999999997,
+    "startTime": "2026-10-17T17:27:42.026Z",
+    "duration": 449051.604,
     "expected": 2,
     "skipped": 0,
     "unexpected": 4,
@@ -52,7 +52,7 @@
       "attempts": [
         {
           "status": "failed",
-          "error": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('article').first().getByRole('navigation', { name: 'Spis treści materiału', exact: true })\nExpected: visible\nTimeout: 15000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" locator('article').first().getByRole('navigation', { name: 'Spis treści materiału', exact: true }) with timeout 15000ms\u001b[22m\n\u001b[2m  - waiting for locator('article').first().getByRole('navigation', { name: 'Spis treści materiału', exact: true })\u001b[22m\n",
+          "error": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('article').first().getByRole('navigation', { name: 'Spis treści materiału', exact: true })\nExpected: visible\nTimeout: 30000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" locator('article').first().getByRole('navigation', { name: 'Spis treści materiału', exact: true }) with timeout 30000ms\u001b[22m\n\u001b[2m  - waiting for locator('article').first().getByRole('navigation', { name: 'Spis treści materiału', exact: true })\u001b[22m\n",
           "diagnostics": [
             {
               "candidates": [
@@ -60,9 +60,64 @@
                   "id": "3fad7bf1-c139-817a-8229-cad960681fab",
                   "title": "Wymiana pompy paliwa — instrukcja",
                   "headingCount": 1
+                },
+                {
+                  "id": "3fad7bf1-c139-81a6-96d9-cd3a6fc96fc1",
+                  "title": "Problemy z 4L60E — diagnostyka",
+                  "headingCount": 1
+                },
+                {
+                  "id": "3fad7bf1-c139-8122-ae6c-d17e3ac2db9e",
+                  "title": "Wymiana przewodów hamulcowych — korozja",
+                  "headingCount": 1
+                },
+                {
+                  "id": "3fad7bf1-c139-8139-8718-eba84bb6e80b",
+                  "title": "Wymiana uszczelek kolektora dolotowego — instrukcja",
+                  "headingCount": 1
+                },
+                {
+                  "id": "3fad7bf1-c139-818c-a843-ffc227de415f",
+                  "title": "Diagnostyka NP231 — 4x4 nie działa",
+                  "headingCount": 1
+                },
+                {
+                  "id": "3fad7bf1-c139-8135-ad4f-d3b2f49dc7c2",
+                  "title": "Punkty masy GMT400 — lokalizacje",
+                  "headingCount": 1
+                },
+                {
+                  "id": "3fad7bf1-c139-8136-a1d4-d5fd3d8a214e",
+                  "title": "Kody RPO — najważniejsze",
+                  "headingCount": 1
+                },
+                {
+                  "id": "3fad7bf1-c139-816a-b6d6-ee3cc4af3ab3",
+                  "title": "Numery części — filtry i płyny",
+                  "headingCount": 1
+                },
+                {
+                  "id": "3fad7bf1-c139-81eb-a9f4-e8594aedf23c",
+                  "title": "Import GMT400 do Polski — formalności",
+                  "headingCount": 1
+                },
+                {
+                  "id": "3fad7bf1-c139-81f5-b63e-e06a085f9d06",
+                  "title": "Dekoder VIN GMT400 — podstawy",
+                  "headingCount": 1
+                },
+                {
+                  "id": "3fad7bf1-c139-8113-8178-ff23af30df67",
+                  "title": "Specyfikacje silników GMT400 — tabela",
+                  "headingCount": 1
+                },
+                {
+                  "id": "3fad7bf1-c139-813c-923e-ed7bc91a5fe0",
+                  "title": "Pływający wskaźnik paliwa — czujnik w zbiorniku",
+                  "headingCount": 2
                 }
               ],
-              "selectedId": "3fad7bf1-c139-817a-8229-cad960681fab"
+              "selectedId": "3fad7bf1-c139-813c-923e-ed7bc91a5fe0"
             }
           ]
         }
@@ -80,6 +135,7 @@
             {
               "articleId": "3fad7bf1-c139-8194-b00a-cf6404bfe8f9",
               "pageErrors": [],
+              "stage": "dialog-open",
               "previewCount": 1,
               "caption": null,
               "finalUrl": "https://www.gmt400.pl/baza/3fad7bf1-c139-8194-b00a-cf6404bfe8f9"
@@ -114,7 +170,7 @@
       "attempts": [
         {
           "status": "failed",
-          "error": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('article').first().getByRole('navigation', { name: 'Spis treści materiału', exact: true })\nExpected: visible\nTimeout: 15000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" locator('article').first().getByRole('navigation', { name: 'Spis treści materiału', exact: true }) with timeout 15000ms\u001b[22m\n\u001b[2m  - waiting for locator('article').first().getByRole('navigation', { name: 'Spis treści materiału', exact: true })\u001b[22m\n",
+          "error": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('article').first().getByRole('navigation', { name: 'Spis treści materiału', exact: true })\nExpected: visible\nTimeout: 30000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" locator('article').first().getByRole('navigation', { name: 'Spis treści materiału', exact: true }) with timeout 30000ms\u001b[22m\n\u001b[2m  - waiting for locator('article').first().getByRole('navigation', { name: 'Spis treści materiału', exact: true })\u001b[22m\n",
           "diagnostics": [
             {
               "candidates": [
@@ -122,9 +178,64 @@
                   "id": "3fad7bf1-c139-817a-8229-cad960681fab",
                   "title": "Wymiana pompy paliwa — instrukcja",
                   "headingCount": 1
+                },
+                {
+                  "id": "3fad7bf1-c139-81a6-96d9-cd3a6fc96fc1",
+                  "title": "Problemy z 4L60E — diagnostyka",
+                  "headingCount": 1
+                },
+                {
+                  "id": "3fad7bf1-c139-8122-ae6c-d17e3ac2db9e",
+                  "title": "Wymiana przewodów hamulcowych — korozja",
+                  "headingCount": 1
+                },
+                {
+                  "id": "3fad7bf1-c139-8139-8718-eba84bb6e80b",
+                  "title": "Wymiana uszczelek kolektora dolotowego — instrukcja",
+                  "headingCount": 1
+                },
+                {
+                  "id": "3fad7bf1-c139-818c-a843-ffc227de415f",
+                  "title": "Diagnostyka NP231 — 4x4 nie działa",
+                  "headingCount": 1
+                },
+                {
+                  "id": "3fad7bf1-c139-8135-ad4f-d3b2f49dc7c2",
+                  "title": "Punkty masy GMT400 — lokalizacje",
+                  "headingCount": 1
+                },
+                {
+                  "id": "3fad7bf1-c139-8136-a1d4-d5fd3d8a214e",
+                  "title": "Kody RPO — najważniejsze",
+                  "headingCount": 1
+                },
+                {
+                  "id": "3fad7bf1-c139-816a-b6d6-ee3cc4af3ab3",
+                  "title": "Numery części — filtry i płyny",
+                  "headingCount": 1
+                },
+                {
+                  "id": "3fad7bf1-c139-81eb-a9f4-e8594aedf23c",
+                  "title": "Import GMT400 do Polski — formalności",
+                  "headingCount": 1
+                },
+                {
+                  "id": "3fad7bf1-c139-81f5-b63e-e06a085f9d06",
+                  "title": "Dekoder VIN GMT400 — podstawy",
+                  "headingCount": 1
+                },
+                {
+                  "id": "3fad7bf1-c139-8113-8178-ff23af30df67",
+                  "title": "Specyfikacje silników GMT400 — tabela",
+                  "headingCount": 1
+                },
+                {
+                  "id": "3fad7bf1-c139-813c-923e-ed7bc91a5fe0",
+                  "title": "Pływający wskaźnik paliwa — czujnik w zbiorniku",
+                  "headingCount": 2
                 }
               ],
-              "selectedId": "3fad7bf1-c139-817a-8229-cad960681fab"
+              "selectedId": "3fad7bf1-c139-813c-923e-ed7bc91a5fe0"
             }
           ]
         }
@@ -142,6 +253,7 @@
             {
               "articleId": "3fad7bf1-c139-8194-b00a-cf6404bfe8f9",
               "pageErrors": [],
+              "stage": "dialog-open",
               "previewCount": 1,
               "caption": null,
               "finalUrl": "https://www.gmt400.pl/baza/3fad7bf1-c139-8194-b00a-cf6404bfe8f9"
