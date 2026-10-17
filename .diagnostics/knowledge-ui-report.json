@@ -1,7 +1,7 @@
 {
-  "codeSha": "c9d4f8b827bde0b77245f77f154def808a0fabd3",
-  "runId": "39023813796",
-  "checkedAt": "2026-10-17T10:11:04.847Z",
+  "codeSha": "be89b1749df017b914437d28441c71b53d5cd795",
+  "runId": "39024267948",
+  "checkedAt": "2026-10-17T10:17:58.043Z",
   "scope": "Chromium with mocked Notion fixtures; category-scoped profile counters; not live Notion or Safari",
   "passed": true,
   "stages": {
@@ -12,8 +12,8 @@
     "browser": "success"
   },
   "stats": {
-    "startTime": "2026-10-17T10:10:56.716Z",
-    "duration": 8060.48,
+    "startTime": "2026-10-17T10:17:49.985Z",
+    "duration": 7983.917,
     "expected": 14,
     "skipped": 0,
     "unexpected": 0,
@@ -27,7 +27,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 790,
+          "durationMs": 871,
           "error": ""
         }
       ]
@@ -39,7 +39,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 464,
+          "durationMs": 473,
           "error": ""
         }
       ]
@@ -51,7 +51,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 441,
+          "durationMs": 462,
           "error": ""
         }
       ]
@@ -63,7 +63,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 305,
+          "durationMs": 327,
           "error": ""
         }
       ]
@@ -75,7 +75,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 316,
+          "durationMs": 312,
           "error": ""
         }
       ]
@@ -87,7 +87,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 318,
+          "durationMs": 308,
           "error": ""
         }
       ]
@@ -99,7 +99,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 357,
+          "durationMs": 303,
           "error": ""
         }
       ]
@@ -111,7 +111,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 309,
+          "durationMs": 306,
           "error": ""
         }
       ]
@@ -123,7 +123,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 387,
+          "durationMs": 391,
           "error": ""
         }
       ]
@@ -135,7 +135,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 349,
+          "durationMs": 336,
           "error": ""
         }
       ]
@@ -147,7 +147,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 648,
+          "durationMs": 656,
           "error": ""
         }
       ]
@@ -159,7 +159,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 736,
+          "durationMs": 656,
           "error": ""
         }
       ]
@@ -171,7 +171,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 350,
+          "durationMs": 410,
           "error": ""
         }
       ]
@@ -183,7 +183,7 @@
       "attempts": [
         {
           "status": "passed",
-          "durationMs": 724,
+          "durationMs": 699,
           "error": ""
         }
       ]
