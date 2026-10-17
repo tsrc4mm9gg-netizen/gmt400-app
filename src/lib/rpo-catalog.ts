@@ -1,5 +1,6 @@
 import { RPO_BATCH_2 } from './rpo-batch-2';
-export type RpoCategory = 'Osie' | 'Silniki' | 'Skrzynie' | 'Wyposażenie' | 'Nadwozie' | 'Klimatyzacja' | 'Masy' | 'Lusterka i wnętrze' | 'Zawieszenie' | 'Osprzęt' | 'Napęd' | 'Emisja' | 'Koła' | 'Pakiety' | 'Kolory i tapicerki';
+import { RPO_BATCH_3 } from './rpo-batch-3';
+export type RpoCategory = 'Osie' | 'Silniki' | 'Skrzynie' | 'Wyposażenie' | 'Nadwozie' | 'Klimatyzacja' | 'Masy' | 'Lusterka i wnętrze' | 'Zawieszenie' | 'Osprzęt' | 'Napęd' | 'Emisja' | 'Koła' | 'Pakiety' | 'Kolory i tapicerki' | 'Hamulce';
 export type RpoEntry = { code: string; category: RpoCategory; description: string; original: string; years: [number, number] | null; models: string[]; source: string; sourceTitle: string; status: 'reference'; notes: string; ratio?: string };
 const AXLE = 'https://differentials.com/gm-axle-ratio-identification-codes/';
 const REFERENCE = 'https://jameshalderman.com/wp-content/uploads/2019/04/RPO_Codes.pdf';
@@ -14,6 +15,7 @@ export const RPO_CATALOG: RpoEntry[] = [
  reference('L29', 'Silniki', 'Benzynowy V8 7.4 l, SFI', 'ENGINE, GAS, 8 CYL, 7.4L, SFI', 'Nie ustala mocy, kalibracji sterownika ani szczegółów osprzętu.'),
  reference('L31', 'Silniki', 'Wariant ciężarowy: benzynowy V8 5.7 l', 'ENGINE, GAS, 8 CYL, 5.7L; TRUCK', 'Kod ma także historyczne znaczenia w innych autach GM. Nie stosuj tego opisu poza właściwym kontekstem ciężarowym.'),
  ...RPO_BATCH_2,
+ ...RPO_BATCH_3,
 ];
 export function decodeRpo(input: string) {
  const tokens = [...new Set(input.toUpperCase().trim().split(/[\s,;|]+/).filter(Boolean))];
