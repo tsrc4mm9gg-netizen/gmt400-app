@@ -25,19 +25,30 @@ test('parts form offers 1999 and 2000 and explains missing data', async ({ page 
  const year = page.getByRole('combobox', { name:'Rocznik', exact:true });
  await expect(year).toBeVisible();
  await expect(year.locator('option')).toHaveCount(14);
- await test.step('Select 2000 and 1999 using the accessible year field', async () => {
-  await year.selectOption('2000');
-  await expect(year).toHaveValue('2000');
-  await year.selectOption('1999');
-  await expect(year).toHaveValue('1999');
- });
+ await year.selectOption('2000');
+ await expect(year).toHaveValue('2000');
+ await year.selectOption('1999');
  const responsePromise = page.waitForResponse(response => { const url = new URL(response.url()); return url.pathname === '/api/parts' && url.searchParams.get('year') === '1999'; });
  await page.getByRole('button', { name:'Szukaj informacji', exact:true }).click();
- const response = await responsePromise;
- expect(response.status()).toBe(200);
- const data = await response.json();
- expect(data.query.year).toBe(1999);
- await expect(page.getByRole('status')).toContainText('Brak danych');
+ expect((await responsePromise).status()).toBe(200);
+ await expect(page.getByRole('status')).toContainText('Brak danych lokalnych');
  await expect(page.getByRole('status')).toContainText('Nie oznacza to, że część nie pasuje');
  await expect(page.getByRole('alert')).toHaveCount(0);
+});
+test('1999 Suburban 5.7 offers separate catalog links without false local matches', async ({ request, page }) => {
+ const params = new URLSearchParams({ model:'Suburban 1500', year:'1999', engine:'5.7L V8', transmission:'Automatyczna', drivetrain:'4x4' });
+ const response = await request.get(BASE + '/api/parts?' + params);
+ expect(response.status()).toBe(200);
+ const data = await response.json();
+ expect(data.results).toHaveLength(0);
+ expect(data.externalCatalogs).toHaveLength(2);
+ for (const item of data.externalCatalogs) { expect(item.drivetrain).toBe('4x4'); expect(item.kind).toBe('external-catalog-link'); expect(item.fitmentVerified).toBe(false); }
+ const other = await request.get(BASE + '/api/parts?' + new URLSearchParams({ model:'Suburban 1500', year:'2000', engine:'5.7L V8' }));
+ expect((await other.json()).externalCatalogs).toHaveLength(0);
+ await page.goto(BASE + '/narzedzia/czesci');
+ for (const [name, value] of [['Model', 'Suburban 1500'], ['Rocznik', '1999'], ['Silnik', '5.7L V8'], ['Skrzynia biegów', 'Automatyczna'], ['Napęd', '4x4']]) await page.getByRole('combobox', { name, exact:true }).selectOption(value);
+ await page.getByRole('button', { name:'Szukaj informacji', exact:true }).click();
+ const catalogs = page.getByRole('region', { name:'Katalogi zewnętrzne', exact:true });
+ await expect(catalogs).toBeVisible();
+ await expect(catalogs.getByRole('link')).toHaveCount(2);
 });
