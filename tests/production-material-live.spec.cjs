@@ -1,4 +1,4 @@
-// Production verification for deployment 93adda0f9a10d13aa4bf3640474bac5f2faa812c.
+// Production verification after adding the 4L60E service-kit illustration.
 const {test,expect}=require('@playwright/test');
 const ORIGIN='https://www.gmt400.pl',ID='3fad7bf1-c139-8122-90d6-dbb1bf5d3cb9';
 const clean=value=>String(value||'').replace(/-/g,'').toLowerCase();
