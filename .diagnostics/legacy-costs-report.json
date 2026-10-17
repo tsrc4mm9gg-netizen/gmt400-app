@@ -1,16 +1,16 @@
 {
-  "auditorCodeSha": "c361e8e2a04fecf06614c830b7e88c19271dde7d",
-  "runId": "39037756263",
-  "checkedAt": "2026-10-17T13:45:52.695Z",
-  "passed": false,
+  "auditorCodeSha": "f86373e04238d1a7bf695ea8c08be23c1511d00a",
+  "runId": "39038175685",
+  "checkedAt": "2026-10-17T13:51:36.799Z",
+  "passed": true,
   "scope": "Candidate main-page import integration, local build and Chromium tests with mocked Notion. Manual customs/VAT inputs, not automated tax assessment or production certification.",
   "parseError": "",
   "stats": {
-    "startTime": "2026-10-17T13:45:17.962Z",
-    "duration": 34646.531,
-    "expected": 7,
+    "startTime": "2026-10-17T13:51:33.132Z",
+    "duration": 3593.6130000000003,
+    "expected": 8,
     "skipped": 0,
-    "unexpected": 1,
+    "unexpected": 0,
     "flaky": 0
   },
   "tests": [
@@ -37,9 +37,9 @@
     },
     {
       "title": "import form recalculates after a price change",
-      "status": "unexpected",
+      "status": "expected",
       "errors": [
-        "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+        ""
       ]
     },
     {

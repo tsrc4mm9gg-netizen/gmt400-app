@@ -3,6 +3,7 @@
 import { useState, useEffect, useMemo } from 'react';
 import AdditionalTips from './AdditionalTips';
 import RepairCostCalculator from './RepairCostCalculator';
+import ImportCostCalculator from './ImportCostCalculator';
 import GroupedNavigation from './GroupedNavigation';
 import useSectionNavigation from './useSectionNavigation';
 import ModelCatalog from './ModelCatalog';
@@ -1295,54 +1296,7 @@ export default function Home() {
           <div>
             <h2 className="text-2xl mb-6" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>IMPORT DO POLSKI</h2>
             
-            <div className="bg-neutral-950 border border-amber-400/30 p-4 mb-6">
-              <h3 className="font-semibold text-amber-400 mb-4">KALKULATOR IMPORTU</h3>
-              <div className="grid sm:grid-cols-2 gap-4 mb-4">
-                <div>
-                  <label className="text-xs text-neutral-500 block mb-1">Cena wylicytowana (PLN)</label>
-                  <input type="number" value={importPrice} onChange={(e) => setImportPrice(Number(e.target.value))}
-                    className="w-full bg-neutral-900 border border-white/10 px-3 py-2 text-sm" />
-                </div>
-                <div>
-                  <label className="text-xs text-neutral-500 block mb-1">Portal aukcyjny</label>
-                  <select value={importSource} onChange={(e) => setImportSource(e.target.value)}
-                    className="w-full bg-neutral-900 border border-white/10 px-3 py-2 text-sm">
-                    <option value="copart">Copart (opłata ~10%)</option>
-                    <option value="iaai">IAAI (opłata ~12%)</option>
-                    <option value="manheim">Manheim (opłata ~8%)</option>
-                    <option value="dealer">Dealer/prywatny (0%)</option>
-                  </select>
-                </div>
-                <div>
-                  <label className="text-xs text-neutral-500 block mb-1">Silnik</label>
-                  <select value={importEngine} onChange={(e) => setImportEngine(e.target.value)}
-                    className="w-full bg-neutral-900 border border-white/10 px-3 py-2 text-sm">
-                    <option value="v6">4.3L V6 — akcyza 3.1%</option>
-                    <option value="v8">5.0/5.7/7.4L V8 — akcyza 18.6%</option>
-                    <option value="diesel">6.5L Diesel — akcyza 18.6%</option>
-                    <option value="pickup">Pickup CN 8704 — akcyza 0%</option>
-                  </select>
-                </div>
-                <div>
-                  <label className="text-xs text-neutral-500 block mb-1">Transport</label>
-                  <select value={importTransport} onChange={(e) => setImportTransport(e.target.value)}
-                    className="w-full bg-neutral-900 border border-white/10 px-3 py-2 text-sm">
-                    <option value="roro">RoRo (najtańszy) — 4000 PLN</option>
-                    <option value="kontener">Kontener 20ft — 6000 PLN</option>
-                    <option value="kontener40">Kontener 40ft — 8000 PLN</option>
-                  </select>
-                </div>
-              </div>
-              <div className="space-y-2 text-sm mt-4">
-                <div className="flex justify-between"><span className="text-neutral-400">Cena:</span><span>{importPrice} PLN</span></div>
-                <div className="flex justify-between"><span className="text-neutral-400">Opłata aukcyjna ({importSource}):</span><span>{Math.round(importPrice * (importSource === 'copart' ? 0.10 : importSource === 'iaai' ? 0.12 : importSource === 'manheim' ? 0.08 : 0))} PLN</span></div>
-                <div className="flex justify-between"><span className="text-neutral-400">Transport ({importTransport}):</span><span>{importTransport === 'roro' ? 4000 : importTransport === 'kontener' ? 6000 : 8000} PLN</span></div>
-                <div className="flex justify-between"><span className="text-neutral-400">Cło 10%:</span><span>{Math.round(importPrice * 0.10)} PLN</span></div>
-                <div className="flex justify-between"><span className="text-neutral-400">Akcyza:</span><span>{Math.round(importPrice * (importEngine === 'v6' ? 0.031 : importEngine === 'pickup' ? 0 : 0.186))} PLN</span></div>
-                <div className="flex justify-between"><span className="text-neutral-400">VAT 23%:</span><span>{Math.round(importPrice * 1.1 * 0.23)} PLN</span></div>
-                <div className="flex justify-between font-bold text-amber-400 text-lg border-t border-amber-400/30 pt-2"><span>SZACUNEK:</span><span>{Math.round(importPrice * 1.5)} PLN</span></div>
-              </div>
-            </div>
+            <ImportCostCalculator />
 
             <div className="bg-neutral-950 border border-white/10 p-4 mb-4">
               <h3 className="font-semibold text-amber-400 mb-3">STAWKI 2026</h3>
