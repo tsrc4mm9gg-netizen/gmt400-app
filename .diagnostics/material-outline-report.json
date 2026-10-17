@@ -1,0 +1,183 @@
+{
+  "auditorCodeSha": "e61cecdc0c06d57d1f420ee20ef93a4704cfa303",
+  "runId": "39041519997",
+  "checkedAt": "2026-10-17T14:41:10.736Z",
+  "passed": false,
+  "scope": "Synthetic local article interactions in Chromium and Linux WebKit plus existing Notion renderer tests. Candidate integration only; no Notion writes, no production article or physical iPhone certification.",
+  "stages": {
+    "INSTALL": "success",
+    "CANDIDATE": "success",
+    "BUILD": "success",
+    "TOOLING": "success",
+    "SERVER": "success",
+    "TESTS": "failure"
+  },
+  "coverage": [
+    {
+      "project": "chromium",
+      "outline": 5,
+      "renderer": 3
+    },
+    {
+      "project": "webkit",
+      "outline": 5,
+      "renderer": 3
+    }
+  ],
+  "parseError": "",
+  "stats": {
+    "startTime": "2026-10-17T14:39:14.488Z",
+    "duration": 116155.152,
+    "expected": 6,
+    "skipped": 0,
+    "unexpected": 10,
+    "flaky": 0
+  },
+  "runnerErrors": [],
+  "tests": [
+    {
+      "title": "contents uses visible headings and unique targets for repeated titles",
+      "file": "material-outline.spec.cjs",
+      "project": "chromium",
+      "status": "unexpected",
+      "errors": [
+        "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('[data-material-outline]')\nExpected: visible\nTimeout: 10000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" locator('[data-material-outline]') with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for locator('[data-material-outline]')\u001b[22m\n"
+      ]
+    },
+    {
+      "title": "contents link updates hash and focuses destination",
+      "file": "material-outline.spec.cjs",
+      "project": "chromium",
+      "status": "unexpected",
+      "errors": [
+        "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('[data-material-outline]')\nExpected: visible\nTimeout: 10000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" locator('[data-material-outline]') with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for locator('[data-material-outline]')\u001b[22m\n"
+      ]
+    },
+    {
+      "title": "contents summary and first link work from keyboard",
+      "file": "material-outline.spec.cjs",
+      "project": "chromium",
+      "status": "unexpected",
+      "errors": [
+        "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('[data-material-outline]')\nExpected: visible\nTimeout: 10000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" locator('[data-material-outline]') with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for locator('[data-material-outline]')\u001b[22m\n"
+      ]
+    },
+    {
+      "title": "short article does not show unnecessary contents",
+      "file": "material-outline.spec.cjs",
+      "project": "chromium",
+      "status": "unexpected",
+      "errors": [
+        "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('heading', { name: 'Krótki materiał', exact: true })\nExpected: visible\nTimeout: 10000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" getByRole('heading', { name: 'Krótki materiał', exact: true }) with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { name: 'Krótki materiał', exact: true })\u001b[22m\n"
+      ]
+    },
+    {
+      "title": "client navigation rebuilds contents for another entry",
+      "file": "material-outline.spec.cjs",
+      "project": "chromium",
+      "status": "unexpected",
+      "errors": [
+        "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('[data-material-outline]')\nExpected: visible\nTimeout: 10000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" locator('[data-material-outline]') with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for locator('[data-material-outline]')\u001b[22m\n"
+      ]
+    },
+    {
+      "title": "contents uses visible headings and unique targets for repeated titles",
+      "file": "material-outline.spec.cjs",
+      "project": "webkit",
+      "status": "unexpected",
+      "errors": [
+        "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('[data-material-outline]')\nExpected: visible\nTimeout: 10000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" locator('[data-material-outline]') with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for locator('[data-material-outline]')\u001b[22m\n"
+      ]
+    },
+    {
+      "title": "contents link updates hash and focuses destination",
+      "file": "material-outline.spec.cjs",
+      "project": "webkit",
+      "status": "unexpected",
+      "errors": [
+        "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('[data-material-outline]')\nExpected: visible\nTimeout: 10000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" locator('[data-material-outline]') with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for locator('[data-material-outline]')\u001b[22m\n"
+      ]
+    },
+    {
+      "title": "contents summary and first link work from keyboard",
+      "file": "material-outline.spec.cjs",
+      "project": "webkit",
+      "status": "unexpected",
+      "errors": [
+        "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('[data-material-outline]')\nExpected: visible\nTimeout: 10000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" locator('[data-material-outline]') with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for locator('[data-material-outline]')\u001b[22m\n"
+      ]
+    },
+    {
+      "title": "short article does not show unnecessary contents",
+      "file": "material-outline.spec.cjs",
+      "project": "webkit",
+      "status": "unexpected",
+      "errors": [
+        "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('heading', { name: 'Krótki materiał', exact: true })\nExpected: visible\nTimeout: 10000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" getByRole('heading', { name: 'Krótki materiał', exact: true }) with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { name: 'Krótki materiał', exact: true })\u001b[22m\n"
+      ]
+    },
+    {
+      "title": "client navigation rebuilds contents for another entry",
+      "file": "material-outline.spec.cjs",
+      "project": "webkit",
+      "status": "unexpected",
+      "errors": [
+        "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('[data-material-outline]')\nExpected: visible\nTimeout: 10000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" locator('[data-material-outline]') with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for locator('[data-material-outline]')\u001b[22m\n"
+      ]
+    },
+    {
+      "title": "instruction body follows pagination and reads nested illustrations",
+      "file": "notion-content.spec.cjs",
+      "project": "chromium",
+      "status": "expected",
+      "errors": [
+        ""
+      ]
+    },
+    {
+      "title": "repeated content cursor fails rather than silently returning partial instructions",
+      "file": "notion-content.spec.cjs",
+      "project": "chromium",
+      "status": "expected",
+      "errors": [
+        ""
+      ]
+    },
+    {
+      "title": "renderer retains text, formatting and image captions without executable links or HTML",
+      "file": "notion-content.spec.cjs",
+      "project": "chromium",
+      "status": "expected",
+      "errors": [
+        ""
+      ]
+    },
+    {
+      "title": "instruction body follows pagination and reads nested illustrations",
+      "file": "notion-content.spec.cjs",
+      "project": "webkit",
+      "status": "expected",
+      "errors": [
+        ""
+      ]
+    },
+    {
+      "title": "repeated content cursor fails rather than silently returning partial instructions",
+      "file": "notion-content.spec.cjs",
+      "project": "webkit",
+      "status": "expected",
+      "errors": [
+        ""
+      ]
+    },
+    {
+      "title": "renderer retains text, formatting and image captions without executable links or HTML",
+      "file": "notion-content.spec.cjs",
+      "project": "webkit",
+      "status": "expected",
+      "errors": [
+        ""
+      ]
+    }
+  ]
+}
