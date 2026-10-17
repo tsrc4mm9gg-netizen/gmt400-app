@@ -2,13 +2,13 @@ name: Mobile WebKit regression verification
 on:
   push:
     branches: [main]
-    paths: ['src/**', 'tests/**', 'package.json', 'package-lock.json', 'next.config.ts', 'playwright.webkit.config.cjs', '.github/workflows/mobile-webkit.yml']
+    paths: ['src/**','tests/**','package.json','package-lock.json','next.config.ts','playwright.webkit.config.cjs','.github/workflows/mobile-webkit.yml']
   workflow_dispatch:
 permissions:
   contents: write
 concurrency:
   group: mobile-webkit-verification
-  cancel-in-progress: false
+  cancel-in-progress: true
 jobs:
   verify:
     runs-on: ubuntu-latest
@@ -21,10 +21,7 @@ jobs:
       - id: install
         run: npm ci
       - id: build
-        shell: bash
-        run: |
-          set -o pipefail
-          npm run build 2>&1 | tee /tmp/mobile-webkit-build.log
+        run: npm run build
       - id: tooling
         run: |
           npm install --no-save --package-lock=false @playwright/test
@@ -33,52 +30,61 @@ jobs:
         run: |
           npm run start -- --hostname 127.0.0.1 --port 3100 > /tmp/mobile-webkit-server.log 2>&1 &
           for i in $(seq 1 60); do
-            if curl -fsS http://127.0.0.1:3100 > /dev/null; then exit 0; fi
+            if curl -fsS http://127.0.0.1:3100 >/dev/null; then exit 0; fi
             sleep 1
           done
           exit 1
       - id: tests
         continue-on-error: true
-        run: npx playwright test --config=playwright.webkit.config.cjs --reporter=json > /tmp/mobile-webkit-tests.json
-      - uses: actions/upload-artifact@v4
-        if: always()
-        with:
-          name: mobile-webkit-verification-artifacts
-          path: |
-            test-results
-            /tmp/mobile-webkit-build.log
-            /tmp/mobile-webkit-server.log
-          if-no-files-found: ignore
-      - name: Publish mobile verification report
+        run: npx playwright test --config=playwright.webkit.config.cjs --reporter=json > /tmp/mobile-webkit-tests.json 2>/tmp/mobile-webkit-errors.log
+      - name: Generate report
         if: always()
         env:
-          INSTALL_RESULT: ${{ steps.install.outcome }}
-          BUILD_RESULT: ${{ steps.build.outcome }}
-          TOOLING_RESULT: ${{ steps.tooling.outcome }}
-          SERVER_RESULT: ${{ steps.server.outcome }}
-          TEST_RESULT: ${{ steps.tests.outcome }}
+          INSTALL: ${{ steps.install.outcome }}
+          BUILD: ${{ steps.build.outcome }}
+          TOOLING: ${{ steps.tooling.outcome }}
+          SERVER: ${{ steps.server.outcome }}
+          TESTS: ${{ steps.tests.outcome }}
         run: |
           node <<'NODE'
           const fs = require('node:fs');
-          let raw = {};
-          let buildDiagnostics = '';
-          try { raw = JSON.parse(fs.readFileSync('/tmp/mobile-webkit-tests.json', 'utf8')); } catch {}
-          try { buildDiagnostics = fs.readFileSync('/tmp/mobile-webkit-build.log', 'utf8').replace(/\u001b\[[0-9;]*m/g, '').slice(-12000); } catch {}
-          const stats = raw.stats || {};
-          const stages = { install: process.env.INSTALL_RESULT, build: process.env.BUILD_RESULT, tooling: process.env.TOOLING_RESULT, server: process.env.SERVER_RESULT, tests: process.env.TEST_RESULT };
-          const passed = Object.values(stages).every(value => value === 'success') && stats.expected === 29 && stats.unexpected === 0 && stats.skipped === 0 && stats.flaky === 0;
+          let raw = {}, parseError = '';
+          try { raw = JSON.parse(fs.readFileSync('/tmp/mobile-webkit-tests.json','utf8')); } catch (error) { parseError = error.message; }
           const tests = [];
-          function walk(suites) { for (const suite of suites || []) { for (const spec of suite.specs || []) for (const test of spec.tests || []) tests.push({ title: spec.title, file: spec.file, status: test.status, attempts: (test.results || []).map(result => ({ status: result.status, error: String(result.error?.message || '').slice(0, 4000) })) }); walk(suite.suites); } }
+          function walk(suites) { for (const suite of suites || []) { for (const spec of suite.specs || []) for (const test of spec.tests || []) tests.push({ title:spec.title,file:spec.file || suite.file || '',status:test.status,attempts:(test.results || []).map(result => ({status:result.status,error:String(result.error?.message || '').slice(0,6000)})) }); walk(suite.suites); } }
           walk(raw.suites);
-          fs.mkdirSync('.diagnostics', { recursive: true });
-          fs.writeFileSync('.diagnostics/mobile-webkit-report.json', JSON.stringify({ codeSha: process.env.GITHUB_SHA, runId: process.env.GITHUB_RUN_ID, checkedAt: new Date().toISOString(), scope: 'Linux WebKit with mobile viewport, touch enabled, mocked Notion fixtures and existing direct server tests; not physical iPhone or live Safari certification', passed, stages, buildDiagnostics: process.env.BUILD_RESULT === 'failure' ? buildDiagnostics : '', stats, tests }, null, 2) + '\n');
+          const stages = Object.fromEntries(['INSTALL','BUILD','TOOLING','SERVER','TESTS'].map(key => [key,process.env[key]]));
+          const minima = {'vehicle-filters.spec.cjs':3,'global-search.spec.cjs':3,'knowledge-categories.spec.cjs':8,'navigation.spec.cjs':6,'navigation-polish.spec.cjs':2,'diy-restoration.spec.cjs':2,'notion-pagination.spec.cjs':2,'notion-content.spec.cjs':3,'new-tools.spec.cjs':9,'parts-api.spec.cjs':5,'maintenance-api.spec.cjs':4,'tools-audit.spec.cjs':15};
+          const coverage = Object.entries(minima).map(([file,minimum]) => ({file,minimum,count:tests.filter(test => test.file.split(/[\\/]/).pop() === file).length}));
+          const stats = raw.stats || {};
+          const passed = Object.values(stages).every(value => value === 'success') && !parseError && !(raw.errors || []).length && coverage.every(item => item.count >= item.minimum) && stats.expected === tests.length && stats.unexpected === 0 && stats.skipped === 0 && stats.flaky === 0 && tests.every(test => test.status === 'expected');
+          fs.mkdirSync('.diagnostics',{recursive:true});
+          fs.writeFileSync('.diagnostics/mobile-webkit-report.json',JSON.stringify({codeSha:process.env.GITHUB_SHA,runId:process.env.GITHUB_RUN_ID,checkedAt:new Date().toISOString(),scope:'Linux WebKit with mobile viewport and touch; local production build, tools API tests and mocked Notion fixtures. Not physical iPhone, production Safari or live provider certification.',passed,stages,stats,coverage,parseError,runnerErrors:raw.errors || [],tests},null,2)+'\n');
           NODE
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: mobile-webkit-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            .diagnostics/mobile-webkit-report.json
+            /tmp/mobile-webkit-tests.json
+            /tmp/mobile-webkit-errors.log
+            /tmp/mobile-webkit-server.log
+            test-results
+      - name: Publish report
+        if: always()
+        run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add .diagnostics/mobile-webkit-report.json
-          git commit -m 'ci: publish mobile WebKit verification [skip ci]'
-          git pull --rebase --autostash origin main
-          git push origin HEAD:main
-      - name: Require complete mobile verification
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'ci: publish extended WebKit report [skip ci]'
+          for i in 1 2 3 4; do
+            if git pull --rebase --autostash origin main && git push origin HEAD:main; then exit 0; fi
+            git rebase --abort || true
+            sleep 2
+          done
+          exit 1
+      - name: Require complete verification
         if: always()
         run: node -e "if (!require('./.diagnostics/mobile-webkit-report.json').passed) process.exit(1)"
