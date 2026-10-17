@@ -1,8 +1,8 @@
 {
-  "auditorCodeSha": "e61cecdc0c06d57d1f420ee20ef93a4704cfa303",
-  "runId": "39041519997",
-  "checkedAt": "2026-10-17T14:41:10.736Z",
-  "passed": false,
+  "auditorCodeSha": "24d7a4b5a9a464d2859ee67c6d282a1095035cab",
+  "runId": "39041902865",
+  "checkedAt": "2026-10-17T14:45:05.311Z",
+  "passed": true,
   "scope": "Synthetic local article interactions in Chromium and Linux WebKit plus existing Notion renderer tests. Candidate integration only; no Notion writes, no production article or physical iPhone certification.",
   "stages": {
     "INSTALL": "success",
@@ -10,7 +10,7 @@
     "BUILD": "success",
     "TOOLING": "success",
     "SERVER": "success",
-    "TESTS": "failure"
+    "TESTS": "success"
   },
   "coverage": [
     {
@@ -26,11 +26,11 @@
   ],
   "parseError": "",
   "stats": {
-    "startTime": "2026-10-17T14:39:14.488Z",
-    "duration": 116155.152,
-    "expected": 6,
+    "startTime": "2026-10-17T14:44:51.859Z",
+    "duration": 13378.442000000001,
+    "expected": 16,
     "skipped": 0,
-    "unexpected": 10,
+    "unexpected": 0,
     "flaky": 0
   },
   "runnerErrors": [],
@@ -39,90 +39,90 @@
       "title": "contents uses visible headings and unique targets for repeated titles",
       "file": "material-outline.spec.cjs",
       "project": "chromium",
-      "status": "unexpected",
+      "status": "expected",
       "errors": [
-        "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('[data-material-outline]')\nExpected: visible\nTimeout: 10000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" locator('[data-material-outline]') with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for locator('[data-material-outline]')\u001b[22m\n"
+        ""
       ]
     },
     {
       "title": "contents link updates hash and focuses destination",
       "file": "material-outline.spec.cjs",
       "project": "chromium",
-      "status": "unexpected",
+      "status": "expected",
       "errors": [
-        "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('[data-material-outline]')\nExpected: visible\nTimeout: 10000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" locator('[data-material-outline]') with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for locator('[data-material-outline]')\u001b[22m\n"
+        ""
       ]
     },
     {
       "title": "contents summary and first link work from keyboard",
       "file": "material-outline.spec.cjs",
       "project": "chromium",
-      "status": "unexpected",
+      "status": "expected",
       "errors": [
-        "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('[data-material-outline]')\nExpected: visible\nTimeout: 10000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" locator('[data-material-outline]') with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for locator('[data-material-outline]')\u001b[22m\n"
+        ""
       ]
     },
     {
       "title": "short article does not show unnecessary contents",
       "file": "material-outline.spec.cjs",
       "project": "chromium",
-      "status": "unexpected",
+      "status": "expected",
       "errors": [
-        "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('heading', { name: 'Krótki materiał', exact: true })\nExpected: visible\nTimeout: 10000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" getByRole('heading', { name: 'Krótki materiał', exact: true }) with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { name: 'Krótki materiał', exact: true })\u001b[22m\n"
+        ""
       ]
     },
     {
       "title": "client navigation rebuilds contents for another entry",
       "file": "material-outline.spec.cjs",
       "project": "chromium",
-      "status": "unexpected",
+      "status": "expected",
       "errors": [
-        "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('[data-material-outline]')\nExpected: visible\nTimeout: 10000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" locator('[data-material-outline]') with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for locator('[data-material-outline]')\u001b[22m\n"
+        ""
       ]
     },
     {
       "title": "contents uses visible headings and unique targets for repeated titles",
       "file": "material-outline.spec.cjs",
       "project": "webkit",
-      "status": "unexpected",
+      "status": "expected",
       "errors": [
-        "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('[data-material-outline]')\nExpected: visible\nTimeout: 10000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" locator('[data-material-outline]') with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for locator('[data-material-outline]')\u001b[22m\n"
+        ""
       ]
     },
     {
       "title": "contents link updates hash and focuses destination",
       "file": "material-outline.spec.cjs",
       "project": "webkit",
-      "status": "unexpected",
+      "status": "expected",
       "errors": [
-        "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('[data-material-outline]')\nExpected: visible\nTimeout: 10000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" locator('[data-material-outline]') with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for locator('[data-material-outline]')\u001b[22m\n"
+        ""
       ]
     },
     {
       "title": "contents summary and first link work from keyboard",
       "file": "material-outline.spec.cjs",
       "project": "webkit",
-      "status": "unexpected",
+      "status": "expected",
       "errors": [
-        "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('[data-material-outline]')\nExpected: visible\nTimeout: 10000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" locator('[data-material-outline]') with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for locator('[data-material-outline]')\u001b[22m\n"
+        ""
       ]
     },
     {
       "title": "short article does not show unnecessary contents",
       "file": "material-outline.spec.cjs",
       "project": "webkit",
-      "status": "unexpected",
+      "status": "expected",
       "errors": [
-        "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('heading', { name: 'Krótki materiał', exact: true })\nExpected: visible\nTimeout: 10000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" getByRole('heading', { name: 'Krótki materiał', exact: true }) with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { name: 'Krótki materiał', exact: true })\u001b[22m\n"
+        ""
       ]
     },
     {
       "title": "client navigation rebuilds contents for another entry",
       "file": "material-outline.spec.cjs",
       "project": "webkit",
-      "status": "unexpected",
+      "status": "expected",
       "errors": [
-        "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('[data-material-outline]')\nExpected: visible\nTimeout: 10000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" locator('[data-material-outline]') with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for locator('[data-material-outline]')\u001b[22m\n"
+        ""
       ]
     },
     {

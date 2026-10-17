@@ -3,6 +3,7 @@ import { cache } from 'react';
 import { notFound } from 'next/navigation';
 import { VehicleMatchBadge } from '../../VehicleMaterialFilter';
 import { NotionContent, readNotionBlocks } from './NotionContent';
+import MaterialContents from '../../MaterialContents';
 const DATABASE = '746973771d604f1e8276502851176af2';
 const cleanId = (id: string) => id.replace(/-/g, '').toLowerCase();
 const text = (property: any) => (property?.title || property?.rich_text || []).map((part: any) => part.plain_text || part.text?.content || '').join('');
@@ -60,6 +61,7 @@ export default async function KnowledgeEntry({ params }: Props) {
       <p className="text-sm text-neutral-400">{entry.Typ} · {entry.Model} {entry.Lata}</p>
       <h1 className="text-3xl text-amber-400">{entry.Nazwa}</h1>
       <VehicleMatchBadge item={entry} />
+      <MaterialContents entryId={entry.id} />
       <p className="rounded border border-white/20 p-3 text-sm text-neutral-400">Dopasowanie do profilu opiera się na metadanych i nie potwierdza poprawności technicznej. Przed naprawą sprawdź zgodność procedury z pojazdem i dokumentacją serwisową.</p>
       {entry.Opis && <section><h2 className="mb-2 text-xl">Opis</h2><p className="whitespace-pre-line text-neutral-300">{entry.Opis}</p></section>}
       {entry.Objawy && <section><h2 className="mb-2 text-xl">Objawy</h2><p className="whitespace-pre-line text-neutral-300">{entry.Objawy}</p></section>}
