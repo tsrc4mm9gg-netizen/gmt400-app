@@ -5,6 +5,7 @@ import { VehicleMatchBadge } from '../../VehicleMaterialFilter';
 import { NotionContent, readNotionBlocks } from './NotionContent';
 import MaterialContents from '../../MaterialContents';
 import MaterialText from '../../MaterialText';
+import RelatedMaterialSuggestions from '../../RelatedMaterialSuggestions';
 const DATABASE = '746973771d604f1e8276502851176af2';
 const cleanId = (id: string) => id.replace(/-/g, '').toLowerCase();
 const text = (property: any) => (property?.title || property?.rich_text || []).map((part: any) => part.plain_text || part.text?.content || '').join('');
@@ -73,5 +74,6 @@ export default async function KnowledgeEntry({ params }: Props) {
       {!contentError && !entry.Opis && !entry.Objawy && !entry.Rozwiązanie && !blocks.length && <p>Ten wpis nie zawiera jeszcze szczegółowej treści.</p>}
       {entry.edited && <p className="text-xs text-neutral-500">Ostatnia edycja wpisu w Notion: {entry.edited}. To nie jest data weryfikacji merytorycznej.</p>}
     </article>
+    <RelatedMaterialSuggestions key={entry.id} current={entry} />
   </main>;
 }
