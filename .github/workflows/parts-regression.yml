@@ -1,0 +1,54 @@
+name: Parts API and form regression
+on:
+  push:
+    branches: [main]
+    paths: ['src/app/api/parts/**', 'src/app/narzedzia/czesci/**', 'src/lib/parts-compatibility.ts', 'tests/parts-api.spec.cjs', 'next.config.ts', 'package.json', 'package-lock.json', '.github/workflows/parts-regression.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: parts-regression-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm ci
+      - name: Build
+        shell: bash
+        run: |
+          set -o pipefail
+          npm run build 2>&1 | tee /tmp/parts-build.log
+      - run: |
+          npm install --no-save --package-lock=false @playwright/test
+          npx playwright install --with-deps chromium
+      - name: Start server
+        run: |
+          npm run start -- --hostname 127.0.0.1 --port 3100 > /tmp/parts-server.log 2>&1 &
+          for i in $(seq 1 60); do
+            if curl -fsS http://127.0.0.1:3100 >/dev/null; then exit 0; fi
+            sleep 1
+          done
+          cat /tmp/parts-server.log
+          exit 1
+      - name: Test API and form
+        shell: bash
+        run: |
+          set -o pipefail
+          npx playwright test tests/parts-api.spec.cjs --workers=1 --reporter=list 2>&1 | tee /tmp/parts-tests.log
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: parts-regression-${{ github.run_id }}-${{ github.run_attempt }}
+          retention-days: 14
+          path: |
+            /tmp/parts-build.log
+            /tmp/parts-server.log
+            /tmp/parts-tests.log
+            test-results
+          if-no-files-found: warn
