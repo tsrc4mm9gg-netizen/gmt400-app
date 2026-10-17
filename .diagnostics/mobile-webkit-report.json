@@ -1,7 +1,7 @@
 {
-  "codeSha": "a116db3444645f82cfd23e3aba5725eb6189ba99",
-  "runId": "38989532928",
-  "checkedAt": "2026-10-17T01:10:33.099Z",
+  "codeSha": "28d96554ea2ca7802892977e1b78c2532d63786d",
+  "runId": "38990065464",
+  "checkedAt": "2026-10-17T01:17:58.655Z",
   "scope": "Linux WebKit with mobile viewport, touch enabled, mocked Notion fixtures and existing direct server tests; not physical iPhone or live Safari certification",
   "passed": true,
   "stages": {
@@ -13,8 +13,8 @@
   },
   "buildDiagnostics": "",
   "stats": {
-    "startTime": "2026-10-17T01:09:54.174Z",
-    "duration": 38026.257,
+    "startTime": "2026-10-17T01:17:19.252Z",
+    "duration": 37695.528000000006,
     "expected": 29,
     "skipped": 0,
     "unexpected": 0,
