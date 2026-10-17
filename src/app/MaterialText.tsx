@@ -1,0 +1,6 @@
+import {Fragment,type ReactNode} from 'react';
+import {parseMaterialText} from '../lib/material-text';
+function inline(text:string):ReactNode{return text.split(/(\*\*[^*\n]+\*\*)/g).map((part,index)=><Fragment key={index}>{part.startsWith('**')&&part.endsWith('**')?<strong>{part.slice(2,-2)}</strong>:part}</Fragment>);}
+export default function MaterialText({text,field}:{text:string;field?:string}){
+ return <div data-material-text data-source-field={field} style={{color:'#d0d5dc',lineHeight:1.7,minWidth:0,overflowWrap:'anywhere'}}>{parseMaterialText(text).map((block,index)=><div key={index} data-text-block={index} style={{marginBottom:12}}>{block.kind==='list'?(block.ordered?<ol start={block.items[0]?.value||1} style={{paddingLeft:24,listStyleType:'decimal'}}>{block.items.map((item,itemIndex)=><li key={itemIndex} value={item.value}>{inline(item.text)}</li>)}</ol>:<ul style={{paddingLeft:24,listStyleType:'disc'}}>{block.items.map((item,itemIndex)=><li key={itemIndex}>{inline(item.text)}</li>)}</ul>):block.kind==='heading'?<h3 style={{color:'#fafafa',fontSize:19,lineHeight:1.4,margin:'20px 0 8px',scrollMarginTop:96}}>{inline(block.text)}</h3>:<p style={{whiteSpace:'pre-wrap',margin:'0 0 12px'}}>{inline(block.text)}</p>}</div>)}</div>;
+}
