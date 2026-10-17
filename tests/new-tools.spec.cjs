@@ -43,10 +43,11 @@ test('larger tires lower effective ratio and increase actual speed', async ({ re
 test('Tools button is visible and opens the hub and RPO page', async ({ page }) => {
  await page.route('**/api/notion', route => route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify({ results: [] }) }));
  await page.goto(BASE);
- const launcher = page.getByRole('link', { name: '🧰 Narzędzia', exact: true });
+ const launcher = page.getByRole('link', { name: 'Narzędzia', exact: true });
  await expect(launcher).toBeVisible();
  await launcher.click();
  await expect(page.getByRole('heading', { name: 'Narzędzia GMT400' })).toBeVisible();
+ await expect(page.getByRole('link', { name: 'Narzędzia', exact: true })).toHaveCount(0);
  await page.getByRole('link', { name: /Kody RPO/ }).click();
  await expect(page.getByRole('heading', { name: 'Co oznaczają kody RPO?' })).toBeVisible();
 });
@@ -58,3 +59,25 @@ test('Polish OBD search displays the P0300 result', async ({ page }) => {
  await expect(page.getByText('Wysoka pilność', { exact: true })).toBeVisible();
  await expect(page.getByRole('heading', { name: 'Co sprawdzić najpierw' })).toBeVisible();
 });
+
+for (const width of [320, 390, 768]) {
+ test('Tools cards have visible styling and fit viewport ' + width, async ({ page }) => {
+  await page.setViewportSize({ width, height: 844 });
+  await page.goto(BASE + '/narzedzia');
+  await expect(page.locator('[data-tools-appearance="inline-v1"]')).toBeVisible();
+  const cards = page.locator('[data-tool-card]');
+  await expect(cards).toHaveCount(4);
+  for (const card of await cards.all()) {
+   await expect(card).toHaveCSS('background-color', 'rgb(23, 29, 37)');
+   await expect(card).toHaveCSS('border-left-color', 'rgb(231, 185, 94)');
+   await expect(card).toHaveCSS('border-left-width', '3px');
+   await expect(card.locator('h2')).toHaveCSS('color', 'rgb(242, 207, 133)');
+   const box = await card.boundingBox();
+   expect(box).not.toBeNull();
+   expect(box.x).toBeGreaterThanOrEqual(0);
+   expect(box.x + box.width).toBeLessThanOrEqual(width);
+  }
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
+  await page.screenshot({ path: test.info().outputPath('tools-' + width + '.png'), fullPage: true });
+ });
+}
