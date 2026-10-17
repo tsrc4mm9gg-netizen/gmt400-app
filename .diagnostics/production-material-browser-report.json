@@ -1,10 +1,10 @@
 {
-  "auditorCodeSha": "cc56d4b382f86b99c30405f6a5f89f0f0d12d6c5",
-  "observedDeploymentSha": "93adda0f9a10d13aa4bf3640474bac5f2faa812c",
-  "deploymentShaAfter": "969f1830d36be6f99eb23065b0ca6158b1ecfde8",
-  "stableDeployment": false,
-  "runId": "39048958112",
-  "checkedAt": "2026-10-17T16:22:41.778Z",
+  "auditorCodeSha": "45aa7b756596774a0db8d8c476baa22cd5b9e43d",
+  "observedDeploymentSha": "45aa7b756596774a0db8d8c476baa22cd5b9e43d",
+  "deploymentShaAfter": "45aa7b756596774a0db8d8c476baa22cd5b9e43d",
+  "stableDeployment": true,
+  "runId": "39050560981",
+  "checkedAt": "2026-10-17T16:46:29.312Z",
   "origin": "https://www.gmt400.pl",
   "passed": false,
   "scope": "Actual known public instruction, its contents navigation and bounded discovery of one real Notion image in up to five public instructions per browser. Chromium and Linux mobile WebKit, no mocks, no Notion writes or VIN submission. Missing eligible sample is unverified, not a pass. Not physical iPhone or all-material certification.",
@@ -17,8 +17,8 @@
   "parseError": "",
   "statusError": "",
   "stats": {
-    "startTime": "2026-10-17T16:21:52.654Z",
-    "duration": 48904.181,
+    "startTime": "2026-10-17T16:43:58.852Z",
+    "duration": 150087.923,
     "expected": 2,
     "skipped": 0,
     "unexpected": 4,
@@ -394,8 +394,8 @@
       "status": "unexpected",
       "attempts": [
         {
-          "status": "failed",
-          "error": "Error: No eligible Notion-image preview found in the bounded sample of 25 real instructions; feature remains unverified.",
+          "status": "timedOut",
+          "error": "\u001b[31mTest timeout of 120000ms exceeded.\u001b[39m",
           "diagnostics": [
             {
               "candidates": [
@@ -414,143 +414,12 @@
                 {
                   "id": "3fad7bf1-c139-8194-b00a-cf6404bfe8f9",
                   "title": "Wymiana oleju i filtra 4L60E — pełna instrukcja",
-                  "previewCount": 0,
-                  "rawImageCount": 0
-                },
-                {
-                  "id": "3fad7bf1-c139-814a-99e2-e5659d4385e2",
-                  "title": "Wymiana uszczelek kolektora Vortec L31 — pełna procedura",
-                  "previewCount": 0,
-                  "rawImageCount": 0
-                },
-                {
-                  "id": "3fad7bf1-c139-8113-8178-ff23af30df67",
-                  "title": "Specyfikacje silników GMT400 — tabela",
-                  "previewCount": 0,
-                  "rawImageCount": 0
-                },
-                {
-                  "id": "3fad7bf1-c139-8139-8718-eba84bb6e80b",
-                  "title": "Wymiana uszczelek kolektora dolotowego — instrukcja",
-                  "previewCount": 0,
-                  "rawImageCount": 0
-                },
-                {
-                  "id": "3fad7bf1-c139-81da-8607-fb9fe3398b30",
-                  "title": "NP231 — tryby pracy i typowe usterki",
-                  "previewCount": 0,
-                  "rawImageCount": 0
-                },
-                {
-                  "id": "3fad7bf1-c139-81a6-96d9-cd3a6fc96fc1",
-                  "title": "Problemy z 4L60E — diagnostyka",
-                  "previewCount": 0,
-                  "rawImageCount": 0
-                },
-                {
-                  "id": "3fad7bf1-c139-813f-8d3a-cd5a545d08df",
-                  "title": "Wymiana filtra i płynu 4L60E — procedura",
-                  "previewCount": 0,
-                  "rawImageCount": 0
-                },
-                {
-                  "id": "3fad7bf1-c139-81f5-b63e-e06a085f9d06",
-                  "title": "Dekoder VIN GMT400 — podstawy",
-                  "previewCount": 0,
-                  "rawImageCount": 0
-                },
-                {
-                  "id": "3fad7bf1-c139-812a-a425-e718398d7d79",
-                  "title": "4L60E — podstawowe dane techniczne",
-                  "previewCount": 0,
-                  "rawImageCount": 0
-                },
-                {
-                  "id": "3fad7bf1-c139-8122-ae6c-d17e3ac2db9e",
-                  "title": "Wymiana przewodów hamulcowych — korozja",
-                  "previewCount": 0,
-                  "rawImageCount": 0
-                },
-                {
-                  "id": "3fad7bf1-c139-81ea-9a0a-d0b7b48e3301",
-                  "title": "Wymiana płynu chłodniczego GMT400",
-                  "previewCount": 0,
-                  "rawImageCount": 0
-                },
-                {
-                  "id": "3fad7bf1-c139-81eb-9242-fe5f354cad64",
-                  "title": "Ciśnienie opon GMT400 — podstawowe wartości",
-                  "previewCount": 0,
-                  "rawImageCount": 0
-                },
-                {
-                  "id": "3fad7bf1-c139-817a-8229-cad960681fab",
-                  "title": "Wymiana pompy paliwa — instrukcja",
-                  "previewCount": 0,
-                  "rawImageCount": 0
-                },
-                {
-                  "id": "3fad7bf1-c139-819b-8220-ef4e9bdaf62d",
-                  "title": "Harmonogram serwisowy GMT400 (podstawowy)",
-                  "previewCount": 0,
-                  "rawImageCount": 0
-                },
-                {
-                  "id": "3fad7bf1-c139-818c-a843-ffc227de415f",
-                  "title": "Diagnostyka NP231 — 4x4 nie działa",
-                  "previewCount": 0,
-                  "rawImageCount": 0
-                },
-                {
-                  "id": "3fad7bf1-c139-8188-a330-ea56ff16affa",
-                  "title": "Pojemności płynów GMT400 (1995 Tahoe/Suburban)",
-                  "previewCount": 0,
-                  "rawImageCount": 0
-                },
-                {
-                  "id": "3fad7bf1-c139-8135-ad4f-d3b2f49dc7c2",
-                  "title": "Punkty masy GMT400 — lokalizacje",
-                  "previewCount": 0,
-                  "rawImageCount": 0
-                },
-                {
-                  "id": "3fad7bf1-c139-818a-b2fd-ecc71ece0a62",
-                  "title": "NP231 — identyfikacja i serwis",
-                  "previewCount": 0,
-                  "rawImageCount": 0
-                },
-                {
-                  "id": "3fad7bf1-c139-816d-90d7-e8fa72fca4cd",
-                  "title": "Układ hamulcowy GMT400 — schemat",
-                  "previewCount": 0,
-                  "rawImageCount": 0
-                },
-                {
-                  "id": "3fad7bf1-c139-816a-b6d6-ee3cc4af3ab3",
-                  "title": "Numery części — filtry i płyny",
-                  "previewCount": 0,
-                  "rawImageCount": 0
-                },
-                {
-                  "id": "3fad7bf1-c139-812a-a4c2-da7af8a7cd8a",
-                  "title": "Układ chłodzenia GMT400 — schemat i serwis",
-                  "previewCount": 0,
-                  "rawImageCount": 0
-                },
-                {
-                  "id": "3fad7bf1-c139-8136-a1d4-d5fd3d8a214e",
-                  "title": "Kody RPO — najważniejsze",
-                  "previewCount": 0,
-                  "rawImageCount": 0
-                },
-                {
-                  "id": "3fad7bf1-c139-812e-a79d-f7e81e7b10ed",
-                  "title": "Pełna wymiana ATF w 4L60E — krok po kroku",
-                  "previewCount": 0,
-                  "rawImageCount": 0
+                  "previewCount": 1,
+                  "rawImageCount": 1
                 }
               ],
-              "selectedId": null
+              "selectedId": "3fad7bf1-c139-8194-b00a-cf6404bfe8f9",
+              "caption": null
             }
           ]
         }
