@@ -1,23 +1,38 @@
 const fs = require('node:fs');
+const { spawnSync } = require('node:child_process');
 const origin = 'https://www.gmt400.pl';
 const expectedSha = process.env.GITHUB_SHA || null;
-const checks = [];
+const checks = [], catalogChecks = [];
 const sleep = ms => new Promise(resolve => setTimeout(resolve,ms));
-async function read(path) { const response = await fetch(origin + path,{cache:'no-store',headers:{Accept:'application/json'},signal:AbortSignal.timeout(15000)}); return {response,data:await response.json()}; }
+function assessDeployment(expected,deployed,cwd = process.cwd()) {
+ if (![expected,deployed].every(value => typeof value === 'string' && /^[a-f0-9]{40}$/i.test(value))) return {passed:false,reason:'deployment_sha_unavailable_or_invalid'};
+ const git = args => spawnSync('git',args,{cwd,encoding:'utf8',timeout:15000});
+ for (const sha of [expected,deployed]) if (git(['cat-file','-e',sha+'^{commit}']).status !== 0) return {passed:false,reason:'commit_history_unavailable'};
+ if (expected === deployed) return {passed:true,reason:'sha_matched'};
+ if (git(['merge-base','--is-ancestor',expected,deployed]).status !== 0) return {passed:false,reason:'deployed_commit_does_not_include_audited_commit'};
+ const diff = git(['diff','--name-only',expected,deployed]);
+ if (diff.status !== 0) return {passed:false,reason:'commit_comparison_failed'};
+ const changedFiles = diff.stdout.trim() ? diff.stdout.trim().split('\n') : [];
+ const meaningful = changedFiles.filter(path => !path.startsWith('.diagnostics/'));
+ return {passed:meaningful.length === 0,reason:meaningful.length ? 'application_or_configuration_changed' : 'descendant_differs_only_in_reports',changedFiles};
+}
+async function read(path) { const response = await fetch(origin+path,{cache:'no-store',headers:{Accept:'application/json'},signal:AbortSignal.timeout(15000)}); return {response,data:await response.json()}; }
 async function probe(name,path,status,validate) {
  const row = {name,path,passed:false,checkedAt:new Date().toISOString()};
- try { const {response,data} = await read(path); row.status = response.status; row.passed = response.status === status && Boolean(validate(data)); row.reason = row.passed ? 'response_contract_passed' : 'unexpected_status_or_payload'; } catch (error) { row.reason = 'network_timeout_or_invalid_json'; row.error = error.message; }
+ try { const {response,data} = await read(path); row.status = response.status; row.passed = response.status === status && Boolean(validate(data)); row.reason = row.passed ? 'response_contract_passed' : 'unexpected_status_or_payload'; } catch (error) {row.reason = 'network_timeout_or_invalid_json'; row.error = error.message;}
  checks.push(row);
 }
 async function main() {
- let deployedSha = null;
- for (let attempt = 0; attempt < 12; attempt++) {
-  try { const {response,data} = await read('/api/status'); deployedSha = response.ok ? data.deployment?.commitSha || null : null; } catch {}
-  if (expectedSha && deployedSha === expectedSha) break;
-  if (attempt < 11) await sleep(10000);
+ let deployedSha = null, version = {passed:false,reason:'deployment_sha_unavailable_or_invalid'};
+ for (let attempt=0;attempt<12;attempt++) {
+  try {const {response,data} = await read('/api/status'); deployedSha = response.ok ? data.deployment?.commitSha || null : null;} catch {}
+  if (typeof deployedSha === 'string' && /^[a-f0-9]{40}$/i.test(deployedSha) && spawnSync('git',['cat-file','-e',deployedSha+'^{commit}'],{timeout:10000}).status !== 0) spawnSync('git',['fetch','--no-tags','origin',deployedSha],{timeout:20000,stdio:'ignore'});
+  version = assessDeployment(expectedSha,deployedSha);
+  if (version.passed) break;
+  if (attempt<11) await sleep(10000);
  }
- checks.push({name:'Deployment SHA matches auditor commit',passed:Boolean(expectedSha && deployedSha === expectedSha),expectedSha,deployedSha,reason:deployedSha === expectedSha && expectedSha ? 'sha_matched' : deployedSha ? 'different_commit_deployed' : 'deployment_sha_unavailable'});
- const approx = (a,b,tolerance=.051) => typeof a === 'number' && Number.isFinite(a) && Math.abs(a-b) <= tolerance;
+ checks.push({name:'Deployment contains audited application version',expectedSha,deployedSha,...version});
+ const approx = (a,b,tolerance=.051) => typeof a === 'number' && Number.isFinite(a) && Math.abs(a-b)<=tolerance;
  await probe('Pressure conversion','/api/units?type=pressure&value=32',200,p => approx(p.output?.value,32*.0689475729,.000001));
  await probe('Polish decimal comma','/api/units?type=length&value=1%2C5',200,p => approx(p.output?.value,1.5*1.609344,.000001));
  await probe('Invalid conversion type','/api/units?type=constructor&value=1',400,p => typeof p.error === 'string');
@@ -37,12 +52,16 @@ async function main() {
  ];
  for (const [name,url] of catalogs) {
   const row = {name,url,passed:false,scope:'HTTP HTML availability only, not verified fitment'};
-  try { const response = await fetch(url,{headers:{Accept:'text/html'},signal:AbortSignal.timeout(20000)}); row.status = response.status; row.finalUrl = response.url; const html = await response.text(); row.passed = response.ok && /text\/html/i.test(response.headers.get('content-type') || '') && html.length > 100 && !/access denied|verify you are human|captcha challenge/i.test(html); row.reason = row.passed ? 'html_available_not_fitment_verified' : 'catalog_availability_not_confirmed'; } catch (error) { row.reason = 'catalog_network_or_timeout'; row.error = error.message; }
-  checks.push(row);
+  try {const response = await fetch(url,{headers:{Accept:'text/html'},signal:AbortSignal.timeout(20000)}); row.status=response.status; row.finalUrl=response.url; const html=await response.text(); row.passed=response.ok && /text\/html/i.test(response.headers.get('content-type') || '') && html.length>100 && !/access denied|verify you are human|captcha challenge/i.test(html); row.reason=row.passed ? 'html_available_not_fitment_verified' : 'catalog_availability_not_confirmed';} catch (error) {row.reason='catalog_network_or_timeout'; row.error=error.message;}
+  catalogChecks.push(row);
+  if (!row.passed) console.warn('::warning::External catalog not verified: '+name+' — '+row.reason);
  }
- const report = {auditorCodeSha:expectedSha,deployedSha,runId:process.env.GITHUB_RUN_ID || null,checkedAt:new Date().toISOString(),origin,passed:checks.length === 16 && checks.every(row => row.passed),scope:'Public live API response contracts and three catalog HTTP checks. No VIN, Notion credentials or authentication tokens. Not browser interaction, real iPhone, all variants or guaranteed catalog fitment.',checks};
+ const applicationPassed=checks.length===13 && checks.every(row=>row.passed);
+ const catalogsVerified=catalogChecks.length===3 && catalogChecks.every(row=>row.passed);
+ const report={auditorCodeSha:expectedSha,deployedSha,runId:process.env.GITHUB_RUN_ID || null,checkedAt:new Date().toISOString(),origin,applicationPassed,catalogsVerified,passed:applicationPassed && catalogsVerified,conclusion:!applicationPassed ? 'application_verification_failed' : catalogsVerified ? 'all_scoped_checks_passed' : 'application_passed_with_external_catalog_warnings',scope:'Live application contracts and validated commit ancestry. Only .diagnostics differences are allowed in descendants. Catalog monitoring is separate; full passed remains false when any catalog is unverified. No VIN or credentials submitted to tested endpoints.',checks,catalogChecks};
  fs.mkdirSync('.diagnostics',{recursive:true}); fs.writeFileSync('.diagnostics/tools-production-report.json',JSON.stringify(report,null,2)+'\n');
- if (process.env.GITHUB_STEP_SUMMARY) fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY,'### Live tools diagnostics\n'+checks.map(row => '- '+(row.passed ? 'PASS' : 'NOT VERIFIED')+': '+row.name+' — '+row.reason).join('\n')+'\n');
- if (!report.passed) process.exitCode = 1;
+ if (process.env.GITHUB_STEP_SUMMARY) fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY,'### Production application: '+(applicationPassed?'PASS':'FAIL')+'\n### External catalogs: '+(catalogsVerified?'VERIFIED':'WARNINGS — NOT FULLY VERIFIED')+'\n'+[...checks,...catalogChecks].map(row=>'- '+(row.passed?'PASS':'NOT VERIFIED')+': '+row.name+' — '+row.reason).join('\n')+'\nFull audit passed: '+report.passed+'\n');
+ if (!applicationPassed) process.exitCode=1;
 }
-main().catch(error => { console.error(error.message); process.exitCode = 1; });
+module.exports={assessDeployment};
+if (require.main === module) main().catch(error=>{console.error(error.message);process.exitCode=1;});
