@@ -1,5 +1,6 @@
 name: Verify complete instruction rendering
 on:
+  workflow_dispatch:
   push:
     branches: [main]
     paths: ['src/**', 'tests/**', 'package.json', 'package-lock.json', 'next.config.ts', '.github/workflows/notion-content.yml']
