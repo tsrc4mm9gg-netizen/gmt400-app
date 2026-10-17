@@ -1,7 +1,7 @@
 {
-  "codeSha": "4852c3b2fa141925e7d384d09798c059780b0911",
-  "runId": "39019782219",
-  "checkedAt": "2026-10-17T09:05:41.469Z",
+  "codeSha": "05112fd42ce3cc708cfeef7be913a736d0b086e8",
+  "runId": "39020010782",
+  "checkedAt": "2026-10-17T09:09:16.102Z",
   "scope": "Chromium mocked fixtures, navigation geometry, tactile styles, profile launcher and category counters; not live Safari",
   "passed": false,
   "build": "failure",
