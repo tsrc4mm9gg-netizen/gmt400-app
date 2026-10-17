@@ -1,32 +1,24 @@
 {
-  "codeSha": "2b7d6c70fa9eca73ab22bdbf198d81aae0e58bac",
-  "runId": "38982147214",
-  "checkedAt": "2026-10-16T23:36:27.475Z",
+  "codeSha": "4167b4cfe84932c28a4655f9e7c6e230fd2264a8",
+  "runId": "38986503703",
+  "checkedAt": "2026-10-17T00:30:00.380Z",
   "scope": "Chromium regressions with category-scoped counters, mocked Notion pagination and server HTML rendering; not complete live Notion or Safari verification",
-  "passed": false,
+  "passed": true,
   "stages": {
     "install": "success",
     "build": "success",
     "tooling": "success",
     "server": "success",
-    "tests": "failure"
+    "tests": "success"
   },
   "buildDiagnostics": "",
   "stats": {
-    "startTime": "2026-10-16T23:36:03.967Z",
-    "duration": 22381.682,
-    "expected": 28,
+    "startTime": "2026-10-17T00:29:43.813Z",
+    "duration": 15637.272,
+    "expected": 29,
     "skipped": 0,
-    "unexpected": 1,
+    "unexpected": 0,
     "flaky": 0
   },
-  "failures": [
-    {
-      "title": "profile counters and default filtering are scoped to the current knowledge category",
-      "status": "unexpected",
-      "errors": [
-        "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveAttribute\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('region', { name: 'Filtrowanie według profilu auta' }).getByRole('button', { name: 'Dla mojego auta (2)', exact: true })\nExpected: \u001b[32m\"true\"\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toHaveAttribute\" getByRole('region', { name: 'Filtrowanie według profilu auta' }).getByRole('button', { name: 'Dla mojego auta (2)', exact: true }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('region', { name: 'Filtrowanie według profilu auta' }).getByRole('button', { name: 'Dla mojego auta (2)', exact: true })\u001b[22m\n"
-      ]
-    }
-  ]
+  "failures": []
 }
