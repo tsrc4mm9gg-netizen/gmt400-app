@@ -1,0 +1,51 @@
+name: Maintenance API regression
+on:
+  push:
+    branches: [main]
+    paths: ['src/lib/maintenance.ts', 'src/app/api/maintenance/**', 'tests/maintenance-api.spec.cjs', 'next.config.ts', 'package.json', 'package-lock.json', '.github/workflows/maintenance-regression.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: maintenance-regression-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm ci
+      - name: Build
+        shell: bash
+        run: |
+          set -o pipefail
+          npm run build 2>&1 | tee /tmp/maintenance-build.log
+      - run: npm install --no-save --package-lock=false @playwright/test
+      - name: Start server
+        run: |
+          npm run start -- --hostname 127.0.0.1 --port 3100 > /tmp/maintenance-server.log 2>&1 &
+          for i in $(seq 1 60); do
+            if curl -fsS http://127.0.0.1:3100 >/dev/null; then exit 0; fi
+            sleep 1
+          done
+          cat /tmp/maintenance-server.log
+          exit 1
+      - name: Test maintenance filters and data safety
+        shell: bash
+        run: |
+          set -o pipefail
+          npx playwright test tests/maintenance-api.spec.cjs --workers=1 --reporter=list 2>&1 | tee /tmp/maintenance-tests.log
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: maintenance-regression-${{ github.run_id }}-${{ github.run_attempt }}
+          retention-days: 14
+          path: |
+            /tmp/maintenance-build.log
+            /tmp/maintenance-server.log
+            /tmp/maintenance-tests.log
+          if-no-files-found: warn
