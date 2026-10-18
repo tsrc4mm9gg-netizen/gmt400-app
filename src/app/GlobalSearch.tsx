@@ -22,12 +22,19 @@ export default function GlobalSearch({ items, onClose }: { items: Entry[]; onClo
     if (normalized.length < 2) return [];
     const tokens = normalized.split(/[^a-z0-9]+/).filter(token => token.length > 1 && !['na', 'do', 'sie'].includes(token));
     if (!tokens.length) return [];
+    const seen = new Set<string>();
     return items.map((item, index) => {
       const title = normalize(item.Nazwa);
       const text = normalize([item.Nazwa, item.Typ, item.Model, item.Lata, item.Opis, item.Objawy, item.Rozwiązanie].filter(Boolean).join(' '));
       const score = tokens.every(token => text.includes(token)) ? tokens.reduce((sum, token) => sum + (title.includes(token) ? 10 : 1), 0) + (title === normalized ? 100 : 0) : 0;
       return { item, index, score };
-    }).filter(result => result.score > 0).sort((a, b) => b.score - a.score || a.index - b.index);
+    }).filter(result => {
+      if (result.score <= 0) return false;
+      if (!result.item.id) return true;
+      if (seen.has(result.item.id)) return false;
+      seen.add(result.item.id);
+      return true;
+    }).sort((a, b) => b.score - a.score || a.index - b.index);
   }, [items, query]);
   const visibleResults = results.slice(0, visibleCount);
   const hasMore = results.length > visibleResults.length;
@@ -45,13 +52,13 @@ export default function GlobalSearch({ items, onClose }: { items: Entry[]; onClo
     </article> : <>
       <label htmlFor="global-search-query" className="mt-4 block text-sm">Szukaj w bazie</label>
       <div className="mt-2 flex flex-wrap items-center gap-2">
-        <input ref={input} id="global-search-query" autoFocus disabled={!ready} type="search" maxLength={120} value={query} onChange={event => updateQuery(event.target.value)} aria-describedby="global-search-scope global-search-memory" placeholder="Kod OBD, objaw lub nazwa materiału…" className="min-h-11 min-w-0 w-full flex-1 basis-48 rounded border border-white/20 bg-neutral-900 p-3 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-400" />
+        <input ref={input} id="global-search-query" autoFocus disabled={!ready} type="search" maxLength={120} autoComplete="off" spellCheck={false} enterKeyHint="search" value={query} onChange={event => updateQuery(event.target.value)} aria-describedby="global-search-scope global-search-memory" placeholder="Kod OBD, objaw lub nazwa materiału…" className="min-h-11 min-w-0 w-full flex-1 basis-48 rounded border border-white/20 bg-neutral-900 p-3 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-400" />
         {query.length > 0 && <button type="button" onClick={clearQuery} className="min-h-11 rounded border border-white/20 px-3 py-2 text-neutral-200 underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-400">Wyczyść frazę</button>}
       </div>
       <p id="global-search-scope" className="mt-2 text-xs text-neutral-400">Przeszukujemy załadowane wpisy Notion: tytuły, typy, modele, lata, opisy, objawy i rozwiązania. Statyczne tabele części i specyfikacji nie są jeszcze indeksowane. Wyniki nie są ukrywane przez filtr profilu.</p>
       <p id="global-search-memory" className="mt-2 text-xs text-neutral-400">{storageAvailable === false ? 'Pamięć sesji jest niedostępna. Wyszukiwanie działa, ale zapamiętanie lub usunięcie zapisanej frazy może się nie udać.' : 'Fraza jest zapamiętywana w tej zakładce na czas sesji. Wyczyść ją przyciskiem „Wyczyść frazę”. Ten mechanizm nie wysyła frazy do Notion.'}</p>
-      {!items.length ? <p role="status" className="mt-4">Brak załadowanych treści. Nie można jeszcze ocenić wyników wyszukiwania.</p> : !ready ? <p role="status" className="mt-4">Przywracanie wyszukiwania…</p> : normalize(query).length < 2 ? <p role="status" className="mt-4">Wpisz co najmniej dwa znaki.</p> : <>
-        <p role="status" className="my-3">Znaleziono: {results.length}{hasMore ? ` — pokazujemy ${visibleResults.length} z ${results.length}.` : results.length > PAGE_SIZE ? ` — pokazujemy wszystkie ${results.length}.` : ''}</p>
+      {!items.length ? <p role="status" aria-live="polite" className="mt-4">Brak załadowanych treści. Nie można jeszcze ocenić wyników wyszukiwania.</p> : !ready ? <p role="status" aria-live="polite" className="mt-4">Przywracanie wyszukiwania…</p> : normalize(query).length < 2 ? <p role="status" aria-live="polite" className="mt-4">Wpisz co najmniej dwa znaki.</p> : <>
+        <p role="status" aria-live="polite" className="my-3">Znaleziono: {results.length}{hasMore ? ` — pokazujemy ${visibleResults.length} z ${results.length}.` : results.length > PAGE_SIZE ? ` — pokazujemy wszystkie ${results.length}.` : ''}</p>
         {!results.length && <div className="my-3 rounded border border-white/10 bg-neutral-900/40 p-3"><p className="break-words">Brak wyników dla „{query.trim()}”.</p><p className="mt-2 text-sm text-neutral-300">Spróbuj krótszej frazy lub kodu. To wynik tylko dla załadowanych wpisów Notion, nie całej zawartości strony. Profil auta nie ogranicza tej listy.</p></div>}
         <ul className="space-y-3">{visibleResults.map(({ item, index }) => <li key={item.id || index} className="rounded border border-white/10 p-3">
           <p className="text-xs text-neutral-400">{item.Typ} · {item.Model} {item.Lata}</p>
