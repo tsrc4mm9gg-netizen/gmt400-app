@@ -1,0 +1,12 @@
+const test=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs'),ts=require('typescript');
+const loaded={exports:{}};
+new Function('exports','require','module',ts.transpileModule(fs.readFileSync('src/lib/search-excerpt.ts','utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2020}}).outputText)(loaded.exports,require,loaded);
+const run=loaded.exports.getSearchExcerpt;
+test('selects symptoms instead of unrelated description',()=>{const r=run({Opis:'Informacja o aucie',Objawy:'Wyciek płynu pod autem'},'wyciek plynu');assert.equal(r.field,'Objawy');assert.equal(r.matched,true);assert.match(r.text,/Wyciek płynu/);});
+test('selects solution with more matching tokens',()=>{const r=run({Opis:'Pompa',Rozwiązanie:'Sprawdź pompę oraz ciśnienie paliwa'},'cisnienie paliwa');assert.equal(r.field,'Rozwiązanie');assert.equal(r.matched,true);});
+test('shows context around a hit beyond the initial excerpt',()=>{const source='Wstęp. '.repeat(80)+'P0300 nierówna praca silnika. '+'Kontekst. '.repeat(40);const r=run({Opis:source},'P0300');assert.match(r.text,/P0300/);assert.ok(r.text.startsWith('…'));assert.ok(r.text.length<=202);assert.ok(source.includes(r.text.replace(/^…|…$/g,'')));});
+test('metadata-only match gets clearly unmatched fallback',()=>{const r=run({Opis:'Zwykły opis bez szukanego kodu'},'P0300');assert.equal(r.matched,false);assert.equal(r.field,'Opis');});
+test('empty fields yield no invented content',()=>{assert.equal(run({},'P0300'),null);assert.equal(run({Opis:' ',Objawy:''},'P0300'),null);});
+test('decomposed Polish letters retain correct source offsets',()=>{const source='Wstęp '.repeat(80)+'cis\u0301nienie paliwa końcówka';const r=run({Objawy:source},'cisnienie');assert.match(r.text,/cis\u0301nienie/);assert.equal(r.matched,true);});
+test('input stays unchanged and excerpt preserves literal markup',()=>{const e={Opis:'<img src=x onerror=bad()> P0300'};const before=JSON.stringify(e);assert.equal(run(e,'P0300').text,e.Opis);assert.equal(JSON.stringify(e),before);});
+test('automatic-transmission synonym finds original wording',()=>{const r=run({Opis:'Skrzynia automatyczna wymaga identyfikacji.'},'automat');assert.equal(r.matched,true);assert.match(r.text,/Skrzynia automatyczna/);});

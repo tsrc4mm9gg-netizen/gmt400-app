@@ -1,0 +1,34 @@
+name: Verify query-aware search excerpts
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['src/lib/search-excerpt.ts','src/app/SearchExcerpt.tsx','src/app/GlobalSearch.tsx','tests/search-excerpt.test.cjs','.github/workflows/search-excerpt.yml','package.json','package-lock.json']
+permissions: {contents: read}
+concurrency: {group: search-excerpt-verification, cancel-in-progress: true}
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: {node-version: '24'}
+      - run: npm ci
+      - name: Verify eight excerpt cases
+        run: |
+          set -o pipefail
+          node --test tests/search-excerpt.test.cjs 2>&1 | tee /tmp/search-excerpt-tests.log
+      - name: Verify production build
+        run: |
+          set -o pipefail
+          npm run build 2>&1 | tee /tmp/search-excerpt-build.log
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: search-excerpts-${{ github.run_id }}-${{ github.run_attempt }}
+          retention-days: 14
+          path: |
+            /tmp/search-excerpt-tests.log
+            /tmp/search-excerpt-build.log
+          if-no-files-found: warn

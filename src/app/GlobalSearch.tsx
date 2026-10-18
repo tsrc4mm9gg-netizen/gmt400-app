@@ -2,6 +2,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { VehicleMatchBadge } from './VehicleMaterialFilter';
 import { useSearchSession } from '../lib/search-session';
+import SearchExcerpt from './SearchExcerpt';
 import type { Applicability } from '../lib/vehicle-compatibility';
 type Entry = { Nazwa: string; Typ: string; Model: string; Opis?: string; Objawy?: string; Rozwiązanie?: string; Lata?: string; id?: string; applicability?: Applicability };
 const normalize = (text: string) => text.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/ł/g, 'l').replace(/\b(skrzynia automatyczna|automatyczna skrzynia|automat)\b/g, 'automat').replace(/\s+/g, ' ').trim();
@@ -50,7 +51,7 @@ export default function GlobalSearch({ items, onClose }: { items: Entry[]; onClo
         <ul className="space-y-3">{results.slice(0, 50).map(({ item, index }) => <li key={item.id || index} className="rounded border border-white/10 p-3">
           <p className="text-xs text-neutral-400">{item.Typ} · {item.Model} {item.Lata}</p>
           <button type="button" className="mt-1 text-left font-semibold text-amber-400 underline" onClick={() => setSelected(item)}>{item.Nazwa}</button>
-          <p className="mt-1 text-sm text-neutral-300">{(item.Opis || item.Objawy || item.Rozwiązanie || '').slice(0, 200)}</p>
+          <SearchExcerpt item={item} query={query} />
           <VehicleMatchBadge item={item} />
         </li>)}</ul>
       </>}
