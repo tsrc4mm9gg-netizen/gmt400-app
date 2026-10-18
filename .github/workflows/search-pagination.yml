@@ -19,7 +19,7 @@ jobs:
       - name: Run pagination regression
         run: |
           set -o pipefail
-          npx playwright test tests/search-results-pagination.spec.cjs --project=chromium 2>&1 | tee /tmp/search-pagination-tests.log
+          npx playwright test tests/search-results-pagination.spec.cjs 2>&1 | tee /tmp/search-pagination-tests.log
       - name: Verify production build
         run: |
           set -o pipefail
