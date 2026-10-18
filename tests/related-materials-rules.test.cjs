@@ -1,70 +1,18 @@
-const test = require('node:test');
-const assert = require('node:assert/strict');
-const fs = require('node:fs');
-const ts = require('typescript');
-const source = fs.readFileSync('src/lib/related-materials.ts', 'utf8');
-const compiled = ts.transpileModule(source, { compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2020 } }).outputText;
-const loaded = { exports: {} };
-new Function('exports', 'require', 'module', compiled)(loaded.exports, require, loaded);
-const { getRelatedMaterials } = loaded.exports;
-const entry = (id, Nazwa, extra = {}) => ({ id, Nazwa, Typ: 'Porada', Model: 'Suburban', ...extra });
-const run = (current, candidates, matches = new Map(), limit = 3) => getRelatedMaterials(current, candidates, matches, limit);
-
-test('same type and model alone do not establish a relationship', () => {
-  assert.deepEqual(run(entry('a', 'Hamulce'), [entry('b', 'Alternator')]), []);
-});
-test('exact diagnostic code ranks above shared ordinary words', () => {
-  const result = run(entry('a', 'P0300 nierowna praca silnika'), [entry('b', 'Nierowna praca silnika'), entry('c', 'P0300 diagnostyka')]);
-  assert.deepEqual(result.map(item => item.id), ['c', 'b']);
-  assert.match(result[0].reason, /P0300/);
-  assert.match(result[0].reason, /nie potwierdzenie/);
-});
-test('different transmission identifiers are not treated as equivalent', () => {
-  assert.deepEqual(run(entry('a', '4L60E'), [entry('b', '4L80E')]), []);
-  assert.equal(run(entry('a', '4l60e'), [entry('b', '4L60E')]).length, 1);
-});
-test('current entry and duplicate normalized identifiers are excluded', () => {
-  const result = run(entry('AA-BB', 'P0300'), [entry('aabb', 'P0300'), entry('CC-DD', 'P0300'), entry('ccdd', 'P0300')]);
-  assert.equal(result.length, 1);
-  assert.equal(result[0].id, 'CC-DD');
-});
-test('outside-scope candidates are excluded', () => {
-  assert.deepEqual(run(entry('a', 'P0300'), [entry('b', 'P0300')], new Map([['b', { status: 'outside_scope', reasons: [] }]])), []);
-});
-test('Polish diacritics normalize and stronger text overlap ranks first', () => {
-  const result = run(entry('a', 'Ciśnienie paliwa pompa'), [entry('b', 'Cisnienie paliwa'), entry('c', 'Cisnienie paliwa pompa')]);
-  assert.deepEqual(result.map(item => item.id), ['c', 'b']);
-});
-test('missing identifiers and invalid limits yield no recommendations', () => {
-  assert.deepEqual(run(entry(undefined, 'P0300'), [entry('b', 'P0300')]), []);
-  assert.deepEqual(run(entry('a', 'P0300'), [entry(undefined, 'P0300')]), []);
-  for (const limit of [0, -1, NaN, Infinity]) assert.deepEqual(run(entry('a', 'P0300'), [entry('b', 'P0300')], new Map(), limit), []);
-});
-test('results respect limit without mutating candidates', () => {
-  const candidates = [entry('b', 'P0300'), entry('c', 'P0300')];
-  const before = JSON.stringify(candidates);
-  assert.equal(run(entry('a', 'P0300'), candidates, new Map(), 1).length, 1);
-  assert.equal(JSON.stringify(candidates), before);
-});
-test('vehicle profile within scope boosts ranking', () => {
-  const current = entry('a', 'P0300 nierowna praca silnika');
-  const candidates = [entry('b', 'P0300 diagnostyka'), entry('c', 'P0300 diagnostyka')];
-  const matches = new Map([['b', { status: 'general', reasons: [] }], ['c', { status: 'within_scope', reasons: [] }]]);
-  const result = run(current, candidates, matches);
-  assert.deepEqual(result.map(item => item.id), ['c', 'b']);
-});
-test('same model adds a small advantage without overriding identifier match', () => {
-  const current = entry('a', 'P0300 nierowna praca silnika');
-  const candidates = [entry('b', 'P0300 diagnostyka', { Model: 'Suburban' }), entry('c', 'P0300 diagnostyka', { Model: 'Tahoe' })];
-  const result = run(current, candidates);
-  assert.deepEqual(result.map(item => item.id), ['b', 'c']);
-});
-test('identifier match outweighs many ordinary shared words', () => {
-  const current = entry('a', 'P0300 nierowna praca silnika pompa paliwa filtr');
-  const candidates = [entry('b', 'nierowna praca silnika pompa paliwa filtr'), entry('c', 'P0300 diagnostyka')];
-  const result = run(current, candidates);
-  assert.deepEqual(result.map(item => item.id), ['c', 'b']);
-});
-test('single shared word does not create a relationship', () => {
-  assert.deepEqual(run(entry('a', 'P0300'), [entry('b', 'P0300 opis')]), []);
-});
+const test=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs'),ts=require('typescript');
+const loaded={exports:{}};
+new Function('exports','require','module',ts.transpileModule(fs.readFileSync('src/lib/related-materials.ts','utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2020}}).outputText)(loaded.exports,require,loaded);
+const entry=(id,Nazwa,extra={})=>({id,Nazwa,Typ:'Porada',Model:'Suburban',...extra});
+const run=(current,candidates,matches=new Map(),limit=3)=>loaded.exports.getRelatedMaterials(current,candidates,matches,limit);
+test('same type and model alone do not establish a relationship',()=>assert.deepEqual(run(entry('a','Hamulce'),[entry('b','Alternator')]),[]));
+test('exact diagnostic code ranks above shared ordinary words',()=>{const r=run(entry('a','P0300 nierowna praca silnika'),[entry('b','Nierowna praca silnika'),entry('c','P0300 diagnostyka')]);assert.deepEqual(r.map(x=>x.id),['c','b']);assert.match(r[0].reason,/P0300/);assert.match(r[0].reason,/nie potwierdzenie/);});
+test('different transmission identifiers are not treated as equivalent',()=>{assert.deepEqual(run(entry('a','4L60E'),[entry('b','4L80E')]),[]);assert.equal(run(entry('a','4l60e'),[entry('b','4L60E')]).length,1);});
+test('current entry and duplicate normalized identifiers are excluded',()=>{const r=run(entry('AA-BB','P0300'),[entry('aabb','P0300'),entry('CC-DD','P0300'),entry('ccdd','P0300')]);assert.equal(r.length,1);assert.equal(r[0].id,'CC-DD');});
+test('outside-scope candidates are excluded',()=>assert.deepEqual(run(entry('a','P0300'),[entry('b','P0300')],new Map([['b',{status:'outside_scope',reasons:[]}]])),[]));
+test('Polish diacritics normalize and stronger text overlap ranks first',()=>assert.deepEqual(run(entry('a','Ciśnienie paliwa pompa'),[entry('b','Cisnienie paliwa'),entry('c','Cisnienie paliwa pompa')]).map(x=>x.id),['c','b']));
+test('missing identifiers and invalid limits yield no recommendations',()=>{assert.deepEqual(run(entry(undefined,'P0300'),[entry('b','P0300')]),[]);assert.deepEqual(run(entry('a','P0300'),[entry(undefined,'P0300')]),[]);for(const limit of [0,-1,NaN,Infinity])assert.deepEqual(run(entry('a','P0300'),[entry('b','P0300')],new Map(),limit),[]);});
+test('results respect limit without mutating candidates',()=>{const c=[entry('b','P0300'),entry('c','P0300')],before=JSON.stringify(c);assert.equal(run(entry('a','P0300'),c,new Map(),1).length,1);assert.equal(JSON.stringify(c),before);});
+test('vehicle profile within scope boosts ranking',()=>assert.deepEqual(run(entry('a','P0300 nierowna praca silnika'),[entry('b','P0300 diagnostyka'),entry('c','P0300 diagnostyka')],new Map([['b',{status:'general',reasons:[]}],['c',{status:'within_scope',reasons:[]}]] )).map(x=>x.id),['c','b']));
+test('same model adds a small advantage without overriding identifier match',()=>assert.deepEqual(run(entry('a','P0300 nierowna praca silnika'),[entry('b','P0300 diagnostyka',{Model:'Suburban'}),entry('c','P0300 diagnostyka',{Model:'Tahoe'})]).map(x=>x.id),['b','c']));
+test('identifier match outweighs many ordinary shared words',()=>assert.deepEqual(run(entry('a','P0300 nierowna praca silnika pompa paliwa filtr'),[entry('b','nierowna praca silnika pompa paliwa filtr'),entry('c','P0300 diagnostyka')]).map(x=>x.id),['c','b']));
+test('single shared ordinary word does not create a relationship',()=>assert.deepEqual(run(entry('a','pompa'),[entry('b','pompa opis')]),[]));
+test('shared diagnostic identifier alone creates a thematic relationship',()=>{const r=run(entry('a','P0300'),[entry('b','P0300 opis')]);assert.equal(r.length,1);assert.equal(r[0].id,'b');assert.match(r[0].reason,/P0300/);assert.match(r[0].reason,/nie potwierdzenie zgodności/);});
