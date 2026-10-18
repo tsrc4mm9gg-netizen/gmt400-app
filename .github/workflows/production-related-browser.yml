@@ -34,9 +34,14 @@ jobs:
         if: always()
         run: |
           node <<'NODE'
-          const fs=require('node:fs'),r=JSON.parse(fs.readFileSync('/tmp/related-live.json','utf8')),tests=[];
-          function walk(suites){for(const suite of suites||[]){for(const spec of suite.specs||[])tests.push(...spec.tests||[]);walk(suite.suites);}}walk(r.suites);
-          const passed=tests.length===2&&['chromium','webkit'].every(project=>tests.filter(t=>t.projectName===project&&t.status==='expected').length===1)&&r.stats?.expected===2&&r.stats?.unexpected===0&&r.stats?.skipped===0&&r.stats?.flaky===0&&!(r.errors||[]).length;
+          const fs=require('node:fs');let r={},parseError='';
+          try{r=JSON.parse(fs.readFileSync('/tmp/related-live.json','utf8'));}catch(error){parseError=error.message;console.error('Cannot read Playwright JSON: '+parseError);}
+          const tests=[];
+          function walk(suites){for(const suite of suites||[]){for(const spec of suite.specs||[])for(const t of spec.tests||[]){tests.push(t);console.log(spec.title+' ['+t.projectName+']: '+t.status);for(const result of t.results||[])for(const error of result.errors||[result.error].filter(Boolean))console.error(String(error.message||error.stack||JSON.stringify(error)));}walk(suite.suites);}}walk(r.suites);
+          for(const error of r.errors||[])console.error(String(error.message||JSON.stringify(error)));
+          if(fs.existsSync('/tmp/related-live-errors.log'))console.error(fs.readFileSync('/tmp/related-live-errors.log','utf8'));
+          console.log('Playwright stats: '+JSON.stringify(r.stats||{}));
+          const passed=!parseError&&tests.length===2&&['chromium','webkit'].every(project=>tests.filter(t=>t.projectName===project&&t.status==='expected').length===1)&&r.stats?.expected===2&&r.stats?.unexpected===0&&r.stats?.skipped===0&&r.stats?.flaky===0&&!(r.errors||[]).length;
           fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY,'Live related-material suggestions: '+(passed?'PASS':'NOT VERIFIED')+'\nNo saved vehicle profile; no mocks or report commits. Does not certify error/retry handling or all articles.\n');
           if(!passed)process.exitCode=1;
           NODE
