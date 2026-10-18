@@ -16,23 +16,41 @@ async function openSearch(page) {
 }
 test('code search opens full material', async ({ page }) => {
   const dialog = await openSearch(page);
-  await dialog.getByLabel('Szukaj w bazie', { exact: true }).fill('P0300');
+  const input = dialog.getByLabel('Szukaj w bazie', { exact: true });
+  await input.fill('P0300');
   await expect(dialog.getByRole('status')).toContainText('Znaleziono: 1');
   await dialog.getByRole('button', { name: fixtures[0].Nazwa, exact: true }).click();
   await expect(dialog.getByRole('heading', { name: fixtures[0].Nazwa, exact: true })).toBeVisible();
   await expect(dialog).toContainText('Pełne rozwiązanie testowe.');
   await dialog.getByRole('button', { name: 'Wróć do wyników' }).click();
-  await expect(dialog.getByLabel('Szukaj w bazie', { exact: true })).toHaveValue('P0300');
+  await expect(input).toHaveValue('P0300');
+  await expect(input).toBeFocused();
+  await expect(dialog.getByRole('status')).toContainText('Znaleziono: 1');
 });
 test('finds symptoms without Polish accents and handles no matches', async ({ page }) => {
   const dialog = await openSearch(page);
-  await dialog.getByLabel('Szukaj w bazie', { exact: true }).fill('wyciek plynu');
+  const input = dialog.getByLabel('Szukaj w bazie', { exact: true });
+  await expect(dialog.getByRole('status')).toContainText('Wpisz co najmniej dwa znaki.');
+  await input.fill('x');
+  await expect(dialog.getByRole('status')).toContainText('Wpisz co najmniej dwa znaki.');
+  await input.fill('wyciek plynu');
   await expect(dialog.getByRole('button', { name: 'Kontrola chłodzenia', exact: true })).toBeVisible();
-  await dialog.getByLabel('Szukaj w bazie', { exact: true }).fill('zzzzbrakwynikow');
+  await input.fill('zzzzbrakwynikow');
   await expect(dialog.getByRole('status')).toContainText('Znaleziono: 0');
+  await expect(dialog.getByText('Brak wyników dla „zzzzbrakwynikow”.', { exact: true })).toBeVisible();
+  await expect(dialog.getByText('Spróbuj krótszej frazy lub kodu.', { exact: false })).toContainText('Profil auta nie ogranicza tej listy.');
+  await dialog.getByRole('button', { name: 'Wyczyść frazę', exact: true }).click();
+  await expect(input).toHaveValue('');
+  await expect(input).toBeFocused();
+  await expect(dialog.getByRole('status')).toContainText('Wpisz co najmniej dwa znaki.');
+  await expect(dialog.getByRole('button', { name: 'Wyczyść frazę', exact: true })).toHaveCount(0);
+  await input.fill('P0300');
+  await expect(dialog.getByRole('button', { name: fixtures[0].Nazwa, exact: true })).toBeVisible();
 });
 test('supports explicit automatic-transmission synonym', async ({ page }) => {
   const dialog = await openSearch(page);
   await dialog.getByLabel('Szukaj w bazie', { exact: true }).fill('automat');
   await expect(dialog.getByRole('button', { name: 'Obsługa skrzyni automatycznej', exact: true })).toBeVisible();
+  await expect(dialog.getByLabel('Szukaj w bazie', { exact: true })).toHaveAttribute('aria-describedby', 'global-search-scope');
+  await expect(dialog.locator('#global-search-scope')).toContainText('Statyczne tabele części i specyfikacji nie są jeszcze indeksowane.');
 });
