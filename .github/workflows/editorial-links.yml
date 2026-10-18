@@ -1,0 +1,91 @@
+name: Editorial source links - Lychee
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '17 6 * * 2'
+  push:
+    branches: [main]
+    paths:
+      - 'src/lib/gmt400-stories*.ts'
+      - 'lychee.toml'
+      - '.github/workflows/editorial-links.yml'
+permissions:
+  contents: read
+concurrency:
+  group: editorial-source-links
+  cancel-in-progress: true
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Collect published editorial source URLs
+        shell: python
+        run: |
+          import json, pathlib, re
+          from urllib.parse import urlsplit
+          sources = {}
+          pattern = re.compile(r'''\bsourceUrl\s*:\s*['"](https?://[^'"\s]+)['"]''')
+          for path in sorted(pathlib.Path('src/lib').glob('gmt400-stories*.ts')):
+              content = path.read_text(encoding='utf-8')
+              for match in pattern.finditer(content):
+                  url = match.group(1)
+                  parsed = urlsplit(url)
+                  if not parsed.hostname or parsed.username or parsed.password:
+                      raise ValueError('Invalid source URL in ' + str(path))
+                  location = str(path) + ':' + str(content.count('\n', 0, match.start()) + 1)
+                  sources.setdefault(url, []).append(location)
+          if not sources:
+              raise SystemExit('No editorial source URLs found; refusing an empty check.')
+          output = pathlib.Path('lychee')
+          output.mkdir(exist_ok=True)
+          (output / 'source-urls.txt').write_text('\n'.join(sorted(sources)) + '\n', encoding='utf-8')
+          (output / 'source-locations.json').write_text(json.dumps(sources, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+          print(f'Collected {len(sources)} unique editorial source URLs.')
+      - name: Check external sources without blocking publication
+        id: lychee
+        uses: lycheeverse/lychee-action@v2.9.0
+        with:
+          lycheeVersion: v0.24.2
+          args: --config lychee.toml --no-progress lychee/source-urls.txt
+          format: markdown
+          output: lychee/report.md
+          fail: false
+          failIfEmpty: true
+          jobSummary: true
+          token: ''
+      - name: Explain advisory result
+        if: always()
+        shell: bash
+        env:
+          CHECK_OUTCOME: ${{ steps.lychee.outcome }}
+          CHECK_EXIT_CODE: ${{ steps.lychee.outputs.exit_code }}
+        run: |
+          {
+            echo '### Scope and interpretation'
+            echo 'Commit: `${{ github.sha }}`'
+            echo 'Only literal sourceUrl fields in src/lib/gmt400-stories*.ts are checked.'
+            echo 'This is not an audit of internal routes, Notion API data, or all links on the live website.'
+            echo 'External failures are advisory. HTTP 403/429 or timeouts require review; they are not automatically accepted.'
+            echo "Lychee outcome: ${CHECK_OUTCOME:-missing}; exit code: ${CHECK_EXIT_CODE:-missing}."
+            echo 'A green workflow is not proof that every link passed. Read the Lychee report above.'
+            echo 'The artifact includes the report, checked URLs, and source file/line locations.'
+          } >> "$GITHUB_STEP_SUMMARY"
+          if [[ "$CHECK_OUTCOME" != 'success' || ! -s lychee/report.md || -z "$CHECK_EXIT_CODE" ]]; then
+            echo '::error::Link audit did not produce a complete report.'
+            exit 1
+          fi
+          if [[ "$CHECK_EXIT_CODE" != '0' ]]; then
+            echo '::warning::Lychee returned a non-zero exit code. Review the report; publication is not blocked by this advisory audit.'
+          fi
+      - name: Preserve report and checked URL list
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: editorial-links-${{ github.run_id }}-${{ github.run_attempt }}
+          path: lychee/
+          retention-days: 14
+          if-no-files-found: warn
