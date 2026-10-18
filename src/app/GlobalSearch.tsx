@@ -1,17 +1,18 @@
 'use client';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { VehicleMatchBadge } from './VehicleMaterialFilter';
+import { useSearchSession } from '../lib/search-session';
 import type { Applicability } from '../lib/vehicle-compatibility';
 type Entry = { Nazwa: string; Typ: string; Model: string; Opis?: string; Objawy?: string; Rozwiązanie?: string; Lata?: string; id?: string; applicability?: Applicability };
 const normalize = (text: string) => text.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/ł/g, 'l').replace(/\b(skrzynia automatyczna|automatyczna skrzynia|automat)\b/g, 'automat').replace(/\s+/g, ' ').trim();
 export default function GlobalSearch({ items, onClose }: { items: Entry[]; onClose: () => void }) {
   const dialog = useRef<HTMLDialogElement>(null);
   const input = useRef<HTMLInputElement>(null);
-  const [query, setQuery] = useState('');
+  const { query, updateQuery, ready, storageAvailable } = useSearchSession();
   const [selected, setSelected] = useState<Entry | null>(null);
   useEffect(() => { const el = dialog.current; el?.showModal(); return () => { el?.close(); }; }, []);
-  useEffect(() => { if (!selected) input.current?.focus(); }, [selected]);
-  const clearQuery = () => { setQuery(''); input.current?.focus(); };
+  useEffect(() => { if (!selected && ready) input.current?.focus(); }, [selected, ready]);
+  const clearQuery = () => { updateQuery(''); input.current?.focus(); };
   const results = useMemo(() => {
     const normalized = normalize(query);
     if (normalized.length < 2) return [];
@@ -38,11 +39,12 @@ export default function GlobalSearch({ items, onClose }: { items: Entry[]; onClo
     </article> : <>
       <label htmlFor="global-search-query" className="mt-4 block text-sm">Szukaj w bazie</label>
       <div className="mt-2 flex flex-wrap items-center gap-2">
-        <input ref={input} id="global-search-query" autoFocus type="search" maxLength={120} value={query} onChange={event => setQuery(event.target.value)} aria-describedby="global-search-scope" placeholder="Kod OBD, objaw lub nazwa materiału…" className="min-h-11 min-w-0 w-full flex-1 basis-48 rounded border border-white/20 bg-neutral-900 p-3 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-400" />
+        <input ref={input} id="global-search-query" autoFocus disabled={!ready} type="search" maxLength={120} value={query} onChange={event => updateQuery(event.target.value)} aria-describedby="global-search-scope global-search-memory" placeholder="Kod OBD, objaw lub nazwa materiału…" className="min-h-11 min-w-0 w-full flex-1 basis-48 rounded border border-white/20 bg-neutral-900 p-3 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-400" />
         {query.length > 0 && <button type="button" onClick={clearQuery} className="min-h-11 rounded border border-white/20 px-3 py-2 text-neutral-200 underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-400">Wyczyść frazę</button>}
       </div>
       <p id="global-search-scope" className="mt-2 text-xs text-neutral-400">Przeszukujemy załadowane wpisy Notion: tytuły, typy, modele, lata, opisy, objawy i rozwiązania. Statyczne tabele części i specyfikacji nie są jeszcze indeksowane. Wyniki nie są ukrywane przez filtr profilu.</p>
-      {!items.length ? <p role="status" className="mt-4">Brak załadowanych treści. Nie można jeszcze ocenić wyników wyszukiwania.</p> : normalize(query).length < 2 ? <p role="status" className="mt-4">Wpisz co najmniej dwa znaki.</p> : <>
+      <p id="global-search-memory" className="mt-2 text-xs text-neutral-400">{storageAvailable === false ? 'Pamięć sesji jest niedostępna. Wyszukiwanie działa, ale zapamiętanie lub usunięcie zapisanej frazy może się nie udać.' : 'Fraza jest zapamiętywana w tej zakładce na czas sesji. Wyczyść ją przyciskiem „Wyczyść frazę”. Ten mechanizm nie wysyła frazy do Notion.'}</p>
+      {!items.length ? <p role="status" className="mt-4">Brak załadowanych treści. Nie można jeszcze ocenić wyników wyszukiwania.</p> : !ready ? <p role="status" className="mt-4">Przywracanie wyszukiwania…</p> : normalize(query).length < 2 ? <p role="status" className="mt-4">Wpisz co najmniej dwa znaki.</p> : <>
         <p role="status" className="my-3">Znaleziono: {results.length}{results.length > 50 ? ' — pokazujemy pierwsze 50; doprecyzuj wyszukiwanie.' : ''}</p>
         {!results.length && <div className="my-3 rounded border border-white/10 bg-neutral-900/40 p-3"><p className="break-words">Brak wyników dla „{query.trim()}”.</p><p className="mt-2 text-sm text-neutral-300">Spróbuj krótszej frazy lub kodu. To wynik tylko dla załadowanych wpisów Notion, nie całej zawartości strony. Profil auta nie ogranicza tej listy.</p></div>}
         <ul className="space-y-3">{results.slice(0, 50).map(({ item, index }) => <li key={item.id || index} className="rounded border border-white/10 p-3">

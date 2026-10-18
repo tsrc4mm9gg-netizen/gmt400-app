@@ -51,6 +51,6 @@ test('supports explicit automatic-transmission synonym', async ({ page }) => {
   const dialog = await openSearch(page);
   await dialog.getByLabel('Szukaj w bazie', { exact: true }).fill('automat');
   await expect(dialog.getByRole('button', { name: 'Obsługa skrzyni automatycznej', exact: true })).toBeVisible();
-  await expect(dialog.getByLabel('Szukaj w bazie', { exact: true })).toHaveAttribute('aria-describedby', 'global-search-scope');
+  await expect(dialog.getByLabel('Szukaj w bazie', { exact: true })).toHaveAttribute('aria-describedby', 'global-search-scope global-search-memory');
   await expect(dialog.locator('#global-search-scope')).toContainText('Statyczne tabele części i specyfikacji nie są jeszcze indeksowane.');
 });
