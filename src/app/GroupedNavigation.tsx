@@ -1,6 +1,8 @@
 'use client';
 import { useRef, useState, type CSSProperties } from 'react';
 import Link from 'next/link';
+import QuickAccess from './QuickAccess';
+import styles from './HomePresentation.module.css';
 type Category = { id: string; label: string };
 const GROUPS = [
   { id: 'garage', label: 'Moje GMT400', icon: 'M3 10l9-7 9 7v11h-6v-7H9v7H3z', ids: ['mojeauto', 'dziennik', 'paliwo'] },
@@ -35,7 +37,8 @@ export default function GroupedNavigation({ categories, active, onSelect, instan
     onSelect(activeGroup?.id === id ? active : first);
     afterRender(() => { if (nav.current) reveal(nav.current); });
   }
-  return <nav ref={nav} className="gmt-navigation" data-layout={instance === 'menu' ? 'menu' : 'flow'} aria-label={instance === 'menu' ? 'Menu główne' : 'Skróty sekcji'} style={{ gridColumn: '1 / -1', boxSizing: 'border-box', position: 'static', width: '100%', minWidth: 0, padding: 6, background: '#171717', borderRadius: 10, ...(instance === 'menu' ? { maxHeight: '65dvh', overflowY: 'auto' } : {}) }}>
+  return <nav ref={nav} className={`gmt-navigation ${styles.root}`} data-layout={instance === 'menu' ? 'menu' : 'flow'} aria-label={instance === 'menu' ? 'Menu główne' : 'Skróty sekcji'} style={{ gridColumn: '1 / -1', boxSizing: 'border-box', position: 'static', width: '100%', minWidth: 0, padding: 6, background: '#171717', borderRadius: 10, ...(instance === 'menu' ? { maxHeight: '65dvh', overflowY: 'auto' } : {}) }}>
+    {instance === 'sections' ? <QuickAccess onSelect={enter} /> : <Link href="/swiat-gmt400" className="mb-4 flex min-h-12 items-center rounded-lg border border-amber-400 px-3 py-2 text-amber-300 underline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-amber-400">Świat GMT400 — historie i ciekawostki</Link>}
     <p style={{ margin: '0 0 10px', color: '#aeb6c2', fontSize: 11, fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase' }}>Kategorie główne</p>
     <div data-navigation-groups style={grid}>{GROUPS.map(group => <button key={group.id} type="button" data-active={selected?.id === group.id ? 'true' : 'false'} aria-expanded={selected?.id === group.id} aria-controls={`nav-${instance}-items`} onClick={() => chooseGroup(group.id)} style={{ ...tile, flexDirection: 'column', gap: 5, padding: '6px 10px' }}>
       <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false"><path d={group.icon} /></svg>

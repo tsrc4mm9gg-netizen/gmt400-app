@@ -1,0 +1,22 @@
+.root { scroll-margin-top: 6rem; }
+/* Limited to the existing homepage hero, not material images. */
+:global(body):has(.root) :global(section.relative:has(> img[alt="GMT400"])) {
+  min-height: clamp(22rem, 50svh, 36rem);
+  align-items: flex-end;
+  isolation: isolate;
+}
+:global(body):has(.root) :global(section.relative:has(> img[alt="GMT400"]) > img) {
+  opacity: 1;
+  object-position: center;
+}
+:global(body):has(.root) :global(section.relative:has(> img[alt="GMT400"]) > div.absolute) {
+  background: linear-gradient(to top, rgb(0 0 0 / 90%) 0%, rgb(0 0 0 / 55%) 18%, rgb(0 0 0 / 8%) 45%, transparent 70%);
+}
+:global(body):has(.root) :global(section.relative:has(> img[alt="GMT400"]) > div.relative) {
+  width: 100%;
+  padding-top: 2rem;
+  padding-bottom: 1.5rem;
+}
+:global(body):has(.root) :global(section.relative:has(> img[alt="GMT400"]) h1) {
+  text-shadow: 0 2px 8px rgb(0 0 0 / 85%);
+}
