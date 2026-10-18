@@ -4,7 +4,7 @@ const fixture={id:ID,Nazwa:TITLE,Typ:'Kod błędu',Model:'Wszystkie',Opis:'Kontr
 test.use({serviceWorkers:'block'});
 async function home(page){await expect(page.getByRole('heading',{name:TITLE,exact:true})).toBeVisible();}
 async function show(page){await page.locator('header button').first().click();const d=page.getByRole('dialog',{name:'Szukaj w bazie wiedzy'});await expect(d).toBeVisible();await expect(d.getByLabel('Szukaj w bazie',{exact:true})).toBeEnabled();return d;}
-async function close(d){await d.getByRole('button',{name:'Zamknij wyszukiwarkę',exact:true}).click();await expect(d).toBeHidden();}
+async function close(d){const mounted=d.page().locator('dialog[aria-labelledby="global-search-title"]');await d.getByRole('button',{name:'Zamknij wyszukiwarkę',exact:true}).click();await expect(mounted).toHaveCount(0);}
 test.beforeEach(async({page,context})=>{
   await page.addInitScript(()=>localStorage.setItem('gmt400_tab','kody'));
   await context.route(url=>url.origin===BASE&&url.pathname==='/api/notion',route=>route.fulfill({json:{results:[fixture],count:1,complete:true}}));
