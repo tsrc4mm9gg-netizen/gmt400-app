@@ -13,6 +13,9 @@ async function headingInView(page, heading) {
 test('category and active content remain synchronized for all nineteen sections', async ({ page }) => {
   await prepare(page);
   const nav = page.getByRole('navigation', { name: 'Skróty sekcji', exact: true });
+  const quickAccess = nav.getByRole('region', { name: 'Od czego zaczynamy?', exact: true });
+  await expect(quickAccess.getByRole('button')).toHaveCount(3);
+  await expect(quickAccess.getByRole('link', { name: /^Poznaj GMT400/ })).toHaveAttribute('href', '/swiat-gmt400');
   const groups = [
     ['Moje GMT400', [['mojeauto','Moje auto'], ['dziennik','Dziennik'], ['paliwo','Paliwo']]],
     ['Modele i dane', [['modele','Modele'], ['specyfikacje','Specyfikacje'], ['historia','Historia'], ['porownaj','Porównaj']]],
@@ -24,7 +27,8 @@ test('category and active content remain synchronized for all nineteen sections'
     await expect.poll(() => page.evaluate(() => localStorage.getItem('gmt400_tab'))).toBe(children[0][0]);
     await expect(nav.locator('[data-navigation-groups] [data-active="true"]')).toHaveCount(1);
     await expect(nav.getByRole('button', { name: label, exact: true })).toHaveAttribute('data-active', 'true');
-    await expect(nav.getByRole('button')).toHaveCount(4 + children.length);
+    await expect(nav.locator('[data-navigation-groups]').getByRole('button')).toHaveCount(4);
+    await expect(nav.locator('[data-navigation-items]').getByRole('button')).toHaveCount(children.length);
     for (const [id, child] of children) {
       const button = nav.getByRole('button', { name: child, exact: true });
       await button.click();
@@ -33,6 +37,12 @@ test('category and active content remain synchronized for all nineteen sections'
       await expect.poll(() => page.evaluate(() => localStorage.getItem('gmt400_tab'))).toBe(id);
       await expect(nav.getByText(`Aktualnie: ${label} / ${child}`, { exact: true })).toBeVisible();
     }
+  }
+  for (const [name, id, child] of [['Sprawdź usterkę', 'usterki', 'Usterki'], ['Zaplanuj serwis', 'serwis', 'Serwis'], ['Kupuję GMT400', 'kupujacy', 'Kupujący']]) {
+    await quickAccess.getByRole('button', { name: new RegExp('^' + name) }).click();
+    await expect.poll(() => page.evaluate(() => localStorage.getItem('gmt400_tab'))).toBe(id);
+    await expect(nav.locator('[data-navigation-items]').getByRole('button', { name: child, exact: true })).toHaveAttribute('aria-pressed', 'true');
+    await expect(nav.locator('[data-navigation-groups] [data-active="true"]')).toHaveCount(1);
   }
 });
 test('all service tiles use page flow and move away when the page is scrolled without clicking', async ({ page }) => {
