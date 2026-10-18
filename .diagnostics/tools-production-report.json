@@ -1,27 +1,27 @@
 {
-  "auditorCodeSha": "54ea1dddace1061fd5c6018e405b62722598954f",
-  "deployedSha": "8b135bba9cf9170e347d7f90778322ecf493ced5",
-  "runId": "39066177520",
-  "checkedAt": "2026-10-17T20:21:04.771Z",
+  "auditorCodeSha": "df6e896fe2f9badf1acebf175a7e4ecaac1f8c8d",
+  "deployedSha": "df6e896fe2f9badf1acebf175a7e4ecaac1f8c8d",
+  "runId": "39130588719",
+  "checkedAt": "2026-10-18T13:14:09.171Z",
   "origin": "https://www.gmt400.pl",
-  "applicationPassed": false,
+  "applicationPassed": true,
   "catalogsVerified": false,
   "passed": false,
-  "conclusion": "application_verification_failed",
+  "conclusion": "application_passed_with_external_catalog_warnings",
   "scope": "Live application contracts and validated commit ancestry. Only .diagnostics differences are allowed in descendants. Catalog monitoring is separate; full passed remains false when any catalog is unverified. No VIN or credentials submitted to tested endpoints.",
   "checks": [
     {
       "name": "Deployment contains audited application version",
-      "expectedSha": "54ea1dddace1061fd5c6018e405b62722598954f",
-      "deployedSha": "8b135bba9cf9170e347d7f90778322ecf493ced5",
-      "passed": false,
-      "reason": "deployed_commit_does_not_include_audited_commit"
+      "expectedSha": "df6e896fe2f9badf1acebf175a7e4ecaac1f8c8d",
+      "deployedSha": "df6e896fe2f9badf1acebf175a7e4ecaac1f8c8d",
+      "passed": true,
+      "reason": "sha_matched"
     },
     {
       "name": "Pressure conversion",
       "path": "/api/units?type=pressure&value=32",
       "passed": true,
-      "checkedAt": "2026-10-17T20:20:52.853Z",
+      "checkedAt": "2026-10-18T13:13:57.583Z",
       "status": 200,
       "reason": "response_contract_passed"
     },
@@ -29,7 +29,7 @@
       "name": "Polish decimal comma",
       "path": "/api/units?type=length&value=1%2C5",
       "passed": true,
-      "checkedAt": "2026-10-17T20:20:52.977Z",
+      "checkedAt": "2026-10-18T13:13:57.677Z",
       "status": 200,
       "reason": "response_contract_passed"
     },
@@ -37,7 +37,7 @@
       "name": "Invalid conversion type",
       "path": "/api/units?type=constructor&value=1",
       "passed": true,
-      "checkedAt": "2026-10-17T20:20:53.083Z",
+      "checkedAt": "2026-10-18T13:13:57.747Z",
       "status": 400,
       "reason": "response_contract_passed"
     },
@@ -45,7 +45,7 @@
       "name": "RPO lookup",
       "path": "/api/rpo?q=G80%20Z71",
       "passed": true,
-      "checkedAt": "2026-10-17T20:20:53.188Z",
+      "checkedAt": "2026-10-18T13:13:57.780Z",
       "status": 200,
       "reason": "response_contract_passed"
     },
@@ -53,7 +53,7 @@
       "name": "RPO invalid limit",
       "path": "/api/rpo?q=G80&limit=-1",
       "passed": true,
-      "checkedAt": "2026-10-17T20:20:53.365Z",
+      "checkedAt": "2026-10-18T13:13:57.855Z",
       "status": 400,
       "reason": "response_contract_passed"
     },
@@ -61,7 +61,7 @@
       "name": "Polish diagnostic search",
       "path": "/api/diagnostics?q=wypadanie%20zaplonow&system=OBD-II",
       "passed": true,
-      "checkedAt": "2026-10-17T20:20:53.464Z",
+      "checkedAt": "2026-10-18T13:13:57.890Z",
       "status": 200,
       "reason": "response_contract_passed"
     },
@@ -69,7 +69,7 @@
       "name": "OBD combined filter",
       "path": "/api/diagnostics?q=P0300&system=OBD-I",
       "passed": true,
-      "checkedAt": "2026-10-17T20:20:53.570Z",
+      "checkedAt": "2026-10-18T13:13:57.953Z",
       "status": 200,
       "reason": "response_contract_passed"
     },
@@ -77,7 +77,7 @@
       "name": "Tire calculation",
       "path": "/api/calculators?tool=tire&width=265&aspect=75&rim=16&oldWidth=235&oldAspect=75&oldRim=16&speed=60&axleRatio=3.73",
       "passed": true,
-      "checkedAt": "2026-10-17T20:20:53.674Z",
+      "checkedAt": "2026-10-18T13:13:57.986Z",
       "status": 200,
       "reason": "response_contract_passed"
     },
@@ -85,7 +85,7 @@
       "name": "Negative tire speed rejected",
       "path": "/api/calculators?tool=tire&width=265&aspect=75&rim=16&speed=-1",
       "passed": true,
-      "checkedAt": "2026-10-17T20:20:53.780Z",
+      "checkedAt": "2026-10-18T13:13:58.030Z",
       "status": 400,
       "reason": "response_contract_passed"
     },
@@ -93,7 +93,7 @@
       "name": "Gear ratio",
       "path": "/api/calculators?tool=gear-ratio&tireDiameterInches=31.6&engineRpm=2000&transmissionRatio=1&axleRatio=3.73",
       "passed": true,
-      "checkedAt": "2026-10-17T20:20:53.881Z",
+      "checkedAt": "2026-10-18T13:13:58.067Z",
       "status": 200,
       "reason": "response_contract_passed"
     },
@@ -101,7 +101,7 @@
       "name": "Compression ratio",
       "path": "/api/calculators?tool=compression-ratio&cylinderVolumeCc=716&combustionChamberCc=64",
       "passed": true,
-      "checkedAt": "2026-10-17T20:20:53.991Z",
+      "checkedAt": "2026-10-18T13:13:58.100Z",
       "status": 200,
       "reason": "response_contract_passed"
     },
@@ -109,7 +109,7 @@
       "name": "1999 Suburban 2WD catalog links",
       "path": "/api/parts?model=Suburban%201500&year=1999&engine=5.7L%20V8&drivetrain=2wd",
       "passed": true,
-      "checkedAt": "2026-10-17T20:20:54.093Z",
+      "checkedAt": "2026-10-18T13:13:58.140Z",
       "status": 200,
       "reason": "response_contract_passed"
     }
