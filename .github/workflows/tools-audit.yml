@@ -5,7 +5,7 @@ on:
     paths: ['src/**', 'tests/**', 'package.json', 'package-lock.json', '.github/workflows/tools-audit.yml']
   workflow_dispatch:
 permissions:
-  contents: write
+  contents: read
 concurrency:
   group: broad-tools-audit
   cancel-in-progress: true
@@ -60,7 +60,7 @@ jobs:
           const passed = Object.values(stages).every(value => value === 'success') && !parseError && !(raw.errors || []).length && coverage.every(item => item.count > 0) && tests.length > 0 && raw.stats?.expected === tests.length && raw.stats?.unexpected === 0 && raw.stats?.skipped === 0 && raw.stats?.flaky === 0 && tests.every(test => test.status === 'expected');
           const report = { codeSha:process.env.GITHUB_SHA, runId:process.env.GITHUB_RUN_ID, checkedAt:new Date().toISOString(), passed, scope:'Local production build, Chromium, numerical and validation cases, mocked official APIs and Notion fixtures. External catalog destinations, live providers, physical iPhone and all legacy inline calculators are not certified by this report.', stages, coverage, stats:raw.stats || {}, parseError, runnerErrors:raw.errors || [], tests };
           fs.mkdirSync('.diagnostics', { recursive:true }); fs.writeFileSync('.diagnostics/tools-audit-report.json', JSON.stringify(report, null, 2) + '\n');
-          fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, 'Tools audit: ' + (passed ? 'PASS' : 'FAIL') + '\nCommit: ' + report.codeSha + '\nTests: ' + tests.length + '\n' + report.scope);
+          fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, 'Tools audit: ' + (passed ? 'PASS' : 'FAIL') + '\nCommit: ' + report.codeSha + '\nTests: ' + tests.length + '\n' + report.scope + '\nReport is attached as a workflow artifact; it is not committed to the repository.');
           NODE
       - uses: actions/upload-artifact@v4
         if: always()
@@ -72,20 +72,6 @@ jobs:
             /tmp/tools-audit-errors.log
             /tmp/tools-audit-server.log
             test-results
-      - name: Publish report
-        if: always()
-        run: |
-          git config user.name 'github-actions[bot]'
-          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add .diagnostics/tools-audit-report.json
-          if git diff --cached --quiet; then exit 0; fi
-          git commit -m 'ci: publish tools audit report [skip ci]'
-          for i in 1 2 3 4; do
-            if git pull --rebase --autostash origin main && git push origin HEAD:main; then exit 0; fi
-            git rebase --abort || true
-            sleep 2
-          done
-          exit 1
       - name: Require complete audit
         if: always()
         run: node -e "if (!require('./.diagnostics/tools-audit-report.json').passed) process.exit(1)"

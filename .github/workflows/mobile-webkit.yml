@@ -5,7 +5,7 @@ on:
     paths: ['src/**','tests/**','package.json','package-lock.json','next.config.ts','playwright.webkit.config.cjs','.github/workflows/mobile-webkit.yml']
   workflow_dispatch:
 permissions:
-  contents: write
+  contents: read
 concurrency:
   group: mobile-webkit-verification
   cancel-in-progress: true
@@ -60,6 +60,7 @@ jobs:
           const passed = Object.values(stages).every(value => value === 'success') && !parseError && !(raw.errors || []).length && coverage.every(item => item.count >= item.minimum) && stats.expected === tests.length && stats.unexpected === 0 && stats.skipped === 0 && stats.flaky === 0 && tests.every(test => test.status === 'expected');
           fs.mkdirSync('.diagnostics',{recursive:true});
           fs.writeFileSync('.diagnostics/mobile-webkit-report.json',JSON.stringify({codeSha:process.env.GITHUB_SHA,runId:process.env.GITHUB_RUN_ID,checkedAt:new Date().toISOString(),scope:'Linux WebKit with mobile viewport and touch; local production build, tools API tests and mocked Notion fixtures. Not physical iPhone, production Safari or live provider certification.',passed,stages,stats,coverage,parseError,runnerErrors:raw.errors || [],tests},null,2)+'\n');
+          fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, 'Mobile WebKit verification: ' + (passed ? 'PASS' : 'FAIL') + '\nReport is attached as a workflow artifact; it is not committed to the repository.');
           NODE
       - uses: actions/upload-artifact@v4
         if: always()
@@ -71,20 +72,6 @@ jobs:
             /tmp/mobile-webkit-errors.log
             /tmp/mobile-webkit-server.log
             test-results
-      - name: Publish report
-        if: always()
-        run: |
-          git config user.name 'github-actions[bot]'
-          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add .diagnostics/mobile-webkit-report.json
-          if git diff --cached --quiet; then exit 0; fi
-          git commit -m 'ci: publish extended WebKit report [skip ci]'
-          for i in 1 2 3 4; do
-            if git pull --rebase --autostash origin main && git push origin HEAD:main; then exit 0; fi
-            git rebase --abort || true
-            sleep 2
-          done
-          exit 1
       - name: Require complete verification
         if: always()
         run: node -e "if (!require('./.diagnostics/mobile-webkit-report.json').passed) process.exit(1)"

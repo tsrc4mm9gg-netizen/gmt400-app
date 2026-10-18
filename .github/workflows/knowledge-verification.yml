@@ -5,7 +5,7 @@ on:
     paths: ['src/**', 'tests/**', 'package.json', 'package-lock.json', 'next.config.ts', '.github/workflows/knowledge-verification.yml']
   workflow_dispatch:
 permissions:
-  contents: write
+  contents: read
 concurrency:
   group: knowledge-verification
   cancel-in-progress: true
@@ -68,7 +68,7 @@ jobs:
           const report = { codeSha: process.env.GITHUB_SHA, runId: process.env.GITHUB_RUN_ID, checkedAt: new Date().toISOString(), scope: 'Local production build and Chromium; mocked Notion fixtures plus local API, tools appearance, parts and maintenance tests. Not live deployment or physical iPhone verification.', passed, stages, stats, coverage, parseError, runnerErrors, buildDiagnostics: stages.build === 'failure' ? read('/tmp/knowledge-build.log') : '', serverDiagnostics: stages.server === 'failure' ? read('/tmp/knowledge-app.log') : '', testDiagnostics: passed ? '' : read('/tmp/knowledge-tests-errors.log'), tests };
           fs.mkdirSync('.diagnostics', { recursive: true });
           fs.writeFileSync('.diagnostics/knowledge-ui-report.json', JSON.stringify(report, null, 2) + '\n');
-          fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, '### Combined regression verification\nCommit: `' + report.codeSha + '`\nResult: ' + (passed ? 'PASS' : 'FAIL') + '\nTests discovered: ' + tests.length + '\nScope: ' + report.scope + '\n');
+          fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, '### Combined regression verification\nCommit: `' + report.codeSha + '`\nResult: ' + (passed ? 'PASS' : 'FAIL') + '\nTests discovered: ' + tests.length + '\nScope: ' + report.scope + '\nReport is attached as a workflow artifact; it is not committed to the repository.');
           NODE
       - uses: actions/upload-artifact@v4
         if: always()
@@ -83,22 +83,6 @@ jobs:
             /tmp/knowledge-tests-errors.log
             test-results
           if-no-files-found: warn
-      - name: Publish readable report
-        if: always()
-        shell: bash
-        run: |
-          test -s .diagnostics/knowledge-ui-report.json
-          git config user.name 'github-actions[bot]'
-          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add .diagnostics/knowledge-ui-report.json
-          if git diff --cached --quiet; then exit 0; fi
-          git commit -m 'ci: publish combined regression report [skip ci]'
-          for attempt in 1 2 3 4; do
-            if git pull --rebase --autostash origin main && git push origin HEAD:main; then exit 0; fi
-            if test -d .git/rebase-merge || test -d .git/rebase-apply; then git rebase --abort; fi
-            sleep 2
-          done
-          exit 1
       - name: Require complete verification
         if: always()
         run: node -e "if (!require('./.diagnostics/knowledge-ui-report.json').passed) process.exit(1)"
