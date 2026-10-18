@@ -1,0 +1,52 @@
+name: Verify live related material suggestions
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['tests/production-related-live.spec.cjs','.github/workflows/production-related-browser.yml']
+permissions:
+  contents: read
+concurrency:
+  group: production-related-browser
+  cancel-in-progress: false
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - run: npm ci
+      - run: |
+          npm install --no-save --package-lock=false @playwright/test
+          npx playwright install --with-deps chromium webkit
+      - name: Configure isolated live browser tests
+        run: |
+          node <<'NODE'
+          require('node:fs').writeFileSync('playwright.related-live.generated.cjs','module.exports='+JSON.stringify({testDir:'./tests',testMatch:'production-related-live.spec.cjs',workers:1,retries:0,timeout:120000,expect:{timeout:15000},use:{viewport:{width:390,height:844},trace:'retain-on-failure'},projects:[{name:'chromium',use:{browserName:'chromium'}},{name:'webkit',use:{browserName:'webkit',isMobile:true,hasTouch:true}}]})+';');
+          NODE
+      - name: Verify production suggestions
+        id: browser
+        run: npx playwright test --config=playwright.related-live.generated.cjs --reporter=json > /tmp/related-live.json 2>/tmp/related-live-errors.log
+      - name: Require both browser results
+        if: always()
+        run: |
+          node <<'NODE'
+          const fs=require('node:fs'),r=JSON.parse(fs.readFileSync('/tmp/related-live.json','utf8')),tests=[];
+          function walk(suites){for(const suite of suites||[]){for(const spec of suite.specs||[])tests.push(...spec.tests||[]);walk(suite.suites);}}walk(r.suites);
+          const passed=tests.length===2&&['chromium','webkit'].every(project=>tests.filter(t=>t.projectName===project&&t.status==='expected').length===1)&&r.stats?.expected===2&&r.stats?.unexpected===0&&r.stats?.skipped===0&&r.stats?.flaky===0&&!(r.errors||[]).length;
+          fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY,'Live related-material suggestions: '+(passed?'PASS':'NOT VERIFIED')+'\nNo saved vehicle profile; no mocks or report commits. Does not certify error/retry handling or all articles.\n');
+          if(!passed)process.exitCode=1;
+          NODE
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: related-live-${{ github.run_id }}-${{ github.run_attempt }}
+          retention-days: 14
+          path: |
+            /tmp/related-live.json
+            /tmp/related-live-errors.log
+            test-results
+          if-no-files-found: warn
