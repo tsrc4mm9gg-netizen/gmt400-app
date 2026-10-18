@@ -1,0 +1,34 @@
+name: Verify search excerpt highlights
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['src/lib/search-highlight.ts','src/app/SearchExcerpt.tsx','tests/search-highlight.test.cjs','.github/workflows/search-highlight.yml','package.json','package-lock.json']
+permissions: {contents: read}
+concurrency: {group: search-highlight-verification, cancel-in-progress: true}
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: {node-version: '24'}
+      - run: npm ci
+      - name: Verify seven highlight cases
+        run: |
+          set -o pipefail
+          node --test tests/search-highlight.test.cjs 2>&1 | tee /tmp/search-highlight-tests.log
+      - name: Verify production build
+        run: |
+          set -o pipefail
+          npm run build 2>&1 | tee /tmp/search-highlight-build.log
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: search-highlights-${{ github.run_id }}-${{ github.run_attempt }}
+          retention-days: 14
+          path: |
+            /tmp/search-highlight-tests.log
+            /tmp/search-highlight-build.log
+          if-no-files-found: warn

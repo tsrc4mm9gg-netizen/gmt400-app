@@ -1,0 +1,12 @@
+const test=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs'),ts=require('typescript');
+const loaded={exports:{}};
+new Function('exports','require','module',ts.transpileModule(fs.readFileSync('src/lib/search-highlight.ts','utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2020}}).outputText)(loaded.exports,require,loaded);
+const run=loaded.exports.getHighlightSegments;
+const text=segments=>segments.map(s=>s.highlighted?`[${s.text}]`:s.text).join('');
+test('highlights a matching token and preserves case',()=>{const s=run('Sprawdź P0300 w silniku','p0300');assert.equal(text(s),'Sprawdź [P0300] w silniku');assert.deepEqual(s.filter(x=>x.highlighted).map(x=>x.text),['P0300']);});
+test('matches Polish text without diacritics',()=>{const s=run('Sprawdź ciśnienie paliwa','cisnienie');assert.equal(text(s),'Sprawdź [ciśnienie] paliwa');});
+test('highlights multiple tokens without reordering',()=>{const s=run('Ciśnienie paliwa i wyciek płynu','cisnienie wyciek');assert.equal(text(s),'[Ciśnienie] paliwa i [wyciek] płynu');});
+test('uses automatic-transmission synonym',()=>{const s=run('Skrzynia automatyczna — materiał','automat');assert.equal(text(s),'[Skrzynia automatyczna] — materiał');});
+test('does not highlight when query has no usable token',()=>{const s=run('Opis materiału','a');assert.equal(text(s),'Opis materiału');assert.equal(s.length,1);assert.equal(s[0].highlighted,false);});
+test('returns empty output for empty text',()=>{assert.deepEqual(run('','P0300'),[]);});
+test('does not alter source text or interpret markup',()=>{const source='<img src=x onerror=bad()> P0300';const s=run(source,'P0300');assert.equal(text(s),source);assert.deepEqual(s.filter(x=>x.highlighted).map(x=>x.text),['P0300']);});
