@@ -1,6 +1,8 @@
+import { additionalStories } from './gmt400-stories-batch2';
 export const storyCategories = [
   { id: 'historia-design', title: 'Historia i projektowanie' },
   { id: 'wlasciciele', title: 'Historie właścicieli' },
+  { id: 'wersje-niezwykle', title: 'Wersje niezwykłe' },
 ] as const;
 export const stories = [
   {
@@ -25,4 +27,5 @@ export const stories = [
       { title: 'Ciekawa historia, nie obietnica', text: 'To relacja konkretnego użytkownika przytoczona przez NPR. Nie stanowi gwarancji podobnego przebiegu innego egzemplarza ani dowodu, że każda część pozostała fabryczna. Oryginalny materiał i nagranie pozwalają usłyszeć emocje towarzyszące temu wydarzeniu.' },
     ],
   },
+  ...additionalStories,
 ];

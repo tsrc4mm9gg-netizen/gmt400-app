@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
   push:
     branches: [main]
-    paths: ['src/app/QuickAccess.tsx','src/app/HomePresentation.module.css','src/app/GroupedNavigation.tsx','src/app/swiat-gmt400/**','src/lib/gmt400-stories.ts','tests/gmt400-stories.test.cjs','.github/workflows/gmt400-stories.yml','package.json','package-lock.json']
+    paths: ['src/app/QuickAccess.tsx','src/app/HomePresentation.module.css','src/app/GroupedNavigation.tsx','src/app/swiat-gmt400/**','src/lib/gmt400-stories*.ts','tests/gmt400-stories.test.cjs','.github/workflows/gmt400-stories.yml','package.json','package-lock.json']
 permissions: {contents: read}
 jobs:
   verify:
@@ -12,7 +12,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
-        with: {node-version: '24'}
+        with: {node-version: '22'}
       - run: npm ci
       - run: node --test tests/gmt400-stories.test.cjs
       - run: npm run build
