@@ -3,11 +3,8 @@ on:
   push:
     branches: [main]
     paths: ['src/app/GroupedNavigation.tsx', 'src/app/KnowledgeCategory.tsx', 'src/app/globals.css', 'src/app/VehicleProfileProvider.tsx', 'src/app/VehicleMaterialFilter.tsx', 'tests/knowledge-categories.spec.cjs', 'tests/navigation.spec.cjs', 'tests/navigation-polish.spec.cjs', '.github/workflows/navigation-layout.yml']
-permissions:
-  contents: write
-concurrency:
-  group: navigation-layout-verification
-  cancel-in-progress: false
+permissions: {contents: read}
+concurrency: {group: navigation-layout-verification, cancel-in-progress: false}
 jobs:
   verify:
     runs-on: ubuntu-latest
@@ -15,8 +12,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
-        with:
-          node-version: '22'
+        with: {node-version: '22'}
       - run: npm ci
       - id: build
         run: npm run build
@@ -33,35 +29,30 @@ jobs:
       - id: browser
         continue-on-error: true
         run: npx playwright test tests/vehicle-filters.spec.cjs tests/global-search.spec.cjs tests/knowledge-categories.spec.cjs tests/navigation.spec.cjs tests/navigation-polish.spec.cjs --workers=1 --reporter=json > /tmp/navigation-layout-tests.json
-      - uses: actions/upload-artifact@v4
-        if: always()
-        with:
-          name: navigation-layout-screenshots
-          path: test-results
-          if-no-files-found: ignore
-      - name: Publish verification report
+      - name: Generate navigation report without repository writes
         if: always()
         env:
           BUILD_RESULT: ${{ steps.build.outcome }}
           BROWSER_RESULT: ${{ steps.browser.outcome }}
         run: |
           node <<'NODE'
-          const fs = require('node:fs');
-          let raw = {};
-          try { raw = JSON.parse(fs.readFileSync('/tmp/navigation-layout-tests.json', 'utf8')); } catch {}
-          const stats = raw.stats || {};
-          const failures = [];
-          function walk(suites) { for (const suite of suites || []) { for (const spec of suite.specs || []) for (const test of spec.tests || []) if (test.status !== 'expected') failures.push({ title: spec.title, status: test.status, errors: (test.results || []).map(result => String(result.error?.message || '').slice(0, 3000)) }); walk(suite.suites); } }
-          walk(raw.suites);
-          const passed = process.env.BUILD_RESULT === 'success' && process.env.BROWSER_RESULT === 'success' && stats.expected === 22 && stats.unexpected === 0 && stats.skipped === 0 && stats.flaky === 0;
-          fs.mkdirSync('.diagnostics', { recursive: true });
-          fs.writeFileSync('.diagnostics/navigation-layout-report.json', JSON.stringify({ codeSha: process.env.GITHUB_SHA, runId: process.env.GITHUB_RUN_ID, checkedAt: new Date().toISOString(), scope: 'Chromium mocked fixtures, navigation geometry, tactile styles, profile launcher and category counters; not live Safari', passed, build: process.env.BUILD_RESULT, browser: process.env.BROWSER_RESULT, stats, failures }, null, 2) + '\n');
+          const fs=require('node:fs');let raw={},parseError='';try{raw=JSON.parse(fs.readFileSync('/tmp/navigation-layout-tests.json','utf8'));}catch(e){parseError=e.message;}
+          const stats=raw.stats||{},tests=[];function walk(suites){for(const s of suites||[]){for(const spec of s.specs||[])for(const t of spec.tests||[])tests.push({title:spec.title,status:t.status,errors:(t.results||[]).flatMap(r=>r.errors||[r.error].filter(Boolean))});walk(s.suites);}}walk(raw.suites);
+          const passed=!parseError&&process.env.BUILD_RESULT==='success'&&process.env.BROWSER_RESULT==='success'&&tests.length===22&&stats.expected===22&&stats.unexpected===0&&stats.skipped===0&&stats.flaky===0&&!(raw.errors||[]).length&&tests.every(t=>t.status==='expected');
+          const report={codeSha:process.env.GITHUB_SHA,runId:process.env.GITHUB_RUN_ID,checkedAt:new Date().toISOString(),scope:'Local Chromium with mocked fixtures; navigation geometry, styles, profile launcher and category counters; not live Safari.',passed,build:process.env.BUILD_RESULT,browser:process.env.BROWSER_RESULT,stats,parseError,runnerErrors:raw.errors||[],failures:tests.filter(t=>t.status!=='expected')};
+          fs.mkdirSync('.diagnostics',{recursive:true});fs.writeFileSync('.diagnostics/navigation-layout-report.json',JSON.stringify(report,null,2));console.log(JSON.stringify(report,null,2));fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY,'Navigation verification: '+(passed?'PASS':'FAIL')+'\nCommit: '+report.codeSha+'\nReport stored in Actions artifacts, not committed.\n');
           NODE
-          git config user.name 'github-actions[bot]'
-          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add .diagnostics/navigation-layout-report.json
-          git commit -m 'ci: publish navigation verification [skip ci]'
-          git pull --rebase --autostash origin main
-          git push origin HEAD:main
-      - if: always()
-        run: node -e "if (!require('./.diagnostics/navigation-layout-report.json').passed) process.exit(1)"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: navigation-layout-${{ github.run_id }}-${{ github.run_attempt }}
+          retention-days: 14
+          path: |
+            .diagnostics/navigation-layout-report.json
+            /tmp/navigation-layout-tests.json
+            /tmp/navigation-app.log
+            test-results
+          if-no-files-found: warn
+      - name: Require complete verification
+        if: always()
+        run: node -e "if(!require('./.diagnostics/navigation-layout-report.json').passed)process.exit(1)"

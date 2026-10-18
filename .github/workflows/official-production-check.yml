@@ -4,22 +4,17 @@ on:
     branches: [main]
     paths: ['src/**','scripts/check-official-production.cjs','scripts/check-tools-production.cjs','tests/deployment-version.test.cjs','.github/workflows/official-production-check.yml']
   workflow_dispatch:
-permissions:
-  contents: write
-concurrency:
-  group: official-production-diagnostics
-  cancel-in-progress: true
+permissions: {contents: read}
+concurrency: {group: official-production-diagnostics, cancel-in-progress: true}
 jobs:
   inspect:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
+        with: {fetch-depth: 0}
       - uses: actions/setup-node@v4
-        with:
-          node-version: '24'
+        with: {node-version: '24'}
       - name: Verify deployment ancestry policy on synthetic repositories
         id: policy
         run: node --test tests/deployment-version.test.cjs
@@ -35,26 +30,11 @@ jobs:
         if: always()
         with:
           name: production-diagnostics-${{ github.run_id }}-${{ github.run_attempt }}
+          retention-days: 14
           path: |
             .diagnostics/official-production-report.json
             .diagnostics/tools-production-report.json
           if-no-files-found: warn
-      - name: Publish reports
-        if: always()
-        run: |
-          test -s .diagnostics/official-production-report.json
-          test -s .diagnostics/tools-production-report.json
-          git config user.name 'github-actions[bot]'
-          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add .diagnostics/official-production-report.json .diagnostics/tools-production-report.json
-          if git diff --cached --quiet; then exit 0; fi
-          git commit -m 'ci: publish application checks and separate catalog warnings [skip ci]'
-          for i in 1 2 3 4; do
-            if git pull --rebase --autostash origin main && git push origin HEAD:main; then exit 0; fi
-            git rebase --abort || true
-            sleep 2
-          done
-          exit 1
       - name: Require current successful application and official API verification
         if: always()
         env:
@@ -67,4 +47,5 @@ jobs:
           const official=require('./.diagnostics/official-production-report.json');
           if (['POLICY_RESULT','TOOLS_RESULT','OFFICIAL_RESULT'].some(key=>process.env[key]!=='success') || tools.applicationPassed!==true || !official.passed || tools.auditorCodeSha!==process.env.GITHUB_SHA || official.auditorCodeSha!==process.env.GITHUB_SHA) process.exit(1);
           if (tools.catalogsVerified!==true) console.warn('::warning::Application checks passed, but external catalogs remain unverified. Full audit is not PASS; inspect catalogChecks in the report.');
+          require('node:fs').appendFileSync(process.env.GITHUB_STEP_SUMMARY,'Application and official API checks passed. External catalog status is separate. Reports stored in Actions artifacts, not committed.\n');
           NODE
