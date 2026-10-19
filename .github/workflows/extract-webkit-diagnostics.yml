@@ -8,7 +8,7 @@ permissions:
   actions: read
   issues: write
 concurrency:
-  group: extract-webkit-39213496487
+  group: extract-webkit-39230827002
   cancel-in-progress: false
 jobs:
   extract:
@@ -18,7 +18,7 @@ jobs:
       - name: Download existing artifact
         env:
           GH_TOKEN: ${{ github.token }}
-        run: gh run download 39213496487 --repo tsrc4mm9gg-netizen/gmt400-app --name mobile-webkit-39213496487-1 --dir /tmp/webkit
+        run: gh run download 39230827002 --repo tsrc4mm9gg-netizen/gmt400-app --name mobile-webkit-39230827002-1 --dir /tmp/webkit
       - name: Summarize diagnostic report
         shell: python
         run: |
@@ -27,8 +27,8 @@ jobs:
           if len(paths) != 1:
               raise SystemExit('Expected exactly one WebKit report')
           report = json.loads(paths[0].read_text())
-          if str(report.get('runId')) != '39213496487':
-              raise SystemExit('Unexpected report run ID')
+          if str(report.get('runId')) != '39230827002' or report.get('codeSha') != '53a254a0f99b79043b905098bdd12f2c8f8e7c96':
+              raise SystemExit('Unexpected report run ID or commit')
           summary = {key: report.get(key) for key in ['codeSha', 'runId', 'checkedAt', 'passed', 'stages', 'stats', 'coverage', 'parseError', 'runnerErrors']}
           summary['failedTests'] = [test for test in report.get('tests', []) if test.get('status') != 'expected']
           body = 'Diagnostic copy of existing artifact; not a new test execution.\n\n```json\n' + json.dumps(summary, ensure_ascii=False, indent=2) + '\n```'
@@ -40,9 +40,9 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         shell: bash
         run: |
-          existing="$(gh issue list --repo tsrc4mm9gg-netizen/gmt400-app --state all --search 'in:title WebKit diagnostics run 39213496487' --json number --jq 'length')"
+          existing="$(gh issue list --repo tsrc4mm9gg-netizen/gmt400-app --state all --search 'in:title WebKit diagnostics run 39230827002' --json number --jq 'length')"
           if [ "$existing" != '0' ]; then
             echo 'Diagnostic issue already exists; no duplicate created.'
             exit 0
           fi
-          gh issue create --repo tsrc4mm9gg-netizen/gmt400-app --title 'WebKit diagnostics run 39213496487' --body-file /tmp/webkit-summary.md
+          gh issue create --repo tsrc4mm9gg-netizen/gmt400-app --title 'WebKit diagnostics run 39230827002' --body-file /tmp/webkit-summary.md
