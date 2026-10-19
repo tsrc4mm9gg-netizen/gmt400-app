@@ -1,0 +1,113 @@
+name: Quality gate
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/**'
+      - 'scripts/**'
+      - 'tests/**'
+      - 'src/**'
+      - 'package.json'
+      - 'package-lock.json'
+      - 'next.config.ts'
+      - 'tsconfig.json'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: quality-gate-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    name: Validate repository changes
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Detect changed files
+        id: changes
+        run: |
+          set -euo pipefail
+          base="${{ github.event.before || 'HEAD^' }}"
+          if ! git cat-file -e "$base^{commit}" 2>/dev/null; then base=HEAD^; fi
+          git diff --name-only --diff-filter=ACMR "$base" HEAD > /tmp/changed-files.txt
+          cat /tmp/changed-files.txt
+
+      - name: Validate workflow YAML
+        run: |
+          set -euo pipefail
+          node - <<'NODE'
+          const fs = require('node:fs');
+          const { execFileSync } = require('node:child_process');
+          const files = execFileSync('find', ['.github/workflows', '-type', 'f', '-name', '*.yml', '-o', '-name', '*.yaml'], { encoding: 'utf8' }).split('\n').filter(Boolean).sort();
+          for (const file of files) {
+            const source = fs.readFileSync(file, 'utf8');
+            if (/\t/.test(source)) throw new Error(`Tab indentation detected: ${file}`);
+            if (!/^name:/m.test(source)) throw new Error(`Missing workflow name: ${file}`);
+            if (!/^on:/m.test(source)) throw new Error(`Missing trigger: ${file}`);
+            if (!/^permissions:/m.test(source)) throw new Error(`Missing explicit permissions: ${file}`);
+          }
+          console.log(`Validated ${files.length} workflow files.`);
+          NODE
+
+      - name: Scan changed files for secrets
+        env:
+          CHANGED_FILES: /tmp/changed-files.txt
+        run: node scripts/scan-changed-secrets.cjs
+
+      - name: Verify dependency lockfile
+        run: |
+          set -euo pipefail
+          node - <<'NODE'
+          const fs = require('node:fs');
+          const pkg = JSON.parse(fs.readFileSync('package.json', 'utf8'));
+          const lock = JSON.parse(fs.readFileSync('package-lock.json', 'utf8'));
+          if (lock.lockfileVersion < 3) throw new Error('package-lock.json must use lockfileVersion 3 or newer.');
+          if (lock.packages?.['']?.name !== pkg.name) throw new Error('Root package name differs between package.json and package-lock.json.');
+          if (lock.packages?.['']?.version !== pkg.version) throw new Error('Root package version differs between package.json and package-lock.json.');
+          for (const section of ['dependencies', 'devDependencies']) {
+            for (const [name, range] of Object.entries(pkg[section] || {})) {
+              if (!lock.packages?.[`node_modules/${name}`]) throw new Error(`Missing lockfile entry: ${name}`);
+            }
+          }
+          console.log('Dependency lockfile is consistent.');
+          NODE
+
+      - name: Run unit tests
+        run: node --test tests/navigation-manifest.test.cjs tests/secret-scanner.test.cjs tests/workflow-quality.test.cjs
+
+      - name: Build production bundle
+        run: |
+          set -o pipefail
+          npm run build 2>&1 | tee /tmp/quality-gate-build.log
+
+      - name: Check build output
+        run: |
+          test -d .next
+          test -f .next/BUILD_ID
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: quality-gate-${{ github.run_id }}-${{ github.run_attempt }}
+          retention-days: 7
+          path: |
+            /tmp/changed-files.txt
+            /tmp/quality-gate-build.log
+          if-no-files-found: warn
