@@ -2,7 +2,7 @@ name: Verify remaining accessibility repair
 on:
   push:
     branches: [main]
-    paths: ['.github/workflows/repair-remaining-accessibility.yml']
+    paths: ['.github/workflows/repair-remaining-accessibility.yml', 'src/app/ImageLightbox.tsx']
 permissions:
   contents: write
   pull-requests: write
