@@ -29,7 +29,8 @@ jobs:
           npx playwright install --with-deps chromium
       - run: |
           npm run start -- --hostname 127.0.0.1 --port 3100 > /tmp/diy-app.log 2>&1 &
-          for i in $(seq 1 60); do
+          for gmt_loop_attempt in $(seq 1 60); do
+            printf 'Attempt %s\n' "$gmt_loop_attempt"
             if curl -fsS http://127.0.0.1:3100 > /dev/null; then exit 0; fi
             sleep 1
           done

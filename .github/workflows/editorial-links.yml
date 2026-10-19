@@ -73,7 +73,7 @@ jobs:
         run: |
           {
             echo '### Scope and interpretation'
-            echo 'Commit: `${{ github.sha }}`'
+            printf 'Commit: %s\n' "$GITHUB_SHA"
             echo 'Only literal sourceUrl fields in src/lib/gmt400-stories*.ts are checked.'
             echo 'This is not an audit of internal routes, Notion API data, or all links on the live website.'
             echo 'External failures are advisory. HTTP 403/429 or timeouts require review; they are not automatically accepted.'

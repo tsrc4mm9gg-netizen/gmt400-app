@@ -9,7 +9,7 @@ async function openSearch(page) {
   await page.route('**/api/notion', route => route.fulfill({ json: { results: fixtures, count: fixtures.length } }));
   await page.goto('http://127.0.0.1:3100');
   await expect(page.getByRole('heading', { name: fixtures[0].Nazwa, exact: true })).toBeVisible();
-  await page.locator('header button').first().click();
+  await page.getByRole('button', { name: 'Otwórz wyszukiwarkę', exact: true }).click();
   const dialog = page.getByRole('dialog', { name: 'Szukaj w bazie wiedzy' });
   await expect(dialog).toBeVisible();
   return dialog;

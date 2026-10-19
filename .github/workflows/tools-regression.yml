@@ -32,7 +32,8 @@ jobs:
         shell: bash
         run: |
           npm run start -- --hostname 127.0.0.1 --port 3100 > /tmp/tools-server.log 2>&1 &
-          for i in $(seq 1 60); do
+          for gmt_loop_attempt in $(seq 1 60); do
+            printf 'Attempt %s\n' "$gmt_loop_attempt"
             if curl -fsS http://127.0.0.1:3100 >/dev/null; then exit 0; fi
             sleep 1
           done
@@ -57,7 +58,9 @@ jobs:
       - name: Write verification summary
         if: always()
         run: |
-          echo '### Tools and navigation verification' >> "$GITHUB_STEP_SUMMARY"
-          echo 'Commit: ${{ github.sha }}' >> "$GITHUB_STEP_SUMMARY"
-          echo 'Job status: ${{ job.status }}' >> "$GITHUB_STEP_SUMMARY"
-          echo 'Local production build, mocked Notion for launcher test; not a live deployment check. Logs are attached as artifacts.' >> "$GITHUB_STEP_SUMMARY"
+          {
+            echo '### Tools and navigation verification'
+            echo 'Commit: ${{ github.sha }}'
+            echo 'Job status: ${{ job.status }}'
+            echo 'Local production build, mocked Notion for launcher test; not a live deployment check. Logs are attached as artifacts.'
+          } >> "$GITHUB_STEP_SUMMARY"
