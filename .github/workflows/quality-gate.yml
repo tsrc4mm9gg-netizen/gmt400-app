@@ -71,6 +71,9 @@ jobs:
           CHANGED_FILES: /tmp/changed-files.txt
         run: node scripts/scan-changed-secrets.cjs
 
+      - name: Check frontend accessibility and quality
+        run: node scripts/check-frontend-quality.cjs
+
       - name: Verify dependency lockfile
         run: |
           set -euo pipefail
@@ -90,7 +93,7 @@ jobs:
           NODE
 
       - name: Run unit tests
-        run: node --test tests/navigation-manifest.test.cjs tests/secret-scanner.test.cjs tests/workflow-quality.test.cjs
+        run: node --test tests/navigation-manifest.test.cjs tests/secret-scanner.test.cjs tests/workflow-quality.test.cjs tests/frontend-quality.test.cjs
 
       - name: Build production bundle
         run: |
