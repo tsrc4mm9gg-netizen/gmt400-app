@@ -1,35 +1,56 @@
-name: Verify safe legacy material formatting before integration
+name: Verify candidate material formatting without repository writes
 on:
+  workflow_dispatch:
   push:
     branches: [main]
-    paths: ['src/app/MaterialText.tsx','src/lib/material-text.ts','tests/material-text.spec.cjs','tests/assert-material-source.cjs','playwright.material-text.config.cjs','.github/workflows/material-text.yml']
-  workflow_dispatch:
+    paths: ['src/app/MaterialText.tsx', 'src/app/baza/**', 'src/lib/material-text.ts', 'tests/material-text.spec.cjs', 'tests/assert-material-source.cjs', 'playwright.material-text.config.cjs', '.github/workflows/material-text.yml', 'scripts/report-current-verification.cjs']
 permissions:
-  contents: write
+  contents: read
 concurrency:
   group: material-text-integration
-  cancel-in-progress: false
+  cancel-in-progress: true
+defaults:
+  run:
+    shell: bash
 jobs:
   verify:
     runs-on: ubuntu-latest
     timeout-minutes: 25
     steps:
       - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
       - uses: actions/setup-node@v4
         with:
           node-version: '24'
+      - run: mkdir -p reports/material-text
       - id: install
         run: npm ci
       - id: candidate
         run: |
           node <<'NODE'
-          const fs=require('node:fs');const path='src/app/baza/[id]/page.tsx';let text=fs.readFileSync(path,'utf8');const statement="import MaterialText from '../../MaterialText';";
-          if(!text.includes(statement)){const anchor="import MaterialContents from '../../MaterialContents';";if(text.split(anchor).length!==2)throw new Error('Entry import anchor missing or ambiguous.');
-          for(const field of ['Opis','Objawy','Rozwiązanie']){const old='<p className="whitespace-pre-line text-neutral-300">{entry.'+field+'}</p>';if(text.split(old).length!==2)throw new Error('Field anchor missing or ambiguous: '+field);text=text.replace(old,'<MaterialText text={entry.'+field+'} field="'+field+'" />');}text=text.replace(anchor,anchor+'\n'+statement);fs.writeFileSync(path,text);}
-          for(const file of ['tests/production-entry-live.spec.cjs','tests/production-material-live.spec.cjs']){let source=fs.readFileSync(file,'utf8');const statement="const {assertMaterialSource}=require('./assert-material-source.cjs');";if(source.includes(statement))continue;const pattern=/await expect\(article\.getByText\(entry\.Rozwiązanie,\s*\{\s*exact:\s*true\s*\}\)\)\.toBeVisible\(\);/g;if((source.match(pattern)||[]).length!==1)throw new Error('Source comparison anchor missing or ambiguous: '+file);source=statement+'\n'+source.replace(pattern,'await assertMaterialSource(article,entry.Rozwiązanie);');fs.writeFileSync(file,source);}
-          const fixture='src/app/material-text-fixture/page.tsx';if(fs.existsSync(fixture))throw new Error('Refusing to replace existing fixture.');fs.mkdirSync('src/app/material-text-fixture',{recursive:true});
-          const value='**Przygotowanie:**<br>Tekst A<br><br>**Kroki:**<br>1. Pierwszy punkt<br>3. Trzeci punkt<br><br>**Kontrola:**<br>- Punkt A<br>- Punkt B<br><script>window.__unsafeMaterial=true</script>';
-          fs.writeFileSync(fixture,`import MaterialText from '../MaterialText';import MaterialContents from '../MaterialContents';export default function Fixture(){return <main style={{padding:16,maxWidth:390}}><article><h1>Test tekstu materiału</h1><MaterialContents entryId="text-fixture"/><section><h2>Rozwiązanie</h2><MaterialText text={${JSON.stringify(value)}} field="Rozwiązanie"/></section></article></main>;}`);
+          const fs = require('node:fs');
+          const assert = require('node:assert/strict');
+          const path = 'src/app/baza/[id]/page.tsx';
+          let text = fs.readFileSync(path, 'utf8');
+          const statement = "import MaterialText from '../../MaterialText';";
+          if (!text.includes(statement)) {
+            const anchor = "import MaterialContents from '../../MaterialContents';";
+            assert.equal(text.split(anchor).length, 2, 'Entry import anchor missing or ambiguous');
+            for (const field of ['Opis', 'Objawy', 'Rozwiązanie']) {
+              const old = '<p className="whitespace-pre-line text-neutral-300">{entry.' + field + '}</p>';
+              assert.equal(text.split(old).length, 2, 'Field anchor missing or ambiguous: ' + field);
+              text = text.replace(old, '<MaterialText text={entry.' + field + '} field="' + field + '" />');
+            }
+            text = text.replace(anchor, anchor + '\n' + statement);
+            fs.writeFileSync(path, text);
+          }
+          for (const field of ['Opis', 'Objawy', 'Rozwiązanie']) assert(text.includes('<MaterialText text={entry.' + field + '} field="' + field + '" />'), 'Candidate integration missing: ' + field);
+          const fixture = 'src/app/material-text-fixture/page.tsx';
+          assert(!fs.existsSync(fixture), 'Refusing to overwrite fixture');
+          const value = '**Przygotowanie:**<br>Tekst A<br><br>**Kroki:**<br>1. Pierwszy punkt<br>3. Trzeci punkt<br><br>**Kontrola:**<br>- Punkt A<br>- Punkt B<br><script>window.__unsafeMaterial=true</script>';
+          fs.mkdirSync('src/app/material-text-fixture', { recursive: true });
+          fs.writeFileSync(fixture, `import MaterialText from '../MaterialText';import MaterialContents from '../MaterialContents';export default function Fixture(){return <main style={{padding:16,maxWidth:390}}><article><h1>Test tekstu materiału</h1><MaterialContents entryId="text-fixture"/><section><h2>Rozwiązanie</h2><MaterialText text={${JSON.stringify(value)}} field="Rozwiązanie"/></section></article></main>;}`);
           NODE
       - id: build
         run: npm run build
@@ -39,62 +60,26 @@ jobs:
           npx playwright install --with-deps chromium webkit
       - id: server
         run: |
-          npm run start -- --hostname 127.0.0.1 --port 3100 > /tmp/material-text-server.log 2>&1 &
-          for gmt_loop_attempt in $(seq 1 60); do
-            printf 'Attempt %s\n' "$gmt_loop_attempt"
-            if curl -fsS http://127.0.0.1:3100 >/dev/null; then exit 0; fi
+          npm run start -- --hostname 127.0.0.1 --port 3100 > reports/material-text/server.log 2>&1 &
+          deadline=$((SECONDS + 60))
+          until curl -fsS http://127.0.0.1:3100 >/dev/null 2>&1; do
+            if (( SECONDS >= deadline )); then cat reports/material-text/server.log; exit 1; fi
             sleep 1
           done
-          exit 1
       - id: tests
         continue-on-error: true
-        run: npx playwright test --config=playwright.material-text.config.cjs --reporter=json > /tmp/material-text-tests.json 2>/tmp/material-text-errors.log
-      - name: Generate report
+        run: npx playwright test --config=playwright.material-text.config.cjs --reporter=json > reports/material-text/tests.json 2> reports/material-text/errors.log
+      - name: Require complete candidate verification
         if: always()
         env:
-          INSTALL: ${{ steps.install.outcome }}
-          CANDIDATE: ${{ steps.candidate.outcome }}
-          BUILD: ${{ steps.build.outcome }}
-          TOOLING: ${{ steps.tooling.outcome }}
-          SERVER: ${{ steps.server.outcome }}
-          TESTS: ${{ steps.tests.outcome }}
-        run: |
-          node <<'NODE'
-          const fs=require('node:fs');let raw={},parseError='';try{raw=JSON.parse(fs.readFileSync('/tmp/material-text-tests.json','utf8'));}catch(error){parseError=error.message;}const tests=[];function walk(suites){for(const suite of suites||[]){for(const spec of suite.specs||[])for(const test of spec.tests||[])tests.push({title:spec.title,file:spec.file||suite.file||'',project:test.projectName,status:test.status,errors:(test.results||[]).map(result=>String(result.error?.message||'').slice(0,6000))});walk(suite.suites);}}walk(raw.suites);
-          const stages=Object.fromEntries(['INSTALL','CANDIDATE','BUILD','TOOLING','SERVER','TESTS'].map(key=>[key,process.env[key]]));const coverage=['chromium','webkit'].map(project=>({project,text:tests.filter(test=>test.project===project&&test.file.endsWith('material-text.spec.cjs')).length,renderer:tests.filter(test=>test.project===project&&test.file.endsWith('notion-content.spec.cjs')).length}));const passed=Object.values(stages).every(value=>value==='success')&&!parseError&&!(raw.errors||[]).length&&coverage.every(item=>item.text===5&&item.renderer===3)&&raw.stats?.expected===tests.length&&raw.stats?.unexpected===0&&raw.stats?.skipped===0&&raw.stats?.flaky===0&&tests.every(test=>test.status==='expected');
-          fs.mkdirSync('.diagnostics',{recursive:true});fs.writeFileSync('.diagnostics/material-text-report.json',JSON.stringify({auditorCodeSha:process.env.GITHUB_SHA,runId:process.env.GITHUB_RUN_ID,checkedAt:new Date().toISOString(),passed,scope:'Synthetic local legacy field formatting, source-content comparison, contents navigation and existing renderer security tests in Chromium and Linux WebKit. No Notion writes, no technical procedure verification or production certification.',stages,coverage,parseError,stats:raw.stats||{},runnerErrors:raw.errors||[],tests},null,2)+'\n');
-          NODE
+          STEP_RESULTS: ${{ toJSON(steps) }}
+        run: node scripts/report-current-verification.cjs material-text
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: material-text-${{ github.run_id }}
+          name: candidate-material-text-${{ github.run_id }}-${{ github.run_attempt }}
           path: |
-            .diagnostics/material-text-report.json
-            /tmp/material-text-tests.json
-            /tmp/material-text-errors.log
-            /tmp/material-text-server.log
-            test-results
-      - name: Publish report and only verified integration and source assertions
-        if: always()
-        run: |
-          test -s .diagnostics/material-text-report.json
-          git config user.name 'github-actions[bot]'
-          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add .diagnostics/material-text-report.json
-          if node -e "if(!require('./.diagnostics/material-text-report.json').passed)process.exit(1)"; then
-            git add 'src/app/baza/[id]/page.tsx' tests/production-entry-live.spec.cjs tests/production-material-live.spec.cjs
-          else
-            git restore 'src/app/baza/[id]/page.tsx' tests/production-entry-live.spec.cjs tests/production-material-live.spec.cjs
-          fi
-          if git diff --cached --quiet; then exit 0; fi
-          git commit -m 'ci: publish verified legacy field formatting and content assertions'
-          for gmt_loop_attempt in 1 2 3 4; do
-            printf 'Attempt %s\n' "$gmt_loop_attempt"
-            if git pull --rebase --autostash origin main && git push origin HEAD:main; then exit 0; fi
-            git rebase --abort || true
-            sleep 2
-          done
-          exit 1
-      - name: Require successful verification
-        if: always()
-        run: node -e "if(!require('./.diagnostics/material-text-report.json').passed)process.exit(1)"
+            reports/material-text/
+            test-results/
+          retention-days: 7
+          if-no-files-found: warn
