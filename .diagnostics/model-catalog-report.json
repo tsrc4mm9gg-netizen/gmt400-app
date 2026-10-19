@@ -1,7 +1,7 @@
 {
-  "codeSha": "0a9bb975970bdf1e1b2259f8ffbefd5615fad3b2",
-  "runId": "38963162126",
-  "checkedAt": "2026-10-16T20:36:58.914Z",
+  "codeSha": "7d2a23e50340fa9ee619128b5b649b65fa57cc0d",
+  "runId": "39253587196",
+  "checkedAt": "2026-10-19T12:41:04.981Z",
   "scope": "Grouped source records; Chromium and mobile WebKit mocked-fixture regressions, not a live Notion or historical-accuracy audit",
   "passed": false,
   "integrationApplied": false,
@@ -9,14 +9,14 @@
     "patch": "success",
     "build": "success",
     "chromium": "success",
-    "webkit": "failure"
+    "webkit": "success"
   },
   "reports": {
     "chromium": {
       "passed": true,
       "stats": {
-        "startTime": "2026-10-16T20:35:50.353Z",
-        "duration": 16545.573,
+        "startTime": "2026-10-19T12:39:50.837Z",
+        "duration": 15987.36,
         "expected": 33,
         "skipped": 0,
         "unexpected": 0,
@@ -27,22 +27,14 @@
     "webkit": {
       "passed": false,
       "stats": {
-        "startTime": "2026-10-16T20:36:08.335Z",
-        "duration": 49403.001000000004,
-        "expected": 32,
+        "startTime": "2026-10-19T12:40:07.759Z",
+        "duration": 55380.865,
+        "expected": 69,
         "skipped": 0,
-        "unexpected": 1,
+        "unexpected": 0,
         "flaky": 0
       },
-      "failures": [
-        {
-          "title": "main categories and subsections have distinct hierarchy and tactile selection styles",
-          "status": "unexpected",
-          "errors": [
-            "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mnot\u001b[2m.\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: not \u001b[32m\"rgb(231, 185, 94)\"\u001b[39m"
-          ]
-        }
-      ]
+      "failures": []
     }
   }
 }
