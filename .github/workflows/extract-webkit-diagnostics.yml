@@ -1,0 +1,48 @@
+name: Extract WebKit diagnostics
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/extract-webkit-diagnostics.yml']
+permissions:
+  contents: read
+  actions: read
+  issues: write
+concurrency:
+  group: extract-webkit-39213496487
+  cancel-in-progress: false
+jobs:
+  extract:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Download existing artifact
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh run download 39213496487 --repo tsrc4mm9gg-netizen/gmt400-app --name mobile-webkit-39213496487-1 --dir /tmp/webkit
+      - name: Summarize diagnostic report
+        shell: python
+        run: |
+          import pathlib, json
+          paths = list(pathlib.Path('/tmp/webkit').rglob('mobile-webkit-report.json'))
+          if len(paths) != 1:
+              raise SystemExit('Expected exactly one WebKit report')
+          report = json.loads(paths[0].read_text())
+          if str(report.get('runId')) != '39213496487':
+              raise SystemExit('Unexpected report run ID')
+          summary = {key: report.get(key) for key in ['codeSha', 'runId', 'checkedAt', 'passed', 'stages', 'stats', 'coverage', 'parseError', 'runnerErrors']}
+          summary['failedTests'] = [test for test in report.get('tests', []) if test.get('status') != 'expected']
+          body = 'Diagnostic copy of existing artifact; not a new test execution.\n\n```json\n' + json.dumps(summary, ensure_ascii=False, indent=2) + '\n```'
+          if len(body) > 55000:
+              raise SystemExit('Diagnostic summary exceeds safe issue size')
+          pathlib.Path('/tmp/webkit-summary.md').write_text(body)
+      - name: Publish diagnostic issue once
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          existing="$(gh issue list --repo tsrc4mm9gg-netizen/gmt400-app --state all --search 'in:title WebKit diagnostics run 39213496487' --json number --jq 'length')"
+          if [ "$existing" != '0' ]; then
+            echo 'Diagnostic issue already exists; no duplicate created.'
+            exit 0
+          fi
+          gh issue create --repo tsrc4mm9gg-netizen/gmt400-app --title 'WebKit diagnostics run 39213496487' --body-file /tmp/webkit-summary.md
