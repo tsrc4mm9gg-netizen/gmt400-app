@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
   push:
     branches: [main]
-    paths: ['src/app/GlobalSearch.tsx','tests/search-input-semantics.spec.cjs','.github/workflows/search-semantics.yml','package.json','package-lock.json','playwright.config.*']
+    paths: ['src/app/GlobalSearch.tsx','src/app/SearchExcerpt.tsx','src/lib/search-*.ts','tests/search-input-semantics.spec.cjs','.github/workflows/search-semantics.yml','package.json','package-lock.json','playwright.search-ci.config.cjs']
 permissions: {contents: read}
 concurrency: {group: search-semantics-verification, cancel-in-progress: true}
 jobs:
@@ -12,24 +12,39 @@ jobs:
     timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
+        with: {persist-credentials: false}
       - uses: actions/setup-node@v4
         with: {node-version: '24'}
       - run: npm ci
-      - run: npx playwright install --with-deps chromium
-      - name: Run search semantics regression
-        run: |
-          set -o pipefail
-          npx playwright test tests/search-input-semantics.spec.cjs 2>&1 | tee /tmp/search-semantics-tests.log
-      - name: Verify production build
+      - name: Verify production build before browser tests
         run: |
           set -o pipefail
           npm run build 2>&1 | tee /tmp/search-semantics-build.log
+      - name: Install pinned test runner
+        run: |
+          npm install --no-save --package-lock=false @playwright/test@1.64.1
+          npx playwright install --with-deps chromium
+      - name: Start production server
+        run: |
+          npm run start -- --hostname 127.0.0.1 --port 3100 > /tmp/search-semantics-server.log 2>&1 &
+          for i in $(seq 1 60); do
+            if curl -fsS http://127.0.0.1:3100/ > /dev/null; then exit 0; fi
+            sleep 1
+          done
+          cat /tmp/search-semantics-server.log
+          exit 1
+      - name: Run all four semantics tests
+        run: |
+          set -o pipefail
+          npx playwright test --config=playwright.search-ci.config.cjs tests/search-input-semantics.spec.cjs --workers=1 --reporter=list 2>&1 | tee /tmp/search-semantics-tests.log
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: search-semantics-${{ github.run_id }}-${{ github.run_attempt }}
-          retention-days: 14
+          retention-days: 7
           path: |
             /tmp/search-semantics-tests.log
             /tmp/search-semantics-build.log
+            /tmp/search-semantics-server.log
+            test-results
           if-no-files-found: warn

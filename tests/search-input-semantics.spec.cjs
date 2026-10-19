@@ -2,14 +2,16 @@ const { test, expect } = require('@playwright/test');
 const fixtures = [
   { id: 'duplicate', Nazwa: 'Materiał z duplikatem', Typ: 'Kod błędu', Model: 'Wszystkie', Opis: 'Wspólna fraza testowa.' },
   { id: 'duplicate', Nazwa: 'Materiał z duplikatem', Typ: 'Kod błędu', Model: 'Wszystkie', Opis: 'Wspólna fraza testowa.' },
-  { Nazwa: 'Wpis bez identyfikatora A', Typ: 'Kod błędu', Model: 'Wszystkie', Opis: 'Wspólna fraza testowa A.' },
-  { Nazwa: 'Wpis bez identyfikatora B', Typ: 'Kod błędu', Model: 'Wszystkie', Opis: 'Wspólna fraza testowa B.' },
+  { Nazwa: 'Wpis bez identyfikatora A', Typ: 'Kod błędu', Model: 'Wszystkie', Opis: 'Wspólna fraza testowa Alfa.' },
+  { Nazwa: 'Wpis bez identyfikatora B', Typ: 'Kod błędu', Model: 'Wszystkie', Opis: 'Wspólna fraza testowa Beta.' },
 ];
 async function open(page) {
   await page.addInitScript(() => localStorage.setItem('gmt400_tab', 'kody'));
   await page.route('**/api/notion', route => route.fulfill({ json: { results: fixtures, count: fixtures.length } }));
   await page.goto('http://127.0.0.1:3100');
-  await expect(page.getByRole('heading', { name: 'Materiał z duplikatem', exact: true })).toBeVisible();
+  const duplicateHeadings = page.getByRole('heading', { name: 'Materiał z duplikatem', exact: true });
+  await expect(duplicateHeadings).toHaveCount(2);
+  await expect(duplicateHeadings.first()).toBeVisible();
   await page.locator('header button').first().click();
   const dialog = page.getByRole('dialog', { name: 'Szukaj w bazie wiedzy' });
   await expect(dialog).toBeVisible();
@@ -41,8 +43,13 @@ test('removes duplicate materials with the same id', async ({ page }) => {
 });
 test('keeps distinct materials without ids', async ({ page }) => {
   const dialog = await open(page);
-  await dialog.getByLabel('Szukaj w bazie', { exact: true }).fill('testowa a');
+  const input = dialog.getByLabel('Szukaj w bazie', { exact: true });
+  await input.fill('testowa alfa');
   await expect(dialog.getByRole('status')).toContainText('Znaleziono: 1');
   await expect(dialog.getByRole('button', { name: 'Wpis bez identyfikatora A', exact: true })).toBeVisible();
   await expect(dialog.getByRole('button', { name: 'Wpis bez identyfikatora B', exact: true })).toHaveCount(0);
+  await input.fill('testowa beta');
+  await expect(dialog.getByRole('status')).toContainText('Znaleziono: 1');
+  await expect(dialog.getByRole('button', { name: 'Wpis bez identyfikatora B', exact: true })).toBeVisible();
+  await expect(dialog.getByRole('button', { name: 'Wpis bez identyfikatora A', exact: true })).toHaveCount(0);
 });
