@@ -1,53 +1,120 @@
-name: Verify remaining accessibility repair
+name: Verify comprehensive CI and accessibility repair
 on:
   push:
     branches: [main]
-    paths: ['.github/workflows/repair-remaining-accessibility.yml', 'src/app/ImageLightbox.tsx']
+    paths: ['.github/workflows/repair-remaining-accessibility.yml']
 permissions:
   contents: write
   pull-requests: write
+  issues: write
 concurrency:
   group: repair-remaining-accessibility
   cancel-in-progress: false
+defaults:
+  run:
+    shell: bash
 jobs:
   repair:
     runs-on: ubuntu-latest
-    timeout-minutes: 25
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - run: npm ci
-      - name: Require reviewed source versions
+      - id: prepare
+        run: mkdir -p reports/comprehensive
+      - id: install
+        run: npm ci 2>&1 | tee reports/comprehensive/install.log
+      - id: source
         run: |
           test "$(git hash-object src/app/page.tsx)" = '4328a095587680f96f502a8c67246be55a08bc68'
           test "$(git hash-object src/app/narzedzia/historia-vin/page.tsx)" = '526fe67cfb3881cf2d15a115ef1d38bea2159707'
-      - run: node scripts/repair-remaining-accessibility.cjs
-      - run: node scripts/check-frontend-quality.cjs
-      - run: npm run build
-      - run: |
+      - id: patch
+        run: |
+          node scripts/repair-workflow-shell.cjs 2>&1 | tee reports/comprehensive/workflow-patch.log
+          node scripts/repair-remaining-accessibility.cjs 2>&1 | tee reports/comprehensive/frontend-patch.log
+      - id: actionlint
+        run: |
+          TOOL_DIR="$RUNNER_TEMP/gmt400-comprehensive-actionlint"
+          mkdir -p "$TOOL_DIR"
+          curl --fail --silent --show-error --location --retry 2 https://github.com/rhysd/actionlint/releases/download/v1.7.12/actionlint_1.7.12_linux_amd64.tar.gz --output "$TOOL_DIR/actionlint.tar.gz"
+          echo "8aca8db96f1b94770f1b0d72b6dddcb1ebb8123cb3712530b08cc387b349a3d8  $TOOL_DIR/actionlint.tar.gz" | sha256sum --check --strict
+          tar -xzf "$TOOL_DIR/actionlint.tar.gz" -C "$TOOL_DIR" actionlint
+          command -v shellcheck
+          "$TOOL_DIR/actionlint" -color=false -pyflakes= 2>&1 | tee reports/comprehensive/actionlint.log
+      - id: frontend
+        run: node scripts/check-frontend-quality.cjs 2>&1 | tee reports/comprehensive/frontend.log
+      - id: build
+        run: npm run build 2>&1 | tee reports/comprehensive/build.log
+      - id: tooling
+        run: |
           npm install --no-save --package-lock=false @playwright/test
           npx playwright install --with-deps webkit
-      - name: Run WebKit accessibility regression tests
+      - id: server
         run: |
-          npm run start -- --hostname 127.0.0.1 --port 3100 > /tmp/a11y-server.log 2>&1 &
+          npm run start -- --hostname 127.0.0.1 --port 3100 > reports/comprehensive/server.log 2>&1 &
           deadline=$((SECONDS + 60))
-          until curl -fsS http://127.0.0.1:3100 >/dev/null; do
-            if (( SECONDS >= deadline )); then cat /tmp/a11y-server.log; exit 1; fi
+          until curl -fsS http://127.0.0.1:3100 >/dev/null 2>&1; do
+            if (( SECONDS >= deadline )); then cat reports/comprehensive/server.log; exit 1; fi
             sleep 1
           done
           printf '%s\n' "module.exports = { testDir: './tests', testMatch: 'frontend-accessibility.spec.cjs', workers: 1, timeout: 45000, expect: { timeout: 10000 }, use: { browserName: 'webkit', viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true } };" > .a11y.config.cjs
-          npx playwright test --config=.a11y.config.cjs
-          npx playwright test --config=playwright.webkit.config.cjs
-      - name: Publish repair branch and pull request after successful checks
+      - id: accessibility
+        run: npx playwright test --config=.a11y.config.cjs --reporter=json > reports/comprehensive/accessibility.json 2> reports/comprehensive/accessibility-errors.log
+      - id: regression
+        run: npx playwright test --config=playwright.webkit.config.cjs --reporter=json > reports/comprehensive/webkit.json 2> reports/comprehensive/webkit-errors.log
+      - id: publish
+        name: Publish only after successful checks
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          git switch -c fix/remaining-frontend-accessibility
+          git switch -c fix/comprehensive-ci-accessibility
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add src/app/page.tsx src/app/narzedzia/historia-vin/page.tsx
-          git commit -m 'fix: remaining frontend labels, semantic controls and image dialog'
-          git push origin HEAD:fix/remaining-frontend-accessibility
-          gh pr create --repo tsrc4mm9gg-netizen/gmt400-app --base main --head fix/remaining-frontend-accessibility --title 'Fix remaining frontend accessibility findings' --body 'Adds accessible names to 16 fields, semantic navigation controls, a native image dialog with Escape and focus restoration, keyboard image triggers, and static JSON-LD without dangerouslySetInnerHTML. Published only after the static frontend check, production build, targeted WebKit tests and existing WebKit regression suite passed. No automatic merge; not a full WCAG certification.'
+          git add .github/workflows src/app/page.tsx src/app/narzedzia/historia-vin/page.tsx
+          git commit -m 'fix: workflow lint and remaining frontend accessibility findings'
+          git push origin HEAD:fix/comprehensive-ci-accessibility
+          gh pr create --repo tsrc4mm9gg-netizen/gmt400-app --base main --head fix/comprehensive-ci-accessibility --title 'Fix workflow lint and remaining frontend accessibility findings' --body 'Preserves bounded retries while fixing 26 unused shell counters, two quoting diagnostics and grouped summary redirection. Applies the existing frontend accessibility repair. Published after actionlint, static frontend checks, production build, targeted accessibility tests and the existing WebKit suite succeeded. No automatic merge or production certification.'
+      - name: Publish diagnostic report even on failure
+        if: always()
+        uses: actions/github-script@v7
+        env:
+          STEP_RESULTS: ${{ toJSON(steps) }}
+        with:
+          script: |
+            const fs = require('node:fs');
+            const path = require('node:path');
+            const steps = JSON.parse(process.env.STEP_RESULTS);
+            const stages = Object.fromEntries(Object.entries(steps).map(([key, value]) => [key, value.outcome]));
+            const files = ['workflow-patch.log', 'frontend-patch.log', 'actionlint.log', 'frontend.log', 'build.log', 'server.log', 'accessibility-errors.log', 'webkit-errors.log'];
+            const diagnostics = {};
+            for (const name of files) {
+              const file = path.join('reports/comprehensive', name);
+              if (fs.existsSync(file)) diagnostics[name] = fs.readFileSync(file, 'utf8').replace(/\u001b\[[0-9;]*m/g, '').slice(-1500);
+            }
+            const browsers = {};
+            for (const name of ['accessibility', 'webkit']) {
+              try {
+                const raw = JSON.parse(fs.readFileSync(`reports/comprehensive/${name}.json`, 'utf8'));
+                const failures = [];
+                const walk = suites => { for (const suite of suites || []) { for (const spec of suite.specs || []) for (const test of spec.tests || []) if (test.status !== 'expected') failures.push({ title: spec.title, file: spec.file || suite.file, status: test.status, errors: (test.results || []).flatMap(result => result.errors || (result.error ? [result.error] : [])).map(error => String(error.message || '').slice(0, 1500)) }); walk(suite.suites); } };
+                walk(raw.suites);
+                browsers[name] = { stats: raw.stats, runnerErrors: raw.errors || [], failures };
+              } catch (error) { browsers[name] = { unavailable: true, reason: error.message }; }
+            }
+            const report = { sourceSha: context.sha, runId: context.runId, checkedAt: new Date().toISOString(), stages, browsers, diagnostics, scope: 'Local static checks, production build and Linux WebKit. Not physical iPhone or live production certification.' };
+            const body = '```json\n' + JSON.stringify(report, null, 2).slice(0, 50000) + '\n```';
+            fs.mkdirSync('reports/comprehensive', { recursive: true });
+            fs.writeFileSync('reports/comprehensive/report.json', JSON.stringify(report, null, 2));
+            const issue = await github.rest.issues.create({ ...context.repo, title: `Comprehensive repair report ${context.runId}`, body });
+            core.notice(issue.data.html_url);
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: comprehensive-repair-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            reports/comprehensive/
+            test-results/
+          retention-days: 7
+          if-no-files-found: warn
