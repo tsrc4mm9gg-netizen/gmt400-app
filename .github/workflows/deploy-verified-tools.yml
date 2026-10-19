@@ -1,14 +1,19 @@
 name: Deploy verified tools theme via existing credentials
+
 on:
   push:
     branches: [main]
-    paths: ['.github/workflows/deploy-verified-tools.yml']
+    paths:
+      - '.github/workflows/deploy-verified-tools.yml'
   workflow_dispatch:
+
 permissions:
-  contents: write
+  contents: read
+
 concurrency:
   group: deploy-verified-tools-theme
   cancel-in-progress: false
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -22,6 +27,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           ref: '653d437b8e05490878d2f74816816c74d6082446'
+
       - id: credentials
         name: Require existing deployment token without exposing it
         run: |
@@ -31,25 +37,29 @@ jobs:
             exit 1
           fi
           test "$(git rev-parse HEAD)" = "$SOURCE_SHA"
+
       - uses: actions/setup-node@v4
         with:
           node-version: '24'
+
       - id: install
         run: npm ci
+
       - id: build
         run: npm run build
+
       - id: tooling
         run: |
           npm install --no-save --package-lock=false @playwright/test
           npx playwright install --with-deps chromium
+
       - id: server
         run: |
           npm run start -- --hostname 127.0.0.1 --port 3100 > /tmp/deploy-tools-server.log 2>&1 &
-          for i in $(seq 1 60); do
-            if curl -fsS http://127.0.0.1:3100 >/dev/null; then exit 0; fi
+          until curl -fsS http://127.0.0.1:3100 >/dev/null; do
             sleep 1
           done
-          exit 1
+
       - id: tests
         run: |
           npx playwright test tests/new-tools.spec.cjs --workers=1 --reporter=json > /tmp/deploy-tools-tests.json
@@ -57,6 +67,7 @@ jobs:
           const report = require('/tmp/deploy-tools-tests.json');
           if (report.stats?.expected < 12 || report.stats?.unexpected !== 0 || report.stats?.skipped !== 0 || report.stats?.flaky !== 0 || (report.errors || []).length) process.exit(1);
           NODE
+
       - id: publish
         name: Deploy pinned tested source to existing production project
         run: |
@@ -67,6 +78,7 @@ jobs:
             exit 1
           fi
           echo "url=$URL" >> "$GITHUB_OUTPUT"
+
       - name: Generate credential-free deployment report
         if: always()
         env:
@@ -84,23 +96,11 @@ jobs:
           fs.writeFileSync('.diagnostics/fallback-deployment-report.json',JSON.stringify(report,null,2)+'\n');
           fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY,'### Verified tools deployment\nSource: '+report.sourceSha+'\nResult: '+report.reason+'\n');
           NODE
+
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: verified-tools-deployment-${{ github.run_id }}
           path: .diagnostics/fallback-deployment-report.json
-      - name: Publish credential-free report only
-        if: always()
-        run: |
-          test -s .diagnostics/fallback-deployment-report.json
-          git config user.name 'github-actions[bot]'
-          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add .diagnostics/fallback-deployment-report.json
-          if git diff --cached --quiet; then exit 0; fi
-          git commit -m 'ci: publish fallback deployment result [skip ci]'
-          for i in 1 2 3 4; do
-            if git pull --rebase --autostash origin main && git push origin HEAD:main; then exit 0; fi
-            git rebase --abort || true
-            sleep 2
-          done
-          exit 1
+          retention-days: 7
+          if-no-files-found: warn
