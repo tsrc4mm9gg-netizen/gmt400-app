@@ -18,6 +18,7 @@ test('DIY restores instructions, existing graphic, lightbox and full-material li
   await expect(page.getByText('TEST PEŁNA INSTRUKCJA', { exact: false })).toBeVisible();
   await expect(page.getByText('Krok drugi zachowany.', { exact: false })).toBeVisible();
   const image = page.locator('#content img[src="/diy-4l60e-pan-pl.jpg"]').first();
+  await image.scrollIntoViewIfNeeded();
   await expect(image).toBeVisible();
   await expect.poll(() => image.evaluate(node => node.complete && node.naturalWidth > 0)).toBe(true);
   await expect(page.getByRole('link', { name: 'Otwórz pełną instrukcję z ilustracjami', exact: true }).first()).toHaveAttribute('href', '/baza/00000000-0000-0000-0000-000000000001');
