@@ -1,61 +1,64 @@
-name: Advance verified roadmap packages
+name: Review roadmap evidence without automatic progression
 on:
-  workflow_run:
-    workflows: ['Verify navigation history and compact profile']
-    types: [completed]
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/roadmap-orchestrator.yml']
 permissions:
-  contents: write
-  issues: write
+  contents: read
 concurrency:
-  group: roadmap-progression
-  cancel-in-progress: false
+  group: roadmap-evidence-review
+  cancel-in-progress: true
 jobs:
-  advance:
-    if: github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.head_branch == 'main'
+  review:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 5
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: main
-          fetch-depth: 0
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '22'
-      - name: Download latest verification report
-        uses: dawidd6/action-download-artifact@v6
-        with:
-          workflow: navigation-context.yml
-          run_id: ${{ github.event.workflow_run.id }}
-          name: navigation-context-diagnostics
-          path: downloaded
-          if_no_artifact_found: fail
-      - name: Restore report
+          persist-credentials: false
+      - name: Review stored evidence without running integration scripts
+        shell: python
         run: |
-          mkdir -p .diagnostics
-          find downloaded -name 'navigation-context-report.json' -print -quit | xargs -I{} cp {} .diagnostics/navigation-context-report.json
-      - id: progression
-        run: node scripts/roadmap-orchestrator.cjs
-      - name: Commit roadmap progression and audit
-        id: commit
-        run: |
-          git config user.name 'github-actions[bot]'
-          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add docs/ROADMAP.md .diagnostics/roadmap-queue.json .diagnostics/roadmap-progression.json .diagnostics/visual-hierarchy-audit.json
-          if git diff --cached --quiet; then
-            echo "changed=false" >> "$GITHUB_OUTPUT"
-          else
-            git commit -m 'chore: advance roadmap after verified package and prepare visual hierarchy audit'
-            echo "changed=true" >> "$GITHUB_OUTPUT"
-          fi
-      - if: steps.commit.outputs.changed == 'true'
-        run: git push origin HEAD:main
-      - name: Create next package task
-        if: steps.commit.outputs.changed == 'true'
-        uses: actions/github-script@v7
+          import json, os, pathlib, re
+          head = os.environ['GITHUB_SHA']
+          report_path = pathlib.Path('.diagnostics/navigation-context-report.json')
+          review = {'reviewedCommit': head, 'reviewRunId': os.environ['GITHUB_RUN_ID'], 'source': str(report_path), 'sourceType': 'report stored in checked-out commit, not a freshly downloaded Actions artifact', 'status': 'requires-review', 'roadmapUpdated': False, 'issuesCreated': False}
+          lines = ['## Przegląd dowodów roadmapy', '', 'Badany commit: `' + head + '`', '', 'Ten workflow nie uruchamia testów, nie zamyka paczek, nie zmienia roadmapy i nie tworzy zgłoszeń.', 'Czytamy raport zapisany w repozytorium, a nie nowy artefakt przebiegu CI.', '']
+          if not report_path.is_file():
+              review['reason'] = 'missing-report'
+              lines.append('Brak zapisanego raportu. Nie potwierdzamy zaliczenia żadnej paczki.')
+          else:
+              try:
+                  report = json.loads(report_path.read_text(encoding='utf-8'))
+                  if not isinstance(report, dict):
+                      raise ValueError('Report must be an object')
+                  sha = report.get('codeSha')
+                  valid_sha = isinstance(sha, str) and re.fullmatch(r'[0-9a-f]{40}', sha) is not None
+                  exact = bool(valid_sha and sha == head)
+                  review.update({'reportedCommit': sha if valid_sha else None, 'exactCommitMatch': exact, 'reportedPassed': report.get('passed') is True, 'reportedIntegrationApplied': report.get('integrationApplied') is True})
+                  review['reason'] = 'stored-report-needs-independent-verification' if exact else 'report-does-not-cover-reviewed-commit'
+                  lines.extend(['Commit raportu: `' + (sha if valid_sha else 'brak poprawnego SHA') + '`', 'Dokładna zgodność commitów: ' + ('TAK' if exact else 'NIE'), 'Raport deklaruje passed=true: ' + ('TAK' if report.get('passed') is True else 'NIE'), ''])
+                  if not exact:
+                      lines.append('Raport nie dotyczy dokładnie badanego commitu. Nie traktujemy zielonego wyniku przodka jako wyniku tego kodu.')
+                  else:
+                      lines.append('SHA jest zgodne, ale sam zapisany JSON nie dowodzi wykonania testów. Przed zamknięciem paczki należy sprawdzić odpowiadający przebieg Actions i jego artefakty.')
+              except (OSError, ValueError, TypeError) as error:
+                  review['reason'] = 'unreadable-report'
+                  review['diagnostic'] = str(error)
+                  lines.append('Raport jest nieczytelny lub ma niepoprawny format. Nie potwierdzamy zaliczenia.')
+          lines.extend(['', 'Wynik tego zadania oznacza wykonanie przeglądu, nie zaliczenie testów ani zakończenie paczek.', 'Decyzja o zamknięciu paczki pozostaje do osobnego zatwierdzenia. Pozostałe workflowy nie są zmieniane tą konfiguracją.'])
+          out = pathlib.Path('reports/roadmap-review')
+          out.mkdir(parents=True, exist_ok=True)
+          (out / 'review.json').write_text(json.dumps(review, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+          (out / 'review.md').write_text('\n'.join(lines) + '\n', encoding='utf-8')
+          with open(os.environ['GITHUB_STEP_SUMMARY'], 'a', encoding='utf-8') as summary:
+              summary.write('\n'.join(lines) + '\n')
+          print('::warning::Evidence review only. No roadmap package was automatically completed.')
+      - uses: actions/upload-artifact@v4
+        if: always()
         with:
-          script: |
-            const fs = require('node:fs');
-            const audit = JSON.parse(fs.readFileSync('.diagnostics/visual-hierarchy-audit.json', 'utf8'));
-            const body = ['## Paczka 3: hierarchia wizualna i ograniczenie akcentu', '', 'Automatycznie utworzone po zaliczeniu paczki 1.', '', '- Punkty roadmapy: 5, 6, 7', '- Audyt źródeł: `' + JSON.stringify(audit.summary) + '`', '- Zakres: odróżnienie kategorii, podsekcji, kart i ustawień; subtelna głębia tylko dla głównych działań; złoty akcent tylko dla wyboru i ważnych działań.', '', 'Zmiany UI powstaną jako osobna paczka po analizie audytu i zostaną poddane testom regresyjnym.'].join('\n');
-            await github.rest.issues.create({ owner: context.repo.owner, repo: context.repo.repo, title: 'Paczka 3: hierarchia wizualna i ograniczenie akcentu', body, labels: [] });
+          name: roadmap-review-${{ github.run_id }}-${{ github.run_attempt }}
+          path: reports/roadmap-review/
+          retention-days: 7
+          if-no-files-found: error
