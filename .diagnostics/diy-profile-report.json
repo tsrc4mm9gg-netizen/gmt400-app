@@ -1,19 +1,12 @@
 {
-  "codeSha": "a8bcb9fe6531abced9bed5a4ec74e032d052aff8",
-  "checkedAt": "2026-10-16T16:11:51.449Z",
+  "codeSha": "7d2a23e50340fa9ee619128b5b649b65fa57cc0d",
+  "checkedAt": "2026-10-19T12:38:11.696Z",
   "scope": "Chromium mocked fixtures, actual local DIY graphic; not complete live Notion audit or Safari verification",
-  "passed": true,
-  "integrationApplied": true,
-  "patch": "success",
-  "build": "success",
-  "browser": "success",
-  "stats": {
-    "startTime": "2026-10-16T16:11:36.803Z",
-    "duration": 13712.578,
-    "expected": 23,
-    "skipped": 0,
-    "unexpected": 0,
-    "flaky": 0
-  },
+  "passed": false,
+  "integrationApplied": false,
+  "patch": "failure",
+  "build": "skipped",
+  "browser": "skipped",
+  "stats": {},
   "failures": []
 }
