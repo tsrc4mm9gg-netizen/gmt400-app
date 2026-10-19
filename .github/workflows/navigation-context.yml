@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
   push:
     branches: [main]
-    paths: ['src/**','tests/**','package.json','package-lock.json','next.config.ts','playwright.webkit.config.cjs','.github/workflows/navigation-context.yml']
+    paths: ['src/**','tests/**','package.json','package-lock.json','next.config.ts','playwright.webkit.config.cjs','playwright.context-ci.config.cjs','scripts/verify-navigation-manifest.cjs','.github/workflows/navigation-context.yml']
 permissions:
   contents: read
 concurrency:
@@ -15,15 +15,14 @@ jobs:
     timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
-        with:
-          persist-credentials: false
+        with: {persist-credentials: false}
       - uses: actions/setup-node@v4
-        with:
-          node-version: '22'
+        with: {node-version: '22'}
       - id: install
         run: npm ci
+      - id: units
+        run: node --test tests/navigation-manifest.test.cjs
       - id: build
-        shell: bash
         run: |
           set -o pipefail
           npm run build 2>&1 | tee /tmp/context-build.log
@@ -31,52 +30,44 @@ jobs:
         run: |
           npm install --no-save --package-lock=false @playwright/test@1.64.1
           npx playwright install --with-deps chromium webkit
+          mkdir -p reports/context
       - id: server
         run: |
           npm run start -- --hostname 127.0.0.1 --port 3100 > /tmp/context-server.log 2>&1 &
           for i in $(seq 1 60); do
-            if curl -fsS http://127.0.0.1:3100 > /dev/null; then exit 0; fi
+            if curl -fsS http://127.0.0.1:3100/ > /dev/null; then exit 0; fi
             sleep 1
           done
           cat /tmp/context-server.log
           exit 1
+      - id: chromium_plan
+        continue-on-error: true
+        run: npx playwright test --config=playwright.context-ci.config.cjs --project=chromium --list --reporter=json > reports/context/chromium-plan.json
       - id: chromium
+        if: ${{ !cancelled() && steps.server.outcome == 'success' && steps.chromium_plan.outcome == 'success' }}
         continue-on-error: true
-        run: npx playwright test tests/vehicle-filters.spec.cjs tests/global-search.spec.cjs tests/knowledge-categories.spec.cjs tests/navigation.spec.cjs tests/navigation-polish.spec.cjs tests/diy-restoration.spec.cjs tests/notion-pagination.spec.cjs tests/notion-content.spec.cjs tests/model-catalog.spec.cjs tests/navigation-context.spec.cjs tests/visual-consistency.spec.cjs --workers=1 --output=test-results/chromium --reporter=json > /tmp/context-chromium.json
+        run: npx playwright test --config=playwright.context-ci.config.cjs --project=chromium --output=test-results/chromium --reporter=json > reports/context/chromium-results.json
+      - id: webkit_plan
+        if: ${{ !cancelled() && steps.server.outcome == 'success' }}
+        continue-on-error: true
+        run: npx playwright test --config=playwright.context-ci.config.cjs --project=webkit --list --reporter=json > reports/context/webkit-plan.json
       - id: webkit
+        if: ${{ !cancelled() && steps.server.outcome == 'success' && steps.webkit_plan.outcome == 'success' }}
         continue-on-error: true
-        run: |
-          node -e "const fs=require('node:fs');const base=require('./playwright.webkit.config.cjs');fs.writeFileSync('playwright.context.generated.config.cjs','module.exports = '+JSON.stringify({...base,testMatch:[...base.testMatch,'model-catalog.spec.cjs','navigation-context.spec.cjs','visual-consistency.spec.cjs']})+';')"
-          npx playwright test --config=playwright.context.generated.config.cjs --output=test-results/webkit --reporter=json > /tmp/context-webkit.json
-      - name: Report committed source without integration or repository writes
+        run: npx playwright test --config=playwright.context-ci.config.cjs --project=webkit --output=test-results/webkit --reporter=json > reports/context/webkit-results.json
+      - name: Require complete successful manifest and publish report
         if: always()
         env:
-          INSTALL_RESULT: ${{ steps.install.outcome }}
-          BUILD_RESULT: ${{ steps.build.outcome }}
-          TOOLING_RESULT: ${{ steps.tooling.outcome }}
-          SERVER_RESULT: ${{ steps.server.outcome }}
-          CHROMIUM_RESULT: ${{ steps.chromium.outcome }}
-          WEBKIT_RESULT: ${{ steps.webkit.outcome }}
-        run: |
-          node <<'NODE'
-          const fs=require('node:fs');
-          const reports={};
-          for(const browser of ['chromium','webkit']) {
-            let raw={},parseError='';try{raw=JSON.parse(fs.readFileSync('/tmp/context-'+browser+'.json','utf8'));}catch(error){parseError=error.message;}
-            const stats=raw.stats||{},tests=[];
-            function walk(suites){for(const suite of suites||[]){for(const spec of suite.specs||[])for(const test of spec.tests||[])tests.push({title:spec.title,status:test.status,errors:(test.results||[]).map(result=>String(result.error?.message||'').slice(0,4000))});walk(suite.suites);}}
-            walk(raw.suites);
-            reports[browser]={passed:!parseError&&!(raw.errors||[]).length&&tests.length===38&&stats.expected===38&&stats.unexpected===0&&stats.skipped===0&&stats.flaky===0&&tests.every(test=>test.status==='expected'),stats,discovered:tests.length,parseError,runnerErrors:raw.errors||[],failures:tests.filter(test=>test.status!=='expected')};
-          }
-          const stages={install:process.env.INSTALL_RESULT,build:process.env.BUILD_RESULT,tooling:process.env.TOOLING_RESULT,server:process.env.SERVER_RESULT,chromium:process.env.CHROMIUM_RESULT,webkit:process.env.WEBKIT_RESULT};
-          const passed=Object.values(stages).every(value=>value==='success')&&Object.values(reports).every(report=>report.passed);
-          let buildDiagnostics='';try{buildDiagnostics=fs.readFileSync('/tmp/context-build.log','utf8').slice(-12000);}catch{}
-          const report={codeSha:process.env.GITHUB_SHA,runId:process.env.GITHUB_RUN_ID,checkedAt:new Date().toISOString(),scope:'Committed source without candidate patching. Existing Chromium/WebKit regression selection retained. Not live deployment or physical iPhone verification.',passed,integrationApplied:false,stages,buildDiagnostics:process.env.BUILD_RESULT==='failure'?buildDiagnostics:'',reports};
-          fs.mkdirSync('.diagnostics',{recursive:true});fs.writeFileSync('.diagnostics/navigation-context-report.json',JSON.stringify(report,null,2)+'\n');
-          const lines=['## Nawigacja: kontrola zapisanego commitu','','Wynik: '+(passed?'PASS':'FAIL'),'Commit: `'+report.codeSha+'`','','Brak patchowania aplikacji, commitów i git push. integrationApplied=false oznacza brak działania integracyjnego, nie wynik testów.','','| Etap | Wynik |','|---|---|',...Object.entries(stages).map(([name,result])=>'| '+name+' | '+result+' |'),'','| Przeglądarka | Wykryte testy | Oczekiwana liczba | Wynik |','|---|---:|---:|---|',...Object.entries(reports).map(([name,result])=>'| '+name+' | '+result.discovered+' | 38 | '+(result.passed?'PASS':'FAIL')+' |'),'','Zachowano dotychczasowy wymóg 38 testów na przeglądarkę. Jeśli dobór WebKit zawiera więcej testów, raport pozostanie czerwony; nie ukrywamy rozbieżności przez obniżanie wymagań.'];
-          for(const [name,result] of Object.entries(reports))for(const failure of result.failures)lines.push('- '+name+': '+failure.title);
-          fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY,lines.join('\n')+'\n');
-          NODE
+          INSTALL: ${{ steps.install.outcome }}
+          UNITS: ${{ steps.units.outcome }}
+          BUILD: ${{ steps.build.outcome }}
+          TOOLING: ${{ steps.tooling.outcome }}
+          SERVER: ${{ steps.server.outcome }}
+          CHROMIUM_PLAN: ${{ steps.chromium_plan.outcome }}
+          CHROMIUM: ${{ steps.chromium.outcome }}
+          WEBKIT_PLAN: ${{ steps.webkit_plan.outcome }}
+          WEBKIT: ${{ steps.webkit.outcome }}
+        run: node scripts/verify-navigation-manifest.cjs
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -85,12 +76,8 @@ jobs:
           include-hidden-files: true
           path: |
             .diagnostics/navigation-context-report.json
-            test-results
+            reports/context/
+            test-results/
             /tmp/context-build.log
             /tmp/context-server.log
-            /tmp/context-chromium.json
-            /tmp/context-webkit.json
           if-no-files-found: warn
-      - name: Require complete verification
-        if: always()
-        run: node -e "if(!require('./.diagnostics/navigation-context-report.json').passed) process.exit(1)"
