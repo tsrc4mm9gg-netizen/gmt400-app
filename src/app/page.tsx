@@ -1,4 +1,5 @@
 'use client';
+import ImageLightbox from './ImageLightbox';
 
 import { useState, useEffect, useMemo } from 'react';
 import AdditionalTips from './AdditionalTips';
@@ -311,37 +312,28 @@ export default function Home() {
       <meta name="mobile-web-app-capable" content="yes" />
       <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
       <link rel="manifest" href="/manifest.json" />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{__html: JSON.stringify({
-        "@context": "https://schema.org",
-        "@type": "WebSite",
-        "name": "GMT400.pl",
-        "description": "Encyklopedia Chevrolet/GMC GMT400 1988-2000",
-        "url": "https://gmt400.pl"
-      })}} />
+      <script type="application/ld+json">{"{\"@context\":\"https://schema.org\",\"@type\":\"WebSite\",\"name\":\"GMT400.pl\",\"description\":\"Encyklopedia Chevrolet/GMC GMT400 1988-2000\",\"url\":\"https://gmt400.pl\"}"}</script>
       
       {lightbox && (
-        <div className="fixed inset-0 bg-black/95 z-[100] flex items-center justify-center p-4" onClick={() => setLightbox(null)}>
-          <img loading="lazy" src={lightbox} alt="powiększony" className="max-w-full max-h-full object-contain" />
-          <button className="absolute top-6 right-6 text-white text-4xl" onClick={() => setLightbox(null)}>×</button>
-        </div>
+        <ImageLightbox src={lightbox} onClose={() => setLightbox(null)} />
       )}
 
       <header className="fixed top-0 left-0 right-0 z-50 bg-black/90 backdrop-blur-md border-b border-white/10">
         <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
-          <div className="flex items-center gap-2 cursor-pointer" onClick={() => { setSelectedModel('Wszystkie'); setSelectedModelItem(null); setTab('modele'); }}>
-            <span className="text-xl font-bold tracking-wider" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>
+          <div className="flex items-center gap-2 cursor-pointer" >
+            <button type="button" aria-label="GMT400 — strona główna" className="rounded focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-amber-400" onClick={() => { setSelectedModel('Wszystkie'); setSelectedModelItem(null); setTab('modele'); }}><span className="text-xl font-bold tracking-wider" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>
               GMT<span className="text-amber-400">400</span>
-            </span>
-            <button onClick={(e) => { e.stopPropagation(); setShowSearch(!showSearch); }} className="ml-4 text-neutral-400 hover:text-white">
+            </span></button>
+            <button aria-label="Otwórz wyszukiwarkę" onClick={(e) => { e.stopPropagation(); setShowSearch(!showSearch); }} className="ml-4 text-neutral-400 hover:text-white">
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
             </button>
-            <button onClick={(e) => { e.stopPropagation(); setDarkMode(!darkMode); }} className="text-neutral-400 hover:text-white text-lg">
+            <button aria-label="Przełącz motyw" onClick={(e) => { e.stopPropagation(); setDarkMode(!darkMode); }} className="text-neutral-400 hover:text-white text-lg">
               {darkMode ? '☀️' : '🌙'}
             </button>
           </div>
           
           <div className="flex items-center gap-3">
-            <input
+            <input aria-label="Szukaj w bieżącej sekcji"
               type="search"
               placeholder="Szukaj..."
               className="hidden sm:block bg-white/5 border border-white/10 rounded px-3 py-1.5 text-sm w-40 focus:outline-none focus:border-amber-400/50"
@@ -358,7 +350,7 @@ export default function Home() {
 
         {menuOpen && (
           <div className="bg-black border-t border-white/10 px-4 py-4">
-            <input
+            <input aria-label="Szukaj w bieżącej sekcji"
               type="search"
               placeholder="Szukaj..."
               className="sm:hidden w-full bg-white/5 border border-white/10 rounded px-3 py-2 text-sm mb-4 focus:outline-none"
@@ -373,7 +365,7 @@ export default function Home() {
       </header>
 
       <div className="bg-neutral-900/50 border-b border-white/5 px-4 py-2 text-xs text-neutral-500">
-        <span className="hover:text-white cursor-pointer" onClick={() => setTab('modele')}>Strona główna</span>
+        <button type="button" className="hover:text-white cursor-pointer" onClick={() => setTab('modele')}>Strona główna</button>
         <span className="mx-2">›</span>
         <span className="text-amber-400">{CATEGORIES.find(c => c.id === tab)?.label || tab}</span>
       </div>
@@ -474,7 +466,7 @@ export default function Home() {
         {tab === 'kody' && (
           <div>
             <h2 className="text-2xl mb-6" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>KODY OBD</h2>
-            <input 
+            <input aria-label="Szukaj kodu OBD" 
               type="text" 
               placeholder="Szukaj kodu (np. P0171, P0300, 12)..." 
               value={codeQuery}
@@ -500,7 +492,7 @@ export default function Home() {
             <h2 className="text-2xl mb-6" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>USTERKI</h2>
             
             <div className="bg-neutral-950 border border-white/10 p-4 mb-6">
-              <input 
+              <input aria-label="Szukaj usterki" 
                 type="text" 
                 placeholder="Szukaj usterki (np. wyciek, 4L60E, kolektor)..." 
                 value={issueQuery}
@@ -511,7 +503,7 @@ export default function Home() {
               <div className="grid sm:grid-cols-2 gap-4">
                 <div>
                   <label className="text-xs text-neutral-500 block mb-2">MODEL</label>
-                  <select 
+                  <select aria-label="Model pojazdu — filtr usterek" 
                     value={issueModel} 
                     onChange={(e) => setIssueModel(e.target.value)}
                     className="w-full bg-neutral-900 border border-white/10 px-3 py-2 text-sm focus:outline-none focus:border-amber-400"
@@ -524,7 +516,7 @@ export default function Home() {
                 </div>
                 <div>
                   <label className="text-xs text-neutral-500 block mb-2">ROCZNIK</label>
-                  <select 
+                  <select aria-label="Rocznik pojazdu — filtr usterek" 
                     value={issueYear} 
                     onChange={(e) => setIssueYear(e.target.value)}
                     className="w-full bg-neutral-900 border border-white/10 px-3 py-2 text-sm focus:outline-none focus:border-amber-400"
@@ -545,7 +537,7 @@ export default function Home() {
                   const issueImg = i.Nazwa.toLowerCase().includes('kolektor') ? '/issue-intake.jpg' : i.Nazwa.toLowerCase().includes('4l60') ? '/issue-4l60e.jpg' : null;
                   return (
                     <div key={idx} className="bg-neutral-950 border border-white/10 overflow-hidden">
-                      {issueImg && <img loading="lazy" src={issueImg} alt="schemat" className="w-full max-h-48 object-contain bg-white cursor-pointer" onClick={() => setLightbox(issueImg)} />}
+                      {issueImg && <button type="button" aria-label="Powiększ ilustrację" className="block w-full rounded focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-amber-400" onClick={() => setLightbox(issueImg)}><img loading="lazy" src={issueImg} alt="schemat" className="w-full max-h-48 object-contain bg-white cursor-pointer"  /></button>}
                       <div className="p-4">
                         <div className="flex justify-between items-start mb-2">
                           <h3 className="font-semibold">{i.Nazwa}</h3>
@@ -577,7 +569,7 @@ export default function Home() {
         {tab === 'diy' && (
           <div>
             <h2 className="text-2xl mb-6" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>PORADNIKI DIY</h2>
-            <input 
+            <input aria-label="Szukaj porady DIY" 
               type="text" 
               placeholder="Szukaj porady (np. 4L60E, filtr, kolektor)..." 
               value={diyQuery}
@@ -590,7 +582,7 @@ export default function Home() {
                 const tipImg = getTipImage(t.Nazwa);
                 return (
                   <div key={idx} className="bg-neutral-950 border border-white/10 overflow-hidden">
-                    {tipImg && <img loading="lazy" src={tipImg} alt="diagram" className="w-full max-h-64 object-contain bg-white cursor-pointer" onClick={() => setLightbox(tipImg)} />}
+                    {tipImg && <button type="button" aria-label="Powiększ ilustrację" className="block w-full rounded focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-amber-400" onClick={() => setLightbox(tipImg)}><img loading="lazy" src={tipImg} alt="diagram" className="w-full max-h-64 object-contain bg-white cursor-pointer"  /></button>}
                     <div className="p-4">
                       <h3 className="font-semibold mb-2">{t.Nazwa}</h3>
                       <VehicleMatchBadge item={t} />
@@ -627,7 +619,7 @@ export default function Home() {
         {tab === 'schematy' && (
           <div>
             <h2 className="text-2xl mb-6" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>SCHEMATY ELEKTRYCZNE</h2>
-            <input 
+            <input aria-label="Szukaj schematu" 
               type="text" 
               placeholder="Szukaj schematu (np. masa, punkt, zegary)..." 
               value={schemaQuery}
@@ -650,7 +642,7 @@ export default function Home() {
           <div>
             <h2 className="text-2xl mb-6" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>DEKODER VIN</h2>
             <div className="bg-neutral-950 border border-white/10 p-4 mb-6">
-              <input 
+              <input aria-label="Numer VIN do dekodowania" 
                 type="text" 
                 placeholder="Wpisz 17-znakowy VIN..." 
                 value={vinInput}
@@ -845,7 +837,7 @@ export default function Home() {
           <div>
             <h2 className="text-2xl mb-6" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>BAZA CZĘŚCI OEM</h2>
             
-            <input 
+            <input aria-label="Szukaj części" 
               type="text" 
               placeholder="Szukaj części (np. filtr, świece, pompa)..." 
               value={partsQuery}
@@ -919,7 +911,7 @@ export default function Home() {
                 { kat: 'filtry', nazwa: 'Filtr paliwa Diesel', oem: 'AC Delco TP1006', opis: 'Filtr paliwa 6.5L', model: '6.5L' },
               ].filter(p => (partsFilter === 'wszystkie' || p.kat === partsFilter) && (!partsQuery || p.nazwa.toLowerCase().includes(partsQuery.toLowerCase()) || p.oem.toLowerCase().includes(partsQuery.toLowerCase()))).map((p, idx) => (
                 <div key={idx} className="bg-neutral-950 border border-white/10 overflow-hidden">
-                  {p.img && <img loading="lazy" src={p.img} alt={p.nazwa} className="w-full h-32 object-contain bg-white cursor-pointer" onClick={() => setLightbox(p.img)} />}
+                  {p.img && <button type="button" aria-label="Powiększ ilustrację" className="block w-full rounded focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-amber-400" onClick={() => setLightbox(p.img)}><img loading="lazy" src={p.img} alt={p.nazwa} className="w-full h-32 object-contain bg-white cursor-pointer"  /></button>}
                   <div className="p-4">
                   <div className="flex justify-between items-start mb-2">
                     <h3 className="font-semibold">{p.nazwa}</h3>
@@ -1016,7 +1008,7 @@ export default function Home() {
               <p className="text-neutral-500 text-center py-4">Wybierz silnik powyżej aby zobaczyć szczegóły.</p>
             )}
 
-            <img loading="lazy" src="/spec-fluids-map.jpg" alt="Lokalizacje płynów" className="w-full mb-6 cursor-pointer" onClick={() => setLightbox('/spec-fluids-map.jpg')} />
+            <button type="button" aria-label="Powiększ ilustrację" className="block w-full rounded focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-amber-400" onClick={() => setLightbox('/spec-fluids-map.jpg')}><img loading="lazy" src="/spec-fluids-map.jpg" alt="Lokalizacje płynów" className="w-full mb-6 cursor-pointer"  /></button>
 
             <div className="bg-neutral-950 border border-white/10 p-4 mb-6">
               <h3 className="font-semibold text-amber-400 mb-4">Płyny eksploatacyjne — interwały</h3>
@@ -1145,7 +1137,7 @@ export default function Home() {
             <h2 className="text-2xl mb-6" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>PORADNIK KUPUJĄCEGO</h2>
             
             <div className="bg-neutral-950 border border-white/10 overflow-hidden mb-4">
-              <img loading="lazy" src="/guide-rust.jpg" alt="Rdza GMT400" className="w-full h-48 object-cover cursor-pointer" onClick={() => setLightbox('/guide-rust.jpg')} />
+              <button type="button" aria-label="Powiększ ilustrację" className="block w-full rounded focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-amber-400" onClick={() => setLightbox('/guide-rust.jpg')}><img loading="lazy" src="/guide-rust.jpg" alt="Rdza GMT400" className="w-full h-48 object-cover cursor-pointer"  /></button>
               <div className="p-4">
                 <h3 className="font-semibold text-amber-400 mb-2">1. RDZA — NAJWIĘKSZY WRÓG</h3>
                 <ul className="text-sm text-neutral-300 space-y-1">
@@ -1160,7 +1152,7 @@ export default function Home() {
             </div>
 
             <div className="bg-neutral-950 border border-white/10 overflow-hidden mb-4">
-              <img loading="lazy" src="/guide-frame.jpg" alt="Rama GMT400" className="w-full h-48 object-cover cursor-pointer" onClick={() => setLightbox('/guide-frame.jpg')} />
+              <button type="button" aria-label="Powiększ ilustrację" className="block w-full rounded focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-amber-400" onClick={() => setLightbox('/guide-frame.jpg')}><img loading="lazy" src="/guide-frame.jpg" alt="Rama GMT400" className="w-full h-48 object-cover cursor-pointer"  /></button>
               <div className="p-4">
                 <h3 className="font-semibold text-amber-400 mb-2">2. RAMA — SPRAWDŹ DOKŁADNIE</h3>
                 <ul className="text-sm text-neutral-300 space-y-1">
@@ -1174,7 +1166,7 @@ export default function Home() {
             </div>
 
             <div className="bg-neutral-950 border border-white/10 overflow-hidden mb-4">
-              <img loading="lazy" src="/guide-engine.jpg" alt="Silnik 5.7L" className="w-full h-48 object-cover cursor-pointer" onClick={() => setLightbox('/guide-engine.jpg')} />
+              <button type="button" aria-label="Powiększ ilustrację" className="block w-full rounded focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-amber-400" onClick={() => setLightbox('/guide-engine.jpg')}><img loading="lazy" src="/guide-engine.jpg" alt="Silnik 5.7L" className="w-full h-48 object-cover cursor-pointer"  /></button>
               <div className="p-4">
                 <h3 className="font-semibold text-amber-400 mb-2">3. SILNIK — CO SPRAWDZIĆ</h3>
                 <ul className="text-sm text-neutral-300 space-y-1">
@@ -1235,7 +1227,7 @@ export default function Home() {
           <div>
             <h2 className="text-2xl mb-6" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>TUNING I MODYFIKACJE</h2>
             
-            <input 
+            <input aria-label="Szukaj modyfikacji" 
               type="text" 
               placeholder="Szukaj modyfikacji (np. lift, headers, LS swap)..." 
               value={tuningQuery}
@@ -1275,7 +1267,7 @@ export default function Home() {
                 { kat: 'zawieszenie', nazwa: 'Polyurethane bushings', efekt: 'Sztywniejsze zawieszenie', czesci: 'Energy Suspension', koszt: '400-800 PLN', opis: 'Zamiana gumowych tulei na poliuretanowe. Lepsza kontrola.', model: 'Wszystkie' },
               ].filter(m => (tuningFilter === 'wszystkie' || m.kat === tuningFilter) && (!tuningQuery || m.nazwa.toLowerCase().includes(tuningQuery.toLowerCase()) || m.opis.toLowerCase().includes(tuningQuery.toLowerCase()))).map((m, idx) => (
                 <div key={idx} className="bg-neutral-950 border border-white/10 overflow-hidden">
-                  {m.img && <img loading="lazy" src={m.img} alt={m.nazwa} className="w-full h-40 object-cover cursor-pointer" onClick={() => setLightbox(m.img)} />}
+                  {m.img && <button type="button" aria-label="Powiększ ilustrację" className="block w-full rounded focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-amber-400" onClick={() => setLightbox(m.img)}><img loading="lazy" src={m.img} alt={m.nazwa} className="w-full h-40 object-cover cursor-pointer"  /></button>}
                   <div className="p-4">
                   <div className="flex justify-between items-start mb-2">
                     <h3 className="font-semibold text-lg">{m.nazwa}</h3>
@@ -1348,7 +1340,7 @@ export default function Home() {
             <AdditionalTips />
             
             <div className="bg-neutral-950 border border-white/10 overflow-hidden mb-4">
-              <img loading="lazy" src="/tip-obd.jpg" alt="OBD1" className="w-full h-48 object-cover cursor-pointer" onClick={() => setLightbox('/tip-obd.jpg')} />
+              <button type="button" aria-label="Powiększ ilustrację" className="block w-full rounded focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-amber-400" onClick={() => setLightbox('/tip-obd.jpg')}><img loading="lazy" src="/tip-obd.jpg" alt="OBD1" className="w-full h-48 object-cover cursor-pointer"  /></button>
               <div className="p-4">
                 <h3 className="font-semibold text-amber-400 mb-2">1. KODY OBD-I BEZ SKANERA (1988-1995)</h3>
                 <p className="text-sm text-neutral-300 mb-2">Odczytaj kody błędów spinaczem — bez skanera!</p>
@@ -1363,7 +1355,7 @@ export default function Home() {
             </div>
 
             <div className="bg-neutral-950 border border-white/10 overflow-hidden mb-4">
-              <img loading="lazy" src="/tip-torsion.jpg" alt="Torsion" className="w-full h-48 object-cover cursor-pointer" onClick={() => setLightbox('/tip-torsion.jpg')} />
+              <button type="button" aria-label="Powiększ ilustrację" className="block w-full rounded focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-amber-400" onClick={() => setLightbox('/tip-torsion.jpg')}><img loading="lazy" src="/tip-torsion.jpg" alt="Torsion" className="w-full h-48 object-cover cursor-pointer"  /></button>
               <div className="p-4">
                 <h3 className="font-semibold text-amber-400 mb-2">2. POZIOMOWANIE 4x4 (TORSION CRANK)</h3>
                 <p className="text-sm text-neutral-300 mb-2">Podnieś przód o 1-2" bez kitów — fabryczne torsion bars.</p>
@@ -1415,7 +1407,7 @@ export default function Home() {
             </div>
 
             <div className="bg-neutral-950 border border-white/10 overflow-hidden mb-4">
-              <img loading="lazy" src="/tip-fuse.jpg" alt="Fuse box" className="w-full h-48 object-cover cursor-pointer" onClick={() => setLightbox('/tip-fuse.jpg')} />
+              <button type="button" aria-label="Powiększ ilustrację" className="block w-full rounded focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-amber-400" onClick={() => setLightbox('/tip-fuse.jpg')}><img loading="lazy" src="/tip-fuse.jpg" alt="Fuse box" className="w-full h-48 object-cover cursor-pointer"  /></button>
               <div className="p-4">
                 <h3 className="font-semibold text-amber-400 mb-2">7. SKRZYNKA BEZPIECZNIKÓW POD MASKĄ</h3>
                 <p className="text-sm text-neutral-300 mb-2">Lokalizacja: tył komory silnika, przy zbiorniku hamulcowym.</p>
@@ -1430,7 +1422,7 @@ export default function Home() {
             </div>
 
             <div className="bg-neutral-950 border border-white/10 overflow-hidden mb-4">
-              <img loading="lazy" src="/tip-tailgate.jpg" alt="Tailgate" className="w-full h-48 object-cover cursor-pointer" onClick={() => setLightbox('/tip-tailgate.jpg')} />
+              <button type="button" aria-label="Powiększ ilustrację" className="block w-full rounded focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-amber-400" onClick={() => setLightbox('/tip-tailgate.jpg')}><img loading="lazy" src="/tip-tailgate.jpg" alt="Tailgate" className="w-full h-48 object-cover cursor-pointer"  /></button>
               <div className="p-4">
                 <h3 className="font-semibold text-amber-400 mb-2">8. KLAPA NIE OTWIERA SIĘ — TRIK</h3>
                 <p className="text-sm text-neutral-300 mb-2">Typowy problem: zacięty mechanizm lub zerwane klipsy.</p>
@@ -1544,15 +1536,15 @@ export default function Home() {
             <div className="bg-neutral-950 border border-white/10 p-4 mb-4 space-y-4">
               <div>
                 <label className="text-sm text-neutral-400 block mb-1">Przejechane km:</label>
-                <input type="number" value={fuelKm} onChange={e => setFuelKm(Number(e.target.value))} className="w-full bg-neutral-900 border border-white/10 p-2 text-sm" />
+                <input aria-label="Przejechany dystans (km)" type="number" value={fuelKm} onChange={e => setFuelKm(Number(e.target.value))} className="w-full bg-neutral-900 border border-white/10 p-2 text-sm" />
               </div>
               <div>
                 <label className="text-sm text-neutral-400 block mb-1">Zatankowane litry:</label>
-                <input type="number" value={fuelLiters} onChange={e => setFuelLiters(Number(e.target.value))} className="w-full bg-neutral-900 border border-white/10 p-2 text-sm" />
+                <input aria-label="Zużyte paliwo (litry)" type="number" value={fuelLiters} onChange={e => setFuelLiters(Number(e.target.value))} className="w-full bg-neutral-900 border border-white/10 p-2 text-sm" />
               </div>
               <div>
                 <label className="text-sm text-neutral-400 block mb-1">Cena za litr (PLN):</label>
-                <input type="number" step="0.1" value={fuelPrice} onChange={e => setFuelPrice(Number(e.target.value))} className="w-full bg-neutral-900 border border-white/10 p-2 text-sm" />
+                <input aria-label="Cena paliwa (PLN za litr)" type="number" step="0.1" value={fuelPrice} onChange={e => setFuelPrice(Number(e.target.value))} className="w-full bg-neutral-900 border border-white/10 p-2 text-sm" />
               </div>
             </div>
             <div className="bg-neutral-950 border border-amber-400/30 p-4">
@@ -1575,7 +1567,7 @@ export default function Home() {
             <h2 className="text-2xl mb-6" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>MOJE AUTO</h2>
             <div className="bg-neutral-950 border border-white/10 p-4 mb-4">
               <label className="text-sm text-neutral-400 block mb-2">Zapisz VIN swojego auta:</label>
-              <input type="text" value={myVin} onChange={e => setMyVin(e.target.value.toUpperCase())} placeholder="Wpisz 17-znakowy VIN" maxLength={17} className="w-full bg-neutral-900 border border-white/10 p-2 text-sm font-mono" />
+              <input aria-label="Numer VIN mojego auta" type="text" value={myVin} onChange={e => setMyVin(e.target.value.toUpperCase())} placeholder="Wpisz 17-znakowy VIN" maxLength={17} className="w-full bg-neutral-900 border border-white/10 p-2 text-sm font-mono" />
               {myVin.length === 17 && (
                 <p className="text-green-400 text-xs mt-2">VIN zapisany lokalnie</p>
               )}

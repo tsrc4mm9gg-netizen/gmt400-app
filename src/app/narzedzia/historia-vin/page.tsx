@@ -106,14 +106,14 @@ export default function VinHistoryPage() {
       </p>
 
       <form onSubmit={checkVin} className="mt-6 flex flex-col gap-3 sm:flex-row">
-        <input
+        <div className="min-w-0 flex-1"><label htmlFor="history-vin" className="mb-2 block text-sm font-medium">Numer VIN pojazdu</label><input id="history-vin"
           value={vin}
           onChange={(event) => setVin(event.target.value.toUpperCase())}
           placeholder="Wpisz 17-znakowy VIN"
           maxLength={20}
           className="w-full rounded-lg border border-slate-300 px-4 py-3 font-mono uppercase"
           required
-        />
+        /></div>
         <button
           type="submit"
           disabled={loading}

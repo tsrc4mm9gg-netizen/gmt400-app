@@ -51,7 +51,7 @@ jobs:
         run: |
           {
             echo '## Kontrola GitHub Actions'
-            echo 'Commit: `${{ github.sha }}`'
+            printf 'Commit: %s\n' "$GITHUB_SHA"
             echo "Wynik kroku kontroli: ${LINT_OUTCOME:-brak}."
             echo 'Narzędzie: actionlint 1.7.12; składnia, wyrażenia Actions oraz ShellCheck dla Bash.'
             echo 'Bez buildu aplikacji. Kontrola nie uruchamia testów strony, nie sprawdza nazw projektów Playwright i nie analizuje Pythona.'
