@@ -30,10 +30,21 @@ jobs:
         run: |
           test "$(git hash-object src/app/page.tsx)" = '4328a095587680f96f502a8c67246be55a08bc68'
           test "$(git hash-object src/app/narzedzia/historia-vin/page.tsx)" = '526fe67cfb3881cf2d15a115ef1d38bea2159707'
+          test "$(git hash-object tests/global-search.spec.cjs)" = '0b73353cc36cca6e5f636375a6dedf1509f72dcc'
       - id: patch
         run: |
           node scripts/repair-workflow-shell.cjs 2>&1 | tee reports/comprehensive/workflow-patch.log
           node scripts/repair-remaining-accessibility.cjs 2>&1 | tee reports/comprehensive/frontend-patch.log
+          node <<'NODE'
+          const fs = require('node:fs');
+          const assert = require('node:assert/strict');
+          const file = 'tests/global-search.spec.cjs';
+          const source = fs.readFileSync(file, 'utf8');
+          const before = "await page.locator('header button').first().click();";
+          const after = "await page.getByRole('button', { name: 'Otwórz wyszukiwarkę', exact: true }).click();";
+          assert.equal(source.split(before).length, 2, 'Expected exactly one positional search selector');
+          fs.writeFileSync(file, source.replace(before, after));
+          NODE
       - id: actionlint
         run: |
           TOOL_DIR="$RUNNER_TEMP/gmt400-comprehensive-actionlint"
@@ -72,10 +83,10 @@ jobs:
           git switch -c fix/comprehensive-ci-accessibility
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add .github/workflows src/app/page.tsx src/app/narzedzia/historia-vin/page.tsx
+          git add .github/workflows src/app/page.tsx src/app/narzedzia/historia-vin/page.tsx tests/global-search.spec.cjs
           git commit -m 'fix: workflow lint and remaining frontend accessibility findings'
           git push origin HEAD:fix/comprehensive-ci-accessibility
-          gh pr create --repo tsrc4mm9gg-netizen/gmt400-app --base main --head fix/comprehensive-ci-accessibility --title 'Fix workflow lint and remaining frontend accessibility findings' --body 'Preserves bounded retries while fixing 26 unused shell counters, two quoting diagnostics and grouped summary redirection. Applies the existing frontend accessibility repair. Published after actionlint, static frontend checks, production build, targeted accessibility tests and the existing WebKit suite succeeded. No automatic merge or production certification.'
+          gh pr create --repo tsrc4mm9gg-netizen/gmt400-app --base main --head fix/comprehensive-ci-accessibility --title 'Fix workflow lint and remaining frontend accessibility findings' --body 'Preserves bounded retries while fixing 26 unused shell counters, two quoting diagnostics and grouped summary redirection. Applies the existing frontend accessibility repair and targets the search button by accessible name in its regression tests. Published after actionlint, static frontend checks, production build, targeted accessibility tests and the existing WebKit suite succeeded. No automatic merge or production certification.'
       - name: Publish diagnostic report even on failure
         if: always()
         uses: actions/github-script@v7
