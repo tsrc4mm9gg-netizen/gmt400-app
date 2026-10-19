@@ -1,183 +1,31 @@
 {
-  "auditorCodeSha": "ed9c8b8d81eacc7bf737fe58bcd5b168e143b7c5",
-  "runId": "39047112725",
-  "checkedAt": "2026-10-17T15:56:59.576Z",
-  "passed": true,
+  "auditorCodeSha": "7d2a23e50340fa9ee619128b5b649b65fa57cc0d",
+  "runId": "39253587848",
+  "checkedAt": "2026-10-19T12:38:46.887Z",
+  "passed": false,
   "scope": "Synthetic local legacy field formatting, source-content comparison, contents navigation and existing renderer security tests in Chromium and Linux WebKit. No Notion writes, no technical procedure verification or production certification.",
   "stages": {
     "INSTALL": "success",
-    "CANDIDATE": "success",
-    "BUILD": "success",
-    "TOOLING": "success",
-    "SERVER": "success",
-    "TESTS": "success"
+    "CANDIDATE": "failure",
+    "BUILD": "skipped",
+    "TOOLING": "skipped",
+    "SERVER": "skipped",
+    "TESTS": "skipped"
   },
   "coverage": [
     {
       "project": "chromium",
-      "text": 5,
-      "renderer": 3
+      "text": 0,
+      "renderer": 0
     },
     {
       "project": "webkit",
-      "text": 5,
-      "renderer": 3
+      "text": 0,
+      "renderer": 0
     }
   ],
-  "parseError": "",
-  "stats": {
-    "startTime": "2026-10-17T15:56:49.957Z",
-    "duration": 9543.408000000001,
-    "expected": 16,
-    "skipped": 0,
-    "unexpected": 0,
-    "flaky": 0
-  },
+  "parseError": "ENOENT: no such file or directory, open '/tmp/material-text-tests.json'",
+  "stats": {},
   "runnerErrors": [],
-  "tests": [
-    {
-      "title": "legacy markup produces three real headings without new content",
-      "file": "material-text.spec.cjs",
-      "project": "chromium",
-      "status": "expected",
-      "errors": [
-        ""
-      ]
-    },
-    {
-      "title": "legacy lists preserve source numbering and ordinary numeric text",
-      "file": "material-text.spec.cjs",
-      "project": "chromium",
-      "status": "expected",
-      "errors": [
-        ""
-      ]
-    },
-    {
-      "title": "renderer escapes unsupported HTML and never creates unsafe links",
-      "file": "material-text.spec.cjs",
-      "project": "chromium",
-      "status": "expected",
-      "errors": [
-        ""
-      ]
-    },
-    {
-      "title": "formatted field exposes source headings lists and complete content",
-      "file": "material-text.spec.cjs",
-      "project": "chromium",
-      "status": "expected",
-      "errors": [
-        ""
-      ]
-    },
-    {
-      "title": "contents can navigate sections originating from the legacy field",
-      "file": "material-text.spec.cjs",
-      "project": "chromium",
-      "status": "expected",
-      "errors": [
-        ""
-      ]
-    },
-    {
-      "title": "legacy markup produces three real headings without new content",
-      "file": "material-text.spec.cjs",
-      "project": "webkit",
-      "status": "expected",
-      "errors": [
-        ""
-      ]
-    },
-    {
-      "title": "legacy lists preserve source numbering and ordinary numeric text",
-      "file": "material-text.spec.cjs",
-      "project": "webkit",
-      "status": "expected",
-      "errors": [
-        ""
-      ]
-    },
-    {
-      "title": "renderer escapes unsupported HTML and never creates unsafe links",
-      "file": "material-text.spec.cjs",
-      "project": "webkit",
-      "status": "expected",
-      "errors": [
-        ""
-      ]
-    },
-    {
-      "title": "formatted field exposes source headings lists and complete content",
-      "file": "material-text.spec.cjs",
-      "project": "webkit",
-      "status": "expected",
-      "errors": [
-        ""
-      ]
-    },
-    {
-      "title": "contents can navigate sections originating from the legacy field",
-      "file": "material-text.spec.cjs",
-      "project": "webkit",
-      "status": "expected",
-      "errors": [
-        ""
-      ]
-    },
-    {
-      "title": "instruction body follows pagination and reads nested illustrations",
-      "file": "notion-content.spec.cjs",
-      "project": "chromium",
-      "status": "expected",
-      "errors": [
-        ""
-      ]
-    },
-    {
-      "title": "repeated content cursor fails rather than silently returning partial instructions",
-      "file": "notion-content.spec.cjs",
-      "project": "chromium",
-      "status": "expected",
-      "errors": [
-        ""
-      ]
-    },
-    {
-      "title": "renderer retains text, formatting and image captions without executable links or HTML",
-      "file": "notion-content.spec.cjs",
-      "project": "chromium",
-      "status": "expected",
-      "errors": [
-        ""
-      ]
-    },
-    {
-      "title": "instruction body follows pagination and reads nested illustrations",
-      "file": "notion-content.spec.cjs",
-      "project": "webkit",
-      "status": "expected",
-      "errors": [
-        ""
-      ]
-    },
-    {
-      "title": "repeated content cursor fails rather than silently returning partial instructions",
-      "file": "notion-content.spec.cjs",
-      "project": "webkit",
-      "status": "expected",
-      "errors": [
-        ""
-      ]
-    },
-    {
-      "title": "renderer retains text, formatting and image captions without executable links or HTML",
-      "file": "notion-content.spec.cjs",
-      "project": "webkit",
-      "status": "expected",
-      "errors": [
-        ""
-      ]
-    }
-  ]
+  "tests": []
 }
