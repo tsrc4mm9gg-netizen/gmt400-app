@@ -1,0 +1,53 @@
+name: Verify remaining accessibility repair
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/repair-remaining-accessibility.yml']
+permissions:
+  contents: write
+  pull-requests: write
+concurrency:
+  group: repair-remaining-accessibility
+  cancel-in-progress: false
+jobs:
+  repair:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm ci
+      - name: Require reviewed source versions
+        run: |
+          test "$(git hash-object src/app/page.tsx)" = '4328a095587680f96f502a8c67246be55a08bc68'
+          test "$(git hash-object src/app/narzedzia/historia-vin/page.tsx)" = '526fe67cfb3881cf2d15a115ef1d38bea2159707'
+      - run: node scripts/repair-remaining-accessibility.cjs
+      - run: node scripts/check-frontend-quality.cjs
+      - run: npm run build
+      - run: |
+          npm install --no-save --package-lock=false @playwright/test
+          npx playwright install --with-deps webkit
+      - name: Run WebKit accessibility regression tests
+        run: |
+          npm run start -- --hostname 127.0.0.1 --port 3100 > /tmp/a11y-server.log 2>&1 &
+          deadline=$((SECONDS + 60))
+          until curl -fsS http://127.0.0.1:3100 >/dev/null; do
+            if (( SECONDS >= deadline )); then cat /tmp/a11y-server.log; exit 1; fi
+            sleep 1
+          done
+          printf '%s\n' "module.exports = { testDir: './tests', testMatch: 'frontend-accessibility.spec.cjs', workers: 1, timeout: 45000, expect: { timeout: 10000 }, use: { browserName: 'webkit', viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true } };" > .a11y.config.cjs
+          npx playwright test --config=.a11y.config.cjs
+          npx playwright test --config=playwright.webkit.config.cjs
+      - name: Publish repair branch and pull request after successful checks
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          git switch -c fix/remaining-frontend-accessibility
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add src/app/page.tsx src/app/narzedzia/historia-vin/page.tsx
+          git commit -m 'fix: remaining frontend labels, semantic controls and image dialog'
+          git push origin HEAD:fix/remaining-frontend-accessibility
+          gh pr create --repo tsrc4mm9gg-netizen/gmt400-app --base main --head fix/remaining-frontend-accessibility --title 'Fix remaining frontend accessibility findings' --body 'Adds accessible names to 16 fields, semantic navigation controls, a native image dialog with Escape and focus restoration, keyboard image triggers, and static JSON-LD without dangerouslySetInnerHTML. Published only after the static frontend check, production build, targeted WebKit tests and existing WebKit regression suite passed. No automatic merge; not a full WCAG certification.'
