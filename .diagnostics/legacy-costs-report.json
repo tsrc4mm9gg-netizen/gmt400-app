@@ -1,13 +1,13 @@
 {
-  "auditorCodeSha": "f86373e04238d1a7bf695ea8c08be23c1511d00a",
-  "runId": "39038175685",
-  "checkedAt": "2026-10-17T13:51:36.799Z",
+  "auditorCodeSha": "7d2a23e50340fa9ee619128b5b649b65fa57cc0d",
+  "runId": "39253587608",
+  "checkedAt": "2026-10-19T12:39:57.534Z",
   "passed": true,
   "scope": "Candidate main-page import integration, local build and Chromium tests with mocked Notion. Manual customs/VAT inputs, not automated tax assessment or production certification.",
   "parseError": "",
   "stats": {
-    "startTime": "2026-10-17T13:51:33.132Z",
-    "duration": 3593.6130000000003,
+    "startTime": "2026-10-19T12:39:53.515Z",
+    "duration": 3940.1129999999994,
     "expected": 8,
     "skipped": 0,
     "unexpected": 0,
