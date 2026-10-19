@@ -1,0 +1,81 @@
+name: Mobile Lighthouse baseline
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '37 6 * * 3'
+  push:
+    branches: [main]
+    paths:
+      - 'src/**'
+      - 'public/**'
+      - 'package.json'
+      - 'package-lock.json'
+      - 'next.config.ts'
+      - 'lighthouserc.cjs'
+      - 'scripts/lighthouse-summary.cjs'
+      - '.github/workflows/lighthouse.yml'
+permissions:
+  contents: read
+concurrency:
+  group: mobile-lighthouse-baseline
+  cancel-in-progress: true
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      NEXT_TELEMETRY_DISABLED: '1'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - name: Build production application
+        shell: bash
+        run: |
+          mkdir -p reports/lighthouse
+          set -o pipefail
+          npm run build 2>&1 | tee reports/lighthouse/build.log
+      - name: Install isolated Lighthouse CI tool
+        shell: bash
+        run: |
+          npm install --prefix "$RUNNER_TEMP/gmt400-lhci" --no-save --package-lock=false @lhci/cli@0.15.1
+          echo "$RUNNER_TEMP/gmt400-lhci/node_modules/.bin" >> "$GITHUB_PATH"
+          CHROME_BIN="$(command -v google-chrome || command -v chromium || command -v chromium-browser || true)"
+          if [[ -z "$CHROME_BIN" ]]; then echo '::error::Chrome executable not available on runner.'; exit 1; fi
+          echo "CHROME_PATH=$CHROME_BIN" >> "$GITHUB_ENV"
+      - name: Start local production server and verify pages
+        shell: bash
+        run: |
+          npm run start -- --hostname 127.0.0.1 --port 3100 > reports/lighthouse/server.log 2>&1 &
+          READY=0
+          for i in $(seq 1 60); do
+            if curl -fsS http://127.0.0.1:3100/ > /dev/null; then READY=1; break; fi
+            sleep 1
+          done
+          if [[ "$READY" != '1' ]]; then cat reports/lighthouse/server.log; exit 1; fi
+          curl -fsS http://127.0.0.1:3100/swiat-gmt400 > /dev/null
+          curl -fsS http://127.0.0.1:3100/swiat-gmt400/design-ktory-sie-nie-starzeje > /dev/null
+      - name: Collect three mobile runs per page
+        run: lhci collect --config=lighthouserc.cjs
+      - name: Evaluate advisory score thresholds
+        run: lhci assert --config=lighthouserc.cjs
+      - name: Save reports locally without public upload
+        run: lhci upload --config=lighthouserc.cjs
+      - name: Publish iPhone-readable summary and verify complete measurements
+        if: always()
+        run: node scripts/lighthouse-summary.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: lighthouse-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            reports/lighthouse/
+            .lighthouseci/
+          include-hidden-files: true
+          retention-days: 14
+          if-no-files-found: warn
