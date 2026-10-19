@@ -53,6 +53,10 @@ test('all service tiles use page flow and move away when the page is scrolled wi
   await expect(nav.locator('[data-navigation-items] > li')).toHaveCount(9);
   const layout = await nav.evaluate(node => { const list = node.querySelector('[data-navigation-items]'); const n = getComputedStyle(node); const l = getComputedStyle(list); return { position: n.position, overflow: n.overflowY, listOverflow: l.overflowY, scrollable: list.scrollHeight > list.clientHeight + 1 }; });
   expect(layout).toEqual({ position: 'static', overflow: 'visible', listOverflow: 'visible', scrollable: false });
+  await expect.poll(() => nav.evaluate(node => {
+    const header = Math.max(0, document.querySelector('header')?.getBoundingClientRect().bottom || 0);
+    return Math.abs(node.getBoundingClientRect().top - header - 16);
+  })).toBeLessThan(2);
   const before = await nav.evaluate(node => ({ top: node.getBoundingClientRect().top, y: window.scrollY }));
   await page.evaluate(() => window.scrollBy(0, 300));
   await expect.poll(() => nav.evaluate(node => node.getBoundingClientRect().top)).toBeLessThan(before.top - 100);
