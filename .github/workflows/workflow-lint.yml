@@ -1,0 +1,76 @@
+name: Check GitHub Actions configuration
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/**', '.github/actionlint.yaml', '.github/actionlint.yml']
+  pull_request:
+    paths: ['.github/workflows/**', '.github/actionlint.yaml', '.github/actionlint.yml']
+permissions:
+  contents: read
+concurrency:
+  group: workflow-lint-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+jobs:
+  lint:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Install verified actionlint release
+        shell: bash
+        run: |
+          TOOL_DIR="$RUNNER_TEMP/gmt400-actionlint"
+          mkdir -p "$TOOL_DIR"
+          curl --fail --silent --show-error --location --retry 2 \
+            https://github.com/rhysd/actionlint/releases/download/v1.7.12/actionlint_1.7.12_linux_amd64.tar.gz \
+            --output "$TOOL_DIR/actionlint.tar.gz"
+          echo "8aca8db96f1b94770f1b0d72b6dddcb1ebb8123cb3712530b08cc387b349a3d8  $TOOL_DIR/actionlint.tar.gz" | sha256sum --check --strict
+          tar -xzf "$TOOL_DIR/actionlint.tar.gz" -C "$TOOL_DIR" actionlint
+          echo "$TOOL_DIR" >> "$GITHUB_PATH"
+          "$TOOL_DIR/actionlint" -version
+          command -v shellcheck
+      - name: Validate all workflow files and Bash scripts
+        id: lint
+        shell: bash
+        run: |
+          mkdir -p reports/workflow-lint
+          set +e
+          actionlint -color=false -pyflakes= 2>&1 | tee reports/workflow-lint/actionlint.log
+          STATUS=${PIPESTATUS[0]}
+          set -e
+          printf '%s\n' "$STATUS" > reports/workflow-lint/exit-code.txt
+          exit "$STATUS"
+      - name: Publish readable result
+        if: always()
+        shell: bash
+        env:
+          LINT_OUTCOME: ${{ steps.lint.outcome }}
+        run: |
+          {
+            echo '## Kontrola GitHub Actions'
+            echo 'Commit: `${{ github.sha }}`'
+            echo "Wynik kroku kontroli: ${LINT_OUTCOME:-brak}."
+            echo 'Narzędzie: actionlint 1.7.12; składnia, wyrażenia Actions oraz ShellCheck dla Bash.'
+            echo 'Bez buildu aplikacji. Kontrola nie uruchamia testów strony, nie sprawdza nazw projektów Playwright i nie analizuje Pythona.'
+            echo 'Czerwony wynik oznacza błędy lub awarię narzędzia, a nie automatyczne wyłączenie innych workflowów.'
+            if [[ -f reports/workflow-lint/actionlint.log ]]; then
+              echo ''
+              echo '### Diagnostyka — pierwsze 120 linii'
+              echo '```text'
+              head -n 120 reports/workflow-lint/actionlint.log
+              echo '```'
+              echo 'Pełny log jest dostępny w kroku kontroli oraz w artefakcie workflow-lint.'
+            else
+              echo 'Brak logu kontroli. Sprawdź krok pobierania i weryfikacji narzędzia; nie uznajemy tego za PASS.'
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: workflow-lint-${{ github.run_id }}-${{ github.run_attempt }}
+          path: reports/workflow-lint/
+          retention-days: 7
+          if-no-files-found: warn
