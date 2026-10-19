@@ -4,8 +4,7 @@ on:
     branches: [main]
     paths: ['.github/workflows/repair-remaining-accessibility.yml']
 permissions:
-  contents: write
-  pull-requests: write
+  contents: read
   issues: write
 concurrency:
   group: repair-remaining-accessibility
@@ -19,6 +18,8 @@ jobs:
     timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
@@ -78,14 +79,19 @@ jobs:
       - id: publish
         name: Publish only after successful checks
         env:
-          GH_TOKEN: ${{ github.token }}
+          GH_TOKEN: ${{ secrets.CI_REPAIR_TOKEN }}
+          GIT_TERMINAL_PROMPT: '0'
         run: |
+          if [ -z "$GH_TOKEN" ]; then
+            echo '::error::Missing CI_REPAIR_TOKEN. No branch or PR was published.'
+            exit 1
+          fi
           git switch -c fix/comprehensive-ci-accessibility
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add .github/workflows src/app/page.tsx src/app/narzedzia/historia-vin/page.tsx tests/global-search.spec.cjs
           git commit -m 'fix: workflow lint and remaining frontend accessibility findings'
-          git push origin HEAD:fix/comprehensive-ci-accessibility
+          git -c credential.helper= -c 'credential.helper=!gh auth git-credential' push origin HEAD:fix/comprehensive-ci-accessibility
           gh pr create --repo tsrc4mm9gg-netizen/gmt400-app --base main --head fix/comprehensive-ci-accessibility --title 'Fix workflow lint and remaining frontend accessibility findings' --body 'Preserves bounded retries while fixing 26 unused shell counters, two quoting diagnostics and grouped summary redirection. Applies the existing frontend accessibility repair and targets the search button by accessible name in its regression tests. Published after actionlint, static frontend checks, production build, targeted accessibility tests and the existing WebKit suite succeeded. No automatic merge or production certification.'
       - name: Publish diagnostic report even on failure
         if: always()
