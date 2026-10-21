@@ -39,6 +39,7 @@ const CATEGORIES = [
   { id: 'tuning', label: 'Tuning' },
   { id: 'import', label: 'Import' },
   { id: 'historia', label: 'Historia' },
+  { id: 'ciekawostki', label: 'Ciekawostki' },
     { id: 'kalkulator', label: 'Koszty' },
     { id: 'porownaj', label: 'Porównaj' },
     { id: 'dziennik', label: 'Dziennik' },
@@ -1755,6 +1756,36 @@ export default function Home() {
                 <div className="flex justify-between"><span>Filtry (powietrze, paliwo)</span><span>150 PLN</span></div>
                 <div className="flex justify-between"><span>Drobne naprawy</span><span>500 PLN</span></div>
                 <div className="flex justify-between font-bold border-t border-amber-400/30 pt-2"><span>RAZEM / ROK</span><span className="text-amber-400">~1050 PLN</span></div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {tab === 'ciekawostki' && (
+          <div>
+            <h2 className="text-2xl mb-6" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>CIEKAWOSTKI GMT400</h2>
+            <div className="grid sm:grid-cols-2 gap-6">
+              <div className="bg-neutral-950 border border-white/10 overflow-hidden">
+                <img loading="lazy" src="/history-line.jpg" alt="Linia" className="w-full h-48 object-cover" />
+                <div className="p-4">
+                  <h3 className="font-semibold text-amber-400 mb-2">Ponad 6 milionów sztuk</h3>
+                  <p className="text-sm text-neutral-300">GMT400 to jedna z najliczniej produkowanych platform GM. W latach 1988-2000 zjechało z taśm ponad 6 milionów pojazdów.</p>
+                </div>
+              </div>
+              <div className="bg-neutral-950 border border-white/10 overflow-hidden">
+                <img loading="lazy" src="/history-badge.jpg" alt="Badge" className="w-full h-48 object-cover" />
+                <div className="p-4">
+                  <h3 className="font-semibold text-amber-400 mb-2">C vs K</h3>
+                  <p className="text-sm text-neutral-300">C = tylny napęd (2WD), K = napęd na 4 koła (4x4). Nazewnictwo pochodzi z lat 60. i przetrwało do końca produkcji.</p>
+                </div>
+              </div>
+              <div className="bg-neutral-950 border border-white/10 p-4">
+                <h3 className="font-semibold text-amber-400 mb-2">Ostatni "prawdziwy" pickup</h3>
+                <p className="text-sm text-neutral-300">Wielu fanów uważa GMT400 za ostatnią generację "prawdziwych" amerykańskich pickupów — prosta konstrukcja, łatwa naprawa, trwała rama.</p>
+              </div>
+              <div className="bg-neutral-950 border border-white/10 p-4">
+                <h3 className="font-semibold text-amber-400 mb-2">Tahoe 2-drzwiowe</h3>
+                <p className="text-sm text-neutral-300">Produkowane tylko do 1999. Krótszy rozstaw osi, lżejsze, bardziej zwrotne. Dziś rzadkość i kolekcjonerski model.</p>
               </div>
             </div>
           </div>
