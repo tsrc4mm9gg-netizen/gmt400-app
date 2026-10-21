@@ -1,0 +1,37 @@
+name: Verify isolated Sentry browser capture
+on:
+  push:
+    branches: [feat/sentry-nextjs-integration]
+  pull_request:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  browser-capture:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      NEXT_PUBLIC_SENTRY_DSN: http://ci@127.0.0.1:4319/1
+      NEXT_PUBLIC_SENTRY_ENABLED: 'true'
+      VERCEL_ENV: preview
+      VERCEL_GIT_COMMIT_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - run: npm ci --ignore-scripts
+      - run: npm install --no-save --package-lock=false --ignore-scripts @playwright/test@1.61.0
+      - run: npx playwright install --with-deps chromium webkit
+      - name: Generate CI-only error fixture
+        run: node scripts/test-sentry-browser.cjs prepare
+      - run: npm run build
+      - name: Verify browser capture and accessible error boundary
+        run: node scripts/test-sentry-browser.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: sentry-browser-${{ github.run_id }}
+          path: test-results
+          retention-days: 7
+          if-no-files-found: warn
