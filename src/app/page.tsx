@@ -554,11 +554,35 @@ export default function Home() {
             )}
 
             {!issueModel && !issueYear && !issueQuery && selectedModel === 'Wszystkie' && (
-              <div className="text-center py-8">
-                <p className="text-neutral-500 mb-4">Wpisz słowo kluczowe lub wybierz model aby zobaczyć usterki.</p>
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 text-sm">
-                  {['wyciek', '4L60E', 'kolektor', 'hamulce', '4x4', 'pompa'].map(k => (
-                    <button key={k} onClick={() => setIssueQuery(k)} className="bg-neutral-800 hover:bg-neutral-700 px-3 py-2">{k}</button>
+              <div>
+                <div className="text-center py-4">
+                  <p className="text-neutral-500 mb-4">Wpisz słowo kluczowe lub wybierz model aby zobaczyć usterki.</p>
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 text-sm mb-8">
+                    {['wyciek', '4L60E', 'kolektor', 'hamulce', '4x4', 'pompa', 'rdza', 'rozdzielacz'].map(k => (
+                      <button key={k} onClick={() => setIssueQuery(k)} className="bg-neutral-800 hover:bg-neutral-700 px-3 py-2">{k}</button>
+                    ))}
+                  </div>
+                </div>
+                <h3 className="text-lg font-semibold text-amber-400 mb-4">Najczęstsze usterki GMT400</h3>
+                <div className="space-y-3">
+                  {[
+                    { name: 'Uszczelka kolektora dolotowego', model: '5.7L Vortec', objawy: 'Wyciek płynu chłodzącego, przegrzewanie, biały dym', rozw: 'Wymiana uszczelki kolektora. Częsty problem 1996-2000. OEM: 12554863. Czas: 4-6h.' },
+                    { name: 'Ślizganie 4L60E (3-4 bieg)', model: 'Wszystkie z 4L60E', objawy: 'Wysokie obroty przy zmianie 3-4, brak 4 biegu', rozw: 'Zużyte sprzęgła 3-4. Regeneracja skrzyni lub wymiana. Koszt: 1500-3500 PLN. Sprawdź płyn i filtr najpierw.' },
+                    { name: 'Pompa paliwa', model: 'Wszystkie', objawy: 'Nie odpala, gaśnie w trasie, słabe ciśnienie', rozw: 'Wymiana pompy w zbiorniku. OEM: AC Delco MU1746 lub EP381. Bezpiecznik ECM-B 20A.' },
+                    { name: 'Rdza ramy i przewodów', model: 'Wszystkie (PL szczególnie)', objawy: 'Rdza na ramie, pękające przewody hamulcowe', rozw: 'Kontrola ramy, wymiana przewodów hamulcowych. Częsty problem w Europie.' },
+                    { name: 'Czujnik poziomu paliwa', model: 'Wszystkie', objawy: 'Wskaźnik paliwa skacze lub pokazuje źle', rozw: 'Wymiana czujnika w zbiorniku (razem z pompą). Częsty problem.' },
+                    { name: 'Rozdzielacz (TBI/Vortec)', model: '5.0/5.7L', objawy: 'Przerywa, nie odpala, brak iskry', rozw: 'Wymiana kopułki, palca, modułu. Częsty problem po 100 tys. km.' },
+                    { name: 'Aktuator 4x4', model: 'K1500/K2500', objawy: 'Nie wchodzi 4x4, grzechotanie', rozw: 'Wymiana aktuatora przedniego mostu lub Posi-Lok. OEM: 26010605.' },
+                    { name: 'Kolektor wydechowy pęknięty', model: '5.7L', objawy: 'Głośny stukot przy zimnym silniku', rozw: 'Wymiana kolektora. Częsty problem. OEM: 12556588.' }
+                  ].map((iss, idx) => (
+                    <div key={idx} className="bg-neutral-950 border border-white/10 p-4">
+                      <div className="flex justify-between items-start mb-2">
+                        <h4 className="font-semibold text-amber-400">{iss.name}</h4>
+                        <span className="text-xs bg-white/10 px-2 py-0.5">{iss.model}</span>
+                      </div>
+                      <p className="text-sm text-neutral-400 mb-1"><span className="text-amber-400">Objawy:</span> {iss.objawy}</p>
+                      <p className="text-sm text-neutral-300">{iss.rozw}</p>
+                    </div>
                   ))}
                 </div>
               </div>
