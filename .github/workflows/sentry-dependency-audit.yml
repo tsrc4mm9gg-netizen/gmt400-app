@@ -1,0 +1,36 @@
+name: Audit Sentry branch dependencies
+on:
+  push:
+    branches: [feat/sentry-nextjs-integration]
+    paths: ['package.json', 'package-lock.json', '.github/workflows/sentry-dependency-audit.yml']
+  pull_request:
+    branches: [main]
+    paths: ['package.json', 'package-lock.json', '.github/workflows/sentry-dependency-audit.yml']
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Collect full dependency audit without changing packages
+        run: |
+          status=0
+          npm audit --json > npm-audit.json || status=$?
+          if [ "$status" -gt 1 ]; then
+            cat npm-audit.json
+            exit "$status"
+          fi
+          node -e 'const fs=require("node:fs");const r=JSON.parse(fs.readFileSync("npm-audit.json","utf8"));if(r.error||!r.metadata||!r.vulnerabilities)throw new Error("Audit did not return a valid report");console.log(JSON.stringify({counts:r.metadata.vulnerabilities,vulnerabilities:r.vulnerabilities},null,2));'
+      - name: Store audit report for review
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: dependency-audit-${{ github.run_id }}
+          path: npm-audit.json
+          retention-days: 7
+          if-no-files-found: error
