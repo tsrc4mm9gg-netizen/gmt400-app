@@ -18,6 +18,7 @@ type Entry = {
   applicability?: Applicability;
 };
 
+type SearchResult = { item: Entry; index: number; score: number };
 type ResultGroup = 'best' | 'issues' | 'codes' | 'guides' | 'other';
 
 const PAGE_SIZE = 50;
@@ -31,8 +32,7 @@ const GROUP_LABELS: Record<ResultGroup, string> = {
 const GROUP_ORDER: ResultGroup[] = ['best', 'issues', 'codes', 'guides', 'other'];
 
 const normalize = (text: string) => text.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/ł/g, 'l').replace(/\b(skrzynia automatyczna|automatyczna skrzynia|automat)\b/g, 'automat').replace(/\s+/g, ' ').trim();
-
-const obdCode = (value: string) => value.match(/\bp[0-9]{4}\b/g) || [];
+const obdCode = (value: string): string[] => value.match(/\bp[0-9]{4}\b/g) || [];
 
 function groupFor(item: Entry, score: number): ResultGroup {
   const type = normalize(item.Typ || '');
@@ -49,8 +49,8 @@ export default function GlobalSearch({ items, onClose }: { items: Entry[]; onClo
   const { query, updateQuery, ready, storageAvailable } = useSearchSession();
   const { profile, ready: profileReady } = useVehicleProfile();
   const [selected, setSelected] = useState<Entry | null>(null);
-  const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
-  const [vehicleOnly, setVehicleOnly] = useState(false);
+  const [visibleCount, setVisibleCount] = useState<number>(PAGE_SIZE);
+  const [vehicleOnly, setVehicleOnly] = useState<boolean>(false);
 
   useEffect(() => { const el = dialog.current; el?.showModal(); return () => { el?.close(); }; }, []);
   useEffect(() => { if (!selected && ready) input.current?.focus(); }, [selected, ready]);
@@ -58,7 +58,7 @@ export default function GlobalSearch({ items, onClose }: { items: Entry[]; onClo
 
   const clearQuery = () => { updateQuery(''); input.current?.focus(); };
 
-  const results = useMemo(() => {
+  const results = useMemo<Result[]>(() => {
     const normalized = normalize(query);
     if (normalized.length < 2) return [];
     const tokens = normalized.split(/[^a-z0-9]+/).filter(token => token.length > 1 && !['na', 'do', 'sie'].includes(token));
@@ -66,7 +66,7 @@ export default function GlobalSearch({ items, onClose }: { items: Entry[]; onClo
     const queryCodes = obdCode(normalized);
     const seen = new Set<string>();
 
-    return items.map((item, index) => {
+    return items.map((item, index): SearchResult => {
       const title = normalize(item.Nazwa);
       const text = normalize([item.Nazwa, item.Typ, item.Model, item.Lata, item.Opis, item.Objawy, item.Rozwiązanie].filter(Boolean).join(' '));
       const itemCodes = obdCode(text);
@@ -101,18 +101,20 @@ export default function GlobalSearch({ items, onClose }: { items: Entry[]; onClo
     }).sort((a, b) => b.score - a.score || a.index - b.index);
   }, [items, query, vehicleOnly, profile, profileReady]);
 
-  const grouped = useMemo(() => {
-    const output = new Map<ResultGroup, typeof results>();
+  const grouped = useMemo<Array<{ group: ResultGroup; results: SearchResult[] }>>(() => {
+    const output = new Map<ResultGroup, SearchResult[]>();
     for (const result of results) {
       const group = groupFor(result.item, result.score);
-      output.set(group, [...(output.get(group) || []), result]);
+      const current = output.get(group) || [];
+      current.push(result);
+      output.set(group, current);
     }
     return GROUP_ORDER.filter(group => output.has(group)).map(group => ({ group, results: output.get(group) || [] }));
   }, [results]);
 
-  const visibleResults = results.slice(0, visibleCount);
+  const visibleResults = useMemo<SearchResult[]>(() => results.slice(0, visibleCount), [results, visibleCount]);
   const hasMore = results.length > visibleResults.length;
-  const suggestions = useMemo(() => {
+  const suggestions = useMemo<string[]>(() => {
     if (normalize(query).length < 2) return [];
     return [...new Set(results.slice(0, 8).map(result => result.item.Nazwa))];
   }, [results, query]);
@@ -148,7 +150,7 @@ export default function GlobalSearch({ items, onClose }: { items: Entry[]; onClo
         <p role="status" aria-live="polite" className="my-3">Znaleziono: {results.length}{hasMore ? ` — pokazujemy ${visibleResults.length} z ${results.length}.` : results.length > PAGE_SIZE ? ` — pokazujemy wszystkie ${results.length}.` : ''}</p>
         {!results.length && <div className="my-3 rounded border border-white/10 bg-neutral-900/40 p-3"><p className="break-words">Brak wyników dla „{query.trim()}”.</p><p className="mt-2 text-sm text-neutral-300">Spróbuj krótszej frazy lub kodu. {vehicleOnly ? 'Filtr „Tylko moje auto” może ograniczać wyniki — wyłącz go, aby zobaczyć wszystkie materiały.' : 'To wynik dla załadowanych wpisów Notion.'}</p></div>}
         <div className="space-y-5">{grouped.map(({ group, results: groupResults }) => {
-          const visibleGroupResults = groupResults.filter(result => visibleResults.includes(result));
+          const visibleGroupResults = groupResults.filter(result => visibleResults.some(visible => visible.item === result.item && visible.index === result.index));
           if (!visibleGroupResults.length) return null;
           return <section key={group} aria-labelledby={`search-group-${group}`}>
             <h3 id={`search-group-${group}`} className="text-sm font-semibold uppercase tracking-wide text-neutral-400">{GROUP_LABELS[group]}</h3>
