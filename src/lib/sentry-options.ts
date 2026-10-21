@@ -1,9 +1,8 @@
-export function sanitizeEvent<T extends { user?: unknown; request?: unknown; extra?: unknown; breadcrumbs?: unknown; server_name?: unknown }>(event: T): T {
-  event.user = { ip_address: null };
+export function sanitizeEvent<T extends { user?: unknown; request?: unknown; extra?: unknown; breadcrumbs?: unknown }>(event: T): T {
+  delete event.user;
   delete event.request;
   delete event.extra;
   delete event.breadcrumbs;
-  delete event.server_name;
   return event;
 }
 
@@ -13,8 +12,6 @@ export const sentryOptions = {
   environment: process.env.NEXT_PUBLIC_VERCEL_ENV || process.env.NODE_ENV,
   release: process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA,
   sendDefaultPii: false,
-  autoSessionTracking: false,
-  sendClientReports: false,
   tracesSampleRate: 0,
   replaysSessionSampleRate: 0,
   replaysOnErrorSampleRate: 0,

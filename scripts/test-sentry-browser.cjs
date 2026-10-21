@@ -67,8 +67,7 @@ export default function Fixture() {
         assert.ok(event, 'Missing browser exception envelope');
         assert.equal(event.environment, 'preview');
         assert.equal(event.release, process.env.VERCEL_GIT_COMMIT_SHA);
-        assert.deepEqual(event.user, { ip_address: null });
-        for (const field of ['request', 'extra', 'breadcrumbs', 'server_name']) assert.equal(event[field], undefined);
+        for (const field of ['user', 'request', 'extra', 'breadcrumbs']) assert.equal(event[field], undefined);
         results.push({ browser: name, passed: true, eventId: event.event_id, environment: event.environment, release: event.release });
         await context.tracing.stop();
       } catch (error) {
