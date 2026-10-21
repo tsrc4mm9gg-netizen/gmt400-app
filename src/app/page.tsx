@@ -1514,6 +1514,35 @@ export default function Home() {
               </ul>
             </div>
             <div className="bg-neutral-950 border border-white/10 p-4">
+              <div className="bg-neutral-950 border border-white/10 overflow-hidden mb-4">
+              <img loading="lazy" src="/tip-obd.jpg" alt="OBD" className="w-full h-48 object-cover cursor-pointer" onClick={() => setLightbox('/tip-obd.jpg')} />
+              <div className="p-4">
+                <h3 className="font-semibold text-amber-400 mb-2">11. ZŁĄCZE OBD-I POD DESKĄ</h3>
+                <p className="text-sm text-neutral-300 mb-2">Przed 1996: złącze ALDL pod deską kierowcy.</p>
+                <ul className="text-sm text-neutral-300 space-y-1">
+                  <li>• Lokalizacja: lewa strona deski, przy dźwigni hamulca ręcznego</li>
+                  <li>• 12-pinowe złącze</li>
+                  <li>• Kody mrugające — zwarcie pinów A i B</li>
+                </ul>
+              </div>
+            </div>
+
+            <div className="bg-neutral-950 border border-white/10 overflow-hidden mb-4">
+              <img loading="lazy" src="/tip-torsion.jpg" alt="Torsion" className="w-full h-48 object-cover cursor-pointer" onClick={() => setLightbox('/tip-torsion.jpg')} />
+              <div className="p-4">
+                <h3 className="font-semibold text-amber-400 mb-2">12. REGULACJA DRĄŻKÓW SKRĘTNYCH</h3>
+                <p className="text-sm text-neutral-300 mb-2">Poziomowanie przodu 4x4.</p>
+                <ol className="text-sm text-neutral-300 space-y-1 list-decimal list-inside">
+                  <li>Unieś przód</li>
+                  <li>Poluzuj nakrętkę blokującą</li>
+                  <li>Kręć śrubą regulacyjną (w prawo = wyżej)</li>
+                  <li>Sprawdź wysokość i dokręć</li>
+                </ol>
+                <p className="text-xs text-neutral-500 mt-2">Narzędzie: klucz do drążków skrętnych</p>
+              </div>
+            </div>
+
+            <div className="bg-neutral-950 border border-white/10 p-4">
               <h3 className="font-semibold text-amber-400 mb-2">6. RESET ADAPTACJI SKRZYNI 4L60E</h3>
               <p className="text-sm text-neutral-300 mb-2">Po wymianie ATF skrzynia "uczy się" od nowa.</p>
               <ol className="text-sm text-neutral-300 space-y-1 list-decimal list-inside">
