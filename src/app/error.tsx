@@ -1,16 +1,18 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
+import * as Sentry from '@sentry/nextjs';
 
-export default function ErrorPage({ reset }: {
+export default function ErrorPage({ error, reset }: {
   error: Error & { digest?: string };
   reset: () => void;
 }) {
   const heading = useRef<HTMLHeadingElement>(null);
 
   useEffect(() => {
+    Sentry.captureException(error);
     heading.current?.focus({ preventScroll: true });
-  }, []);
+  }, [error]);
 
   return (
     <main className="mx-auto flex min-h-[70dvh] max-w-xl flex-col justify-center gap-5 px-6 py-24 text-white" aria-labelledby="page-error-title">
