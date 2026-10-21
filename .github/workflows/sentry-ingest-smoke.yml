@@ -1,0 +1,40 @@
+name: Verify one labelled Sentry ingestion event
+on:
+  push:
+    branches: [feat/sentry-nextjs-integration]
+    paths: ['.github/workflows/sentry-ingest-smoke.yml']
+permissions:
+  contents: read
+jobs:
+  ingest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - run: npm ci --ignore-scripts
+      - name: Send one synthetic message using the configured SDK
+        run: |
+          node <<'NODE'
+          const fs = require('node:fs');
+          const vm = require('node:vm');
+          const ts = require('typescript');
+          const Sentry = require('@sentry/nextjs');
+          const source = fs.readFileSync('src/lib/sentry-options.ts', 'utf8');
+          const code = ts.transpileModule(source, { compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2022 } }).outputText;
+          const context = { exports: {}, process: { env: { NODE_ENV: 'production', NEXT_PUBLIC_VERCEL_ENV: 'preview-smoke', NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA: process.env.GITHUB_SHA } } };
+          vm.runInNewContext(code, context);
+          Sentry.init({ ...context.exports.sentryOptions, defaultIntegrations: false });
+          (async () => {
+            try {
+              const id = Sentry.captureMessage('GMT400 Sentry ingestion smoke test', { level: 'info', tags: { verification: 'ci-ingestion', workflow_run: process.env.GITHUB_RUN_ID } });
+              console.log('Sentry event ID:', id);
+              if (!await Sentry.flush(10000)) throw new Error('Sentry transport did not flush within timeout');
+              console.log('Transport flushed; confirm ingestion separately in Sentry using the event ID.');
+            } finally {
+              await Sentry.close(2000);
+            }
+          })().catch(error => { console.error(error.message); process.exitCode = 1; });
+          NODE
