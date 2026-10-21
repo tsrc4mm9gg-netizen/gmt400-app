@@ -58,7 +58,7 @@ export default function GlobalSearch({ items, onClose }: { items: Entry[]; onClo
 
   const clearQuery = () => { updateQuery(''); input.current?.focus(); };
 
-  const results = useMemo<Result[]>(() => {
+  const results = useMemo<SearchResult[]>(() => {
     const normalized = normalize(query);
     if (normalized.length < 2) return [];
     const tokens = normalized.split(/[^a-z0-9]+/).filter(token => token.length > 1 && !['na', 'do', 'sie'].includes(token));
