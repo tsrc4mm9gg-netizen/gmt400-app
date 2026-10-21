@@ -17,6 +17,8 @@ import {
   type VehicleProfile
 } from '@/lib/vehicle-profile';
 
+export type { VehicleProfile } from '@/lib/vehicle-profile';
+
 const Context = createContext<{ profile: VehicleProfile | null; ready: boolean }>({ profile: null, ready: false });
 
 export const useVehicleProfile = () => useContext(Context);

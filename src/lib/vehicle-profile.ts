@@ -46,7 +46,7 @@ export const EMPTY_VEHICLE_PROFILE: VehicleProfile = {
 };
 
 export function normalizeRpoCodes(value: string): string[] {
-  return [...new Set(value
+  return [...new Set((value || '')
     .toUpperCase()
     .split(/[\s,;]+/)
     .map(code => code.trim())
@@ -59,7 +59,7 @@ export function isValidVehicleProfile(value: unknown): value is VehicleProfile {
   const profile = value as Partial<VehicleProfile>;
   const validBrand = profile.brand === '' || profile.brand === 'Chevrolet' || profile.brand === 'GMC';
   const validDrive = profile.drive === '' || profile.drive === '2WD' || profile.drive === '4WD';
-  const validYear = profile.year === '' || /^(19(8[89]|9\d)|2000)$/.test(profile.year);
+  const validYear = profile.year === '' || /^(19(8[89]|9\d)|2000)$/.test(profile.year || '');
   const validRpo = Array.isArray(profile.rpoCodes) && profile.rpoCodes.every(code => typeof code === 'string' && /^[A-Z0-9]{2,5}$/.test(code));
   return validBrand && validDrive && validYear && validRpo
     && typeof profile.model === 'string' && profile.model.length <= 80
@@ -89,7 +89,7 @@ export function vehicleProfileSummary(profile: VehicleProfile | null): string {
     profile.year,
     profile.engine,
     profile.drive,
-    profile.rpoCodes.length ? `RPO: ${profile.rpoCodes.join(', ')}` : ''
+    profile.rpoCodes?.length ? `RPO: ${profile.rpoCodes.join(', ')}` : ''
   ].filter(Boolean);
   return parts.join(' · ');
 }
