@@ -7,7 +7,7 @@ export function sanitizeEvent<T extends { user?: unknown; request?: unknown; ext
 }
 
 export const sentryOptions = {
-  dsn: 'https://d98d3250958bf8200baa65a90fbc4582@o4512280021499904.ingest.de.sentry.io/4512280030675024',
+  dsn: process.env.NEXT_PUBLIC_SENTRY_DSN || 'https://d98d3250958bf8200baa65a90fbc4582@o4512280021499904.ingest.de.sentry.io/4512280030675024',
   enabled: process.env.NODE_ENV === 'production' && process.env.NEXT_PUBLIC_SENTRY_ENABLED !== 'false',
   environment: process.env.NEXT_PUBLIC_VERCEL_ENV || process.env.NODE_ENV,
   release: process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA,
