@@ -987,6 +987,15 @@ export default function Home() {
 
         {tab === 'specyfikacje' && (
           <div>
+            <h2 className="text-2xl mb-6" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>SPECYFIKACJE</h2>
+            <div className="bg-neutral-950 border border-white/10 overflow-hidden mb-6">
+              <img loading="lazy" src="/spec-fluids.jpg" alt="Płyny" className="w-full cursor-pointer" onClick={() => setLightbox('/spec-fluids.jpg')} />
+              <div className="p-4">
+                <h3 className="font-semibold text-amber-400">Pojemności płynów eksploatacyjnych</h3>
+                <p className="text-sm text-neutral-400">Kliknij aby powiększyć. Dane dla 5.7L i 4.3L.</p>
+              </div>
+            </div>
+          <div>
             <h2 className="text-2xl mb-6" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>SPECYFIKACJE SILNIKÓW</h2>
             
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-6">
