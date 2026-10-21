@@ -596,6 +596,37 @@ export default function Home() {
         {tab === 'diy' && (
           <div>
             <h2 className="text-2xl mb-6" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>PORADNIKI DIY</h2>
+            
+            <div className="grid sm:grid-cols-2 gap-4 mb-8">
+              <div className="bg-neutral-950 border border-white/10 overflow-hidden">
+                <img loading="lazy" src="/diy-distributor.jpg" alt="Rozdzielacz" className="w-full h-40 object-cover cursor-pointer" onClick={() => setLightbox('/diy-distributor.jpg')} />
+                <div className="p-3">
+                  <h4 className="font-semibold text-amber-400">Wymiana kopułki i palca</h4>
+                  <p className="text-xs text-neutral-400">5.7L Vortec. Czas: 30 min. Trudność: łatwa.</p>
+                </div>
+              </div>
+              <div className="bg-neutral-950 border border-white/10 overflow-hidden">
+                <img loading="lazy" src="/diy-brakes.jpg" alt="Przewody" className="w-full h-40 object-cover cursor-pointer" onClick={() => setLightbox('/diy-brakes.jpg')} />
+                <div className="p-3">
+                  <h4 className="font-semibold text-amber-400">Wymiana przewodów hamulcowych</h4>
+                  <p className="text-xs text-neutral-400">Kontrola ramy. Częsty problem w PL.</p>
+                </div>
+              </div>
+              <div className="bg-neutral-950 border border-white/10 overflow-hidden">
+                <img loading="lazy" src="/diy-cabinfilter.jpg" alt="Filtr" className="w-full h-40 object-cover cursor-pointer" onClick={() => setLightbox('/diy-cabinfilter.jpg')} />
+                <div className="p-3">
+                  <h4 className="font-semibold text-amber-400">Filtr kabinowy</h4>
+                  <p className="text-xs text-neutral-400">Lokalizacja pod deską. Łatwa wymiana.</p>
+                </div>
+              </div>
+              <div className="bg-neutral-950 border border-white/10 overflow-hidden">
+                <img loading="lazy" src="/issue-4l60e.jpg" alt="4L60E" className="w-full h-40 object-cover cursor-pointer" onClick={() => setLightbox('/issue-4l60e.jpg')} />
+                <div className="p-3">
+                  <h4 className="font-semibold text-amber-400">Wymiana filtra 4L60E</h4>
+                  <p className="text-xs text-neutral-400">Co 50 tys. km. Płyn Dexron III.</p>
+                </div>
+              </div>
+            </div>
             <input aria-label="Szukaj porady DIY" 
               type="text" 
               placeholder="Szukaj porady (np. 4L60E, filtr, kolektor)..." 
