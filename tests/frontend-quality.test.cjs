@@ -1,47 +1,59 @@
 const test = require('node:test');
 const assert = require('node:assert/strict');
-const { execFileSync } = require('node:child_process');
+const { spawnSync } = require('node:child_process');
 const fs = require('node:fs');
 const os = require('node:os');
 const path = require('node:path');
 
-function run(files) {
+const checker = path.resolve(__dirname, '../scripts/check-frontend-quality.cjs');
+
+function check(source, expectedStatus, expectedDiagnostic) {
   const root = fs.mkdtempSync(path.join(os.tmpdir(), 'frontend-quality-'));
-  const source = path.join(root, 'src');
-  fs.mkdirSync(source);
-  for (const [name, content] of Object.entries(files)) fs.writeFileSync(path.join(source, name), content);
-  const previous = process.cwd();
-  process.chdir(root);
   try {
-    execFileSync(process.execPath, [path.resolve(previous, 'scripts/check-frontend-quality.cjs')], { stdio: 'pipe' });
-    return 0;
-  } catch (error) {
-    return error.status;
+    fs.mkdirSync(path.join(root, 'src'));
+    fs.writeFileSync(path.join(root, 'src/page.tsx'), source);
+    const result = spawnSync(process.execPath, [checker], { cwd: root, encoding: 'utf8' });
+    if (result.error) throw result.error;
+    const output = (result.stdout || '') + (result.stderr || '');
+    assert.equal(result.status, expectedStatus, output);
+    if (expectedDiagnostic) {
+      assert.match(output, expectedDiagnostic);
+      assert.doesNotMatch(output, /AssertionError|MODULE_NOT_FOUND|Cannot find module/);
+      if (!expectedDiagnostic.source.includes('syntax error')) assert.doesNotMatch(output, /syntax error/);
+    }
   } finally {
-    process.chdir(previous);
+    fs.rmSync(root, { recursive: true, force: true });
   }
 }
 
 test('accepts accessible markup', () => {
-  assert.equal(run({ 'page.tsx': '<img alt="Logo" />\n<button>Zapisz</button>\n<h1>Tytuł</h1>\n<h2>Sekcja</h2>\n' }), 0);
+  check('const Page = () => <><img src="/logo.png" alt="Logo" /><button type="button">Zapisz</button><h1>Tytuł</h1><h2>Sekcja</h2></>;', 0);
+});
+
+test('accepts a form control with an associated label', () => {
+  check('const Page = () => <><label htmlFor="query">Szukaj</label><input id="query" type="text" /></>;', 0);
 });
 
 test('rejects image without alt', () => {
-  assert.equal(run({ 'page.tsx': '<img src="/logo.png" />\n' }), 1);
+  check('const Page = () => <img src="/logo.png" />;', 1, /<img> without alt/);
 });
 
 test('rejects clickable div without role', () => {
-  assert.equal(run({ 'page.tsx': '<div onClick={() => {}}>Kliknij</div>\n' }), 1);
+  check('const Page = () => <div onClick={() => {}}>Kliknij</div>;', 1, /clickable div without role/);
 });
 
 test('rejects form control without label', () => {
-  assert.equal(run({ 'page.tsx': '<input type="text" />\n' }), 1);
+  check('const Page = () => <input type="text" />;', 1, /form control without accessible label/);
 });
 
 test('rejects heading level jump', () => {
-  assert.equal(run({ 'page.tsx': '<h1>Tytuł</h1>\n<h3>Sekcja</h3>\n' }), 1);
+  check('const Page = () => <><h1>Tytuł</h1><h3>Sekcja</h3></>;', 1, /heading level jumps from h1 to h3/);
 });
 
 test('rejects dangerouslySetInnerHTML', () => {
-  assert.equal(run({ 'page.tsx': '<div dangerouslySetInnerHTML={{ __html: html }} />\n' }), 1);
+  check('const Page = () => <div dangerouslySetInnerHTML={{ __html: html }} />;', 1, /dangerouslySetInnerHTML requires explicit review/);
+});
+
+test('rejects malformed JSX', () => {
+  check('const Page = () => <input', 1, /syntax error/);
 });
