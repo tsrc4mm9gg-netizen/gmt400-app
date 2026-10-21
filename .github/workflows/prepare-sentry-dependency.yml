@@ -1,0 +1,46 @@
+name: Prepare locked Sentry dependency
+on:
+  push:
+    branches: [feat/sentry-nextjs-integration]
+    paths: [.github/workflows/prepare-sentry-dependency.yml]
+permissions:
+  contents: read
+concurrency:
+  group: prepare-sentry-dependency
+  cancel-in-progress: false
+jobs:
+  prepare:
+    if: github.ref == 'refs/heads/feat/sentry-nextjs-integration'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: feat/sentry-nextjs-integration
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+      - name: Install pinned Sentry SDK and generate lockfile
+        run: npm install --save-exact --ignore-scripts @sentry/nextjs@10.68.0
+      - name: Verify clean dependency installation
+        run: npm ci --ignore-scripts
+      - name: Run existing unit tests
+        run: node --test tests/navigation-manifest.test.cjs tests/secret-scanner.test.cjs tests/workflow-quality.test.cjs tests/frontend-quality.test.cjs
+      - name: Verify production build with SDK installed
+        run: npm run build
+      - name: Commit only dependency manifests on integration branch
+        env:
+          TARGET_BRANCH: feat/sentry-nextjs-integration
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -- package.json package-lock.json
+          if git diff --cached --quiet; then
+            echo 'Dependency manifests already current.'
+            exit 0
+          fi
+          git commit -m 'build: lock Sentry Next.js SDK 10.68.0'
+          git push origin "HEAD:refs/heads/$TARGET_BRANCH"
