@@ -995,7 +995,6 @@ export default function Home() {
                 <p className="text-sm text-neutral-400">Kliknij aby powiększyć. Dane dla 5.7L i 4.3L.</p>
               </div>
             </div>
-          <div>
             <h2 className="text-2xl mb-6" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>SPECYFIKACJE SILNIKÓW</h2>
             
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-6">
