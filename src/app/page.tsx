@@ -13,6 +13,7 @@ import { useVehicleMaterialFilter, VehicleMatchBadge } from './VehicleMaterialFi
 import type { Applicability } from '../lib/vehicle-compatibility';
 import { matchesYearRules } from '../lib/year-range.mjs';
 import VinHistorySummary from './VinHistorySummary';
+import { useModelSelection } from './ModelSelectionContext';
 
 type Item = {
   id?: string;
@@ -276,9 +277,42 @@ export default function Home() {
   const uniqueModels = ['Wszystkie', ...Array.from(new Set(models.map(m => m.Model).filter(Boolean)))];
   const years = ['1988', '1989', '1990', '1991', '1992', '1993', '1994', '1995', '1996', '1997', '1998', '1999', '2000'];
 
+  const { bodyId, filters: modelFilters } = useModelSelection();
+
   const filterByModel = (list: Item[]) => {
-    if (selectedModel === 'Wszystkie') return list;
-    return list.filter(i => i.Model === selectedModel || i.Model === 'Wszystkie');
+    let result = list;
+    if (selectedModel !== 'Wszystkie') {
+      result = result.filter(i => i.Model === selectedModel || i.Model === 'Wszystkie');
+    }
+    if (bodyId) {
+      const bodyMap: Record<string, string[]> = {
+        'tahoe-4d': ['Tahoe', '4-drzwi', '4 drzwi'],
+        'tahoe-2d': ['Tahoe', 'Blazer', '2-drzwi', '2 drzwi'],
+        'suburban': ['Suburban'],
+        'yukon': ['Yukon'],
+        'ck-reg': ['Regular', 'C/K', '1500', '2500', '3500'],
+        'ck-ext': ['Extended', 'Extended Cab'],
+        'k1500': ['K1500', '4x4'],
+        'sierra': ['Sierra', 'GMC'],
+        'dually': ['Dually', '3500', 'Dual'],
+      };
+      const keywords = bodyMap[bodyId] || [];
+      if (keywords.length) {
+        result = result.filter(i => {
+          const m = (i.Model || '').toLowerCase();
+          const n = (i.Nazwa || '').toLowerCase();
+          return keywords.some(k => m.includes(k.toLowerCase()) || n.includes(k.toLowerCase())) || m === 'wszystkie';
+        });
+      }
+    }
+    if (modelFilters.year) {
+      result = result.filter(i => {
+        const lata = (i.Lata || '').trim();
+        if (!lata) return true;
+        return matchesYearRules(modelFilters.year!, [lata]) !== false;
+      });
+    }
+    return result;
   };
 
   const filteredModels = useMemo(() => {
