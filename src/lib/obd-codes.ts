@@ -84,7 +84,7 @@ export const OBD_CODES: ObdCode[] = [
     systems: ['Zapłon', 'Silnik'],
     description: 'PCM wykrywa wypadanie zapłonów bez wskazania jednego konkretnego cylindra.',
     commonCauses: ['Zużyte świece lub przewody zapłonowe', 'Nieszczelność podciśnienia', 'Niskie ciśnienie paliwa', 'Problem z rozdzielaczem, kopułką lub palcem', 'Niski stan mechaniczny silnika'],
-    diagnosticSteps: ['Odczytaj liczniki misfire per cylinder', 'Sprawdź świece, przewody, kopułkę i palec', 'Sprawdź nieszczelności podciśnienia', 'Zmierz ciśnienie paliwa', 'Wykonaj test kompresji, jeśli wypadanie zapłonów persists'],
+    diagnosticSteps: ['Odczytaj liczniki misfire per cylinder', 'Sprawdź świece, przewody, kopułkę i palec', 'Sprawdź nieszczelności podciśnienia', 'Zmierz ciśnienie paliwa', 'Wykonaj test kompresji, jeśli wypadanie zapłonów utrzymuje się'],
     relatedSearch: 'misfire GMT400'
   },
   {
