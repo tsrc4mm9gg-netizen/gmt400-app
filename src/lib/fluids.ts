@@ -13,52 +13,88 @@ export type FluidSpecification = {
 
 export const FLUID_SPECS: FluidSpecification[] = [
  {
- id: 'engine-oil-5-7l',
+ id: 'engine-oil-4-3l',
  system: 'Olej silnikowy',
- appliesTo: ['5.7L V8 benzyna'],
- capacity: 'Sprawdź pojemność dla konkretnego rocznika i filtra',
+ appliesTo: ['4.3L V6 benzyna'],
+ capacity: '4,5 qt (4,3 L) z filtrem',
  specification: 'Zgodnie z instrukcją właściwego rocznika',
  filter: 'Filtr oleju zgodny z silnikiem i rocznikiem',
- confidence: 'verify',
- source: 'https://www.gmt400.com/threads/rpo-code-list.37531/',
- sourceTitle: 'GMT400.com — referencja społecznościowa',
- notes: 'Pojemność zależy od miski, filtra i historii napraw. Uzupełniaj do znacznika, nie „na sztywno”.'
+ confidence: 'reference',
+ source: 'https://www.centerlearning.com/tmswebtree/techlink/images/issues/ref_gds/Oil_capchart9608.pdf',
+ sourceTitle: 'GM — Oil capacity chart (1996-08)',
+ notes: 'Pojemność z filtrem. Sprawdź w swoim aucie / manualu — GMT400 ma wiele wariantów (rocznik, GVWR, silnik, skrzynia, RPO).'
+ },
+ {
+ id: 'engine-oil-5-0-5-7l',
+ system: 'Olej silnikowy',
+ appliesTo: ['5.0L V8 benzyna', '5.7L V8 benzyna'],
+ capacity: '5 qt (4,7 L) z filtrem',
+ specification: 'Zgodnie z instrukcją właściwego rocznika',
+ filter: 'Filtr oleju zgodny z silnikiem i rocznikiem',
+ confidence: 'reference',
+ source: 'https://www.centerlearning.com/tmswebtree/techlink/images/issues/ref_gds/Oil_capchart9608.pdf',
+ sourceTitle: 'GM — Oil capacity chart (1996-08)',
+ notes: 'Pojemność z filtrem. Sprawdź w swoim aucie / manualu — GMT400 ma wiele wariantów (rocznik, GVWR, silnik, skrzynia, RPO).'
  },
  {
  id: 'engine-oil-6-5l',
  system: 'Olej silnikowy',
  appliesTo: ['6.5L V8 diesel'],
- capacity: 'Sprawdź pojemność dla konkretnego rocznika i filtra',
+ capacity: '7 qt (6,6 L) z filtrem',
  specification: 'Zgodnie z instrukcją właściwego rocznika',
  filter: 'Filtr oleju zgodny z silnikiem i rocznikiem',
- confidence: 'verify',
- source: 'https://www.gmt400.com/threads/rpo-code-list.37531/',
- sourceTitle: 'GMT400.com — referencja społecznościowa',
- notes: 'Diesel wymaga potwierdzenia filtra, pojemności i specyfikacji oleju dla konkretnego rocznika.'
+ confidence: 'reference',
+ source: 'https://www.centerlearning.com/tmswebtree/techlink/images/issues/ref_gds/Oil_capchart9608.pdf',
+ sourceTitle: 'GM — Oil capacity chart (1996-08)',
+ notes: 'Pojemność z filtrem. Sprawdź w swoim aucie / manualu — GMT400 ma wiele wariantów (rocznik, GVWR, silnik, skrzynia, RPO).'
  },
  {
- id: 'coolant',
- system: 'Płyn chłodniczy',
- appliesTo: ['Benzyna', 'Diesel'],
- capacity: 'Zależna od silnika, chłodnicy i ogrzewania',
+ id: 'engine-oil-7-4l',
+ system: 'Olej silnikowy',
+ appliesTo: ['7.4L V8 benzyna'],
+ capacity: '7 qt (6,6 L) z filtrem',
  specification: 'Zgodnie z instrukcją właściwego rocznika',
+ filter: 'Filtr oleju zgodny z silnikiem i rocznikiem',
+ confidence: 'reference',
+ source: 'https://www.centerlearning.com/tmswebtree/techlink/images/issues/ref_gds/Oil_capchart9608.pdf',
+ sourceTitle: 'GM — Oil capacity chart (1996-08)',
+ notes: 'Pojemność z filtrem. Sprawdź w swoim aucie / manualu — GMT400 ma wiele wariantów (rocznik, GVWR, silnik, skrzynia, RPO).'
+ },
+ {
+ id: 'coolant-1995',
+ system: 'Płyn chłodniczy',
+ appliesTo: ['1995 Benzyna', '1995 Diesel'],
+ capacity: '4.3L: 13 qt (12,3 L); 5.0/5.7L: 17,5 qt (16,6 L); 6.5L: 23,5 qt (22,3 L); 7.4L: 25 qt (23,7 L)',
+ specification: 'Zielony płyn długowieczny GM; wymiana 30 000 mil / 24 mies.',
  filter: null,
- confidence: 'verify',
- source: 'https://www.gmt400.com/threads/rpo-code-list.37531/',
- sourceTitle: 'GMT400.com — referencja społecznościowa',
- notes: 'Nie mieszaj różnych technologii płynów. Po wymianie usuń powietrze z układu.'
+ confidence: 'reference',
+ source: 'https://assets.gm.com/manuals/chevrolet/1995_chevrolet_1500_owners.pdf',
+ sourceTitle: 'OM95 — 1995 Chevrolet C/K 1500 Owners Manual',
+ notes: 'Nie mieszaj technologii płynów. Po wymianie usuń powietrze z układu. Sprawdź w swoim aucie / manualu — GMT400 ma wiele wariantów (rocznik, GVWR, silnik, skrzynia, RPO).'
+ },
+ {
+ id: 'coolant-1999',
+ system: 'Płyn chłodniczy',
+ appliesTo: ['1999 Benzyna', '1999 Diesel'],
+ capacity: 'L31 5.7L: 17,5 qt (16,6 L); z tylną nagrzewnicą 20 qt (18,9 L); 7.4L: 25 qt (23,7 L); z tylną nagrzewnicą 27,5 qt (26 L)',
+ specification: 'DEX-COOL; pierwsza wymiana 150 000 mil / 60 mies.',
+ filter: null,
+ confidence: 'reference',
+ source: 'https://www.chevrolet.com/ownercenter/content/dam/gmownercenter/gmna/dynamic/manuals/1999/chevrolet/suburban/1999_chevrolet_suburban_owners.pdf',
+ sourceTitle: 'OM99 — 1999 Chevrolet Suburban Owners Manual',
+ notes: 'DEX-COOL: 150 000 mil / 60 mies. Nie mieszaj technologii płynów. Sprawdź w swoim aucie / manualu — GMT400 ma wiele wariantów (rocznik, GVWR, silnik, skrzynia, RPO).'
  },
  {
  id: 'at-4l60e',
  system: 'Automatyczna skrzynia 4L60E',
  appliesTo: ['Automatyczna', '4L60E'],
  capacity: 'Zależna od zakresu serwisu i chłodnicy',
- specification: 'Zgodnie z instrukcją właściwego rocznika',
+ specification: 'DEXRON-III',
  filter: 'Filtr skrzyni zgodny z 4L60E',
- confidence: 'verify',
- source: 'https://www.gmt400.com/threads/rpo-code-list.37531/',
- sourceTitle: 'GMT400.com — referencja społecznościowa',
- notes: 'Poziom sprawdzać zgodnie z procedurą i temperaturą płynu. Nie dobieraj płynu wyłącznie po oznaczeniu skrzyni.'
+ confidence: 'reference',
+ source: 'https://assets.gm.com/manuals/chevrolet/1995_chevrolet_1500_owners.pdf',
+ sourceTitle: 'OM95 — 1995 Chevrolet C/K 1500 Owners Manual',
+ notes: 'Poziom sprawdzać zgodnie z procedurą i temperaturą płynu. Sprawdź w swoim aucie / manualu — GMT400 ma wiele wariantów (rocznik, GVWR, silnik, skrzynia, RPO).'
  },
  {
  id: 'at-4l80e',
@@ -68,45 +104,57 @@ export const FLUID_SPECS: FluidSpecification[] = [
  specification: 'Zgodnie z instrukcją właściwego rocznika',
  filter: 'Filtr skrzyni zgodny z 4L80E',
  confidence: 'verify',
- source: 'https://www.gmt400.com/threads/rpo-code-list.37531/',
- sourceTitle: 'GMT400.com — referencja społecznościowa',
- notes: '4L80E nie jest automatycznie wymienna z 4L60E. Potwierdź konwerter, obudowę i złącza.'
+ source: 'https://assets.gm.com/manuals/chevrolet/1995_chevrolet_1500_owners.pdf',
+ sourceTitle: 'OM95 — 1995 Chevrolet C/K 1500 Owners Manual',
+ notes: '4L80E nie jest automatycznie wymienna z 4L60E. Potwierdź konwerter, obudowę i złącza. Sprawdź w swoim aucie / manualu — GMT400 ma wiele wariantów (rocznik, GVWR, silnik, skrzynia, RPO).'
  },
  {
- id: 'transfer-case',
- system: 'Skrzynia rozdzielcza',
+ id: 'transfer-case-manual',
+ system: 'Skrzynia rozdzielcza — manualna (NP241C / NP243C)',
  appliesTo: ['4x4'],
  capacity: 'Zależna od modelu reduktora',
- specification: 'Zgodnie z instrukcją właściwego rocznika',
+ specification: 'DEXRON-III',
  filter: null,
- confidence: 'verify',
- source: 'https://www.gmt400.com/threads/rpo-code-list.37531/',
- sourceTitle: 'GMT400.com — referencja społecznościowa',
- notes: 'Zidentyfikuj reduktor po tabliczce przed doborem płynu.'
+ confidence: 'reference',
+ source: 'https://www.chevrolet.com/ownercenter/content/dam/gmownercenter/gmna/dynamic/manuals/1999/chevrolet/suburban/1999_chevrolet_suburban_owners.pdf',
+ sourceTitle: 'OM99 — 1999 Chevrolet Suburban Owners Manual',
+ notes: 'Reduktor z dźwignią lub przyciskami bez trybu Auto. Sprawdź w swoim aucie / manualu — GMT400 ma wiele wariantów (rocznik, GVWR, silnik, skrzynia, RPO).'
+ },
+ {
+ id: 'transfer-case-autotrac',
+ system: 'Skrzynia rozdzielcza — AutoTrac (NV246)',
+ appliesTo: ['4x4'],
+ capacity: 'Zależna od modelu reduktora',
+ specification: 'GM Automatic Transfer Case Fluid 12378396',
+ filter: null,
+ confidence: 'reference',
+ source: 'https://www.chevrolet.com/ownercenter/content/dam/gmownercenter/gmna/dynamic/manuals/1999/chevrolet/suburban/1999_chevrolet_suburban_owners.pdf',
+ sourceTitle: 'OM99 — 1999 Chevrolet Suburban Owners Manual',
+ notes: 'Reduktor z trybem Auto 4WD. Sprawdź w swoim aucie / manualu — GMT400 ma wiele wariantów (rocznik, GVWR, silnik, skrzynia, RPO).'
  },
  {
  id: 'front-differential',
  system: 'Przedni mechanizm różnicowy',
  appliesTo: ['4x4'],
  capacity: 'Zależna od mostu',
- specification: 'Zgodnie z instrukcją właściwego rocznika',
+ specification: 'SAE 80W-90 GL-5 (GM 1052271)',
  filter: null,
- confidence: 'verify',
- source: 'https://www.gmt400.com/threads/rpo-code-list.37531/',
- sourceTitle: 'GMT400.com — referencja społecznościowa',
- notes: 'Sprawdź typ mostu i obecność aktuatorskiego połączenia przed doborem płynu.'
+ confidence: 'reference',
+ source: 'https://assets.gm.com/manuals/chevrolet/1995_chevrolet_1500_owners.pdf',
+ sourceTitle: 'OM95 — 1995 Chevrolet C/K 1500 Owners Manual',
+ notes: 'G80: bez dodatku tarciowego. Sprawdź typ mostu przed doborem płynu. Sprawdź w swoim aucie / manualu — GMT400 ma wiele wariantów (rocznik, GVWR, silnik, skrzynia, RPO).'
  },
  {
  id: 'rear-differential',
  system: 'Tylny mechanizm różnicowy',
  appliesTo: ['RWD', '4x4'],
  capacity: 'Zależna od mostu',
- specification: 'Zgodnie z instrukcją właściwego rocznika',
+ specification: 'SAE 80W-90 GL-5 (GM 1052271)',
  filter: null,
- confidence: 'verify',
- source: 'https://www.gmt400.com/threads/rpo-code-list.37531/',
- sourceTitle: 'GMT400.com — referencja społecznościowa',
- notes: 'Most z ograniczonym poślizgiem może wymagać dodatku. Potwierdź typ mostu i przełożenie.'
+ confidence: 'reference',
+ source: 'https://assets.gm.com/manuals/chevrolet/1995_chevrolet_1500_owners.pdf',
+ sourceTitle: 'OM95 — 1995 Chevrolet C/K 1500 Owners Manual',
+ notes: 'G80: bez dodatku tarciowego. Sprawdź typ mostu i przełożenie. Sprawdź w swoim aucie / manualu — GMT400 ma wiele wariantów (rocznik, GVWR, silnik, skrzynia, RPO).'
  },
  {
  id: 'brake-fluid',
@@ -116,9 +164,9 @@ export const FLUID_SPECS: FluidSpecification[] = [
  specification: 'Zgodnie z instrukcją właściwego rocznika',
  filter: null,
  confidence: 'verify',
- source: 'https://www.gmt400.com/threads/rpo-code-list.37531/',
- sourceTitle: 'GMT400.com — referencja społecznościowa',
- notes: 'Nie mieszaj płynów o różnych specyfikacjach. Po serwisie usuń powietrze z układu.'
+ source: 'https://assets.gm.com/manuals/chevrolet/1995_chevrolet_1500_owners.pdf',
+ sourceTitle: 'OM95 — 1995 Chevrolet C/K 1500 Owners Manual',
+ notes: 'Nie mieszaj płynów o różnych specyfikacjach. Po serwisie usuń powietrze z układu. Sprawdź w swoim aucie / manualu — GMT400 ma wiele wariantów (rocznik, GVWR, silnik, skrzynia, RPO).'
  },
  {
  id: 'power-steering',
@@ -128,9 +176,9 @@ export const FLUID_SPECS: FluidSpecification[] = [
  specification: 'Zgodnie z instrukcją właściwego rocznika',
  filter: null,
  confidence: 'verify',
- source: 'https://www.gmt400.com/threads/rpo-code-list.37531/',
- sourceTitle: 'GMT400.com — referencja społecznościowa',
- notes: 'Uzupełniaj tylko płynem zgodnym z układem; sprawdzaj wycieki i stan przewodów.'
+ source: 'https://assets.gm.com/manuals/chevrolet/1995_chevrolet_1500_owners.pdf',
+ sourceTitle: 'OM95 — 1995 Chevrolet C/K 1500 Owners Manual',
+ notes: 'Uzupełniaj tylko płynem zgodnym z układem; sprawdzaj wycieki i stan przewodów. Sprawdź w swoim aucie / manualu — GMT400 ma wiele wariantów (rocznik, GVWR, silnik, skrzynia, RPO).'
  }
 ];
 
