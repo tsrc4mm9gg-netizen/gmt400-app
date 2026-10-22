@@ -5,6 +5,7 @@ import VehicleProfileProvider from "./VehicleProfileProvider";
 import ToolsLauncher from "./ToolsLauncher";
 import SiteHeader from "./site-header";
 import SiteFooter from "./site-footer";
+import HomeHero from "./HomeHero";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -48,6 +49,7 @@ export default function RootLayout({
       <body className={`${geistSans.variable} ${geistMono.variable} flex min-h-screen flex-col antialiased`}>
         <SiteHeader />
         <div className="flex-1">
+          <HomeHero />
           <VehicleProfileProvider>{children}</VehicleProfileProvider>
         </div>
         <SiteFooter />
