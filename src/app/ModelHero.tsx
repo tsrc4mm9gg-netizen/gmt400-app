@@ -37,6 +37,7 @@ export default function ModelHero() {
   const [showFilters, setShowFilters] = useState(false);
 
   const body = BODY_STYLES[index];
+  const displayYear = filters.year || body.years.split('–')[0];
 
   const emit = (bodyId: string | null, f: Filters) => {
     setSelection({ bodyId, filters: f });
@@ -86,7 +87,7 @@ export default function ModelHero() {
         onTouchEnd={handleTouchEnd}
       >
         <div className="absolute left-3 top-3 z-10 rounded bg-red-600 px-2 py-0.5 text-xs font-semibold text-white">
-          {body.years.split('–')[0]}
+          {displayYear}
         </div>
 
         <div className="relative aspect-[16/9] w-full">
@@ -96,7 +97,11 @@ export default function ModelHero() {
 
         <div className="absolute bottom-0 left-0 right-0 p-4 text-white">
           <h2 className="text-xl font-bold">{body.name}</h2>
-          <p className="text-sm text-neutral-300">{body.years}</p>
+          <p className="text-sm text-neutral-300">
+            {filters.year ? filters.year : body.years}
+            {filters.engine ? ` · ${filters.engine}` : ''}
+            {filters.drivetrain ? ` · ${filters.drivetrain.toUpperCase()}` : ''}
+          </p>
         </div>
 
         <button onClick={prev} className="absolute left-2 top-1/2 -translate-y-1/2 rounded-full bg-black/50 p-2 text-white" aria-label="Poprzedni">‹</button>
