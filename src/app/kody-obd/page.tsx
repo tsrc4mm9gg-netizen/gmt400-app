@@ -35,6 +35,7 @@ export default function ObdCodesPage({ searchParams }: { searchParams: Promise<{
           <input id="obd-search" name="q" type="search" defaultValue={query} placeholder="np. P0300, EGR, O2, EVAP" className="min-h-12 min-w-0 flex-1 rounded border border-white/20 bg-neutral-900 px-4 py-3 text-white" />
           <button type="submit" className="min-h-12 rounded bg-amber-400 px-5 font-semibold text-black">Szukaj</button>
         </form>
+        {query && <p className="mb-4 text-sm text-neutral-400">Aktywny filtr: <strong className="text-neutral-200">{query}</strong> · <Link href="/kody-obd" className="text-amber-400 underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-400">Wyczyść filtr</Link></p>}
         <p className="mb-4 text-sm text-neutral-400">Znaleziono {results.length} z {OBD_CODES.length} kodów.</p>
         <ul className="grid gap-4 sm:grid-cols-2">
           {results.map(item => (
