@@ -8,7 +8,7 @@ const CATEGORIES = [
   { href: '/schematy', icon: '🔌', title: 'Schematy', desc: 'Instalacje i układy' },
   { href: '/kody-obd', icon: '📡', title: 'Kody OBD', desc: 'Diagnostyka i błędy' },
   { href: '/narzedzia', icon: '💧', title: 'Płyny', desc: 'Specyfikacje i wymiany' },
-  { href: '/?tab=modele', icon: '🚚', title: 'Modele', desc: 'Warianty i lata produkcji' },
+  { href: '/baza?typ=Model', icon: '🚚', title: 'Modele', desc: 'Warianty i lata produkcji' },
 ];
 
 export default function CategoryGrid() {
