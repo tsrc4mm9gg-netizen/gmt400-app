@@ -1,36 +1,45 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
-import * as Sentry from '@sentry/nextjs';
+import Link from 'next/link';
 
-export default function ErrorPage({ error, reset }: {
-  error: Error & { digest?: string };
-  reset: () => void;
-}) {
-  const heading = useRef<HTMLHeadingElement>(null);
-
-  useEffect(() => {
-    Sentry.captureException(error);
-    heading.current?.focus({ preventScroll: true });
-  }, [error]);
-
+export default function Error({ reset }: { error: Error & { digest?: string }; reset: () => void }) {
   return (
-    <main className="mx-auto flex min-h-[70dvh] max-w-xl flex-col justify-center gap-5 px-6 py-24 text-white" aria-labelledby="page-error-title">
-      <p className="text-sm uppercase tracking-widest text-amber-400">GMT400</p>
-      <h1 ref={heading} id="page-error-title" tabIndex={-1} className="text-3xl font-semibold focus:outline-2 focus:outline-offset-4 focus:outline-amber-400">
-        Nie udało się wyświetlić strony
-      </h1>
-      <p className="leading-relaxed text-neutral-300">
-        Wystąpił nieoczekiwany błąd. Spróbuj ponownie. Jeśli problem się powtarza, wróć na stronę główną.
+    <main className="mx-auto flex min-h-[60vh] max-w-3xl flex-col items-center justify-center px-5 py-16 text-center text-white">
+      <p className="text-sm font-semibold uppercase tracking-wide text-amber-400">Błąd serwera</p>
+      <h1 className="mt-3 text-3xl font-bold text-amber-400 sm:text-4xl">Wystąpił błąd</h1>
+      <p role="alert" className="mt-4 max-w-xl text-neutral-300">
+        Wystąpił nieoczekiwany problem. Może to być chwilowa usterka — spróbuj ponownie lub wróć do głównej strony serwisu.
       </p>
-      <div className="flex flex-wrap gap-3">
-        <button type="button" onClick={reset} className="inline-flex min-h-11 items-center justify-center rounded-lg bg-amber-400 px-5 py-3 font-semibold text-black focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-amber-400">
+
+      <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
+        <button
+          type="button"
+          onClick={() => reset()}
+          className="inline-flex min-h-11 items-center rounded-md bg-amber-400 px-5 py-3 font-semibold text-black underline-offset-4 hover:bg-amber-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-amber-400"
+        >
           Spróbuj ponownie
         </button>
-        <a href="/" className="inline-flex min-h-11 items-center justify-center rounded-lg border border-neutral-500 px-5 py-3 text-white underline underline-offset-4 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-amber-400">
-          Strona główna
-        </a>
+        <Link
+          href="/"
+          className="inline-flex min-h-11 items-center rounded-md border border-amber-400 px-5 py-3 font-semibold text-amber-400 underline-offset-4 hover:bg-amber-400 hover:text-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-amber-400"
+        >
+          Wróć na stronę główną
+        </Link>
       </div>
+
+      <nav aria-label="Nawigacja pomocnicza" className="mt-8">
+        <ul className="flex flex-wrap items-center justify-center gap-x-5 gap-y-3 text-sm">
+          <li>
+            <Link href="/szukaj" className="rounded text-amber-400 underline-offset-4 hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-amber-400">Szukaj materiałów</Link>
+          </li>
+          <li>
+            <Link href="/baza" className="rounded text-amber-400 underline-offset-4 hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-amber-400">Baza wiedzy</Link>
+          </li>
+          <li>
+            <Link href="/kody-obd" className="rounded text-amber-400 underline-offset-4 hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-amber-400">Kody OBD</Link>
+          </li>
+        </ul>
+      </nav>
     </main>
   );
 }
