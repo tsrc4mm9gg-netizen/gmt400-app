@@ -56,7 +56,25 @@ type Props = { params: Promise<{ id: string }> };
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const entry = await readEntry((await params).id);
   if (!entry) return { title: 'Nie znaleziono materiału — GMT400', robots: { index: false, follow: false } };
-  return { title: `${entry.Nazwa} — GMT400`, description: (entry.Opis || entry.Objawy || entry.Rozwiązanie || entry.Nazwa).slice(0, 160), alternates: { canonical: `https://www.gmt400.pl/baza/${entry.id}` } };
+  const description = (entry.Opis || entry.Objawy || entry.Rozwiązanie || entry.Nazwa).slice(0, 160);
+  const url = `/baza/${entry.id}`;
+  return {
+    title: `${entry.Nazwa} — GMT400`,
+    description,
+    alternates: { canonical: url },
+    openGraph: {
+      type: 'article',
+      locale: 'pl_PL',
+      url,
+      title: `${entry.Nazwa} — GMT400`,
+      description,
+    },
+    twitter: {
+      card: 'summary',
+      title: `${entry.Nazwa} — GMT400`,
+      description,
+    },
+  };
 }
 export default async function KnowledgeEntry({ params }: Props) {
   const entry = await readEntry((await params).id);

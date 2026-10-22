@@ -11,9 +11,23 @@ export async function generateMetadata({ params }: { params: Promise<{ code: str
   const { code } = await params;
   const item = findObdCode(code);
   if (!item) return { title: 'Nie znaleziono kodu OBD — GMT400' };
+  const url = `/kody-obd/${item.code.toLowerCase()}`;
   return {
     title: `${item.code} — ${item.title} | GMT400`,
-    description: item.description
+    description: item.description,
+    alternates: { canonical: url },
+    openGraph: {
+      type: 'article',
+      locale: 'pl_PL',
+      url,
+      title: `${item.code} — ${item.title} | GMT400`,
+      description: item.description,
+    },
+    twitter: {
+      card: 'summary',
+      title: `${item.code} — ${item.title} | GMT400`,
+      description: item.description,
+    },
   };
 }
 
