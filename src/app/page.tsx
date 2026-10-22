@@ -1807,6 +1807,9 @@ export default function Home() {
           <div className="text-neutral-500 text-xs">gmt400.pl</div>
         </div>
       </footer>
+      </div>
+      </div>
+      </div>
     </div>
   );
 }
