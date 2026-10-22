@@ -46,7 +46,7 @@ export default function ObdCodesPage({ searchParams }: { searchParams: Promise<{
           <button type="submit" className="min-h-12 rounded bg-amber-400 px-5 font-semibold text-black">Filtruj</button>
         </form>
         {query && <p className="mb-4 text-sm text-neutral-400">Aktywny filtr: <strong className="text-neutral-200">{query}</strong> · <Link href="/kody-obd" className="text-amber-400 underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-400">Wyczyść filtr</Link></p>}
-        <p className="mb-4 text-sm text-neutral-400">Znaleziono {results.length} z {OBD_CODES.length} kodów.</p>
+        <p className="mb-4 text-sm text-neutral-400">Wyświetlanie {results.length} z {OBD_CODES.length} kodów.</p>
         <ul className="grid gap-4 sm:grid-cols-2">
           {results.map(item => (
             <li key={item.code} className="rounded-xl border border-white/10 bg-neutral-900/60 p-4">
