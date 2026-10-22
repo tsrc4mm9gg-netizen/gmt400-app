@@ -49,6 +49,21 @@ const comparable = (field: string, value: string) => {
   return /^4l(?:60|80)e$/.test(text);
 };
 
+function yearMatches(profileYear: string, rule: string): boolean | null {
+  const text = rule.trim();
+  if (general(text)) return true;
+  if (/^\d{4}$/.test(text)) return text === profileYear;
+  const range = text.match(/^(\d{4})\s*[-\u2013\u2014]\s*(\d{4})$/);
+  if (range) {
+    const from = Number(range[1]), to = Number(range[2]);
+    if (from > to) return null;
+    return Number(profileYear) >= from && Number(profileYear) <= to;
+  }
+  const open = text.match(/^(\d{4})\+$/);
+  if (open) return Number(profileYear) >= Number(open[1]);
+  return null;
+}
+
 export function matchVehicle(profile: VehicleSelection, rules: Applicability): MatchResult {
   const unknown: string[] = [];
   const outside: string[] = [];
@@ -70,13 +85,7 @@ export function matchVehicle(profile: VehicleSelection, rules: Applicability): M
   else if (rules.years.some(general)) wildcards++;
   else if (!/^\d{4}$/.test(profile.year)) unknown.push('Rocznik: nieustalony w profilu');
   else {
-    const checks = rules.years.map(value => {
-      const text = value.trim();
-      if (/^\d{4}$/.test(text)) return text === profile.year;
-      const range = text.match(/^(\d{4})\s*[-–—]\s*(\d{4})$/);
-      if (!range || Number(range[1]) > Number(range[2])) return null;
-      return Number(profile.year) >= Number(range[1]) && Number(profile.year) <= Number(range[2]);
-    });
+    const checks = rules.years.map(value => yearMatches(profile.year, value));
     if (checks.includes(true)) explicit++;
     else if (checks.includes(null)) unknown.push('Rocznik: nierozpoznany zapis zakresu');
     else outside.push('Rocznik: poza opisanym zakresem');
