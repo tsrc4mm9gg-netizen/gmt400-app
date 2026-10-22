@@ -7,7 +7,7 @@ const control = 'min-h-11 rounded border border-amber-400 px-4 py-3 focus-visibl
 function isEntry(value: unknown): value is Entry {
   if (!value || typeof value !== 'object') return false;
   const record = value as Record<string, unknown>;
-  return typeof record.id === 'string' && typeof record.Nazwa === 'string' && ['Opis', 'Objawy', 'Rozwiązanie', 'Model', 'Typ'].every(key => record[key] === undefined || typeof record[key] === 'string');
+  return typeof record.Nazwa === 'string' && ['Opis', 'Objawy', 'Rozwiązanie', 'Model', 'Typ', 'id'].every(key => record[key] === undefined || typeof record[key] === 'string');
 }
 export default function SearchPage({ query }: { query: string }) {
   const [items, setItems] = useState<Entry[]>([]);
@@ -32,6 +32,6 @@ export default function SearchPage({ query }: { query: string }) {
     <form action="/szukaj" method="get" role="search" className="my-6"><label htmlFor="page-search" className="block">Kod, objaw lub nazwa materiału</label><div className="mt-2 flex flex-wrap gap-3"><input key={query} id="page-search" name="q" type="search" maxLength={120} defaultValue={query} className={`${control} min-w-0 flex-1 bg-neutral-900`} /><button className={`${control} bg-amber-400 text-black`} type="submit">Szukaj</button></div></form>
     <p className="mb-4 text-sm text-neutral-400">Baza OBD i materiały Notion. Ten widok pokazuje wszystkie auta, bez filtra profilu. Dla fraz wielowyrazowych wymagane są wszystkie słowa. Powiązanie z hasłem nie potwierdza zastosowania kodu w konkretnym aucie.</p>
     <p role="status" className="mb-4">Znaleziono: {results.length}. {status === 'loading' ? 'Trwa pobieranie dodatkowych materiałów Notion.' : status === 'error' ? 'Nie udało się pobrać materiałów Notion w wymaganym czasie lub wystąpił błąd. Wyniki obejmują tylko bazę OBD.' : 'Materiały Notion załadowane.'}</p>
-    {!query.trim() ? <p>Wpisz frazę, aby zobaczyć wyniki.</p> : <><ul className="space-y-4">{results.map(result => <li key={result.id} className="rounded border border-white/20 p-4"><h2><Link href={result.href || `/baza/${encodeURIComponent(result.id)}`} className="inline-flex min-h-11 items-center text-amber-400 underline focus-visible:outline-2">{result.Nazwa}</Link></h2><p className="mt-2 text-neutral-300">{(result.Opis || result.Objawy || '').slice(0, 250)}</p></li>)}</ul>{status !== 'loading' && !results.length && <p>Brak wyników. Spróbuj krótszej frazy, np. P0300 lub 4L60E.</p>}</>}
+    {!query.trim() ? <p>Wpisz frazę, aby zobaczyć wyniki.</p> : <><ul className="space-y-4">{results.map((result, index) => <li key={result.href || result.id || index} className="rounded border border-white/20 p-4"><h2><Link href={result.href || (result.id ? `/baza/${encodeURIComponent(result.id)}` : '/')} className="inline-flex min-h-11 items-center text-amber-400 underline focus-visible:outline-2">{result.Nazwa}</Link></h2><p className="mt-2 text-neutral-300">{(result.Opis || result.Objawy || '').slice(0, 250)}</p></li>)}</ul>{status !== 'loading' && !results.length && <p>Brak wyników. Spróbuj krótszej frazy, np. P0300 lub 4L60E.</p>}</>}
   </main>;
 }
