@@ -2,9 +2,31 @@ import type { MetadataRoute } from 'next'
 import { OBD_CODES } from '@/lib/obd-codes'
 
 const BASE = 'https://www.gmt400.pl'
-const UPDATED = new Date('2026-10-22')
+const DATABASE_ID = '746973771d604f1e8276502851176af2'
+const UPDATED = new Date()
 
-export default function sitemap(): MetadataRoute.Sitemap {
+async function getKnowledgeIds(): Promise<string[]> {
+  const token = process.env.NOTION_TOKEN
+  if (!token) return []
+  try {
+    const response = await fetch(`https://api.notion.com/v1/databases/${DATABASE_ID}/query`, {
+      method: 'POST',
+      headers: { Authorization: `Bearer ${token}`, 'Notion-Version': '2022-06-28', 'Content-Type': 'application/json' },
+      body: JSON.stringify({ page_size: 100 }),
+      signal: AbortSignal.timeout(10000),
+    })
+    if (!response.ok) return []
+    const data = await response.json()
+    if (!Array.isArray(data.results)) return []
+    return data.results
+      .map((page: any) => typeof page?.id === 'string' ? page.id : '')
+      .filter((id: string) => /^[a-f0-9]{32}$/i.test(id.replace(/-/g, '')))
+  } catch {
+    return []
+  }
+}
+
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const staticRoutes: MetadataRoute.Sitemap = [
     { url: BASE, lastModified: UPDATED, changeFrequency: 'weekly', priority: 1 },
     { url: `${BASE}/kody-obd`, lastModified: UPDATED, changeFrequency: 'monthly', priority: 0.9 },
@@ -21,5 +43,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6,
   }))
 
-  return [...staticRoutes, ...obdRoutes]
+  const knowledgeIds = await getKnowledgeIds()
+  const knowledgeRoutes: MetadataRoute.Sitemap = knowledgeIds.map(id => ({
+    url: `${BASE}/baza/${id}`,
+    lastModified: UPDATED,
+    changeFrequency: 'monthly' as const,
+    priority: 0.5,
+  }))
+
+  return [...staticRoutes, ...obdRoutes, ...knowledgeRoutes]
 }

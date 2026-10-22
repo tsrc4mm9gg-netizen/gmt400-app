@@ -1,15 +1,14 @@
 'use client';
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { OBD_CODES } from '../lib/obd-codes';
+import { buildKnowledgeIndex, getKnowledgeEntries, searchKnowledge, type KnowledgeEntry } from '../lib/knowledge-index';
 import { matchVehicle, type Applicability } from '../lib/vehicle-compatibility';
 import { useVehicleProfile } from './VehicleProfileProvider';
 import { useSearchSession } from '../lib/search-session';
 import { VehicleMatchBadge } from './VehicleMaterialFilter';
 import SearchExcerpt from './SearchExcerpt';
 
-type Entry = { Nazwa: string; Typ: string; Model: string; Opis?: string; Objawy?: string; Rozwiązanie?: string; Lata?: string; id?: string; applicability?: Applicability; href?: string };
+type Entry = KnowledgeEntry;
 const normalize = (text: string) => text.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/ł/g, 'l').replace(/\s+/g, ' ').trim();
-const OBD_ENTRIES: Entry[] = OBD_CODES.map(item => ({ id: `obd:${item.code}`, Nazwa: `${item.code} — ${item.title}`, Typ: 'Kod błędu', Model: 'Zakres zastosowania wymaga sprawdzenia', Opis: item.description, Objawy: item.commonCauses.join('\n'), Rozwiązanie: item.diagnosticSteps.join('\n'), href: `/kody-obd/${item.code.toLowerCase()}` }));
 const focusClass = 'min-h-11 rounded focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-400';
 
 export default function GlobalSearch({ items, onClose }: { items: Entry[]; onClose: () => void }) {
@@ -20,37 +19,24 @@ export default function GlobalSearch({ items, onClose }: { items: Entry[]; onClo
   const [vehicleOnly, setVehicleOnly] = useState(false);
   const [selected, setSelected] = useState<Entry | null>(null);
   const [limit, setLimit] = useState(50);
-  const entries = useMemo(() => [...OBD_ENTRIES, ...items], [items]);
+  const index = useMemo(() => buildKnowledgeIndex(getKnowledgeEntries(items)), [items]);
   useEffect(() => { const element = dialog.current; const previous = document.activeElement; element?.showModal(); return () => { element?.close(); if (previous instanceof HTMLElement) previous.focus(); }; }, []);
   useEffect(() => { if (ready && !selected) input.current?.focus(); }, [ready, selected]);
   useEffect(() => { setLimit(50); }, [query, vehicleOnly, profile]);
   const results = useMemo(() => {
-    const text = normalize(query);
-    const tokens = text.split(/[^a-z0-9]+/).filter(Boolean);
-    if (text.length < 2 || !tokens.length) return [];
-    const seen = new Set<string>();
-    return entries.map((item, index) => {
-      const title = normalize(item.Nazwa);
-      const body = normalize([item.Nazwa, item.Typ, item.Model, item.Lata, item.Opis, item.Objawy, item.Rozwiązanie].filter(Boolean).join(' '));
-      const score = tokens.every(token => body.includes(token)) ? tokens.reduce((sum, token) => sum + (title.includes(token) ? 10 : 1), 0) + (title.startsWith(text) ? 100 : 0) : 0;
-      return { item, index, score };
-    }).filter(({ item, score }) => {
-      if (!score) return false;
+    return searchKnowledge(index, query).filter(item => {
       if (vehicleOnly && profileReady && profile && item.applicability) {
         const selection = { ...profile, model: profile.platform || profile.model };
         if (matchVehicle(selection, item.applicability).status === 'outside_scope') return false;
       }
-      const key = item.href || item.id;
-      if (key && seen.has(key)) return false;
-      if (key) seen.add(key);
       return true;
-    }).sort((a, b) => b.score - a.score || a.index - b.index);
-  }, [entries, query, vehicleOnly, profileReady, profile]);
+    });
+  }, [index, query, vehicleOnly, profileReady, profile]);
   const visible = results.slice(0, limit);
   const groups = [
-    { title: 'Kody błędów', rows: visible.filter(row => normalize(row.item.Typ).includes('kod')) },
-    { title: 'Usterki i objawy', rows: visible.filter(row => normalize(row.item.Typ).includes('usterk')) },
-    { title: 'Porady i pozostałe materiały', rows: visible.filter(row => !/kod|usterk/.test(normalize(row.item.Typ))) }
+    { title: 'Kody błędów', rows: visible.filter(row => normalize(row.Typ).includes('kod')) },
+    { title: 'Usterki i objawy', rows: visible.filter(row => normalize(row.Typ).includes('usterk')) },
+    { title: 'Porady i pozostałe materiały', rows: visible.filter(row => !/kod|usterk/.test(normalize(row.Typ))) }
   ];
   return <dialog ref={dialog} onClose={onClose} aria-labelledby="global-search-title" className="m-auto w-[90vw] max-w-3xl max-h-[85dvh] overflow-y-auto rounded-xl border border-amber-400 bg-neutral-950 p-5 text-white backdrop:bg-black/80">
     <header className="flex items-start justify-between gap-4"><h2 id="global-search-title" className="text-xl text-amber-400">Szukaj w bazie wiedzy</h2><button type="button" className={`${focusClass} min-w-11`} onClick={() => dialog.current?.close()} aria-label="Zamknij wyszukiwarkę">×</button></header>
@@ -69,7 +55,7 @@ export default function GlobalSearch({ items, onClose }: { items: Entry[]; onClo
       <details className="mt-2 text-sm text-neutral-400"><summary className="cursor-pointer">Zakres wyszukiwania i pamięć</summary><p className="mt-2">Statyczne tabele części i specyfikacji nie są indeksowane. {storageAvailable === false ? 'Pamięć sesji jest niedostępna.' : 'Fraza jest zapamiętywana w tej zakładce na czas sesji; usuń ją przyciskiem Wyczyść frazę.'}</p></details>
       <p role="status" aria-live="polite" className="my-4">{!ready ? 'Przywracanie wyszukiwania…' : normalize(query).length < 2 ? 'Wpisz co najmniej dwa znaki.' : `Znaleziono: ${results.length}`}</p>
       {ready && normalize(query).length >= 2 && !results.length && <p className="rounded border border-white/20 p-4">Brak wyników. Spróbuj krótszej frazy{vehicleOnly ? ' lub wyłącz filtr auta' : ''}.</p>}
-      {groups.map(({ title, rows }, index) => rows.length > 0 && <section key={title} aria-labelledby={`search-group-${index}`} className="mt-5"><h3 id={`search-group-${index}`} className="text-lg text-amber-400">{title}</h3><ul className="mt-2 space-y-3">{rows.map(({ item, index: itemIndex }) => <li key={item.href || item.id || itemIndex} className="rounded border border-white/10 p-3"><p className="text-xs text-neutral-400">{item.Typ}</p>{item.href ? <a href={item.href} className={`${focusClass} inline-flex items-center text-amber-400 underline`}>{item.Nazwa}</a> : <button type="button" onClick={() => setSelected(item)} className={`${focusClass} text-left text-amber-400 underline`}>{item.Nazwa}</button>}<SearchExcerpt item={item} query={query} />{item.href ? <p className="mt-2 text-xs text-neutral-400">Ogólne znaczenie kodu — zastosowanie i procedurę sprawdź dla konkretnego pojazdu.</p> : <VehicleMatchBadge item={item} />}</li>)}</ul></section>)}
+      {groups.map(({ title, rows }, index) => rows.length > 0 && <section key={title} aria-labelledby={`search-group-${index}`} className="mt-5"><h3 id={`search-group-${index}`} className="text-lg text-amber-400">{title}</h3><ul className="mt-2 space-y-3">{rows.map((item, itemIndex) => <li key={item.href || item.id || itemIndex} className="rounded border border-white/10 p-3"><p className="text-xs text-neutral-400">{item.Typ}</p>{item.href ? <a href={item.href} className={`${focusClass} inline-flex items-center text-amber-400 underline`}>{item.Nazwa}</a> : <button type="button" onClick={() => setSelected(item)} className={`${focusClass} text-left text-amber-400 underline`}>{item.Nazwa}</button>}<SearchExcerpt item={item} query={query} />{item.href ? <p className="mt-2 text-xs text-neutral-400">Ogólne znaczenie kodu — zastosowanie i procedurę sprawdź dla konkretnego pojazdu.</p> : <VehicleMatchBadge item={item} />}</li>)}</ul></section>)}
       {results.length > limit && <button type="button" onClick={() => setLimit(value => value + 50)} className={`${focusClass} mt-4 w-full border border-amber-400 p-3 text-amber-400`}>Pokaż więcej wyników</button>}
     </>}
   </dialog>;
