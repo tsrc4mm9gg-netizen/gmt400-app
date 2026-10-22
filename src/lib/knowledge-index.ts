@@ -2,7 +2,7 @@ import { OBD_CODES } from './obd-codes';
 import type { Applicability } from './vehicle-compatibility';
 
 export type KnowledgeEntry = {
-  id: string;
+  id?: string;
   Nazwa: string;
   Typ: string;
   Model?: string;
@@ -34,7 +34,7 @@ const tokenizeSearch = (query: string) => [...new Set(
 )];
 
 export function toSearchDocument(entry: KnowledgeEntry): IndexedKnowledge {
-  const searchId = entry.href || entry.id;
+  const searchId = entry.href || entry.id || '';
   const searchTitle = entry.Nazwa;
   const searchKeywords = [entry.Typ, entry.Model, entry.Lata].filter((value): value is string => Boolean(value));
   const searchBody = [entry.Nazwa, entry.Typ, entry.Model, entry.Lata, entry.Opis, entry.Objawy, entry.Rozwiązanie]
