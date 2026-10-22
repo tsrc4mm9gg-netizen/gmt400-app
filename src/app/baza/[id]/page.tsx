@@ -34,12 +34,16 @@ function localDiagram(title: string): string | null {
   const value = title.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/ł/g, 'l');
   const mappings: [string[], string][] = [
     [['4l60e','atf','miska'], '/diy-4l60e-pan-pl.jpg'],
-    [['kolektor','intake'], '/diy-intake-pl.jpg'],
-    [['np231','rozdzielcz'], '/diy-np231-pl.jpg'],
-    [['hamulc'], '/diy-brakes-pl.jpg'],
+    [['kolektor','intake','uszczelk'], '/diy-intake-pl.jpg'],
+    [['np231','rozdzielcz','4x4'], '/diy-np231-pl.jpg'],
+    [['hamulc','przewod'], '/diy-brakes-pl.jpg'],
     [['chlodz','termostat','pompa wody'], '/diy-cooling-sys.jpg'],
-    [['paliw'], '/diy-fuel.jpg'],
-    [['masa','punkt mas'], '/diy-grounds.jpg'],
+    [['paliw','pompa paliwa'], '/diy-fuel.jpg'],
+    [['masa','punkt mas','uziemien'], '/diy-grounds.jpg'],
+    [['obd','kod'], '/diy-obd.jpg'],
+    [['czujnik','maf','sonda','tps','iac'], '/diy-sensors.jpg'],
+    [['pompa paliwa','fuel pump'], '/diy-fuelpump.jpg'],
+    [['rdza','korozj','rama'], '/issue-rust.jpg'],
   ];
   return mappings.find(([terms]) => terms.some(term => value.includes(term)))?.[1] || null;
 }

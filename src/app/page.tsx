@@ -78,7 +78,9 @@ function getTipImage(nazwa: string): string | null {
   if (n.includes('paliw') || n.includes('pompa paliwa') || n.includes('filtr paliwa')) return '/diy-fuel.jpg';
   if (n.includes('masa') || n.includes('punkt') || n.includes('uziemien')) return '/diy-grounds.jpg';
   if (n.includes('obd') || n.includes('kod') || n.includes('diagnost')) return '/diy-obd.jpg';
-  if (n.includes('czujnik') || n.includes('maf') || n.includes('sonda')) return '/diy-sensors.jpg';
+  if (n.includes('czujnik') || n.includes('maf') || n.includes('sonda') || n.includes('tps') || n.includes('iac')) return '/diy-sensors.jpg';
+  if (n.includes('pompa paliwa') || n.includes('fuel pump')) return '/diy-fuelpump.jpg';
+  if (n.includes('rdza') || n.includes('korozj') || n.includes('rama')) return '/issue-rust.jpg';
   return null;
 }
 
