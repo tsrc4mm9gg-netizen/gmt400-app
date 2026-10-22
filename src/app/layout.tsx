@@ -47,10 +47,18 @@ export default function RootLayout({
   return (
     <html lang="pl">
       <body className={`${geistSans.variable} ${geistMono.variable} flex min-h-screen flex-col antialiased`}>
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded focus:bg-amber-400 focus:px-4 focus:py-2 focus:font-semibold focus:text-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-amber-400"
+        >
+          Przejdź do treści
+        </a>
         <SiteHeader />
         <div className="flex-1">
           <HomeHero />
-          <VehicleProfileProvider>{children}</VehicleProfileProvider>
+          <main id="main">
+            <VehicleProfileProvider>{children}</VehicleProfileProvider>
+          </main>
         </div>
         <SiteFooter />
         <ToolsLauncher />
