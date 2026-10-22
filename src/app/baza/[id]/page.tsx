@@ -44,6 +44,14 @@ function localDiagram(title: string): string | null {
   return mappings.find(([terms]) => terms.some(term => value.includes(term)))?.[1] || null;
 }
 const hasImage = (blocks: any[]): boolean => blocks.some(block => block.type === 'image' || hasImage(block.children || []));
+const obdCode = (entry: { Nazwa: string; Opis: string; Objawy: string; Rozwiązanie: string }): string | null => {
+  const source = `${entry.Nazwa} ${entry.Opis} ${entry.Objawy} ${entry.Rozwiązanie}`;
+  return source.match(/\b([POBU][0-3][0-9]{3})\b/i)?.[1]?.toLowerCase() || null;
+};
+const lead = (entry: { Opis: string; Objawy: string }): string => {
+  const source = (entry.Opis || entry.Objawy).replace(/\s+/g, ' ').trim();
+  return source.length > 180 ? `${source.slice(0, 177).trimEnd()}…` : source;
+};
 type Props = { params: Promise<{ id: string }> };
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const entry = await readEntry((await params).id);
@@ -57,11 +65,23 @@ export default async function KnowledgeEntry({ params }: Props) {
   let contentError = false;
   try { blocks = await readNotionBlocks(entry.id, process.env.NOTION_TOKEN || ''); } catch { contentError = true; }
   const diagram = entry.Typ === 'Porada' && !hasImage(blocks) ? localDiagram(entry.Nazwa) : null;
+  const materialLead = lead(entry);
+  const code = obdCode(entry);
   return <main className="mx-auto min-h-screen max-w-4xl bg-black px-5 py-10 pb-28 text-white">
-    <a href="/" className="text-amber-400 underline">Wróć do encyklopedii</a>
+    <nav aria-label="Nawigacja pomocnicza" className="flex flex-wrap items-center gap-x-3 gap-y-2 text-sm">
+      <a href="/" className="text-amber-400 underline">Wróć do encyklopedii</a>
+      <span aria-hidden="true" className="text-neutral-600">·</span>
+      <a href="/szukaj" className="text-amber-400 underline">Wróć do wyników</a>
+    </nav>
     <article className="mt-6 space-y-6">
-      <p className="text-sm text-neutral-400">{entry.Typ} · {entry.Model} {entry.Lata}</p>
+      <div className="flex flex-wrap gap-2">
+        {entry.Typ && <span className="rounded-full border border-amber-400/40 bg-amber-400/10 px-3 py-1 text-xs font-medium text-amber-300">Typ: {entry.Typ}</span>}
+        {entry.Model && <span className="rounded-full border border-white/20 bg-white/5 px-3 py-1 text-xs text-neutral-200">Model: {entry.Model}</span>}
+        {entry.Lata && <span className="rounded-full border border-white/20 bg-white/5 px-3 py-1 text-xs text-neutral-200">Lata: {entry.Lata}</span>}
+      </div>
       <h1 className="text-3xl text-amber-400">{entry.Nazwa}</h1>
+      {materialLead && <p className="text-lg leading-relaxed text-neutral-200">{materialLead}</p>}
+      {code && <p className="rounded border border-sky-400/40 bg-sky-400/10 p-3 text-sm"><a className="font-semibold text-sky-300 underline" href={`/kody-obd/${code}`}>Otwórz kartę kodu OBD {code.toUpperCase()}</a></p>}
       <VehicleMatchBadge item={entry} />
       <MaterialContents entryId={entry.id} />
       <p className="rounded border border-white/20 p-3 text-sm text-neutral-400">Dopasowanie do profilu opiera się na metadanych i nie potwierdza poprawności technicznej. Przed naprawą sprawdź zgodność procedury z pojazdem i dokumentacją serwisową.</p>
