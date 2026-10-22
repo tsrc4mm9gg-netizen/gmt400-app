@@ -26,7 +26,7 @@ export default function ObdCodesPage({ searchParams }: { searchParams: Promise<{
           <p className="text-sm uppercase tracking-wide text-amber-400">Diagnostyka</p>
           <h1 className="mt-1 text-3xl font-bold text-white">Kody OBD-II GMT400</h1>
           <p className="mt-3 max-w-2xl text-neutral-300">Baza kodów diagnostycznych z objaśnieniem, typowymi przyczynami i kolejnością sprawdzania. Kody są informacyjne — przed wymianą części potwierdź usterkę pomiarami i danymi live.</p>
-          <p className="mt-3 max-w-2xl text-neutral-300">Baza obejmuje kody dotyczące paliwa, powietrza, zapłonu, chłodzenia, emisji oraz skrzyni biegów.</p>
+          <p className="mt-3 max-w-2xl text-neutral-300">Wybierz system, aby zawęzić listę kodów.</p>
           <nav aria-label="Filtry systemów" className="mt-4">
             <ul className="flex flex-wrap gap-2">
               {systemFilters.map(system => {
