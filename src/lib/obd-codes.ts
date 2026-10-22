@@ -216,6 +216,14 @@ export function findObdCode(code: string): ObdCode | undefined {
   return OBD_CODES.find(item => item.code.toLowerCase() === code.toLowerCase());
 }
 
+export function getRelatedObdCodes(code: string, limit = 3): ObdCode[] {
+  const current = findObdCode(code);
+  if (!current) return [];
+  return OBD_CODES
+    .filter(item => item.code !== current.code && item.systems.some(system => current.systems.includes(system)))
+    .slice(0, limit);
+}
+
 export function searchObdCodes(query: string): ObdCode[] {
   const normalized = query.trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
   if (!normalized) return OBD_CODES;

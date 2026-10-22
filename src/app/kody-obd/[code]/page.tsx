@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { findObdCode, OBD_CODES } from '@/lib/obd-codes';
+import { findObdCode, getRelatedObdCodes, OBD_CODES } from '@/lib/obd-codes';
 
 export function generateStaticParams() {
   return OBD_CODES.map(({ code }) => ({ code: code.toLowerCase() }));
@@ -17,10 +17,18 @@ export async function generateMetadata({ params }: { params: Promise<{ code: str
   };
 }
 
+const severityVisual = {
+  critical: { label: 'Waga: wysoka — nie ignoruj', className: 'bg-red-500' },
+  warning: { label: 'Waga: średnia — zdiagnozuj', className: 'bg-amber-400' },
+  info: { label: 'Waga: informacyjna', className: 'bg-sky-400' }
+} as const;
+
 export default async function ObdCodePage({ params }: { params: Promise<{ code: string }> }) {
   const { code } = await params;
   const item = findObdCode(code);
   if (!item) notFound();
+  const relatedCodes = getRelatedObdCodes(item.code, 3);
+  const severity = severityVisual[item.severity];
 
   return (
     <main className="mx-auto max-w-3xl px-4 py-8">
@@ -31,7 +39,12 @@ export default async function ObdCodePage({ params }: { params: Promise<{ code: 
         <p className="text-sm uppercase tracking-wide text-amber-400">Kod OBD-II</p>
         <h1 className="mt-1 text-3xl font-bold text-white">{item.code} — {item.title}</h1>
         <p className="mt-3 text-neutral-300">{item.description}</p>
-        <p className="mt-3 text-sm text-neutral-400">Waga: {item.severity === 'critical' ? 'wysoka — nie ignoruj' : item.severity === 'warning' ? 'średnia — zdiagnozuj' : 'informacyjna'} · Układ: {item.systems.join(', ')}</p>
+        <p className="mt-3 flex flex-wrap items-center gap-2 text-sm text-neutral-400">
+          <span className={`inline-block h-2.5 w-2.5 rounded-full ${severity.className}`} aria-hidden="true" />
+          <span>{severity.label}</span>
+          <span aria-hidden="true">·</span>
+          <span>Układ: {item.systems.join(', ')}</span>
+        </p>
       </header>
       <section className="mt-8">
         <h2 className="text-xl text-amber-400">Typowe przyczyny</h2>
@@ -41,6 +54,19 @@ export default async function ObdCodePage({ params }: { params: Promise<{ code: 
         <h2 className="text-xl text-amber-400">Kolejność diagnostyki</h2>
         <ol className="mt-3 list-decimal space-y-2 pl-5 text-neutral-300">{item.diagnosticSteps.map(step => <li key={step}>{step}</li>)}</ol>
       </section>
+      {relatedCodes.length > 0 && (
+        <section className="mt-8">
+          <h2 className="text-xl text-amber-400">Powiązane kody</h2>
+          <ul className="mt-3 grid gap-3 sm:grid-cols-2">
+            {relatedCodes.map(related => (
+              <li key={related.code} className="rounded-xl border border-white/10 bg-neutral-900/60 p-4">
+                <Link href={`/kody-obd/${related.code.toLowerCase()}`} className="font-semibold text-amber-400 underline">{related.code}</Link>
+                <p className="mt-1 text-sm text-neutral-300">{related.title}</p>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
       <section className="mt-8 rounded-xl border border-amber-400/40 bg-neutral-900/60 p-4">
         <h2 className="text-lg text-amber-400">Powiązane materiały</h2>
         <p className="mt-2 text-neutral-300">Wyszukaj powiązane poradniki i usterki:</p>

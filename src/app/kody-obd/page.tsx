@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { OBD_CODES, searchObdCodes } from '@/lib/obd-codes';
+import RandomCodeLink from './random-code-link';
 
 export const metadata: Metadata = {
   title: 'Kody OBD-II GMT400 — baza, przyczyny i diagnostyka',
@@ -20,6 +21,7 @@ export default function ObdCodesPage({ searchParams }: { searchParams: Promise<{
   return searchParams.then(({ q }) => {
     const query = q || '';
     const results = searchObdCodes(query);
+    const activeSystemCount = systemCounts[query];
     return (
       <main className="mx-auto max-w-5xl px-4 py-8">
         <header className="mb-6">
@@ -44,8 +46,9 @@ export default function ObdCodesPage({ searchParams }: { searchParams: Promise<{
           <label htmlFor="obd-search" className="sr-only">Szukaj kodu OBD</label>
           <input id="obd-search" name="q" type="search" defaultValue={query} placeholder="Szukaj kodu lub systemu, np. P0300" className="min-h-12 min-w-0 flex-1 rounded border border-white/20 bg-neutral-900 px-4 py-3 text-white" />
           <button type="submit" className="min-h-12 rounded bg-amber-400 px-5 font-semibold text-black">Filtruj</button>
+          <RandomCodeLink />
         </form>
-        {query && <p className="mb-4 text-sm text-neutral-400">Aktywny filtr: <strong className="text-neutral-200">{query}</strong> · <Link href="/kody-obd" className="text-amber-400 underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-400">Wyczyść filtr</Link></p>}
+        {query && <p className="mb-4 text-sm text-neutral-400">Aktywny filtr: <strong className="text-neutral-200">{query}</strong>{typeof activeSystemCount === 'number' && <> · {activeSystemCount} kodów</>} · <Link href="/kody-obd" className="text-amber-400 underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-400">Wyczyść filtr</Link></p>}
         <p className="mb-4 text-sm text-neutral-400">Wyświetlanie {results.length} z {OBD_CODES.length} kodów.</p>
         <ul className="grid gap-4 sm:grid-cols-2">
           {results.map(item => (
