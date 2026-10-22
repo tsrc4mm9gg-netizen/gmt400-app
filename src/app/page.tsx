@@ -11,6 +11,7 @@ import ModelCatalog from './ModelCatalog';
 import GlobalSearch from './GlobalSearch';
 import { useVehicleMaterialFilter, VehicleMatchBadge } from './VehicleMaterialFilter';
 import type { Applicability } from '../lib/vehicle-compatibility';
+import { matchesYearRules } from '../lib/year-range.mjs';
 import VinHistorySummary from './VinHistorySummary';
 
 type Item = {
@@ -289,17 +290,10 @@ export default function Home() {
     if (issueModel) result = result.filter(i => i.Model === issueModel || i.Model === 'Wszystkie');
     if (selectedModel !== 'Wszystkie' && !issueModel) result = result.filter(i => i.Model === selectedModel || i.Model === 'Wszystkie');
     if (issueYear) {
-      const y = Number(issueYear);
       result = result.filter(i => {
         const lata = (i.Lata || '').trim();
-        if (!lata || lata.toLowerCase().includes('wszystkie')) return true;
-        // match exact year, range like 1996-2000, or 1996+
-        if (lata.includes(issueYear)) return true;
-        const range = lata.match(/(\d{4})\s*[-–—]\s*(\d{4})/);
-        if (range) return y >= Number(range[1]) && y <= Number(range[2]);
-        const open = lata.match(/(\d{4})\+/);
-        if (open) return y >= Number(open[1]);
-        return false;
+        if (!lata) return true;
+        return matchesYearRules(issueYear, [lata]) !== false;
       });
     }
     const q = (issueQuery || query).toLowerCase();
