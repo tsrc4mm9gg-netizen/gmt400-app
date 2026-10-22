@@ -5,7 +5,6 @@ import { buildKnowledgeIndex, getKnowledgeEntries, searchKnowledge, type Knowled
 import RandomCodeLink from './random-code-link';
 
 type Entry = KnowledgeEntry;
-const control = 'min-h-11 rounded border border-amber-400 px-4 py-3 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-400';
 const queryExamples = ['P0300', '4L60E', 'EGR', 'MAF', 'EVAP', 'O2 sensor', 'fuel trim', 'idle air control'];
 
 function isEntry(value: unknown): value is Entry {
@@ -35,13 +34,107 @@ export default function SearchPage({ query }: { query: string }) {
   const results = useMemo(() => searchKnowledge(index, query), [index, query]);
   const normalizedQuery = query.trim();
 
-  return <main className="mx-auto max-w-4xl px-4 py-8 text-white">
-    <nav aria-label="Nawigacja" className="mb-6 flex gap-4"><Link href="/" className="text-amber-400 underline">Strona główna</Link><Link href="/kody-obd" className="text-amber-400 underline">Kody OBD</Link></nav>
-    <h1 className="text-3xl">Szukaj w bazie wiedzy</h1>
-    <form action="/szukaj" method="get" role="search" className="my-6"><label htmlFor="page-search" className="block">Kod, objaw lub nazwa materiału</label><div className="mt-2 flex flex-wrap gap-3"><input key={query} id="page-search" name="q" type="search" maxLength={120} defaultValue={query} placeholder="Szukaj kodu lub systemu, np. P0300" className={`${control} min-w-0 flex-1 bg-neutral-900`} /><button className={`${control} bg-amber-400 text-black`} type="submit">Szukaj</button><RandomCodeLink /></div></form>
-    <section aria-labelledby="search-examples-title" className="mb-6 rounded border border-white/20 bg-neutral-900 p-4"><h2 id="search-examples-title" className="text-lg text-amber-400">Popularne hasła</h2><p className="mt-1 text-sm text-neutral-400">Wybierz hasło, aby zawęzić wyniki.</p><ul className="mt-3 flex flex-wrap gap-2">{queryExamples.map(example => <li key={example}><Link href={`/szukaj?q=${encodeURIComponent(example)}`} className="inline-flex min-h-11 items-center rounded border border-white/20 bg-neutral-950 px-4 py-2 text-amber-400 underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-400">{example}</Link></li>)}</ul></section>
-    <p className="mb-4 text-sm text-neutral-400">Baza OBD i materiały Notion. Ten widok pokazuje wszystkie auta, bez filtra profilu. Dla fraz wielowyrazowych wymagane są wszystkie słowa. Powiązanie z hasłem nie potwierdza zastosowania kodu w konkretnym aucie.</p>
-    {normalizedQuery && <p role="status" className="mb-4">Wyświetlanie {results.length} wyników dla: <strong className="text-neutral-200">{normalizedQuery}</strong>. {status === 'loading' ? 'Trwa pobieranie dodatkowych materiałów Notion.' : status === 'error' ? 'Nie udało się pobrać materiałów Notion w wymaganym czasie lub wystąpił błąd. Wyniki obejmują tylko bazę OBD.' : 'Materiały Notion załadowane.'}</p>}
-    {!normalizedQuery ? <p>Wpisz frazę lub wybierz popularne hasło, aby zobaczyć wyniki.</p> : <><ul className="space-y-4">{results.map(result => { const obdCode = result.id?.startsWith('obd:') ? result.id.slice(4) : undefined; return <li key={result.id} className="rounded border border-white/20 p-4"><div className="flex flex-wrap items-center gap-2"><h2 className="text-lg"><Link href={result.href || (result.id ? `/baza/${encodeURIComponent(result.id)}` : '/')} className="inline-flex min-h-11 items-center text-amber-400 underline focus-visible:outline-2">{result.Nazwa}</Link></h2>{obdCode && <span className="rounded bg-amber-400 px-2 py-1 text-xs font-semibold text-black">Kod OBD</span>}</div><p className="mt-2 text-neutral-300">{(result.Opis || result.Objawy || '').slice(0, 250)}</p>{obdCode && <Link href={`/kody-obd/${obdCode.toLowerCase()}`} className="mt-2 inline-flex min-h-11 items-center text-amber-400 underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-400">Otwórz kartę kodu {obdCode}</Link>}</li>; })}</ul>{status !== 'loading' && !results.length && <p className="rounded border border-white/10 bg-neutral-900/60 p-4 text-neutral-300">Brak wyników. Spróbuj krótszej frazy albo popularnego hasła, np. P0300, EGR lub 4L60E.</p>}</>}
-  </main>;
+  return (
+    <main className="mx-auto max-w-4xl px-4 py-8 text-white">
+      <nav aria-label="Nawigacja" className="mb-6 flex gap-4">
+        <Link href="/" className="text-red-400 underline">Strona główna</Link>
+        <Link href="/kody-obd" className="text-red-400 underline">Kody OBD</Link>
+      </nav>
+
+      <h1 className="text-3xl font-bold">Szukaj w bazie wiedzy</h1>
+
+      <form action="/szukaj" method="get" role="search" className="my-6">
+        <label htmlFor="page-search" className="mb-2 block text-sm font-medium text-neutral-300">
+          Kod, objaw lub nazwa materiału
+        </label>
+        <div className="flex flex-col gap-3 sm:flex-row">
+          <input
+            key={query}
+            id="page-search"
+            name="q"
+            type="search"
+            maxLength={120}
+            defaultValue={query}
+            placeholder="Szukaj kodu lub systemu, np. P0300"
+            className="min-h-14 flex-1 rounded-xl border-2 border-red-600 bg-neutral-900 px-4 py-3 text-lg text-white placeholder:text-neutral-500 focus:border-red-500 focus:outline-none focus:ring-2 focus:ring-red-600/40"
+          />
+          <button
+            type="submit"
+            className="min-h-14 rounded-xl bg-red-600 px-8 text-lg font-semibold text-white shadow-lg shadow-red-600/30 transition hover:bg-red-500"
+          >
+            Szukaj
+          </button>
+        </div>
+        <div className="mt-3">
+          <RandomCodeLink />
+        </div>
+      </form>
+
+      <section aria-labelledby="search-examples-title" className="mb-6 rounded-xl border border-white/10 bg-neutral-900 p-4">
+        <h2 id="search-examples-title" className="text-lg font-semibold text-red-400">Popularne hasła</h2>
+        <p className="mt-1 text-sm text-neutral-400">Wybierz hasło, aby zawęzić wyniki.</p>
+        <ul className="mt-3 flex flex-wrap gap-2">
+          {queryExamples.map(example => (
+            <li key={example}>
+              <Link
+                href={`/szukaj?q=${encodeURIComponent(example)}`}
+                className="inline-flex min-h-11 items-center rounded-lg border border-white/15 bg-neutral-950 px-4 py-2 text-red-300 transition hover:border-red-600 hover:text-white"
+              >
+                {example}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <p className="mb-4 text-sm text-neutral-400">
+        Baza OBD i materiały Notion. Ten widok pokazuje wszystkie auta, bez filtra profilu. Dla fraz wielowyrazowych wymagane są wszystkie słowa. Powiązanie z hasłem nie potwierdza zastosowania kodu w konkretnym aucie.
+      </p>
+
+      {normalizedQuery && (
+        <p role="status" className="mb-4">
+          Wyświetlanie {results.length} wyników dla: <strong className="text-neutral-200">{normalizedQuery}</strong>.{' '}
+          {status === 'loading' ? 'Trwa pobieranie dodatkowych materiałów Notion.' : status === 'error' ? 'Nie udało się pobrać materiałów Notion w wymaganym czasie lub wystąpił błąd. Wyniki obejmują tylko bazę OBD.' : 'Materiały Notion załadowane.'}
+        </p>
+      )}
+
+      {!normalizedQuery ? (
+        <p className="text-neutral-400">Wpisz frazę lub wybierz popularne hasło, aby zobaczyć wyniki.</p>
+      ) : (
+        <>
+          <ul className="space-y-4">
+            {results.map(result => {
+              const obdCode = result.id?.startsWith('obd:') ? result.id.slice(4) : undefined;
+              return (
+                <li key={result.id} className="rounded-xl border border-white/10 bg-neutral-900/50 p-4">
+                  <div className="flex flex-wrap items-center gap-2">
+                    <h2 className="text-lg">
+                      <Link
+                        href={result.href || (result.id ? `/baza/${encodeURIComponent(result.id)}` : '/')}
+                        className="text-red-300 hover:text-white"
+                      >
+                        {result.Nazwa}
+                      </Link>
+                    </h2>
+                    {obdCode && <span className="rounded bg-red-600 px-2 py-0.5 text-xs font-semibold text-white">Kod OBD</span>}
+                  </div>
+                  <p className="mt-2 text-neutral-300">{(result.Opis || result.Objawy || '').slice(0, 250)}</p>
+                  {obdCode && (
+                    <Link href={`/kody-obd/${obdCode.toLowerCase()}`} className="mt-2 inline-flex text-red-400 hover:text-white">
+                      Otwórz kartę kodu {obdCode}
+                    </Link>
+                  )}
+                </li>
+              );
+            })}
+          </ul>
+          {status !== 'loading' && !results.length && (
+            <p className="rounded-xl border border-white/10 bg-neutral-900/60 p-4 text-neutral-300">
+              Brak wyników. Spróbuj krótszej frazy albo popularnego hasła, np. P0300, EGR lub 4L60E.
+            </p>
+          )}
+        </>
+      )}
+    </main>
+  );
 }
