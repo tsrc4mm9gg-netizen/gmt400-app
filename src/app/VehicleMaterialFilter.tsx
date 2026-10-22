@@ -27,13 +27,18 @@ export function useVehicleMaterialFilter<T extends Material>(items: T[], scopeTy
   const counts = useMemo(() => {
     const output: Record<Mode, number> = { relevant: 0, all: evaluated.length, within_scope: 0, general: 0, unknown: 0, outside_scope: 0 };
     for (const row of evaluated) if (row.match) output[row.match.status]++;
-    output.relevant = output.within_scope + output.general;
+    // relevant = confirmed + general + unknown (so content does not disappear)
+    output.relevant = output.within_scope + output.general + output.unknown;
     return output;
   }, [evaluated]);
   const visibleItems = useMemo(() => {
     if (!active || mode === 'all') return items;
     const scoped = new Set(evaluated.map(row => row.item));
-    const allowed = new Set(evaluated.filter(row => mode === 'relevant' ? row.match?.status === 'within_scope' || row.match?.status === 'general' : row.match?.status === mode).map(row => row.item));
+    const allowed = new Set(evaluated.filter(row => 
+      mode === 'relevant' 
+        ? row.match?.status === 'within_scope' || row.match?.status === 'general' || row.match?.status === 'unknown'
+        : row.match?.status === mode
+    ).map(row => row.item));
     return items.filter(item => !scoped.has(item) || allowed.has(item));
   }, [items, active, mode, evaluated]);
   const panel = <CompactVehicleFilterPanel profile={profile} active={active} mode={mode} counts={counts} onModeChange={setMode} />;
