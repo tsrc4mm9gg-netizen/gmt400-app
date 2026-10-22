@@ -1,5 +1,5 @@
 import { GMT400_YEAR_RANGE, type VehicleProfile } from './vehicle-profile';
-import { matchesNumericYears, matchesYearRule, matchesYearRules } from './year-range';
+import { matchesNumericYears, matchesYearRule, matchesYearRules } from './year-range.mjs';
 
 export interface ContentCompatibility {
   makes?: string[];
