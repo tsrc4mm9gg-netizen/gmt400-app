@@ -50,10 +50,6 @@ const comparable = (field: string, value: string) => {
   return /^4l(?:60|80)e$/.test(text);
 };
 
-function yearMatches(profileYear: string, rule: string): boolean | null {
-  return matchesYearRule(profileYear, rule);
-}
-
 export function matchVehicle(profile: VehicleSelection, rules: Applicability): MatchResult {
   const unknown: string[] = [];
   const outside: string[] = [];
