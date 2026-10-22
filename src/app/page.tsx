@@ -573,7 +573,7 @@ export default function Home() {
 
             
               <div className="space-y-3">
-                <p className="text-neutral-500 text-sm mb-4">Znaleziono: {filteredIssues.filter(i => !issueQuery || i.Nazwa.toLowerCase().includes(issueQuery.toLowerCase()) || (i.Objawy && i.Objawy.toLowerCase().includes(issueQuery.toLowerCase())) || (i.Rozwiązanie && i.Rozwiązanie.toLowerCase().includes(issueQuery.toLowerCase()))).length} usterek</p>
+                <p className="text-neutral-500 text-sm mb-4">Znaleziono: {filteredIssues.length} usterek</p>
                 {filteredIssues.filter(i => !issueQuery || i.Nazwa.toLowerCase().includes(issueQuery.toLowerCase()) || (i.Objawy && i.Objawy.toLowerCase().includes(issueQuery.toLowerCase())) || (i.Rozwiązanie && i.Rozwiązanie.toLowerCase().includes(issueQuery.toLowerCase()))).map((i, idx) => {
                   const issueImg = i.Nazwa.toLowerCase().includes('kolektor') ? '/issue-intake.jpg' : i.Nazwa.toLowerCase().includes('4l60') ? '/issue-4l60e.jpg' : null;
                   return (
@@ -597,7 +597,7 @@ export default function Home() {
             {!issueModel && !issueYear && !issueQuery && selectedModel === 'Wszystkie' && (
               <div>
                 <div className="text-center py-4">
-                  <p className="text-neutral-500 mb-4">Wpisz słowo kluczowe lub wybierz model aby zobaczyć usterki.</p>
+                  <p className="text-neutral-500 mb-4">Lista usterek jest widoczna poniżej. Użyj filtrów lub wyszukiwania, aby zawęzić wyniki.</p>
                   <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 text-sm mb-8">
                     {['wyciek', '4L60E', 'kolektor', 'hamulce', '4x4', 'pompa'].map(k => (
                       <button key={k} onClick={() => setIssueQuery(k)} className="bg-neutral-800 hover:bg-neutral-700 px-3 py-2">{k}</button>
