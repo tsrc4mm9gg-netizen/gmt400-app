@@ -22,11 +22,14 @@ export default function ObdCodesPage({ searchParams }: { searchParams: Promise<{
           <p className="mt-3 max-w-2xl text-neutral-300">Baza obejmuje kody dotyczące paliwa, powietrza, zapłonu, chłodzenia, emisji oraz skrzyni biegów.</p>
           <nav aria-label="Filtry systemów" className="mt-4">
             <ul className="flex flex-wrap gap-2">
-              {systemFilters.map(system => (
-                <li key={system}>
-                  <Link href={`/kody-obd?q=${encodeURIComponent(system)}`} className="inline-flex min-h-11 items-center rounded border border-white/20 bg-neutral-950 px-4 py-2 text-amber-400 underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-400">{system}</Link>
-                </li>
-              ))}
+              {systemFilters.map(system => {
+                const isActive = query === system;
+                return (
+                  <li key={system}>
+                    <Link href={`/kody-obd?q=${encodeURIComponent(system)}`} aria-current={isActive ? 'page' : undefined} className={`inline-flex min-h-11 items-center rounded border px-4 py-2 underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-400 ${isActive ? 'border-amber-400 bg-amber-400 font-semibold text-black' : 'border-white/20 bg-neutral-950 text-amber-400'}`}>{system}</Link>
+                  </li>
+                );
+              })}
             </ul>
           </nav>
         </header>
