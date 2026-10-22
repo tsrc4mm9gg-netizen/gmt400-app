@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
+import { useModelSelection } from './ModelSelectionContext';
 
 type BodyStyle = {
   id: string;
@@ -28,11 +29,8 @@ type Filters = {
   drivetrain?: string;
 };
 
-export default function ModelHero({
-  onSelectionChange,
-}: {
-  onSelectionChange?: (selection: { bodyId: string | null; filters: Filters }) => void;
-}) {
+export default function ModelHero() {
+  const { setSelection } = useModelSelection();
   const [index, setIndex] = useState(0);
   const [touchStart, setTouchStart] = useState(0);
   const [filters, setFilters] = useState<Filters>({});
@@ -41,7 +39,7 @@ export default function ModelHero({
   const body = BODY_STYLES[index];
 
   const emit = (bodyId: string | null, f: Filters) => {
-    onSelectionChange?.({ bodyId, filters: f });
+    setSelection({ bodyId, filters: f });
   };
 
   const next = () => {
