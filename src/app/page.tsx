@@ -657,23 +657,7 @@ export default function Home() {
           </div>
         )}
 
-        {tab === 'diy' && (
-          <div className="mb-6 bg-neutral-950 border border-white/10 p-4">
-            <h3 className="font-semibold text-amber-400 mb-3">PORADNIKI WIDEO</h3>
-            <div className="grid sm:grid-cols-2 gap-4">
-              <div className="aspect-video bg-neutral-900 flex items-center justify-center">
-                <a href="https://www.youtube.com/results?search_query=GMT400+DIY+repair" target="_blank" className="text-amber-400 hover:underline">
-                  ▶ YouTube: GMT400 DIY
-                </a>
-              </div>
-              <div className="aspect-video bg-neutral-900 flex items-center justify-center">
-                <a href="https://www.youtube.com/results?search_query=GMT400+4L60E+rebuild" target="_blank" className="text-amber-400 hover:underline">
-                  ▶ YouTube: 4L60E
-                </a>
-              </div>
-            </div>
-          </div>
-        )}
+        
 
         {tab === 'schematy' && (
           <div>
