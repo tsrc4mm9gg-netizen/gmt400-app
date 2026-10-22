@@ -108,8 +108,18 @@ export function matchesVehicleProfile(profile: VehicleProfile | null, compatibil
   if (compatibility.years?.length) {
     const year = Number(profile.year);
     if (profile.year && Number.isFinite(year)) {
-      const ranges = compatibility.years.map(value => Array.isArray(value) ? value : [value, value]);
-      if (!ranges.some(([from, to]) => year >= from && year <= to)) return false;
+      // Support both discrete years and a single range tuple [from, to]
+      const isRangeTuple = compatibility.years.length === 2 &&
+        typeof compatibility.years[0] === 'number' &&
+        typeof compatibility.years[1] === 'number' &&
+        compatibility.years[0] < compatibility.years[1];
+      if (isRangeTuple) {
+        const [from, to] = compatibility.years as [number, number];
+        if (year < from || year > to) return false;
+      } else {
+        // discrete years
+        if (!compatibility.years.some(y => Number(y) === year)) return false;
+      }
     }
   }
 
