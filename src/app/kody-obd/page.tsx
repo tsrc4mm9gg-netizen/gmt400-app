@@ -9,6 +9,13 @@ export const metadata: Metadata = {
 
 const systemFilters = ['Paliwo', 'Powietrze', 'Zapłon', 'Chłodzenie', 'Emisje', 'Skrzynia biegów'];
 
+const systemCounts = Object.fromEntries(
+  systemFilters.map(system => [
+    system,
+    OBD_CODES.filter(code => code.systems.includes(system)).length
+  ])
+);
+
 export default function ObdCodesPage({ searchParams }: { searchParams: Promise<{ q?: string }> }) {
   return searchParams.then(({ q }) => {
     const query = q || '';
@@ -26,7 +33,7 @@ export default function ObdCodesPage({ searchParams }: { searchParams: Promise<{
                 const isActive = query === system;
                 return (
                   <li key={system}>
-                    <Link href={`/kody-obd?q=${encodeURIComponent(system)}`} aria-current={isActive ? 'page' : undefined} className={`inline-flex min-h-11 items-center rounded border px-4 py-2 underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-400 ${isActive ? 'border-amber-400 bg-amber-400 font-semibold text-black' : 'border-white/20 bg-neutral-950 text-amber-400'}`}>{system}{isActive && <span className="sr-only">(aktywny filtr)</span>}</Link>
+                    <Link href={`/kody-obd?q=${encodeURIComponent(system)}`} aria-current={isActive ? 'page' : undefined} className={`inline-flex min-h-11 items-center rounded border px-4 py-2 underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-400 ${isActive ? 'border-amber-400 bg-amber-400 font-semibold text-black' : 'border-white/20 bg-neutral-950 text-amber-400'}`}>{system} — {systemCounts[system]}{isActive && <span className="sr-only">(aktywny filtr)</span>}</Link>
                   </li>
                 );
               })}
