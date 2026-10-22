@@ -27,3 +27,15 @@ button { min-height:var(--control-height); }
 .gmt-profile-trigger:disabled { opacity:.5; cursor:wait; }
 @media (hover:hover) { .gmt-navigation button:hover, .gmt-profile-trigger:hover { color:#fff !important; border-color:#46505d !important; } }
 @media (prefers-reduced-motion:reduce) { .gmt-navigation button, .gmt-profile-trigger { transition:none; } }
+
+
+/* === Premium 4A home consistency === */
+body { --accent: #dc2626; --accent-soft: #f87171; }
+.text-amber-400, .text-amber-300, .text-yellow-400 { color: #f87171 !important; }
+.bg-amber-400, .bg-amber-300, .bg-yellow-400 { background-color: #dc2626 !important; color: #fff !important; }
+.border-amber-400, .border-amber-300 { border-color: #dc2626 !important; }
+/* Hide duplicate old hero title when new ModelHero is present */
+main h1:has(+ p), 
+#content > div:first-child .text-4xl { display: none; }
+/* Soften old model filter pills */
+button[class*="bg-amber"] { background: #dc2626 !important; }
