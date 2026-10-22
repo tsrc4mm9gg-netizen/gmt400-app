@@ -2,17 +2,22 @@
 import { useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
 import { buildKnowledgeIndex, getKnowledgeEntries, searchKnowledge, type KnowledgeEntry } from '../../lib/knowledge-index';
+import RandomCodeLink from './random-code-link';
+
 type Entry = KnowledgeEntry;
 const control = 'min-h-11 rounded border border-amber-400 px-4 py-3 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-400';
-const queryExamples = ['P0300', '4L60E', 'EGR', 'EVAP'];
+const queryExamples = ['P0300', '4L60E', 'EGR', 'MAF', 'EVAP', 'O2 sensor', 'fuel trim', 'idle air control'];
+
 function isEntry(value: unknown): value is Entry {
   if (!value || typeof value !== 'object') return false;
   const record = value as Record<string, unknown>;
   return typeof record.id === 'string' && typeof record.Nazwa === 'string' && ['Opis', 'Objawy', 'Rozwiązanie', 'Model', 'Typ'].every(key => record[key] === undefined || typeof record[key] === 'string');
 }
+
 export default function SearchPage({ query }: { query: string }) {
   const [items, setItems] = useState<Entry[]>([]);
   const [status, setStatus] = useState<'loading' | 'ready' | 'error'>('loading');
+
   useEffect(() => {
     let active = true;
     const controller = new AbortController();
@@ -25,15 +30,18 @@ export default function SearchPage({ query }: { query: string }) {
     }).catch(() => { if (active) setStatus('error'); }).finally(() => window.clearTimeout(timeout));
     return () => { active = false; window.clearTimeout(timeout); controller.abort(); };
   }, []);
+
   const index = useMemo(() => buildKnowledgeIndex(getKnowledgeEntries(items)), [items]);
   const results = useMemo(() => searchKnowledge(index, query), [index, query]);
+  const normalizedQuery = query.trim();
+
   return <main className="mx-auto max-w-4xl px-4 py-8 text-white">
     <nav aria-label="Nawigacja" className="mb-6 flex gap-4"><Link href="/" className="text-amber-400 underline">Strona główna</Link><Link href="/kody-obd" className="text-amber-400 underline">Kody OBD</Link></nav>
     <h1 className="text-3xl">Szukaj w bazie wiedzy</h1>
-    <form action="/szukaj" method="get" role="search" className="my-6"><label htmlFor="page-search" className="block">Kod, objaw lub nazwa materiału</label><div className="mt-2 flex flex-wrap gap-3"><input key={query} id="page-search" name="q" type="search" maxLength={120} defaultValue={query} className={`${control} min-w-0 flex-1 bg-neutral-900`} /><button className={`${control} bg-amber-400 text-black`} type="submit">Szukaj</button></div></form>
-    {!query.trim() && <section aria-labelledby="search-examples-title" className="mb-6 rounded border border-white/20 bg-neutral-900 p-4"><h2 id="search-examples-title" className="text-lg text-amber-400">Przykładowe zapytania</h2><p className="mt-1 text-sm text-neutral-400">Wybierz przykład, aby sprawdzić bazę wiedzy.</p><ul className="mt-3 flex flex-wrap gap-2">{queryExamples.map(example => <li key={example}><Link href={`/szukaj?q=${encodeURIComponent(example)}`} className="inline-flex min-h-11 items-center rounded border border-white/20 bg-neutral-950 px-4 py-2 text-amber-400 underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-400">{example}</Link></li>)}</ul></section>}
+    <form action="/szukaj" method="get" role="search" className="my-6"><label htmlFor="page-search" className="block">Kod, objaw lub nazwa materiału</label><div className="mt-2 flex flex-wrap gap-3"><input key={query} id="page-search" name="q" type="search" maxLength={120} defaultValue={query} placeholder="Szukaj kodu lub systemu, np. P0300" className={`${control} min-w-0 flex-1 bg-neutral-900`} /><button className={`${control} bg-amber-400 text-black`} type="submit">Szukaj</button><RandomCodeLink /></div></form>
+    <section aria-labelledby="search-examples-title" className="mb-6 rounded border border-white/20 bg-neutral-900 p-4"><h2 id="search-examples-title" className="text-lg text-amber-400">Popularne hasła</h2><p className="mt-1 text-sm text-neutral-400">Wybierz hasło, aby zawęzić wyniki.</p><ul className="mt-3 flex flex-wrap gap-2">{queryExamples.map(example => <li key={example}><Link href={`/szukaj?q=${encodeURIComponent(example)}`} className="inline-flex min-h-11 items-center rounded border border-white/20 bg-neutral-950 px-4 py-2 text-amber-400 underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-400">{example}</Link></li>)}</ul></section>
     <p className="mb-4 text-sm text-neutral-400">Baza OBD i materiały Notion. Ten widok pokazuje wszystkie auta, bez filtra profilu. Dla fraz wielowyrazowych wymagane są wszystkie słowa. Powiązanie z hasłem nie potwierdza zastosowania kodu w konkretnym aucie.</p>
-    <p role="status" className="mb-4">Znaleziono: {results.length}. {status === 'loading' ? 'Trwa pobieranie dodatkowych materiałów Notion.' : status === 'error' ? 'Nie udało się pobrać materiałów Notion w wymaganym czasie lub wystąpił błąd. Wyniki obejmują tylko bazę OBD.' : 'Materiały Notion załadowane.'}</p>
-    {!query.trim() ? <p>Wpisz frazę, aby zobaczyć wyniki.</p> : <><ul className="space-y-4">{results.map(result => <li key={result.id} className="rounded border border-white/20 p-4"><h2><Link href={result.href || (result.id ? `/baza/${encodeURIComponent(result.id)}` : '/')} className="inline-flex min-h-11 items-center text-amber-400 underline focus-visible:outline-2">{result.Nazwa}</Link></h2><p className="mt-2 text-neutral-300">{(result.Opis || result.Objawy || '').slice(0, 250)}</p></li>)}</ul>{status !== 'loading' && !results.length && <p>Brak wyników. Spróbuj krótszej frazy, np. P0300 lub 4L60E.</p>}</>}
+    {normalizedQuery && <p role="status" className="mb-4">Wyświetlanie {results.length} wyników dla: <strong className="text-neutral-200">{normalizedQuery}</strong>. {status === 'loading' ? 'Trwa pobieranie dodatkowych materiałów Notion.' : status === 'error' ? 'Nie udało się pobrać materiałów Notion w wymaganym czasie lub wystąpił błąd. Wyniki obejmują tylko bazę OBD.' : 'Materiały Notion załadowane.'}</p>}
+    {!normalizedQuery ? <p>Wpisz frazę lub wybierz popularne hasło, aby zobaczyć wyniki.</p> : <><ul className="space-y-4">{results.map(result => { const obdCode = result.id?.startsWith('obd:') ? result.id.slice(4) : undefined; return <li key={result.id} className="rounded border border-white/20 p-4"><div className="flex flex-wrap items-center gap-2"><h2 className="text-lg"><Link href={result.href || (result.id ? `/baza/${encodeURIComponent(result.id)}` : '/')} className="inline-flex min-h-11 items-center text-amber-400 underline focus-visible:outline-2">{result.Nazwa}</Link></h2>{obdCode && <span className="rounded bg-amber-400 px-2 py-1 text-xs font-semibold text-black">Kod OBD</span>}</div><p className="mt-2 text-neutral-300">{(result.Opis || result.Objawy || '').slice(0, 250)}</p>{obdCode && <Link href={`/kody-obd/${obdCode.toLowerCase()}`} className="mt-2 inline-flex min-h-11 items-center text-amber-400 underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-400">Otwórz kartę kodu {obdCode}</Link>}</li>; })}</ul>{status !== 'loading' && !results.length && <p className="rounded border border-white/10 bg-neutral-900/60 p-4 text-neutral-300">Brak wyników. Spróbuj krótszej frazy albo popularnego hasła, np. P0300, EGR lub 4L60E.</p>}</>}
   </main>;
 }
