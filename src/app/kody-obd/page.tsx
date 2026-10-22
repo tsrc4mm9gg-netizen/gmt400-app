@@ -42,6 +42,27 @@ export default function ObdCodesPage({ searchParams }: { searchParams: Promise<{
             </ul>
           </nav>
         </header>
+        <section aria-labelledby="obd-generations" className="mb-6 rounded-xl border border-white/10 bg-neutral-900/60 p-4">
+          <h2 id="obd-generations" className="text-xl font-semibold text-white">OBD-I czy OBD-II?</h2>
+          <div className="mt-3 grid gap-4 sm:grid-cols-2">
+            <div>
+              <h3 className="font-semibold text-amber-400">OBD-I (1988–1995)</h3>
+              <ul className="mt-2 list-disc pl-5 text-neutral-300">
+                <li>Złącze ALDL 12-pin</li>
+                <li>Odczyt: zwarcie pinów A–B, miganie lampki „Check Engine”</li>
+                <li>Kod 12 = tryb diagnostyczny</li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="font-semibold text-amber-400">OBD-II (1996+)</h3>
+              <ul className="mt-2 list-disc pl-5 text-neutral-300">
+                <li>Gniazdo diagnostyczne 16-pin</li>
+                <li>Odczyt skanerem OBD-II</li>
+                <li>Kody P0xxx</li>
+              </ul>
+            </div>
+          </div>
+        </section>
         <form role="search" className="mb-6 flex flex-wrap gap-3">
           <label htmlFor="obd-search" className="sr-only">Szukaj kodu OBD</label>
           <input id="obd-search" name="q" type="search" defaultValue={query} placeholder="Szukaj kodu lub systemu, np. P0300" className="min-h-12 min-w-0 flex-1 rounded border border-white/20 bg-neutral-900 px-4 py-3 text-white" />
