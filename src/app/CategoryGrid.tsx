@@ -3,17 +3,17 @@
 import Link from 'next/link';
 
 const CATEGORIES = [
-  { href: '/baza?typ=Porada', icon: '🛠️', title: 'DIY', desc: 'Poradniki i instrukcje' },
-  { href: '/baza?typ=Usterka', icon: '⚠️', title: 'Usterki', desc: 'Typowe problemy i naprawy' },
+  { href: '/?tab=diy', icon: '🛠️', title: 'DIY', desc: 'Poradniki i instrukcje' },
+  { href: '/?tab=usterki', icon: '⚠️', title: 'Usterki', desc: 'Typowe problemy i naprawy' },
   { href: '/schematy', icon: '🔌', title: 'Schematy', desc: 'Instalacje i układy' },
   { href: '/kody-obd', icon: '📡', title: 'Kody OBD', desc: 'Diagnostyka i błędy' },
   { href: '/narzedzia', icon: '💧', title: 'Płyny', desc: 'Specyfikacje i wymiany' },
-  { href: '/baza?typ=Model', icon: '🚚', title: 'Modele', desc: 'Warianty i lata produkcji' },
+  { href: '/?tab=modele', icon: '🚚', title: 'Modele', desc: 'Warianty i lata produkcji' },
 ];
 
 export default function CategoryGrid() {
   return (
-    <section className="px-4 pb-24">
+    <section className="px-4 pb-8">
       <h2 className="mb-3 text-xs font-semibold uppercase tracking-widest text-neutral-500">Kategorie</h2>
       <div className="grid grid-cols-2 gap-3">
         {CATEGORIES.map((cat) => (
