@@ -522,6 +522,7 @@ export default function Home() {
           </div>
         </div>
       )}
+      {tab !== 'modele' && (
       <div id="content" className="max-w-7xl mx-auto px-4 py-8">
         {['usterki', 'kody', 'diy', 'schematy'].includes(tab) && vehicleFilterPanel}
         
@@ -1778,6 +1779,7 @@ export default function Home() {
           </div>
         )}
       </div>
+      )}
 
       <footer className="border-t border-white/10 py-8">
         <div className="max-w-7xl mx-auto px-4 flex justify-between items-center">
