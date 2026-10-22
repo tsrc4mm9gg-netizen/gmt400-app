@@ -574,7 +574,7 @@ export default function Home() {
             
               <div className="space-y-3">
                 <p className="text-neutral-500 text-sm mb-4">Znaleziono: {filteredIssues.length} usterek</p>
-                {filteredIssues.filter(i => !issueQuery || i.Nazwa.toLowerCase().includes(issueQuery.toLowerCase()) || (i.Objawy && i.Objawy.toLowerCase().includes(issueQuery.toLowerCase())) || (i.Rozwiązanie && i.Rozwiązanie.toLowerCase().includes(issueQuery.toLowerCase()))).map((i, idx) => {
+                {filteredIssues.map((i, idx) => {
                   const issueImg = i.Nazwa.toLowerCase().includes('kolektor') ? '/issue-intake.jpg' : i.Nazwa.toLowerCase().includes('4l60') ? '/issue-4l60e.jpg' : null;
                   return (
                     <div key={idx} className="bg-neutral-950 border border-white/10 overflow-hidden">
