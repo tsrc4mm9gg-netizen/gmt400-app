@@ -47,6 +47,9 @@ export default async function ObdCodePage({ params }: { params: Promise<{ code: 
         <Link href={`/szukaj?q=${encodeURIComponent(item.relatedSearch)}`} className="mt-2 inline-block min-h-11 rounded bg-amber-400 px-4 py-3 font-semibold text-black">Szukaj: {item.relatedSearch}</Link>
       </section>
       <p className="mt-8 text-sm text-neutral-400">Kod OBD wskazuje obszar problemu, ale nie zastępuje diagnostyki. Nie wymieniaj części wyłącznie na podstawie kodu — potwierdź przyczynę pomiarami.</p>
+      <nav aria-label="Nawigacja na końcu strony" className="mt-8">
+        <Link href="/kody-obd" className="inline-flex min-h-11 items-center text-amber-400 underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-400">← Wszystkie kody OBD</Link>
+      </nav>
     </main>
   );
 }
