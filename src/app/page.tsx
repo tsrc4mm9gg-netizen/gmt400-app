@@ -368,6 +368,11 @@ export default function Home() {
     );
   }
 
+  // Home screen is rendered by HomeHero in layout. Long content only after entering a section.
+  if (tab === 'modele') {
+    return null;
+  }
+
   return (
     <div className="min-h-screen bg-black text-white" style={{ paddingBottom: "env(safe-area-inset-bottom)" }}>
       
