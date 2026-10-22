@@ -17,8 +17,25 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "GMT400 Encyklopedia",
+  metadataBase: new URL("https://www.gmt400.pl"),
+  title: {
+    default: "GMT400 Encyklopedia",
+    template: "%s | GMT400",
+  },
   description: "Baza wiedzy dla właścicieli Chevrolet C/K, Tahoe, Suburban i GMC (1988–2000)",
+  openGraph: {
+    type: "website",
+    locale: "pl_PL",
+    siteName: "GMT400",
+    title: "GMT400 Encyklopedia",
+    description: "Baza wiedzy dla właścicieli Chevrolet C/K, Tahoe, Suburban i GMC (1988–2000)",
+    url: "/",
+  },
+  twitter: {
+    card: "summary",
+    title: "GMT400 Encyklopedia",
+    description: "Baza wiedzy dla właścicieli Chevrolet C/K, Tahoe, Suburban i GMC (1988–2000)",
+  },
 };
 
 export default function RootLayout({
