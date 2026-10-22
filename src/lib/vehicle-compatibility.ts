@@ -1,4 +1,5 @@
 import { GMT400_YEAR_RANGE, type VehicleProfile } from './vehicle-profile';
+import { matchesNumericYears, matchesYearRules } from './year-range.mjs';
 
 export interface ContentCompatibility {
   makes?: string[];
@@ -49,21 +50,6 @@ const comparable = (field: string, value: string) => {
   return /^4l(?:60|80)e$/.test(text);
 };
 
-function yearMatches(profileYear: string, rule: string): boolean | null {
-  const text = rule.trim();
-  if (general(text)) return true;
-  if (/^\d{4}$/.test(text)) return text === profileYear;
-  const range = text.match(/^(\d{4})\s*[-\u2013\u2014]\s*(\d{4})$/);
-  if (range) {
-    const from = Number(range[1]), to = Number(range[2]);
-    if (from > to) return null;
-    return Number(profileYear) >= from && Number(profileYear) <= to;
-  }
-  const open = text.match(/^(\d{4})\+$/);
-  if (open) return Number(profileYear) >= Number(open[1]);
-  return null;
-}
-
 export function matchVehicle(profile: VehicleSelection, rules: Applicability): MatchResult {
   const unknown: string[] = [];
   const outside: string[] = [];
@@ -85,9 +71,9 @@ export function matchVehicle(profile: VehicleSelection, rules: Applicability): M
   else if (rules.years.some(general)) wildcards++;
   else if (!/^\d{4}$/.test(profile.year)) unknown.push('Rocznik: nieustalony w profilu');
   else {
-    const checks = rules.years.map(value => yearMatches(profile.year, value));
-    if (checks.includes(true)) explicit++;
-    else if (checks.includes(null)) unknown.push('Rocznik: nierozpoznany zapis zakresu');
+    const yearStatus = matchesYearRules(profile.year, rules.years);
+    if (yearStatus === true) explicit++;
+    else if (yearStatus === null) unknown.push('Rocznik: nierozpoznany zapis zakresu');
     else outside.push('Rocznik: poza opisanym zakresem');
   }
 
@@ -106,21 +92,8 @@ export function matchesVehicleProfile(profile: VehicleProfile | null, compatibil
   if (compatibility.models?.length && !compatibility.models.some(model => normalize(model) === normalize(profile.model))) return false;
 
   if (compatibility.years?.length) {
-    const year = Number(profile.year);
-    if (profile.year && Number.isFinite(year)) {
-      // Support both discrete years and a single range tuple [from, to]
-      const isRangeTuple = compatibility.years.length === 2 &&
-        typeof compatibility.years[0] === 'number' &&
-        typeof compatibility.years[1] === 'number' &&
-        compatibility.years[0] < compatibility.years[1];
-      if (isRangeTuple) {
-        const [from, to] = compatibility.years as [number, number];
-        if (year < from || year > to) return false;
-      } else {
-        // discrete years
-        if (!compatibility.years.some(y => Number(y) === year)) return false;
-      }
-    }
+    const yearStatus = matchesNumericYears(profile.year, compatibility.years);
+    if (yearStatus === false) return false;
   }
 
   if (compatibility.engines?.length && profile.engine && !compatibility.engines.some(engine => normalize(engine) === normalize(profile.engine))) return false;
