@@ -39,7 +39,6 @@ const CATEGORIES = [
   { id: 'tuning', label: 'Tuning' },
   { id: 'import', label: 'Import' },
   { id: 'historia', label: 'Historia' },
-  { id: 'ciekawostki', label: 'Ciekawostki' },
     { id: 'kalkulator', label: 'Koszty' },
     { id: 'porownaj', label: 'Porównaj' },
     { id: 'dziennik', label: 'Dziennik' },
@@ -559,35 +558,25 @@ export default function Home() {
                 <div className="text-center py-4">
                   <p className="text-neutral-500 mb-4">Wpisz słowo kluczowe lub wybierz model aby zobaczyć usterki.</p>
                   <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 text-sm mb-8">
-                    {['wyciek', '4L60E', 'kolektor', 'hamulce', '4x4', 'pompa', 'rdza', 'rozdzielacz'].map(k => (
+                    {['wyciek', '4L60E', 'kolektor', 'hamulce', '4x4', 'pompa'].map(k => (
                       <button key={k} onClick={() => setIssueQuery(k)} className="bg-neutral-800 hover:bg-neutral-700 px-3 py-2">{k}</button>
                     ))}
                   </div>
                 </div>
                 <h3 className="text-lg font-semibold text-amber-400 mb-4">Najczęstsze usterki GMT400</h3>
                 <div className="space-y-3">
-                  {[
-                    { name: 'Uszczelka kolektora dolotowego', model: '5.7L Vortec', objawy: 'Wyciek płynu chłodzącego, przegrzewanie, biały dym', rozw: 'Wymiana uszczelki kolektora. Częsty problem 1996-2000. OEM: 12554863. Czas: 4-6h.', img: '/issue-intake.jpg' },
-                    { name: 'Ślizganie 4L60E (3-4 bieg)', model: 'Wszystkie z 4L60E', objawy: 'Wysokie obroty przy zmianie 3-4, brak 4 biegu', rozw: 'Zużyte sprzęgła 3-4. Regeneracja skrzyni lub wymiana. Koszt: 1500-3500 PLN. Sprawdź płyn i filtr najpierw.', img: '/issue-4l60e.jpg' },
-                    { name: 'Pompa paliwa', model: 'Wszystkie', objawy: 'Nie odpala, gaśnie w trasie, słabe ciśnienie', rozw: 'Wymiana pompy w zbiorniku. OEM: AC Delco MU1746 lub EP381. Bezpiecznik ECM-B 20A.', img: '/issue-fuelpump.jpg' },
-                    { name: 'Rdza ramy i przewodów', model: 'Wszystkie (PL szczególnie)', objawy: 'Rdza na ramie, pękające przewody hamulcowe', rozw: 'Kontrola ramy, wymiana przewodów hamulcowych. Częsty problem w Europie.', img: '/issue-rust.jpg' },
-                    { name: 'Czujnik poziomu paliwa', model: 'Wszystkie', objawy: 'Wskaźnik paliwa skacze lub pokazuje źle', rozw: 'Wymiana czujnika w zbiorniku (razem z pompą). Częsty problem.', img: '/issue-fuelpump.jpg' },
-                    { name: 'Rozdzielacz (TBI/Vortec)', model: '5.0/5.7L', objawy: 'Przerywa, nie odpala, brak iskry', rozw: 'Wymiana kopułki, palca, modułu. Częsty problem po 100 tys. km.', img: '' },
-                    { name: 'Aktuator 4x4', model: 'K1500/K2500', objawy: 'Nie wchodzi 4x4, grzechotanie', rozw: 'Wymiana aktuatora przedniego mostu lub Posi-Lok. OEM: 26010605.', img: '/issue-4x4.jpg' },
-                    { name: 'Kolektor wydechowy pęknięty', model: '5.7L', objawy: 'Głośny stukot przy zimnym silniku', rozw: 'Wymiana kolektora. Częsty problem. OEM: 12556588.', img: '' }
-                  ].map((iss, idx) => (
-                    <div key={idx} className="bg-neutral-950 border border-white/10 overflow-hidden">
-                      {iss.img && <img loading="lazy" src={iss.img} alt={iss.name} className="w-full h-40 object-cover cursor-pointer" onClick={() => setLightbox(iss.img)} />}
-                      <div className="p-4">
-                        <div className="flex justify-between items-start mb-2">
-                          <h4 className="font-semibold text-amber-400">{iss.name}</h4>
-                          <span className="text-xs bg-white/10 px-2 py-0.5">{iss.model}</span>
-                        </div>
-                        <p className="text-sm text-neutral-400 mb-1"><span className="text-amber-400">Objawy:</span> {iss.objawy}</p>
-                        <p className="text-sm text-neutral-300">{iss.rozw}</p>
-                      </div>
-                    </div>
-                  ))}
+                  <div className="bg-neutral-950 border border-white/10 p-4">
+                    <h4 className="font-semibold text-amber-400">Uszczelka kolektora dolotowego</h4>
+                    <p className="text-sm text-neutral-400">Objawy: wyciek płynu, przegrzewanie. Rozwiązanie: wymiana uszczelki. OEM: 12554863.</p>
+                  </div>
+                  <div className="bg-neutral-950 border border-white/10 p-4">
+                    <h4 className="font-semibold text-amber-400">Ślizganie 4L60E</h4>
+                    <p className="text-sm text-neutral-400">Objawy: wysokie obroty przy zmianie 3-4. Rozwiązanie: regeneracja skrzyni.</p>
+                  </div>
+                  <div className="bg-neutral-950 border border-white/10 p-4">
+                    <h4 className="font-semibold text-amber-400">Pompa paliwa</h4>
+                    <p className="text-sm text-neutral-400">Objawy: nie odpala, gaśnie. Rozwiązanie: wymiana pompy w zbiorniku.</p>
+                  </div>
                 </div>
               </div>
             )}
@@ -597,37 +586,6 @@ export default function Home() {
         {tab === 'diy' && (
           <div>
             <h2 className="text-2xl mb-6" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>PORADNIKI DIY</h2>
-            
-            <div className="grid sm:grid-cols-2 gap-4 mb-8">
-              <div className="bg-neutral-950 border border-white/10 overflow-hidden">
-                <img loading="lazy" src="/diy-distributor.jpg" alt="Rozdzielacz" className="w-full h-40 object-cover cursor-pointer" onClick={() => setLightbox('/diy-distributor.jpg')} />
-                <div className="p-3">
-                  <h4 className="font-semibold text-amber-400">Wymiana kopułki i palca</h4>
-                  <p className="text-xs text-neutral-400">5.7L Vortec. Czas: 30 min. Trudność: łatwa.</p>
-                </div>
-              </div>
-              <div className="bg-neutral-950 border border-white/10 overflow-hidden">
-                <img loading="lazy" src="/diy-brakes.jpg" alt="Przewody" className="w-full h-40 object-cover cursor-pointer" onClick={() => setLightbox('/diy-brakes.jpg')} />
-                <div className="p-3">
-                  <h4 className="font-semibold text-amber-400">Wymiana przewodów hamulcowych</h4>
-                  <p className="text-xs text-neutral-400">Kontrola ramy. Częsty problem w PL.</p>
-                </div>
-              </div>
-              <div className="bg-neutral-950 border border-white/10 overflow-hidden">
-                <img loading="lazy" src="/diy-cabinfilter.jpg" alt="Filtr" className="w-full h-40 object-cover cursor-pointer" onClick={() => setLightbox('/diy-cabinfilter.jpg')} />
-                <div className="p-3">
-                  <h4 className="font-semibold text-amber-400">Filtr kabinowy</h4>
-                  <p className="text-xs text-neutral-400">Lokalizacja pod deską. Łatwa wymiana.</p>
-                </div>
-              </div>
-              <div className="bg-neutral-950 border border-white/10 overflow-hidden">
-                <img loading="lazy" src="/issue-4l60e.jpg" alt="4L60E" className="w-full h-40 object-cover cursor-pointer" onClick={() => setLightbox('/issue-4l60e.jpg')} />
-                <div className="p-3">
-                  <h4 className="font-semibold text-amber-400">Wymiana filtra 4L60E</h4>
-                  <p className="text-xs text-neutral-400">Co 50 tys. km. Płyn Dexron III.</p>
-                </div>
-              </div>
-            </div>
             <input aria-label="Szukaj porady DIY" 
               type="text" 
               placeholder="Szukaj porady (np. 4L60E, filtr, kolektor)..." 
@@ -657,7 +615,23 @@ export default function Home() {
           </div>
         )}
 
-        
+        {tab === 'diy' && (
+          <div className="mb-6 bg-neutral-950 border border-white/10 p-4">
+            <h3 className="font-semibold text-amber-400 mb-3">PORADNIKI WIDEO</h3>
+            <div className="grid sm:grid-cols-2 gap-4">
+              <div className="aspect-video bg-neutral-900 flex items-center justify-center">
+                <a href="https://www.youtube.com/results?search_query=GMT400+DIY+repair" target="_blank" className="text-amber-400 hover:underline">
+                  ▶ YouTube: GMT400 DIY
+                </a>
+              </div>
+              <div className="aspect-video bg-neutral-900 flex items-center justify-center">
+                <a href="https://www.youtube.com/results?search_query=GMT400+4L60E+rebuild" target="_blank" className="text-amber-400 hover:underline">
+                  ▶ YouTube: 4L60E
+                </a>
+              </div>
+            </div>
+          </div>
+        )}
 
         {tab === 'schematy' && (
           <div>
@@ -971,14 +945,6 @@ export default function Home() {
 
         {tab === 'specyfikacje' && (
           <div>
-            <h2 className="text-2xl mb-6" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>SPECYFIKACJE</h2>
-            <div className="bg-neutral-950 border border-white/10 overflow-hidden mb-6">
-              <img loading="lazy" src="/spec-fluids.jpg" alt="Płyny" className="w-full cursor-pointer" onClick={() => setLightbox('/spec-fluids.jpg')} />
-              <div className="p-4">
-                <h3 className="font-semibold text-amber-400">Pojemności płynów eksploatacyjnych</h3>
-                <p className="text-sm text-neutral-400">Kliknij aby powiększyć. Dane dla 5.7L i 4.3L.</p>
-              </div>
-            </div>
             <h2 className="text-2xl mb-6" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>SPECYFIKACJE SILNIKÓW</h2>
             
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-6">
@@ -1538,35 +1504,6 @@ export default function Home() {
               </ul>
             </div>
             <div className="bg-neutral-950 border border-white/10 p-4">
-              <div className="bg-neutral-950 border border-white/10 overflow-hidden mb-4">
-              <img loading="lazy" src="/tip-obd.jpg" alt="OBD" className="w-full h-48 object-cover cursor-pointer" onClick={() => setLightbox('/tip-obd.jpg')} />
-              <div className="p-4">
-                <h3 className="font-semibold text-amber-400 mb-2">11. ZŁĄCZE OBD-I POD DESKĄ</h3>
-                <p className="text-sm text-neutral-300 mb-2">Przed 1996: złącze ALDL pod deską kierowcy.</p>
-                <ul className="text-sm text-neutral-300 space-y-1">
-                  <li>• Lokalizacja: lewa strona deski, przy dźwigni hamulca ręcznego</li>
-                  <li>• 12-pinowe złącze</li>
-                  <li>• Kody mrugające — zwarcie pinów A i B</li>
-                </ul>
-              </div>
-            </div>
-
-            <div className="bg-neutral-950 border border-white/10 overflow-hidden mb-4">
-              <img loading="lazy" src="/tip-torsion.jpg" alt="Torsion" className="w-full h-48 object-cover cursor-pointer" onClick={() => setLightbox('/tip-torsion.jpg')} />
-              <div className="p-4">
-                <h3 className="font-semibold text-amber-400 mb-2">12. REGULACJA DRĄŻKÓW SKRĘTNYCH</h3>
-                <p className="text-sm text-neutral-300 mb-2">Poziomowanie przodu 4x4.</p>
-                <ol className="text-sm text-neutral-300 space-y-1 list-decimal list-inside">
-                  <li>Unieś przód</li>
-                  <li>Poluzuj nakrętkę blokującą</li>
-                  <li>Kręć śrubą regulacyjną (w prawo = wyżej)</li>
-                  <li>Sprawdź wysokość i dokręć</li>
-                </ol>
-                <p className="text-xs text-neutral-500 mt-2">Narzędzie: klucz do drążków skrętnych</p>
-              </div>
-            </div>
-
-            <div className="bg-neutral-950 border border-white/10 p-4">
               <h3 className="font-semibold text-amber-400 mb-2">6. RESET ADAPTACJI SKRZYNI 4L60E</h3>
               <p className="text-sm text-neutral-300 mb-2">Po wymianie ATF skrzynia "uczy się" od nowa.</p>
               <ol className="text-sm text-neutral-300 space-y-1 list-decimal list-inside">
@@ -1753,36 +1690,6 @@ export default function Home() {
           </div>
         )}
 
-        {tab === 'ciekawostki' && (
-          <div>
-            <h2 className="text-2xl mb-6" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>CIEKAWOSTKI GMT400</h2>
-            <div className="grid sm:grid-cols-2 gap-6">
-              <div className="bg-neutral-950 border border-white/10 overflow-hidden">
-                <img loading="lazy" src="/history-line.jpg" alt="Linia" className="w-full h-48 object-cover" />
-                <div className="p-4">
-                  <h3 className="font-semibold text-amber-400 mb-2">Ponad 6 milionów sztuk</h3>
-                  <p className="text-sm text-neutral-300">GMT400 to jedna z najliczniej produkowanych platform GM. W latach 1988-2000 zjechało z taśm ponad 6 milionów pojazdów.</p>
-                </div>
-              </div>
-              <div className="bg-neutral-950 border border-white/10 overflow-hidden">
-                <img loading="lazy" src="/history-badge.jpg" alt="Badge" className="w-full h-48 object-cover" />
-                <div className="p-4">
-                  <h3 className="font-semibold text-amber-400 mb-2">C vs K</h3>
-                  <p className="text-sm text-neutral-300">C = tylny napęd (2WD), K = napęd na 4 koła (4x4). Nazewnictwo pochodzi z lat 60. i przetrwało do końca produkcji.</p>
-                </div>
-              </div>
-              <div className="bg-neutral-950 border border-white/10 p-4">
-                <h3 className="font-semibold text-amber-400 mb-2">Ostatni "prawdziwy" pickup</h3>
-                <p className="text-sm text-neutral-300">Wielu fanów uważa GMT400 za ostatnią generację "prawdziwych" amerykańskich pickupów — prosta konstrukcja, łatwa naprawa, trwała rama.</p>
-              </div>
-              <div className="bg-neutral-950 border border-white/10 p-4">
-                <h3 className="font-semibold text-amber-400 mb-2">Tahoe 2-drzwiowe</h3>
-                <p className="text-sm text-neutral-300">Produkowane tylko do 1999. Krótszy rozstaw osi, lżejsze, bardziej zwrotne. Dziś rzadkość i kolekcjonerski model.</p>
-              </div>
-            </div>
-          </div>
-        )}
-
         {tab === 'historia' && (
           <div>
             <h2 className="text-2xl mb-6" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>HISTORIA GMT400</h2>
@@ -1807,9 +1714,6 @@ export default function Home() {
           <div className="text-neutral-500 text-xs">gmt400.pl</div>
         </div>
       </footer>
-      </div>
-      </div>
-      </div>
     </div>
   );
 }
