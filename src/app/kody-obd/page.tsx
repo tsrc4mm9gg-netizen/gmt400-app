@@ -7,6 +7,8 @@ export const metadata: Metadata = {
   description: 'Baza kodów OBD-II dla Chevroleta i GMC GMT400: znaczenie kodu, typowe przyczyny, kolejność diagnostyki i powiązane materiały.'
 };
 
+const systemFilters = ['Paliwo', 'Powietrze', 'Zapłon', 'Chłodzenie', 'Emisje', 'Skrzynia biegów'];
+
 export default function ObdCodesPage({ searchParams }: { searchParams: Promise<{ q?: string }> }) {
   return searchParams.then(({ q }) => {
     const query = q || '';
@@ -18,6 +20,15 @@ export default function ObdCodesPage({ searchParams }: { searchParams: Promise<{
           <h1 className="mt-1 text-3xl font-bold text-white">Kody OBD-II GMT400</h1>
           <p className="mt-3 max-w-2xl text-neutral-300">Baza kodów diagnostycznych z objaśnieniem, typowymi przyczynami i kolejnością sprawdzania. Kody są informacyjne — przed wymianą części potwierdź usterkę pomiarami i danymi live.</p>
           <p className="mt-3 max-w-2xl text-neutral-300">Baza obejmuje kody dotyczące paliwa, powietrza, zapłonu, chłodzenia, emisji oraz skrzyni biegów.</p>
+          <nav aria-label="Filtry systemów" className="mt-4">
+            <ul className="flex flex-wrap gap-2">
+              {systemFilters.map(system => (
+                <li key={system}>
+                  <Link href={`/kody-obd?q=${encodeURIComponent(system)}`} className="inline-flex min-h-11 items-center rounded border border-white/20 bg-neutral-950 px-4 py-2 text-amber-400 underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-400">{system}</Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
         </header>
         <form role="search" className="mb-6 flex flex-wrap gap-3">
           <label htmlFor="obd-search" className="sr-only">Szukaj kodu OBD</label>
