@@ -61,7 +61,7 @@ export const TORQUE_SPECS: TorqueSpecification[] = [
  appliesTo: '1996–1999 Vortec 5.0/5.7 (C/K)',
  valueLbFt: 22,
  valueNm: 30,
- notes: 'Używana głowica: 15 Nm (11 lb-ft) wg Engine Mechanical lub 20 Nm (14 lb-ft) wg Engine Electrical — GM podaje obie wartości. Sprawdź w swoim aucie / manualu.',
+ notes: 'Używana głowica: 15 N·m (11 lb-ft) wg Engine Mechanical lub 20 N·m (14 lb-ft) wg Engine Electrical — GM podaje obie wartości. Sprawdź w swoim aucie / manualu.',
  confidence: 'reference',
  source: 'https://gm.saturn.team/Chevrolet/Chevy_C_Pickup___2WD/1996/2/1/171/37544',
  sourceTitle: 'GM Service Manual 1996 C Pickup — Spark Plug Replacement'
@@ -72,7 +72,7 @@ export const TORQUE_SPECS: TorqueSpecification[] = [
  appliesTo: '1996–1999 Vortec 5.0/5.7 (C/K)',
  valueLbFt: 11,
  valueNm: 15,
- notes: 'Kolejność 1–8, gwint z klejem: 3 Nm (27 lb-in) → 12 Nm (106 lb-in) → 15 Nm (11 lb-ft). Górny kolektor: 5 Nm, potem 10 Nm. Sprawdź w swoim aucie / manualu.',
+ notes: 'Kolejność 1–8, gwint z klejem: 3 N·m (27 lb-in) → 12 N·m (106 lb-in) → 15 N·m (11 lb-ft). Górny kolektor: 5 N·m, potem 10 N·m. Sprawdź w swoim aucie / manualu.',
  confidence: 'reference',
  source: 'https://gm.saturn.team/Chevrolet/Chevy_C_Pickup___2WD/1996/2/1/157/44190',
  sourceTitle: 'GM Service Manual 1996 C Pickup — Intake Manifold Installation'
@@ -83,7 +83,7 @@ export const TORQUE_SPECS: TorqueSpecification[] = [
  appliesTo: '1996 C/K 4L60-E',
  valueLbFt: 8,
  valueNm: 11,
- notes: 'GM: 11 Nm (97 lb-in), krzyżowo. Sprawdź w swoim aucie / manualu.',
+ notes: 'GM: 11 N·m (97 lb-in), krzyżowo. Sprawdź w swoim aucie / manualu.',
  confidence: 'reference',
  source: 'https://gm.saturn.team/Chevrolet/Chevy_C_Pickup___2WD/1996/2/5/169/6598',
  sourceTitle: 'GM Service Manual 1996 C Pickup — 4L60-E Fluid/Filter Replacement'

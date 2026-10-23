@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 export const dynamic = 'force-dynamic';
-const CONVERSIONS = { length:{ from:'mile', to:'km', factor:1.609344 }, volume:{ from:'US gallon', to:'litr', factor:3.785411784 }, pressure:{ from:'psi', to:'bar', factor:0.0689475729 }, mass:{ from:'funt', to:'kg', factor:0.45359237 }, torque:{ from:'ft-lb', to:'Nm', factor:1.35581795 } } as const;
+const CONVERSIONS = { length:{ from:'mile', to:'km', factor:1.609344 }, volume:{ from:'US gallon', to:'litr', factor:3.785411784 }, pressure:{ from:'psi', to:'bar', factor:0.0689475729 }, mass:{ from:'funt', to:'kg', factor:0.45359237 }, torque:{ from:'ft-lb', to:'N·m', factor:1.35581795 } } as const;
 export async function GET(request:Request) {
  const p = new URL(request.url).searchParams;
  const type = p.get('type');

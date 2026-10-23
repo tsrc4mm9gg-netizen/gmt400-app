@@ -25,7 +25,7 @@ export function SourceList() {
 export function EngineTable() {
   return (
     <div className="mb-6 rounded-xl border border-white/10 bg-neutral-950 p-4">
-      <p className="mb-3 text-sm text-neutral-400">Pickupy C/K, moc SAE net. Moment: Nm (w nawiasie lb-ft jak w źródle).</p>
+      <p className="mb-3 text-sm text-neutral-400">Pickupy C/K, moc SAE net. Moment: N·m (w nawiasie lb-ft jak w źródle).</p>
       <div className="overflow-x-auto">
         <table className="w-full min-w-[560px] text-sm">
           <thead>
@@ -139,7 +139,7 @@ export function TorqueTable() {
           <li key={t.id} className="border-b border-white/5 pb-3 last:border-0">
             <div className="flex items-start justify-between gap-3">
               <span className="font-medium text-white">{t.component}</span>
-              <span className="shrink-0 text-right text-red-400">{t.valueNm} Nm ({t.valueLbFt} lb-ft)</span>
+              <span className="shrink-0 text-right text-red-400">{t.valueNm} N·m ({t.valueLbFt} lb-ft)</span>
             </div>
             <p className="text-xs text-neutral-400">{t.appliesTo}</p>
             <p className="mt-1 text-xs text-neutral-500">{t.notes}</p>

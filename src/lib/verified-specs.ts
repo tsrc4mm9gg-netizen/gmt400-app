@@ -1,7 +1,7 @@
 // Dane zweryfikowane wg audytu (docs/factual-corrections.md):
 // [W1] en.wikipedia.org/wiki/Chevrolet_C/K_(fourth_generation), [W2] .../Chevrolet_Tahoe,
 // [OM95] GM Owner's Manual 1995 C/K 1500, [OM99] GM Owner's Manual 1999 Suburban.
-// Jednostki metryczne pierwsze; w nawiasie wartość źródłowa (lb-ft, qt, mil) — 1 lb-ft = 1,3558 Nm, 1 qt = 0,9464 L, 1 mila = 1,609 km.
+// Jednostki metryczne pierwsze; w nawiasie wartość źródłowa (lb-ft, qt, mil) — 1 lb-ft = 1,3558 N·m, 1 qt = 0,9464 L, 1 mila = 1,609 km.
 
 export const CHECK_NOTE = 'Sprawdź w swoim aucie / manualu — GMT400 ma wiele wariantów (rocznik, GVWR, silnik, skrzynia, RPO).';
 
@@ -15,17 +15,17 @@ export const SOURCES: Record<string, { label: string; url: string }> = {
 export type EngineSpec = { name: string; rpo: string; years: string; output: string; note?: string; src: string };
 
 export const ENGINES: EngineSpec[] = [
-  { name: '4.3 V6 TBI', rpo: 'LB4', years: '1988–1995', output: '150–165 KM / 312–319 Nm (230–235 lb-ft)', note: 'zależnie od rocznika i GVWR', src: 'W1' },
-  { name: '4.3 Vortec 4300', rpo: 'L35', years: '1996–1998', output: '200 KM / 346 Nm (255 lb-ft)', src: 'W1' },
-  { name: '5.0 V8 TBI', rpo: 'L03', years: '1988–1995', output: '175 KM / 359–366 Nm (265–270 lb-ft)', src: 'W1' },
-  { name: '5.0 Vortec 5000', rpo: 'L30', years: '1996–1998', output: '230 KM / 386 Nm (285 lb-ft)', src: 'W1' },
-  { name: '5.7 V8 TBI', rpo: 'L05', years: '1988–1995', output: '190–210 KM / 400–420 Nm (295–310 lb-ft)', src: 'W1' },
-  { name: '5.7 Vortec 5700', rpo: 'L31', years: '1996–2000', output: '255 KM / 447 Nm (330 lb-ft)', note: 'Tahoe wg [W2]: 454 Nm (335 lb-ft)', src: 'W1' },
-  { name: '7.4 V8 TBI', rpo: 'L19', years: '1988–1995', output: '230 KM / 522 Nm (385 lb-ft)', note: '454 SS 1991–1993: 255 KM / 549 Nm (405 lb-ft)', src: 'W1' },
-  { name: '7.4 Vortec 7400', rpo: 'L29', years: '1996–2000', output: '290 KM / 556 Nm (410 lb-ft)', src: 'W1' },
+  { name: '4.3 V6 TBI', rpo: 'LB4', years: '1988–1995', output: '150–165 KM / 312–319 N·m (230–235 lb-ft)', note: 'zależnie od rocznika i GVWR', src: 'W1' },
+  { name: '4.3 Vortec 4300', rpo: 'L35', years: '1996–1998', output: '200 KM / 346 N·m (255 lb-ft)', src: 'W1' },
+  { name: '5.0 V8 TBI', rpo: 'L03', years: '1988–1995', output: '175 KM / 359–366 N·m (265–270 lb-ft)', src: 'W1' },
+  { name: '5.0 Vortec 5000', rpo: 'L30', years: '1996–1998', output: '230 KM / 386 N·m (285 lb-ft)', src: 'W1' },
+  { name: '5.7 V8 TBI', rpo: 'L05', years: '1988–1995', output: '190–210 KM / 400–420 N·m (295–310 lb-ft)', src: 'W1' },
+  { name: '5.7 Vortec 5700', rpo: 'L31', years: '1996–2000', output: '255 KM / 447 N·m (330 lb-ft)', note: 'Tahoe wg [W2]: 454 N·m (335 lb-ft)', src: 'W1' },
+  { name: '7.4 V8 TBI', rpo: 'L19', years: '1988–1995', output: '230 KM / 522 N·m (385 lb-ft)', note: '454 SS 1991–1993: 255 KM / 549 N·m (405 lb-ft)', src: 'W1' },
+  { name: '7.4 Vortec 7400', rpo: 'L29', years: '1996–2000', output: '290 KM / 556 N·m (410 lb-ft)', src: 'W1' },
   { name: '6.2 diesel', rpo: 'LH6 / LL4', years: '1988–1993', output: '126–150 KM', src: 'W1' },
-  { name: '6.5 diesel (wolnossący)', rpo: 'L49', years: '1994–1995', output: '155 KM / 373 Nm (275 lb-ft)', src: 'W1' },
-  { name: '6.5 turbodiesel', rpo: 'L56 (GVWR < 3856 kg / 8500 lb) / L65 (> 3856 kg)', years: '1992–2002', output: '180–195 KM / 488–597 Nm (360–440 lb-ft)', note: 'w Tahoe/Yukon tylko 3-drzwiowe 4WD 1994–1999 [W2]', src: 'W1' },
+  { name: '6.5 diesel (wolnossący)', rpo: 'L49', years: '1994–1995', output: '155 KM / 373 N·m (275 lb-ft)', src: 'W1' },
+  { name: '6.5 turbodiesel', rpo: 'L56 (GVWR < 3856 kg / 8500 lb) / L65 (> 3856 kg)', years: '1992–2002', output: '180–195 KM / 488–597 N·m (360–440 lb-ft)', note: 'w Tahoe/Yukon tylko 3-drzwiowe 4WD 1994–1999 [W2]', src: 'W1' },
 ];
 
 export type FluidRow = { item: string; spec: string; capacity: string; interval: string; src: string };
