@@ -3,12 +3,12 @@
 import Link from 'next/link';
 
 const CATEGORIES = [
-  { href: '/?tab=diy', icon: '🛠️', title: 'DIY', desc: 'Poradniki krok po kroku' },
-  { href: '/?tab=usterki', icon: '⚠️', title: 'Usterki', desc: 'Objawy i diagnostyka' },
-  { href: '/kody-obd', icon: '📡', title: 'Kody OBD', desc: 'OBD-I i OBD-II' },
-  { href: '/schematy', icon: '🔌', title: 'Schematy', desc: 'Instalacje i układy' },
-  { href: '/narzedzia', icon: '🔧', title: 'Narzędzia', desc: 'Kalkulatory, VIN, RPO' },
-  { href: '/baza?typ=Model', icon: '🚚', title: 'Modele', desc: 'Warianty i lata' },
+  { href: '/?tab=diy', icon: '🛠️', title: 'DIY', desc: 'Poradniki' },
+  { href: '/?tab=usterki', icon: '⚠️', title: 'Usterki', desc: 'Diagnostyka' },
+  { href: '/kody-obd', icon: '📡', title: 'Kody OBD', desc: 'OBD-I / II' },
+  { href: '/schematy', icon: '🔌', title: 'Schematy', desc: 'Układy' },
+  { href: '/narzedzia', icon: '🔧', title: 'Narzędzia', desc: 'Kalkulatory' },
+  { href: '/baza?typ=Model', icon: '🚚', title: 'Modele', desc: 'Warianty' },
 ];
 
 export default function CategoryGrid() {
