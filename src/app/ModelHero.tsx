@@ -12,9 +12,9 @@ type BodyStyle = {
 };
 
 const BODY_STYLES: BodyStyle[] = [
-  { id: 'tahoe-4d', name: 'Tahoe 4-drzwi', image: '/tahoe-gold.jpg', years: '1995–2000' },
+  { id: 'tahoe-4d', name: 'Tahoe 4-drzwi', image: '/tahoe-gold.jpg?v=2', years: '1995–2000' },
   { id: 'tahoe-2d', name: 'Tahoe / Blazer 2-drzwi', image: '/tahoe-2d-red.jpg', years: '1992–1999' },
-  { id: 'suburban', name: 'Suburban', image: '/suburban-navy.jpg', years: '1992–1999' },
+  { id: 'suburban', name: 'Suburban', image: '/suburban-navy.jpg?v=2', years: '1992–1999' },
   { id: 'yukon', name: 'GMC Yukon', image: '/yukon-white.jpg', years: '1992–2000' },
   { id: 'ck-reg', name: 'C/K Regular Cab', image: '/ck-reg.jpg', years: '1988–1998' },
   { id: 'ck-ext', name: 'C/K Extended Cab', image: '/ck-ext.jpg', years: '1988–1998' },
@@ -97,7 +97,7 @@ export default function ModelHero() {
         </div>
 
         <div className="relative aspect-[16/9] w-full">
-          <Image src={body.image} alt={body.name} fill className="object-cover" priority />
+          <Image src={body.image} alt={body.name} fill className="object-cover" priority unoptimized />
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
         </div>
 
