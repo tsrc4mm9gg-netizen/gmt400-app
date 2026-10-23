@@ -49,7 +49,13 @@ export default async function ModelPage({ params }: Props) {
   const prev = BODY_STYLES[(index - 1 + BODY_STYLES.length) % BODY_STYLES.length];
   const next = BODY_STYLES[(index + 1) % BODY_STYLES.length];
   const has4wd = !['ck-ext'].includes(body.id);
-  const schematics = SCHEMATICS.filter(s => s.diagram && (s.id !== 'aldl-12-pin' || body.from <= 1995) && (s.id !== 'obd-ii-16-pin' || body.to >= 1996) && (s.id !== 'fuse-locations' || ['tahoe-4d', 'tahoe-2d', 'suburban', 'yukon', 'ck-reg', 'ck-ext', 'k1500', 'sierra'].includes(body.id)));
+  // Zakres lat, których dotyczy schemat (wg źródła w schematics.ts) — pokazujemy tylko pasujące do rocznika nadwozia.
+  const yearRange: Record<string, [number, number]> = {
+    'aldl-12-pin': [1988, 1995], 'obd-ii-16-pin': [1996, 2000], 'vortec-cooling': [1996, 2000], 'fuel-system': [1988, 2000],
+    'vortec-intake-gaskets': [1996, 2000], 'ground-points': [1996, 1996], 'brakes-abs': [1995, 1999], 'fluids-1995-1999': [1995, 1999],
+  };
+  const inYears = (id: string) => { const r = yearRange[id]; return !r || (body.from <= r[1] && body.to >= r[0]); };
+  const schematics = SCHEMATICS.filter(s => s.diagram && inYears(s.id) && (s.id !== 'fuse-locations' || ['tahoe-4d', 'tahoe-2d', 'suburban', 'yukon', 'ck-reg', 'ck-ext', 'k1500', 'sierra'].includes(body.id)));
 
   return (
     <div className="mx-auto min-h-screen max-w-5xl bg-black px-4 py-6 pb-28 text-white sm:px-5 sm:py-10">

@@ -5,7 +5,7 @@ import Breadcrumbs from '../ui/Breadcrumbs';
 
 export const metadata = {
   title: 'Schematy — GMT400',
-  description: 'Schematy GMT400: ALDL 12-pin, OBD-II 16-pin, wymiana ATF 4L60-E, lokalizacja bezpieczników, przednie zawieszenie C/K, układ chłodzenia Vortec, napęd 4×4.',
+  description: 'Schematy GMT400: ALDL 12-pin, OBD-II 16-pin, chłodzenie, hamulce i ABS, układ paliwowy, uszczelki kolektora Vortec, punkty masy, tabela płynów, ATF 4L60-E, bezpieczniki, zawieszenie C/K, napęd 4×4.',
   alternates: { canonical: 'https://www.gmt400.pl/schematy' },
 };
 

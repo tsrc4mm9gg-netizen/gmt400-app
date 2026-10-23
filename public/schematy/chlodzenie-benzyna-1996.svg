@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Źródła:
+- SM 1996 C Pickup, Cooling System: https://gm.saturn.team/Chevrolet/Chevy_C_Pickup___2WD/1996/2/1/170/37217
+- SM 1996, Coolant Recovery System: https://gm.saturn.team/Chevrolet/Chevy_C_Pickup___2WD/1996/2/1/170/37162
+- SM 1996, Thermostat: https://gm.saturn.team/Chevrolet/Chevy_C_Pickup___2WD/1996/2/1/170/37209
+- 1999 Chevrolet Suburban Owner's Manual (GM), rozdz. 6 i 7
+Rysunek poglądowy (nie w skali). Wersja ciemna dla gmt400.pl. Własny rysunek gmt400.pl (bez grafik AI).
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1762" width="900" height="1762" role="img" aria-label="Układ chłodzenia — benzyna (1996+)">
+<title>Układ chłodzenia — benzyna (1996+)</title>
+<rect width="900" height="1762" fill="#0d0d0f"/>
+<g font-family="DejaVu Sans, Arial, sans-serif">
+<text x="30" y="58" font-size="30" fill="#f5f5f5" font-weight="bold">Układ chłodzenia — benzyna (1996+)</text>
+<text x="30" y="90" font-size="20" fill="#f87171">Model i lata: C/K, Tahoe, Yukon, Suburban z silnikami</text>
+<text x="30" y="122" font-size="20" fill="#f87171">benzynowymi 1996–2000 (SM 1996 C/K, OM 1999). Diesel 6.5:</text>
+<text x="30" y="154" font-size="20" fill="#f87171">zbiornik wyrównawczy ciśnieniowy (surge tank).</text>
+<rect x="30" y="200" width="8" height="30" fill="#dc2626"/>
+<text x="48" y="225" font-size="24" fill="#f5f5f5" font-weight="bold">Jak krąży płyn (benzyna)</text>
+<rect x="60" y="242" width="780" height="76" rx="12" fill="#18181b" stroke="#f87171" stroke-width="2"/>
+<text x="80" y="276" font-size="23" fill="#f5f5f5" font-weight="bold">Pompa wody</text>
+<text x="80" y="306" font-size="19" fill="#a3a3a3">napędzana paskiem, tłoczy płyn do bloku i głowic</text>
+<path d="M450 322 v26 m-12 -12 l12 14 l12 -14" stroke="#dc2626" stroke-width="4" fill="none"/>
+<rect x="60" y="354" width="780" height="76" rx="12" fill="#18181b" stroke="#f5f5f5" stroke-width="2"/>
+<text x="80" y="388" font-size="23" fill="#f5f5f5" font-weight="bold">Blok i głowice silnika</text>
+<text x="80" y="418" font-size="19" fill="#a3a3a3">płyn odbiera ciepło</text>
+<path d="M450 434 v26 m-12 -12 l12 14 l12 -14" stroke="#dc2626" stroke-width="4" fill="none"/>
+<rect x="60" y="466" width="780" height="102" rx="12" fill="#18181b" stroke="#f5f5f5" stroke-width="2"/>
+<text x="80" y="500" font-size="23" fill="#f5f5f5" font-weight="bold">Termostat (woskowy)</text>
+<text x="80" y="530" font-size="19" fill="#a3a3a3">zimny silnik: zamknięty — płyn krąży tylko w silniku (szybkie</text>
+<text x="80" y="556" font-size="19" fill="#a3a3a3">nagrzanie); ciepły: otwiera się</text>
+<path d="M450 572 v26 m-12 -12 l12 14 l12 -14" stroke="#dc2626" stroke-width="4" fill="none"/>
+<rect x="60" y="604" width="780" height="76" rx="12" fill="#18181b" stroke="#f5f5f5" stroke-width="2"/>
+<text x="80" y="638" font-size="23" fill="#f5f5f5" font-weight="bold">Chłodnica + wentylator ze sprzęgłem</text>
+<text x="80" y="668" font-size="19" fill="#a3a3a3">oddaje ciepło; korek chłodnicy 103 kPa (15 psi)</text>
+<path d="M450 684 v26 m-12 -12 l12 14 l12 -14" stroke="#dc2626" stroke-width="4" fill="none"/>
+<rect x="60" y="716" width="780" height="76" rx="12" fill="#18181b" stroke="#f5f5f5" stroke-width="2"/>
+<text x="80" y="750" font-size="23" fill="#f5f5f5" font-weight="bold">Powrót do pompy</text>
+<text x="80" y="780" font-size="19" fill="#a3a3a3">nagrzewnica kabiny to osobne odgałęzienie obiegu</text>
+<rect x="30" y="822" width="8" height="30" fill="#dc2626"/>
+<text x="48" y="847" font-size="24" fill="#f5f5f5" font-weight="bold">Zbiorniczek wyrównawczy (benzyna)</text>
+<rect x="30" y="864" width="840" height="100" rx="8" fill="#18181b" stroke="#3f3f46"/>
+<text x="46" y="898" font-size="21" fill="#f5f5f5" font-weight="bold">Połączenie</text>
+<text x="346" y="898" font-size="21" fill="#f5f5f5">wężyk odpowietrzający od szyjki chłodnicy —</text>
+<text x="346" y="926" font-size="21" fill="#f5f5f5">nadmiar płynu przy nagrzaniu, powrót przy</text>
+<text x="346" y="954" font-size="21" fill="#f5f5f5">stygnięciu</text>
+<rect x="30" y="972" width="840" height="72" rx="8" fill="#18181b" stroke="#3f3f46"/>
+<text x="46" y="1006" font-size="21" fill="#f5f5f5" font-weight="bold">Poziom</text>
+<text x="346" y="1006" font-size="21" fill="#f5f5f5">między ADD i FULL (ok. 1 l różnicy); FULL</text>
+<text x="346" y="1034" font-size="21" fill="#f5f5f5">sprawdzaj na ciepłym silniku</text>
+<rect x="30" y="1052" width="840" height="72" rx="8" fill="#18181b" stroke="#3f3f46"/>
+<text x="46" y="1086" font-size="21" fill="#f5f5f5" font-weight="bold">Diesel 6.5</text>
+<text x="346" y="1086" font-size="21" fill="#f5f5f5">zbiornik wyrównawczy ciśnieniowy z własnym</text>
+<text x="346" y="1114" font-size="21" fill="#f5f5f5">korkiem — płyn przez niego krąży</text>
+<rect x="30" y="1154" width="8" height="30" fill="#dc2626"/>
+<text x="48" y="1179" font-size="24" fill="#f5f5f5" font-weight="bold">Płyn i pojemności</text>
+<rect x="30" y="1196" width="840" height="72" rx="8" fill="#18181b" stroke="#3f3f46"/>
+<text x="46" y="1230" font-size="21" fill="#f5f5f5" font-weight="bold">Płyn</text>
+<text x="346" y="1230" font-size="21" fill="#f5f5f5">DEX-COOL (pomarańczowy, bez krzemianów)</text>
+<text x="346" y="1258" font-size="21" fill="#f5f5f5">50/50 z wodą</text>
+<rect x="30" y="1276" width="840" height="72" rx="8" fill="#18181b" stroke="#3f3f46"/>
+<text x="46" y="1310" font-size="21" fill="#f5f5f5" font-weight="bold">Wymiana DEX-COOL</text>
+<text x="346" y="1310" font-size="21" fill="#f5f5f5">OM99: 5 lat / 150 000 mil (240 000 km) • SM</text>
+<text x="346" y="1338" font-size="21" fill="#f5f5f5">1996: 166 000 km (100 000 mil) / 5 lat</text>
+<rect x="30" y="1356" width="840" height="44" rx="8" fill="#18181b" stroke="#3f3f46"/>
+<text x="46" y="1390" font-size="21" fill="#f5f5f5" font-weight="bold">5.7 L31 (VIN R)</text>
+<text x="346" y="1390" font-size="21" fill="#f5f5f5">16,5 l (19 l z tylną nagrzewnicą) — OM99</text>
+<rect x="30" y="1408" width="840" height="44" rx="8" fill="#18181b" stroke="#3f3f46"/>
+<text x="46" y="1442" font-size="21" fill="#f5f5f5" font-weight="bold">7.4 L29 (VIN J)</text>
+<text x="346" y="1442" font-size="21" fill="#f5f5f5">23,5 l (26 l z tylną nagrzewnicą) — OM99</text>
+<rect x="30" y="1470" width="840" height="136" rx="8" fill="#2a0f10" stroke="#dc2626" stroke-width="2"/>
+<text x="48" y="1506" font-size="21" fill="#fca5a5" font-weight="bold">Uwaga: nie odkręcaj korka na gorącym silniku. Dolanie</text>
+<text x="48" y="1534" font-size="21" fill="#fca5a5">płynu z krzemianami = wymiana już po 50 000 km (30 000</text>
+<text x="48" y="1562" font-size="21" fill="#fca5a5">mil) / 24 mies. (SM 1996). 1988–1995: płyn etylenowy wg GM</text>
+<text x="48" y="1590" font-size="21" fill="#fca5a5">6038-M (OM95) — inny niż DEX-COOL.</text>
+<text x="30" y="1654" font-size="18" fill="#a3a3a3">Sprawdź w swoim aucie / manualu — GMT400 ma wiele wariantów (rocznik,</text>
+<text x="30" y="1680" font-size="18" fill="#a3a3a3">silnik, GVWR, RPO). Rysunek poglądowy, nie w skali.</text>
+<text x="30" y="1706" font-size="18" fill="#a3a3a3">Źródło: GM Service Manual 1996 C/K (Engine Cooling), instrukcja 1999</text>
+<text x="30" y="1732" font-size="18" fill="#a3a3a3">Suburban</text>
+</g>
+</svg>

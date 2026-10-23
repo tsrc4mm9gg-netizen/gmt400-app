@@ -14,6 +14,7 @@ import NotionUnavailable from './NotionUnavailable';
 import { findObdCode } from '../../../lib/obd-codes';
 import Breadcrumbs, { type Crumb } from '../../ui/Breadcrumbs';
 import BackLink from '../../ui/BackLink';
+import { SCHEMATICS } from '../../../lib/schematics';
 
 const SECTION_OF: Record<string, Crumb> = {
   'Usterka': { href: '/usterki', label: 'Usterki' },
@@ -76,6 +77,24 @@ function localDiagram(title: string): string | null {
     [['rdza','korozj','rama'], '/issue-rust.jpg'],
   ];
   return mappings.find(([terms]) => terms.some(term => value.includes(term)))?.[1] || null;
+}
+// Powiązane schematy SVG (/schematy#id) po słowach kluczowych z tytułu — tylko dodatkowy link, grafiki AI bez zmian.
+function relatedSchematics(title: string): { id: string; title: string }[] {
+  const value = title.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/ł/g, 'l');
+  const map: [string[], string][] = [
+    [['chlodz', 'termostat', 'pompa wody', 'przegrz', 'plyn chlodn', 'chlodnic'], 'vortec-cooling'],
+    [['hamul', 'abs', 'hydro-boost', 'hydroboost'], 'brakes-abs'],
+    [['paliw', 'csfi', 'sfi', 'tbi', 'wtrysk', 'pulsator', 'pajak'], 'fuel-system'],
+    [['kolektor', 'intake', 'uszczelk'], 'vortec-intake-gaskets'],
+    [['masa', 'masy', 'punkt mas', 'uziemien', 'g101'], 'ground-points'],
+    [['plyny', 'przeglad', 'pojemnos', 'olej'], 'fluids-1995-1999'],
+    [['aldl', 'obd-i', 'kody migow'], 'aldl-12-pin'],
+    [['obd-ii', 'obd2', 'obd ii'], 'obd-ii-16-pin'],
+    [['bezpiecz'], 'fuse-locations'],
+    [['4l60', 'atf'], '4l60e-atf-filter'],
+  ];
+  const ids = [...new Set(map.filter(([terms]) => terms.some(t => value.includes(t))).map(([, id]) => id))];
+  return ids.map(id => SCHEMATICS.find(s => s.id === id)).filter((s): s is NonNullable<typeof s> => Boolean(s)).slice(0, 3).map(s => ({ id: s.id, title: s.title }));
 }
 const hasImage = (blocks: any[]): boolean => blocks.some(block => block.type === 'image' || hasImage(block.children || []));
 const obdCode = (entry: { Nazwa: string; Opis: string; Objawy: string; Rozwiązanie: string }): string | null => {
@@ -147,6 +166,7 @@ export default async function KnowledgeEntry({ params }: Props) {
       {contentError && <p role="alert" className="rounded border border-red-600/40 p-3">Nie udało się pobrać dodatkowej zawartości strony Notion. Powyższe pola są dostępne, ale materiał może być niekompletny. Odśwież stronę, aby ponowić pobieranie.</p>}
       {blocks.length > 0 && <section aria-label="Zawartość strony Notion"><h2 className="mb-3 text-xl">Treść materiału i ilustracje</h2><NotionContent blocks={blocks} /></section>}
       {diagram && <figure><a href={diagram} target="_blank" rel="noopener noreferrer"><img src={diagram} alt="Grafika pomocnicza z biblioteki GMT400" loading="lazy" className="h-auto w-full rounded object-contain" /></a><figcaption className="mt-2 text-xs text-neutral-400">Grafika pomocnicza z biblioteki aplikacji, nie ilustracja przypisana w Notion do tego wpisu. Sprawdź jej zgodność z konkretnym pojazdem i procedurą.</figcaption></figure>}
+      {(() => { const sch = relatedSchematics(entry.Nazwa); return sch.length > 0 && <aside aria-label="Powiązane schematy" className="rounded-xl border border-red-600/40 bg-neutral-950 p-4"><h2 className="text-lg font-semibold text-white">Schemat do tego tematu</h2><ul className="mt-2 space-y-2">{sch.map(s => <li key={s.id}><a href={`/schematy#${s.id}`} className="flex min-h-11 items-center justify-between gap-3 rounded-lg border border-white/10 px-3 py-2 text-neutral-100 hover:border-red-600">{s.title}<span aria-hidden="true" className="text-red-400">→</span></a></li>)}</ul><p className="mt-2 text-xs text-neutral-400">Schematy mają podany model i lata — sprawdź w swoim aucie / manualu.</p></aside>; })()}
       {!contentError && !entry.Opis && !entry.Objawy && !entry.Rozwiązanie && !blocks.length && <p>Ten wpis nie zawiera jeszcze szczegółowej treści.</p>}
       {entry.edited && <p className="text-xs text-neutral-500">Ostatnia edycja wpisu w Notion: {entry.edited}. To nie jest data weryfikacji merytorycznej.</p>}
     </article>

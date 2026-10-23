@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Źródła:
+- SM 1996 C Pickup, Intake Manifold Replacement (5.0/5.7): https://gm.saturn.team/Chevrolet/Chevy_C_Pickup___2WD/1996/2/1/157/44190
+Rysunek poglądowy (nie w skali). Wersja ciemna dla gmt400.pl. Własny rysunek gmt400.pl (bez grafik AI).
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1266" width="900" height="1266" role="img" aria-label="Uszczelki kolektora Vortec 5.0/5.7 — montaż">
+<title>Uszczelki kolektora Vortec 5.0/5.7 — montaż</title>
+<rect width="900" height="1266" fill="#0d0d0f"/>
+<g font-family="DejaVu Sans, Arial, sans-serif">
+<text x="30" y="58" font-size="30" fill="#f5f5f5" font-weight="bold">Uszczelki kolektora Vortec 5.0/5.7 — montaż</text>
+<text x="30" y="90" font-size="20" fill="#f87171">Model i lata: Silniki Vortec 5.0 L30 / 5.7 L31 w C/K,</text>
+<text x="30" y="122" font-size="20" fill="#f87171">Tahoe, Yukon, Suburban 1996–2000 (procedura z SM 1996 C/K,</text>
+<text x="30" y="154" font-size="20" fill="#f87171">Engine Mechanical 5.0L/5.7L).</text>
+<rect x="30" y="200" width="8" height="30" fill="#dc2626"/>
+<text x="48" y="225" font-size="24" fill="#f5f5f5" font-weight="bold">Przekrój — gdzie są uszczelki</text>
+<rect x="250" y="252" width="400" height="70" rx="10" fill="#18181b" stroke="#f5f5f5" stroke-width="2"/>
+<text x="450" y="296" font-size="22" fill="#f5f5f5" font-weight="bold" text-anchor="middle">kolektor dolny</text>
+<path d="M110 422 L250 322 L270 342 L140 442 Z" fill="#27272a" stroke="#f5f5f5" stroke-width="2"/>
+<path d="M790 422 L650 322 L630 342 L760 442 Z" fill="#27272a" stroke="#f5f5f5" stroke-width="2"/>
+<text x="120" y="477" font-size="20" fill="#a3a3a3">głowica L</text>
+<text x="700" y="477" font-size="20" fill="#a3a3a3">głowica P</text>
+<line x1="250" y1="318" x2="252" y2="336" stroke="#dc2626" stroke-width="8"/><line x1="650" y1="318" x2="648" y2="336" stroke="#dc2626" stroke-width="8"/>
+<text x="160" y="357" font-size="19" fill="#f87171">uszczelka</text>
+<text x="660" y="357" font-size="19" fill="#f87171">uszczelka</text>
+<rect x="320" y="392" width="260" height="44" rx="6" fill="#991b1b"/>
+<text x="450" y="422" font-size="20" fill="#f5f5f5" text-anchor="middle">blok: przód / tył</text>
+<text x="450" y="467" font-size="19" fill="#f87171" text-anchor="middle">ścieg 5 mm na bloku</text>
+<rect x="30" y="524" width="8" height="30" fill="#dc2626"/>
+<text x="48" y="549" font-size="24" fill="#f5f5f5" font-weight="bold">Kolejność (SM 1996)</text>
+<rect x="30" y="566" width="840" height="72" rx="8" fill="#18181b" stroke="#3f3f46"/>
+<text x="46" y="600" font-size="21" fill="#f5f5f5" font-weight="bold">1. Klej na uszczelkę</text>
+<text x="346" y="600" font-size="21" fill="#f5f5f5">łatka 4 mm kleju GM 12346141 na końcach</text>
+<text x="346" y="628" font-size="21" fill="#f5f5f5">uszczelki kolektora dolnego</text>
+<rect x="30" y="646" width="840" height="44" rx="8" fill="#18181b" stroke="#3f3f46"/>
+<text x="46" y="680" font-size="21" fill="#f5f5f5" font-weight="bold">2. Kołki ustalające</text>
+<text x="346" y="680" font-size="21" fill="#f5f5f5">załóż uszczelki na kołkach ustalających</text>
+<rect x="30" y="698" width="840" height="72" rx="8" fill="#18181b" stroke="#3f3f46"/>
+<text x="46" y="732" font-size="21" fill="#f5f5f5" font-weight="bold">3. Uszczelniacz na bloku</text>
+<text x="346" y="732" font-size="21" fill="#f5f5f5">ścieg 5 mm z przodu i z tyłu bloku,</text>
+<text x="346" y="760" font-size="21" fill="#f5f5f5">zachodzący 13 mm na każdą uszczelkę</text>
+<rect x="30" y="778" width="840" height="72" rx="8" fill="#18181b" stroke="#3f3f46"/>
+<text x="46" y="812" font-size="21" fill="#f5f5f5" font-weight="bold">4. Montuj na mokro</text>
+<text x="346" y="812" font-size="21" fill="#f5f5f5">kolektor zakładaj, póki uszczelniacz jest</text>
+<text x="346" y="840" font-size="21" fill="#f5f5f5">mokry</text>
+<rect x="30" y="858" width="840" height="72" rx="8" fill="#18181b" stroke="#3f3f46"/>
+<text x="46" y="892" font-size="21" fill="#f5f5f5" font-weight="bold">5. Śruby</text>
+<text x="346" y="892" font-size="21" fill="#f5f5f5">klej do gwintów GM 12345382 na śruby</text>
+<text x="346" y="920" font-size="21" fill="#f5f5f5">kolektora dolnego</text>
+<rect x="30" y="938" width="840" height="72" rx="8" fill="#18181b" stroke="#3f3f46"/>
+<text x="46" y="972" font-size="21" fill="#f5f5f5" font-weight="bold">6. Dokręcanie</text>
+<text x="346" y="972" font-size="21" fill="#f5f5f5">kolejność 1–8: najpierw 3 N·m, potem 12 N·m,</text>
+<text x="346" y="1000" font-size="21" fill="#f5f5f5">na końcu 15 N·m</text>
+<rect x="30" y="1028" width="840" height="108" rx="8" fill="#2a0f10" stroke="#dc2626" stroke-width="2"/>
+<text x="48" y="1064" font-size="21" fill="#fca5a5" font-weight="bold">Uwaga: zła kolejność dokręcania może zdeformować</text>
+<text x="48" y="1092" font-size="21" fill="#fca5a5">współosiowość gniazd łożysk wału (ostrzeżenie SM 1996).</text>
+<text x="48" y="1120" font-size="21" fill="#fca5a5">Momenty i środki — sprawdź w manualu dla swojego rocznika.</text>
+<text x="30" y="1184" font-size="18" fill="#a3a3a3">Sprawdź w swoim aucie / manualu — GMT400 ma wiele wariantów (rocznik,</text>
+<text x="30" y="1210" font-size="18" fill="#a3a3a3">silnik, GVWR, RPO). Rysunek poglądowy, nie w skali.</text>
+<text x="30" y="1236" font-size="18" fill="#a3a3a3">Źródło: GM Service Manual 1996 C/K — Intake Manifold Replacement 5.0L/5.7L</text>
+</g>
+</svg>

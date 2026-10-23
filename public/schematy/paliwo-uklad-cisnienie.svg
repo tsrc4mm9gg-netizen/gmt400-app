@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Źródła:
+- SM 1996 C Pickup, Fuel System: https://gm.saturn.team/Chevrolet/Chevy_C_Pickup___2WD/1996/2/1/183/31697
+- SM 1996, Fuel System Diagnosis: https://gm.saturn.team/Chevrolet/Chevy_C_Pickup___2WD/1996/2/1/183/31643
+- SM 1999 Tahoe 4WD, CSFI Description: https://gm.saturn.team/Chevrolet/Tahoe___4WD/1999/7/1/905/31296
+- SM 1999, Fuel System Diagnosis: https://gm.saturn.team/Chevrolet/Tahoe___4WD/1999/7/1/905/30683
+- 1995 Chevrolet C/K 1500 Owner's Manual (GM), https://assets.gm.com/manuals/chevrolet/1995_chevrolet_1500_owners.pdf
+- 1999 Chevrolet Suburban Owner's Manual (GM), rozdz. 6 i 7
+Rysunek poglądowy (nie w skali). Wersja ciemna dla gmt400.pl. Własny rysunek gmt400.pl (bez grafik AI).
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1758" width="900" height="1758" role="img" aria-label="Układ paliwowy — wtrysk i ciśnienie">
+<title>Układ paliwowy — wtrysk i ciśnienie</title>
+<rect width="900" height="1758" fill="#0d0d0f"/>
+<g font-family="DejaVu Sans, Arial, sans-serif">
+<text x="30" y="58" font-size="30" fill="#f5f5f5" font-weight="bold">Układ paliwowy — wtrysk i ciśnienie</text>
+<text x="30" y="90" font-size="20" fill="#f87171">Model i lata: 1988–1995: TBI (OM95). 1996–2000: CSFI</text>
+<text x="30" y="122" font-size="20" fill="#f87171">„pająk” w 4.3/5.0/5.7, SFI w 7.4 (SM 1996 C/K, SM 1999</text>
+<text x="30" y="154" font-size="20" fill="#f87171">Tahoe 4WD).</text>
+<rect x="30" y="200" width="8" height="30" fill="#dc2626"/>
+<text x="48" y="225" font-size="24" fill="#f5f5f5" font-weight="bold">Droga paliwa (1996+)</text>
+<rect x="60" y="242" width="780" height="76" rx="12" fill="#18181b" stroke="#f87171" stroke-width="2"/>
+<text x="80" y="276" font-size="23" fill="#f5f5f5" font-weight="bold">Pompa w zbiorniku + pulsator</text>
+<text x="80" y="306" font-size="19" fill="#a3a3a3">zawór zwrotny w zbiorniku trzyma ciśnienie po wyłączeniu pompy</text>
+<path d="M450 322 v26 m-12 -12 l12 14 l12 -14" stroke="#dc2626" stroke-width="4" fill="none"/>
+<rect x="60" y="354" width="780" height="102" rx="12" fill="#18181b" stroke="#f5f5f5" stroke-width="2"/>
+<text x="80" y="388" font-size="23" fill="#f5f5f5" font-weight="bold">Filtr liniowy</text>
+<text x="80" y="418" font-size="19" fill="#a3a3a3">strzałka kierunku przepływu! nakrętki 27 N·m (20 lb·ft); GF626</text>
+<text x="80" y="444" font-size="19" fill="#a3a3a3">co 30 000 mil (OM99)</text>
+<path d="M450 460 v26 m-12 -12 l12 14 l12 -14" stroke="#dc2626" stroke-width="4" fill="none"/>
+<rect x="60" y="492" width="780" height="102" rx="12" fill="#18181b" stroke="#f5f5f5" stroke-width="2"/>
+<text x="80" y="526" font-size="23" fill="#f5f5f5" font-weight="bold">Regulator ciśnienia</text>
+<text x="80" y="556" font-size="19" fill="#a3a3a3">utrzymuje ciśnienie; nieszczelny regulator = spadek ciśnienia</text>
+<text x="80" y="582" font-size="19" fill="#a3a3a3">po wyłączeniu pompy</text>
+<path d="M450 598 v26 m-12 -12 l12 14 l12 -14" stroke="#dc2626" stroke-width="4" fill="none"/>
+<rect x="60" y="630" width="780" height="102" rx="12" fill="#18181b" stroke="#f5f5f5" stroke-width="2"/>
+<text x="80" y="664" font-size="23" fill="#f5f5f5" font-weight="bold">Wtrysk</text>
+<text x="80" y="694" font-size="19" fill="#a3a3a3">CSFI: centralna jednostka + przewody do zaworków (poppet) •</text>
+<text x="80" y="720" font-size="19" fill="#a3a3a3">SFI 7.4: osobne wtryskiwacze</text>
+<path d="M450 736 v26 m-12 -12 l12 14 l12 -14" stroke="#dc2626" stroke-width="4" fill="none"/>
+<rect x="60" y="768" width="780" height="76" rx="12" fill="#18181b" stroke="#f5f5f5" stroke-width="2"/>
+<text x="80" y="802" font-size="23" fill="#f5f5f5" font-weight="bold">Powrót do zbiornika</text>
+<text x="80" y="832" font-size="19" fill="#a3a3a3">nadmiar paliwa wraca osobnym przewodem</text>
+<rect x="30" y="874" width="8" height="30" fill="#dc2626"/>
+<text x="48" y="899" font-size="24" fill="#f5f5f5" font-weight="bold">Ciśnienie (zapłon ON, silnik stoi)</text>
+<rect x="30" y="916" width="840" height="44" rx="8" fill="#18181b" stroke="#3f3f46"/>
+<text x="46" y="950" font-size="21" fill="#f5f5f5" font-weight="bold">CSFI</text>
+<text x="346" y="950" font-size="21" fill="#f5f5f5">415–455 kPa (60–66 psi)</text>
+<rect x="30" y="968" width="840" height="44" rx="8" fill="#18181b" stroke="#3f3f46"/>
+<text x="46" y="1002" font-size="21" fill="#f5f5f5" font-weight="bold">SFI (7.4)</text>
+<text x="346" y="1002" font-size="21" fill="#f5f5f5">385–430 kPa (56–62 psi) — SM 1996</text>
+<rect x="30" y="1020" width="840" height="72" rx="8" fill="#18181b" stroke="#3f3f46"/>
+<text x="46" y="1054" font-size="21" fill="#f5f5f5" font-weight="bold">Trzymanie (CSFI, SM</text>
+<text x="46" y="1082" font-size="21" fill="#f5f5f5" font-weight="bold">1999)</text>
+<text x="346" y="1054" font-size="21" fill="#f5f5f5">379–413 kPa (55–60 psi) po wyłączeniu pompy</text>
+<rect x="30" y="1100" width="840" height="72" rx="8" fill="#18181b" stroke="#3f3f46"/>
+<text x="46" y="1134" font-size="21" fill="#f5f5f5" font-weight="bold">Poniżej 300 kPa (44 psi)</text>
+<text x="346" y="1134" font-size="21" fill="#f5f5f5">na biegu jałowym — auto praktycznie nie</text>
+<text x="346" y="1162" font-size="21" fill="#f5f5f5">jedzie</text>
+<rect x="30" y="1180" width="840" height="44" rx="8" fill="#18181b" stroke="#3f3f46"/>
+<text x="46" y="1214" font-size="21" fill="#f5f5f5" font-weight="bold">Nigdy powyżej</text>
+<text x="346" y="1214" font-size="21" fill="#f5f5f5">517 kPa (75 psi) — można uszkodzić układ</text>
+<rect x="30" y="1254" width="8" height="30" fill="#dc2626"/>
+<text x="48" y="1279" font-size="24" fill="#f5f5f5" font-weight="bold">Pompa — sterowanie</text>
+<rect x="30" y="1296" width="840" height="44" rx="8" fill="#18181b" stroke="#3f3f46"/>
+<text x="46" y="1330" font-size="21" fill="#f5f5f5" font-weight="bold">Kluczyk ON</text>
+<text x="346" y="1330" font-size="21" fill="#f5f5f5">VCM włącza przekaźnik pompy na 2 s</text>
+<rect x="30" y="1348" width="840" height="100" rx="8" fill="#18181b" stroke="#3f3f46"/>
+<text x="46" y="1382" font-size="21" fill="#f5f5f5" font-weight="bold">Rezerwa</text>
+<text x="346" y="1382" font-size="21" fill="#f5f5f5">czujnik ciśnienia oleju włącza pompę przy</text>
+<text x="346" y="1410" font-size="21" fill="#f5f5f5">ok. 28 kPa (4 psi) — zepsuty przekaźnik =</text>
+<text x="346" y="1438" font-size="21" fill="#f5f5f5">długie kręcenie</text>
+<rect x="30" y="1466" width="840" height="136" rx="8" fill="#2a0f10" stroke="#dc2626" stroke-width="2"/>
+<text x="48" y="1502" font-size="21" fill="#fca5a5" font-weight="bold">Uwaga: układ jest pod ciśnieniem także po wyłączeniu</text>
+<text x="48" y="1530" font-size="21" fill="#fca5a5">silnika. Po pracy test szczelności: zapłon ON 2 s, OFF 10</text>
+<text x="48" y="1558" font-size="21" fill="#fca5a5">s, znowu ON — i obejrzyj złącza. TBI 1988–1995 ma inne</text>
+<text x="48" y="1586" font-size="21" fill="#fca5a5">wartości — sprawdź w swoim manualu.</text>
+<text x="30" y="1650" font-size="18" fill="#a3a3a3">Sprawdź w swoim aucie / manualu — GMT400 ma wiele wariantów (rocznik,</text>
+<text x="30" y="1676" font-size="18" fill="#a3a3a3">silnik, GVWR, RPO). Rysunek poglądowy, nie w skali.</text>
+<text x="30" y="1702" font-size="18" fill="#a3a3a3">Źródło: GM Service Manual 1996 C/K i 1999 Tahoe (Engine Controls),</text>
+<text x="30" y="1728" font-size="18" fill="#a3a3a3">instrukcje 1995 i 1999</text>
+</g>
+</svg>

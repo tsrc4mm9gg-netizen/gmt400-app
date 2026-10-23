@@ -13,7 +13,7 @@ export default function SchematicViewer({ src, alt, width, height, title }: Prop
         type="button"
         onClick={() => setOpen(true)}
         aria-label={`Otwórz schemat na pełnym ekranie: ${title}`}
-        className="group relative block w-full overflow-hidden rounded-lg border border-white/10 bg-[#0d0d0f] text-left focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-500"
+        className={`group relative block w-full overflow-hidden ${height > width ? 'mx-auto max-w-xl' : ''} rounded-lg border border-white/10 bg-[#0d0d0f] text-left focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-500`}
         style={{ aspectRatio: `${width} / ${height}` }}
       >
         {!loaded && <span aria-hidden="true" className="absolute inset-0 animate-pulse bg-white/5" />}

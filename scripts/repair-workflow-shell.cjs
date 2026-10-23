@@ -1,6 +1,6 @@
 const fs = require('node:fs');
 const assert = require('node:assert/strict');
-const counts = { 'knowledge-verification': 1, 'legacy-costs': 2, lighthouse: 1, 'maintenance-regression': 1, 'material-images': 2, 'material-outline': 2, 'material-text': 2, 'mobile-webkit': 1, 'model-catalog': 1, 'navigation-context': 1, 'navigation-layout': 1, 'notion-content': 1, 'parts-regression': 1, 'production-tools-browser': 1, 'restore-diy': 1, 'search-pagination': 1, 'search-semantics': 1, 'search-session': 1, 'tools-audit': 1, 'tools-regression': 1, 'vehicle-filter-browser-tests': 1, 'viewport-accessibility': 1 };
+const counts = { 'knowledge-verification': 1, 'legacy-costs': 2, lighthouse: 1, 'maintenance-regression': 1, 'material-images': 2, 'material-outline': 2, 'material-text': 2, 'mobile-webkit': 1, 'model-catalog': 1, 'navigation-layout': 1, 'notion-content': 1, 'parts-regression': 1, 'production-tools-browser': 1, 'restore-diy': 1, 'search-pagination': 1, 'search-semantics': 1, 'tools-audit': 1, 'tools-regression': 1, 'vehicle-filter-browser-tests': 1, 'viewport-accessibility': 1 };
 const updates = new Map();
 let total = 0;
 for (const [name, expected] of Object.entries(counts)) {
