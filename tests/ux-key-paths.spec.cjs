@@ -100,7 +100,7 @@ test('menu w nagłówku: każda sekcja się otwiera, aktywna pozycja i przycisk 
   const errors = await guard(page);
   await page.goto(BASE + '/');
   const nav = page.getByRole('navigation', { name: 'Nawigacja główna' });
-  for (const [label, url] of [['Modele', '/modele'], ['Baza wiedzy', '/baza'], ['Kody OBD', '/kody-obd'], ['Schematy', '/schematy']]) {
+  for (const [label, url] of [['Sprawdź VIN', '/vin'], ['Modele', '/modele'], ['Baza wiedzy', '/baza'], ['Kody OBD', '/kody-obd'], ['Schematy', '/schematy']]) {
     await nav.getByRole('link', { name: label, exact: true }).click();
     await expect(page).toHaveURL(new RegExp('^' + BASE.replace(/[.]/g, '\\.') + url + '(\\?tab=[a-z-]+)?$'));
     await expect(nav.getByRole('link', { name: label, exact: true })).toHaveAttribute('aria-current', 'page');
@@ -262,7 +262,7 @@ test('bezpieczniki: wyszukiwanie, filtr rocznika i brak wyników', async ({ page
 
 test('dekoder VIN: cyfra kontrolna, rok, silnik z OM i błędne znaki', async ({ page }) => {
   const errors = await guard(page);
-  await page.goto(BASE + '/?tab=vin');
+  await page.goto(BASE + '/vin');
   const decoder = page.getByTestId('vin-decoder');
   await decoder.scrollIntoViewIfNeeded();
   const input = decoder.getByRole('textbox', { name: 'Numer VIN do dekodowania' });

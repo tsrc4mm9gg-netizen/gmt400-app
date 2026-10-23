@@ -9,6 +9,7 @@ export const metadata: Metadata = {
 
 // Stare linki typu /?tab=diy kierujemy do nowych podstron, żeby strona główna została krótka.
 const LEGACY_TABS: Record<string, string> = {
+  vin: '/vin',
   modele: '/modele',
   diy: '/diy',
   diy_content: '/diy',

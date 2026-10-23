@@ -39,7 +39,7 @@ export const FAULT_DIAGNOSTICS: FaultDiagnostic[] = [
  {
  id: 'abs-differences',
  title: 'ABS — różnice rocznikowe (1988–2000)',
- scope: '1988–1994: RWAL (tylko tylna oś; w K-modelach działa tylko w 2WD). 1995+: czterokołowy ABS (do 8 500 lb GVWR).',
+ scope: '1988–1994: RWAL (tylko tylna oś; w K-modelach działa tylko w 2WD). 1995+: czterokołowy ABS (do 3856 kg / 8500 lb GVWR).',
  symptoms: ['Lampka ABS.', 'Różne zachowanie hamulców zależnie od rocznika.'],
  tests: ['Sprawdź rocznik i typ ABS (RWAL vs 4-kołowy).', 'Dla RWAL: diagnostyka ograniczona do tylnej osi.', 'Dla 4-kołowego: diagnostyka obejmuje wszystkie koła.', 'Potwierdź w instrukcji właściwego rocznika.'],
  causes: ['Inna architektura układu zależnie od rocznika.'],

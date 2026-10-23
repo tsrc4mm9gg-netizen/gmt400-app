@@ -7,6 +7,7 @@ import { vehicleProfileShort } from '@/lib/vehicle-profile';
 
 const links = [
   { href: '/', label: 'Strona główna' },
+  { href: '/vin', label: 'Sprawdź VIN' },
   { href: '/modele', label: 'Modele' },
   { href: '/baza', label: 'Baza wiedzy' },
   { href: '/kody-obd', label: 'Kody OBD' },

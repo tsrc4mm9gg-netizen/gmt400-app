@@ -106,7 +106,7 @@ export const SCHEMATICS: Schematic[] = [
  { label: '4. Czyszczenie', value: 'Oczyść miskę i magnes, obejrzyj osad (zrób zdjęcie)' },
  { label: '5. Montaż', value: 'Nowy uszczelniacz, filtr i uszczelka; momenty śrub wg FSM rocznika' },
  { label: '6. Napełnianie', value: 'ATF przez rurkę bagnetu; poziom wg procedury z instrukcji (temperatura, bieg)' },
- { label: 'Interwał (OM99)', value: 'co 100 000 mil (160 000 km); w ciężkich warunkach co 50 000 mil (80 000 km)' }
+ { label: 'Interwał (OM99)', value: 'co 160 000 km (100 000 mil); w ciężkich warunkach co 80 000 km (50 000 mil)' }
  ],
  source: 'https://www.chevrolet.com/ownercenter/content/dam/gmownercenter/gmna/dynamic/manuals/1999/chevrolet/suburban/1999_chevrolet_suburban_owners.pdf',
  sourceTitle: 'OM99 — 1999 Chevrolet Suburban Owners Manual',
@@ -190,7 +190,7 @@ export const SCHEMATICS: Schematic[] = [
  { label: 'Minimum na jałowym', value: 'poniżej 300 kPa (44 psi) auto praktycznie nie jedzie' },
  { label: 'Maksimum testu', value: 'nie przekraczaj 517 kPa (75 psi)' },
  { label: 'Pompa', value: 'VCM włącza na 2 s przy zapłonie; rezerwa: czujnik ciśnienia oleju ok. 28 kPa' },
- { label: 'Filtr', value: 'strzałka przepływu; nakrętki 27 N·m; GF626 co 30 000 mil (OM99)' }
+ { label: 'Filtr', value: 'strzałka przepływu; nakrętki 27 N·m; GF626 co 48 000 km (30 000 mil) (OM99)' }
  ],
  source: 'https://gm.saturn.team/Chevrolet/Chevy_C_Pickup___2WD/1996/2/1/183/31643',
  sourceTitle: 'GM Service Manual 1996 C/K i 1999 Tahoe — Fuel System Diagnosis',

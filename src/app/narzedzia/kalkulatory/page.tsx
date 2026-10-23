@@ -9,7 +9,7 @@ export default function Calculators() {
  const [newAspect, setNewAspect] = useState('75');
  const [newRim, setNewRim] = useState('16');
  const [axleRatio, setAxleRatio] = useState('3.73');
- const [speed, setSpeed] = useState('60');
+ const [speed, setSpeed] = useState('100');
  const [result, setResult] = useState<any>(null);
  const [error, setError] = useState('');
  const [loading, setLoading] = useState(false);
@@ -69,7 +69,7 @@ export default function Calculators() {
 
  <div className="grid gap-3 sm:grid-cols-2">
  <label className="text-sm">Przełożenie tylnej osi<input className="mt-1 w-full rounded border px-2 py-2" value={axleRatio} onChange={event => setAxleRatio(event.target.value)} /></label>
- <label className="text-sm">Wskazanie licznika, mph<input className="mt-1 w-full rounded border px-2 py-2" value={speed} onChange={event => setSpeed(event.target.value)} /></label>
+ <label className="text-sm">Wskazanie licznika, km/h<input className="mt-1 w-full rounded border px-2 py-2" value={speed} onChange={event => setSpeed(event.target.value)} /></label>
  </div>
 
  <button type="submit" disabled={loading} className="w-full rounded-lg bg-blue-600 px-4 py-3 font-semibold text-white hover:bg-blue-700 disabled:opacity-50">
@@ -102,7 +102,7 @@ export default function Calculators() {
  </div>
 
  <p className="mt-4 rounded-lg bg-red-50 p-3 text-sm text-red-900">
- Przy wskazaniu licznika {speed} mph rzeczywista prędkość wyniesie około <strong>{result.actualSpeedAtIndicatedSpeed ?? '—'} mph</strong>.
+ Przy wskazaniu licznika {speed} km/h rzeczywista prędkość wyniesie około <strong>{result.actualSpeedAtIndicatedSpeed ?? '—'} km/h</strong>.
  </p>
  <p className="mt-3 text-xs text-slate-500">{result.note}</p>
  </div>

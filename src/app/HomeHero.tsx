@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import ModelHero from './ModelHero';
 import CategoryGrid from './CategoryGrid';
 import HomeSearch from './HomeSearch';
@@ -12,6 +13,10 @@ export default function HomeHero() {
 
   return (
     <div className="mx-auto w-full max-w-3xl">
+      <Link href="/vin" data-testid="home-vin-cta" className="mx-4 mb-3 mt-3 flex min-h-12 items-center justify-between gap-3 rounded-lg border border-red-600/50 bg-red-950/40 px-4 py-2 text-white transition hover:border-red-500 hover:bg-red-900/40 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-500">
+        <span className="min-w-0"><span className="block text-base font-bold">Sprawdź swój VIN</span><span className="block text-xs text-neutral-300">Rocznik, silnik, nadwozie i fabryka z 17 znaków — plus kody RPO</span></span>
+        <span aria-hidden="true" className="shrink-0 text-xl text-red-400">›</span>
+      </Link>
       <ModelHero />
       {body && (
         <div data-testid="active-filters" role="region" aria-label="Aktywne filtry" className="mx-4 mb-3 rounded-lg border border-red-600/30 bg-red-950/30 px-3 py-2 text-sm text-neutral-300">

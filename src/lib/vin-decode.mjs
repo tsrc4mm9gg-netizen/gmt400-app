@@ -26,15 +26,21 @@ export const VIN_SOURCES = {
 /** Tabela pozycji VIN: lata, poziom źródła (gm = dokument GM, secondary = katalog/poradnik) i kody. */
 const T = (from, to, tier, sources, codes, note) => ({ from, to, tier, sources, codes, ...(note ? { note } : {}) });
 const GM_C1_98_00 = ['gmsm98', 'gmsm99', 'gmsm00'];
+/** „6001–7000 lb” → „2722–3175 kg (6001–7000 lb)” — kg pierwsze, lb z tabeli GM w nawiasie (1 lb = 0,45359237 kg). */
+const LB_KG = 0.45359237;
+export function lbRangeToKg(text) {
+  return text.replace(/(\d+)–(\d+) lb/g, (_, a, b) => `${Math.round(Number(a) * LB_KG)}–${Math.round(Number(b) * LB_KG)} kg (${a}–${b} lb)`);
+}
+const metricCodes = codes => Object.fromEntries(Object.entries(codes).map(([k, v]) => [k, lbRangeToKg(v)]));
 export const POSITION_TABLES = {
   1: [T(1988, 2000, 'gm', [...GM_C1_98_00, 'lmc'], { 1: 'USA', 2: 'Kanada', 3: 'Meksyk' })],
   3: [
     T(1988, 2000, 'gm', ['gmstd', 'gmsms10'], { C: 'Chevrolet — ciężarówka (Chevrolet Truck)', T: 'GMC — ciężarówka (GMC Truck)', N: 'Chevrolet — pojazd wielozadaniowy (MPV, np. Suburban/Tahoe)', K: 'GMC — pojazd wielozadaniowy (MPV, np. Suburban/Yukon)' }),
   ],
   4: [
-    T(1998, 2000, 'gm', GM_C1_98_00, { B: '3001–4000 lb, hamulce hydrauliczne', C: '4001–5000 lb, hydrauliczne', D: '5001–6000 lb, hydrauliczne', E: '6001–7000 lb, hydrauliczne', F: '7001–8000 lb, hydrauliczne', G: '8001–9000 lb, hydrauliczne', H: '9001–10000 lb, hydrauliczne', J: '10001–14000 lb, hydrauliczne', K: '14001–16000 lb, hydrauliczne' }),
-    T(1996, 1997, 'secondary', ['jegs'], { B: '3001–4000 lb', C: '4001–5000 lb', D: '5001–6000 lb', E: '6001–7000 lb', F: '7001–8000 lb', G: '8001–9000 lb', H: '9001–10000 lb', J: '10001–14000 lb', K: '14001–16000 lb' }),
-    T(1988, 1998, 'secondary', ['lmc'], { D: '5001–6000 lb, hydrauliczne', E: '6001–7000 lb, hydrauliczne', F: '7001–8000 lb, hydrauliczne', G: '8001–9000 lb, hydrauliczne', H: '9001–10000 lb, hydrauliczne' }),
+    T(1998, 2000, 'gm', GM_C1_98_00, metricCodes({ B: '3001–4000 lb, hamulce hydrauliczne', C: '4001–5000 lb, hydrauliczne', D: '5001–6000 lb, hydrauliczne', E: '6001–7000 lb, hydrauliczne', F: '7001–8000 lb, hydrauliczne', G: '8001–9000 lb, hydrauliczne', H: '9001–10000 lb, hydrauliczne', J: '10001–14000 lb, hydrauliczne', K: '14001–16000 lb, hydrauliczne' })),
+    T(1996, 1997, 'secondary', ['jegs'], metricCodes({ B: '3001–4000 lb', C: '4001–5000 lb', D: '5001–6000 lb', E: '6001–7000 lb', F: '7001–8000 lb', G: '8001–9000 lb', H: '9001–10000 lb', J: '10001–14000 lb', K: '14001–16000 lb' })),
+    T(1988, 1998, 'secondary', ['lmc'], metricCodes({ D: '5001–6000 lb, hydrauliczne', E: '6001–7000 lb, hydrauliczne', F: '7001–8000 lb, hydrauliczne', G: '8001–9000 lb, hydrauliczne', H: '9001–10000 lb, hydrauliczne' })),
   ],
   5: [
     T(1998, 2000, 'gm', GM_C1_98_00, { C: 'kabina konwencjonalna, 4x2 (C)', D: 'ciężarówka wojskowa, 4x4', K: 'kabina konwencjonalna, 4x4 (K)' }),
@@ -87,7 +93,7 @@ export const ENGINE_TABLES = [
     Z: { engine: '4.3 L V6', fuel: `benzyna, ${TBI}` }, H: { engine: '5.0 L V8', fuel: `benzyna, ${TBI}` },
     K: { engine: '5.7 L V8', fuel: `benzyna, ${TBI}` }, N: { engine: '7.4 L V8', fuel: `benzyna, ${TBI}` },
     P: { engine: '6.5 L V8 diesel', fuel: 'diesel wolnossący' }, S: { engine: '6.5 L V8 turbodiesel', fuel: 'turbodiesel (emisje LD)' },
-    F: { engine: '6.5 L V8 turbodiesel', fuel: 'turbodiesel (emisje HD, GVWR > 8500 lb)' } } },
+    F: { engine: '6.5 L V8 turbodiesel', fuel: 'turbodiesel (emisje HD, GVWR > 3856 kg / 8500 lb)' } } },
   { from: 1996, to: 1998, tier: 'gm', sources: ['om96', 'om97', 'om98'], scope: 'C/K Pickup, silniki benzynowe (wg OM C/K; diesel opisuje osobny Diesel Engine Supplement)', codes: {
     W: { engine: 'Vortec 4300 V6', rpo: 'L35' }, M: { engine: 'Vortec 5000 V8', rpo: 'L30' },
     R: { engine: 'Vortec 5700 V8', rpo: 'L31' }, J: { engine: 'Vortec 7400 V8', rpo: 'L29' } } },

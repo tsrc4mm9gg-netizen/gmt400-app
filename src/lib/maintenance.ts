@@ -33,12 +33,12 @@ if (transmissionFluid) {
  transmissionFluid.confidence = 'reference';
  transmissionFluid.source = 'https://assets.gm.com/manuals/chevrolet/1995_chevrolet_1500_owners.pdf';
  transmissionFluid.sourceTitle = 'OM95 — 1995 Chevrolet C/K 1500 Owners Manual';
- transmissionFluid.notes = 'Wymiana płynu i filtra: 100 000 mil normalnie, 50 000 mil przy ciężkiej eksploatacji. Płyn DEXRON-III. Sprawdź w swoim aucie / manualu — GMT400 ma wiele wariantów (rocznik, GVWR, silnik, skrzynia, RPO).';
+ transmissionFluid.notes = 'Wymiana płynu i filtra: 160 000 km (100 000 mil) normalnie, 80 000 km (50 000 mil) przy ciężkiej eksploatacji. Płyn DEXRON-III. Sprawdź w swoim aucie / manualu — GMT400 ma wiele wariantów (rocznik, GVWR, silnik, skrzynia, RPO).';
 }
 
 const coolantItem = MAINTENANCE_ITEMS.find(item => item.id === 'coolant');
 if (coolantItem) {
- coolantItem.notes = '1995: zielony płyn długowieczny GM, wymiana 30 000 mil / 24 mies. 1999 DEX-COOL: pierwsza wymiana 150 000 mil / 60 mies. Nie mieszaj technologii płynów. Sprawdź w swoim aucie / manualu — GMT400 ma wiele wariantów (rocznik, GVWR, silnik, skrzynia, RPO).';
+ coolantItem.notes = '1995: zielony płyn długowieczny GM, wymiana 48 000 km (30 000 mil) / 24 mies. 1999 DEX-COOL: pierwsza wymiana 240 000 km (150 000 mil) / 60 mies. Nie mieszaj technologii płynów. Sprawdź w swoim aucie / manualu — GMT400 ma wiele wariantów (rocznik, GVWR, silnik, skrzynia, RPO).';
 }
 
 const transferCaseItem = MAINTENANCE_ITEMS.find(item => item.id === 'transfer-case-fluid');

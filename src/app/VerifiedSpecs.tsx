@@ -25,7 +25,7 @@ export function SourceList() {
 export function EngineTable() {
   return (
     <div className="mb-6 rounded-xl border border-white/10 bg-neutral-950 p-4">
-      <p className="mb-3 text-sm text-neutral-400">Pickupy C/K, moc SAE net. Moment: lb-ft (Nm).</p>
+      <p className="mb-3 text-sm text-neutral-400">Pickupy C/K, moc SAE net. Moment: Nm (w nawiasie lb-ft jak w źródle).</p>
       <div className="overflow-x-auto">
         <table className="w-full min-w-[560px] text-sm">
           <thead>
@@ -46,7 +46,7 @@ export function EngineTable() {
           </tbody>
         </table>
       </div>
-      <p className="mt-3 text-sm text-neutral-400">Skrzynie biegów: 700R4/4L60 → 4L60-E od 1993; THM400 → 4L80-E od 1991 (powyżej 8600 lb GVWR, z 7.4 i 6.2) <Src id="W1" />.</p>
+      <p className="mt-3 text-sm text-neutral-400">Skrzynie biegów: 700R4/4L60 → 4L60-E od 1993; THM400 → 4L80-E od 1991 (powyżej 3901 kg / 8600 lb GVWR, z 7.4 i 6.2) <Src id="W1" />.</p>
       <CheckNote />
     </div>
   );
@@ -139,7 +139,7 @@ export function TorqueTable() {
           <li key={t.id} className="border-b border-white/5 pb-3 last:border-0">
             <div className="flex items-start justify-between gap-3">
               <span className="font-medium text-white">{t.component}</span>
-              <span className="shrink-0 text-right text-red-400">{t.valueLbFt} lb-ft ({t.valueNm} Nm)</span>
+              <span className="shrink-0 text-right text-red-400">{t.valueNm} Nm ({t.valueLbFt} lb-ft)</span>
             </div>
             <p className="text-xs text-neutral-400">{t.appliesTo}</p>
             <p className="mt-1 text-xs text-neutral-500">{t.notes}</p>

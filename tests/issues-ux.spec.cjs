@@ -23,3 +23,27 @@ test('usterki: struktura wpisu i filtr źródeł', async ({ page }) => {
   expect(await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth)).toBeLessThanOrEqual(1);
   expect(errors).toEqual([]);
 });
+
+// DIY: kroki w osobnych liniach → jedna lista, etykiety (Narzędzia/Momenty), opis i źródła, filtr źródeł, 390 px bez przewijania w bok.
+const DIY = { complete: true, results: [
+  { id: 'd1', Nazwa: 'Wymiana oleju — test DIY', Typ: 'Porada', Model: 'Wszystkie', Modele: ['Wszystkie'], Lata: '1992–2000 — sprawdź w swoim aucie / manualu', Opis: 'Procedura GM.\nŹródło: https://gm.saturn.team/Chevrolet/Tahoe___4WD/1999/7/7/60789', Rozwiązanie: 'Narzędzia: klucz 24 mm, pompka\nKrok po kroku (GM):\n1. Wykręć korek wlewu.\n2. Wykręć korek spustowy.\n3. Wkręć korek 47 N·m.\nMomenty (GM): korki 47 N·m.\n⚠️ Sprawdź w swoim aucie / manualu.' },
+  { id: 'd2', Nazwa: 'Porada bez źródła — test DIY', Typ: 'Porada', Model: 'Wszystkie', Modele: ['Wszystkie'], Opis: '', Rozwiązanie: 'Sprawdź to.' },
+] };
+test('diy: numerowane kroki, etykiety, źródła i filtr', async ({ page }) => {
+  const errors = []; page.on('pageerror', e => errors.push(String(e)));
+  await page.context().route(u => u.pathname.startsWith('/api/notion'), r => r.fulfill({ json: DIY }));
+  await page.goto(`${BASE}/diy`);
+  await expect(page.getByTestId('diy-count')).toHaveText('Znaleziono: 2');
+  const card = page.locator('div.bg-neutral-950', { hasText: 'Wymiana oleju — test DIY' }).first();
+  await expect(card.getByTestId('issue-steps').locator('ol > li')).toHaveCount(3);
+  await expect(card.getByTestId('issue-steps').locator('ol > li').nth(2)).toContainText('47 N·m');
+  await expect(card.getByTestId('steps-label').first()).toHaveText('Narzędzia:');
+  await expect(card.getByTestId('issue-years')).toContainText('1992–2000');
+  await expect(card.getByTestId('diy-sourced')).toBeVisible();
+  await card.getByText('Opis i źródła').click();
+  await expect(card.getByTestId('issue-cause').locator('a')).toHaveAttribute('href', 'https://gm.saturn.team/Chevrolet/Tahoe___4WD/1999/7/7/60789');
+  await page.getByTestId('diy-sourced-only').check();
+  await expect(page.getByTestId('diy-count')).toHaveText('Znaleziono: 1');
+  expect(await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth)).toBeLessThanOrEqual(1);
+  expect(errors).toEqual([]);
+});

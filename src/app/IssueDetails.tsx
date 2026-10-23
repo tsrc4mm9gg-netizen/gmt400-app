@@ -40,16 +40,38 @@ export function hasSource(i: { Opis?: string; Rozwiązanie?: string }) {
   return /https?:\/\//.test(`${i.Opis || ''} ${i.Rozwiązanie || ''}`);
 }
 
+/** Łączy kolejne linie „1. …”, „2. …” w jeden akapit, żeby powstała jedna lista numerowana. */
+export function mergeNumberedLines(text: string): string[] {
+  const out: string[] = [];
+  let prevNumbered = false;
+  for (const line of text.split(/\n+/).map(p => p.trim()).filter(Boolean)) {
+    const numbered = /^\d{1,2}\.\s/.test(line);
+    if (numbered && prevNumbered && out.length) out[out.length - 1] += ' ' + line;
+    else out.push(line);
+    prevNumbered = numbered;
+  }
+  return out;
+}
+
+const LABEL_RE = /^(Narzędzia|Krok po kroku(?: \(GM\))?|Momenty(?: \(GM\))?|Momenty dokręcania(?: \(GM\))?|Różnice|Uwaga|Płyny|Części)(:)\s*/;
+
+function Labeled({ text }: { text: string }) {
+  const m = LABEL_RE.exec(text);
+  if (!m) return <>{linkify(text)}</>;
+  const rest = text.slice(m[0].length);
+  return <><span className="font-semibold text-red-400" data-testid="steps-label">{m[1]}:</span>{rest ? ' ' : ''}{linkify(rest)}</>;
+}
+
 export function StepsText({ text, className = '' }: { text: string; className?: string }) {
-  const paragraphs = text.split(/\n+/).map(p => p.trim()).filter(Boolean);
+  const paragraphs = mergeNumberedLines(text);
   return (
     <div className={`space-y-2 text-sm text-neutral-300 ${className}`} data-testid="issue-steps">
       {paragraphs.map((p, pi) => {
         const s = splitSteps(p);
-        if (!s) return <p key={pi} className="break-words">{linkify(p)}</p>;
+        if (!s) return <p key={pi} className={`break-words${p.startsWith('⚠') ? ' border-l-2 border-red-600/60 pl-3 text-neutral-400' : ''}`}><Labeled text={p} /></p>;
         return (
           <div key={pi} className="space-y-1">
-            {s.pre && <p className="break-words">{linkify(s.pre)}</p>}
+            {s.pre && <p className="break-words"><Labeled text={s.pre} /></p>}
             <ol className="list-decimal space-y-1 pl-5 marker:text-red-400">
               {s.steps.map((st, si) => <li key={si} className="break-words pl-1">{linkify(st)}</li>)}
             </ol>
@@ -60,14 +82,14 @@ export function StepsText({ text, className = '' }: { text: string; className?: 
   );
 }
 
-export function IssueMeta({ item }: { item: { Lata?: string; Opis?: string } }) {
+export function IssueMeta({ item, label = 'Przyczyna i źródła' }: { item: { Lata?: string; Opis?: string }; label?: string }) {
   return (
     <>
       {item.Lata && <p className="mb-2 text-xs text-neutral-400 break-words" data-testid="issue-years"><span className="font-semibold uppercase tracking-wide text-neutral-500">Lata / zakres:</span> {item.Lata}</p>}
       {item.Opis && (
         <details className="mb-2 border-l-2 border-red-600/60 pl-3 text-sm text-neutral-400" data-testid="issue-cause">
-          <summary className="min-h-11 cursor-pointer py-2 text-neutral-300 hover:text-white">Przyczyna i źródła</summary>
-          <p className="pb-2 break-words">{linkify(item.Opis)}</p>
+          <summary className="min-h-11 cursor-pointer py-2 text-neutral-300 hover:text-white">{label}</summary>
+          <p className="pb-2 break-words whitespace-pre-line">{linkify(item.Opis)}</p>
         </details>
       )}
     </>

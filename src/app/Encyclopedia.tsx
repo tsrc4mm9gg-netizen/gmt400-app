@@ -137,6 +137,7 @@ export default function Encyclopedia({ initialTab }: { initialTab?: string } = {
   const [issueQuery, setIssueQuery] = useState('');
   const [codeQuery, setCodeQuery] = useState('');
   const [diyQuery, setDiyQuery] = useState('');
+  const [diySourcedOnly, setDiySourcedOnly] = useState(false);
   const [schemaQuery, setSchemaQuery] = useState('');
   const [vinResult, setVinResult] = useState<Record<string, string> | null>(null);
   const [vinWarning, setVinWarning] = useState(false);
@@ -342,6 +343,10 @@ export default function Encyclopedia({ initialTab }: { initialTab?: string } = {
     let result = filterByModel(tips);
     return result.filter(t => t.Nazwa.toLowerCase().includes(query.toLowerCase()) || (t.Rozwiązanie || '').toLowerCase().includes(query.toLowerCase()));
   }, [tips, query, selectedModel, bodyId, modelFilters]);
+  const diyTips = useMemo(() => {
+    const q = diyQuery.toLowerCase();
+    return filteredTips.filter(t => (!q || t.Nazwa.toLowerCase().includes(q) || (t.Rozwiązanie || '').toLowerCase().includes(q) || (t.Opis || '').toLowerCase().includes(q)) && (!diySourcedOnly || hasSource(t)));
+  }, [filteredTips, diyQuery, diySourcedOnly]);
 
   const selectModel = (model: string, item?: Item) => {
     setSelectedModel(model);
@@ -607,9 +612,13 @@ export default function Encyclopedia({ initialTab }: { initialTab?: string } = {
               onChange={(e) => setDiyQuery(e.target.value)}
               className="w-full bg-neutral-900 border border-white/10 px-4 py-3 text-sm focus:outline-none focus:border-red-600 mb-4"
             />
-            <p className="text-neutral-500 text-sm mb-4">Znaleziono: {filteredTips.filter(t => !diyQuery || t.Nazwa.toLowerCase().includes(diyQuery.toLowerCase()) || (t.Rozwiązanie && t.Rozwiązanie.toLowerCase().includes(diyQuery.toLowerCase()))).length}</p>
+            <label className="mb-3 flex min-h-11 items-center gap-3 text-sm text-neutral-300">
+              <input type="checkbox" checked={diySourcedOnly} onChange={(e) => setDiySourcedOnly(e.target.checked)} className="h-5 w-5 accent-red-600" data-testid="diy-sourced-only" />
+              Tylko procedury ze źródłami (instrukcje GM, biuletyny)
+            </label>
+            <p className="text-neutral-500 text-sm mb-4" role="status" data-testid="diy-count">Znaleziono: {diyTips.length}</p>
             <div className="space-y-4">
-              {filteredTips.filter(t => !diyQuery || t.Nazwa.toLowerCase().includes(diyQuery.toLowerCase()) || (t.Rozwiązanie && t.Rozwiązanie.toLowerCase().includes(diyQuery.toLowerCase()))).map((t, idx) => {
+              {diyTips.map((t, idx) => {
                 const tipImg = getTipImage(t.Nazwa);
                 return (
                   <div key={idx} className="bg-neutral-950 border border-white/10 overflow-hidden">
@@ -618,8 +627,9 @@ export default function Encyclopedia({ initialTab }: { initialTab?: string } = {
                       <h3 className="font-semibold mb-2">{t.Nazwa}</h3>
                       {(() => { const body = bodyForEntry(t); return body ? <div className="mb-2"><ModelThumb body={body} /></div> : null; })()}
                       <VehicleMatchBadge item={t} />
-                      {t.Opis && <p className="mb-3 text-neutral-400 text-sm whitespace-pre-line">{t.Opis}</p>}
-                      <p className="text-neutral-300 text-sm whitespace-pre-line">{t.Rozwiązanie}</p>
+                      {hasSource(t) && <span className="mb-2 inline-block border border-emerald-500/40 px-2 py-0.5 text-xs text-emerald-300" data-testid="diy-sourced">ze źródłem</span>}
+                      <IssueMeta item={t} label="Opis i źródła" />
+                      {t.Rozwiązanie && <><p className="mb-1 text-xs font-semibold uppercase tracking-wide text-neutral-500">Instrukcja</p><StepsText text={t.Rozwiązanie} /></>}
                       {t.id && <a className="mt-2 inline-flex min-h-11 items-center text-sm text-red-400 underline" href={'/baza/' + encodeURIComponent(t.id)}>Otwórz pełną instrukcję z ilustracjami</a>}
                     </div>
                   </div>
@@ -672,7 +682,8 @@ export default function Encyclopedia({ initialTab }: { initialTab?: string } = {
         {tab === 'vin' && (
           <div>
             <h2 className="text-2xl mb-6" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>DEKODER VIN</h2>
-            <VinDecoder onDecoded={(vin, year) => { setVinResult(vin ? { VIN: vin, Rok: year ? String(year) : '' } : null); setVinWarning(false); }} />
+            <p className="mb-4 text-sm text-neutral-300">Dekoder ma teraz własną stronę: <Link href="/vin" className="text-red-400 underline">gmt400.pl/vin</Link>.</p>
+            <VinDecoder withRpo onDecoded={(vin, year) => { setVinResult(vin ? { VIN: vin, Rok: year ? String(year) : '' } : null); setVinWarning(false); }} />
 
             {vinResult && (
               <div className="mt-4 space-y-4">
@@ -973,16 +984,16 @@ export default function Encyclopedia({ initialTab }: { initialTab?: string } = {
 
             <div className="space-y-4">
               {[
-                { kat: 'zawieszenie', nazwa: 'Lift 4-6 cali', efekt: '+4-6" wysokości, większe opony 33-35"', czesci: 'Rough Country / BDS kit', koszt: '3000-6000 PLN', opis: 'Pełny kit z krzyżownicami, wahaczami i blokami.', model: 'K1500 4x4', img: '/mod-lift.jpg' },
-                { kat: 'zawieszenie', nazwa: 'Leveling kit (torsion crank)', efekt: '+1-2" przód, poziomowanie', czesci: 'Fabryczne klucze torsion', koszt: '0 PLN (DIY)', opis: 'Kręcenie kluczy torsion bars. Max 2" bez problemów. Więcej = zużycie części.' },
-                { kat: 'zawieszenie', nazwa: 'Drop 4/6 (obniżenie)', efekt: '-4" przód, -6" tył', czesci: 'CPP Drop Springs + Flip Kit', koszt: '2000-4000 PLN', opis: 'Obniżenie dla stylu street. Drop springs + flip kit + shackles.', model: 'C1500 2WD', img: '/mod-drop.jpg' },
+                { kat: 'zawieszenie', nazwa: 'Lift 10–15 cm (4–6 cali)', efekt: '+10–15 cm (4–6") wysokości, większe opony 33–35"', czesci: 'Rough Country / BDS kit', koszt: '3000-6000 PLN', opis: 'Pełny kit z krzyżownicami, wahaczami i blokami.', model: 'K1500 4x4', img: '/mod-lift.jpg' },
+                { kat: 'zawieszenie', nazwa: 'Leveling kit (torsion crank)', efekt: '+2,5–5 cm (1–2") przód, poziomowanie', czesci: 'Fabryczne klucze torsion', koszt: '0 PLN (DIY)', opis: 'Kręcenie kluczy torsion bars. Maks. 5 cm (2") bez problemów. Więcej = zużycie części.' },
+                { kat: 'zawieszenie', nazwa: 'Drop 4/6 (obniżenie)', efekt: '−10 cm (4") przód, −15 cm (6") tył', czesci: 'CPP Drop Springs + Flip Kit', koszt: '2000-4000 PLN', opis: 'Obniżenie dla stylu street. Drop springs + flip kit + shackles.', model: 'C1500 2WD', img: '/mod-drop.jpg' },
                 { kat: 'zawieszenie', nazwa: 'Coilover conversion', efekt: 'Regulowana wysokość, lepsza jazda', czesci: 'QA1 / Ridetech kit', koszt: '8000-15000 PLN', opis: 'Zamiana sprężyn na coilover. Pełna regulacja i lepsza kontrola.' },
                 { kat: 'silnik', nazwa: 'LS Swap 5.3L', efekt: '+100-150 KM, nowoczesność', czesci: '5.3L LM7 + 4L60E/4L80E', koszt: '8000-15000 PLN', opis: 'Najpopularniejszy swap. 5.3L z GMT800. Wymaga okablowania i ECU.', model: 'Wszystkie GMT400', img: '/mod-ls.jpg' },
                 { kat: 'silnik', nazwa: 'LS Swap 6.0L', efekt: '+150-200 KM, moment do holowania', czesci: '6.0L LQ4 + 4L80E', koszt: '12000-20000 PLN', opis: 'Dla cięższych aut i holowania. Więcej momentu niż 5.3L.' },
                 { kat: 'silnik', nazwa: 'Headers (kolektory)', efekt: '+10-20 KM, lepszy dźwięk', czesci: 'Flowtech / Hedman headers', koszt: '800-2000 PLN', opis: 'Zamiana fabrycznych kolektorów. Shorty lub long tube.' },
                 { kat: 'silnik', nazwa: 'Cold Air Intake', efekt: '+5-10 KM, lepszy dźwięk', czesci: 'K&N / Airaid kit', koszt: '400-800 PLN', opis: 'Zimne powietrze do silnika. Prosty montaż.' },
-                { kat: 'wydech', nazwa: 'Cat-back exhaust', efekt: 'Lepszy dźwięk, +5-10 KM', czesci: 'Magnaflow / Flowmaster', koszt: '1500-3000 PLN', opis: 'Wydech od katalizatora. 2.5" lub 3" średnica.' },
-                { kat: 'wydech', nazwa: 'Pełny wydech 3"', efekt: '+15-25 KM z headers', czesci: 'Headers + 3" system', koszt: '3000-5000 PLN', opis: 'Headers + Y-pipe + 3" cat-back. Maksymalny przepływ.', model: 'Wszystkie V8', img: '/mod-exhaust.jpg' },
+                { kat: 'wydech', nazwa: 'Cat-back exhaust', efekt: 'Lepszy dźwięk, +5-10 KM', czesci: 'Magnaflow / Flowmaster', koszt: '1500-3000 PLN', opis: 'Wydech od katalizatora. Średnica 64 mm (2,5") lub 76 mm (3").' },
+                { kat: 'wydech', nazwa: 'Pełny wydech 76 mm (3")', efekt: '+15-25 KM z headers', czesci: 'Headers + system 76 mm (3")', koszt: '3000-5000 PLN', opis: 'Headers + Y-pipe + cat-back 76 mm (3"). Maksymalny przepływ.', model: 'Wszystkie V8', img: '/mod-exhaust.jpg' },
                 { kat: 'skrzynia', nazwa: '4L60E rebuild', efekt: 'Niezawodność, trzymanie mocy', czesci: 'Sonnax kit + frictions', koszt: '3000-6000 PLN', opis: 'Regeneracja z ulepszonymi częściami. Shift kit, hardened sun shell.' },
                 { kat: 'skrzynia', nazwa: '4L80E swap', efekt: 'Wytrzymałość na moc', czesci: '4L80E + crossmember + shaft', koszt: '5000-10000 PLN', opis: 'Dla LS swap i mocy powyżej 400 KM. Wymaga modyfikacji.' },
                 { kat: 'hamulce', nazwa: 'Big brake kit', efekt: 'Krótsza droga hamowania', czesci: 'Wilwood / Pro Performance', koszt: '3000-6000 PLN', opis: 'Większe tarcze i zaciski. Dla obniżonych i szybkich aut.' },
@@ -1202,7 +1213,7 @@ export default function Encyclopedia({ initialTab }: { initialTab?: string } = {
                 <li>ON — przesun przelacznik w strone kolumny</li>
                 <li>SET — przycisk na koncu dzwigni</li>
                 <li>RESUME — przesun ponownie</li>
-                <li>Dziala od 25 mph</li>
+                <li>Działa od 40 km/h (25 mph)</li>
               </ul>
             </div>
             <div className="bg-neutral-950 border border-white/10 p-4 mb-4">

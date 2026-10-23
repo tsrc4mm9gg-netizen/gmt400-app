@@ -31,6 +31,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${BASE}/kody-obd`, lastModified: UPDATED, changeFrequency: 'monthly', priority: 0.9 },
     { url: `${BASE}/modele`, lastModified: UPDATED, changeFrequency: 'monthly', priority: 0.8 },
     { url: `${BASE}/schematy`, lastModified: UPDATED, changeFrequency: 'monthly', priority: 0.7 },
+    { url: `${BASE}/vin`, lastModified: UPDATED, changeFrequency: 'monthly', priority: 0.8 },
     { url: `${BASE}/moj-samochod`, lastModified: UPDATED, changeFrequency: 'monthly', priority: 0.7 },
     ...BODY_STYLES.map(body => ({ url: `${BASE}/modele/${body.id}`, lastModified: UPDATED, changeFrequency: 'monthly' as const, priority: 0.7 })),
     { url: `${BASE}/narzedzia`, lastModified: UPDATED, changeFrequency: 'monthly', priority: 0.6 },
