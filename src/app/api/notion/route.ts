@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { notionFetch } from '../../../lib/notion-fetch';
+import { withoutSuperseded } from '../../../lib/superseded.mjs';
 const DATABASE_ID = '746973771d604f1e8276502851176af2';
 function getRichText(prop: any): string {
   if (!prop?.rich_text) return '';
@@ -37,7 +38,8 @@ export async function GET() {
         startCursor = next;
       }
     }
-    const results = allResults.map((page: any) => {
+    // Wpisy oznaczone „Do usunięcia – zastąpione przez …” zostają w Notion do przeglądu, ale nie trafiają na stronę.
+    const results = withoutSuperseded(allResults.map((page: any) => {
       const props = page.properties || {};
       return {
         Nazwa: props.Nazwa?.title?.map((part: any) => part.plain_text || '').join('') || getRichText(props.Nazwa),
@@ -51,7 +53,7 @@ export async function GET() {
         id: page.id,
         applicability: { brand: getValues(props.Marka), model: getValues(props.Model), years: getValues(props.Lata), engine: getValues(props.Silnik), drive: getValues(props['Napęd']), transmission: getValues(props.Skrzynia) },
       };
-    });
+    }));
     return NextResponse.json({ results, count: results.length, complete: true });
   } catch {
     return NextResponse.json({ error: 'Błąd pobierania kompletnej bazy Notion.' }, { status: 502 });
