@@ -4,7 +4,7 @@ import { OBD_CODES, searchObdCodes } from '@/lib/obd-codes';
 import RandomCodeLink from './random-code-link';
 
 export const metadata: Metadata = {
-  title: 'Kody OBD-II GMT400 — baza, przyczyny i diagnostyka',
+  title: 'Kody OBD-II GMT400 (1996+) — baza, przyczyny i diagnostyka',
   description: 'Baza kodów OBD-II dla Chevroleta i GMC GMT400: znaczenie kodu, typowe przyczyny, kolejność diagnostyki i powiązane materiały.'
 };
 
@@ -26,7 +26,7 @@ export default function ObdCodesPage({ searchParams }: { searchParams: Promise<{
       <main className="mx-auto max-w-5xl px-4 py-8">
         <header className="mb-6">
           <p className="text-sm uppercase tracking-wide text-red-400">Diagnostyka</p>
-          <h1 className="mt-1 text-3xl font-bold text-white">Kody OBD-II GMT400</h1>
+          <h1 className="mt-1 text-3xl font-bold text-white">Kody OBD-II GMT400 (1996+)</h1>
           <p className="mt-3 max-w-2xl text-neutral-300">Baza kodów diagnostycznych z objaśnieniem, typowymi przyczynami i kolejnością sprawdzania. Kody są informacyjne — przed wymianą części potwierdź usterkę pomiarami i danymi live.</p>
           <p className="mt-3 max-w-2xl text-neutral-300">Wybierz system, aby zawęzić listę kodów.</p>
           <nav aria-label="Filtry systemów" className="mt-4">
@@ -35,7 +35,7 @@ export default function ObdCodesPage({ searchParams }: { searchParams: Promise<{
                 const isActive = query === system;
                 return (
                   <li key={system}>
-                    <Link href={`/kody-obd?q=${encodeURIComponent(system)}`} aria-current={isActive ? 'page' : undefined} className={`inline-flex min-h-11 items-center rounded border px-4 py-2 underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-500 ${isActive ? 'border-red-600 bg-red-600 font-semibold text-black' : 'border-white/20 bg-neutral-950 text-red-400'}`}>{system} — {systemCounts[system]}<span className="sr-only">kodów</span>{isActive && <span className="sr-only">(aktywny filtr)</span>}</Link>
+                    <Link href={`/kody-obd?q=${encodeURIComponent(system)}`} aria-current={isActive ? 'page' : undefined} className={`inline-flex min-h-11 items-center rounded border px-4 py-2 underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-500 ${isActive ? 'border-red-600 bg-red-600 font-semibold text-white' : 'border-white/20 bg-neutral-950 text-red-400'}`}>{system} — {systemCounts[system]}<span className="sr-only">kodów</span>{isActive && <span className="sr-only">(aktywny filtr)</span>}</Link>
                   </li>
                 );
               })}

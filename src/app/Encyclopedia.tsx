@@ -15,6 +15,7 @@ import { matchesYearRules } from '../lib/year-range.mjs';
 import VinHistorySummary from './VinHistorySummary';
 import { useModelSelection } from './ModelSelectionContext';
 import { findBody } from '../lib/body-styles';
+import { EngineTable, FluidsTable } from './VerifiedSpecs';
 
 type Item = {
   id?: string;
@@ -683,21 +684,21 @@ export default function Encyclopedia({ initialTab }: { initialTab?: string } = {
                 onClick={() => {
                   if (vinInput.length === 17) {
                     const yearCodes: Record<string, string> = { 'J': '1988', 'K': '1989', 'L': '1990', 'M': '1991', 'N': '1992', 'P': '1993', 'R': '1994', 'S': '1995', 'T': '1996', 'V': '1997', 'W': '1998', 'X': '1999', 'Y': '2000' };
-                    const engineCodes: Record<string, string> = { 'Z': '4.3L V6 TBI', 'H': '5.0L V8 TBI', 'K': '5.7L V8 TBI', 'R': '5.7L Vortec V8', 'N': '7.4L V8', 'F': '6.5L Diesel', 'S': '6.5L Turbodiesel', 'C': '4.3L V6 CPI', 'W': '4.3L V6 Vortec' };
+                    const engineCodes: Record<string, string> = { 'Z': '4.3L V6 TBI (LB4)', 'H': '5.0L V8 TBI (L03)', 'K': '5.7L V8 TBI (L05)', 'R': '5.7L Vortec V8 (L31)', 'N': '7.4L V8 TBI (L19)', 'F': '6.5L Turbodiesel', 'S': '6.5L Turbodiesel', 'W': '4.3L V6 Vortec (L35)' };
                     const plantCodes: Record<string, string> = { '1': 'Oshawa, Kanada', 'Z': 'Fort Wayne, Indiana', 'E': 'Pontiac, Michigan', 'J': 'Janesville, Wisconsin', 'G': 'Flint, Michigan' };
                     const modelCodes: Record<string, string> = { 'C': 'C/K 1500', 'K': 'K1500 4x4', 'V': 'C/K 2500', 'R': 'C/K 3500', 'S': 'Suburban', 'T': 'Tahoe' };
                     const engCode = vinInput[7];
                     const year = yearCodes[vinInput[9]] || 'Nieznany';
                     const engineSpecs: Record<string, {moc: string, moment: string, olej: string, filtr: string}> = {
-                      'Z': {moc: '160-200 KM', moment: '230-260 Nm', olej: '4.3 L 5W-30', filtr: 'PF47'},
-                      'H': {moc: '175-190 KM', moment: '270 Nm', olej: '4.7 L 5W-30', filtr: 'PF1218'},
-                      'K': {moc: '210 KM', moment: '300 Nm', olej: '4.7 L 5W-30', filtr: 'PF1218'},
-                      'R': {moc: '255 KM', moment: '330 Nm', olej: '4.7 L 5W-30', filtr: 'PF1218'},
-                      'N': {moc: '230-290 KM', moment: '385-410 Nm', olej: '5.7 L 10W-30', filtr: 'PF1218'},
-                      'F': {moc: '180 KM', moment: '360 Nm', olej: '6.6 L 15W-40', filtr: 'PF1218'},
-                      'S': {moc: '215 KM', moment: '440 Nm', olej: '6.6 L 15W-40', filtr: 'PF1218'},
-                      'C': {moc: '200 KM', moment: '260 Nm', olej: '4.3 L 5W-30', filtr: 'PF47'},
-                      'W': {moc: '200 KM', moment: '260 Nm', olej: '4.3 L 5W-30', filtr: 'PF47'},
+                      // Moc/moment wg [W1], olej z filtrem wg [OM95]/[OM99]. Sprawdź w swoim aucie / manualu.
+                      'Z': {moc: '150–165 KM', moment: '230–235 lb-ft (312–319 Nm)', olej: '4,5 qt (4,3 L)', filtr: 'wg katalogu'},
+                      'H': {moc: '175 KM', moment: '265–270 lb-ft (359–366 Nm)', olej: '5 qt (4,7 L)', filtr: 'wg katalogu'},
+                      'K': {moc: '190–210 KM', moment: '295–310 lb-ft (400–420 Nm)', olej: '5 qt (4,7 L)', filtr: 'wg katalogu'},
+                      'R': {moc: '255 KM', moment: '330 lb-ft (447 Nm)', olej: '5 qt (4,8 L)', filtr: 'PF1218 (4WD: PF52)'},
+                      'N': {moc: '230 KM', moment: '385 lb-ft (522 Nm)', olej: '7 qt (6,6 L)', filtr: 'wg katalogu'},
+                      'F': {moc: '180–195 KM', moment: '360–440 lb-ft (488–597 Nm)', olej: '7 qt (6,6 L)', filtr: 'wg katalogu'},
+                      'S': {moc: '180–195 KM', moment: '360–440 lb-ft (488–597 Nm)', olej: '7 qt (6,6 L)', filtr: 'wg katalogu'},
+                      'W': {moc: '200 KM', moment: '255 lb-ft (346 Nm)', olej: 'wg instrukcji', filtr: 'wg katalogu'},
                     };
                     const spec = engineSpecs[engCode] || {moc: '?', moment: '?', olej: '?', filtr: '?'};
                     const trans = engCode === 'N' || engCode === 'F' || engCode === 'S' ? '4L80E (wzmocniona)' : '4L60E';
@@ -773,22 +774,12 @@ export default function Encyclopedia({ initialTab }: { initialTab?: string } = {
                   <div className="flex justify-between"><span className="text-neutral-400">Świece (5.7L)</span><span className="text-red-400">AC Delco 41-932</span></div>
                   <div className="flex justify-between"><span className="text-neutral-400">Termostat</span><span className="text-red-400">AC Delco 131-113</span></div>
                   <div className="flex justify-between"><span className="text-neutral-400">Pompa wody</span><span className="text-red-400">AC Delco 252-611</span></div>
-                  <div className="flex justify-between"><span className="text-neutral-400">Czujnik MAF</span><span className="text-red-400">AC Delco 213-252</span></div>
                 </div>
               </div>
 
               <div className="bg-neutral-950 border border-white/10 p-4">
-                <h3 className="text-lg font-bold text-red-400 mb-4">POJEMNOŚCI PŁYNÓW</h3>
-                <div className="grid sm:grid-cols-2 gap-2 text-sm">
-                  <div className="flex justify-between"><span className="text-neutral-400">Olej silnikowy</span><span>4.7 L (5W-30)</span></div>
-                  <div className="flex justify-between"><span className="text-neutral-400">ATF 4L60E</span><span>5.0 L (Dexron VI)</span></div>
-                  <div className="flex justify-between"><span className="text-neutral-400">Płyn chłodzący</span><span>15 L (Dex-Cool)</span></div>
-                  <div className="flex justify-between"><span className="text-neutral-400">Olej dyferencjału</span><span>2.0 L (75W-90)</span></div>
-                  <div className="flex justify-between"><span className="text-neutral-400">Płyn hamulcowy</span><span>0.5 L (DOT 3)</span></div>
-                  <div className="flex justify-between"><span className="text-neutral-400">Olej NP231</span><span>1.2 L (ATF)</span></div>
-                  <div className="flex justify-between"><span className="text-neutral-400">Płyn wspomagania</span><span>1.0 L</span></div>
-                  <div className="flex justify-between"><span className="text-neutral-400">Paliwo</span><span>98-114 L</span></div>
-                </div>
+                <h3 className="text-lg font-bold text-red-400 mb-2">POJEMNOŚCI PŁYNÓW</h3>
+                <p className="text-sm text-neutral-300">Pojemności zależą od silnika i rocznika. Zweryfikowane dane z instrukcji GM 1995 i 1999 znajdziesz w zakładce <button type="button" onClick={() => setTab('specyfikacje')} className="text-red-300 underline">Specyfikacje</button>.</p>
               </div>
                 <div className="mt-4 p-3 bg-neutral-900 text-sm text-neutral-400">
                   <p className="mb-2"><strong className="text-white">Struktura VIN GMT400:</strong></p>
@@ -865,6 +856,7 @@ export default function Encyclopedia({ initialTab }: { initialTab?: string } = {
         {tab === 'czesci' && (
           <div>
             <h2 className="text-2xl mb-6" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>BAZA CZĘŚCI OEM</h2>
+            <p className="mb-4 rounded-lg border border-red-600/30 bg-red-950/30 p-3 text-sm text-neutral-300">Numery części i momenty dokręcania są orientacyjne. Sprawdź w swoim aucie / manualu — GMT400 ma wiele wariantów (rocznik, GVWR, silnik, skrzynia, RPO). Zawsze weryfikuj w katalogu dla swojego VIN.</p>
             
             <input aria-label="Szukaj części" 
               type="text" 
@@ -959,109 +951,11 @@ export default function Encyclopedia({ initialTab }: { initialTab?: string } = {
           <div>
             <h2 className="text-2xl mb-6" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>SPECYFIKACJE SILNIKÓW</h2>
             
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-6">
-              {[
-                { id: '43', name: '4.3L V6', img: '/engine-43.jpg', power: '160–200 KM' },
-                { id: '50', name: '5.0L V8', img: '/engine-43.jpg', power: '175–230 KM' },
-                { id: '57tbi', name: '5.7L TBI', img: '/engine-vortec.jpg', power: '210 KM' },
-                { id: '57vortec', name: '5.7L Vortec', img: '/engine-vortec.jpg', power: '255 KM' },
-                { id: '74', name: '7.4L V8', img: '/engine-vortec.jpg', power: '230–290 KM' },
-                { id: '65d', name: '6.5L Diesel', img: '/engine-diesel.jpg', power: '180–215 KM' },
-              ].map(e => (
-                <button key={e.id} onClick={() => setSelectedEngine(selectedEngine === e.id ? '' : e.id)}
-                  className={`p-3 text-center transition ${selectedEngine === e.id ? 'bg-red-600 text-white' : 'bg-neutral-900 hover:bg-neutral-800'}`}>
-                  <img loading="lazy" src={e.img} alt={e.name} className="w-full h-20 object-contain mb-2" />
-                  <div className="font-semibold text-sm">{e.name}</div>
-                  <div className="text-xs opacity-70">{e.power}</div>
-                </button>
-              ))}
-            </div>
-
-            {selectedEngine === '57vortec' && (
-              <div className="bg-neutral-950 border border-white/10 p-4 mb-6">
-                <img loading="lazy" src="/engine-vortec.jpg" alt="5.7L Vortec" className="w-full max-h-48 object-contain mb-4" />
-                <h3 className="text-xl font-bold text-red-400 mb-3">5.7L Vortec V8 (L31)</h3>
-                <div className="grid sm:grid-cols-2 gap-4 text-sm">
-                  <div><span className="text-neutral-500">Moc:</span> <span className="text-white">255 KM @ 4600 rpm</span></div>
-                  <div><span className="text-neutral-500">Moment:</span> <span className="text-white">330 Nm @ 2800 rpm</span></div>
-                  <div><span className="text-neutral-500">Lata:</span> <span className="text-white">1996–2000</span></div>
-                  <div><span className="text-neutral-500">Kod:</span> <span className="text-white">L31</span></div>
-                  <div><span className="text-neutral-500">Wtrysk:</span> <span className="text-white">Sekwencyjny (SFI)</span></div>
-                  <div><span className="text-neutral-500">Kompresja:</span> <span className="text-white">9.4:1</span></div>
-                </div>
-                <div className="mt-4 text-neutral-300 text-sm">
-                  <p className="mb-2"><strong>Cechy:</strong> Najpopularniejszy silnik GMT400. Wprowadzony w 1996 jako zamiennik TBI.</p>
-                  <p className="mb-2"><strong>Filtr oleju:</strong> AC Delco PF1218</p>
-                  <p className="mb-2"><strong>Świece:</strong> AC Delco 41-932 (gap 1.5mm)</p>
-                  <p><strong>Olej:</strong> 4.7 L, 5W-30 lub 10W-30</p>
-                </div>
-              </div>
-            )}
-
-            {selectedEngine === '65d' && (
-              <div className="bg-neutral-950 border border-white/10 p-4 mb-6">
-                <img loading="lazy" src="/engine-diesel.jpg" alt="6.5L Diesel" className="w-full max-h-48 object-contain mb-4" />
-                <h3 className="text-xl font-bold text-red-400 mb-3">6.5L Turbodiesel</h3>
-                <div className="grid sm:grid-cols-2 gap-4 text-sm">
-                  <div><span className="text-neutral-500">Moc:</span> <span className="text-white">180–215 KM</span></div>
-                  <div><span className="text-neutral-500">Moment:</span> <span className="text-white">360–440 Nm</span></div>
-                  <div><span className="text-neutral-500">Lata:</span> <span className="text-white">1992–2000</span></div>
-                  <div><span className="text-neutral-500">Typ:</span> <span className="text-white">Turbodiesel</span></div>
-                </div>
-                <div className="mt-4 text-neutral-300 text-sm">
-                  <p className="mb-2"><strong>Cechy:</strong> Jedyny diesel w GMT400. Popularny do holowania.</p>
-                  <p className="mb-2"><strong>Problemy:</strong> Pompa wtryskowa, głowice (pękanie)</p>
-                  <p><strong>Olej:</strong> 6.6 L, 15W-40 diesel</p>
-                </div>
-              </div>
-            )}
-
-            {selectedEngine === '43' && (
-              <div className="bg-neutral-950 border border-white/10 p-4 mb-6">
-                <img loading="lazy" src="/engine-43.jpg" alt="4.3L V6" className="w-full max-h-48 object-contain mb-4" />
-                <h3 className="text-xl font-bold text-red-400 mb-3">4.3L V6</h3>
-                <div className="grid sm:grid-cols-2 gap-4 text-sm">
-                  <div><span className="text-neutral-500">Moc:</span> <span className="text-white">160–200 KM</span></div>
-                  <div><span className="text-neutral-500">Moment:</span> <span className="text-white">230–260 Nm</span></div>
-                  <div><span className="text-neutral-500">Lata:</span> <span className="text-white">1988–2000</span></div>
-                  <div><span className="text-neutral-500">Typ:</span> <span className="text-white">V6 TBI/CPI</span></div>
-                </div>
-                <div className="mt-4 text-neutral-300 text-sm">
-                  <p className="mb-2"><strong>Cechy:</strong> Podstawowy silnik. Ekonomiczny, ale słabszy.</p>
-                  <p><strong>Olej:</strong> 4.3 L, 5W-30</p>
-                </div>
-              </div>
-            )}
-
-            {!selectedEngine && (
-              <p className="text-neutral-500 text-center py-4">Wybierz silnik powyżej aby zobaczyć szczegóły.</p>
-            )}
+            <EngineTable />
 
             <button type="button" aria-label="Powiększ ilustrację" className="block w-full rounded focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-red-500" onClick={() => setLightbox('/spec-fluids-map.jpg')}><img loading="lazy" src="/spec-fluids-map.jpg" alt="Lokalizacje płynów" className="w-full mb-6 cursor-pointer"  /></button>
 
-            <div className="bg-neutral-950 border border-white/10 p-4 mb-6">
-              <h3 className="font-semibold text-red-400 mb-4">Płyny eksploatacyjne — interwały</h3>
-              <div className="overflow-x-auto">
-                <table className="w-full text-sm">
-                  <thead>
-                    <tr className="border-b border-white/10 text-red-400">
-                      <th className="p-2 text-left">Płyn</th>
-                      <th className="p-2 text-left">Specyfikacja</th>
-                      <th className="p-2 text-left">Pojemność</th>
-                      <th className="p-2 text-left">Interwał</th>
-                    </tr>
-                  </thead>
-                  <tbody className="text-neutral-300">
-                    <tr className="border-b border-white/5"><td className="p-2">Olej silnikowy</td><td className="p-2">5W-30 / 10W-30</td><td className="p-2">4.3–6.6 L</td><td className="p-2">5–8 tys. km</td></tr>
-                    <tr className="border-b border-white/5"><td className="p-2">ATF 4L60E</td><td className="p-2">Dexron VI</td><td className="p-2">5.0 L</td><td className="p-2">50 tys. km</td></tr>
-                    <tr className="border-b border-white/5"><td className="p-2">Płyn chłodzący</td><td className="p-2">Dex-Cool</td><td className="p-2">15 L</td><td className="p-2">5 lat / 150 tys.</td></tr>
-                    <tr className="border-b border-white/5"><td className="p-2">Płyn hamulcowy</td><td className="p-2">DOT 3</td><td className="p-2">0.5 L</td><td className="p-2">2 lata</td></tr>
-                    <tr className="border-b border-white/5"><td className="p-2">Olej dyferencjału</td><td className="p-2">75W-90 GL-5</td><td className="p-2">2.0 L</td><td className="p-2">50 tys. km</td></tr>
-                    <tr><td className="p-2">Olej NP231</td><td className="p-2">ATF Dexron</td><td className="p-2">1.2 L</td><td className="p-2">50 tys. km</td></tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
+            <FluidsTable />
 
             <div className="bg-neutral-950 border border-white/10 p-4 mt-6">
               <h3 className="font-semibold text-red-400 mb-3">Numery OEM — filtry</h3>
@@ -1079,45 +973,8 @@ export default function Encyclopedia({ initialTab }: { initialTab?: string } = {
           <div>
             <h2 className="text-2xl mb-6" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>HARMONOGRAM SERWISOWY</h2>
             
-            <div className="bg-neutral-950 border border-white/10 overflow-x-auto mb-6">
-              <table className="w-full text-sm">
-                <thead>
-                  <tr className="border-b border-white/10 text-red-400">
-                    <th className="p-3 text-left">Czynność</th>
-                    <th className="p-3 text-left">Interwał</th>
-                    <th className="p-3 text-left">Specyfikacja</th>
-                    <th className="p-3 text-left">Część OEM</th>
-                  </tr>
-                </thead>
-                <tbody className="text-neutral-300">
-                  <tr className="border-b border-white/5"><td className="p-3">Olej silnikowy</td><td className="p-3">5-8 tys. km</td><td className="p-3">5W-30 / 10W-30</td><td className="p-3 text-red-400">PF1218</td></tr>
-                  <tr className="border-b border-white/5"><td className="p-3">Filtr oleju</td><td className="p-3">Przy wymianie oleju</td><td className="p-3">AC Delco</td><td className="p-3 text-red-400">PF1218</td></tr>
-                  <tr className="border-b border-white/5"><td className="p-3">Filtr powietrza</td><td className="p-3">30 tys. km</td><td className="p-3">AC Delco</td><td className="p-3 text-red-400">A1163C</td></tr>
-                  <tr className="border-b border-white/5"><td className="p-3">Filtr paliwa</td><td className="p-3">50 tys. km</td><td className="p-3">AC Delco</td><td className="p-3 text-red-400">GF626</td></tr>
-                  <tr className="border-b border-white/5"><td className="p-3">ATF 4L60E</td><td className="p-3">50 tys. km</td><td className="p-3">Dexron VI</td><td className="p-3 text-red-400">TF289</td></tr>
-                  <tr className="border-b border-white/5"><td className="p-3">Płyn chłodzący</td><td className="p-3">5 lat / 150 tys.</td><td className="p-3">Dex-Cool</td><td className="p-3 text-red-400">—</td></tr>
-                  <tr className="border-b border-white/5"><td className="p-3">Płyn hamulcowy</td><td className="p-3">2 lata</td><td className="p-3">DOT 3</td><td className="p-3 text-red-400">—</td></tr>
-                  <tr className="border-b border-white/5"><td className="p-3">Świece zapłonowe</td><td className="p-3">50 tys. km</td><td className="p-3">Gap 1.5mm</td><td className="p-3 text-red-400">41-932</td></tr>
-                  <tr className="border-b border-white/5"><td className="p-3">Pasek klinowy</td><td className="p-3">100 tys. km</td><td className="p-3">Gates/Dayco</td><td className="p-3 text-red-400">—</td></tr>
-                  <tr className="border-b border-white/5"><td className="p-3">Olej dyferencjału</td><td className="p-3">50 tys. km</td><td className="p-3">75W-90 GL-5</td><td className="p-3 text-red-400">—</td></tr>
-                  <tr className="border-b border-white/5"><td className="p-3">Olej NP231</td><td className="p-3">50 tys. km</td><td className="p-3">ATF Dexron</td><td className="p-3 text-red-400">—</td></tr>
-                  <tr className="border-b border-white/5"><td className="p-3">Termostat</td><td className="p-3">Przy problemach</td><td className="p-3">195°F (91°C)</td><td className="p-3 text-red-400">131-113</td></tr>
-                  <tr className="border-b border-white/5"><td className="p-3">Klocki hamulcowe</td><td className="p-3">Wg zużycia</td><td className="p-3">Ceramiczne</td><td className="p-3 text-red-400">17D473CH</td></tr>
-                  <tr><td className="p-3">Amortyzatory</td><td className="p-3">100 tys. km</td><td className="p-3">AC Delco</td><td className="p-3 text-red-400">504-1079</td></tr>
-                  <tr className="border-b border-white/5"><td className="p-3">Czujnik tlenu</td><td className="p-3">100 tys. km</td><td className="p-3">AC Delco</td><td className="p-3 text-red-400">213-1552</td></tr>
-                  <tr className="border-b border-white/5"><td className="p-3">Przewody zapłonowe</td><td className="p-3">80 tys. km</td><td className="p-3">AC Delco</td><td className="p-3 text-red-400">9746HH</td></tr>
-                  <tr className="border-b border-white/5"><td className="p-3">Płyn wspomagania</td><td className="p-3">50 tys. km</td><td className="p-3">ATF Dexron</td><td className="p-3 text-red-400">—</td></tr>
-                  <tr className="border-b border-white/5"><td className="p-3">Filtr PCV</td><td className="p-3">50 tys. km</td><td className="p-3">AC Delco</td><td className="p-3 text-red-400">CV917C</td></tr>
-                  <tr><td className="p-3">Pasek rozrządu</td><td className="p-3">100 tys. km</td><td className="p-3">Gates</td><td className="p-3 text-red-400">—</td></tr>
-                  <tr className="border-b border-white/5"><td className="p-3">Olej silnikowy 4.3L</td><td className="p-3">5-8 tys. km</td><td className="p-3">4.3 L 5W-30</td><td className="p-3 text-red-400">PF47</td></tr>
-                  <tr className="border-b border-white/5"><td className="p-3">Olej silnikowy 5.7L</td><td className="p-3">5-8 tys. km</td><td className="p-3">4.7 L 5W-30</td><td className="p-3 text-red-400">PF1218</td></tr>
-                  <tr className="border-b border-white/5"><td className="p-3">Olej silnikowy 7.4L</td><td className="p-3">5-8 tys. km</td><td className="p-3">5.7 L 10W-30</td><td className="p-3 text-red-400">PF1218</td></tr>
-                  <tr className="border-b border-white/5"><td className="p-3">Olej silnikowy 6.5L</td><td className="p-3">5-8 tys. km</td><td className="p-3">6.6 L 15W-40</td><td className="p-3 text-red-400">PF1218</td></tr>
-                  <tr className="border-b border-white/5"><td className="p-3">ATF 4L80E</td><td className="p-3">50 tys. km</td><td className="p-3">6.5 L Dexron VI</td><td className="p-3 text-red-400">—</td></tr>
-                  <tr><td className="p-3">Olej NP241</td><td className="p-3">50 tys. km</td><td className="p-3">2.0 L ATF</td><td className="p-3 text-red-400">—</td></tr>
-                </tbody>
-              </table>
-            </div>
+            <p className="mb-4 text-sm text-neutral-400">Interwały wg instrukcji GM (1995 i 1999). Numery części sprawdzaj w katalogu dla swojego VIN i RPO.</p>
+            <FluidsTable />
 
             <div className="grid sm:grid-cols-2 gap-4">
               <div className="bg-neutral-950 border border-white/10 p-4">
@@ -1706,14 +1563,16 @@ export default function Encyclopedia({ initialTab }: { initialTab?: string } = {
           <div>
             <h2 className="text-2xl mb-6" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>HISTORIA GMT400</h2>
             <div className="bg-neutral-950 border border-white/10 p-6">
-              <p className="text-neutral-300 mb-4">Platforma GMT400 była produkowana w latach 1988–2000.</p>
+              <p className="text-neutral-300 mb-4">Platforma GMT400 była produkowana w latach 1988–2002 (pickupy C/K w większości do 1998–1999, Tahoe/Yukon do 2000, C3500HD do 2002).</p>
               <div className="space-y-2 text-sm text-neutral-400">
                 <p><span className="text-red-400">1988:</span> Debiut C/K 1500/2500/3500</p>
-                <p><span className="text-red-400">1992:</span> Suburban na platformie GMT400</p>
-                <p><span className="text-red-400">1995:</span> Debiut Tahoe i Yukon</p>
-                <p><span className="text-red-400">1996:</span> Wprowadzenie silników Vortec</p>
-                <p><span className="text-red-400">1999:</span> Ostatni rok Tahoe 2-drzwi</p>
-                <p><span className="text-red-400">2000:</span> Koniec produkcji</p>
+                <p><span className="text-red-400">1992:</span> Suburban, Blazer (1992–1994) i GMC Yukon (2-drzwi) na platformie GMT400</p>
+                <p><span className="text-red-400">1993:</span> 4L60-E zastępuje 700R4/4L60</p>
+                <p><span className="text-red-400">1995:</span> Blazer przemianowany na Tahoe; wersje 4-drzwiowe Tahoe i Yukon; lifting wnętrza (nowa deska, poduszka kierowcy)</p>
+                <p><span className="text-red-400">1996:</span> Silniki Vortec, OBD-II, trzecie drzwi w Extended Cab</p>
+                <p><span className="text-red-400">1998–1999:</span> NV246 AutoTrac (1998); Yukon Denali (1999)</p>
+                <p><span className="text-red-400">1999–2000:</span> Pickupy i Suburban przechodzą na GMT800 (1999/2000); Tahoe/Yukon 4-drzwi do 2000, C3500HD do 2002</p>
+                <p className="pt-2 text-xs text-neutral-500">Źródła: Wikipedia — Chevrolet C/K (4. generacja), Chevrolet Tahoe, GMT400. Sprawdź w swoim aucie / manualu — GMT400 ma wiele wariantów (rocznik, GVWR, silnik, skrzynia, RPO).</p>
               </div>
             </div>
           </div>
