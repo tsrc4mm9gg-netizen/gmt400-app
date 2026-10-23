@@ -3,68 +3,82 @@
 Źródła:
 - Płyn: DEXRON-III (instrukcja obsługi GM 1999 Chevrolet Suburban, Part D: Recommended Fluids and Lubricants, s. 7-44).
 - Interwały 50 000 mil (severe) / 100 000 mil (normal): ta sama instrukcja, s. 7-5 / 7-7.
-  https://www.chevrolet.com/ownercenter/content/dam/gmownercenter/gmna/dynamic/manuals/1999/chevrolet/suburban/1999_chevrolet_suburban_owners.pdf
+-   https://www.chevrolet.com/ownercenter/content/dam/gmownercenter/gmna/dynamic/manuals/1999/chevrolet/suburban/1999_chevrolet_suburban_owners.pdf
 - 4L60-E od 1993: Wikipedia "Chevrolet C/K (fourth generation)".
-Schemat celowo NIE podaje momentów, pojemności ani liczby śrub - te dane wziąć z FSM (rozdział Automatic Transmission 4L60-E, On-Vehicle Service) danego rocznika.
-Wersja ciemna (kolory dopasowane do gmt400.pl).
-Licencja: własny rysunek dla gmt400.pl (do decyzji autora, np. CC BY 4.0).
+- Schemat celowo NIE podaje momentów, pojemności ani liczby śrub - te dane wziąć z FSM (rozdział Automatic Transmission 4L60-E, On-Vehicle Service) danego rocznika.
+- Wersja ciemna (kolory dopasowane do gmt400.pl).
+Rysunek poglądowy (nie w skali). Styl v2 gmt400.pl (ciemny + czerwony). Własny rysunek gmt400.pl (bez grafik AI).
 -->
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 600" width="1100" height="600" role="img" aria-label="4L60-E: wymiana ATF i filtra — kolejność kroków">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1432" width="900" height="1432" role="img" aria-label="4L60-E: wymiana ATF i filtra — kolejność kroków">
 <title>4L60-E: wymiana ATF i filtra — kolejność kroków</title>
-<rect width="1100" height="600" fill="#0d0d0f"/>
-<g font-family='DejaVu Sans, Arial, sans-serif' fill="#f5f5f5">
-<text x="30" y="44" font-size="26" font-weight="bold">4L60-E: wymiana ATF i filtra — kolejność kroków</text>
-<text x="30" y="72" font-size="15" fill="#a3a3a3">Zakres: 4L60-E, GMT400 1500/lekkie 2500, 1993–2000</text>
-<rect x="30" y="110" width="330" height="170" rx="10" fill="#1f1214" stroke="#dc2626" stroke-width="2"/>
-<circle cx="60" cy="142" r="18" fill="#dc2626"/>
-<text x="54" y="148" font-size="18" fill="#ffffff" font-weight="bold">1</text>
-<text x="88" y="149" font-size="19" font-weight="bold">Przygotowanie</text>
-<text x="46" y="182" font-size="14" >Auto na podnośniku lub stabilnych</text>
-<text x="46" y="203" font-size="14" >podporach, skrzynia ostudzona. Nowy</text>
-<text x="46" y="224" font-size="14" >filtr, uszczelka miski, ATF</text>
-<text x="46" y="245" font-size="14" >DEXRON-III.</text>
-<path d="M364 195 l 12 0" stroke="#dc2626" stroke-width="3"/>
-<rect x="380" y="110" width="330" height="170" rx="10" fill="#1f1214" stroke="#dc2626" stroke-width="2"/>
-<circle cx="410" cy="142" r="18" fill="#dc2626"/>
-<text x="404" y="148" font-size="18" fill="#ffffff" font-weight="bold">2</text>
-<text x="438" y="149" font-size="19" font-weight="bold">Miska</text>
-<text x="396" y="182" font-size="14" >Odkręcaj śruby miski, zostaw 2–3</text>
-<text x="396" y="203" font-size="14" >luźno z jednej strony, żeby spuścić</text>
-<text x="396" y="224" font-size="14" >ATF do wanny.</text>
-<path d="M714 195 l 12 0" stroke="#dc2626" stroke-width="3"/>
-<rect x="730" y="110" width="330" height="170" rx="10" fill="#1f1214" stroke="#dc2626" stroke-width="2"/>
-<circle cx="760" cy="142" r="18" fill="#dc2626"/>
-<text x="754" y="148" font-size="18" fill="#ffffff" font-weight="bold">3</text>
-<text x="788" y="149" font-size="19" font-weight="bold">Filtr</text>
-<text x="746" y="182" font-size="14" >Zdejmij miskę, wyciągnij stary filtr.</text>
-<text x="746" y="203" font-size="14" >Sprawdź, czy w obudowie nie zostały</text>
-<text x="746" y="224" font-size="14" >elementy uszczelniające filtra (wg</text>
-<text x="746" y="245" font-size="14" >FSM).</text>
-<rect x="30" y="300" width="330" height="170" rx="10" fill="#1f1214" stroke="#dc2626" stroke-width="2"/>
-<circle cx="60" cy="332" r="18" fill="#dc2626"/>
-<text x="54" y="338" font-size="18" fill="#ffffff" font-weight="bold">4</text>
-<text x="88" y="339" font-size="19" font-weight="bold">Czyszczenie</text>
-<text x="46" y="372" font-size="14" >Oczyść miskę i magnes; obejrzyj osad</text>
-<text x="46" y="393" font-size="14" >(opiłki / okładziny — opisz i</text>
-<text x="46" y="414" font-size="14" >zachowaj zdjęcie).</text>
-<path d="M364 385 l 12 0" stroke="#dc2626" stroke-width="3"/>
-<rect x="380" y="300" width="330" height="170" rx="10" fill="#1f1214" stroke="#dc2626" stroke-width="2"/>
-<circle cx="410" cy="332" r="18" fill="#dc2626"/>
-<text x="404" y="338" font-size="18" fill="#ffffff" font-weight="bold">5</text>
-<text x="438" y="339" font-size="19" font-weight="bold">Montaż</text>
-<text x="396" y="372" font-size="14" >Nowy uszczelniacz i filtr, czysta</text>
-<text x="396" y="393" font-size="14" >miska z nową uszczelką. Momenty śrub</text>
-<text x="396" y="414" font-size="14" >— wg FSM Twojego rocznika.</text>
-<path d="M714 385 l 12 0" stroke="#dc2626" stroke-width="3"/>
-<rect x="730" y="300" width="330" height="170" rx="10" fill="#1f1214" stroke="#dc2626" stroke-width="2"/>
-<circle cx="760" cy="332" r="18" fill="#dc2626"/>
-<text x="754" y="338" font-size="18" fill="#ffffff" font-weight="bold">6</text>
-<text x="788" y="339" font-size="19" font-weight="bold">Napełnianie</text>
-<text x="746" y="372" font-size="14" >Uzupełnij ATF przez rurkę bagnetu.</text>
-<text x="746" y="393" font-size="14" >Poziom sprawdź wg procedury z</text>
-<text x="746" y="414" font-size="14" >instrukcji obsługi (temperatura,</text>
-<text x="746" y="435" font-size="14" >bieg).</text>
-<text x="30" y="510" font-size="15" fill="#a3a3a3">Interwał (instrukcja 1999): co 50 000 mil przy ciężkich warunkach, co 100 000 mil przy normalnych.</text>
-<rect x="20" y="546" width="1060" height="38" rx="6" fill="#2a0f10" stroke="#dc2626"/>
-<text x="34" y="571" font-size="15" font-weight="bold" fill="#fca5a5">⚠ Sprawdź w swoim aucie / manualu — GMT400 ma wiele wariantów.</text>
-</g></svg>
+<defs><pattern id="g" width="30" height="30" patternUnits="userSpaceOnUse"><circle cx="15" cy="15" r="1.2" fill="#1f1f24"/></pattern></defs>
+<rect width="900" height="1432" fill="#0d0d0f"/>
+<rect width="900" height="1432" fill="url(#g)"/>
+<g font-family="DejaVu Sans, Arial, sans-serif">
+<rect x="0" y="0" width="900" height="8" fill="#dc2626"/>
+<text x="870" y="40" font-size="16" fill="#a3a3a3" text-anchor="end">gmt400.pl · schemat</text>
+<text x="30" y="80" font-size="30" fill="#f5f5f5" font-weight="bold">4L60-E: wymiana ATF i filtra — kolejność kroków</text>
+<text x="30" y="110" font-size="20" fill="#f87171">Model i lata: 4L60-E, GMT400 1500/lekkie 2500, 1993–2000</text>
+<line x1="30" y1="126" x2="870" y2="126" stroke="#3f3f46" stroke-width="2"/>
+<rect x="30" y="156" width="8" height="30" fill="#dc2626"/>
+<text x="50" y="181" font-size="24" fill="#f5f5f5" font-weight="bold">Kroki</text>
+<rect x="60" y="200" width="780" height="108" rx="12" fill="#18181b" stroke="#f87171" stroke-width="2"/>
+<circle cx="60" cy="254.0" r="17" fill="#dc2626" stroke="#0d0d0f" stroke-width="3"/>
+<text x="60" y="261.0" font-size="19" fill="#f5f5f5" font-weight="bold" text-anchor="middle">1</text>
+<text x="92" y="236" font-size="23" fill="#f5f5f5" font-weight="bold">Przygotowanie</text>
+<text x="92" y="266" font-size="19" fill="#a3a3a3">Auto na podnośniku lub stabilnych podporach, skrzynia</text>
+<text x="92" y="292" font-size="19" fill="#a3a3a3">ostudzona. Nowy filtr, uszczelka miski, ATF DEXRON-III.</text>
+<path d="M450 312 v26 m-12 -12 l12 14 l12 -14" stroke="#dc2626" stroke-width="4" fill="none"/>
+<rect x="60" y="344" width="780" height="108" rx="12" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<circle cx="60" cy="398.0" r="17" fill="#dc2626" stroke="#0d0d0f" stroke-width="3"/>
+<text x="60" y="405.0" font-size="19" fill="#f5f5f5" font-weight="bold" text-anchor="middle">2</text>
+<text x="92" y="380" font-size="23" fill="#f5f5f5" font-weight="bold">Miska</text>
+<text x="92" y="410" font-size="19" fill="#a3a3a3">Odkręcaj śruby miski, zostaw 2–3 luźno z jednej strony, żeby</text>
+<text x="92" y="436" font-size="19" fill="#a3a3a3">spuścić ATF do wanny.</text>
+<path d="M450 456 v26 m-12 -12 l12 14 l12 -14" stroke="#dc2626" stroke-width="4" fill="none"/>
+<rect x="60" y="488" width="780" height="134" rx="12" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<circle cx="60" cy="555.0" r="17" fill="#dc2626" stroke="#0d0d0f" stroke-width="3"/>
+<text x="60" y="562.0" font-size="19" fill="#f5f5f5" font-weight="bold" text-anchor="middle">3</text>
+<text x="92" y="524" font-size="23" fill="#f5f5f5" font-weight="bold">Filtr</text>
+<text x="92" y="554" font-size="19" fill="#a3a3a3">Zdejmij miskę, wyciągnij stary filtr. Sprawdź, czy w</text>
+<text x="92" y="580" font-size="19" fill="#a3a3a3">obudowie nie zostały elementy uszczelniające filtra (wg</text>
+<text x="92" y="606" font-size="19" fill="#a3a3a3">FSM).</text>
+<path d="M450 626 v26 m-12 -12 l12 14 l12 -14" stroke="#dc2626" stroke-width="4" fill="none"/>
+<rect x="60" y="658" width="780" height="108" rx="12" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<circle cx="60" cy="712.0" r="17" fill="#dc2626" stroke="#0d0d0f" stroke-width="3"/>
+<text x="60" y="719.0" font-size="19" fill="#f5f5f5" font-weight="bold" text-anchor="middle">4</text>
+<text x="92" y="694" font-size="23" fill="#f5f5f5" font-weight="bold">Czyszczenie</text>
+<text x="92" y="724" font-size="19" fill="#a3a3a3">Oczyść miskę i magnes; obejrzyj osad (opiłki / okładziny —</text>
+<text x="92" y="750" font-size="19" fill="#a3a3a3">opisz i zachowaj zdjęcie).</text>
+<path d="M450 770 v26 m-12 -12 l12 14 l12 -14" stroke="#dc2626" stroke-width="4" fill="none"/>
+<rect x="60" y="802" width="780" height="108" rx="12" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<circle cx="60" cy="856.0" r="17" fill="#dc2626" stroke="#0d0d0f" stroke-width="3"/>
+<text x="60" y="863.0" font-size="19" fill="#f5f5f5" font-weight="bold" text-anchor="middle">5</text>
+<text x="92" y="838" font-size="23" fill="#f5f5f5" font-weight="bold">Montaż</text>
+<text x="92" y="868" font-size="19" fill="#a3a3a3">Nowy uszczelniacz i filtr, czysta miska z nową uszczelką.</text>
+<text x="92" y="894" font-size="19" fill="#a3a3a3">Momenty śrub — wg FSM Twojego rocznika.</text>
+<path d="M450 914 v26 m-12 -12 l12 14 l12 -14" stroke="#dc2626" stroke-width="4" fill="none"/>
+<rect x="60" y="946" width="780" height="108" rx="12" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<circle cx="60" cy="1000.0" r="17" fill="#dc2626" stroke="#0d0d0f" stroke-width="3"/>
+<text x="60" y="1007.0" font-size="19" fill="#f5f5f5" font-weight="bold" text-anchor="middle">6</text>
+<text x="92" y="982" font-size="23" fill="#f5f5f5" font-weight="bold">Napełnianie</text>
+<text x="92" y="1012" font-size="19" fill="#a3a3a3">Uzupełnij ATF przez rurkę bagnetu. Poziom sprawdź wg</text>
+<text x="92" y="1038" font-size="19" fill="#a3a3a3">procedury z instrukcji obsługi (temperatura, bieg).</text>
+<rect x="30" y="1062" width="840" height="72" rx="8" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<text x="46" y="1096" font-size="21" fill="#f5f5f5" font-weight="bold">Interwał (instrukcja</text>
+<text x="46" y="1124" font-size="21" fill="#f5f5f5" font-weight="bold">1999)</text>
+<text x="296" y="1096" font-size="21" fill="#f5f5f5">co 50 000 mil przy ciężkich warunkach, co 100</text>
+<text x="296" y="1124" font-size="21" fill="#f5f5f5">000 mil przy normalnych.</text>
+<rect x="30" y="1168" width="8" height="30" fill="#dc2626"/>
+<text x="50" y="1193" font-size="24" fill="#f5f5f5" font-weight="bold">Legenda</text>
+<path d="M40 1230 h40 m-12 -10 l12 10 l-12 10" stroke="#dc2626" stroke-width="4" fill="none"/>
+<text x="104" y="1237" font-size="19" fill="#f5f5f5">kierunek przepływu / sygnału</text>
+<circle cx="62" cy="1266" r="14" fill="#dc2626"/>
+<text x="62" y="1272" font-size="17" fill="#f5f5f5" font-weight="bold" text-anchor="middle">1</text>
+<text x="104" y="1273" font-size="19" fill="#f5f5f5">numer odnośnika / kolejność</text>
+<text x="30" y="1324" font-size="18" fill="#a3a3a3">Sprawdź w swoim aucie / manualu — GMT400 ma wiele wariantów (rocznik, silnik,</text>
+<text x="30" y="1350" font-size="18" fill="#a3a3a3">GVWR, RPO). Rysunek poglądowy, nie w skali.</text>
+<text x="30" y="1376" font-size="18" fill="#a3a3a3">Źródło: Instrukcja obsługi GM 1999 Suburban (płyny, interwały); Wikipedia</text>
+<text x="30" y="1402" font-size="18" fill="#a3a3a3">„Chevrolet C/K (fourth generation)”</text>
+</g>
+</svg>

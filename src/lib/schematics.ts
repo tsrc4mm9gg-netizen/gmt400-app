@@ -11,7 +11,13 @@ export type Schematic = {
  /** Schemat SVG (ciemna wersja w public/schematy/). models = model + lata, którego dotyczy rysunek. */
  diagram?: { src: string; alt: string; models: string; width: number; height: number };
  related?: string[];
+ /** Prawdziwe zdjęcia na wolnej licencji (Wikimedia Commons). Brak pola = brak licencjonowanego zdjęcia. */
+ photos?: SchematicPhoto[];
 };
+export type SchematicPhoto = { src: string; alt: string; width: number; height: number; author: string; license: string; licenseUrl: string; sourceUrl: string; models: string; note?: string };
+
+const SIMONOV = { author: 'simonov', license: 'CC BY-SA 2.0', licenseUrl: 'https://creativecommons.org/licenses/by-sa/2.0/' };
+const ENGINE_1990: SchematicPhoto = { src: '/schematy/foto/komora-1990-ck1500.webp', alt: 'Komora silnika Chevroleta C/K 1500 z 1990 r.: V8 z filtrem powietrza na wtrysku TBI, zbiorniczek płynu chłodniczego, osłona wentylatora, wspomaganie i pompa hamulcowa', width: 1280, height: 853, author: 'Michael Barera', license: 'CC BY-SA 4.0', licenseUrl: 'https://creativecommons.org/licenses/by-sa/4.0/', sourceUrl: "https://commons.wikimedia.org/wiki/File:2017_Bois_d%27Arc_Spring_Car_Show_50_(1990_Chevrolet_1500_engine).jpg", models: 'Chevrolet C/K 1500, 1990 (V8 TBI)', note: 'Niefabryczny filtr K&N i przewody zapłonowe.' };
 
 export const SCHEMATICS: Schematic[] = [
  {
@@ -28,7 +34,7 @@ export const SCHEMATICS: Schematic[] = [
  ],
  source: 'https://en.wikipedia.org/wiki/ALDL',
  sourceTitle: 'ALDL — Wikipedia',
- diagram: { src: '/schematy/aldl-12pin-obd1.svg', alt: 'Schemat złącza ALDL 12-pin z zaznaczonymi pinami A (masa) i B (wejście diagnostyczne) oraz kroki odczytu kodów migowych', models: 'C/K, Sierra, Blazer/Tahoe, Yukon, Suburban — benzyna 1988–1995 (OBD-I)', width: 1100, height: 560 },
+ diagram: { src: '/schematy/aldl-12pin-obd1.svg', alt: 'Schemat złącza ALDL 12-pin z zaznaczonymi pinami A (masa) i B (wejście diagnostyczne) oraz kroki odczytu kodów migowych', models: 'C/K, Sierra, Blazer/Tahoe, Yukon, Suburban — benzyna 1988–1995 (OBD-I)', width: 900, height: 1671 },
  related: ['obd-ii-16-pin'],
  note: 'Sprawdź w swoim aucie / manualu — GMT400 ma wiele wariantów (rocznik, GVWR, silnik, skrzynia, RPO).'
  },
@@ -45,7 +51,7 @@ export const SCHEMATICS: Schematic[] = [
  ],
  source: 'https://en.wikipedia.org/wiki/On-board_diagnostics',
  sourceTitle: 'On-board diagnostics — Wikipedia',
- diagram: { src: '/schematy/obd2-dlc-16pin-gmt400.svg', alt: 'Schemat gniazda OBD-II DLC 16-pin z pinami 2 (J1850 VPW), 4 i 5 (masa) oraz 16 (+12 V)', models: 'C/K, Sierra, Tahoe, Yukon, Suburban 1996–2000 (OBD-II)', width: 1100, height: 560 },
+ diagram: { src: '/schematy/obd2-dlc-16pin-gmt400.svg', alt: 'Schemat gniazda OBD-II DLC 16-pin z pinami 2 (J1850 VPW), 4 i 5 (masa) oraz 16 (+12 V)', models: 'C/K, Sierra, Tahoe, Yukon, Suburban 1996–2000 (OBD-II)', width: 900, height: 1423 },
  related: ['aldl-12-pin'],
  note: 'Sprawdź w swoim aucie / manualu — GMT400 ma wiele wariantów (rocznik, GVWR, silnik, skrzynia, RPO).'
  },
@@ -64,7 +70,8 @@ export const SCHEMATICS: Schematic[] = [
  source: 'https://gm.saturn.team/Chevrolet/Chevy_C_Pickup___2WD/1996/2/1/170/37217',
  sourceTitle: 'GM Service Manual 1996 C/K — Engine Cooling (+ OM99)',
  note: 'Sprawdź w swoim aucie / manualu — GMT400 ma wiele wariantów (rocznik, GVWR, silnik, skrzynia, RPO).',
- diagram: { src: '/schematy/chlodzenie-benzyna-1996.svg', alt: 'Schemat obiegu płynu chłodniczego: pompa, silnik, termostat, chłodnica, zbiorniczek, pojemności i płyn', models: 'C/K, Tahoe/Yukon, Suburban benzyna 1996–2000', width: 900, height: 1762 },
+ diagram: { src: '/schematy/chlodzenie-benzyna-1996.svg', alt: 'Schemat obiegu płynu chłodniczego: pompa, silnik, termostat, chłodnica, zbiorniczek, pojemności i płyn', models: 'C/K, Tahoe/Yukon, Suburban benzyna 1996–2000', width: 900, height: 1974 },
+  photos: [{ ...ENGINE_1990, note: 'Rocznik 1990 (TBI) — inny niż schemat (1996–2000); zbiorniczek i przewody mogą się różnić. Niefabryczny filtr K&N.' }],
  related: ['fluids-1995-1999']
  },
  {
@@ -99,7 +106,7 @@ export const SCHEMATICS: Schematic[] = [
  source: 'https://www.chevrolet.com/ownercenter/content/dam/gmownercenter/gmna/dynamic/manuals/1999/chevrolet/suburban/1999_chevrolet_suburban_owners.pdf',
  sourceTitle: 'OM99 — 1999 Chevrolet Suburban Owners Manual',
  note: 'Sprawdź w swoim aucie / manualu — GMT400 ma wiele wariantów (rocznik, GVWR, silnik, skrzynia, RPO).',
- diagram: { src: '/schematy/4l60e-atf-filtr-kroki.svg', alt: 'Sześć kroków wymiany ATF i filtra w skrzyni 4L60-E', models: 'C/K 1500, lekkie 2500, Tahoe/Yukon, Suburban 1500 z 4L60-E, 1993–2000', width: 1100, height: 600 }
+ diagram: { src: '/schematy/4l60e-atf-filtr-kroki.svg', alt: 'Sześć kroków wymiany ATF i filtra w skrzyni 4L60-E', models: 'C/K 1500, lekkie 2500, Tahoe/Yukon, Suburban 1500 z 4L60-E, 1993–2000', width: 900, height: 1432 }
  },
  {
  id: 'fuse-locations',
@@ -115,7 +122,7 @@ export const SCHEMATICS: Schematic[] = [
  source: 'https://www.chevrolet.com/ownercenter/content/dam/gmownercenter/gmna/dynamic/manuals/1999/chevrolet/suburban/1999_chevrolet_suburban_owners.pdf',
  sourceTitle: 'OM99 — 1999 Chevrolet Suburban Owners Manual',
  note: 'Sprawdź w swoim aucie / manualu — GMT400 ma wiele wariantów (rocznik, GVWR, silnik, skrzynia, RPO).',
- diagram: { src: '/schematy/bezpieczniki-lokalizacja.svg', alt: 'Widok auta z góry z zaznaczoną skrzynką bezpieczników w kabinie i skrzynką pod maską', models: 'Tahoe / Suburban 1999; C/K 1500 1995 (kabina)', width: 1180, height: 560 }
+ diagram: { src: '/schematy/bezpieczniki-lokalizacja.svg', alt: 'Widok auta z góry z zaznaczoną skrzynką bezpieczników w kabinie i skrzynką pod maską', models: 'Tahoe / Suburban 1999; C/K 1500 1995 (kabina)', width: 900, height: 1498 }
  },
  {
  id: 'front-suspension-c-k',
@@ -131,7 +138,11 @@ export const SCHEMATICS: Schematic[] = [
  source: 'https://en.wikipedia.org/wiki/Chevrolet_C/K_(fourth_generation)',
  sourceTitle: 'Wikipedia: Chevrolet C/K (4. generacja)',
  note: 'Sprawdź w swoim aucie / manualu — GMT400 ma wiele wariantów (rocznik, GVWR, silnik, skrzynia, RPO).',
- diagram: { src: '/schematy/zawieszenie-przod-c-k.svg', alt: 'Porównanie przedniego zawieszenia C (sprężyna śrubowa) i K (drążek skrętny, półoś, przedni most)', models: 'C/K, Sierra, Tahoe/Yukon, Suburban 1988–2000', width: 1180, height: 560 },
+ diagram: { src: '/schematy/zawieszenie-przod-c-k.svg', alt: 'Porównanie przedniego zawieszenia C (sprężyna śrubowa) i K (drążek skrętny, półoś, przedni most)', models: 'C/K, Sierra, Tahoe/Yukon, Suburban 1988–2000', width: 900, height: 1550 },
+  photos: [
+   { src: '/schematy/foto/zawieszenie-1998-suburban-k2500-polos.webp', alt: 'Przednie zawieszenie K (4×4) od spodu: półoś z osłonami przegubów, zwrotnica, wahacze — strona kierowcy', width: 1280, height: 960, ...SIMONOV, sourceUrl: "https://commons.wikimedia.org/wiki/File:New_front_axles_assembly-_driver%27s_side.jpg", models: 'Chevrolet Suburban K2500, 1998', note: 'Nowe półosie założone przez autora.' },
+   { src: '/schematy/foto/zawieszenie-1998-suburban-k2500-linki.webp', alt: 'Przód K (4×4) od spodu: drążek kierowniczy, stabilizator, osłona półosi, tarcza hamulcowa', width: 1280, height: 960, ...SIMONOV, sourceUrl: 'https://commons.wikimedia.org/wiki/File:Front_end_linkages.jpg', models: 'Chevrolet Suburban K2500, 1998', note: 'Auto z niefabrycznym liftem Pro Comp (wg innych zdjęć autora).' },
+  ],
  related: ['4wd-control']
  },
  {
@@ -151,7 +162,8 @@ export const SCHEMATICS: Schematic[] = [
  source: 'https://gm.saturn.team/Chevrolet/Tahoe___4WD/1999/7/4/795/50063',
  sourceTitle: 'GM Service Manual 1999 Tahoe 4WD — Brakes / ABS',
  note: 'Sprawdź w swoim aucie / manualu — GMT400 ma wiele wariantów (rocznik, GVWR, silnik, skrzynia, RPO).',
- diagram: { src: '/schematy/hamulce-abs-uklad.svg', alt: 'Schemat hamulców: pompa, wspomaganie, EHCU, 3 kanały ABS, zawór zespolony, płyny', models: 'Tahoe/Yukon/Suburban 1999; C/K 1995', width: 900, height: 1678 },
+ diagram: { src: '/schematy/hamulce-abs-uklad.svg', alt: 'Schemat hamulców: pompa, wspomaganie, EHCU, 3 kanały ABS, zawór zespolony, płyny', models: 'Tahoe/Yukon/Suburban 1999; C/K 1995', width: 900, height: 1910 },
+  photos: [{ src: '/schematy/foto/hamulce-1998-suburban-k2500.webp', alt: 'Przednia tarcza i zacisk hamulca Suburbana K2500 po wymianie, piasta zdjęta z auta na podnośniku', width: 1280, height: 960, ...SIMONOV, sourceUrl: 'https://commons.wikimedia.org/wiki/File:New_front_brakes_-_49020391443.jpg', models: 'Chevrolet Suburban K2500, 1998', note: 'Tarcze i zaciski wymienione przez autora — nie fabryczne.' }],
  related: ['fluids-1995-1999']
  },
  {
@@ -171,7 +183,8 @@ export const SCHEMATICS: Schematic[] = [
  source: 'https://gm.saturn.team/Chevrolet/Chevy_C_Pickup___2WD/1996/2/1/183/31643',
  sourceTitle: 'GM Service Manual 1996 C/K i 1999 Tahoe — Fuel System Diagnosis',
  note: 'Sprawdź w swoim aucie / manualu — GMT400 ma wiele wariantów (rocznik, GVWR, silnik, skrzynia, RPO).',
- diagram: { src: '/schematy/paliwo-uklad-cisnienie.svg', alt: 'Schemat układu paliwowego: pompa, filtr, regulator, wtrysk, powrót, ciśnienia', models: 'C/K, Tahoe/Yukon, Suburban 1996–2000 (CSFI/SFI)', width: 900, height: 1758 },
+ diagram: { src: '/schematy/paliwo-uklad-cisnienie.svg', alt: 'Schemat układu paliwowego: pompa, filtr, regulator, wtrysk, powrót, ciśnienia', models: 'C/K, Tahoe/Yukon, Suburban 1996–2000 (CSFI/SFI)', width: 900, height: 1992 },
+  photos: [ENGINE_1990],
  related: []
  },
  {
@@ -188,7 +201,7 @@ export const SCHEMATICS: Schematic[] = [
  source: 'https://gm.saturn.team/Chevrolet/Chevy_C_Pickup___2WD/1996/2/1/157/44190',
  sourceTitle: 'GM Service Manual 1996 C/K — Intake Manifold Replacement 5.0L/5.7L',
  note: 'Sprawdź w swoim aucie / manualu — GMT400 ma wiele wariantów (rocznik, GVWR, silnik, skrzynia, RPO).',
- diagram: { src: '/schematy/vortec-uszczelki-kolektora.svg', alt: 'Przekrój: kolektor dolny, uszczelki na głowicach, ścieg na bloku i kolejność montażu', models: 'Vortec 5.0/5.7, 1996–2000', width: 900, height: 1266 },
+ diagram: { src: '/schematy/vortec-uszczelki-kolektora.svg', alt: 'Przekrój: kolektor dolny, uszczelki na głowicach, ścieg na bloku i kolejność montażu', models: 'Vortec 5.0/5.7, 1996–2000', width: 900, height: 1396 },
  related: []
  },
  {
@@ -207,7 +220,7 @@ export const SCHEMATICS: Schematic[] = [
  source: 'https://gm.saturn.team/Chevrolet/Chevy_C_Pickup___2WD/1996/2/1/171/37566',
  sourceTitle: 'GM Service Manual 1996 C/K — Starting and Charging Components',
  note: 'Sprawdź w swoim aucie / manualu — GMT400 ma wiele wariantów (rocznik, GVWR, silnik, skrzynia, RPO).',
- diagram: { src: '/schematy/masy-punkty-1996.svg', alt: 'Widok z góry komory silnika z punktami masy G101, G102, G105, G112', models: 'C/K 1996', width: 900, height: 1388 },
+ diagram: { src: '/schematy/masy-punkty-1996.svg', alt: 'Widok z góry komory silnika z punktami masy G101, G102, G105, G112', models: 'C/K 1996', width: 900, height: 1518 },
  related: []
  },
  {
@@ -226,8 +239,47 @@ export const SCHEMATICS: Schematic[] = [
  source: 'https://www.chevrolet.com/ownercenter/content/dam/gmownercenter/gmna/dynamic/manuals/1999/chevrolet/suburban/1999_chevrolet_suburban_owners.pdf',
  sourceTitle: 'OM95 (1995 C/K 1500) i OM99 (1999 Suburban) — Recommended Fluids',
  note: 'Sprawdź w swoim aucie / manualu — GMT400 ma wiele wariantów (rocznik, GVWR, silnik, skrzynia, RPO).',
- diagram: { src: '/schematy/plyny-tabela-1995-1999.svg', alt: 'Tabela płynów i pojemności 1995 vs 1999', models: 'C/K 1995; Suburban/Tahoe 1999', width: 900, height: 1470 },
+ diagram: { src: '/schematy/plyny-tabela-1995-1999.svg', alt: 'Tabela płynów i pojemności 1995 vs 1999', models: 'C/K 1995; Suburban/Tahoe 1999', width: 900, height: 1582 },
  related: ['vortec-cooling', 'brakes-abs']
+ },
+ {
+ id: 'ignition-hei-vortec',
+ title: 'Zapłon — HEI-EST (1988–1995) vs Enhanced Ignition (1996+)',
+ scope: 'C/K 1500 5.7 TBI 1995 (opis modułu zapłonu) i C/K 1996 benzyna 5.0/5.7/7.4 (SM 1996). Inne silniki i lata — sprawdź w manualu.',
+ description: 'Do 1995 (TBI) moduł w aparacie zapłonowym ma 4-pinowe złącze A–D, a ECM steruje wyprzedzeniem przez linie bypass i EST; kąt bazowy ustawia się przy rozłączonym złączu „Set Timing”. Od 1996 (Vortec) VCM steruje osobnym modułem cewki (ICM) na podstawie czujnika CKP; aparat ma stałe położenie i kąta nie da się regulować.',
+ rows: [
+ { label: '1988–1995: złącze modułu', value: 'A = masa odniesienia, B = bypass (5 V z ECM przy ok. 400 obr/min), C = REF HI (obroty), D = EST' },
+ { label: '1988–1995: kąt bazowy', value: '0° (TDC); 454: 4° przed GMP — przy rozłączonym złączu „Set Timing” (TAN/BLK)' },
+ { label: '1988–1995: kod 42', value: 'przerwa lub zwarcie do masy na linii bypass (B)' },
+ { label: '1996+: czujniki', value: 'CKP w przedniej pokrywie (V8: 4x), CMP w aparacie (1x, tylko do kodów wypadania zapłonów)' },
+ { label: '1996+: test iskry', value: 'tester min. 25 000 V (J 26792); zasilanie cewki i ICM powyżej 10 V przy zapłonie ON' },
+ { label: '1996+: kąt zapłonu', value: 'nieregulowany (aparat w stałym położeniu)' }
+ ],
+ source: 'https://gm.saturn.team/Chevrolet/Chevy_C_Pickup___2WD/1996/2/1/183/31639',
+ sourceTitle: 'GM Service Manual 1996 C/K — Enhanced Ignition System; opis IC 1995 C 1500 5.7 TBI; instrukcja GM „Set Timing” 1987–1995',
+ note: 'Sprawdź w swoim aucie / manualu — GMT400 ma wiele wariantów (rocznik, GVWR, silnik, skrzynia, RPO).',
+ diagram: { src: '/schematy/zaplon-hei-vortec.svg', alt: 'Dwa schematy zapłonu: 1988–1995 ECM i moduł w aparacie ze złączem A–D oraz złączem Set Timing; 1996+ czujniki CKP i CMP, VCM, moduł cewki, cewka i aparat; tabela różnic', models: 'C/K 1500 5.7 TBI 1995; C/K 1996 benzyna 5.0/5.7/7.4', width: 900, height: 3334 },
+ related: ['aldl-12-pin', 'obd-ii-16-pin', 'charging-cs130-cs144']
+ },
+ {
+ id: 'charging-cs130-cs144',
+ title: 'Ładowanie — alternator CS-130 / CS-144 i lampka BAT (1996)',
+ scope: 'C/K 1996 benzyna i diesel (SM 1996 C Pickup 2WD). Dla 1988–1995 i innych nadwozi — sprawdź w swoim manualu.',
+ description: 'Alternatory CS-130 i CS-144 mają wbudowany regulator (bez diod pomocniczych). Lampka ładowania zasilana jest z bezpiecznika GAUGES nr 4 (20 A) i przez obwód 25 idzie do zacisku L. Świeci przy zapłonie ON i gaśnie po uruchomieniu; świecąca przy pracy oznacza za niskie lub za wysokie napięcie albo stojący alternator.',
+ rows: [
+ { label: 'Zaciski', value: 'L — przez lampkę lub rezystor; I — do + (wprost lub przez rezystor); P — stojan (obrotomierz w dieslu); S — opcjonalny pomiar napięcia' },
+ { label: 'Obwód lampki', value: 'GAUGES 4 (20 A) → PNK (39) → zestaw wskaźników pin 22 → lampka → pin 19 → obwód 25 → L' },
+ { label: 'Kolor obwodu 25', value: 'SM 1996 podaje raz BRN, raz BLK — sprawdź w swoim aucie' },
+ { label: 'Najpierw sprawdź', value: 'bezpiecznik GAUGES 4, złącze i zacisk BAT, klemy, pasek, bezpiecznik topikowy, masy G101 / G102 / G105' },
+ { label: 'Napięcie', value: 'powyżej 16 V przy 2500 obr/min (odbiorniki OFF) = wymień alternator' },
+ { label: 'Wydajność', value: 'przy 2500 obr/min i min. 13 V — w granicach 15 A od wartości znamionowej' }
+ ],
+ source: 'https://gm.saturn.team/Chevrolet/Chevy_C_Pickup___2WD/1996/2/1/171/37502',
+ sourceTitle: 'GM Service Manual 1996 C/K — Generator Description and Operation, Starting and Charging Circuit, Charging System Diagnosis',
+ note: 'Sprawdź w swoim aucie / manualu — GMT400 ma wiele wariantów (rocznik, GVWR, silnik, skrzynia, RPO).',
+ diagram: { src: '/schematy/ladowanie-cs130-cs144.svg', alt: 'Schemat ładowania: akumulator, bezpiecznik topikowy, alternator z zaciskami BAT, L, P, I/S, stacyjka, bezpiecznik GAUGES 4, zestaw wskaźników z lampką; diagnostyka', models: 'C/K 1996 benzyna i diesel', width: 900, height: 2965 },
+ photos: [{ src: '/schematy/foto/alternator-1993-silverado-1500.webp', alt: 'Alternator w komorze silnika Chevroleta Silverado 1500 z 1993 r.', width: 1280, height: 853, author: 'Angelsharum', license: 'CC BY-SA 3.0', licenseUrl: 'https://creativecommons.org/licenses/by-sa/3.0/', sourceUrl: 'https://commons.wikimedia.org/wiki/File:Alternator.jpg', models: 'Chevrolet Silverado 1500, 1993', note: 'Rocznik 1993 — inny niż schemat (1996); typ alternatora na zdjęciu niepotwierdzony.' }],
+ related: ['ground-points', 'fuse-locations', 'ignition-hei-vortec']
  }
 ];
 

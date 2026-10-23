@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Źródła:
+- SM 1996 C Pickup, Generator Description and Operation (CS-130, CS-144, zaciski P L I S): https://gm.saturn.team/Chevrolet/Chevy_C_Pickup___2WD/1996/2/1/171/37502
+- SM 1996, Starting and Charging Circuit (GAUGES 4 20 A, PNK 39, BRN 25, WHT 121): https://gm.saturn.team/Chevrolet/Chevy_C_Pickup___2WD/1996/2/1/171/37481
+- SM 1996, Charging System Diagnosis (bezpiecznik topikowy, masy): https://gm.saturn.team/Chevrolet/Chevy_C_Pickup___2WD/1996/2/1/171/37586
+- SM 1996, Generator Assembly Check (wartości testu): https://gm.saturn.team/Chevrolet/Chevy_C_Pickup___2WD/1996/2/1/171/37505
+- SM 1996, Volts Indicator Lamp Always On: https://gm.saturn.team/Chevrolet/Chevy_C_Pickup___2WD/1996/2/1/171/37558
+- SM 1996, Starting and Charging Components (G101/G102/G105, położenie): https://gm.saturn.team/Chevrolet/Chevy_C_Pickup___2WD/1996/2/1/171/37566
+Rysunek poglądowy (nie w skali). Styl v2 gmt400.pl (ciemny + czerwony). Własny rysunek gmt400.pl (bez grafik AI).
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 2965" width="900" height="2965" role="img" aria-label="Ładowanie: alternator CS-130 / CS-144 i lampka BAT">
+<title>Ładowanie: alternator CS-130 / CS-144 i lampka BAT</title>
+<defs><pattern id="g" width="30" height="30" patternUnits="userSpaceOnUse"><circle cx="15" cy="15" r="1.2" fill="#1f1f24"/></pattern></defs>
+<rect width="900" height="2965" fill="#0d0d0f"/>
+<rect width="900" height="2965" fill="url(#g)"/>
+<g font-family="DejaVu Sans, Arial, sans-serif">
+<rect x="0" y="0" width="900" height="8" fill="#dc2626"/>
+<text x="870" y="40" font-size="16" fill="#a3a3a3" text-anchor="end">gmt400.pl · schemat</text>
+<text x="30" y="80" font-size="30" fill="#f5f5f5" font-weight="bold">Ładowanie: alternator CS-130 / CS-144 i lampka</text>
+<text x="30" y="116" font-size="30" fill="#f5f5f5" font-weight="bold">BAT</text>
+<text x="30" y="146" font-size="20" fill="#f87171">Model i lata: C/K 1996 benzyna i diesel (SM 1996 C Pickup 2WD</text>
+<text x="30" y="176" font-size="20" fill="#f87171">— Engine Electrical). Inne lata i nadwozia — sprawdź w swoim</text>
+<text x="30" y="206" font-size="20" fill="#f87171">manualu.</text>
+<line x1="30" y1="222" x2="870" y2="222" stroke="#3f3f46" stroke-width="2"/>
+<rect x="30" y="252" width="8" height="30" fill="#dc2626"/>
+<text x="50" y="277" font-size="24" fill="#f5f5f5" font-weight="bold">Obwód (1996)</text>
+<text x="30" y="316" font-size="18" fill="#a3a3a3">Uproszczony, poglądowy — kolory i numery obwodów z SM 1996.</text>
+<rect x="40" y="341" width="250" height="100" rx="10" fill="#18181b" stroke="#f5f5f5" stroke-width="2"/>
+<text x="165.0" y="396.5" font-size="20" fill="#f5f5f5" font-weight="bold" text-anchor="middle">Akumulator</text>
+<circle cx="44" cy="345" r="17" fill="#dc2626" stroke="#0d0d0f" stroke-width="3"/>
+<text x="44" y="352" font-size="19" fill="#f5f5f5" font-weight="bold" text-anchor="middle">1</text>
+<rect x="560" y="341" width="300" height="400" rx="10" fill="#18181b" stroke="#f5f5f5" stroke-width="2"/>
+<circle cx="564" cy="345" r="17" fill="#dc2626" stroke="#0d0d0f" stroke-width="3"/>
+<text x="564" y="352" font-size="19" fill="#f5f5f5" font-weight="bold" text-anchor="middle">5</text>
+<text x="710" y="385" font-size="22" fill="#f5f5f5" font-weight="bold" text-anchor="middle">Alternator</text>
+<text x="710" y="411" font-size="18" fill="#a3a3a3" text-anchor="middle">CS-130 / CS-144</text>
+<text x="710" y="435" font-size="18" fill="#a3a3a3" text-anchor="middle">lewy przód silnika</text>
+<rect x="560" y="463" width="64" height="36" rx="5" fill="#27272a" stroke="#f5f5f5" stroke-width="2"/>
+<text x="592" y="488" font-size="18" fill="#f5f5f5" font-weight="bold" text-anchor="middle">BAT</text>
+<text x="636" y="479" font-size="16" fill="#a3a3a3">wyjście prądu</text>
+<text x="636" y="499" font-size="16" fill="#a3a3a3">ładowania</text>
+<rect x="560" y="538" width="64" height="36" rx="5" fill="#27272a" stroke="#f5f5f5" stroke-width="2"/>
+<text x="592" y="563" font-size="18" fill="#f5f5f5" font-weight="bold" text-anchor="middle">L</text>
+<text x="636" y="554" font-size="16" fill="#a3a3a3">lampka / włączenie</text>
+<text x="636" y="574" font-size="16" fill="#a3a3a3">regulatora</text>
+<rect x="560" y="613" width="64" height="36" rx="5" fill="#27272a" stroke="#f5f5f5" stroke-width="2"/>
+<text x="592" y="638" font-size="18" fill="#f5f5f5" font-weight="bold" text-anchor="middle">P</text>
+<text x="636" y="629" font-size="16" fill="#a3a3a3">stojan → obrotomierz</text>
+<text x="636" y="649" font-size="16" fill="#a3a3a3">(diesel)</text>
+<rect x="560" y="678" width="64" height="36" rx="5" fill="#27272a" stroke="#f5f5f5" stroke-width="2"/>
+<text x="592" y="703" font-size="18" fill="#f5f5f5" font-weight="bold" text-anchor="middle">I / S</text>
+<text x="636" y="694" font-size="16" fill="#a3a3a3">opcjonalne: zasilanie</text>
+<text x="636" y="714" font-size="16" fill="#a3a3a3">/ pomiar</text>
+<path d="M290 381 L560 481" fill="none" stroke="#0d0d0f" stroke-width="10" stroke-linejoin="round"/>
+<path d="M290 381 L560 481" fill="none" stroke="#ef4444" stroke-width="5" stroke-linejoin="round"/>
+<text x="300" y="373" font-size="18" fill="#ef4444" font-weight="bold">B+</text>
+<rect x="395" y="406" width="56" height="30" rx="6" fill="#0d0d0f" stroke="#f87171" stroke-width="3" transform="rotate(20 423 421)"/>
+<circle cx="423" cy="386" r="17" fill="#dc2626" stroke="#0d0d0f" stroke-width="3"/>
+<text x="423" y="393" font-size="19" fill="#f5f5f5" font-weight="bold" text-anchor="middle">2</text>
+<text x="300" y="499" font-size="17" fill="#f87171" font-weight="bold">bezpiecznik topikowy</text>
+<rect x="40" y="511" width="250" height="80" rx="10" fill="#18181b" stroke="#f5f5f5" stroke-width="2"/>
+<text x="165.0" y="544.0" font-size="19" fill="#f5f5f5" font-weight="bold" text-anchor="middle">Stacyjka RUN /</text>
+<text x="165.0" y="568.0" font-size="19" fill="#f5f5f5" font-weight="bold" text-anchor="middle">START</text>
+<circle cx="44" cy="515" r="17" fill="#dc2626" stroke="#0d0d0f" stroke-width="3"/>
+<text x="44" y="522" font-size="19" fill="#f5f5f5" font-weight="bold" text-anchor="middle">3</text>
+<rect x="40" y="631" width="250" height="90" rx="10" fill="#18181b" stroke="#f5f5f5" stroke-width="2"/>
+<text x="165.0" y="658.0" font-size="19" fill="#f5f5f5" font-weight="bold" text-anchor="middle">GAUGES nr 4 (20 A)</text>
+<text x="165.0" y="684.0" font-size="18" fill="#a3a3a3" text-anchor="middle">bezpiecznik,</text>
+<text x="165.0" y="707.0" font-size="18" fill="#a3a3a3" text-anchor="middle">skrzynka w kabinie</text>
+<circle cx="44" cy="635" r="17" fill="#dc2626" stroke="#0d0d0f" stroke-width="3"/>
+<text x="44" y="642" font-size="19" fill="#f5f5f5" font-weight="bold" text-anchor="middle">4</text>
+<path d="M165 441 L165 511" fill="none" stroke="#0d0d0f" stroke-width="10" stroke-linejoin="round"/>
+<path d="M165 441 L165 511" fill="none" stroke="#ef4444" stroke-width="5" stroke-linejoin="round"/>
+<path d="M165 591 L165 631" fill="none" stroke="#0d0d0f" stroke-width="10" stroke-linejoin="round"/>
+<path d="M165 591 L165 631" fill="none" stroke="#ef4444" stroke-width="5" stroke-linejoin="round"/>
+<rect x="40" y="781" width="250" height="150" rx="10" fill="#18181b" stroke="#f5f5f5" stroke-width="2"/>
+<text x="165.0" y="826.5" font-size="19" fill="#f5f5f5" font-weight="bold" text-anchor="middle">Zestaw wskaźników</text>
+<text x="165.0" y="852.5" font-size="18" fill="#a3a3a3" text-anchor="middle">lampka ładowania</text>
+<text x="165.0" y="875.5" font-size="18" fill="#a3a3a3" text-anchor="middle">(VOLTS / BAT): pin</text>
+<text x="165.0" y="898.5" font-size="18" fill="#a3a3a3" text-anchor="middle">22 → pin 19</text>
+<circle cx="44" cy="785" r="17" fill="#dc2626" stroke="#0d0d0f" stroke-width="3"/>
+<text x="44" y="792" font-size="19" fill="#f5f5f5" font-weight="bold" text-anchor="middle">6</text>
+<path d="M165 721 L165 781" fill="none" stroke="#0d0d0f" stroke-width="10" stroke-linejoin="round"/>
+<path d="M165 721 L165 781" fill="none" stroke="#f472b6" stroke-width="5" stroke-linejoin="round"/>
+<text x="180" y="759" font-size="18" fill="#f472b6" font-weight="bold">PNK (39)</text>
+<path d="M290 901 L470 901 L470 556 L560 556" fill="none" stroke="#0d0d0f" stroke-width="10" stroke-linejoin="round"/>
+<path d="M290 901 L470 901 L470 556 L560 556" fill="none" stroke="#b45309" stroke-width="5" stroke-linejoin="round"/>
+<text x="330" y="889" font-size="18" fill="#b45309" font-weight="bold">BRN (25) → L</text>
+<path d="M560 631 L510 631 L510 941 L290 941" fill="none" stroke="#0d0d0f" stroke-width="10" stroke-linejoin="round"/>
+<path d="M560 631 L510 631 L510 941 L290 941" fill="none" stroke="#e5e5e5" stroke-width="5" stroke-linejoin="round" stroke-dasharray="10 7"/>
+<text x="330" y="971" font-size="17" fill="#e5e5e5" font-weight="bold">WHT (121) → pin 6, tylko diesel</text>
+<path d="M760 741 v14 M744 755 h32 M750 762 h20 M756 769 h8" stroke="#f5f5f5" stroke-width="3" fill="none"/>
+<text x="560" y="811" font-size="16" fill="#a3a3a3">masy: G101, G102, G105</text>
+<rect x="30" y="1027" width="8" height="30" fill="#dc2626"/>
+<text x="50" y="1052" font-size="24" fill="#f5f5f5" font-weight="bold">Jak działa lampka BAT</text>
+<rect x="60" y="1071" width="780" height="108" rx="12" fill="#18181b" stroke="#f87171" stroke-width="2"/>
+<circle cx="60" cy="1125.0" r="17" fill="#dc2626" stroke="#0d0d0f" stroke-width="3"/>
+<text x="60" y="1132.0" font-size="19" fill="#f5f5f5" font-weight="bold" text-anchor="middle">1</text>
+<text x="92" y="1107" font-size="23" fill="#f5f5f5" font-weight="bold">Zapłon ON, silnik stoi</text>
+<text x="92" y="1137" font-size="19" fill="#a3a3a3">lampka świeci — sterownik lampki w regulatorze; to też test</text>
+<text x="92" y="1163" font-size="19" fill="#a3a3a3">żarówki i obwodu.</text>
+<path d="M450 1183 v26 m-12 -12 l12 14 l12 -14" stroke="#dc2626" stroke-width="4" fill="none"/>
+<rect x="60" y="1215" width="780" height="82" rx="12" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<circle cx="60" cy="1256.0" r="17" fill="#dc2626" stroke="#0d0d0f" stroke-width="3"/>
+<text x="60" y="1263.0" font-size="19" fill="#f5f5f5" font-weight="bold" text-anchor="middle">2</text>
+<text x="92" y="1251" font-size="23" fill="#f5f5f5" font-weight="bold">Silnik pracuje, ładowanie OK</text>
+<text x="92" y="1281" font-size="19" fill="#a3a3a3">lampka gaśnie.</text>
+<path d="M450 1301 v26 m-12 -12 l12 14 l12 -14" stroke="#dc2626" stroke-width="4" fill="none"/>
+<rect x="60" y="1333" width="780" height="108" rx="12" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<circle cx="60" cy="1387.0" r="17" fill="#dc2626" stroke="#0d0d0f" stroke-width="3"/>
+<text x="60" y="1394.0" font-size="19" fill="#f5f5f5" font-weight="bold" text-anchor="middle">3</text>
+<text x="92" y="1369" font-size="23" fill="#f5f5f5" font-weight="bold">Lampka świeci przy pracy</text>
+<text x="92" y="1399" font-size="19" fill="#a3a3a3">za niskie lub za wysokie napięcie albo alternator nie kręci</text>
+<text x="92" y="1425" font-size="19" fill="#a3a3a3">się (stoi pasek) — sprawdź układ.</text>
+<rect x="30" y="1475" width="8" height="30" fill="#dc2626"/>
+<text x="50" y="1500" font-size="24" fill="#f5f5f5" font-weight="bold">Zaciski regulatora (SM 1996)</text>
+<rect x="30" y="1519" width="840" height="44" rx="8" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<text x="46" y="1553" font-size="21" fill="#f5f5f5" font-weight="bold">L</text>
+<text x="216" y="1553" font-size="21" fill="#f5f5f5">przez lampkę albo rezystor — włącza regulator.</text>
+<rect x="30" y="1571" width="840" height="44" rx="8" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<text x="46" y="1605" font-size="21" fill="#f5f5f5" font-weight="bold">I</text>
+<text x="216" y="1605" font-size="21" fill="#f5f5f5">wprost do + lub przez rezystor.</text>
+<rect x="30" y="1623" width="840" height="44" rx="8" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<text x="46" y="1657" font-size="21" fill="#f5f5f5" font-weight="bold">P</text>
+<text x="216" y="1657" font-size="21" fill="#f5f5f5">połączony ze stojanem; może iść do obrotomierza.</text>
+<rect x="30" y="1675" width="840" height="72" rx="8" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<text x="46" y="1709" font-size="21" fill="#f5f5f5" font-weight="bold">S</text>
+<text x="216" y="1709" font-size="21" fill="#f5f5f5">pomiar napięcia w innym miejscu; nieużywany = pomiar</text>
+<text x="216" y="1737" font-size="21" fill="#f5f5f5">wewnętrzny.</text>
+<rect x="30" y="1755" width="840" height="44" rx="8" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<text x="46" y="1789" font-size="21" fill="#f5f5f5" font-weight="bold">Oznaczenie</text>
+<text x="216" y="1789" font-size="21" fill="#f5f5f5">regulator / złącze może mieć napis PLI/FS lub PLFS.</text>
+<rect x="30" y="1833" width="8" height="30" fill="#dc2626"/>
+<text x="50" y="1858" font-size="24" fill="#f5f5f5" font-weight="bold">Szybka diagnoza (SM 1996)</text>
+<rect x="30" y="1877" width="840" height="100" rx="8" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<text x="46" y="1911" font-size="21" fill="#f5f5f5" font-weight="bold">Najpierw</text>
+<text x="236" y="1911" font-size="21" fill="#f5f5f5">bezpiecznik GAUGES nr 4, złącze i zacisk BAT</text>
+<text x="236" y="1939" font-size="21" fill="#f5f5f5">alternatora, klemy akumulatora, pasek, bezpiecznik</text>
+<text x="236" y="1967" font-size="21" fill="#f5f5f5">topikowy, masy G101 / G102 / G105.</text>
+<rect x="30" y="1985" width="840" height="72" rx="8" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<text x="46" y="2019" font-size="21" fill="#f5f5f5" font-weight="bold">Obwód 25</text>
+<text x="236" y="2019" font-size="21" fill="#f5f5f5">zapłon ON, wtyczka zdjęta z alternatora: na</text>
+<text x="236" y="2047" font-size="21" fill="#f5f5f5">przewodzie 25 ma być napięcie akumulatora (B+).</text>
+<rect x="30" y="2065" width="840" height="72" rx="8" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<text x="46" y="2099" font-size="21" fill="#f5f5f5" font-weight="bold">Za wysokie</text>
+<text x="236" y="2099" font-size="21" fill="#f5f5f5">2500 obr/min, odbiorniki OFF: powyżej 16 V na</text>
+<text x="236" y="2127" font-size="21" fill="#f5f5f5">akumulatorze = wymień alternator.</text>
+<rect x="30" y="2145" width="840" height="72" rx="8" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<text x="46" y="2179" font-size="21" fill="#f5f5f5" font-weight="bold">Wydajność</text>
+<text x="236" y="2179" font-size="21" fill="#f5f5f5">2500 obr/min, obciążenie min. 13 V: prąd w granicach</text>
+<text x="236" y="2207" font-size="21" fill="#f5f5f5">15 A od wartości znamionowej = OK.</text>
+<rect x="30" y="2225" width="840" height="72" rx="8" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<text x="46" y="2259" font-size="21" fill="#f5f5f5" font-weight="bold">Lampka stale</text>
+<text x="236" y="2259" font-size="21" fill="#f5f5f5">zdejmij wtyczkę: gaśnie = alternator; dalej świeci =</text>
+<text x="236" y="2287" font-size="21" fill="#f5f5f5">zwarcie do masy przewodu 25 lub zestaw wskaźników.</text>
+<rect x="30" y="2315" width="840" height="136" rx="8" fill="#2a0f10" stroke="#dc2626" stroke-width="2"/>
+<text x="48" y="2351" font-size="21" fill="#fca5a5" font-weight="bold">Uwaga: przewód 25 zwieraj do masy tylko zworką z</text>
+<text x="48" y="2379" font-size="21" fill="#fca5a5">bezpiecznikiem 5 A (J 36169-A). SM 1996 podaje kolor obwodu 25</text>
+<text x="48" y="2407" font-size="21" fill="#fca5a5">raz jako BRN, raz jako BLK — sprawdź w swoim aucie. CS-130 nie</text>
+<text x="48" y="2435" font-size="21" fill="#fca5a5">jest naprawialny (nie rozbierać).</text>
+<rect x="30" y="2485" width="8" height="30" fill="#dc2626"/>
+<text x="50" y="2510" font-size="24" fill="#f5f5f5" font-weight="bold">Legenda</text>
+<circle cx="62" cy="2547" r="14" fill="#dc2626"/>
+<text x="62" y="2553" font-size="17" fill="#f5f5f5" font-weight="bold" text-anchor="middle">1</text>
+<text x="104" y="2554" font-size="19" fill="#f5f5f5">numer odnośnika / kolejność</text>
+<line x1="40" y1="2583" x2="84" y2="2583" stroke="#ef4444" stroke-width="5"/>
+<text x="104" y="2590" font-size="19" fill="#f5f5f5">gruby przewód B+ (prąd ładowania)</text>
+<line x1="40" y1="2619" x2="84" y2="2619" stroke="#f472b6" stroke-width="5"/>
+<text x="104" y="2626" font-size="19" fill="#f5f5f5">PNK — różowy</text>
+<line x1="40" y1="2655" x2="84" y2="2655" stroke="#b45309" stroke-width="5"/>
+<text x="104" y="2662" font-size="19" fill="#f5f5f5">BRN — brązowy</text>
+<line x1="40" y1="2691" x2="84" y2="2691" stroke="#e5e5e5" stroke-width="5"/>
+<text x="104" y="2698" font-size="19" fill="#f5f5f5">WHT — biały</text>
+<path d="M62 2713 v12 M48 2725 h28 M54 2732 h16 M59 2739 h6" stroke="#f5f5f5" stroke-width="3" fill="none"/>
+<text x="104" y="2734" font-size="19" fill="#f5f5f5">masa</text>
+<path d="M40 2763 h40 m-12 -10 l12 10 l-12 10" stroke="#dc2626" stroke-width="4" fill="none"/>
+<text x="104" y="2770" font-size="19" fill="#f5f5f5">kierunek przepływu / sygnału</text>
+<rect x="40" y="2785" width="44" height="28" rx="5" fill="#2a0f10" stroke="#dc2626" stroke-width="2"/>
+<text x="104" y="2806" font-size="19" fill="#f5f5f5">ostrzeżenie z manualu</text>
+<text x="30" y="2857" font-size="18" fill="#a3a3a3">Sprawdź w swoim aucie / manualu — GMT400 ma wiele wariantów (rocznik, silnik,</text>
+<text x="30" y="2883" font-size="18" fill="#a3a3a3">GVWR, RPO). Rysunek poglądowy, nie w skali.</text>
+<text x="30" y="2909" font-size="18" fill="#a3a3a3">Źródło: GM Service Manual 1996 C/K — Engine Electrical (Generator, Starting and</text>
+<text x="30" y="2935" font-size="18" fill="#a3a3a3">Charging Circuit, Charging System Diagnosis)</text>
+</g>
+</svg>

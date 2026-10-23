@@ -2,47 +2,102 @@
 <!--
 Źródła:
 - "Suspension for the GMT400 chassis is fully independent with unequal-length control arms. C-series trucks used front coil springs, with front torsion bars for K-series trucks":
-  Wikipedia "Chevrolet C/K (fourth generation)", sekcja Chassis.
+-   Wikipedia "Chevrolet C/K (fourth generation)", sekcja Chassis.
 - Przyciski 4WD od 1996 i AutoTrac (NV246) od 1998: Wikipedia "Chevrolet Tahoe" (1. generacja). NP241/NP243 w K1500: GMT Central (źródło wtórne) - potwierdzić tabliczką/FSM.
 - Zdjęcie poglądowe: Commons "File:New front axles assembly- driver's side.jpg" (simonov, CC BY-SA 2.0, 1998 Chevrolet Suburban).
-Schemat blokowy, bez geometrii i momentów - te wg FSM, rozdział Front Suspension.
-Wersja ciemna (kolory dopasowane do gmt400.pl).
-Licencja: własny rysunek dla gmt400.pl (do decyzji autora, np. CC BY 4.0).
+- Schemat blokowy, bez geometrii i momentów - te wg FSM, rozdział Front Suspension.
+- Wersja ciemna (kolory dopasowane do gmt400.pl).
+Rysunek poglądowy (nie w skali). Styl v2 gmt400.pl (ciemny + czerwony). Własny rysunek gmt400.pl (bez grafik AI).
 -->
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1180 560" width="1180" height="560" role="img" aria-label="Przednie zawieszenie: C vs K i skrzynie rozdzielcze">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1550" width="900" height="1550" role="img" aria-label="Przednie zawieszenie: C vs K i skrzynie rozdzielcze">
 <title>Przednie zawieszenie: C vs K i skrzynie rozdzielcze</title>
-<rect width="1180" height="560" fill="#0d0d0f"/>
-<g font-family='DejaVu Sans, Arial, sans-serif' fill="#f5f5f5">
-<text x="30" y="44" font-size="26" font-weight="bold">Przednie zawieszenie: C vs K i skrzynie rozdzielcze</text>
-<text x="30" y="72" font-size="15" fill="#a3a3a3">Zakres: C/K, Tahoe/Yukon, Suburban 1988–2000 (K = 4×4)</text>
-<text x="40" y="115" font-size="17" font-weight="bold">C (4×2): niezależne, wahacze nierównej długości + sprężyna śrubowa</text>
-<rect x="60" y="130" width="170" height="36" rx="8" fill="#1c1c1f" stroke="#f5f5f5" stroke-width="2"/>
-<text x="70" y="153.0" font-size="14" >górny wahacz</text>
-<rect x="60" y="176" width="170" height="36" rx="8" fill="#2a1517" stroke="#f5f5f5" stroke-width="2"/>
-<text x="70" y="199.0" font-size="14" >sprężyna śrubowa</text>
-<rect x="60" y="222" width="170" height="36" rx="8" fill="#1c1c1f" stroke="#f5f5f5" stroke-width="2"/>
-<text x="70" y="245.0" font-size="14" >dolny wahacz</text>
-<rect x="260" y="160" width="170" height="60" rx="8" fill="#1c1c1f" stroke="#f5f5f5" stroke-width="2"/>
-<text x="270" y="195.0" font-size="14" >zwrotnica / piasta</text>
-<text x="40" y="300" font-size="17" font-weight="bold">K (4×4): niezależne, wahacze nierównej długości + drążek skrętny</text>
-<rect x="60" y="315" width="170" height="36" rx="8" fill="#1c1c1f" stroke="#f5f5f5" stroke-width="2"/>
-<text x="70" y="338.0" font-size="14" >górny wahacz</text>
-<rect x="60" y="361" width="170" height="36" rx="8" fill="#26262b" stroke="#f5f5f5" stroke-width="2"/>
-<text x="70" y="384.0" font-size="14" >drążek skrętny</text>
-<rect x="60" y="407" width="170" height="36" rx="8" fill="#1c1c1f" stroke="#f5f5f5" stroke-width="2"/>
-<text x="70" y="430.0" font-size="14" >dolny wahacz</text>
-<rect x="260" y="345" width="170" height="60" rx="8" fill="#1c1c1f" stroke="#f5f5f5" stroke-width="2"/>
-<text x="270" y="380.0" font-size="14" >zwrotnica / piasta</text>
-<rect x="450" y="350" width="200" height="50" rx="8" fill="#2a1517" stroke="#f5f5f5" stroke-width="2"/>
-<text x="460" y="380.0" font-size="14" >półoś z przegubami</text>
-<rect x="670" y="350" width="160" height="50" rx="8" fill="#2a1517" stroke="#f5f5f5" stroke-width="2"/>
-<text x="680" y="380.0" font-size="14" >przedni most</text>
-<text x="790" y="130" font-size="14" font-weight="bold" fill="#f5f5f5">Skrzynie rozdzielcze K (GMT400):</text>
-<text x="790" y="156" font-size="14" font-weight="normal" fill="#f5f5f5">• NP241 — dźwignia w podłodze</text>
-<text x="790" y="182" font-size="14" font-weight="normal" fill="#f5f5f5">• NP243 — przyciski (Tahoe/Yukon 1996+)</text>
-<text x="790" y="208" font-size="14" font-weight="normal" fill="#f5f5f5">• NV246 AutoTrac — od 1998 (Auto 4WD)</text>
-<text x="790" y="234" font-size="14" font-weight="bold" fill="#f87171">NP231 — brak w źródłach dla GMT400.</text>
-<text x="790" y="260" font-size="14" font-weight="normal" fill="#f5f5f5">Typ potwierdź po tabliczce na obudowie.</text>
-<rect x="20" y="506" width="1140" height="38" rx="6" fill="#2a0f10" stroke="#dc2626"/>
-<text x="34" y="531" font-size="15" font-weight="bold" fill="#fca5a5">⚠ Sprawdź w swoim aucie / manualu — GMT400 ma wiele wariantów.</text>
-</g></svg>
+<defs><pattern id="g" width="30" height="30" patternUnits="userSpaceOnUse"><circle cx="15" cy="15" r="1.2" fill="#1f1f24"/></pattern></defs>
+<rect width="900" height="1550" fill="#0d0d0f"/>
+<rect width="900" height="1550" fill="url(#g)"/>
+<g font-family="DejaVu Sans, Arial, sans-serif">
+<rect x="0" y="0" width="900" height="8" fill="#dc2626"/>
+<text x="870" y="40" font-size="16" fill="#a3a3a3" text-anchor="end">gmt400.pl · schemat</text>
+<text x="30" y="80" font-size="30" fill="#f5f5f5" font-weight="bold">Przednie zawieszenie: C vs K i skrzynie</text>
+<text x="30" y="116" font-size="30" fill="#f5f5f5" font-weight="bold">rozdzielcze</text>
+<text x="30" y="146" font-size="20" fill="#f87171">Model i lata: C/K, Tahoe/Yukon, Suburban 1988–2000 (K = 4×4)</text>
+<line x1="30" y1="162" x2="870" y2="162" stroke="#3f3f46" stroke-width="2"/>
+<rect x="30" y="192" width="8" height="62" fill="#dc2626"/>
+<text x="50" y="217" font-size="24" fill="#f5f5f5" font-weight="bold">C (4×2): niezależne, wahacze nierównej długości +</text>
+<text x="50" y="249" font-size="24" fill="#f5f5f5" font-weight="bold">sprężyna śrubowa</text>
+<rect x="60" y="276" width="300" height="62" rx="10" fill="#18181b" stroke="#f5f5f5" stroke-width="2"/>
+<text x="210.0" y="312.5" font-size="20" fill="#f5f5f5" font-weight="bold" text-anchor="middle">górny wahacz</text>
+<circle cx="64" cy="280" r="17" fill="#dc2626" stroke="#0d0d0f" stroke-width="3"/>
+<text x="64" y="287" font-size="19" fill="#f5f5f5" font-weight="bold" text-anchor="middle">1</text>
+<rect x="60" y="354" width="300" height="62" rx="10" fill="#991b1b" stroke="#f87171" stroke-width="2"/>
+<text x="210.0" y="390.5" font-size="20" fill="#f5f5f5" font-weight="bold" text-anchor="middle">sprężyna śrubowa</text>
+<circle cx="64" cy="358" r="17" fill="#dc2626" stroke="#0d0d0f" stroke-width="3"/>
+<text x="64" y="365" font-size="19" fill="#f5f5f5" font-weight="bold" text-anchor="middle">2</text>
+<rect x="60" y="432" width="300" height="62" rx="10" fill="#18181b" stroke="#f5f5f5" stroke-width="2"/>
+<text x="210.0" y="468.5" font-size="20" fill="#f5f5f5" font-weight="bold" text-anchor="middle">dolny wahacz</text>
+<circle cx="64" cy="436" r="17" fill="#dc2626" stroke="#0d0d0f" stroke-width="3"/>
+<text x="64" y="443" font-size="19" fill="#f5f5f5" font-weight="bold" text-anchor="middle">3</text>
+<rect x="430" y="336" width="300" height="100" rx="10" fill="#18181b" stroke="#f5f5f5" stroke-width="2"/>
+<text x="580.0" y="391.5" font-size="20" fill="#f5f5f5" font-weight="bold" text-anchor="middle">zwrotnica / piasta</text>
+<circle cx="434" cy="340" r="17" fill="#dc2626" stroke="#0d0d0f" stroke-width="3"/>
+<text x="434" y="347" font-size="19" fill="#f5f5f5" font-weight="bold" text-anchor="middle">4</text>
+<line x1="360" y1="307" x2="430" y2="386" stroke="#a3a3a3" stroke-width="2"/>
+<line x1="360" y1="463" x2="430" y2="386" stroke="#a3a3a3" stroke-width="2"/>
+<rect x="30" y="542" width="8" height="62" fill="#dc2626"/>
+<text x="50" y="567" font-size="24" fill="#f5f5f5" font-weight="bold">K (4×4): niezależne, wahacze nierównej długości + drążek</text>
+<text x="50" y="599" font-size="24" fill="#f5f5f5" font-weight="bold">skrętny</text>
+<rect x="60" y="626" width="300" height="62" rx="10" fill="#18181b" stroke="#f5f5f5" stroke-width="2"/>
+<text x="210.0" y="662.5" font-size="20" fill="#f5f5f5" font-weight="bold" text-anchor="middle">górny wahacz</text>
+<circle cx="64" cy="630" r="17" fill="#dc2626" stroke="#0d0d0f" stroke-width="3"/>
+<text x="64" y="637" font-size="19" fill="#f5f5f5" font-weight="bold" text-anchor="middle">1</text>
+<rect x="60" y="704" width="300" height="62" rx="10" fill="#991b1b" stroke="#f87171" stroke-width="2"/>
+<text x="210.0" y="740.5" font-size="20" fill="#f5f5f5" font-weight="bold" text-anchor="middle">drążek skrętny</text>
+<circle cx="64" cy="708" r="17" fill="#dc2626" stroke="#0d0d0f" stroke-width="3"/>
+<text x="64" y="715" font-size="19" fill="#f5f5f5" font-weight="bold" text-anchor="middle">2</text>
+<rect x="60" y="782" width="300" height="62" rx="10" fill="#18181b" stroke="#f5f5f5" stroke-width="2"/>
+<text x="210.0" y="818.5" font-size="20" fill="#f5f5f5" font-weight="bold" text-anchor="middle">dolny wahacz</text>
+<circle cx="64" cy="786" r="17" fill="#dc2626" stroke="#0d0d0f" stroke-width="3"/>
+<text x="64" y="793" font-size="19" fill="#f5f5f5" font-weight="bold" text-anchor="middle">3</text>
+<rect x="430" y="686" width="300" height="100" rx="10" fill="#18181b" stroke="#f5f5f5" stroke-width="2"/>
+<text x="580.0" y="741.5" font-size="20" fill="#f5f5f5" font-weight="bold" text-anchor="middle">zwrotnica / piasta</text>
+<circle cx="434" cy="690" r="17" fill="#dc2626" stroke="#0d0d0f" stroke-width="3"/>
+<text x="434" y="697" font-size="19" fill="#f5f5f5" font-weight="bold" text-anchor="middle">4</text>
+<line x1="360" y1="657" x2="430" y2="736" stroke="#a3a3a3" stroke-width="2"/>
+<line x1="360" y1="813" x2="430" y2="736" stroke="#a3a3a3" stroke-width="2"/>
+<rect x="60" y="866" width="330" height="70" rx="10" fill="#27272a" stroke="#f5f5f5" stroke-width="2"/>
+<text x="225.0" y="906.5" font-size="20" fill="#f5f5f5" font-weight="bold" text-anchor="middle">półoś z przegubami</text>
+<circle cx="64" cy="870" r="17" fill="#dc2626" stroke="#0d0d0f" stroke-width="3"/>
+<text x="64" y="877" font-size="19" fill="#f5f5f5" font-weight="bold" text-anchor="middle">5</text>
+<rect x="470" y="866" width="260" height="70" rx="10" fill="#27272a" stroke="#f5f5f5" stroke-width="2"/>
+<text x="600.0" y="906.5" font-size="20" fill="#f5f5f5" font-weight="bold" text-anchor="middle">przedni most</text>
+<circle cx="474" cy="870" r="17" fill="#dc2626" stroke="#0d0d0f" stroke-width="3"/>
+<text x="474" y="877" font-size="19" fill="#f5f5f5" font-weight="bold" text-anchor="middle">6</text>
+<line x1="390" y1="901" x2="466" y2="901" stroke="#dc2626" stroke-width="4"/>
+<path d="M453.7 907.7 L466 901 L453.7 894.3" stroke="#dc2626" stroke-width="4" fill="none"/>
+<rect x="30" y="982" width="8" height="30" fill="#dc2626"/>
+<text x="50" y="1007" font-size="24" fill="#f5f5f5" font-weight="bold">Skrzynie rozdzielcze K (GMT400)</text>
+<rect x="30" y="1026" width="840" height="44" rx="8" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<text x="46" y="1060" font-size="21" fill="#f5f5f5" font-weight="bold">NP241</text>
+<text x="276" y="1060" font-size="21" fill="#f5f5f5">dźwignia w podłodze</text>
+<rect x="30" y="1078" width="840" height="44" rx="8" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<text x="46" y="1112" font-size="21" fill="#f5f5f5" font-weight="bold">NP243</text>
+<text x="276" y="1112" font-size="21" fill="#f5f5f5">przyciski (Tahoe/Yukon 1996+)</text>
+<rect x="30" y="1130" width="840" height="44" rx="8" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<text x="46" y="1164" font-size="21" fill="#f5f5f5" font-weight="bold">NV246 AutoTrac</text>
+<text x="276" y="1164" font-size="21" fill="#f5f5f5">od 1998 (Auto 4WD)</text>
+<rect x="30" y="1182" width="840" height="44" rx="8" fill="#18181b" stroke="#dc2626" stroke-width="2"/>
+<text x="46" y="1216" font-size="21" fill="#f87171" font-weight="bold">NP231</text>
+<text x="276" y="1216" font-size="21" fill="#f5f5f5">brak w źródłach dla GMT400.</text>
+<text x="30" y="1260" font-size="18" fill="#a3a3a3">Typ potwierdź po tabliczce na obudowie.</text>
+<rect x="30" y="1286" width="8" height="30" fill="#dc2626"/>
+<text x="50" y="1311" font-size="24" fill="#f5f5f5" font-weight="bold">Legenda</text>
+<circle cx="62" cy="1348" r="14" fill="#dc2626"/>
+<text x="62" y="1354" font-size="17" fill="#f5f5f5" font-weight="bold" text-anchor="middle">1</text>
+<text x="104" y="1355" font-size="19" fill="#f5f5f5">numer odnośnika / kolejność</text>
+<path d="M40 1384 h40 m-12 -10 l12 10 l-12 10" stroke="#dc2626" stroke-width="4" fill="none"/>
+<text x="104" y="1391" font-size="19" fill="#f5f5f5">kierunek przepływu / sygnału</text>
+<text x="30" y="1442" font-size="18" fill="#a3a3a3">Sprawdź w swoim aucie / manualu — GMT400 ma wiele wariantów (rocznik, silnik,</text>
+<text x="30" y="1468" font-size="18" fill="#a3a3a3">GVWR, RPO). Rysunek poglądowy, nie w skali.</text>
+<text x="30" y="1494" font-size="18" fill="#a3a3a3">Źródło: Wikipedia „Chevrolet C/K (fourth generation)” i „Chevrolet Tahoe”; GMT</text>
+<text x="30" y="1520" font-size="18" fill="#a3a3a3">Central (wtórne)</text>
+</g>
+</svg>

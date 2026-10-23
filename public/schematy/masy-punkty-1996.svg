@@ -5,65 +5,74 @@
 - SM 1996, Cooling System Components: https://gm.saturn.team/Chevrolet/Chevy_C_Pickup___2WD/1996/2/1/170/37231
 - SM 1996, Ground Leads: https://gm.saturn.team/Chevrolet/Chevy_C_Pickup___2WD/1996/2/1/171/37510
 - TSB „Use of Star Washer on a Body or Chassis Ground”: https://gm.saturn.team/Chevrolet/Tahoe___4WD/1999/bulletins/1581142
-Rysunek poglądowy (nie w skali). Wersja ciemna dla gmt400.pl. Własny rysunek gmt400.pl (bez grafik AI).
+Rysunek poglądowy (nie w skali). Styl v2 gmt400.pl (ciemny + czerwony). Własny rysunek gmt400.pl (bez grafik AI).
 -->
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1388" width="900" height="1388" role="img" aria-label="Punkty masy — silnik i nadwozie (1996)">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1518" width="900" height="1518" role="img" aria-label="Punkty masy — silnik i nadwozie (1996)">
 <title>Punkty masy — silnik i nadwozie (1996)</title>
-<rect width="900" height="1388" fill="#0d0d0f"/>
+<defs><pattern id="g" width="30" height="30" patternUnits="userSpaceOnUse"><circle cx="15" cy="15" r="1.2" fill="#1f1f24"/></pattern></defs>
+<rect width="900" height="1518" fill="#0d0d0f"/>
+<rect width="900" height="1518" fill="url(#g)"/>
 <g font-family="DejaVu Sans, Arial, sans-serif">
-<text x="30" y="58" font-size="30" fill="#f5f5f5" font-weight="bold">Punkty masy — silnik i nadwozie (1996)</text>
-<text x="30" y="90" font-size="20" fill="#f87171">Model i lata: C/K 1996 (SM 1996 C Pickup 2WD — tabele</text>
-<text x="30" y="122" font-size="20" fill="#f87171">komponentów). Inne lata i nadwozia mogą mieć inne numery i</text>
-<text x="30" y="154" font-size="20" fill="#f87171">miejsca.</text>
-<rect x="30" y="200" width="8" height="30" fill="#dc2626"/>
-<text x="48" y="225" font-size="24" fill="#f5f5f5" font-weight="bold">Widok z góry (poglądowo)</text>
-<rect x="200" y="252" width="500" height="330" rx="40" fill="#18181b" stroke="#f5f5f5" stroke-width="3"/>
-<text x="450" y="246" font-size="18" fill="#f5f5f5" font-weight="bold" text-anchor="middle">PRZÓD</text>
-<rect x="340" y="332" width="220" height="170" rx="14" fill="#27272a" stroke="#a3a3a3"/>
-<text x="450" y="422" font-size="22" fill="#a3a3a3" text-anchor="middle">silnik</text>
-<text x="230" y="282" font-size="18" fill="#a3a3a3">L (kierowca)</text>
-<text x="500" y="552" font-size="18" fill="#a3a3a3">P (pasażer)</text>
-<circle cx="565" cy="352" r="12" fill="#dc2626" stroke="#f5f5f5" stroke-width="2"/>
-<circle cx="650" cy="307" r="12" fill="#dc2626" stroke="#f5f5f5" stroke-width="2"/>
-<circle cx="650" cy="272" r="12" fill="#dc2626" stroke="#f5f5f5" stroke-width="2"/>
-<circle cx="240" cy="542" r="12" fill="#dc2626" stroke="#f5f5f5" stroke-width="2"/>
-<text x="575" y="377" font-size="20" fill="#f87171">G102/G105</text>
-<text x="715" y="314" font-size="20" fill="#f87171">G101</text>
-<text x="715" y="279" font-size="20" fill="#f87171">G112</text>
-<text x="260" y="549" font-size="20" fill="#f87171">skrzynka bezp.</text>
-<rect x="30" y="624" width="8" height="30" fill="#dc2626"/>
-<text x="48" y="649" font-size="24" fill="#f5f5f5" font-weight="bold">Lista (SM 1996)</text>
-<rect x="30" y="666" width="840" height="44" rx="8" fill="#18181b" stroke="#3f3f46"/>
-<text x="46" y="700" font-size="21" fill="#f5f5f5" font-weight="bold">G101</text>
-<text x="336" y="700" font-size="21" fill="#f5f5f5">blacha przy prawym przednim nadkolu</text>
-<rect x="30" y="718" width="840" height="72" rx="8" fill="#18181b" stroke="#3f3f46"/>
-<text x="46" y="752" font-size="21" fill="#f5f5f5" font-weight="bold">G102 (benzyna)</text>
-<text x="336" y="752" font-size="21" fill="#f5f5f5">prawy przód bloku, przy kole pasowym tłumika</text>
-<text x="336" y="780" font-size="21" fill="#f5f5f5">drgań</text>
-<rect x="30" y="798" width="840" height="44" rx="8" fill="#18181b" stroke="#3f3f46"/>
-<text x="46" y="832" font-size="21" fill="#f5f5f5" font-weight="bold">G105 (benzyna)</text>
-<text x="336" y="832" font-size="21" fill="#f5f5f5">prawy przód bloku</text>
-<rect x="30" y="850" width="840" height="72" rx="8" fill="#18181b" stroke="#3f3f46"/>
-<text x="46" y="884" font-size="21" fill="#f5f5f5" font-weight="bold">G102 / G105 (diesel)</text>
-<text x="336" y="884" font-size="21" fill="#f5f5f5">lewy przód kolektora dolotowego / prawa góra</text>
-<text x="336" y="912" font-size="21" fill="#f5f5f5">głowicy</text>
-<rect x="30" y="930" width="840" height="44" rx="8" fill="#18181b" stroke="#3f3f46"/>
-<text x="46" y="964" font-size="21" fill="#f5f5f5" font-weight="bold">G106 (diesel)</text>
-<text x="336" y="964" font-size="21" fill="#f5f5f5">masa lewego akumulatora do silnika</text>
-<rect x="30" y="982" width="840" height="44" rx="8" fill="#18181b" stroke="#3f3f46"/>
-<text x="46" y="1016" font-size="21" fill="#f5f5f5" font-weight="bold">G112</text>
-<text x="336" y="1016" font-size="21" fill="#f5f5f5">prawy przód komory silnika, pod lampką komory</text>
-<rect x="30" y="1034" width="840" height="72" rx="8" fill="#18181b" stroke="#3f3f46"/>
-<text x="46" y="1068" font-size="21" fill="#f5f5f5" font-weight="bold">Skrzynka bezp. pod</text>
-<text x="46" y="1096" font-size="21" fill="#f5f5f5" font-weight="bold">maską</text>
-<text x="336" y="1068" font-size="21" fill="#f5f5f5">lewy tył komory, na błotniku</text>
-<rect x="30" y="1124" width="840" height="108" rx="8" fill="#2a0f10" stroke="#dc2626" stroke-width="2"/>
-<text x="48" y="1160" font-size="21" fill="#fca5a5" font-weight="bold">Uwaga: dodatkowe linki masowe łączą ramę/nadwozie z</text>
-<text x="48" y="1188" font-size="21" fill="#fca5a5">silnikiem i skrzynią — zawsze podłącz wszystkie (SM 1996).</text>
-<text x="48" y="1216" font-size="21" fill="#fca5a5">GM: nie stosuj podkładek zębatych pod masy nadwozia/ramy.</text>
-<text x="30" y="1280" font-size="18" fill="#a3a3a3">Sprawdź w swoim aucie / manualu — GMT400 ma wiele wariantów (rocznik,</text>
-<text x="30" y="1306" font-size="18" fill="#a3a3a3">silnik, GVWR, RPO). Rysunek poglądowy, nie w skali.</text>
-<text x="30" y="1332" font-size="18" fill="#a3a3a3">Źródło: GM Service Manual 1996 C/K (Starting and Charging, Engine</text>
-<text x="30" y="1358" font-size="18" fill="#a3a3a3">Cooling), biuletyn GM o podkładkach zębatych</text>
+<rect x="0" y="0" width="900" height="8" fill="#dc2626"/>
+<text x="870" y="40" font-size="16" fill="#a3a3a3" text-anchor="end">gmt400.pl · schemat</text>
+<text x="30" y="80" font-size="30" fill="#f5f5f5" font-weight="bold">Punkty masy — silnik i nadwozie (1996)</text>
+<text x="30" y="110" font-size="20" fill="#f87171">Model i lata: C/K 1996 (SM 1996 C Pickup 2WD — tabele</text>
+<text x="30" y="140" font-size="20" fill="#f87171">komponentów). Inne lata i nadwozia mogą mieć inne numery i</text>
+<text x="30" y="170" font-size="20" fill="#f87171">miejsca.</text>
+<line x1="30" y1="186" x2="870" y2="186" stroke="#3f3f46" stroke-width="2"/>
+<rect x="30" y="216" width="8" height="30" fill="#dc2626"/>
+<text x="50" y="241" font-size="24" fill="#f5f5f5" font-weight="bold">Widok z góry (poglądowo)</text>
+<rect x="200" y="270" width="500" height="330" rx="40" fill="#18181b" stroke="#f5f5f5" stroke-width="3"/>
+<text x="450" y="264" font-size="18" fill="#f5f5f5" font-weight="bold" text-anchor="middle">PRZÓD</text>
+<rect x="340" y="350" width="220" height="170" rx="14" fill="#27272a" stroke="#a3a3a3"/>
+<text x="450" y="440" font-size="22" fill="#a3a3a3" text-anchor="middle">silnik</text>
+<text x="230" y="300" font-size="18" fill="#a3a3a3">L (kierowca)</text>
+<text x="500" y="570" font-size="18" fill="#a3a3a3">P (pasażer)</text>
+<circle cx="565" cy="370" r="12" fill="#dc2626" stroke="#f5f5f5" stroke-width="2"/>
+<circle cx="650" cy="325" r="12" fill="#dc2626" stroke="#f5f5f5" stroke-width="2"/>
+<circle cx="650" cy="290" r="12" fill="#dc2626" stroke="#f5f5f5" stroke-width="2"/>
+<circle cx="240" cy="560" r="12" fill="#dc2626" stroke="#f5f5f5" stroke-width="2"/>
+<text x="575" y="395" font-size="20" fill="#f87171">G102/G105</text>
+<text x="715" y="332" font-size="20" fill="#f87171">G101</text>
+<text x="715" y="297" font-size="20" fill="#f87171">G112</text>
+<text x="260" y="567" font-size="20" fill="#f87171">skrzynka bezp.</text>
+<rect x="30" y="646" width="8" height="30" fill="#dc2626"/>
+<text x="50" y="671" font-size="24" fill="#f5f5f5" font-weight="bold">Lista (SM 1996)</text>
+<rect x="30" y="690" width="840" height="44" rx="8" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<text x="46" y="724" font-size="21" fill="#f5f5f5" font-weight="bold">G101</text>
+<text x="336" y="724" font-size="21" fill="#f5f5f5">blacha przy prawym przednim nadkolu</text>
+<rect x="30" y="742" width="840" height="72" rx="8" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<text x="46" y="776" font-size="21" fill="#f5f5f5" font-weight="bold">G102 (benzyna)</text>
+<text x="336" y="776" font-size="21" fill="#f5f5f5">prawy przód bloku, przy kole pasowym tłumika</text>
+<text x="336" y="804" font-size="21" fill="#f5f5f5">drgań</text>
+<rect x="30" y="822" width="840" height="44" rx="8" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<text x="46" y="856" font-size="21" fill="#f5f5f5" font-weight="bold">G105 (benzyna)</text>
+<text x="336" y="856" font-size="21" fill="#f5f5f5">prawy przód bloku</text>
+<rect x="30" y="874" width="840" height="72" rx="8" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<text x="46" y="908" font-size="21" fill="#f5f5f5" font-weight="bold">G102 / G105 (diesel)</text>
+<text x="336" y="908" font-size="21" fill="#f5f5f5">lewy przód kolektora dolotowego / prawa góra</text>
+<text x="336" y="936" font-size="21" fill="#f5f5f5">głowicy</text>
+<rect x="30" y="954" width="840" height="44" rx="8" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<text x="46" y="988" font-size="21" fill="#f5f5f5" font-weight="bold">G106 (diesel)</text>
+<text x="336" y="988" font-size="21" fill="#f5f5f5">masa lewego akumulatora do silnika</text>
+<rect x="30" y="1006" width="840" height="44" rx="8" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<text x="46" y="1040" font-size="21" fill="#f5f5f5" font-weight="bold">G112</text>
+<text x="336" y="1040" font-size="21" fill="#f5f5f5">prawy przód komory silnika, pod lampką komory</text>
+<rect x="30" y="1058" width="840" height="72" rx="8" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<text x="46" y="1092" font-size="21" fill="#f5f5f5" font-weight="bold">Skrzynka bezp. pod</text>
+<text x="46" y="1120" font-size="21" fill="#f5f5f5" font-weight="bold">maską</text>
+<text x="336" y="1092" font-size="21" fill="#f5f5f5">lewy tył komory, na błotniku</text>
+<rect x="30" y="1148" width="840" height="108" rx="8" fill="#2a0f10" stroke="#dc2626" stroke-width="2"/>
+<text x="48" y="1184" font-size="21" fill="#fca5a5" font-weight="bold">Uwaga: dodatkowe linki masowe łączą ramę/nadwozie z silnikiem</text>
+<text x="48" y="1212" font-size="21" fill="#fca5a5">i skrzynią — zawsze podłącz wszystkie (SM 1996). GM: nie</text>
+<text x="48" y="1240" font-size="21" fill="#fca5a5">stosuj podkładek zębatych pod masy nadwozia/ramy.</text>
+<rect x="30" y="1290" width="8" height="30" fill="#dc2626"/>
+<text x="50" y="1315" font-size="24" fill="#f5f5f5" font-weight="bold">Legenda</text>
+<rect x="40" y="1338" width="44" height="28" rx="5" fill="#2a0f10" stroke="#dc2626" stroke-width="2"/>
+<text x="104" y="1359" font-size="19" fill="#f5f5f5">ostrzeżenie z manualu</text>
+<text x="30" y="1410" font-size="18" fill="#a3a3a3">Sprawdź w swoim aucie / manualu — GMT400 ma wiele wariantów (rocznik, silnik,</text>
+<text x="30" y="1436" font-size="18" fill="#a3a3a3">GVWR, RPO). Rysunek poglądowy, nie w skali.</text>
+<text x="30" y="1462" font-size="18" fill="#a3a3a3">Źródło: GM Service Manual 1996 C/K (Starting and Charging, Engine Cooling),</text>
+<text x="30" y="1488" font-size="18" fill="#a3a3a3">biuletyn GM o podkładkach zębatych</text>
 </g>
 </svg>

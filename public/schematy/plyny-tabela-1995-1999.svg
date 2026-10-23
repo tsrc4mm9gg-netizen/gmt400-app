@@ -3,73 +3,81 @@
 Źródła:
 - 1995 Chevrolet C/K 1500 Owner's Manual (GM), https://assets.gm.com/manuals/chevrolet/1995_chevrolet_1500_owners.pdf
 - 1999 Chevrolet Suburban Owner's Manual (GM), rozdz. 6 i 7
-Rysunek poglądowy (nie w skali). Wersja ciemna dla gmt400.pl. Własny rysunek gmt400.pl (bez grafik AI).
+Rysunek poglądowy (nie w skali). Styl v2 gmt400.pl (ciemny + czerwony). Własny rysunek gmt400.pl (bez grafik AI).
 -->
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1470" width="900" height="1470" role="img" aria-label="Tabela płynów — 1995 vs 1999">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1582" width="900" height="1582" role="img" aria-label="Tabela płynów — 1995 vs 1999">
 <title>Tabela płynów — 1995 vs 1999</title>
-<rect width="900" height="1470" fill="#0d0d0f"/>
+<defs><pattern id="g" width="30" height="30" patternUnits="userSpaceOnUse"><circle cx="15" cy="15" r="1.2" fill="#1f1f24"/></pattern></defs>
+<rect width="900" height="1582" fill="#0d0d0f"/>
+<rect width="900" height="1582" fill="url(#g)"/>
 <g font-family="DejaVu Sans, Arial, sans-serif">
-<text x="30" y="58" font-size="30" fill="#f5f5f5" font-weight="bold">Tabela płynów — 1995 vs 1999</text>
-<text x="30" y="90" font-size="20" fill="#f87171">Model i lata: C/K 1995 (instrukcja OM95) i Suburban/Tahoe</text>
-<text x="30" y="122" font-size="20" fill="#f87171">1999 (instrukcja OM99). Inne lata — sprawdź w swoim</text>
-<text x="30" y="154" font-size="20" fill="#f87171">manualu.</text>
-<rect x="30" y="200" width="8" height="30" fill="#dc2626"/>
-<text x="48" y="225" font-size="24" fill="#f5f5f5" font-weight="bold">Olej silnikowy z filtrem</text>
-<rect x="30" y="242" width="840" height="44" rx="8" fill="#18181b" stroke="#3f3f46"/>
-<text x="46" y="276" font-size="21" fill="#f5f5f5" font-weight="bold">1995</text>
-<text x="196" y="276" font-size="21" fill="#f5f5f5">4.3: 4,3 l • 5.0/5.7: 4,8 l • 6.5 D: 6,5 l • 7.4: 6,5 l</text>
-<rect x="30" y="294" width="840" height="44" rx="8" fill="#18181b" stroke="#3f3f46"/>
-<text x="46" y="328" font-size="21" fill="#f5f5f5" font-weight="bold">1999</text>
-<text x="196" y="328" font-size="21" fill="#f5f5f5">5.7 L31: 4,8 l • 7.4 L29: 6,3 l</text>
-<rect x="30" y="368" width="8" height="30" fill="#dc2626"/>
-<text x="48" y="393" font-size="24" fill="#f5f5f5" font-weight="bold">Płyn chłodniczy</text>
-<rect x="30" y="410" width="840" height="72" rx="8" fill="#18181b" stroke="#3f3f46"/>
-<text x="46" y="444" font-size="21" fill="#f5f5f5" font-weight="bold">1995</text>
-<text x="196" y="444" font-size="21" fill="#f5f5f5">etylenowy 50/50 wg GM 6038-M; 5.7: 16,5 l; 7.4: 23,5 l;</text>
-<text x="196" y="472" font-size="21" fill="#f5f5f5">6.5 D: 22,2 l</text>
-<rect x="30" y="490" width="840" height="72" rx="8" fill="#18181b" stroke="#3f3f46"/>
-<text x="46" y="524" font-size="21" fill="#f5f5f5" font-weight="bold">1999</text>
-<text x="196" y="524" font-size="21" fill="#f5f5f5">DEX-COOL 50/50; 5.7: 16,5 l (19 l z tylną nagrz.); 7.4:</text>
-<text x="196" y="552" font-size="21" fill="#f5f5f5">23,5 l (26 l)</text>
-<rect x="30" y="592" width="8" height="30" fill="#dc2626"/>
-<text x="48" y="617" font-size="24" fill="#f5f5f5" font-weight="bold">Pozostałe</text>
-<rect x="30" y="634" width="840" height="72" rx="8" fill="#18181b" stroke="#3f3f46"/>
+<rect x="0" y="0" width="900" height="8" fill="#dc2626"/>
+<text x="870" y="40" font-size="16" fill="#a3a3a3" text-anchor="end">gmt400.pl · schemat</text>
+<text x="30" y="80" font-size="30" fill="#f5f5f5" font-weight="bold">Tabela płynów — 1995 vs 1999</text>
+<text x="30" y="110" font-size="20" fill="#f87171">Model i lata: C/K 1995 (instrukcja OM95) i Suburban/Tahoe 1999</text>
+<text x="30" y="140" font-size="20" fill="#f87171">(instrukcja OM99). Inne lata — sprawdź w swoim manualu.</text>
+<line x1="30" y1="156" x2="870" y2="156" stroke="#3f3f46" stroke-width="2"/>
+<rect x="30" y="186" width="8" height="30" fill="#dc2626"/>
+<text x="50" y="211" font-size="24" fill="#f5f5f5" font-weight="bold">Olej silnikowy z filtrem</text>
+<rect x="30" y="230" width="840" height="44" rx="8" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<text x="46" y="264" font-size="21" fill="#f5f5f5" font-weight="bold">1995</text>
+<text x="196" y="264" font-size="21" fill="#f5f5f5">4.3: 4,3 l • 5.0/5.7: 4,8 l • 6.5 D: 6,5 l • 7.4: 6,5 l</text>
+<rect x="30" y="282" width="840" height="44" rx="8" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<text x="46" y="316" font-size="21" fill="#f5f5f5" font-weight="bold">1999</text>
+<text x="196" y="316" font-size="21" fill="#f5f5f5">5.7 L31: 4,8 l • 7.4 L29: 6,3 l</text>
+<rect x="30" y="360" width="8" height="30" fill="#dc2626"/>
+<text x="50" y="385" font-size="24" fill="#f5f5f5" font-weight="bold">Płyn chłodniczy</text>
+<rect x="30" y="404" width="840" height="72" rx="8" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<text x="46" y="438" font-size="21" fill="#f5f5f5" font-weight="bold">1995</text>
+<text x="196" y="438" font-size="21" fill="#f5f5f5">etylenowy 50/50 wg GM 6038-M; 5.7: 16,5 l; 7.4: 23,5 l;</text>
+<text x="196" y="466" font-size="21" fill="#f5f5f5">6.5 D: 22,2 l</text>
+<rect x="30" y="484" width="840" height="72" rx="8" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<text x="46" y="518" font-size="21" fill="#f5f5f5" font-weight="bold">1999</text>
+<text x="196" y="518" font-size="21" fill="#f5f5f5">DEX-COOL 50/50; 5.7: 16,5 l (19 l z tylną nagrz.); 7.4:</text>
+<text x="196" y="546" font-size="21" fill="#f5f5f5">23,5 l (26 l)</text>
+<rect x="30" y="590" width="8" height="30" fill="#dc2626"/>
+<text x="50" y="615" font-size="24" fill="#f5f5f5" font-weight="bold">Pozostałe</text>
+<rect x="30" y="634" width="840" height="72" rx="8" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
 <text x="46" y="668" font-size="21" fill="#f5f5f5" font-weight="bold">Hamulce</text>
 <text x="336" y="668" font-size="21" fill="#f5f5f5">1995: DOT-3 GM 1052535 • 1999: DOT-3 GM</text>
 <text x="336" y="696" font-size="21" fill="#f5f5f5">12377967</text>
-<rect x="30" y="714" width="840" height="44" rx="8" fill="#18181b" stroke="#3f3f46"/>
+<rect x="30" y="714" width="840" height="44" rx="8" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
 <text x="46" y="748" font-size="21" fill="#f5f5f5" font-weight="bold">Wspomaganie</text>
 <text x="336" y="748" font-size="21" fill="#f5f5f5">GM 1050017 (1999 także 1052884)</text>
-<rect x="30" y="766" width="840" height="44" rx="8" fill="#18181b" stroke="#3f3f46"/>
+<rect x="30" y="766" width="840" height="44" rx="8" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
 <text x="46" y="800" font-size="21" fill="#f5f5f5" font-weight="bold">Skrzynia automatyczna</text>
 <text x="336" y="800" font-size="21" fill="#f5f5f5">DEXRON-III</text>
-<rect x="30" y="818" width="840" height="72" rx="8" fill="#18181b" stroke="#3f3f46"/>
+<rect x="30" y="818" width="840" height="72" rx="8" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
 <text x="46" y="852" font-size="21" fill="#f5f5f5" font-weight="bold">Reduktor</text>
 <text x="336" y="852" font-size="21" fill="#f5f5f5">1995: DEXRON-III • 1999: ręczny DEXRON-III,</text>
 <text x="336" y="880" font-size="21" fill="#f5f5f5">automatyczny GM 12378396</text>
-<rect x="30" y="898" width="840" height="72" rx="8" fill="#18181b" stroke="#3f3f46"/>
+<rect x="30" y="898" width="840" height="72" rx="8" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
 <text x="46" y="932" font-size="21" fill="#f5f5f5" font-weight="bold">Mosty</text>
 <text x="336" y="932" font-size="21" fill="#f5f5f5">SAE 80W-90 GM 1052271; 1999 szpera (locking):</text>
 <text x="336" y="960" font-size="21" fill="#f5f5f5">tylko 1052271, bez modyfikatora tarcia</text>
-<rect x="30" y="978" width="840" height="44" rx="8" fill="#18181b" stroke="#3f3f46"/>
+<rect x="30" y="978" width="840" height="44" rx="8" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
 <text x="46" y="1012" font-size="21" fill="#f5f5f5" font-weight="bold">Sprzęgło hydr. (1995)</text>
 <text x="336" y="1012" font-size="21" fill="#f5f5f5">GM 12345347</text>
-<rect x="30" y="1030" width="840" height="44" rx="8" fill="#18181b" stroke="#3f3f46"/>
+<rect x="30" y="1030" width="840" height="44" rx="8" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
 <text x="46" y="1064" font-size="21" fill="#f5f5f5" font-weight="bold">Spryskiwacz</text>
 <text x="336" y="1064" font-size="21" fill="#f5f5f5">Optikleen GM 1051515 (1995 i 1999)</text>
-<rect x="30" y="1104" width="8" height="30" fill="#dc2626"/>
-<text x="48" y="1129" font-size="24" fill="#f5f5f5" font-weight="bold">Zbiornik paliwa</text>
-<rect x="30" y="1146" width="840" height="44" rx="8" fill="#18181b" stroke="#3f3f46"/>
-<text x="46" y="1180" font-size="21" fill="#f5f5f5" font-weight="bold">1995 pickup</text>
-<text x="246" y="1180" font-size="21" fill="#f5f5f5">krótka paka 98 l • długa 128 l</text>
-<rect x="30" y="1198" width="840" height="44" rx="8" fill="#18181b" stroke="#3f3f46"/>
-<text x="46" y="1232" font-size="21" fill="#f5f5f5" font-weight="bold">1999</text>
-<text x="246" y="1232" font-size="21" fill="#f5f5f5">Utility 113 l • Suburban benzyna 167 l / diesel 159 l</text>
-<rect x="30" y="1260" width="840" height="80" rx="8" fill="#2a0f10" stroke="#dc2626" stroke-width="2"/>
-<text x="48" y="1296" font-size="21" fill="#fca5a5" font-weight="bold">Uwaga: pojemności to wartości z instrukcji — po wymianie</text>
-<text x="48" y="1324" font-size="21" fill="#fca5a5">zawsze sprawdź poziom bagnetem / na zbiorniczku.</text>
-<text x="30" y="1388" font-size="18" fill="#a3a3a3">Sprawdź w swoim aucie / manualu — GMT400 ma wiele wariantów (rocznik,</text>
-<text x="30" y="1414" font-size="18" fill="#a3a3a3">silnik, GVWR, RPO). Rysunek poglądowy, nie w skali.</text>
-<text x="30" y="1440" font-size="18" fill="#a3a3a3">Źródło: Instrukcje GM: 1995 C/K 1500, 1999 Suburban</text>
+<rect x="30" y="1108" width="8" height="30" fill="#dc2626"/>
+<text x="50" y="1133" font-size="24" fill="#f5f5f5" font-weight="bold">Zbiornik paliwa</text>
+<rect x="30" y="1152" width="840" height="44" rx="8" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<text x="46" y="1186" font-size="21" fill="#f5f5f5" font-weight="bold">1995 pickup</text>
+<text x="246" y="1186" font-size="21" fill="#f5f5f5">krótka paka 98 l • długa 128 l</text>
+<rect x="30" y="1204" width="840" height="44" rx="8" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<text x="46" y="1238" font-size="21" fill="#f5f5f5" font-weight="bold">1999</text>
+<text x="246" y="1238" font-size="21" fill="#f5f5f5">Utility 113 l • Suburban benzyna 167 l / diesel 159 l</text>
+<rect x="30" y="1266" width="840" height="80" rx="8" fill="#2a0f10" stroke="#dc2626" stroke-width="2"/>
+<text x="48" y="1302" font-size="21" fill="#fca5a5" font-weight="bold">Uwaga: pojemności to wartości z instrukcji — po wymianie</text>
+<text x="48" y="1330" font-size="21" fill="#fca5a5">zawsze sprawdź poziom bagnetem / na zbiorniczku.</text>
+<rect x="30" y="1380" width="8" height="30" fill="#dc2626"/>
+<text x="50" y="1405" font-size="24" fill="#f5f5f5" font-weight="bold">Legenda</text>
+<rect x="40" y="1428" width="44" height="28" rx="5" fill="#2a0f10" stroke="#dc2626" stroke-width="2"/>
+<text x="104" y="1449" font-size="19" fill="#f5f5f5">ostrzeżenie z manualu</text>
+<text x="30" y="1500" font-size="18" fill="#a3a3a3">Sprawdź w swoim aucie / manualu — GMT400 ma wiele wariantów (rocznik, silnik,</text>
+<text x="30" y="1526" font-size="18" fill="#a3a3a3">GVWR, RPO). Rysunek poglądowy, nie w skali.</text>
+<text x="30" y="1552" font-size="18" fill="#a3a3a3">Źródło: Instrukcje GM: 1995 C/K 1500, 1999 Suburban</text>
 </g>
 </svg>

@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Źródła:
+- 1995 C 1500 5.7 TBI, Ignition Control Module – Description (A–D, bypass 5 V przy ok. 400 obr/min, DTC 42): https://workshop-manuals.com/chevrolet/c_1500_truck_2wd/v8-350_5.7l_vin_k_tbi/relays_and_modules/relays_and_modules_powertrain_management/relays_and_modules_ignition_system/ignition_control_module/component_information/locations/page_332/
+- 1995 C 1500 5.7 TBI, IC System / DTC 42 / test „Set Timing”: https://workshop-manuals.com/chevrolet/c_1500_truck_2wd/v8-350_5.7l_vin_k_tbi/relays_and_modules/relays_and_modules_powertrain_management/relays_and_modules_ignition_system/ignition_control_module/component_information/locations/page_333/
+- 1987–1995 GM TBI „Set Timing” Instructions (0° TDC, 454: 4° BTDC; złącze TAN/BLK): http://westersgarage.eidnet.ca/Set%20Timing%20Instructions.pdf
+- SM 1996 C Pickup, Enhanced Ignition System (opis): https://gm.saturn.team/Chevrolet/Chevy_C_Pickup___2WD/1996/2/1/183/31639
+- SM 1996, Enhanced Ignition System – System Check (wartości testów): https://gm.saturn.team/Chevrolet/Chevy_C_Pickup___2WD/1996/2/1/183/31640
+- SM 1996, Ignition System: https://gm.saturn.team/Chevrolet/Chevy_C_Pickup___2WD/1996/2/1/171/37518
+- SM 1996, Ignition Timing: https://gm.saturn.team/Chevrolet/Chevy_C_Pickup___2WD/1996/2/1/171/37519
+Rysunek poglądowy (nie w skali). Styl v2 gmt400.pl (ciemny + czerwony). Własny rysunek gmt400.pl (bez grafik AI).
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 3334" width="900" height="3334" role="img" aria-label="Zapłon: HEI-EST (1988–1995) vs Enhanced Ignition (1996+)">
+<title>Zapłon: HEI-EST (1988–1995) vs Enhanced Ignition (1996+)</title>
+<defs><pattern id="g" width="30" height="30" patternUnits="userSpaceOnUse"><circle cx="15" cy="15" r="1.2" fill="#1f1f24"/></pattern></defs>
+<rect width="900" height="3334" fill="#0d0d0f"/>
+<rect width="900" height="3334" fill="url(#g)"/>
+<g font-family="DejaVu Sans, Arial, sans-serif">
+<rect x="0" y="0" width="900" height="8" fill="#dc2626"/>
+<text x="870" y="40" font-size="16" fill="#a3a3a3" text-anchor="end">gmt400.pl · schemat</text>
+<text x="30" y="80" font-size="30" fill="#f5f5f5" font-weight="bold">Zapłon: HEI-EST (1988–1995) vs Enhanced Ignition</text>
+<text x="30" y="116" font-size="30" fill="#f5f5f5" font-weight="bold">(1996+)</text>
+<text x="30" y="146" font-size="20" fill="#f87171">Model i lata: C/K 1500 5.7 TBI 1995 (opis IC, A–B–C–D); C/K</text>
+<text x="30" y="176" font-size="20" fill="#f87171">1996 benzyna 5.0/5.7/7.4 (SM 1996, Engine Controls). Inne</text>
+<text x="30" y="206" font-size="20" fill="#f87171">silniki i lata — sprawdź w swoim manualu.</text>
+<line x1="30" y1="222" x2="870" y2="222" stroke="#3f3f46" stroke-width="2"/>
+<rect x="30" y="252" width="8" height="30" fill="#dc2626"/>
+<text x="50" y="277" font-size="24" fill="#f5f5f5" font-weight="bold">A. 1988–1995 TBI: HEI-EST (4 przewody)</text>
+<rect x="40" y="312" width="250" height="150" rx="10" fill="#18181b" stroke="#f5f5f5" stroke-width="2"/>
+<text x="165.0" y="345.5" font-size="20" fill="#f5f5f5" font-weight="bold" text-anchor="middle">ECM (moduł</text>
+<text x="165.0" y="370.5" font-size="20" fill="#f5f5f5" font-weight="bold" text-anchor="middle">sterujący)</text>
+<text x="165.0" y="397.5" font-size="18" fill="#a3a3a3" text-anchor="middle">liczy wyprzedzenie z</text>
+<text x="165.0" y="420.5" font-size="18" fill="#a3a3a3" text-anchor="middle">obrotów, MAP i temp.</text>
+<text x="165.0" y="443.5" font-size="18" fill="#a3a3a3" text-anchor="middle">płynu</text>
+<circle cx="44" cy="316" r="17" fill="#dc2626" stroke="#0d0d0f" stroke-width="3"/>
+<text x="44" y="323" font-size="19" fill="#f5f5f5" font-weight="bold" text-anchor="middle">1</text>
+<rect x="560" y="312" width="300" height="150" rx="10" fill="#18181b" stroke="#f5f5f5" stroke-width="2"/>
+<text x="710.0" y="368.5" font-size="20" fill="#f5f5f5" font-weight="bold" text-anchor="middle">Moduł w aparacie</text>
+<text x="710.0" y="393.5" font-size="20" fill="#f5f5f5" font-weight="bold" text-anchor="middle">zapłonowym</text>
+<text x="710.0" y="420.5" font-size="18" fill="#a3a3a3" text-anchor="middle">złącze 4-pin A–B–C–D</text>
+<circle cx="564" cy="316" r="17" fill="#dc2626" stroke="#0d0d0f" stroke-width="3"/>
+<text x="564" y="323" font-size="19" fill="#f5f5f5" font-weight="bold" text-anchor="middle">2</text>
+<path d="M290 502 L560 502" fill="none" stroke="#0d0d0f" stroke-width="10" stroke-linejoin="round"/>
+<path d="M290 502 L560 502" fill="none" stroke="#737373" stroke-width="5" stroke-linejoin="round"/>
+<text x="575" y="509" font-size="20" fill="#f87171" font-weight="bold">A</text>
+<text x="605" y="509" font-size="17" fill="#f5f5f5">REF LOW — masa odniesienia</text>
+<line x1="290" y1="502" x2="290" y2="462" stroke="#3f3f46" stroke-width="2"/>
+<path d="M290 548 L560 548" fill="none" stroke="#0d0d0f" stroke-width="10" stroke-linejoin="round"/>
+<path d="M290 548 L560 548" fill="none" stroke="#60a5fa" stroke-width="5" stroke-linejoin="round"/>
+<text x="575" y="555" font-size="20" fill="#f87171" font-weight="bold">B</text>
+<text x="605" y="555" font-size="17" fill="#f5f5f5">BYPASS — 5 V z ECM</text>
+
+<path d="M290 594 L560 594" fill="none" stroke="#0d0d0f" stroke-width="10" stroke-linejoin="round"/>
+<path d="M290 594 L560 594" fill="none" stroke="#60a5fa" stroke-width="5" stroke-linejoin="round"/>
+<text x="575" y="601" font-size="20" fill="#f87171" font-weight="bold">C</text>
+<text x="605" y="601" font-size="17" fill="#f5f5f5">REF HI — obroty / położenie</text>
+
+<path d="M290 640 L560 640" fill="none" stroke="#0d0d0f" stroke-width="10" stroke-linejoin="round"/>
+<path d="M290 640 L560 640" fill="none" stroke="#60a5fa" stroke-width="5" stroke-linejoin="round"/>
+<text x="575" y="647" font-size="20" fill="#f87171" font-weight="bold">D</text>
+<text x="605" y="647" font-size="17" fill="#f5f5f5">EST — sygnał wyzwalania</text>
+
+<line x1="290" y1="462" x2="290" y2="640" stroke="#3f3f46" stroke-width="2"/><line x1="560" y1="462" x2="560" y2="640" stroke="#3f3f46" stroke-width="2"/>
+<rect x="395" y="532" width="44" height="32" rx="6" fill="#0d0d0f" stroke="#d6b98c" stroke-width="3"/>
+<circle cx="417" cy="514" r="17" fill="#dc2626" stroke="#0d0d0f" stroke-width="3"/>
+<text x="417" y="521" font-size="19" fill="#f5f5f5" font-weight="bold" text-anchor="middle">3</text>
+<text x="280" y="512" font-size="17" fill="#d6b98c" font-weight="bold" text-anchor="end">„Set Timing”</text>
+<text x="280" y="534" font-size="16" fill="#d6b98c" text-anchor="end">1 przewód TAN/BLK</text>
+<rect x="560" y="706" width="300" height="80" rx="10" fill="#18181b" stroke="#f5f5f5" stroke-width="2"/>
+<text x="710.0" y="751.5" font-size="20" fill="#f5f5f5" font-weight="bold" text-anchor="middle">Cewka zapłonowa</text>
+<circle cx="564" cy="710" r="17" fill="#dc2626" stroke="#0d0d0f" stroke-width="3"/>
+<text x="564" y="717" font-size="19" fill="#f5f5f5" font-weight="bold" text-anchor="middle">4</text>
+<path d="M860 432 L885 432 L885 746 L866 746" fill="none" stroke="#0d0d0f" stroke-width="10" stroke-linejoin="round"/>
+<path d="M860 432 L885 432 L885 746 L866 746" fill="none" stroke="#60a5fa" stroke-width="5" stroke-linejoin="round"/>
+<line x1="880" y1="746" x2="862" y2="746" stroke="#dc2626" stroke-width="4"/>
+<path d="M874.3 739.3 L862 746 L874.3 752.7" stroke="#dc2626" stroke-width="4" fill="none"/>
+<rect x="560" y="836" width="300" height="80" rx="10" fill="#18181b" stroke="#f5f5f5" stroke-width="2"/>
+<text x="710.0" y="869.0" font-size="20" fill="#f5f5f5" font-weight="bold" text-anchor="middle">Kopułka + palec →</text>
+<text x="710.0" y="894.0" font-size="20" fill="#f5f5f5" font-weight="bold" text-anchor="middle">świece</text>
+<circle cx="564" cy="840" r="17" fill="#dc2626" stroke="#0d0d0f" stroke-width="3"/>
+<text x="564" y="847" font-size="19" fill="#f5f5f5" font-weight="bold" text-anchor="middle">5</text>
+<line x1="710" y1="786" x2="710" y2="832" stroke="#dc2626" stroke-width="4"/>
+<path d="M703.3 819.7 L710 832 L716.7 819.7" stroke="#dc2626" stroke-width="4" fill="none"/>
+<rect x="30" y="936" width="840" height="72" rx="8" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<text x="46" y="970" font-size="21" fill="#f5f5f5" font-weight="bold">1 ECM ↔ 2 moduł</text>
+<text x="296" y="970" font-size="21" fill="#f5f5f5">ok. 400 obr/min: ECM daje 5 V na B (bypass) i</text>
+<text x="296" y="998" font-size="21" fill="#f5f5f5">przejmuje sterowanie zapłonem z modułu.</text>
+<rect x="30" y="1016" width="840" height="100" rx="8" fill="#18181b" stroke="#dc2626" stroke-width="2"/>
+<text x="46" y="1050" font-size="21" fill="#f87171" font-weight="bold">3 Set Timing</text>
+<text x="296" y="1050" font-size="21" fill="#f5f5f5">rozłączasz na czas ustawiania kąta bazowego (wg</text>
+<text x="296" y="1078" font-size="21" fill="#f5f5f5">instrukcji GM). Test: przy 2000 obr/min</text>
+<text x="296" y="1106" font-size="21" fill="#f5f5f5">rozłączenie zmienia kąt = sterowanie działa.</text>
+<rect x="30" y="1124" width="840" height="72" rx="8" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<text x="46" y="1158" font-size="21" fill="#f5f5f5" font-weight="bold">Kąt bazowy</text>
+<text x="296" y="1158" font-size="21" fill="#f5f5f5">instrukcja GM 1987–1995 TBI: 0° (TDC); silnik</text>
+<text x="296" y="1186" font-size="21" fill="#f5f5f5">454: 4° przed GMP.</text>
+<rect x="30" y="1204" width="840" height="128" rx="8" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<text x="46" y="1238" font-size="21" fill="#f5f5f5" font-weight="bold">Usterka</text>
+<text x="296" y="1238" font-size="21" fill="#f5f5f5">przerwa lub zwarcie do masy na B → kod 42,</text>
+<text x="296" y="1266" font-size="21" fill="#f5f5f5">zapłon na kącie bazowym (+ trochę wyprzedzenia z</text>
+<text x="296" y="1294" font-size="21" fill="#f5f5f5">modułu). Przerwa na A → słabe osiągi. Brak</text>
+<text x="296" y="1322" font-size="21" fill="#f5f5f5">sygnału REF → silnik nie pracuje.</text>
+<rect x="30" y="1340" width="840" height="100" rx="8" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<text x="46" y="1374" font-size="21" fill="#f5f5f5" font-weight="bold">Gdzie jest złącze</text>
+<text x="296" y="1374" font-size="21" fill="#f5f5f5">instrukcja 1987–1995: pod obudową nagrzewnicy po</text>
+<text x="296" y="1402" font-size="21" fill="#f5f5f5">stronie pasażera; zależy od rocznika — sprawdź w</text>
+<text x="296" y="1430" font-size="21" fill="#f5f5f5">swoim aucie.</text>
+<rect x="30" y="1474" width="8" height="30" fill="#dc2626"/>
+<text x="50" y="1499" font-size="24" fill="#f5f5f5" font-weight="bold">B. 1996+ Vortec: Enhanced Ignition (OBD-II)</text>
+<rect x="40" y="1534" width="260" height="140" rx="10" fill="#18181b" stroke="#f5f5f5" stroke-width="2"/>
+<text x="170.0" y="1575.0" font-size="20" fill="#f5f5f5" font-weight="bold" text-anchor="middle">Czujnik CKP</text>
+<text x="170.0" y="1602.0" font-size="18" fill="#a3a3a3" text-anchor="middle">przednia pokrywa; V8:</text>
+<text x="170.0" y="1625.0" font-size="18" fill="#a3a3a3" text-anchor="middle">4 impulsy/obrót (4x),</text>
+<text x="170.0" y="1648.0" font-size="18" fill="#a3a3a3" text-anchor="middle">V6: 3x</text>
+<circle cx="44" cy="1538" r="17" fill="#dc2626" stroke="#0d0d0f" stroke-width="3"/>
+<text x="44" y="1545" font-size="19" fill="#f5f5f5" font-weight="bold" text-anchor="middle">1</text>
+<rect x="40" y="1704" width="260" height="180" rx="10" fill="#18181b" stroke="#f5f5f5" stroke-width="2"/>
+<text x="170.0" y="1741.0" font-size="20" fill="#f5f5f5" font-weight="bold" text-anchor="middle">Czujnik CMP w</text>
+<text x="170.0" y="1766.0" font-size="20" fill="#f5f5f5" font-weight="bold" text-anchor="middle">aparacie</text>
+<text x="170.0" y="1793.0" font-size="18" fill="#a3a3a3" text-anchor="middle">1 impuls / 2 obroty</text>
+<text x="170.0" y="1816.0" font-size="18" fill="#a3a3a3" text-anchor="middle">wału (1x) — tylko do</text>
+<text x="170.0" y="1839.0" font-size="18" fill="#a3a3a3" text-anchor="middle">wykrywania wypadania</text>
+<text x="170.0" y="1862.0" font-size="18" fill="#a3a3a3" text-anchor="middle">zapłonów</text>
+<circle cx="44" cy="1708" r="17" fill="#dc2626" stroke="#0d0d0f" stroke-width="3"/>
+<text x="44" y="1715" font-size="19" fill="#f5f5f5" font-weight="bold" text-anchor="middle">2</text>
+<rect x="380" y="1574" width="220" height="170" rx="10" fill="#18181b" stroke="#f5f5f5" stroke-width="2"/>
+<text x="490.0" y="1618.5" font-size="20" fill="#f5f5f5" font-weight="bold" text-anchor="middle">VCM</text>
+<text x="490.0" y="1645.5" font-size="18" fill="#a3a3a3" text-anchor="middle">steruje zapłonem i</text>
+<text x="490.0" y="1668.5" font-size="18" fill="#a3a3a3" text-anchor="middle">bypass (bez</text>
+<text x="490.0" y="1691.5" font-size="18" fill="#a3a3a3" text-anchor="middle">dawnego modułu w</text>
+<text x="490.0" y="1714.5" font-size="18" fill="#a3a3a3" text-anchor="middle">aparacie)</text>
+<circle cx="384" cy="1578" r="17" fill="#dc2626" stroke="#0d0d0f" stroke-width="3"/>
+<text x="384" y="1585" font-size="19" fill="#f5f5f5" font-weight="bold" text-anchor="middle">3</text>
+<path d="M300 1589 L380 1624" fill="none" stroke="#0d0d0f" stroke-width="10" stroke-linejoin="round"/>
+<path d="M300 1589 L380 1624" fill="none" stroke="#60a5fa" stroke-width="5" stroke-linejoin="round"/>
+<line x1="372" y1="1621" x2="380" y2="1624" stroke="#dc2626" stroke-width="4"/>
+<path d="M366.1 1626.0 L380 1624 L370.9 1613.4" stroke="#dc2626" stroke-width="4" fill="none"/>
+<path d="M300 1794 L380 1714" fill="none" stroke="#0d0d0f" stroke-width="10" stroke-linejoin="round"/>
+<path d="M300 1794 L380 1714" fill="none" stroke="#60a5fa" stroke-width="5" stroke-linejoin="round"/>
+<line x1="374" y1="1720" x2="380" y2="1714" stroke="#dc2626" stroke-width="4"/>
+<path d="M376.1 1727.4 L380 1714 L366.6 1717.9" stroke="#dc2626" stroke-width="4" fill="none"/>
+<rect x="660" y="1574" width="210" height="170" rx="10" fill="#18181b" stroke="#f5f5f5" stroke-width="2"/>
+<text x="765.0" y="1629.0" font-size="20" fill="#f5f5f5" font-weight="bold" text-anchor="middle">Moduł sterujący</text>
+<text x="765.0" y="1654.0" font-size="20" fill="#f5f5f5" font-weight="bold" text-anchor="middle">cewką (ICM)</text>
+<text x="765.0" y="1681.0" font-size="18" fill="#a3a3a3" text-anchor="middle">przełącznik</text>
+<text x="765.0" y="1704.0" font-size="18" fill="#a3a3a3" text-anchor="middle">elektroniczny</text>
+<circle cx="664" cy="1578" r="17" fill="#dc2626" stroke="#0d0d0f" stroke-width="3"/>
+<text x="664" y="1585" font-size="19" fill="#f5f5f5" font-weight="bold" text-anchor="middle">4</text>
+<path d="M600 1659 L660 1659" fill="none" stroke="#0d0d0f" stroke-width="10" stroke-linejoin="round"/>
+<path d="M600 1659 L660 1659" fill="none" stroke="#60a5fa" stroke-width="5" stroke-linejoin="round"/>
+<line x1="650" y1="1659" x2="660" y2="1659" stroke="#dc2626" stroke-width="4"/>
+<path d="M647.7 1665.7 L660 1659 L647.7 1652.3" stroke="#dc2626" stroke-width="4" fill="none"/>
+<text x="605" y="1646" font-size="17" fill="#60a5fa" font-weight="bold">IC</text>
+<rect x="660" y="1824" width="210" height="90" rx="10" fill="#18181b" stroke="#f5f5f5" stroke-width="2"/>
+<text x="765.0" y="1874.5" font-size="20" fill="#f5f5f5" font-weight="bold" text-anchor="middle">Cewka</text>
+<circle cx="664" cy="1828" r="17" fill="#dc2626" stroke="#0d0d0f" stroke-width="3"/>
+<text x="664" y="1835" font-size="19" fill="#f5f5f5" font-weight="bold" text-anchor="middle">5</text>
+<path d="M765 1744 L765 1824" fill="none" stroke="#0d0d0f" stroke-width="10" stroke-linejoin="round"/>
+<path d="M765 1744 L765 1824" fill="none" stroke="#60a5fa" stroke-width="5" stroke-linejoin="round"/>
+<rect x="380" y="1824" width="220" height="90" rx="10" fill="#18181b" stroke="#f5f5f5" stroke-width="2"/>
+<text x="490.0" y="1862.0" font-size="18" fill="#f5f5f5" font-weight="bold" text-anchor="middle">Kopułka + palec →</text>
+<text x="490.0" y="1885.0" font-size="18" fill="#f5f5f5" font-weight="bold" text-anchor="middle">świece</text>
+<circle cx="384" cy="1828" r="17" fill="#dc2626" stroke="#0d0d0f" stroke-width="3"/>
+<text x="384" y="1835" font-size="19" fill="#f5f5f5" font-weight="bold" text-anchor="middle">6</text>
+<line x1="660" y1="1869" x2="604" y2="1869" stroke="#dc2626" stroke-width="4"/>
+<path d="M616.3 1862.3 L604 1869 L616.3 1875.7" stroke="#dc2626" stroke-width="4" fill="none"/>
+<rect x="30" y="1934" width="840" height="72" rx="8" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<text x="46" y="1968" font-size="21" fill="#f5f5f5" font-weight="bold">Zasilanie</text>
+<text x="276" y="1968" font-size="21" fill="#f5f5f5">cewka (A) i ICM (A): napięcie zapłonu, przy</text>
+<text x="276" y="1996" font-size="21" fill="#f5f5f5">zapłonie ON powyżej 10 V.</text>
+<rect x="30" y="2014" width="840" height="72" rx="8" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<text x="46" y="2048" font-size="21" fill="#f5f5f5" font-weight="bold">Sygnał IC</text>
+<text x="276" y="2048" font-size="21" fill="#f5f5f5">VCM złącze C3 → ICM pin B; ICM pin D → cewka pin</text>
+<text x="276" y="2076" font-size="21" fill="#f5f5f5">C. Na B przy kręceniu: 1,0–4,0 V AC.</text>
+<rect x="30" y="2094" width="840" height="72" rx="8" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<text x="46" y="2128" font-size="21" fill="#f5f5f5" font-weight="bold">Iskra (test)</text>
+<text x="276" y="2128" font-size="21" fill="#f5f5f5">tester iskry wymaga min. 25 000 V (J 26792);</text>
+<text x="276" y="2156" font-size="21" fill="#f5f5f5">przewód cewki ok. 1000 Ω na cal.</text>
+<rect x="30" y="2174" width="840" height="72" rx="8" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<text x="46" y="2208" font-size="21" fill="#f5f5f5" font-weight="bold">Kąt zapłonu</text>
+<text x="276" y="2208" font-size="21" fill="#f5f5f5">aparat w stałym położeniu — kąta nie da się</text>
+<text x="276" y="2236" font-size="21" fill="#f5f5f5">regulować.</text>
+<rect x="30" y="2254" width="840" height="72" rx="8" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<text x="46" y="2288" font-size="21" fill="#f5f5f5" font-weight="bold">Kody</text>
+<text x="276" y="2288" font-size="21" fill="#f5f5f5">np. P0336–P0339 (CKP), P1345 (CKP–CMP), P1351 /</text>
+<text x="276" y="2316" font-size="21" fill="#f5f5f5">P1361 (obwód sterowania cewką).</text>
+<rect x="30" y="2360" width="8" height="30" fill="#dc2626"/>
+<text x="50" y="2385" font-size="24" fill="#f5f5f5" font-weight="bold">Najważniejsze różnice</text>
+<rect x="30" y="2404" width="840" height="44" rx="8" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<text x="46" y="2438" font-size="21" fill="#f5f5f5" font-weight="bold">Sterownik</text>
+<text x="276" y="2438" font-size="21" fill="#f5f5f5">1988–1995: ECM • 1996+: VCM</text>
+<rect x="30" y="2456" width="840" height="72" rx="8" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<text x="46" y="2490" font-size="21" fill="#f5f5f5" font-weight="bold">Wyzwalanie</text>
+<text x="276" y="2490" font-size="21" fill="#f5f5f5">1988–1995: sygnał REF z aparatu • 1996+: czujnik</text>
+<text x="276" y="2518" font-size="21" fill="#f5f5f5">CKP na wale</text>
+<rect x="30" y="2536" width="840" height="72" rx="8" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<text x="46" y="2570" font-size="21" fill="#f5f5f5" font-weight="bold">Moduł</text>
+<text x="276" y="2570" font-size="21" fill="#f5f5f5">1988–1995: w aparacie, 4 przewody A–D • 1996+:</text>
+<text x="276" y="2598" font-size="21" fill="#f5f5f5">osobny moduł cewki (ICM)</text>
+<rect x="30" y="2616" width="840" height="44" rx="8" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<text x="46" y="2650" font-size="21" fill="#f5f5f5" font-weight="bold">Ustawianie kąta</text>
+<text x="276" y="2650" font-size="21" fill="#f5f5f5">1988–1995: tak (Set Timing) • 1996+: nie</text>
+<rect x="30" y="2668" width="840" height="72" rx="8" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<text x="46" y="2702" font-size="21" fill="#f5f5f5" font-weight="bold">Kody</text>
+<text x="276" y="2702" font-size="21" fill="#f5f5f5">1988–1995: 2-cyfrowe (np. 12, 42) • 1996+: kody P</text>
+<text x="276" y="2730" font-size="21" fill="#f5f5f5">(OBD-II)</text>
+<rect x="30" y="2758" width="840" height="108" rx="8" fill="#2a0f10" stroke="#dc2626" stroke-width="2"/>
+<text x="48" y="2794" font-size="21" fill="#fca5a5" font-weight="bold">Uwaga: po ustawieniu kąta podłącz złącze „Set Timing” z</text>
+<text x="48" y="2822" font-size="21" fill="#fca5a5">powrotem. W 1996+ kąta nie ustawia się wcale. Wartości i</text>
+<text x="48" y="2850" font-size="21" fill="#fca5a5">miejsce złącza — sprawdź w swoim manualu.</text>
+<rect x="30" y="2900" width="8" height="30" fill="#dc2626"/>
+<text x="50" y="2925" font-size="24" fill="#f5f5f5" font-weight="bold">Legenda</text>
+<circle cx="62" cy="2962" r="14" fill="#dc2626"/>
+<text x="62" y="2968" font-size="17" fill="#f5f5f5" font-weight="bold" text-anchor="middle">1</text>
+<text x="104" y="2969" font-size="19" fill="#f5f5f5">numer odnośnika / kolejność</text>
+<line x1="40" y1="2998" x2="84" y2="2998" stroke="#737373" stroke-width="5"/>
+<text x="104" y="3005" font-size="19" fill="#f5f5f5">masa</text>
+<line x1="40" y1="3034" x2="84" y2="3034" stroke="#60a5fa" stroke-width="5"/>
+<text x="104" y="3041" font-size="19" fill="#f5f5f5">sygnał sterujący (kolor umowny)</text>
+<line x1="40" y1="3070" x2="84" y2="3070" stroke="#d6b98c" stroke-width="5"/>
+<text x="104" y="3077" font-size="19" fill="#f5f5f5">TAN/BLK — jasnobrązowy z czarnym paskiem</text>
+<path d="M40 3106 h40 m-12 -10 l12 10 l-12 10" stroke="#dc2626" stroke-width="4" fill="none"/>
+<text x="104" y="3113" font-size="19" fill="#f5f5f5">kierunek przepływu / sygnału</text>
+<rect x="40" y="3128" width="44" height="28" rx="5" fill="#2a0f10" stroke="#dc2626" stroke-width="2"/>
+<text x="104" y="3149" font-size="19" fill="#f5f5f5">ostrzeżenie z manualu</text>
+<text x="30" y="3200" font-size="18" fill="#a3a3a3">Sprawdź w swoim aucie / manualu — GMT400 ma wiele wariantów (rocznik, silnik,</text>
+<text x="30" y="3226" font-size="18" fill="#a3a3a3">GVWR, RPO). Rysunek poglądowy, nie w skali.</text>
+<text x="30" y="3252" font-size="18" fill="#a3a3a3">Źródło: opis IC 1995 C 1500 5.7 TBI (workshop-manuals.com); instrukcja GM „Set</text>
+<text x="30" y="3278" font-size="18" fill="#a3a3a3">Timing” 1987–1995; GM Service Manual 1996 C/K (Engine Controls / Engine</text>
+<text x="30" y="3304" font-size="18" fill="#a3a3a3">Electrical)</text>
+</g>
+</svg>

@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { SCHEMATICS } from '@/lib/schematics';
 import SchematicViewer from './SchematicViewer';
+import SchematicPhotos from './SchematicPhotos';
 import Breadcrumbs from '../ui/Breadcrumbs';
 
 export const metadata = {
@@ -16,7 +17,7 @@ export default function SchematyPage() {
     <div className="mx-auto w-full max-w-5xl px-4 py-6 text-white sm:py-10">
       <Breadcrumbs className="mb-2" items={[{ label: 'Schematy' }]} />
       <h1 className="text-3xl font-bold text-red-400">Schematy — GMT400</h1>
-      <p className="mt-2 text-neutral-300">Własne, uproszczone schematy i pinouty. Bez skanów FSM ani materiałów © GM. Każdy rysunek ma podany model i lata — <strong className="text-white">sprawdź w swoim aucie / manualu</strong>, bo GMT400 ma wiele wariantów.</p>
+      <p className="mt-2 text-neutral-300">Własne, uproszczone schematy i pinouty. Bez skanów FSM ani materiałów © GM. Przy części schematów są prawdziwe zdjęcia z Wikimedia Commons (autor i licencja pod zdjęciem). Każdy rysunek ma podany model i lata — <strong className="text-white">sprawdź w swoim aucie / manualu</strong>, bo GMT400 ma wiele wariantów.</p>
       <nav aria-label="Spis schematów" className="mt-5">
         <ul className="flex flex-wrap gap-2">
           {SCHEMATICS.map(item => (
@@ -40,6 +41,7 @@ export default function SchematyPage() {
               <figcaption className="mt-2 text-xs text-neutral-400">Stuknij schemat, aby otworzyć go na pełnym ekranie i powiększyć dwoma palcami. Rysunek poglądowy — nie zastępuje FSM.</figcaption>
             </figure>
           )}
+          {item.photos && item.photos.length > 0 && <SchematicPhotos photos={item.photos} title={item.title} />}
           <p className="mt-3 text-neutral-200">{item.description}</p>
           <div className="mt-4 overflow-x-auto">
             <table className="w-full min-w-[320px] text-left text-sm">

@@ -2,58 +2,109 @@
 <!--
 Źródła:
 - Układ liter 12-pin (widok od czoła): Wikipedia "ALDL" (F E D C B A / G H J K L M); "No battery voltage is present in the 12 pin ALDL connector".
-  https://en.wikipedia.org/wiki/ALDL
+-   https://en.wikipedia.org/wiki/ALDL
 - A = masa, B = wejście diagnostyczne, procedura zwarcia A-B i kod 12: ChevyTalk FAQ https://chevytalk.org/fusionbb/showpost.php?post/2169725 ;
-  FCAR https://www.fcarusa.com/TechSupport/FAQ/how-read-older-gm-codes-or-older-detroit (źródła społecznościowe/wtórne - potwierdzić w FSM rocznika).
+-   FCAR https://www.fcarusa.com/TechSupport/FAQ/how-read-older-gm-codes-or-older-detroit (źródła społecznościowe/wtórne - potwierdzić w FSM rocznika).
 - OBD-I do 1995, OBD-II od 1996 (Vortec): Wikipedia "Chevrolet C/K (fourth generation)".
-Diesle 6.5 TD 1994-95 mają własne procedury - nie obejmuje.
-Wersja ciemna (kolory dopasowane do gmt400.pl).
-Licencja: własny rysunek dla gmt400.pl (do decyzji autora, np. CC BY 4.0).
+- Diesle 6.5 TD 1994-95 mają własne procedury - nie obejmuje.
+- Wersja ciemna (kolory dopasowane do gmt400.pl).
+Rysunek poglądowy (nie w skali). Styl v2 gmt400.pl (ciemny + czerwony). Własny rysunek gmt400.pl (bez grafik AI).
 -->
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 560" width="1100" height="560" role="img" aria-label="OBD-I: odczyt kodów migowych przez złącze ALDL (12-pin)">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1671" width="900" height="1671" role="img" aria-label="OBD-I: odczyt kodów migowych przez złącze ALDL (12-pin)">
 <title>OBD-I: odczyt kodów migowych przez złącze ALDL (12-pin)</title>
-<rect width="1100" height="560" fill="#0d0d0f"/>
-<g font-family='DejaVu Sans, Arial, sans-serif' fill="#f5f5f5">
-<text x="30" y="44" font-size="26" font-weight="bold">OBD-I: odczyt kodów migowych przez złącze ALDL (12-pin)</text>
-<text x="30" y="72" font-size="15" fill="#a3a3a3">Zakres: GMT400 z silnikiem benzynowym 1988–1995 (OBD-I)</text>
-<text x="30" y="110" font-size="16" >Gniazdo ALDL pod deską rozdzielczą — widok od czoła gniazda w aucie</text>
-<rect x="120" y="140" width="500" height="200" rx="14" fill="#27272a" stroke="#f5f5f5" stroke-width="3"/>
-<rect x="148" y="168" width="44" height="44" rx="6" fill="#1c1c1f" stroke="#f5f5f5" stroke-width="2"/>
-<text x="163" y="197" font-size="20" font-weight="bold">F</text>
-<rect x="228" y="168" width="44" height="44" rx="6" fill="#1c1c1f" stroke="#f5f5f5" stroke-width="2"/>
-<text x="243" y="197" font-size="20" font-weight="bold">E</text>
-<rect x="308" y="168" width="44" height="44" rx="6" fill="#1c1c1f" stroke="#f5f5f5" stroke-width="2"/>
-<text x="323" y="197" font-size="20" font-weight="bold">D</text>
-<rect x="388" y="168" width="44" height="44" rx="6" fill="#1c1c1f" stroke="#f5f5f5" stroke-width="2"/>
-<text x="403" y="197" font-size="20" font-weight="bold">C</text>
-<rect x="468" y="168" width="44" height="44" rx="6" fill="#991b1b" stroke="#f5f5f5" stroke-width="2"/>
-<text x="483" y="197" font-size="20" font-weight="bold">B</text>
-<rect x="548" y="168" width="44" height="44" rx="6" fill="#991b1b" stroke="#f5f5f5" stroke-width="2"/>
-<text x="563" y="197" font-size="20" font-weight="bold">A</text>
-<rect x="148" y="248" width="44" height="44" rx="6" fill="#1c1c1f" stroke="#f5f5f5" stroke-width="2"/>
-<text x="163" y="277" font-size="20" font-weight="bold">G</text>
-<rect x="228" y="248" width="44" height="44" rx="6" fill="#1c1c1f" stroke="#f5f5f5" stroke-width="2"/>
-<text x="243" y="277" font-size="20" font-weight="bold">H</text>
-<rect x="308" y="248" width="44" height="44" rx="6" fill="#1c1c1f" stroke="#f5f5f5" stroke-width="2"/>
-<text x="323" y="277" font-size="20" font-weight="bold">J</text>
-<rect x="388" y="248" width="44" height="44" rx="6" fill="#1c1c1f" stroke="#f5f5f5" stroke-width="2"/>
-<text x="403" y="277" font-size="20" font-weight="bold">K</text>
-<rect x="468" y="248" width="44" height="44" rx="6" fill="#1c1c1f" stroke="#f5f5f5" stroke-width="2"/>
-<text x="483" y="277" font-size="20" font-weight="bold">L</text>
-<rect x="548" y="248" width="44" height="44" rx="6" fill="#1c1c1f" stroke="#f5f5f5" stroke-width="2"/>
-<text x="563" y="277" font-size="20" font-weight="bold">M</text>
-<path d="M490 166 C 490 115, 570 115, 570 166" fill="none" stroke="#ef4444" stroke-width="6" stroke-linecap="round"/>
-<text x="610" y="150" font-size="16" fill="#ef4444" font-weight="bold">← zworka (spinacz) A–B</text>
-<text x="720" y="190" font-size="17" font-weight="bold">A — masa</text>
-<text x="720" y="216" font-size="17" font-weight="bold">B — wejście diagnostyczne ECM</text>
-<text x="720" y="250" font-size="14" fill="#a3a3a3">Pozostałe piny: przypisanie zależy od modelu</text>
-<text x="720" y="270" font-size="14" fill="#a3a3a3">i rocznika (dane, ABS itd.) — wg FSM.</text>
-<text x="720" y="296" font-size="14" fill="#a3a3a3">W 12-pinowym ALDL nie ma zasilania +12 V.</text>
-<text x="40" y="370" font-size="16" >1. Zapłon OFF. Zewrzyj A z B (spinacz / zworka).</text>
-<text x="40" y="398" font-size="16" >2. Zapłon ON, silnika NIE uruchamiaj.</text>
-<text x="40" y="426" font-size="16" >3. Lampka SES/Check Engine miga kody: najpierw kod 12 (3×) = tryb diagnostyczny,</text>
-<text x="40" y="454" font-size="16" >    potem zapisane kody, każdy 3× (np. błysk-pauza-błysk-błysk = 12).</text>
-<text x="40" y="482" font-size="16" >4. Zapłon OFF, zdejmij zworkę. Kod wskazuje obwód, nie konkretną część.</text>
-<rect x="20" y="506" width="1060" height="38" rx="6" fill="#2a0f10" stroke="#dc2626"/>
-<text x="34" y="531" font-size="15" font-weight="bold" fill="#fca5a5">⚠ Sprawdź w swoim aucie / manualu — GMT400 ma wiele wariantów.</text>
-</g></svg>
+<defs><pattern id="g" width="30" height="30" patternUnits="userSpaceOnUse"><circle cx="15" cy="15" r="1.2" fill="#1f1f24"/></pattern></defs>
+<rect width="900" height="1671" fill="#0d0d0f"/>
+<rect width="900" height="1671" fill="url(#g)"/>
+<g font-family="DejaVu Sans, Arial, sans-serif">
+<rect x="0" y="0" width="900" height="8" fill="#dc2626"/>
+<text x="870" y="40" font-size="16" fill="#a3a3a3" text-anchor="end">gmt400.pl · schemat</text>
+<text x="30" y="80" font-size="30" fill="#f5f5f5" font-weight="bold">OBD-I: odczyt kodów migowych przez złącze ALDL</text>
+<text x="30" y="116" font-size="30" fill="#f5f5f5" font-weight="bold">(12-pin)</text>
+<text x="30" y="146" font-size="20" fill="#f87171">Model i lata: GMT400 z silnikiem benzynowym 1988–1995 (OBD-I)</text>
+<line x1="30" y1="162" x2="870" y2="162" stroke="#3f3f46" stroke-width="2"/>
+<rect x="30" y="192" width="8" height="30" fill="#dc2626"/>
+<text x="50" y="217" font-size="24" fill="#f5f5f5" font-weight="bold">Gniazdo — widok od czoła</text>
+<text x="30" y="256" font-size="18" fill="#a3a3a3">Gniazdo ALDL pod deską rozdzielczą — widok od czoła gniazda w aucie</text>
+<rect x="100" y="300" width="650" height="260" rx="16" fill="#18181b" stroke="#f5f5f5" stroke-width="2"/>
+<rect x="133" y="335" width="60" height="60" rx="8" fill="#27272a" stroke="#a3a3a3" stroke-width="2"/>
+<text x="163" y="374" font-size="26" fill="#f5f5f5" font-weight="bold" text-anchor="middle">F</text>
+<rect x="238" y="335" width="60" height="60" rx="8" fill="#27272a" stroke="#a3a3a3" stroke-width="2"/>
+<text x="268" y="374" font-size="26" fill="#f5f5f5" font-weight="bold" text-anchor="middle">E</text>
+<rect x="343" y="335" width="60" height="60" rx="8" fill="#27272a" stroke="#a3a3a3" stroke-width="2"/>
+<text x="373" y="374" font-size="26" fill="#f5f5f5" font-weight="bold" text-anchor="middle">D</text>
+<rect x="448" y="335" width="60" height="60" rx="8" fill="#27272a" stroke="#a3a3a3" stroke-width="2"/>
+<text x="478" y="374" font-size="26" fill="#f5f5f5" font-weight="bold" text-anchor="middle">C</text>
+<rect x="553" y="335" width="60" height="60" rx="8" fill="#991b1b" stroke="#f87171" stroke-width="2"/>
+<text x="583" y="374" font-size="26" fill="#f5f5f5" font-weight="bold" text-anchor="middle">B</text>
+<rect x="658" y="335" width="60" height="60" rx="8" fill="#991b1b" stroke="#f87171" stroke-width="2"/>
+<text x="688" y="374" font-size="26" fill="#f5f5f5" font-weight="bold" text-anchor="middle">A</text>
+<rect x="133" y="440" width="60" height="60" rx="8" fill="#27272a" stroke="#a3a3a3" stroke-width="2"/>
+<text x="163" y="479" font-size="26" fill="#f5f5f5" font-weight="bold" text-anchor="middle">G</text>
+<rect x="238" y="440" width="60" height="60" rx="8" fill="#27272a" stroke="#a3a3a3" stroke-width="2"/>
+<text x="268" y="479" font-size="26" fill="#f5f5f5" font-weight="bold" text-anchor="middle">H</text>
+<rect x="343" y="440" width="60" height="60" rx="8" fill="#27272a" stroke="#a3a3a3" stroke-width="2"/>
+<text x="373" y="479" font-size="26" fill="#f5f5f5" font-weight="bold" text-anchor="middle">J</text>
+<rect x="448" y="440" width="60" height="60" rx="8" fill="#27272a" stroke="#a3a3a3" stroke-width="2"/>
+<text x="478" y="479" font-size="26" fill="#f5f5f5" font-weight="bold" text-anchor="middle">K</text>
+<rect x="553" y="440" width="60" height="60" rx="8" fill="#27272a" stroke="#a3a3a3" stroke-width="2"/>
+<text x="583" y="479" font-size="26" fill="#f5f5f5" font-weight="bold" text-anchor="middle">L</text>
+<rect x="658" y="440" width="60" height="60" rx="8" fill="#27272a" stroke="#a3a3a3" stroke-width="2"/>
+<text x="688" y="479" font-size="26" fill="#f5f5f5" font-weight="bold" text-anchor="middle">M</text>
+<path d="M583 333 C 583 275, 688 275, 688 333" fill="none" stroke="#dc2626" stroke-width="6" stroke-linecap="round"/>
+<circle cx="736" cy="359" r="17" fill="#dc2626" stroke="#0d0d0f" stroke-width="3"/>
+<text x="736" y="366" font-size="19" fill="#f5f5f5" font-weight="bold" text-anchor="middle">1</text>
+<circle cx="571" cy="307" r="17" fill="#dc2626" stroke="#0d0d0f" stroke-width="3"/>
+<text x="571" y="314" font-size="19" fill="#f5f5f5" font-weight="bold" text-anchor="middle">2</text>
+<text x="450" y="585" font-size="20" fill="#f87171" font-weight="bold" text-anchor="middle">← zworka (spinacz) A–B</text>
+<rect x="30" y="605" width="840" height="44" rx="8" fill="#18181b" stroke="#dc2626" stroke-width="2"/>
+<text x="46" y="639" font-size="21" fill="#f87171" font-weight="bold">1 A</text>
+<text x="276" y="639" font-size="21" fill="#f5f5f5">masa</text>
+<rect x="30" y="657" width="840" height="44" rx="8" fill="#18181b" stroke="#dc2626" stroke-width="2"/>
+<text x="46" y="691" font-size="21" fill="#f87171" font-weight="bold">2 B</text>
+<text x="276" y="691" font-size="21" fill="#f5f5f5">wejście diagnostyczne ECM</text>
+<rect x="30" y="709" width="840" height="72" rx="8" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<text x="46" y="743" font-size="21" fill="#f5f5f5" font-weight="bold">Pozostałe piny</text>
+<text x="276" y="743" font-size="21" fill="#f5f5f5">przypisanie zależy od modelu i rocznika (dane, ABS</text>
+<text x="276" y="771" font-size="21" fill="#f5f5f5">itd.) — wg FSM.</text>
+<rect x="30" y="789" width="840" height="44" rx="8" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<text x="46" y="823" font-size="21" fill="#f5f5f5" font-weight="bold">Zasilanie</text>
+<text x="276" y="823" font-size="21" fill="#f5f5f5">W 12-pinowym ALDL nie ma zasilania +12 V.</text>
+<rect x="30" y="867" width="8" height="30" fill="#dc2626"/>
+<text x="50" y="892" font-size="24" fill="#f5f5f5" font-weight="bold">Odczyt kodów</text>
+<rect x="60" y="911" width="780" height="82" rx="12" fill="#18181b" stroke="#f87171" stroke-width="2"/>
+<circle cx="60" cy="952.0" r="17" fill="#dc2626" stroke="#0d0d0f" stroke-width="3"/>
+<text x="60" y="959.0" font-size="19" fill="#f5f5f5" font-weight="bold" text-anchor="middle">1</text>
+<text x="92" y="947" font-size="23" fill="#f5f5f5" font-weight="bold">Zapłon OFF</text>
+<text x="92" y="977" font-size="19" fill="#a3a3a3">Zewrzyj A z B (spinacz / zworka).</text>
+<path d="M450 997 v26 m-12 -12 l12 14 l12 -14" stroke="#dc2626" stroke-width="4" fill="none"/>
+<rect x="60" y="1029" width="780" height="82" rx="12" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<circle cx="60" cy="1070.0" r="17" fill="#dc2626" stroke="#0d0d0f" stroke-width="3"/>
+<text x="60" y="1077.0" font-size="19" fill="#f5f5f5" font-weight="bold" text-anchor="middle">2</text>
+<text x="92" y="1065" font-size="23" fill="#f5f5f5" font-weight="bold">Zapłon ON</text>
+<text x="92" y="1095" font-size="19" fill="#a3a3a3">silnika NIE uruchamiaj.</text>
+<path d="M450 1115 v26 m-12 -12 l12 14 l12 -14" stroke="#dc2626" stroke-width="4" fill="none"/>
+<rect x="60" y="1147" width="780" height="108" rx="12" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<circle cx="60" cy="1201.0" r="17" fill="#dc2626" stroke="#0d0d0f" stroke-width="3"/>
+<text x="60" y="1208.0" font-size="19" fill="#f5f5f5" font-weight="bold" text-anchor="middle">3</text>
+<text x="92" y="1183" font-size="23" fill="#f5f5f5" font-weight="bold">Lampka SES/Check Engine miga kody</text>
+<text x="92" y="1213" font-size="19" fill="#a3a3a3">najpierw kod 12 (3×) = tryb diagnostyczny, potem zapisane</text>
+<text x="92" y="1239" font-size="19" fill="#a3a3a3">kody, każdy 3× (np. błysk-pauza-błysk-błysk = 12).</text>
+<path d="M450 1259 v26 m-12 -12 l12 14 l12 -14" stroke="#dc2626" stroke-width="4" fill="none"/>
+<rect x="60" y="1291" width="780" height="82" rx="12" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<circle cx="60" cy="1332.0" r="17" fill="#dc2626" stroke="#0d0d0f" stroke-width="3"/>
+<text x="60" y="1339.0" font-size="19" fill="#f5f5f5" font-weight="bold" text-anchor="middle">4</text>
+<text x="92" y="1327" font-size="23" fill="#f5f5f5" font-weight="bold">Zapłon OFF, zdejmij zworkę</text>
+<text x="92" y="1357" font-size="19" fill="#a3a3a3">Kod wskazuje obwód, nie konkretną część.</text>
+<rect x="30" y="1407" width="8" height="30" fill="#dc2626"/>
+<text x="50" y="1432" font-size="24" fill="#f5f5f5" font-weight="bold">Legenda</text>
+<circle cx="62" cy="1469" r="14" fill="#dc2626"/>
+<text x="62" y="1475" font-size="17" fill="#f5f5f5" font-weight="bold" text-anchor="middle">1</text>
+<text x="104" y="1476" font-size="19" fill="#f5f5f5">numer odnośnika / kolejność</text>
+<path d="M40 1505 h40 m-12 -10 l12 10 l-12 10" stroke="#dc2626" stroke-width="4" fill="none"/>
+<text x="104" y="1512" font-size="19" fill="#f5f5f5">kierunek przepływu / sygnału</text>
+<text x="30" y="1563" font-size="18" fill="#a3a3a3">Sprawdź w swoim aucie / manualu — GMT400 ma wiele wariantów (rocznik, silnik,</text>
+<text x="30" y="1589" font-size="18" fill="#a3a3a3">GVWR, RPO). Rysunek poglądowy, nie w skali.</text>
+<text x="30" y="1615" font-size="18" fill="#a3a3a3">Źródło: Wikipedia „ALDL”; ChevyTalk FAQ i FCAR (źródła wtórne — potwierdź w FSM</text>
+<text x="30" y="1641" font-size="18" fill="#a3a3a3">rocznika)</text>
+</g>
+</svg>
