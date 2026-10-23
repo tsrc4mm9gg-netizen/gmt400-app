@@ -5,7 +5,7 @@ import { useVehicleProfile } from '../VehicleProfileProvider';
 import VinDecoder from '../VinDecoder';
 import FuseTable from '../schematy/FuseTable';
 import { ILLUSTRATED_TIPS, ILLUSTRATED_TIPS_MANUAL } from '../AdditionalTips';
-import { decodeVin } from '@/lib/vin-decode.mjs';
+import { decodeVin, profileFromVin } from '@/lib/vin-decode.mjs';
 import { FUSE_YEARS } from '@/lib/fuses.mjs';
 import { knowledgeFit, partFit, scopeTextFit, type Fit } from '@/lib/my-car.mjs';
 import { PART_FITMENTS } from '@/lib/parts-compatibility';
@@ -58,15 +58,21 @@ function CarForm({ initial, onDone, onCancel }: { initial: VehicleProfile | null
   const onVin = (vin: string | null, year: number | null) => {
     if (!vin) { setVinNote(''); return; }
     const r = decodeVin(vin);
+    const fromVin = profileFromVin(r) ?? {};
     const patch: Partial<VehicleProfile> = { vin };
     const notes: string[] = [];
+    if (fromVin.brand) { patch.brand = fromVin.brand; notes.push(`marka ${fromVin.brand}`); }
+    if (fromVin.brand && fromVin.platform && fromVin.model && (VEHICLE_CATALOG[fromVin.brand][fromVin.platform] ?? []).includes(fromVin.model)) {
+      patch.platform = fromVin.platform; patch.model = fromVin.model; notes.push(`model ${fromVin.model}`);
+    } else { patch.platform = fromVin.brand && fromVin.brand !== draft.brand ? '' : draft.platform; patch.model = fromVin.brand && fromVin.brand !== draft.brand ? '' : draft.model; notes.push('nadwozia/modelu nie odczytano – wybierz ręcznie'); }
+    if (fromVin.drive) { patch.drive = fromVin.drive; notes.push(`napęd ${fromVin.drive}`); }
     if (year && year >= GMT400_YEAR_RANGE[0] && year <= GMT400_YEAR_RANGE[1]) { patch.year = String(year); notes.push(`rocznik ${year}`); }
     else notes.push('rocznik spoza GMT400 1988–2000 – wybierz ręcznie');
-    if (r.ok && r.engine?.rpo) { patch.engine = r.engine.rpo; notes.push(`silnik ${r.engine.rpo} (${r.engine.engine})`); }
-    else notes.push('silnika nie odczytano – wybierz ręcznie');
+    if (fromVin.engine) { patch.engine = fromVin.engine; notes.push(`silnik ${fromVin.engine}${r.ok && r.engine ? ` (${r.engine.engine})` : ''}`); }
+    else notes.push(r.ok && r.engine ? `silnik ${r.engine.engine} (bez kodu RPO – wybierz z listy)` : 'silnika nie odczytano – wybierz ręcznie');
     if (r.ok && !r.check.ok) notes.push('uwaga: cyfra kontrolna się nie zgadza – sprawdź przepisany VIN');
     set(patch);
-    setVinNote(`Z VIN: ${notes.join(', ')}. Model i nadwozie wybierz poniżej.`);
+    setVinNote(`Z VIN: ${notes.join(', ')}. Sprawdź pola poniżej i zapisz.`);
   };
 
   const submit = (e: FormEvent) => {
@@ -82,7 +88,7 @@ function CarForm({ initial, onDone, onCancel }: { initial: VehicleProfile | null
     <div data-testid="my-car-form" className="mt-6 grid gap-4 lg:grid-cols-2">
       <div className="min-w-0 rounded-xl border border-white/10 bg-neutral-950 p-4 sm:p-5">
         <h2 className="text-xl font-semibold text-red-300">1. Masz VIN? (opcjonalnie)</h2>
-        <p className="mb-3 mt-1 text-sm text-neutral-400">Odczytamy rocznik (10. znak), kod silnika (8. znak, tabele z instrukcji GM 1994–1999) i cyfrę kontrolną. VIN zostaje w przeglądarce.</p>
+        <p className="mb-3 mt-1 text-sm text-neutral-400">Odczytamy markę, napęd, model, rocznik i silnik z tabel GM (każde pole ze źródłem) i wypełnimy profil. VIN zostaje w przeglądarce.</p>
         <VinDecoder onDecoded={onVin} />
         {vinNote && <p data-testid="my-car-vin-note" role="status" className="rounded-lg border border-red-600/40 bg-red-600/10 p-3 text-sm text-red-100">{vinNote}</p>}
       </div>

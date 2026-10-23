@@ -8,6 +8,7 @@ import ModelThumb from '../ModelThumb';
 import { bodyForEntry } from '../../lib/model-images';
 
 type Entry = KnowledgeEntry;
+const PAGE_SIZE = 50;
 const queryExamples = ['P0300', '4L60E', 'EGR', 'MAF', 'EVAP', 'O2 sensor', 'fuel trim', 'idle air control'];
 
 function isEntry(value: unknown): value is Entry {
@@ -36,6 +37,10 @@ export default function SearchPage({ query }: { query: string }) {
   const index = useMemo(() => buildKnowledgeIndex(getKnowledgeEntries(items)), [items]);
   const results = useMemo(() => searchKnowledge(index, query), [index, query]);
   const normalizedQuery = query.trim();
+  const [shown, setShown] = useState({ query, count: PAGE_SIZE });
+  const visibleCount = shown.query === query ? shown.count : PAGE_SIZE;
+  const visibleResults = results.slice(0, visibleCount);
+  const hasMore = results.length > visibleResults.length;
 
   return (
     <div className="mx-auto max-w-4xl px-4 py-8 text-white">
@@ -53,6 +58,12 @@ export default function SearchPage({ query }: { query: string }) {
             id="page-search"
             name="q"
             type="search"
+            inputMode="search"
+            enterKeyHint="search"
+            autoComplete="off"
+            autoCorrect="off"
+            autoCapitalize="none"
+            spellCheck={false}
             maxLength={120}
             defaultValue={query}
             placeholder="Szukaj kodu lub systemu, np. P0300"
@@ -92,9 +103,10 @@ export default function SearchPage({ query }: { query: string }) {
       </p>
 
       {normalizedQuery && (
-        <p role="status" className="mb-4">
+        <p role="status" aria-live="polite" data-testid="search-status" className="mb-4">
           Wyświetlanie {results.length} wyników dla: <strong className="text-neutral-200">{normalizedQuery}</strong>.{' '}
           {status === 'loading' ? 'Trwa pobieranie dodatkowych materiałów Notion.' : status === 'error' ? 'Nie udało się pobrać materiałów Notion w wymaganym czasie lub wystąpił błąd. Wyniki obejmują tylko bazę OBD.' : 'Materiały Notion załadowane.'}
+          {results.length > PAGE_SIZE && (hasMore ? ` Pokazujemy ${visibleResults.length} z ${results.length}.` : ` Pokazujemy wszystkie ${results.length}.`)}
         </p>
       )}
 
@@ -103,7 +115,7 @@ export default function SearchPage({ query }: { query: string }) {
       ) : (
         <>
           <ul className="space-y-4 [overflow-wrap:anywhere]">
-            {results.map(result => {
+            {visibleResults.map(result => {
               const obdCode = result.id?.startsWith('obd:') ? result.id.slice(4) : undefined;
               const body = obdCode ? null : bodyForEntry(result);
               return (
@@ -130,6 +142,18 @@ export default function SearchPage({ query }: { query: string }) {
               );
             })}
           </ul>
+          {hasMore && (
+            <div className="mt-6 flex justify-center">
+              <button
+                type="button"
+                data-testid="search-more"
+                onClick={() => setShown({ query, count: visibleCount + PAGE_SIZE })}
+                className="min-h-12 rounded-xl border-2 border-red-600 bg-neutral-900 px-6 text-base font-semibold text-red-200 transition hover:bg-red-950/50 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500"
+              >
+                Pokaż więcej wyników
+              </button>
+            </div>
+          )}
           {status === 'loading' && !results.length && (
             <ul aria-hidden="true" data-testid="search-skeleton" className="space-y-4">
               {[0, 1, 2].map(i => <li key={i} className="h-28 animate-pulse rounded-xl border border-white/10 bg-neutral-900/60" />)}

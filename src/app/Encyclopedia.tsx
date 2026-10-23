@@ -21,6 +21,7 @@ import { EngineTable, FluidsTable, PartSourceNote, OemQuickList, TorqueTable } f
 import { PARTS } from '../lib/parts-catalog';
 import ModelThumb from './ModelThumb';
 import { bodyForEntry, isGeneralEntry, isSpecificToBody } from '../lib/model-images';
+import { IssueMeta, StepsText, hasSource } from './IssueDetails';
 
 type Item = {
   id?: string;
@@ -131,6 +132,7 @@ export default function Encyclopedia({ initialTab }: { initialTab?: string } = {
   const [lightbox, setLightbox] = useState<string | null>(null);
   const [menuOpen, setMenuOpen] = useState(false);
   const [issueYear, setIssueYear] = useState('');
+  const [issueSourcedOnly, setIssueSourcedOnly] = useState(false);
   const [issueModel, setIssueModel] = useState('');
   const [issueQuery, setIssueQuery] = useState('');
   const [codeQuery, setCodeQuery] = useState('');
@@ -324,10 +326,12 @@ export default function Encyclopedia({ initialTab }: { initialTab?: string } = {
     if (q) result = result.filter(i => 
       i.Nazwa.toLowerCase().includes(q) || 
       (i.Objawy || '').toLowerCase().includes(q) || 
-      (i.Rozwiązanie || '').toLowerCase().includes(q)
+      (i.Rozwiązanie || '').toLowerCase().includes(q) ||
+      (i.Opis || '').toLowerCase().includes(q)
     );
+    if (issueSourcedOnly) result = result.filter(hasSource);
     return result;
-  }, [issues, query, issueQuery, selectedModel, issueModel, issueYear, bodyId, modelFilters]);
+  }, [issues, query, issueQuery, selectedModel, issueModel, issueYear, bodyId, modelFilters, issueSourcedOnly]);
 
   const filteredCodes = useMemo(() => {
     let result = filterByModel(codes);
@@ -532,11 +536,15 @@ export default function Encyclopedia({ initialTab }: { initialTab?: string } = {
                   </select>
                 </div>
               </div>
+              <label className="mt-4 flex min-h-11 cursor-pointer items-center gap-3 text-sm text-neutral-300">
+                <input type="checkbox" checked={issueSourcedOnly} onChange={(e) => setIssueSourcedOnly(e.target.checked)} className="h-5 w-5 accent-red-600" data-testid="issue-sourced-only" />
+                Tylko wpisy ze źródłami (biuletyny GM, instrukcje, katalogi)
+              </label>
             </div>
 
             
               <div className="space-y-3">
-                <p className="text-neutral-500 text-sm mb-4">Znaleziono: {filteredIssues.length} usterek</p>
+                <p className="text-neutral-500 text-sm mb-4" role="status" data-testid="issue-count">Znaleziono: {filteredIssues.length} usterek</p>
                 {filteredIssues.map((i, idx) => {
                   const issueImg = i.Nazwa.toLowerCase().includes('kolektor') ? '/issue-intake.jpg' : i.Nazwa.toLowerCase().includes('4l60') ? '/issue-4l60e.jpg' : null;
                   return (
@@ -548,8 +556,10 @@ export default function Encyclopedia({ initialTab }: { initialTab?: string } = {
                           {(() => { const body = bodyForEntry(i); return body ? <ModelThumb body={body} /> : <span className="text-xs bg-white/10 px-2 py-0.5 text-neutral-400">{isGeneralEntry(i) ? 'Wszystkie GMT400' : i.Model}</span>; })()}
                         </div>
                         <VehicleMatchBadge item={i} />
-                        {i.Objawy && <p className="text-neutral-400 text-sm mb-2"><span className="text-red-400">Objawy:</span> {i.Objawy}</p>}
-                        {i.Rozwiązanie && <p className="text-neutral-300 text-sm whitespace-pre-line">{i.Rozwiązanie}</p>}
+                        {hasSource(i) && <span className="mb-2 inline-block border border-emerald-500/40 px-2 py-0.5 text-xs text-emerald-300" data-testid="issue-sourced">ze źródłem</span>}
+                        <IssueMeta item={i} />
+                        {i.Objawy && <p className="text-neutral-400 text-sm mb-2 break-words"><span className="text-red-400">Objawy:</span> {i.Objawy}</p>}
+                        {i.Rozwiązanie && <><p className="mb-1 text-xs font-semibold uppercase tracking-wide text-neutral-500">Co zrobić</p><StepsText text={i.Rozwiązanie} /></>}
                       </div>
                     </div>
                   );

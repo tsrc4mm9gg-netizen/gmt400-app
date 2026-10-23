@@ -1,60 +1,66 @@
+// Stronicowanie wyników na /szukaj (dawniej: okno GlobalSearch, usunięte z interfejsu).
 const { test, expect } = require('@playwright/test');
+const BASE = 'http://127.0.0.1:3100';
 const TOTAL = 120;
 const fixtures = Array.from({ length: TOTAL }, (_, index) => ({ id: `pagination-${String(index).padStart(3, '0')}`, Nazwa: `Materiał testowy ${String(index).padStart(3, '0')}`, Typ: 'Kod błędu', Model: 'Wszystkie', Opis: `Wspólna fraza testowa numer ${index}.` }));
-async function open(page, count = TOTAL) {
-  await page.addInitScript(() => localStorage.setItem('gmt400_tab', 'kody'));
+const title = name => ({ name, exact: true });
+async function open(page, count = TOTAL, q = 'wspolna fraza') {
   await page.route('**/api/notion', route => route.fulfill({ json: { results: fixtures.slice(0, count), count } }));
-  await page.goto('http://127.0.0.1:3100');
-  await expect(page.getByRole('heading', { name: 'Materiał testowy 000', exact: true })).toBeVisible();
-  await page.locator('header button').first().click();
-  const dialog = page.getByRole('dialog', { name: 'Szukaj w bazie wiedzy' });
-  await expect(dialog).toBeVisible();
-  await dialog.getByLabel('Szukaj w bazie', { exact: true }).fill('wspolna fraza');
-  await expect(dialog.getByRole('status')).toContainText(`Znaleziono: ${count}`);
-  return dialog;
+  await page.goto(`${BASE}/szukaj?q=${encodeURIComponent(q)}`);
+  const status = page.getByTestId('search-status');
+  await expect(status).toContainText('Materiały Notion załadowane.');
+  await expect(status).toContainText(`Wyświetlanie ${count} wyników`);
+  return status;
 }
+const links = page => page.getByRole('main').getByRole('link', { name: /^Materiał testowy \d{3}$/ });
+const more = page => page.getByRole('button', title('Pokaż więcej wyników'));
+
 test('shows first fifty and reveals results in pages', async ({ page }) => {
-  const dialog = await open(page);
-  await expect(dialog.getByRole('status')).toContainText('Znaleziono: 120 — pokazujemy 50 z 120.');
-  await expect(dialog.getByRole('button', { name: 'Materiał testowy 049', exact: true })).toBeVisible();
-  await expect(dialog.getByRole('button', { name: 'Materiał testowy 050', exact: true })).toHaveCount(0);
-  await dialog.getByRole('button', { name: 'Pokaż więcej wyników', exact: true }).click();
-  await expect(dialog.getByRole('status')).toContainText('Znaleziono: 120 — pokazujemy 100 z 120.');
-  await expect(dialog.getByRole('button', { name: 'Materiał testowy 099', exact: true })).toBeVisible();
-  await dialog.getByRole('button', { name: 'Pokaż więcej wyników', exact: true }).click();
-  await expect(dialog.getByRole('status')).toContainText('Znaleziono: 120 — pokazujemy wszystkie 120.');
-  await expect(dialog.getByRole('button', { name: 'Materiał testowy 119', exact: true })).toBeVisible();
-  await expect(dialog.getByRole('button', { name: 'Pokaż więcej wyników', exact: true })).toHaveCount(0);
+  const status = await open(page);
+  await expect(status).toContainText('Pokazujemy 50 z 120.');
+  await expect(page.getByRole('link', title('Materiał testowy 049'))).toBeVisible();
+  await expect(page.getByRole('link', title('Materiał testowy 050'))).toHaveCount(0);
+  await more(page).click();
+  await expect(status).toContainText('Pokazujemy 100 z 120.');
+  await expect(page.getByRole('link', title('Materiał testowy 099'))).toBeVisible();
+  await more(page).click();
+  await expect(status).toContainText('Pokazujemy wszystkie 120.');
+  await expect(page.getByRole('link', title('Materiał testowy 119'))).toBeVisible();
+  await expect(more(page)).toHaveCount(0);
+  const overflow = await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);
+  expect(overflow, 'brak poziomego przewijania').toBeLessThanOrEqual(0);
 });
 test('keeps ranking order while expanding results', async ({ page }) => {
-  const dialog = await open(page);
-  const buttons = dialog.getByRole('button', { name: /^Materiał testowy \d{3}$/ });
-  await expect(buttons).toHaveText(fixtures.slice(0, 50).map(item => item.Nazwa));
-  await dialog.getByRole('button', { name: 'Pokaż więcej wyników', exact: true }).click();
-  await expect(buttons).toHaveText(fixtures.slice(0, 100).map(item => item.Nazwa));
+  await open(page);
+  await expect(links(page)).toHaveText(fixtures.slice(0, 50).map(item => item.Nazwa));
+  await more(page).click();
+  await expect(links(page)).toHaveText(fixtures.slice(0, 100).map(item => item.Nazwa));
 });
 test('does not show pagination for exactly fifty results', async ({ page }) => {
-  const dialog = await open(page, 50);
-  await expect(dialog.getByRole('status')).toContainText('Znaleziono: 50');
-  await expect(dialog.getByRole('button', { name: 'Pokaż więcej wyników', exact: true })).toHaveCount(0);
-  await expect(dialog.getByRole('button', { name: 'Materiał testowy 049', exact: true })).toBeVisible();
+  const status = await open(page, 50);
+  await expect(status).not.toContainText('Pokazujemy');
+  await expect(more(page)).toHaveCount(0);
+  await expect(links(page)).toHaveCount(50);
 });
 test('resets pagination when the query changes', async ({ page }) => {
-  const dialog = await open(page);
-  await dialog.getByRole('button', { name: 'Pokaż więcej wyników', exact: true }).click();
-  await expect(dialog.getByRole('button', { name: 'Materiał testowy 099', exact: true })).toBeVisible();
-  await dialog.getByLabel('Szukaj w bazie', { exact: true }).fill('wspolna testowa');
-  await expect(dialog.getByRole('status')).toContainText('Znaleziono: 120 — pokazujemy 50 z 120.');
-  await expect(dialog.getByRole('button', { name: 'Materiał testowy 049', exact: true })).toBeVisible();
-  await expect(dialog.getByRole('button', { name: 'Materiał testowy 050', exact: true })).toHaveCount(0);
-  await expect(dialog.getByRole('button', { name: 'Materiał testowy 099', exact: true })).toHaveCount(0);
-  await expect(dialog.getByRole('button', { name: /^Materiał testowy \d{3}$/ })).toHaveCount(50);
-  await expect(dialog.getByRole('button', { name: 'Pokaż więcej wyników', exact: true })).toBeVisible();
+  await open(page);
+  await more(page).click();
+  await expect(page.getByRole('link', title('Materiał testowy 099'))).toBeVisible();
+  const input = page.getByLabel('Kod, objaw lub nazwa materiału');
+  await input.fill('wspolna testowa');
+  await input.press('Enter');
+  await expect(page).toHaveURL(/[?&]q=wspolna\+testowa/);
+  const status = page.getByTestId('search-status');
+  await expect(status).toContainText('Pokazujemy 50 z 120.');
+  await expect(links(page)).toHaveCount(50);
+  await expect(page.getByRole('link', title('Materiał testowy 050'))).toHaveCount(0);
+  await expect(more(page)).toBeVisible();
 });
 test('keeps focus on the reveal control after expanding', async ({ page }) => {
-  const dialog = await open(page);
-  const button = dialog.getByRole('button', { name: 'Pokaż więcej wyników', exact: true });
-  await button.click();
+  const status = await open(page);
+  const button = more(page);
+  await button.focus();
+  await page.keyboard.press('Enter');
+  await expect(status).toContainText('Pokazujemy 100 z 120.');
   await expect(button).toBeFocused();
-  await expect(dialog.getByRole('status')).toContainText('pokazujemy 100 z 120');
 });

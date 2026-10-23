@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
   push:
     branches: [main]
-    paths: ['src/app/GlobalSearch.tsx','src/app/SearchExcerpt.tsx','src/lib/search-*.ts','tests/search-results-pagination.spec.cjs','.github/workflows/search-pagination.yml','package.json','package-lock.json','playwright.search-ci.config.cjs']
+    paths: ['src/app/szukaj/**','src/lib/knowledge-index.ts','src/app/SearchExcerpt.tsx','src/lib/search-*.ts','tests/search-results-pagination.spec.cjs','.github/workflows/search-pagination.yml','package.json','package-lock.json','playwright.search-ci.config.cjs']
 permissions: {contents: read}
 concurrency: {group: search-pagination-verification, cancel-in-progress: true}
 jobs:
@@ -23,7 +23,7 @@ jobs:
       - name: Install pinned test runner
         run: |
           npm install --no-save --package-lock=false @playwright/test@1.64.1
-          npx playwright install --with-deps chromium
+          npx playwright install --with-deps chromium webkit
       - name: Start production server
         run: |
           npm run start -- --hostname 127.0.0.1 --port 3100 > /tmp/search-pagination-server.log 2>&1 &
