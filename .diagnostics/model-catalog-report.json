@@ -1,7 +1,7 @@
 {
-  "codeSha": "42a29f0f664798709983ff2299c4c3479a47035f",
-  "runId": "39878651246",
-  "checkedAt": "2026-10-23T00:32:38.634Z",
+  "codeSha": "155701b458b7149daed9d2c3524261772812c6b7",
+  "runId": "39915071500",
+  "checkedAt": "2026-10-23T07:01:08.307Z",
   "scope": "Grouped source records; Chromium and mobile WebKit mocked-fixture regressions, not a live Notion or historical-accuracy audit",
   "passed": false,
   "integrationApplied": false,
