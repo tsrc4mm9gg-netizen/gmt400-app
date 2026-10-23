@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Źródła:
+- OM 1994 Chevrolet C/K Pickup, s. 6-95–6-96 (skan GM, kopia dezosmanuals.com) — https://dezosmanuals.com/wp-content/uploads/2021/07/1994-Chevrolet-1500.pdf
+Rysunek poglądowy (nie w skali). Styl v2 gmt400.pl (ciemny + czerwony). Własny rysunek gmt400.pl (bez grafik AI).
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 3323" width="900" height="3323" role="img" aria-label="Bezpieczniki w kabinie: układ i amperaż (1994)">
+<title>Bezpieczniki w kabinie: układ i amperaż (1994)</title>
+<defs><pattern id="g" width="30" height="30" patternUnits="userSpaceOnUse"><circle cx="15" cy="15" r="1.2" fill="#1f1f24"/></pattern></defs>
+<rect width="900" height="3323" fill="#0d0d0f"/>
+<rect width="900" height="3323" fill="url(#g)"/>
+<g font-family="DejaVu Sans, Arial, sans-serif">
+<rect x="0" y="0" width="900" height="8" fill="#dc2626"/>
+<text x="870" y="40" font-size="16" fill="#a3a3a3" text-anchor="end">gmt400.pl · schemat</text>
+<text x="30" y="80" font-size="30" fill="#f5f5f5" font-weight="bold">Bezpieczniki w kabinie: układ i amperaż (1994)</text>
+<text x="30" y="110" font-size="20" fill="#f87171">Model i lata: C/K Pickup 1994 (wg OM 1994 GM)</text>
+<line x1="30" y1="126" x2="870" y2="126" stroke="#3f3f46" stroke-width="2"/>
+<rect x="30" y="156" width="8" height="30" fill="#dc2626"/>
+<text x="50" y="181" font-size="24" fill="#f5f5f5" font-weight="bold">Skrzynka w desce — wg rysunku OM94</text>
+<rect x="40" y="216" width="820" height="640" rx="18" fill="#18181b" stroke="#f5f5f5" stroke-width="2"/>
+<rect x="58" y="236" width="104" height="108" rx="10" fill="#27272a" stroke="#a3a3a3" stroke-width="2"/>
+<text x="110" y="274" font-size="24" fill="#f87171" font-weight="bold" text-anchor="middle">20 A</text>
+<text x="110" y="302" font-size="16" fill="#f5f5f5" text-anchor="middle">GAGES</text>
+<rect x="202" y="266" width="44" height="48" rx="6" fill="#111113" stroke="#3f3f46" stroke-width="2" stroke-dasharray="5 4"/>
+<rect x="316" y="266" width="44" height="48" rx="6" fill="#111113" stroke="#3f3f46" stroke-width="2" stroke-dasharray="5 4"/>
+<rect x="400" y="236" width="104" height="108" rx="10" fill="#27272a" stroke="#a3a3a3" stroke-width="2"/>
+<text x="452" y="274" font-size="24" fill="#f87171" font-weight="bold" text-anchor="middle">25 A</text>
+<text x="452" y="302" font-size="16" fill="#f5f5f5" text-anchor="middle">HTR A/C</text>
+<rect x="544" y="266" width="44" height="48" rx="6" fill="#111113" stroke="#3f3f46" stroke-width="2" stroke-dasharray="5 4"/>
+<rect x="658" y="266" width="44" height="48" rx="6" fill="#111113" stroke="#3f3f46" stroke-width="2" stroke-dasharray="5 4"/>
+<rect x="742" y="236" width="104" height="108" rx="10" fill="#27272a" stroke="#a3a3a3" stroke-width="2"/>
+<text x="794" y="274" font-size="24" fill="#f87171" font-weight="bold" text-anchor="middle">25 A</text>
+<text x="794" y="302" font-size="16" fill="#f5f5f5" text-anchor="middle">WIPER</text>
+<rect x="58" y="358" width="104" height="108" rx="10" fill="#27272a" stroke="#a3a3a3" stroke-width="2"/>
+<text x="110" y="396" font-size="24" fill="#f87171" font-weight="bold" text-anchor="middle">15 A</text>
+<text x="110" y="424" font-size="16" fill="#f5f5f5" text-anchor="middle">TURN/BU</text>
+<rect x="172" y="358" width="104" height="108" rx="10" fill="#27272a" stroke="#a3a3a3" stroke-width="2"/>
+<text x="224" y="396" font-size="24" fill="#f87171" font-weight="bold" text-anchor="middle">25 A</text>
+<text x="224" y="424" font-size="16" fill="#f5f5f5" text-anchor="middle">4WD</text>
+<rect x="286" y="358" width="104" height="108" rx="10" fill="#27272a" stroke="#a3a3a3" stroke-width="2"/>
+<text x="338" y="396" font-size="24" fill="#f87171" font-weight="bold" text-anchor="middle">20 A</text>
+<text x="338" y="424" font-size="16" fill="#f5f5f5" text-anchor="middle">CTSY</text>
+<rect x="430" y="388" width="44" height="48" rx="6" fill="#111113" stroke="#3f3f46" stroke-width="2" stroke-dasharray="5 4"/>
+<rect x="544" y="388" width="44" height="48" rx="6" fill="#111113" stroke="#3f3f46" stroke-width="2" stroke-dasharray="5 4"/>
+<rect x="658" y="388" width="44" height="48" rx="6" fill="#111113" stroke="#3f3f46" stroke-width="2" stroke-dasharray="5 4"/>
+<rect x="742" y="358" width="104" height="108" rx="10" fill="#27272a" stroke="#a3a3a3" stroke-width="2"/>
+<text x="794" y="396" font-size="24" fill="#f87171" font-weight="bold" text-anchor="middle">10 A</text>
+<text x="794" y="424" font-size="16" fill="#f5f5f5" text-anchor="middle">RADIO</text>
+<rect x="58" y="480" width="104" height="108" rx="10" fill="#27272a" stroke="#a3a3a3" stroke-width="2"/>
+<text x="110" y="518" font-size="24" fill="#f87171" font-weight="bold" text-anchor="middle">10 A</text>
+<text x="110" y="546" font-size="16" fill="#f5f5f5" text-anchor="middle">PCM/IGN</text>
+<rect x="172" y="480" width="104" height="108" rx="10" fill="#27272a" stroke="#a3a3a3" stroke-width="2"/>
+<text x="224" y="518" font-size="24" fill="#f87171" font-weight="bold" text-anchor="middle">15 A</text>
+<text x="224" y="546" font-size="16" fill="#f5f5f5" text-anchor="middle">BRAKE</text>
+<rect x="286" y="480" width="104" height="108" rx="10" fill="#27272a" stroke="#a3a3a3" stroke-width="2"/>
+<text x="338" y="518" font-size="24" fill="#f87171" font-weight="bold" text-anchor="middle">20 A</text>
+<text x="338" y="546" font-size="16" fill="#f5f5f5" text-anchor="middle">PARK LP</text>
+<rect x="430" y="510" width="44" height="48" rx="6" fill="#111113" stroke="#3f3f46" stroke-width="2" stroke-dasharray="5 4"/>
+<rect x="544" y="510" width="44" height="48" rx="6" fill="#111113" stroke="#3f3f46" stroke-width="2" stroke-dasharray="5 4"/>
+<rect x="658" y="510" width="44" height="48" rx="6" fill="#111113" stroke="#3f3f46" stroke-width="2" stroke-dasharray="5 4"/>
+<rect x="742" y="480" width="104" height="108" rx="10" fill="#991b1b" stroke="#f87171" stroke-width="2"/>
+<text x="794" y="518" font-size="18" fill="#fecaca" font-weight="bold" text-anchor="middle">30 A</text>
+<text x="794" y="546" font-size="16" fill="#f5f5f5" text-anchor="middle">ACC/IGN</text>
+<text x="794" y="580" font-size="13" fill="#fecaca" text-anchor="middle">wyłącznik</text>
+<rect x="58" y="602" width="104" height="108" rx="10" fill="#27272a" stroke="#a3a3a3" stroke-width="2"/>
+<text x="110" y="640" font-size="24" fill="#f87171" font-weight="bold" text-anchor="middle">10 A</text>
+<text x="110" y="668" font-size="16" fill="#f5f5f5" text-anchor="middle">INJ A</text>
+<rect x="202" y="632" width="44" height="48" rx="6" fill="#111113" stroke="#3f3f46" stroke-width="2" stroke-dasharray="5 4"/>
+<rect x="316" y="632" width="44" height="48" rx="6" fill="#111113" stroke="#3f3f46" stroke-width="2" stroke-dasharray="5 4"/>
+<rect x="400" y="602" width="104" height="108" rx="10" fill="#27272a" stroke="#a3a3a3" stroke-width="2"/>
+<text x="452" y="640" font-size="24" fill="#f87171" font-weight="bold" text-anchor="middle">5 A</text>
+<text x="452" y="668" font-size="16" fill="#f5f5f5" text-anchor="middle">PANEL LPS</text>
+<rect x="514" y="602" width="104" height="108" rx="10" fill="#27272a" stroke="#a3a3a3" stroke-width="2"/>
+<text x="566" y="640" font-size="24" fill="#f87171" font-weight="bold" text-anchor="middle">15 A</text>
+<text x="566" y="668" font-size="16" fill="#f5f5f5" text-anchor="middle">DRL</text>
+<rect x="658" y="632" width="44" height="48" rx="6" fill="#111113" stroke="#3f3f46" stroke-width="2" stroke-dasharray="5 4"/>
+<rect x="742" y="602" width="104" height="108" rx="10" fill="#991b1b" stroke="#f87171" stroke-width="2"/>
+<text x="794" y="640" font-size="18" fill="#fecaca" font-weight="bold" text-anchor="middle">30 A</text>
+<text x="794" y="668" font-size="16" fill="#f5f5f5" text-anchor="middle">ACC/BATT</text>
+<text x="794" y="702" font-size="13" fill="#fecaca" text-anchor="middle">wyłącznik</text>
+<rect x="58" y="724" width="104" height="108" rx="10" fill="#27272a" stroke="#a3a3a3" stroke-width="2"/>
+<text x="110" y="762" font-size="18" fill="#f87171" font-weight="bold" text-anchor="middle">—</text>
+<text x="110" y="790" font-size="16" fill="#f5f5f5" text-anchor="middle">TRANS</text>
+<rect x="202" y="754" width="44" height="48" rx="6" fill="#111113" stroke="#3f3f46" stroke-width="2" stroke-dasharray="5 4"/>
+<rect x="316" y="754" width="44" height="48" rx="6" fill="#111113" stroke="#3f3f46" stroke-width="2" stroke-dasharray="5 4"/>
+<rect x="430" y="754" width="44" height="48" rx="6" fill="#111113" stroke="#3f3f46" stroke-width="2" stroke-dasharray="5 4"/>
+<rect x="514" y="724" width="104" height="108" rx="10" fill="#27272a" stroke="#a3a3a3" stroke-width="2"/>
+<text x="566" y="762" font-size="24" fill="#f87171" font-weight="bold" text-anchor="middle">15 A</text>
+<text x="566" y="790" font-size="16" fill="#f5f5f5" text-anchor="middle">STOP/HAZ</text>
+<rect x="658" y="754" width="44" height="48" rx="6" fill="#111113" stroke="#3f3f46" stroke-width="2" stroke-dasharray="5 4"/>
+<rect x="742" y="724" width="104" height="108" rx="10" fill="#27272a" stroke="#a3a3a3" stroke-width="2"/>
+<text x="794" y="762" font-size="24" fill="#f87171" font-weight="bold" text-anchor="middle">5 A</text>
+<text x="794" y="790" font-size="16" fill="#f5f5f5" text-anchor="middle">CRANK</text>
+<text x="30" y="886" font-size="18" fill="#a3a3a3">Rozkład jak na rysunku OM94: 5 rzędów, kolumny liczone od lewej (R = rząd, K =</text>
+<text x="30" y="909" font-size="18" fill="#a3a3a3">kolumna — oznaczenie gmt400.pl, OM94 nie numeruje gniazd). Puste ramki = gniazda</text>
+<text x="30" y="932" font-size="18" fill="#a3a3a3">bez opisu w OM94.</text>
+<rect x="30" y="967" width="8" height="30" fill="#dc2626"/>
+<text x="50" y="992" font-size="24" fill="#f5f5f5" font-weight="bold">Kolory bezpieczników (Fuse Legend, OM94/OM95)</text>
+<rect x="30" y="1011" width="840" height="44" rx="8" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<text x="46" y="1045" font-size="21" fill="#f5f5f5" font-weight="bold">5 A</text>
+<text x="206" y="1045" font-size="21" fill="#f5f5f5">jasnobrązowy (tan)</text>
+<rect x="30" y="1063" width="840" height="44" rx="8" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<text x="46" y="1097" font-size="21" fill="#f5f5f5" font-weight="bold">7,5 A</text>
+<text x="206" y="1097" font-size="21" fill="#f5f5f5">brązowy</text>
+<rect x="30" y="1115" width="840" height="44" rx="8" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<text x="46" y="1149" font-size="21" fill="#f5f5f5" font-weight="bold">10 A</text>
+<text x="206" y="1149" font-size="21" fill="#f5f5f5">czerwony</text>
+<rect x="30" y="1167" width="840" height="44" rx="8" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<text x="46" y="1201" font-size="21" fill="#f5f5f5" font-weight="bold">15 A</text>
+<text x="206" y="1201" font-size="21" fill="#f5f5f5">niebieski</text>
+<rect x="30" y="1219" width="840" height="44" rx="8" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<text x="46" y="1253" font-size="21" fill="#f5f5f5" font-weight="bold">20 A</text>
+<text x="206" y="1253" font-size="21" fill="#f5f5f5">żółty</text>
+<rect x="30" y="1271" width="840" height="44" rx="8" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<text x="46" y="1305" font-size="21" fill="#f5f5f5" font-weight="bold">25 A</text>
+<text x="206" y="1305" font-size="21" fill="#f5f5f5">bezbarwny</text>
+<rect x="30" y="1323" width="840" height="44" rx="8" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<text x="46" y="1357" font-size="21" fill="#f5f5f5" font-weight="bold">30 A</text>
+<text x="206" y="1357" font-size="21" fill="#f5f5f5">zielony</text>
+<rect x="30" y="1401" width="8" height="30" fill="#dc2626"/>
+<text x="50" y="1426" font-size="24" fill="#f5f5f5" font-weight="bold">Co zabezpiecza każda pozycja</text>
+<rect x="30" y="1445" width="840" height="156" rx="8" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<text x="46" y="1479" font-size="21" fill="#f5f5f5" font-weight="bold">R1·K1 GAGES 20 A</text>
+<text x="346" y="1479" font-size="21" fill="#f5f5f5">Tempomat, podświetlenie wyświetlacza 4WD,</text>
+<text x="346" y="1507" font-size="21" fill="#f5f5f5">timer ogrzewania tylnej szyby, zasilanie</text>
+<text x="346" y="1535" font-size="21" fill="#f5f5f5">przekaźnika dodatkowego akumulatora, timer</text>
+<text x="346" y="1563" font-size="21" fill="#f5f5f5">brzęczyka pasów, zasilanie zestawu</text>
+<text x="346" y="1591" font-size="21" fill="#f5f5f5">wskaźników z zapłonu</text>
+<rect x="30" y="1609" width="840" height="72" rx="8" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<text x="46" y="1643" font-size="21" fill="#f5f5f5" font-weight="bold">R1·K4 HTR A/C 25 A</text>
+<text x="346" y="1643" font-size="21" fill="#f5f5f5">H.V.A.C. 4WD, Aux. Batt. Relay — tak w druku</text>
+<text x="346" y="1671" font-size="21" fill="#f5f5f5">OM (ogrzewanie/klimatyzacja)</text>
+<rect x="30" y="1689" width="840" height="44" rx="8" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<text x="46" y="1723" font-size="21" fill="#f5f5f5" font-weight="bold">R1·K7 WIPER 25 A</text>
+<text x="346" y="1723" font-size="21" fill="#f5f5f5">Wycieraczki przedniej szyby, spryskiwacz</text>
+<rect x="30" y="1741" width="840" height="44" rx="8" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<text x="46" y="1775" font-size="21" fill="#f5f5f5" font-weight="bold">R2·K1 TURN/BU 15 A</text>
+<text x="346" y="1775" font-size="21" fill="#f5f5f5">Światła cofania, kierunkowskazy</text>
+<rect x="30" y="1793" width="840" height="44" rx="8" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<text x="46" y="1827" font-size="21" fill="#f5f5f5" font-weight="bold">R2·K2 4WD 25 A</text>
+<text x="346" y="1827" font-size="21" fill="#f5f5f5">Napęd 4×4 (Four Wheel Drive)</text>
+<rect x="30" y="1845" width="840" height="100" rx="8" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<text x="46" y="1879" font-size="21" fill="#f5f5f5" font-weight="bold">R2·K3 CTSY 20 A</text>
+<text x="346" y="1879" font-size="21" fill="#f5f5f5">Lampka sufitowa, lampa skrzyni, oświetlenie</text>
+<text x="346" y="1907" font-size="21" fill="#f5f5f5">wnętrza i schowka, radio (pamięć/zegar) — wg</text>
+<text x="346" y="1935" font-size="21" fill="#f5f5f5">druku OM (patrz uwaga)</text>
+<rect x="30" y="1953" width="840" height="44" rx="8" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<text x="46" y="1987" font-size="21" fill="#f5f5f5" font-weight="bold">R2·K7 RADIO 10 A</text>
+<text x="346" y="1987" font-size="21" fill="#f5f5f5">Zasilanie radia</text>
+<rect x="30" y="2005" width="840" height="100" rx="8" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<text x="46" y="2039" font-size="21" fill="#f5f5f5" font-weight="bold">R3·K1 PCM/IGN 10 A</text>
+<text x="346" y="2039" font-size="21" fill="#f5f5f5">TCC, zawór powietrza (air diverter), ESC,</text>
+<text x="346" y="2067" font-size="21" fill="#f5f5f5">EGR, zapłon ECM, włącznik hamulca RWAL (w</text>
+<text x="346" y="2095" font-size="21" fill="#f5f5f5">tabeli: „EMC/Ign”)</text>
+<rect x="30" y="2113" width="840" height="44" rx="8" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<text x="46" y="2147" font-size="21" fill="#f5f5f5" font-weight="bold">R3·K2 BRAKE 15 A</text>
+<text x="346" y="2147" font-size="21" fill="#f5f5f5">RWAL, prędkościomierz w zestawie wskaźników</text>
+<rect x="30" y="2165" width="840" height="156" rx="8" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<text x="46" y="2199" font-size="21" fill="#f5f5f5" font-weight="bold">R3·K3 PARK LP 20 A</text>
+<text x="346" y="2199" font-size="21" fill="#f5f5f5">Przekaźnik i zasilanie klaksonu,</text>
+<text x="346" y="2227" font-size="21" fill="#f5f5f5">zapalniczka, światła postojowe,</text>
+<text x="346" y="2255" font-size="21" fill="#f5f5f5">podświetlenie włącznika C49, ostrzeżenie</text>
+<text x="346" y="2283" font-size="21" fill="#f5f5f5">„światła włączone” — wg druku OM (patrz</text>
+<text x="346" y="2311" font-size="21" fill="#f5f5f5">uwaga)</text>
+<rect x="30" y="2329" width="840" height="72" rx="8" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<text x="46" y="2363" font-size="21" fill="#f5f5f5" font-weight="bold">R3·K7 ACC/IGN 30 A</text>
+<text x="346" y="2363" font-size="21" fill="#f5f5f5">Wyłącznik termiczny (circuit breaker): szyby</text>
+<text x="346" y="2391" font-size="21" fill="#f5f5f5">elektryczne</text>
+<rect x="30" y="2409" width="840" height="44" rx="8" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<text x="46" y="2443" font-size="21" fill="#f5f5f5" font-weight="bold">R4·K1 INJ A 10 A</text>
+<text x="346" y="2443" font-size="21" fill="#f5f5f5">Wtryskiwacze TBI (w tabeli: „Ign. A”)</text>
+<rect x="30" y="2461" width="840" height="72" rx="8" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<text x="46" y="2495" font-size="21" fill="#f5f5f5" font-weight="bold">R4·K4 PANEL LPS 5 A</text>
+<text x="346" y="2495" font-size="21" fill="#f5f5f5">Podświetlenie radia i HVAC — wg druku OM</text>
+<text x="346" y="2523" font-size="21" fill="#f5f5f5">(patrz uwaga)</text>
+<rect x="30" y="2541" width="840" height="44" rx="8" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<text x="46" y="2575" font-size="21" fill="#f5f5f5" font-weight="bold">R4·K5 DRL 15 A</text>
+<text x="346" y="2575" font-size="21" fill="#f5f5f5">Światła do jazdy dziennej (DRL)</text>
+<rect x="30" y="2593" width="840" height="72" rx="8" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<text x="46" y="2627" font-size="21" fill="#f5f5f5" font-weight="bold">R4·K7 ACC/BATT 30 A</text>
+<text x="346" y="2627" font-size="21" fill="#f5f5f5">Wyłącznik termiczny (circuit breaker): zamki</text>
+<text x="346" y="2655" font-size="21" fill="#f5f5f5">drzwi, ogrzewanie tylnej szyby</text>
+<rect x="30" y="2673" width="840" height="72" rx="8" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<text x="46" y="2707" font-size="21" fill="#f5f5f5" font-weight="bold">R5·K1 TRANS —</text>
+<text x="346" y="2707" font-size="21" fill="#f5f5f5">Skrzynia biegów — gniazdo opisane na</text>
+<text x="346" y="2735" font-size="21" fill="#f5f5f5">rysunku, brak w tabeli OM94</text>
+<rect x="30" y="2753" width="840" height="100" rx="8" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<text x="46" y="2787" font-size="21" fill="#f5f5f5" font-weight="bold">R5·K5 STOP/HAZ 15 A</text>
+<text x="346" y="2787" font-size="21" fill="#f5f5f5">Przerywacz świateł awaryjnych, brzęczyk</text>
+<text x="346" y="2815" font-size="21" fill="#f5f5f5">pasów, światła stop, pamięć RWAL — wg druku</text>
+<text x="346" y="2843" font-size="21" fill="#f5f5f5">OM (patrz uwaga)</text>
+<rect x="30" y="2861" width="840" height="44" rx="8" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<text x="46" y="2895" font-size="21" fill="#f5f5f5" font-weight="bold">R5·K7 CRANK 5 A</text>
+<text x="346" y="2895" font-size="21" fill="#f5f5f5">Rozruch (Crank), „Discreet” — tak w druku OM</text>
+<rect x="30" y="2923" width="840" height="164" rx="8" fill="#2a0f10" stroke="#dc2626" stroke-width="2"/>
+<text x="48" y="2959" font-size="21" fill="#fca5a5" font-weight="bold">Uwaga: W tabeli OM94 opisy obwodów są w druku przesunięte</text>
+<text x="48" y="2987" font-size="21" fill="#fca5a5">między wierszami CTSY, PARK LP, P. LPS i STOP/HAZ — podział</text>
+<text x="48" y="3015" font-size="21" fill="#fca5a5">podany tak, jak wynika z druku. Sprawdź na pokrywie skrzynki.</text>
+<text x="48" y="3043" font-size="21" fill="#fca5a5">Linia oświetlenia pod maską ma osobny bezpiecznik w przewodzie</text>
+<text x="48" y="3071" font-size="21" fill="#fca5a5">(OM94).</text>
+<rect x="30" y="3121" width="8" height="30" fill="#dc2626"/>
+<text x="50" y="3146" font-size="24" fill="#f5f5f5" font-weight="bold">Legenda</text>
+<rect x="40" y="3169" width="44" height="28" rx="5" fill="#2a0f10" stroke="#dc2626" stroke-width="2"/>
+<text x="104" y="3190" font-size="19" fill="#f5f5f5">ostrzeżenie z manualu</text>
+<text x="30" y="3241" font-size="18" fill="#a3a3a3">Sprawdź w swoim aucie / manualu — GMT400 ma wiele wariantów (rocznik, silnik,</text>
+<text x="30" y="3267" font-size="18" fill="#a3a3a3">GVWR, RPO). Rysunek poglądowy, nie w skali.</text>
+<text x="30" y="3293" font-size="18" fill="#a3a3a3">Źródło: Instrukcja obsługi GM 1994 Chevrolet C/K Pickup, s. 6-95–6-96</text>
+</g>
+</svg>

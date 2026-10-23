@@ -1,0 +1,10 @@
+export type FuseVariant = { years: string[]; text: string };
+export type FuseRow = { pos: string; name: string; amps: string; variants: FuseVariant[] };
+export type FuseTable = { id: string; box: string; models: string; years: string[]; ampsNote: string; note: string; posNote: string; sources: { title: string; url: string }[]; rows: FuseRow[] };
+export const FUSE_COLORS: { amps: string; color: string }[];
+export const FUSE_COLORS_SOURCE: string;
+export const FUSE_YEARS: string[];
+export const FUSE_TABLES: FuseTable[];
+export function normalizeFuseText(value: unknown): string;
+export function filterFuseTables(tables: FuseTable[], options?: { year?: string; query?: string }): FuseTable[];
+export function yearsLabel(years: string[]): string;

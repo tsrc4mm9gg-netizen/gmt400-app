@@ -9,11 +9,16 @@ export type Schematic = {
  sourceTitle: string;
  note: string;
  /** Schemat SVG (ciemna wersja w public/schematy/). models = model + lata, którego dotyczy rysunek. */
- diagram?: { src: string; alt: string; models: string; width: number; height: number };
+ diagram?: SchematicDiagram;
+ /** Dodatkowe rysunki pod głównym (np. układy skrzynek bezpieczników wg rocznika). */
+ extraDiagrams?: SchematicDiagram[];
+ /** Pokaż wyszukiwalną tabelę bezpieczników (src/lib/fuses.mjs). */
+ fuseTable?: boolean;
  related?: string[];
  /** Prawdziwe zdjęcia na wolnej licencji (Wikimedia Commons). Brak pola = brak licencjonowanego zdjęcia. */
  photos?: SchematicPhoto[];
 };
+export type SchematicDiagram = { src: string; alt: string; models: string; width: number; height: number };
 export type SchematicPhoto = { src: string; alt: string; width: number; height: number; author: string; license: string; licenseUrl: string; sourceUrl: string; models: string; note?: string };
 
 const SIMONOV = { author: 'simonov', license: 'CC BY-SA 2.0', licenseUrl: 'https://creativecommons.org/licenses/by-sa/2.0/' };
@@ -110,19 +115,26 @@ export const SCHEMATICS: Schematic[] = [
  },
  {
  id: 'fuse-locations',
- title: 'Gdzie są skrzynki bezpieczników',
- scope: 'Tahoe/Suburban 1999 (OM99); C/K 1500 1995 (OM95) — kabina.',
- description: 'Poglądowy widok z góry: skrzynka w kabinie na bocznej krawędzi deski po stronie kierowcy oraz skrzynka bezpieczników i przekaźników pod maską przy zbiorniczku płynu hamulcowego.',
+ title: 'Bezpieczniki: skrzynki, numery i obwody',
+ scope: 'Kabina: C/K Pickup 1994–1998 i Suburban 1999; pod maską: C/K Pickup 1996–1998 i Suburban 1999 (wg instrukcji obsługi GM).',
+ description: 'Skrzynka w kabinie jest na bocznej krawędzi deski po stronie kierowcy (zdejmij pokrywę, w niej szczypce). Skrzynka bezpieczników i przekaźników pod maską jest z tyłu komory silnika, przy zbiorniczku płynu hamulcowego. Poniżej: gdzie są skrzynki, układ gniazd z numerami wg rocznika i tabela z opisem każdego obwodu.',
  rows: [
- { label: 'Kabina', value: 'Boczna krawędź deski po stronie kierowcy — zdejmij pokrywę (w niej szczypce)' },
- { label: 'Pod maską (1999)', value: 'Tył komory silnika, przy zbiorniczku płynu hamulcowego' },
- { label: '1995 C/K', value: 'Instrukcja opisuje skrzynkę w kabinie w tym samym miejscu' },
- { label: 'Obsada', value: 'Układ bezpieczników zależy od rocznika — opis jest na pokrywie i w instrukcji' }
+ { label: 'Kabina 1994', value: 'Gniazda bez numerów w OM — oznaczamy je rząd·kolumna wg rysunku; amperaż podany w OM94' },
+ { label: 'Kabina 1995–1999', value: 'Gniazda 1–24 + wyłączniki termiczne A i B; obsada części gniazd różni się wg rocznika' },
+ { label: 'Pod maską 1996–1999', value: 'Gniazda opisane nazwą (np. ECM-1, IGN-A, ABS); przekaźniki rozrusznika, A/C, pompy paliwa, świateł stop, A.I.R., klaksonu' },
+ { label: 'Amperaż 1995–1999', value: 'Instrukcje nie podają amperażu gniazd — odczytaj go z wyjętego bezpiecznika lub pokrywy' },
+ { label: '1988–1993, Tahoe/Yukon/Sierra', value: 'Brak w tych danych — sprawdź opis na pokrywie i w instrukcji swojego auta' }
  ],
- source: 'https://www.chevrolet.com/ownercenter/content/dam/gmownercenter/gmna/dynamic/manuals/1999/chevrolet/suburban/1999_chevrolet_suburban_owners.pdf',
- sourceTitle: 'OM99 — 1999 Chevrolet Suburban Owners Manual',
+ source: 'https://assets.gm.com/manuals/chevrolet/1997_chevrolet_1500_owners.pdf',
+ sourceTitle: 'GM Owner\'s Manual 1997 Chevrolet C/K (pełna lista źródeł 1994–1999 przy tabeli)',
  note: 'Sprawdź w swoim aucie / manualu — GMT400 ma wiele wariantów (rocznik, GVWR, silnik, skrzynia, RPO).',
- diagram: { src: '/schematy/bezpieczniki-lokalizacja.svg', alt: 'Widok auta z góry z zaznaczoną skrzynką bezpieczników w kabinie i skrzynką pod maską', models: 'Tahoe / Suburban 1999; C/K 1500 1995 (kabina)', width: 900, height: 1498 }
+ diagram: { src: '/schematy/bezpieczniki-lokalizacja.svg', alt: 'Widok auta z góry z zaznaczoną skrzynką bezpieczników w kabinie i skrzynką pod maską', models: 'Tahoe / Suburban 1999; C/K 1500 1995 (kabina)', width: 900, height: 1498 },
+ extraDiagrams: [
+ { src: '/schematy/bezpieczniki-kabina-1995-1999.svg', alt: 'Układ skrzynki bezpieczników w desce 1995–1999: gniazda 1–24 w 4 rzędach, wyłączniki A i B, nazwy gniazd i opis obwodów wg rocznika', models: 'C/K Pickup 1995–1998, Suburban 1999 — kabina', width: 900, height: 4295 },
+ { src: '/schematy/bezpieczniki-kabina-1994.svg', alt: 'Układ skrzynki bezpieczników w desce 1994: 5 rzędów gniazd z amperażem, legenda kolorów i opis obwodów', models: 'C/K Pickup 1994 — kabina', width: 900, height: 3323 },
+ { src: '/schematy/bezpieczniki-pod-maska-1996-1999.svg', alt: 'Układ skrzynki bezpieczników i przekaźników pod maską 1996–1999 z opisem obwodów wg rocznika', models: 'C/K Pickup 1996–1998, Suburban 1999 — pod maską', width: 900, height: 2745 }
+ ],
+ fuseTable: true
  },
  {
  id: 'front-suspension-c-k',

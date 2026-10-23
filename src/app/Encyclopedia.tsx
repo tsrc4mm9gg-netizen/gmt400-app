@@ -12,6 +12,7 @@ import GlobalSearch from './GlobalSearch';
 import { useVehicleMaterialFilter, VehicleMatchBadge } from './VehicleMaterialFilter';
 import type { Applicability } from '../lib/vehicle-compatibility';
 import { matchesYearRules } from '../lib/year-range.mjs';
+import VinDecoder from './VinDecoder';
 import VinHistorySummary from './VinHistorySummary';
 import { useModelSelection } from './ModelSelectionContext';
 import { findBody } from '../lib/body-styles';
@@ -134,7 +135,6 @@ export default function Encyclopedia({ initialTab }: { initialTab?: string } = {
   const [codeQuery, setCodeQuery] = useState('');
   const [diyQuery, setDiyQuery] = useState('');
   const [schemaQuery, setSchemaQuery] = useState('');
-  const [vinInput, setVinInput] = useState('');
   const [vinResult, setVinResult] = useState<Record<string, string> | null>(null);
   const [vinWarning, setVinWarning] = useState(false);
   const [myVin, setMyVin] = useState('');
@@ -662,99 +662,10 @@ export default function Encyclopedia({ initialTab }: { initialTab?: string } = {
         {tab === 'vin' && (
           <div>
             <h2 className="text-2xl mb-6" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>DEKODER VIN</h2>
-            <div className="bg-neutral-950 border border-white/10 p-4 mb-6">
-              <input aria-label="Numer VIN do dekodowania" 
-                type="text" 
-                placeholder="Wpisz 17-znakowy VIN..." 
-                value={vinInput}
-                onChange={(e) => setVinInput(e.target.value.toUpperCase())}
-                maxLength={17}
-                className="w-full bg-neutral-900 border border-white/10 px-4 py-3 text-lg font-mono tracking-wider focus:outline-none focus:border-red-600 mb-4"
-              />
-              <button 
-                onClick={() => {
-                  if (vinInput.length === 17) {
-                    const yearCodes: Record<string, string> = { 'J': '1988', 'K': '1989', 'L': '1990', 'M': '1991', 'N': '1992', 'P': '1993', 'R': '1994', 'S': '1995', 'T': '1996', 'V': '1997', 'W': '1998', 'X': '1999', 'Y': '2000' };
-                    const engineCodes: Record<string, string> = { 'Z': '4.3L V6 TBI (LB4)', 'H': '5.0L V8 TBI (L03)', 'K': '5.7L V8 TBI (L05)', 'R': '5.7L Vortec V8 (L31)', 'N': '7.4L V8 TBI (L19)', 'F': '6.5L Turbodiesel', 'S': '6.5L Turbodiesel', 'W': '4.3L V6 Vortec (L35)' };
-                    const plantCodes: Record<string, string> = { '1': 'Oshawa, Kanada', 'Z': 'Fort Wayne, Indiana', 'E': 'Pontiac, Michigan', 'J': 'Janesville, Wisconsin', 'G': 'Flint, Michigan' };
-                    const modelCodes: Record<string, string> = { 'C': 'C/K 1500', 'K': 'K1500 4x4', 'V': 'C/K 2500', 'R': 'C/K 3500', 'S': 'Suburban', 'T': 'Tahoe' };
-                    const engCode = vinInput[7];
-                    const year = yearCodes[vinInput[9]] || 'Nieznany';
-                    const engineSpecs: Record<string, {moc: string, moment: string, olej: string, filtr: string}> = {
-                      // Moc/moment wg [W1], olej z filtrem wg [OM95]/[OM99]. Sprawdź w swoim aucie / manualu.
-                      'Z': {moc: '150–165 KM', moment: '230–235 lb-ft (312–319 Nm)', olej: '4,5 qt (4,3 L)', filtr: 'wg katalogu'},
-                      'H': {moc: '175 KM', moment: '265–270 lb-ft (359–366 Nm)', olej: '5 qt (4,7 L)', filtr: 'wg katalogu'},
-                      'K': {moc: '190–210 KM', moment: '295–310 lb-ft (400–420 Nm)', olej: '5 qt (4,7 L)', filtr: 'wg katalogu'},
-                      'R': {moc: '255 KM', moment: '330 lb-ft (447 Nm)', olej: '5 qt (4,8 L)', filtr: 'PF1218 (4WD: PF52)'},
-                      'N': {moc: '230 KM', moment: '385 lb-ft (522 Nm)', olej: '7 qt (6,6 L)', filtr: 'wg katalogu'},
-                      'F': {moc: '180–195 KM', moment: '360–440 lb-ft (488–597 Nm)', olej: '7 qt (6,6 L)', filtr: 'wg katalogu'},
-                      'S': {moc: '180–195 KM', moment: '360–440 lb-ft (488–597 Nm)', olej: '7 qt (6,6 L)', filtr: 'wg katalogu'},
-                      'W': {moc: '200 KM', moment: '255 lb-ft (346 Nm)', olej: 'wg instrukcji', filtr: 'wg katalogu'},
-                    };
-                    const spec = engineSpecs[engCode] || {moc: '?', moment: '?', olej: '?', filtr: '?'};
-                    const trans = engCode === 'N' || engCode === 'F' || engCode === 'S' ? '4L80E (wzmocniona)' : '4L60E';
-                    const axle = vinInput[4] === 'R' || vinInput[4] === 'V' ? '14-bolt (2500/3500)' : '10-bolt (1500)';
-                    const result: Record<string, string> = {
-                      'VIN': vinInput,
-                      'Kraj': vinInput[0] === '1' ? 'USA' : vinInput[0] === '2' ? 'Kanada' : 'Meksyk',
-                      'Producent': vinInput[1] === 'G' ? 'General Motors' : 'Inny',
-                      'Rok produkcji': year,
-                      'Model': modelCodes[vinInput[4]] || 'Sprawdź RPO',
-                      'Silnik': engineCodes[engCode] || 'Nieznany (' + engCode + ')',
-                      'Moc': spec.moc,
-                      'Moment': spec.moment,
-                      'Skrzynia biegów': trans,
-                      'Oś tylna': axle,
-                      'Olej silnikowy': spec.olej,
-                      'Filtr oleju': 'AC Delco ' + spec.filtr,
-                      'Fabryka': plantCodes[vinInput[10]] || 'Nieznana',
-                      'Numer seryjny': vinInput.slice(11),
-                      'ATF': trans.includes('4L80') ? '6.5 L Dexron VI' : '5.0 L Dexron VI',
-                      'Płyn chłodzący': '15 L Dex-Cool',
-                      'Hamulce': vinInput[4] === 'R' ? 'Tarcze + bębny (HD)' : 'Tarcze przód + bębny tył',
-                      'Zawieszenie': vinInput[4] === 'K' ? '4x4 (torsion bars)' : '2WD (sprężyny)',
-                      'Paliwo': engCode === 'F' || engCode === 'S' ? 'Diesel' : 'Benzyna 95',
-                      'Pojemność zbiornika': '98-114 L',
-                      'Opony': vinInput[4] === 'R' ? 'LT245/75R16' : 'P235/75R15',
-                      'Masa własna': vinInput[4] === 'R' ? '2400-2800 kg' : '1800-2200 kg',
-                      'Ładowność': vinInput[4] === 'R' ? '1500+ kg' : '500-800 kg',
-                    };
-                    setVinResult(result);
-      setVinWarning(false);
-                  }
-                }}
-                className="w-full bg-red-600 text-white py-3 font-semibold hover:bg-red-500 transition"
-              >
-                DEKODUJ VIN
-              </button>
-            </div>
+            <VinDecoder onDecoded={(vin, year) => { setVinResult(vin ? { VIN: vin, Rok: year ? String(year) : '' } : null); setVinWarning(false); }} />
 
             {vinResult && (
-              <div className="space-y-4">
-              <div className="bg-neutral-950 border border-red-600/30 p-4">
-                <h3 className="text-lg font-bold text-red-400 mb-4">PODSTAWOWE DANE</h3>
-                <div className="grid sm:grid-cols-2 gap-3">
-                  {Object.entries(vinResult).slice(0, 8).map(([key, val]) => (
-                    <div key={key} className="flex justify-between border-b border-white/10 pb-2">
-                      <span className="text-neutral-500">{key}:</span>
-                      <span className="text-white font-medium">{val}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-              
-              <div className="bg-neutral-950 border border-white/10 p-4">
-                <h3 className="text-lg font-bold text-red-400 mb-4">SPECYFIKACJA TECHNICZNA</h3>
-                <div className="grid sm:grid-cols-2 gap-3">
-                  {Object.entries(vinResult).slice(8).map(([key, val]) => (
-                    <div key={key} className="flex justify-between border-b border-white/10 pb-2">
-                      <span className="text-neutral-500">{key}:</span>
-                      <span className="text-white font-medium">{val}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
+              <div className="mt-4 space-y-4">
               <div className="bg-neutral-950 border border-white/10 p-4">
                 <h3 className="text-lg font-bold text-red-400 mb-4">NUMERY OEM CZĘŚCI</h3>
                 <OemQuickList />
@@ -764,12 +675,6 @@ export default function Encyclopedia({ initialTab }: { initialTab?: string } = {
                 <h3 className="text-lg font-bold text-red-400 mb-2">POJEMNOŚCI PŁYNÓW</h3>
                 <p className="text-sm text-neutral-300">Pojemności zależą od silnika i rocznika. Zweryfikowane dane z instrukcji GM 1995 i 1999 znajdziesz w zakładce <button type="button" onClick={() => setTab('specyfikacje')} className="text-red-300 underline">Specyfikacje</button>.</p>
               </div>
-                <div className="mt-4 p-3 bg-neutral-900 text-sm text-neutral-400">
-                  <p className="mb-2"><strong className="text-white">Struktura VIN GMT400:</strong></p>
-                  <p>Poz. 1: Kraj | Poz. 2: Producent | Poz. 4-5: Model</p>
-                  <p>Poz. 8: Silnik | Poz. 10: Rok | Poz. 11: Fabryka</p>
-                  <p>Poz. 12-17: Numer seryjny</p>
-                </div>
               </div>
             )}
 

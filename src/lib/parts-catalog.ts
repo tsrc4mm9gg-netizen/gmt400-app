@@ -52,6 +52,9 @@ export const PART_SOURCES = {
   MAP2131545: { label: 'Katalog ACDelco (PartsHawk) — 213-1545', url: 'https://partshawk.com/acdelco-213-1545-manifold-absolute-pressure-sensor.html' },
   IAT213243: { label: 'Katalog ACDelco (PartsHawk) — 213-243', url: 'https://partshawk.com/acdelco-213-243-air-charge-temperature-sensor.html' },
   IAT_DEALER: { label: 'Folsom Chevrolet (katalog GM) — 1996 K1500 5.0, czujniki', url: 'https://parts.folsomchevy.com/v-1996-chevrolet-k1500-pickup--wt--5-0l-v8-gas/engine--sensors' },
+  BJ45D2279: { label: 'AutoFactsDB — ACDelco 45D2279 (sworzeń dolny, Dodge/Plymouth Neon)', url: 'https://autofactsdb.com/part/acdelco/45d2279/' },
+  WC18E660: { label: 'Parts Mart — ACDelco 18E660 (GM 19109381)', url: 'https://www.partsmartaz.net/parts/acdelco-rear-passenger-side-brake-wheel-cylinder-18e660' },
+  CS45H0065: { label: 'Amazon — ACDelco 45H0065 (GM 88913378)', url: 'https://www.amazon.com/ACDelco-45H0065-Professional-Front-Spring/dp/B000C9RW96' },
   MS98016T: { label: 'Fel-Pro — uszczelki kolektora (MS 98016 T = LS Gen III)', url: 'https://www.felpro.com/technical/tecblogs/gm-trucks-intake-manifold-gasket-issues.html' },
 } satisfies Record<string, PartSource>;
 
@@ -86,7 +89,7 @@ export const PARTS: Part[] = [
   { kat: 'skrzynia', nazwa: 'Solenoid zmiany biegów A/B', oem: 'AC Delco 24230298', opis: 'Solenoid 1-2 / 3-4 (dwa w skrzyni). To NIE jest solenoid EPC.', model: '4L60E 1993+', status: 'poprawione', src: ['SOL24230298'], uwaga: 'Usunięto duplikat „Solenoid EPC” z tym samym numerem.' },
   { kat: 'hamulce', nazwa: 'Klocki hamulcowe przód', oem: 'AC Delco 17D369MH', opis: 'Klocki hamulcowe przednie', model: 'C/K 1500 1988–1999, C/K 2500 1988–2000 (lekkie), Tahoe 1995–2000, Yukon 1992–2000 (wg katalogu)', status: 'poprawione', src: ['PADS17D369MH', 'PADS17D473'], uwaga: 'Wcześniej: 17D473CH — to klocki do Forda Escort / Mazdy.' },
   { kat: 'hamulce', nazwa: 'Tarcze hamulcowe przód', oem: 'AC Delco 18A2491', opis: 'Tarcze hamulcowe przednie', model: '1500', status: 'niezweryfikowane', uwaga: NV },
-  { kat: 'hamulce', nazwa: 'Cylinderki hamulcowe', oem: 'AC Delco 18E660', opis: 'Cylinderki bębnów tylnych', model: '1500', status: 'niezweryfikowane', uwaga: NV },
+  { kat: 'hamulce', nazwa: 'Cylinderki hamulcowe', oem: 'AC Delco 18E660', opis: 'Cylinderki bębnów tylnych', model: '1500', status: 'niezweryfikowane', src: ['WC18E660'], uwaga: `${NV}. Sklep podaje: tył, strona pasażera, odpowiednik GM 19109381 — bez listy aut, więc nie potwierdza GMT400.` },
   { kat: 'zawieszenie', nazwa: 'Amortyzatory przód', oem: 'AC Delco 504-1079', opis: 'Amortyzatory przednie', model: '1500', status: 'niezweryfikowane', uwaga: NV },
   { kat: 'zawieszenie', nazwa: 'Amortyzatory tył', oem: 'AC Delco 504-1080', opis: 'Amortyzatory tylne', model: '1500', status: 'niezweryfikowane', uwaga: NV },
   { kat: 'zawieszenie', nazwa: 'Końcówki drążków', oem: 'AC Delco 45A0526', opis: 'Końcówki drążków kierowniczych', model: 'Wszystkie', status: 'niezweryfikowane', src: ['TR45A0526'], uwaga: `${NV}. Katalogi przypisują 45A0526 innemu autu (Toyota Van).` },
@@ -109,13 +112,13 @@ export const PARTS: Part[] = [
   { kat: 'silnik', nazwa: 'Czujnik tlenu', oem: 'AC Delco 213-1552', opis: 'Sonda lambda', model: 'Wszystkie', status: 'niezweryfikowane', src: ['O2_213_1552'], uwaga: `${NV}. Katalogi przypisują 213-1552 autom 2004–2007.` },
   { kat: 'hamulce', nazwa: 'Zacisk przedni', oem: 'AC Delco 18FR1247', opis: 'Zacisk hamulcowy przód', model: '1500', status: 'niezweryfikowane', src: ['CAL18FR1247'], uwaga: `${NV}. Katalogi przypisują 18FR1247 innym autom (Toyota).` },
   { kat: 'hamulce', nazwa: 'Tarcza przednia', oem: 'AC Delco 18A258AC', opis: 'Tarcza hamulcowa przód (tylko 4×4)', model: 'K1500 1988–1999, K2500 1988–1998, K1500 Suburban 1992–1999, Tahoe 1995–2000, Yukon 1992–2000, Blazer 1992–94 (wg katalogu); 2WD — inny numer', status: 'poprawione', src: ['ROT18A258AC', 'ROT18A1532'], uwaga: 'Wcześniej: 18A1532 — to tarcza do Subaru SVX.' },
-  { kat: 'zawieszenie', nazwa: 'Wahacz dolny', oem: 'AC Delco 45D2279', opis: 'Wahacz dolny', model: '1500', status: 'niezweryfikowane', uwaga: NV },
+  { kat: 'zawieszenie', nazwa: 'Wahacz dolny', oem: 'AC Delco 45D2279', opis: 'Wahacz dolny', model: '1500', status: 'niezweryfikowane', src: ['BJ45D2279'], uwaga: `${NV}. 45D2279 to w katalogach przedni dolny sworzeń (nie wahacz) do Dodge/Plymouth Neon 2000–2005 — nie pasuje do GMT400.` },
   { kat: 'silnik', nazwa: 'Wtrysk centralny (spider)', oem: 'AC Delco 217-3028', opis: 'Zestaw wtrysku CPI/spider', model: '4.3L V6 Vortec 1996+', status: 'poprawione', src: ['INJ2173028'], uwaga: 'Wcześniej przypisany do 5.7L — to część do 4.3L.' },
   { kat: 'silnik', nazwa: 'Regulator ciśnienia', oem: 'AC Delco 217-3074', opis: 'Regulator ciśnienia paliwa', model: 'Vortec', status: 'niezweryfikowane', uwaga: `${NV}. Nie znaleziono listy zastosowań 217-3074 dla GMT400.` },
   { kat: 'silnik', nazwa: 'Czujnik stukowy (KS)', oem: 'AC Delco 213-324', opis: 'Czujnik spalania stukowego', model: 'C/K 1988–2000 (wg katalogu)', status: 'poprawione', src: ['KS213324'], uwaga: 'Wcześniej opisany jako czujnik wału (CKP) — to czujnik stukowy.' },
   { kat: 'silnik', nazwa: 'Czujnik wałka (CMP)', oem: 'AC Delco 213-920', opis: 'Czujnik położenia wałka rozrządu', model: 'Vortec 1996–1999', status: 'potwierdzone', src: ['CMP213920'] },
   { kat: 'hamulce', nazwa: 'Cylinder koła', oem: 'AC Delco 18E1277', opis: 'Cylinder hamulcowy tył', model: '1500', status: 'niezweryfikowane', uwaga: NV },
-  { kat: 'zawieszenie', nazwa: 'Sprężyna przód', oem: 'AC Delco 45H0065', opis: 'Sprężyna przednia', model: 'C1500', status: 'niezweryfikowane', uwaga: NV },
+  { kat: 'zawieszenie', nazwa: 'Sprężyna przód', oem: 'AC Delco 45H0065', opis: 'Sprężyna przednia', model: 'C1500', status: 'niezweryfikowane', src: ['CS45H0065'], uwaga: `${NV}. Sklep podaje tylko: komplet sprężyn przednich, GM 88913378 — bez listy aut.` },
   { kat: 'filtry', nazwa: 'Filtr paliwa Diesel', oem: 'AC Delco TP1006', opis: 'Filtr paliwa 6.5L', model: '6.5L diesel (wg OM95)', status: 'potwierdzone', src: ['OM95'] },
 ];
 

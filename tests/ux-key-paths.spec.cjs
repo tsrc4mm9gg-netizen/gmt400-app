@@ -241,3 +241,39 @@ test('strony kluczowe: bez przewijania w bok, bez błędów, każdy przycisk ma 
   }
   expect(errors).toEqual([]);
 });
+
+test('bezpieczniki: wyszukiwanie, filtr rocznika i brak wyników', async ({ page }) => {
+  const errors = await guard(page);
+  await page.goto(BASE + '/schematy#fuse-locations');
+  const table = page.getByTestId('fuse-table');
+  await table.scrollIntoViewIfNeeded();
+  const count = table.getByTestId('fuse-count');
+  const all = Number((await count.innerText()).match(/\d+/)[0]);
+  expect(all).toBe(65);
+  await table.getByRole('searchbox', { name: 'Szukaj w tabeli bezpieczników' }).fill('wycieraczki');
+  await expect.poll(async () => Number((await count.innerText()).match(/\d+/)[0])).toBeLessThan(all);
+  await table.getByRole('combobox', { name: 'Rocznik' }).selectOption('1994');
+  await expect(table.getByText('R1·K7', { exact: true })).toBeVisible();
+  await table.getByRole('searchbox', { name: 'Szukaj w tabeli bezpieczników' }).fill('zzzz');
+  await expect(count).toHaveText('Wyniki: 0');
+  await noHorizontalScroll(page);
+  expect(errors).toEqual([]);
+});
+
+test('dekoder VIN: cyfra kontrolna, rok, silnik z OM i błędne znaki', async ({ page }) => {
+  const errors = await guard(page);
+  await page.goto(BASE + '/?tab=vin');
+  const decoder = page.getByTestId('vin-decoder');
+  await decoder.scrollIntoViewIfNeeded();
+  const input = decoder.getByRole('textbox', { name: 'Numer VIN do dekodowania' });
+  await input.fill('1GCEK19R0VE000000');
+  await decoder.getByRole('button', { name: 'DEKODUJ VIN' }).click();
+  await expect(decoder.getByTestId('vin-year')).toContainText('1997');
+  await expect(decoder.getByTestId('vin-engine')).toContainText('RPO L31');
+  await expect(decoder.getByTestId('vin-check')).toContainText('nie zgadza');
+  await input.fill('1GCEK19R0VE00000O');
+  await decoder.getByRole('button', { name: 'DEKODUJ VIN' }).click();
+  await expect(decoder.getByTestId('vin-errors')).toContainText('I, O ani Q');
+  await noHorizontalScroll(page);
+  expect(errors).toEqual([]);
+});

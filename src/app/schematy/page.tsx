@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { SCHEMATICS } from '@/lib/schematics';
 import SchematicViewer from './SchematicViewer';
 import SchematicPhotos from './SchematicPhotos';
+import FuseTable from './FuseTable';
 import Breadcrumbs from '../ui/Breadcrumbs';
 
 export const metadata = {
@@ -31,16 +32,17 @@ export default function SchematyPage() {
         <section key={item.id} id={item.id} className="mt-8 scroll-mt-24 rounded-xl border border-white/10 bg-neutral-950 p-4 sm:p-5">
           <h2 className="text-xl font-semibold text-red-300">{item.title}</h2>
           <p className="mt-1 text-sm text-neutral-400">Zakres: {item.scope}</p>
-          {item.diagram && (
-            <figure className="mt-4">
+          {[item.diagram, ...(item.extraDiagrams ?? [])].filter(d => d !== undefined).map(d => (
+            <figure key={d.src} className="mt-4">
               <div className="mb-2 flex flex-wrap gap-2 text-xs">
-                <span className="rounded-full border border-red-600/50 bg-red-600/10 px-3 py-1 text-red-200">Model i lata: {item.diagram.models}</span>
+                <span className="rounded-full border border-red-600/50 bg-red-600/10 px-3 py-1 text-red-200">Model i lata: {d.models}</span>
                 <span className="rounded-full border border-white/15 bg-white/5 px-3 py-1 text-neutral-200">⚠ Sprawdź w swoim aucie / manualu</span>
               </div>
-              <SchematicViewer src={item.diagram.src} alt={item.diagram.alt} width={item.diagram.width} height={item.diagram.height} title={item.title} />
+              <SchematicViewer src={d.src} alt={d.alt} width={d.width} height={d.height} title={item.extraDiagrams?.length ? `${item.title} — ${d.models}` : item.title} />
               <figcaption className="mt-2 text-xs text-neutral-400">Stuknij schemat, aby otworzyć go na pełnym ekranie i powiększyć dwoma palcami. Rysunek poglądowy — nie zastępuje FSM.</figcaption>
             </figure>
-          )}
+          ))}
+          {item.fuseTable && <FuseTable />}
           {item.photos && item.photos.length > 0 && <SchematicPhotos photos={item.photos} title={item.title} />}
           <p className="mt-3 text-neutral-200">{item.description}</p>
           <div className="mt-4 overflow-x-auto">
