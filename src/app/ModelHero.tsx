@@ -38,9 +38,15 @@ export default function ModelHero() {
 
   const body = BODY_STYLES[index];
   const displayYear = filters.year || body.years.split('–')[0];
+  const hasFilters = Boolean(filters.year || filters.engine || filters.drivetrain);
 
   const emit = (bodyId: string | null, f: Filters) => {
     setSelection({ bodyId, filters: f });
+  };
+
+  const clearFilters = () => {
+    setFilters({});
+    emit(body.id, {});
   };
 
   const next = () => {
@@ -132,38 +138,48 @@ export default function ModelHero() {
       </button>
 
       {showFilters && (
-        <div className="mt-3 grid grid-cols-3 gap-2">
-          <select
-            value={filters.year || ''}
-            onChange={(e) => updateFilter('year', e.target.value)}
-            className="rounded-md border border-white/15 bg-neutral-900 px-2 py-2 text-sm text-white"
-          >
-            <option value="">Rocznik</option>
-            {['1988','1989','1990','1991','1992','1993','1994','1995','1996','1997','1998','1999','2000'].map(y => (
-              <option key={y} value={y}>{y}</option>
-            ))}
-          </select>
-          <select
-            value={filters.engine || ''}
-            onChange={(e) => updateFilter('engine', e.target.value)}
-            className="rounded-md border border-white/15 bg-neutral-900 px-2 py-2 text-sm text-white"
-          >
-            <option value="">Silnik</option>
-            <option value="4.3">4.3L</option>
-            <option value="5.0">5.0L</option>
-            <option value="5.7">5.7L</option>
-            <option value="6.5">6.5L diesel</option>
-            <option value="7.4">7.4L</option>
-          </select>
-          <select
-            value={filters.drivetrain || ''}
-            onChange={(e) => updateFilter('drivetrain', e.target.value)}
-            className="rounded-md border border-white/15 bg-neutral-900 px-2 py-2 text-sm text-white"
-          >
-            <option value="">Napęd</option>
-            <option value="2wd">2WD</option>
-            <option value="4wd">4WD</option>
-          </select>
+        <div className="mt-3 space-y-2">
+          <div className="grid grid-cols-3 gap-2">
+            <select
+              value={filters.year || ''}
+              onChange={(e) => updateFilter('year', e.target.value)}
+              className="rounded-md border border-white/15 bg-neutral-900 px-2 py-2 text-sm text-white"
+            >
+              <option value="">Rocznik</option>
+              {['1988','1989','1990','1991','1992','1993','1994','1995','1996','1997','1998','1999','2000'].map(y => (
+                <option key={y} value={y}>{y}</option>
+              ))}
+            </select>
+            <select
+              value={filters.engine || ''}
+              onChange={(e) => updateFilter('engine', e.target.value)}
+              className="rounded-md border border-white/15 bg-neutral-900 px-2 py-2 text-sm text-white"
+            >
+              <option value="">Silnik</option>
+              <option value="4.3">4.3L</option>
+              <option value="5.0">5.0L</option>
+              <option value="5.7">5.7L</option>
+              <option value="6.5">6.5L diesel</option>
+              <option value="7.4">7.4L</option>
+            </select>
+            <select
+              value={filters.drivetrain || ''}
+              onChange={(e) => updateFilter('drivetrain', e.target.value)}
+              className="rounded-md border border-white/15 bg-neutral-900 px-2 py-2 text-sm text-white"
+            >
+              <option value="">Napęd</option>
+              <option value="2wd">2WD</option>
+              <option value="4wd">4WD</option>
+            </select>
+          </div>
+          {hasFilters && (
+            <button
+              onClick={clearFilters}
+              className="w-full rounded-md border border-red-600/40 bg-red-950/40 py-2 text-sm text-red-300"
+            >
+              Wyczyść wybór
+            </button>
+          )}
         </div>
       )}
     </section>
