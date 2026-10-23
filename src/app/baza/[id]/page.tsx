@@ -147,7 +147,7 @@ export default async function KnowledgeEntry({ params }: Props) {
     <div className="mt-1 flex flex-wrap items-center gap-x-3 text-sm">
       <BackLink fallback="/szukaj" label="← Wróć" className="inline-flex min-h-11 items-center text-red-400 underline" />
     </div>
-    <article className="mt-6 space-y-6">
+    <article className="mt-6 min-w-0 space-y-6 [overflow-wrap:anywhere]">
       <div className="flex flex-wrap gap-2">
         {entry.Typ && <span className="rounded-full border border-red-600/40 bg-red-600/10 px-3 py-1 text-xs font-medium text-red-300">Typ: {entry.Typ}</span>}
         {(entry.Modele.length ? entry.Modele.join(', ') : entry.Model) && <span className="rounded-full border border-white/20 bg-white/5 px-3 py-1 text-xs text-neutral-200">Model: {entry.Modele.length ? entry.Modele.map(m => m === 'Wszystkie' ? 'Wszystkie GMT400' : m).join(', ') : entry.Model}</span>}
