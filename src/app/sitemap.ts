@@ -1,3 +1,4 @@
+import { BODY_STYLES } from '../lib/body-styles';
 import type { MetadataRoute } from 'next'
 import { OBD_CODES } from '@/lib/obd-codes'
 
@@ -32,6 +33,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${BASE}/baza`, lastModified: UPDATED, changeFrequency: 'weekly', priority: 0.9 },
     { url: `${BASE}/szukaj`, lastModified: UPDATED, changeFrequency: 'weekly', priority: 0.8 },
     { url: `${BASE}/kody-obd`, lastModified: UPDATED, changeFrequency: 'monthly', priority: 0.9 },
+    { url: `${BASE}/modele`, lastModified: UPDATED, changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${BASE}/schematy`, lastModified: UPDATED, changeFrequency: 'monthly', priority: 0.7 },
+    ...BODY_STYLES.map(body => ({ url: `${BASE}/modele/${body.id}`, lastModified: UPDATED, changeFrequency: 'monthly' as const, priority: 0.7 })),
     { url: `${BASE}/narzedzia`, lastModified: UPDATED, changeFrequency: 'monthly', priority: 0.6 },
     { url: `${BASE}/narzedzia/rpo`, lastModified: UPDATED, changeFrequency: 'monthly', priority: 0.5 },
     { url: `${BASE}/narzedzia/diagnostyka`, lastModified: UPDATED, changeFrequency: 'monthly', priority: 0.5 },

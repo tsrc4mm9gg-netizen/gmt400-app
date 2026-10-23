@@ -74,7 +74,7 @@ export default function ObdCodesPage({ searchParams }: { searchParams: Promise<{
         <ul className="grid gap-4 sm:grid-cols-2">
           {results.map(item => (
             <li key={item.code} className="rounded-xl border border-white/10 bg-neutral-900/60 p-4">
-              <Link href={`/kody-obd/${item.code.toLowerCase()}`} className="text-lg font-semibold text-red-400 underline">{item.code}</Link>
+              <Link href={`/kody-obd/${item.code.toLowerCase()}`} className="inline-flex min-h-11 items-center text-lg font-semibold text-red-400 underline">{item.code}</Link>
               <p className="mt-1 text-neutral-200">{item.title}</p>
               <p className="mt-2 text-xs uppercase tracking-wide text-neutral-400">{item.systems.join(' · ')}</p>
             </li>

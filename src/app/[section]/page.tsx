@@ -13,7 +13,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 async function Category({ params }: Props) {
   const { section } = await params;
   if (!Object.hasOwn(TITLES, section)) notFound();
-  return <main className="mx-auto min-h-screen max-w-5xl bg-black px-5 py-10 pb-28 text-white"><a href="/" className="text-red-400 underline">Wróć do encyklopedii</a><h1 className="mt-6 text-3xl font-bold text-white">{TITLES[section]}</h1><KnowledgeCategory section={section} /></main>;
+  return <main className="mx-auto min-h-screen max-w-5xl bg-black px-5 py-10 pb-28 text-white"><a href="/" className="inline-flex min-h-11 items-center text-red-400 underline">Wróć do encyklopedii</a><h1 className="mt-6 text-3xl font-bold text-white">{TITLES[section]}</h1><KnowledgeCategory section={section} /></main>;
 }
 export default function CategoryPage(props: Props) {
   return <Suspense fallback={<p className="bg-black p-8 text-white" role="status">Ładowanie kategorii…</p>}><Category {...props} /></Suspense>;

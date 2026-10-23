@@ -47,7 +47,7 @@ export default async function ObdCodePage({ params }: { params: Promise<{ code: 
   return (
     <main className="mx-auto max-w-3xl px-4 py-8">
       <nav aria-label="Nawigacja" className="mb-4">
-        <Link href="/kody-obd" className="text-red-400 underline">← Wszystkie kody OBD</Link>
+        <Link href="/kody-obd" className="inline-flex min-h-11 items-center text-red-400 underline">← Wszystkie kody OBD</Link>
       </nav>
       <header>
         <p className="text-sm uppercase tracking-wide text-red-400">Kod OBD-II</p>
@@ -74,7 +74,7 @@ export default async function ObdCodePage({ params }: { params: Promise<{ code: 
           <ul className="mt-3 grid gap-3 sm:grid-cols-2">
             {relatedCodes.map(related => (
               <li key={related.code} className="rounded-xl border border-white/10 bg-neutral-900/60 p-4">
-                <Link href={`/kody-obd/${related.code.toLowerCase()}`} className="font-semibold text-red-400 underline">{related.code}</Link>
+                <Link href={`/kody-obd/${related.code.toLowerCase()}`} className="inline-flex min-h-11 items-center font-semibold text-red-400 underline">{related.code}</Link>
                 <p className="mt-1 text-sm text-neutral-300">{related.title}</p>
               </li>
             ))}

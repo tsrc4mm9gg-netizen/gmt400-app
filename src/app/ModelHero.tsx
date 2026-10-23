@@ -2,8 +2,10 @@
 
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { useModelSelection, type Filters } from './ModelSelectionContext';
 import { BODY_STYLES, bodyYears, yearOptions } from '../lib/body-styles';
+import { bodyImage } from '../lib/model-images';
 
 const ENGINES = [
   { value: '4.3', label: '4.3 V6' },
@@ -77,37 +79,36 @@ export default function ModelHero() {
         <div className="relative aspect-[16/9] w-full">
           <Image
             key={body.image}
-            src={body.image}
+            src={bodyImage(body)}
             alt={`${body.name} (${bodyYears(body)})`}
             fill
             sizes="(max-width: 768px) 100vw, 768px"
             className="object-cover"
             priority={index === 0}
-            unoptimized
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent" />
         </div>
 
-        <div className="absolute bottom-0 left-0 right-0 p-4 text-white">
-          <h2 className="text-xl font-bold sm:text-2xl">{body.name}</h2>
-          <p className="text-sm text-neutral-300">
-            {filters.year ? filters.year : bodyYears(body)}
-            {filters.engine ? ` · ${ENGINES.find(e => e.value === filters.engine)?.label ?? filters.engine}` : ''}
-            {filters.drivetrain ? ` · ${filters.drivetrain.toUpperCase()}` : ''}
-          </p>
-          {body.note && <p className="mt-0.5 text-xs text-neutral-400">{body.note}</p>}
+        <div className="flex items-center gap-2 border-t border-white/10 bg-neutral-950 px-2 py-3 text-white">
+          <button onClick={prev} className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-white/5 text-2xl text-white ring-1 ring-white/10 hover:bg-red-600" aria-label="Poprzedni model">‹</button>
+          <div className="min-w-0 flex-1 text-center">
+            <h2 className="truncate text-xl font-bold sm:text-2xl">{body.name}</h2>
+            <p className="text-sm text-neutral-300">
+              {filters.year ? filters.year : bodyYears(body)}
+              {filters.engine ? ` · ${ENGINES.find(e => e.value === filters.engine)?.label ?? filters.engine}` : ''}
+              {filters.drivetrain ? ` · ${filters.drivetrain.toUpperCase()}` : ''}
+            </p>
+            {body.note && <p className="mt-0.5 text-xs text-neutral-400">{body.note}</p>}
+          </div>
+          <button onClick={next} className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-white/5 text-2xl text-white ring-1 ring-white/10 hover:bg-red-600" aria-label="Następny model">›</button>
         </div>
-
-        <button onClick={prev} className="absolute left-2 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-black/60 text-2xl text-white" aria-label="Poprzedni model">‹</button>
-        <button onClick={next} className="absolute right-2 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-black/60 text-2xl text-white" aria-label="Następny model">›</button>
       </div>
 
-      <div className="mt-3 flex justify-center gap-1.5">
+      <div className="-mx-2 mt-1 flex justify-center">
         {BODY_STYLES.map((b, i) => (
           <button
             key={b.id}
             onClick={() => go(i)}
-            className="flex h-6 items-center"
+            className="flex h-11 w-10 items-center justify-center"
             aria-label={b.name}
             aria-current={i === index ? 'true' : undefined}
           >
@@ -115,6 +116,13 @@ export default function ModelHero() {
           </button>
         ))}
       </div>
+
+      <Link
+        href={`/modele/${body.id}`}
+        className="mt-1 flex min-h-12 w-full items-center justify-center gap-2 rounded-lg px-4 py-2 text-center border border-red-600/50 bg-red-600/10 text-sm font-semibold text-white hover:bg-red-600/25"
+      >
+        Strona modelu: {body.name} — lata, silniki, usterki, DIY <span aria-hidden="true" className="text-red-300">→</span>
+      </Link>
 
       <button
         onClick={() => setShowFilters(!showFilters)}

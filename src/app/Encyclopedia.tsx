@@ -16,6 +16,8 @@ import VinHistorySummary from './VinHistorySummary';
 import { useModelSelection } from './ModelSelectionContext';
 import { findBody } from '../lib/body-styles';
 import { EngineTable, FluidsTable } from './VerifiedSpecs';
+import ModelThumb from './ModelThumb';
+import { bodyForEntry } from '../lib/model-images';
 
 type Item = {
   id?: string;
@@ -385,8 +387,8 @@ export default function Encyclopedia({ initialTab }: { initialTab?: string } = {
       )}
 
 
-      <div className="bg-neutral-900/50 border-b border-white/5 px-4 py-2 text-xs text-neutral-500">
-        <a href="/" className="hover:text-white">Strona główna</a>
+      <div className="flex items-center bg-neutral-900/50 border-b border-white/5 px-4 text-sm text-neutral-500">
+        <a href="/" className="inline-flex min-h-11 items-center hover:text-white">Strona główna</a>
         <span className="mx-2">›</span>
         <span className="text-red-400">{CATEGORIES.find(c => c.id === tab)?.label || tab}</span>
       </div>
@@ -432,23 +434,28 @@ export default function Encyclopedia({ initialTab }: { initialTab?: string } = {
         <div className="max-w-7xl mx-auto px-4 flex flex-wrap items-center gap-2 text-sm">
           {selectedBody ? (
             <>
+              <ModelThumb body={selectedBody} label={false} />
               <span className="text-neutral-400">Pokazuję materiały dla:</span>
               <span className="rounded-md bg-red-600 px-3 py-1.5 font-semibold text-white">
                 {selectedBody.name}{modelFilters.year ? ` · ${modelFilters.year}` : ` · ${selectedBody.from}–${selectedBody.to}`}{modelFilters.engine ? ` · ${modelFilters.engine}` : ''}{modelFilters.drivetrain ? ` · ${modelFilters.drivetrain.toUpperCase()}` : ''}
               </span>
+              <a href={`/modele/${selectedBody.id}`} className="inline-flex min-h-11 items-center px-2 text-red-300 underline">Strona modelu</a>
               <a href="/" className="inline-flex min-h-11 items-center px-2 text-red-300 underline">Zmień model</a>
               <button type="button" onClick={clearSelection} className="min-h-11 px-2 text-neutral-400 underline hover:text-white">Wszystkie modele</button>
+              <a href="#sekcje" className="inline-flex min-h-11 items-center px-2 text-neutral-400 underline md:hidden">Inne działy ↓</a>
             </>
           ) : (
             <>
               <span className="text-neutral-400">Wszystkie modele GMT400.</span>
               <a href="/" className="inline-flex min-h-11 items-center px-2 text-red-300 underline">Wybierz swój model na stronie głównej</a>
+              <a href="/modele" className="inline-flex min-h-11 items-center px-2 text-red-300 underline">Katalog modeli</a>
             </>
           )}
         </div>
       </div>
 
-      <div className="bg-neutral-900 py-4">
+      <div className="flex flex-col [&>*]:w-full [&>*]:min-w-0 [overflow-wrap:anywhere]">
+      <div id="sekcje" className="order-last bg-neutral-900 py-4 md:order-none">
         <div className="max-w-7xl mx-auto px-4">
           <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-7 gap-2">
             <GroupedNavigation categories={CATEGORIES} active={tab} instance="sections" onSelect={setTab} />
@@ -460,7 +467,7 @@ export default function Encyclopedia({ initialTab }: { initialTab?: string } = {
         <div className="max-w-7xl mx-auto px-4 pt-4">
           <div className="bg-red-950/50 border border-red-500/30 text-red-300 px-4 py-3 rounded text-sm flex items-center justify-between">
             <span>{error}</span>
-            <button onClick={() => window.location.reload()} className="underline text-red-200">Odśwież</button>
+            <button onClick={() => window.location.reload()} className="min-h-11 px-2 underline text-red-200">Odśwież</button>
           </div>
         </div>
       )}
@@ -470,7 +477,7 @@ export default function Encyclopedia({ initialTab }: { initialTab?: string } = {
         {selectedModel !== 'Wszystkie' && (
           <div className="mb-6 flex items-center justify-between bg-red-600/10 border border-red-600/30 p-3">
             <span className="text-red-400">Filtr: <strong>{selectedModel}</strong></span>
-            <button onClick={() => selectModel('Wszystkie')} className="text-sm text-neutral-400 hover:text-white">Wyczyść ×</button>
+            <button onClick={() => selectModel('Wszystkie')} className="min-h-11 px-2 text-sm text-neutral-400 hover:text-white">Wyczyść ×</button>
           </div>
         )}
 
@@ -491,6 +498,7 @@ export default function Encyclopedia({ initialTab }: { initialTab?: string } = {
               {filteredCodes.filter(c => !codeQuery || c.Nazwa.toLowerCase().includes(codeQuery.toLowerCase()) || (c.Opis && c.Opis.toLowerCase().includes(codeQuery.toLowerCase()))).map((c, idx) => (
                 <div key={idx} className="bg-neutral-950 border border-white/10 p-4">
                   <h3 className="font-semibold text-red-400 mb-1">{c.Nazwa}</h3>
+                  {(() => { const body = bodyForEntry(c); return body ? <div className="mb-2"><ModelThumb body={body} /></div> : null; })()}
                       <VehicleMatchBadge item={c} />
                   {c.Opis && <p className="text-neutral-400 text-sm mb-2">{c.Opis}</p>}
                   {c.Rozwiązanie && <p className="text-neutral-300 text-sm whitespace-pre-line">{c.Rozwiązanie}</p>}
@@ -519,7 +527,7 @@ export default function Encyclopedia({ initialTab }: { initialTab?: string } = {
                   <select aria-label="Model pojazdu — filtr usterek" 
                     value={issueModel} 
                     onChange={(e) => setIssueModel(e.target.value)}
-                    className="w-full bg-neutral-900 border border-white/10 px-3 py-2 text-sm focus:outline-none focus:border-red-600"
+                    className="min-h-11 w-full bg-neutral-900 border border-white/10 px-3 py-2 text-base focus:outline-none focus:border-red-600"
                   >
                     <option value="">Wszystkie modele</option>
                     {uniqueModels.filter(m => m !== 'Wszystkie').map(m => (
@@ -532,7 +540,7 @@ export default function Encyclopedia({ initialTab }: { initialTab?: string } = {
                   <select aria-label="Rocznik pojazdu — filtr usterek" 
                     value={issueYear} 
                     onChange={(e) => setIssueYear(e.target.value)}
-                    className="w-full bg-neutral-900 border border-white/10 px-3 py-2 text-sm focus:outline-none focus:border-red-600"
+                    className="min-h-11 w-full bg-neutral-900 border border-white/10 px-3 py-2 text-base focus:outline-none focus:border-red-600"
                   >
                     <option value="">Wszystkie roczniki</option>
                     {years.map(y => (
@@ -552,11 +560,11 @@ export default function Encyclopedia({ initialTab }: { initialTab?: string } = {
                     <div key={idx} className="bg-neutral-950 border border-white/10 overflow-hidden">
                       {issueImg && <button type="button" aria-label="Powiększ ilustrację" className="block w-full rounded focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-red-500" onClick={() => setLightbox(issueImg)}><img loading="lazy" src={issueImg} alt="schemat" className="w-full max-h-48 object-contain bg-white cursor-pointer"  /></button>}
                       <div className="p-4">
-                        <div className="flex justify-between items-start mb-2">
+                        <div className="flex flex-wrap justify-between items-start gap-2 mb-2">
                           <h3 className="font-semibold">{i.Nazwa}</h3>
-                      <VehicleMatchBadge item={i} />
-                          <span className="text-xs bg-white/10 px-2 py-0.5 text-neutral-400">{i.Model}</span>
+                          {(() => { const body = bodyForEntry(i); return body ? <ModelThumb body={body} /> : <span className="text-xs bg-white/10 px-2 py-0.5 text-neutral-400">{i.Model === 'Wszystkie' ? 'Wszystkie GMT400' : i.Model}</span>; })()}
                         </div>
+                        <VehicleMatchBadge item={i} />
                         {i.Objawy && <p className="text-neutral-400 text-sm mb-2"><span className="text-red-400">Objawy:</span> {i.Objawy}</p>}
                         {i.Rozwiązanie && <p className="text-neutral-300 text-sm whitespace-pre-line">{i.Rozwiązanie}</p>}
                       </div>
@@ -572,7 +580,7 @@ export default function Encyclopedia({ initialTab }: { initialTab?: string } = {
                   <p className="text-neutral-500 mb-4">Lista usterek jest widoczna poniżej. Użyj filtrów lub wyszukiwania, aby zawęzić wyniki.</p>
                   <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 text-sm mb-8">
                     {['wyciek', '4L60E', 'kolektor', 'hamulce', '4x4', 'pompa'].map(k => (
-                      <button key={k} onClick={() => setIssueQuery(k)} className="bg-neutral-800 hover:bg-neutral-700 px-3 py-2">{k}</button>
+                      <button key={k} onClick={() => setIssueQuery(k)} className="min-h-11 bg-neutral-800 hover:bg-neutral-700 px-3 py-2">{k}</button>
                     ))}
                   </div>
                 </div>
@@ -615,11 +623,11 @@ export default function Encyclopedia({ initialTab }: { initialTab?: string } = {
                     {tipImg && <button type="button" aria-label="Powiększ ilustrację" className="block w-full rounded focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-red-500" onClick={() => setLightbox(tipImg)}><img loading="lazy" src={tipImg} alt="diagram" className="w-full max-h-64 object-contain bg-white cursor-pointer"  /></button>}
                     <div className="p-4">
                       <h3 className="font-semibold mb-2">{t.Nazwa}</h3>
-                      <VehicleMatchBadge item={t} />
+                      {(() => { const body = bodyForEntry(t); return body ? <div className="mb-2"><ModelThumb body={body} /></div> : null; })()}
                       <VehicleMatchBadge item={t} />
                       {t.Opis && <p className="mb-3 text-neutral-400 text-sm whitespace-pre-line">{t.Opis}</p>}
                       <p className="text-neutral-300 text-sm whitespace-pre-line">{t.Rozwiązanie}</p>
-                      {t.id && <a className="mt-3 inline-block text-sm text-red-400 underline" href={'/baza/' + encodeURIComponent(t.id)}>Otwórz pełną instrukcję z ilustracjami</a>}
+                      {t.id && <a className="mt-2 inline-flex min-h-11 items-center text-sm text-red-400 underline" href={'/baza/' + encodeURIComponent(t.id)}>Otwórz pełną instrukcję z ilustracjami</a>}
                     </div>
                   </div>
                 );
@@ -633,12 +641,12 @@ export default function Encyclopedia({ initialTab }: { initialTab?: string } = {
             <h3 className="font-semibold text-red-400 mb-3">PORADNIKI WIDEO</h3>
             <div className="grid sm:grid-cols-2 gap-4">
               <div className="aspect-video bg-neutral-900 flex items-center justify-center">
-                <a href="https://www.youtube.com/results?search_query=GMT400+DIY+repair" target="_blank" className="text-red-400 hover:underline">
+                <a href="https://www.youtube.com/results?search_query=GMT400+DIY+repair" target="_blank" className="inline-flex min-h-11 items-center text-red-400 hover:underline">
                   ▶ YouTube: GMT400 DIY
                 </a>
               </div>
               <div className="aspect-video bg-neutral-900 flex items-center justify-center">
-                <a href="https://www.youtube.com/results?search_query=GMT400+4L60E+rebuild" target="_blank" className="text-red-400 hover:underline">
+                <a href="https://www.youtube.com/results?search_query=GMT400+4L60E+rebuild" target="_blank" className="inline-flex min-h-11 items-center text-red-400 hover:underline">
                   ▶ YouTube: 4L60E
                 </a>
               </div>
@@ -1577,6 +1585,7 @@ export default function Encyclopedia({ initialTab }: { initialTab?: string } = {
             </div>
           </div>
         )}
+      </div>
       </div>
     </div>
   );

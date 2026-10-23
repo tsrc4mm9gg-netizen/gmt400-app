@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Źródła:
+- Numeracja i funkcje pinów J1962 (2 = J1850 bus+, PWM i VPW; 10 = J1850 bus- tylko PWM; 4 masa podwozia; 5 masa sygnałowa;
+  6/14 CAN; 7/15 K/L-line; 16 +12 V; 9 "GM: 8192 baud ALDL where fitted"): Wikipedia "On-board diagnostics", sekcja OBD-II diagnostic connector.
+  https://en.wikipedia.org/wiki/On-board_diagnostics
+- J1850 VPW jako standard GM ("Class 2 (GM, 10.4K)"): ten sam artykuł.
+- OBD-II od 1996 w GMT400: Wikipedia "Chevrolet C/K (fourth generation)".
+- Kształt gniazda: por. Commons File:OBD-II type A female connector pinout.svg (CC0, Xoneca).
+Lokalizacja "pod deską po stronie kierowcy" - typowa; potwierdź w instrukcji obsługi rocznika.
+Wersja ciemna (kolory dopasowane do gmt400.pl).
+Licencja: własny rysunek dla gmt400.pl (do decyzji autora, np. CC BY 4.0).
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 560" width="1100" height="560" role="img" aria-label="OBD-II: gniazdo diagnostyczne DLC 16-pin">
+<title>OBD-II: gniazdo diagnostyczne DLC 16-pin</title>
+<rect width="1100" height="560" fill="#0d0d0f"/>
+<g font-family='DejaVu Sans, Arial, sans-serif' fill="#f5f5f5">
+<text x="30" y="44" font-size="26" font-weight="bold">OBD-II: gniazdo diagnostyczne DLC 16-pin</text>
+<text x="30" y="72" font-size="15" fill="#a3a3a3">Zakres: GMT400 1996–2000 (OBD-II)</text>
+<text x="30" y="110" font-size="16" >Gniazdo DLC (SAE J1962) pod deską po stronie kierowcy — widok od czoła gniazda</text>
+<path d="M80 122 H 606 L 578 294 H 108 Z" fill="#27272a" stroke="#f5f5f5" stroke-width="3"/>
+<rect x="102" y="148" width="40" height="40" rx="5" fill="#1c1c1f" stroke="#f5f5f5" stroke-width="2"/>
+<text x="116" y="174" font-size="17" font-weight="bold">1</text>
+<rect x="164" y="148" width="40" height="40" rx="5" fill="#991b1b" stroke="#f5f5f5" stroke-width="2"/>
+<text x="178" y="174" font-size="17" font-weight="bold">2</text>
+<rect x="226" y="148" width="40" height="40" rx="5" fill="#1c1c1f" stroke="#f5f5f5" stroke-width="2"/>
+<text x="240" y="174" font-size="17" font-weight="bold">3</text>
+<rect x="288" y="148" width="40" height="40" rx="5" fill="#52525b" stroke="#f5f5f5" stroke-width="2"/>
+<text x="302" y="174" font-size="17" font-weight="bold">4</text>
+<rect x="350" y="148" width="40" height="40" rx="5" fill="#52525b" stroke="#f5f5f5" stroke-width="2"/>
+<text x="364" y="174" font-size="17" font-weight="bold">5</text>
+<rect x="412" y="148" width="40" height="40" rx="5" fill="#1c1c1f" stroke="#f5f5f5" stroke-width="2"/>
+<text x="426" y="174" font-size="17" font-weight="bold">6</text>
+<rect x="474" y="148" width="40" height="40" rx="5" fill="#1c1c1f" stroke="#f5f5f5" stroke-width="2"/>
+<text x="488" y="174" font-size="17" font-weight="bold">7</text>
+<rect x="536" y="148" width="40" height="40" rx="5" fill="#1c1c1f" stroke="#f5f5f5" stroke-width="2"/>
+<text x="550" y="174" font-size="17" font-weight="bold">8</text>
+<rect x="102" y="210" width="40" height="40" rx="5" fill="#1c1c1f" stroke="#f5f5f5" stroke-width="2"/>
+<text x="116" y="236" font-size="17" font-weight="bold">9</text>
+<rect x="164" y="210" width="40" height="40" rx="5" fill="#1c1c1f" stroke="#f5f5f5" stroke-width="2"/>
+<text x="173" y="236" font-size="17" font-weight="bold">10</text>
+<rect x="226" y="210" width="40" height="40" rx="5" fill="#1c1c1f" stroke="#f5f5f5" stroke-width="2"/>
+<text x="235" y="236" font-size="17" font-weight="bold">11</text>
+<rect x="288" y="210" width="40" height="40" rx="5" fill="#1c1c1f" stroke="#f5f5f5" stroke-width="2"/>
+<text x="297" y="236" font-size="17" font-weight="bold">12</text>
+<rect x="350" y="210" width="40" height="40" rx="5" fill="#1c1c1f" stroke="#f5f5f5" stroke-width="2"/>
+<text x="359" y="236" font-size="17" font-weight="bold">13</text>
+<rect x="412" y="210" width="40" height="40" rx="5" fill="#1c1c1f" stroke="#f5f5f5" stroke-width="2"/>
+<text x="421" y="236" font-size="17" font-weight="bold">14</text>
+<rect x="474" y="210" width="40" height="40" rx="5" fill="#1c1c1f" stroke="#f5f5f5" stroke-width="2"/>
+<text x="483" y="236" font-size="17" font-weight="bold">15</text>
+<rect x="536" y="210" width="40" height="40" rx="5" fill="#f87171" stroke="#f5f5f5" stroke-width="2"/>
+<text x="545" y="236" font-size="17" font-weight="bold">16</text>
+<rect x="640" y="134" width="20" height="20" fill="#991b1b" stroke="#f5f5f5"/>
+<text x="670" y="150" font-size="16" >pin 2: J1850 VPW (GM Class 2) — dane OBD-II</text>
+<rect x="640" y="166" width="20" height="20" fill="#52525b" stroke="#f5f5f5"/>
+<text x="670" y="182" font-size="16" >pin 4: masa podwozia</text>
+<rect x="640" y="198" width="20" height="20" fill="#52525b" stroke="#f5f5f5"/>
+<text x="670" y="214" font-size="16" >pin 5: masa sygnałowa</text>
+<rect x="640" y="230" width="20" height="20" fill="#f87171" stroke="#f5f5f5"/>
+<text x="670" y="246" font-size="16" >pin 16: +12 V akumulator (stałe)</text>
+<text x="640" y="284" font-size="14" fill="#a3a3a3">Pozostałe piny: inne protokoły J1962 (CAN 6/14,</text>
+<text x="640" y="304" font-size="14" fill="#a3a3a3">K/L-line 7/15, J1850 PWM 10) lub piny producenta</text>
+<text x="640" y="324" font-size="14" fill="#a3a3a3">(np. pin 9: GM ALDL 8192 bd „gdzie występuje”).</text>
+<text x="640" y="344" font-size="14" fill="#a3a3a3">Co jest obsadzone w Twoim aucie — sprawdź w FSM.</text>
+<text x="40" y="370" font-size="16" >• OBD-II w GMT400: od rocznika 1996 (silniki Vortec). Kody P0xxx dotyczą tylko 1996+.</text>
+<text x="40" y="400" font-size="16" >• Do odczytu potrzebny skaner OBD-II obsługujący J1850 VPW (standard GM).</text>
+<text x="40" y="430" font-size="16" >• 1988–1995: inne, 12-pinowe złącze ALDL i kody 2-cyfrowe — patrz osobny schemat.</text>
+<rect x="20" y="506" width="1060" height="38" rx="6" fill="#2a0f10" stroke="#dc2626"/>
+<text x="34" y="531" font-size="15" font-weight="bold" fill="#fca5a5">⚠ Sprawdź w swoim aucie / manualu — GMT400 ma wiele wariantów.</text>
+</g></svg>

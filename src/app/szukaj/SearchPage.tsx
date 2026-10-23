@@ -3,6 +3,8 @@ import { useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
 import { buildKnowledgeIndex, getKnowledgeEntries, searchKnowledge, type KnowledgeEntry } from '../../lib/knowledge-index';
 import RandomCodeLink from './random-code-link';
+import ModelThumb from '../ModelThumb';
+import { bodyForEntry } from '../../lib/model-images';
 
 type Entry = KnowledgeEntry;
 const queryExamples = ['P0300', '4L60E', 'EGR', 'MAF', 'EVAP', 'O2 sensor', 'fuel trim', 'idle air control'];
@@ -36,9 +38,10 @@ export default function SearchPage({ query }: { query: string }) {
 
   return (
     <main className="mx-auto max-w-4xl px-4 py-8 text-white">
-      <nav aria-label="Nawigacja" className="mb-6 flex gap-4">
-        <Link href="/" className="text-red-400 underline">Strona główna</Link>
-        <Link href="/kody-obd" className="text-red-400 underline">Kody OBD</Link>
+      <nav aria-label="Nawigacja" className="mb-4 flex flex-wrap gap-x-4">
+        <Link href="/" className="inline-flex min-h-11 items-center text-red-400 underline">Strona główna</Link>
+        <Link href="/modele" className="inline-flex min-h-11 items-center text-red-400 underline">Modele</Link>
+        <Link href="/kody-obd" className="inline-flex min-h-11 items-center text-red-400 underline">Kody OBD</Link>
       </nav>
 
       <h1 className="text-3xl font-bold">Szukaj w bazie wiedzy</h1>
@@ -105,22 +108,24 @@ export default function SearchPage({ query }: { query: string }) {
           <ul className="space-y-4">
             {results.map(result => {
               const obdCode = result.id?.startsWith('obd:') ? result.id.slice(4) : undefined;
+              const body = obdCode ? null : bodyForEntry(result);
               return (
                 <li key={result.id} className="rounded-xl border border-white/10 bg-neutral-900/50 p-4">
                   <div className="flex flex-wrap items-center gap-2">
                     <h2 className="text-lg">
                       <Link
                         href={result.href || (result.id ? `/baza/${encodeURIComponent(result.id)}` : '/')}
-                        className="text-red-300 hover:text-white"
+                        className="inline-flex min-h-11 items-center text-red-300 hover:text-white"
                       >
                         {result.Nazwa}
                       </Link>
                     </h2>
                     {obdCode && <span className="rounded bg-red-600 px-2 py-0.5 text-xs font-semibold text-white">Kod OBD</span>}
                   </div>
+                  {body && <div className="mt-2"><ModelThumb body={body} /></div>}
                   <p className="mt-2 text-neutral-300">{(result.Opis || result.Objawy || '').slice(0, 250)}</p>
                   {obdCode && (
-                    <Link href={`/kody-obd/${obdCode.toLowerCase()}`} className="mt-2 inline-flex text-red-400 hover:text-white">
+                    <Link href={`/kody-obd/${obdCode.toLowerCase()}`} className="mt-1 inline-flex min-h-11 items-center text-red-400 hover:text-white">
                       Otwórz kartę kodu {obdCode}
                     </Link>
                   )}

@@ -6,6 +6,8 @@ import { NotionContent, readNotionBlocks } from './NotionContent';
 import MaterialContents from '../../MaterialContents';
 import MaterialText from '../../MaterialText';
 import RelatedMaterialSuggestions from '../../RelatedMaterialSuggestions';
+import ModelThumb from '../../ModelThumb';
+import { bodyForEntry } from '../../../lib/model-images';
 const DATABASE = '746973771d604f1e8276502851176af2';
 const cleanId = (id: string) => id.replace(/-/g, '').toLowerCase();
 const text = (property: any) => (property?.title || property?.rich_text || []).map((part: any) => part.plain_text || part.text?.content || '').join('');
@@ -89,11 +91,12 @@ export default async function KnowledgeEntry({ params }: Props) {
   const diagram = entry.Typ === 'Porada' && !hasImage(blocks) ? localDiagram(entry.Nazwa) : null;
   const materialLead = lead(entry);
   const code = obdCode(entry);
+  const body = entry.Typ === 'Kod błędu' ? null : bodyForEntry(entry);
   return <main className="mx-auto min-h-screen max-w-4xl bg-black px-5 py-10 pb-28 text-white">
     <nav aria-label="Nawigacja pomocnicza" className="flex flex-wrap items-center gap-x-3 gap-y-2 text-sm">
-      <a href="/" className="text-red-400 underline">Wróć do encyklopedii</a>
+      <a href="/" className="inline-flex min-h-11 items-center text-red-400 underline">Wróć do encyklopedii</a>
       <span aria-hidden="true" className="text-neutral-600">·</span>
-      <a href="/szukaj" className="text-red-400 underline">Wróć do wyników</a>
+      <a href="/szukaj" className="inline-flex min-h-11 items-center text-red-400 underline">Wróć do wyników</a>
     </nav>
     <article className="mt-6 space-y-6">
       <div className="flex flex-wrap gap-2">
@@ -101,9 +104,10 @@ export default async function KnowledgeEntry({ params }: Props) {
         {entry.Model && <span className="rounded-full border border-white/20 bg-white/5 px-3 py-1 text-xs text-neutral-200">Model: {entry.Model}</span>}
         {entry.Lata && <span className="rounded-full border border-white/20 bg-white/5 px-3 py-1 text-xs text-neutral-200">Lata: {entry.Lata}</span>}
       </div>
+      {body && <div className="flex flex-wrap items-center gap-3"><ModelThumb body={body} size="md" /><span className="text-xs text-neutral-500">Zdjęcie poglądowe modelu z katalogu</span></div>}
       <h1 className="text-3xl text-red-400">{entry.Nazwa}</h1>
       {materialLead && <p className="text-lg leading-relaxed text-neutral-200">{materialLead}</p>}
-      {code && <p className="rounded border border-sky-400/40 bg-sky-400/10 p-3 text-sm"><a className="font-semibold text-sky-300 underline" href={`/kody-obd/${code}`}>Otwórz kartę kodu OBD {code.toUpperCase()}</a></p>}
+      {code && <p className="rounded border border-red-600/40 bg-red-600/10 px-3 text-sm"><a className="inline-flex min-h-11 items-center font-semibold text-red-300 underline" href={`/kody-obd/${code}`}>Otwórz kartę kodu OBD {code.toUpperCase()}</a></p>}
       <VehicleMatchBadge item={entry} />
       <MaterialContents entryId={entry.id} />
       <p className="rounded border border-white/20 p-3 text-sm text-neutral-400">Dopasowanie do profilu opiera się na metadanych i nie potwierdza poprawności technicznej. Przed naprawą sprawdź zgodność procedury z pojazdem i dokumentacją serwisową.</p>

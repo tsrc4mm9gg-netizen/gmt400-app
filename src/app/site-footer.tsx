@@ -2,8 +2,10 @@ import Link from 'next/link';
 
 const links = [
   { href: '/', label: 'Strona główna' },
+  { href: '/modele', label: 'Modele' },
   { href: '/baza', label: 'Baza wiedzy' },
   { href: '/kody-obd', label: 'Kody OBD' },
+  { href: '/schematy', label: 'Schematy' },
   { href: '/szukaj', label: 'Szukaj' },
 ];
 
@@ -12,12 +14,12 @@ export default function SiteFooter() {
     <footer className="mt-auto border-t border-white/10 bg-black text-neutral-300">
       <div className="mx-auto max-w-6xl px-4 py-8">
         <nav aria-label="Nawigacja w stopce">
-          <ul className="flex flex-wrap items-center gap-x-5 gap-y-3 text-sm">
+          <ul className="flex flex-wrap items-center gap-x-5 gap-y-1 text-sm">
             {links.map(({ href, label }) => (
               <li key={href}>
                 <Link
                   href={href}
-                  className="rounded text-red-400 underline-offset-4 transition-colors hover:text-red-300 hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-red-500"
+                  className="inline-flex min-h-11 min-w-11 items-center rounded text-red-400 underline-offset-4 transition-colors hover:text-red-300 hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-red-500"
                 >
                   {label}
                 </Link>

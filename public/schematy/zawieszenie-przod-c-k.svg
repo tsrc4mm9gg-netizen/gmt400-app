@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Źródła:
+- "Suspension for the GMT400 chassis is fully independent with unequal-length control arms. C-series trucks used front coil springs, with front torsion bars for K-series trucks":
+  Wikipedia "Chevrolet C/K (fourth generation)", sekcja Chassis.
+- Przyciski 4WD od 1996 i AutoTrac (NV246) od 1998: Wikipedia "Chevrolet Tahoe" (1. generacja). NP241/NP243 w K1500: GMT Central (źródło wtórne) - potwierdzić tabliczką/FSM.
+- Zdjęcie poglądowe: Commons "File:New front axles assembly- driver's side.jpg" (simonov, CC BY-SA 2.0, 1998 Chevrolet Suburban).
+Schemat blokowy, bez geometrii i momentów - te wg FSM, rozdział Front Suspension.
+Wersja ciemna (kolory dopasowane do gmt400.pl).
+Licencja: własny rysunek dla gmt400.pl (do decyzji autora, np. CC BY 4.0).
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1180 560" width="1180" height="560" role="img" aria-label="Przednie zawieszenie: C vs K i skrzynie rozdzielcze">
+<title>Przednie zawieszenie: C vs K i skrzynie rozdzielcze</title>
+<rect width="1180" height="560" fill="#0d0d0f"/>
+<g font-family='DejaVu Sans, Arial, sans-serif' fill="#f5f5f5">
+<text x="30" y="44" font-size="26" font-weight="bold">Przednie zawieszenie: C vs K i skrzynie rozdzielcze</text>
+<text x="30" y="72" font-size="15" fill="#a3a3a3">Zakres: C/K, Tahoe/Yukon, Suburban 1988–2000 (K = 4×4)</text>
+<text x="40" y="115" font-size="17" font-weight="bold">C (4×2): niezależne, wahacze nierównej długości + sprężyna śrubowa</text>
+<rect x="60" y="130" width="170" height="36" rx="8" fill="#1c1c1f" stroke="#f5f5f5" stroke-width="2"/>
+<text x="70" y="153.0" font-size="14" >górny wahacz</text>
+<rect x="60" y="176" width="170" height="36" rx="8" fill="#2a1517" stroke="#f5f5f5" stroke-width="2"/>
+<text x="70" y="199.0" font-size="14" >sprężyna śrubowa</text>
+<rect x="60" y="222" width="170" height="36" rx="8" fill="#1c1c1f" stroke="#f5f5f5" stroke-width="2"/>
+<text x="70" y="245.0" font-size="14" >dolny wahacz</text>
+<rect x="260" y="160" width="170" height="60" rx="8" fill="#1c1c1f" stroke="#f5f5f5" stroke-width="2"/>
+<text x="270" y="195.0" font-size="14" >zwrotnica / piasta</text>
+<text x="40" y="300" font-size="17" font-weight="bold">K (4×4): niezależne, wahacze nierównej długości + drążek skrętny</text>
+<rect x="60" y="315" width="170" height="36" rx="8" fill="#1c1c1f" stroke="#f5f5f5" stroke-width="2"/>
+<text x="70" y="338.0" font-size="14" >górny wahacz</text>
+<rect x="60" y="361" width="170" height="36" rx="8" fill="#26262b" stroke="#f5f5f5" stroke-width="2"/>
+<text x="70" y="384.0" font-size="14" >drążek skrętny</text>
+<rect x="60" y="407" width="170" height="36" rx="8" fill="#1c1c1f" stroke="#f5f5f5" stroke-width="2"/>
+<text x="70" y="430.0" font-size="14" >dolny wahacz</text>
+<rect x="260" y="345" width="170" height="60" rx="8" fill="#1c1c1f" stroke="#f5f5f5" stroke-width="2"/>
+<text x="270" y="380.0" font-size="14" >zwrotnica / piasta</text>
+<rect x="450" y="350" width="200" height="50" rx="8" fill="#2a1517" stroke="#f5f5f5" stroke-width="2"/>
+<text x="460" y="380.0" font-size="14" >półoś z przegubami</text>
+<rect x="670" y="350" width="160" height="50" rx="8" fill="#2a1517" stroke="#f5f5f5" stroke-width="2"/>
+<text x="680" y="380.0" font-size="14" >przedni most</text>
+<text x="790" y="130" font-size="14" font-weight="bold" fill="#f5f5f5">Skrzynie rozdzielcze K (GMT400):</text>
+<text x="790" y="156" font-size="14" font-weight="normal" fill="#f5f5f5">• NP241 — dźwignia w podłodze</text>
+<text x="790" y="182" font-size="14" font-weight="normal" fill="#f5f5f5">• NP243 — przyciski (Tahoe/Yukon 1996+)</text>
+<text x="790" y="208" font-size="14" font-weight="normal" fill="#f5f5f5">• NV246 AutoTrac — od 1998 (Auto 4WD)</text>
+<text x="790" y="234" font-size="14" font-weight="bold" fill="#f87171">NP231 — brak w źródłach dla GMT400.</text>
+<text x="790" y="260" font-size="14" font-weight="normal" fill="#f5f5f5">Typ potwierdź po tabliczce na obudowie.</text>
+<rect x="20" y="506" width="1140" height="38" rx="6" fill="#2a0f10" stroke="#dc2626"/>
+<text x="34" y="531" font-size="15" font-weight="bold" fill="#fca5a5">⚠ Sprawdź w swoim aucie / manualu — GMT400 ma wiele wariantów.</text>
+</g></svg>
