@@ -38,7 +38,7 @@ jobs:
         run: |
           # Każda próba ograniczona czasowo, jedna ponowna próba — wcześniej krok potrafił wisieć do limitu joba
           install_tooling() {
-            timeout 240 npm install --no-save --package-lock=false --no-audit --no-fund @playwright/test@${PLAYWRIGHT_VERSION} &&
+            timeout 240 npm install --no-save --package-lock=false --no-audit --no-fund "@playwright/test@${PLAYWRIGHT_VERSION}" &&
             timeout 360 npx playwright install --with-deps webkit chromium
           }
           install_tooling || { echo 'Instalacja Playwright: ponowna próba'; sleep 10; install_tooling; }
