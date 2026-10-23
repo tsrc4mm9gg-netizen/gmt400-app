@@ -102,7 +102,7 @@ export default function SearchPage({ query }: { query: string }) {
         <p className="text-neutral-400">Wpisz frazę lub wybierz popularne hasło, aby zobaczyć wyniki.</p>
       ) : (
         <>
-          <ul className="space-y-4">
+          <ul className="space-y-4 [overflow-wrap:anywhere]">
             {results.map(result => {
               const obdCode = result.id?.startsWith('obd:') ? result.id.slice(4) : undefined;
               const body = obdCode ? null : bodyForEntry(result);
