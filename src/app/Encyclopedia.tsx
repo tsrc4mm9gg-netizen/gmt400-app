@@ -55,10 +55,10 @@ function getModelImage(nazwa: string): string | null {
   const n = nazwa.toLowerCase();
   // Tahoe
   if (n.includes('tahoe') && (n.includes('2-drzwi') || n.includes('2 drzwi'))) return '/tahoe-2d-red.jpg';
-  if (n.includes('tahoe') && (n.includes('4-drzwi') || n.includes('4 drzwi'))) return '/tahoe-gold.jpg?v=3';
-  if (n.includes('tahoe')) return '/tahoe-gold.jpg?v=3';
+  if (n.includes('tahoe') && (n.includes('4-drzwi') || n.includes('4 drzwi'))) return '/carousel-tahoe-gold.jpg?v=4';
+  if (n.includes('tahoe')) return '/carousel-tahoe-gold.jpg?v=4';
   // Suburban
-  if (n.includes('suburban')) return '/suburban-navy.jpg?v=3';
+  if (n.includes('suburban')) return '/carousel-suburban-navy.jpg?v=4';
   // Sierra / GMC
   if (n.includes('sierra')) return '/sierra-burgundy.jpg';
   // Yukon
@@ -68,7 +68,7 @@ function getModelImage(nazwa: string): string | null {
   if (n.includes('k1500') || (n.includes('4x4') && !n.includes('tahoe'))) return '/k1500-black.jpg';
   if (n.includes('extended')) return '/k1500-black.jpg';
   if (n.includes('regular cab') || n.includes('c/k') || n.includes('1500') || n.includes('2500') || n.includes('3500')) return '/ck-1500-blue.jpg';
-  return '/tahoe-gold.jpg?v=3';
+  return '/carousel-tahoe-gold.jpg?v=4';
 }
 
 function getTipImage(nazwa: string): string | null {

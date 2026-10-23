@@ -10,9 +10,9 @@ export type BodyStyle = {
 // Zakresy lat wg docs/factual-corrections.md (Blazer GMT400 1992–1994, Yukon 1992–2000 itd.).
 // Zdjęcia: ?v= wymusza pobranie nowej wersji pliku z CDN i z pamięci przeglądarki.
 export const BODY_STYLES: BodyStyle[] = [
-  { id: 'tahoe-4d', name: 'Tahoe 4-drzwi', image: '/tahoe-gold.jpg?v=3', from: 1995, to: 2000 },
+  { id: 'tahoe-4d', name: 'Tahoe 4-drzwi', image: '/carousel-tahoe-gold.jpg?v=4', from: 1995, to: 2000 },
   { id: 'tahoe-2d', name: 'Tahoe / Blazer 2-drzwi', image: '/tahoe-2d-red.jpg', from: 1992, to: 1999, note: 'Blazer 1992–1994, Tahoe 2-drzwi 1995–1999' },
-  { id: 'suburban', name: 'Suburban', image: '/suburban-navy.jpg?v=3', from: 1992, to: 1999 },
+  { id: 'suburban', name: 'Suburban', image: '/carousel-suburban-navy.jpg?v=4', from: 1992, to: 1999 },
   { id: 'yukon', name: 'GMC Yukon', image: '/yukon-white.jpg', from: 1992, to: 2000, note: '2-drzwi od 1992, 4-drzwi od 1995' },
   { id: 'ck-reg', name: 'C/K Regular Cab', image: '/ck-reg.jpg', from: 1988, to: 1998 },
   { id: 'ck-ext', name: 'C/K Extended Cab', image: '/ck-ext.jpg', from: 1988, to: 1998, note: 'Trzecie drzwi od 1996' },
