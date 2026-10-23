@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import { useModelSelection } from '../../ModelSelectionContext';
 import { isGeneralEntry, isSpecificToBody } from '../../../lib/model-images';
 
-type Entry = { id: string; Nazwa: string; Typ: string; Model: string; Lata?: string; Opis?: string };
+type Entry = { id: string; Nazwa: string; Typ: string; Model: string; Modele?: string[]; Lata?: string; Opis?: string };
 
 const SECTIONS = [
   { typ: 'Usterka', label: 'Usterki', href: '/usterki' },

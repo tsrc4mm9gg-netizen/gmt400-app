@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import { notionFetch } from '../../../lib/notion-fetch';
 const DATABASE_ID = '746973771d604f1e8276502851176af2';
 function getRichText(prop: any): string {
   if (!prop?.rich_text) return '';
@@ -22,11 +23,8 @@ export async function GET() {
     while (hasMore) {
       const body: any = { page_size: 100 };
       if (startCursor) body.start_cursor = startCursor;
-      const res = await fetch(`https://api.notion.com/v1/databases/${DATABASE_ID}/query`, {
-        method: 'POST',
-        headers: { Authorization: `Bearer ${token}`, 'Notion-Version': '2022-06-28', 'Content-Type': 'application/json' },
-        body: JSON.stringify(body),
-      });
+      // Ponawianie przy 429/5xx (limit Notion ~3 zapytania/s); kompletna lista albo błąd — nigdy częściowa.
+      const res = await notionFetch(`https://api.notion.com/v1/databases/${DATABASE_ID}/query`, { token, method: 'POST', body: JSON.stringify(body), revalidate: 300, timeoutMs: 15000 });
       if (!res.ok) return NextResponse.json({ error: 'Nie udało się pobrać kompletnej bazy Notion.' }, { status: 502 });
       const data = await res.json();
       if (!Array.isArray(data.results) || typeof data.has_more !== 'boolean') return NextResponse.json({ error: 'Nieprawidłowa odpowiedź Notion. Nie zwracamy częściowej listy.' }, { status: 502 });
@@ -45,6 +43,7 @@ export async function GET() {
         Nazwa: props.Nazwa?.title?.map((part: any) => part.plain_text || '').join('') || getRichText(props.Nazwa),
         Typ: props.Typ?.select?.name || '',
         Model: props.Model?.select?.name || '',
+        Modele: getValues(props.Modele),
         Opis: getRichText(props.Opis),
         Objawy: getRichText(props.Objawy),
         Rozwiązanie: getRichText(props['Rozwiązanie']),

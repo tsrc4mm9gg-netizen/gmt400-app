@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react';
 import MaterialImage from '../../MaterialImage';
+import { notionFetch } from '../../../lib/notion-fetch';
 export function safeUrl(value: unknown): string | null {
   if (typeof value !== 'string') return null;
   try { const url = new URL(value); return ['https:', 'http:'].includes(url.protocol) ? url.href : null; } catch { return null; }
@@ -17,7 +18,7 @@ export async function readNotionBlocks(id: string, token: string): Promise<any[]
       const url = new URL(`https://api.notion.com/v1/blocks/${encodeURIComponent(parent)}/children`);
       url.searchParams.set('page_size', '100');
       if (cursor) url.searchParams.set('start_cursor', cursor);
-      const response = await fetch(url.toString(), { headers: { Authorization: `Bearer ${token}`, 'Notion-Version': '2022-06-28' }, next: { revalidate: 300 }, signal: AbortSignal.timeout(10000) });
+      const response = await notionFetch(url.toString(), { token, revalidate: 300 });
       if (!response.ok) throw new Error('Nie udało się odczytać wszystkich bloków materiału.');
       const data = await response.json();
       if (!Array.isArray(data.results) || typeof data.has_more !== 'boolean') throw new Error('Nieprawidłowa odpowiedź bloków Notion.');

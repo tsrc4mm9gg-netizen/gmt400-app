@@ -7,7 +7,10 @@ import MaterialContents from '../../MaterialContents';
 import MaterialText from '../../MaterialText';
 import RelatedMaterialSuggestions from '../../RelatedMaterialSuggestions';
 import ModelThumb from '../../ModelThumb';
+import * as Sentry from '@sentry/nextjs';
 import { bodyForEntry } from '../../../lib/model-images';
+import { notionFetch, NotionUnavailableError } from '../../../lib/notion-fetch';
+import NotionUnavailable from './NotionUnavailable';
 const DATABASE = '746973771d604f1e8276502851176af2';
 const cleanId = (id: string) => id.replace(/-/g, '').toLowerCase();
 const text = (property: any) => (property?.title || property?.rich_text || []).map((part: any) => part.plain_text || part.text?.content || '').join('');
@@ -16,18 +19,33 @@ const values = (property: any): string[] => {
   if (typeof property?.select?.name === 'string') return [property.select.name];
   return text(property).split(/[;\n]+/).map((value: string) => value.trim()).filter(Boolean);
 };
+const UNAVAILABLE = { unavailable: true } as const;
 const readEntry = cache(async (id: string) => {
+  // Zły format id to po prostu brak wpisu → 404 (nie błąd, nie trafia do Sentry).
   if (!/^(?:[a-f0-9]{32}|[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12})$/i.test(id)) return null;
   const token = process.env.NOTION_TOKEN;
-  if (!token) throw new Error('Baza wiedzy jest chwilowo niedostępna.');
-  const response = await fetch(`https://api.notion.com/v1/pages/${encodeURIComponent(id)}`, { headers: { Authorization: `Bearer ${token}`, 'Notion-Version': '2022-06-28' }, next: { revalidate: 300 }, signal: AbortSignal.timeout(10000) });
-  if (response.status === 404) return null;
-  if (!response.ok) throw new Error('Nie udało się pobrać materiału.');
+  if (!token) return UNAVAILABLE;
+  let response: Response;
+  try {
+    // Ponawianie przy 429/5xx/timeout; udane odpowiedzi są w cache danych Next przez 5 min.
+    response = await notionFetch(`https://api.notion.com/v1/pages/${encodeURIComponent(id)}`, { token, revalidate: 300 });
+  } catch (error) {
+    Sentry.captureException(error, { level: 'warning', tags: { notion: 'page' } });
+    return UNAVAILABLE;
+  }
+  // 400 (np. id spoza integracji), 404 → brak wpisu.
+  if (response.status === 404 || response.status === 400) return null;
+  if (!response.ok) {
+    Sentry.captureException(new NotionUnavailableError(`Notion HTTP ${response.status} dla strony wpisu.`), { level: 'warning', tags: { notion: 'page' } });
+    return UNAVAILABLE;
+  }
   const page = await response.json();
   if (page.archived || page.in_trash || cleanId(page.parent?.database_id || '') !== DATABASE) return null;
   const p = page.properties || {};
+  const modele = values(p.Modele);
   return {
-    id: page.id as string, Nazwa: text(p.Nazwa) || 'Materiał bez tytułu', Typ: p.Typ?.select?.name || '', Model: values(p.Model).join(', '), Lata: values(p.Lata).join('; '),
+    unavailable: false as const,
+    id: page.id as string, Nazwa: text(p.Nazwa) || 'Materiał bez tytułu', Typ: p.Typ?.select?.name || '', Model: values(p.Model).join(', '), Modele: modele, Lata: values(p.Lata).join('; '),
     Opis: text(p.Opis), Objawy: text(p.Objawy), Rozwiązanie: text(p['Rozwiązanie']), edited: typeof page.last_edited_time === 'string' ? page.last_edited_time.slice(0, 10) : '',
     applicability: { brand: values(p.Marka), model: values(p.Model), years: values(p.Lata), engine: values(p.Silnik), drive: values(p['Napęd']), transmission: values(p.Skrzynia) },
   };
@@ -62,6 +80,7 @@ type Props = { params: Promise<{ id: string }> };
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const entry = await readEntry((await params).id);
   if (!entry) return { title: 'Nie znaleziono materiału — GMT400', robots: { index: false, follow: false } };
+  if (entry.unavailable) return { title: 'Baza wiedzy chwilowo niedostępna — GMT400', robots: { index: false, follow: false } };
   const description = (entry.Opis || entry.Objawy || entry.Rozwiązanie || entry.Nazwa).slice(0, 160);
   const url = `/baza/${entry.id}`;
   return {
@@ -85,6 +104,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function KnowledgeEntry({ params }: Props) {
   const entry = await readEntry((await params).id);
   if (!entry) notFound();
+  if (entry.unavailable) return <NotionUnavailable />;
   let blocks: any[] = [];
   let contentError = false;
   try { blocks = await readNotionBlocks(entry.id, process.env.NOTION_TOKEN || ''); } catch { contentError = true; }
@@ -101,7 +121,7 @@ export default async function KnowledgeEntry({ params }: Props) {
     <article className="mt-6 space-y-6">
       <div className="flex flex-wrap gap-2">
         {entry.Typ && <span className="rounded-full border border-red-600/40 bg-red-600/10 px-3 py-1 text-xs font-medium text-red-300">Typ: {entry.Typ}</span>}
-        {entry.Model && <span className="rounded-full border border-white/20 bg-white/5 px-3 py-1 text-xs text-neutral-200">Model: {entry.Model}</span>}
+        {(entry.Modele.length ? entry.Modele.join(', ') : entry.Model) && <span className="rounded-full border border-white/20 bg-white/5 px-3 py-1 text-xs text-neutral-200">Model: {entry.Modele.length ? entry.Modele.map(m => m === 'Wszystkie' ? 'Wszystkie GMT400' : m).join(', ') : entry.Model}</span>}
         {entry.Lata && <span className="rounded-full border border-white/20 bg-white/5 px-3 py-1 text-xs text-neutral-200">Lata: {entry.Lata}</span>}
       </div>
       {body && <div className="flex flex-wrap items-center gap-3"><ModelThumb body={body} size="md" /><span className="text-xs text-neutral-500">Zdjęcie poglądowe modelu z katalogu</span></div>}

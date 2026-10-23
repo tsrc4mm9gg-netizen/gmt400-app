@@ -1,6 +1,7 @@
 import { BODY_STYLES } from '../lib/body-styles';
 import type { MetadataRoute } from 'next'
 import { OBD_CODES } from '@/lib/obd-codes'
+import { notionFetch } from '@/lib/notion-fetch'
 
 const BASE = 'https://www.gmt400.pl'
 const DATABASE_ID = '746973771d604f1e8276502851176af2'
@@ -10,12 +11,7 @@ async function getKnowledgeIds(): Promise<string[]> {
   const token = process.env.NOTION_TOKEN
   if (!token) return []
   try {
-    const response = await fetch(`https://api.notion.com/v1/databases/${DATABASE_ID}/query`, {
-      method: 'POST',
-      headers: { Authorization: `Bearer ${token}`, 'Notion-Version': '2022-06-28', 'Content-Type': 'application/json' },
-      body: JSON.stringify({ page_size: 100 }),
-      signal: AbortSignal.timeout(10000),
-    })
+    const response = await notionFetch(`https://api.notion.com/v1/databases/${DATABASE_ID}/query`, { token, method: 'POST', body: JSON.stringify({ page_size: 100 }), revalidate: 3600 })
     if (!response.ok) return []
     const data = await response.json()
     if (!Array.isArray(data.results)) return []

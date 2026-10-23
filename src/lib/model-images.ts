@@ -19,8 +19,23 @@ const RULES: [RegExp, string][] = [
   [/\bc\/k\b|\bc1500\b|\bc2500\b|\bk2500\b|silverado|regular cab|pickup/, 'ck-reg'],
 ];
 
-/** Dopasowuje nadwozie na podstawie pola Model (gdy konkretne) albo nazwy wpisu. Zwraca null dla „Wszystkie”. */
-export function bodyForEntry(entry: { Model?: string; Nazwa?: string }): BodyStyle | null {
+type ModelEntry = { Model?: string; Nazwa?: string; Modele?: string[] };
+
+// Pole Notion „Modele” (multi-select) używa tych samych nazw co BODY_STYLES (np. „C/K 3500 Dually”) + „Wszystkie”.
+const isAllValue = (value: string) => /wszystk|gmt400/i.test(value);
+/** Nadwozia z pola „Modele”: null = pole puste (fallback na stare reguły), [] = „Wszystkie”. */
+export function bodiesFromModele(entry: ModelEntry): BodyStyle[] | null {
+  const values = Array.isArray(entry.Modele) ? entry.Modele.filter(value => typeof value === 'string' && value.trim()) : [];
+  if (!values.length) return null;
+  if (values.some(isAllValue)) return [];
+  const bodies = values.map(value => BODY_STYLES.find(body => body.name.toLowerCase() === value.trim().toLowerCase() || body.id === value.trim()) ?? null).filter((body): body is BodyStyle => !!body);
+  return bodies.length ? bodies : null;
+}
+
+/** Dopasowuje nadwozie: najpierw pole „Modele” z Notion, potem pole Model (gdy konkretne) albo nazwa wpisu. Zwraca null dla „Wszystkie”. */
+export function bodyForEntry(entry: ModelEntry): BodyStyle | null {
+  const fromModele = bodiesFromModele(entry);
+  if (fromModele) return fromModele[0] ?? null;
   const model = normalize(entry.Model || '');
   const sources = [model && model !== 'wszystkie' ? model : '', normalize(entry.Nazwa || '')];
   for (const source of sources) {
@@ -46,12 +61,16 @@ export const BODY_MATCH: Record<string, string[]> = {
   dually: ['dually', '3500', 'dual'],
 };
 
-export const isGeneralEntry = (entry: { Model?: string }) => {
+export const isGeneralEntry = (entry: ModelEntry) => {
+  const fromModele = bodiesFromModele(entry);
+  if (fromModele) return fromModele.length === 0;
   const model = (entry.Model || '').toLowerCase();
   return !model || model.includes('wszystk') || model.includes('gmt400');
 };
 
-export const isSpecificToBody = (entry: { Model?: string; Nazwa?: string }, bodyId: string) => {
+export const isSpecificToBody = (entry: ModelEntry, bodyId: string) => {
+  const fromModele = bodiesFromModele(entry);
+  if (fromModele) return fromModele.some(body => body.id === bodyId);
   const keywords = BODY_MATCH[bodyId] || [];
   const model = (entry.Model || '').toLowerCase();
   const name = (entry.Nazwa || '').toLowerCase();

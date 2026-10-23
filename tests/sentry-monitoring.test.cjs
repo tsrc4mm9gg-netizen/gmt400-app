@@ -18,14 +18,27 @@ test('monitoring is disabled in development and unit tests', () => {
 });
 
 test('production monitoring can be explicitly disabled', () => {
-  assert.equal(options({ NODE_ENV: 'production' }).sentryOptions.enabled, true);
-  assert.equal(options({ NODE_ENV: 'production', NEXT_PUBLIC_SENTRY_ENABLED: 'false' }).sentryOptions.enabled, false);
+  assert.equal(options({ NODE_ENV: 'production', NEXT_PUBLIC_VERCEL_ENV: 'production' }).sentryOptions.enabled, true);
+  assert.equal(options({ NODE_ENV: 'production', VERCEL: '1' }).sentryOptions.enabled, true);
+  assert.equal(options({ NODE_ENV: 'production', NEXT_PUBLIC_VERCEL_ENV: 'production', NEXT_PUBLIC_SENTRY_ENABLED: 'false' }).sentryOptions.enabled, false);
+});
+
+test('local production build (next start outside Vercel) does not report to Sentry', () => {
+  assert.equal(options({ NODE_ENV: 'production' }).sentryOptions.enabled, false);
+  assert.equal(options({ NODE_ENV: 'production', NEXT_PUBLIC_SENTRY_ENABLED: 'true' }).sentryOptions.enabled, true);
 });
 
 test('privacy filter removes request, identity, extras and breadcrumbs', () => {
   const { sanitizeEvent } = options({ NODE_ENV: 'test' });
   const event = sanitizeEvent({ event_id: 'test', user: { email: 'private@example.invalid' }, request: { data: 'private' }, extra: { vin: 'private' }, breadcrumbs: [{ message: 'private' }] });
   assert.deepEqual(event, { event_id: 'test' });
+});
+
+test('expected 404 (notFound) is not sent, real errors are', () => {
+  const { beforeSend } = options({ NODE_ENV: 'test' });
+  assert.equal(beforeSend({ exception: { values: [{ type: 'Error', value: 'NEXT_HTTP_ERROR_FALLBACK;404' }] } }), null);
+  assert.equal(beforeSend({ exception: { values: [{ type: 'Error', value: 'NEXT_NOT_FOUND' }] } }), null);
+  assert.ok(beforeSend({ exception: { values: [{ type: 'Error', value: 'Baza wiedzy jest chwilowo niedostępna.' }] } }));
 });
 
 test('replay, tracing, SDK logs and breadcrumbs are disabled', () => {

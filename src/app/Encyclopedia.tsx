@@ -17,7 +17,7 @@ import { useModelSelection } from './ModelSelectionContext';
 import { findBody } from '../lib/body-styles';
 import { EngineTable, FluidsTable } from './VerifiedSpecs';
 import ModelThumb from './ModelThumb';
-import { bodyForEntry } from '../lib/model-images';
+import { bodyForEntry, isGeneralEntry, isSpecificToBody } from '../lib/model-images';
 
 type Item = {
   id?: string;
@@ -25,6 +25,7 @@ type Item = {
   Nazwa: string;
   Typ: string;
   Model: string;
+  Modele?: string[];
   Opis?: string;
   Objawy?: string;
   Rozwiązanie?: string;
@@ -290,27 +291,8 @@ export default function Encyclopedia({ initialTab }: { initialTab?: string } = {
       result = result.filter(i => i.Model === selectedModel || i.Model === 'Wszystkie');
     }
     if (bodyId) {
-      const bodyMap: Record<string, string[]> = {
-        'tahoe-4d': ['Tahoe', '4-drzwi', '4 drzwi'],
-        'tahoe-2d': ['Tahoe', 'Blazer', '2-drzwi', '2 drzwi'],
-        'suburban': ['Suburban'],
-        'yukon': ['Yukon'],
-        'ck-reg': ['Regular', 'C/K', '1500', '2500', '3500'],
-        'ck-ext': ['Extended', 'Extended Cab'],
-        'k1500': ['K1500', '4x4'],
-        'sierra': ['Sierra', 'GMC'],
-        'dually': ['Dually', '3500', 'Dual'],
-      };
-      const keywords = bodyMap[bodyId] || [];
-      if (keywords.length) {
-        result = result.filter(i => {
-          const m = (i.Model || '').toLowerCase();
-          const n = (i.Nazwa || '').toLowerCase();
-          // Wpisy ogólne (bez modelu, "Wszystkie", "GMT400") dotyczą każdego nadwozia.
-          if (!m || m.includes('wszystk') || m.includes('gmt400') || m.includes('wszystkie')) return true;
-          return keywords.some(k => m.includes(k.toLowerCase()) || n.includes(k.toLowerCase()));
-        });
-      }
+      // Pole „Modele” z Notion ma pierwszeństwo; bez niego — dotychczasowe słowa kluczowe (BODY_MATCH).
+      result = result.filter(i => isGeneralEntry(i) || isSpecificToBody(i, bodyId));
     }
     if (modelFilters.year) {
       result = result.filter(i => {
@@ -562,7 +544,7 @@ export default function Encyclopedia({ initialTab }: { initialTab?: string } = {
                       <div className="p-4">
                         <div className="flex flex-wrap justify-between items-start gap-2 mb-2">
                           <h3 className="font-semibold">{i.Nazwa}</h3>
-                          {(() => { const body = bodyForEntry(i); return body ? <ModelThumb body={body} /> : <span className="text-xs bg-white/10 px-2 py-0.5 text-neutral-400">{i.Model === 'Wszystkie' ? 'Wszystkie GMT400' : i.Model}</span>; })()}
+                          {(() => { const body = bodyForEntry(i); return body ? <ModelThumb body={body} /> : <span className="text-xs bg-white/10 px-2 py-0.5 text-neutral-400">{isGeneralEntry(i) ? 'Wszystkie GMT400' : i.Model}</span>; })()}
                         </div>
                         <VehicleMatchBadge item={i} />
                         {i.Objawy && <p className="text-neutral-400 text-sm mb-2"><span className="text-red-400">Objawy:</span> {i.Objawy}</p>}
