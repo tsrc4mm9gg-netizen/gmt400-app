@@ -232,7 +232,7 @@ test('przycisk „na górę” pojawia się po przewinięciu i wraca na górę',
 
 test('strony kluczowe: bez przewijania w bok, bez błędów, każdy przycisk ma nazwę', async ({ page }) => {
   const errors = await guard(page);
-  for (const url of ['/', '/modele', '/baza', '/usterki', '/diy', '/poradniki', '/kody-obd', '/schematy', '/szukaj?q=hamulce', '/narzedzia', '/swiat-gmt400']) {
+  for (const url of ['/', '/modele', '/baza', '/usterki', '/diy', '/poradniki', '/kody-obd', '/schematy', '/szukaj?q=hamulce', '/narzedzia', '/narzedzia/rpo', '/moj-samochod', '/swiat-gmt400']) {
     await page.goto(BASE + url);
     await page.waitForLoadState('networkidle');
     await noHorizontalScroll(page);
@@ -274,6 +274,117 @@ test('dekoder VIN: cyfra kontrolna, rok, silnik z OM i błędne znaki', async ({
   await input.fill('1GCEK19R0VE00000O');
   await decoder.getByRole('button', { name: 'DEKODUJ VIN' }).click();
   await expect(decoder.getByTestId('vin-errors')).toContainText('I, O ani Q');
+  await noHorizontalScroll(page);
+  expect(errors).toEqual([]);
+});
+
+// ---------- Dekoder RPO ----------
+test('RPO: kilka kodów naraz, nieznany kod i podpowiedź O/0', async ({ page }) => {
+  const errors = await guard(page);
+  await page.goto(BASE + '/narzedzia/rpo');
+  await page.locator('#rpo-query').fill('G80 Z71 L31 XQZ LO5');
+  await page.getByRole('button', { name: 'Sprawdź kody', exact: true }).click();
+  await expect(page.getByTestId('rpo-count')).toContainText('5');
+  for (const code of ['G80', 'Z71', 'L31']) await expect(page.locator(`[data-testid="rpo-result"][data-code="${code}"]`)).toBeVisible();
+  await expect(page.locator(`[data-testid="rpo-result"][data-code="G80"]`)).toContainText('Sprawdź w swoim aucie / manualu');
+  const unknown = page.getByTestId('rpo-unknown');
+  await expect(unknown).toHaveCount(2);
+  await expect(unknown.first()).toContainText('nieznany – sprawdź');
+  await unknown.filter({ hasText: 'LO5' }).getByRole('button', { name: 'L05', exact: true }).click();
+  await expect(page.locator(`[data-testid="rpo-result"][data-code="L05"]`)).toBeVisible();
+  await expect(page.getByRole('heading', { name: /Źródła/ })).toBeVisible();
+  await noHorizontalScroll(page);
+  expect(errors).toEqual([]);
+});
+
+// ---------- Mój samochód ----------
+async function saveManualCar(page, { brand = 'Chevrolet', platform = 'C/K', model = 'K1500', year = '1997', engine = 'L31', rpo = 'G80 Z71 XQZ' } = {}) {
+  const form = page.getByRole('form', { name: 'Dane auta' });
+  await form.getByLabel('Marka').selectOption(brand);
+  await form.getByLabel('Nadwozie').selectOption(platform);
+  await form.getByLabel('Model').selectOption(model);
+  await form.getByLabel('Rocznik').selectOption(year);
+  if (engine) await form.getByLabel('Silnik (kod RPO)').selectOption(engine);
+  await form.getByLabel('Kody RPO z naklejki (opcjonalnie)').fill(rpo);
+  await form.getByRole('button', { name: 'Zapisz moje auto', exact: true }).click();
+}
+
+test('Mój samochód: ręczny zapis → plakietka → dopasowane sekcje → przeładowanie → zapomnij', async ({ page }) => {
+  const errors = await guard(page);
+  await page.goto(BASE + '/moj-samochod');
+  await expect(page.getByTestId('header-car-badge')).toHaveCount(0);
+  await expect(page.getByTestId('my-car-form')).toBeVisible();
+  await noHorizontalScroll(page);
+  await saveManualCar(page);
+  const summary = page.getByTestId('my-car-summary');
+  await expect(summary).toContainText('Chevrolet K1500 · 1997');
+  await expect(summary).toContainText('L31');
+  await expect(page.getByTestId('header-car-badge')).toContainText('K1500 · 1997');
+  await expect(page.getByRole('heading', { name: 'Bezpieczniki — 1997' })).toBeVisible();
+  await expect(page.getByTestId('fuse-table').getByLabel('Rocznik')).toHaveValue('1997');
+  // Usterki: tarcze 1988–1999 pasują; TBI 1988–1995 i 6.5L (inny silnik) pominięte.
+  const faults = page.getByTestId('my-car-fault');
+  await expect(faults.filter({ hasText: 'tarcze' })).toHaveAttribute('data-fit', 'match');
+  await expect(faults.filter({ hasText: 'TBI' })).toHaveCount(0);
+  await expect(faults.filter({ hasText: '6.5L' })).toHaveCount(0);
+  await expect(faults.first()).toContainText('sprawdź w swoim aucie / manualu');
+  await expect(page.getByTestId('my-car-diy').filter({ hasText: 'Procedury DIY' })).toHaveAttribute('data-fit', 'match');
+  await expect(page.getByTestId('my-car-model').filter({ hasText: 'Yukon' })).toHaveCount(0);
+  await expect(page.locator('[data-testid="my-car-rpo"][data-code="G80"]')).not.toContainText('nieznany');
+  await expect(page.locator('[data-testid="my-car-rpo"][data-code="XQZ"]')).toContainText('nieznany – sprawdź');
+  await noHorizontalScroll(page);
+  await page.reload();
+  await expect(page.getByTestId('my-car-summary')).toContainText('Chevrolet K1500 · 1997');
+  await page.getByTestId('my-car-rpo-link').click();
+  await expect(page).toHaveURL(/\/narzedzia\/rpo$/);
+  await expect(page.locator('#rpo-vehicle')).toHaveValue('Chevrolet C/K');
+  await page.getByRole('button', { name: /Wstaw moje kody RPO/ }).click();
+  await expect(page.locator('[data-testid="rpo-result"][data-code="G80"] [data-testid="rpo-fit"]')).toBeVisible();
+  await page.getByTestId('header-car-badge').click();
+  await expect(page).toHaveURL(/\/moj-samochod$/);
+  await page.getByRole('button', { name: 'Zapomnij auto', exact: true }).click();
+  await page.getByRole('button', { name: 'Tak, zapomnij', exact: true }).click();
+  await expect(page.getByTestId('my-car-form')).toBeVisible();
+  await expect(page.getByTestId('header-car-badge')).toHaveCount(0);
+  expect(await page.evaluate(() => localStorage.getItem('gmt400_vehicle_profile_v2'))).toBeNull();
+  expect(errors).toEqual([]);
+});
+
+test('Mój samochód: VIN uzupełnia rocznik i silnik, zmiana auta', async ({ page }) => {
+  const errors = await guard(page);
+  await page.goto(BASE + '/moj-samochod');
+  await page.locator('#vin-input').fill('1GCEK19R0VZ000000');
+  await page.getByRole('button', { name: 'DEKODUJ VIN', exact: true }).click();
+  await expect(page.getByTestId('my-car-vin-note')).toContainText('rocznik 1997');
+  await expect(page.getByTestId('my-car-vin-note')).toContainText('L31');
+  const form = page.getByRole('form', { name: 'Dane auta' });
+  await expect(form.getByLabel('Rocznik')).toHaveValue('1997');
+  await expect(form.getByLabel('Silnik (kod RPO)')).toHaveValue('L31');
+  await saveManualCar(page, { engine: '', rpo: '' });
+  await expect(page.getByTestId('my-car-summary')).toContainText('1GCEK19R0VZ000000');
+  await page.getByRole('button', { name: 'Zmień auto', exact: true }).click();
+  await saveManualCar(page, { platform: 'Tahoe', model: 'Tahoe 4-door', year: '1999', engine: '', rpo: '' });
+  await expect(page.getByTestId('my-car-summary')).toContainText('Chevrolet Tahoe 4-door · 1999');
+  await expect(page.getByTestId('header-car-badge')).toContainText('Tahoe 4d · 1999');
+  await expect(page.getByTestId('my-car-fuse-warning')).toBeVisible();
+  await expect(page.getByTestId('my-car-tip').filter({ hasText: 'drugiego rzędu' })).toHaveAttribute('data-fit', 'match');
+  await expect(page.getByTestId('my-car-tip').filter({ hasText: 'Trzeci rząd' })).toHaveCount(0);
+  await noHorizontalScroll(page);
+  expect(errors).toEqual([]);
+});
+
+test('Mój samochód: działa bez localStorage (tryb prywatny / blokada)', async ({ page }) => {
+  await page.addInitScript(() => {
+    const fail = () => { throw new DOMException('blocked', 'SecurityError'); };
+    try { Object.defineProperty(window, 'localStorage', { configurable: true, get: fail }); } catch {}
+  });
+  const errors = await guard(page);
+  await page.goto(BASE + '/moj-samochod');
+  await expect(page.getByTestId('my-car-storage-note')).toBeVisible();
+  await saveManualCar(page);
+  await expect(page.getByTestId('my-car-summary')).toContainText('Chevrolet K1500 · 1997');
+  await expect(page.getByTestId('my-car-notice')).toContainText('tylko w tej karcie');
+  await expect(page.getByTestId('header-car-badge')).toBeVisible();
   await noHorizontalScroll(page);
   expect(errors).toEqual([]);
 });

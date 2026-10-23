@@ -2,6 +2,8 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { useStoredVehicleProfile } from '@/lib/vehicle-profile-store';
+import { vehicleProfileShort } from '@/lib/vehicle-profile';
 
 const links = [
   { href: '/', label: 'Strona główna' },
@@ -9,11 +11,31 @@ const links = [
   { href: '/baza', label: 'Baza wiedzy' },
   { href: '/kody-obd', label: 'Kody OBD' },
   { href: '/schematy', label: 'Schematy' },
+  { href: '/moj-samochod', label: 'Mój samochód' },
 ];
 
 function isActive(pathname: string, href: string) {
   if (href === '/') return pathname === '/';
   return pathname === href || pathname.startsWith(`${href}/`);
+}
+
+/** Mała plakietka z zapisanym autem (tylko po hydratacji — serwer renderuje pustą). */
+function CarBadge({ active }: { active: boolean }) {
+  const profile = useStoredVehicleProfile();
+  const short = vehicleProfileShort(profile);
+  if (!profile || !short) return null;
+  return (
+    <Link
+      href="/moj-samochod"
+      data-testid="header-car-badge"
+      aria-label={`Mój samochód: ${profile.brand} ${profile.model}${profile.year ? ' ' + profile.year : ''}`}
+      aria-current={active ? 'page' : undefined}
+      className="inline-flex min-h-11 max-w-[10.5rem] min-w-0 items-center gap-2 rounded-full border border-red-600/60 bg-red-950/40 px-3 text-sm font-semibold text-red-100 transition hover:border-red-500 hover:bg-red-900/50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-red-500 sm:max-w-[16rem] md:order-2"
+    >
+      <span aria-hidden="true" className="h-2 w-2 shrink-0 rounded-full bg-red-500 shadow-[0_0_6px_rgba(239,68,68,0.9)]" />
+      <span className="truncate">{short}</span>
+    </Link>
+  );
 }
 
 export default function SiteHeader() {
@@ -39,6 +61,7 @@ export default function SiteHeader() {
         >
           GMT400
         </Link>
+        <CarBadge active={isActive(pathname, '/moj-samochod')} />
         <div className="md:order-3">{search}</div>
 
         <nav aria-label="Nawigacja główna" className="-mx-4 w-[calc(100%+2rem)] overflow-x-auto px-2 md:mx-0 md:w-auto md:flex-1 md:overflow-visible md:px-0">

@@ -2,11 +2,11 @@ const { test, expect } = require('@playwright/test');
 const BASE = 'http://127.0.0.1:3100';
 
 test('RPO decodes multiple codes, filters categories and reports ratio conflicts', async ({ request }) => {
- const response = await request.get(BASE + '/api/rpo?q=G80%20Z71%20GU5%20GT5');
+ const response = await request.get(BASE + '/api/rpo?q=G80%20Z71%20GU6%20GT5');
  expect(response.status()).toBe(200);
  const data = await response.json();
  expect(data.ratioConflict).toBe(true);
- for (const code of ['G80', 'Z71', 'GU5', 'GT5']) expect(data.results.some(item => item.code === code)).toBe(true);
+ for (const code of ['G80', 'Z71', 'GU6', 'GT5']) expect(data.results.some(item => item.code === code)).toBe(true);
  const filtered = await request.get(BASE + '/api/rpo?q=G80%20Z71&category=Osie');
  const body = await filtered.json();
  expect(body.results.length).toBeGreaterThan(0);

@@ -3,8 +3,8 @@ import { useId, useMemo, useState } from 'react';
 import { FUSE_COLORS, FUSE_COLORS_SOURCE, FUSE_TABLES, FUSE_YEARS, filterFuseTables, yearsLabel } from '@/lib/fuses.mjs';
 
 /** Wyszukiwalna tabela bezpieczników (kabina + pod maską) z OM GM 1994–1999. */
-export default function FuseTable() {
-  const [year, setYear] = useState('');
+export default function FuseTable({ initialYear = '' }: { initialYear?: string } = {}) {
+  const [year, setYear] = useState(FUSE_YEARS.includes(initialYear) ? initialYear : '');
   const [query, setQuery] = useState('');
   const inputId = useId();
   const tables = useMemo(() => filterFuseTables(FUSE_TABLES, { year, query }), [year, query]);
@@ -12,7 +12,7 @@ export default function FuseTable() {
   return (
     <div className="mt-5 rounded-lg border border-white/10 bg-black/30 p-3 sm:p-4" data-testid="fuse-table">
       <h3 className="text-lg font-semibold text-white">Tabela bezpieczników — wyszukaj obwód</h3>
-      <p className="mt-1 text-sm text-neutral-400">Te same dane co na schematach powyżej, z instrukcji obsługi GM (Owner&apos;s Manual). Wpisz np. <em>radio</em>, <em>wycieraczki</em>, <em>ABS</em> albo numer gniazda.</p>
+      <p className="mt-1 text-sm text-neutral-400">{initialYear ? 'Dane z instrukcji obsługi GM (Owner’s Manual), te same co na stronie Schematy.' : <>Te same dane co na schematach powyżej, z instrukcji obsługi GM (Owner&apos;s Manual).</>} Wpisz np. <em>radio</em>, <em>wycieraczki</em>, <em>ABS</em> albo numer gniazda.</p>
       <div className="mt-3 flex flex-col gap-2 sm:flex-row">
         <label htmlFor={inputId} className="sr-only">Szukaj w tabeli bezpieczników</label>
         <input id={inputId} type="search" value={query} onChange={e => setQuery(e.target.value)} placeholder="Szukaj: obwód, nazwa, numer…" autoComplete="off"

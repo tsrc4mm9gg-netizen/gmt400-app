@@ -1,4 +1,5 @@
 'use client';
+import Link from 'next/link';
 import ImageLightbox from './ImageLightbox';
 
 import { useState, useEffect, useMemo } from 'react';
@@ -137,7 +138,6 @@ export default function Encyclopedia({ initialTab }: { initialTab?: string } = {
   const [schemaQuery, setSchemaQuery] = useState('');
   const [vinResult, setVinResult] = useState<Record<string, string> | null>(null);
   const [vinWarning, setVinWarning] = useState(false);
-  const [myVin, setMyVin] = useState('');
   const [fuelKm, setFuelKm] = useState(500);
   const [fuelLiters, setFuelLiters] = useState(50);
   const [fuelPrice, setFuelPrice] = useState(6.5);
@@ -1282,35 +1282,10 @@ export default function Encyclopedia({ initialTab }: { initialTab?: string } = {
         {tab === 'mojeauto' && (
           <div>
             <h2 className="text-2xl mb-6" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>MOJE AUTO</h2>
-            <div className="bg-neutral-950 border border-white/10 p-4 mb-4">
-              <label className="text-sm text-neutral-400 block mb-2">Zapisz VIN swojego auta:</label>
-              <input aria-label="Numer VIN mojego auta" type="text" value={myVin} onChange={e => setMyVin(e.target.value.toUpperCase())} placeholder="Wpisz 17-znakowy VIN" maxLength={17} className="w-full bg-neutral-900 border border-white/10 p-2 text-sm font-mono" />
-              {myVin.length === 17 && (
-                <p className="text-green-400 text-xs mt-2">VIN zapisany lokalnie</p>
-              )}
+            <div className="bg-neutral-950 border border-red-600/30 p-4">
+              <p className="text-sm text-neutral-300">Zapisz VIN albo model i rocznik na stronie „Mój samochód”. Zobaczysz tam bezpieczniki dla Twojego rocznika, usterki, DIY, porady, części i kody RPO dopasowane do auta. Dane zostają tylko w tej przeglądarce.</p>
+              <Link href="/moj-samochod" className="mt-3 inline-flex min-h-11 items-center bg-red-600 px-4 font-semibold text-white hover:bg-red-500">Przejdź do „Mój samochód”</Link>
             </div>
-            {myVin.length === 17 && (
-              <div className="space-y-4">
-                <div className="bg-neutral-950 border border-red-600/30 p-4">
-                  <h3 className="font-semibold text-red-400 mb-2">SZYBKI DOSTĘP</h3>
-                  <div className="grid grid-cols-2 gap-2">
-                    <button onClick={() => setTab('czesci')} className="bg-neutral-900 p-3 text-sm hover:bg-neutral-800">Części dla mojego auta</button>
-                    <button onClick={() => setTab('diy')} className="bg-neutral-900 p-3 text-sm hover:bg-neutral-800">Poradniki DIY</button>
-                    <button onClick={() => setTab('usterki')} className="bg-neutral-900 p-3 text-sm hover:bg-neutral-800">Typowe usterki</button>
-                    <button onClick={() => setTab('kalkulator')} className="bg-neutral-900 p-3 text-sm hover:bg-neutral-800">Koszty napraw</button>
-                  </div>
-                </div>
-                <div className="bg-neutral-950 border border-white/10 p-4">
-                  <h3 className="font-semibold text-red-400 mb-2">PRZYPOMNIENIA</h3>
-                  <ul className="text-sm text-neutral-300 space-y-1">
-                    <li>• Wymiana oleju — co 5-8 tys. km</li>
-                    <li>• Filtr powietrza — co 30 tys. km</li>
-                    <li>• Świece — co 50 tys. km</li>
-                    <li>• ATF — co 50 tys. km</li>
-                  </ul>
-                </div>
-              </div>
-            )}
           </div>
         )}
 

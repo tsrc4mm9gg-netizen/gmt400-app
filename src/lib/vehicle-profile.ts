@@ -10,9 +10,12 @@ export interface VehicleProfile {
   drive: VehicleDrivetrain | '';
   transmission: string;
   rpoCodes: string[];
+  /** Opcjonalny VIN (17 znaków) — tylko w tej przeglądarce. */
+  vin?: string;
 }
 export const VEHICLE_PROFILE_VERSION = 2;
 export const VEHICLE_PROFILE_STORAGE_KEY = 'gmt400_vehicle_profile_v2';
+export const VIN_PATTERN = /^[A-HJ-NPR-Z0-9]{17}$/;
 export const GMT400_YEAR_RANGE = [1988, 2000] as const;
 export const VEHICLE_CATALOG: Record<VehicleMake, Record<VehiclePlatform, string[]>> = {
   Chevrolet: { 'C/K': ['C1500', 'K1500', 'C2500', 'K2500', 'C3500', 'K3500'], Tahoe: ['Tahoe 2-door', 'Tahoe 4-door'], Suburban: ['Suburban 1500', 'Suburban 2500'], Yukon: [], Sierra: [] },
@@ -35,6 +38,7 @@ export function isValidVehicleProfile(value: unknown): value is VehicleProfile {
   if (!models.length || (!models.includes(model) && !(model === platform && LEGACY_MODELS[p.brand].includes(model)))) return false;
   if (p.year !== '' && !/^(19(8[89]|9\d)|2000)$/.test(p.year as string)) return false;
   if (!['', '2WD', '4WD'].includes(p.drive as string)) return false;
+  if (p.vin !== undefined && !(typeof p.vin === 'string' && (p.vin === '' || VIN_PATTERN.test(p.vin)))) return false;
   return Array.isArray(p.rpoCodes) && p.rpoCodes.length <= 100 && p.rpoCodes.every(code => typeof code === 'string' && /^[A-Z0-9]{2,5}$/.test(code));
 }
 export function parseVehicleProfile(raw: string | null): VehicleProfile | null {
@@ -52,7 +56,7 @@ export function parseVehicleProfile(raw: string | null): VehicleProfile | null {
       candidate = { ...old, platform: old.model, rpoCodes: [] };
     } else if (parsed.version !== VEHICLE_PROFILE_VERSION) return null;
     if (!isValidVehicleProfile(candidate)) return null;
-    return { brand: candidate.brand, platform: candidate.platform, model: candidate.model, year: candidate.year, engine: candidate.engine, drive: candidate.drive, transmission: candidate.transmission, rpoCodes: [...new Set(candidate.rpoCodes)] };
+    return { brand: candidate.brand, platform: candidate.platform, model: candidate.model, year: candidate.year, engine: candidate.engine, drive: candidate.drive, transmission: candidate.transmission, rpoCodes: [...new Set(candidate.rpoCodes)], ...(candidate.vin ? { vin: candidate.vin } : {}) };
   } catch { return null; }
 }
 export function serializeVehicleProfile(profile: VehicleProfile): string {
@@ -61,4 +65,9 @@ export function serializeVehicleProfile(profile: VehicleProfile): string {
 export function vehicleProfileSummary(profile: VehicleProfile | null): string {
   if (!profile?.brand || !profile.model) return 'Ustaw profil auta';
   return [`${profile.brand} ${profile.model}`, profile.year, profile.engine, profile.drive, profile.rpoCodes.length ? `RPO: ${profile.rpoCodes.join(', ')}` : ''].filter(Boolean).join(' · ');
+}
+export function vehicleProfileShort(profile: VehicleProfile | null): string {
+  if (!profile?.brand || !profile.model) return '';
+  const model = profile.model.replace(/ (\d)-door$/, ' $1d');
+  return [model, profile.year].filter(Boolean).join(' · ');
 }

@@ -1,0 +1,14 @@
+import type { VehicleProfile } from './vehicle-profile';
+export type Fit = 'match' | 'general' | 'unknown' | 'outside';
+type ProfileLike = Pick<VehicleProfile, 'brand' | 'platform' | 'model' | 'year' | 'engine'> | null | undefined;
+export function platformWords(profile: ProfileLike): string[];
+export function modelFit(texts: string[] | string, profile: ProfileLike): Fit;
+export function leadingYears(rule: string): [number, number] | null;
+export function yearFit(rules: string[] | string, year: string | undefined): Fit;
+export function engineCodesIn(text: string | undefined): string[];
+export function litersIn(text: string | undefined): string[];
+export function titleFit(title: string | undefined, profile: ProfileLike): Fit;
+export function engineFit(title: string | undefined, profile: ProfileLike, engineLiters?: string): { engine: Fit; engines: string[] };
+export function knowledgeFit(item: { Nazwa?: string; Lata?: string; Modele?: string[]; applicability?: { model?: string[]; years?: string[] } }, profile: ProfileLike, engineLiters?: string): { fit: Fit; model: Fit; year: Fit; title: Fit; engine: Fit; engines: string[] };
+export function scopeTextFit(scope: string, profile: ProfileLike): { fit: Fit; model: Fit; year: Fit };
+export function partFit(part: { fitsModels: string[]; yearRange: [number, number] }, profile: ProfileLike): { fit: Fit; model: Fit; year: Fit };

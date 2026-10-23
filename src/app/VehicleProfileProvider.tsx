@@ -1,16 +1,25 @@
 'use client';
-import { createContext, useContext, useEffect, useRef, useState, type ReactNode } from 'react';
+import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
+import { LEGACY_VEHICLE_PROFILE_KEY, clearProfile, storageAvailable, useHydrated, useStoredVehicleProfile, writeProfile } from '@/lib/vehicle-profile-store';
 import { createPortal } from 'react-dom';
 import { EMPTY_VEHICLE_PROFILE, VEHICLE_CATALOG, VEHICLE_PROFILE_STORAGE_KEY, isValidVehicleProfile, normalizeRpoCodes, parseVehicleProfile, serializeVehicleProfile, vehicleProfileSummary, type VehicleProfile, type VehicleMake, type VehiclePlatform, type VehicleDrivetrain } from '@/lib/vehicle-profile';
 export type { VehicleProfile } from '@/lib/vehicle-profile';
-const LEGACY_KEY = 'gmt400_vehicle_profile_v1';
-const Context = createContext<{ profile: VehicleProfile | null; ready: boolean }>({ profile: null, ready: false });
+export type VehicleProfileContext = {
+  profile: VehicleProfile | null;
+  ready: boolean;
+  /** Zapisuje profil; zwraca false, gdy zapis trwały się nie udał (działa tylko w tej karcie). */
+  save: (profile: VehicleProfile) => boolean;
+  /** Usuwa profil; zwraca false, gdy nie udało się usunąć wszystkich zapisów. */
+  clear: () => boolean;
+  openEditor: () => void;
+};
+const Context = createContext<VehicleProfileContext>({ profile: null, ready: false, save: () => false, clear: () => false, openEditor: () => {} });
 export const useVehicleProfile = () => useContext(Context);
 const control = 'mt-1 block min-h-11 w-full rounded border border-white/20 bg-neutral-900 p-3 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-500';
 const button = 'min-h-11 rounded border border-white/20 px-4 py-3 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-500';
 export default function VehicleProfileProvider({ children }: { children: ReactNode }) {
-  const [profile, setProfile] = useState<VehicleProfile | null>(null);
-  const [ready, setReady] = useState(false);
+  const profile = useStoredVehicleProfile();
+  const ready = useHydrated();
   const [draft, setDraft] = useState<VehicleProfile>({ ...EMPTY_VEHICLE_PROFILE });
   const [rpoText, setRpoText] = useState('');
   const [message, setMessage] = useState('');
@@ -20,15 +29,13 @@ export default function VehicleProfileProvider({ children }: { children: ReactNo
   const fileInput = useRef<HTMLInputElement>(null);
   useEffect(() => {
     try {
-      const stored = parseVehicleProfile(localStorage.getItem(VEHICLE_PROFILE_STORAGE_KEY));
-      const next = stored || parseVehicleProfile(localStorage.getItem(LEGACY_KEY));
-      setProfile(next);
-      if (!stored && next) localStorage.setItem(VEHICLE_PROFILE_STORAGE_KEY, serializeVehicleProfile(next));
-    } catch { setMessage('Pamięć przeglądarki jest niedostępna. Zapis profilu może się nie udać.'); }
-    setReady(true);
-    const sync = (event: StorageEvent) => { if (event.key === VEHICLE_PROFILE_STORAGE_KEY || event.key === null) setProfile(parseVehicleProfile(event.newValue)); };
-    window.addEventListener('storage', sync);
-    return () => window.removeEventListener('storage', sync);
+      const raw = window.localStorage.getItem(VEHICLE_PROFILE_STORAGE_KEY);
+      if (!parseVehicleProfile(raw)) {
+        const legacy = parseVehicleProfile(window.localStorage.getItem(LEGACY_VEHICLE_PROFILE_KEY));
+        if (legacy) writeProfile(legacy);
+      }
+    } catch { /* obsłużone niżej */ }
+    if (!storageAvailable()) setMessage('Pamięć przeglądarki jest niedostępna. Profil zadziała tylko w tej karcie.');
   }, []);
   useEffect(() => {
     const sync = () => setSlot(document.getElementById('vehicle-profile-launcher'));
@@ -38,21 +45,21 @@ export default function VehicleProfileProvider({ children }: { children: ReactNo
   }, []);
   const update = <K extends keyof VehicleProfile>(key: K, value: VehicleProfile[K]) => setDraft(previous => ({ ...previous, [key]: value }));
   const close = () => dialog.current?.close();
-  const open = () => { setDraft(profile ? { ...profile } : { ...EMPTY_VEHICLE_PROFILE }); setRpoText(profile?.rpoCodes.join(', ') || ''); setMessage(''); dialog.current?.showModal(); };
+  const open = useCallback(() => { setDraft(profile ? { ...profile } : { ...EMPTY_VEHICLE_PROFILE }); setRpoText(profile?.rpoCodes.join(', ') || ''); setMessage(''); dialog.current?.showModal(); }, [profile]);
+  const saveProfile = useCallback((next: VehicleProfile) => writeProfile(next), []);
+  const clearStored = useCallback(() => clearProfile(), []);
   const save = () => {
     const tokens = rpoText.trim().split(/[\s,;]+/).filter(Boolean);
     if (tokens.some(code => !/^[A-Z0-9]{2,5}$/i.test(code))) { setMessage('Sprawdź RPO: użyj kodów złożonych z 2–5 liter lub cyfr, oddzielonych spacją albo przecinkiem.'); return; }
     const clean = { ...draft, model: draft.model.trim(), engine: draft.engine.trim(), transmission: draft.transmission.trim(), rpoCodes: normalizeRpoCodes(rpoText) };
     if (!isValidVehicleProfile(clean)) { setMessage('Sprawdź markę, model, rocznik 1988–2000 oraz kody RPO.'); return; }
-    try { localStorage.setItem(VEHICLE_PROFILE_STORAGE_KEY, serializeVehicleProfile(clean)); setMessage('Profil zapisany w tej przeglądarce.'); }
-    catch { setMessage('Profil działa w tej sesji, ale nie udało się zapisać go na stałe.'); }
-    setProfile(clean); close();
+    setMessage(writeProfile(clean) ? 'Profil zapisany w tej przeglądarce.' : 'Profil działa w tej sesji, ale nie udało się zapisać go na stałe.');
+    close();
   };
   const clear = () => {
-    let failed = false;
-    for (const key of [VEHICLE_PROFILE_STORAGE_KEY, LEGACY_KEY]) { try { localStorage.removeItem(key); } catch { failed = true; } }
-    setProfile(null); setDraft({ ...EMPTY_VEHICLE_PROFILE }); setRpoText('');
-    setMessage(failed ? 'Profil wyłączono, ale nie udało się usunąć wszystkich zapisów z pamięci.' : 'Profil usunięty.'); close();
+    const ok = clearProfile();
+    setDraft({ ...EMPTY_VEHICLE_PROFILE }); setRpoText('');
+    setMessage(ok ? 'Profil usunięty.' : 'Profil wyłączono, ale nie udało się usunąć wszystkich zapisów z pamięci.'); close();
   };
   const exportProfile = () => {
     if (!profile) return;
@@ -68,8 +75,9 @@ export default function VehicleProfileProvider({ children }: { children: ReactNo
   const platforms = draft.brand ? (Object.keys(VEHICLE_CATALOG[draft.brand]) as VehiclePlatform[]).filter(platform => VEHICLE_CATALOG[draft.brand as VehicleMake][platform].length > 0) : [];
   const models = draft.brand && draft.platform ? VEHICLE_CATALOG[draft.brand][draft.platform] : [];
   const legacyModel = draft.model && !models.includes(draft.model);
+  const value = useMemo(() => ({ profile, ready, save: saveProfile, clear: clearStored, openEditor: open }), [profile, ready, saveProfile, clearStored, open]);
   const launcher = <button ref={trigger} type="button" disabled={!ready} onClick={open} className="gmt-profile-trigger" aria-haspopup="dialog">{vehicleProfileSummary(profile)}</button>;
-  return <Context.Provider value={{ profile, ready }}>{children}{slot ? createPortal(launcher, slot) : <div className="mx-auto max-w-7xl p-4">{launcher}</div>}
+  return <Context.Provider value={value}>{children}{slot ? createPortal(launcher, slot) : <div className="mx-auto max-w-7xl p-4">{launcher}</div>}
     <dialog ref={dialog} onClose={() => trigger.current?.focus({ preventScroll: true })} aria-labelledby="vehicle-profile-title" aria-describedby="vehicle-profile-help" className="m-auto w-[calc(100%-2rem)] max-w-lg max-h-[85dvh] overflow-y-auto rounded-xl border border-red-600 bg-neutral-950 p-5 text-white backdrop:bg-black/80">
       <header className="flex items-start justify-between gap-3"><h2 id="vehicle-profile-title" className="text-xl text-red-400">Moje auto — profil GMT400</h2><button type="button" onClick={close} aria-label="Zamknij profil" className={button}>×</button></header>
       <p id="vehicle-profile-help" className="my-3 text-sm text-neutral-400">Wpisz potwierdzone dane. Nieznane pola opcjonalne pozostaw puste. Profil jest zapisywany tylko w tej przeglądarce.</p>
