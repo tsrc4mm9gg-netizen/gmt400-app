@@ -2,9 +2,12 @@ name: Verify and connect grouped model catalog
 on:
   push:
     branches: [main]
-    paths: ['src/app/ModelCatalog.tsx', 'src/lib/model-catalog.ts', 'tests/model-catalog.spec.cjs', 'scripts/connect-model-catalog.cjs', '.github/workflows/model-catalog.yml']
+    paths: ['src/app/ModelCatalog.tsx', 'src/app/Encyclopedia.tsx', 'src/app/modele/**', 'src/lib/model-catalog.ts', 'tests/model-catalog.spec.cjs', 'scripts/connect-model-catalog.cjs', '.github/workflows/model-catalog.yml']
+  workflow_dispatch:
+# Verification only: the catalog integration landed on 16.10 (02cb13d), so this workflow
+# no longer patches or commits anything. The report is published as an artifact and job summary.
 permissions:
-  contents: write
+  contents: read
 concurrency:
   group: model-catalog-integration
   cancel-in-progress: false
@@ -20,6 +23,7 @@ jobs:
         with:
           node-version: '22'
       - id: patch
+        name: Verify catalog wiring (structure, no file writes)
         run: node scripts/connect-model-catalog.cjs
       - run: npm ci
       - id: build
@@ -38,11 +42,11 @@ jobs:
           exit 1
       - id: chromium
         continue-on-error: true
-        run: npx playwright test tests/vehicle-filters.spec.cjs tests/global-search.spec.cjs tests/knowledge-categories.spec.cjs tests/navigation.spec.cjs tests/navigation-polish.spec.cjs tests/diy-restoration.spec.cjs tests/notion-pagination.spec.cjs tests/notion-content.spec.cjs tests/model-catalog.spec.cjs --workers=1 --output=test-results/chromium --reporter=json > /tmp/model-chromium.json
+        run: npx playwright test tests/model-catalog.spec.cjs --workers=1 --output=test-results/chromium --reporter=json > /tmp/model-chromium.json
       - id: webkit
         continue-on-error: true
         run: |
-          node -e "const fs=require('node:fs');const base=require('./playwright.webkit.config.cjs');fs.writeFileSync('playwright.models.generated.config.cjs','module.exports = '+JSON.stringify({...base,testMatch:[...base.testMatch,'model-catalog.spec.cjs']})+';')"
+          node -e "const fs=require('node:fs');const base=require('./playwright.webkit.config.cjs');fs.writeFileSync('playwright.models.generated.config.cjs','module.exports = '+JSON.stringify({...base,testMatch:['model-catalog.spec.cjs']})+';')"
           npx playwright test --config=playwright.models.generated.config.cjs --output=test-results/webkit --reporter=json > /tmp/model-webkit.json
       - uses: actions/upload-artifact@v4
         if: always()
@@ -50,7 +54,7 @@ jobs:
           name: model-catalog-verification
           path: test-results
           if-no-files-found: ignore
-      - name: Publish report and activate catalog only after both browsers pass
+      - name: Write verification report
         if: always()
         env:
           PATCH_RESULT: ${{ steps.patch.outcome }}
@@ -68,23 +72,20 @@ jobs:
             const failures = [];
             function walk(suites) { for (const suite of suites || []) { for (const spec of suite.specs || []) for (const test of spec.tests || []) if (test.status !== 'expected') failures.push({ title: spec.title, status: test.status, errors: (test.results || []).map(result => String(result.error?.message || '').slice(0,3000)) }); walk(suite.suites); } }
             walk(raw.suites);
-            reports[browser] = { passed: stats.expected === 33 && stats.unexpected === 0 && stats.skipped === 0 && stats.flaky === 0, stats, failures };
+            reports[browser] = { passed: stats.expected > 0 && stats.unexpected === 0 && stats.skipped === 0 && stats.flaky === 0, stats, failures };
           }
           const stages = { patch: process.env.PATCH_RESULT, build: process.env.BUILD_RESULT, chromium: process.env.CHROMIUM_RESULT, webkit: process.env.WEBKIT_RESULT };
           const passed = Object.values(stages).every(value => value === 'success') && Object.values(reports).every(report => report.passed);
           fs.mkdirSync('.diagnostics',{ recursive:true });
-          fs.writeFileSync('.diagnostics/model-catalog-report.json',JSON.stringify({ codeSha:process.env.GITHUB_SHA,runId:process.env.GITHUB_RUN_ID,checkedAt:new Date().toISOString(),scope:'Grouped source records; Chromium and mobile WebKit mocked-fixture regressions, not a live Notion or historical-accuracy audit',passed,integrationApplied:passed,stages,reports },null,2)+'\n');
+          fs.writeFileSync('.diagnostics/model-catalog-report.json',JSON.stringify({ codeSha:process.env.GITHUB_SHA,runId:process.env.GITHUB_RUN_ID,checkedAt:new Date().toISOString(),scope:'Grouped source records; Chromium and mobile WebKit mocked-fixture regressions, not a live Notion or historical-accuracy audit',passed,integrationApplied:'n/a (integrated 2026-10-16, 02cb13d)',stages,reports },null,2)+'\n');
           NODE
-          git config user.name 'github-actions[bot]'
-          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add .diagnostics/model-catalog-report.json
-          if node -e "process.exit(require('./.diagnostics/model-catalog-report.json').passed?0:1)"; then
-            git add src/app/page.tsx
-            git commit -m 'Activate verified family and variant model catalog'
-          else
-            git commit -m 'ci: publish failed model catalog verification [skip ci]'
-          fi
-          git pull --rebase --autostash origin main
-          git push origin HEAD:main
+          node -e "const r=require('./.diagnostics/model-catalog-report.json');console.log(JSON.stringify({passed:r.passed,stages:r.stages,chromium:r.reports.chromium.stats,webkit:r.reports.webkit.stats}))"
+          { echo '### Model catalog verification'; echo; echo '```json'; cat .diagnostics/model-catalog-report.json; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: model-catalog-report
+          path: .diagnostics/model-catalog-report.json
+          if-no-files-found: ignore
       - if: always()
         run: node -e "if(!require('./.diagnostics/model-catalog-report.json').passed) process.exit(1)"

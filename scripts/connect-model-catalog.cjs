@@ -1,19 +1,25 @@
+// Structural check that the grouped model catalog is wired into the app.
+// History: this script used to PATCH src/app/page.tsx once, guarded by a hard-coded
+// git blob hash of that file. The integration landed on 16.10 (02cb13d); later page.tsx
+// was split into Encyclopedia.tsx + routes (/modele, /modele/[id]), so the hash could
+// never match again. It now only verifies structure and never writes files.
 const fs = require('node:fs');
-const crypto = require('node:crypto');
+const path = require('node:path');
 const assert = require('node:assert/strict');
-const path = 'src/app/page.tsx';
-const bytes = fs.readFileSync(path);
-let text = bytes.toString('utf8');
-const replacement = "{tab === 'modele' && <ModelCatalog items={filteredModels} onChoose={item => selectModel(item.Model, item)} />}\n\n        ";
-if (text.includes("import ModelCatalog from './ModelCatalog';") && text.includes(replacement.trim())) process.exit(0);
-assert.equal(crypto.createHash('sha1').update(Buffer.from('blob ' + bytes.length + '\0')).update(bytes).digest('hex'), '6bb5a673a99d03238030c1aa7a437f94bbe9c21a', 'Unexpected source version; refusing overwrite');
-const anchor = "import GroupedNavigation from './GroupedNavigation';";
-assert.equal(text.split(anchor).length - 1, 1);
-text = text.replace(anchor, anchor + "\nimport ModelCatalog from './ModelCatalog';");
-const start = text.indexOf("{tab === 'modele' && (");
-const end = text.indexOf("{tab === 'kody' && (", start);
-assert(start >= 0 && end > start, 'Expected isolated model list');
-const old = text.slice(start, end);
-assert(old.includes('filteredModels.map'));
-text = text.slice(0, start) + replacement + text.slice(end);
-fs.writeFileSync(path, text);
+
+const read = file => fs.readFileSync(file, 'utf8');
+const appDir = 'src/app';
+const sources = fs.readdirSync(appDir).filter(name => /\.tsx$/.test(name)).map(name => path.join(appDir, name));
+
+assert(fs.existsSync('src/app/ModelCatalog.tsx'), 'ModelCatalog component is missing');
+assert.match(read('src/app/ModelCatalog.tsx'), /export default function ModelCatalog\b/, 'ModelCatalog default export is missing');
+assert.match(read('src/lib/model-catalog.ts'), /export function groupModels\b/, 'groupModels() is missing');
+
+const hosts = sources.filter(file => /import ModelCatalog from '\.\/ModelCatalog'/.test(read(file)) && /tab === 'modele' && <ModelCatalog\b/.test(read(file)));
+assert(hosts.length >= 1, 'ModelCatalog is not rendered for the "modele" tab in any src/app component');
+
+assert(fs.existsSync('src/app/modele/page.tsx'), '/modele route is missing');
+assert.match(read('src/app/modele/page.tsx'), /initialTab="modele"/, '/modele route does not open the model catalog');
+assert(fs.existsSync('src/app/modele/[id]/page.tsx'), '/modele/[id] route is missing');
+
+console.log(`Model catalog wired in: ${hosts.join(', ')}; routes /modele and /modele/[id] present.`);

@@ -20,9 +20,8 @@ test('Sierra and ambiguous GMC Suburban names are separated without relabelling 
   expect(modelWarning(records[1])).not.toBe('');
 });
 async function prepare(page) {
-  await page.addInitScript(() => localStorage.setItem('gmt400_tab','modele'));
   await page.route('**/api/notion', route => route.fulfill({ json: { results: data, count: data.length, complete: true } }));
-  await page.goto('http://127.0.0.1:3100');
+  await page.goto('http://127.0.0.1:3100/modele');
   return page.getByRole('region', { name: 'Katalog modeli według rodzin', exact: true });
 }
 test('catalog opens family and body variant while keeping both original descriptions and links', async ({ page }, info) => {
