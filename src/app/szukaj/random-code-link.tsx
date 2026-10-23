@@ -13,7 +13,7 @@ export default function RandomCodeLink() {
         const randomCode = OBD_CODES[Math.floor(Math.random() * OBD_CODES.length)];
         router.push(`/kody-obd/${randomCode.code.toLowerCase()}`);
       }}
-      className="inline-flex min-h-11 items-center rounded border border-white/20 bg-neutral-950 px-4 py-3 text-amber-400 underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-400"
+      className="inline-flex min-h-11 items-center rounded border border-white/20 bg-neutral-950 px-4 py-3 text-red-400 underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-500"
     >
       Losowy kod
     </button>

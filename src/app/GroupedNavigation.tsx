@@ -38,7 +38,7 @@ export default function GroupedNavigation({ categories, active, onSelect, instan
     afterRender(() => { if (nav.current) reveal(nav.current); });
   }
   return <nav ref={nav} className={`gmt-navigation ${styles.root}`} data-layout={instance === 'menu' ? 'menu' : 'flow'} aria-label={instance === 'menu' ? 'Menu główne' : 'Skróty sekcji'} style={{ gridColumn: '1 / -1', boxSizing: 'border-box', position: 'static', width: '100%', minWidth: 0, padding: 6, background: '#171717', borderRadius: 10, ...(instance === 'menu' ? { maxHeight: '65dvh', overflowY: 'auto' } : {}) }}>
-    {instance === 'sections' ? <QuickAccess onSelect={enter} /> : <Link href="/swiat-gmt400" className="mb-4 flex min-h-12 items-center rounded-lg border border-amber-400 px-3 py-2 text-amber-300 underline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-amber-400">Świat GMT400 — historie i ciekawostki</Link>}
+    {instance === 'sections' ? <QuickAccess onSelect={enter} /> : <Link href="/swiat-gmt400" className="mb-4 flex min-h-12 items-center rounded-lg border border-red-600 px-3 py-2 text-red-300 underline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-red-500">Świat GMT400 — historie i ciekawostki</Link>}
     <p style={{ margin: '0 0 10px', color: '#aeb6c2', fontSize: 11, fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase' }}>Kategorie główne</p>
     <div data-navigation-groups style={grid}>{GROUPS.map(group => <button key={group.id} type="button" data-active={selected?.id === group.id ? 'true' : 'false'} aria-expanded={selected?.id === group.id} aria-controls={`nav-${instance}-items`} onClick={() => chooseGroup(group.id)} style={{ ...tile, flexDirection: 'column', gap: 5, padding: '6px 10px' }}>
       <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false"><path d={group.icon} /></svg>
@@ -51,9 +51,9 @@ export default function GroupedNavigation({ categories, active, onSelect, instan
         <button type="button" aria-pressed={active === category.id} onClick={() => enter(category.id)} style={{ ...tile, height: 48, borderRadius: 7, fontSize: 13 }}>{category.label}</button>
       </li>)}</ul>
     </div>
-    <Link href="/narzedzia" prefetch={false} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: 48, marginTop: 12, padding: '8px 12px', borderRadius: 8, background: '#fbbf24', color: '#111111', fontSize: 14, fontWeight: 700, textAlign: 'center', textDecoration: 'none' }}>Narzędzia: RPO, OBD, opony i części</Link>
+    <Link href="/narzedzia" prefetch={false} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: 48, marginTop: 12, padding: '8px 12px', borderRadius: 8, background: '#ef4444', color: '#111111', fontSize: 14, fontWeight: 700, textAlign: 'center', textDecoration: 'none' }}>Narzędzia: RPO, OBD, opony i części</Link>
     {['vin', 'usterki', 'paliwo', 'mojeauto', 'kupujacy'].includes(active) && <div style={{ marginTop: 12, padding: 12, border: '1px solid #554a30', borderRadius: 8 }}>
-      <Link href="/narzedzia/dane-pojazdu" prefetch={false} style={{ display: 'flex', alignItems: 'center', minHeight: 44, color: '#f2cf85', fontSize: 14, lineHeight: '20px', textDecoration: 'underline' }}>Oficjalne dane VIN, NHTSA i EPA</Link>
+      <Link href="/narzedzia/dane-pojazdu" prefetch={false} style={{ display: 'flex', alignItems: 'center', minHeight: 44, color: '#fca5a5', fontSize: 14, lineHeight: '20px', textDecoration: 'underline' }}>Oficjalne dane VIN, NHTSA i EPA</Link>
       <p style={{ margin: '4px 0 0', color: '#a7adb7', fontSize: 12, lineHeight: '18px' }}>Dekoder VIN, kampanie bezpieczeństwa, zgłoszenia właścicieli i spalanie. Dostęp także bez wpisywania VIN; wybierz model i rocznik w narzędziu.</p>
     </div>}
   </nav>;

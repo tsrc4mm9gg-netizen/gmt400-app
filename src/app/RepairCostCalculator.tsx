@@ -42,18 +42,18 @@ export default function RepairCostCalculator() {
       <label htmlFor="repair-rate" className="block">Stawka robocizny (PLN/h)</label>
       <input id="repair-rate" type="number" min="0" step="10" value={rate} onChange={e => { const n = Number(e.target.value); setRate(Number.isFinite(n) ? Math.min(10000, Math.max(0, n)) : 0); }} className="w-full bg-neutral-900 border border-white/20 p-3" />
     </div>
-    <div aria-live="polite" className="bg-neutral-950 border border-amber-400/30 p-4 space-y-4">
+    <div aria-live="polite" className="bg-neutral-950 border border-red-600/30 p-4 space-y-4">
       <h3 className="text-xl">{repair.name}</h3>
       <h4>Potrzebne części i materiały</h4>
       <ul className="space-y-4">{repair.parts.map(part => <li key={part.name} className="border-b border-white/10 pb-3 break-words">
         <div className="flex flex-wrap justify-between gap-2"><span>{part.name} — {part.quantity}</span><span>{money(part.budget)}</span></div>
         <p className="text-sm text-neutral-300 mt-1">{part.oem ? <>GM OEM: {part.oem}. <a href={part.source} target="_blank" rel="noopener noreferrer" className="underline">Źródło katalogowe</a> · dopasowanie do auta: sprawdź VIN.</> : 'GM OEM: niepotwierdzony lub nie dotyczy materiału/usługi. Nie zamawiaj części bez identyfikacji po VIN/RPO.'}</p>
       </li>)}</ul>
-      {repair.note && <p className="text-sm text-amber-200">{repair.note}</p>}
+      {repair.note && <p className="text-sm text-red-200">{repair.note}</p>}
       <dl className="space-y-2">
         <div className="flex justify-between gap-3"><dt>Części, materiały i usługi dodatkowe</dt><dd>{money(materials)}</dd></div>
         <div className="flex justify-between gap-3"><dt>Robocizna ({repair.hours} h × {rate} PLN)</dt><dd>{money(labor)}</dd></div>
-        <div className="flex justify-between gap-3 text-amber-400 text-lg"><dt>RAZEM WARSZTAT</dt><dd data-testid="repair-total">{money(materials + labor)}</dd></div>
+        <div className="flex justify-between gap-3 text-red-400 text-lg"><dt>RAZEM WARSZTAT</dt><dd data-testid="repair-total">{money(materials + labor)}</dd></div>
         <div className="flex justify-between gap-3"><dt>DIY — bez robocizny własnej</dt><dd>{money(materials)}</dd></div>
       </dl>
       <p className="text-sm text-neutral-400">Czas to założenie kalkulacji, nie norma warsztatowa. Zestawienie pomaga planować budżet; nie zastępuje diagnozy ani procedury naprawy.</p>

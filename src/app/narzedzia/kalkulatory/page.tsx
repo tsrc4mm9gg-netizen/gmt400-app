@@ -101,7 +101,7 @@ export default function Calculators() {
  </div>
  </div>
 
- <p className="mt-4 rounded-lg bg-amber-50 p-3 text-sm text-amber-900">
+ <p className="mt-4 rounded-lg bg-red-50 p-3 text-sm text-red-900">
  Przy wskazaniu licznika {speed} mph rzeczywista prędkość wyniesie około <strong>{result.actualSpeedAtIndicatedSpeed ?? '—'} mph</strong>.
  </p>
  <p className="mt-3 text-xs text-slate-500">{result.note}</p>

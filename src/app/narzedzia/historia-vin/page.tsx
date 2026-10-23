@@ -143,7 +143,7 @@ export default function VinHistoryPage() {
                 className={`rounded-lg border p-4 ${
                   alert.level === 'warning'
                     ? 'border-red-300 bg-red-50 text-red-900'
-                    : 'border-amber-300 bg-amber-50 text-amber-900'
+                    : 'border-red-500 bg-red-50 text-red-900'
                 }`}
               >
                 <p className="font-semibold">{alert.message}</p>

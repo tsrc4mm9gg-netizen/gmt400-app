@@ -8,11 +8,11 @@ export const metadata = {
 export default function SchematyPage() {
  return (
  <main id="main-content" className="mx-auto w-full max-w-5xl px-4 py-10">
- <h1 className="text-3xl font-bold text-amber-400">Schematy — GMT400</h1>
+ <h1 className="text-3xl font-bold text-red-400">Schematy — GMT400</h1>
  <p className="mt-2 text-zinc-300">Podstawowe opisy i pinouty. Bez hostowania skanów FSM ani materiałów © GM.</p>
  {SCHEMATICS.map(item => (
  <section key={item.id} className="mt-8 rounded-xl border border-zinc-800 bg-zinc-900/60 p-5">
- <h2 className="text-xl font-semibold text-amber-300">{item.title}</h2>
+ <h2 className="text-xl font-semibold text-red-300">{item.title}</h2>
  <p className="mt-1 text-sm text-zinc-400">Zakres: {item.scope}</p>
  <p className="mt-2 text-zinc-200">{item.description}</p>
  <table className="mt-4 w-full text-left text-sm">
@@ -33,7 +33,7 @@ export default function SchematyPage() {
  </tbody>
  </table>
  <p className="mt-3 text-xs text-zinc-500">
- Źródło: <a className="text-amber-400 underline" href={item.source}>{item.sourceTitle}</a>
+ Źródło: <a className="text-red-400 underline" href={item.source}>{item.sourceTitle}</a>
  </p>
  <p className="mt-1 text-xs text-zinc-500">{item.note}</p>
  </section>

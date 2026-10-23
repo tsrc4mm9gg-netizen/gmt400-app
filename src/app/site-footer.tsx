@@ -17,7 +17,7 @@ export default function SiteFooter() {
               <li key={href}>
                 <Link
                   href={href}
-                  className="rounded text-amber-400 underline-offset-4 transition-colors hover:text-amber-300 hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-amber-400"
+                  className="rounded text-red-400 underline-offset-4 transition-colors hover:text-red-300 hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-red-500"
                 >
                   {label}
                 </Link>

@@ -33,7 +33,7 @@ export default function RpoPage() {
         <button type="submit" disabled={loading} className="rounded-lg bg-blue-600 px-4 py-2 font-medium text-white hover:bg-blue-700 disabled:opacity-50">{loading ? 'Szukam…' : 'Sprawdź kody'}</button>
       </form>
       {error && <p className="mt-3 rounded bg-red-50 p-3 text-sm text-red-700">{error}</p>}
-      {data?.ratioConflict && <p className="mt-3 rounded bg-amber-50 p-3 text-sm text-amber-800">Uwaga: podane kody wskazują różne przełożenia tylnej osi. Sprawdź tabliczkę pojazdu.</p>}
+      {data?.ratioConflict && <p className="mt-3 rounded bg-red-50 p-3 text-sm text-red-800">Uwaga: podane kody wskazują różne przełożenia tylnej osi. Sprawdź tabliczkę pojazdu.</p>}
       {data?.invalidTokens?.length > 0 && <p className="mt-3 rounded bg-slate-100 p-3 text-sm text-slate-700">Pominięto nieprawidłowe wpisy: {data.invalidTokens.join(', ')}</p>}
     </section>
     {data && <p className="text-sm text-slate-600">Znaleziono wyników: <strong>{results.length}</strong></p>}

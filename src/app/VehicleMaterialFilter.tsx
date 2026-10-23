@@ -12,7 +12,7 @@ export function VehicleMatchBadge({ item }: { item: Material }) {
   const { profile, ready } = useVehicleProfile();
   if (!ready || !profile) return null;
   const match = matchVehicle(profile, item.applicability || EMPTY);
-  return <details className="my-2 text-xs text-neutral-400"><summary className="cursor-pointer text-amber-400">{LABELS[match.status]}</summary><ul className="mt-1 list-disc pl-4">{match.reasons.map(reason => <li key={reason}>{reason}</li>)}</ul></details>;
+  return <details className="my-2 text-xs text-neutral-400"><summary className="cursor-pointer text-red-400">{LABELS[match.status]}</summary><ul className="mt-1 list-disc pl-4">{match.reasons.map(reason => <li key={reason}>{reason}</li>)}</ul></details>;
 }
 export function useVehicleMaterialFilter<T extends Material>(items: T[], scopeTypes?: string[]) {
   const { profile, ready } = useVehicleProfile();

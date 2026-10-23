@@ -20,7 +20,7 @@ export default function GlobalError({ error, reset }: {
           <h1 ref={heading} id="global-error-title" tabIndex={-1}>Nie udało się uruchomić strony</h1>
           <p>Wystąpił nieoczekiwany błąd. Możesz spróbować ponownie lub otworzyć stronę główną.</p>
           <button type="button" onClick={reset} style={{ minHeight: 44, padding: '12px 20px', marginRight: 16 }}>Spróbuj ponownie</button>
-          <a href="/" style={{ display: 'inline-block', minHeight: 44, padding: '12px 0', color: '#f2cf85', boxSizing: 'border-box' }}>Strona główna</a>
+          <a href="/" style={{ display: 'inline-block', minHeight: 44, padding: '12px 0', color: '#fca5a5', boxSizing: 'border-box' }}>Strona główna</a>
         </main>
       </body>
     </html>

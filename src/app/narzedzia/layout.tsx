@@ -14,15 +14,14 @@ const THEME = `
 [data-tool-theme="dark-v1"] input[class], [data-tool-theme="dark-v1"] select[class], [data-tool-theme="dark-v1"] textarea[class] { display:block; width:100%; min-height:44px; margin-top:6px; padding:10px 12px; border:1px solid #596371; border-radius:7px; background:#101317 !important; color:#fafafa !important; -webkit-text-fill-color:#fafafa !important; font-size:16px; color-scheme:dark; }
 [data-tool-theme="dark-v1"] input::placeholder, [data-tool-theme="dark-v1"] textarea::placeholder { color:#aab4c1 !important; -webkit-text-fill-color:#aab4c1 !important; opacity:1; }
 [data-tool-theme="dark-v1"] option { background:#101317 !important; color:#fafafa !important; }
-[data-tool-theme="dark-v1"] button[class] { min-height:44px; padding:10px 14px; border:1px solid #596371; border-radius:8px; background:#101317 !important; color:#f2cf85 !important; }
-[data-tool-theme="dark-v1"] button[type='submit'] { background:#e7b95e !important; color:#111111 !important; border-color:#e7b95e; font-weight:700; }
+[data-tool-theme="dark-v1"] button[class] { min-height:44px; padding:10px 14px; border:1px solid #596371; border-radius:8px; background:#101317 !important; color:#fca5a5 !important; }
+[data-tool-theme="dark-v1"] button[type='submit'] { background:#dc2626 !important; color:#ffffff !important; border-color:#dc2626; font-weight:700; }
 [data-tool-theme="dark-v1"] button:disabled { opacity:.65; }
-[data-tool-theme="dark-v1"] a[class] { color:#f2cf85 !important; }
+[data-tool-theme="dark-v1"] a[class] { color:#fca5a5 !important; }
 [data-tool-theme="dark-v1"] [class*='bg-red-'] { background-color:#351b22 !important; }
 [data-tool-theme="dark-v1"] [class*='text-red-'] { color:#ffb4b4 !important; }
-[data-tool-theme="dark-v1"] [class*='bg-amber-'] { background-color:#302719 !important; }
-[data-tool-theme="dark-v1"] [class*='text-amber-'] { color:#f2cf85 !important; }
-[data-tool-theme="dark-v1"] input:focus-visible, [data-tool-theme="dark-v1"] select:focus-visible, [data-tool-theme="dark-v1"] button:focus-visible, [data-tool-theme="dark-v1"] a:focus-visible { outline:2px solid #e7b95e; outline-offset:3px; }
+[data-tool-theme="dark-v1"] [class*='bg-red-6'] { background-color:#dc2626 !important; color:#fff !important; }
+[data-tool-theme="dark-v1"] input:focus-visible, [data-tool-theme="dark-v1"] select:focus-visible, [data-tool-theme="dark-v1"] button:focus-visible, [data-tool-theme="dark-v1"] a:focus-visible { outline:2px solid #dc2626; outline-offset:3px; }
 `;
 export default function ToolsLayout({ children }:{ children:ReactNode }) {
  const pathname = usePathname();

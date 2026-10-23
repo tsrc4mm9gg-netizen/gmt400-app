@@ -38,23 +38,23 @@ export default function PartsPage() {
   finally { if (!controller.signal.aborted) setLoading(false); }
  }
  return <main style={{ boxSizing:'border-box', width:'100%', maxWidth:1000, margin:'0 auto', padding:'20px 16px 120px', color:'#ededed' }}>
-  <Link href="/narzedzia" style={{ display:'inline-flex', alignItems:'center', minHeight:44, marginBottom:16, color:'#f2cf85' }}>← Wszystkie narzędzia</Link>
+  <Link href="/narzedzia" style={{ display:'inline-flex', alignItems:'center', minHeight:44, marginBottom:16, color:'#fca5a5' }}>← Wszystkie narzędzia</Link>
   <section style={panel}>
    <h1 style={{ margin:'0 0 12px', color:'#fafafa', fontSize:26 }}>Sprawdź informacje o częściach</h1>
    <p style={{ color:'#d0d5dc', lineHeight:1.65 }}>To pomoc w szukaniu, nie pełny katalog części. Zobacz wpisy lokalne oraz dostępne odnośniki do katalogów dostawców. Żaden wynik nie potwierdza automatycznie pasowania.</p>
    <form onSubmit={search} style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit, minmax(min(100%, 240px), 1fr))', gap:14 }}>
     {fields.map(field => <div key={field.key} style={{ minWidth:0 }}><label htmlFor={'parts-' + field.key}>{field.label}</label><select id={'parts-' + field.key} aria-label={field.label} value={query[field.key]} onChange={event => setQuery(previous => ({ ...previous, [field.key]:event.target.value }))} style={control}>{field.options.map(value => <option key={value} value={value}>{value ? value === '2wd' ? '2WD — C1500' : value === '4x4' ? '4x4 — K1500' : value : field.empty}</option>)}</select></div>)}
-    <button type="submit" disabled={loading} style={{ gridColumn:'1 / -1', minHeight:48, border:0, borderRadius:8, padding:12, background:'#e7b95e', color:'#111111', fontSize:16, fontWeight:700 }}>{loading ? 'Sprawdzam…' : 'Szukaj informacji'}</button>
+    <button type="submit" disabled={loading} style={{ gridColumn:'1 / -1', minHeight:48, border:0, borderRadius:8, padding:12, background:'#dc2626', color:'#ffffff', fontSize:16, fontWeight:700 }}>{loading ? 'Sprawdzam…' : 'Szukaj informacji'}</button>
    </form>
    {error && <p role="alert" style={{ marginTop:16, color:'#ffb4b4' }}>{error}</p>}
    {data && <p role="status" style={{ marginTop:16, color:'#d0d5dc' }}>{data.results.length ? 'Wpisy lokalne: ' + data.results.length + '.' : 'Brak danych lokalnych dla wybranego auta. Nie oznacza to, że część nie pasuje.'}{data.externalCatalogs.length ? ' Dostępne odnośniki do katalogów zewnętrznych: ' + data.externalCatalogs.length + '.' : ' Dla tego wyboru nie dodano jeszcze odnośników katalogowych.'}</p>}
   </section>
   {data && data.externalCatalogs.length > 0 && <section aria-label="Katalogi zewnętrzne" style={panel}>
-   <h2 style={{ margin:'0 0 10px', color:'#f2cf85', fontSize:20 }}>Sprawdź części w katalogach dostawców</h2>
+   <h2 style={{ margin:'0 0 10px', color:'#fca5a5', fontSize:20 }}>Sprawdź części w katalogach dostawców</h2>
    <p style={{ color:'#d0d5dc' }}>Odnośniki dotyczą Chevrolet. Przy nieustalonym napędzie pokazujemy osobno wersję C1500 i K1500 — wybierz właściwą. Nie pobieramy tu numerów części, cen ani stanów magazynowych.</p>
-   {data.externalCatalogs.map(catalog => <a key={catalog.url} href={catalog.url} target="_blank" rel="noopener noreferrer" style={{ display:'block', marginTop:12, padding:16, border:'1px solid #596371', borderRadius:8, background:'#101317', color:'#f2cf85', textDecoration:'none', overflowWrap:'anywhere' }}><span style={{ display:'block', fontWeight:700 }}>{catalog.title} ↗</span><span style={{ display:'block', marginTop:6, color:'#d0d5dc', fontSize:13 }}>{catalog.vehicle}</span><span style={{ display:'block', marginTop:6, fontSize:13 }}>Otwórz katalog i sprawdź zastosowanie</span></a>)}
+   {data.externalCatalogs.map(catalog => <a key={catalog.url} href={catalog.url} target="_blank" rel="noopener noreferrer" style={{ display:'block', marginTop:12, padding:16, border:'1px solid #596371', borderRadius:8, background:'#101317', color:'#fca5a5', textDecoration:'none', overflowWrap:'anywhere' }}><span style={{ display:'block', fontWeight:700 }}>{catalog.title} ↗</span><span style={{ display:'block', marginTop:6, color:'#d0d5dc', fontSize:13 }}>{catalog.vehicle}</span><span style={{ display:'block', marginTop:6, fontSize:13 }}>Otwórz katalog i sprawdź zastosowanie</span></a>)}
   </section>}
-  {data?.results.map((item, index) => <article key={item.part + index} style={panel}><p style={{ color:'#f2cf85', fontSize:13 }}>Wpis lokalny — pasowanie niepotwierdzone</p><h2 style={{ color:'#fafafa', fontSize:20 }}>{item.part}</h2><p>Modele wymienione we wpisie: {item.fitsModels.join(', ')}</p><p>Zakres lat we wpisie: {item.yearRange[0]}–{item.yearRange[1]}.</p><p>{item.notes}</p></article>)}
+  {data?.results.map((item, index) => <article key={item.part + index} style={panel}><p style={{ color:'#fca5a5', fontSize:13 }}>Wpis lokalny — pasowanie niepotwierdzone</p><h2 style={{ color:'#fafafa', fontSize:20 }}>{item.part}</h2><p>Modele wymienione we wpisie: {item.fitsModels.join(', ')}</p><p>Zakres lat we wpisie: {item.yearRange[0]}–{item.yearRange[1]}.</p><p>{item.notes}</p></article>)}
   {data && <aside style={panel}><p style={{ margin:0, color:'#bdc6d2', fontSize:13 }}>{data.coverage.message} {data.disclaimer}</p></aside>}
  </main>;
 }

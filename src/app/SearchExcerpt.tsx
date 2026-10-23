@@ -4,5 +4,5 @@ export default function SearchExcerpt({ item, query }: { item: { Opis?: string; 
   const excerpt = getSearchExcerpt(item, query);
   if (!excerpt) return null;
   const segments = excerpt.matched ? getHighlightSegments(excerpt.text, query) : [{ text: excerpt.text, highlighted: false }];
-  return <p data-search-excerpt className="mt-1 whitespace-pre-line break-words text-sm text-neutral-300"><span className="text-xs text-neutral-400">{excerpt.field}{excerpt.matched ? ' — fragment dopasowania' : ' — początek treści'}: </span>{segments.map((segment, index) => segment.highlighted ? <mark key={index} className="bg-amber-400/30 text-amber-200">{segment.text}</mark> : <span key={index}>{segment.text}</span>)}</p>;
+  return <p data-search-excerpt className="mt-1 whitespace-pre-line break-words text-sm text-neutral-300"><span className="text-xs text-neutral-400">{excerpt.field}{excerpt.matched ? ' — fragment dopasowania' : ' — początek treści'}: </span>{segments.map((segment, index) => segment.highlighted ? <mark key={index} className="bg-red-600/30 text-red-200">{segment.text}</mark> : <span key={index}>{segment.text}</span>)}</p>;
 }

@@ -91,17 +91,17 @@ export default async function KnowledgeEntry({ params }: Props) {
   const code = obdCode(entry);
   return <main className="mx-auto min-h-screen max-w-4xl bg-black px-5 py-10 pb-28 text-white">
     <nav aria-label="Nawigacja pomocnicza" className="flex flex-wrap items-center gap-x-3 gap-y-2 text-sm">
-      <a href="/" className="text-amber-400 underline">Wróć do encyklopedii</a>
+      <a href="/" className="text-red-400 underline">Wróć do encyklopedii</a>
       <span aria-hidden="true" className="text-neutral-600">·</span>
-      <a href="/szukaj" className="text-amber-400 underline">Wróć do wyników</a>
+      <a href="/szukaj" className="text-red-400 underline">Wróć do wyników</a>
     </nav>
     <article className="mt-6 space-y-6">
       <div className="flex flex-wrap gap-2">
-        {entry.Typ && <span className="rounded-full border border-amber-400/40 bg-amber-400/10 px-3 py-1 text-xs font-medium text-amber-300">Typ: {entry.Typ}</span>}
+        {entry.Typ && <span className="rounded-full border border-red-600/40 bg-red-600/10 px-3 py-1 text-xs font-medium text-red-300">Typ: {entry.Typ}</span>}
         {entry.Model && <span className="rounded-full border border-white/20 bg-white/5 px-3 py-1 text-xs text-neutral-200">Model: {entry.Model}</span>}
         {entry.Lata && <span className="rounded-full border border-white/20 bg-white/5 px-3 py-1 text-xs text-neutral-200">Lata: {entry.Lata}</span>}
       </div>
-      <h1 className="text-3xl text-amber-400">{entry.Nazwa}</h1>
+      <h1 className="text-3xl text-red-400">{entry.Nazwa}</h1>
       {materialLead && <p className="text-lg leading-relaxed text-neutral-200">{materialLead}</p>}
       {code && <p className="rounded border border-sky-400/40 bg-sky-400/10 p-3 text-sm"><a className="font-semibold text-sky-300 underline" href={`/kody-obd/${code}`}>Otwórz kartę kodu OBD {code.toUpperCase()}</a></p>}
       <VehicleMatchBadge item={entry} />
@@ -110,7 +110,7 @@ export default async function KnowledgeEntry({ params }: Props) {
       {entry.Opis && <section><h2 className="mb-2 text-xl">Opis</h2><MaterialText text={entry.Opis} field="Opis" /></section>}
       {entry.Objawy && <section><h2 className="mb-2 text-xl">Objawy</h2><MaterialText text={entry.Objawy} field="Objawy" /></section>}
       {entry.Rozwiązanie && <section><h2 className="mb-2 text-xl">Rozwiązanie</h2><MaterialText text={entry.Rozwiązanie} field="Rozwiązanie" /></section>}
-      {contentError && <p role="alert" className="rounded border border-amber-400/40 p-3">Nie udało się pobrać dodatkowej zawartości strony Notion. Powyższe pola są dostępne, ale materiał może być niekompletny. Odśwież stronę, aby ponowić pobieranie.</p>}
+      {contentError && <p role="alert" className="rounded border border-red-600/40 p-3">Nie udało się pobrać dodatkowej zawartości strony Notion. Powyższe pola są dostępne, ale materiał może być niekompletny. Odśwież stronę, aby ponowić pobieranie.</p>}
       {blocks.length > 0 && <section aria-label="Zawartość strony Notion"><h2 className="mb-3 text-xl">Treść materiału i ilustracje</h2><NotionContent blocks={blocks} /></section>}
       {diagram && <figure><a href={diagram} target="_blank" rel="noopener noreferrer"><img src={diagram} alt="Grafika pomocnicza z biblioteki GMT400" loading="lazy" className="h-auto w-full rounded object-contain" /></a><figcaption className="mt-2 text-xs text-neutral-400">Grafika pomocnicza z biblioteki aplikacji, nie ilustracja przypisana w Notion do tego wpisu. Sprawdź jej zgodność z konkretnym pojazdem i procedurą.</figcaption></figure>}
       {!contentError && !entry.Opis && !entry.Objawy && !entry.Rozwiązanie && !blocks.length && <p>Ten wpis nie zawiera jeszcze szczegółowej treści.</p>}
