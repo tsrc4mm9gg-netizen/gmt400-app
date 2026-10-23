@@ -22,7 +22,7 @@ export default function SiteHeader() {
       <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-3 px-4 py-3">
         <Link
           href="/"
-          className="rounded font-semibold text-amber-400 underline-offset-4 transition-colors hover:text-amber-300 hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-amber-400"
+          className="rounded font-semibold text-red-500 underline-offset-4 transition-colors hover:text-red-400 hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-red-500"
         >
           GMT400
         </Link>
@@ -37,8 +37,8 @@ export default function SiteHeader() {
                   <Link
                     href={href}
                     aria-current={active ? 'page' : undefined}
-                    className={`rounded px-2 py-1 underline-offset-4 transition-colors hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-amber-400 ${
-                      active ? 'font-semibold text-amber-400' : 'text-neutral-200 hover:text-amber-300'
+                    className={`rounded px-2 py-1 underline-offset-4 transition-colors hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-red-500 ${
+                      active ? 'font-semibold text-red-400' : 'text-neutral-200 hover:text-red-300'
                     }`}
                   >
                     {label}
@@ -50,7 +50,7 @@ export default function SiteHeader() {
               <Link
                 href="/szukaj"
                 aria-current={isActive(pathname, '/szukaj') ? 'page' : undefined}
-                className="inline-flex min-h-11 items-center rounded-md border border-amber-400 px-4 py-2 font-semibold text-amber-400 underline-offset-4 transition-colors hover:bg-amber-400 hover:text-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-amber-400"
+                className="inline-flex min-h-11 items-center rounded-lg bg-red-600 px-5 py-2 font-semibold text-white shadow-md shadow-red-600/30 transition hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-red-500"
               >
                 Szukaj
               </Link>
