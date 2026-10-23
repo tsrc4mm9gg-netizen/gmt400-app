@@ -1,7 +1,7 @@
 {
-  "auditorCodeSha": "7d2a23e50340fa9ee619128b5b649b65fa57cc0d",
-  "runId": "39253587319",
-  "checkedAt": "2026-10-19T12:41:27.702Z",
+  "auditorCodeSha": "42a29f0f664798709983ff2299c4c3479a47035f",
+  "runId": "39878651222",
+  "checkedAt": "2026-10-23T00:34:17.590Z",
   "passed": false,
   "scope": "Synthetic local article interactions in Chromium and Linux WebKit plus existing Notion renderer tests. Candidate integration only; no Notion writes, no production article or physical iPhone certification.",
   "stages": {
@@ -26,8 +26,8 @@
   ],
   "parseError": "",
   "stats": {
-    "startTime": "2026-10-19T12:40:37.987Z",
-    "duration": 49644.655999999995,
+    "startTime": "2026-10-23T00:33:23.816Z",
+    "duration": 53710.414000000004,
     "expected": 12,
     "skipped": 0,
     "unexpected": 4,
