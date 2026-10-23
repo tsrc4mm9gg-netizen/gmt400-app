@@ -69,7 +69,7 @@ jobs:
           const passed=Object.values(stages).every(value=>value==='success')&&!parseError&&!(raw.errors||[]).length&&coverage.every(item=>item.images===5&&item.renderer===3)&&raw.stats?.expected===tests.length&&raw.stats?.unexpected===0&&raw.stats?.skipped===0&&raw.stats?.flaky===0&&tests.every(test=>test.status==='expected');
           fs.mkdirSync('.diagnostics',{recursive:true});fs.writeFileSync('.diagnostics/material-images-report.json',JSON.stringify({auditorCodeSha:process.env.GITHUB_SHA,runId:process.env.GITHUB_RUN_ID,checkedAt:new Date().toISOString(),passed,scope:'Local synthetic illustrations rendered through candidate Notion renderer, Chromium and Linux WebKit plus existing renderer security tests. No Notion writes; no production signed image availability or physical iPhone certification.',stages,coverage,parseError,stats:raw.stats||{},runnerErrors:raw.errors||[],tests},null,2)+'\n');
           NODE
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         if: always()
         with:
           name: material-images-${{ github.run_id }}

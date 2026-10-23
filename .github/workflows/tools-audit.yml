@@ -63,7 +63,7 @@ jobs:
           fs.mkdirSync('.diagnostics', { recursive:true }); fs.writeFileSync('.diagnostics/tools-audit-report.json', JSON.stringify(report, null, 2) + '\n');
           fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, 'Tools audit: ' + (passed ? 'PASS' : 'FAIL') + '\nCommit: ' + report.codeSha + '\nTests: ' + tests.length + '\n' + report.scope + '\nReport is attached as a workflow artifact; it is not committed to the repository.');
           NODE
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         if: always()
         with:
           name: tools-audit-${{ github.run_id }}-${{ github.run_attempt }}

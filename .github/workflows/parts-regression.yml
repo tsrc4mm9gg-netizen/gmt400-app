@@ -42,7 +42,7 @@ jobs:
         run: |
           set -o pipefail
           npx playwright test tests/parts-api.spec.cjs --workers=1 --reporter=list 2>&1 | tee /tmp/parts-tests.log
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         if: always()
         with:
           name: parts-regression-${{ github.run_id }}-${{ github.run_attempt }}

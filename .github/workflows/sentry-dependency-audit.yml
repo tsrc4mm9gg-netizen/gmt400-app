@@ -28,7 +28,7 @@ jobs:
           node -e 'const fs=require("node:fs");const r=JSON.parse(fs.readFileSync("npm-audit.json","utf8"));if(r.error||!r.metadata||!r.vulnerabilities)throw new Error("Audit did not return a valid report");console.log(JSON.stringify({counts:r.metadata.vulnerabilities,vulnerabilities:r.vulnerabilities},null,2));'
       - name: Store audit report for review
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: dependency-audit-${{ github.run_id }}
           path: npm-audit.json

@@ -48,7 +48,7 @@ jobs:
         run: |
           node -e "const fs=require('node:fs');const base=require('./playwright.webkit.config.cjs');fs.writeFileSync('playwright.models.generated.config.cjs','module.exports = '+JSON.stringify({...base,testMatch:['model-catalog.spec.cjs']})+';')"
           npx playwright test --config=playwright.models.generated.config.cjs --output=test-results/webkit --reporter=json > /tmp/model-webkit.json
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         if: always()
         with:
           name: model-catalog-verification
@@ -81,7 +81,7 @@ jobs:
           NODE
           node -e "const r=require('./.diagnostics/model-catalog-report.json');console.log(JSON.stringify({passed:r.passed,stages:r.stages,chromium:r.reports.chromium.stats,webkit:r.reports.webkit.stats}))"
           { echo '### Model catalog verification'; echo; echo '```json'; cat .diagnostics/model-catalog-report.json; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         if: always()
         with:
           name: model-catalog-report

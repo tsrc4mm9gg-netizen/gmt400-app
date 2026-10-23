@@ -126,7 +126,7 @@ jobs:
             fs.writeFileSync('reports/comprehensive/report.json', JSON.stringify(report, null, 2));
             const issue = await github.rest.issues.create({ ...context.repo, title: `Comprehensive repair report ${context.runId}`, body });
             core.notice(issue.data.html_url);
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         if: always()
         with:
           name: comprehensive-repair-${{ github.run_id }}-${{ github.run_attempt }}
