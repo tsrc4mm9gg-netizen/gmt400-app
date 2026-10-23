@@ -1,8 +1,8 @@
 'use client';
 import { useCallback, useEffect, useRef, useState, type SetStateAction } from 'react';
-export default function useSectionNavigation(allowed: string[]) {
+export default function useSectionNavigation(allowed: string[], preferred?: string) {
   const key = allowed.join('|');
-  const fallback = allowed[0] || 'modele';
+  const fallback = preferred && allowed.includes(preferred) ? preferred : allowed[0] || 'modele';
   const [section, setSection] = useState(fallback);
   const current = useRef(fallback);
   const ready = useRef(false);
@@ -16,10 +16,10 @@ export default function useSectionNavigation(allowed: string[]) {
     const explicit = valid(url.searchParams.get('tab'));
     let saved: string | null = null;
     try { saved = valid(localStorage.getItem('gmt400_tab')); } catch {}
-    const initial = explicit || saved || fallback;
+    const initial = explicit || (preferred ? fallback : saved) || fallback;
     const position = typeof window.history.state?.gmt400ScrollY === 'number' ? window.history.state.gmt400ScrollY : null;
     current.current = initial; setSection(initial); persist(initial);
-    url.searchParams.set('tab', initial);
+    if (preferred && initial === fallback) url.searchParams.delete('tab'); else url.searchParams.set('tab', initial);
     window.history.replaceState({ ...window.history.state, gmt400Section: initial, gmt400ScrollY: position ?? window.scrollY }, '', url.toString());
     ready.current = true;
     const previousRestoration = window.history.scrollRestoration;
@@ -63,16 +63,16 @@ export default function useSectionNavigation(allowed: string[]) {
     window.addEventListener('keydown', intent);
     window.addEventListener('pagehide', savePosition);
     return () => { stopped = true; cancelInitial(); if (timer) clearTimeout(timer); window.removeEventListener('popstate', pop); window.removeEventListener('scroll', scroll); window.removeEventListener('wheel', intent); window.removeEventListener('touchstart', intent); window.removeEventListener('pointerdown', intent); window.removeEventListener('keydown', intent); window.removeEventListener('pagehide', savePosition); window.history.scrollRestoration = previousRestoration; };
-  }, [valid, fallback, persist, savePosition]);
+  }, [valid, fallback, preferred, persist, savePosition]);
   const navigate = useCallback((value: SetStateAction<string>) => {
     const next = valid(typeof value === 'function' ? value(current.current) : value);
     if (!next || typeof window === 'undefined') return;
     if (next !== current.current) {
       savePosition();
-      const url = new URL(window.location.href); url.searchParams.set('tab', next);
+      const url = new URL(window.location.href); if (preferred && next === fallback) url.searchParams.delete('tab'); else url.searchParams.set('tab', next);
       window.history.pushState({ ...window.history.state, gmt400Section: next, gmt400ScrollY: 0 }, '', url.toString());
     }
     current.current = next; setSection(next); persist(next);
-  }, [valid, savePosition, persist]);
+  }, [valid, savePosition, persist, preferred, fallback]);
   return [section, navigate] as const;
 }

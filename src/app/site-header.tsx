@@ -22,7 +22,7 @@ export default function SiteHeader() {
       <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-3 px-4 py-3">
         <Link
           href="/"
-          className="rounded font-semibold text-red-500 underline-offset-4 transition-colors hover:text-red-400 hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-red-500"
+          className="rounded text-lg font-bold text-red-500 underline-offset-4 transition-colors hover:text-red-400 hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-red-500"
         >
           GMT400
         </Link>
@@ -50,8 +50,9 @@ export default function SiteHeader() {
               <Link
                 href="/szukaj"
                 aria-current={isActive(pathname, '/szukaj') ? 'page' : undefined}
-                className="inline-flex min-h-11 items-center rounded-lg bg-red-600 px-5 py-2 font-semibold text-white shadow-md shadow-red-600/30 transition hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-red-500"
+                className="inline-flex min-h-12 items-center gap-2 rounded-xl bg-red-600 px-6 py-2 text-base font-bold text-white shadow-lg shadow-red-600/40 ring-1 ring-red-400/40 transition hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-red-500"
               >
+                <svg aria-hidden="true" viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" /></svg>
                 Szukaj
               </Link>
             </li>

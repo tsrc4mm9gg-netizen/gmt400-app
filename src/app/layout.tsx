@@ -5,7 +5,6 @@ import VehicleProfileProvider from "./VehicleProfileProvider";
 import ToolsLauncher from "./ToolsLauncher";
 import SiteHeader from "./site-header";
 import SiteFooter from "./site-footer";
-import HomeHero from "./HomeHero";
 import { ModelSelectionProvider } from "./ModelSelectionContext";
 
 const geistSans = Geist({
@@ -57,8 +56,7 @@ export default function RootLayout({
         <ModelSelectionProvider>
           <SiteHeader />
           <div className="flex-1">
-            <HomeHero />
-            <main id="main">
+            <main id="main-content">
               <VehicleProfileProvider>{children}</VehicleProfileProvider>
             </main>
           </div>
