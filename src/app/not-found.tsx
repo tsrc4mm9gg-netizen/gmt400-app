@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 export default function NotFound() {
   return (
-    <main className="mx-auto flex min-h-[60vh] max-w-3xl flex-col items-center justify-center px-5 py-16 text-center text-white">
+    <div className="mx-auto flex min-h-[60vh] max-w-3xl flex-col items-center justify-center px-5 py-16 text-center text-white">
       <p className="text-sm font-semibold uppercase tracking-wide text-red-400">Błąd 404</p>
       <h1 className="mt-3 text-3xl font-bold text-red-400 sm:text-4xl">Nie znaleziono strony</h1>
       <p className="mt-4 max-w-xl text-neutral-300">
@@ -45,6 +45,6 @@ export default function NotFound() {
           </li>
         </ul>
       </nav>
-    </main>
+    </div>
   );
 }

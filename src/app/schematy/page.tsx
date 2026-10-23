@@ -1,5 +1,7 @@
 import Link from 'next/link';
 import { SCHEMATICS } from '@/lib/schematics';
+import SchematicViewer from './SchematicViewer';
+import Breadcrumbs from '../ui/Breadcrumbs';
 
 export const metadata = {
   title: 'Schematy — GMT400',
@@ -11,7 +13,8 @@ const titleOf = (id: string) => SCHEMATICS.find(item => item.id === id)?.title ?
 
 export default function SchematyPage() {
   return (
-    <main id="main-content" className="mx-auto w-full max-w-5xl px-4 py-8 text-white sm:py-10">
+    <div className="mx-auto w-full max-w-5xl px-4 py-6 text-white sm:py-10">
+      <Breadcrumbs className="mb-2" items={[{ label: 'Schematy' }]} />
       <h1 className="text-3xl font-bold text-red-400">Schematy — GMT400</h1>
       <p className="mt-2 text-neutral-300">Własne, uproszczone schematy i pinouty. Bez skanów FSM ani materiałów © GM. Każdy rysunek ma podany model i lata — <strong className="text-white">sprawdź w swoim aucie / manualu</strong>, bo GMT400 ma wiele wariantów.</p>
       <nav aria-label="Spis schematów" className="mt-5">
@@ -33,11 +36,8 @@ export default function SchematyPage() {
                 <span className="rounded-full border border-red-600/50 bg-red-600/10 px-3 py-1 text-red-200">Model i lata: {item.diagram.models}</span>
                 <span className="rounded-full border border-white/15 bg-white/5 px-3 py-1 text-neutral-200">⚠ Sprawdź w swoim aucie / manualu</span>
               </div>
-              <a href={item.diagram.src} target="_blank" rel="noopener noreferrer" className="block overflow-hidden rounded-lg border border-white/10 bg-[#0d0d0f]">
-                {/* SVG serwowany bezpośrednio (wektor, bez optymalizacji rastrowej) */}
-                <img src={item.diagram.src} alt={item.diagram.alt} width={item.diagram.width} height={item.diagram.height} loading="lazy" decoding="async" className="h-auto w-full" />
-              </a>
-              <figcaption className="mt-2 text-xs text-neutral-400">Kliknij, aby otworzyć schemat w pełnym rozmiarze (na telefonie możesz go powiększyć gestem). Rysunek poglądowy — nie zastępuje FSM.</figcaption>
+              <SchematicViewer src={item.diagram.src} alt={item.diagram.alt} width={item.diagram.width} height={item.diagram.height} title={item.title} />
+              <figcaption className="mt-2 text-xs text-neutral-400">Stuknij schemat, aby otworzyć go na pełnym ekranie i powiększyć dwoma palcami. Rysunek poglądowy — nie zastępuje FSM.</figcaption>
             </figure>
           )}
           <p className="mt-3 text-neutral-200">{item.description}</p>
@@ -72,6 +72,6 @@ export default function SchematyPage() {
         </section>
       ))}
       <p className="mt-8 text-sm text-neutral-400">Schematy dla konkretnego nadwozia znajdziesz też na <Link href="/modele" className="inline-flex min-h-11 items-center text-red-400 underline">stronach modeli</Link>.</p>
-    </main>
+    </div>
   );
 }

@@ -1,4 +1,6 @@
 import { CHECK_NOTE, ENGINES, FLUIDS, SOURCES, TRANSFER_CASES } from '../lib/verified-specs';
+import { PARTS, PART_SOURCES, STATUS_LABEL, type Part } from '../lib/parts-catalog';
+import { TORQUE_SPECS } from '../lib/torque-specs';
 
 function Src({ id }: { id: string }) {
   const s = SOURCES[id];
@@ -78,6 +80,73 @@ export function FluidsTable() {
       <p className="mt-2 text-sm text-neutral-400">Harmonogram GM dla GMT400 nie przewiduje wymiany paska rozrządu — wymienia tylko kontrolę paska osprzętu <Src id="OM99" />.</p>
       <CheckNote />
       <SourceList />
+    </div>
+  );
+}
+
+const STATUS_CLASS: Record<Part['status'], string> = {
+  potwierdzone: 'border-emerald-500/40 text-emerald-300',
+  poprawione: 'border-sky-500/40 text-sky-300',
+  niezweryfikowane: 'border-red-500/50 text-red-300',
+};
+
+/** Mały przypis ze statusem i linkami do źródeł — czytelny na telefonie (linki ≥ 44 px wysokości dotyku). */
+export function PartSourceNote({ part }: { part: Part }) {
+  return (
+    <div className="mt-2 text-xs leading-relaxed">
+      <span className={`inline-block rounded border px-1.5 py-0.5 ${STATUS_CLASS[part.status]}`}>{STATUS_LABEL[part.status]}</span>
+      {part.uwaga && <p className="mt-1 text-neutral-400">{part.uwaga}</p>}
+      {part.src && part.src.length > 0 && (
+        <p className="mt-1 flex flex-wrap gap-x-3 text-neutral-500">
+          <span>Źródło:</span>
+          {part.src.map(id => (
+            <a key={id} href={PART_SOURCES[id].url} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-8 items-center text-red-300 underline underline-offset-2 hover:text-red-200">{PART_SOURCES[id].label}</a>
+          ))}
+        </p>
+      )}
+      <p className="mt-1 text-neutral-500">Sprawdź w swoim aucie / manualu.</p>
+    </div>
+  );
+}
+
+const QUICK = ['AC Delco PF1218', 'AC Delco PF52', 'AC Delco A1300C', 'AC Delco GF626', 'AC Delco TF289', 'AC Delco 41-932', 'AC Delco 131-113', 'AC Delco 252-711'];
+
+export function OemQuickList({ filtersOnly = false }: { filtersOnly?: boolean }) {
+  const items = PARTS.filter(p => QUICK.includes(p.oem) && (!filtersOnly || p.kat === 'filtry'));
+  return (
+    <div className="space-y-3 text-sm">
+      {items.map(p => (
+        <div key={p.oem} className="border-b border-white/5 pb-2 last:border-0">
+          <div className="flex items-start justify-between gap-3">
+            <span className="text-neutral-300">{p.nazwa}</span>
+            <span className="shrink-0 text-right font-medium text-red-400">{p.oem.replace('AC Delco ', '')}</span>
+          </div>
+          <p className="text-xs text-neutral-500">{p.model}</p>
+          {p.src && <p className="text-xs text-neutral-500">Źródło: {p.src.map((id, i) => <span key={id}>{i > 0 && ', '}<a href={PART_SOURCES[id].url} target="_blank" rel="noopener noreferrer" className="text-red-300 underline underline-offset-2">{PART_SOURCES[id].label}</a></span>)}</p>}
+        </div>
+      ))}
+      <CheckNote />
+    </div>
+  );
+}
+
+export function TorqueTable() {
+  return (
+    <div className="mt-6 rounded-xl border border-white/10 bg-neutral-950 p-4">
+      <h3 className="mb-3 font-semibold text-red-400">Momenty dokręcania (z dokumentacji GM)</h3>
+      <ul className="space-y-3 text-sm">
+        {TORQUE_SPECS.map(t => (
+          <li key={t.id} className="border-b border-white/5 pb-3 last:border-0">
+            <div className="flex items-start justify-between gap-3">
+              <span className="font-medium text-white">{t.component}</span>
+              <span className="shrink-0 text-right text-red-400">{t.valueLbFt} lb-ft ({t.valueNm} Nm)</span>
+            </div>
+            <p className="text-xs text-neutral-400">{t.appliesTo}</p>
+            <p className="mt-1 text-xs text-neutral-500">{t.notes}</p>
+            <a href={t.source} target="_blank" rel="noopener noreferrer" className="mt-1 inline-flex min-h-8 items-center text-xs text-red-300 underline underline-offset-2">Źródło: {t.sourceTitle}</a>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }

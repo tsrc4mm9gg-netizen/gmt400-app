@@ -17,7 +17,7 @@ const s: Record<string, CSSProperties> = {
  grid: { display:'grid', gridTemplateColumns:'repeat(auto-fit, minmax(min(100%, 300px), 1fr))', alignItems:'stretch', gap:14, width:'100%', minWidth:0, margin:0, padding:0 },
  card: { boxSizing:'border-box', position:'relative', display:'flex', flexDirection:'column', alignItems:'flex-start', justifyContent:'flex-start', width:'100%', maxWidth:'100%', minWidth:0, margin:0, padding:20, border:'1px solid #46505d', borderLeft:'3px solid #dc2626', borderRadius:10, background:'#171d25', color:'#ededed', textAlign:'left', textDecoration:'none', whiteSpace:'normal', overflowWrap:'anywhere' },
  icon: { display:'flex', alignItems:'center', justifyContent:'center', flex:'0 0 auto', width:36, height:36, margin:'0 0 10px', border:'1px solid #7a3434', borderRadius:8, background:'#301c1c', color:'#fca5a5' },
- tag: { display:'block', margin:'0 0 5px', color:'#c9b78f', fontSize:11, fontWeight:650, lineHeight:1.5 },
+ tag: { display:'block', margin:'0 0 5px', color:'#a3a3a3', fontSize:11, fontWeight:650, lineHeight:1.5 },
  cardTitle: { display:'block', width:'100%', margin:'0 0 8px', padding:0, color:'#fca5a5', fontSize:21, fontWeight:700, lineHeight:1.3, textWrap:'initial', whiteSpace:'normal' },
  description: { display:'block', width:'100%', maxWidth:'100%', margin:'0 0 8px', color:'#e0e5ec', fontSize:14, lineHeight:1.65, whiteSpace:'normal', overflowWrap:'anywhere' },
  example: { display:'block', width:'100%', maxWidth:'100%', margin:'0 0 12px', color:'#bdc6d2', fontSize:12, lineHeight:1.6 },
@@ -27,7 +27,7 @@ const s: Record<string, CSSProperties> = {
  noticeText: { display:'block', maxWidth:'100%', margin:0, color:'#bdc6d2', fontSize:12, lineHeight:1.65 }
 };
 export default function ToolsPage() {
- return <main style={s.page} data-tools-appearance="inline-v1">
+ return <div style={s.page} data-tools-appearance="inline-v1">
  <header style={s.header}>
  <Link href="/" style={s.back}>← Wróć do encyklopedii</Link>
  <p style={s.eyebrow}>TWÓJ WARSZTAT ONLINE</p>
@@ -48,5 +48,5 @@ export default function ToolsPage() {
  <h2 style={s.noticeTitle}>Informacje pomocnicze, nie instrukcja naprawy</h2>
  <p style={s.noticeText}>Przed zakupem części lub serwisem potwierdź dane dla konkretnego auta, rocznika i zamontowanych podzespołów. Brak wyniku nie oznacza braku usterki ani niezgodności części.</p>
  </aside>
- </main>;
+ </div>;
 }

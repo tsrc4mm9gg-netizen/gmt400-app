@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
+import Breadcrumbs from '../../ui/Breadcrumbs';
 import { notFound } from 'next/navigation';
 import { BODY_STYLES, bodyYears, findBody } from '../../../lib/body-styles';
 import { bodyImage, modelHref } from '../../../lib/model-images';
@@ -51,14 +52,8 @@ export default async function ModelPage({ params }: Props) {
   const schematics = SCHEMATICS.filter(s => s.diagram && (s.id !== 'aldl-12-pin' || body.from <= 1995) && (s.id !== 'obd-ii-16-pin' || body.to >= 1996) && (s.id !== 'fuse-locations' || ['tahoe-4d', 'tahoe-2d', 'suburban', 'yukon', 'ck-reg', 'ck-ext', 'k1500', 'sierra'].includes(body.id)));
 
   return (
-    <main className="mx-auto min-h-screen max-w-5xl bg-black px-4 py-6 pb-28 text-white sm:px-5 sm:py-10">
-      <nav aria-label="Okruszki" className="flex flex-wrap items-center gap-x-1 text-sm text-neutral-400">
-        <Link href="/" className="inline-flex min-h-11 items-center pr-1 text-red-400 underline">Strona główna</Link>
-        <span aria-hidden="true">/</span>
-        <Link href="/modele" className="inline-flex min-h-11 items-center px-1 text-red-400 underline">Modele</Link>
-        <span aria-hidden="true">/</span>
-        <span className="px-1 text-neutral-300">{body.name}</span>
-      </nav>
+    <div className="mx-auto min-h-screen max-w-5xl bg-black px-4 py-6 pb-28 text-white sm:px-5 sm:py-10">
+      <Breadcrumbs items={[{ href: '/modele', label: 'Modele' }, { label: body.name }]} />
 
       <header className="mt-3 overflow-hidden rounded-2xl border border-white/10 bg-neutral-950">
         <div className="relative aspect-[16/9] w-full bg-neutral-900">
@@ -134,6 +129,6 @@ export default async function ModelPage({ params }: Props) {
           ))}
         </ul>
       </section>
-    </main>
+    </div>
   );
 }

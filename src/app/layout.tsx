@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import VehicleProfileProvider from "./VehicleProfileProvider";
+import BackToTop from './ui/BackToTop';
 import ToolsLauncher from "./ToolsLauncher";
 import SiteHeader from "./site-header";
 import SiteFooter from "./site-footer";
@@ -56,12 +57,13 @@ export default function RootLayout({
         <ModelSelectionProvider>
           <SiteHeader />
           <div className="flex-1">
-            <main id="main-content">
+            <main id="main-content" tabIndex={-1} className="outline-none">
               <VehicleProfileProvider>{children}</VehicleProfileProvider>
             </main>
           </div>
           <SiteFooter />
           <ToolsLauncher />
+          <BackToTop />
         </ModelSelectionProvider>
       </body>
     </html>

@@ -10,7 +10,7 @@ export default function Error({ error, reset }: { error: Error & { digest?: stri
   }, [error]);
 
   return (
-    <main className="mx-auto flex min-h-[60vh] max-w-3xl flex-col items-center justify-center px-5 py-16 text-center text-white">
+    <div className="mx-auto flex min-h-[60vh] max-w-3xl flex-col items-center justify-center px-5 py-16 text-center text-white">
       <p className="text-sm font-semibold uppercase tracking-wide text-red-400">Błąd serwera</p>
       <h1 className="mt-3 text-3xl font-bold text-red-400 sm:text-4xl">Wystąpił błąd</h1>
       <p role="alert" className="mt-4 max-w-xl text-neutral-300">
@@ -46,6 +46,6 @@ export default function Error({ error, reset }: { error: Error & { digest?: stri
           </li>
         </ul>
       </nav>
-    </main>
+    </div>
   );
 }

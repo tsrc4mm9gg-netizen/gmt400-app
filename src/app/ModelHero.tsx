@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useModelSelection, type Filters } from './ModelSelectionContext';
@@ -22,7 +22,9 @@ export default function ModelHero() {
   const { bodyId, filters: ctxFilters, setSelection } = useModelSelection();
   const ctxIndex = BODY_STYLES.findIndex(b => b.id === bodyId);
   const [index, setIndex] = useState(ctxIndex >= 0 ? ctxIndex : 0);
-  const [touchStart, setTouchStart] = useState(0);
+  // Ref, nie stan: touchend musi widzieć start gestu nawet przed kolejnym renderem.
+  const touchStart = useRef<{ x: number; y: number } | null>(null);
+  const [imageLoaded, setImageLoaded] = useState(false);
   const [showFilters, setShowFilters] = useState(false);
 
   // Wybór zapisany w sesji (np. po powrocie z podstrony) wczytuje się po montażu.
@@ -43,12 +45,22 @@ export default function ModelHero() {
   const next = () => go((index + 1) % BODY_STYLES.length);
   const prev = () => go((index - 1 + BODY_STYLES.length) % BODY_STYLES.length);
 
-  const handleTouchStart = (e: React.TouchEvent) => setTouchStart(e.touches[0].clientX);
+  const handleTouchStart = (e: React.TouchEvent) => { touchStart.current = e.touches.length === 1 ? { x: e.touches[0].clientX, y: e.touches[0].clientY } : null; };
   const handleTouchEnd = (e: React.TouchEvent) => {
-    const diff = touchStart - e.changedTouches[0].clientX;
-    if (diff > 50) next();
-    if (diff < -50) prev();
+    const start = touchStart.current;
+    touchStart.current = null;
+    if (!start || !e.changedTouches.length) return;
+    const dx = start.x - e.changedTouches[0].clientX;
+    const dy = start.y - e.changedTouches[0].clientY;
+    // Tylko wyraźnie poziomy gest — przewijanie strony w pionie nie zmienia modelu.
+    if (Math.abs(dx) < 50 || Math.abs(dx) < Math.abs(dy) * 1.5) return;
+    if (dx > 0) next(); else prev();
   };
+  const handleKey = (e: React.KeyboardEvent) => {
+    if (e.key === 'ArrowRight') { e.preventDefault(); next(); }
+    if (e.key === 'ArrowLeft') { e.preventDefault(); prev(); }
+  };
+  useEffect(() => { setImageLoaded(false); }, [body.image]);
 
   const updateFilter = (key: keyof Filters, value: string) => {
     setSelection({ bodyId: body.id, filters: { ...filters, [key]: value || undefined } });
@@ -65,8 +77,14 @@ export default function ModelHero() {
 
       <div
         className="relative overflow-hidden rounded-2xl border border-white/10 bg-neutral-900 shadow-2xl"
+        role="group"
+        aria-roledescription="karuzela"
+        aria-label={`Model ${index + 1} z ${BODY_STYLES.length}: ${body.name}`}
+        data-testid="model-carousel"
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
+        onTouchCancel={() => { touchStart.current = null; }}
+        onKeyDown={handleKey}
       >
         <div
           className="absolute left-3 top-3 z-10 rounded-md bg-red-600 px-2.5 py-1 text-sm font-bold text-white shadow"
@@ -77,7 +95,9 @@ export default function ModelHero() {
         </div>
 
         <div className="relative aspect-[16/9] w-full">
+          {!imageLoaded && <div aria-hidden="true" className="absolute inset-0 animate-pulse bg-neutral-800" />}
           <Image
+            onLoad={() => setImageLoaded(true)}
             key={body.image}
             src={bodyImage(body)}
             alt={`${body.name} (${bodyYears(body)})`}
@@ -89,7 +109,7 @@ export default function ModelHero() {
         </div>
 
         <div className="flex items-center gap-2 border-t border-white/10 bg-neutral-950 px-2 py-3 text-white">
-          <button onClick={prev} className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-white/5 text-2xl text-white ring-1 ring-white/10 hover:bg-red-600" aria-label="Poprzedni model">‹</button>
+          <button type="button" onClick={prev} className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-white/5 text-2xl text-white ring-1 ring-white/10 hover:bg-red-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-500" aria-label="Poprzedni model">‹</button>
           <div className="min-w-0 flex-1 text-center">
             <h2 className="truncate text-xl font-bold sm:text-2xl">{body.name}</h2>
             <p className="text-sm text-neutral-300">
@@ -99,7 +119,7 @@ export default function ModelHero() {
             </p>
             {body.note && <p className="mt-0.5 text-xs text-neutral-400">{body.note}</p>}
           </div>
-          <button onClick={next} className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-white/5 text-2xl text-white ring-1 ring-white/10 hover:bg-red-600" aria-label="Następny model">›</button>
+          <button type="button" onClick={next} className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-white/5 text-2xl text-white ring-1 ring-white/10 hover:bg-red-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-500" aria-label="Następny model">›</button>
         </div>
       </div>
 
@@ -107,6 +127,7 @@ export default function ModelHero() {
         {BODY_STYLES.map((b, i) => (
           <button
             key={b.id}
+            type="button"
             onClick={() => go(i)}
             className="flex h-11 w-10 items-center justify-center"
             aria-label={b.name}
@@ -125,6 +146,7 @@ export default function ModelHero() {
       </Link>
 
       <button
+        type="button"
         onClick={() => setShowFilters(!showFilters)}
         aria-expanded={showFilters}
         className="mt-3 min-h-12 w-full rounded-lg border border-white/15 bg-neutral-900 text-sm font-medium text-white hover:border-red-600/60"
@@ -155,6 +177,7 @@ export default function ModelHero() {
           <p className="text-xs text-neutral-500">Wybór zawęża DIY, usterki i kody do tego modelu. Sprawdź w swoim aucie / manualu — GMT400 ma wiele wariantów (rocznik, GVWR, silnik, skrzynia, RPO).</p>
           {hasFilters && (
             <button
+              type="button"
               onClick={() => setSelection({ bodyId: body.id, filters: {} })}
               className="min-h-11 w-full rounded-lg border border-red-600/40 bg-red-950/40 text-sm text-red-300"
             >

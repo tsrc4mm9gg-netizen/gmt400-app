@@ -59,7 +59,7 @@ export const DIY_PROCEDURES: DiyProcedure[] = [
  {
  id: 'transfer-case-fluid-change',
  title: 'Olej w skrzyni rozdzielczej (1988–2000)',
- scope: 'NP241C / NP243C: DEXRON-III. NV246 AutoTrac: GM Automatic Transfer Case Fluid 12378396.',
+ scope: 'NP241C / NP243C: DEXRON-III. NV246 AutoTrac: GM Automatic Transfer Case Fluid 12378396 (zastąpiony przez GM 12378508 Auto-Trak II).',
  safety: ['Pracuj na zimnym reduktorze, auto poziomo.'],
  tools: ['Klucz do korków', 'Lejek', 'Pojemnik'],
  parts: ['Właściwy płyn zgodnie z modelem reduktora'],

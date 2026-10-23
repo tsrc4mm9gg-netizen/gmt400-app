@@ -37,7 +37,7 @@ export default function PartsPage() {
   } catch (exception) { if (!controller.signal.aborted) setError(exception instanceof Error ? exception.message : 'Błąd połączenia.'); }
   finally { if (!controller.signal.aborted) setLoading(false); }
  }
- return <main style={{ boxSizing:'border-box', width:'100%', maxWidth:1000, margin:'0 auto', padding:'20px 16px 120px', color:'#ededed' }}>
+ return <div style={{ boxSizing:'border-box', width:'100%', maxWidth:1000, margin:'0 auto', padding:'20px 16px 120px', color:'#ededed' }}>
   <Link href="/narzedzia" style={{ display:'inline-flex', alignItems:'center', minHeight:44, marginBottom:16, color:'#fca5a5' }}>← Wszystkie narzędzia</Link>
   <section style={panel}>
    <h1 style={{ margin:'0 0 12px', color:'#fafafa', fontSize:26 }}>Sprawdź informacje o częściach</h1>
@@ -56,5 +56,5 @@ export default function PartsPage() {
   </section>}
   {data?.results.map((item, index) => <article key={item.part + index} style={panel}><p style={{ color:'#fca5a5', fontSize:13 }}>Wpis lokalny — pasowanie niepotwierdzone</p><h2 style={{ color:'#fafafa', fontSize:20 }}>{item.part}</h2><p>Modele wymienione we wpisie: {item.fitsModels.join(', ')}</p><p>Zakres lat we wpisie: {item.yearRange[0]}–{item.yearRange[1]}.</p><p>{item.notes}</p></article>)}
   {data && <aside style={panel}><p style={{ margin:0, color:'#bdc6d2', fontSize:13 }}>{data.coverage.message} {data.disclaimer}</p></aside>}
- </main>;
+ </div>;
 }

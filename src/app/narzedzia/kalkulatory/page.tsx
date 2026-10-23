@@ -43,7 +43,7 @@ export default function Calculators() {
  }
 
  return (
- <main className="mx-auto max-w-4xl space-y-4 p-4">
+ <div className="mx-auto max-w-4xl space-y-4 p-4">
  <section className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
  <h1 className="text-2xl font-semibold text-slate-900">Czy większe opony zmienią prędkość?</h1>
  <p className="mt-1 text-sm text-slate-600">Porównaj obecne opony z planowanymi. Sprawdzisz, jak zmieni się rzeczywista prędkość i efektywne przełożenie osi.</p>
@@ -108,6 +108,6 @@ export default function Calculators() {
  </div>
  )}
  </section>
- </main>
+ </div>
  );
 }

@@ -25,10 +25,17 @@ test('unverified intervals and misleading citations are not published', async ({
   expect(data.scheduleStatus).toBe('unverified');
   expect(data.results).toHaveLength(10);
   for (const entry of data.results) {
-   expect(entry.confidence).toBe('verify');
-   expect(entry.source).toBeNull();
-   expect(entry.intervalVerified).toBe(false);
-   for (const field of ['intervalMiles', 'intervalMonths', 'severeServiceMiles', 'severeServiceMonths']) expect(entry[field]).toBeNull();
+   expect(['verify', 'reference']).toContain(entry.confidence);
+   if (entry.confidence === 'verify') {
+    expect(entry.source).toBeNull();
+    expect(entry.intervalVerified).toBe(false);
+    for (const field of ['intervalMiles', 'intervalMonths', 'severeServiceMiles', 'severeServiceMonths']) expect(entry[field]).toBeNull();
+   } else {
+    // Interwał opublikowany tylko z cytatem z instrukcji GM (OM95/OM99) i ostrzeżeniem o wariantach.
+    expect(entry.source).toMatch(/^https:\/\/assets\.gm\.com\/manuals\//);
+    expect(entry.intervalVerified).toBe(true);
+    expect(entry.notes).toContain('Sprawdź w swoim aucie / manualu');
+   }
   }
  }
 });

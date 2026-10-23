@@ -19,7 +19,7 @@ export default function Diagnostics() {
   }
   const severityLabel: Record<string, string> = { information: 'Informacja', moderate: 'Umiarkowana pilność', high: 'Wysoka pilność' };
   const severityStyle: Record<string, string> = { information: 'bg-blue-100 text-blue-800', moderate: 'bg-red-100 text-red-800', high: 'bg-red-100 text-red-800' };
-  return <main className="mx-auto max-w-4xl space-y-4 p-4">
+  return <div className="mx-auto max-w-4xl space-y-4 p-4">
     <section className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
       <h1 className="text-2xl font-semibold text-slate-900">Co oznacza kod błędu?</h1>
       <p className="mt-1 text-sm text-slate-600">Wpisz kod ze skanera, np. <strong>P0300</strong>, albo opis problemu, np. <strong>misfire</strong> lub <strong>EVAP</strong>.</p>
@@ -47,5 +47,5 @@ export default function Diagnostics() {
       </div>
       <p className="mt-4 rounded-lg bg-slate-50 p-3 text-xs text-slate-600">{item.notes}</p>
     </article>)}</div>
-  </main>;
+  </div>;
 }

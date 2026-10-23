@@ -99,7 +99,7 @@ export default function VinHistoryPage() {
   }
 
   return (
-    <main className="mx-auto max-w-4xl px-4 py-10">
+    <div className="mx-auto max-w-4xl px-4 py-10">
       <h1 className="text-3xl font-bold">Historia i zdjęcia po numerze VIN</h1>
       <p className="mt-2 text-slate-600">
         Wpisz pełny 17-znakowy numer VIN, aby wyszukać publiczne ślady tego konkretnego pojazdu: ogłoszenia, aukcje, możliwe szkody oraz zdjęcia z dostępnych stron.
@@ -226,6 +226,6 @@ export default function VinHistoryPage() {
           {data.disclaimer}
         </p>
       )}
-    </main>
+    </div>
   );
 }

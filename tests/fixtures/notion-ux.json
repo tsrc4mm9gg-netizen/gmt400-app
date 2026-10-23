@@ -1,0 +1,395 @@
+{
+ "results": [
+  {
+   "Nazwa": "GMC Yukon Denali (1998–2000)",
+   "Typ": "Model",
+   "Model": "Yukon",
+   "Opis": "Wersja Denali GMC Yukon.",
+   "Objawy": "",
+   "Rozwiązanie": "",
+   "Lata": "1998–2000",
+   "id": "401d7bf1-c139-813f-869b-d1451f493253",
+   "applicability": {
+    "brand": [],
+    "model": [
+     "Yukon"
+    ],
+    "years": [
+     "1998–2000"
+    ],
+    "engine": [],
+    "drive": [],
+    "transmission": []
+   },
+   "Modele": [
+    "GMC Yukon"
+   ]
+  },
+  {
+   "Nazwa": "GMC Suburban (1992–1999)",
+   "Typ": "Model",
+   "Model": "Suburban",
+   "Opis": "GMC Suburban — nie Yukon XL (to nazwa GMT800).",
+   "Objawy": "",
+   "Rozwiązanie": "",
+   "Lata": "1992–1999",
+   "id": "401d7bf1-c139-819d-937c-e6ad234c38e8",
+   "applicability": {
+    "brand": [],
+    "model": [
+     "Suburban"
+    ],
+    "years": [
+     "1992–1999"
+    ],
+    "engine": [],
+    "drive": [],
+    "transmission": []
+   },
+   "Modele": [
+    "Suburban"
+   ]
+  },
+  {
+   "Nazwa": "C3500HD",
+   "Typ": "Model",
+   "Model": "C/K",
+   "Opis": "Ciężarowa wersja C/K.",
+   "Objawy": "",
+   "Rozwiązanie": "",
+   "Lata": "do 2002 (USA) / do 2006 (Meksyk)",
+   "id": "401d7bf1-c139-81a6-90ca-ed0401a970b5",
+   "applicability": {
+    "brand": [],
+    "model": [
+     "C/K"
+    ],
+    "years": [
+     "do 2002 (USA) / do 2006 (Meksyk)"
+    ],
+    "engine": [],
+    "drive": [],
+    "transmission": []
+   },
+   "Modele": [
+    "C/K 3500 Dually"
+   ]
+  },
+  {
+   "Nazwa": "Cadillac Escalade (1999–2000)",
+   "Typ": "Model",
+   "Model": "Wszystkie",
+   "Opis": "5-drzwiowy SUV SWB, silnik L31 5.7L, skrzynia 4L60-E, reduktor AutoTrac.",
+   "Objawy": "",
+   "Rozwiązanie": "",
+   "Lata": "1999–2000",
+   "id": "401d7bf1-c139-81fd-9f79-f28ae4aa5b8c",
+   "applicability": {
+    "brand": [],
+    "model": [
+     "Wszystkie"
+    ],
+    "years": [
+     "1999–2000"
+    ],
+    "engine": [],
+    "drive": [],
+    "transmission": []
+   },
+   "Modele": []
+  },
+  {
+   "Nazwa": "Pływający wskaźnik paliwa — czujnik w zbiorniku",
+   "Typ": "Usterka",
+   "Model": "Wszystkie",
+   "Opis": "",
+   "Objawy": "Wskaźnik pokazuje losowe wartości, skacze, lub pokazuje pełny/pusty.",
+   "Rozwiązanie": "Typowa usterka GMT400.\n\nPrzyczyna:\nZużyty czujnik poziomu paliwa (float + rezystor) w zbiorniku.\n\nCzęstotliwość: Wysoka po 150+ tys. km\nKoszt naprawy: 150–300 PLN (czujnik) + robocizna\n\nRozwiązanie:\n1. Sprawdź czy problem jest stały czy przerywany\n2. Wymień czujnik poziomu (wymaga opuszczenia zbiornika)\n3. Sprawdź masę zbiornika\n\nTip: Często wymienia się razem z pompą paliwa (jeśli też słaba).",
+   "Lata": "",
+   "id": "3fad7bf1-c139-813c-923e-ed7bc91a5fe0",
+   "applicability": {
+    "brand": [],
+    "model": [
+     "Wszystkie"
+    ],
+    "years": [],
+    "engine": [],
+    "drive": [],
+    "transmission": []
+   },
+   "Modele": [
+    "Wszystkie"
+   ]
+  },
+  {
+   "Nazwa": "Zardzewiałe przewody hamulcowe — typowa usterka",
+   "Typ": "Usterka",
+   "Model": "Wszystkie",
+   "Opis": "",
+   "Objawy": "Miękki pedał hamulca, wyciek płynu, dłuższa droga hamowania.",
+   "Rozwiązanie": "Jedna z najczęstszych usterek GMT400.\n\nPrzyczyna:\nPrzewody hamulcowe (sztywne) korodują od zewnątrz, szczególnie pod autem i przy mocowaniach.\n\nCzęstotliwość: Bardzo wysoka na autach 20+ lat\nKoszt naprawy: 300–800 PLN (zależy od zakresu)\n\nRozwiązanie:\n1. Sprawdź wszystkie przewody wizualnie (szczególnie pod podłogą i przy kołach)\n2. Wymień skorodowane odcinki lub całe przewody\n3. Użyj przewodów miedzianych (CuNi) — odporniejsze na korozję\n4. Odpowietrz układ po wymianie\n\nTip: Nie czekaj aż pęknie. Sprawdzaj co roku przy przeglądzie.",
+   "Lata": "",
+   "id": "3fad7bf1-c139-81c7-8ced-dd94fbc30c1f",
+   "applicability": {
+    "brand": [],
+    "model": [
+     "Wszystkie"
+    ],
+    "years": [],
+    "engine": [],
+    "drive": [],
+    "transmission": []
+   },
+   "Modele": [
+    "Wszystkie"
+   ]
+  },
+  {
+   "Nazwa": "Problemy z układem zapłonowym TBI — tipy",
+   "Typ": "Usterka",
+   "Model": "Wszystkie",
+   "Opis": "",
+   "Objawy": "Wypadanie zapłonu, trudny rozruch na autach do 1995",
+   "Rozwiązanie": "1. Sprawdź świece. 2. Sprawdź przewody. 3. Sprawdź cewkę. Tip: wymieniaj przewody co 50-80 tys. km.",
+   "Lata": "1988–1995",
+   "id": "3fad7bf1-c139-8185-9a88-ff1295724b3d",
+   "applicability": {
+    "brand": [],
+    "model": [
+     "Wszystkie"
+    ],
+    "years": [
+     "1988–1995"
+    ],
+    "engine": [],
+    "drive": [],
+    "transmission": []
+   },
+   "Modele": [
+    "Wszystkie"
+   ]
+  },
+  {
+   "Nazwa": "Problemy z układem hamulcowym (tarcze) — tipy",
+   "Typ": "Usterka",
+   "Model": "Wszystkie",
+   "Opis": "",
+   "Objawy": "Wibracje przy hamowaniu, nierówne zużycie, hałas",
+   "Rozwiązanie": "1. Sprawdź tarcze. 2. Sprawdź klocki. 3. Wymień zużyte elementy. Tip: na GMT400 często zużywają się przednie tarcze.",
+   "Lata": "1988–1999",
+   "id": "3fad7bf1-c139-8101-bb7e-d7290e634b66",
+   "applicability": {
+    "brand": [],
+    "model": [
+     "Wszystkie"
+    ],
+    "years": [
+     "1988–1999"
+    ],
+    "engine": [],
+    "drive": [],
+    "transmission": []
+   },
+   "Modele": [
+    "Wszystkie"
+   ]
+  },
+  {
+   "Nazwa": "Problemy z pompą wtryskową 6.5L — tipy",
+   "Typ": "Usterka",
+   "Model": "Wszystkie",
+   "Opis": "",
+   "Objawy": "Trudny rozruch, dymienie, brak mocy",
+   "Rozwiązanie": "1. Sprawdź filtr paliwa. 2. Sprawdź przewody. 3. Regeneracja lub wymiana pompy. Tip: częsty problem na dieslach GMT400.",
+   "Lata": "1992–1999",
+   "id": "3fad7bf1-c139-81fd-ad0b-cc705a1ba196",
+   "applicability": {
+    "brand": [],
+    "model": [
+     "Wszystkie"
+    ],
+    "years": [
+     "1992–1999"
+    ],
+    "engine": [],
+    "drive": [],
+    "transmission": []
+   },
+   "Modele": [
+    "Wszystkie"
+   ]
+  },
+  {
+   "Nazwa": "Procedury DIY — GMT400 (OM95/OM99)",
+   "Typ": "Porada",
+   "Model": "Wszystkie",
+   "Opis": "Zestaw procedur serwisowych: olej silnikowy, płyn chłodniczy, ATF 4L60-E, olej w reduktorze i mostach. Dane z fluids.ts, maintenance.ts i torque-specs.ts.",
+   "Objawy": "",
+   "Rozwiązanie": "",
+   "Lata": "1988–2000",
+   "id": "401d7bf1-c139-8192-ac17-cf89b5c1a034",
+   "applicability": {
+    "brand": [],
+    "model": [
+     "Wszystkie"
+    ],
+    "years": [
+     "1988–2000"
+    ],
+    "engine": [],
+    "drive": [],
+    "transmission": []
+   },
+   "Modele": []
+  },
+  {
+   "Nazwa": "Wymiana pompy paliwa — instrukcja",
+   "Typ": "Porada",
+   "Model": "Wszystkie",
+   "Opis": "",
+   "Objawy": "",
+   "Rozwiązanie": "Wymiana pompy paliwa GMT400\n\nObjawy:\n- Trudny rozruch\n- Gaśnięcie silnika\n- Brak mocy\n- Hałas z tyłu auta\n\nDostęp:\n- Zdejmij pakę (szybsze) lub spuść zbiornik\n- Pompa jest w zbiorniku\n\nKroki:\n1. Odłącz akumulator\n2. Spuść paliwo lub jedź na rezerwie\n3. Zdejmij pakę lub spuść zbiornik\n4. Odłącz przewody paliwowe\n5. Odkręć pierścień blokujący\n6. Wyjmij pompę z czujnikiem poziomu\n7. Wymień pompę i uszczelkę\n8. Złóż w odwrotnej kolejności\n9. Sprawdź szczelność\n\nTip: Wymieniaj uszczelkę i pierścień blokujący. Stare często przeciekają.",
+   "Lata": "",
+   "id": "3fad7bf1-c139-817a-8229-cad960681fab",
+   "applicability": {
+    "brand": [],
+    "model": [
+     "Wszystkie"
+    ],
+    "years": [],
+    "engine": [],
+    "drive": [],
+    "transmission": []
+   },
+   "Modele": []
+  },
+  {
+   "Nazwa": "Problemy z 4L60E — diagnostyka",
+   "Typ": "Porada",
+   "Model": "Wszystkie",
+   "Opis": "",
+   "Objawy": "",
+   "Rozwiązanie": "Typowe problemy 4L60E i diagnostyka\n\nŚlizganie 3-4 biegu:\n- Przyczyna: zużyte sprzęgła 3-4\n- Rozwiązanie: regeneracja skrzyni\n\nSzarpanie przy zmianie biegów:\n- Przyczyna: brudny olej, zużyty filtr\n- Rozwiązanie: wymiana oleju i filtra\n\nBrak biegu wstecznego:\n- Przyczyna: zużyte sprzęgła wsteczne\n- Rozwiązanie: regeneracja\n\nOpóźnione włączenie Drive:\n- Przyczyna: niski poziom oleju lub zużyty solenoid\n- Rozwiązanie: sprawdź poziom, wymień solenoid\n\nPrzegrzewanie:\n- Przyczyna: brak dodatkowej chłodnicy\n- Rozwiązanie: zamontuj zewnętrzną chłodnicę ATF\n\nTip: Poziom oleju sprawdzaj na gorąco, silnik pracuje, dźwignia w Park.",
+   "Lata": "",
+   "id": "3fad7bf1-c139-81a6-96d9-cd3a6fc96fc1",
+   "applicability": {
+    "brand": [],
+    "model": [
+     "Wszystkie"
+    ],
+    "years": [],
+    "engine": [],
+    "drive": [],
+    "transmission": []
+   },
+   "Modele": []
+  },
+  {
+   "Nazwa": "Wymiana przewodów hamulcowych — korozja",
+   "Typ": "Porada",
+   "Model": "Wszystkie",
+   "Opis": "",
+   "Objawy": "",
+   "Rozwiązanie": "Wymiana zardzewiałych przewodów hamulcowych GMT400\n\nObjawy:\n- Miękki pedał hamulca\n- Wyciek płynu\n- Dłuższa droga hamowania\n- Ślady rdzy na przewodach\n\nNajczęstsze miejsca korozji:\n- Przewód wzdłuż lewej ramy\n- Przy zbiorniku paliwa\n- Przy tylnej osi\n- Przy połączeniach gumowych\n\nCo zrobić:\n1. Sprawdź wszystkie przewody wizualnie\n2. Wymień zardzewiałe odcinki\n3. Użyj przewodów NiCopp lub nierdzewnych\n4. Odpowietrz układ po wymianie\n5. Sprawdź gumowe przewody elastyczne\n\nTip: Gumowe przewody elastyczne też się starzeją — wymieniaj razem ze stalowymi. Zestawy pre-bent dostępne (Inline Tube).",
+   "Lata": "",
+   "id": "3fad7bf1-c139-8122-ae6c-d17e3ac2db9e",
+   "applicability": {
+    "brand": [],
+    "model": [
+     "Wszystkie"
+    ],
+    "years": [],
+    "engine": [],
+    "drive": [],
+    "transmission": []
+   },
+   "Modele": []
+  },
+  {
+   "Nazwa": "Wymiana uszczelek kolektora dolotowego — instrukcja",
+   "Typ": "Porada",
+   "Model": "Wszystkie",
+   "Opis": "",
+   "Objawy": "",
+   "Rozwiązanie": "Wymiana uszczelek kolektora dolotowego GMT400\n\nObjawy:\n- Wyciek płynu chłodzącego\n- Kody P0171/P0174 (uboga mieszanka)\n- Biały dym z wydechu\n- Spadek poziomu płynu\n\nCo potrzebujesz:\n- Komplet uszczelek kolektora\n- Płyn chłodzący\n- Klucze, śrubokręt\n- Skrobak do uszczelek\n\nKroki:\n1. Odłącz akumulator\n2. Spuść płyn chłodzący\n3. Zdejmij pokrywę silnika i przewody\n4. Odłącz przewody paliwowe i elektryczne\n5. Odkręć śruby kolektora (równomiernie)\n6. Zdejmij kolektor\n7. Usuń stare uszczelki, wyczyść powierzchnie\n8. Załóż nowe uszczelki\n9. Przykręć kolektor (moment wg specyfikacji)\n10. Uzupełnij płyn, odpowietrz układ\n\nTip: Sprawdź czy nie ma pęknięć w kolektorze. Na Vortec często pęka plastikowa część.",
+   "Lata": "",
+   "id": "3fad7bf1-c139-8139-8718-eba84bb6e80b",
+   "applicability": {
+    "brand": [],
+    "model": [
+     "Wszystkie"
+    ],
+    "years": [],
+    "engine": [],
+    "drive": [],
+    "transmission": []
+   },
+   "Modele": []
+  },
+  {
+   "Nazwa": "P0320 — Ignition/Distributor Engine Speed Input Circuit",
+   "Typ": "Kod błędu",
+   "Model": "Wszystkie",
+   "Opis": "Brak sygnału obrotów z rozdzielacza.",
+   "Objawy": "",
+   "Rozwiązanie": "Diagnostyka krok po kroku:\n\nObjawy:\n- Silnik nie odpala lub gaśnie\n- Check Engine\n- Brak iskry\n\nPrzyczyny:\n1. Uszkodzony czujnik w rozdzielaczu (pickup coil)\n2. Uszkodzony moduł zapłonu (ICM)\n3. Uszkodzona wiązka do rozdzielacza\n4. Uszkodzony ECM\n\nTesty:\n1. Sprawdź czy jest iskra (wyjmij świecę, podłącz do przewodu, przyłóż do masy, kręć rozrusznikiem)\n2. Sprawdź rezystancję pickup coil (powinna być 500–1500 Ω)\n3. Sprawdź zasilanie modułu zapłonu (12V przy włączonym zapłonie)\n4. Sprawdź sygnał z pickup coil do ECM (oscyloskop lub LED)\n\nNaprawa:\n- Wymiana pickup coil lub całego rozdzielacza\n- Wymiana modułu zapłonu\n- Naprawa wiązki\n\nTip: Na Vortec L31 pickup coil często pada po 150+ tys. km.",
+   "Lata": "",
+   "id": "3fad7bf1-c139-81af-8235-cd84a6e7c6e7",
+   "applicability": {
+    "brand": [],
+    "model": [
+     "Wszystkie"
+    ],
+    "years": [],
+    "engine": [],
+    "drive": [],
+    "transmission": []
+   },
+   "Modele": []
+  },
+  {
+   "Nazwa": "P0440 — EVAP System",
+   "Typ": "Kod błędu",
+   "Model": "Wszystkie",
+   "Opis": "Wykryto nieszczelność układu EVAP.",
+   "Objawy": "",
+   "Rozwiązanie": "Diagnostyka krok po kroku:\n\nObjawy:\n- Check Engine (często jedyny objaw)\n- Czasem zapach paliwa\n\nPrzyczyny:\n1. Luźny lub uszkodzony korek wlewu paliwa (najczęstsze!)\n2. Pęknięty wąż EVAP\n3. Uszkodzony zawór purge\n4. Uszkodzony czujnik ciśnienia w zbiorniku\n\nTesty:\n1. Sprawdź korek wlewu — dokręć lub wymień\n2. Skasuj kod i przejedź cykl jazdy\n3. Sprawdź węże EVAP wizualnie\n4. Sprawdź zawór purge (powinien klikać przy testowaniu)\n\nNaprawa:\n- Wymiana korka wlewu (najtańsze rozwiązanie)\n- Wymiana węży\n- Wymiana zaworu purge\n\nTip: W 80% przypadków winny jest korek wlewu. Zawsze sprawdzaj najpierw.",
+   "Lata": "",
+   "id": "3fad7bf1-c139-81db-afc1-d374a8589420",
+   "applicability": {
+    "brand": [],
+    "model": [
+     "Wszystkie"
+    ],
+    "years": [],
+    "engine": [],
+    "drive": [],
+    "transmission": []
+   },
+   "Modele": []
+  },
+  {
+   "Nazwa": "P0420 — Catalyst Efficiency Below Threshold",
+   "Typ": "Kod błędu",
+   "Model": "Wszystkie",
+   "Opis": "Katalizator nie osiąga wymaganej sprawności.",
+   "Objawy": "",
+   "Rozwiązanie": "Z GM Mode 6:\n\nObjawy: Check Engine, czasem spadek mocy lub zwiększone zużycie.\n\nPrzyczyny GMT400:\n- Zużyty katalizator (najczęściej po 200+ tys. km)\n- Uszkodzona sonda za katalizatorem (Bank 1 Sensor 2)\n- Nieszczelność wydechu przed katalizatorem\n- Bogata mieszanka (uszkodzone wtryskiwacze, MAF)\n\nRozwiązanie:\n1. Sprawdź sondę za katalizatorem (powinna być stabilna ~0.45 V).\n2. Sprawdź szczelność wydechu przed katalizatorem.\n3. Sprawdź czy nie ma kodów lean/rich (P0171/P0172).\n4. Jeśli sonda OK i brak innych kodów — katalizator do wymiany.\n\nTip: Na GMT400 często najpierw pada sonda, nie katalizator. Zawsze sprawdzaj sondę przed wymianą katalizatora.",
+   "Lata": "",
+   "id": "3fad7bf1-c139-8199-ad96-f0cc8d5622ab",
+   "applicability": {
+    "brand": [],
+    "model": [
+     "Wszystkie"
+    ],
+    "years": [],
+    "engine": [],
+    "drive": [],
+    "transmission": []
+   },
+   "Modele": []
+  }
+ ],
+ "count": 17,
+ "complete": true
+}

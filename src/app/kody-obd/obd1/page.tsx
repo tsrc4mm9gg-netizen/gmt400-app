@@ -7,7 +7,7 @@ export const metadata = {
 
 export default function Obd1Page() {
  return (
- <main id="main-content" className="mx-auto w-full max-w-5xl px-4 py-10">
+ <div className="mx-auto w-full max-w-5xl px-4 py-10">
  <h1 className="text-3xl font-bold text-red-400">Kody OBD-I (1988–1995)</h1>
  <p className="mt-2 text-zinc-300">Kod wskazuje obwód, a nie konkretną część. Sprawdź w swoim aucie / manualu — GMT400 ma wiele wariantów (rocznik, GVWR, silnik, skrzynia, RPO).</p>
  <section className="mt-6 rounded-xl border border-zinc-800 bg-zinc-900/60 p-5">
@@ -46,6 +46,6 @@ export default function Obd1Page() {
  <p className="mt-6 text-xs text-zinc-500">
  Źródła: RepairPal GM OBD-I chart, Tradecraft Specialties, Wards Specialty Performance, Straight Talk Automotive.
  </p>
- </main>
+ </div>
  );
 }

@@ -15,7 +15,8 @@ import { matchesYearRules } from '../lib/year-range.mjs';
 import VinHistorySummary from './VinHistorySummary';
 import { useModelSelection } from './ModelSelectionContext';
 import { findBody } from '../lib/body-styles';
-import { EngineTable, FluidsTable } from './VerifiedSpecs';
+import { EngineTable, FluidsTable, PartSourceNote, OemQuickList, TorqueTable } from './VerifiedSpecs';
+import { PARTS } from '../lib/parts-catalog';
 import ModelThumb from './ModelThumb';
 import { bodyForEntry, isGeneralEntry, isSpecificToBody } from '../lib/model-images';
 
@@ -570,7 +571,7 @@ export default function Encyclopedia({ initialTab }: { initialTab?: string } = {
                 <div className="space-y-3">
                   <div className="bg-neutral-950 border border-white/10 p-4">
                     <h4 className="font-semibold text-red-400">Uszczelka kolektora dolotowego</h4>
-                    <p className="text-sm text-neutral-400">Objawy: wyciek płynu, przegrzewanie. Rozwiązanie: wymiana uszczelki. OEM: 12554863.</p>
+                    <p className="text-sm text-neutral-400">Objawy: wyciek płynu, przegrzewanie. Rozwiązanie: wymiana uszczelki. Numer OEM 12554863 — niezweryfikowany, sprawdź w manualu / katalogu GM po VIN.</p>
                   </div>
                   <div className="bg-neutral-950 border border-white/10 p-4">
                     <h4 className="font-semibold text-red-400">Ślizganie 4L60E</h4>
@@ -756,15 +757,7 @@ export default function Encyclopedia({ initialTab }: { initialTab?: string } = {
 
               <div className="bg-neutral-950 border border-white/10 p-4">
                 <h3 className="text-lg font-bold text-red-400 mb-4">NUMERY OEM CZĘŚCI</h3>
-                <div className="grid sm:grid-cols-2 gap-2 text-sm">
-                  <div className="flex justify-between"><span className="text-neutral-400">Filtr oleju</span><span className="text-red-400">AC Delco PF1218</span></div>
-                  <div className="flex justify-between"><span className="text-neutral-400">Filtr powietrza</span><span className="text-red-400">AC Delco A1163C</span></div>
-                  <div className="flex justify-between"><span className="text-neutral-400">Filtr paliwa</span><span className="text-red-400">AC Delco GF626</span></div>
-                  <div className="flex justify-between"><span className="text-neutral-400">Filtr ATF</span><span className="text-red-400">AC Delco TF289</span></div>
-                  <div className="flex justify-between"><span className="text-neutral-400">Świece (5.7L)</span><span className="text-red-400">AC Delco 41-932</span></div>
-                  <div className="flex justify-between"><span className="text-neutral-400">Termostat</span><span className="text-red-400">AC Delco 131-113</span></div>
-                  <div className="flex justify-between"><span className="text-neutral-400">Pompa wody</span><span className="text-red-400">AC Delco 252-611</span></div>
-                </div>
+                <OemQuickList />
               </div>
 
               <div className="bg-neutral-950 border border-white/10 p-4">
@@ -858,78 +851,25 @@ export default function Encyclopedia({ initialTab }: { initialTab?: string } = {
             
             <div className="flex flex-wrap gap-2 mb-6">
               {['wszystkie', 'filtry', 'silnik', 'skrzynia', 'hamulce', 'zawieszenie'].map(f => (
-                <button key={f} onClick={() => setPartsFilter(f)}
-                  className={`px-3 py-1 text-sm ${partsFilter === f ? 'bg-red-600 text-white' : 'bg-neutral-800 hover:bg-neutral-700'}`}>
+                <button key={f} type="button" aria-pressed={partsFilter === f} onClick={() => setPartsFilter(f)}
+                  className={`min-h-11 px-3 py-2 text-sm ${partsFilter === f ? 'bg-red-600 text-white' : 'bg-neutral-800 hover:bg-neutral-700'}`}>
                   {f.charAt(0).toUpperCase() + f.slice(1)}
                 </button>
               ))}
             </div>
 
             <div className="space-y-3">
-              {[
-                { kat: 'filtry', nazwa: 'Filtr oleju 5.7L', oem: 'AC Delco PF1218', opis: 'Filtr oleju silnikowego dla 5.0/5.7/7.4L V8. Moment dokręcania: 20 Nm. Wymiana co 5-8 tys. km.', model: 'Wszystkie V8', img: '/part-filter.jpg' },
-                { kat: 'filtry', nazwa: 'Filtr oleju 4.3L', oem: 'AC Delco PF47', opis: 'Filtr oleju silnikowego dla 4.3L V6', model: 'C/K 1500' },
-                { kat: 'filtry', nazwa: 'Filtr powietrza', oem: 'AC Delco A1163C', opis: 'Filtr powietrza silnika', model: 'Wszystkie' },
-                { kat: 'filtry', nazwa: 'Filtr paliwa', oem: 'AC Delco GF626', opis: 'Filtr paliwa w linii', model: 'Wszystkie' },
-                { kat: 'filtry', nazwa: 'Filtr ATF 4L60E', oem: 'AC Delco TF289', opis: 'Filtr oleju skrzyni biegów', model: 'Wszystkie' },
-                { kat: 'silnik', nazwa: 'Świece zapłonowe 5.7L', oem: 'AC Delco 41-932', opis: 'Świece zapłonowe Rapidfire. Szczelina: 1.5mm. Moment dokręcania: 15 Nm. Wymiana co 50 tys. km.', model: 'Wszystkie V8', img: '/part-plugs.jpg' },
-                { kat: 'silnik', nazwa: 'Termostat', oem: 'AC Delco 131-113', opis: 'Termostat 195°F (91°C)', model: 'Wszystkie' },
-                { kat: 'silnik', nazwa: 'Pompa wody', oem: 'AC Delco 252-611', opis: 'Pompa wody silnika', model: 'Wszystkie V8' },
-                { kat: 'silnik', nazwa: 'Czujnik MAF', oem: 'AC Delco 213-252', opis: 'Czujnik przepływu powietrza', model: '1996-2000' },
-                { kat: 'silnik', nazwa: 'Czujnik O2', oem: 'AC Delco 213-1555', opis: 'Sonda lambda', model: 'Wszystkie' },
-                { kat: 'skrzynia', nazwa: 'Uszczelka miski 4L60E', oem: 'Fel-Pro TOS18722', opis: 'Uszczelka miski oleju skrzyni', model: 'Wszystkie' },
-                { kat: 'skrzynia', nazwa: 'Solenoid 4L60E', oem: 'AC Delco 24230298', opis: 'Solenoid zmiany biegów', model: 'Wszystkie' },
-                { kat: 'hamulce', nazwa: 'Klocki hamulcowe przód', oem: 'AC Delco 17D473CH', opis: 'Klocki hamulcowe przednie', model: '1500' },
-                { kat: 'hamulce', nazwa: 'Tarcze hamulcowe przód', oem: 'AC Delco 18A2491', opis: 'Tarcze hamulcowe przednie', model: '1500' },
-                { kat: 'hamulce', nazwa: 'Cylinderki hamulcowe', oem: 'AC Delco 18E660', opis: 'Cylinderki bębnów tylnych', model: '1500' },
-                { kat: 'zawieszenie', nazwa: 'Amortyzatory przód', oem: 'AC Delco 504-1079', opis: 'Amortyzatory przednie', model: '1500' },
-                { kat: 'zawieszenie', nazwa: 'Amortyzatory tył', oem: 'AC Delco 504-1080', opis: 'Amortyzatory tylne', model: '1500' },
-                { kat: 'zawieszenie', nazwa: 'Końcówki drążków', oem: 'AC Delco 45A0526', opis: 'Końcówki drążków kierowniczych', model: 'Wszystkie' },
-                { kat: 'silnik', nazwa: 'Uszczelka kolektora', oem: 'Fel-Pro MS98016T', opis: 'Uszczelki kolektora dolotowego', model: '5.7L' },
-                { kat: 'silnik', nazwa: 'Pompa paliwa', oem: 'AC Delco EP381', opis: 'Pompa paliwa w zbiorniku', model: 'Wszystkie' },
-                { kat: 'silnik', nazwa: 'Cewka zapłonowa', oem: 'AC Delco D577', opis: 'Cewka zapłonowa', model: 'Wszystkie' },
-                { kat: 'silnik', nazwa: 'Rozdzielacz', oem: 'AC Delco 1103952', opis: 'Rozdzielacz zapłonu', model: '5.7L' },
-                { kat: 'skrzynia', nazwa: 'Czujnik prędkości', oem: 'AC Delco 24203876', opis: 'Czujnik prędkości wyjściowej', model: '4L60E' },
-                { kat: 'skrzynia', nazwa: 'Uszczelka konwertera', oem: 'AC Delco 24206182', opis: 'Uszczelka konwertera momentu', model: '4L60E' },
-                { kat: 'hamulce', nazwa: 'Pompa hamulcowa', oem: 'AC Delco 18M1165', opis: 'Pompa hamulcowa główna', model: 'Wszystkie' },
-                { kat: 'hamulce', nazwa: 'Przewody hamulcowe', oem: 'Inline Tube', opis: 'Zestaw przewodów stalowych', model: 'Wszystkie' },
-                { kat: 'zawieszenie', nazwa: 'Sworznie wahaczy', oem: 'AC Delco 45D2278', opis: 'Sworznie wahaczy górnych', model: '1500' },
-                { kat: 'zawieszenie', nazwa: 'Tuleje wahaczy', oem: 'AC Delco 45G11040', opis: 'Tuleje wahaczy', model: '1500' },
-                { kat: 'filtry', nazwa: 'Filtr kabinowy', oem: 'AC Delco CF101', opis: 'Filtr powietrza kabiny', model: '1996+' },
-                { kat: 'silnik', nazwa: 'Czujnik MAP', oem: 'AC Delco 213-1545', opis: 'Czujnik ciśnienia kolektora', model: 'Wszystkie' },
-                { kat: 'silnik', nazwa: 'Czujnik IAT', oem: 'AC Delco 213-243', opis: 'Czujnik temperatury powietrza', model: 'Wszystkie' },
-                { kat: 'silnik', nazwa: 'Czujnik ECT', oem: 'AC Delco 213-928', opis: 'Czujnik temperatury płynu', model: 'Wszystkie' },
-                { kat: 'silnik', nazwa: 'Czujnik tlenu', oem: 'AC Delco 213-1552', opis: 'Sonda lambda', model: 'Wszystkie' },
-                { kat: 'silnik', nazwa: 'Pompa wodna', oem: 'AC Delco 252-707', opis: 'Pompa wody', model: '5.7L' },
-                { kat: 'silnik', nazwa: 'Termostat', oem: 'AC Delco 131-113', opis: 'Termostat 195°F', model: 'Wszystkie' },
-                { kat: 'hamulce', nazwa: 'Zacisk przedni', oem: 'AC Delco 18FR1247', opis: 'Zacisk hamulcowy przód', model: '1500' },
-                { kat: 'hamulce', nazwa: 'Tarcza przednia', oem: 'AC Delco 18A1532', opis: 'Tarcza hamulcowa przód', model: '1500' },
-                { kat: 'zawieszenie', nazwa: 'Wahacz górny', oem: 'AC Delco 45D2278', opis: 'Wahacz górny z sworzniem', model: '1500' },
-                { kat: 'zawieszenie', nazwa: 'Wahacz dolny', oem: 'AC Delco 45D2279', opis: 'Wahacz dolny', model: '1500' },
-                { kat: 'zawieszenie', nazwa: 'Końcówka drążka', oem: 'AC Delco 45A0526', opis: 'Końcówka drążka kierowniczego', model: 'Wszystkie' },
-                { kat: 'skrzynia', nazwa: 'Uszczelka miski', oem: 'AC Delco 24206182', opis: 'Uszczelka miski 4L60E', model: '4L60E' },
-                { kat: 'skrzynia', nazwa: 'Solenoid EPC', oem: 'AC Delco 24230298', opis: 'Solenoid ciśnienia', model: '4L60E' },
-                { kat: 'silnik', nazwa: 'Wtryskiwacz', oem: 'AC Delco 217-3028', opis: 'Wtryskiwacz paliwa', model: '5.7L Vortec' },
-                { kat: 'silnik', nazwa: 'Regulator ciśnienia', oem: 'AC Delco 217-3074', opis: 'Regulator ciśnienia paliwa', model: 'Vortec' },
-                { kat: 'silnik', nazwa: 'Czujnik wału', oem: 'AC Delco 213-324', opis: 'Czujnik położenia wału (CKP)', model: 'Vortec' },
-                { kat: 'silnik', nazwa: 'Czujnik wałka', oem: 'AC Delco 213-920', opis: 'Czujnik położenia wałka (CMP)', model: 'Vortec' },
-                { kat: 'hamulce', nazwa: 'Cylinder hamulcowy', oem: 'AC Delco 18M1165', opis: 'Pompa hamulcowa główna', model: 'Wszystkie' },
-                { kat: 'hamulce', nazwa: 'Cylinder koła', oem: 'AC Delco 18E1277', opis: 'Cylinder hamulcowy tył', model: '1500' },
-                { kat: 'zawieszenie', nazwa: 'Amortyzator przód', oem: 'AC Delco 504-1079', opis: 'Amortyzator przedni', model: '1500' },
-                { kat: 'zawieszenie', nazwa: 'Amortyzator tył', oem: 'AC Delco 504-1080', opis: 'Amortyzator tylny', model: '1500' },
-                { kat: 'zawieszenie', nazwa: 'Sprężyna przód', oem: 'AC Delco 45H0065', opis: 'Sprężyna przednia', model: 'C1500' },
-                { kat: 'filtry', nazwa: 'Filtr oleju Diesel', oem: 'AC Delco PF1218', opis: 'Filtr oleju 6.5L', model: '6.5L' },
-                { kat: 'filtry', nazwa: 'Filtr paliwa Diesel', oem: 'AC Delco TP1006', opis: 'Filtr paliwa 6.5L', model: '6.5L' },
-              ].filter(p => (partsFilter === 'wszystkie' || p.kat === partsFilter) && (!partsQuery || p.nazwa.toLowerCase().includes(partsQuery.toLowerCase()) || p.oem.toLowerCase().includes(partsQuery.toLowerCase()))).map((p, idx) => (
+              {PARTS.filter(p => (partsFilter === 'wszystkie' || p.kat === partsFilter) && (!partsQuery || p.nazwa.toLowerCase().includes(partsQuery.toLowerCase()) || p.oem.toLowerCase().includes(partsQuery.toLowerCase()) || p.opis.toLowerCase().includes(partsQuery.toLowerCase()))).map((p, idx) => (
                 <div key={idx} className="bg-neutral-950 border border-white/10 overflow-hidden">
-                  {p.img && <button type="button" aria-label="Powiększ ilustrację" className="block w-full rounded focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-red-500" onClick={() => setLightbox(p.img)}><img loading="lazy" src={p.img} alt={p.nazwa} className="w-full h-32 object-contain bg-white cursor-pointer"  /></button>}
+                  {p.img && <button type="button" aria-label="Powiększ ilustrację" className="block w-full rounded focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-red-500" onClick={() => setLightbox(p.img ?? null)}><img loading="lazy" src={p.img} alt={p.nazwa} className="w-full h-32 object-contain bg-white cursor-pointer"  /></button>}
                   <div className="p-4">
                   <div className="flex justify-between items-start mb-2">
                     <h3 className="font-semibold">{p.nazwa}</h3>
                     <span className="text-xs bg-red-600 text-white px-2 py-0.5">{p.oem}</span>
                   </div>
                   <p className="text-neutral-400 text-sm mb-1">{p.opis}</p>
-                  <p className="text-neutral-500 text-xs">Model: {p.model}</p>
+                  <p className="text-neutral-500 text-xs">Model / lata: {p.model}</p>
+                  <PartSourceNote part={p} />
                   </div>
                 </div>
               ))}
@@ -949,13 +889,9 @@ export default function Encyclopedia({ initialTab }: { initialTab?: string } = {
 
             <div className="bg-neutral-950 border border-white/10 p-4 mt-6">
               <h3 className="font-semibold text-red-400 mb-3">Numery OEM — filtry</h3>
-              <div className="text-sm text-neutral-300 space-y-2">
-                <div className="flex justify-between"><span>Filtr oleju 5.7L</span><span className="text-red-400">AC Delco PF1218</span></div>
-                <div className="flex justify-between"><span>Filtr powietrza</span><span className="text-red-400">AC Delco A1163C</span></div>
-                <div className="flex justify-between"><span>Filtr ATF 4L60E</span><span className="text-red-400">AC Delco TF289</span></div>
-                <div className="flex justify-between"><span>Filtr paliwa</span><span className="text-red-400">AC Delco GF626</span></div>
-              </div>
+              <OemQuickList filtersOnly />
             </div>
+            <TorqueTable />
           </div>
         )}
 
@@ -979,10 +915,10 @@ export default function Encyclopedia({ initialTab }: { initialTab?: string } = {
               <div className="bg-neutral-950 border border-white/10 p-4">
                 <h3 className="font-semibold text-red-400 mb-3">Co 30-50 tys. km</h3>
                 <ul className="text-sm text-neutral-300 space-y-1">
-                  <li>• Filtr powietrza (A1163C)</li>
-                  <li>• Filtr paliwa (GF626)</li>
+                  <li>• Filtr powietrza (A1300C — V8 1996+)</li>
+                  <li>• Filtr paliwa (GF626 — 1996+; 1995: GF481)</li>
                   <li>• ATF + filtr (TF289)</li>
-                  <li>• Świece zapłonowe (41-932)</li>
+                  <li>• Świece zapłonowe (41-932 — Vortec 1996+)</li>
                   <li>• Olej dyferencjału</li>
                 </ul>
               </div>
@@ -1306,7 +1242,7 @@ export default function Encyclopedia({ initialTab }: { initialTab?: string } = {
                   <li>Zdejmij osłonę klamki (3 śruby Torx)</li>
                   <li>Sprawdź klipsy łączące drążki</li>
                   <li>Nasmaruj mechanizm WD-40</li>
-                  <li>Jeśli zerwane — wymień klipsy (OEM: 15991785)</li>
+                  <li>Jeśli zerwane — wymień klipsy lub klamkę (GM 15991785 to klamka klapy z mocowaniami, nie same klipsy — sprawdź po VIN / w katalogu GM)</li>
                 </ol>
                 <p className="text-xs text-neutral-500 mt-2">Trik awaryjny: wciśnij zatrzaski z boków jednocześnie</p>
               </div>
@@ -1491,7 +1427,7 @@ export default function Encyclopedia({ initialTab }: { initialTab?: string } = {
                     <p className="text-sm font-medium">Filtr powietrza</p>
                     <p className="text-xs text-neutral-500">Co 30 tys. km</p>
                   </div>
-                  <span className="text-red-400 text-sm">A1163C</span>
+                  <span className="text-red-400 text-sm">A1300C</span>
                 </div>
                 <div className="flex items-center justify-between border-b border-white/5 pb-2">
                   <div>

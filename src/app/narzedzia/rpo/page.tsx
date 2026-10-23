@@ -23,7 +23,7 @@ export default function RpoPage() {
     finally { setLoading(false); }
   }
   const results: any[] = data?.results ?? [];
-  return <main className="mx-auto max-w-4xl space-y-4 p-4">
+  return <div className="mx-auto max-w-4xl space-y-4 p-4">
     <section className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
       <h1 className="text-2xl font-semibold text-slate-900">Co oznaczają kody RPO?</h1>
       <p className="mt-1 text-sm text-slate-600">Wpisz kody z tabliczki pojazdu, np. <strong>G80 Z71 GU5</strong>. Możesz też szukać po nazwie, np. „hamulce” albo „holowanie”.</p>
@@ -47,5 +47,5 @@ export default function RpoPage() {
         <a href={item.source} target="_blank" rel="noopener noreferrer" className="mt-2 block text-xs text-blue-700 underline">Źródło: {item.sourceTitle}</a>
       </article>;
     })}</div>
-  </main>;
+  </div>;
 }

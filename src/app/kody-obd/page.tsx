@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { OBD_CODES, searchObdCodes } from '@/lib/obd-codes';
 import RandomCodeLink from './random-code-link';
+import Breadcrumbs from '../ui/Breadcrumbs';
 
 export const metadata: Metadata = {
   title: 'Kody OBD-II GMT400 (1996+) — baza, przyczyny i diagnostyka',
@@ -23,7 +24,8 @@ export default function ObdCodesPage({ searchParams }: { searchParams: Promise<{
     const results = searchObdCodes(query);
     const activeSystemCount = systemCounts[query];
     return (
-      <main className="mx-auto max-w-5xl px-4 py-8">
+      <div className="mx-auto max-w-5xl px-4 py-8">
+        <Breadcrumbs className="mb-2" items={[{ label: 'Kody OBD' }]} />
         <header className="mb-6">
           <p className="text-sm uppercase tracking-wide text-red-400">Diagnostyka</p>
           <h1 className="mt-1 text-3xl font-bold text-white">Kody OBD-II GMT400 (1996+)</h1>
@@ -82,7 +84,7 @@ export default function ObdCodesPage({ searchParams }: { searchParams: Promise<{
         </ul>
         {!results.length && query && <p className="rounded border border-white/10 bg-neutral-900/60 p-4 text-neutral-300">Brak wyników dla filtra: <strong className="text-neutral-200">{query}</strong>. <Link href="/kody-obd" className="text-red-400 underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-500">Wyczyść filtr</Link>, aby zobaczyć wszystkie kody.</p>}
         {!results.length && !query && <p className="rounded border border-white/10 bg-neutral-900/60 p-4 text-neutral-300">Brak wyników. Spróbuj samego kodu, np. „P0300”, albo krótszej frazy.</p>}
-      </main>
+      </div>
     );
   });
 }

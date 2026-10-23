@@ -2,7 +2,7 @@ const { test, expect } = require('@playwright/test');
 async function prepare(page) {
   await page.addInitScript(() => localStorage.setItem('gmt400_tab', 'modele'));
   await page.route('**/api/notion', route => route.fulfill({ json: { results: [], count: 0 } }));
-  await page.goto('http://127.0.0.1:3100');
+  await page.goto('http://127.0.0.1:3100/baza');
   await expect(page.getByRole('navigation', { name: 'Skróty sekcji', exact: true })).toBeVisible();
 }
 async function headingInView(page, heading) {
@@ -68,21 +68,6 @@ test('all service tiles use page flow and move away when the page is scrolled wi
   await nav.getByRole('button', { name: 'Moje GMT400', exact: true }).click();
   await expect(page.getByRole('heading', { name: 'IMPORT DO POLSKI', exact: true })).toHaveCount(0);
   await expect(nav.getByRole('button', { name: 'Moje auto', exact: true })).toHaveAttribute('aria-pressed', 'true');
-});
-test('header menu remains available while reading content', async ({ page }) => {
-  await page.setViewportSize({ width: 390, height: 844 });
-  await prepare(page);
-  const nav = page.getByRole('navigation', { name: 'Skróty sekcji', exact: true });
-  await nav.getByRole('button', { name: 'Zakup i import', exact: true }).click();
-  await nav.getByRole('button', { name: 'Import', exact: true }).click();
-  await headingInView(page, page.getByRole('heading', { name: 'IMPORT DO POLSKI', exact: true }));
-  await page.getByRole('button', { name: 'Otwórz menu', exact: true }).click();
-  const menu = page.getByRole('navigation', { name: 'Menu główne', exact: true });
-  await menu.getByRole('button', { name: 'Serwis i części', exact: true }).click();
-  await menu.getByRole('button', { name: 'Usterki', exact: true }).click();
-  await expect(menu).toHaveCount(0);
-  await headingInView(page, page.getByRole('heading', { name: 'USTERKI', exact: true }));
-  await expect(nav.getByRole('button', { name: 'Serwis i części', exact: true })).toHaveAttribute('data-active', 'true');
 });
 for (const width of [375, 390, 430]) test(`symmetric compact tiles and no clipped rows at ${width}px`, async ({ page }, info) => {
   await page.setViewportSize({ width, height: 844 });

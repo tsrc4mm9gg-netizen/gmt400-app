@@ -3,6 +3,7 @@ import { useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
 import { buildKnowledgeIndex, getKnowledgeEntries, searchKnowledge, type KnowledgeEntry } from '../../lib/knowledge-index';
 import RandomCodeLink from './random-code-link';
+import Breadcrumbs from '../ui/Breadcrumbs';
 import ModelThumb from '../ModelThumb';
 import { bodyForEntry } from '../../lib/model-images';
 
@@ -37,12 +38,8 @@ export default function SearchPage({ query }: { query: string }) {
   const normalizedQuery = query.trim();
 
   return (
-    <main className="mx-auto max-w-4xl px-4 py-8 text-white">
-      <nav aria-label="Nawigacja" className="mb-4 flex flex-wrap gap-x-4">
-        <Link href="/" className="inline-flex min-h-11 items-center text-red-400 underline">Strona główna</Link>
-        <Link href="/modele" className="inline-flex min-h-11 items-center text-red-400 underline">Modele</Link>
-        <Link href="/kody-obd" className="inline-flex min-h-11 items-center text-red-400 underline">Kody OBD</Link>
-      </nav>
+    <div className="mx-auto max-w-4xl px-4 py-8 text-white">
+      <Breadcrumbs items={[{ label: 'Szukaj' }]} />
 
       <h1 className="text-3xl font-bold">Szukaj w bazie wiedzy</h1>
 
@@ -133,13 +130,22 @@ export default function SearchPage({ query }: { query: string }) {
               );
             })}
           </ul>
+          {status === 'loading' && !results.length && (
+            <ul aria-hidden="true" data-testid="search-skeleton" className="space-y-4">
+              {[0, 1, 2].map(i => <li key={i} className="h-28 animate-pulse rounded-xl border border-white/10 bg-neutral-900/60" />)}
+            </ul>
+          )}
           {status !== 'loading' && !results.length && (
-            <p className="rounded-xl border border-white/10 bg-neutral-900/60 p-4 text-neutral-300">
-              Brak wyników. Spróbuj krótszej frazy albo popularnego hasła, np. P0300, EGR lub 4L60E.
-            </p>
+            <div data-testid="search-empty" className="rounded-xl border border-white/10 bg-neutral-900/60 p-4 text-neutral-300">
+              <p>Brak wyników dla „{normalizedQuery}”. Spróbuj krótszej frazy albo popularnego hasła, np. P0300, EGR lub 4L60E. Polskie znaki nie są wymagane (np. „sprzeglo” = „sprzęgło”).</p>
+              <div className="mt-3 flex flex-wrap gap-2">
+                <Link href="/szukaj" className="inline-flex min-h-11 items-center rounded-lg border border-red-600/50 px-4 font-semibold text-red-300 hover:bg-red-950/40">Wyczyść wyszukiwanie</Link>
+                <Link href="/kody-obd" className="inline-flex min-h-11 items-center rounded-lg border border-white/15 px-4 text-neutral-200 hover:border-red-600">Lista kodów OBD</Link>
+              </div>
+            </div>
           )}
         </>
       )}
-    </main>
+    </div>
   );
 }

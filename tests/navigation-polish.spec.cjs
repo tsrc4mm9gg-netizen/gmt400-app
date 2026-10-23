@@ -5,7 +5,7 @@ test.beforeEach(async ({ page }) => {
   await page.route('**/api/notion', route => route.fulfill({ json: { results: [], count: 0 } }));
 });
 test('main categories and subsections have distinct hierarchy and tactile selection styles', async ({ page }, info) => {
-  await page.goto('http://127.0.0.1:3100');
+  await page.goto('http://127.0.0.1:3100/baza');
   const nav = page.getByRole('navigation', { name: 'Skróty sekcji', exact: true });
   const service = nav.getByRole('button', { name: 'Serwis i części', exact: true });
   const inactiveStyles = await service.evaluate(node => { const s = getComputedStyle(node); return { background: s.backgroundColor, borderColor: s.borderColor, outline: s.outlineStyle, weight: Number(s.fontWeight) }; });
@@ -27,15 +27,4 @@ test('main categories and subsections have distinct hierarchy and tactile select
   const marker = await subsection.evaluate(node => getComputedStyle(node, '::after').width);
   expect(marker).toBe('3px');
   await page.screenshot({ path: info.outputPath('navigation-hierarchy.png'), fullPage: true });
-});
-test('profile launcher sits inside its panel rather than floating over content', async ({ page }) => {
-  await page.goto('http://127.0.0.1:3100/usterki');
-  const panel = page.getByRole('region', { name: 'Filtrowanie według profilu auta', exact: true });
-  const launcher = panel.getByRole('button', { name: 'Ustaw profil auta', exact: true });
-  await expect(launcher).toBeVisible();
-  expect(await launcher.evaluate(node => getComputedStyle(node).position)).toBe('static');
-  await launcher.click();
-  await expect(page.getByRole('dialog', { name: 'Moje auto — wspólny profil', exact: true })).toBeVisible();
-  await page.getByRole('button', { name: 'Zamknij profil', exact: true }).click();
-  await expect(launcher).toBeFocused();
 });

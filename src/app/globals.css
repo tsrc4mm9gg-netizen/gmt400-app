@@ -31,3 +31,7 @@ button { min-height:var(--control-height); }
 
 /* === Premium dark + red === */
 body { --accent: #dc2626; --accent-soft: #f87171; }
+/* iOS Safari powiększa stronę po dotknięciu pola z czcionką < 16px — na telefonie wymuszamy 16px. */
+@media (max-width: 767px) { input:not([type=checkbox]):not([type=radio]):not([type=range]), select, textarea { font-size: 16px !important; } }
+/* Zakotwiczenia (#sekcja) nie chowają się pod lepkim nagłówkiem. */
+html { scroll-padding-top: 1rem; }

@@ -125,7 +125,7 @@ export const FLUID_SPECS: FluidSpecification[] = [
  system: 'Skrzynia rozdzielcza — AutoTrac (NV246)',
  appliesTo: ['4x4'],
  capacity: 'Zależna od modelu reduktora',
- specification: 'GM Automatic Transfer Case Fluid 12378396',
+ specification: 'GM Automatic Transfer Case Fluid 12378396 (zastąpiony przez GM 12378508 Auto-Trak II)',
  filter: null,
  confidence: 'reference',
  source: 'https://www.chevrolet.com/ownercenter/content/dam/gmownercenter/gmna/dynamic/manuals/1999/chevrolet/suburban/1999_chevrolet_suburban_owners.pdf',

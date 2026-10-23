@@ -42,7 +42,7 @@ test('larger tires lower effective ratio and increase actual speed', async ({ re
 
 test('Tools button is visible and opens the hub and RPO page', async ({ page }) => {
  await page.route('**/api/notion', route => route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify({ results: [] }) }));
- await page.goto(BASE);
+ await page.goto(BASE + '/kody-obd');
  const launcher = page.getByRole('link', { name: 'Narzędzia', exact: true });
  await expect(launcher).toBeVisible();
  await launcher.click();
@@ -69,9 +69,9 @@ for (const width of [320, 390, 768]) {
   await expect(cards).toHaveCount(4);
   for (const card of await cards.all()) {
    await expect(card).toHaveCSS('background-color', 'rgb(23, 29, 37)');
-   await expect(card).toHaveCSS('border-left-color', 'rgb(231, 185, 94)');
+   await expect(card).toHaveCSS('border-left-color', 'rgb(220, 38, 38)');
    await expect(card).toHaveCSS('border-left-width', '3px');
-   await expect(card.locator('h2')).toHaveCSS('color', 'rgb(242, 207, 133)');
+   await expect(card.locator('h2')).toHaveCSS('color', 'rgb(252, 165, 165)');
    const box = await card.boundingBox();
    expect(box).not.toBeNull();
    expect(box.x).toBeGreaterThanOrEqual(0);
@@ -95,7 +95,7 @@ for (const tool of [
   await page.setViewportSize({width:390,height:844});
   await page.goto(BASE + '/narzedzia/' + tool.path);
   const surface = page.locator('[data-tool-theme="dark-v1"]'); await expect(surface).toBeVisible();
-  const panel = surface.locator('main > section').first();
+  const panel = surface.locator('section').first();
   await expect(panel).toHaveCSS('background-color','rgb(23, 29, 37)');
   await expect(panel.locator('h1')).toHaveCSS('color','rgb(250, 250, 250)');
   for (const control of await panel.locator('input,select').all()) {
@@ -105,8 +105,8 @@ for (const tool of [
    expect(contrast(...colors)).toBeGreaterThanOrEqual(4.5);
   }
   const button = page.getByRole('button',{name:tool.button,exact:true});
-  await expect(button).toHaveCSS('background-color','rgb(231, 185, 94)');
-  await expect(button).toHaveCSS('color','rgb(17, 17, 17)');
+  await expect(button).toHaveCSS('background-color','rgb(220, 38, 38)');
+  await expect(button).toHaveCSS('color','rgb(255, 255, 255)');
   if (tool.placeholder) await page.getByPlaceholder(tool.placeholder,{exact:true}).fill(tool.query);
   await button.click();
   const result = tool.path === 'kalkulatory' ? page.getByRole('heading',{name:'Wynik',exact:true}).locator('..') : surface.locator('article').first();

@@ -2,7 +2,7 @@ name: Mobile WebKit regression verification
 on:
   push:
     branches: [main]
-    paths: ['src/**','tests/**','package.json','package-lock.json','next.config.ts','playwright.webkit.config.cjs','.github/workflows/mobile-webkit.yml']
+    paths: ['src/**','tests/**','package.json','package-lock.json','next.config.ts','playwright.webkit.config.cjs','playwright.ux.config.cjs','.github/workflows/mobile-webkit.yml']
   workflow_dispatch:
 permissions:
   contents: read
@@ -25,7 +25,7 @@ jobs:
       - id: tooling
         run: |
           npm install --no-save --package-lock=false @playwright/test
-          npx playwright install --with-deps webkit
+          npx playwright install --with-deps webkit chromium
       - id: server
         run: |
           npm run start -- --hostname 127.0.0.1 --port 3100 > /tmp/mobile-webkit-server.log 2>&1 &
@@ -38,6 +38,9 @@ jobs:
       - id: tests
         continue-on-error: true
         run: npx playwright test --config=playwright.webkit.config.cjs --reporter=json > /tmp/mobile-webkit-tests.json 2>/tmp/mobile-webkit-errors.log
+      - id: ux
+        continue-on-error: true
+        run: npx playwright test --config=playwright.ux.config.cjs --reporter=json > /tmp/ux-key-paths.json 2>/tmp/ux-key-paths-errors.log
       - name: Generate report
         if: always()
         env:
@@ -46,6 +49,7 @@ jobs:
           TOOLING: ${{ steps.tooling.outcome }}
           SERVER: ${{ steps.server.outcome }}
           TESTS: ${{ steps.tests.outcome }}
+          UX: ${{ steps.ux.outcome }}
         run: |
           node <<'NODE'
           const fs = require('node:fs');
@@ -54,13 +58,22 @@ jobs:
           const tests = [];
           function walk(suites) { for (const suite of suites || []) { for (const spec of suite.specs || []) for (const test of spec.tests || []) tests.push({ title:spec.title,file:spec.file || suite.file || '',status:test.status,attempts:(test.results || []).map(result => ({status:result.status,error:String(result.error?.message || '').slice(0,6000)})) }); walk(suite.suites); } }
           walk(raw.suites);
-          const stages = Object.fromEntries(['INSTALL','BUILD','TOOLING','SERVER','TESTS'].map(key => [key,process.env[key]]));
-          const minima = {'vehicle-filters.spec.cjs':3,'global-search.spec.cjs':3,'knowledge-categories.spec.cjs':8,'navigation.spec.cjs':6,'navigation-polish.spec.cjs':2,'diy-restoration.spec.cjs':2,'notion-pagination.spec.cjs':2,'notion-content.spec.cjs':3,'new-tools.spec.cjs':9,'parts-api.spec.cjs':5,'maintenance-api.spec.cjs':4,'tools-audit.spec.cjs':15};
+          const stages = Object.fromEntries(['INSTALL','BUILD','TOOLING','SERVER','TESTS','UX'].map(key => [key,process.env[key]]));
+          const minima = {'vehicle-filters.spec.cjs':2,'knowledge-categories.spec.cjs':3,'navigation.spec.cjs':5,'navigation-polish.spec.cjs':1,'diy-restoration.spec.cjs':1,'notion-pagination.spec.cjs':2,'notion-content.spec.cjs':3,'new-tools.spec.cjs':12,'parts-api.spec.cjs':5,'maintenance-api.spec.cjs':4,'tools-audit.spec.cjs':15};
           const coverage = Object.entries(minima).map(([file,minimum]) => ({file,minimum,count:tests.filter(test => test.file.split(/[\\/]/).pop() === file).length}));
           const stats = raw.stats || {};
-          const passed = Object.values(stages).every(value => value === 'success') && !parseError && !(raw.errors || []).length && coverage.every(item => item.count >= item.minimum) && stats.expected === tests.length && stats.unexpected === 0 && stats.skipped === 0 && stats.flaky === 0 && tests.every(test => test.status === 'expected');
+          let passed = Object.values(stages).every(value => value === 'success') && !parseError && !(raw.errors || []).length && coverage.every(item => item.count >= item.minimum) && stats.expected === tests.length && stats.unexpected === 0 && stats.skipped === 0 && stats.flaky === 0 && tests.every(test => test.status === 'expected');
+          // Kluczowe ścieżki (Chromium + WebKit, telefon + komputer). Pominięte mogą być tylko testy dotyku/telefonu w projektach desktopowych.
+          let ux = {}, uxParseError = '';
+          try { ux = JSON.parse(fs.readFileSync('/tmp/ux-key-paths.json','utf8')); } catch (error) { uxParseError = error.message; }
+          const uxTests = [];
+          function walkUx(suites) { for (const suite of suites || []) { for (const spec of suite.specs || []) for (const test of spec.tests || []) uxTests.push({ title:spec.title,project:test.projectName,status:test.status,attempts:(test.results || []).map(result => ({status:result.status,error:String(result.error?.message || '').slice(0,6000)})) }); walkUx(suite.suites); } }
+          walkUx(ux.suites);
+          const uxProjects = ['chromium-mobile','chromium-desktop','webkit-mobile','webkit-desktop'];
+          const uxPassed = !uxParseError && !(ux.errors || []).length && uxProjects.every(project => uxTests.filter(test => test.project === project && test.status === 'expected').length >= 10) && (ux.stats || {}).unexpected === 0 && (ux.stats || {}).flaky === 0 && uxTests.every(test => test.status === 'expected' || (test.status === 'skipped' && test.project.endsWith('-desktop')));
+          passed = passed && uxPassed;
           fs.mkdirSync('.diagnostics',{recursive:true});
-          fs.writeFileSync('.diagnostics/mobile-webkit-report.json',JSON.stringify({codeSha:process.env.GITHUB_SHA,runId:process.env.GITHUB_RUN_ID,checkedAt:new Date().toISOString(),scope:'Linux WebKit with mobile viewport and touch; local production build, tools API tests and mocked Notion fixtures. Not physical iPhone, production Safari or live provider certification.',passed,stages,stats,coverage,parseError,runnerErrors:raw.errors || [],tests},null,2)+'\n');
+          fs.writeFileSync('.diagnostics/mobile-webkit-report.json',JSON.stringify({codeSha:process.env.GITHUB_SHA,runId:process.env.GITHUB_RUN_ID,checkedAt:new Date().toISOString(),scope:'Linux WebKit with mobile viewport and touch; local production build, tools API tests and mocked Notion fixtures. Not physical iPhone, production Safari or live provider certification.',passed,stages,stats,coverage,parseError,runnerErrors:raw.errors || [],tests,ux:{passed:uxPassed,stats:ux.stats || {},parseError:uxParseError,runnerErrors:ux.errors || [],tests:uxTests}},null,2)+'\n');
           fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, 'Mobile WebKit verification: ' + (passed ? 'PASS' : 'FAIL') + '\nReport is attached as a workflow artifact; it is not committed to the repository.');
           NODE
       - uses: actions/upload-artifact@v4
@@ -71,6 +84,8 @@ jobs:
             .diagnostics/mobile-webkit-report.json
             /tmp/mobile-webkit-tests.json
             /tmp/mobile-webkit-errors.log
+            /tmp/ux-key-paths.json
+            /tmp/ux-key-paths-errors.log
             /tmp/mobile-webkit-server.log
             test-results
       - name: Require complete verification

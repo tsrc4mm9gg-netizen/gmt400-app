@@ -11,6 +11,16 @@ import * as Sentry from '@sentry/nextjs';
 import { bodyForEntry } from '../../../lib/model-images';
 import { notionFetch, NotionUnavailableError } from '../../../lib/notion-fetch';
 import NotionUnavailable from './NotionUnavailable';
+import { findObdCode } from '../../../lib/obd-codes';
+import Breadcrumbs, { type Crumb } from '../../ui/Breadcrumbs';
+import BackLink from '../../ui/BackLink';
+
+const SECTION_OF: Record<string, Crumb> = {
+  'Usterka': { href: '/usterki', label: 'Usterki' },
+  'Kod błędu': { href: '/kody-obd', label: 'Kody OBD' },
+  'Porada': { href: '/poradniki', label: 'Poradniki' },
+  'Model': { href: '/modele', label: 'Modele' },
+};
 const DATABASE = '746973771d604f1e8276502851176af2';
 const cleanId = (id: string) => id.replace(/-/g, '').toLowerCase();
 const text = (property: any) => (property?.title || property?.rich_text || []).map((part: any) => part.plain_text || part.text?.content || '').join('');
@@ -110,14 +120,14 @@ export default async function KnowledgeEntry({ params }: Props) {
   try { blocks = await readNotionBlocks(entry.id, process.env.NOTION_TOKEN || ''); } catch { contentError = true; }
   const diagram = entry.Typ === 'Porada' && !hasImage(blocks) ? localDiagram(entry.Nazwa) : null;
   const materialLead = lead(entry);
-  const code = obdCode(entry);
+  const rawCode = obdCode(entry);
+  const code = rawCode && findObdCode(rawCode) ? rawCode : null;
   const body = entry.Typ === 'Kod błędu' ? null : bodyForEntry(entry);
-  return <main className="mx-auto min-h-screen max-w-4xl bg-black px-5 py-10 pb-28 text-white">
-    <nav aria-label="Nawigacja pomocnicza" className="flex flex-wrap items-center gap-x-3 gap-y-2 text-sm">
-      <a href="/" className="inline-flex min-h-11 items-center text-red-400 underline">Wróć do encyklopedii</a>
-      <span aria-hidden="true" className="text-neutral-600">·</span>
-      <a href="/szukaj" className="inline-flex min-h-11 items-center text-red-400 underline">Wróć do wyników</a>
-    </nav>
+  return <div className="mx-auto min-h-screen max-w-4xl bg-black px-5 py-10 pb-28 text-white">
+    <Breadcrumbs items={[...(SECTION_OF[entry.Typ] ? [SECTION_OF[entry.Typ]] : [{ href: '/baza', label: 'Baza wiedzy' }]), { label: entry.Nazwa }]} />
+    <div className="mt-1 flex flex-wrap items-center gap-x-3 text-sm">
+      <BackLink fallback="/szukaj" label="← Wróć" className="inline-flex min-h-11 items-center text-red-400 underline" />
+    </div>
     <article className="mt-6 space-y-6">
       <div className="flex flex-wrap gap-2">
         {entry.Typ && <span className="rounded-full border border-red-600/40 bg-red-600/10 px-3 py-1 text-xs font-medium text-red-300">Typ: {entry.Typ}</span>}
@@ -141,5 +151,5 @@ export default async function KnowledgeEntry({ params }: Props) {
       {entry.edited && <p className="text-xs text-neutral-500">Ostatnia edycja wpisu w Notion: {entry.edited}. To nie jest data weryfikacji merytorycznej.</p>}
     </article>
     <RelatedMaterialSuggestions key={entry.id} current={entry} />
-  </main>;
+  </div>;
 }

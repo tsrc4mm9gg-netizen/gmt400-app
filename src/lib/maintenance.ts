@@ -43,7 +43,7 @@ if (coolantItem) {
 
 const transferCaseItem = MAINTENANCE_ITEMS.find(item => item.id === 'transfer-case-fluid');
 if (transferCaseItem) {
- transferCaseItem.notes = 'NP241C / NP243C: DEXRON-III. NV246 AutoTrac: GM Automatic Transfer Case Fluid 12378396. Sprawdź w swoim aucie / manualu — GMT400 ma wiele wariantów (rocznik, GVWR, silnik, skrzynia, RPO).';
+ transferCaseItem.notes = 'NP241C / NP243C: DEXRON-III. NV246 AutoTrac: GM Automatic Transfer Case Fluid 12378396 (zastąpiony przez GM 12378508 Auto-Trak II). Sprawdź w swoim aucie / manualu — GMT400 ma wiele wariantów (rocznik, GVWR, silnik, skrzynia, RPO).';
 }
 
 const differentialItem = MAINTENANCE_ITEMS.find(item => item.id === 'differential-fluid');
