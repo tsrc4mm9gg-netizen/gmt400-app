@@ -44,7 +44,7 @@ function Rich({ parts = [] }: { parts?: any[] }): ReactNode {
     if (part.annotations?.strikethrough) value = <s>{value}</s>;
     if (part.annotations?.underline) value = <u>{value}</u>;
     const href = safeUrl(part.href || part.text?.link?.url);
-    return <span key={index}>{href ? <a href={href} className="text-red-400 underline" rel="noopener noreferrer">{value}</a> : value}</span>;
+    return <span key={index}>{href ? <a href={href} className="text-red-400 underline [overflow-wrap:anywhere]" rel="noopener noreferrer">{value}</a> : value}</span>;
   });
 }
 export function NotionContent({ blocks }: { blocks: any[] }): ReactNode {
@@ -66,7 +66,7 @@ export function NotionContent({ blocks }: { blocks: any[] }): ReactNode {
       case 'table': content = <div className="overflow-x-auto"><table className="w-full border-collapse text-sm"><tbody>{(block.children || []).map((row: any) => <tr key={row.id}>{(row.table_row?.cells || []).map((cell: any[], column: number) => <td key={column} className="border border-white/20 p-2"><Rich parts={cell} /></td>)}</tr>)}</tbody></table></div>; break;
       case 'column_list': case 'column': content = null; break;
       case 'toggle': content = <p className="font-semibold">{rich}</p>; break;
-      case 'bookmark': case 'link_preview': case 'embed': case 'video': case 'file': case 'pdf': { const href = safeUrl(data.url || data.file?.url || data.external?.url); content = href ? <a href={href} className="text-red-400 underline" rel="noopener noreferrer">{data.name || 'Otwórz załącznik lub materiał źródłowy'}</a> : <p>Załącznik ma niedostępny adres.</p>; break; }
+      case 'bookmark': case 'link_preview': case 'embed': case 'video': case 'file': case 'pdf': { const href = safeUrl(data.url || data.file?.url || data.external?.url); content = href ? <a href={href} className="text-red-400 underline [overflow-wrap:anywhere]" rel="noopener noreferrer">{data.name || 'Otwórz załącznik lub materiał źródłowy'}</a> : <p>Załącznik ma niedostępny adres.</p>; break; }
       default: content = <p className="text-sm text-neutral-400">Element Notion „{block.type}” nie jest jeszcze obsługiwany w tym widoku.</p>;
     }
     return <div key={block.id || index} className="my-3">{content}{block.type !== 'table' && block.children?.length > 0 && <div className="ml-4"><NotionContent blocks={block.children} /></div>}</div>;
