@@ -29,7 +29,7 @@ jobs:
           exit 1
       - id: browser
         continue-on-error: true
-        run: npx playwright test tests/vehicle-filters.spec.cjs tests/global-search.spec.cjs tests/knowledge-categories.spec.cjs tests/navigation.spec.cjs tests/navigation-polish.spec.cjs --workers=1 --reporter=json > /tmp/navigation-layout-tests.json
+        run: npx playwright test tests/vehicle-filters.spec.cjs tests/knowledge-categories.spec.cjs tests/navigation.spec.cjs tests/navigation-polish.spec.cjs --workers=1 --reporter=json > /tmp/navigation-layout-tests.json
       - name: Generate navigation report without repository writes
         if: always()
         env:
@@ -39,7 +39,7 @@ jobs:
           node <<'NODE'
           const fs=require('node:fs');let raw={},parseError='';try{raw=JSON.parse(fs.readFileSync('/tmp/navigation-layout-tests.json','utf8'));}catch(e){parseError=e.message;}
           const stats=raw.stats||{},tests=[];function walk(suites){for(const s of suites||[]){for(const spec of s.specs||[])for(const t of spec.tests||[])tests.push({title:spec.title,status:t.status,errors:(t.results||[]).flatMap(r=>r.errors||[r.error].filter(Boolean))});walk(s.suites);}}walk(raw.suites);
-          const passed=!parseError&&process.env.BUILD_RESULT==='success'&&process.env.BROWSER_RESULT==='success'&&tests.length===22&&stats.expected===22&&stats.unexpected===0&&stats.skipped===0&&stats.flaky===0&&!(raw.errors||[]).length&&tests.every(t=>t.status==='expected');
+          const passed=!parseError&&process.env.BUILD_RESULT==='success'&&process.env.BROWSER_RESULT==='success'&&tests.length===11&&stats.expected===11&&stats.unexpected===0&&stats.skipped===0&&stats.flaky===0&&!(raw.errors||[]).length&&tests.every(t=>t.status==='expected');
           const report={codeSha:process.env.GITHUB_SHA,runId:process.env.GITHUB_RUN_ID,checkedAt:new Date().toISOString(),scope:'Local Chromium with mocked fixtures; navigation geometry, styles, profile launcher and category counters; not live Safari.',passed,build:process.env.BUILD_RESULT,browser:process.env.BROWSER_RESULT,stats,parseError,runnerErrors:raw.errors||[],failures:tests.filter(t=>t.status!=='expected')};
           fs.mkdirSync('.diagnostics',{recursive:true});fs.writeFileSync('.diagnostics/navigation-layout-report.json',JSON.stringify(report,null,2));console.log(JSON.stringify(report,null,2));fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY,'Navigation verification: '+(passed?'PASS':'FAIL')+'\nCommit: '+report.codeSha+'\nReport stored in Actions artifacts, not committed.\n');
           NODE

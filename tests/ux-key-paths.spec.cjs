@@ -6,10 +6,13 @@ const FIXTURE = path.join(__dirname, 'fixtures', 'notion-ux.json');
 
 async function guard(page) {
   const errors = [];
-  page.on('pageerror', error => errors.push('pageerror: ' + error.message));
-  page.on('console', message => { if (message.type() === 'error' && !/Failed to load resource/.test(message.text())) errors.push('console: ' + message.text()); });
-  page.on('response', response => { const url = response.url(); if (url.startsWith(BASE) && response.status() >= 400 && !url.includes('/_next/image')) errors.push(response.status() + ' ' + url); });
-  await page.route('**/api/notion*', route => route.fulfill({ path: FIXTURE, contentType: 'application/json' }));
+  // WebKit zgłasza przerwane w trakcie nawigacji prefetche Next.js (?_rsc=) jako „access control checks” — to nie jest błąd strony.
+  const benign = message => /[?&]_rsc=.*access control checks/.test(message);
+  page.on('pageerror', error => { if (!benign(error.message)) errors.push('pageerror: ' + error.message); });
+  page.on('console', message => { if (message.type() === 'error' && !/Failed to load resource/.test(message.text()) && !benign(message.text())) errors.push('console: ' + message.text()); });
+  // /api/notion jest podmieniane fixture'em; w CI nie ma tokenu Notion, a WebKit potrafi puścić pojedyncze żądanie obok mocka — treść Notion sprawdzają osobne testy.
+  page.on('response', response => { const url = response.url(); if (url.startsWith(BASE) && response.status() >= 400 && !url.includes('/_next/image') && !new URL(url).pathname.startsWith('/api/notion')) errors.push(response.status() + ' ' + url); });
+  await page.context().route(url => url.pathname.startsWith('/api/notion'), route => route.fulfill({ path: FIXTURE, contentType: 'application/json' }));
   return errors;
 }
 async function noHorizontalScroll(page) {
@@ -46,9 +49,11 @@ test('karuzela: poziomy gest zmienia model, pionowy nie', async ({ page }, testI
   await expect(carousel(page)).toHaveAttribute('aria-label', /^Model 1 /);
   const swipe = (dx, dy) => carousel(page).evaluate((node, [dx, dy]) => {
     const r = node.getBoundingClientRect(); const x = r.left + r.width / 2, y = r.top + 80;
-    const touch = (cx, cy) => new Touch({ identifier: 1, target: node, clientX: cx, clientY: cy });
-    node.dispatchEvent(new TouchEvent('touchstart', { bubbles: true, touches: [touch(x, y)], changedTouches: [touch(x, y)] }));
-    node.dispatchEvent(new TouchEvent('touchend', { bubbles: true, touches: [], changedTouches: [touch(x + dx, y + dy)] }));
+    // WebKit nie pozwala tworzyć obiektów Touch, więc zdarzenie dostaje listy dotknięć jako zwykłe obiekty (React czyta tylko clientX/clientY).
+    const fire = (type, touches, changed) => { const event = new Event(type, { bubbles: true, cancelable: true }); Object.defineProperty(event, 'touches', { value: touches }); Object.defineProperty(event, 'targetTouches', { value: touches }); Object.defineProperty(event, 'changedTouches', { value: changed }); node.dispatchEvent(event); };
+    const touch = (cx, cy) => ({ identifier: 1, target: node, clientX: cx, clientY: cy, pageX: cx, pageY: cy, screenX: cx, screenY: cy });
+    fire('touchstart', [touch(x, y)], [touch(x, y)]);
+    fire('touchend', [], [touch(x + dx, y + dy)]);
   }, [dx, dy]);
   await swipe(-120, 10);
   await expect(carousel(page)).toHaveAttribute('aria-label', /^Model 2 /);

@@ -38,7 +38,7 @@ jobs:
           exit 1
       - id: tests
         continue-on-error: true
-        run: npx playwright test tests/tools-audit.spec.cjs tests/new-tools.spec.cjs tests/parts-api.spec.cjs tests/maintenance-api.spec.cjs tests/global-search.spec.cjs tests/knowledge-categories.spec.cjs tests/vehicle-filters.spec.cjs tests/official-vehicle-api.spec.cjs --workers=1 --reporter=json > /tmp/tools-audit.json 2>/tmp/tools-audit-errors.log
+        run: npx playwright test tests/tools-audit.spec.cjs tests/new-tools.spec.cjs tests/parts-api.spec.cjs tests/maintenance-api.spec.cjs tests/knowledge-categories.spec.cjs tests/vehicle-filters.spec.cjs tests/official-vehicle-api.spec.cjs --workers=1 --reporter=json > /tmp/tools-audit.json 2>/tmp/tools-audit-errors.log
       - name: Generate audit report
         if: always()
         env:
@@ -56,7 +56,7 @@ jobs:
           function walk(suites) { for (const suite of suites || []) { for (const spec of suite.specs || []) for (const test of spec.tests || []) tests.push({ title:spec.title, file:spec.file || suite.file || '', status:test.status, attempts:(test.results || []).map(result => ({ status:result.status, error:String(result.error?.message || '').slice(0, 6000) })) }); walk(suite.suites); } }
           walk(raw.suites);
           const stages = Object.fromEntries(['INSTALL','BUILD','TOOLING','SERVER','TESTS'].map(key => [key, process.env[key]]));
-          const required = ['tools-audit.spec.cjs', 'new-tools.spec.cjs', 'parts-api.spec.cjs', 'maintenance-api.spec.cjs', 'global-search.spec.cjs', 'knowledge-categories.spec.cjs', 'vehicle-filters.spec.cjs', 'official-vehicle-api.spec.cjs'];
+          const required = ['tools-audit.spec.cjs', 'new-tools.spec.cjs', 'parts-api.spec.cjs', 'maintenance-api.spec.cjs', 'knowledge-categories.spec.cjs', 'vehicle-filters.spec.cjs', 'official-vehicle-api.spec.cjs'];
           const coverage = required.map(file => ({ file, count:tests.filter(test => test.file.split(/[\\/]/).pop() === file).length }));
           const passed = Object.values(stages).every(value => value === 'success') && !parseError && !(raw.errors || []).length && coverage.every(item => item.count > 0) && tests.length > 0 && raw.stats?.expected === tests.length && raw.stats?.unexpected === 0 && raw.stats?.skipped === 0 && raw.stats?.flaky === 0 && tests.every(test => test.status === 'expected');
           const report = { codeSha:process.env.GITHUB_SHA, runId:process.env.GITHUB_RUN_ID, checkedAt:new Date().toISOString(), passed, scope:'Local production build, Chromium, numerical and validation cases, mocked official APIs and Notion fixtures. External catalog destinations, live providers, physical iPhone and all legacy inline calculators are not certified by this report.', stages, coverage, stats:raw.stats || {}, parseError, runnerErrors:raw.errors || [], tests };

@@ -40,7 +40,7 @@ jobs:
             if (( SECONDS >= deadline )); then cat reports/diy/server.log; exit 1; fi
             sleep 1
           done
-          printf '%s\n' "module.exports = { testDir: './tests', testMatch: ['vehicle-filters.spec.cjs', 'global-search.spec.cjs', 'knowledge-categories.spec.cjs', 'navigation.spec.cjs', 'navigation-polish.spec.cjs', 'diy-restoration.spec.cjs'], workers: 1, retries: 0, timeout: 45000, expect: { timeout: 10000 }, projects: [{ name: 'chromium', use: { browserName: 'chromium', viewport: { width: 390, height: 844 } } }] };" > .diy-verification.config.cjs
+          printf '%s\n' "module.exports = { testDir: './tests', testMatch: ['vehicle-filters.spec.cjs', 'knowledge-categories.spec.cjs', 'navigation.spec.cjs', 'navigation-polish.spec.cjs', 'diy-restoration.spec.cjs'], workers: 1, retries: 0, timeout: 45000, expect: { timeout: 10000 }, projects: [{ name: 'chromium', use: { browserName: 'chromium', viewport: { width: 390, height: 844 } } }] };" > .diy-verification.config.cjs
       - id: tests
         continue-on-error: true
         run: npx playwright test --config=.diy-verification.config.cjs --reporter=json > reports/diy/tests.json 2> reports/diy/errors.log

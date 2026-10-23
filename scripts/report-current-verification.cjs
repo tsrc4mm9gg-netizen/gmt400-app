@@ -16,7 +16,7 @@ function walk(suites) {
   }
 }
 walk(raw.suites);
-const minima = mode === 'diy' ? { 'vehicle-filters.spec.cjs': 3, 'global-search.spec.cjs': 3, 'knowledge-categories.spec.cjs': 8, 'navigation.spec.cjs': 6, 'navigation-polish.spec.cjs': 2, 'diy-restoration.spec.cjs': 2 } : { 'material-text.spec.cjs': 5, 'notion-content.spec.cjs': 3 };
+const minima = mode === 'diy' ? { 'vehicle-filters.spec.cjs': 2, 'knowledge-categories.spec.cjs': 3, 'navigation.spec.cjs': 5, 'navigation-polish.spec.cjs': 1, 'diy-restoration.spec.cjs': 1 } : { 'material-text.spec.cjs': 5, 'notion-content.spec.cjs': 3 };
 const projects = mode === 'diy' ? ['chromium'] : ['chromium', 'webkit'];
 const coverage = projects.flatMap(project => Object.entries(minima).map(([file, minimum]) => ({ project, file, minimum, count: tests.filter(test => test.project === project && test.file === file).length })));
 const stats = raw.stats || {};

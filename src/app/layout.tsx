@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import VehicleProfileProvider from "./VehicleProfileProvider";
@@ -25,6 +25,7 @@ export const metadata: Metadata = {
     template: "%s | GMT400",
   },
   description: "Baza wiedzy dla właścicieli Chevrolet C/K, Tahoe, Suburban i GMC (1988–2000)",
+  manifest: "/manifest.json",
   openGraph: {
     type: "website",
     locale: "pl_PL",
@@ -38,6 +39,10 @@ export const metadata: Metadata = {
     title: "GMT400 Encyklopedia",
     description: "Baza wiedzy dla właścicieli Chevrolet C/K, Tahoe, Suburban i GMC (1988–2000)",
   },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#0a0a0a",
 };
 
 export default function RootLayout({

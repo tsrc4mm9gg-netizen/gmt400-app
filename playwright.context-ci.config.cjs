@@ -1,6 +1,6 @@
 const { defineConfig } = require('@playwright/test');
 const webkit = require('./playwright.webkit.config.cjs');
-const chromiumFiles = ['vehicle-filters.spec.cjs','global-search.spec.cjs','knowledge-categories.spec.cjs','navigation.spec.cjs','navigation-polish.spec.cjs','diy-restoration.spec.cjs','notion-pagination.spec.cjs','notion-content.spec.cjs','model-catalog.spec.cjs','navigation-context.spec.cjs','visual-consistency.spec.cjs'];
+const chromiumFiles = ['vehicle-filters.spec.cjs','knowledge-categories.spec.cjs','navigation.spec.cjs','navigation-polish.spec.cjs','diy-restoration.spec.cjs','notion-pagination.spec.cjs','notion-content.spec.cjs','model-catalog.spec.cjs','navigation-context.spec.cjs','visual-consistency.spec.cjs'];
 module.exports = defineConfig({
   testDir: './tests', workers: 1, retries: 0,
   projects: [

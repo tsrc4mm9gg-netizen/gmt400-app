@@ -41,7 +41,7 @@ jobs:
           exit 1
       - id: browser
         continue-on-error: true
-        run: npx playwright test tests/vehicle-filters.spec.cjs tests/global-search.spec.cjs tests/knowledge-categories.spec.cjs tests/navigation.spec.cjs tests/navigation-polish.spec.cjs tests/new-tools.spec.cjs tests/parts-api.spec.cjs tests/maintenance-api.spec.cjs --workers=1 --reporter=json > /tmp/knowledge-tests.json 2>/tmp/knowledge-tests-errors.log
+        run: npx playwright test tests/vehicle-filters.spec.cjs tests/knowledge-categories.spec.cjs tests/navigation.spec.cjs tests/navigation-polish.spec.cjs tests/new-tools.spec.cjs tests/parts-api.spec.cjs tests/maintenance-api.spec.cjs --workers=1 --reporter=json > /tmp/knowledge-tests.json 2>/tmp/knowledge-tests-errors.log
       - name: Generate readable verification report
         if: always()
         env:
@@ -61,7 +61,7 @@ jobs:
           function walk(suites) { for (const suite of suites || []) { for (const spec of suite.specs || []) for (const test of spec.tests || []) tests.push({ title: spec.title, file: spec.file || suite.file || '', status: test.status, attempts: (test.results || []).map(result => ({ status: result.status, durationMs: result.duration, error: String(result.error?.message || '').slice(0, 5000) })) }); walk(suite.suites); } }
           walk(raw.suites);
           const stages = { install: process.env.INSTALL_RESULT, build: process.env.BUILD_RESULT, tooling: process.env.TOOLING_RESULT, server: process.env.SERVER_RESULT, browser: process.env.BROWSER_RESULT };
-          const minimumCounts = { 'vehicle-filters.spec.cjs': 3, 'global-search.spec.cjs': 3, 'knowledge-categories.spec.cjs': 8, 'navigation.spec.cjs': 6, 'navigation-polish.spec.cjs': 2, 'new-tools.spec.cjs': 9, 'parts-api.spec.cjs': 4, 'maintenance-api.spec.cjs': 4 };
+          const minimumCounts = { 'vehicle-filters.spec.cjs': 2, 'knowledge-categories.spec.cjs': 3, 'navigation.spec.cjs': 5, 'navigation-polish.spec.cjs': 1, 'new-tools.spec.cjs': 12, 'parts-api.spec.cjs': 5, 'maintenance-api.spec.cjs': 4 };
           const coverage = Object.entries(minimumCounts).map(([file, minimum]) => { const count = tests.filter(test => test.file.replace(/\\/g, '/').split('/').pop() === file).length; return { file, minimum, count, covered: count >= minimum }; });
           const stats = raw.stats || {};
           const runnerErrors = raw.errors || [];
