@@ -1,39 +1,25 @@
 {
-  "codeSha": "7d2a23e50340fa9ee619128b5b649b65fa57cc0d",
-  "runId": "39253587196",
-  "checkedAt": "2026-10-19T12:41:04.981Z",
+  "codeSha": "cf0289676899b3655fe64de694bd167947e1ff00",
+  "runId": "39878379862",
+  "checkedAt": "2026-10-23T00:29:12.731Z",
   "scope": "Grouped source records; Chromium and mobile WebKit mocked-fixture regressions, not a live Notion or historical-accuracy audit",
   "passed": false,
   "integrationApplied": false,
   "stages": {
-    "patch": "success",
-    "build": "success",
-    "chromium": "success",
-    "webkit": "success"
+    "patch": "failure",
+    "build": "skipped",
+    "chromium": "skipped",
+    "webkit": "skipped"
   },
   "reports": {
     "chromium": {
-      "passed": true,
-      "stats": {
-        "startTime": "2026-10-19T12:39:50.837Z",
-        "duration": 15987.36,
-        "expected": 33,
-        "skipped": 0,
-        "unexpected": 0,
-        "flaky": 0
-      },
+      "passed": false,
+      "stats": {},
       "failures": []
     },
     "webkit": {
       "passed": false,
-      "stats": {
-        "startTime": "2026-10-19T12:40:07.759Z",
-        "duration": 55380.865,
-        "expected": 69,
-        "skipped": 0,
-        "unexpected": 0,
-        "flaky": 0
-      },
+      "stats": {},
       "failures": []
     }
   }
