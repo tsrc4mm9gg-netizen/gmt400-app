@@ -6,26 +6,42 @@ on:
   workflow_dispatch:
 permissions:
   contents: read
+env:
+  PLAYWRIGHT_VERSION: '1.64.1'
 concurrency:
   group: mobile-webkit-verification
   cancel-in-progress: true
 jobs:
   verify:
     runs-on: ubuntu-latest
-    timeout-minutes: 25
+    timeout-minutes: 45
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
+          cache: npm
       - id: install
-        run: npm ci
+        timeout-minutes: 12
+        run: |
+          # npm ci z jedną ponowną próbą (zawieszenia rejestru npm na runnerze)
+          timeout 300 npm ci --no-audit --no-fund || { echo 'npm ci: ponowna próba'; rm -rf node_modules; timeout 300 npm ci --no-audit --no-fund; }
       - id: build
         run: npm run build
+      - name: Cache Playwright browsers
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: ms-playwright-${{ runner.os }}-${{ env.PLAYWRIGHT_VERSION }}-webkit-chromium
       - id: tooling
+        timeout-minutes: 15
         run: |
-          npm install --no-save --package-lock=false @playwright/test
-          npx playwright install --with-deps webkit chromium
+          # Każda próba ograniczona czasowo, jedna ponowna próba — wcześniej krok potrafił wisieć do limitu joba
+          install_tooling() {
+            timeout 240 npm install --no-save --package-lock=false --no-audit --no-fund @playwright/test@${PLAYWRIGHT_VERSION} &&
+            timeout 360 npx playwright install --with-deps webkit chromium
+          }
+          install_tooling || { echo 'Instalacja Playwright: ponowna próba'; sleep 10; install_tooling; }
       - id: server
         run: |
           npm run start -- --hostname 127.0.0.1 --port 3100 > /tmp/mobile-webkit-server.log 2>&1 &
