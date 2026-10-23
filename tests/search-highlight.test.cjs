@@ -9,4 +9,4 @@ test('highlights multiple tokens without reordering',()=>{const s=run('Ciśnieni
 test('uses automatic-transmission synonym',()=>{const s=run('Skrzynia automatyczna — materiał','automat');assert.equal(text(s),'[Skrzynia automatyczna] — materiał');});
 test('does not highlight when query has no usable token',()=>{const s=run('Opis materiału','a');assert.equal(text(s),'Opis materiału');assert.equal(s.length,1);assert.equal(s[0].highlighted,false);});
 test('returns empty output for empty text',()=>{assert.deepEqual(run('','P0300'),[]);});
-test('does not alter source text or interpret markup',()=>{const source='<img src=x onerror=bad()> P0300';const s=run(source,'P0300');assert.equal(text(s),source);assert.deepEqual(s.filter(x=>x.highlighted).map(x=>x.text),['P0300']);});
+test('does not alter source text or interpret markup',()=>{const source='<img src=x onerror=bad()> P0300';const s=run(source,'P0300');assert.equal(s.map(x=>x.text).join(''),source);assert.deepEqual(s.filter(x=>x.highlighted).map(x=>x.text),['P0300']);});

@@ -93,7 +93,7 @@ jobs:
           NODE
 
       - name: Run unit tests
-        run: node --test tests/navigation-manifest.test.cjs tests/secret-scanner.test.cjs tests/workflow-quality.test.cjs tests/frontend-quality.test.cjs tests/package-one-core.test.mjs tests/knowledge-integration.test.mjs
+        run: node --test tests/navigation-manifest.test.cjs tests/secret-scanner.test.cjs tests/workflow-quality.test.cjs tests/frontend-quality.test.cjs tests/package-one-core.test.mjs tests/knowledge-integration.test.mjs tests/fuses-vin.test.mjs tests/my-car.test.mjs tests/search-highlight.test.cjs tests/search-excerpt.test.cjs
 
       - name: Build production bundle
         run: |
