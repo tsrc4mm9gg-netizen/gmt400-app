@@ -8,19 +8,19 @@ const CATEGORIES = [
   { href: '/kody-obd', icon: '📡', title: 'Kody OBD', desc: 'OBD-I / II' },
   { href: '/schematy', icon: '🔌', title: 'Schematy', desc: 'Układy' },
   { href: '/narzedzia', icon: '🔧', title: 'Narzędzia', desc: 'Kalkulatory' },
-  { href: '/baza?typ=Model', icon: '🚚', title: 'Modele', desc: 'Warianty' },
+  { href: '/?tab=modele', icon: '🚚', title: 'Modele', desc: 'Warianty' },
 ];
 
 export default function CategoryGrid() {
   return (
-    <section className="px-4 pb-8">
+    <section className="relative z-10 px-4 pb-8">
       <h2 className="mb-3 text-xs font-semibold uppercase tracking-widest text-neutral-500">Kategorie</h2>
       <div className="grid grid-cols-2 gap-3">
         {CATEGORIES.map((cat) => (
           <Link
             key={cat.href}
             href={cat.href}
-            className="group rounded-xl border border-white/10 bg-neutral-900 p-4 transition hover:border-red-600/50 hover:bg-neutral-800"
+            className="group relative z-10 rounded-xl border border-white/10 bg-neutral-900 p-4 transition hover:border-red-600/50 hover:bg-neutral-800"
           >
             <div className="mb-2 text-2xl">{cat.icon}</div>
             <div className="font-semibold text-white">{cat.title}</div>
