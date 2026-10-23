@@ -12,9 +12,9 @@ type BodyStyle = {
 };
 
 const BODY_STYLES: BodyStyle[] = [
-  { id: 'tahoe-4d', name: 'Tahoe 4-drzwi', image: '/tahoe-4d-green.jpg', years: '1995–2000' },
+  { id: 'tahoe-4d', name: 'Tahoe 4-drzwi', image: '/tahoe-gold.jpg', years: '1995–2000' },
   { id: 'tahoe-2d', name: 'Tahoe / Blazer 2-drzwi', image: '/tahoe-2d-red.jpg', years: '1992–1999' },
-  { id: 'suburban', name: 'Suburban', image: '/suburban-beige.jpg', years: '1992–1999' },
+  { id: 'suburban', name: 'Suburban', image: '/suburban-navy.jpg', years: '1992–1999' },
   { id: 'yukon', name: 'GMC Yukon', image: '/yukon-white.jpg', years: '1992–2000' },
   { id: 'ck-reg', name: 'C/K Regular Cab', image: '/ck-reg.jpg', years: '1988–1998' },
   { id: 'ck-ext', name: 'C/K Extended Cab', image: '/ck-ext.jpg', years: '1988–1998' },
