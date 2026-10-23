@@ -28,7 +28,7 @@ jobs:
       - run: npm run build
       - name: Verify browser capture and accessible error boundary
         run: node scripts/test-sentry-browser.cjs
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         if: always()
         with:
           name: sentry-browser-${{ github.run_id }}

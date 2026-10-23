@@ -27,7 +27,7 @@ jobs:
       - id: tests
         continue-on-error: true
         run: npx playwright test --config=playwright.official-live.config.cjs --reporter=json > /tmp/official-live-tests.json
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         if: always()
         with:
           name: official-live-browser-${{ github.sha }}

@@ -49,7 +49,7 @@ jobs:
           fs.mkdirSync('.diagnostics',{recursive:true});fs.writeFileSync('.diagnostics/production-material-browser-report.json',JSON.stringify({auditorCodeSha:process.env.GITHUB_SHA,observedDeploymentSha:before.sha||null,deploymentShaAfter:afterSha,stableDeployment,runId:process.env.GITHUB_RUN_ID,checkedAt:new Date().toISOString(),origin:'https://www.gmt400.pl',passed,scope:'Actual known public instruction, its contents navigation and bounded discovery of one real Notion image in up to five public instructions per browser. Chromium and Linux mobile WebKit, no mocks, no Notion writes or VIN submission. Missing eligible sample is unverified, not a pass. Not physical iPhone or all-material certification.',stages,parseError,statusError,stats:raw.stats||{},runnerErrors:raw.errors||[],tests},null,2)+'\n');fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY,'### Real production materials\nResult: '+(passed?'PASS':'NOT FULLY VERIFIED')+'\nObserved SHA: '+before.sha+'\nStable deployment: '+stableDeployment+'\nTests discovered: '+tests.length+'\n');}
           main().catch(error=>{console.error(error.message);process.exitCode=1;});
           NODE
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         if: always()
         with:
           name: real-production-material-${{ github.run_id }}-${{ github.run_attempt }}

@@ -97,7 +97,7 @@ jobs:
           fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY,'### Verified tools deployment\nSource: '+report.sourceSha+'\nResult: '+report.reason+'\n');
           NODE
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         if: always()
         with:
           name: verified-tools-deployment-${{ github.run_id }}
