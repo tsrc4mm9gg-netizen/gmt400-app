@@ -4,6 +4,7 @@ import Link from 'next/link';
 import ModelHero from './ModelHero';
 import CategoryGrid from './CategoryGrid';
 import HomeSearch from './HomeSearch';
+import OwnerEssentials from './OwnerEssentials';
 import { useModelSelection } from './ModelSelectionContext';
 import { findBody } from '../lib/body-styles';
 
@@ -39,6 +40,7 @@ export default function HomeHero() {
         </div>
       )}
       <HomeSearch />
+      <OwnerEssentials />
       <CategoryGrid />
     </div>
   );

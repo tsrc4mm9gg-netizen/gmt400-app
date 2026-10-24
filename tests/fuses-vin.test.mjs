@@ -105,3 +105,18 @@ test('VIN: linki „Zdjęcia i historia” to tylko wyszukiwania / strony starto
   assert.ok(links.some(l => l.href.includes('tbm=isch') && l.href.includes(encodeURIComponent('"1GCEK19R9VE112233"'))));
   assert.ok(links.filter(l => l.href.startsWith('https://www.google.com/search')).every(l => l.href.includes('1GCEK19R9VE112233')));
 });
+
+test('Ford (1F…) i inne marki nie są mapowane na Chevroleta/GMC (profileFromVin + pole 3)', () => {
+  const ford = decodeVin('1FTHF26H0VEA12345');
+  assert.equal(ford.ok, true);
+  assert.equal(profileFromVin(ford), null);
+  const f3 = ford.fields.find(x => x.pos === '3');
+  assert.equal(f3.value, null);
+  assert.match(f3.note, /nie jest VIN General Motors/);
+  // warianty GM bez zmian
+  assert.equal(profileFromVin(decodeVin('1GDHK34F0XF000000'))?.brand, 'GMC');
+  const chev = profileFromVin(decodeVin('1GCEK19K1RE123456'));
+  assert.equal(chev?.brand, 'Chevrolet');
+  const ca = profileFromVin(decodeVin('2GCEK19K1R1123456'));
+  assert.equal(ca?.brand, 'Chevrolet');
+});

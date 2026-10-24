@@ -1,4 +1,5 @@
 import { OBD_CODES } from './obd-codes';
+import { GUIDE_ENTRIES } from './guide-entries.mjs';
 import type { Applicability } from './vehicle-compatibility';
 
 export type KnowledgeEntry = {
@@ -92,6 +93,10 @@ export function getObdEntries(): KnowledgeEntry[] {
   }));
 }
 
+export function getGuideEntries(): KnowledgeEntry[] {
+  return GUIDE_ENTRIES.map(entry => ({ ...entry }));
+}
+
 export function getKnowledgeEntries(items: readonly KnowledgeEntry[] = []): KnowledgeEntry[] {
-  return [...getObdEntries(), ...items];
+  return [...getGuideEntries(), ...getObdEntries(), ...items];
 }

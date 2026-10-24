@@ -184,7 +184,8 @@ function buildFields(vin, year, engine, engineNote, checkOk, expected) {
   out.push(field('1', vin[0], lookup(1, vin[0], year ?? 1998)));
   out.push(field('2', vin[1], vin[1] === 'G' ? { value: 'General Motors', tier: 'gm', sources: [...GM_C1_98_00, 'gmstd'] } : { value: null, tier: 'unknown', sources: [], note: 'Pojazdy GMT400 mają „G” (General Motors) — inny znak oznacza, że to nie VIN GM.' }));
   const make = vin[2];
-  if (make === 'B' || make === 'D') out.push(field('3', make, { value: null, tier: 'unknown', sources: GM_C1_98_00, note: `Tabela GM C/K 1998–2000 wymienia kody B, C, D, T z opisami „Chevrolet, Incomplete Chevrolet Truck, GMC, Incomplete GMC Truck” bez jednoznacznego przypisania. „${make}” wiąże się z marką ${make === 'B' ? 'Chevrolet' : 'GMC'}, ale rodzaj (kompletny / niekompletny pojazd) — ${UNKNOWN} w vPIC.` }));
+  if (vin[1] !== 'G') out.push(field('3', make, { value: null, tier: 'unknown', sources: [], note: 'To nie jest VIN General Motors (druga pozycja nie jest „G”) — tabela GMT400 nie opisuje tego kodu producenta.' }));
+  else if (make === 'B' || make === 'D') out.push(field('3', make, { value: null, tier: 'unknown', sources: GM_C1_98_00, note: `Tabela GM C/K 1998–2000 wymienia kody B, C, D, T z opisami „Chevrolet, Incomplete Chevrolet Truck, GMC, Incomplete GMC Truck” bez jednoznacznego przypisania. „${make}” wiąże się z marką ${make === 'B' ? 'Chevrolet' : 'GMC'}, ale rodzaj (kompletny / niekompletny pojazd) — ${UNKNOWN} w vPIC.` }));
   else out.push(field('3', make, lookup(3, make, year ?? 1998)));
   for (const pos of [4, 5, 6, 7]) out.push(field(String(pos), vin[pos - 1], lookup(pos, vin[pos - 1], year)));
   out.push(field('8', vin[7], engine ? { value: `${engine.engine}${engine.rpo ? ` — RPO ${engine.rpo}` : ''}${engine.fuel ? `, ${engine.fuel}` : ''}`, tier: engine.tier, sources: engine.sources } : { value: null, tier: 'unknown', sources: [], note: engineNote }));
@@ -205,6 +206,8 @@ export function profileFromVin(result) {
   const f = Object.fromEntries(result.fields.map(x => [x.pos, x]));
   const known = pos => f[pos]?.value !== null && f[pos]?.value !== undefined;
   const code = pos => f[pos]?.code;
+  // Tylko VIN-y GM (WMI 1G/2G/3G…). Inne marki (np. Ford 1F…) mają własne kody w pozycji 3 — nie mapujemy ich na Chevroleta/GMC.
+  if (code('2') !== 'G' || !['1', '2', '3'].includes(code('1'))) return null;
   const patch = {};
   const brand = MPV[code('3')] ?? TRUCK[code('3')];
   if (brand) patch.brand = brand;

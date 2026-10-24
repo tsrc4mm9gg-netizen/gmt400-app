@@ -1031,45 +1031,15 @@ export default function Encyclopedia({ initialTab }: { initialTab?: string } = {
             
             <ImportCostCalculator />
 
-            <div className="bg-neutral-950 border border-white/10 p-4 mb-4">
-              <h3 className="font-semibold text-red-400 mb-3">STAWKI 2026</h3>
-              <div className="overflow-x-auto">
-                <table className="w-full text-sm">
-                  <thead><tr className="border-b border-white/10 text-red-400"><th className="p-2 text-left">Typ</th><th className="p-2 text-left">Cło</th><th className="p-2 text-left">Akcyza</th><th className="p-2 text-left">VAT</th></tr></thead>
-                  <tbody className="text-neutral-300">
-                    <tr className="border-b border-white/5"><td className="p-2">Osobowy do 2000cm³</td><td className="p-2">10%</td><td className="p-2">3.1%</td><td className="p-2">23%</td></tr>
-                    <tr className="border-b border-white/5"><td className="p-2">Osobowy powyzej 2000cm³</td><td className="p-2">10%</td><td className="p-2 text-red-400">18.6%</td><td className="p-2">23%</td></tr>
-                    <tr className="border-b border-white/5"><td className="p-2">Pickup CN 8704</td><td className="p-2">22%</td><td className="p-2 text-green-400">0%</td><td className="p-2">23%</td></tr>
-                    <tr><td className="p-2">Zabytkowy 30+ lat</td><td className="p-2 text-green-400">0%</td><td className="p-2">—</td><td className="p-2">—</td></tr>
-                  </tbody>
-                </table>
-              </div>
-              <p className="text-xs text-neutral-500 mt-2">* GMT400 z 5.7L/7.4L = 18.6% akcyza. Pickup może być CN 8704 (0% akcyza).</p>
-            </div>
-
-            <div className="bg-neutral-950 border border-white/10 p-4 mb-4">
-              <h3 className="font-semibold text-red-400 mb-3">PROCEDURA KROK PO KROKU</h3>
-              <ol className="text-sm text-neutral-300 space-y-2 list-decimal list-inside">
-                <li><strong>Zakup w USA</strong> — aukcja (Copart, IAAI) lub dealer</li>
-                <li><strong>Transport morski</strong> — 2-8 tygodni, koszt 4000-8000 PLN</li>
-                <li><strong>Odprawa celna</strong> — cło 10% + VAT 23%</li>
-                <li><strong>Akcyza</strong> — deklaracja AKC-U/S w 14 dni, płatność w 30 dni</li>
-                <li><strong>Tłumaczenia</strong> — title, faktura (300-600 PLN)</li>
-                <li><strong>Przystosowanie</strong> — światła ECE, prędkościomierz km/h (2000-5000 PLN)</li>
-                <li><strong>Badanie techniczne</strong> — 149 PLN (z LPG 245 PLN)</li>
-                <li><strong>Rejestracja</strong> — wydział komunikacji (160-250 PLN)</li>
-              </ol>
-            </div>
-
-            <div className="bg-neutral-950 border border-white/10 p-4">
-              <h3 className="font-semibold text-red-400 mb-3">TIPSY Z FORÓW</h3>
-              <ul className="text-sm text-neutral-300 space-y-2">
-                <li>• <strong>Pickup = 0% akcyza</strong> — jeśli sklasyfikowany jako CN 8704 (ciężarowy)</li>
-                <li>• <strong>Homologacja nie wymagana</strong> — dla używanych aut z title wystarczy przystosowanie</li>
-                <li>• <strong>Światła</strong> — wymiana na ECE lub naklejki korekcyjne</li>
-                <li>• <strong>Prędkościomierz</strong> — wymiana skali lub przeprogramowanie</li>
-                <li>• <strong>LPG</strong> — instalacja 3000-6000 PLN, oszczędność ~40% na paliwie</li>
-                <li>• <strong>Mienie przesiedleńcze</strong> — 0% cło/VAT/akcyza przy 12 mies. pobytu w USA</li>
+            <div className="bg-neutral-950 border border-red-600/60 p-4 mb-4" data-testid="import-guide-link">
+              <h3 className="font-semibold text-red-400 mb-3">AKTUALNY PORADNIK Z ŹRÓDŁAMI (stan na 24.10.2026)</h3>
+              <p className="text-sm text-neutral-300 leading-6">Pełny opis opłat, procedury, kalkulator cła/akcyzy/VAT, trasa USA→DE/NL→PL i zabytek CN 9705 — z linkami do przepisów i datami: <Link href="/dla-wlasciciela/import" className="inline-flex min-h-11 items-center text-red-300 underline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-red-500">Sprowadzenie i rejestracja z USA/UE</Link>.</p>
+              <ul className="mt-3 text-sm text-neutral-300 space-y-2 list-disc pl-5 leading-6">
+                <li>Akcyza 18,6% dotyczy samochodów osobowych (CN 8703) powyżej 2000 cm³, 3,1% do 2000 cm³; pickup N1 (CN 8704) akcyzy nie ma, ale „pickup” nie oznacza automatycznie takiej klasyfikacji.</li>
+                <li>Opłata recyklingowa: zniesiona od 1.01.2016.</li>
+                <li>Od 1.07.2026 cło 0% dla osobowych z pochodzeniem USA (z dowodem pochodzenia); bez dowodu 10%.</li>
+                <li>Rejestracja w 30 dni; kara 500 zł (1000 zł po 180 dniach).</li>
+                <li>Światła, LPG, żółte tablice: <Link href="/dla-wlasciciela/swiatla-eu" className="text-red-300 underline">światła</Link>, <Link href="/dla-wlasciciela/lpg" className="text-red-300 underline">LPG</Link>, <Link href="/dla-wlasciciela/zolte-tablice" className="text-red-300 underline">żółte tablice</Link>. Przepisy się zmieniają — sprawdź w urzędzie.</li>
               </ul>
             </div>
           </div>

@@ -9,6 +9,7 @@ const links = [
   { href: '/', label: 'Strona główna' },
   { href: '/vin', label: 'Sprawdź VIN' },
   { href: '/modele', label: 'Modele' },
+  { href: '/dla-wlasciciela', label: 'Dla właściciela' },
   { href: '/baza', label: 'Baza wiedzy' },
   { href: '/kody-obd', label: 'Kody OBD' },
   { href: '/schematy', label: 'Schematy' },

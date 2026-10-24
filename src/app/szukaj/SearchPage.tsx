@@ -117,7 +117,8 @@ export default function SearchPage({ query }: { query: string }) {
           <ul className="space-y-4 [overflow-wrap:anywhere]">
             {visibleResults.map(result => {
               const obdCode = result.id?.startsWith('obd:') ? result.id.slice(4) : undefined;
-              const body = obdCode ? null : bodyForEntry(result);
+              const isGuide = result.Typ === 'Poradnik';
+              const body = obdCode || isGuide ? null : bodyForEntry(result);
               return (
                 <li key={result.id} className="rounded-xl border border-white/10 bg-neutral-900/50 p-4">
                   <div className="flex flex-wrap items-center gap-2">
@@ -130,6 +131,7 @@ export default function SearchPage({ query }: { query: string }) {
                       </Link>
                     </h2>
                     {obdCode && <span className="rounded bg-red-600 px-2 py-0.5 text-xs font-semibold text-white">Kod OBD</span>}
+                    {isGuide && <span className="rounded bg-red-600 px-2 py-0.5 text-xs font-semibold text-white">Poradnik</span>}
                   </div>
                   {body && <div className="mt-2"><ModelThumb body={body} /></div>}
                   <p className="mt-2 text-neutral-300">{(result.Opis || result.Objawy || '').slice(0, 250)}</p>

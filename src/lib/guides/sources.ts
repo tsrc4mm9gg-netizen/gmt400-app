@@ -1,0 +1,76 @@
+import type { Source } from './types';
+
+const S = (id: string, kind: Source['kind'], label: string, url: string, date: string): Source => ({ id, kind, label, url, date });
+const CHECKED = 'sprawdzono 24.10.2026';
+
+export const SOURCES: Source[] = [
+  // — oficjalne
+  S('akcyza-stawki', 'official', 'podatki.gov.pl — stawki podatku akcyzowego od samochodów', 'https://www.podatki.gov.pl/akcyza/stawki-podatkowe', CHECKED),
+  S('akcyza-ustawa', 'official', 'ISAP — ustawa o podatku akcyzowym (art. 104–105, 106)', 'https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20090030011', CHECKED),
+  S('puesc-akcyza', 'official', 'PUESC — deklaracja akcyzowa od samochodu i potwierdzenie zapłaty', 'https://puesc.gov.pl/uslugi/zloz-deklaracje-akcyzowa-od-samochodu-i-uzyskaj-potwierdzenie-zaplaty', CHECKED),
+  S('puesc-akcyza-info', 'official', 'PUESC — podatek akcyzowy za sprowadzony samochód', 'https://puesc.gov.pl/uslugi/podatek-akcyzowy-za-sprowadzony-samochod', CHECKED),
+  S('akc-us', 'official', 'MF — formularz AKC-U/S (nabycie wewnątrzwspólnotowe samochodów osobowych)', 'https://finanse-arch.mf.gov.pl/pl/web/wp/akcyza/formularze/-/asset_publisher/0Tp7/content/akc-u-s-deklaracja-uproszczona-dla-podatku-akcyzowego-od-nabycia-wewnatrzwspolnotowego-samochodow-osobowych', CHECKED),
+  S('pickup-mf', 'official', 'MF — wyjaśnienie: pickup a klasyfikacja 8704 i akcyza', 'https://finanse-arch.mf.gov.pl/pl/web/wp/akcyza/wyjasnienia-i-komunikaty/-/asset_publisher/Id8O/content/id/2002160', CHECKED),
+  S('cn9705-granica', 'official', 'granica.gov.pl — pojazdy kolekcjonerskie (CN 9705)', 'https://granica.gov.pl/j/index.php/539', CHECKED),
+  S('cn9705-mf', 'official', 'MF — samochód kolekcjonerski/zabytkowy w rozumieniu przepisów celnych', 'https://finanse-arch.mf.gov.pl/pl/web/wp/specyficzne-towary/-/asset_publisher/gA0k/content/samochod-kolekcjonerski-zabytkowy-w-rozumieniu-przepisow-celnych', CHECKED),
+  S('isztar', 'official', 'ISZTAR4 — taryfa celna (wyszukiwarka kodów CN i stawek)', 'https://ext-isztar4.mf.gov.pl/taryfa_celna/', CHECKED),
+  S('wnt-vat', 'official', 'podatki.gov.pl — wewnątrzwspólnotowe nabycie towarów (WNT)', 'https://www.podatki.gov.pl/podatki-firmowe/vat/poradniki-i-informatory/wewnatrzwspolnotowe-nabycie-towarow-wnt', CHECKED),
+  S('vat-30b', 'official', 'Ustawa o VAT, art. 30b (podstawa opodatkowania importu) — gofin.pl', 'https://przepisy.gofin.pl/przepisy,6,32,32,670,472661,20251001,art-30b-ustawa-z-dnia-11032004-r-o-podatku-od-towarow-i-uslug.html', CHECKED),
+  S('origin-pl', 'official', 'podatki.gov.pl — pochodzenie towarów (reguły niepreferencyjne)', 'https://www.podatki.gov.pl/informacje-o-cle/podstawowe-informacje-o-cle/informacje-dla-przedsiebiorcow/pochodzenie-towarow', CHECKED),
+  S('recykling', 'official', 'gov.pl/NFOŚiGW — opłata recyklingowa (zniesiona 1.01.2016)', 'https://www.gov.pl/web/nfosigw/oplata-recyklingowa', CHECKED),
+  S('rejestracja-gov', 'official', 'gov.pl — rejestracja pojazdów (Ministerstwo Infrastruktury)', 'https://www.gov.pl/web/infrastruktura/rejestracja-pojazdow', CHECKED),
+  S('zarejestruj-gov', 'official', 'gov.pl — zarejestruj pojazd', 'https://www.gov.pl/web/gov/zarejestruj-pojazd', CHECKED),
+  S('oplaty-rej-1', 'official', 'samorzad.gov.pl — tabela opłat za rejestrację pojazdów', 'https://samorzad.gov.pl/attachment/38d628b3-e059-4314-aae0-b8e308626ba1', CHECKED),
+  S('oplaty-rej-2', 'official', 'samorzad.gov.pl — tabela opłat za rejestrację (druga wersja)', 'https://samorzad.gov.pl/attachment/8d2daa8c-6749-4e2f-bfdf-9cb4c296d49e', CHECKED),
+  S('rcl-oplaty', 'official', 'RCL — projekt podwyżki opłat rejestracyjnych (nr 12404903)', 'https://legislacja.gov.pl/projekt/12404903', CHECKED),
+  S('pord', 'official', 'Prawo o ruchu drogowym, tekst jednolity Dz.U. 2024 poz. 1251 (art. 2 pkt 39, 72, 73aa, 81, 140mb)', 'https://api.sejm.gov.pl/eli/acts/DU/2024/1251/text.html', CHECKED),
+  S('wt', 'official', 'Warunki techniczne pojazdów, Dz.U. 2024 poz. 502', 'https://api.sejm.gov.pl/eli/acts/DU/2024/502', CHECKED),
+  S('badania-oplaty', 'official', 'Rozporządzenie zmieniające opłaty za badania techniczne z 3.09.2025, Dz.U. 2025 poz. 1223', 'https://api.sejm.gov.pl/eli/acts/DU/2025/1223', CHECKED),
+  S('rejestracja-rozp', 'official', 'Rozporządzenie o opłatach za rejestrację, tekst jednolity z 16.04.2025, Dz.U. 2025 poz. 553', 'https://api.sejm.gov.pl/eli/acts/DU/2025/553', CHECKED),
+  S('zmiany-2026', 'official', 'Rozporządzenie z 5.06.2026, Dz.U. 2026 poz. 742 (zmiany w rejestracji od 10.06.2026)', 'https://api.sejm.gov.pl/eli/acts/DU/2026/742', CHECKED),
+  S('oc-ustawa', 'official', 'Ustawa o ubezpieczeniach obowiązkowych (Dz.U. 2025 poz. 367 — tekst jednolity oznaczony jako wygasły; sprawdź aktualny)', 'https://api.sejm.gov.pl/eli/acts/DU/2025/367', CHECKED),
+  S('wuoz-olsztyn', 'official', 'WUOZ Olsztyn — wpis pojazdu do ewidencji zabytków (zarządzenie W-M WKZ 5/2026 z 18.02.2026)', 'https://www.gov.pl/web/wuoz-olsztyn/wpis-pojazdu-do-ewidencji-zabytkow', '18.02.2026'),
+  S('wuoz-mwkz', 'official', 'MWKZ — pojazdy zabytkowe', 'https://mwkz.pl/zabytki/pojazdy-zabytkowe', CHECKED),
+  S('wuoz-wroclaw', 'official', 'WUOZ Wrocław — wpis do rejestru pojazdów zabytkowych', 'https://www.gov.pl/web/wuoz-wroclaw/wpis-do-rejstru-pojazdow-zabytkowych', CHECKED),
+  S('wuoz-gdansk', 'official', 'WUOZ Gdańsk — wojewódzka ewidencja pojazdów zabytkowych', 'https://www.gov.pl/web/wuoz-gdansk/wojewodzka-ewidencja-pojazdow-zabytkowych', CHECKED),
+  S('garaz-wt', 'official', 'WT budynków, §108 — garaże i LPG (lexlege.pl)', 'https://lexlege.pl/tech-war-budynkow/paragraf-108/', CHECKED),
+  S('tdt-faq', 'official', 'TDT — często zadawane pytania (homologacja montażu LPG, badania zbiorników)', 'https://www.tdt.gov.pl/czesto-zadawane-pytania/', CHECKED),
+  S('lpg-homolog', 'official', 'Rozporządzenie MI z 12.09.2023 — homologacja montażu dodatkowej instalacji zasilania gazem (Dz.U. 2023 poz. 2001)', 'https://www.dziennikustaw.gov.pl/D2023000200101.pdf', CHECKED),
+  // — media, portale, katalogi
+  S('klasyk', 'media', 'klasyk.pl — Żółte tablice 2026 (P. Wójcik, aktualizacja 24.07.2026)', 'https://klasyk.pl/artykul/zolte-tablice-2026-kompletny-przewodnik-po-rejestracji-zabytkowej-w-erze-stref-czystego-transportu.html', '24.07.2026'),
+  S('rankomat', 'media', 'rankomat.pl — wiek pojazdu zabytkowego', 'https://rankomat.pl/samochod/wiek-pojazdu-zabytkowego', CHECKED),
+  S('agc', 'media', 'Agencja Celna UK — sprowadzenie auta z USA: cło, akcyza, VAT (30.09.2026)', 'https://agencjacelna.uk/sprowadzenie-auta-z-usa-do-polski-clo-akcyza-vat/', '30.09.2026'),
+  S('log24', 'media', 'log24.pl — nowe preferencje celne UE–USA od 1.07.2026', 'https://log24.pl/news/nowe-preferencje-celne-ue-usa-od-1-lipca-2026-r/', CHECKED),
+  S('nazysk', 'media', 'nazysk.pl — cło na towary z USA, dowód pochodzenia (kod 300 / U190)', 'https://nazysk.pl/poradniki/clo-na-towary-z-usa-dowod-pochodzenia/', CHECKED),
+  S('stag', 'media', 'STAG — formalności po montażu instalacji LPG', 'https://www.stag.pl/formalnosci-po-montazu-instalacji-lpg-2/', CHECKED),
+  S('samar', 'media', 'samar.pl — LPG w garażu podziemnym (2026)', 'https://www.samar.pl/wiadomosci/lpg-w-garazu-podziemnym-przepisy-ministerstwo-infrastruktury-2026', '2026'),
+  S('eurodiagnosta', 'media', 'Eurodiagnosta — informacje o pojazdach z USA (oświetlenie, badania)', 'https://www.eurodiagnosta.pl/active/activeUSA.html', CHECKED),
+  S('grajewo', 'shop', 'Autogaz Grajewo — cennik montażu i usług LPG', 'https://autogaz.grajewo.com/cennik/', CHECKED),
+  S('lpgwebshop', 'shop', 'LPGwebshop — zbiornik toroidalny 70 L, Ø650×270 mm (R67-01)', 'https://lpgwebshop.com/en/step-lpg-toroidal-tank-1-hole-mv-int/850-lpg-toroidal-tank-70l-o650x270-step-1-hole-30-int-multivalve-included.html', CHECKED),
+  S('vanmeenen', 'shop', 'Van Meenen — wewnętrzny zbiornik toroidalny 70 L, Ø680×240 (ECE 67R01)', 'https://shop.vanmeenen.com/en/lpg_cng-tanks-&-valves-1/lpg-toroidal-tanks-42/internal-toroidal-lpg-tank-680x240---70-liter-4791', CHECKED),
+  S('raso-tbi', 'shop', 'Raso Enterprises — Dual Fuel TBI (miksery Impco)', 'https://rasoenterprises.com/propane/35-conversions/53-dual-fuel-tbi', CHECKED),
+  S('raso-sizing', 'shop', 'Raso Enterprises — dobór mieszacza Impco (CA300A, CA425)', 'https://rasoenterprises.org/propane/31-carburetion/187-dual-fuel?showall=1', CHECKED),
+  S('flashlube', 'shop', 'Flashlube — Valve Saver Fluid (producent)', 'https://www.flashlube.com/products/valve-saver-fluid', CHECKED),
+  S('autocentrum-lpg', 'media', 'AutoCentrum — opinie o LPG: Chevrolet (brak modeli GMT400)', 'https://www.autocentrum.pl/opinie-lpg/chevrolet/', CHECKED),
+  S('mnf', 'shop', 'mnf.de — lampy tylne do GM full-size 88–00 (bez ABE/TÜV)', 'https://mnf.de/products/performance-ruckleuchten-gm-full-size-truck-suv-88-00', CHECKED),
+  S('gmpartswiki', 'shop', 'GMPartsWiki — 16506324 (reflektor Bosch, wycofany)', 'http://cevg.gmpartswiki.com/gmpart?gmpartno=16506324', CHECKED),
+  S('arteb', 'shop', 'Lights by Arteb — reflektory E-code dla GMT400 (Brazylia)', 'https://lightsbyarteb.com/', CHECKED),
+  // — fora i relacje użytkowników (daty = data wątku/posta)
+  S('cf-26433', 'forum', 'chevy-forum.eu — G20 5.7 TBI LPG, Köln (22.01.2018)', 'https://www.chevy-forum.eu/forum5/thread/26433-geloest-g20-van-305-5-7-l-tbi-lpg-umbau-koeln/', '22.01.2018'),
+  S('cf-17330', 'forum', 'chevy-forum.eu — spalanie Tahoe 5.7 (08.2013)', 'https://www.chevy-forum.eu/forum5/thread/17330-spritverbrauch-tahoe-5-7/', '08.2013'),
+  S('cf-1740', 'forum', 'chevy-forum.eu — Impco Venturi, Tahoe startet nicht richtig', 'https://www.chevy-forum.eu/forum5/thread/1740-impco-venturi-lpg-anlage-tahoe-startet-nicht-richtig/', 'data nieustalona'),
+  S('rr-3089', 'forum', 'roadrunners.pl — LPG w amerykańskich autach (11.2013)', 'https://forum.roadrunners.pl/viewtopic.php?t=3089', '11.2013'),
+  S('lpgforum-9455', 'forum', "lpgforum.de — Chevrolet Tahoe 5.7 ('99), wątek 9455", 'https://www.lpgforum.de/threads/chevrolet-tahoe-5-7l.9455/', 'data nieustalona'),
+  S('g4-44553', 'forum', 'gmt400.com — dual-fuel gaz/LPG na Vortec 350 (29.03.2019)', 'https://www.gmt400.com/threads/44553/', '29.03.2019'),
+  S('cf-25376', 'forum', 'chevy-forum.eu — przeróbka kierunków i hamulca na TÜV, C1500 (06.2017)', 'https://www.chevy-forum.eu/forum5/thread/25376-brauche-hilfe-bei-brems-blinker-umbau-fuer-tuev/', '09–10.06.2017'),
+  S('cf-47013', 'forum', 'chevy-forum.eu — tylne kierunki, Sierra 2014+ (nie GMT400)', 'https://www.chevy-forum.eu/forum5/thread/47013-umbau-blinker-hinten/', '2017/2018'),
+  S('vwgolf-529136', 'forum', 'forum.vwgolf.pl — zielona żarówka za czerwonym kloszem (2013)', 'https://forum.vwgolf.pl/viewtopic.php?t=529136', '2013'),
+  S('g4-946', 'forum', 'gmt400.com — quad sealed beam i Bosch E-code T84 (14.04.2010, edyt. 26.10.2012)', 'https://www.gmt400.com/threads/tech-88-89-gmt400-quad-sealed-beam-upgrades-bosch-t84-e-code-headlights.946/', '14.04.2010'),
+  S('g4-62350', 'forum', 'gmt400.com — quad beam headlamp question', 'https://www.gmt400.com/threads/quad-beam-headlamp-question.62350/', 'data nieustalona'),
+  S('g4-57899', 'forum', 'gmt400.com — OEM composite headlights, Arteb E-code (28.04.2022, aktualizacja 4.03.2024)', 'https://www.gmt400.com/threads/oem-composite-headlights-new-gmt400-gm-brazil-arteb-e-code-export.57899/', '28.04.2022'),
+  S('g4-63941', 'forum', 'gmt400.com — Arteb: koniec produkcji lamp', 'https://www.gmt400.com/threads/arteb-headlights-taillights-end-of-life.63941/', 'data nieustalona'),
+];
+
+const BY_ID = new Map(SOURCES.map(s => [s.id, s]));
+export const getSource = (id: string) => BY_ID.get(id);
+export const KIND_LABEL: Record<Source['kind'], string> = { official: 'urzędowe', media: 'portal/media', forum: 'forum / relacja', shop: 'sklep / cennik' };

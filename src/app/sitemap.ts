@@ -34,6 +34,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${BASE}/vin`, lastModified: UPDATED, changeFrequency: 'monthly', priority: 0.8 },
     { url: `${BASE}/moj-samochod`, lastModified: UPDATED, changeFrequency: 'monthly', priority: 0.7 },
     ...BODY_STYLES.map(body => ({ url: `${BASE}/modele/${body.id}`, lastModified: UPDATED, changeFrequency: 'monthly' as const, priority: 0.7 })),
+    { url: `${BASE}/dla-wlasciciela`, lastModified: UPDATED, changeFrequency: 'monthly', priority: 0.9 },
+    ...['lpg', 'import', 'swiatla-eu', 'zolte-tablice'].map(slug => ({ url: `${BASE}/dla-wlasciciela/${slug}`, lastModified: UPDATED, changeFrequency: 'monthly' as const, priority: 0.8 })),
     { url: `${BASE}/narzedzia`, lastModified: UPDATED, changeFrequency: 'monthly', priority: 0.6 },
     { url: `${BASE}/narzedzia/rpo`, lastModified: UPDATED, changeFrequency: 'monthly', priority: 0.5 },
     { url: `${BASE}/narzedzia/diagnostyka`, lastModified: UPDATED, changeFrequency: 'monthly', priority: 0.5 },
