@@ -67,12 +67,12 @@ export default function SiteHeader() {
         <div className="lg:order-3">{search}</div>
 
         <nav aria-label="Nawigacja główna" className="-mx-4 w-[calc(100%+2rem)] overflow-x-auto px-2 lg:mx-0 lg:w-auto lg:flex-1 lg:overflow-visible lg:px-0">
-          <ul className="flex items-center gap-x-1 whitespace-nowrap text-sm lg:justify-end lg:gap-x-2">
+          <ul className="flex items-center gap-x-1 whitespace-nowrap text-sm lg:justify-end lg:gap-x-1 xl:gap-x-2">
             {links.map(({ href, label }) => {
               const active = isActive(pathname, href);
 
               return (
-                <li key={href}>
+                <li key={href} className={href === '/' ? 'lg:hidden xl:block' : undefined}>
                   <Link
                     href={href}
                     aria-current={active ? 'page' : undefined}
