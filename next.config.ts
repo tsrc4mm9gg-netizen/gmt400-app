@@ -4,7 +4,9 @@ import { withSentryConfig } from '@sentry/nextjs';
 const nextConfig: NextConfig = {
   cacheComponents: false,
   env: {
-    NEXT_PUBLIC_VERCEL_ENV: process.env.VERCEL_ENV || process.env.NODE_ENV || 'development',
+    // Tylko prawdziwe VERCEL_ENV — wcześniej fallback na NODE_ENV dawał „production” w każdym lokalnym/CI buildzie,
+    // przez co testy na 127.0.0.1 raportowały do Sentry jako produkcja.
+    NEXT_PUBLIC_VERCEL_ENV: process.env.VERCEL_ENV || '',
     NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA: process.env.VERCEL_GIT_COMMIT_SHA || '',
   },
   turbopack: {

@@ -190,7 +190,10 @@ export default function Encyclopedia({ initialTab }: { initialTab?: string } = {
 
   useEffect(() => {
     if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('/sw.js');
+      // Rejestracja SW może się nie udać u prawdziwych użytkowników (tryb prywatny, blokada SW, zerwane połączenie,
+      // Safari „Script …/sw.js load failed”). To nie jest awaria strony — strona działa bez SW, więc nie zgłaszamy
+      // tego jako nieobsłużonego błędu (wcześniej odrzucona obietnica trafiała do Sentry).
+      navigator.serviceWorker.register('/sw.js').catch(() => undefined);
     }
   }, []);
 
