@@ -38,6 +38,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${BASE}/narzedzia/rpo`, lastModified: UPDATED, changeFrequency: 'monthly', priority: 0.5 },
     { url: `${BASE}/narzedzia/diagnostyka`, lastModified: UPDATED, changeFrequency: 'monthly', priority: 0.5 },
     { url: `${BASE}/narzedzia/czesci`, lastModified: UPDATED, changeFrequency: 'monthly', priority: 0.5 },
+    { url: `${BASE}/narzedzia/historia-vin`, lastModified: UPDATED, changeFrequency: 'monthly', priority: 0.5 },
   ]
 
   const obdRoutes: MetadataRoute.Sitemap = OBD_CODES.map(code => ({

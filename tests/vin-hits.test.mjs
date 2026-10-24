@@ -53,3 +53,22 @@ test('API /api/vin-hits: VIN przez POST, bez cache odpowiedzi, timeouty, błąd 
   assert.match(src, /res\.status === 400 && Array\.isArray\(list\) && list\.length === 0 && raw\?\.Count === 0/, 'pusty 400 z NHTSA = 0, inne błędy = nieznane');
   assert.doesNotMatch(src, /google\.com|bidfax|poctra|autoastat|cararam|carfax|autocheck|vinaudit|nicb/i, 'serwer nie odpytuje stron bez legalnego API');
 });
+
+test('historia VIN: jedna implementacja, brak starego scrapera i cudzych obrazków', async () => {
+  const { existsSync, readFileSync } = await import('node:fs');
+  const read = f => readFileSync(new URL('../' + f, import.meta.url), 'utf8');
+  assert.equal(existsSync(new URL('../src/app/api/vin-history', import.meta.url)), false, 'stary /api/vin-history usunięty');
+  assert.equal(existsSync(new URL('../src/app/VinHistorySummary.tsx', import.meta.url)), false);
+  const shared = read('src/app/VinHistoryHits.tsx');
+  assert.doesNotMatch(shared, /<img|duckduckgo|referrerPolicy/i);
+  assert.match(shared, /fetch\('\/api\/vin-hits'/);
+  const decoder = read('src/app/VinDecoder.tsx'), tool = read('src/app/narzedzia/historia-vin/VinHistoryTool.tsx'), enc = read('src/app/Encyclopedia.tsx');
+  assert.match(decoder, /<VinHistoryHits /);
+  assert.match(tool, /<VinHistoryHits [^>]*variant="page"/);
+  for (const [name, src] of [['VinDecoder', decoder], ['VinHistoryTool', tool]]) {
+    assert.doesNotMatch(src, /api\/vin-hits|api\/vin-history|duckduckgo|<img/i, name + ' nie liczy po swojemu i nie pokazuje cudzych zdjęć');
+  }
+  assert.doesNotMatch(enc, /api\/vin-history|duckduckgo|VinHistorySummary/i, 'Encyclopedia bez starego wyszukiwania');
+  assert.match(tool, /check\.ok/, 'strona historii sprawdza cyfrę kontrolną');
+  assert.match(read('src/app/narzedzia/page.tsx'), /href: '\/narzedzia\/historia-vin'/);
+});

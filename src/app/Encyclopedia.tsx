@@ -14,7 +14,7 @@ import { useVehicleMaterialFilter, VehicleMatchBadge } from './VehicleMaterialFi
 import type { Applicability } from '../lib/vehicle-compatibility';
 import { matchesYearRules } from '../lib/year-range.mjs';
 import VinDecoder from './VinDecoder';
-import VinHistorySummary from './VinHistorySummary';
+import OfficialVehicleData from './OfficialVehicleData';
 import { useModelSelection } from './ModelSelectionContext';
 import { findBody } from '../lib/body-styles';
 import { EngineTable, FluidsTable, PartSourceNote, OemQuickList, TorqueTable } from './VerifiedSpecs';
@@ -704,8 +704,8 @@ export default function Encyclopedia({ initialTab }: { initialTab?: string } = {
 
             {vinResult && (
               <div className="mt-4 bg-neutral-950 border border-red-600/30 p-4">
-                <h3 className="font-semibold text-red-400 mb-3">HISTORIA I ZDJĘCIA TEGO VIN</h3>
-                <VinHistorySummary key={vinResult.VIN} vin={vinResult.VIN} />
+                <h3 className="font-semibold text-red-400 mb-3">OFICJALNE DANE NHTSA</h3>
+                <OfficialVehicleData key={vinResult.VIN} vin={vinResult.VIN} />
 
                 <h4 className="font-semibold text-red-400 mb-2">POWIĄZANE INFORMACJE</h4>
                 <div className="space-y-2">

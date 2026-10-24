@@ -66,7 +66,7 @@ for (const width of [320, 390, 768]) {
   await page.goto(BASE + '/narzedzia');
   await expect(page.locator('[data-tools-appearance="inline-v1"]')).toBeVisible();
   const cards = page.locator('[data-tool-card]');
-  await expect(cards).toHaveCount(4);
+  await expect(cards).toHaveCount(5);
   for (const card of await cards.all()) {
    await expect(card).toHaveCSS('background-color', 'rgb(23, 29, 37)');
    await expect(card).toHaveCSS('border-left-color', 'rgb(220, 38, 38)');

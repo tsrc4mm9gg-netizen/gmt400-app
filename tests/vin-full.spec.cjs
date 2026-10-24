@@ -102,6 +102,50 @@ test('VIN: błąd liczników pokazuje „?”, nigdy 0', async ({ page }) => {
   expect(errors).toEqual([]);
 });
 
+test('Historia VIN: walidacja, ta sama lista z licznikami, link do /vin, bez obrazków', async ({ page }) => {
+  const { errors } = await guard(page);
+  const hits = [];
+  await page.context().route(u => u.pathname === '/api/vin-hits', async r => { hits.push(r.request().postDataJSON()); await r.fulfill({ json: { counts: { nhtsaRecalls: 0, nhtsaComplaints: 12 }, notes: {}, scope: { make: 'Chevrolet', year: '1995', platform: 'C/K', nhtsaModels: ['C/K'] } } }); });
+  await page.goto(BASE + '/narzedzia/historia-vin');
+  await expect(page.getByRole('heading', { level: 1, name: 'Historia VIN' })).toBeVisible();
+  const input = page.getByLabel('Numer VIN pojazdu', { exact: true });
+  const go = page.getByRole('button', { name: 'SPRAWDŹ HISTORIĘ' });
+  await input.fill('1GCEK14K6SZ1996');
+  await go.click();
+  await expect(page.getByTestId('history-vin-errors')).toContainText('17 znaków');
+  await input.fill('1GCEK14K7SZ199684'); // zła cyfra kontrolna
+  await go.click();
+  await expect(page.getByTestId('history-vin-errors')).toContainText('Cyfra kontrolna');
+  await expect(page.getByTestId('history-vin-errors')).toContainText('6');
+  expect(hits).toHaveLength(0);
+  await input.fill('1GCEK14K6SZ199684');
+  await go.click();
+  const hist = page.getByTestId('vin-history');
+  await expect(hist.getByTestId('vin-hit-nhtsa-complaints')).toHaveText('12');
+  expect(hits).toEqual([{ vin: '1GCEK14K6SZ199684' }]);
+  await expect(hist.getByTestId('vin-hit-nhtsa-recalls')).toHaveText('0');
+  const items = hist.getByTestId('vin-history-list').locator('li');
+  await expect(items.first()).toContainText('skargi');
+  await expect(items.last()).toHaveClass(/opacity-60/);
+  await expect(hist.getByTestId('vin-hit-cararam')).toHaveText(/sprawdź/i);
+  await expect(hist.getByText('Dlaczego przy części linków nie ma liczby?')).toBeVisible();
+  await expect(page.getByTestId('history-vin-summary')).toContainText('1995 Chevrolet K1500');
+  await expect(hist.getByRole('link', { name: /pełne dekodowanie/ })).toHaveAttribute('href', '/vin');
+  await expect(page.locator('main img, [data-testid="vin-history"] img')).toHaveCount(0);
+  for (const a of await hist.locator('a[target="_blank"]').all()) await expect(a).toHaveAttribute('rel', /noopener/);
+  await noHorizontalScroll(page);
+  expect(errors).toEqual([]);
+});
+
+test('Narzędzia: karta Historia VIN prowadzi do strony historii', async ({ page }) => {
+  await page.goto(BASE + '/narzedzia');
+  const card = page.locator('a[data-tool-card][href="/narzedzia/historia-vin"]');
+  await expect(card).toContainText('Historia VIN');
+  await card.click();
+  await expect(page).toHaveURL(/\/narzedzia\/historia-vin\/?$/);
+  await expect(page.getByLabel('Numer VIN pojazdu', { exact: true })).toBeVisible();
+});
+
 test('VIN: nieznany kod pokazuje „nieznane – sprawdź”', async ({ page }) => {
   const { errors } = await guard(page);
   await page.goto(BASE + '/?tab=vin');
