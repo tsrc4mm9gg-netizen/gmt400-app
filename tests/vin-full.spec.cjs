@@ -49,11 +49,56 @@ test('VIN: wszystkie pozycje, źródła, vPIC po kliknięciu i linki historii', 
   await expect(d.getByTestId('vin-vpic-data')).toContainText('PONTIAC');
   await expect(d.getByTestId('vin-vpic-data')).toContainText('5.7');
   const hist = d.getByTestId('vin-history');
-  await hist.locator('summary').click(); // sekcja zwinięta domyślnie
+  await hist.locator('summary').first().click(); // sekcja zwinięta domyślnie
   await expect(hist.getByRole('link', { name: /Google Grafika/ })).toHaveAttribute('href', /tbm=isch.*1GCEK19R9VE112233/);
   for (const a of await hist.locator('a[target="_blank"]').all()) await expect(a).toHaveAttribute('rel', /noopener/);
   await expect(hist.locator('img')).toHaveCount(0);
   await noHorizontalScroll(page);
+  expect(errors).toEqual([]);
+});
+
+test('VIN: liczniki przed linkami historii — tylko po otwarciu, 0 przygaszone, brak danych ≠ 0', async ({ page }) => {
+  const { errors } = await guard(page);
+  const hits = [];
+  await page.context().route(u => u.pathname === '/api/vin-hits', async r => { hits.push(r.request().postDataJSON()); await new Promise(res => setTimeout(res, 300)); await r.fulfill({ json: { counts: { nhtsaRecalls: 2, nhtsaComplaints: 0 }, notes: {}, scope: { make: 'Chevrolet', year: '1995', platform: 'C/K', nhtsaModels: ['C/K', 'K1500'] } } }); });
+  await page.goto(BASE + '/vin');
+  const d = page.getByTestId('vin-decoder');
+  await d.getByRole('textbox', { name: 'Numer VIN do dekodowania' }).fill('1GCEK14K6SZ199684');
+  await d.getByRole('button', { name: 'DEKODUJ VIN' }).click();
+  const hist = d.getByTestId('vin-history');
+  await expect(hist).toBeVisible();
+  expect(hits).toHaveLength(0); // nic nie wysyłamy, dopóki sekcja zwinięta
+  await hist.locator('summary').first().click();
+  await expect(hist.getByTestId('vin-hit-nhtsa-recalls')).toHaveText('2');
+  expect(hits).toEqual([{ vin: '1GCEK14K6SZ199684' }]);
+  await expect(hist.getByTestId('vin-hit-nhtsa-complaints')).toHaveText('0');
+  await expect(hist.getByTestId('vin-hit-google')).toHaveText(/sprawdź/i);
+  await expect(hist.getByTestId('vin-hit-bidfax')).toHaveText(/sprawdź/i);
+  const items = hist.getByTestId('vin-history-list').locator('li');
+  await expect(items.first()).toContainText('akcje serwisowe');
+  await expect(items.last()).toContainText('skargi'); // zera na końcu
+  await expect(items.last()).toHaveClass(/opacity-60/);
+  await expect(hist.getByTestId('vin-hits-scope')).toContainText('C/K, K1500');
+  await expect(hist.getByRole('link', { name: /cararam\.com/ })).toHaveAttribute('href', 'https://cararam.com/en/vin/1GCEK14K6SZ199684');
+  const heights = await items.evaluateAll(els => els.map(e => e.getBoundingClientRect().height));
+  expect(Math.max(...heights)).toBeLessThan(90);
+  await expect(hist.locator('img')).toHaveCount(0);
+  await noHorizontalScroll(page);
+  expect(errors).toEqual([]);
+});
+
+test('VIN: błąd liczników pokazuje „?”, nigdy 0', async ({ page }) => {
+  const { errors } = await guard(page);
+  await page.context().route(u => u.pathname === '/api/vin-hits', r => r.fulfill({ status: 503, json: { error: 'x' } }));
+  await page.goto(BASE + '/vin');
+  const d = page.getByTestId('vin-decoder');
+  await d.getByRole('textbox', { name: 'Numer VIN do dekodowania' }).fill('1GCEK14K6SZ199684');
+  await d.getByRole('button', { name: 'DEKODUJ VIN' }).click();
+  const hist = d.getByTestId('vin-history');
+  await hist.locator('summary').first().click();
+  await expect(hist.getByRole('status')).toContainText('nie znaczy, że wyników nie ma');
+  await expect(hist.getByTestId('vin-hit-nhtsa-recalls')).toHaveText('?');
+  await expect(hist.getByTestId('vin-hit-nhtsa-complaints')).toHaveText('?');
   expect(errors).toEqual([]);
 });
 

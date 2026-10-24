@@ -222,18 +222,22 @@ export function profileFromVin(result) {
   return patch;
 }
 
-/** Linki wychodzące „Zdjęcia i historia tego VIN” — tylko wyszukiwania i strony startowe; nic nie pobieramy. */
+/** Linki wychodzące „Zdjęcia i historia tego VIN” — tylko wyszukiwania i strony startowe; nic nie pobieramy.
+ *  `count` = id licznika z /api/vin-hits (tylko źródła z oficjalnym API); brak `count` = serwis nie daje liczby legalnie. */
 export function vinHistoryLinks(vin) {
   const q = s => encodeURIComponent(s);
   return [
-    { label: 'Google — dokładny VIN', href: `https://www.google.com/search?q=${q(`"${vin}"`)}` },
-    { label: 'Google Grafika — dokładny VIN', href: `https://www.google.com/search?tbm=isch&q=${q(`"${vin}"`)}` },
-    { label: 'Historia aukcji: bidfax.info (przez Google)', href: `https://www.google.com/search?q=${q(`site:bidfax.info "${vin}"`)}` },
-    { label: 'Historia aukcji: poctra.com (przez Google)', href: `https://www.google.com/search?q=${q(`site:poctra.com "${vin}"`)}` },
-    { label: 'Historia aukcji: autoastat.com (przez Google)', href: `https://www.google.com/search?q=${q(`site:autoastat.com "${vin}"`)}` },
-    { label: 'CARFAX — raport historii (płatny)', href: 'https://www.carfax.com/vehicle-history-reports/' },
-    { label: 'AutoCheck — raport historii (płatny)', href: 'https://www.autocheck.com/vehiclehistory/' },
-    { label: 'VinAudit — raport historii (płatny)', href: 'https://www.vinaudit.com/' },
-    { label: 'NICB VINCheck — kradzież / szkoda całkowita (USA)', href: 'https://www.nicb.org/vincheck' },
+    { id: 'nhtsa-recalls', count: 'nhtsaRecalls', label: 'NHTSA — akcje serwisowe (rocznik i model)', href: '/narzedzia/dane-pojazdu' },
+    { id: 'nhtsa-complaints', count: 'nhtsaComplaints', label: 'NHTSA — skargi właścicieli (rocznik i model)', href: '/narzedzia/dane-pojazdu' },
+    { id: 'google', reason: 'google', label: 'Google — dokładny VIN', href: `https://www.google.com/search?q=${q(`"${vin}"`)}` },
+    { id: 'google-images', reason: 'google', label: 'Google Grafika — dokładny VIN', href: `https://www.google.com/search?tbm=isch&q=${q(`"${vin}"`)}` },
+    { id: 'cararam', reason: 'cararam', label: 'Archiwum aukcji: cararam.com (bezpośrednio)', href: `https://cararam.com/en/vin/${q(vin)}` },
+    { id: 'bidfax', reason: 'bidfax', label: 'Historia aukcji: bidfax.info (przez Google)', href: `https://www.google.com/search?q=${q(`site:bidfax.info "${vin}"`)}` },
+    { id: 'poctra', reason: 'poctra', label: 'Historia aukcji: poctra.com (przez Google)', href: `https://www.google.com/search?q=${q(`site:poctra.com "${vin}"`)}` },
+    { id: 'autoastat', reason: 'autoastat', label: 'Historia aukcji: autoastat.com (przez Google)', href: `https://www.google.com/search?q=${q(`site:autoastat.com "${vin}"`)}` },
+    { id: 'carfax', reason: 'carfax', label: 'CARFAX — raport historii (płatny)', href: 'https://www.carfax.com/vehicle-history-reports/' },
+    { id: 'autocheck', reason: 'autocheck', label: 'AutoCheck — raport historii (płatny)', href: 'https://www.autocheck.com/vehiclehistory/' },
+    { id: 'vinaudit', reason: 'vinaudit', label: 'VinAudit — raport historii (płatny)', href: 'https://www.vinaudit.com/' },
+    { id: 'nicb', reason: 'nicb', label: 'NICB VINCheck — kradzież / szkoda całkowita (USA)', href: 'https://www.nicb.org/vincheck' },
   ];
 }

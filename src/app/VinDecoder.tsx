@@ -1,5 +1,6 @@
 'use client';
 import { useState } from 'react';
+import { badgeText, NOT_COUNTABLE_REASON, sortByHits } from '@/lib/vin-hits.mjs';
 import Link from 'next/link';
 import { decodeVin, profileFromVin, vinHistoryLinks, VIN_SOURCES, UNKNOWN, type VinDecodeResult, type VinField, type VinSourceKey } from '@/lib/vin-decode.mjs';
 import { decodeRpo, findRpo } from '@/lib/rpo-catalog';
@@ -155,16 +156,7 @@ export default function VinDecoder({ onDecoded, withRpo = false }: { onDecoded?:
               <p className="mt-2 flex flex-wrap gap-x-4"><Link href="/narzedzia/dane-pojazdu" className={linkCls}>Kampanie serwisowe i dane EPA</Link><Link href="/narzedzia/rpo" className={linkCls}>Pełny katalog kodów RPO</Link></p>
             </div>
           </details>
-          <details className={`group ${sectionCls}`} data-testid="vin-history">
-            <summary className={summaryCls}><span>Zdjęcia i historia tego VIN</span><Chevron /></summary>
-            <div className="border-t border-white/10 p-4 pt-3">
-              <p className="text-sm text-neutral-300">Linki otwierają wyszukiwanie w zewnętrznych serwisach. Nie pobieramy ani nie kopiujemy cudzych zdjęć i raportów — wyniki zależą od tych serwisów.</p>
-              <ul className="mt-2 grid gap-x-4 sm:grid-cols-2">
-                {vinHistoryLinks(result.vin).map(l => <li key={l.label} className="min-w-0"><a href={l.href} target="_blank" rel="noopener noreferrer nofollow" className={linkCls}>{l.label} ↗</a></li>)}
-              </ul>
-              <p className="mt-2 text-xs text-neutral-400">Pełna analiza historii: <Link href="/narzedzia/historia-vin" className="text-red-400 underline">Historia VIN</Link>.</p>
-            </div>
-          </details>
+          <VinHistory vin={result.vin} key={result.vin} />
           {withRpo && <VinRpoAndSave result={result} />}
         </div>
       )}
@@ -240,5 +232,64 @@ function FieldRow({ f }: { f: VinField }) {
         </span>
       </span>
     </li>
+  );
+}
+
+type Hits = { state: 'idle' | 'loading' | 'error' } | { state: 'done'; counts: Record<string, number | null>; notes: Record<string, string>; models: string[]; label: string };
+
+/** „Zdjęcia i historia tego VIN”: linki + liczba wyników tam, gdzie źródło daje ją legalnie (NHTSA API). Pobieramy dopiero po otwarciu sekcji. */
+function VinHistory({ vin }: { vin: string }) {
+  const [hits, setHits] = useState<Hits>({ state: 'idle' });
+  const load = () => {
+    if (hits.state !== 'idle') return;
+    setHits({ state: 'loading' });
+    fetch('/api/vin-hits', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ vin }) })
+      .then(r => (r.ok ? r.json() : Promise.reject(new Error('HTTP ' + r.status))))
+      .then(d => setHits({ state: 'done', counts: d.counts ?? {}, notes: d.notes ?? {}, models: d.scope?.nhtsaModels ?? [], label: d.scope ? `${d.scope.year} ${d.scope.make}` : '' }))
+      .catch(() => setHits({ state: 'error' }));
+  };
+  const links = vinHistoryLinks(vin);
+  const countOf = (l: (typeof links)[number]) => (hits.state === 'done' && l.count ? hits.counts[l.count] : undefined);
+  const ordered = hits.state === 'done' ? sortByHits(links, Object.fromEntries(links.map(l => [l.id, countOf(l)]))) : links;
+  return (
+    <details className={`group ${sectionCls}`} data-testid="vin-history" onToggle={e => { if ((e.currentTarget as HTMLDetailsElement).open) load(); }}>
+      <summary className={summaryCls}><span>Zdjęcia i historia tego VIN</span><Chevron /></summary>
+      <div className="border-t border-white/10 p-4 pt-3">
+        <p className="text-sm text-neutral-300">Linki otwierają wyszukiwanie w zewnętrznych serwisach. Nie pobieramy ani nie kopiujemy cudzych zdjęć i raportów — wyniki zależą od tych serwisów.</p>
+        <p className="mt-2 text-xs text-neutral-400" data-testid="vin-hits-note">Liczba przed linkiem = rekordy w oficjalnej bazie NHTSA dla rocznika i modelu (nie tylko tego egzemplarza; akcje obejmują też kampanie na części i akcesoria pasujące do auta); <span className="text-neutral-500">0</span> = baza nic nie zwróciła. „sprawdź” = serwis nie podaje liczby bez captchy lub płatnego dostępu — otwórz link.</p>
+        <ul className="mt-2 grid gap-x-4 sm:grid-cols-2" data-testid="vin-history-list">
+          {ordered.map(l => {
+            const c = countOf(l);
+            const text = badgeText(c);
+            const zero = text === '0';
+            const loading = hits.state === 'loading' && l.count;
+            const internal = l.href.startsWith('/');
+            const badge = loading
+              ? <span className="inline-flex h-7 w-16 shrink-0 animate-pulse items-center justify-center border border-white/10 bg-white/10 text-xs text-neutral-400" aria-label="liczę…">…</span>
+              : text !== null
+                ? <span className={`inline-flex h-7 w-16 shrink-0 items-center justify-center border text-sm font-bold tabular-nums ${zero ? 'border-white/15 text-neutral-500' : 'border-red-500 bg-red-600 text-white'}`} aria-label={`${text} ${zero ? '— brak rekordów' : 'rekordów'}`} data-testid={`vin-hit-${l.id}`}>{text}</span>
+                : <span className="inline-flex h-7 w-16 shrink-0 items-center justify-center border border-dashed border-white/20 text-[11px] uppercase tracking-wide text-neutral-400" aria-label="liczba niedostępna — sprawdź w serwisie" data-testid={`vin-hit-${l.id}`}>{l.count && hits.state !== 'idle' ? '?' : 'sprawdź'}</span>;
+            return (
+              <li key={l.id} className={`flex min-w-0 items-center gap-3 ${zero ? 'opacity-60' : ''}`}>
+                {badge}
+                {internal
+                  ? <Link href={l.href} className={`${linkCls} min-w-0`}>{l.label}</Link>
+                  : <a href={l.href} target="_blank" rel="noopener noreferrer nofollow" className={`${linkCls} min-w-0`}>{l.label} ↗</a>}
+              </li>
+            );
+          })}
+        </ul>
+        {hits.state === 'done' && hits.models.length > 0 && <p className="mt-2 text-xs text-neutral-400" data-testid="vin-hits-scope">NHTSA {hits.label}: zsumowano nazwy modelu {hits.models.join(', ')} (każda kampania/skarga liczona raz).</p>}
+        {hits.state === 'done' && Object.values(hits.notes).length > 0 && <p className="mt-1 text-xs text-neutral-400">{[...new Set(Object.values(hits.notes))].join(' ')}</p>}
+        {hits.state === 'error' && <p className="mt-2 text-xs text-neutral-400" role="status">Nie udało się pobrać liczników — to nie znaczy, że wyników nie ma.</p>}
+        <details className="mt-2 text-xs text-neutral-400">
+          <summary className="inline-flex min-h-11 cursor-pointer items-center text-neutral-300 underline">Dlaczego przy części linków nie ma liczby?</summary>
+          <ul className="mt-1 list-disc space-y-1 pl-5">
+            {[...new Set(links.filter(l => l.reason).map(l => l.reason as string))].map(r => <li key={r}>{links.filter(l => l.reason === r).map(l => l.label.split(' — ')[0].replace(/^Historia aukcji: |^Archiwum aukcji: /, '').replace(/ \(.*\)$/, '')).join(', ')}: {NOT_COUNTABLE_REASON[r]}</li>)}
+          </ul>
+        </details>
+        <p className="mt-2 text-xs text-neutral-400">Pełna analiza historii: <Link href="/narzedzia/historia-vin" className="text-red-400 underline">Historia VIN</Link>.</p>
+      </div>
+    </details>
   );
 }

@@ -17,5 +17,6 @@ export type VinDecodeResult =
 export function decodeVin(input: unknown): VinDecodeResult;
 export type VinProfilePatch = { brand?: 'Chevrolet' | 'GMC'; year?: string; drive?: '2WD' | '4WD'; engine?: string; platform?: 'C/K' | 'Suburban' | 'Tahoe' | 'Yukon'; model?: string };
 export function profileFromVin(result: VinDecodeResult | null | undefined): VinProfilePatch | null;
-export function vinHistoryLinks(vin: string): { label: string; href: string }[];
+export type VinHistoryLink = { id: string; label: string; href: string; count?: 'nhtsaRecalls' | 'nhtsaComplaints'; reason?: string };
+export function vinHistoryLinks(vin: string): VinHistoryLink[];
 export function lbRangeToKg(text: string): string;

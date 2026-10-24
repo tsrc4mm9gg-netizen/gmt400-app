@@ -101,7 +101,7 @@ test('VIN: tabele pozycji mają lata 1988–2000, rodzaj źródła i istniejące
 test('VIN: linki „Zdjęcia i historia” to tylko wyszukiwania / strony startowe (https, bez obrazków)', () => {
   const links = vinHistoryLinks('1GCEK19R9VE112233');
   assert.ok(links.length >= 8);
-  for (const l of links) { assert.match(l.href, /^https:\/\//); assert.doesNotMatch(l.href, /\.(jpe?g|png|webp)(\?|$)/i); }
+  for (const l of links) { assert.match(l.href, /^(https:\/\/|\/narzedzia\/)/); assert.doesNotMatch(l.href, /\.(jpe?g|png|webp)(\?|$)/i); }
   assert.ok(links.some(l => l.href.includes('tbm=isch') && l.href.includes(encodeURIComponent('"1GCEK19R9VE112233"'))));
   assert.ok(links.filter(l => l.href.startsWith('https://www.google.com/search')).every(l => l.href.includes('1GCEK19R9VE112233')));
 });
