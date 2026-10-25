@@ -10,6 +10,8 @@ export interface KnowledgeEntry {
   Objawy?: string;
   Rozwiązanie?: string;
   Lata?: string;
+  /** Dodatkowe frazy wyszukiwania (aliasy), niewidoczne w UI. */
+  Slowa?: string;
   href?: string;
   applicability?: Applicability;
 }

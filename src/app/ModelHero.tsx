@@ -67,12 +67,10 @@ export default function ModelHero() {
   };
 
   return (
-    <section className="mx-auto w-full max-w-3xl px-4 pt-6 pb-2" aria-label="Wybór modelu">
-      <div className="mb-4 text-center">
-        <h1 className="text-4xl font-bold tracking-wider text-white">
-          GMT<span className="text-red-600">400</span>
-        </h1>
-        <p className="mt-1 text-xs uppercase tracking-[0.25em] text-neutral-400">Encyklopedia · 1988–2000</p>
+    <section className="mx-auto w-full max-w-3xl px-4 pt-2 pb-2" aria-label="Wybór modelu">
+      <div className="mb-3">
+        <h2 className="text-xl font-bold text-white">Wybierz model</h2>
+        <p className="text-xs text-neutral-400">Przesuń lub użyj strzałek — wybór zawęża usterki, DIY i kody do Twojego nadwozia.</p>
       </div>
 
       <div
@@ -111,7 +109,7 @@ export default function ModelHero() {
         <div className="flex items-center gap-2 border-t border-white/10 bg-neutral-950 px-2 py-3 text-white">
           <button type="button" onClick={prev} className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-white/5 text-2xl text-white ring-1 ring-white/10 hover:bg-red-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-500" aria-label="Poprzedni model">‹</button>
           <div className="min-w-0 flex-1 text-center">
-            <h2 className="truncate text-xl font-bold sm:text-2xl">{body.name}</h2>
+            <h3 className="truncate text-xl font-bold sm:text-2xl">{body.name}</h3>
             <p className="text-sm text-neutral-300">
               {filters.year ? filters.year : bodyYears(body)}
               {filters.engine ? ` · ${ENGINES.find(e => e.value === filters.engine)?.label ?? filters.engine}` : ''}

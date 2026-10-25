@@ -1,5 +1,6 @@
 import { OBD_CODES } from './obd-codes';
 import { GUIDE_ENTRIES } from './guide-entries.mjs';
+import { prepareQuery, scoreDocument } from './search-aliases.mjs';
 import type { Applicability } from './vehicle-compatibility';
 
 export type KnowledgeEntry = {
@@ -11,6 +12,7 @@ export type KnowledgeEntry = {
   Objawy?: string;
   Rozwiązanie?: string;
   Lata?: string;
+  Slowa?: string;
   href?: string;
   applicability?: Applicability;
 };
@@ -38,7 +40,7 @@ export function toSearchDocument(entry: KnowledgeEntry): IndexedKnowledge {
   const searchId = entry.href || entry.id || '';
   const searchTitle = entry.Nazwa;
   const searchKeywords = [entry.Typ, entry.Model, entry.Lata].filter((value): value is string => Boolean(value));
-  const searchBody = [entry.Nazwa, entry.Typ, entry.Model, entry.Lata, entry.Opis, entry.Objawy, entry.Rozwiązanie]
+  const searchBody = [entry.Nazwa, entry.Typ, entry.Model, entry.Lata, entry.Opis, entry.Objawy, entry.Rozwiązanie, entry.Slowa]
     .filter(Boolean)
     .join(' ');
   return { ...entry, searchId, searchTitle, searchBody, searchKeywords };
@@ -57,18 +59,12 @@ export function buildKnowledgeIndex(entries: readonly KnowledgeEntry[]): Indexed
 }
 
 export function searchKnowledge(index: readonly IndexedKnowledge[], query: string): KnowledgeEntry[] {
-  const normalized = normalizeSearch(query);
-  const tokens = tokenizeSearch(query);
-  if (normalized.length < 2 || !tokens.length) return [];
+  const prepared = prepareQuery(query);
+  if (prepared.normalized.length < 2 || !prepared.tokens.length) return [];
   const seen = new Set<string>();
   return index.map((document, originalIndex) => {
-    const title = normalizeSearch(document.searchTitle);
-    const body = normalizeSearch([document.searchTitle, document.searchBody, ...document.searchKeywords].join(' '));
-    const matches = tokens.every(token => body.includes(token));
-    const score = matches
-      ? tokens.reduce((sum, token) => sum + (title.includes(token) ? 10 : 1), 0)
-        + (title === normalized ? 200 : title.startsWith(normalized) ? 100 : 0)
-      : 0;
+    const body = [document.searchTitle, document.searchBody, ...document.searchKeywords].join(' ');
+    const score = scoreDocument(prepared, { title: document.searchTitle, body, id: document.searchId });
     return { document, score, originalIndex };
   })
     .filter(({ document, score }) => {

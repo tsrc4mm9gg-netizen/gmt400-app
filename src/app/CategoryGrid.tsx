@@ -2,8 +2,6 @@ import Link from 'next/link';
 
 const CATEGORIES = [
   { href: '/modele', icon: '🚚', title: 'Modele', desc: 'Warianty i roczniki' },
-  { href: '/diy', icon: '🛠️', title: 'DIY', desc: 'Poradniki napraw' },
-  { href: '/usterki', icon: '⚠️', title: 'Usterki', desc: 'Objawy i diagnostyka' },
   { href: '/kody-obd', icon: '📡', title: 'Kody OBD', desc: 'OBD-I 88–95 / OBD-II 96+' },
   { href: '/schematy', icon: '🔌', title: 'Schematy', desc: 'Złącza i układy' },
   { href: '/narzedzia', icon: '🔧', title: 'Narzędzia', desc: 'RPO, VIN, kalkulatory' },
@@ -12,8 +10,8 @@ const CATEGORIES = [
 export default function CategoryGrid() {
   return (
     <section className="relative z-10 px-4 pb-10" aria-labelledby="categories-title">
-      <h2 id="categories-title" className="mb-3 text-xs font-semibold uppercase tracking-widest text-neutral-400">Kategorie</h2>
-      <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
+      <h2 id="categories-title" className="mb-3 text-xs font-semibold uppercase tracking-widest text-neutral-400">Więcej</h2>
+      <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
         {CATEGORIES.map((cat) => (
           <Link
             key={cat.href}

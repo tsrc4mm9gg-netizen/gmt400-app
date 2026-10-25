@@ -4,6 +4,7 @@ import { getSource, KIND_LABEL } from '../../lib/guides/sources';
 import { BODY_STYLES } from '../../lib/body-styles';
 import { GUIDES, getGuide } from '../../lib/guides';
 import Breadcrumbs from '../ui/Breadcrumbs';
+import JsonLd from '../ui/JsonLd';
 import Src from './Src';
 import LightsWiringSvg from './LightsWiringSvg';
 import ImportGuideCalculator from './ImportGuideCalculator';
@@ -100,12 +101,41 @@ function BlockView({ b }: { b: Block }) {
   }
 }
 
+const SITE = 'https://www.gmt400.pl';
+/** „24.10.2026” → „2026-10-24” (data weryfikacji treści = dateModified). */
+const isoDate = (pl: string) => pl.split('.').reverse().join('-');
+
+function guideJsonLd(g: Guide) {
+  const url = `${SITE}/dla-wlasciciela/${g.slug}`;
+  const org = { '@type': 'Organization', name: 'GMT400', url: SITE };
+  return [
+    {
+      '@context': 'https://schema.org', '@type': 'Article', headline: g.title, description: g.seoDescription ?? g.description,
+      inLanguage: 'pl-PL', dateModified: isoDate(g.asOf), mainEntityOfPage: url, url, author: org, publisher: org,
+    },
+    {
+      '@context': 'https://schema.org', '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Strona główna', item: SITE },
+        { '@type': 'ListItem', position: 2, name: 'Dla właściciela', item: `${SITE}/dla-wlasciciela` },
+        { '@type': 'ListItem', position: 3, name: g.short, item: url },
+      ],
+    },
+    // FAQ z tej samej treści, którą widać na stronie (sekcja „FAQ”).
+    {
+      '@context': 'https://schema.org', '@type': 'FAQPage',
+      mainEntity: g.faq.map(f => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
+    },
+  ];
+}
+
 export default function GuideView({ guide }: { guide: Guide }) {
   const bodies = guide.bodies.map(id => BODY_STYLES.find(b => b.id === id)).filter(Boolean) as typeof BODY_STYLES;
   const sources = collectSources(guide);
   const related = guide.related.map(getGuide).filter(Boolean) as Guide[];
   return (
     <div className="min-h-screen bg-neutral-950 px-5 py-8 pb-28 text-white">
+      {guideJsonLd(guide).map((d, i) => <JsonLd key={i} data={d} />)}
       <article className="mx-auto max-w-3xl" data-testid="guide-article">
         <Breadcrumbs items={[{ href: '/dla-wlasciciela', label: 'Dla właściciela' }, { label: guide.short }]} />
         <header className="my-6">

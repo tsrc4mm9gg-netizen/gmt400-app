@@ -1,5 +1,6 @@
 'use client';
 import { useEffect, useMemo, useRef, useState } from 'react';
+import { prepareQuery } from '../lib/search-aliases.mjs';
 import { buildKnowledgeIndex, getKnowledgeEntries, searchKnowledge, type KnowledgeEntry } from '../lib/knowledge-index';
 import { matchVehicle, type Applicability } from '../lib/vehicle-compatibility';
 import { useVehicleProfile } from './VehicleProfileProvider';
@@ -32,6 +33,7 @@ export default function GlobalSearch({ items, onClose }: { items: Entry[]; onClo
       return true;
     });
   }, [index, query, vehicleOnly, profileReady, profile]);
+  const gapNote = useMemo(() => prepareQuery(query).note, [query]);
   const visible = results.slice(0, limit);
   const groups = [
     { title: 'Kody błędów', rows: visible.filter(row => normalize(row.Typ).includes('kod')) },
@@ -54,6 +56,7 @@ export default function GlobalSearch({ items, onClose }: { items: Entry[]; onClo
       <p id="global-search-scope" className="mt-2 text-sm text-neutral-400">Przeszukujemy bazę kodów OBD oraz załadowane materiały Notion. Filtr ukrywa wyłącznie materiały jednoznacznie poza zakresem auta. Nieustalona zgodność pozostaje widoczna i nie oznacza potwierdzonego dopasowania.</p>
       <details className="mt-2 text-sm text-neutral-400"><summary className="cursor-pointer">Zakres wyszukiwania i pamięć</summary><p className="mt-2">Statyczne tabele części i specyfikacji nie są indeksowane. {storageAvailable === false ? 'Pamięć sesji jest niedostępna.' : 'Fraza jest zapamiętywana w tej zakładce na czas sesji; usuń ją przyciskiem Wyczyść frazę.'}</p></details>
       <p role="status" aria-live="polite" className="my-4">{!ready ? 'Przywracanie wyszukiwania…' : normalize(query).length < 2 ? 'Wpisz co najmniej dwa znaki.' : `Znaleziono: ${results.length}`}</p>
+      {gapNote && <p data-testid="search-gap-note" className="mb-4 rounded border border-red-600/60 p-3 text-sm text-neutral-200">{gapNote}</p>}
       {ready && normalize(query).length >= 2 && !results.length && <p className="rounded border border-white/20 p-4">Brak wyników. Spróbuj krótszej frazy{vehicleOnly ? ' lub wyłącz filtr auta' : ''}.</p>}
       {groups.map(({ title, rows }, index) => rows.length > 0 && <section key={title} aria-labelledby={`search-group-${index}`} className="mt-5"><h3 id={`search-group-${index}`} className="text-lg text-red-400">{title}</h3><ul className="mt-2 space-y-3">{rows.map((item, itemIndex) => <li key={item.href || item.id || itemIndex} className="rounded border border-white/10 p-3"><p className="text-xs text-neutral-400">{item.Typ}</p>{item.href ? <a href={item.href} className={`${focusClass} inline-flex items-center text-red-400 underline`}>{item.Nazwa}</a> : <button type="button" onClick={() => setSelected(item)} className={`${focusClass} text-left text-red-400 underline`}>{item.Nazwa}</button>}<SearchExcerpt item={item} query={query} />{item.href ? <p className="mt-2 text-xs text-neutral-400">{item.Typ === 'Poradnik' ? 'Poradnik — każda liczba ma źródło i datę; przepisy się zmieniają, sprawdź w urzędzie.' : 'Ogólne znaczenie kodu — zastosowanie i procedurę sprawdź dla konkretnego pojazdu.'}</p> : <VehicleMatchBadge item={item} />}</li>)}</ul></section>)}
       {results.length > limit && <button type="button" onClick={() => setLimit(value => value + 50)} className={`${focusClass} mt-4 w-full border border-red-600 p-3 text-red-400`}>Pokaż więcej wyników</button>}

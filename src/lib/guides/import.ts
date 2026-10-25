@@ -5,6 +5,8 @@ export const IMPORT_GUIDE: Guide = {
   title: 'Sprowadzenie i rejestracja GMT400 z USA/UE — opłaty i procedura 2026',
   short: 'Import i rejestracja z USA/UE',
   description: 'Cło, akcyza, VAT, badanie, tłumaczenia, opłaty rejestracyjne, termin 30 dni i kara — wraz z kalkulatorem (orientacyjnie). Trasa USA→DE/NL→PL, zabytek CN 9705.',
+  seoTitle: 'Auto z USA: akcyza, cło i rejestracja Tahoe, Suburban — 2026',
+  seoDescription: 'Sprowadzenie Tahoe, Suburban, Silverado z USA lub UE: cło, akcyza, VAT, badanie, tłumaczenia, opłaty rejestracyjne, termin 30 dni i kara — z kalkulatorem (orientacyjnie).',
   asOf: '24.10.2026',
   bodies: ['ck-reg', 'ck-ext', 'k1500', 'sierra', 'dually', 'suburban', 'tahoe-4d', 'tahoe-2d', 'yukon'],
   years: '1988–2002',

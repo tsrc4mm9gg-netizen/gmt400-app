@@ -5,6 +5,8 @@ export const LPG_GUIDE: Guide = {
   title: 'LPG w GMT400 — co wybrać, ile kosztuje, jakie formalności',
   short: 'LPG w GMT400',
   description: 'Instalacja LPG w Chevrolecie/GMC GMT400 (1988–2000): mikser czy sekwencja, zbiornik, koszty w zł, spalanie, przepisy (R67/R115, badanie roczne, garaże podziemne).',
+  seoTitle: 'LPG w Tahoe, Suburban, Silverado — koszt, instalacja, przepisy',
+  seoDescription: 'Instalacja LPG w Tahoe, Suburban, Silverado i innych Chevroletach/GMC GMT400 (1988–2000): mikser czy sekwencja, koszty w zł, przepisy i badanie roczne, relacje użytkowników o spalaniu.',
   asOf: '24.10.2026',
   bodies: ['ck-reg', 'ck-ext', 'k1500', 'sierra', 'dually', 'suburban', 'tahoe-4d', 'tahoe-2d', 'yukon'],
   years: '1988–2000',

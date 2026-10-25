@@ -6,7 +6,8 @@ import Breadcrumbs from '../ui/Breadcrumbs';
 
 export const metadata: Metadata = {
   title: 'Kody OBD-II GMT400 (1996+) — baza, przyczyny i diagnostyka',
-  description: 'Baza kodów OBD-II dla Chevroleta i GMC GMT400: znaczenie kodu, typowe przyczyny, kolejność diagnostyki i powiązane materiały.'
+  description: 'Baza kodów OBD-II dla Chevroleta i GMC GMT400: znaczenie kodu, typowe przyczyny, kolejność diagnostyki i powiązane materiały.',
+  alternates: { canonical: 'https://www.gmt400.pl/kody-obd' },
 };
 
 const systemFilters = ['Paliwo', 'Powietrze', 'Zapłon', 'Chłodzenie', 'Emisje', 'Skrzynia biegów'];

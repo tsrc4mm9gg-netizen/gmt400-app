@@ -28,6 +28,9 @@ export type Guide = {
   title: string;
   short: string;
   description: string;
+  /** Tytuł i opis do <title>/meta (z nazwami modeli); H1 i karty używają title/description. */
+  seoTitle?: string;
+  seoDescription?: string;
   /** Data, na którą sprawdzono wszystkie liczby na stronie. */
   asOf: string;
   /** Id z BODY_STYLES (src/lib/body-styles.ts). */

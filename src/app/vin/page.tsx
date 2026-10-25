@@ -15,7 +15,7 @@ export default function VinPage() {
       <Breadcrumbs className="mb-2" items={[{ label: 'Sprawdź VIN' }]} />
       <h1 className="text-3xl font-bold text-red-400">Sprawdź swój VIN</h1>
       <p className="mb-5 mt-2 text-neutral-300">Wpisz albo wklej VIN — zobaczysz rocznik, silnik, nadwozie i fabrykę. Szczegóły każdej pozycji i źródła są niżej w rozwijanych sekcjach. Wynik możesz zapisać w <Link href="/moj-samochod" className="text-red-400 underline">Mój samochód</Link>.</p>
-      <VinDecoder withRpo />
+      <VinDecoder withRpo prefillFromUrl />
     </div>
   );
 }

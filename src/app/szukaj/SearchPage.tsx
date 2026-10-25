@@ -2,6 +2,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
 import { buildKnowledgeIndex, getKnowledgeEntries, searchKnowledge, type KnowledgeEntry } from '../../lib/knowledge-index';
+import { prepareQuery } from '../../lib/search-aliases.mjs';
 import RandomCodeLink from './random-code-link';
 import Breadcrumbs from '../ui/Breadcrumbs';
 import ModelThumb from '../ModelThumb';
@@ -9,6 +10,7 @@ import { bodyForEntry } from '../../lib/model-images';
 
 type Entry = KnowledgeEntry;
 const PAGE_SIZE = 50;
+const guideExamples = ['tahoe lpg', 'akcyza auto z usa', 'czerwone kierunkowskazy usa', 'żółte tablice', 'suburban spalanie'];
 const queryExamples = ['P0300', '4L60E', 'EGR', 'MAF', 'EVAP', 'O2 sensor', 'fuel trim', 'idle air control'];
 
 function isEntry(value: unknown): value is Entry {
@@ -36,6 +38,7 @@ export default function SearchPage({ query }: { query: string }) {
 
   const index = useMemo(() => buildKnowledgeIndex(getKnowledgeEntries(items)), [items]);
   const results = useMemo(() => searchKnowledge(index, query), [index, query]);
+  const gapNote = useMemo(() => prepareQuery(query).note, [query]);
   const normalizedQuery = query.trim();
   const [shown, setShown] = useState({ query, count: PAGE_SIZE });
   const visibleCount = shown.query === query ? shown.count : PAGE_SIZE;
@@ -84,8 +87,8 @@ export default function SearchPage({ query }: { query: string }) {
       <section aria-labelledby="search-examples-title" className="mb-6 rounded-xl border border-white/10 bg-neutral-900 p-4">
         <h2 id="search-examples-title" className="text-lg font-semibold text-red-400">Popularne hasła</h2>
         <p className="mt-1 text-sm text-neutral-400">Wybierz hasło, aby zawęzić wyniki.</p>
-        <ul className="mt-3 flex flex-wrap gap-2">
-          {queryExamples.map(example => (
+        <ul className="mt-3 flex flex-wrap gap-2" data-testid="search-examples">
+          {[...guideExamples, ...queryExamples].map(example => (
             <li key={example}>
               <Link
                 href={`/szukaj?q=${encodeURIComponent(example)}`}
@@ -99,7 +102,7 @@ export default function SearchPage({ query }: { query: string }) {
       </section>
 
       <p className="mb-4 text-sm text-neutral-400">
-        Baza OBD i materiały Notion. Ten widok pokazuje wszystkie auta, bez filtra profilu. Dla fraz wielowyrazowych wymagane są wszystkie słowa. Powiązanie z hasłem nie potwierdza zastosowania kodu w konkretnym aucie.
+        Baza OBD i materiały Notion. Ten widok pokazuje wszystkie auta, bez filtra profilu. Rozumiemy też potoczne frazy i nazwy modeli („tahoe lpg”, „auto z usa”); dla pozostałych fraz wielowyrazowych wymagane są wszystkie słowa. Powiązanie z hasłem nie potwierdza zastosowania kodu w konkretnym aucie.
       </p>
 
       {normalizedQuery && (
@@ -108,6 +111,10 @@ export default function SearchPage({ query }: { query: string }) {
           {status === 'loading' ? 'Trwa pobieranie dodatkowych materiałów Notion.' : status === 'error' ? 'Nie udało się pobrać materiałów Notion w wymaganym czasie lub wystąpił błąd. Wyniki obejmują tylko bazę OBD.' : 'Materiały Notion załadowane.'}
           {results.length > PAGE_SIZE && (hasMore ? ` Pokazujemy ${visibleResults.length} z ${results.length}.` : ` Pokazujemy wszystkie ${results.length}.`)}
         </p>
+      )}
+
+      {normalizedQuery && gapNote && (
+        <p data-testid="search-gap-note" className="mb-4 rounded-lg border border-red-600/60 bg-red-950/30 p-3 text-sm text-neutral-200">{gapNote}</p>
       )}
 
       {!normalizedQuery ? (

@@ -4,7 +4,7 @@ export function toSearchDocument(entry) {
   return {
     id: entry.href || entry.id,
     title: entry.Nazwa,
-    description: [entry.Typ, entry.Model, entry.Lata, entry.Opis, entry.Objawy, entry.Rozwiązanie].filter(Boolean).join(' '),
+    description: [entry.Typ, entry.Model, entry.Lata, entry.Opis, entry.Objawy, entry.Rozwiązanie, entry.Slowa].filter(Boolean).join(' '),
     keywords: [entry.Typ, entry.Model, entry.Lata].filter(Boolean),
   };
 }

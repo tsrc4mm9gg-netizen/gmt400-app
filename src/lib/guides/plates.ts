@@ -11,6 +11,8 @@ export const PLATES_GUIDE: Guide = {
   title: 'Żółte tablice (zabytek) dla GMT400 — kryteria, procedura, koszty',
   short: 'Żółte tablice',
   description: 'Kiedy GMT400 może dostać żółte tablice zabytkowe: kryteria wieku wg województw, procedura krok po kroku, koszty w zł, plusy i minusy (OC, badania, LPG) — z oznaczeniem rozbieżności źródeł.',
+  seoTitle: 'Żółte tablice dla Tahoe, Suburban, Silverado — kryteria i koszty',
+  seoDescription: 'Kiedy Tahoe, Suburban czy Silverado (GMT400) może dostać żółte tablice zabytkowe: kryteria wieku wg województw, procedura krok po kroku, koszty w zł, OC, badania i LPG — z oznaczeniem rozbieżności źródeł.',
   asOf: '24.10.2026',
   bodies: ['ck-reg', 'ck-ext', 'k1500', 'sierra', 'dually', 'suburban', 'tahoe-4d', 'tahoe-2d', 'yukon'],
   years: '1988–2002',

@@ -5,6 +5,8 @@ export const LIGHTS_GUIDE: Guide = {
   title: 'Przeróbka świateł GMT400 na europejskie — co zaakceptuje badanie',
   short: 'Światła na europejskie',
   description: 'Czego wymaga stacja kontroli pojazdów, jak przerobić tylne kierunkowskazy w C/K, Suburbanie, Tahoe i Blazerze, numery części, schemat okablowania i „patenty” użytkowników — z oceną legalności.',
+  seoTitle: 'Czerwone kierunkowskazy z USA — przeróbka świateł Tahoe, Suburban',
+  seoDescription: 'Jak przerobić tylne kierunkowskazy z USA na europejskie w Tahoe, Suburban, Blazerze i C/K (Silverado): wymagania stacji kontroli, numery części, schemat okablowania — z oceną legalności.',
   asOf: '24.10.2026',
   bodies: ['ck-reg', 'ck-ext', 'k1500', 'sierra', 'dually', 'suburban', 'tahoe-4d', 'tahoe-2d', 'yukon'],
   years: '1988–2000',

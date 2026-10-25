@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import VinHistoryHits, { linkCls, sectionCls, summaryCls, Chevron } from './VinHistoryHits';
 import Link from 'next/link';
 import { decodeVin, profileFromVin, VIN_SOURCES, UNKNOWN, type VinDecodeResult, type VinField, type VinSourceKey } from '@/lib/vin-decode.mjs';
@@ -51,17 +51,29 @@ function summaryOf(r: Extract<VinDecodeResult, { ok: true }>) {
 
 
 /** Dekoder VIN GMT400: jedno pole + przycisk, podsumowanie na górze, szczegóły w rozwijanych sekcjach. */
-export default function VinDecoder({ onDecoded, withRpo = false }: { onDecoded?: (vin: string | null, year: number | null, result?: VinDecodeResult) => void; withRpo?: boolean }) {
+export default function VinDecoder({ onDecoded, withRpo = false, prefillFromUrl = false }: { onDecoded?: (vin: string | null, year: number | null, result?: VinDecodeResult) => void; withRpo?: boolean; prefillFromUrl?: boolean }) {
   const [input, setInput] = useState('');
   const [result, setResult] = useState<VinDecodeResult | null>(null);
   const [vpic, setVpic] = useState<Vpic>({ state: 'idle' });
-  const submit = (e: React.FormEvent) => {
-    e.preventDefault();
-    const r = decodeVin(input);
+  const run = (value: string) => {
+    const r = decodeVin(value);
     setResult(r);
     setVpic({ state: 'idle' });
     onDecoded?.(r.ok ? r.vin : null, r.ok ? r.year : null, r);
   };
+  const submit = (e: React.FormEvent) => {
+    e.preventDefault();
+    run(input);
+  };
+  // /vin?vin=… (np. z pola na stronie głównej): wpisz i od razu zdekoduj.
+  useEffect(() => {
+    if (!prefillFromUrl) return;
+    const q = new URLSearchParams(window.location.search).get('vin');
+    if (!q) return;
+    const clean = q.replace(/[\s-]/g, '').toUpperCase().slice(0, 20);
+    setInput(clean);
+    run(clean);
+  }, [prefillFromUrl]);
   const fetchVpic = async () => {
     if (!result?.ok || !result.year) return;
     setVpic({ state: 'loading' });
