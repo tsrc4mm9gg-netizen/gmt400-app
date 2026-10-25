@@ -42,6 +42,7 @@ export default function ModelCatalog({ items, onChoose }: { items: ModelRecord[]
         </article>)}
       </details>)}
     </section>)}
+    {items.some(item => item.id) && <details className="rounded-xl border border-white/10 bg-neutral-950 p-3"><summary className="flex min-h-11 cursor-pointer items-center text-sm font-semibold text-white">Wszystkie wpisy o modelach i silnikach ({items.filter(item => item.id).length})</summary><ul className="mt-2 grid gap-x-6 sm:grid-cols-2">{items.filter(item => item.id).map(item => <li key={item.id}><a href={'/baza/' + encodeURIComponent(item.id as string)} className="flex min-h-11 flex-col justify-center py-1 text-sm text-neutral-200 underline decoration-neutral-600 underline-offset-4 hover:text-red-300"><span>{item.Nazwa}</span><span className="text-xs text-neutral-400 no-underline">{[item.Model, item.Lata].filter(Boolean).join(' · ')}</span></a></li>)}</ul></details>}
     {onChoose && <p className="text-xs text-neutral-500">Wybór wersji ustawia filtr katalogu. Nie nadpisuje zapisanego profilu auta. Dane i nazwy pochodzą z Notion i mogą wymagać weryfikacji.</p>}
   </section>;
 }

@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Encyclopedia from '../Encyclopedia';
+import { getListEntries } from '../../lib/notion-entries';
 
 export const metadata: Metadata = {
   title: 'Baza wiedzy',
@@ -7,6 +8,9 @@ export const metadata: Metadata = {
   alternates: { canonical: 'https://www.gmt400.pl/baza' },
 };
 
-export default function BazaPage() {
-  return <Encyclopedia />;
+// ISR (15 min): domyślna zakładka „Modele” jest w HTML; gdy Notion nie odpowiada, strona pobiera dane w przeglądarce.
+export const revalidate = 900;
+
+export default async function BazaPage() {
+  return <Encyclopedia initialItems={await getListEntries()} />;
 }

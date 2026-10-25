@@ -115,13 +115,15 @@ function playGong(): void {
   }
 }
 
-export default function Encyclopedia({ initialTab }: { initialTab?: string } = {}) {
-  const [items, setItems] = useState<Item[]>([]);
+export default function Encyclopedia({ initialTab, initialItems }: { initialTab?: string; initialItems?: Item[] | null } = {}) {
+  // initialItems: lista wyrenderowana na serwerze (ISR) — trafia do HTML dla wyszukiwarek, a użytkownik nie widzi ekranu ładowania.
+  // Po montażu i tak pobieramy świeże dane z /api/notion (cache 5 min), więc nowe wpisy pojawiają się bez czekania na ISR.
+  const [items, setItems] = useState<Item[]>(initialItems ?? []);
   const [error, setError] = useState<string | null>(null);
   const [ratings, setRatings] = useState<Record<string, number>>({});
   const [touchStart, setTouchStart] = useState(0);
   const [touchEnd, setTouchEnd] = useState(0);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(!initialItems);
   const [query, setQuery] = useState('');
   const [tab, setTab] = useSectionNavigation(CATEGORIES.map(category => category.id), initialTab);
   const materialScope = tab === 'diy' || tab === 'schematy' ? ['Porada'] : tab === 'kody' ? ['Kod błędu'] : tab === 'usterki' ? ['Usterka'] : undefined;
@@ -214,10 +216,12 @@ export default function Encyclopedia({ initialTab }: { initialTab?: string } = {
         return r.json();
       })
       .then(data => {
+        if (initialItems && (!Array.isArray(data.results) || data.complete === false)) return;
         setItems(data.results || []);
         setError(null);
       })
       .catch(err => {
+        if (initialItems) return; // zostają dane z serwera; błąd odświeżenia nie psuje strony
         if (err.name !== 'AbortError') setError('Nie udało się załadować danych z bazy. Odśwież stronę lub spróbuj później.');
         else setError('Przekroczono czas oczekiwania na dane. Sprawdź połączenie i odśwież.');
       })
@@ -226,7 +230,7 @@ export default function Encyclopedia({ initialTab }: { initialTab?: string } = {
         setLoading(false);
       });
     return () => { controller.abort(); clearTimeout(timeout); };
-  }, []);
+  }, [initialItems]);
 
   // Swipe from left edge to go back
   useEffect(() => {
@@ -560,7 +564,7 @@ export default function Encyclopedia({ initialTab }: { initialTab?: string } = {
                       {issueImg && <button type="button" aria-label="Powiększ ilustrację" className="block w-full rounded focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-red-500" onClick={() => setLightbox(issueImg)}><img loading="lazy" src={issueImg} alt="schemat" className="w-full max-h-48 object-contain bg-white cursor-pointer"  /></button>}
                       <div className="p-4">
                         <div className="flex flex-wrap justify-between items-start gap-2 mb-2">
-                          <h3 className="font-semibold">{i.Nazwa}</h3>
+                          <h3 className="font-semibold">{i.id ? <a className="inline-flex min-h-11 items-center underline decoration-neutral-600 underline-offset-4 hover:text-red-300 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-red-500" href={'/baza/' + encodeURIComponent(i.id)}>{i.Nazwa}</a> : i.Nazwa}</h3>
                           {(() => { const body = bodyForEntry(i); return body ? <ModelThumb body={body} /> : <span className="text-xs bg-white/10 px-2 py-0.5 text-neutral-400">{isGeneralEntry(i) ? 'Wszystkie GMT400' : i.Model}</span>; })()}
                         </div>
                         <VehicleMatchBadge item={i} />

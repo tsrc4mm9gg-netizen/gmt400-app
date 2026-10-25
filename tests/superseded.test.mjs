@@ -18,9 +18,11 @@ test('withoutSuperseded zachowuje kolejność pozostałych wpisów', () => {
   assert.deepEqual(withoutSuperseded(undefined), []);
 });
 
-test('/api/notion filtruje oznaczone wpisy przed liczeniem count', () => {
+test('/api/notion i listy SSR filtrują oznaczone wpisy tą samą funkcją (wspólna biblioteka) przed liczeniem count', () => {
+  const lib = readFileSync(new URL('../src/lib/notion-entries.ts', import.meta.url), 'utf8');
   const route = readFileSync(new URL('../src/app/api/notion/route.ts', import.meta.url), 'utf8');
-  assert.match(route, /import \{ withoutSuperseded \} from '..\/..\/..\/lib\/superseded\.mjs'/);
-  assert.match(route, /const results = withoutSuperseded\(/);
+  assert.match(lib, /import \{ withoutSuperseded \} from '\.\/superseded\.mjs'/);
+  assert.match(lib, /withoutSuperseded\(/);
+  assert.match(route, /fetchAllEntries\(/);
   assert.match(route, /count: results\.length/);
 });
