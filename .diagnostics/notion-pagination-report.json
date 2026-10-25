@@ -1,8 +1,8 @@
 {
-  "codeSha": "32cc912f91f4d7a900b6a5dae1c30fa48ab30241",
-  "apiBlobSha": "2a292666f03440843af0445ec5ad7056656bf6e8",
-  "runId": "40014057105",
-  "checkedAt": "2026-10-23T19:47:40.081Z",
+  "codeSha": "c54aba8043061ce9eed41afabf2e4dddb739b019",
+  "apiBlobSha": "01e3523156dbd4a752d35df84f0be04255857e4e",
+  "runId": "40154272583",
+  "checkedAt": "2026-10-25T02:24:45.316Z",
   "scope": "Direct GET handler tests with mocked Notion responses; 501 entries, complete titles, repeated-cursor rejection; not live Notion or browser tests",
   "passed": true,
   "stages": {
@@ -12,8 +12,8 @@
     "tests": "success"
   },
   "stats": {
-    "startTime": "2026-10-23T19:47:39.023Z",
-    "duration": 972.3889999999999,
+    "startTime": "2026-10-25T02:24:44.201Z",
+    "duration": 1037.386,
     "expected": 2,
     "skipped": 0,
     "unexpected": 0,
