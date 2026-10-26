@@ -21,9 +21,13 @@ test('VIN: wszystkie pozycje, źródła, vPIC po kliknięciu i linki historii', 
   const { errors, posted } = await guard(page);
   await page.goto(BASE + '/vin');
   const d = page.getByTestId('vin-decoder');
-  await d.getByRole('textbox', { name: 'Numer VIN do dekodowania' }).fill('1GCEK19R9VE112233');
-  await d.getByRole('button', { name: 'DEKODUJ VIN' }).click();
-  await expect(d.getByTestId('vin-check')).toContainText('się zgadza');
+  // Na wolnym runnerze (WebKit) formularz bywa klikany, zanim React zhydratuje stronę — wtedy kliknięcie nic nie robi.
+  // Powtarzamy wpisanie i kliknięcie aż dekoder zareaguje (operacja jest idempotentna, nic nie jest wysyłane).
+  await expect(async () => {
+    await d.getByRole('textbox', { name: 'Numer VIN do dekodowania' }).fill('1GCEK19R9VE112233');
+    await d.getByRole('button', { name: 'DEKODUJ VIN' }).click();
+    await expect(d.getByTestId('vin-check')).toContainText('się zgadza', { timeout: 3000 });
+  }).toPass({ timeout: 30000 });
   // Podsumowanie na górze, szczegóły zwinięte
   const sum = d.getByTestId('vin-summary');
   await expect(sum).toContainText('1997');
