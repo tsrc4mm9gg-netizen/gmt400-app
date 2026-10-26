@@ -177,7 +177,7 @@ test('strona główna: wyróżniona kategoria „Najważniejsze dla właściciel
 test('sitemap.ts zawiera /dla-wlasciciela i 4 podstrony (public/sitemap.xml jest statyczny, produkcja serwi dynamiczny)', () => {
   const src = require('fs').readFileSync(require('path').join(__dirname, '../src/app/sitemap.ts'), 'utf8');
   expect(src).toContain('${BASE}/dla-wlasciciela`');
-  for (const s of SLUGS) expect(src).toContain(`'${s}'`);
+  expect(src).toContain('GUIDES.map(guide => ({ url: `${BASE}/dla-wlasciciela/${guide.slug}`'); // pętla po opublikowanych poradnikach, bez ręcznej listy slugów
 });
 
 test('wyszukiwarka /szukaj znajduje poradniki (LPG, żółte tablice, cło)', async ({ page }) => {

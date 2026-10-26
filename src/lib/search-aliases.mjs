@@ -57,7 +57,9 @@ for (const group of SYNONYM_GROUPS) for (const word of group) synonymIndex.set(w
 export const GUIDE_ROUTES = [
   { id: '/dla-wlasciciela/lpg', test: /\b(lpg|autogaz\w*|autogas\w*|propan\w*|gazow\w*|gaz do|gaz w|gaz na|instalacj\w* gaz\w*|dual ?fuel|stag|prins|impco)\b/, boost: 1000 },
   { id: '/dla-wlasciciela/lpg', test: /\bgaz\b/, boost: 600 },
-  { id: '/dla-wlasciciela/lpg', test: /\b(spalani\w*|zuzyci\w* paliw\w*|mpg|l\/100|fuel economy|fuel consumption|gas mileage)\b/, boost: 300, gap: 'spalanie' },
+  { id: '/dla-wlasciciela/lpg', test: /\b(spalani\w*|zuzyci\w* paliw\w*|mpg|l\/100|fuel economy|fuel consumption|gas mileage)\b/, boost: 300, only: true },
+  // Wpis Notion o spalaniu (Porada „Spalanie GMT400 — ile pali…”) ma wyprzedzać poradnik LPG; dopasowanie po tytule, nie po id Notion.
+  { titleTest: /^spalanie gmt400\b/, test: /\b(spalani\w*|zuzyci\w* paliw\w*|mpg|l\/100|fuel economy|fuel consumption|gas mileage|ile pali\w*)\b/, boost: 1200, only: true },
   { id: '/dla-wlasciciela/import', test: /\b(akcyz\w*|cl[oa]|sprowadz\w*|import\w*|recykling\w*|pierwsz\w* przeglad)\b/, boost: 700 },
   { id: '/dla-wlasciciela/import', test: /\busa\b/, boost: 400 },
   { id: '/dla-wlasciciela/import', test: /\bhomologacj\w*/, boost: 400, gap: 'homologacja' },
@@ -69,7 +71,6 @@ export const GUIDE_ROUTES = [
 /** Gdy trasa oznaczona `gap` jest trafiona, UI pokazuje uczciwą notkę o niepełnej treści. */
 export const GAP_NOTES = {
   homologacja: 'Poradnik o imporcie nie opisuje osobno homologacji ani świadectwa zgodności — jest w nim badanie techniczne przed rejestracją i opłaty. Ścieżkę homologacji potwierdź w stacji kontroli lub wydziale komunikacji.',
-  spalanie: 'Nie mamy jeszcze osobnej strony o spalaniu i kosztach eksploatacji. Poniżej poradnik LPG z relacjami użytkowników (benzyna i LPG, l/100 km) — to dane z forów, nie normy producenta.',
 };
 
 function expandToken(token) {
@@ -82,10 +83,12 @@ export function prepareQuery(query) {
   let normalized = normalizeSearch(query);
   const routes = [];
   let note = null;
+  let only = false;
   for (const route of GUIDE_ROUTES) {
     if (route.test.test(normalized) && (!route.requires || route.requires.test(normalized))) {
       routes.push(route);
       if (route.gap && !note) note = route.gap;
+      if (route.only) only = true;
     }
   }
   for (const [pattern, replacement] of PHRASE_REWRITES) normalized = normalized.replace(pattern, replacement);
@@ -95,7 +98,7 @@ export function prepareQuery(query) {
   const topical = base.filter(token => !MODEL_WORDS.has(token));
   const hardTokens = topical.length ? topical : base;
   const softTokens = topical.length ? base.filter(token => MODEL_WORDS.has(token)) : [];
-  const routedOnly = Boolean(note) && hardTokens.every(token => ROUTED_ONLY_WORDS.has(token));
+  const routedOnly = (Boolean(note) || only) && hardTokens.every(token => ROUTED_ONLY_WORDS.has(token));
   return {
     routedOnly,
     normalized,
@@ -125,7 +128,7 @@ export function scoreDocument(prepared, { title, body, id }) {
     if (t === prepared.normalized) score += 200;
     else if (t.startsWith(prepared.normalized)) score += 100;
   }
-  const boost = prepared.routes.filter(route => route.id === id).reduce((max, route) => Math.max(max, route.boost), 0);
+  const boost = prepared.routes.filter(route => route.id === id || (route.titleTest && route.titleTest.test(t))).reduce((max, route) => Math.max(max, route.boost), 0);
   if (boost) return Math.max(score, 1) + boost;
   if (!matched || prepared.routedOnly) return 0;
   // Poradniki to centralne strony tematów — przy zwykłym dopasowaniu wyprzedzają pojedyncze wpisy.

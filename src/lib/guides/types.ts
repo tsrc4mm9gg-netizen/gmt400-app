@@ -25,6 +25,8 @@ export type Section = { id: string; title: string; open?: boolean; blocks: Block
 
 export type Guide = {
   slug: string;
+  /** Szkic: poradnik jest w repo, ale ukryty (hub, strona główna, menu, sitemap, wyszukiwarka, adres daje 404), dopóki nie ma źródeł. Usuń pole po przepisaniu ze źródłami. */
+  draft?: boolean;
   title: string;
   short: string;
   description: string;

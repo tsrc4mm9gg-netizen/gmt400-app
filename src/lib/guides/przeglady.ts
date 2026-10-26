@@ -2,6 +2,7 @@ import type { Guide } from './types';
 
 export const PRZEGLADY_GUIDE: Guide = {
   slug: 'przeglady',
+  draft: true, // ukryty: brak źródeł; do przepisania ze źródłami urzędowymi
   title: 'Przeglądy i interwały GMT400',
   short: 'Co sprawdzać regularnie w Polsce',
   description: 'Interwały serwisowe i typowe problemy GMT400 eksploatowanych w Polsce (LPG, korozja, płyny).',

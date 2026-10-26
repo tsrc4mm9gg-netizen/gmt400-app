@@ -10,7 +10,7 @@ import { bodyForEntry } from '../../lib/model-images';
 
 type Entry = KnowledgeEntry;
 const PAGE_SIZE = 50;
-const guideExamples = ['tahoe lpg', 'akcyza auto z usa', 'czerwone kierunkowskazy usa', 'żółte tablice', 'suburban spalanie'];
+const guideExamples = ['tahoe lpg', 'akcyza auto z usa', 'czerwone kierunkowskazy usa', 'żółte tablice', 'suburban spalanie', 'rdza progi', 'dmuchawa rezystor', 'wkładka stacyjki'];
 const queryExamples = ['P0300', '4L60E', 'EGR', 'MAF', 'EVAP', 'O2 sensor', 'fuel trim', 'idle air control'];
 
 function isEntry(value: unknown): value is Entry {

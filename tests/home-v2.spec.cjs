@@ -76,13 +76,13 @@ test('home: Usterki, DIY i cztery poradniki PL prowadzą do właściwych stron',
   for (const slug of ['lpg', 'import', 'swiatla-eu', 'zolte-tablice']) expect(links).toContain('/dla-wlasciciela/' + slug);
 });
 
-test('/szukaj: przykładowe hasła są linkami, a „suburban spalanie” daje poradnik LPG i uczciwą notkę o luce', async ({ page }) => {
+test('/szukaj: przykładowe hasła są linkami, a „suburban spalanie” daje poradnik LPG bez notki o luce', async ({ page }) => {
   await setup(page);
   await page.goto(BASE + '/szukaj');
   const chips = page.getByTestId('search-examples').getByRole('link');
   expect(await chips.count()).toBeGreaterThanOrEqual(4);
   await page.goto(BASE + '/szukaj?q=suburban%20spalanie');
-  await expect(page.getByTestId('search-gap-note')).toContainText('spalani');
+  await expect(page.getByTestId('search-gap-note')).toHaveCount(0);
   await expect(page.locator('main a[href="/dla-wlasciciela/lpg"]').first()).toBeVisible();
 });
 

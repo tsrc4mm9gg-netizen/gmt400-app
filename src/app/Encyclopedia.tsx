@@ -20,6 +20,7 @@ import { findBody } from '../lib/body-styles';
 import { EngineTable, FluidsTable, PartSourceNote, OemQuickList, TorqueTable } from './VerifiedSpecs';
 import { PARTS } from '../lib/parts-catalog';
 import ModelThumb from './ModelThumb';
+import DiagramImage from './ui/DiagramImage';
 import { bodyForEntry, isGeneralEntry, isSpecificToBody } from '../lib/model-images';
 import { IssueMeta, StepsText, hasSource } from './IssueDetails';
 
@@ -561,7 +562,7 @@ export default function Encyclopedia({ initialTab, initialItems }: { initialTab?
                   const issueImg = i.Nazwa.toLowerCase().includes('kolektor') ? '/issue-intake.jpg' : i.Nazwa.toLowerCase().includes('4l60') ? '/issue-4l60e.jpg' : null;
                   return (
                     <div key={idx} className="bg-neutral-950 border border-white/10 overflow-hidden">
-                      {issueImg && <button type="button" aria-label="Powiększ ilustrację" className="block w-full rounded focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-red-500" onClick={() => setLightbox(issueImg)}><img loading="lazy" src={issueImg} alt="schemat" className="w-full max-h-48 object-contain bg-white cursor-pointer"  /></button>}
+                      {issueImg && <button type="button" aria-label="Powiększ ilustrację" className="block w-full rounded focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-red-500" onClick={() => setLightbox(issueImg)}><DiagramImage src={issueImg} alt={`Schemat poglądowy: ${i.Nazwa}`} maxHeightClass="max-h-48" /></button>}
                       <div className="p-4">
                         <div className="flex flex-wrap justify-between items-start gap-2 mb-2">
                           <h3 className="font-semibold">{i.id ? <a className="inline-flex min-h-11 items-center underline decoration-neutral-600 underline-offset-4 hover:text-red-300 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-red-500" href={'/baza/' + encodeURIComponent(i.id)}>{i.Nazwa}</a> : i.Nazwa}</h3>
@@ -626,10 +627,11 @@ export default function Encyclopedia({ initialTab, initialItems }: { initialTab?
             <p className="text-neutral-500 text-sm mb-4" role="status" data-testid="diy-count">Znaleziono: {diyTips.length}</p>
             <div className="space-y-4">
               {diyTips.map((t, idx) => {
+                const firstTipImageIndex = diyTips.findIndex(tip => getTipImage(tip.Nazwa));
                 const tipImg = getTipImage(t.Nazwa);
                 return (
                   <div key={idx} className="bg-neutral-950 border border-white/10 overflow-hidden">
-                    {tipImg && <button type="button" aria-label="Powiększ ilustrację" className="block w-full rounded focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-red-500" onClick={() => setLightbox(tipImg)}><img loading="lazy" src={tipImg} alt="diagram" className="w-full max-h-64 object-contain bg-white cursor-pointer"  /></button>}
+                    {tipImg && <button type="button" aria-label="Powiększ ilustrację" className="block w-full rounded focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-red-500" onClick={() => setLightbox(tipImg)}><DiagramImage src={tipImg} alt={`Ilustracja poglądowa: ${t.Nazwa}`} priority={idx === firstTipImageIndex} /></button>}
                     <div className="p-4">
                       <h3 className="font-semibold mb-2">{t.Nazwa}</h3>
                       {(() => { const body = bodyForEntry(t); return body ? <div className="mb-2"><ModelThumb body={body} /></div> : null; })()}

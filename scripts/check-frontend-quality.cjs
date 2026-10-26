@@ -56,6 +56,25 @@ function analyze(source, file) {
     }
     return null;
   }
+  // Jedyny udokumentowany wyjątek od reguły dangerouslySetInnerHTML: dane strukturalne schema.org.
+  // Wolno tylko <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(dane).replace(/</g, '\\u003c') }} />
+  // (React koduje encjami tekst potomny <script>, więc JSON-LD nie da się wstawić inaczej; zamiana „<” na \u003c
+  // uniemożliwia zamknięcie tagu). Każda inna postać (inny typ skryptu, inne atrybuty, __html bez JSON.stringify
+  // i zamiany) nadal jest zgłaszana.
+  function safeJsonLd(node) {
+    if (tag(node) !== 'script' || literal(attr(node, 'type')) !== 'application/ld+json') return false;
+    if (node.attributes.properties.some(item => !ts.isJsxAttribute(item) || !['type', 'dangerouslySetInnerHTML'].includes(item.name.getText(tree)))) return false;
+    const value = valueOf(attr(node, 'dangerouslySetInnerHTML'));
+    if (!value || !ts.isObjectLiteralExpression(value) || value.properties.length !== 1) return false;
+    const prop = value.properties[0];
+    if (!ts.isPropertyAssignment(prop) || prop.name.getText(tree) !== '__html') return false;
+    const call = unwrap(prop.initializer);
+    if (!call || !ts.isCallExpression(call) || !ts.isPropertyAccessExpression(call.expression) || call.expression.name.text !== 'replace' || call.arguments.length !== 2) return false;
+    const [pattern, replacement] = call.arguments;
+    if (pattern.getText(tree) !== '/</g' || !ts.isStringLiteral(replacement) || replacement.text !== '\\u003c') return false;
+    const inner = unwrap(call.expression.expression);
+    return !!inner && ts.isCallExpression(inner) && inner.expression.getText(tree) === 'JSON.stringify' && inner.arguments.length === 1;
+  }
   const idKey = (element, name) => expressionKey(valueOf(attr(element, name)), element);
   const tag = node => node.tagName.getText(tree);
   const labels = elements.filter(node => tag(node) === 'label');
@@ -71,7 +90,7 @@ function analyze(source, file) {
       for (let parent = node.parent; parent && parent !== owner(node); parent = parent.parent) if (ts.isJsxElement(parent) && parent.openingElement.tagName.getText(tree) === 'label') wrapped = true;
       if (!nonempty(attr(node, 'aria-label')) && !nonempty(attr(node, 'aria-labelledby')) && !linked && !wrapped) report(node, 'form control without accessible label');
     }
-    if (attr(node, 'dangerouslySetInnerHTML')) report(node, 'dangerouslySetInnerHTML requires explicit review');
+    if (attr(node, 'dangerouslySetInnerHTML') && !safeJsonLd(node)) report(node, 'dangerouslySetInnerHTML requires explicit review');
     if (/^h[1-6]$/.test(name)) {
       const level = Number(name[1]), scope = owner(node), previous = previousHeadings.get(scope);
       if (previous && level - previous > 1) report(node, `heading level jumps from h${previous} to h${level}`);
@@ -94,6 +113,12 @@ function selfTest() {
   check('const x = <div onClick={() => {}}>Akcja</div>;', 1);
   check('const x = <button onClick={() => {}}>Akcja</button>;', 0);
   check('const x = <script dangerouslySetInnerHTML={{ __html: "{}" }} />;', 1);
+  check('const x = <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(data).replace(/</g, "\\\\u003c") }} />;', 0);
+  check('const x = <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }} />;', 1);
+  check('const x = <script type="text/javascript" dangerouslySetInnerHTML={{ __html: JSON.stringify(data).replace(/</g, "\\\\u003c") }} />;', 1);
+  check('const x = <div type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(data).replace(/</g, "\\\\u003c") }} />;', 1);
+  check('const x = <script type="application/ld+json" onLoad={f} dangerouslySetInnerHTML={{ __html: JSON.stringify(data).replace(/</g, "\\\\u003c") }} />;', 1);
+  check('const x = <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: html.replace(/</g, "\\\\u003c") }} />;', 1);
   check('const x = <><h1>Tytuł</h1><h3>Sekcja</h3></>;', 1);
   check('const A = () => <label htmlFor="q">Szukaj</label>; const B = () => <input id="q" />;', 1);
   check('function A(){ const id = useId(); return <><label htmlFor={id + "-q"}>Szukaj</label><textarea id={id + "-q"} /></>; }', 0);

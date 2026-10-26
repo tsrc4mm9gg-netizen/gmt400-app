@@ -10,6 +10,7 @@ const other = [
   { id: 'n3', Nazwa: 'Wymiana oleju w skrzyni 4L60E', Typ: 'Porada', Model: 'Tahoe Suburban', Opis: 'Dexron VI, ilość oleju.' },
   { id: 'n4', Nazwa: 'Zardzewiałe przewody hamulcowe', Typ: 'Usterka', Model: 'C/K', Opis: 'Korozja przewodów.' },
   { id: 'n5', Nazwa: 'Chevrolet Tahoe 4-drzwi — pełny opis', Typ: 'Model', Model: 'Tahoe', Opis: 'Wersja rodzinna.' },
+  { id: 'n6', Nazwa: 'Spalanie GMT400 — ile pali Tahoe, Suburban i C/K 1500: dane EPA przeliczone na l/100 km', Typ: 'Porada', Model: 'Wszystkie', Opis: 'Zużycie paliwa wg silnika.' },
 ];
 const index = buildKnowledgeIndex([...other, ...GUIDE_ENTRIES]);
 const top = query => searchKnowledge(index, query)[0]?.href;
@@ -30,11 +31,11 @@ test('„gaz” nie ściąga pedału gazu przed poradnikiem LPG', () => {
   assert.equal(results[0].href, g('lpg'));
 });
 
-test('spalanie: poradnik LPG + uczciwa notka, bez szumu „spalanie stukowe”', () => {
-  for (const phrase of ['tahoe spalanie', 'suburban spalanie', 'silverado spalanie', 'zużycie paliwa', 'fuel consumption']) {
+test('spalanie: wpis o spalaniu pierwszy, poradnik LPG drugi, bez szumu „spalanie stukowe” i bez notki o luce', () => {
+  for (const phrase of ['spalanie', 'tahoe spalanie', 'suburban spalanie', 'silverado spalanie', 'zużycie paliwa', 'fuel consumption', 'ile pali tahoe']) {
     const results = searchKnowledge(index, phrase);
-    assert.deepEqual(results.map(r => r.href || r.id), [g('lpg')], phrase);
-    assert.match(searchNote(phrase) ?? '', /osobnej strony o spalaniu/, phrase);
+    assert.deepEqual(results.map(r => r.href || r.id), ['n6', g('lpg')], phrase);
+    assert.equal(searchNote(phrase), null, phrase);
   }
   assert.equal(searchNote('tahoe lpg'), null);
 });

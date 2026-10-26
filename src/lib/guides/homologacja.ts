@@ -2,6 +2,7 @@ import type { Guide } from './types';
 
 export const HOMOLOGACJA_GUIDE: Guide = {
   slug: 'homologacja',
+  draft: true, // ukryty: brak źródeł; do przepisania ze źródłami urzędowymi
   title: 'Homologacja GMT400 w Polsce',
   short: 'Badanie techniczne, dokumenty, typowe problemy',
   description: 'Co sprawdzić przed badaniem technicznym GMT400 importowanego z USA. Dokumenty, światła, hamulce, korozja ramy.',
