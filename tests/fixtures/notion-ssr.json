@@ -1,0 +1,425 @@
+{
+ "results": [
+  {
+   "id": "00000000-0000-4000-8000-000000000001",
+   "Nazwa": "Testowa usterka numer 1 do testów SSR",
+   "Typ": "Usterka",
+   "Model": "Tahoe",
+   "Opis": "Opis wpisu testowego 1.",
+   "Objawy": "Objaw testowy.",
+   "Rozwiązanie": "Krok pierwszy.\nKrok drugi.",
+   "Lata": "1995–1999"
+  },
+  {
+   "id": "00000000-0000-4000-8000-000000000002",
+   "Nazwa": "Testowa usterka numer 2 do testów SSR",
+   "Typ": "Usterka",
+   "Model": "Tahoe",
+   "Opis": "Opis wpisu testowego 2.",
+   "Objawy": "Objaw testowy.",
+   "Rozwiązanie": "Krok pierwszy.\nKrok drugi.",
+   "Lata": "1995–1999"
+  },
+  {
+   "id": "00000000-0000-4000-8000-000000000003",
+   "Nazwa": "Testowa usterka numer 3 do testów SSR",
+   "Typ": "Usterka",
+   "Model": "Tahoe",
+   "Opis": "Opis wpisu testowego 3.",
+   "Objawy": "Objaw testowy.",
+   "Rozwiązanie": "Krok pierwszy.\nKrok drugi.",
+   "Lata": "1995–1999"
+  },
+  {
+   "id": "00000000-0000-4000-8000-000000000004",
+   "Nazwa": "Testowa usterka numer 4 do testów SSR",
+   "Typ": "Usterka",
+   "Model": "Tahoe",
+   "Opis": "Opis wpisu testowego 4.",
+   "Objawy": "Objaw testowy.",
+   "Rozwiązanie": "Krok pierwszy.\nKrok drugi.",
+   "Lata": "1995–1999"
+  },
+  {
+   "id": "00000000-0000-4000-8000-000000000005",
+   "Nazwa": "Testowa usterka numer 5 do testów SSR",
+   "Typ": "Usterka",
+   "Model": "Tahoe",
+   "Opis": "Opis wpisu testowego 5.",
+   "Objawy": "Objaw testowy.",
+   "Rozwiązanie": "Krok pierwszy.\nKrok drugi.",
+   "Lata": "1995–1999"
+  },
+  {
+   "id": "00000000-0000-4000-8000-000000000006",
+   "Nazwa": "Testowa usterka numer 6 do testów SSR",
+   "Typ": "Usterka",
+   "Model": "Tahoe",
+   "Opis": "Opis wpisu testowego 6.",
+   "Objawy": "Objaw testowy.",
+   "Rozwiązanie": "Krok pierwszy.\nKrok drugi.",
+   "Lata": "1995–1999"
+  },
+  {
+   "id": "00000000-0000-4000-8000-000000000007",
+   "Nazwa": "Testowa usterka numer 7 do testów SSR",
+   "Typ": "Usterka",
+   "Model": "Tahoe",
+   "Opis": "Opis wpisu testowego 7.",
+   "Objawy": "Objaw testowy.",
+   "Rozwiązanie": "Krok pierwszy.\nKrok drugi.",
+   "Lata": "1995–1999"
+  },
+  {
+   "id": "00000000-0000-4000-8000-000000000008",
+   "Nazwa": "Testowa usterka numer 8 do testów SSR",
+   "Typ": "Usterka",
+   "Model": "Tahoe",
+   "Opis": "Opis wpisu testowego 8.",
+   "Objawy": "Objaw testowy.",
+   "Rozwiązanie": "Krok pierwszy.\nKrok drugi.",
+   "Lata": "1995–1999"
+  },
+  {
+   "id": "00000000-0000-4000-8000-000000000009",
+   "Nazwa": "Testowa usterka numer 9 do testów SSR",
+   "Typ": "Usterka",
+   "Model": "Tahoe",
+   "Opis": "Opis wpisu testowego 9.",
+   "Objawy": "Objaw testowy.",
+   "Rozwiązanie": "Krok pierwszy.\nKrok drugi.",
+   "Lata": "1995–1999"
+  },
+  {
+   "id": "00000000-0000-4000-8000-000000000010",
+   "Nazwa": "Testowa usterka numer 10 do testów SSR",
+   "Typ": "Usterka",
+   "Model": "Tahoe",
+   "Opis": "Opis wpisu testowego 10.",
+   "Objawy": "Objaw testowy.",
+   "Rozwiązanie": "Krok pierwszy.\nKrok drugi.",
+   "Lata": "1995–1999"
+  },
+  {
+   "id": "00000000-0000-4000-8000-000000000011",
+   "Nazwa": "Testowa usterka numer 11 do testów SSR",
+   "Typ": "Usterka",
+   "Model": "Tahoe",
+   "Opis": "Opis wpisu testowego 11.",
+   "Objawy": "Objaw testowy.",
+   "Rozwiązanie": "Krok pierwszy.\nKrok drugi.",
+   "Lata": "1995–1999"
+  },
+  {
+   "id": "00000000-0000-4000-8000-000000000012",
+   "Nazwa": "Testowa usterka numer 12 do testów SSR",
+   "Typ": "Usterka",
+   "Model": "Tahoe",
+   "Opis": "Opis wpisu testowego 12.",
+   "Objawy": "Objaw testowy.",
+   "Rozwiązanie": "Krok pierwszy.\nKrok drugi.",
+   "Lata": "1995–1999"
+  },
+  {
+   "id": "00000000-0000-4000-8000-000000000013",
+   "Nazwa": "Testowa usterka numer 13 do testów SSR",
+   "Typ": "Usterka",
+   "Model": "Tahoe",
+   "Opis": "Opis wpisu testowego 13.",
+   "Objawy": "Objaw testowy.",
+   "Rozwiązanie": "Krok pierwszy.\nKrok drugi.",
+   "Lata": "1995–1999"
+  },
+  {
+   "id": "00000000-0000-4000-8000-000000000014",
+   "Nazwa": "Testowa usterka numer 14 do testów SSR",
+   "Typ": "Usterka",
+   "Model": "Tahoe",
+   "Opis": "Opis wpisu testowego 14.",
+   "Objawy": "Objaw testowy.",
+   "Rozwiązanie": "Krok pierwszy.\nKrok drugi.",
+   "Lata": "1995–1999"
+  },
+  {
+   "id": "00000000-0000-4000-8000-000000000015",
+   "Nazwa": "Testowa porada DIY numer 1 do testów SSR",
+   "Typ": "Porada",
+   "Model": "Suburban",
+   "Opis": "Opis wpisu testowego 1.",
+   "Objawy": "",
+   "Rozwiązanie": "Krok pierwszy.\nKrok drugi.",
+   "Lata": "1995–1999"
+  },
+  {
+   "id": "00000000-0000-4000-8000-000000000016",
+   "Nazwa": "Testowa porada DIY numer 2 do testów SSR",
+   "Typ": "Porada",
+   "Model": "Suburban",
+   "Opis": "Opis wpisu testowego 2.",
+   "Objawy": "",
+   "Rozwiązanie": "Krok pierwszy.\nKrok drugi.",
+   "Lata": "1995–1999"
+  },
+  {
+   "id": "00000000-0000-4000-8000-000000000017",
+   "Nazwa": "Testowa porada DIY numer 3 do testów SSR",
+   "Typ": "Porada",
+   "Model": "Suburban",
+   "Opis": "Opis wpisu testowego 3.",
+   "Objawy": "",
+   "Rozwiązanie": "Krok pierwszy.\nKrok drugi.",
+   "Lata": "1995–1999"
+  },
+  {
+   "id": "00000000-0000-4000-8000-000000000018",
+   "Nazwa": "Testowa porada DIY numer 4 do testów SSR",
+   "Typ": "Porada",
+   "Model": "Suburban",
+   "Opis": "Opis wpisu testowego 4.",
+   "Objawy": "",
+   "Rozwiązanie": "Krok pierwszy.\nKrok drugi.",
+   "Lata": "1995–1999"
+  },
+  {
+   "id": "00000000-0000-4000-8000-000000000019",
+   "Nazwa": "Testowa porada DIY numer 5 do testów SSR",
+   "Typ": "Porada",
+   "Model": "Suburban",
+   "Opis": "Opis wpisu testowego 5.",
+   "Objawy": "",
+   "Rozwiązanie": "Krok pierwszy.\nKrok drugi.",
+   "Lata": "1995–1999"
+  },
+  {
+   "id": "00000000-0000-4000-8000-000000000020",
+   "Nazwa": "Testowa porada DIY numer 6 do testów SSR",
+   "Typ": "Porada",
+   "Model": "Suburban",
+   "Opis": "Opis wpisu testowego 6.",
+   "Objawy": "",
+   "Rozwiązanie": "Krok pierwszy.\nKrok drugi.",
+   "Lata": "1995–1999"
+  },
+  {
+   "id": "00000000-0000-4000-8000-000000000021",
+   "Nazwa": "Testowa porada DIY numer 7 do testów SSR",
+   "Typ": "Porada",
+   "Model": "Suburban",
+   "Opis": "Opis wpisu testowego 7.",
+   "Objawy": "",
+   "Rozwiązanie": "Krok pierwszy.\nKrok drugi.",
+   "Lata": "1995–1999"
+  },
+  {
+   "id": "00000000-0000-4000-8000-000000000022",
+   "Nazwa": "Testowa porada DIY numer 8 do testów SSR",
+   "Typ": "Porada",
+   "Model": "Suburban",
+   "Opis": "Opis wpisu testowego 8.",
+   "Objawy": "",
+   "Rozwiązanie": "Krok pierwszy.\nKrok drugi.",
+   "Lata": "1995–1999"
+  },
+  {
+   "id": "00000000-0000-4000-8000-000000000023",
+   "Nazwa": "Testowa porada DIY numer 9 do testów SSR",
+   "Typ": "Porada",
+   "Model": "Suburban",
+   "Opis": "Opis wpisu testowego 9.",
+   "Objawy": "",
+   "Rozwiązanie": "Krok pierwszy.\nKrok drugi.",
+   "Lata": "1995–1999"
+  },
+  {
+   "id": "00000000-0000-4000-8000-000000000024",
+   "Nazwa": "Testowa porada DIY numer 10 do testów SSR",
+   "Typ": "Porada",
+   "Model": "Suburban",
+   "Opis": "Opis wpisu testowego 10.",
+   "Objawy": "",
+   "Rozwiązanie": "Krok pierwszy.\nKrok drugi.",
+   "Lata": "1995–1999"
+  },
+  {
+   "id": "00000000-0000-4000-8000-000000000025",
+   "Nazwa": "Testowa porada DIY numer 11 do testów SSR",
+   "Typ": "Porada",
+   "Model": "Suburban",
+   "Opis": "Opis wpisu testowego 11.",
+   "Objawy": "",
+   "Rozwiązanie": "Krok pierwszy.\nKrok drugi.",
+   "Lata": "1995–1999"
+  },
+  {
+   "id": "00000000-0000-4000-8000-000000000026",
+   "Nazwa": "Testowa porada DIY numer 12 do testów SSR",
+   "Typ": "Porada",
+   "Model": "Suburban",
+   "Opis": "Opis wpisu testowego 12.",
+   "Objawy": "",
+   "Rozwiązanie": "Krok pierwszy.\nKrok drugi.",
+   "Lata": "1995–1999"
+  },
+  {
+   "id": "00000000-0000-4000-8000-000000000027",
+   "Nazwa": "Testowa porada DIY numer 13 do testów SSR",
+   "Typ": "Porada",
+   "Model": "Suburban",
+   "Opis": "Opis wpisu testowego 13.",
+   "Objawy": "",
+   "Rozwiązanie": "Krok pierwszy.\nKrok drugi.",
+   "Lata": "1995–1999"
+  },
+  {
+   "id": "00000000-0000-4000-8000-000000000028",
+   "Nazwa": "Testowa porada DIY numer 14 do testów SSR",
+   "Typ": "Porada",
+   "Model": "Suburban",
+   "Opis": "Opis wpisu testowego 14.",
+   "Objawy": "",
+   "Rozwiązanie": "Krok pierwszy.\nKrok drugi.",
+   "Lata": "1995–1999"
+  },
+  {
+   "id": "00000000-0000-4000-8000-000000000029",
+   "Nazwa": "Testowy model numer 1 do testów SSR",
+   "Typ": "Model",
+   "Model": "Silverado",
+   "Opis": "Opis wpisu testowego 1.",
+   "Objawy": "",
+   "Rozwiązanie": "",
+   "Lata": "1995–1999"
+  },
+  {
+   "id": "00000000-0000-4000-8000-000000000030",
+   "Nazwa": "Testowy model numer 2 do testów SSR",
+   "Typ": "Model",
+   "Model": "Silverado",
+   "Opis": "Opis wpisu testowego 2.",
+   "Objawy": "",
+   "Rozwiązanie": "",
+   "Lata": "1995–1999"
+  },
+  {
+   "id": "00000000-0000-4000-8000-000000000031",
+   "Nazwa": "Testowy model numer 3 do testów SSR",
+   "Typ": "Model",
+   "Model": "Silverado",
+   "Opis": "Opis wpisu testowego 3.",
+   "Objawy": "",
+   "Rozwiązanie": "",
+   "Lata": "1995–1999"
+  },
+  {
+   "id": "00000000-0000-4000-8000-000000000032",
+   "Nazwa": "Testowy model numer 4 do testów SSR",
+   "Typ": "Model",
+   "Model": "Silverado",
+   "Opis": "Opis wpisu testowego 4.",
+   "Objawy": "",
+   "Rozwiązanie": "",
+   "Lata": "1995–1999"
+  },
+  {
+   "id": "00000000-0000-4000-8000-000000000033",
+   "Nazwa": "Testowy model numer 5 do testów SSR",
+   "Typ": "Model",
+   "Model": "Silverado",
+   "Opis": "Opis wpisu testowego 5.",
+   "Objawy": "",
+   "Rozwiązanie": "",
+   "Lata": "1995–1999"
+  },
+  {
+   "id": "00000000-0000-4000-8000-000000000034",
+   "Nazwa": "Testowy model numer 6 do testów SSR",
+   "Typ": "Model",
+   "Model": "Silverado",
+   "Opis": "Opis wpisu testowego 6.",
+   "Objawy": "",
+   "Rozwiązanie": "",
+   "Lata": "1995–1999"
+  },
+  {
+   "id": "00000000-0000-4000-8000-000000000035",
+   "Nazwa": "Testowy model numer 7 do testów SSR",
+   "Typ": "Model",
+   "Model": "Silverado",
+   "Opis": "Opis wpisu testowego 7.",
+   "Objawy": "",
+   "Rozwiązanie": "",
+   "Lata": "1995–1999"
+  },
+  {
+   "id": "00000000-0000-4000-8000-000000000036",
+   "Nazwa": "Testowy model numer 8 do testów SSR",
+   "Typ": "Model",
+   "Model": "Silverado",
+   "Opis": "Opis wpisu testowego 8.",
+   "Objawy": "",
+   "Rozwiązanie": "",
+   "Lata": "1995–1999"
+  },
+  {
+   "id": "00000000-0000-4000-8000-000000000037",
+   "Nazwa": "Testowy model numer 9 do testów SSR",
+   "Typ": "Model",
+   "Model": "Silverado",
+   "Opis": "Opis wpisu testowego 9.",
+   "Objawy": "",
+   "Rozwiązanie": "",
+   "Lata": "1995–1999"
+  },
+  {
+   "id": "00000000-0000-4000-8000-000000000038",
+   "Nazwa": "Testowy model numer 10 do testów SSR",
+   "Typ": "Model",
+   "Model": "Silverado",
+   "Opis": "Opis wpisu testowego 10.",
+   "Objawy": "",
+   "Rozwiązanie": "",
+   "Lata": "1995–1999"
+  },
+  {
+   "id": "00000000-0000-4000-8000-000000000039",
+   "Nazwa": "Testowy model numer 11 do testów SSR",
+   "Typ": "Model",
+   "Model": "Silverado",
+   "Opis": "Opis wpisu testowego 11.",
+   "Objawy": "",
+   "Rozwiązanie": "",
+   "Lata": "1995–1999"
+  },
+  {
+   "id": "00000000-0000-4000-8000-000000000040",
+   "Nazwa": "Testowy model numer 12 do testów SSR",
+   "Typ": "Model",
+   "Model": "Silverado",
+   "Opis": "Opis wpisu testowego 12.",
+   "Objawy": "",
+   "Rozwiązanie": "",
+   "Lata": "1995–1999"
+  },
+  {
+   "id": "00000000-0000-4000-8000-000000000041",
+   "Nazwa": "Testowy model numer 13 do testów SSR",
+   "Typ": "Model",
+   "Model": "Silverado",
+   "Opis": "Opis wpisu testowego 13.",
+   "Objawy": "",
+   "Rozwiązanie": "",
+   "Lata": "1995–1999"
+  },
+  {
+   "id": "00000000-0000-4000-8000-000000000042",
+   "Nazwa": "Testowy model numer 14 do testów SSR",
+   "Typ": "Model",
+   "Model": "Silverado",
+   "Opis": "Opis wpisu testowego 14.",
+   "Objawy": "",
+   "Rozwiązanie": "",
+   "Lata": "1995–1999"
+  }
+ ],
+ "count": 42
+}

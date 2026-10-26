@@ -26,8 +26,18 @@ jobs:
         run: |
           # npm ci z jedną ponowną próbą (zawieszenia rejestru npm na runnerze)
           timeout 300 npm ci --no-audit --no-fund || { echo 'npm ci: ponowna próba'; rm -rf node_modules; timeout 300 npm ci --no-audit --no-fund; }
+      - id: mock
+        # Atrapa API Notion: listy /usterki /diy /modele /poradniki /baza są renderowane na serwerze (ISR), więc testy SSR potrzebują danych
+        # już przy buildzie. Bez tego testy SSR byłyby pomijane w projektach mobilnych, a bramka (słusznie) odrzuca takie pominięcia.
+        run: |
+          node tests/helpers/mock-notion.mjs tests/fixtures/notion-ssr.json 4010 > /tmp/mock-notion.log 2>&1 &
+          for i in $(seq 1 20); do if grep -q 'mock notion on' /tmp/mock-notion.log; then exit 0; fi; sleep 0.5; done
+          cat /tmp/mock-notion.log; exit 1
       - id: build
         run: npm run build
+        env:
+          NOTION_API_BASE: http://127.0.0.1:4010
+          NOTION_TOKEN: ci-mock-token
       - name: Cache Playwright browsers
         uses: actions/cache@v4
         with:
@@ -44,7 +54,7 @@ jobs:
           install_tooling || { echo 'Instalacja Playwright: ponowna próba'; sleep 10; install_tooling; }
       - id: server
         run: |
-          npm run start -- --hostname 127.0.0.1 --port 3100 > /tmp/mobile-webkit-server.log 2>&1 &
+          NOTION_API_BASE=http://127.0.0.1:4010 NOTION_TOKEN=ci-mock-token npm run start -- --hostname 127.0.0.1 --port 3100 > /tmp/mobile-webkit-server.log 2>&1 &
           for gmt_loop_attempt in $(seq 1 60); do
             printf 'Attempt %s\n' "$gmt_loop_attempt"
             if curl -fsS http://127.0.0.1:3100 >/dev/null; then exit 0; fi
@@ -56,6 +66,8 @@ jobs:
         run: npx playwright test --config=playwright.webkit.config.cjs --reporter=json > /tmp/mobile-webkit-tests.json 2>/tmp/mobile-webkit-errors.log
       - id: ux
         continue-on-error: true
+        env:
+          SSR_LISTS: '1'
         run: npx playwright test --config=playwright.ux.config.cjs --reporter=json > /tmp/ux-key-paths.json 2>/tmp/ux-key-paths-errors.log
       - name: Generate report
         if: always()
