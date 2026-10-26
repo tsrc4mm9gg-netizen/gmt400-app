@@ -2,6 +2,8 @@ import type { NextConfig } from "next";
 import { withSentryConfig } from '@sentry/nextjs';
 
 const nextConfig: NextConfig = {
+  // Osobny katalog buildu dla CI: drugi build z atrapą Notion (testy SSR list) obok zwykłego bez danych (test błędu pobierania).
+  distDir: process.env.NEXT_DIST_DIR || '.next',
   cacheComponents: false,
   env: {
     // Tylko prawdziwe VERCEL_ENV — wcześniej fallback na NODE_ENV dawał „production” w każdym lokalnym/CI buildzie,
