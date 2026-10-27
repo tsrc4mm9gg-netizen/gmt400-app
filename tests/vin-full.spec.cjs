@@ -1,6 +1,7 @@
 // Pełny dekoder VIN GMT400: wszystkie pozycje ze źródłami, vPIC na żądanie (mock), linki do historii, wypełnienie Mój samochód.
 const { test, expect } = require('@playwright/test');
 const path = require('node:path');
+const { hydrated } = require('./helpers/hydration.cjs');
 const BASE = process.env.UX_BASE || 'http://127.0.0.1:3100';
 const FIXTURE = path.join(__dirname, 'fixtures', 'notion-ux.json');
 const VPIC = { data: { Make: 'CHEVROLET', Model: 'C/K Pickup 1500', ModelYear: '1997', Series: '1/2 ton', BodyClass: 'Pickup', DriveType: '4WD/4-Wheel Drive/4x4', DisplacementL: '5.7', EngineCylinders: '8', FuelTypePrimary: 'Gasoline', PlantCity: 'PONTIAC', PlantState: 'MICHIGAN', PlantCountry: 'UNITED STATES (USA)', ErrorText: '0 - VIN decoded clean. Check Digit (9th position) is correct' }, source: 'NHTSA vPIC', fetchedAt: '2026-10-23T18:00:00.000Z' };
@@ -67,6 +68,7 @@ test('VIN: liczniki przed linkami historii — tylko po otwarciu, 0 przygaszone,
   await page.context().route(u => u.pathname === '/api/vin-hits', async r => { hits.push(r.request().postDataJSON()); await new Promise(res => setTimeout(res, 300)); await r.fulfill({ json: { counts: { nhtsaRecalls: 2, nhtsaComplaints: 0 }, notes: {}, scope: { make: 'Chevrolet', year: '1995', platform: 'C/K', nhtsaModels: ['C/K', 'K1500'] } } }); });
   await page.goto(BASE + '/vin');
   const d = page.getByTestId('vin-decoder');
+  await hydrated(d.getByRole('button', { name: 'DEKODUJ VIN' }));
   await d.getByRole('textbox', { name: 'Numer VIN do dekodowania' }).fill('1GCEK14K6SZ199684');
   await d.getByRole('button', { name: 'DEKODUJ VIN' }).click();
   const hist = d.getByTestId('vin-history');
@@ -96,6 +98,7 @@ test('VIN: błąd liczników pokazuje „?”, nigdy 0', async ({ page }) => {
   await page.context().route(u => u.pathname === '/api/vin-hits', r => r.fulfill({ status: 503, json: { error: 'x' } }));
   await page.goto(BASE + '/vin');
   const d = page.getByTestId('vin-decoder');
+  await hydrated(d.getByRole('button', { name: 'DEKODUJ VIN' }));
   await d.getByRole('textbox', { name: 'Numer VIN do dekodowania' }).fill('1GCEK14K6SZ199684');
   await d.getByRole('button', { name: 'DEKODUJ VIN' }).click();
   const hist = d.getByTestId('vin-history');
@@ -114,6 +117,7 @@ test('Historia VIN: walidacja, ta sama lista z licznikami, link do /vin, bez obr
   await expect(page.getByRole('heading', { level: 1, name: 'Historia VIN' })).toBeVisible();
   const input = page.getByLabel('Numer VIN pojazdu', { exact: true });
   const go = page.getByRole('button', { name: 'SPRAWDŹ HISTORIĘ' });
+  await hydrated(go);
   await input.fill('1GCEK14K6SZ1996');
   await go.click();
   await expect(page.getByTestId('history-vin-errors')).toContainText('17 znaków');
@@ -155,6 +159,7 @@ test('VIN: nieznany kod pokazuje „nieznane – sprawdź”', async ({ page }) 
   await page.goto(BASE + '/?tab=vin');
   await expect(page).toHaveURL(/\/vin$/); // stary link przekierowuje
   const d = page.getByTestId('vin-decoder');
+  await hydrated(d.getByRole('button', { name: 'DEKODUJ VIN' }));
   await d.getByRole('textbox', { name: 'Numer VIN do dekodowania' }).fill('1GNFK16R7VJ345678');
   await d.getByRole('button', { name: 'DEKODUJ VIN' }).click();
   await expect(d.getByTestId('vin-pos-11')).toContainText('nieznane – sprawdź');
@@ -165,6 +170,7 @@ test('VIN: nieznany kod pokazuje „nieznane – sprawdź”', async ({ page }) 
 test('Mój samochód: VIN wypełnia markę, nadwozie, model, napęd, rocznik i silnik', async ({ page }) => {
   const { errors } = await guard(page);
   await page.goto(BASE + '/moj-samochod');
+  await hydrated(page.getByRole('button', { name: 'DEKODUJ VIN', exact: true }));
   await page.locator('#vin-input').fill('1GCHK29F8YF123456');
   await page.getByRole('button', { name: 'DEKODUJ VIN', exact: true }).click();
   const form = page.getByRole('form', { name: 'Dane auta' });
@@ -189,6 +195,7 @@ test('/vin: wklejanie, RPO od razu i zapis VIN + RPO w Mój samochód', async ({
   await page.goto(BASE + '/vin');
   await expect(page.locator('h1')).toHaveText('Sprawdź swój VIN');
   const d = page.getByTestId('vin-decoder');
+  await hydrated(d.getByRole('button', { name: 'DEKODUJ VIN' }));
   const input = d.getByRole('textbox', { name: 'Numer VIN do dekodowania' });
   await input.fill('1gchk29f8yf123456');
   await expect(input).toHaveValue('1GCHK29F8YF123456');
@@ -211,6 +218,7 @@ test('/vin: wklejanie, RPO od razu i zapis VIN + RPO w Mój samochód', async ({
   await expect(page.getByTestId('header-car-badge')).toContainText('K2500');
   // Błędny VIN — prosty komunikat
   await page.goto(BASE + '/vin');
+  await hydrated(page.getByRole('button', { name: 'DEKODUJ VIN' }));
   await page.getByRole('textbox', { name: 'Numer VIN do dekodowania' }).fill('1GCHK29F8YF12');
   await page.getByRole('button', { name: 'DEKODUJ VIN' }).click();
   await expect(page.getByTestId('vin-errors')).toContainText('17 znaków');

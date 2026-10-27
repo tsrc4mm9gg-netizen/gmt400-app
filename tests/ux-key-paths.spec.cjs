@@ -1,6 +1,7 @@
 // Kluczowe ścieżki użytkownika (telefon 390×844 i komputer 1280). Uruchamiane w Chromium i WebKit.
 const { test, expect } = require('@playwright/test');
 const path = require('node:path');
+const { hydrated } = require('./helpers/hydration.cjs');
 const BASE = process.env.UX_BASE || 'http://127.0.0.1:3100';
 const FIXTURE = path.join(__dirname, 'fixtures', 'notion-ux.json');
 
@@ -265,6 +266,7 @@ test('dekoder VIN: cyfra kontrolna, rok, silnik z OM i błędne znaki', async ({
   await page.goto(BASE + '/vin');
   const decoder = page.getByTestId('vin-decoder');
   await decoder.scrollIntoViewIfNeeded();
+  await hydrated(decoder.getByRole('button', { name: 'DEKODUJ VIN' }));
   const input = decoder.getByRole('textbox', { name: 'Numer VIN do dekodowania' });
   await input.fill('1GCEK19R0VE000000');
   await decoder.getByRole('button', { name: 'DEKODUJ VIN' }).click();
@@ -282,6 +284,7 @@ test('dekoder VIN: cyfra kontrolna, rok, silnik z OM i błędne znaki', async ({
 test('RPO: kilka kodów naraz, nieznany kod i podpowiedź O/0', async ({ page }) => {
   const errors = await guard(page);
   await page.goto(BASE + '/narzedzia/rpo');
+  await hydrated(page.getByRole('button', { name: 'Sprawdź kody', exact: true }));
   await page.locator('#rpo-query').fill('G80 Z71 L31 XQZ LO5');
   await page.getByRole('button', { name: 'Sprawdź kody', exact: true }).click();
   await expect(page.getByTestId('rpo-count')).toContainText('5');

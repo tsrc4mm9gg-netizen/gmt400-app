@@ -2,6 +2,7 @@
 // Uruchamiane przez playwright.ux.config.cjs (Chromium + WebKit, 390 i 1280) oraz dodatkowo 768 px.
 const { test, expect } = require('@playwright/test');
 const path = require('node:path');
+const { hydrated } = require('./helpers/hydration.cjs');
 const BASE = process.env.UX_BASE || 'http://127.0.0.1:3100';
 const FIXTURE = path.join(__dirname, 'fixtures', 'notion-ux.json');
 
@@ -19,6 +20,7 @@ test('Mój samochód: formularz → podsumowanie, plakietka, odświeżenie, zapo
   const errors = await guard(page);
   await page.goto(BASE + '/moj-samochod');
   const form = page.getByRole('form', { name: 'Dane auta' });
+  await hydrated(form.getByRole('button', { name: 'Zapisz moje auto' }));
   await form.getByLabel('Marka').selectOption('Chevrolet');
   await form.getByLabel('Nadwozie').selectOption({ index: 1 });
   await form.getByLabel('Model').selectOption('K1500');
@@ -41,6 +43,7 @@ test('Mój samochód: formularz → podsumowanie, plakietka, odświeżenie, zapo
 test('Mój samochód: VIN podpowiada rocznik', async ({ page }) => {
   const errors = await guard(page);
   await page.goto(BASE + '/moj-samochod');
+  await hydrated(page.getByRole('button', { name: 'DEKODUJ VIN' }));
   await page.getByLabel('Numer VIN do dekodowania').fill('1GCEK19R0VE000000');
   await page.getByRole('button', { name: 'DEKODUJ VIN' }).click();
   await expect(page.getByTestId('vin-year')).toContainText('1997');
@@ -52,6 +55,7 @@ test('Mój samochód: VIN podpowiada rocznik', async ({ page }) => {
 test('dekoder RPO: kilka kodów naraz, nieznany kod i oryginał GM', async ({ page }) => {
   const errors = await guard(page);
   await page.goto(BASE + '/narzedzia/rpo');
+  await hydrated(page.getByRole('button', { name: 'Sprawdź kody' }));
   await page.getByLabel('Kody RPO lub szukana fraza').fill('Z71 G80 ZY2 QQ9');
   await page.getByRole('button', { name: 'Sprawdź kody' }).click();
   await expect(page.locator('[data-testid=rpo-result][data-code=Z71]')).toBeVisible();
@@ -71,6 +75,7 @@ test('bezpieczniki: wyszukiwanie w tabeli', async ({ page }) => {
   await expect(table).toBeVisible();
   const count = table.getByTestId('fuse-count');
   const before = await count.innerText();
+  await hydrated(table.getByLabel('Szukaj w tabeli bezpieczników'));
   await table.getByLabel('Szukaj w tabeli bezpieczników').fill('radio');
   await expect(count).not.toHaveText(before);
   await expect(count).not.toHaveText('Wyniki: 0');
