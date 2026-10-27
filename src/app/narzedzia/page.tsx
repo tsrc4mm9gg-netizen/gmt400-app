@@ -17,7 +17,7 @@ const s: Record<string, CSSProperties> = {
  intro: { display:'block', maxWidth:650, margin:0, color:'#c7ccd3', fontSize:14, lineHeight:1.65 },
  grid: { display:'grid', gridTemplateColumns:'repeat(auto-fit, minmax(min(100%, 300px), 1fr))', alignItems:'stretch', gap:14, width:'100%', minWidth:0, margin:0, padding:0 },
  card: { boxSizing:'border-box', position:'relative', display:'flex', flexDirection:'column', alignItems:'flex-start', justifyContent:'flex-start', width:'100%', maxWidth:'100%', minWidth:0, margin:0, padding:20, border:'1px solid rgba(255,255,255,.16)', borderRadius:20, backgroundColor:'#1a1a1d', backgroundImage:'var(--card-gradient)', color:'#ededed', textAlign:'left', textDecoration:'none', whiteSpace:'normal', overflowWrap:'anywhere' },
- icon: { display:'flex', alignItems:'center', justifyContent:'center', flex:'0 0 auto', width:36, height:36, margin:'0 0 10px', border:'1px solid #7a3434', borderRadius:8, background:'var(--surface-hi)', color:'var(--accent-soft)' },
+ icon: { display:'flex', alignItems:'center', justifyContent:'center', flex:'0 0 auto', width:36, height:36, margin:'0 0 10px', border:'1px solid rgba(255,255,255,.22)', borderRadius:8, background:'var(--surface-hi)', color:'var(--accent-soft)' },
  tag: { display:'block', margin:'0 0 5px', color:'#a3a3a3', fontSize:11, fontWeight:650, lineHeight:1.5 },
  cardTitle: { display:'block', width:'100%', margin:'0 0 8px', padding:0, color:'var(--accent-soft)', fontSize:21, fontWeight:700, lineHeight:1.3, textWrap:'initial', whiteSpace:'normal' },
  description: { display:'block', width:'100%', maxWidth:'100%', margin:'0 0 8px', color:'#e0e5ec', fontSize:14, lineHeight:1.65, whiteSpace:'normal', overflowWrap:'anywhere' },
@@ -37,7 +37,7 @@ export default function ToolsPage() {
  </header>
  <section style={s.grid} aria-label="Dostępne narzędzia">
  {TOOLS.map(tool => <Link key={tool.href} href={tool.href} style={s.card} data-tool-card>
- <span style={s.icon} aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" focusable="false"><path d={tool.icon} /></svg></span>
+ <span style={s.icon} aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" focusable="false"><path d={tool.icon} /></svg></span>
  <span style={s.tag}>{tool.tag}</span>
  <h2 style={s.cardTitle}>{tool.title}</h2>
  <p style={s.description}>{tool.description}</p>

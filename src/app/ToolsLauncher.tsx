@@ -1,4 +1,5 @@
 'use client';
+import { CategoryIcon } from './ui/CategoryIcon';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
@@ -35,7 +36,7 @@ export default function ToolsLauncher() {
         textDecoration: 'none',
       }}
     >
-      <span aria-hidden="true">🛠️</span>
+      <CategoryIcon name="tools" className="h-5 w-5" />
       <span>Narzędzia</span>
     </Link>
   );

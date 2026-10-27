@@ -1,10 +1,11 @@
 import Link from 'next/link';
+import { IconTile, type CategoryIconName } from './ui/CategoryIcon';
 
-const CATEGORIES = [
-  { href: '/modele', icon: '🚚', title: 'Modele', desc: 'Warianty i roczniki' },
-  { href: '/kody-obd', icon: '📡', title: 'Kody OBD', desc: 'OBD-I 88–95 / OBD-II 96+' },
-  { href: '/schematy', icon: '🔌', title: 'Schematy', desc: 'Złącza i układy' },
-  { href: '/narzedzia', icon: '🔧', title: 'Narzędzia', desc: 'RPO, VIN, kalkulatory' },
+const CATEGORIES: { href: string; icon: CategoryIconName; title: string; desc: string }[] = [
+  { href: '/modele', icon: 'modele', title: 'Modele', desc: 'Warianty i roczniki' },
+  { href: '/kody-obd', icon: 'obd', title: 'Kody OBD', desc: 'OBD-I 88–95 / OBD-II 96+' },
+  { href: '/schematy', icon: 'schematy', title: 'Schematy', desc: 'Złącza i układy' },
+  { href: '/narzedzia', icon: 'tools', title: 'Narzędzia', desc: 'RPO, VIN, kalkulatory' },
 ];
 
 export default function CategoryGrid() {
@@ -16,12 +17,12 @@ export default function CategoryGrid() {
           <Link
             key={cat.href}
             href={cat.href}
-            className="group relative z-10 block min-h-28 rounded-xl border border-white/10 bg-neutral-900 p-4 transition hover:border-silver-600/50 hover:bg-neutral-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-silver-500"
+            className="group relative z-10 block min-h-28 rounded-2xl border border-white/15 bg-neutral-900 p-4 transition hover:border-silver-600/50 hover:bg-neutral-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-silver-500"
           >
-            <div className="mb-2 text-2xl" aria-hidden="true">{cat.icon}</div>
+            <IconTile name={cat.icon} className="mb-3" />
             <div className="font-semibold text-white">{cat.title}</div>
             <div className="mt-1 text-xs text-neutral-400">{cat.desc}</div>
-            <div className="mt-3 h-px w-8 bg-silver-600 transition-all group-hover:w-12" />
+            
           </Link>
         ))}
       </div>

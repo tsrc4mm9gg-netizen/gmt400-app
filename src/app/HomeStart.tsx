@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { IconTile } from './ui/CategoryIcon';
 
 /** Zwarty początek strony głównej: VIN (pole + przycisk), potem Usterki i DIY. */
 export default function HomeStart() {
@@ -59,16 +60,16 @@ export default function HomeStart() {
 
       <ul className="mt-3 grid grid-cols-2 gap-3" data-testid="home-main-entries">
         <li>
-          <Link href="/usterki" className="group flex h-full min-h-28 flex-col rounded-2xl border border-white/15 bg-neutral-900 p-4 transition hover:border-silver-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-silver-500">
-            <svg aria-hidden="true" viewBox="0 0 24 24" className="h-7 w-7 text-silver-500" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 3 2 20h20L12 3Z" /><path d="M12 10v4M12 17.5v.01" /></svg>
-            <span className="mt-2 text-lg font-bold text-white">Usterki</span>
+          <Link href="/usterki" className="group flex h-full min-h-28 flex-col rounded-3xl border border-white/15 bg-neutral-900 p-4 transition hover:border-silver-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-silver-500">
+            <IconTile name="usterki" />
+            <span className="mt-3 text-lg font-bold text-white">Usterki</span>
             <span className="mt-0.5 text-xs text-neutral-300">Objawy i diagnostyka: skrzynia, silnik, ABS, zawieszenie</span>
           </Link>
         </li>
         <li>
-          <Link href="/diy" className="group flex h-full min-h-28 flex-col rounded-2xl border border-white/15 bg-neutral-900 p-4 transition hover:border-silver-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-silver-500">
-            <svg aria-hidden="true" viewBox="0 0 24 24" className="h-7 w-7 text-silver-500" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14.7 6.3a4 4 0 0 0-5 5L3 18l3 3 6.7-6.7a4 4 0 0 0 5-5l-2.4 2.4-2.6-.6-.6-2.6 2.6-2.2Z" /></svg>
-            <span className="mt-2 text-lg font-bold text-white">DIY</span>
+          <Link href="/diy" className="group flex h-full min-h-28 flex-col rounded-3xl border border-white/15 bg-neutral-900 p-4 transition hover:border-silver-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-silver-500">
+            <IconTile name="diy" />
+            <span className="mt-3 text-lg font-bold text-white">DIY</span>
             <span className="mt-0.5 text-xs text-neutral-300">Naprawy krok po kroku z numerami części i momentami</span>
           </Link>
         </li>

@@ -7,6 +7,11 @@ import { useModelSelection, type Filters } from './ModelSelectionContext';
 import { BODY_STYLES, bodyYears, yearOptions } from '../lib/body-styles';
 import { bodyImage } from '../lib/model-images';
 
+// Linia podłogi (dół opon) jako ułamek wysokości zdjęcia — do odbicia na podłodze studia.
+const FLOOR: Record<string, number> = { 'tahoe-4d': 0.76, 'tahoe-2d': 0.755, suburban: 0.742, yukon: 0.75, 'ck-reg': 0.82, 'ck-ext': 0.795, k1500: 0.755, sierra: 0.728, dually: 0.733 };
+// Zdjęcia 3:2 w ramce 16:9 (object-cover) tracą ~8% góry i dołu.
+const floorPercent = (id: string) => `${((((FLOOR[id] ?? 0.75) - 0.0809) / 0.8382) * 100).toFixed(1)}%`;
+
 const ENGINES = [
   { value: '4.3', label: '4.3 V6' },
   { value: '5.0', label: '5.0 V8' },
@@ -74,66 +79,69 @@ export default function ModelHero() {
       </div>
 
       <div
-        className="relative overflow-hidden rounded-2xl border border-white/10 bg-neutral-900 shadow-2xl"
+        className="relative overflow-hidden rounded-3xl border border-white/20 bg-neutral-950 shadow-2xl"
         role="group"
         aria-roledescription="karuzela"
         aria-label={`Model ${index + 1} z ${BODY_STYLES.length}: ${body.name}`}
         data-testid="model-carousel"
+        style={{ touchAction: 'pan-y' }}
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
         onTouchCancel={() => { touchStart.current = null; }}
         onKeyDown={handleKey}
       >
-        <div
-          className="absolute left-3 top-3 z-10 rounded-md bg-silver-600 px-2.5 py-1 text-sm font-bold text-neutral-950 shadow"
-          data-testid="year-badge"
-          aria-live="polite"
-        >
-          {badge}
-        </div>
-
-        <div className="relative aspect-[16/9] w-full">
+        <div className="studio relative aspect-[16/9] w-full" style={{ ['--floor' as string]: floorPercent(body.id) }}>
           {!imageLoaded && <div aria-hidden="true" className="absolute inset-0 animate-pulse bg-neutral-800" />}
+          <div className="studio-reflection studio-slide" aria-hidden="true" key={`r-${body.image}`}>
+            <Image src={bodyImage(body)} alt="" fill sizes="(max-width: 768px) 100vw, 768px" className="object-cover" />
+          </div>
           <Image
-            onLoad={() => setImageLoaded(true)}
             key={body.image}
+            onLoad={() => setImageLoaded(true)}
             src={bodyImage(body)}
             alt={`${body.name} (${bodyYears(body)})`}
             fill
             sizes="(max-width: 768px) 100vw, 768px"
-            className="object-cover"
+            className="studio-slide object-cover"
             priority={index === 0}
           />
-        </div>
 
-        <div className="flex items-center gap-2 border-t border-white/10 bg-neutral-950 px-2 py-3 text-white">
-          <button type="button" onClick={prev} className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-white/5 text-2xl text-neutral-950 ring-1 ring-white/10 hover:bg-silver-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-silver-500" aria-label="Poprzedni model">‹</button>
-          <div className="min-w-0 flex-1 text-center">
-            <h3 className="truncate text-xl font-bold sm:text-2xl">{body.name}</h3>
-            <p className="text-sm text-neutral-300">
-              {filters.year ? filters.year : bodyYears(body)}
-              {filters.engine ? ` · ${ENGINES.find(e => e.value === filters.engine)?.label ?? filters.engine}` : ''}
-              {filters.drivetrain ? ` · ${filters.drivetrain.toUpperCase()}` : ''}
-            </p>
-            {body.note && <p className="mt-0.5 text-xs text-neutral-400">{body.note}</p>}
-          </div>
-          <button type="button" onClick={next} className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-white/5 text-2xl text-neutral-950 ring-1 ring-white/10 hover:bg-silver-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-silver-500" aria-label="Następny model">›</button>
-        </div>
-      </div>
-
-      <div className="-mx-2 mt-1 flex justify-center">
-        {BODY_STYLES.map((b, i) => (
-          <button
-            key={b.id}
-            type="button"
-            onClick={() => go(i)}
-            className="flex h-11 w-10 items-center justify-center"
-            aria-label={b.name}
-            aria-current={i === index ? 'true' : undefined}
+          <div
+            className="absolute left-3 top-3 z-10 rounded-full border border-white/25 bg-black/55 px-3 py-1 text-sm font-semibold text-white backdrop-blur"
+            data-testid="year-badge"
+            aria-live="polite"
           >
-            <span className={`block h-1.5 rounded-full transition-all ${i === index ? 'w-6 bg-silver-600' : 'w-1.5 bg-white/30'}`} />
-          </button>
-        ))}
+            {badge}
+          </div>
+
+          <button type="button" onClick={prev} className="absolute left-3 top-1/2 z-10 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-white/30 bg-black/70 text-2xl text-white backdrop-blur hover:bg-black/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-silver-500" aria-label="Poprzedni model">‹</button>
+          <button type="button" onClick={next} className="absolute right-3 top-1/2 z-10 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-white/30 bg-black/70 text-2xl text-white backdrop-blur hover:bg-black/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-silver-500" aria-label="Następny model">›</button>
+
+          <div className="absolute inset-x-0 bottom-0 z-10 flex justify-center">
+            {BODY_STYLES.map((b, i) => (
+              <button
+                key={b.id}
+                type="button"
+                onClick={() => go(i)}
+                className="flex h-9 w-6 items-center justify-center"
+                aria-label={b.name}
+                aria-current={i === index ? 'true' : undefined}
+              >
+                <span className={`block h-1.5 rounded-full transition-all ${i === index ? 'w-5 bg-white' : 'w-1.5 bg-white/40'}`} />
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <div className="border-t border-white/10 bg-neutral-950 px-3 py-3 text-center text-white">
+          <h3 className="truncate text-xl font-bold sm:text-2xl">{body.name}</h3>
+          <p className="text-sm text-neutral-300">
+            {filters.year ? filters.year : bodyYears(body)}
+            {filters.engine ? ` · ${ENGINES.find(e => e.value === filters.engine)?.label ?? filters.engine}` : ''}
+            {filters.drivetrain ? ` · ${filters.drivetrain.toUpperCase()}` : ''}
+          </p>
+          {body.note && <p className="mt-0.5 text-xs text-neutral-400">{body.note}</p>}
+        </div>
       </div>
 
       <Link
