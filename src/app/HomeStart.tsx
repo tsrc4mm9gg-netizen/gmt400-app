@@ -60,11 +60,11 @@ export default function HomeStart() {
 
       <ul className="mt-3 grid grid-cols-2 gap-3" data-testid="home-main-entries">
         <li className="col-span-2">
-          <Link href="/diagnoza" data-testid="home-diagnoza" className="group flex min-h-16 items-center gap-3 rounded-3xl border-2 border-silver-600/70 bg-gradient-to-b from-silver-950/50 to-neutral-950 p-3 transition hover:border-silver-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-silver-500">
+          <Link href="/diagnoza" data-testid="home-diagnoza" className="group flex min-h-14 items-center gap-3 rounded-3xl border-2 border-silver-600/70 bg-gradient-to-b from-silver-950/50 to-neutral-950 p-2.5 transition hover:border-silver-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-silver-500">
             <IconTile name="diagnoza" />
             <span className="min-w-0 flex-1">
               <span className="block text-lg font-bold leading-tight text-white">Co się dzieje z moim autem?</span>
-              <span className="mt-0.5 block text-xs text-neutral-300">Wybierz objaw → 1–2 pytania → możliwe przyczyny</span>
+              <span className="mt-0.5 block text-xs text-neutral-300">Objaw → 1–2 pytania → przyczyny</span>
             </span>
             <span aria-hidden="true" className="text-xl text-silver-300">›</span>
           </Link>

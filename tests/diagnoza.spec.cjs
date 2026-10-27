@@ -4,6 +4,7 @@ const { test, expect } = require('@playwright/test');
 const path = require('node:path');
 const { hydrated } = require('./helpers/hydration.cjs');
 const BASE = process.env.UX_BASE || 'http://127.0.0.1:3100';
+const NODATA_BASE = process.env.NODATA_BASE || 'http://127.0.0.1:3100';
 const FIXTURE = path.join(__dirname, 'fixtures', 'notion-diagnoza.json');
 const SYMPTOM_IDS = ['nie-odpala', 'szarpie-gasnie', 'check-engine', 'wycieki', 'halasy', 'hamulce', 'skrzynia', 'klima-ogrzewanie', 'elektryka', 'przegrzewanie', 'paliwo-dym'];
 
@@ -127,15 +128,13 @@ test('/diagnoza: każdy z 11 objawów daje listę przyczyn z linkami; luka treś
 });
 
 test('/diagnoza: gdy Notion nie odpowiada, przyczyny nadal się pokazują z ogólnymi linkami do bazy (bez błędu strony)', async ({ page }) => {
+  // Scenariusz awarii wymaga serwera BEZ danych Notion po stronie SSR (zwykły build, port 3100) — wtedy przeglądarka sama pobiera /api/notion.
   await guard(page, { notion: 'fail' });
-  await open(page, '?objaw=nie-odpala');
+  await page.goto(NODATA_BASE + '/diagnoza?objaw=nie-odpala');
+  await expect(page.getByTestId('diagnoza-tool')).toBeVisible();
+  await hydrated(page.getByTestId('diagnoza-tool').locator('button').first());
   const list = page.getByTestId('cause-list');
   await expect(list).toBeVisible();
-  const loading = await page.getByText('Ładowanie wpisu…').count();
-  const fallback = await page.getByText('Wpis w bazie wiedzy').count();
-  const server = await page.getByTestId('cause-link').first().getAttribute('href');
-  // serwer z danymi Notion (np. produkcja) renderuje wpisy bez udziału przeglądarki — wtedy scenariusz awarii nie dotyczy
-  test.skip(loading === 0 && fallback === 0 && /^\/baza\//.test(server || ''), 'serwer ma dane Notion po stronie SSR');
   await expect(page.getByText('Wpis w bazie wiedzy').first()).toBeVisible({ timeout: 20000 });
   await expect(list.locator('> li').first()).toBeVisible();
 });
