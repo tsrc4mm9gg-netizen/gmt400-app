@@ -1,7 +1,7 @@
 {
-  "auditorCodeSha": "42a29f0f664798709983ff2299c4c3479a47035f",
-  "runId": "39878651270",
-  "checkedAt": "2026-10-23T00:32:47.333Z",
+  "auditorCodeSha": "38d0c90e2cfefd82053b884606780b325b653586",
+  "runId": "40426952475",
+  "checkedAt": "2026-10-27T00:31:44.857Z",
   "passed": false,
   "scope": "Candidate main-page import integration, local build and Chromium tests with mocked Notion. Manual customs/VAT inputs, not automated tax assessment or production certification.",
   "parseError": "ENOENT: no such file or directory, open '/tmp/legacy-costs-tests.json'",
