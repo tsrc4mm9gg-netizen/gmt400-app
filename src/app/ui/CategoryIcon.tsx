@@ -24,6 +24,19 @@ const PATHS = {
   fluid: <path d="M12 3.5s6 6.2 6 10.5a6 6 0 0 1-12 0c0-4.3 6-10.5 6-10.5Z" />,
   fuse: <><rect x="3.5" y="3.5" width="17" height="17" rx="3" /><path d="M3.5 9.2h17M3.5 14.8h17M9.2 3.5v17M14.8 3.5v17" /></>,
   grid: <><rect x="4" y="4" width="6.5" height="6.5" rx="1.6" /><rect x="13.5" y="4" width="6.5" height="6.5" rx="1.6" /><rect x="4" y="13.5" width="6.5" height="6.5" rx="1.6" /><rect x="13.5" y="13.5" width="6.5" height="6.5" rx="1.6" /></>,
+  diagnoza: <><circle cx="11" cy="11" r="6.8" /><path d="m20.5 20.5-4.7-4.7" /><path d="M7.4 11h1.9l1.1-2.4 1.6 4.8 1.1-2.4h1.5" /></>,
+  key: <><circle cx="7.5" cy="15.5" r="3.6" /><path d="m10.1 13 8.4-8.4M15.6 7.5l2.2 2.2M18 5.1l2 2" /></>,
+  wave: <path d="M2.5 12h3.2l2.1-6.5 3.6 12.5 3.2-9.5 1.7 3.5h5.2" />,
+  engine: <path d="M4 10.5h1.5V8.5H8V6.5h6v2h2.2l2 2.2h1.8v4.8h-1.8l-2 2.3H8.6L6 15.2H4v-4.7Z" />,
+  drop: <><path d="M12 3.2s5.2 5.5 5.2 9.2a5.2 5.2 0 0 1-10.4 0C6.8 8.7 12 3.2 12 3.2Z" /><path d="M5 20.8h14" /></>,
+  sound: <><path d="M3.5 9.7v4.6H7l4.8 4V5.7L7 9.7H3.5Z" /><path d="M15 9.2a4 4 0 0 1 0 5.6M17.6 6.6a7.5 7.5 0 0 1 0 10.8" /></>,
+  brake: <><circle cx="12" cy="12" r="8.6" /><circle cx="12" cy="12" r="2.6" /><path d="M12 5v1.8M12 17.2V19M5 12h1.8M17.2 12H19" /></>,
+  gear: <><circle cx="12" cy="12" r="3" /><path d="M12 3.5v3M12 17.5v3M3.5 12h3M17.5 12h3M6 6l2.1 2.1M15.9 15.9 18 18M18 6l-2.1 2.1M8.1 15.9 6 18" /></>,
+  snow: <path d="M12 3v18M4.4 7.5l15.2 9M19.6 7.5l-15.2 9M9.6 4.6 12 6.8l2.4-2.2M9.6 19.4l2.4-2.2 2.4 2.2" />,
+  bolt: <path d="M13.2 3 5.5 13.6h5.7L10.4 21l8.1-10.8h-5.8L13.2 3Z" />,
+  thermo: <><path d="M10 14.4V5.2a2 2 0 0 1 4 0v9.2a4 4 0 1 1-4 0Z" /><path d="M12 9.5v6.6" /></>,
+  smoke: <path d="M7.2 18a4 4 0 0 1-.6-7.95A5.6 5.6 0 0 1 17.2 9.6 4.2 4.2 0 0 1 17 18H7.2Z" />,
+  search: <><circle cx="11" cy="11" r="6.8" /><path d="m20.5 20.5-4.7-4.7" /></>,
 } satisfies Record<string, ReactNode>;
 
 export type CategoryIconName = keyof typeof PATHS;
