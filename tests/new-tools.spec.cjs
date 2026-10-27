@@ -68,10 +68,9 @@ for (const width of [320, 390, 768]) {
   const cards = page.locator('[data-tool-card]');
   await expect(cards).toHaveCount(5);
   for (const card of await cards.all()) {
-   await expect(card).toHaveCSS('background-color', 'rgb(23, 29, 37)');
-   await expect(card).toHaveCSS('border-left-color', 'rgb(220, 38, 38)');
-   await expect(card).toHaveCSS('border-left-width', '3px');
-   await expect(card.locator('h2')).toHaveCSS('color', 'rgb(252, 165, 165)');
+   await expect(card).toHaveCSS('background-color', 'rgb(26, 26, 29)');
+   await expect(card).toHaveCSS('border-top-color', 'rgba(255, 255, 255, 0.16)');
+   await expect(card.locator('h2')).toHaveCSS('color', 'rgb(244, 244, 245)');
    const box = await card.boundingBox();
    expect(box).not.toBeNull();
    expect(box.x).toBeGreaterThanOrEqual(0);
@@ -96,22 +95,22 @@ for (const tool of [
   await page.goto(BASE + '/narzedzia/' + tool.path);
   const surface = page.locator('[data-tool-theme="dark-v1"]'); await expect(surface).toBeVisible();
   const panel = surface.locator('section').first();
-  await expect(panel).toHaveCSS('background-color','rgb(23, 29, 37)');
+  await expect(panel).toHaveCSS('background-color','rgb(26, 26, 29)');
   await expect(panel.locator('h1')).toHaveCSS('color','rgb(250, 250, 250)');
   for (const control of await panel.locator('input,select').all()) {
-   await expect(control).toHaveCSS('background-color','rgb(16, 19, 23)');
+   await expect(control).toHaveCSS('background-color','rgb(13, 13, 14)');
    await expect(control).toHaveCSS('color','rgb(250, 250, 250)');
    const colors = await control.evaluate(element => {const style = getComputedStyle(element); return [style.color,style.backgroundColor];});
    expect(contrast(...colors)).toBeGreaterThanOrEqual(4.5);
   }
   const button = page.getByRole('button',{name:tool.button,exact:true});
-  await expect(button).toHaveCSS('background-color','rgb(220, 38, 38)');
-  await expect(button).toHaveCSS('color','rgb(255, 255, 255)');
+  await expect(button).toHaveCSS('background-color','rgb(217, 217, 222)');
+  await expect(button).toHaveCSS('color','rgb(10, 10, 11)');
   if (tool.placeholder) await page.getByPlaceholder(tool.placeholder,{exact:true}).fill(tool.query);
   await button.click();
   const result = tool.path === 'kalkulatory' ? page.getByRole('heading',{name:'Wynik',exact:true}).locator('..') : surface.locator('article').first();
   await expect(result).toBeVisible();
-  await expect(result).toHaveCSS('background-color','rgb(23, 29, 37)');
+  await expect(result).toHaveCSS('background-color','rgb(26, 26, 29)');
   const text = result.locator('p').first();
   const colors = await text.evaluate(element => [getComputedStyle(element).color,getComputedStyle(element.closest('article') || element.parentElement).backgroundColor]);
   expect(contrast(...colors)).toBeGreaterThanOrEqual(4.5);

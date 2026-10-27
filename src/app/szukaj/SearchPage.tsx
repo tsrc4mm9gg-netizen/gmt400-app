@@ -70,11 +70,11 @@ export default function SearchPage({ query }: { query: string }) {
             maxLength={120}
             defaultValue={query}
             placeholder="Szukaj kodu lub systemu, np. P0300"
-            className="min-h-14 flex-1 rounded-xl border-2 border-red-600 bg-neutral-900 px-4 py-3 text-lg text-white placeholder:text-neutral-500 focus:border-red-500 focus:outline-none focus:ring-2 focus:ring-red-600/40"
+            className="min-h-14 flex-1 rounded-xl border-2 border-silver-600 bg-neutral-900 px-4 py-3 text-lg text-white placeholder:text-neutral-500 focus:border-silver-500 focus:outline-none focus:ring-2 focus:ring-silver-600/40"
           />
           <button
             type="submit"
-            className="min-h-14 rounded-xl bg-red-600 px-8 text-lg font-semibold text-white shadow-lg shadow-red-600/30 transition hover:bg-red-500"
+            className="min-h-14 rounded-xl bg-silver-600 px-8 text-lg font-semibold text-neutral-950 shadow-lg shadow-silver-600/30 transition hover:bg-silver-500"
           >
             Szukaj
           </button>
@@ -85,14 +85,14 @@ export default function SearchPage({ query }: { query: string }) {
       </form>
 
       <section aria-labelledby="search-examples-title" className="mb-6 rounded-xl border border-white/10 bg-neutral-900 p-4">
-        <h2 id="search-examples-title" className="text-lg font-semibold text-red-400">Popularne hasła</h2>
+        <h2 id="search-examples-title" className="text-lg font-semibold text-silver-400">Popularne hasła</h2>
         <p className="mt-1 text-sm text-neutral-400">Wybierz hasło, aby zawęzić wyniki.</p>
         <ul className="mt-3 flex flex-wrap gap-2" data-testid="search-examples">
           {[...guideExamples, ...queryExamples].map(example => (
             <li key={example}>
               <Link
                 href={`/szukaj?q=${encodeURIComponent(example)}`}
-                className="inline-flex min-h-11 items-center rounded-lg border border-white/15 bg-neutral-950 px-4 py-2 text-red-300 transition hover:border-red-600 hover:text-white"
+                className="inline-flex min-h-11 items-center rounded-lg border border-white/15 bg-neutral-950 px-4 py-2 text-silver-300 transition hover:border-silver-600 hover:text-white"
               >
                 {example}
               </Link>
@@ -114,7 +114,7 @@ export default function SearchPage({ query }: { query: string }) {
       )}
 
       {normalizedQuery && gapNote && (
-        <p data-testid="search-gap-note" className="mb-4 rounded-lg border border-red-600/60 bg-red-950/30 p-3 text-sm text-neutral-200">{gapNote}</p>
+        <p data-testid="search-gap-note" className="mb-4 rounded-lg border border-silver-600/60 bg-silver-950/30 p-3 text-sm text-neutral-200">{gapNote}</p>
       )}
 
       {!normalizedQuery ? (
@@ -132,18 +132,18 @@ export default function SearchPage({ query }: { query: string }) {
                     <h2 className="text-lg">
                       <Link
                         href={result.href || (result.id ? `/baza/${encodeURIComponent(result.id)}` : '/')}
-                        className="inline-flex min-h-11 items-center text-red-300 hover:text-white"
+                        className="inline-flex min-h-11 items-center text-silver-300 hover:text-white"
                       >
                         {result.Nazwa}
                       </Link>
                     </h2>
-                    {obdCode && <span className="rounded bg-red-600 px-2 py-0.5 text-xs font-semibold text-white">Kod OBD</span>}
-                    {isGuide && <span className="rounded bg-red-600 px-2 py-0.5 text-xs font-semibold text-white">Poradnik</span>}
+                    {obdCode && <span className="rounded bg-silver-600 px-2 py-0.5 text-xs font-semibold text-neutral-950">Kod OBD</span>}
+                    {isGuide && <span className="rounded bg-silver-600 px-2 py-0.5 text-xs font-semibold text-neutral-950">Poradnik</span>}
                   </div>
                   {body && <div className="mt-2"><ModelThumb body={body} /></div>}
                   <p className="mt-2 text-neutral-300">{(result.Opis || result.Objawy || '').slice(0, 250)}</p>
                   {obdCode && (
-                    <Link href={`/kody-obd/${obdCode.toLowerCase()}`} className="mt-1 inline-flex min-h-11 items-center text-red-400 hover:text-white">
+                    <Link href={`/kody-obd/${obdCode.toLowerCase()}`} className="mt-1 inline-flex min-h-11 items-center text-silver-400 hover:text-white">
                       Otwórz kartę kodu {obdCode}
                     </Link>
                   )}
@@ -157,7 +157,7 @@ export default function SearchPage({ query }: { query: string }) {
                 type="button"
                 data-testid="search-more"
                 onClick={() => setShown({ query, count: visibleCount + PAGE_SIZE })}
-                className="min-h-12 rounded-xl border-2 border-red-600 bg-neutral-900 px-6 text-base font-semibold text-red-200 transition hover:bg-red-950/50 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500"
+                className="min-h-12 rounded-xl border-2 border-silver-600 bg-neutral-900 px-6 text-base font-semibold text-silver-200 transition hover:bg-silver-950/50 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-silver-500"
               >
                 Pokaż więcej wyników
               </button>
@@ -172,8 +172,8 @@ export default function SearchPage({ query }: { query: string }) {
             <div data-testid="search-empty" className="rounded-xl border border-white/10 bg-neutral-900/60 p-4 text-neutral-300">
               <p>Brak wyników dla „{normalizedQuery}”. Spróbuj krótszej frazy albo popularnego hasła, np. P0300, EGR lub 4L60E. Polskie znaki nie są wymagane (np. „sprzeglo” = „sprzęgło”).</p>
               <div className="mt-3 flex flex-wrap gap-2">
-                <Link href="/szukaj" className="inline-flex min-h-11 items-center rounded-lg border border-red-600/50 px-4 font-semibold text-red-300 hover:bg-red-950/40">Wyczyść wyszukiwanie</Link>
-                <Link href="/kody-obd" className="inline-flex min-h-11 items-center rounded-lg border border-white/15 px-4 text-neutral-200 hover:border-red-600">Lista kodów OBD</Link>
+                <Link href="/szukaj" className="inline-flex min-h-11 items-center rounded-lg border border-silver-600/50 px-4 font-semibold text-silver-300 hover:bg-silver-950/40">Wyczyść wyszukiwanie</Link>
+                <Link href="/kody-obd" className="inline-flex min-h-11 items-center rounded-lg border border-white/15 px-4 text-neutral-200 hover:border-silver-600">Lista kodów OBD</Link>
               </div>
             </div>
           )}

@@ -29,19 +29,19 @@ export default function VinHistoryTool() {
           placeholder="np. 1GCEK14K…" value={input} maxLength={20}
           onChange={e => setInput(e.target.value.toUpperCase())}
           onPaste={e => { const t = e.clipboardData.getData('text'); if (!t) return; e.preventDefault(); setInput(t.replace(/[\s-]/g, '').toUpperCase().slice(0, 20)); }}
-          className="mb-1 min-h-14 w-full border border-white/10 bg-neutral-900 px-4 py-3 font-mono text-lg uppercase tracking-wider text-white focus:border-red-600 focus:outline-none" />
+          className="mb-1 min-h-14 w-full border border-white/10 bg-neutral-900 px-4 py-3 font-mono text-lg uppercase tracking-wider text-white focus:border-silver-600 focus:outline-none" />
         <p id="history-vin-hint" className="mb-3 text-xs text-neutral-400">{clean.length === 17 ? '17 znaków — gotowe.' : `Wpisano ${clean.length} z 17 znaków.`} Litery I, O i Q nie występują w VIN.</p>
-        <button type="submit" className="min-h-12 w-full bg-red-600 py-3 text-base font-semibold text-white transition hover:bg-red-500">SPRAWDŹ HISTORIĘ</button>
+        <button type="submit" className="min-h-12 w-full bg-silver-600 py-3 text-base font-semibold text-neutral-950 transition hover:bg-silver-500">SPRAWDŹ HISTORIĘ</button>
         <p className="mt-2 text-xs text-neutral-400">VIN sprawdzamy w przeglądarce. Do naszego serwera trafia tylko po kliknięciu, a do NHTSA wysyłamy wyłącznie markę, rocznik i model — nie VIN. Niczego nie zapisujemy.</p>
       </form>
       {errors.length > 0 && (
-        <div role="alert" className="border border-red-600/50 bg-red-600/10 p-4 text-red-100" data-testid="history-vin-errors">
+        <div role="alert" className="border border-danger-600/50 bg-danger-600/10 p-4 text-danger-100" data-testid="history-vin-errors">
           {errors.map(e => <p key={e}>{e}</p>)}
         </div>
       )}
       {vin && (
         <>
-          <p className="min-w-0 break-all text-sm text-neutral-300" data-testid="history-vin-summary"><span className="font-mono tracking-wider text-white">{vin}</span>{label && <> · {label}</>} · <Link href="/vin" className="text-red-400 underline">pełne dekodowanie</Link></p>
+          <p className="min-w-0 break-all text-sm text-neutral-300" data-testid="history-vin-summary"><span className="font-mono tracking-wider text-white">{vin}</span>{label && <> · {label}</>} · <Link href="/vin" className="text-silver-400 underline">pełne dekodowanie</Link></p>
           <VinHistoryHits key={vin} vin={vin} variant="page" />
         </>
       )}

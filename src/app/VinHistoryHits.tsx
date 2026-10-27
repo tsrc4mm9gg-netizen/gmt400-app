@@ -10,10 +10,10 @@ import Link from 'next/link';
 import { vinHistoryLinks } from '@/lib/vin-decode.mjs';
 import { badgeText, NOT_COUNTABLE_REASON, sortByHits } from '@/lib/vin-hits.mjs';
 
-export const linkCls = 'inline-flex min-h-11 items-center text-red-400 underline break-words';
+export const linkCls = 'inline-flex min-h-11 items-center text-silver-400 underline break-words';
 export const sectionCls = 'min-w-0 border border-white/10 bg-neutral-950';
-export const summaryCls = 'flex min-h-12 cursor-pointer items-center justify-between gap-3 px-4 py-3 text-base font-semibold text-white hover:text-red-300 [&::-webkit-details-marker]:hidden';
-export const Chevron = () => <span aria-hidden="true" className="text-red-400 transition group-open:rotate-90">›</span>;
+export const summaryCls = 'flex min-h-12 cursor-pointer items-center justify-between gap-3 px-4 py-3 text-base font-semibold text-white hover:text-silver-300 [&::-webkit-details-marker]:hidden';
+export const Chevron = () => <span aria-hidden="true" className="text-silver-400 transition group-open:rotate-90">›</span>;
 
 type Hits = { state: 'idle' | 'loading' | 'error' } | { state: 'done'; counts: Record<string, number | null>; notes: Record<string, string>; models: string[]; label: string };
 
@@ -50,7 +50,7 @@ export default function VinHistoryHits({ vin, variant = 'section' }: { vin: stri
           const badge = loading
             ? <span className="inline-flex h-7 w-16 shrink-0 animate-pulse items-center justify-center border border-white/10 bg-white/10 text-xs text-neutral-400" aria-label="liczę…">…</span>
             : text !== null
-              ? <span className={`inline-flex h-7 w-16 shrink-0 items-center justify-center border text-sm font-bold tabular-nums ${zero ? 'border-white/15 text-neutral-500' : 'border-red-500 bg-red-600 text-white'}`} aria-label={`${text} ${zero ? '— brak rekordów' : 'rekordów'}`} data-testid={`vin-hit-${l.id}`}>{text}</span>
+              ? <span className={`inline-flex h-7 w-16 shrink-0 items-center justify-center border text-sm font-bold tabular-nums ${zero ? 'border-white/15 text-neutral-500' : 'border-silver-500 bg-silver-600 text-neutral-950'}`} aria-label={`${text} ${zero ? '— brak rekordów' : 'rekordów'}`} data-testid={`vin-hit-${l.id}`}>{text}</span>
               : <span className="inline-flex h-7 w-16 shrink-0 items-center justify-center border border-dashed border-white/20 text-[11px] uppercase tracking-wide text-neutral-400" aria-label="liczba niedostępna — sprawdź w serwisie" data-testid={`vin-hit-${l.id}`}>{l.count && hits.state !== 'idle' ? '?' : 'sprawdź'}</span>;
           return (
             <li key={l.id} className={`flex min-w-0 items-center gap-3 ${zero ? 'opacity-60' : ''}`}>
@@ -72,8 +72,8 @@ export default function VinHistoryHits({ vin, variant = 'section' }: { vin: stri
         </ul>
       </details>
       {variant === 'page'
-        ? <p className="mt-2 text-xs text-neutral-400">Rocznik, silnik, nadwozie, fabryka i kody RPO: <Link href="/vin" className="text-red-400 underline">pełne dekodowanie w Sprawdź VIN</Link>.</p>
-        : <p className="mt-2 text-xs text-neutral-400">Ta sama lista jako osobne narzędzie: <Link href="/narzedzia/historia-vin" className="text-red-400 underline">Historia VIN</Link>.</p>}
+        ? <p className="mt-2 text-xs text-neutral-400">Rocznik, silnik, nadwozie, fabryka i kody RPO: <Link href="/vin" className="text-silver-400 underline">pełne dekodowanie w Sprawdź VIN</Link>.</p>
+        : <p className="mt-2 text-xs text-neutral-400">Ta sama lista jako osobne narzędzie: <Link href="/narzedzia/historia-vin" className="text-silver-400 underline">Historia VIN</Link>.</p>}
     </>
   );
 

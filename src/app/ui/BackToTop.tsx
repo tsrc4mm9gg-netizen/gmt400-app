@@ -23,7 +23,7 @@ export default function BackToTop() {
         window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
         document.getElementById('main-content')?.focus({ preventScroll: true });
       }}
-      className={`fixed left-4 z-[89] inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/20 bg-neutral-900/95 text-lg text-white shadow-lg shadow-black/50 transition-[opacity,visibility] duration-200 hover:border-red-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-500 ${visible ? 'visible opacity-100' : 'invisible pointer-events-none opacity-0'}`}
+      className={`fixed left-4 z-[89] inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/20 bg-neutral-900/95 text-lg text-white shadow-lg shadow-black/50 transition-[opacity,visibility] duration-200 hover:border-silver-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-silver-500 ${visible ? 'visible opacity-100' : 'invisible pointer-events-none opacity-0'}`}
       style={{ bottom: 'calc(16px + env(safe-area-inset-bottom, 0px))' }}
     >
       <span aria-hidden="true">↑</span>

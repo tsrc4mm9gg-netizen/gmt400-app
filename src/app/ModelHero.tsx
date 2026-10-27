@@ -16,7 +16,7 @@ const ENGINES = [
   { value: '6.5', label: '6.5 diesel' },
 ];
 
-const selectClass = 'min-h-12 w-full rounded-lg border border-white/15 bg-neutral-900 px-2 text-base text-white focus:border-red-500 focus:outline-none focus:ring-2 focus:ring-red-600/40';
+const selectClass = 'min-h-12 w-full rounded-lg border border-white/15 bg-neutral-900 px-2 text-base text-white focus:border-silver-500 focus:outline-none focus:ring-2 focus:ring-silver-600/40';
 
 export default function ModelHero() {
   const { bodyId, filters: ctxFilters, setSelection } = useModelSelection();
@@ -85,7 +85,7 @@ export default function ModelHero() {
         onKeyDown={handleKey}
       >
         <div
-          className="absolute left-3 top-3 z-10 rounded-md bg-red-600 px-2.5 py-1 text-sm font-bold text-white shadow"
+          className="absolute left-3 top-3 z-10 rounded-md bg-silver-600 px-2.5 py-1 text-sm font-bold text-neutral-950 shadow"
           data-testid="year-badge"
           aria-live="polite"
         >
@@ -107,7 +107,7 @@ export default function ModelHero() {
         </div>
 
         <div className="flex items-center gap-2 border-t border-white/10 bg-neutral-950 px-2 py-3 text-white">
-          <button type="button" onClick={prev} className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-white/5 text-2xl text-white ring-1 ring-white/10 hover:bg-red-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-500" aria-label="Poprzedni model">‹</button>
+          <button type="button" onClick={prev} className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-white/5 text-2xl text-neutral-950 ring-1 ring-white/10 hover:bg-silver-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-silver-500" aria-label="Poprzedni model">‹</button>
           <div className="min-w-0 flex-1 text-center">
             <h3 className="truncate text-xl font-bold sm:text-2xl">{body.name}</h3>
             <p className="text-sm text-neutral-300">
@@ -117,7 +117,7 @@ export default function ModelHero() {
             </p>
             {body.note && <p className="mt-0.5 text-xs text-neutral-400">{body.note}</p>}
           </div>
-          <button type="button" onClick={next} className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-white/5 text-2xl text-white ring-1 ring-white/10 hover:bg-red-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-500" aria-label="Następny model">›</button>
+          <button type="button" onClick={next} className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-white/5 text-2xl text-neutral-950 ring-1 ring-white/10 hover:bg-silver-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-silver-500" aria-label="Następny model">›</button>
         </div>
       </div>
 
@@ -131,23 +131,23 @@ export default function ModelHero() {
             aria-label={b.name}
             aria-current={i === index ? 'true' : undefined}
           >
-            <span className={`block h-1.5 rounded-full transition-all ${i === index ? 'w-6 bg-red-600' : 'w-1.5 bg-white/30'}`} />
+            <span className={`block h-1.5 rounded-full transition-all ${i === index ? 'w-6 bg-silver-600' : 'w-1.5 bg-white/30'}`} />
           </button>
         ))}
       </div>
 
       <Link
         href={`/modele/${body.id}`}
-        className="mt-1 flex min-h-12 w-full items-center justify-center gap-2 rounded-lg px-4 py-2 text-center border border-red-600/50 bg-red-600/10 text-sm font-semibold text-white hover:bg-red-600/25"
+        className="mt-1 flex min-h-12 w-full items-center justify-center gap-2 rounded-lg px-4 py-2 text-center border border-silver-600/50 bg-silver-600/10 text-sm font-semibold text-white hover:bg-silver-600/25"
       >
-        Strona modelu: {body.name} — lata, silniki, usterki, DIY <span aria-hidden="true" className="text-red-300">→</span>
+        Strona modelu: {body.name} — lata, silniki, usterki, DIY <span aria-hidden="true" className="text-silver-300">→</span>
       </Link>
 
       <button
         type="button"
         onClick={() => setShowFilters(!showFilters)}
         aria-expanded={showFilters}
-        className="mt-3 min-h-12 w-full rounded-lg border border-white/15 bg-neutral-900 text-sm font-medium text-white hover:border-red-600/60"
+        className="mt-3 min-h-12 w-full rounded-lg border border-white/15 bg-neutral-900 text-sm font-medium text-white hover:border-silver-600/60"
       >
         {showFilters ? 'Ukryj doprecyzowanie' : 'Doprecyzuj: rocznik, silnik, napęd'}
       </button>
@@ -177,7 +177,7 @@ export default function ModelHero() {
             <button
               type="button"
               onClick={() => setSelection({ bodyId: body.id, filters: {} })}
-              className="min-h-11 w-full rounded-lg border border-red-600/40 bg-red-950/40 text-sm text-red-300"
+              className="min-h-11 w-full rounded-lg border border-silver-600/40 bg-silver-950/40 text-sm text-silver-300"
             >
               Wyczyść doprecyzowanie
             </button>

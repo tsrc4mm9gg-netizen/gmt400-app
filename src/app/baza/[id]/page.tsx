@@ -145,28 +145,28 @@ export default async function KnowledgeEntry({ params }: Props) {
   return <div className="mx-auto min-h-screen max-w-4xl bg-black px-5 py-10 pb-28 text-white">
     <Breadcrumbs items={[...(SECTION_OF[entry.Typ] ? [SECTION_OF[entry.Typ]] : [{ href: '/baza', label: 'Baza wiedzy' }]), { label: entry.Nazwa }]} />
     <div className="mt-1 flex flex-wrap items-center gap-x-3 text-sm">
-      <BackLink fallback="/szukaj" label="← Wróć" className="inline-flex min-h-11 items-center text-red-400 underline" />
+      <BackLink fallback="/szukaj" label="← Wróć" className="inline-flex min-h-11 items-center text-silver-400 underline" />
     </div>
     <article className="mt-6 min-w-0 space-y-6 [overflow-wrap:anywhere]">
       <div className="flex flex-wrap gap-2">
-        {entry.Typ && <span className="rounded-full border border-red-600/40 bg-red-600/10 px-3 py-1 text-xs font-medium text-red-300">Typ: {entry.Typ}</span>}
+        {entry.Typ && <span className="rounded-full border border-silver-600/40 bg-silver-600/10 px-3 py-1 text-xs font-medium text-silver-300">Typ: {entry.Typ}</span>}
         {(entry.Modele.length ? entry.Modele.join(', ') : entry.Model) && <span className="rounded-full border border-white/20 bg-white/5 px-3 py-1 text-xs text-neutral-200">Model: {entry.Modele.length ? entry.Modele.map(m => m === 'Wszystkie' ? 'Wszystkie GMT400' : m).join(', ') : entry.Model}</span>}
         {entry.Lata && <span className="rounded-full border border-white/20 bg-white/5 px-3 py-1 text-xs text-neutral-200">Lata: {entry.Lata}</span>}
       </div>
       {body && <div className="flex flex-wrap items-center gap-3"><ModelThumb body={body} size="md" /><span className="text-xs text-neutral-500">Zdjęcie poglądowe modelu z katalogu</span></div>}
-      <h1 className="text-3xl text-red-400">{entry.Nazwa}</h1>
+      <h1 className="text-3xl text-silver-400">{entry.Nazwa}</h1>
       {materialLead && <p className="text-lg leading-relaxed text-neutral-200">{materialLead}</p>}
-      {code && <p className="rounded border border-red-600/40 bg-red-600/10 px-3 text-sm"><a className="inline-flex min-h-11 items-center font-semibold text-red-300 underline" href={`/kody-obd/${code}`}>Otwórz kartę kodu OBD {code.toUpperCase()}</a></p>}
+      {code && <p className="rounded border border-silver-600/40 bg-silver-600/10 px-3 text-sm"><a className="inline-flex min-h-11 items-center font-semibold text-silver-300 underline" href={`/kody-obd/${code}`}>Otwórz kartę kodu OBD {code.toUpperCase()}</a></p>}
       <VehicleMatchBadge item={entry} />
       <MaterialContents entryId={entry.id} />
       <p className="rounded border border-white/20 p-3 text-sm text-neutral-400">Dopasowanie do profilu opiera się na metadanych i nie potwierdza poprawności technicznej. Przed naprawą sprawdź zgodność procedury z pojazdem i dokumentacją serwisową.</p>
       {entry.Opis && <section><h2 className="mb-2 text-xl">Opis</h2><MaterialText text={entry.Opis} field="Opis" /></section>}
       {entry.Objawy && <section><h2 className="mb-2 text-xl">Objawy</h2><MaterialText text={entry.Objawy} field="Objawy" /></section>}
       {entry.Rozwiązanie && <section><h2 className="mb-2 text-xl">Rozwiązanie</h2><MaterialText text={entry.Rozwiązanie} field="Rozwiązanie" /></section>}
-      {contentError && <p role="alert" className="rounded border border-red-600/40 p-3">Nie udało się pobrać dodatkowej zawartości strony Notion. Powyższe pola są dostępne, ale materiał może być niekompletny. Odśwież stronę, aby ponowić pobieranie.</p>}
+      {contentError && <p role="alert" className="rounded border border-danger-600/40 p-3">Nie udało się pobrać dodatkowej zawartości strony Notion. Powyższe pola są dostępne, ale materiał może być niekompletny. Odśwież stronę, aby ponowić pobieranie.</p>}
       {blocks.length > 0 && <section aria-label="Zawartość strony Notion"><h2 className="mb-3 text-xl">Treść materiału i ilustracje</h2><NotionContent blocks={blocks} /></section>}
       {diagram && <figure><a href={diagram} target="_blank" rel="noopener noreferrer"><img src={diagram} alt="Grafika pomocnicza z biblioteki GMT400" loading="lazy" className="h-auto w-full rounded object-contain" /></a><figcaption className="mt-2 text-xs text-neutral-400">Grafika pomocnicza z biblioteki aplikacji, nie ilustracja przypisana w Notion do tego wpisu. Sprawdź jej zgodność z konkretnym pojazdem i procedurą.</figcaption></figure>}
-      {(() => { const sch = relatedSchematics(entry.Nazwa); return sch.length > 0 && <aside aria-label="Powiązane schematy" className="rounded-xl border border-red-600/40 bg-neutral-950 p-4"><h2 className="text-lg font-semibold text-white">Schemat do tego tematu</h2><ul className="mt-2 space-y-2">{sch.map(s => <li key={s.id}><a href={`/schematy#${s.id}`} className="flex min-h-11 items-center justify-between gap-3 rounded-lg border border-white/10 px-3 py-2 text-neutral-100 hover:border-red-600">{s.title}<span aria-hidden="true" className="text-red-400">→</span></a></li>)}</ul><p className="mt-2 text-xs text-neutral-400">Schematy mają podany model i lata — sprawdź w swoim aucie / manualu.</p></aside>; })()}
+      {(() => { const sch = relatedSchematics(entry.Nazwa); return sch.length > 0 && <aside aria-label="Powiązane schematy" className="rounded-xl border border-silver-600/40 bg-neutral-950 p-4"><h2 className="text-lg font-semibold text-white">Schemat do tego tematu</h2><ul className="mt-2 space-y-2">{sch.map(s => <li key={s.id}><a href={`/schematy#${s.id}`} className="flex min-h-11 items-center justify-between gap-3 rounded-lg border border-white/10 px-3 py-2 text-neutral-100 hover:border-silver-600">{s.title}<span aria-hidden="true" className="text-silver-400">→</span></a></li>)}</ul><p className="mt-2 text-xs text-neutral-400">Schematy mają podany model i lata — sprawdź w swoim aucie / manualu.</p></aside>; })()}
       {!contentError && !entry.Opis && !entry.Objawy && !entry.Rozwiązanie && !blocks.length && <p>Ten wpis nie zawiera jeszcze szczegółowej treści.</p>}
       {entry.edited && <p className="text-xs text-neutral-500">Ostatnia edycja wpisu w Notion: {entry.edited}. To nie jest data weryfikacji merytorycznej.</p>}
     </article>

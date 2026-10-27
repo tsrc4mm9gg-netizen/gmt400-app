@@ -47,22 +47,22 @@ export default function ModelMaterials({ bodyId, bodyName }: { bodyId: string; b
       <p className="mt-1 text-sm text-neutral-400">Przyciski ustawiają ten model jako filtr (zapamiętany w tej karcie przeglądarki) i otwierają sekcję.{selected === bodyId && ' Ten model jest już wybrany.'}</p>
       <div className="mt-3 grid gap-3 sm:grid-cols-3">
         {groups.map(group => (
-          <button key={group.typ} type="button" onClick={() => open(group.href)} className="flex min-h-14 items-center justify-between gap-3 rounded-xl border border-red-600/50 bg-red-600/10 px-4 py-3 text-left font-semibold text-white transition hover:bg-red-600/25">
+          <button key={group.typ} type="button" onClick={() => open(group.href)} className="flex min-h-14 items-center justify-between gap-3 rounded-xl border border-silver-600/50 bg-silver-600/10 px-4 py-3 text-left font-semibold text-white transition hover:bg-silver-600/25">
             <span>{group.label}<span className="block text-xs font-normal text-neutral-300">{status === 'ready' ? `${group.specific.length} dla modelu + ${group.general} ogólnych GMT400` : status === 'loading' ? 'Ładowanie…' : 'Otwórz sekcję'}</span></span>
-            <span aria-hidden="true" className="text-red-300">→</span>
+            <span aria-hidden="true" className="text-silver-300">→</span>
           </button>
         ))}
       </div>
-      {status === 'error' && <p role="alert" className="mt-3 text-sm text-red-300">Nie udało się pobrać wpisów z bazy. Sekcje otworzą się z filtrem modelu.</p>}
+      {status === 'error' && <p role="alert" className="mt-3 text-sm text-danger-300">Nie udało się pobrać wpisów z bazy. Sekcje otworzą się z filtrem modelu.</p>}
       {status === 'ready' && (groups.some(g => g.specific.length) || profiles.length > 0) && (
         <div className="mt-4 rounded-xl border border-white/10 bg-neutral-950 p-4">
           <h3 className="text-lg font-semibold">Wpisy oznaczone tym modelem</h3>
           <ul className="mt-2 divide-y divide-white/10">
             {[...profiles, ...groups.flatMap(g => g.specific)].slice(0, 12).map(item => (
               <li key={item.id}>
-                <Link href={`/baza/${encodeURIComponent(item.id)}`} className="flex min-h-11 items-center justify-between gap-3 py-2 text-neutral-100 hover:text-red-300">
+                <Link href={`/baza/${encodeURIComponent(item.id)}`} className="flex min-h-11 items-center justify-between gap-3 py-2 text-neutral-100 hover:text-silver-300">
                   <span>{item.Nazwa}<span className="block text-xs text-neutral-500">{item.Typ}{item.Lata ? ` · ${item.Lata}` : ''}</span></span>
-                  <span aria-hidden="true" className="text-red-400">→</span>
+                  <span aria-hidden="true" className="text-silver-400">→</span>
                 </Link>
               </li>
             ))}

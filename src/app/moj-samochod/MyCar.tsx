@@ -22,8 +22,8 @@ const YEARS = Array.from({ length: GMT400_YEAR_RANGE[1] - GMT400_YEAR_RANGE[0] +
 const PLATFORM_LABEL: Record<VehiclePlatform, string> = { 'C/K': 'C/K (pickup)', Sierra: 'Sierra (pickup)', Tahoe: 'Tahoe', Yukon: 'Yukon', Suburban: 'Suburban' };
 const TRANSMISSION_BY_RPO: Record<string, string> = { M30: '4L60E', MT1: '4L80E' };
 const RPO_BY_TRANSMISSION: Record<string, string> = { '4L60E': 'M30', '4L80E': 'MT1' };
-const field = 'mt-1 block min-h-11 w-full min-w-0 rounded-lg border border-white/15 bg-neutral-950 px-3 text-base text-white focus:border-red-600 focus:outline-none';
-const btn = 'inline-flex min-h-11 items-center justify-center rounded-lg border border-white/15 px-4 text-sm font-semibold text-white hover:border-red-600';
+const field = 'mt-1 block min-h-11 w-full min-w-0 rounded-lg border border-white/15 bg-neutral-950 px-3 text-base text-white focus:border-silver-600 focus:outline-none';
+const btn = 'inline-flex min-h-11 items-center justify-center rounded-lg border border-white/15 px-4 text-sm font-semibold text-white hover:border-silver-600';
 const chip = 'inline-flex max-w-full items-center rounded-full border px-3 py-1 text-xs';
 const CHECK = 'sprawdź w swoim aucie / manualu';
 
@@ -87,13 +87,13 @@ function CarForm({ initial, onDone, onCancel }: { initial: VehicleProfile | null
   return (
     <div data-testid="my-car-form" className="mt-6 grid gap-4 lg:grid-cols-2">
       <div className="min-w-0 rounded-xl border border-white/10 bg-neutral-950 p-4 sm:p-5">
-        <h2 className="text-xl font-semibold text-red-300">1. Masz VIN? (opcjonalnie)</h2>
+        <h2 className="text-xl font-semibold text-silver-300">1. Masz VIN? (opcjonalnie)</h2>
         <p className="mb-3 mt-1 text-sm text-neutral-400">Odczytamy markę, napęd, model, rocznik i silnik z tabel GM (każde pole ze źródłem) i wypełnimy profil. VIN zostaje w przeglądarce.</p>
         <VinDecoder onDecoded={onVin} />
-        {vinNote && <p data-testid="my-car-vin-note" role="status" className="rounded-lg border border-red-600/40 bg-red-600/10 p-3 text-sm text-red-100">{vinNote}</p>}
+        {vinNote && <p data-testid="my-car-vin-note" role="status" className="rounded-lg border border-silver-600/40 bg-silver-600/10 p-3 text-sm text-silver-100">{vinNote}</p>}
       </div>
       <form onSubmit={submit} aria-label="Dane auta" className="min-w-0 rounded-xl border border-white/10 bg-neutral-950 p-4 sm:p-5">
-        <h2 className="text-xl font-semibold text-red-300">2. Model i rocznik</h2>
+        <h2 className="text-xl font-semibold text-silver-300">2. Model i rocznik</h2>
         <div className="mt-3 grid gap-3 sm:grid-cols-2">
           <label className="block min-w-0 text-sm text-neutral-300">Marka
             <select className={field} value={draft.brand} onChange={e => set({ brand: e.target.value as VehicleMake | '', platform: '', model: '' })}>
@@ -138,10 +138,10 @@ function CarForm({ initial, onDone, onCancel }: { initial: VehicleProfile | null
             <input className={field} value={rpoText} onChange={e => setRpoText(e.target.value.toUpperCase())} placeholder="np. G80 Z71 L31" autoCapitalize="characters" autoComplete="off" spellCheck={false} />
           </label>
         </div>
-        <p className="mt-2 text-xs text-neutral-400">Listy silników i skrzyń pochodzą z dokumentów GM dla wybranego auta i rocznika (<Link href="/narzedzia/rpo" className="text-red-400 underline">dekoder RPO</Link>). Napęd podpowiadamy z litery modelu (C = 2WD, K = 4WD).</p>
-        {error && <p role="alert" className="mt-3 text-sm text-red-300">{error}</p>}
+        <p className="mt-2 text-xs text-neutral-400">Listy silników i skrzyń pochodzą z dokumentów GM dla wybranego auta i rocznika (<Link href="/narzedzia/rpo" className="text-silver-400 underline">dekoder RPO</Link>). Napęd podpowiadamy z litery modelu (C = 2WD, K = 4WD).</p>
+        {error && <p role="alert" className="mt-3 text-sm text-danger-300">{error}</p>}
         <div className="mt-4 flex flex-wrap gap-3">
-          <button type="submit" className={`${btn} border-red-600 bg-red-600 hover:bg-red-500`}>Zapisz moje auto</button>
+          <button type="submit" className={`${btn} border-silver-600 bg-silver-600 hover:bg-silver-500`}>Zapisz moje auto</button>
           {onCancel && <button type="button" onClick={onCancel} className={btn}>Anuluj</button>}
         </div>
       </form>
@@ -152,7 +152,7 @@ function CarForm({ initial, onDone, onCancel }: { initial: VehicleProfile | null
 /* ---------- Wspólne elementy ---------- */
 const FIT_LABEL: Record<Fit, string> = { match: 'pasuje do Twojego auta', general: 'ogólne dla GMT400', unknown: 'zakres do sprawdzenia', outside: 'poza zakresem' };
 const FitChip = ({ fit }: { fit: Fit }) => (
-  <span data-testid="my-car-fit" data-fit={fit} className={`${chip} ${fit === 'match' ? 'border-red-600/60 bg-red-600/15 text-red-100' : 'border-white/15 bg-white/5 text-neutral-200'}`}>{FIT_LABEL[fit]}</span>
+  <span data-testid="my-car-fit" data-fit={fit} className={`${chip} ${fit === 'match' ? 'border-silver-600/60 bg-silver-600/15 text-silver-100' : 'border-white/15 bg-white/5 text-neutral-200'}`}>{FIT_LABEL[fit]}</span>
 );
 const ScopeLine = ({ scope }: { scope: string }) => (
   <p className="mt-1 break-words text-xs text-neutral-400">Model i lata: {scope || 'brak opisu zakresu'} — {CHECK}</p>
@@ -161,7 +161,7 @@ const ScopeLine = ({ scope }: { scope: string }) => (
 function Section({ id, title, children, lead }: { id: string; title: string; lead?: string; children: React.ReactNode }) {
   return (
     <section id={id} aria-labelledby={`${id}-h`} className="mt-6 min-w-0 scroll-mt-24 rounded-xl border border-white/10 bg-neutral-950 p-4 sm:p-5">
-      <h2 id={`${id}-h`} className="text-xl font-semibold text-red-300">{title}</h2>
+      <h2 id={`${id}-h`} className="text-xl font-semibold text-silver-300">{title}</h2>
       {lead && <p className="mt-1 text-sm text-neutral-400">{lead}</p>}
       {children}
     </section>
@@ -177,8 +177,8 @@ function Rows({ rows, testId, empty, limit = 8 }: { rows: Row[]; testId: string;
   const item = (r: Row) => (
     <li key={r.key} data-testid={testId} data-fit={r.fit} className="min-w-0 rounded-lg border border-white/10 bg-black/40 p-3">
       {r.external
-        ? <a href={r.href} target="_blank" rel="noopener noreferrer" className="break-words font-semibold text-white underline-offset-4 hover:text-red-300 hover:underline">{r.title}</a>
-        : <Link href={r.href} className="break-words font-semibold text-white underline-offset-4 hover:text-red-300 hover:underline">{r.title}</Link>}
+        ? <a href={r.href} target="_blank" rel="noopener noreferrer" className="break-words font-semibold text-white underline-offset-4 hover:text-silver-300 hover:underline">{r.title}</a>
+        : <Link href={r.href} className="break-words font-semibold text-white underline-offset-4 hover:text-silver-300 hover:underline">{r.title}</Link>}
       <div className="mt-2 flex flex-wrap gap-2"><FitChip fit={r.fit} /></div>
       <ScopeLine scope={r.scope} />
       {r.extra && <p className="mt-1 break-words text-xs text-neutral-400">{r.extra}</p>}
@@ -239,7 +239,7 @@ function RpoList({ codes, profile }: { codes: string[]; profile: VehicleProfile 
         const entry: RpoEntry | undefined = findRpo(code);
         return (
           <li key={code} data-testid="my-car-rpo" data-code={code} className="min-w-0 rounded-lg border border-white/10 bg-black/40 p-3 text-sm">
-            <p className="break-words"><span className="font-mono font-bold text-white">{code}</span> — {entry ? entry.description : <span className="text-red-200">nieznany – sprawdź</span>}</p>
+            <p className="break-words"><span className="font-mono font-bold text-white">{code}</span> — {entry ? entry.description : <span className="text-silver-200">nieznany – sprawdź</span>}</p>
             {entry && <p className="mt-1 text-xs text-neutral-400">{entry.category} · {RPO_FIT_LABEL[rpoFit(entry, vehicle, yearNum(profile))]} — {CHECK}</p>}
           </li>
         );
@@ -288,9 +288,9 @@ function CarView({ profile, notice, storageNote, onEdit, confirmForget, setConfi
   return (
     <>
       {storageNote}
-      {notice && <p role="status" data-testid="my-car-notice" className="mt-4 rounded-lg border border-red-600/40 bg-red-600/10 p-3 text-sm text-red-100">{notice}</p>}
-      <section data-testid="my-car-summary" aria-labelledby="my-car-summary-h" className="mt-6 min-w-0 rounded-xl border border-red-600/40 bg-neutral-950 p-4 sm:p-5">
-        <p className="text-xs uppercase tracking-wider text-red-300">Twoje auto</p>
+      {notice && <p role="status" data-testid="my-car-notice" className="mt-4 rounded-lg border border-silver-600/40 bg-silver-600/10 p-3 text-sm text-silver-100">{notice}</p>}
+      <section data-testid="my-car-summary" aria-labelledby="my-car-summary-h" className="mt-6 min-w-0 rounded-xl border border-silver-600/40 bg-neutral-950 p-4 sm:p-5">
+        <p className="text-xs uppercase tracking-wider text-silver-300">Twoje auto</p>
         <h2 id="my-car-summary-h" className="mt-1 break-words text-2xl font-bold text-white">{profile.brand} {profile.model} · {year || 'rocznik ?'}</h2>
         <dl className="mt-3 grid gap-x-6 gap-y-2 text-sm sm:grid-cols-2">
           <div className="min-w-0"><dt className="text-neutral-400">Silnik</dt><dd className="break-words text-neutral-100">{profile.engine ? `${profile.engine}${engine ? ` — ${engine.description}` : ''}` : 'nie podano'}</dd></div>
@@ -305,20 +305,20 @@ function CarView({ profile, notice, storageNote, onEdit, confirmForget, setConfi
             ? <button type="button" onClick={() => setConfirmForget(true)} className={btn}>Zapomnij auto</button>
             : <span className="flex flex-wrap items-center gap-3" role="group" aria-label="Potwierdź usunięcie">
                 <span className="text-sm text-neutral-200">Usunąć auto z tej przeglądarki?</span>
-                <button type="button" onClick={onForget} className={`${btn} border-red-600 bg-red-600 hover:bg-red-500`}>Tak, zapomnij</button>
+                <button type="button" onClick={onForget} className={`${btn} border-silver-600 bg-silver-600 hover:bg-silver-500`}>Tak, zapomnij</button>
                 <button type="button" onClick={() => setConfirmForget(false)} className={btn}>Nie</button>
               </span>}
         </div>
       </section>
       <nav aria-label="Sekcje dla Twojego auta" className="mt-4">
-        <ul className="flex flex-wrap gap-2">{nav.map(([id, label]) => <li key={id}><a href={`#${id}`} className="inline-flex min-h-11 items-center rounded-lg border border-white/15 bg-neutral-950 px-3 text-sm text-neutral-200 hover:border-red-600 hover:text-white">{label}</a></li>)}</ul>
+        <ul className="flex flex-wrap gap-2">{nav.map(([id, label]) => <li key={id}><a href={`#${id}`} className="inline-flex min-h-11 items-center rounded-lg border border-white/15 bg-neutral-950 px-3 text-sm text-neutral-200 hover:border-silver-600 hover:text-white">{label}</a></li>)}</ul>
       </nav>
 
       <Section id="bezpieczniki" title={`Bezpieczniki — ${year}`}>
         {fuseYear ? (
           <>
             <div className="mt-2 flex flex-wrap gap-2 text-xs">
-              <span className={`${chip} border-red-600/50 bg-red-600/10 text-red-200`}>Tabela z instrukcji GM: rocznik {year}</span>
+              <span className={`${chip} border-silver-600/50 bg-silver-600/10 text-silver-200`}>Tabela z instrukcji GM: rocznik {year}</span>
               <span className={`${chip} border-white/15 bg-white/5 text-neutral-200`}>⚠ {CHECK.replace(/^s/, 'S')}</span>
             </div>
             {!fuseOwnModel && <p data-testid="my-car-fuse-warning" className="mt-2 text-sm text-neutral-300">Tabele pochodzą z instrukcji C/K Pickup (1994–1998) i Suburban (1999). Twoje nadwozie może mieć inną obsadę – porównaj z pokrywą skrzynki.</p>}
@@ -327,14 +327,14 @@ function CarView({ profile, notice, storageNote, onEdit, confirmForget, setConfi
               <FuseTable initialYear={year} />
             </details>
           </>
-        ) : <p className="mt-2 text-sm text-neutral-300">Dla rocznika {year} nie mamy tabeli z instrukcji GM (mamy 1994–1999). Zobacz <Link href="/schematy#fuse-locations" className="text-red-400 underline">położenie skrzynek bezpieczników</Link> i {CHECK}.</p>}
+        ) : <p className="mt-2 text-sm text-neutral-300">Dla rocznika {year} nie mamy tabeli z instrukcji GM (mamy 1994–1999). Zobacz <Link href="/schematy#fuse-locations" className="text-silver-400 underline">położenie skrzynek bezpieczników</Link> i {CHECK}.</p>}
       </Section>
 
       {knowledge.status !== 'ok' ? (
         <Section id="usterki" title="Usterki, DIY i opisy modelu">
           {knowledge.status === 'loading'
             ? <p className="mt-2 text-sm text-neutral-400" role="status">Wczytywanie bazy wiedzy…</p>
-            : <p className="mt-2 text-sm text-neutral-300" role="alert">Nie udało się wczytać bazy wiedzy. <button type="button" onClick={knowledge.retry} className="ml-1 min-h-11 text-red-400 underline">Spróbuj ponownie</button></p>}
+            : <p className="mt-2 text-sm text-neutral-300" role="alert">Nie udało się wczytać bazy wiedzy. <button type="button" onClick={knowledge.retry} className="ml-1 min-h-11 text-silver-400 underline">Spróbuj ponownie</button></p>}
         </Section>
       ) : (
         <>
@@ -349,12 +349,12 @@ function CarView({ profile, notice, storageNote, onEdit, confirmForget, setConfi
 
       <Section id="porady" title="Porady ilustrowane" lead="Z Owner’s Manual 1999 Suburban/Tahoe.">
         <Rows rows={tips} testId="my-car-tip" empty="Te porady dotyczą Tahoe/Suburban 1999 – dla Twojego auta brak pasujących." />
-        <p className="mt-2 text-xs text-neutral-500"><a href={ILLUSTRATED_TIPS_MANUAL} target="_blank" rel="noopener noreferrer" className="text-red-400 underline">Instrukcja (PDF, GM)</a></p>
+        <p className="mt-2 text-xs text-neutral-500"><a href={ILLUSTRATED_TIPS_MANUAL} target="_blank" rel="noopener noreferrer" className="text-silver-400 underline">Instrukcja (PDF, GM)</a></p>
       </Section>
 
       <Section id="czesci" title="Części — zgodność" lead="Referencje społecznościowe; zawsze potwierdź numer części i RPO.">
         <Rows rows={parts} testId="my-car-part" empty="Brak części z zakresem obejmującym Twoje auto." />
-        <p className="mt-2 text-sm"><Link href="/narzedzia/czesci" className="text-red-400 underline">Pełna wyszukiwarka zgodności części</Link></p>
+        <p className="mt-2 text-sm"><Link href="/narzedzia/czesci" className="text-silver-400 underline">Pełna wyszukiwarka zgodności części</Link></p>
       </Section>
 
       {knowledge.status === 'ok' && (
@@ -365,7 +365,7 @@ function CarView({ profile, notice, storageNote, onEdit, confirmForget, setConfi
 
       <Section id="rpo" title="Kody RPO Twojego auta" lead="Naklejka Service Parts Identification (zwykle w schowku). Kody rozkodowujemy tylko według dokumentów GM.">
         {profile.rpoCodes.length ? <RpoList codes={profile.rpoCodes} profile={profile} /> : <p className="mt-2 text-sm text-neutral-300">Nie dodano kodów RPO. Dodasz je przyciskiem „Zmień auto”.</p>}
-        <p className="mt-3"><Link href="/narzedzia/rpo" data-testid="my-car-rpo-link" className={`${btn} border-red-600`}>Otwórz dekoder RPO</Link></p>
+        <p className="mt-3"><Link href="/narzedzia/rpo" data-testid="my-car-rpo-link" className={`${btn} border-silver-600`}>Otwórz dekoder RPO</Link></p>
       </Section>
     </>
   );

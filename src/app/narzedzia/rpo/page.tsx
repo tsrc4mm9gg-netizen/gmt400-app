@@ -59,7 +59,7 @@ export default function RpoPage() {
           <div className="min-w-0"><label htmlFor="rpo-vehicle" className="mb-1 block text-sm font-medium text-white">Porównaj z modelem</label><select id="rpo-vehicle" value={vehicle} onChange={event => setVehicleChoice(event.target.value)} className="w-full rounded-lg border px-3 py-2"><option value="">— bez porównania —</option>{RPO_VEHICLES.map(v => <option key={v} value={v}>{v}</option>)}</select></div>
           <div className="min-w-0"><label htmlFor="rpo-year" className="mb-1 block text-sm font-medium text-white">Rocznik</label><select id="rpo-year" value={year} onChange={event => setYearChoice(event.target.value)} className="w-full rounded-lg border px-3 py-2"><option value="">—</option>{YEARS.map(y => <option key={y} value={y}>{y}</option>)}</select></div>
         </div>
-        <button type="submit" className="rounded-lg bg-red-600 px-4 py-2 font-medium text-white sm:col-span-2">Sprawdź kody</button>
+        <button type="submit" className="rounded-lg bg-silver-600 px-4 py-2 font-medium text-neutral-950 sm:col-span-2">Sprawdź kody</button>
       </form>
       <p className="mt-3 text-xs text-neutral-400">Baza: <strong>{RPO_CATALOG.length}</strong> kodów wydrukowanych w dokumentach GM dla GMT400 (Chevrolet C/K, Suburban, Tahoe; GMC Sierra, Suburban, Yukon), lata 1988–2000. Kodów spoza dokumentów nie dopisujemy — pokażemy je jako „nieznany – sprawdź”.</p>
       {profile && <p className="mt-2 text-sm text-neutral-300">Twoje auto: <Link href="/moj-samochod" className="underline">{profile.brand} {profile.model}{profile.year ? ' ' + profile.year : ''}</Link>{profile.rpoCodes.length > 0 && <> · <button type="button" onClick={fillFromProfile} className="ml-1 rounded-lg border px-3 py-1 text-sm">Wstaw moje kody RPO ({profile.rpoCodes.length})</button></>}</p>}
@@ -67,12 +67,12 @@ export default function RpoPage() {
 
     {outcome && outcome.mode !== 'none' && <p className="text-sm text-neutral-300" role="status" data-testid="rpo-count">{outcome.mode === 'decode' ? 'Rozkodowane pozycje' : 'Znaleziono wyników'}: <strong>{outcome.results.length}</strong>{outcome.results.length > LIMIT && ` (pokazano ${LIMIT} — zawęź kategorię lub frazę)`}</p>}
     {outcome?.mode === 'none' && <p className="text-sm text-neutral-300" role="status">Wpisz kody albo wybierz kategorię.</p>}
-    {outcome?.ratioConflict && <p className="rounded-lg border border-red-600 p-3 text-sm text-red-200" data-testid="rpo-ratio-conflict">Uwaga: podane kody wskazują różne przełożenia tylnego mostu. Auto ma jedno przełożenie — sprawdź naklejkę jeszcze raz.</p>}
+    {outcome?.ratioConflict && <p className="rounded-lg border border-danger-600 p-3 text-sm text-danger-200" data-testid="rpo-ratio-conflict">Uwaga: podane kody wskazują różne przełożenia tylnego mostu. Auto ma jedno przełożenie — sprawdź naklejkę jeszcze raz.</p>}
     {outcome && (outcome.mode === 'search' || outcome.mode === 'browse') && outcome.results.length === 0 && <p className="text-sm text-neutral-300">Brak kodów pasujących do frazy w tej kategorii.</p>}
 
     <div className="space-y-3" data-testid="rpo-results">{shown.map((item, index) => item.kind === 'unknown'
       ? <article key={`u-${item.code}-${index}`} data-testid="rpo-unknown" className="rounded-lg border p-4">
-          <p className="text-base font-semibold text-white"><span className="mr-2 font-mono text-lg text-red-300">{item.code}</span>nieznany – sprawdź</p>
+          <p className="text-base font-semibold text-white"><span className="mr-2 font-mono text-lg text-silver-300">{item.code}</span>nieznany – sprawdź</p>
           <p className="mt-1 text-sm text-neutral-300">{item.hint ?? 'Tego kodu nie ma w dokumentach GM dla GMT400, z których korzystamy. Sprawdź pisownię na naklejce i w instrukcji serwisowej swojego rocznika.'}</p>
           {item.suggestion && <p className="mt-1 text-sm text-neutral-300">Czy chodziło o <button type="button" className="rounded-lg border px-2 py-1 font-mono text-sm" onClick={() => { const next = query.toUpperCase().split(/[\s,;|/]+/).map(t => t === item.code ? item.suggestion : t).join(' '); setQuery(next); setSubmitted({ query: next, category }); }}>{item.suggestion}</button>? Na naklejkach i w skanach litera O bywa mylona z zerem, a I z jedynką.</p>}
         </article>
@@ -94,11 +94,11 @@ export default function RpoPage() {
 function RpoCard({ entry, vehicle, year }: { entry: RpoEntry; vehicle: string | null; year: number | null }) {
   const fit = rpoFit(entry, vehicle, year);
   return <article className="rounded-lg border p-4" data-testid="rpo-result" data-code={entry.code}>
-    <p className="text-base font-medium text-white"><span className="mr-2 font-mono text-lg font-bold text-red-300">{entry.code}</span>{entry.description}</p>
+    <p className="text-base font-medium text-white"><span className="mr-2 font-mono text-lg font-bold text-silver-300">{entry.code}</span>{entry.description}</p>
     <div className="mt-2 flex flex-wrap gap-2 text-xs">
       <span className="rounded-full border px-2 py-0.5">{entry.category}</span>
-      {entry.status !== 'verified' && <span className="rounded-full border border-red-600 px-2 py-0.5 text-red-200">{STATUS_LABEL[entry.status]}</span>}
-      {fit !== 'no-data' && <span data-testid="rpo-fit" data-fit={fit} className={`rounded-full border px-2 py-0.5 ${fit === 'listed' ? 'border-red-500 text-white' : 'text-neutral-300'}`}>{fit === 'listed' ? '✓ ' : ''}{FIT_LABEL[fit]}</span>}
+      {entry.status !== 'verified' && <span className="rounded-full border border-silver-600 px-2 py-0.5 text-silver-200">{STATUS_LABEL[entry.status]}</span>}
+      {fit !== 'no-data' && <span data-testid="rpo-fit" data-fit={fit} className={`rounded-full border px-2 py-0.5 ${fit === 'listed' ? 'border-silver-500 text-white' : 'text-neutral-300'}`}>{fit === 'listed' ? '✓ ' : ''}{FIT_LABEL[fit]}</span>}
     </div>
     {entry.hasPolish && <p className="mt-2 text-sm text-neutral-300">GM: <span lang="en">{entry.original}</span></p>}
     <p className="mt-2 text-sm text-neutral-300"><span className="font-semibold text-white">Model i lata (dokumenty GM): </span>{entry.applies.map((a, i) => <span key={a.vehicle}>{i > 0 && '; '}{a.vehicle} {a.years}{a.original ? <span lang="en"> („{a.original}”)</span> : null}</span>)}</p>

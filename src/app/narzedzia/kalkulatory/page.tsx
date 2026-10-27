@@ -77,7 +77,7 @@ export default function Calculators() {
  </button>
  </form>
 
- {error && <p className="mt-3 rounded bg-red-50 p-3 text-sm text-red-700">{error}</p>}
+ {error && <p className="mt-3 rounded bg-danger-950/60 p-3 text-sm text-danger-300">{error}</p>}
 
  {result && (
  <div className="mt-5 rounded-xl border border-slate-200 bg-slate-50 p-5">
@@ -101,7 +101,7 @@ export default function Calculators() {
  </div>
  </div>
 
- <p className="mt-4 rounded-lg bg-red-50 p-3 text-sm text-red-900">
+ <p className="mt-4 rounded-lg bg-silver-50 p-3 text-sm text-silver-900">
  Przy wskazaniu licznika {speed} km/h rzeczywista prędkość wyniesie około <strong>{result.actualSpeedAtIndicatedSpeed ?? '—'} km/h</strong>.
  </p>
  <p className="mt-3 text-xs text-slate-500">{result.note}</p>

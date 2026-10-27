@@ -16,10 +16,10 @@ export default function FuseTable({ initialYear = '' }: { initialYear?: string }
       <div className="mt-3 flex flex-col gap-2 sm:flex-row">
         <label htmlFor={inputId} className="sr-only">Szukaj w tabeli bezpieczników</label>
         <input id={inputId} type="search" value={query} onChange={e => setQuery(e.target.value)} placeholder="Szukaj: obwód, nazwa, numer…" autoComplete="off"
-          className="min-h-11 flex-1 rounded-lg border border-white/15 bg-neutral-950 px-3 text-base text-white placeholder:text-neutral-500 focus:border-red-500 focus:outline-none" />
+          className="min-h-11 flex-1 rounded-lg border border-white/15 bg-neutral-950 px-3 text-base text-white placeholder:text-neutral-500 focus:border-silver-500 focus:outline-none" />
         <label className="flex min-h-11 items-center gap-2 text-sm text-neutral-300">Rocznik
           <select value={year} onChange={e => setYear(e.target.value)} aria-label="Rocznik"
-            className="min-h-11 rounded-lg border border-white/15 bg-neutral-950 px-3 text-base text-white focus:border-red-500 focus:outline-none">
+            className="min-h-11 rounded-lg border border-white/15 bg-neutral-950 px-3 text-base text-white focus:border-silver-500 focus:outline-none">
             <option value="">wszystkie</option>
             {FUSE_YEARS.map(y => <option key={y} value={y}>{y}</option>)}
           </select>
@@ -29,16 +29,16 @@ export default function FuseTable({ initialYear = '' }: { initialYear?: string }
       {tables.length === 0 && <p className="mt-3 text-neutral-300">Brak pozycji dla tego wyszukiwania. Sprawdź opis na pokrywie skrzynki i w instrukcji.</p>}
       {tables.map(table => (
         <section key={table.id} className="mt-4" aria-label={`${table.box}: ${table.models}`}>
-          <h4 className="font-semibold text-red-300">{table.box}</h4>
-          <p className="mt-1"><span className="inline-block rounded-full border border-red-600/50 bg-red-600/10 px-3 py-1 text-xs text-red-200">Model i lata: {table.models}</span></p>
+          <h4 className="font-semibold text-silver-300">{table.box}</h4>
+          <p className="mt-1"><span className="inline-block rounded-full border border-silver-600/50 bg-silver-600/10 px-3 py-1 text-xs text-silver-200">Model i lata: {table.models}</span></p>
           <p className="mt-1 text-xs text-neutral-400">{table.posNote} {table.ampsNote}</p>
           <ul className="mt-2 divide-y divide-white/10 rounded-lg border border-white/10">
             {table.rows.map(row => (
               <li key={row.pos} className="grid grid-cols-[4.5rem_1fr] gap-3 p-3 sm:grid-cols-[6rem_10rem_1fr]">
-                <span className="font-mono text-lg font-bold text-red-400">{row.pos}</span>
+                <span className="font-mono text-lg font-bold text-silver-400">{row.pos}</span>
                 <span className="text-sm text-neutral-200 sm:col-auto">
                   <span className="font-semibold text-white">{row.name === row.pos ? '' : row.name}</span>
-                  {row.amps !== '—' && <span className="block text-red-200">{row.amps}</span>}
+                  {row.amps !== '—' && <span className="block text-silver-200">{row.amps}</span>}
                 </span>
                 <span className="col-span-2 text-sm text-neutral-300 sm:col-span-1">
                   {row.variants.map(v => (
@@ -53,7 +53,7 @@ export default function FuseTable({ initialYear = '' }: { initialYear?: string }
           </ul>
           <p className="mt-2 text-xs text-neutral-400">{table.note}</p>
           <p className="mt-1 text-xs text-neutral-500">Źródła:{' '}
-            {table.sources.map((s, i) => <span key={s.url}>{i > 0 && ' · '}<a href={s.url} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center text-red-400 underline">{s.title}</a></span>)}
+            {table.sources.map((s, i) => <span key={s.url}>{i > 0 && ' · '}<a href={s.url} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center text-silver-400 underline">{s.title}</a></span>)}
           </p>
         </section>
       ))}

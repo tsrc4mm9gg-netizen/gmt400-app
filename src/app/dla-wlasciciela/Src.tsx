@@ -14,7 +14,7 @@ export default function Src({ ids }: { ids?: string[] }) {
         return (
           <span key={id}>
             {i > 0 && ' · '}
-            <a href={s.url} target="_blank" rel="noopener noreferrer" title={`${s.label} — ${KIND_LABEL[s.kind]}`} className="text-red-300 underline underline-offset-2 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-500">{host(s.url)}</a>
+            <a href={s.url} target="_blank" rel="noopener noreferrer" title={`${s.label} — ${KIND_LABEL[s.kind]}`} className="text-silver-300 underline underline-offset-2 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-silver-500">{host(s.url)}</a>
             <span> ({KIND_LABEL[s.kind]}, {s.date})</span>
           </span>
         );

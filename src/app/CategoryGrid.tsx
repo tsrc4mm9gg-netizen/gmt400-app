@@ -16,16 +16,16 @@ export default function CategoryGrid() {
           <Link
             key={cat.href}
             href={cat.href}
-            className="group relative z-10 block min-h-28 rounded-xl border border-white/10 bg-neutral-900 p-4 transition hover:border-red-600/50 hover:bg-neutral-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-red-500"
+            className="group relative z-10 block min-h-28 rounded-xl border border-white/10 bg-neutral-900 p-4 transition hover:border-silver-600/50 hover:bg-neutral-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-silver-500"
           >
             <div className="mb-2 text-2xl" aria-hidden="true">{cat.icon}</div>
             <div className="font-semibold text-white">{cat.title}</div>
             <div className="mt-1 text-xs text-neutral-400">{cat.desc}</div>
-            <div className="mt-3 h-px w-8 bg-red-600 transition-all group-hover:w-12" />
+            <div className="mt-3 h-px w-8 bg-silver-600 transition-all group-hover:w-12" />
           </Link>
         ))}
       </div>
-      <Link href="/baza" className="mt-4 flex min-h-12 items-center justify-center rounded-xl border border-red-600/40 text-sm font-semibold text-red-300 hover:bg-red-950/30">
+      <Link href="/baza" className="mt-4 flex min-h-12 items-center justify-center rounded-xl border border-silver-600/40 text-sm font-semibold text-silver-300 hover:bg-silver-950/30">
         Wszystkie sekcje bazy wiedzy →
       </Link>
     </section>

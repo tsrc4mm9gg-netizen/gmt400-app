@@ -17,25 +17,25 @@ export default function SchematyPage() {
   return (
     <div className="mx-auto w-full max-w-5xl px-4 py-6 text-white sm:py-10">
       <Breadcrumbs className="mb-2" items={[{ label: 'Schematy' }]} />
-      <h1 className="text-3xl font-bold text-red-400">Schematy — GMT400</h1>
+      <h1 className="text-3xl font-bold text-silver-400">Schematy — GMT400</h1>
       <p className="mt-2 text-neutral-300">Własne, uproszczone schematy i pinouty. Bez skanów FSM ani materiałów © GM. Przy części schematów są prawdziwe zdjęcia z Wikimedia Commons (autor i licencja pod zdjęciem). Każdy rysunek ma podany model i lata — <strong className="text-white">sprawdź w swoim aucie / manualu</strong>, bo GMT400 ma wiele wariantów.</p>
       <nav aria-label="Spis schematów" className="mt-5">
         <ul className="flex flex-wrap gap-2">
           {SCHEMATICS.map(item => (
             <li key={item.id}>
-              <a href={`#${item.id}`} className="inline-flex min-h-11 items-center rounded-lg border border-white/15 bg-neutral-950 px-3 text-sm text-neutral-200 hover:border-red-600 hover:text-white">{item.title}</a>
+              <a href={`#${item.id}`} className="inline-flex min-h-11 items-center rounded-lg border border-white/15 bg-neutral-950 px-3 text-sm text-neutral-200 hover:border-silver-600 hover:text-white">{item.title}</a>
             </li>
           ))}
         </ul>
       </nav>
       {SCHEMATICS.map(item => (
         <section key={item.id} id={item.id} className="mt-8 scroll-mt-24 rounded-xl border border-white/10 bg-neutral-950 p-4 sm:p-5">
-          <h2 className="text-xl font-semibold text-red-300">{item.title}</h2>
+          <h2 className="text-xl font-semibold text-silver-300">{item.title}</h2>
           <p className="mt-1 text-sm text-neutral-400">Zakres: {item.scope}</p>
           {[item.diagram, ...(item.extraDiagrams ?? [])].filter(d => d !== undefined).map(d => (
             <figure key={d.src} className="mt-4">
               <div className="mb-2 flex flex-wrap gap-2 text-xs">
-                <span className="rounded-full border border-red-600/50 bg-red-600/10 px-3 py-1 text-red-200">Model i lata: {d.models}</span>
+                <span className="rounded-full border border-silver-600/50 bg-silver-600/10 px-3 py-1 text-silver-200">Model i lata: {d.models}</span>
                 <span className="rounded-full border border-white/15 bg-white/5 px-3 py-1 text-neutral-200">⚠ Sprawdź w swoim aucie / manualu</span>
               </div>
               <SchematicViewer src={d.src} alt={d.alt} width={d.width} height={d.height} title={item.extraDiagrams?.length ? `${item.title} — ${d.models}` : item.title} />
@@ -66,16 +66,16 @@ export default function SchematyPage() {
           </div>
           {item.related && item.related.length > 0 && (
             <p className="mt-3 text-sm text-neutral-400">Zobacz też:{' '}
-              {item.related.map((id, index) => <span key={id}>{index > 0 && ', '}<a href={`#${id}`} className="inline-flex min-h-11 items-center text-red-400 underline">{titleOf(id)}</a></span>)}
+              {item.related.map((id, index) => <span key={id}>{index > 0 && ', '}<a href={`#${id}`} className="inline-flex min-h-11 items-center text-silver-400 underline">{titleOf(id)}</a></span>)}
             </p>
           )}
           <p className="mt-2 text-xs text-neutral-500">
-            Źródło: <a className="inline-flex min-h-11 items-center text-red-400 underline" href={item.source} target="_blank" rel="noopener noreferrer">{item.sourceTitle}</a>
+            Źródło: <a className="inline-flex min-h-11 items-center text-silver-400 underline" href={item.source} target="_blank" rel="noopener noreferrer">{item.sourceTitle}</a>
           </p>
           <p className="mt-1 text-xs text-neutral-400">{item.note}</p>
         </section>
       ))}
-      <p className="mt-8 text-sm text-neutral-400">Schematy dla konkretnego nadwozia znajdziesz też na <Link href="/modele" className="inline-flex min-h-11 items-center text-red-400 underline">stronach modeli</Link>.</p>
+      <p className="mt-8 text-sm text-neutral-400">Schematy dla konkretnego nadwozia znajdziesz też na <Link href="/modele" className="inline-flex min-h-11 items-center text-silver-400 underline">stronach modeli</Link>.</p>
     </div>
   );
 }

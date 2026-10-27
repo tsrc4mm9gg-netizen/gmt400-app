@@ -14,8 +14,8 @@ export default function SchematicPhotos({ photos, title }: { photos: SchematicPh
               <span className="block font-medium text-neutral-200">{photo.models}{photo.note ? ` — ${photo.note}` : ''}</span>
               <span className="block">
                 Fot. {photo.author},{' '}
-                <a href={photo.licenseUrl} target="_blank" rel="noopener noreferrer license" className="inline-flex min-h-11 items-center text-red-400 underline">{photo.license}</a>,{' '}
-                <a href={photo.sourceUrl} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center text-red-400 underline" aria-label={`Źródło zdjęcia (Wikimedia Commons) — ${title}`}>Wikimedia Commons</a>
+                <a href={photo.licenseUrl} target="_blank" rel="noopener noreferrer license" className="inline-flex min-h-11 items-center text-silver-400 underline">{photo.license}</a>,{' '}
+                <a href={photo.sourceUrl} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center text-silver-400 underline" aria-label={`Źródło zdjęcia (Wikimedia Commons) — ${title}`}>Wikimedia Commons</a>
               </span>
             </figcaption>
           </figure>

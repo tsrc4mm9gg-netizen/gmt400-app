@@ -367,7 +367,7 @@ export default function Encyclopedia({ initialTab, initialItems }: { initialTab?
     return (
       <div className="min-h-screen bg-black text-white flex flex-col items-center justify-center gap-4">
         <div className="text-4xl font-bold tracking-widest" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>GMT400</div>
-        <div className="w-8 h-8 border-2 border-red-600 border-t-transparent rounded-full animate-spin"></div>
+        <div className="w-8 h-8 border-2 border-silver-600 border-t-transparent rounded-full animate-spin"></div>
         <p className="text-sm text-neutral-500">Ładowanie...</p>
       </div>
     );
@@ -390,7 +390,7 @@ export default function Encyclopedia({ initialTab, initialItems }: { initialTab?
       <div className="flex items-center bg-neutral-900/50 border-b border-white/5 px-4 text-sm text-neutral-500">
         <a href="/" className="inline-flex min-h-11 items-center hover:text-white">Strona główna</a>
         <span className="mx-2">›</span>
-        <span className="text-red-400">{CATEGORIES.find(c => c.id === tab)?.label || tab}</span>
+        <span className="text-silver-400">{CATEGORIES.find(c => c.id === tab)?.label || tab}</span>
       </div>
       <h1 className="sr-only">{CATEGORIES.find(c => c.id === tab)?.label || tab} — GMT400</h1>
 
@@ -402,25 +402,25 @@ export default function Encyclopedia({ initialTab, initialItems }: { initialTab?
           <div className="max-w-7xl mx-auto px-4">
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
               <button onClick={() => setTab('modele')} className={`p-4 text-center transition ${
-                tab === 'modele' ? 'bg-red-600 text-white' : 'bg-neutral-800 hover:bg-neutral-700'
+                tab === 'modele' ? 'bg-silver-600 text-neutral-950' : 'bg-neutral-800 hover:bg-neutral-700'
               }`}>
                 <div className="text-2xl font-bold" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>{filteredModels.length}</div>
                 <div className="text-xs uppercase mt-1">Modele</div>
               </button>
               <button onClick={() => setTab('usterki')} className={`p-4 text-center transition ${
-                tab === 'usterki' ? 'bg-red-600 text-white' : 'bg-neutral-800 hover:bg-neutral-700'
+                tab === 'usterki' ? 'bg-silver-600 text-neutral-950' : 'bg-neutral-800 hover:bg-neutral-700'
               }`}>
                 <div className="text-2xl font-bold" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>{filteredIssues.length}</div>
                 <div className="text-xs uppercase mt-1">Usterki</div>
               </button>
               <button onClick={() => setTab('kody')} className={`p-4 text-center transition ${
-                tab === 'kody' ? 'bg-red-600 text-white' : 'bg-neutral-800 hover:bg-neutral-700'
+                tab === 'kody' ? 'bg-silver-600 text-neutral-950' : 'bg-neutral-800 hover:bg-neutral-700'
               }`}>
                 <div className="text-2xl font-bold" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>{filteredCodes.length}</div>
                 <div className="text-xs uppercase mt-1">Kody</div>
               </button>
               <button onClick={() => setTab('diy')} className={`p-4 text-center transition ${
-                tab === 'diy' ? 'bg-red-600 text-white' : 'bg-neutral-800 hover:bg-neutral-700'
+                tab === 'diy' ? 'bg-silver-600 text-neutral-950' : 'bg-neutral-800 hover:bg-neutral-700'
               }`}>
                 <div className="text-2xl font-bold" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>{filteredTips.length}</div>
                 <div className="text-xs uppercase mt-1">Porady</div>
@@ -436,19 +436,19 @@ export default function Encyclopedia({ initialTab, initialItems }: { initialTab?
             <>
               <ModelThumb body={selectedBody} label={false} />
               <span className="text-neutral-400">Pokazuję materiały dla:</span>
-              <span className="rounded-md bg-red-600 px-3 py-1.5 font-semibold text-white">
+              <span className="rounded-md bg-silver-600 px-3 py-1.5 font-semibold text-neutral-950">
                 {selectedBody.name}{modelFilters.year ? ` · ${modelFilters.year}` : ` · ${selectedBody.from}–${selectedBody.to}`}{modelFilters.engine ? ` · ${modelFilters.engine}` : ''}{modelFilters.drivetrain ? ` · ${modelFilters.drivetrain.toUpperCase()}` : ''}
               </span>
-              <a href={`/modele/${selectedBody.id}`} className="inline-flex min-h-11 items-center px-2 text-red-300 underline">Strona modelu</a>
-              <a href="/" className="inline-flex min-h-11 items-center px-2 text-red-300 underline">Zmień model</a>
+              <a href={`/modele/${selectedBody.id}`} className="inline-flex min-h-11 items-center px-2 text-silver-300 underline">Strona modelu</a>
+              <a href="/" className="inline-flex min-h-11 items-center px-2 text-silver-300 underline">Zmień model</a>
               <button type="button" onClick={clearSelection} className="min-h-11 px-2 text-neutral-400 underline hover:text-white">Wszystkie modele</button>
               <a href="#sekcje" className="inline-flex min-h-11 items-center px-2 text-neutral-400 underline md:hidden">Inne działy ↓</a>
             </>
           ) : (
             <>
               <span className="text-neutral-400">Wszystkie modele GMT400.</span>
-              <a href="/" className="inline-flex min-h-11 items-center px-2 text-red-300 underline">Wybierz swój model na stronie głównej</a>
-              <a href="/modele" className="inline-flex min-h-11 items-center px-2 text-red-300 underline">Katalog modeli</a>
+              <a href="/" className="inline-flex min-h-11 items-center px-2 text-silver-300 underline">Wybierz swój model na stronie głównej</a>
+              <a href="/modele" className="inline-flex min-h-11 items-center px-2 text-silver-300 underline">Katalog modeli</a>
             </>
           )}
         </div>
@@ -465,9 +465,9 @@ export default function Encyclopedia({ initialTab, initialItems }: { initialTab?
 
       {error && (
         <div className="max-w-7xl mx-auto px-4 pt-4">
-          <div className="bg-red-950/50 border border-red-500/30 text-red-300 px-4 py-3 rounded text-sm flex items-center justify-between">
+          <div className="bg-silver-950/50 border border-silver-500/30 text-silver-300 px-4 py-3 rounded text-sm flex items-center justify-between">
             <span>{error}</span>
-            <button onClick={() => window.location.reload()} className="min-h-11 px-2 underline text-red-200">Odśwież</button>
+            <button onClick={() => window.location.reload()} className="min-h-11 px-2 underline text-silver-200">Odśwież</button>
           </div>
         </div>
       )}
@@ -475,8 +475,8 @@ export default function Encyclopedia({ initialTab, initialItems }: { initialTab?
         {['usterki', 'kody', 'diy', 'schematy'].includes(tab) && vehicleFilterPanel}
         
         {selectedModel !== 'Wszystkie' && (
-          <div className="mb-6 flex items-center justify-between bg-red-600/10 border border-red-600/30 p-3">
-            <span className="text-red-400">Filtr: <strong>{selectedModel}</strong></span>
+          <div className="mb-6 flex items-center justify-between bg-silver-600/10 border border-silver-600/30 p-3">
+            <span className="text-silver-400">Filtr: <strong>{selectedModel}</strong></span>
             <button onClick={() => selectModel('Wszystkie')} className="min-h-11 px-2 text-sm text-neutral-400 hover:text-white">Wyczyść ×</button>
           </div>
         )}
@@ -491,13 +491,13 @@ export default function Encyclopedia({ initialTab, initialItems }: { initialTab?
               placeholder="Szukaj kodu (np. P0171, P0300, 12)..." 
               value={codeQuery}
               onChange={(e) => setCodeQuery(e.target.value)}
-              className="w-full bg-neutral-900 border border-white/10 px-4 py-3 text-sm focus:outline-none focus:border-red-600 mb-4"
+              className="w-full bg-neutral-900 border border-white/10 px-4 py-3 text-sm focus:outline-none focus:border-silver-600 mb-4"
             />
             <p className="text-neutral-500 text-sm mb-4">Znaleziono: {filteredCodes.filter(c => !codeQuery || c.Nazwa.toLowerCase().includes(codeQuery.toLowerCase()) || (c.Opis && c.Opis.toLowerCase().includes(codeQuery.toLowerCase()))).length}</p>
             <div className="space-y-3">
               {filteredCodes.filter(c => !codeQuery || c.Nazwa.toLowerCase().includes(codeQuery.toLowerCase()) || (c.Opis && c.Opis.toLowerCase().includes(codeQuery.toLowerCase()))).map((c, idx) => (
                 <div key={idx} className="bg-neutral-950 border border-white/10 p-4">
-                  <h3 className="font-semibold text-red-400 mb-1">{c.Nazwa}</h3>
+                  <h3 className="font-semibold text-silver-400 mb-1">{c.Nazwa}</h3>
                   {(() => { const body = bodyForEntry(c); return body ? <div className="mb-2"><ModelThumb body={body} /></div> : null; })()}
                       <VehicleMatchBadge item={c} />
                   {c.Opis && <p className="text-neutral-400 text-sm mb-2">{c.Opis}</p>}
@@ -518,7 +518,7 @@ export default function Encyclopedia({ initialTab, initialItems }: { initialTab?
                 placeholder="Szukaj usterki (np. wyciek, 4L60E, kolektor)..." 
                 value={issueQuery}
                 onChange={(e) => setIssueQuery(e.target.value)}
-                className="w-full bg-neutral-900 border border-white/10 px-4 py-3 text-sm focus:outline-none focus:border-red-600 mb-4"
+                className="w-full bg-neutral-900 border border-white/10 px-4 py-3 text-sm focus:outline-none focus:border-silver-600 mb-4"
               />
               <p className="text-neutral-400 text-sm mb-4">Lub filtruj po modelu i roczniku:</p>
               <div className="grid sm:grid-cols-2 gap-4">
@@ -527,7 +527,7 @@ export default function Encyclopedia({ initialTab, initialItems }: { initialTab?
                   <select aria-label="Model pojazdu — filtr usterek" 
                     value={issueModel} 
                     onChange={(e) => setIssueModel(e.target.value)}
-                    className="min-h-11 w-full bg-neutral-900 border border-white/10 px-3 py-2 text-base focus:outline-none focus:border-red-600"
+                    className="min-h-11 w-full bg-neutral-900 border border-white/10 px-3 py-2 text-base focus:outline-none focus:border-silver-600"
                   >
                     <option value="">Wszystkie modele</option>
                     {uniqueModels.filter(m => m !== 'Wszystkie').map(m => (
@@ -540,7 +540,7 @@ export default function Encyclopedia({ initialTab, initialItems }: { initialTab?
                   <select aria-label="Rocznik pojazdu — filtr usterek" 
                     value={issueYear} 
                     onChange={(e) => setIssueYear(e.target.value)}
-                    className="min-h-11 w-full bg-neutral-900 border border-white/10 px-3 py-2 text-base focus:outline-none focus:border-red-600"
+                    className="min-h-11 w-full bg-neutral-900 border border-white/10 px-3 py-2 text-base focus:outline-none focus:border-silver-600"
                   >
                     <option value="">Wszystkie roczniki</option>
                     {years.map(y => (
@@ -550,7 +550,7 @@ export default function Encyclopedia({ initialTab, initialItems }: { initialTab?
                 </div>
               </div>
               <label className="mt-4 flex min-h-11 cursor-pointer items-center gap-3 text-sm text-neutral-300">
-                <input type="checkbox" checked={issueSourcedOnly} onChange={(e) => setIssueSourcedOnly(e.target.checked)} className="h-5 w-5 accent-red-600" data-testid="issue-sourced-only" />
+                <input type="checkbox" checked={issueSourcedOnly} onChange={(e) => setIssueSourcedOnly(e.target.checked)} className="h-5 w-5 accent-silver-600" data-testid="issue-sourced-only" />
                 Tylko wpisy ze źródłami (biuletyny GM, instrukcje, katalogi)
               </label>
             </div>
@@ -562,16 +562,16 @@ export default function Encyclopedia({ initialTab, initialItems }: { initialTab?
                   const issueImg = i.Nazwa.toLowerCase().includes('kolektor') ? '/issue-intake.jpg' : i.Nazwa.toLowerCase().includes('4l60') ? '/issue-4l60e.jpg' : null;
                   return (
                     <div key={idx} className="bg-neutral-950 border border-white/10 overflow-hidden">
-                      {issueImg && <button type="button" aria-label="Powiększ ilustrację" className="block w-full rounded focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-red-500" onClick={() => setLightbox(issueImg)}><DiagramImage src={issueImg} alt={`Schemat poglądowy: ${i.Nazwa}`} maxHeightClass="max-h-48" /></button>}
+                      {issueImg && <button type="button" aria-label="Powiększ ilustrację" className="block w-full rounded focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-silver-500" onClick={() => setLightbox(issueImg)}><DiagramImage src={issueImg} alt={`Schemat poglądowy: ${i.Nazwa}`} maxHeightClass="max-h-48" /></button>}
                       <div className="p-4">
                         <div className="flex flex-wrap justify-between items-start gap-2 mb-2">
-                          <h3 className="font-semibold">{i.id ? <a className="inline-flex min-h-11 items-center underline decoration-neutral-600 underline-offset-4 hover:text-red-300 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-red-500" href={'/baza/' + encodeURIComponent(i.id)}>{i.Nazwa}</a> : i.Nazwa}</h3>
+                          <h3 className="font-semibold">{i.id ? <a className="inline-flex min-h-11 items-center underline decoration-neutral-600 underline-offset-4 hover:text-silver-300 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-silver-500" href={'/baza/' + encodeURIComponent(i.id)}>{i.Nazwa}</a> : i.Nazwa}</h3>
                           {(() => { const body = bodyForEntry(i); return body ? <ModelThumb body={body} /> : <span className="text-xs bg-white/10 px-2 py-0.5 text-neutral-400">{isGeneralEntry(i) ? 'Wszystkie GMT400' : i.Model}</span>; })()}
                         </div>
                         <VehicleMatchBadge item={i} />
                         {hasSource(i) && <span className="mb-2 inline-block border border-emerald-500/40 px-2 py-0.5 text-xs text-emerald-300" data-testid="issue-sourced">ze źródłem</span>}
                         <IssueMeta item={i} />
-                        {i.Objawy && <p className="text-neutral-400 text-sm mb-2 break-words"><span className="text-red-400">Objawy:</span> {i.Objawy}</p>}
+                        {i.Objawy && <p className="text-neutral-400 text-sm mb-2 break-words"><span className="text-silver-400">Objawy:</span> {i.Objawy}</p>}
                         {i.Rozwiązanie && <><p className="mb-1 text-xs font-semibold uppercase tracking-wide text-neutral-500">Co zrobić</p><StepsText text={i.Rozwiązanie} /></>}
                       </div>
                     </div>
@@ -590,18 +590,18 @@ export default function Encyclopedia({ initialTab, initialItems }: { initialTab?
                     ))}
                   </div>
                 </div>
-                <h3 className="text-lg font-semibold text-red-400 mb-4">Najczęstsze usterki GMT400</h3>
+                <h3 className="text-lg font-semibold text-silver-400 mb-4">Najczęstsze usterki GMT400</h3>
                 <div className="space-y-3">
                   <div className="bg-neutral-950 border border-white/10 p-4">
-                    <h4 className="font-semibold text-red-400">Uszczelka kolektora dolotowego</h4>
+                    <h4 className="font-semibold text-silver-400">Uszczelka kolektora dolotowego</h4>
                     <p className="text-sm text-neutral-400">Objawy: wyciek płynu, przegrzewanie. Rozwiązanie: wymiana uszczelki. Numer OEM 12554863 — niezweryfikowany, sprawdź w manualu / katalogu GM po VIN.</p>
                   </div>
                   <div className="bg-neutral-950 border border-white/10 p-4">
-                    <h4 className="font-semibold text-red-400">Ślizganie 4L60E</h4>
+                    <h4 className="font-semibold text-silver-400">Ślizganie 4L60E</h4>
                     <p className="text-sm text-neutral-400">Objawy: wysokie obroty przy zmianie 3-4. Rozwiązanie: regeneracja skrzyni.</p>
                   </div>
                   <div className="bg-neutral-950 border border-white/10 p-4">
-                    <h4 className="font-semibold text-red-400">Pompa paliwa</h4>
+                    <h4 className="font-semibold text-silver-400">Pompa paliwa</h4>
                     <p className="text-sm text-neutral-400">Objawy: nie odpala, gaśnie. Rozwiązanie: wymiana pompy w zbiorniku.</p>
                   </div>
                 </div>
@@ -618,10 +618,10 @@ export default function Encyclopedia({ initialTab, initialItems }: { initialTab?
               placeholder="Szukaj porady (np. 4L60E, filtr, kolektor)..." 
               value={diyQuery}
               onChange={(e) => setDiyQuery(e.target.value)}
-              className="w-full bg-neutral-900 border border-white/10 px-4 py-3 text-sm focus:outline-none focus:border-red-600 mb-4"
+              className="w-full bg-neutral-900 border border-white/10 px-4 py-3 text-sm focus:outline-none focus:border-silver-600 mb-4"
             />
             <label className="mb-3 flex min-h-11 items-center gap-3 text-sm text-neutral-300">
-              <input type="checkbox" checked={diySourcedOnly} onChange={(e) => setDiySourcedOnly(e.target.checked)} className="h-5 w-5 accent-red-600" data-testid="diy-sourced-only" />
+              <input type="checkbox" checked={diySourcedOnly} onChange={(e) => setDiySourcedOnly(e.target.checked)} className="h-5 w-5 accent-silver-600" data-testid="diy-sourced-only" />
               Tylko procedury ze źródłami (instrukcje GM, biuletyny)
             </label>
             <p className="text-neutral-500 text-sm mb-4" role="status" data-testid="diy-count">Znaleziono: {diyTips.length}</p>
@@ -631,7 +631,7 @@ export default function Encyclopedia({ initialTab, initialItems }: { initialTab?
                 const tipImg = getTipImage(t.Nazwa);
                 return (
                   <div key={idx} className="bg-neutral-950 border border-white/10 overflow-hidden">
-                    {tipImg && <button type="button" aria-label="Powiększ ilustrację" className="block w-full rounded focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-red-500" onClick={() => setLightbox(tipImg)}><DiagramImage src={tipImg} alt={`Ilustracja poglądowa: ${t.Nazwa}`} priority={idx === firstTipImageIndex} /></button>}
+                    {tipImg && <button type="button" aria-label="Powiększ ilustrację" className="block w-full rounded focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-silver-500" onClick={() => setLightbox(tipImg)}><DiagramImage src={tipImg} alt={`Ilustracja poglądowa: ${t.Nazwa}`} priority={idx === firstTipImageIndex} /></button>}
                     <div className="p-4">
                       <h3 className="font-semibold mb-2">{t.Nazwa}</h3>
                       {(() => { const body = bodyForEntry(t); return body ? <div className="mb-2"><ModelThumb body={body} /></div> : null; })()}
@@ -639,7 +639,7 @@ export default function Encyclopedia({ initialTab, initialItems }: { initialTab?
                       {hasSource(t) && <span className="mb-2 inline-block border border-emerald-500/40 px-2 py-0.5 text-xs text-emerald-300" data-testid="diy-sourced">ze źródłem</span>}
                       <IssueMeta item={t} label="Opis i źródła" />
                       {t.Rozwiązanie && <><p className="mb-1 text-xs font-semibold uppercase tracking-wide text-neutral-500">Instrukcja</p><StepsText text={t.Rozwiązanie} /></>}
-                      {t.id && <a className="mt-2 inline-flex min-h-11 items-center text-sm text-red-400 underline" href={'/baza/' + encodeURIComponent(t.id)}>Otwórz pełną instrukcję z ilustracjami</a>}
+                      {t.id && <a className="mt-2 inline-flex min-h-11 items-center text-sm text-silver-400 underline" href={'/baza/' + encodeURIComponent(t.id)}>Otwórz pełną instrukcję z ilustracjami</a>}
                     </div>
                   </div>
                 );
@@ -650,15 +650,15 @@ export default function Encyclopedia({ initialTab, initialItems }: { initialTab?
 
         {tab === 'diy' && (
           <div className="mb-6 bg-neutral-950 border border-white/10 p-4">
-            <h3 className="font-semibold text-red-400 mb-3">PORADNIKI WIDEO</h3>
+            <h3 className="font-semibold text-silver-400 mb-3">PORADNIKI WIDEO</h3>
             <div className="grid sm:grid-cols-2 gap-4">
               <div className="aspect-video bg-neutral-900 flex items-center justify-center">
-                <a href="https://www.youtube.com/results?search_query=GMT400+DIY+repair" target="_blank" className="inline-flex min-h-11 items-center text-red-400 hover:underline">
+                <a href="https://www.youtube.com/results?search_query=GMT400+DIY+repair" target="_blank" className="inline-flex min-h-11 items-center text-silver-400 hover:underline">
                   ▶ YouTube: GMT400 DIY
                 </a>
               </div>
               <div className="aspect-video bg-neutral-900 flex items-center justify-center">
-                <a href="https://www.youtube.com/results?search_query=GMT400+4L60E+rebuild" target="_blank" className="inline-flex min-h-11 items-center text-red-400 hover:underline">
+                <a href="https://www.youtube.com/results?search_query=GMT400+4L60E+rebuild" target="_blank" className="inline-flex min-h-11 items-center text-silver-400 hover:underline">
                   ▶ YouTube: 4L60E
                 </a>
               </div>
@@ -674,7 +674,7 @@ export default function Encyclopedia({ initialTab, initialItems }: { initialTab?
               placeholder="Szukaj schematu (np. masa, punkt, zegary)..." 
               value={schemaQuery}
               onChange={(e) => setSchemaQuery(e.target.value)}
-              className="w-full bg-neutral-900 border border-white/10 px-4 py-3 text-sm focus:outline-none focus:border-red-600 mb-4"
+              className="w-full bg-neutral-900 border border-white/10 px-4 py-3 text-sm focus:outline-none focus:border-silver-600 mb-4"
             />
             <div className="bg-neutral-950 border border-white/10 p-4">
               {filteredTips.filter(t => (t.Nazwa.toLowerCase().includes('punkt') || t.Nazwa.toLowerCase().includes('masa') || t.Nazwa.toLowerCase().includes('schemat')) && (!schemaQuery || t.Nazwa.toLowerCase().includes(schemaQuery.toLowerCase()) || (t.Rozwiązanie && t.Rozwiązanie.toLowerCase().includes(schemaQuery.toLowerCase())))).map((t, idx) => (
@@ -691,44 +691,44 @@ export default function Encyclopedia({ initialTab, initialItems }: { initialTab?
         {tab === 'vin' && (
           <div>
             <h2 className="text-2xl mb-6" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>DEKODER VIN</h2>
-            <p className="mb-4 text-sm text-neutral-300">Dekoder ma teraz własną stronę: <Link href="/vin" className="text-red-400 underline">gmt400.pl/vin</Link>.</p>
+            <p className="mb-4 text-sm text-neutral-300">Dekoder ma teraz własną stronę: <Link href="/vin" className="text-silver-400 underline">gmt400.pl/vin</Link>.</p>
             <VinDecoder withRpo onDecoded={(vin, year) => { setVinResult(vin ? { VIN: vin, Rok: year ? String(year) : '' } : null); setVinWarning(false); }} />
 
             {vinResult && (
               <div className="mt-4 space-y-4">
               <div className="bg-neutral-950 border border-white/10 p-4">
-                <h3 className="text-lg font-bold text-red-400 mb-4">NUMERY OEM CZĘŚCI</h3>
+                <h3 className="text-lg font-bold text-silver-400 mb-4">NUMERY OEM CZĘŚCI</h3>
                 <OemQuickList />
               </div>
 
               <div className="bg-neutral-950 border border-white/10 p-4">
-                <h3 className="text-lg font-bold text-red-400 mb-2">POJEMNOŚCI PŁYNÓW</h3>
-                <p className="text-sm text-neutral-300">Pojemności zależą od silnika i rocznika. Zweryfikowane dane z instrukcji GM 1995 i 1999 znajdziesz w zakładce <button type="button" onClick={() => setTab('specyfikacje')} className="text-red-300 underline">Specyfikacje</button>.</p>
+                <h3 className="text-lg font-bold text-silver-400 mb-2">POJEMNOŚCI PŁYNÓW</h3>
+                <p className="text-sm text-neutral-300">Pojemności zależą od silnika i rocznika. Zweryfikowane dane z instrukcji GM 1995 i 1999 znajdziesz w zakładce <button type="button" onClick={() => setTab('specyfikacje')} className="text-silver-300 underline">Specyfikacje</button>.</p>
               </div>
               </div>
             )}
 
             {vinResult && (
-              <div className="mt-4 bg-neutral-950 border border-red-600/30 p-4">
-                <h3 className="font-semibold text-red-400 mb-3">OFICJALNE DANE NHTSA</h3>
+              <div className="mt-4 bg-neutral-950 border border-silver-600/30 p-4">
+                <h3 className="font-semibold text-silver-400 mb-3">OFICJALNE DANE NHTSA</h3>
                 <OfficialVehicleData key={vinResult.VIN} vin={vinResult.VIN} />
 
-                <h4 className="font-semibold text-red-400 mb-2">POWIĄZANE INFORMACJE</h4>
+                <h4 className="font-semibold text-silver-400 mb-2">POWIĄZANE INFORMACJE</h4>
                 <div className="space-y-2">
                   <a href={`https://www.gmt400.com/search/search?keywords=${vinResult['Rok'] || ''} ${vinResult['Model'] || ''}`} target="_blank" className="block bg-neutral-900 p-3 hover:bg-neutral-800">
-                    <p className="text-sm font-medium text-red-400">Forum GMT400.com</p>
+                    <p className="text-sm font-medium text-silver-400">Forum GMT400.com</p>
                     <p className="text-xs text-neutral-500">Dyskusje o tym roczniku i modelu</p>
                   </a>
                   <a href={`https://www.google.com/search?q=${vinResult['Rok'] || ''} ${vinResult['Model'] || 'GMT400'} recall`} target="_blank" className="block bg-neutral-900 p-3 hover:bg-neutral-800">
-                    <p className="text-sm font-medium text-red-400">Akcje serwisowe</p>
+                    <p className="text-sm font-medium text-silver-400">Akcje serwisowe</p>
                     <p className="text-xs text-neutral-500">Sprawdź recall dla tego rocznika</p>
                   </a>
                   <a href={`https://www.google.com/search?q=${vinResult['Rok'] || ''} ${vinResult['Model'] || 'GMT400'} common problems`} target="_blank" className="block bg-neutral-900 p-3 hover:bg-neutral-800">
-                    <p className="text-sm font-medium text-red-400">Typowe problemy</p>
+                    <p className="text-sm font-medium text-silver-400">Typowe problemy</p>
                     <p className="text-xs text-neutral-500">Najczęstsze usterki tego modelu</p>
                   </a>
                   <a href={`https://www.youtube.com/results?search_query=${vinResult['Rok'] || ''} ${vinResult['Model'] || 'GMT400'} review`} target="_blank" className="block bg-neutral-900 p-3 hover:bg-neutral-800">
-                    <p className="text-sm font-medium text-red-400">YouTube</p>
+                    <p className="text-sm font-medium text-silver-400">YouTube</p>
                     <p className="text-xs text-neutral-500">Recenzje i poradniki wideo</p>
                   </a>
                 </div>
@@ -737,7 +737,7 @@ export default function Encyclopedia({ initialTab, initialItems }: { initialTab?
 
             {vinResult && (
               <div className="mt-4 bg-neutral-950 border border-white/10 p-4">
-                <h3 className="font-semibold text-red-400 mb-3">Typowe usterki dla tego rocznika</h3>
+                <h3 className="font-semibold text-silver-400 mb-3">Typowe usterki dla tego rocznika</h3>
                 <ul className="text-sm text-neutral-300 space-y-2">
                   <li>• Uszczelki kolektora dolotowego (wyciek płynu)</li>
                   <li>• Korozja przewodów hamulcowych</li>
@@ -746,7 +746,7 @@ export default function Encyclopedia({ initialTab, initialItems }: { initialTab?
                   <li>• Czujnik MAF (kody P0171/P0174)</li>
                   <li>• Punkty masy (korozja)</li>
                 </ul>
-                <h3 className="font-semibold text-red-400 mt-4 mb-3">Zalecany serwis</h3>
+                <h3 className="font-semibold text-silver-400 mt-4 mb-3">Zalecany serwis</h3>
                 <ul className="text-sm text-neutral-300 space-y-2">
                   <li>• Olej silnikowy: co 5-8 tys. km</li>
                   <li>• ATF: co 50 tys. km</li>
@@ -758,7 +758,7 @@ export default function Encyclopedia({ initialTab, initialItems }: { initialTab?
             )}
 
             <div className="mt-6 bg-neutral-950 border border-white/10 p-4">
-              <h3 className="font-semibold text-red-400 mb-3">Kody silników GMT400</h3>
+              <h3 className="font-semibold text-silver-400 mb-3">Kody silników GMT400</h3>
               <div className="grid sm:grid-cols-2 gap-2 text-sm">
                 <div className="flex justify-between"><span className="text-neutral-400">Z</span><span>4.3L V6 TBI</span></div>
                 <div className="flex justify-between"><span className="text-neutral-400">H</span><span>5.0L V8 TBI</span></div>
@@ -774,20 +774,20 @@ export default function Encyclopedia({ initialTab, initialItems }: { initialTab?
         {tab === 'czesci' && (
           <div>
             <h2 className="text-2xl mb-6" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>BAZA CZĘŚCI OEM</h2>
-            <p className="mb-4 rounded-lg border border-red-600/30 bg-red-950/30 p-3 text-sm text-neutral-300">Numery części i momenty dokręcania są orientacyjne. Sprawdź w swoim aucie / manualu — GMT400 ma wiele wariantów (rocznik, GVWR, silnik, skrzynia, RPO). Zawsze weryfikuj w katalogu dla swojego VIN.</p>
+            <p className="mb-4 rounded-lg border border-silver-600/30 bg-silver-950/30 p-3 text-sm text-neutral-300">Numery części i momenty dokręcania są orientacyjne. Sprawdź w swoim aucie / manualu — GMT400 ma wiele wariantów (rocznik, GVWR, silnik, skrzynia, RPO). Zawsze weryfikuj w katalogu dla swojego VIN.</p>
             
             <input aria-label="Szukaj części" 
               type="text" 
               placeholder="Szukaj części (np. filtr, świece, pompa)..." 
               value={partsQuery}
               onChange={(e) => setPartsQuery(e.target.value)}
-              className="w-full bg-neutral-900 border border-white/10 px-4 py-3 text-sm focus:outline-none focus:border-red-600 mb-4"
+              className="w-full bg-neutral-900 border border-white/10 px-4 py-3 text-sm focus:outline-none focus:border-silver-600 mb-4"
             />
             
             <div className="flex flex-wrap gap-2 mb-6">
               {['wszystkie', 'filtry', 'silnik', 'skrzynia', 'hamulce', 'zawieszenie'].map(f => (
                 <button key={f} type="button" aria-pressed={partsFilter === f} onClick={() => setPartsFilter(f)}
-                  className={`min-h-11 px-3 py-2 text-sm ${partsFilter === f ? 'bg-red-600 text-white' : 'bg-neutral-800 hover:bg-neutral-700'}`}>
+                  className={`min-h-11 px-3 py-2 text-sm ${partsFilter === f ? 'bg-silver-600 text-neutral-950' : 'bg-neutral-800 hover:bg-neutral-700'}`}>
                   {f.charAt(0).toUpperCase() + f.slice(1)}
                 </button>
               ))}
@@ -796,11 +796,11 @@ export default function Encyclopedia({ initialTab, initialItems }: { initialTab?
             <div className="space-y-3">
               {PARTS.filter(p => (partsFilter === 'wszystkie' || p.kat === partsFilter) && (!partsQuery || p.nazwa.toLowerCase().includes(partsQuery.toLowerCase()) || p.oem.toLowerCase().includes(partsQuery.toLowerCase()) || p.opis.toLowerCase().includes(partsQuery.toLowerCase()))).map((p, idx) => (
                 <div key={idx} className="bg-neutral-950 border border-white/10 overflow-hidden">
-                  {p.img && <button type="button" aria-label="Powiększ ilustrację" className="block w-full rounded focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-red-500" onClick={() => setLightbox(p.img ?? null)}><img loading="lazy" src={p.img} alt={p.nazwa} className="w-full h-32 object-contain bg-white cursor-pointer"  /></button>}
+                  {p.img && <button type="button" aria-label="Powiększ ilustrację" className="block w-full rounded focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-silver-500" onClick={() => setLightbox(p.img ?? null)}><img loading="lazy" src={p.img} alt={p.nazwa} className="w-full h-32 object-contain bg-white cursor-pointer"  /></button>}
                   <div className="p-4">
                   <div className="flex justify-between items-start mb-2">
                     <h3 className="font-semibold">{p.nazwa}</h3>
-                    <span className="text-xs bg-red-600 text-white px-2 py-0.5">{p.oem}</span>
+                    <span className="text-xs bg-silver-600 text-neutral-950 px-2 py-0.5">{p.oem}</span>
                   </div>
                   <p className="text-neutral-400 text-sm mb-1">{p.opis}</p>
                   <p className="text-neutral-500 text-xs">Model / lata: {p.model}</p>
@@ -818,12 +818,12 @@ export default function Encyclopedia({ initialTab, initialItems }: { initialTab?
             
             <EngineTable />
 
-            <button type="button" aria-label="Powiększ ilustrację" className="block w-full rounded focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-red-500" onClick={() => setLightbox('/spec-fluids-map.jpg')}><img loading="lazy" src="/spec-fluids-map.jpg" alt="Lokalizacje płynów" className="w-full mb-6 cursor-pointer"  /></button>
+            <button type="button" aria-label="Powiększ ilustrację" className="block w-full rounded focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-silver-500" onClick={() => setLightbox('/spec-fluids-map.jpg')}><img loading="lazy" src="/spec-fluids-map.jpg" alt="Lokalizacje płynów" className="w-full mb-6 cursor-pointer"  /></button>
 
             <FluidsTable />
 
             <div className="bg-neutral-950 border border-white/10 p-4 mt-6">
-              <h3 className="font-semibold text-red-400 mb-3">Numery OEM — filtry</h3>
+              <h3 className="font-semibold text-silver-400 mb-3">Numery OEM — filtry</h3>
               <OemQuickList filtersOnly />
             </div>
             <TorqueTable />
@@ -839,7 +839,7 @@ export default function Encyclopedia({ initialTab, initialItems }: { initialTab?
 
             <div className="grid sm:grid-cols-2 gap-4">
               <div className="bg-neutral-950 border border-white/10 p-4">
-                <h3 className="font-semibold text-red-400 mb-3">Co 5-8 tys. km</h3>
+                <h3 className="font-semibold text-silver-400 mb-3">Co 5-8 tys. km</h3>
                 <ul className="text-sm text-neutral-300 space-y-1">
                   <li>• Wymiana oleju silnikowego (4.7 L)</li>
                   <li>• Wymiana filtra oleju (PF1218)</li>
@@ -848,7 +848,7 @@ export default function Encyclopedia({ initialTab, initialItems }: { initialTab?
                 </ul>
               </div>
               <div className="bg-neutral-950 border border-white/10 p-4">
-                <h3 className="font-semibold text-red-400 mb-3">Co 30-50 tys. km</h3>
+                <h3 className="font-semibold text-silver-400 mb-3">Co 30-50 tys. km</h3>
                 <ul className="text-sm text-neutral-300 space-y-1">
                   <li>• Filtr powietrza (A1300C — V8 1996+)</li>
                   <li>• Filtr paliwa (GF626 — 1996+; 1995: GF481)</li>
@@ -858,7 +858,7 @@ export default function Encyclopedia({ initialTab, initialItems }: { initialTab?
                 </ul>
               </div>
               <div className="bg-neutral-950 border border-white/10 p-4">
-                <h3 className="font-semibold text-red-400 mb-3">Co 100 tys. km</h3>
+                <h3 className="font-semibold text-silver-400 mb-3">Co 100 tys. km</h3>
                 <ul className="text-sm text-neutral-300 space-y-1">
                   <li>• Pasek klinowy</li>
                   <li>• Amortyzatory</li>
@@ -867,7 +867,7 @@ export default function Encyclopedia({ initialTab, initialItems }: { initialTab?
                 </ul>
               </div>
               <div className="bg-neutral-950 border border-white/10 p-4">
-                <h3 className="font-semibold text-red-400 mb-3">Sezonowo</h3>
+                <h3 className="font-semibold text-silver-400 mb-3">Sezonowo</h3>
                 <ul className="text-sm text-neutral-300 space-y-1">
                   <li>• Płyn hamulcowy (co 2 lata)</li>
                   <li>• Płyn chłodzący (co 5 lat)</li>
@@ -884,9 +884,9 @@ export default function Encyclopedia({ initialTab, initialItems }: { initialTab?
             <h2 className="text-2xl mb-6" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>PORADNIK KUPUJĄCEGO</h2>
             
             <div className="bg-neutral-950 border border-white/10 overflow-hidden mb-4">
-              <button type="button" aria-label="Powiększ ilustrację" className="block w-full rounded focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-red-500" onClick={() => setLightbox('/guide-rust.jpg')}><img loading="lazy" src="/guide-rust.jpg" alt="Rdza GMT400" className="w-full h-48 object-cover cursor-pointer"  /></button>
+              <button type="button" aria-label="Powiększ ilustrację" className="block w-full rounded focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-silver-500" onClick={() => setLightbox('/guide-rust.jpg')}><img loading="lazy" src="/guide-rust.jpg" alt="Rdza GMT400" className="w-full h-48 object-cover cursor-pointer"  /></button>
               <div className="p-4">
-                <h3 className="font-semibold text-red-400 mb-2">1. RDZA — NAJWIĘKSZY WRÓG</h3>
+                <h3 className="font-semibold text-silver-400 mb-2">1. RDZA — NAJWIĘKSZY WRÓG</h3>
                 <ul className="text-sm text-neutral-300 space-y-1">
                   <li>• <strong>Progi</strong> — sprawdź od spodu, rdza często ukryta pod listwami</li>
                   <li>• <strong>Nadkola</strong> — szczególnie tylne, woda zbiera się za błotnikiem</li>
@@ -899,9 +899,9 @@ export default function Encyclopedia({ initialTab, initialItems }: { initialTab?
             </div>
 
             <div className="bg-neutral-950 border border-white/10 overflow-hidden mb-4">
-              <button type="button" aria-label="Powiększ ilustrację" className="block w-full rounded focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-red-500" onClick={() => setLightbox('/guide-frame.jpg')}><img loading="lazy" src="/guide-frame.jpg" alt="Rama GMT400" className="w-full h-48 object-cover cursor-pointer"  /></button>
+              <button type="button" aria-label="Powiększ ilustrację" className="block w-full rounded focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-silver-500" onClick={() => setLightbox('/guide-frame.jpg')}><img loading="lazy" src="/guide-frame.jpg" alt="Rama GMT400" className="w-full h-48 object-cover cursor-pointer"  /></button>
               <div className="p-4">
-                <h3 className="font-semibold text-red-400 mb-2">2. RAMA — SPRAWDŹ DOKŁADNIE</h3>
+                <h3 className="font-semibold text-silver-400 mb-2">2. RAMA — SPRAWDŹ DOKŁADNIE</h3>
                 <ul className="text-sm text-neutral-300 space-y-1">
                   <li>• <strong>Pęknięcia</strong> — przy mocowaniach zawieszenia, za kabiną</li>
                   <li>• <strong>Korozja</strong> — szczególnie przy spawach i otworach</li>
@@ -913,9 +913,9 @@ export default function Encyclopedia({ initialTab, initialItems }: { initialTab?
             </div>
 
             <div className="bg-neutral-950 border border-white/10 overflow-hidden mb-4">
-              <button type="button" aria-label="Powiększ ilustrację" className="block w-full rounded focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-red-500" onClick={() => setLightbox('/guide-engine.jpg')}><img loading="lazy" src="/guide-engine.jpg" alt="Silnik 5.7L" className="w-full h-48 object-cover cursor-pointer"  /></button>
+              <button type="button" aria-label="Powiększ ilustrację" className="block w-full rounded focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-silver-500" onClick={() => setLightbox('/guide-engine.jpg')}><img loading="lazy" src="/guide-engine.jpg" alt="Silnik 5.7L" className="w-full h-48 object-cover cursor-pointer"  /></button>
               <div className="p-4">
-                <h3 className="font-semibold text-red-400 mb-2">3. SILNIK — CO SPRAWDZIĆ</h3>
+                <h3 className="font-semibold text-silver-400 mb-2">3. SILNIK — CO SPRAWDZIĆ</h3>
                 <ul className="text-sm text-neutral-300 space-y-1">
                   <li>• <strong>Olej</strong> — mleczny = uszczelka głowicy, metaliczne = zużycie</li>
                   <li>• <strong>Wycieki</strong> — uszczelka kolektora (typowy problem Vortec)</li>
@@ -928,7 +928,7 @@ export default function Encyclopedia({ initialTab, initialItems }: { initialTab?
             </div>
 
             <div className="bg-neutral-950 border border-white/10 p-4 mb-4">
-              <h3 className="font-semibold text-red-400 mb-2">4. SKRZYNIA BIEGÓW</h3>
+              <h3 className="font-semibold text-silver-400 mb-2">4. SKRZYNIA BIEGÓW</h3>
               <ul className="text-sm text-neutral-300 space-y-1">
                 <li>• <strong>4L60E</strong> — szarpanie przy zmianie 2-3 = typowy problem</li>
                 <li>• <strong>ATF</strong> — ciemny/spalony = zużycie, metaliczne = problem</li>
@@ -939,7 +939,7 @@ export default function Encyclopedia({ initialTab, initialItems }: { initialTab?
             </div>
 
             <div className="bg-neutral-950 border border-white/10 p-4 mb-4">
-              <h3 className="font-semibold text-red-400 mb-2">5. ZAWIESZENIE I HAMULCE</h3>
+              <h3 className="font-semibold text-silver-400 mb-2">5. ZAWIESZENIE I HAMULCE</h3>
               <ul className="text-sm text-neutral-300 space-y-1">
                 <li>• <strong>Tuleje</strong> — stukanie na nierównościach = zużyte</li>
                 <li>• <strong>Sworznie</strong> — luz na kole = wymiana</li>
@@ -950,8 +950,8 @@ export default function Encyclopedia({ initialTab, initialItems }: { initialTab?
               <p className="text-xs text-neutral-500 mt-2">Komplet zawieszenia: 2000-4000 PLN. Hamulce: 1000-2000 PLN</p>
             </div>
 
-            <div className="bg-neutral-950 border border-red-600/30 p-4">
-              <h3 className="font-semibold text-red-400 mb-2">CHECKLIST PRZED ZAKUPEM</h3>
+            <div className="bg-neutral-950 border border-silver-600/30 p-4">
+              <h3 className="font-semibold text-silver-400 mb-2">CHECKLIST PRZED ZAKUPEM</h3>
               <div className="grid sm:grid-cols-2 gap-2 text-sm text-neutral-300">
                 <div>☐ VIN zgodny z dokumentami</div>
                 <div>☐ Numer ramy zgodny z VIN</div>
@@ -979,13 +979,13 @@ export default function Encyclopedia({ initialTab, initialItems }: { initialTab?
               placeholder="Szukaj modyfikacji (np. lift, headers, LS swap)..." 
               value={tuningQuery}
               onChange={(e) => setTuningQuery(e.target.value)}
-              className="w-full bg-neutral-900 border border-white/10 px-4 py-3 text-sm focus:outline-none focus:border-red-600 mb-4"
+              className="w-full bg-neutral-900 border border-white/10 px-4 py-3 text-sm focus:outline-none focus:border-silver-600 mb-4"
             />
             
             <div className="flex flex-wrap gap-2 mb-6">
               {['wszystkie', 'zawieszenie', 'silnik', 'wydech', 'skrzynia', 'hamulce'].map(f => (
                 <button key={f} onClick={() => setTuningFilter(f)}
-                  className={`px-3 py-1 text-sm ${tuningFilter === f ? 'bg-red-600 text-white' : 'bg-neutral-800 hover:bg-neutral-700'}`}>
+                  className={`px-3 py-1 text-sm ${tuningFilter === f ? 'bg-silver-600 text-neutral-950' : 'bg-neutral-800 hover:bg-neutral-700'}`}>
                   {f.charAt(0).toUpperCase() + f.slice(1)}
                 </button>
               ))}
@@ -1014,16 +1014,16 @@ export default function Encyclopedia({ initialTab, initialItems }: { initialTab?
                 { kat: 'zawieszenie', nazwa: 'Polyurethane bushings', efekt: 'Sztywniejsze zawieszenie', czesci: 'Energy Suspension', koszt: '400-800 PLN', opis: 'Zamiana gumowych tulei na poliuretanowe. Lepsza kontrola.', model: 'Wszystkie' },
               ].filter(m => (tuningFilter === 'wszystkie' || m.kat === tuningFilter) && (!tuningQuery || m.nazwa.toLowerCase().includes(tuningQuery.toLowerCase()) || m.opis.toLowerCase().includes(tuningQuery.toLowerCase()))).map((m, idx) => (
                 <div key={idx} className="bg-neutral-950 border border-white/10 overflow-hidden">
-                  {m.img && <button type="button" aria-label="Powiększ ilustrację" className="block w-full rounded focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-red-500" onClick={() => setLightbox(m.img)}><img loading="lazy" src={m.img} alt={m.nazwa} className="w-full h-40 object-cover cursor-pointer"  /></button>}
+                  {m.img && <button type="button" aria-label="Powiększ ilustrację" className="block w-full rounded focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-silver-500" onClick={() => setLightbox(m.img)}><img loading="lazy" src={m.img} alt={m.nazwa} className="w-full h-40 object-cover cursor-pointer"  /></button>}
                   <div className="p-4">
                   <div className="flex justify-between items-start mb-2">
                     <h3 className="font-semibold text-lg">{m.nazwa}</h3>
-                    <span className="text-xs bg-red-600 text-white px-2 py-0.5">{m.koszt}</span>
+                    <span className="text-xs bg-silver-600 text-neutral-950 px-2 py-0.5">{m.koszt}</span>
                   </div>
-                  <p className="text-red-400 text-sm mb-2">Efekt: {m.efekt}</p>
+                  <p className="text-silver-400 text-sm mb-2">Efekt: {m.efekt}</p>
                   <p className="text-neutral-300 text-sm mb-2">{m.opis}</p>
                   <p className="text-neutral-500 text-xs">Części: {m.czesci}</p>
-                  {m.model && <p className="text-red-400 text-xs mt-1">Model: {m.model}</p>}
+                  {m.model && <p className="text-silver-400 text-xs mt-1">Model: {m.model}</p>}
                   </div>
                 </div>
               ))}
@@ -1037,15 +1037,15 @@ export default function Encyclopedia({ initialTab, initialItems }: { initialTab?
             
             <ImportCostCalculator />
 
-            <div className="bg-neutral-950 border border-red-600/60 p-4 mb-4" data-testid="import-guide-link">
-              <h3 className="font-semibold text-red-400 mb-3">AKTUALNY PORADNIK Z ŹRÓDŁAMI (stan na 24.10.2026)</h3>
-              <p className="text-sm text-neutral-300 leading-6">Pełny opis opłat, procedury, kalkulator cła/akcyzy/VAT, trasa USA→DE/NL→PL i zabytek CN 9705 — z linkami do przepisów i datami: <Link href="/dla-wlasciciela/import" className="inline-flex min-h-11 items-center text-red-300 underline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-red-500">Sprowadzenie i rejestracja z USA/UE</Link>.</p>
+            <div className="bg-neutral-950 border border-silver-600/60 p-4 mb-4" data-testid="import-guide-link">
+              <h3 className="font-semibold text-silver-400 mb-3">AKTUALNY PORADNIK Z ŹRÓDŁAMI (stan na 24.10.2026)</h3>
+              <p className="text-sm text-neutral-300 leading-6">Pełny opis opłat, procedury, kalkulator cła/akcyzy/VAT, trasa USA→DE/NL→PL i zabytek CN 9705 — z linkami do przepisów i datami: <Link href="/dla-wlasciciela/import" className="inline-flex min-h-11 items-center text-silver-300 underline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-silver-500">Sprowadzenie i rejestracja z USA/UE</Link>.</p>
               <ul className="mt-3 text-sm text-neutral-300 space-y-2 list-disc pl-5 leading-6">
                 <li>Akcyza 18,6% dotyczy samochodów osobowych (CN 8703) powyżej 2000 cm³, 3,1% do 2000 cm³; pickup N1 (CN 8704) akcyzy nie ma, ale „pickup” nie oznacza automatycznie takiej klasyfikacji.</li>
                 <li>Opłata recyklingowa: zniesiona od 1.01.2016.</li>
                 <li>Od 1.07.2026 cło 0% dla osobowych z pochodzeniem USA (z dowodem pochodzenia); bez dowodu 10%.</li>
                 <li>Rejestracja w 30 dni; kara 500 zł (1000 zł po 180 dniach).</li>
-                <li>Światła, LPG, żółte tablice: <Link href="/dla-wlasciciela/swiatla-eu" className="text-red-300 underline">światła</Link>, <Link href="/dla-wlasciciela/lpg" className="text-red-300 underline">LPG</Link>, <Link href="/dla-wlasciciela/zolte-tablice" className="text-red-300 underline">żółte tablice</Link>. Przepisy się zmieniają — sprawdź w urzędzie.</li>
+                <li>Światła, LPG, żółte tablice: <Link href="/dla-wlasciciela/swiatla-eu" className="text-silver-300 underline">światła</Link>, <Link href="/dla-wlasciciela/lpg" className="text-silver-300 underline">LPG</Link>, <Link href="/dla-wlasciciela/zolte-tablice" className="text-silver-300 underline">żółte tablice</Link>. Przepisy się zmieniają — sprawdź w urzędzie.</li>
               </ul>
             </div>
           </div>
@@ -1057,9 +1057,9 @@ export default function Encyclopedia({ initialTab, initialItems }: { initialTab?
             <AdditionalTips />
             
             <div className="bg-neutral-950 border border-white/10 overflow-hidden mb-4">
-              <button type="button" aria-label="Powiększ ilustrację" className="block w-full rounded focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-red-500" onClick={() => setLightbox('/tip-obd.jpg')}><img loading="lazy" src="/tip-obd.jpg" alt="OBD1" className="w-full h-48 object-cover cursor-pointer"  /></button>
+              <button type="button" aria-label="Powiększ ilustrację" className="block w-full rounded focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-silver-500" onClick={() => setLightbox('/tip-obd.jpg')}><img loading="lazy" src="/tip-obd.jpg" alt="OBD1" className="w-full h-48 object-cover cursor-pointer"  /></button>
               <div className="p-4">
-                <h3 className="font-semibold text-red-400 mb-2">1. KODY OBD-I BEZ SKANERA (1988-1995)</h3>
+                <h3 className="font-semibold text-silver-400 mb-2">1. KODY OBD-I BEZ SKANERA (1988-1995)</h3>
                 <p className="text-sm text-neutral-300 mb-2">Odczytaj kody błędów spinaczem — bez skanera!</p>
                 <ol className="text-sm text-neutral-300 space-y-1 list-decimal list-inside">
                   <li>Znajdź złącze ALDL pod deską (12-pin)</li>
@@ -1072,9 +1072,9 @@ export default function Encyclopedia({ initialTab, initialItems }: { initialTab?
             </div>
 
             <div className="bg-neutral-950 border border-white/10 overflow-hidden mb-4">
-              <button type="button" aria-label="Powiększ ilustrację" className="block w-full rounded focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-red-500" onClick={() => setLightbox('/tip-torsion.jpg')}><img loading="lazy" src="/tip-torsion.jpg" alt="Torsion" className="w-full h-48 object-cover cursor-pointer"  /></button>
+              <button type="button" aria-label="Powiększ ilustrację" className="block w-full rounded focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-silver-500" onClick={() => setLightbox('/tip-torsion.jpg')}><img loading="lazy" src="/tip-torsion.jpg" alt="Torsion" className="w-full h-48 object-cover cursor-pointer"  /></button>
               <div className="p-4">
-                <h3 className="font-semibold text-red-400 mb-2">2. POZIOMOWANIE 4x4 (TORSION CRANK)</h3>
+                <h3 className="font-semibold text-silver-400 mb-2">2. POZIOMOWANIE 4x4 (TORSION CRANK)</h3>
                 <p className="text-sm text-neutral-300 mb-2">Podnieś przód o 1-2" bez kitów — fabryczne torsion bars.</p>
                 <ol className="text-sm text-neutral-300 space-y-1 list-decimal list-inside">
                   <li>Znajdź śruby regulacyjne przy krzyżownicy (18mm)</li>
@@ -1088,10 +1088,10 @@ export default function Encyclopedia({ initialTab, initialItems }: { initialTab?
             </div>
 
             <div className="bg-neutral-950 border border-white/10 p-4 mb-4">
-              <h3 className="font-semibold text-red-400 mb-2">3. SPRAWDŹ PRZEŁOŻENIE OSI BEZ ROZBIERANIA</h3>
+              <h3 className="font-semibold text-silver-400 mb-2">3. SPRAWDŹ PRZEŁOŻENIE OSI BEZ ROZBIERANIA</h3>
               <button type="button" onClick={() => setLightbox('/tip-axle-ratio-guide.svg')} aria-label="Powiększ schemat testu przełożenia" className="block w-full my-4"><img src="/tip-axle-ratio-guide.svg" alt="Otwarty mechanizm: jedno koło nieruchome, drugie dwa obroty; liczymy obroty wału" className="w-full h-auto" /></button>
               <p className="text-sm text-neutral-300 mb-2">Najpierw odczytaj RPO. Jeśli most był zmieniany, kod może nie odpowiadać obecnemu przełożeniu.</p>
-              <p className="text-sm text-red-200 mb-2">Próba wymaga rozpoznania mechanizmu i bezpiecznego podparcia auta. Równe, twarde podłoże, kliny pod kołami pozostającymi na ziemi i podpory o odpowiedniej nośności w punktach zalecanych przez producenta. Nie pracuj pod autem opartym wyłącznie na podnośniku. Silnik wyłączony; koła obracaj tylko ręcznie. Zabezpiecz auto przed przetoczeniem przed ustawieniem skrzyni w N i zwolnieniem hamulca postojowego. Jeśli nie potrafisz bezpiecznie przygotować auta, zleć próbę warsztatowi.</p>
+              <p className="text-sm text-silver-200 mb-2">Próba wymaga rozpoznania mechanizmu i bezpiecznego podparcia auta. Równe, twarde podłoże, kliny pod kołami pozostającymi na ziemi i podpory o odpowiedniej nośności w punktach zalecanych przez producenta. Nie pracuj pod autem opartym wyłącznie na podnośniku. Silnik wyłączony; koła obracaj tylko ręcznie. Zabezpiecz auto przed przetoczeniem przed ustawieniem skrzyni w N i zwolnieniem hamulca postojowego. Jeśli nie potrafisz bezpiecznie przygotować auta, zleć próbę warsztatowi.</p>
               <ul className="text-sm text-neutral-300 space-y-2 list-disc list-inside">
                 <li>Otwarty mechanizm, drugie koło nieruchome: oznacz oponę i wał, obróć swobodne koło o dwa pełne obroty i policz obroty wału.</li>
                 <li>Gdy oba koła rzeczywiście obracają się razem w tę samą stronę: jeden pełny obrót obu kół odpowiada liczbie obrotów wału równej przełożeniu. Nie zakładaj automatycznie takiego zachowania przy każdym mechanizmie z blokadą.</li>
@@ -1101,7 +1101,7 @@ export default function Encyclopedia({ initialTab, initialItems }: { initialTab?
             </div>
 
             <div className="bg-neutral-950 border border-white/10 p-4 mb-4">
-              <h3 className="font-semibold text-red-400 mb-2">4. UKRYTY KLUCZ POD ZDERZAKIEM</h3>
+              <h3 className="font-semibold text-silver-400 mb-2">4. UKRYTY KLUCZ POD ZDERZAKIEM</h3>
               <p className="text-sm text-neutral-300 mb-2">Niektóre GMT400 mają schowek na klucz awaryjny.</p>
               <ul className="text-sm text-neutral-300 space-y-1">
                 <li>• Sprawdź pod przednim zderzakiem przy ramie</li>
@@ -1111,7 +1111,7 @@ export default function Encyclopedia({ initialTab, initialItems }: { initialTab?
             </div>
 
             <div className="bg-neutral-950 border border-white/10 p-4 mb-4">
-              <h3 className="font-semibold text-red-400 mb-2">5. KODY RPO W SCHOWKU</h3>
+              <h3 className="font-semibold text-silver-400 mb-2">5. KODY RPO W SCHOWKU</h3>
               <button type="button" onClick={() => setLightbox('/tip-rpo-guide.svg')} aria-label="Powiększ schemat naklejki RPO" className="block w-full my-4"><img src="/tip-rpo-guide.svg" alt="Schemat schowka pasażera i przykładowej naklejki: GT4 oznacza przełożenie 3,73" className="w-full h-auto" /></button>
               <p className="text-xs text-neutral-400 mb-3">Schemat lokalizacji jest poglądowy. Kody na ilustracji są przykładem, nie danymi Twojego auta. RPO opisuje wyposażenie fabryczne, nie późniejsze przeróbki. <a href="https://differentials.com/gm-axle-ratio-identification-codes/" target="_blank" rel="noopener noreferrer" className="underline">Źródło kodów przełożeń</a></p>
               <p className="text-sm text-neutral-300 mb-2">Naklejka w schowku zawiera wszystkie opcje fabryczne.</p>
@@ -1124,9 +1124,9 @@ export default function Encyclopedia({ initialTab, initialItems }: { initialTab?
             </div>
 
             <div className="bg-neutral-950 border border-white/10 overflow-hidden mb-4">
-              <button type="button" aria-label="Powiększ ilustrację" className="block w-full rounded focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-red-500" onClick={() => setLightbox('/tip-fuse.jpg')}><img loading="lazy" src="/tip-fuse.jpg" alt="Fuse box" className="w-full h-48 object-cover cursor-pointer"  /></button>
+              <button type="button" aria-label="Powiększ ilustrację" className="block w-full rounded focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-silver-500" onClick={() => setLightbox('/tip-fuse.jpg')}><img loading="lazy" src="/tip-fuse.jpg" alt="Fuse box" className="w-full h-48 object-cover cursor-pointer"  /></button>
               <div className="p-4">
-                <h3 className="font-semibold text-red-400 mb-2">7. SKRZYNKA BEZPIECZNIKÓW POD MASKĄ</h3>
+                <h3 className="font-semibold text-silver-400 mb-2">7. SKRZYNKA BEZPIECZNIKÓW POD MASKĄ</h3>
                 <p className="text-sm text-neutral-300 mb-2">Lokalizacja: tył komory silnika, przy zbiorniku hamulcowym.</p>
                 <ul className="text-sm text-neutral-300 space-y-1">
                   <li>• <strong>ECM-B</strong> — pompa paliwa, PCM</li>
@@ -1139,9 +1139,9 @@ export default function Encyclopedia({ initialTab, initialItems }: { initialTab?
             </div>
 
             <div className="bg-neutral-950 border border-white/10 overflow-hidden mb-4">
-              <button type="button" aria-label="Powiększ ilustrację" className="block w-full rounded focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-red-500" onClick={() => setLightbox('/tip-tailgate.jpg')}><img loading="lazy" src="/tip-tailgate.jpg" alt="Tailgate" className="w-full h-48 object-cover cursor-pointer"  /></button>
+              <button type="button" aria-label="Powiększ ilustrację" className="block w-full rounded focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-silver-500" onClick={() => setLightbox('/tip-tailgate.jpg')}><img loading="lazy" src="/tip-tailgate.jpg" alt="Tailgate" className="w-full h-48 object-cover cursor-pointer"  /></button>
               <div className="p-4">
-                <h3 className="font-semibold text-red-400 mb-2">8. KLAPA NIE OTWIERA SIĘ — TRIK</h3>
+                <h3 className="font-semibold text-silver-400 mb-2">8. KLAPA NIE OTWIERA SIĘ — TRIK</h3>
                 <p className="text-sm text-neutral-300 mb-2">Typowy problem: zacięty mechanizm lub zerwane klipsy.</p>
                 <ol className="text-sm text-neutral-300 space-y-1 list-decimal list-inside">
                   <li>Zdejmij osłonę klamki (3 śruby Torx)</li>
@@ -1154,7 +1154,7 @@ export default function Encyclopedia({ initialTab, initialItems }: { initialTab?
             </div>
 
             <div className="bg-neutral-950 border border-white/10 p-4 mb-4">
-              <h3 className="font-semibold text-red-400 mb-2">9. UKRYTY BEZPIECZNIK POMPY PALIWA</h3>
+              <h3 className="font-semibold text-silver-400 mb-2">9. UKRYTY BEZPIECZNIK POMPY PALIWA</h3>
               <p className="text-sm text-neutral-300 mb-2">Jeśli silnik nie odpala — sprawdź ten bezpiecznik.</p>
               <ul className="text-sm text-neutral-300 space-y-1">
                 <li>• Lokalizacja: skrzynka pod deską, bezpiecznik ECM-B</li>
@@ -1165,7 +1165,7 @@ export default function Encyclopedia({ initialTab, initialItems }: { initialTab?
             </div>
 
             <div className="bg-neutral-950 border border-white/10 p-4 mb-4">
-              <h3 className="font-semibold text-red-400 mb-2">10. TEST KOMPRESJI BEZ NARZĘDZI</h3>
+              <h3 className="font-semibold text-silver-400 mb-2">10. TEST KOMPRESJI BEZ NARZĘDZI</h3>
               <p className="text-sm text-neutral-300 mb-2">Szybki test stanu silnika.</p>
               <ol className="text-sm text-neutral-300 space-y-1 list-decimal list-inside">
                 <li>Wykręć wszystkie świece</li>
@@ -1177,7 +1177,7 @@ export default function Encyclopedia({ initialTab, initialItems }: { initialTab?
             </div>
 
             <div className="bg-neutral-950 border border-white/10 p-4 mb-4">
-              <h3 className="font-semibold text-red-400 mb-2">11. TEST POMPY PALIWA</h3>
+              <h3 className="font-semibold text-silver-400 mb-2">11. TEST POMPY PALIWA</h3>
               <p className="text-sm text-neutral-300 mb-2">Szybki test czy pompa dziala.</p>
               <ol className="text-sm text-neutral-300 space-y-1 list-decimal list-inside">
                 <li>Znajdz przekaznik pompy (skrzynka pod maska)</li>
@@ -1187,7 +1187,7 @@ export default function Encyclopedia({ initialTab, initialItems }: { initialTab?
               </ol>
             </div>
             <div className="bg-neutral-950 border border-white/10 p-4 mb-4">
-              <h3 className="font-semibold text-red-400 mb-2">12. TEMPOMAT — JAK UZYWAC</h3>
+              <h3 className="font-semibold text-silver-400 mb-2">12. TEMPOMAT — JAK UZYWAC</h3>
               <ul className="text-sm text-neutral-300 space-y-1">
                 <li>ON — przesun przelacznik w strone kolumny</li>
                 <li>SET — przycisk na koncu dzwigni</li>
@@ -1196,7 +1196,7 @@ export default function Encyclopedia({ initialTab, initialItems }: { initialTab?
               </ul>
             </div>
             <div className="bg-neutral-950 border border-white/10 p-4 mb-4">
-              <h3 className="font-semibold text-red-400 mb-2">13. 4x4 — PRAWIDLOWE PRZELACZANIE</h3>
+              <h3 className="font-semibold text-silver-400 mb-2">13. 4x4 — PRAWIDLOWE PRZELACZANIE</h3>
               <ul className="text-sm text-neutral-300 space-y-1">
                 <li>4HI — mozna w trakcie jazdy (do 80 km/h)</li>
                 <li>4LO — tylko na postoju, skrzynia w N</li>
@@ -1204,7 +1204,7 @@ export default function Encyclopedia({ initialTab, initialItems }: { initialTab?
               </ul>
             </div>
             <div className="bg-neutral-950 border border-white/10 p-4">
-              <h3 className="font-semibold text-red-400 mb-2">6. RESET ADAPTACJI SKRZYNI 4L60E</h3>
+              <h3 className="font-semibold text-silver-400 mb-2">6. RESET ADAPTACJI SKRZYNI 4L60E</h3>
               <p className="text-sm text-neutral-300 mb-2">Po wymianie ATF skrzynia "uczy się" od nowa.</p>
               <ol className="text-sm text-neutral-300 space-y-1 list-decimal list-inside">
                 <li>Odłącz akumulator na 30 minut</li>
@@ -1225,12 +1225,12 @@ export default function Encyclopedia({ initialTab, initialItems }: { initialTab?
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>
-                  <tr className="border-b border-red-600/30">
+                  <tr className="border-b border-silver-600/30">
                     <th className="text-left p-2">Parametr</th>
-                    <th className="text-center p-2 text-red-400">C1500</th>
-                    <th className="text-center p-2 text-red-400">K1500</th>
-                    <th className="text-center p-2 text-red-400">Tahoe</th>
-                    <th className="text-center p-2 text-red-400">Suburban</th>
+                    <th className="text-center p-2 text-silver-400">C1500</th>
+                    <th className="text-center p-2 text-silver-400">K1500</th>
+                    <th className="text-center p-2 text-silver-400">Tahoe</th>
+                    <th className="text-center p-2 text-silver-400">Suburban</th>
                   </tr>
                 </thead>
                 <tbody className="text-neutral-300">
@@ -1240,7 +1240,7 @@ export default function Encyclopedia({ initialTab, initialItems }: { initialTab?
                   <tr className="border-b border-white/5"><td className="p-2">Miejsca</td><td className="text-center">3-6</td><td className="text-center">3-6</td><td className="text-center">5-6</td><td className="text-center">6-9</td></tr>
                   <tr className="border-b border-white/5"><td className="p-2">Silniki</td><td className="text-center">4.3-5.7L</td><td className="text-center">4.3-5.7L</td><td className="text-center">5.7L</td><td className="text-center">5.7-7.4L</td></tr>
                   <tr className="border-b border-white/5"><td className="p-2">Spalanie</td><td className="text-center">12-15 L</td><td className="text-center">14-17 L</td><td className="text-center">14-16 L</td><td className="text-center">15-18 L</td></tr>
-                  <tr className="border-b border-white/5"><td className="p-2">Cena części</td><td className="text-center text-green-400">Niska</td><td className="text-center text-red-400">Średnia</td><td className="text-center text-red-400">Średnia</td><td className="text-center text-red-400">Wyższa</td></tr>
+                  <tr className="border-b border-white/5"><td className="p-2">Cena części</td><td className="text-center text-green-400">Niska</td><td className="text-center text-silver-400">Średnia</td><td className="text-center text-silver-400">Średnia</td><td className="text-center text-silver-400">Wyższa</td></tr>
                 </tbody>
               </table>
             </div>
@@ -1264,11 +1264,11 @@ export default function Encyclopedia({ initialTab, initialItems }: { initialTab?
                 <input aria-label="Cena paliwa (PLN za litr)" type="number" step="0.1" value={fuelPrice} onChange={e => setFuelPrice(Number(e.target.value))} className="w-full bg-neutral-900 border border-white/10 p-2 text-sm" />
               </div>
             </div>
-            <div className="bg-neutral-950 border border-red-600/30 p-4">
-              <h3 className="font-semibold text-red-400 mb-4">WYNIKI</h3>
+            <div className="bg-neutral-950 border border-silver-600/30 p-4">
+              <h3 className="font-semibold text-silver-400 mb-4">WYNIKI</h3>
               <div className="space-y-2 text-sm">
-                <div className="flex justify-between"><span>Średnie spalanie:</span><span className="text-red-400 font-bold">{((fuelLiters / fuelKm) * 100).toFixed(1)} L/100km</span></div>
-                <div className="flex justify-between"><span>Koszt na 100 km:</span><span className="text-red-400 font-bold">{(((fuelLiters / fuelKm) * 100) * fuelPrice).toFixed(0)} PLN</span></div>
+                <div className="flex justify-between"><span>Średnie spalanie:</span><span className="text-silver-400 font-bold">{((fuelLiters / fuelKm) * 100).toFixed(1)} L/100km</span></div>
+                <div className="flex justify-between"><span>Koszt na 100 km:</span><span className="text-silver-400 font-bold">{(((fuelLiters / fuelKm) * 100) * fuelPrice).toFixed(0)} PLN</span></div>
                 <div className="flex justify-between"><span>Koszt na km:</span><span>{((fuelLiters / fuelKm) * fuelPrice).toFixed(2)} PLN</span></div>
                 <div className="flex justify-between border-t border-white/10 pt-2"><span>Koszt tankowania:</span><span>{(fuelLiters * fuelPrice).toFixed(0)} PLN</span></div>
               </div>
@@ -1282,9 +1282,9 @@ export default function Encyclopedia({ initialTab, initialItems }: { initialTab?
         {tab === 'mojeauto' && (
           <div>
             <h2 className="text-2xl mb-6" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>MOJE AUTO</h2>
-            <div className="bg-neutral-950 border border-red-600/30 p-4">
+            <div className="bg-neutral-950 border border-silver-600/30 p-4">
               <p className="text-sm text-neutral-300">Zapisz VIN albo model i rocznik na stronie „Mój samochód”. Zobaczysz tam bezpieczniki dla Twojego rocznika, usterki, DIY, porady, części i kody RPO dopasowane do auta. Dane zostają tylko w tej przeglądarce.</p>
-              <Link href="/moj-samochod" className="mt-3 inline-flex min-h-11 items-center bg-red-600 px-4 font-semibold text-white hover:bg-red-500">Przejdź do „Mój samochód”</Link>
+              <Link href="/moj-samochod" className="mt-3 inline-flex min-h-11 items-center bg-silver-600 px-4 font-semibold text-neutral-950 hover:bg-silver-500">Przejdź do „Mój samochód”</Link>
             </div>
           </div>
         )}
@@ -1293,73 +1293,73 @@ export default function Encyclopedia({ initialTab, initialItems }: { initialTab?
           <div>
             <h2 className="text-2xl mb-6" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>DZIENNIK SERWISOWY</h2>
             <div className="bg-neutral-950 border border-white/10 p-4 mb-4">
-              <h3 className="font-semibold text-red-400 mb-3">HARMONOGRAM WYMIAN</h3>
+              <h3 className="font-semibold text-silver-400 mb-3">HARMONOGRAM WYMIAN</h3>
               <div className="space-y-3">
                 <div className="flex items-center justify-between border-b border-white/5 pb-2">
                   <div>
                     <p className="text-sm font-medium">Olej silnikowy</p>
                     <p className="text-xs text-neutral-500">Co 5-8 tys. km lub 6 miesięcy</p>
                   </div>
-                  <span className="text-red-400 text-sm">PF1218</span>
+                  <span className="text-silver-400 text-sm">PF1218</span>
                 </div>
                 <div className="flex items-center justify-between border-b border-white/5 pb-2">
                   <div>
                     <p className="text-sm font-medium">Filtr powietrza</p>
                     <p className="text-xs text-neutral-500">Co 30 tys. km</p>
                   </div>
-                  <span className="text-red-400 text-sm">A1300C</span>
+                  <span className="text-silver-400 text-sm">A1300C</span>
                 </div>
                 <div className="flex items-center justify-between border-b border-white/5 pb-2">
                   <div>
                     <p className="text-sm font-medium">Filtr paliwa</p>
                     <p className="text-xs text-neutral-500">Co 50 tys. km</p>
                   </div>
-                  <span className="text-red-400 text-sm">GF626</span>
+                  <span className="text-silver-400 text-sm">GF626</span>
                 </div>
                 <div className="flex items-center justify-between border-b border-white/5 pb-2">
                   <div>
                     <p className="text-sm font-medium">Świece zapłonowe</p>
                     <p className="text-xs text-neutral-500">Co 50 tys. km</p>
                   </div>
-                  <span className="text-red-400 text-sm">41-932</span>
+                  <span className="text-silver-400 text-sm">41-932</span>
                 </div>
                 <div className="flex items-center justify-between border-b border-white/5 pb-2">
                   <div>
                     <p className="text-sm font-medium">ATF 4L60E</p>
                     <p className="text-xs text-neutral-500">Co 50 tys. km</p>
                   </div>
-                  <span className="text-red-400 text-sm">TF289</span>
+                  <span className="text-silver-400 text-sm">TF289</span>
                 </div>
                 <div className="flex items-center justify-between border-b border-white/5 pb-2">
                   <div>
                     <p className="text-sm font-medium">Płyn chłodzący</p>
                     <p className="text-xs text-neutral-500">Co 5 lat lub 100 tys. km</p>
                   </div>
-                  <span className="text-red-400 text-sm">Dex-Cool</span>
+                  <span className="text-silver-400 text-sm">Dex-Cool</span>
                 </div>
                 <div className="flex items-center justify-between border-b border-white/5 pb-2">
                   <div>
                     <p className="text-sm font-medium">Płyn hamulcowy</p>
                     <p className="text-xs text-neutral-500">Co 2 lata</p>
                   </div>
-                  <span className="text-red-400 text-sm">DOT 3</span>
+                  <span className="text-silver-400 text-sm">DOT 3</span>
                 </div>
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-sm font-medium">Rozrząd</p>
                     <p className="text-xs text-neutral-500">Co 100 tys. km</p>
                   </div>
-                  <span className="text-red-400 text-sm">Gates</span>
+                  <span className="text-silver-400 text-sm">Gates</span>
                 </div>
               </div>
             </div>
-            <div className="bg-neutral-950 border border-red-600/30 p-4">
-              <h3 className="font-semibold text-red-400 mb-3">KOSZTY ROCZNE (szacunek)</h3>
+            <div className="bg-neutral-950 border border-silver-600/30 p-4">
+              <h3 className="font-semibold text-silver-400 mb-3">KOSZTY ROCZNE (szacunek)</h3>
               <div className="space-y-2 text-sm">
                 <div className="flex justify-between"><span>Olej + filtr (2x)</span><span>400 PLN</span></div>
                 <div className="flex justify-between"><span>Filtry (powietrze, paliwo)</span><span>150 PLN</span></div>
                 <div className="flex justify-between"><span>Drobne naprawy</span><span>500 PLN</span></div>
-                <div className="flex justify-between font-bold border-t border-red-600/30 pt-2"><span>RAZEM / ROK</span><span className="text-red-400">~1050 PLN</span></div>
+                <div className="flex justify-between font-bold border-t border-silver-600/30 pt-2"><span>RAZEM / ROK</span><span className="text-silver-400">~1050 PLN</span></div>
               </div>
             </div>
           </div>
@@ -1371,13 +1371,13 @@ export default function Encyclopedia({ initialTab, initialItems }: { initialTab?
             <div className="bg-neutral-950 border border-white/10 p-6">
               <p className="text-neutral-300 mb-4">Platforma GMT400 była produkowana w latach 1988–2002 (pickupy C/K w większości do 1998–1999, Tahoe/Yukon do 2000, C3500HD do 2002).</p>
               <div className="space-y-2 text-sm text-neutral-400">
-                <p><span className="text-red-400">1988:</span> Debiut C/K 1500/2500/3500</p>
-                <p><span className="text-red-400">1992:</span> Suburban, Blazer (1992–1994) i GMC Yukon (2-drzwi) na platformie GMT400</p>
-                <p><span className="text-red-400">1993:</span> 4L60-E zastępuje 700R4/4L60</p>
-                <p><span className="text-red-400">1995:</span> Blazer przemianowany na Tahoe; wersje 4-drzwiowe Tahoe i Yukon; lifting wnętrza (nowa deska, poduszka kierowcy)</p>
-                <p><span className="text-red-400">1996:</span> Silniki Vortec, OBD-II, trzecie drzwi w Extended Cab</p>
-                <p><span className="text-red-400">1998–1999:</span> NV246 AutoTrac (1998); Yukon Denali (1999)</p>
-                <p><span className="text-red-400">1999–2000:</span> Pickupy i Suburban przechodzą na GMT800 (1999/2000); Tahoe/Yukon 4-drzwi do 2000, C3500HD do 2002</p>
+                <p><span className="text-silver-400">1988:</span> Debiut C/K 1500/2500/3500</p>
+                <p><span className="text-silver-400">1992:</span> Suburban, Blazer (1992–1994) i GMC Yukon (2-drzwi) na platformie GMT400</p>
+                <p><span className="text-silver-400">1993:</span> 4L60-E zastępuje 700R4/4L60</p>
+                <p><span className="text-silver-400">1995:</span> Blazer przemianowany na Tahoe; wersje 4-drzwiowe Tahoe i Yukon; lifting wnętrza (nowa deska, poduszka kierowcy)</p>
+                <p><span className="text-silver-400">1996:</span> Silniki Vortec, OBD-II, trzecie drzwi w Extended Cab</p>
+                <p><span className="text-silver-400">1998–1999:</span> NV246 AutoTrac (1998); Yukon Denali (1999)</p>
+                <p><span className="text-silver-400">1999–2000:</span> Pickupy i Suburban przechodzą na GMT800 (1999/2000); Tahoe/Yukon 4-drzwi do 2000, C3500HD do 2002</p>
                 <p className="pt-2 text-xs text-neutral-500">Źródła: Wikipedia — Chevrolet C/K (4. generacja), Chevrolet Tahoe, GMT400. Sprawdź w swoim aucie / manualu — GMT400 ma wiele wariantów (rocznik, GVWR, silnik, skrzynia, RPO).</p>
               </div>
             </div>

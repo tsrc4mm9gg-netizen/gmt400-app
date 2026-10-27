@@ -9,11 +9,11 @@ import Src from './Src';
 import LightsWiringSvg from './LightsWiringSvg';
 import ImportGuideCalculator from './ImportGuideCalculator';
 
-const linkStyle = 'inline-flex min-h-11 items-center rounded px-2 text-red-300 underline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-red-500';
+const linkStyle = 'inline-flex min-h-11 items-center rounded px-2 text-silver-300 underline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-silver-500';
 
 const TONE: Record<string, { box: string; label: string }> = {
-  warn: { box: 'border-red-500/70 bg-red-950/40', label: 'Uwaga' },
-  conflict: { box: 'border-red-400 border-dashed bg-red-950/50', label: 'Rozbieżność źródeł' },
+  warn: { box: 'border-danger-500/70 bg-danger-950/40', label: 'Uwaga' },
+  conflict: { box: 'border-silver-400 border-dashed bg-silver-950/50', label: 'Rozbieżność źródeł' },
   info: { box: 'border-neutral-600 bg-neutral-900', label: 'Informacja' },
   legal: { box: 'border-neutral-400 bg-neutral-900', label: 'Przepisy' },
 };
@@ -37,14 +37,14 @@ function BlockView({ b }: { b: Block }) {
       return <p className="leading-7 text-neutral-200">{b.text}<Src ids={b.src} /></p>;
     case 'list': {
       const Tag = b.ordered ? 'ol' : 'ul';
-      return <Tag className={`${b.ordered ? 'list-decimal' : 'list-disc'} space-y-3 pl-5 leading-7 text-neutral-200 marker:text-red-400`}>{b.items.map((i, k) => <li key={k}>{i.text}<Src ids={i.src} /></li>)}</Tag>;
+      return <Tag className={`${b.ordered ? 'list-decimal' : 'list-disc'} space-y-3 pl-5 leading-7 text-neutral-200 marker:text-silver-400`}>{b.items.map((i, k) => <li key={k}>{i.text}<Src ids={i.src} /></li>)}</Tag>;
     }
     case 'check':
       return (
         <div className="rounded-xl border border-neutral-700 bg-neutral-900 p-4">
           <h4 className="font-semibold text-white">{b.title}</h4>
           <ul className="mt-3 space-y-3">{b.items.map((i, k) => (
-            <li key={k} className="flex gap-3 leading-7 text-neutral-200"><span aria-hidden="true" className="mt-1.5 inline-block h-5 w-5 shrink-0 rounded border-2 border-red-500" /><span className="min-w-0">{i.text}<Src ids={i.src} /></span></li>
+            <li key={k} className="flex gap-3 leading-7 text-neutral-200"><span aria-hidden="true" className="mt-1.5 inline-block h-5 w-5 shrink-0 rounded border-2 border-silver-500" /><span className="min-w-0">{i.text}<Src ids={i.src} /></span></li>
           ))}</ul>
         </div>
       );
@@ -73,7 +73,7 @@ function BlockView({ b }: { b: Block }) {
       const t = TONE[b.tone];
       return (
         <aside className={`rounded-xl border-2 p-4 ${t.box}`} data-tone={b.tone}>
-          <p className="text-xs font-bold uppercase tracking-widest text-red-300"><span aria-hidden="true">▲ </span>{t.label}</p>
+          <p className="text-xs font-bold uppercase tracking-widest text-silver-300"><span aria-hidden="true">▲ </span>{t.label}</p>
           <h4 className="mt-1 font-semibold text-white">{b.title}</h4>
           <p className="mt-2 leading-7 text-neutral-200">{b.text}</p>
           <Src ids={b.src} />
@@ -85,7 +85,7 @@ function BlockView({ b }: { b: Block }) {
         <div className="rounded-xl border border-neutral-700 p-4">
           <h4 className="font-semibold text-white">{b.title}</h4>
           <ul className="mt-3 space-y-4">{b.items.map((i, k) => (
-            <li key={k} className="border-l-4 border-red-600 pl-3">
+            <li key={k} className="border-l-4 border-silver-600 pl-3">
               <p className="text-xs uppercase tracking-wide text-neutral-400">Relacja użytkownika · {i.where} · {i.date}</p>
               <p className="mt-1 leading-7 text-neutral-200">{i.text}</p>
               <Src ids={[i.src]} />
@@ -139,49 +139,49 @@ export default function GuideView({ guide }: { guide: Guide }) {
       <article className="mx-auto max-w-3xl" data-testid="guide-article">
         <Breadcrumbs items={[{ href: '/dla-wlasciciela', label: 'Dla właściciela' }, { label: guide.short }]} />
         <header className="my-6">
-          <p className="text-sm uppercase tracking-widest text-red-300">Najważniejsze dla właściciela w PL</p>
+          <p className="text-sm uppercase tracking-widest text-silver-300">Najważniejsze dla właściciela w PL</p>
           <h1 className="mt-3 break-words text-3xl font-semibold leading-tight sm:text-4xl">{guide.title}</h1>
           <p className="mt-4 text-lg leading-8 text-neutral-300">{guide.description}</p>
-          <p className="mt-4 text-sm font-semibold text-red-300" data-testid="guide-asof">Stan na: {guide.asOf}</p>
+          <p className="mt-4 text-sm font-semibold text-silver-300" data-testid="guide-asof">Stan na: {guide.asOf}</p>
           <ul aria-label="Dotyczy" className="mt-4 flex flex-wrap gap-2 text-sm">
             <li className="rounded-full border border-neutral-600 px-3 py-1 text-neutral-200">Lata: {guide.years}</li>
             {guide.engines && <li className="rounded-full border border-neutral-600 px-3 py-1 text-neutral-200">{guide.engines}</li>}
-            {bodies.map(b => <li key={b.id} data-body={b.id} className="rounded-full border border-red-700/60 bg-red-950/30 px-3 py-1 text-neutral-100">{b.name} {b.from}–{b.to}</li>)}
+            {bodies.map(b => <li key={b.id} data-body={b.id} className="rounded-full border border-silver-700/60 bg-silver-950/30 px-3 py-1 text-neutral-100">{b.name} {b.from}–{b.to}</li>)}
           </ul>
         </header>
 
-        <section aria-labelledby="summary-title" data-testid="guide-summary" className="rounded-xl border-2 border-red-600/70 bg-red-950/30 p-5">
+        <section aria-labelledby="summary-title" data-testid="guide-summary" className="rounded-xl border-2 border-silver-600/70 bg-silver-950/30 p-5">
           <h2 id="summary-title" className="text-xl font-semibold">W skrócie</h2>
-          <ul className="mt-3 list-disc space-y-3 pl-5 leading-7 text-neutral-100 marker:text-red-400">{guide.summary.map((s, i) => <li key={i}>{s}</li>)}</ul>
+          <ul className="mt-3 list-disc space-y-3 pl-5 leading-7 text-neutral-100 marker:text-silver-400">{guide.summary.map((s, i) => <li key={i}>{s}</li>)}</ul>
         </section>
 
         <p className="mt-4 rounded-lg border border-neutral-700 bg-neutral-900 p-3 text-sm leading-6 text-neutral-300">
           Sprawdź w swoim aucie / manualu (VIN, RPO, tabliczka). Przepisy się zmieniają — sprawdź w urzędzie. Wartości w zł i jednostki metryczne; przy każdej liczbie jest źródło z datą. Czego nie dało się zweryfikować, zaznaczono wprost.
         </p>
 
-        <nav aria-label="Spis treści" className="mt-6"><ul className="flex flex-wrap gap-2">{guide.sections.map(s => <li key={s.id}><a href={'#' + s.id} className="inline-flex min-h-11 items-center rounded-full border border-neutral-600 px-4 text-sm text-neutral-100 hover:border-red-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-500">{s.title}</a></li>)}</ul></nav>
+        <nav aria-label="Spis treści" className="mt-6"><ul className="flex flex-wrap gap-2">{guide.sections.map(s => <li key={s.id}><a href={'#' + s.id} className="inline-flex min-h-11 items-center rounded-full border border-neutral-600 px-4 text-sm text-neutral-100 hover:border-silver-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-silver-500">{s.title}</a></li>)}</ul></nav>
 
         <div className="mt-6 space-y-4">
           {guide.sections.map(s => (
             <details key={s.id} id={s.id} open={s.open} className="group scroll-mt-6 rounded-xl border border-neutral-700 bg-neutral-900/60">
-              <summary className="flex min-h-12 cursor-pointer list-none items-center justify-between gap-3 px-4 py-3 text-lg font-semibold text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-500 [&::-webkit-details-marker]:hidden">
-                <span className="min-w-0">{s.title}</span><span aria-hidden="true" className="shrink-0 text-red-400 transition group-open:rotate-90">›</span>
+              <summary className="flex min-h-12 cursor-pointer list-none items-center justify-between gap-3 px-4 py-3 text-lg font-semibold text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-silver-500 [&::-webkit-details-marker]:hidden">
+                <span className="min-w-0">{s.title}</span><span aria-hidden="true" className="shrink-0 text-silver-400 transition group-open:rotate-90">›</span>
               </summary>
               <div className="min-w-0 space-y-4 px-4 pb-5">{s.blocks.map((b, i) => <BlockView key={i} b={b} />)}</div>
             </details>
           ))}
         </div>
 
-        <section aria-labelledby="mistakes-title" className="mt-8 rounded-xl border border-red-700/50 p-5">
+        <section aria-labelledby="mistakes-title" className="mt-8 rounded-xl border border-silver-700/50 p-5">
           <h2 id="mistakes-title" className="text-xl font-semibold">Najczęstsze błędy</h2>
-          <ul className="mt-3 space-y-3 leading-7 text-neutral-200">{guide.mistakes.map((m, i) => <li key={i} className="flex gap-3"><span aria-hidden="true" className="text-red-400">✕</span><span className="min-w-0">{m}</span></li>)}</ul>
+          <ul className="mt-3 space-y-3 leading-7 text-neutral-200">{guide.mistakes.map((m, i) => <li key={i} className="flex gap-3"><span aria-hidden="true" className="text-silver-400">✕</span><span className="min-w-0">{m}</span></li>)}</ul>
         </section>
 
         <section aria-labelledby="faq-title" className="mt-8">
           <h2 id="faq-title" className="text-xl font-semibold">FAQ</h2>
           <div className="mt-3 space-y-3">{guide.faq.map((f, i) => (
             <details key={i} className="rounded-xl border border-neutral-700 bg-neutral-900">
-              <summary className="flex min-h-12 cursor-pointer items-center px-4 py-3 font-semibold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-500">{f.q}</summary>
+              <summary className="flex min-h-12 cursor-pointer items-center px-4 py-3 font-semibold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-silver-500">{f.q}</summary>
               <div className="px-4 pb-4 leading-7 text-neutral-200">{f.a}<Src ids={f.src} /></div>
             </details>
           ))}</div>
@@ -189,9 +189,9 @@ export default function GuideView({ guide }: { guide: Guide }) {
 
         <section aria-labelledby="sources-title" className="mt-8">
           <details className="rounded-xl border border-neutral-700 bg-neutral-900/60" data-testid="guide-sources">
-            <summary id="sources-title" className="flex min-h-12 cursor-pointer items-center px-4 py-3 text-lg font-semibold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-500">Źródła ({sources.length}) i daty</summary>
+            <summary id="sources-title" className="flex min-h-12 cursor-pointer items-center px-4 py-3 text-lg font-semibold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-silver-500">Źródła ({sources.length}) i daty</summary>
             <ul className="space-y-3 px-4 pb-4 text-sm leading-6">{sources.map(id => { const s = getSource(id)!; return (
-              <li key={id} className="min-w-0 break-words text-neutral-300"><a href={s.url} target="_blank" rel="noopener noreferrer" className="text-red-300 underline">{s.label}</a> — {KIND_LABEL[s.kind]}, stan na: {s.date}</li>
+              <li key={id} className="min-w-0 break-words text-neutral-300"><a href={s.url} target="_blank" rel="noopener noreferrer" className="text-silver-300 underline">{s.label}</a> — {KIND_LABEL[s.kind]}, stan na: {s.date}</li>
             ); })}</ul>
           </details>
         </section>

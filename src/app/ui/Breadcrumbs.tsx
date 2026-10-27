@@ -13,7 +13,7 @@ export default function Breadcrumbs({ items, className = '' }: { items: Crumb[];
             <li key={`${item.label}-${index}`} className="flex min-w-0 items-center gap-x-1">
               {index > 0 && <span aria-hidden="true" className="text-neutral-600">/</span>}
               {item.href && !last ? (
-                <Link href={item.href} className="inline-flex min-h-11 items-center px-1 text-red-400 underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-500">{item.label}</Link>
+                <Link href={item.href} className="inline-flex min-h-11 items-center px-1 text-silver-400 underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-silver-500">{item.label}</Link>
               ) : (
                 <span aria-current={last ? 'page' : undefined} className="max-w-[60vw] truncate px-1 text-neutral-300 sm:max-w-md">{item.label}</span>
               )}

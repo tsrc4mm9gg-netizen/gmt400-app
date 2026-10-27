@@ -18,8 +18,8 @@ export default function MaterialContents({entryId}:{entryId:string}) {
   });
   setEntries(items);return()=>restore.forEach(reset=>reset());
  },[entryId]);
- return <nav ref={navRef} aria-label="Spis treści materiału" data-material-outline hidden={entries.length<2} style={{background:'#171d25',color:'#ededed',border:'1px solid #343a43',borderRadius:10,padding:'8px 16px',margin:'16px 0',minWidth:0}}>
-  <details><summary style={{minHeight:44,display:'list-item',alignContent:'center',cursor:'pointer',color:'#fca5a5',fontWeight:650}}>Spis treści ({entries.length})</summary>
+ return <nav ref={navRef} aria-label="Spis treści materiału" data-material-outline hidden={entries.length<2} style={{background:'var(--card-gradient)',color:'#ededed',border:'1px solid rgba(255,255,255,.14)',borderRadius:10,padding:'8px 16px',margin:'16px 0',minWidth:0}}>
+  <details><summary style={{minHeight:44,display:'list-item',alignContent:'center',cursor:'pointer',color:'var(--accent-soft)',fontWeight:650}}>Spis treści ({entries.length})</summary>
    <ol style={{paddingLeft:20,margin:'8px 0'}}>{entries.map(entry=><li key={entry.id} style={{marginLeft:entry.level===3?16:0,overflowWrap:'anywhere'}}><a href={'#'+encodeURIComponent(entry.id)} style={{display:'block',minHeight:44,padding:'10px 0',color:'#d0d5dc',textDecoration:'underline'}} onClick={()=>requestAnimationFrame(()=>document.getElementById(entry.id)?.focus({preventScroll:true}))}>{entry.label}</a></li>)}</ol>
   </details>
  </nav>;

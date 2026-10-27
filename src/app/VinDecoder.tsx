@@ -13,7 +13,7 @@ const Src = ({ k, short }: { k: VinSourceKey; short?: boolean }) => (
 const TIER = {
   gm: { text: 'dokument GM / NHTSA', cls: 'border-green-600/40 bg-green-600/10 text-green-200' },
   secondary: { text: 'źródło wtórne — sprawdź', cls: 'border-white/20 bg-white/5 text-neutral-200' },
-  unknown: { text: UNKNOWN, cls: 'border-red-600/50 bg-red-600/10 text-red-200' },
+  unknown: { text: UNKNOWN, cls: 'border-silver-600/50 bg-silver-600/10 text-silver-200' },
 } as const;
 
 /** Pola z NHTSA vPIC, które pokazujemy (nazwa API → etykieta). */
@@ -100,28 +100,28 @@ export default function VinDecoder({ onDecoded, withRpo = false, prefillFromUrl 
         <label htmlFor="vin-input" className="mb-2 block text-sm text-neutral-300">Numer VIN (17 znaków) — u góry deski po stronie kierowcy, pod szybą, albo w dowodzie rejestracyjnym (pole E)</label>
         <input id="vin-input" aria-label="Numer VIN do dekodowania" aria-describedby="vin-hint" type="text" inputMode="text" autoCapitalize="characters" autoComplete="off" autoCorrect="off" spellCheck={false} enterKeyHint="go"
           placeholder="np. 1GCEK19R…" value={input} onChange={e => setInput(e.target.value.toUpperCase())} onPaste={onPaste} maxLength={20}
-          className="mb-1 min-h-14 w-full border border-white/10 bg-neutral-900 px-4 py-3 font-mono text-lg uppercase tracking-wider focus:border-red-600 focus:outline-none" />
+          className="mb-1 min-h-14 w-full border border-white/10 bg-neutral-900 px-4 py-3 font-mono text-lg uppercase tracking-wider focus:border-silver-600 focus:outline-none" />
         <p id="vin-hint" className="mb-3 text-xs text-neutral-400" data-testid="vin-length">{len === 17 ? '17 znaków — gotowe.' : `Wpisano ${len} z 17 znaków.`} Litery I, O i Q nie występują w VIN.</p>
-        <button type="submit" className="min-h-12 w-full bg-red-600 py-3 text-base font-semibold text-white transition hover:bg-red-500">DEKODUJ VIN</button>
+        <button type="submit" className="min-h-12 w-full bg-silver-600 py-3 text-base font-semibold text-neutral-950 transition hover:bg-silver-500">DEKODUJ VIN</button>
         <p className="mt-2 text-xs text-neutral-400">Dekodowanie odbywa się w przeglądarce. VIN trafia do NHTSA tylko, gdy klikniesz „Pobierz dane z NHTSA vPIC”.</p>
       </form>
       {result && !result.ok && (
-        <div role="alert" className="mb-6 border border-red-600/50 bg-red-600/10 p-4 text-red-100" data-testid="vin-errors">
+        <div role="alert" className="mb-6 border border-danger-600/50 bg-danger-600/10 p-4 text-danger-100" data-testid="vin-errors">
           {result.errors.map(e => <p key={e}>{e}</p>)}
         </div>
       )}
       {result && result.ok && (
         <div className="min-w-0 space-y-3" data-testid="vin-result">
-          <div className="min-w-0 border border-red-600/40 bg-neutral-950 p-4" data-testid="vin-summary">
-            <h3 className="mb-3 text-lg font-bold text-red-400">TWÓJ VIN W SKRÓCIE</h3>
+          <div className="min-w-0 border border-silver-600/40 bg-neutral-950 p-4" data-testid="vin-summary">
+            <h3 className="mb-3 text-lg font-bold text-silver-400">TWÓJ VIN W SKRÓCIE</h3>
             <p className="mb-3 break-all font-mono text-base tracking-wider text-white">{result.vin}</p>
             <dl className="grid gap-x-4 gap-y-2 sm:grid-cols-2">
               {summaryOf(result).map(([label, value]) => (
-                <div key={label} className="min-w-0 border-b border-white/5 pb-1"><dt className="text-xs uppercase tracking-wide text-neutral-400">{label}</dt><dd className={`break-words ${value === UNKNOWN ? 'text-red-200' : 'text-neutral-100'}`}>{value}</dd></div>
+                <div key={label} className="min-w-0 border-b border-white/5 pb-1"><dt className="text-xs uppercase tracking-wide text-neutral-400">{label}</dt><dd className={`break-words ${value === UNKNOWN ? 'text-silver-200' : 'text-neutral-100'}`}>{value}</dd></div>
               ))}
             </dl>
           </div>
-          <div className={`border p-4 ${result.check.ok ? 'border-green-600/40 bg-green-600/10' : 'border-red-600/50 bg-red-600/10'}`} data-testid="vin-check">
+          <div className={`border p-4 ${result.check.ok ? 'border-green-600/40 bg-green-600/10' : 'border-silver-600/50 bg-silver-600/10'}`} data-testid="vin-check">
             <p className="font-semibold text-white">{result.check.ok ? '✓ Cyfra kontrolna się zgadza' : '✗ Cyfra kontrolna się nie zgadza'}</p>
             <p className="text-sm text-neutral-200">Poz. 9 = <strong className="font-mono">{result.check.value}</strong>, wyliczona = <strong className="font-mono">{result.check.expected}</strong>. {result.check.ok ? 'VIN jest poprawnie zapisany (to nie potwierdza historii auta).' : 'Najczęściej to literówka — porównaj VIN z tabliczką na desce, naklejką na drzwiach i dowodem.'}</p>
           </div>
@@ -145,14 +145,14 @@ export default function VinDecoder({ onDecoded, withRpo = false, prefillFromUrl 
             <div className="border-t border-white/10 p-4 pt-3">
               <p className="text-sm text-neutral-300">Oficjalna baza NHTSA — dodatkowe pola (seria, nadwozie, pojemność, wtrysk, fabryka). vPIC też bywa niepełny dla starszych aut.</p>
               {result.year ? (
-                <button type="button" onClick={fetchVpic} disabled={vpic.state === 'loading'} data-testid="vin-vpic-fetch" className="mt-3 min-h-12 w-full border border-red-600 px-4 py-2 font-semibold text-red-200 transition hover:bg-red-600/20 disabled:opacity-60 sm:w-auto">
+                <button type="button" onClick={fetchVpic} disabled={vpic.state === 'loading'} data-testid="vin-vpic-fetch" className="mt-3 min-h-12 w-full border border-silver-600 px-4 py-2 font-semibold text-silver-200 transition hover:bg-silver-600/20 disabled:opacity-60 sm:w-auto">
                   {vpic.state === 'loading' ? 'Pobieram…' : 'Pobierz dane z NHTSA vPIC'}
                 </button>
               ) : <p className="mt-2 text-sm text-neutral-400">Najpierw musi się zgadzać rok modelowy (1988–2000).</p>}
-              {vpic.state === 'error' && <p role="alert" className="mt-3 text-sm text-red-200">{vpic.message}</p>}
+              {vpic.state === 'error' && <p role="alert" className="mt-3 text-sm text-danger-200">{vpic.message}</p>}
               {vpic.state === 'done' && (
                 <div className="mt-3" role="status">
-                  {vpic.data.ErrorText && !/^0\b/.test(vpic.data.ErrorText) && <p className="mb-2 text-sm text-red-200">vPIC: {vpic.data.ErrorText}</p>}
+                  {vpic.data.ErrorText && !/^0\b/.test(vpic.data.ErrorText) && <p className="mb-2 text-sm text-danger-200">vPIC: {vpic.data.ErrorText}</p>}
                   <dl className="grid gap-x-4 gap-y-1 text-sm sm:grid-cols-2" data-testid="vin-vpic-data">
                     {VPIC_FIELDS.filter(([k]) => vpic.data[k]).map(([k, label]) => (
                       <div key={k} className="min-w-0 border-b border-white/5 py-1"><dt className="text-xs text-neutral-400">{label}</dt><dd className="break-words text-neutral-100">{vpicValue(k, vpic.data[k])}</dd></div>
@@ -200,24 +200,24 @@ function VinRpoAndSave({ result }: { result: Extract<VinDecodeResult, { ok: true
       <label htmlFor="vin-rpo-input" className="mb-2 block text-base font-semibold text-white">Dopisz kody RPO z naklejki w schowku <span className="text-sm font-normal text-neutral-400">(opcjonalnie)</span></label>
       <p className="mb-2 text-xs text-neutral-400">Naklejka „Service Parts Identification” — trzyznakowe kody, np. G80 Z71 L31. Oddziel spacją.</p>
       <input id="vin-rpo-input" type="text" value={rpo} onChange={e => { setRpo(e.target.value.toUpperCase()); setSaved(''); }} placeholder="np. G80 Z71 L31" autoCapitalize="characters" autoComplete="off" autoCorrect="off" spellCheck={false}
-        className="min-h-12 w-full border border-white/10 bg-neutral-900 px-4 py-3 font-mono text-base uppercase tracking-wider focus:border-red-600 focus:outline-none" />
+        className="min-h-12 w-full border border-white/10 bg-neutral-900 px-4 py-3 font-mono text-base uppercase tracking-wider focus:border-silver-600 focus:outline-none" />
       {decoded && decoded.results.length > 0 && (
         <ul className="mt-3 divide-y divide-white/10 text-sm" data-testid="vin-rpo-results" aria-live="polite">
           {decoded.results.map(r => (
             <li key={r.code} className="py-2" data-testid="vin-rpo-item" data-code={r.code}>
-              <span className="font-mono font-bold text-red-300">{r.code}</span>{' '}
-              {r.entry ? <span className="text-neutral-100">{r.entry.description} <span className="text-xs text-neutral-400">({r.entry.category}) — <a href={r.entry.sources[0]?.url ?? r.entry.source} target="_blank" rel="noopener noreferrer" className="text-red-400 underline">źródło</a></span></span>
-                : <span className="text-red-200">nieznany kod – sprawdź{r.suggestion ? ` (może ${r.suggestion}?)` : ''}{r.hint ? ` — ${r.hint}` : ''}</span>}
+              <span className="font-mono font-bold text-silver-300">{r.code}</span>{' '}
+              {r.entry ? <span className="text-neutral-100">{r.entry.description} <span className="text-xs text-neutral-400">({r.entry.category}) — <a href={r.entry.sources[0]?.url ?? r.entry.source} target="_blank" rel="noopener noreferrer" className="text-silver-400 underline">źródło</a></span></span>
+                : <span className="text-silver-200">nieznany kod – sprawdź{r.suggestion ? ` (może ${r.suggestion}?)` : ''}{r.hint ? ` — ${r.hint}` : ''}</span>}
             </li>
           ))}
         </ul>
       )}
-      <button type="button" onClick={save} data-testid="vin-save" className="mt-3 min-h-12 w-full bg-red-600 px-4 py-3 text-base font-semibold text-white transition hover:bg-red-500 sm:w-auto">Zapisz VIN{rpo.trim() ? ' i RPO' : ''} w „Mój samochód”</button>
+      <button type="button" onClick={save} data-testid="vin-save" className="mt-3 min-h-12 w-full bg-silver-600 px-4 py-3 text-base font-semibold text-neutral-950 transition hover:bg-silver-500 sm:w-auto">Zapisz VIN{rpo.trim() ? ' i RPO' : ''} w „Mój samochód”</button>
       {saved && (
-        <p role="status" data-testid="vin-save-status" className={`mt-2 text-sm ${saved === 'need-model' ? 'text-red-200' : 'text-green-200'}`}>
-          {saved === 'ok' && <>Zapisano w tej przeglądarce. <Link href="/moj-samochod" className="text-red-400 underline">Otwórz Mój samochód</Link></>}
-          {saved === 'memory' && <>Zapisano tylko w tej karcie (pamięć przeglądarki niedostępna). <Link href="/moj-samochod" className="text-red-400 underline">Otwórz Mój samochód</Link></>}
-          {saved === 'need-model' && <>Z VIN nie da się jednoznacznie odczytać modelu. <Link href="/moj-samochod" className="text-red-400 underline">Wybierz model w Mój samochód</Link> i wpisz tam VIN.</>}
+        <p role="status" data-testid="vin-save-status" className={`mt-2 text-sm ${saved === 'need-model' ? 'text-silver-200' : 'text-green-200'}`}>
+          {saved === 'ok' && <>Zapisano w tej przeglądarce. <Link href="/moj-samochod" className="text-silver-400 underline">Otwórz Mój samochód</Link></>}
+          {saved === 'memory' && <>Zapisano tylko w tej karcie (pamięć przeglądarki niedostępna). <Link href="/moj-samochod" className="text-silver-400 underline">Otwórz Mój samochód</Link></>}
+          {saved === 'need-model' && <>Z VIN nie da się jednoznacznie odczytać modelu. <Link href="/moj-samochod" className="text-silver-400 underline">Wybierz model w Mój samochód</Link> i wpisz tam VIN.</>}
         </p>
       )}
     </div>
@@ -229,7 +229,7 @@ function FieldRow({ f }: { f: VinField }) {
   const tier = TIER[f.value === null ? 'unknown' : f.tier];
   return (
     <li className="grid grid-cols-[4.5rem_minmax(0,1fr)] gap-3 py-2" data-testid={testId}>
-      <span className="text-xs text-neutral-400">poz. {f.pos}<span className="block break-all font-mono text-base font-bold text-red-300">{f.code}</span></span>
+      <span className="text-xs text-neutral-400">poz. {f.pos}<span className="block break-all font-mono text-base font-bold text-silver-300">{f.code}</span></span>
       <span className="min-w-0">
         <strong className="block text-white">{f.label}</strong>
         <span className="text-sm text-neutral-200">{f.value ?? UNKNOWN}</span>

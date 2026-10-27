@@ -66,10 +66,10 @@ export default async function ModelPage({ params }: Props) {
           <Image src={bodyImage(body)} alt={`${body.name} — zdjęcie poglądowe modelu GMT400`} fill priority sizes="(max-width: 1024px) 100vw, 1024px" className="object-cover" />
         </div>
         <div className="p-4 sm:p-6">
-          <p className="text-xs font-semibold uppercase tracking-widest text-red-400">Model GMT400</p>
+          <p className="text-xs font-semibold uppercase tracking-widest text-silver-400">Model GMT400</p>
           <h1 className="mt-1 text-3xl font-bold sm:text-4xl">{body.name}</h1>
           <div className="mt-3 flex flex-wrap gap-2 text-sm">
-            <span className="rounded-full border border-red-600/50 bg-red-600/10 px-3 py-1 text-red-200">Lata: {bodyYears(body)}</span>
+            <span className="rounded-full border border-silver-600/50 bg-silver-600/10 px-3 py-1 text-silver-200">Lata: {bodyYears(body)}</span>
             {body.note && <span className="rounded-full border border-white/15 bg-white/5 px-3 py-1 text-neutral-200">{body.note}</span>}
           </div>
           {DESCRIPTIONS[body.id] && <p className="mt-4 max-w-3xl text-base leading-relaxed text-neutral-300">{DESCRIPTIONS[body.id]}</p>}
@@ -89,7 +89,7 @@ export default async function ModelPage({ params }: Props) {
               {engines.map(engine => (
                 <tr key={engine.rpo + engine.name} className="border-t border-white/10 align-top">
                   <td className="p-3 font-medium text-white">{engine.name}</td>
-                  <td className="p-3 text-red-300">{engine.rpo}</td>
+                  <td className="p-3 text-silver-300">{engine.rpo}</td>
                   <td className="p-3 text-neutral-300">{engine.years}</td>
                   <td className="p-3 text-neutral-300">{engine.output}{engine.note && <span className="block text-xs text-neutral-500">{engine.note}</span>}</td>
                 </tr>
@@ -98,8 +98,8 @@ export default async function ModelPage({ params }: Props) {
           </table>
         </div>
         {has4wd && <p className="mt-3 text-sm text-neutral-400">{TRANSFER_CASES}</p>}
-        <p className="mt-3 rounded-lg border border-red-600/40 bg-red-600/10 p-3 text-sm text-red-100">⚠ {CHECK_NOTE} Kod silnika (RPO) znajdziesz na naklejce Service Parts Identification w schowku.</p>
-        <p className="mt-2 text-xs text-neutral-500">Źródła: <a className="inline-flex min-h-11 items-center text-red-400 underline" href={SOURCES.W1.url} target="_blank" rel="noopener noreferrer">{SOURCES.W1.label}</a> · <a className="inline-flex min-h-11 items-center text-red-400 underline" href={SOURCES.W2.url} target="_blank" rel="noopener noreferrer">{SOURCES.W2.label}</a></p>
+        <p className="mt-3 rounded-lg border border-silver-600/40 bg-silver-600/10 p-3 text-sm text-silver-100">⚠ {CHECK_NOTE} Kod silnika (RPO) znajdziesz na naklejce Service Parts Identification w schowku.</p>
+        <p className="mt-2 text-xs text-neutral-500">Źródła: <a className="inline-flex min-h-11 items-center text-silver-400 underline" href={SOURCES.W1.url} target="_blank" rel="noopener noreferrer">{SOURCES.W1.label}</a> · <a className="inline-flex min-h-11 items-center text-silver-400 underline" href={SOURCES.W2.url} target="_blank" rel="noopener noreferrer">{SOURCES.W2.label}</a></p>
       </section>
 
       {schematics.length > 0 && (
@@ -108,9 +108,9 @@ export default async function ModelPage({ params }: Props) {
           <ul className="mt-3 grid gap-2 sm:grid-cols-2">
             {schematics.map(s => (
               <li key={s.id}>
-                <Link href={`/schematy#${s.id}`} className="flex min-h-11 items-center justify-between gap-3 rounded-xl border border-white/10 bg-neutral-950 px-4 py-3 text-neutral-100 hover:border-red-600/60">
+                <Link href={`/schematy#${s.id}`} className="flex min-h-11 items-center justify-between gap-3 rounded-xl border border-white/10 bg-neutral-950 px-4 py-3 text-neutral-100 hover:border-silver-600/60">
                   <span>{s.title}<span className="block text-xs text-neutral-400">{s.diagram?.models}</span></span>
-                  <span aria-hidden="true" className="text-red-400">→</span>
+                  <span aria-hidden="true" className="text-silver-400">→</span>
                 </Link>
               </li>
             ))}
@@ -121,13 +121,13 @@ export default async function ModelPage({ params }: Props) {
       <section aria-labelledby="other-title" className="mt-10">
         <h2 id="other-title" className="text-2xl font-semibold">Inne nadwozia GMT400</h2>
         <div className="mt-3 flex justify-between gap-2 text-sm">
-          <Link href={modelHref(prev)} className="inline-flex min-h-11 items-center rounded-lg border border-white/15 px-3 text-neutral-200 hover:border-red-600">← {prev.name}</Link>
-          <Link href={modelHref(next)} className="inline-flex min-h-11 items-center rounded-lg border border-white/15 px-3 text-right text-neutral-200 hover:border-red-600">{next.name} →</Link>
+          <Link href={modelHref(prev)} className="inline-flex min-h-11 items-center rounded-lg border border-white/15 px-3 text-neutral-200 hover:border-silver-600">← {prev.name}</Link>
+          <Link href={modelHref(next)} className="inline-flex min-h-11 items-center rounded-lg border border-white/15 px-3 text-right text-neutral-200 hover:border-silver-600">{next.name} →</Link>
         </div>
         <ul className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-3">
           {BODY_STYLES.filter(b => b.id !== body.id).map(b => (
             <li key={b.id}>
-              <Link href={modelHref(b)} className="block overflow-hidden rounded-xl border border-white/10 bg-neutral-950 hover:border-red-600/60">
+              <Link href={modelHref(b)} className="block overflow-hidden rounded-xl border border-white/10 bg-neutral-950 hover:border-silver-600/60">
                 <Image src={bodyImage(b)} alt="" width={320} height={180} sizes="(max-width: 640px) 45vw, 300px" loading="lazy" className="aspect-video h-auto w-full object-cover" />
                 <span className="block p-2 text-sm font-semibold text-neutral-100">{b.name}<span className="block text-xs font-normal text-neutral-400">{bodyYears(b)}</span></span>
               </Link>

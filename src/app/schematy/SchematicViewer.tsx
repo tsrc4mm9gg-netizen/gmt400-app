@@ -13,13 +13,13 @@ export default function SchematicViewer({ src, alt, width, height, title }: Prop
         type="button"
         onClick={() => setOpen(true)}
         aria-label={`Otwórz schemat na pełnym ekranie: ${title}`}
-        className={`group relative block w-full overflow-hidden ${height > width ? 'mx-auto max-w-xl' : ''} rounded-lg border border-white/10 bg-[#0d0d0f] text-left focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-500`}
+        className={`group relative block w-full overflow-hidden ${height > width ? 'mx-auto max-w-xl' : ''} rounded-lg border border-white/10 bg-[#0d0d0f] text-left focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-silver-500`}
         style={{ aspectRatio: `${width} / ${height}` }}
       >
         {!loaded && <span aria-hidden="true" className="absolute inset-0 animate-pulse bg-white/5" />}
         {/* SVG serwowany bezpośrednio (wektor, bez optymalizacji rastrowej) */}
         <img src={src} alt={alt} width={width} height={height} loading="lazy" decoding="async" onLoad={() => setLoaded(true)} className="relative h-auto w-full" />
-        <span className="pointer-events-none absolute bottom-2 right-2 rounded-full bg-black/80 px-3 py-1.5 text-xs font-semibold text-white ring-1 ring-white/20 group-hover:bg-red-600">⤢ Pełny ekran</span>
+        <span className="pointer-events-none absolute bottom-2 right-2 rounded-full bg-black/80 px-3 py-1.5 text-xs font-semibold text-neutral-950 ring-1 ring-white/20 group-hover:bg-silver-600">⤢ Pełny ekran</span>
       </button>
       {open && <ZoomDialog src={src} alt={alt} title={title} onClose={() => setOpen(false)} />}
     </>
@@ -84,7 +84,7 @@ function ZoomDialog({ src, alt, title, onClose }: { src: string; alt: string; ti
     gesture.current = rest.length === 1 ? { dist: 0, s: view.s, x: view.x, y: view.y, cx: rest[0].x, cy: rest[0].y } : null;
   };
 
-  const btn = 'inline-flex min-h-11 min-w-11 items-center justify-center rounded-lg border border-white/25 bg-black/80 px-3 text-lg font-semibold text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-500';
+  const btn = 'inline-flex min-h-11 min-w-11 items-center justify-center rounded-lg border border-white/25 bg-black/80 px-3 text-lg font-semibold text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-silver-500';
   return (
     <dialog
       ref={dialog}
@@ -95,7 +95,7 @@ function ZoomDialog({ src, alt, title, onClose }: { src: string; alt: string; ti
     >
       <div className="flex h-full flex-col">
         <div className="flex items-center gap-2 border-b border-white/10 bg-neutral-950 px-3 py-2" style={{ paddingTop: 'max(0.5rem, env(safe-area-inset-top))' }}>
-          <p className="min-w-0 flex-1 truncate text-sm font-semibold text-red-300">{title}</p>
+          <p className="min-w-0 flex-1 truncate text-sm font-semibold text-silver-300">{title}</p>
           <button type="button" className={btn} aria-label="Pomniejsz" onClick={() => zoomBy(1 / 1.5)}>−</button>
           <button type="button" className={btn} aria-label="Powiększ" onClick={() => zoomBy(1.5)}>+</button>
           <button type="button" className={`${btn} text-sm`} aria-label="Dopasuj do ekranu" onClick={() => setView({ s: 1, x: 0, y: 0 })}>1:1</button>

@@ -32,7 +32,7 @@ export default function LightsWiringSvg() {
         <text x="109" y="496" textAnchor="middle" fontSize="15" fill="#d4d4d4">przewód jasnozielony</text>
 
         {/* lampa tylna */}
-        <rect x="270" y="190" width="196" height="190" rx="12" className="fill-neutral-900 stroke-red-500" strokeWidth="3" />
+        <rect x="270" y="190" width="196" height="190" rx="12" className="fill-neutral-900 stroke-silver-500" strokeWidth="3" />
         <text x="368" y="214" textAnchor="middle" fontSize="16" fontWeight="700" fill="#fff">Lampa tylna LH</text>
         <rect x="284" y="226" width="168" height="62" rx="8" fill="#7f1d1d" stroke="#ef4444" strokeWidth="2" />
         <text x="368" y="252" textAnchor="middle" fontSize="16" fontWeight="700" fill="#fff">A · STOP + pozycja</text>

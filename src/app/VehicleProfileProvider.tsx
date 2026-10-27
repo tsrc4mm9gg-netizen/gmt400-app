@@ -15,8 +15,8 @@ export type VehicleProfileContext = {
 };
 const Context = createContext<VehicleProfileContext>({ profile: null, ready: false, save: () => false, clear: () => false, openEditor: () => {} });
 export const useVehicleProfile = () => useContext(Context);
-const control = 'mt-1 block min-h-11 w-full rounded border border-white/20 bg-neutral-900 p-3 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-500';
-const button = 'min-h-11 rounded border border-white/20 px-4 py-3 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-500';
+const control = 'mt-1 block min-h-11 w-full rounded border border-white/20 bg-neutral-900 p-3 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-silver-500';
+const button = 'min-h-11 rounded border border-white/20 px-4 py-3 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-silver-500';
 export default function VehicleProfileProvider({ children }: { children: ReactNode }) {
   const profile = useStoredVehicleProfile();
   const ready = useHydrated();
@@ -78,8 +78,8 @@ export default function VehicleProfileProvider({ children }: { children: ReactNo
   const value = useMemo(() => ({ profile, ready, save: saveProfile, clear: clearStored, openEditor: open }), [profile, ready, saveProfile, clearStored, open]);
   const launcher = <button ref={trigger} type="button" disabled={!ready} onClick={open} className="gmt-profile-trigger" aria-haspopup="dialog">{vehicleProfileSummary(profile)}</button>;
   return <Context.Provider value={value}>{children}{slot ? createPortal(launcher, slot) : <div className="mx-auto max-w-7xl p-4">{launcher}</div>}
-    <dialog ref={dialog} onClose={() => trigger.current?.focus({ preventScroll: true })} aria-labelledby="vehicle-profile-title" aria-describedby="vehicle-profile-help" className="m-auto w-[calc(100%-2rem)] max-w-lg max-h-[85dvh] overflow-y-auto rounded-xl border border-red-600 bg-neutral-950 p-5 text-white backdrop:bg-black/80">
-      <header className="flex items-start justify-between gap-3"><h2 id="vehicle-profile-title" className="text-xl text-red-400">Moje auto — profil GMT400</h2><button type="button" onClick={close} aria-label="Zamknij profil" className={button}>×</button></header>
+    <dialog ref={dialog} onClose={() => trigger.current?.focus({ preventScroll: true })} aria-labelledby="vehicle-profile-title" aria-describedby="vehicle-profile-help" className="m-auto w-[calc(100%-2rem)] max-w-lg max-h-[85dvh] overflow-y-auto rounded-xl border border-silver-600 bg-neutral-950 p-5 text-white backdrop:bg-black/80">
+      <header className="flex items-start justify-between gap-3"><h2 id="vehicle-profile-title" className="text-xl text-silver-400">Moje auto — profil GMT400</h2><button type="button" onClick={close} aria-label="Zamknij profil" className={button}>×</button></header>
       <p id="vehicle-profile-help" className="my-3 text-sm text-neutral-400">Wpisz potwierdzone dane. Nieznane pola opcjonalne pozostaw puste. Profil jest zapisywany tylko w tej przeglądarce.</p>
       <form onSubmit={event => { event.preventDefault(); save(); }} className="space-y-3">
         <label className="block">Marka<select required value={draft.brand} onChange={event => { setDraft({ ...EMPTY_VEHICLE_PROFILE, brand: event.target.value as VehicleMake }); setRpoText(''); }} className={control}><option value="">Wybierz markę</option>{Object.keys(VEHICLE_CATALOG).map(brand => <option key={brand}>{brand}</option>)}</select></label>
@@ -92,8 +92,8 @@ export default function VehicleProfileProvider({ children }: { children: ReactNo
         <label className="block">Kody RPO (opcjonalne)<input maxLength={1000} value={rpoText} onChange={event => setRpoText(event.target.value)} autoCapitalize="characters" autoCorrect="off" spellCheck={false} aria-describedby="rpo-help" placeholder="Z71, GT4, KC4" className={control} /></label>
         <p id="rpo-help" className="text-xs text-neutral-400">Oddziel kody spacją lub przecinkiem. Format sprawdzamy przy zapisie, nie podczas wpisywania.</p>
         <p className="text-xs text-neutral-400">Eksport obejmuje zapisany profil, a nie niezapisane zmiany formularza.</p>
-        <p role="status" className="text-sm text-red-400">{message}</p>
-        <div className="flex flex-wrap gap-3"><button type="submit" className={`${button} bg-red-600 text-white`}>Zapisz profil</button><button type="button" onClick={close} className={button}>Anuluj</button>{profile && <button type="button" onClick={exportProfile} className={button}>Eksportuj JSON</button>}<button type="button" onClick={() => fileInput.current?.click()} className={button}>Importuj JSON</button>{profile && <button type="button" onClick={clear} className={button}>Usuń profil</button>}</div>
+        <p role="status" className="text-sm text-silver-400">{message}</p>
+        <div className="flex flex-wrap gap-3"><button type="submit" className={`${button} bg-silver-600 text-neutral-950`}>Zapisz profil</button><button type="button" onClick={close} className={button}>Anuluj</button>{profile && <button type="button" onClick={exportProfile} className={button}>Eksportuj JSON</button>}<button type="button" onClick={() => fileInput.current?.click()} className={button}>Importuj JSON</button>{profile && <button type="button" onClick={clear} className={button}>Usuń profil</button>}</div>
         <input ref={fileInput} type="file" accept="application/json,.json" aria-label="Importuj profil JSON" hidden onChange={event => { const file = event.target.files?.[0]; if (file) void importProfile(file); event.target.value = ''; }} />
       </form>
     </dialog><p role="status" className="sr-only">{message}</p>

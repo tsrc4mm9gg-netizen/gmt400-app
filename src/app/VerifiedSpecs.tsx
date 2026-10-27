@@ -5,11 +5,11 @@ import { TORQUE_SPECS } from '../lib/torque-specs';
 function Src({ id }: { id: string }) {
   const s = SOURCES[id];
   if (!s) return null;
-  return <a href={s.url} target="_blank" rel="noopener noreferrer" className="text-red-300 underline" title={s.label}>[{id}]</a>;
+  return <a href={s.url} target="_blank" rel="noopener noreferrer" className="text-silver-300 underline" title={s.label}>[{id}]</a>;
 }
 
 export function CheckNote() {
-  return <p className="mt-3 rounded-lg border border-red-600/30 bg-red-950/30 p-3 text-sm text-neutral-300">{CHECK_NOTE}</p>;
+  return <p className="mt-3 rounded-lg border border-silver-600/30 bg-silver-950/30 p-3 text-sm text-neutral-300">{CHECK_NOTE}</p>;
 }
 
 export function SourceList() {
@@ -29,7 +29,7 @@ export function EngineTable() {
       <div className="overflow-x-auto">
         <table className="w-full min-w-[560px] text-sm">
           <thead>
-            <tr className="border-b border-white/10 text-left text-red-400">
+            <tr className="border-b border-white/10 text-left text-silver-400">
               <th className="p-2">Silnik</th><th className="p-2">RPO</th><th className="p-2">Lata</th><th className="p-2">Moc / moment</th><th className="p-2">Źródło</th>
             </tr>
           </thead>
@@ -55,11 +55,11 @@ export function EngineTable() {
 export function FluidsTable() {
   return (
     <div className="mb-6 rounded-xl border border-white/10 bg-neutral-950 p-4">
-      <h3 className="mb-3 font-semibold text-red-400">Płyny, pojemności i interwały (z instrukcji GM)</h3>
+      <h3 className="mb-3 font-semibold text-silver-400">Płyny, pojemności i interwały (z instrukcji GM)</h3>
       <div className="overflow-x-auto">
         <table className="w-full min-w-[620px] text-sm">
           <thead>
-            <tr className="border-b border-white/10 text-left text-red-400">
+            <tr className="border-b border-white/10 text-left text-silver-400">
               <th className="p-2">Pozycja</th><th className="p-2">Specyfikacja</th><th className="p-2">Pojemność</th><th className="p-2">Interwał</th><th className="p-2">Źródło</th>
             </tr>
           </thead>
@@ -87,7 +87,7 @@ export function FluidsTable() {
 const STATUS_CLASS: Record<Part['status'], string> = {
   potwierdzone: 'border-emerald-500/40 text-emerald-300',
   poprawione: 'border-sky-500/40 text-sky-300',
-  niezweryfikowane: 'border-red-500/50 text-red-300',
+  niezweryfikowane: 'border-silver-500/50 text-silver-300',
 };
 
 /** Mały przypis ze statusem i linkami do źródeł — czytelny na telefonie (linki ≥ 44 px wysokości dotyku). */
@@ -100,7 +100,7 @@ export function PartSourceNote({ part }: { part: Part }) {
         <p className="mt-1 flex flex-wrap gap-x-3 text-neutral-500">
           <span>Źródło:</span>
           {part.src.map(id => (
-            <a key={id} href={PART_SOURCES[id].url} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-8 items-center text-red-300 underline underline-offset-2 hover:text-red-200">{PART_SOURCES[id].label}</a>
+            <a key={id} href={PART_SOURCES[id].url} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-8 items-center text-silver-300 underline underline-offset-2 hover:text-silver-200">{PART_SOURCES[id].label}</a>
           ))}
         </p>
       )}
@@ -119,10 +119,10 @@ export function OemQuickList({ filtersOnly = false }: { filtersOnly?: boolean })
         <div key={p.oem} className="border-b border-white/5 pb-2 last:border-0">
           <div className="flex items-start justify-between gap-3">
             <span className="text-neutral-300">{p.nazwa}</span>
-            <span className="shrink-0 text-right font-medium text-red-400">{p.oem.replace('AC Delco ', '')}</span>
+            <span className="shrink-0 text-right font-medium text-silver-400">{p.oem.replace('AC Delco ', '')}</span>
           </div>
           <p className="text-xs text-neutral-500">{p.model}</p>
-          {p.src && <p className="text-xs text-neutral-500">Źródło: {p.src.map((id, i) => <span key={id}>{i > 0 && ', '}<a href={PART_SOURCES[id].url} target="_blank" rel="noopener noreferrer" className="text-red-300 underline underline-offset-2">{PART_SOURCES[id].label}</a></span>)}</p>}
+          {p.src && <p className="text-xs text-neutral-500">Źródło: {p.src.map((id, i) => <span key={id}>{i > 0 && ', '}<a href={PART_SOURCES[id].url} target="_blank" rel="noopener noreferrer" className="text-silver-300 underline underline-offset-2">{PART_SOURCES[id].label}</a></span>)}</p>}
         </div>
       ))}
       <CheckNote />
@@ -133,17 +133,17 @@ export function OemQuickList({ filtersOnly = false }: { filtersOnly?: boolean })
 export function TorqueTable() {
   return (
     <div className="mt-6 rounded-xl border border-white/10 bg-neutral-950 p-4">
-      <h3 className="mb-3 font-semibold text-red-400">Momenty dokręcania (z dokumentacji GM)</h3>
+      <h3 className="mb-3 font-semibold text-silver-400">Momenty dokręcania (z dokumentacji GM)</h3>
       <ul className="space-y-3 text-sm">
         {TORQUE_SPECS.map(t => (
           <li key={t.id} className="border-b border-white/5 pb-3 last:border-0">
             <div className="flex items-start justify-between gap-3">
               <span className="font-medium text-white">{t.component}</span>
-              <span className="shrink-0 text-right text-red-400">{t.valueNm} N·m ({t.valueLbFt} lb-ft)</span>
+              <span className="shrink-0 text-right text-silver-400">{t.valueNm} N·m ({t.valueLbFt} lb-ft)</span>
             </div>
             <p className="text-xs text-neutral-400">{t.appliesTo}</p>
             <p className="mt-1 text-xs text-neutral-500">{t.notes}</p>
-            <a href={t.source} target="_blank" rel="noopener noreferrer" className="mt-1 inline-flex min-h-8 items-center text-xs text-red-300 underline underline-offset-2">Źródło: {t.sourceTitle}</a>
+            <a href={t.source} target="_blank" rel="noopener noreferrer" className="mt-1 inline-flex min-h-8 items-center text-xs text-silver-300 underline underline-offset-2">Źródło: {t.sourceTitle}</a>
           </li>
         ))}
       </ul>

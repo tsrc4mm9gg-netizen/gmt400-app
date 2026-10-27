@@ -12,7 +12,7 @@ export default function VinHistoryPage() {
   return (
     <div className="mx-auto w-full max-w-3xl px-4 py-6 text-white sm:py-10">
       <Breadcrumbs className="mb-2" items={[{ href: '/narzedzia', label: 'Narzędzia' }, { label: 'Historia VIN' }]} />
-      <h1 className="text-3xl font-bold text-red-400">Historia VIN</h1>
+      <h1 className="text-3xl font-bold text-silver-400">Historia VIN</h1>
       <p className="mb-5 mt-2 text-neutral-300">Sama historia: ile akcji serwisowych i skarg właścicieli ma ten rocznik i model w oficjalnej bazie NHTSA, plus linki do archiwów aukcji i raportów dla dokładnego VIN. To ta sama lista, co w sekcji „Zdjęcia i historia tego VIN” na stronie Sprawdź VIN.</p>
       <VinHistoryTool />
     </div>

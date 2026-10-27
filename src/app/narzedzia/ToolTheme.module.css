@@ -1,20 +1,22 @@
 .surface { color:#ededed; color-scheme:dark; width:100%; min-width:0; }
 .surface :global(main) { box-sizing:border-box; width:100%; max-width:1000px; min-width:0; margin:0 auto; padding:20px 16px 120px; background:transparent; color:#ededed; }
 .surface :global(main *), .surface :global(main *::before), .surface :global(main *::after) { box-sizing:border-box; min-width:0; }
-.surface :global(section), .surface :global(article) { margin-bottom:16px; padding:20px; border:1px solid #343a43; border-radius:10px; background:#171d25; color:#ededed; overflow-wrap:anywhere; }
-.surface :global([class*='bg-']) { background-color:#171d25; background-image:none; }
+.surface :global(section), .surface :global(article) { margin-bottom:16px; padding:20px; border:1px solid rgba(255,255,255,.14); border-radius:var(--radius-lg); background-color:#1a1a1d; background-image:var(--card-gradient); box-shadow:var(--card-sheen); color:#ededed; overflow-wrap:anywhere; }
+.surface :global([class*='bg-']) { background-color:#1a1a1d; background-image:none; }
 .surface :global([class*='text-']) { color:#d0d5dc; }
 .surface :global(h1[class]), .surface :global(h2[class]) { color:#fafafa; }
 .surface :global(p), .surface :global(li) { line-height:1.65; }
 .surface :global(label) { display:block; color:#ededed; }
-.surface :global(input[class]), .surface :global(select[class]), .surface :global(textarea[class]) { display:block; width:100%; min-height:44px; margin-top:6px; padding:10px 12px; border:1px solid #596371; border-radius:7px; background:#101317; color:#fafafa; -webkit-text-fill-color:#fafafa; font-size:16px; color-scheme:dark; }
+.surface :global(input[class]), .surface :global(select[class]), .surface :global(textarea[class]) { display:block; width:100%; min-height:44px; margin-top:6px; padding:10px 12px; border:1px solid rgba(255,255,255,.22); border-radius:12px; background:#0d0d0e; color:#fafafa; -webkit-text-fill-color:#fafafa; font-size:16px; color-scheme:dark; }
 .surface :global(input::placeholder), .surface :global(textarea::placeholder) { color:#aab4c1; -webkit-text-fill-color:#aab4c1; opacity:1; }
-.surface :global(option) { background:#101317; color:#fafafa; }
-.surface :global(button[class]) { min-height:44px; padding:10px 14px; border:1px solid #596371; border-radius:8px; background:#101317; color:#fca5a5; }
-.surface :global(button[type='submit']) { background:#dc2626; color:#ffffff; border-color:#dc2626; font-weight:700; }
+.surface :global(option) { background:#0d0d0e; color:#fafafa; }
+.surface :global(button[class]) { min-height:44px; padding:10px 14px; border:1px solid rgba(255,255,255,.2); border-radius:12px; background:linear-gradient(180deg,#2a2a2d,#161618); color:var(--accent-soft); }
+.surface :global(button[type='submit']) { background:var(--accent); color:var(--accent-ink); border-color:var(--accent); font-weight:700; }
 .surface :global(button:disabled) { opacity:.65; }
-.surface :global(a[class]) { color:#fca5a5; }
-.surface :global([class*='bg-red-']) { background-color:#351b22; }
-.surface :global([class*='text-red-']) { color:#ffb4b4; }
-.surface :global([class*='bg-red-6']), .surface :global([class*='bg-red-5']) { background-color:#dc2626; color:#ffffff; }
-.surface :global(input:focus-visible), .surface :global(select:focus-visible), .surface :global(button:focus-visible), .surface :global(a:focus-visible) { outline:2px solid #ef4444; outline-offset:3px; }
+.surface :global(a[class]) { color:var(--accent-soft); }
+.surface :global([class*='bg-silver-']) { background-color:var(--surface-hi); }
+.surface :global([class*='text-silver-']) { color:var(--accent-soft); }
+.surface :global([class*='text-danger-']) { color:var(--danger-soft); }
+.surface :global([class*='bg-danger-']) { background-color:#2a1215; }
+.surface :global([class*='bg-silver-6']), .surface :global([class*='bg-silver-5']) { background-color:var(--accent); color:var(--accent-ink); }
+.surface :global(input:focus-visible), .surface :global(select:focus-visible), .surface :global(button:focus-visible), .surface :global(a:focus-visible) { outline:2px solid var(--accent); outline-offset:3px; }

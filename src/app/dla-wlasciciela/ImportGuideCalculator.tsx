@@ -3,7 +3,7 @@ import { useId, useState } from 'react';
 import { calculateImport, IMPORT_RATES, type Origin, type VehicleKind } from '../../lib/import-calc';
 
 const pln = (n: number) => n.toLocaleString('pl-PL', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' zł';
-const field = 'mt-1 block min-h-11 w-full min-w-0 rounded-lg border border-neutral-600 bg-neutral-950 px-3 text-base text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-500';
+const field = 'mt-1 block min-h-11 w-full min-w-0 rounded-lg border border-neutral-600 bg-neutral-950 px-3 text-base text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-silver-500';
 
 export default function ImportGuideCalculator() {
   const id = useId();
@@ -14,7 +14,7 @@ export default function ImportGuideCalculator() {
   const [origin, setOrigin] = useState<Origin>('usa-proof');
   const r = calculateImport({ price, transport, capacity, kind, origin });
   return (
-    <section aria-labelledby={id + '-t'} data-testid="guide-calc" className="rounded-xl border border-red-700/50 bg-neutral-900 p-4">
+    <section aria-labelledby={id + '-t'} data-testid="guide-calc" className="rounded-xl border border-silver-700/50 bg-neutral-900 p-4">
       <h3 id={id + '-t'} className="text-lg font-semibold text-white">Kalkulator: cło, akcyza, VAT i suma</h3>
       <p className="mt-2 text-sm leading-6 text-neutral-300">Orientacyjnie, sprawdź w urzędzie. Stawki: stan na {IMPORT_RATES.asOf}. Cena i transport w zł (kurs przeliczenia ustala urząd).</p>
       <div className="mt-4 grid gap-3 sm:grid-cols-2">
@@ -44,15 +44,15 @@ export default function ImportGuideCalculator() {
                   <dd data-testid={'guide-calc-' + l.id} className="shrink-0 font-medium text-white">{pln(l.amount)}</dd>
                 </div>
               ))}
-              <div className="flex justify-between gap-3 bg-red-950/40 px-3 py-3">
+              <div className="flex justify-between gap-3 bg-silver-950/40 px-3 py-3">
                 <dt className="font-semibold text-white">Razem (cena + transport + podatki + minimum urzędowe)</dt>
-                <dd data-testid="guide-calc-total" className="shrink-0 text-lg font-bold text-red-300">{pln(r.total)}</dd>
+                <dd data-testid="guide-calc-total" className="shrink-0 text-lg font-bold text-silver-300">{pln(r.total)}</dd>
               </div>
             </dl>
             <p className="mt-2 text-sm text-neutral-300">Same cło + akcyza + VAT: <strong data-testid="guide-calc-duties" className="text-white">{pln(r.duties)}</strong></p>
             <ul className="mt-3 list-disc space-y-1 pl-5 text-sm leading-6 text-neutral-300">{r.notes.map(n => <li key={n}>{n}</li>)}</ul>
           </>
-        ) : <p role="status" className="text-sm text-red-300">{r.error}</p>}
+        ) : <p role="status" className="text-sm text-danger-300">{r.error}</p>}
       </div>
       <p className="mt-3 text-xs leading-5 text-neutral-400">Wynik nie obejmuje tłumaczeń, opłat portowych, agencji celnej, napraw ani LPG. Nie jest wyliczeniem urzędu celnego ani skarbowego.</p>
     </section>

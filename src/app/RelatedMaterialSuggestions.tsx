@@ -51,10 +51,10 @@ export default function RelatedMaterialSuggestions({ current }: { current: Knowl
   }, [current, state, profile, ready]);
   if (state.status === 'ready' && ready && items.length) return <RelatedMaterials items={items} />;
   return <section aria-label="Powiązane materiały" className="mt-6 rounded border border-white/15 p-4">
-    <h2 className="text-lg text-red-400">Powiązane materiały</h2>
+    <h2 className="text-lg text-silver-400">Powiązane materiały</h2>
     {state.status === 'error' ? <>
       <p role="status" className="mt-3 text-neutral-300">Nie udało się pobrać propozycji. Treść instrukcji pozostaje dostępna.</p>
-      <button type="button" onClick={() => { setState({ status: 'loading', items: [] }); setAttempt(value => value + 1); }} className="mt-3 min-h-11 rounded border border-white/30 px-4 py-2 text-red-400">Spróbuj ponownie</button>
+      <button type="button" onClick={() => { setState({ status: 'loading', items: [] }); setAttempt(value => value + 1); }} className="mt-3 min-h-11 rounded border border-white/30 px-4 py-2 text-silver-400">Spróbuj ponownie</button>
     </> : <p role="status" className="mt-3 text-neutral-300">{state.status === 'loading' || !ready ? 'Ładowanie powiązanych materiałów…' : 'Nie znaleziono powiązanych materiałów według obecnych reguł. Nie oznacza to braku innych przydatnych informacji w bazie.'}</p>}
   </section>;
 }

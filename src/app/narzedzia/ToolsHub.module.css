@@ -1,22 +1,22 @@
 .page { box-sizing:border-box; width:100%; max-width:1000px; min-width:0; margin:0 auto; padding:20px 16px calc(100px + env(safe-area-inset-bottom, 0px)); color:#ededed; font-family:var(--font-geist-sans),system-ui,sans-serif; color-scheme:dark; }
 .page *, .page *::before, .page *::after { box-sizing:border-box; }
 .page .header { position:static; display:block; width:100%; min-width:0; margin:0 0 22px; padding:0; border:0; background:transparent; }
-.page .back { display:inline-flex; align-items:center; width:fit-content; max-width:100%; min-height:44px; margin:0 0 14px; padding:8px 0; color:#fca5a5; font-size:14px; line-height:1.5; text-decoration:none; white-space:normal; }
-.page .eyebrow { display:block; margin:0 0 8px; color:#dc2626; font-size:11px; font-weight:700; line-height:1.5; letter-spacing:.1em; }
+.page .back { display:inline-flex; align-items:center; width:fit-content; max-width:100%; min-height:44px; margin:0 0 14px; padding:8px 0; color:var(--accent-soft); font-size:14px; line-height:1.5; text-decoration:none; white-space:normal; }
+.page .eyebrow { display:block; margin:0 0 8px; color:var(--accent); font-size:11px; font-weight:700; line-height:1.5; letter-spacing:.1em; }
 .page .title { display:block; margin:0 0 10px; padding:0; color:#fafafa; font-size:clamp(26px,5vw,36px); font-weight:750; line-height:1.2; letter-spacing:-.02em; overflow-wrap:break-word; }
 .page .intro { display:block; width:100%; max-width:650px; margin:0; color:#c7ccd3; font-size:14px; line-height:1.65; white-space:normal; overflow-wrap:anywhere; }
 .page .grid { display:grid; grid-template-columns:minmax(0,1fr); align-items:stretch; gap:12px; width:100%; min-width:0; margin:0; padding:0; }
-.page .card { position:relative; display:flex; flex-direction:column; align-items:flex-start; justify-content:flex-start; width:100%; max-width:100%; min-width:0; min-height:0; gap:0; margin:0; padding:18px; border:1px solid #343a43; border-left:3px solid #dc2626; border-radius:10px; background:#12161c; color:#ededed; text-align:left; text-decoration:none; white-space:normal; overflow-wrap:anywhere; transition:border-color .15s ease,background-color .15s ease; }
-.page .card:hover { background:#171d25; border-color:#dc2626; }
-.page .card:focus-visible,.page .back:focus-visible { outline:3px solid #fca5a5; outline-offset:3px; }
-.page .icon { display:flex; align-items:center; justify-content:center; flex:0 0 auto; width:36px; height:36px; margin:0 0 10px; border:1px solid #5b2a2a; border-radius:8px; background:#261818; color:#fca5a5; }
+.page .card { position:relative; display:flex; flex-direction:column; align-items:flex-start; justify-content:flex-start; width:100%; max-width:100%; min-width:0; min-height:0; gap:0; margin:0; padding:18px; border:1px solid rgba(255,255,255,.14); border-radius:20px; background-color:#1a1a1d; background-image:var(--card-gradient); box-shadow:var(--card-sheen); color:#ededed; text-align:left; text-decoration:none; white-space:normal; overflow-wrap:anywhere; transition:border-color .15s ease,background-color .15s ease; }
+.page .card:hover { background-color:#202024; border-color:var(--accent); }
+.page .card:focus-visible,.page .back:focus-visible { outline:3px solid var(--accent-soft); outline-offset:3px; }
+.page .icon { display:flex; align-items:center; justify-content:center; flex:0 0 auto; width:36px; height:36px; margin:0 0 10px; border:1px solid #5b2a2a; border-radius:8px; background:#261818; color:var(--accent-soft); }
 .page .icon svg { display:block; width:20px; height:20px; flex:0 0 auto; }
 .page .tag { display:block; margin:0 0 5px; color:#c2b391; font-size:10px; font-weight:650; line-height:1.5; letter-spacing:.06em; text-transform:uppercase; }
 .page .cardTitle { display:block; width:100%; margin:0 0 8px; padding:0; color:#fafafa; font-size:20px; font-weight:700; line-height:1.3; letter-spacing:-.015em; text-wrap:initial; white-space:normal; overflow-wrap:break-word; }
 .page .description { display:block; width:100%; max-width:100%; margin:0 0 8px; color:#d0d5dc; font-size:14px; line-height:1.6; white-space:normal; overflow-wrap:anywhere; }
 .page .example { display:block; width:100%; max-width:100%; margin:0 0 12px; color:#b5beca; font-size:12px; line-height:1.6; white-space:normal; overflow-wrap:anywhere; }
-.page .action { display:flex; align-items:center; justify-content:space-between; gap:12px; width:100%; min-height:44px; margin:auto 0 0; padding:10px 0 0; border-top:1px solid #343a43; color:#fca5a5; font-size:14px; font-weight:650; line-height:1.5; white-space:normal; }
-.page .notice { display:block; width:100%; margin:18px 0 0; padding:14px 16px; border:1px solid #343a43; border-radius:10px; background:#101317; }
+.page .action { display:flex; align-items:center; justify-content:space-between; gap:12px; width:100%; min-height:44px; margin:auto 0 0; padding:10px 0 0; border-top:1px solid rgba(255,255,255,.14); color:var(--accent-soft); font-size:14px; font-weight:650; line-height:1.5; white-space:normal; }
+.page .notice { display:block; width:100%; margin:18px 0 0; padding:14px 16px; border:1px solid rgba(255,255,255,.14); border-radius:10px; background:#0d0d0e; }
 .page .noticeTitle { display:block; margin:0 0 6px; padding:0; color:#e2e7ed; font-size:13px; font-weight:650; line-height:1.5; }
 .page .noticeText { display:block; max-width:100%; margin:0; color:#bdc6d2; font-size:12px; line-height:1.65; overflow-wrap:anywhere; }
 @media (min-width:640px) { .page { padding-top:28px; } .page .grid { grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px; } .page .card { padding:22px; } }
