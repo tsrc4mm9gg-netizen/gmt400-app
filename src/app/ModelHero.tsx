@@ -8,7 +8,7 @@ import { BODY_STYLES, bodyYears, yearOptions } from '../lib/body-styles';
 import { bodyImage } from '../lib/model-images';
 
 // Linia podłogi (dół opon) jako ułamek wysokości zdjęcia — do odbicia na podłodze studia.
-const FLOOR: Record<string, number> = { 'tahoe-4d': 0.76, 'tahoe-2d': 0.755, suburban: 0.742, yukon: 0.75, 'ck-reg': 0.82, 'ck-ext': 0.795, k1500: 0.755, sierra: 0.728, dually: 0.733 };
+const FLOOR: Record<string, number> = { 'tahoe-4d': 0.76, 'tahoe-2d': 0.76, suburban: 0.76, yukon: 0.76, 'ck-reg': 0.82, 'ck-ext': 0.795, k1500: 0.755, sierra: 0.728, dually: 0.733 };
 // Zdjęcia 3:2 w ramce 16:9 (object-cover) tracą ~8% góry i dołu.
 const floorPercent = (id: string) => `${((((FLOOR[id] ?? 0.75) - 0.0809) / 0.8382) * 100).toFixed(1)}%`;
 
@@ -141,6 +141,11 @@ export default function ModelHero() {
             {filters.drivetrain ? ` · ${filters.drivetrain.toUpperCase()}` : ''}
           </p>
           {body.note && <p className="mt-0.5 text-xs text-neutral-400">{body.note}</p>}
+          {body.credit && (
+            <p className="mt-1 text-[11px] leading-snug text-neutral-500" data-testid="photo-credit">
+              Zdjęcie: {body.credit.author}, {body.credit.licenseUrl ? <a href={body.credit.licenseUrl} target="_blank" rel="noopener noreferrer" className="underline">{body.credit.license}</a> : body.credit.license}, <a href={body.credit.sourceUrl} target="_blank" rel="noopener noreferrer" className="underline">Wikimedia Commons</a> ({body.credit.changes})
+            </p>
+          )}
         </div>
       </div>
 

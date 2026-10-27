@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { BODY_STYLES, bodyYears } from '../lib/body-styles';
 import { bodyImage, modelHref } from '../lib/model-images';
 import { groupModels, modelWarning, normalizeModel, type ModelRecord } from '../lib/model-catalog';
-const PHOTOS: Record<string, string> = { tahoe: '/carousel-tahoe-gold.jpg?v=4', suburban: '/carousel-suburban-navy.jpg?v=4', pickups: '/ck-1500-blue.jpg', yukon: '/yukon-white.jpg' };
+const PHOTOS: Record<string, string> = { tahoe: '/carousel/tahoe-4d.webp', suburban: '/carousel/suburban.webp', pickups: '/ck-1500-blue.jpg', yukon: '/carousel/yukon.webp' };
 export default function ModelCatalog({ items, onChoose }: { items: ModelRecord[]; onChoose?: (item: ModelRecord) => void }) {
   const [query, setQuery] = useState('');
   const [selected, setSelected] = useState<string | null>(null);
