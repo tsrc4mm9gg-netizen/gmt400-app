@@ -13,17 +13,17 @@ async function prepare(page, withProfile) {
   await page.goto('http://127.0.0.1:3100/baza');
   await expect(page.getByRole('heading', { name: 'PORADNIKI DIY', exact: true })).toBeVisible();
 }
-test('DIY restores instructions, existing graphic, lightbox and full-material link before videos', async ({ page }) => {
+test('DIY shows compact tiles (graphic + excerpt) and opens the full instruction only via link, before videos', async ({ page }) => {
   await prepare(page, false);
-  await expect(page.getByText('TEST PEŁNA INSTRUKCJA', { exact: false })).toBeVisible();
-  await expect(page.getByText('Krok drugi zachowany.', { exact: false })).toBeVisible();
-  const image = page.locator('#content img[src*="diy-4l60e-pan-pl.jpg"]').first();
+  const tile = page.getByTestId('entry-tile').filter({ hasText: 'TEST 4L60E instrukcja Suburban' });
+  await expect(tile).toHaveCount(1);
+  // w liście jest tylko zwarty fragment, a nie pełna instrukcja
+  await expect(tile.getByTestId('tile-excerpt')).toContainText('TEST OPIS');
+  const image = page.locator('#content img[src*="diy-4l60e-pan"]').first();
   await image.scrollIntoViewIfNeeded();
   await expect(image).toBeVisible();
   await expect.poll(() => image.evaluate(node => node.complete && node.naturalWidth > 0)).toBe(true);
-  await expect(page.getByRole('link', { name: 'Otwórz pełną instrukcję z ilustracjami', exact: true }).first()).toHaveAttribute('href', '/baza/00000000-0000-0000-0000-000000000001');
+  await expect(tile.getByRole('link', { name: 'TEST 4L60E instrukcja Suburban', exact: true })).toHaveAttribute('href', '/baza/00000000-0000-0000-0000-000000000001');
   const headings = await page.locator('#content h2,#content h3').allTextContents();
   expect(headings.indexOf('PORADNIKI DIY')).toBeLessThan(headings.indexOf('PORADNIKI WIDEO'));
-  await image.click();
-  await expect(page.getByRole('img', { name: 'powiększony', exact: true })).toBeVisible();
 });

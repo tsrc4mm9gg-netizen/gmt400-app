@@ -1,6 +1,8 @@
 'use client';
 import { useEffect, useMemo, useState } from 'react';
 import { useVehicleMaterialFilter, VehicleMatchBadge } from './VehicleMaterialFilter';
+import EntryTile from './ui/EntryTile';
+import { excerptOf, getTipImage } from '../lib/entry-tile';
 import RelatedMaterials from './RelatedMaterials';
 import { getRelatedMaterials } from '../lib/related-materials';
 import type { Applicability, MatchResult } from '../lib/vehicle-compatibility';
@@ -55,12 +57,10 @@ export default function KnowledgeCategory({ section, initialItems }: { section: 
       <label htmlFor="category-query" className="block">Szukaj w tej kategorii</label>
       <input id="category-query" type="search" maxLength={120} value={query} onChange={event => setQuery(event.target.value)} className="w-full rounded border border-white/20 bg-neutral-900 p-3" />
       <p role="status">Widoczne: {results.length}. Materiały tej kategorii przed filtrowaniem: {categoryTotal}.</p>
-      {!categoryTotal ? <p>W pobranej bazie nie ma wpisów tej kategorii.</p> : !results.length ? <div><p>Brak wyników przy obecnych ustawieniach. Sprawdź filtr profilu albo wyszukiwaną frazę.</p><button type="button" className="mt-2 underline" onClick={() => setQuery('')}>Wyczyść frazę wyszukiwania</button></div> : <ul className="space-y-4">{results.map((item, index) => <li key={item.id || index} className="rounded-lg border border-white/10 bg-neutral-900/40 p-4 [overflow-wrap:anywhere] sm:p-5">
-        <p className="text-xs text-neutral-400">{item.Typ} · {item.Model} {item.Lata}</p>
-        <h2 className="mt-1 text-xl font-semibold text-neutral-100">{item.id ? <a className="inline-flex min-h-11 items-center rounded-sm underline decoration-neutral-500 underline-offset-4 hover:text-silver-300 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-silver-500" href={'/baza/' + encodeURIComponent(item.id)}>{item.Nazwa}</a> : item.Nazwa}</h2>
-        <VehicleMatchBadge item={item} />
-        <p className="mt-2 text-sm text-neutral-300">{(item.Opis || item.Objawy || item.Rozwiązanie || '').slice(0, 280)}</p>
-        {!item.id && <p className="text-xs text-neutral-500">Brak identyfikatora potrzebnego do stałego odnośnika.</p>}
+      {!categoryTotal ? <p>W pobranej bazie nie ma wpisów tej kategorii.</p> : !results.length ? <div><p>Brak wyników przy obecnych ustawieniach. Sprawdź filtr profilu albo wyszukiwaną frazę.</p><button type="button" className="mt-2 underline" onClick={() => setQuery('')}>Wyczyść frazę wyszukiwania</button></div> : <ul className="space-y-3">{results.map((item, index) => <li key={item.id || index}>
+        <EntryTile item={item} headingLevel={2} icon={section === 'usterki' ? 'usterki' : section === 'kody-obd' ? 'obd' : section === 'modele' ? 'modele' : 'diy'} image={getTipImage(item.Nazwa)} excerpt={excerptOf(item, ['Opis', 'Objawy', 'Rozwiązanie'])}>
+          <VehicleMatchBadge item={item} />
+        </EntryTile>
       </li>)}</ul>}
       <RelatedMaterials items={related} />
     </>}

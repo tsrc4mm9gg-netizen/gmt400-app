@@ -20,9 +20,10 @@ import { findBody } from '../lib/body-styles';
 import { EngineTable, FluidsTable, PartSourceNote, OemQuickList, TorqueTable } from './VerifiedSpecs';
 import { PARTS } from '../lib/parts-catalog';
 import ModelThumb from './ModelThumb';
-import DiagramImage from './ui/DiagramImage';
-import { bodyForEntry, isGeneralEntry, isSpecificToBody } from '../lib/model-images';
-import { IssueMeta, StepsText, hasSource } from './IssueDetails';
+import EntryTile from './ui/EntryTile';
+import { excerptOf, getIssueImage, getTipImage } from '../lib/entry-tile';
+import { isGeneralEntry, isSpecificToBody } from '../lib/model-images';
+import { hasSource } from './IssueDetails';
 
 type Item = {
   id?: string;
@@ -77,22 +78,6 @@ function getModelImage(nazwa: string): string | null {
   if (n.includes('extended')) return '/k1500-black.jpg';
   if (n.includes('regular cab') || n.includes('c/k') || n.includes('1500') || n.includes('2500') || n.includes('3500')) return '/ck-1500-blue.jpg';
   return '/carousel-tahoe-gold.jpg?v=4';
-}
-
-function getTipImage(nazwa: string): string | null {
-  const n = nazwa.toLowerCase();
-  if (n.includes('4l60e') || n.includes('skrzyni') || n.includes('atf') || n.includes('miska')) return '/diy-4l60e-pan-pl.jpg';
-  if (n.includes('kolektor') || n.includes('uszczelk') || n.includes('intake')) return '/diy-intake-pl.jpg';
-  if (n.includes('np231') || n.includes('4x4') || n.includes('rozdzielcz')) return '/diy-np231-pl.jpg';
-  if (n.includes('hamulc') || n.includes('przewod')) return '/diy-brakes-pl.jpg';
-  if (n.includes('chłodz') || n.includes('termostat') || n.includes('pompa wody')) return '/diy-cooling-sys.jpg';
-  if (n.includes('paliw') || n.includes('pompa paliwa') || n.includes('filtr paliwa')) return '/diy-fuel.jpg';
-  if (n.includes('masa') || n.includes('punkt') || n.includes('uziemien')) return '/diy-grounds.jpg';
-  if (n.includes('obd') || n.includes('kod') || n.includes('diagnost')) return '/diy-obd.jpg';
-  if (n.includes('czujnik') || n.includes('maf') || n.includes('sonda') || n.includes('tps') || n.includes('iac')) return '/diy-sensors.jpg';
-  if (n.includes('pompa paliwa') || n.includes('fuel pump')) return '/diy-fuelpump.jpg';
-  if (n.includes('rdza') || n.includes('korozj') || n.includes('rama')) return '/issue-rust.jpg';
-  return null;
 }
 
 function playGong(): void {
@@ -496,13 +481,9 @@ export default function Encyclopedia({ initialTab, initialItems }: { initialTab?
             <p className="text-neutral-500 text-sm mb-4">Znaleziono: {filteredCodes.filter(c => !codeQuery || c.Nazwa.toLowerCase().includes(codeQuery.toLowerCase()) || (c.Opis && c.Opis.toLowerCase().includes(codeQuery.toLowerCase()))).length}</p>
             <div className="space-y-3">
               {filteredCodes.filter(c => !codeQuery || c.Nazwa.toLowerCase().includes(codeQuery.toLowerCase()) || (c.Opis && c.Opis.toLowerCase().includes(codeQuery.toLowerCase()))).map((c, idx) => (
-                <div key={idx} className="bg-neutral-950 border border-white/10 p-4">
-                  <h3 className="font-semibold text-silver-400 mb-1">{c.Nazwa}</h3>
-                  {(() => { const body = bodyForEntry(c); return body ? <div className="mb-2"><ModelThumb body={body} /></div> : null; })()}
-                      <VehicleMatchBadge item={c} />
-                  {c.Opis && <p className="text-neutral-400 text-sm mb-2">{c.Opis}</p>}
-                  {c.Rozwiązanie && <p className="text-neutral-300 text-sm whitespace-pre-line">{c.Rozwiązanie}</p>}
-                </div>
+                <EntryTile key={c.id || idx} item={c} icon="obd" excerpt={excerptOf(c, ['Opis', 'Rozwiązanie'])}>
+                  <VehicleMatchBadge item={c} />
+                </EntryTile>
               ))}
             </div>
           </div>
@@ -558,25 +539,11 @@ export default function Encyclopedia({ initialTab, initialItems }: { initialTab?
             
               <div className="space-y-3">
                 <p className="text-neutral-500 text-sm mb-4" role="status" data-testid="issue-count">Znaleziono: {filteredIssues.length} usterek</p>
-                {filteredIssues.map((i, idx) => {
-                  const issueImg = i.Nazwa.toLowerCase().includes('kolektor') ? '/issue-intake.jpg' : i.Nazwa.toLowerCase().includes('4l60') ? '/issue-4l60e.jpg' : null;
-                  return (
-                    <div key={idx} className="bg-neutral-950 border border-white/10 overflow-hidden">
-                      {issueImg && <button type="button" aria-label="Powiększ ilustrację" className="block w-full rounded focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-silver-500" onClick={() => setLightbox(issueImg)}><DiagramImage src={issueImg} alt={`Schemat poglądowy: ${i.Nazwa}`} maxHeightClass="max-h-48" /></button>}
-                      <div className="p-4">
-                        <div className="flex flex-wrap justify-between items-start gap-2 mb-2">
-                          <h3 className="font-semibold">{i.id ? <a className="inline-flex min-h-11 items-center underline decoration-neutral-600 underline-offset-4 hover:text-silver-300 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-silver-500" href={'/baza/' + encodeURIComponent(i.id)}>{i.Nazwa}</a> : i.Nazwa}</h3>
-                          {(() => { const body = bodyForEntry(i); return body ? <ModelThumb body={body} /> : <span className="text-xs bg-white/10 px-2 py-0.5 text-neutral-400">{isGeneralEntry(i) ? 'Wszystkie GMT400' : i.Model}</span>; })()}
-                        </div>
-                        <VehicleMatchBadge item={i} />
-                        {hasSource(i) && <span className="mb-2 inline-block border border-emerald-500/40 px-2 py-0.5 text-xs text-emerald-300" data-testid="issue-sourced">ze źródłem</span>}
-                        <IssueMeta item={i} />
-                        {i.Objawy && <p className="text-neutral-400 text-sm mb-2 break-words"><span className="text-silver-400">Objawy:</span> {i.Objawy}</p>}
-                        {i.Rozwiązanie && <><p className="mb-1 text-xs font-semibold uppercase tracking-wide text-neutral-500">Co zrobić</p><StepsText text={i.Rozwiązanie} /></>}
-                      </div>
-                    </div>
-                  );
-                })}
+                {filteredIssues.map((i, idx) => (
+                  <EntryTile key={i.id || idx} item={i} icon="usterki" image={getIssueImage(i.Nazwa)} excerpt={excerptOf(i, ['Objawy', 'Opis', 'Rozwiązanie'])} sourced={hasSource(i)} sourcedTestId="issue-sourced">
+                    <VehicleMatchBadge item={i} />
+                  </EntryTile>
+                ))}
               </div>
             
 
@@ -625,25 +592,12 @@ export default function Encyclopedia({ initialTab, initialItems }: { initialTab?
               Tylko procedury ze źródłami (instrukcje GM, biuletyny)
             </label>
             <p className="text-neutral-500 text-sm mb-4" role="status" data-testid="diy-count">Znaleziono: {diyTips.length}</p>
-            <div className="space-y-4">
-              {diyTips.map((t, idx) => {
-                const firstTipImageIndex = diyTips.findIndex(tip => getTipImage(tip.Nazwa));
-                const tipImg = getTipImage(t.Nazwa);
-                return (
-                  <div key={idx} className="bg-neutral-950 border border-white/10 overflow-hidden">
-                    {tipImg && <button type="button" aria-label="Powiększ ilustrację" className="block w-full rounded focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-silver-500" onClick={() => setLightbox(tipImg)}><DiagramImage src={tipImg} alt={`Ilustracja poglądowa: ${t.Nazwa}`} priority={idx === firstTipImageIndex} /></button>}
-                    <div className="p-4">
-                      <h3 className="font-semibold mb-2">{t.Nazwa}</h3>
-                      {(() => { const body = bodyForEntry(t); return body ? <div className="mb-2"><ModelThumb body={body} /></div> : null; })()}
-                      <VehicleMatchBadge item={t} />
-                      {hasSource(t) && <span className="mb-2 inline-block border border-emerald-500/40 px-2 py-0.5 text-xs text-emerald-300" data-testid="diy-sourced">ze źródłem</span>}
-                      <IssueMeta item={t} label="Opis i źródła" />
-                      {t.Rozwiązanie && <><p className="mb-1 text-xs font-semibold uppercase tracking-wide text-neutral-500">Instrukcja</p><StepsText text={t.Rozwiązanie} /></>}
-                      {t.id && <a className="mt-2 inline-flex min-h-11 items-center text-sm text-silver-400 underline" href={'/baza/' + encodeURIComponent(t.id)}>Otwórz pełną instrukcję z ilustracjami</a>}
-                    </div>
-                  </div>
-                );
-              })}
+            <div className="space-y-3">
+              {diyTips.map((t, idx) => (
+                <EntryTile key={t.id || idx} item={t} icon="diy" image={getTipImage(t.Nazwa)} excerpt={excerptOf(t, ['Opis', 'Rozwiązanie'])} sourced={hasSource(t)} sourcedTestId="diy-sourced">
+                  <VehicleMatchBadge item={t} />
+                </EntryTile>
+              ))}
             </div>
           </div>
         )}
