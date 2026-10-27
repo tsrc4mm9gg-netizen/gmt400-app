@@ -62,7 +62,7 @@ export default async function ModelPage({ params }: Props) {
       <Breadcrumbs items={[{ href: '/modele', label: 'Modele' }, { label: body.name }]} />
 
       <header className="mt-3 overflow-hidden rounded-2xl border border-white/10 bg-neutral-950">
-        <div className="studio relative aspect-[16/9] w-full bg-neutral-900">
+        <div className="relative aspect-[16/9] w-full bg-neutral-900">
           <Image src={bodyImage(body)} alt={`${body.name} — zdjęcie poglądowe modelu GMT400`} fill priority sizes="(max-width: 1024px) 100vw, 1024px" className="object-cover" />
         </div>
         <div className="p-4 sm:p-6">
@@ -74,11 +74,6 @@ export default async function ModelPage({ params }: Props) {
           </div>
           {DESCRIPTIONS[body.id] && <p className="mt-4 max-w-3xl text-base leading-relaxed text-neutral-300">{DESCRIPTIONS[body.id]}</p>}
           <p className="mt-3 text-xs text-neutral-500">Zdjęcie poglądowe z katalogu modeli — kolor i wyposażenie mogą się różnić od Twojego auta.</p>
-          {body.credit && (
-            <p className="mt-1 text-xs text-neutral-500">
-              Zdjęcie: {body.credit.author}, {body.credit.license}, <a href={body.credit.sourceUrl} target="_blank" rel="noopener noreferrer" className="underline">Wikimedia Commons</a> ({body.credit.changes}).
-            </p>
-          )}
         </div>
       </header>
 

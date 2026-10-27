@@ -1,12 +1,20 @@
-# Zdjęcia karuzeli — źródła i licencje
+# Zdjęcia modeli i karuzeli — źródła i licencje
 
-Zdjęcia z Wikimedia Commons (wolne licencje). Z oryginałów usunięto tło modelem segmentacji (rembg/isnet), zmieniono kadr, obrazy złożono na białym tle 2000×1333 (CSS `.studio` robi z tego studyjne tło); w jednym zdjęciu (Tahoe 2-drzwi) ręcznie wymazano resztki otoczenia (samochód w tle). Poza kadrem/tłem/jasnością nie zmieniano pojazdu.
+**Pochodzenie i licencja zdjęć używanych na kartach i stronach modeli NIE są potwierdzone.**
 
-| Karta | Plik w repo | Autor | Licencja | Źródło (Commons) | Rozdzielczość oryginału |
-|---|---|---|---|---|---|
-| Tahoe 4-drzwi (1995–96) | public/carousel/tahoe-4d.webp | IFCAR | domena publiczna | https://commons.wikimedia.org/wiki/File:1st-Chevrolet-Tahoe-4door.jpg | 2099×1207 |
-| Tahoe / Blazer 2-drzwi (1997) | public/carousel/tahoe-2d.webp | Cutlass | CC0 1.0 | https://commons.wikimedia.org/wiki/File:1997_Chevrolet_Tahoe_2-door_in_Dark_Cherry_Metallic,_front_right,_2-19-2022.jpg | 3781×2328 |
-| Suburban (1997–99) | public/carousel/suburban.webp | IFCAR | domena publiczna | https://commons.wikimedia.org/wiki/File:Chevrolet-Suburban.jpg | 2408×1640 |
-| GMC Yukon 4-drzwi | public/carousel/yukon.webp | IFCAR | domena publiczna | https://commons.wikimedia.org/wiki/File:1st-GMC-Yukon-4door.jpg | 1726×918 |
+Dotyczy to wszystkich kart, w tym SUV-ów przywróconych 27.10.2026 po wycofaniu zdjęć z Wikimedia Commons:
 
-Pozostałe karty (C/K Regular/Extended Cab, K1500, Sierra, C/K 3500 Dually) używają dotychczasowych zdjęć z `public/` — ich pochodzenie i licencja nie są potwierdzone.
+| Karta | Plik w `public/` |
+|---|---|
+| Tahoe 4-drzwi | `carousel-tahoe-gold.jpg` |
+| Tahoe / Blazer 2-drzwi | `tahoe-2d-red.jpg` |
+| Suburban | `carousel-suburban-navy.jpg` |
+| GMC Yukon | `yukon-white.jpg` |
+| C/K Regular Cab, C/K Extended Cab, K1500 4x4, GMC Sierra, C/K 3500 Dually | `ck-reg.jpg`, `ck-ext.jpg`, `k1500-black.jpg`, `sierra-burgundy.jpg`, `ck-3500-dually.jpg` |
+
+Autor, źródło i licencja tych plików nie są udokumentowane. Zanim strona zostanie promowana szerzej, należy je zastąpić zdjęciami o potwierdzonej wolnej licencji (np. Wikimedia Commons, z atrybucją) lub własnymi.
+
+## Historia
+
+- Commit 195fa40 (27.10.2026) zamienił zdjęcia kart SUV na wycięte zdjęcia z Wikimedia Commons (IFCAR — domena publiczna, Cutlass — CC0) wraz ze stopkami atrybucji.
+- Na prośbę właściciela strony stare zdjęcia SUV zostały przywrócone, a pliki z Commons i stopki atrybucji usunięto. Pliki z Commons nadal są dostępne w historii git (commit 195fa40).
