@@ -35,10 +35,11 @@ for (const width of [390, 768, 1280]) {
       expect(box.x + box.width).toBeLessThanOrEqual(width + 1);
       expect(await tile.getAttribute('href')).toMatch(/^\/diagnoza\?objaw=[a-z-]+(&[a-z]+=[a-z0-9-]+)*$/);
     }
-    // kolejność: właściciel → problemy → wyszukiwarka/modele
+    // kolejność: karuzela modeli → właściciel → problemy → wyszukiwarka
     const y = async sel => (await page.locator(sel).first().boundingBox()).y;
     expect(await y('[data-testid=owner-essentials]')).toBeLessThan(await y('[data-testid=home-problems]'));
-    expect(await y('[data-testid=home-problems]')).toBeLessThan(await y('h2:has-text("Wybierz model")'));
+    expect(await y('h2:has-text("Wybierz model")')).toBeLessThan(await y('[data-testid=owner-essentials]'));
+    expect(await y('[data-testid=home-problems]')).toBeLessThan(await y('#home-search'));
     await noHorizontalScroll(page);
     expect(errors).toEqual([]);
   });

@@ -73,9 +73,9 @@ export default function ModelHero() {
 
   return (
     <section className="mx-auto w-full max-w-3xl px-4 pt-2 pb-2" aria-label="Wybór modelu">
-      <div className="mb-3">
-        <h2 className="text-xl font-bold text-white">Wybierz model</h2>
-        <p className="text-xs text-neutral-400">Przesuń lub użyj strzałek — wybór zawęża usterki, DIY i kody do Twojego nadwozia.</p>
+      <div className="mb-2">
+        <h2 className="text-lg font-bold text-white" style={{ margin: 0, fontSize: '1.125rem' }}>Wybierz model</h2>
+        <p className="text-xs text-neutral-400">Przesuń lub użyj strzałek — wybór zawęża usterki, DIY i kody.</p>
       </div>
 
       <div

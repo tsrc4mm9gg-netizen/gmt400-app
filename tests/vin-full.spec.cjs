@@ -229,10 +229,13 @@ test('/vin: wklejanie, RPO od razu i zapis VIN + RPO w Mój samochód', async ({
 test('VIN łatwo znaleźć: wejście na stronie głównej i w menu', async ({ page }) => {
   const { errors } = await guard(page);
   await page.goto(BASE + '/');
-  const cta = page.getByTestId('home-vin-cta');
+  // skrót „Sprawdź VIN” tuż pod karuzelą jest nad zgięciem; pełny dekoder (pole + przycisk) leży niżej
+  const cta = page.getByTestId('home-quick-vin');
   await expect(cta).toBeVisible();
   const box = await cta.boundingBox();
-  expect(box.y + box.height).toBeLessThanOrEqual(page.viewportSize().height);
+  if (page.viewportSize().width <= 500) expect(box.y + box.height).toBeLessThanOrEqual(page.viewportSize().height - 20);
+  await expect(page.getByTestId('home-vin-cta')).toBeVisible();
+  await hydrated(page.getByTestId('home-vin-cta'));
   await cta.click();
   await expect(page).toHaveURL(/\/vin$/);
   const nav = page.getByRole('navigation', { name: 'Nawigacja główna' });

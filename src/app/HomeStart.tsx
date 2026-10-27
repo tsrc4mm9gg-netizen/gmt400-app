@@ -1,11 +1,9 @@
 'use client';
 
 import { useState } from 'react';
-import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { IconTile } from './ui/CategoryIcon';
 
-/** Zwarty początek strony głównej: VIN (pole + przycisk), potem Usterki i DIY. */
+/** Pełny dekoder VIN na stronie głównej (pod karuzelą modeli; skrót do niego jest w HomeQuickLinks). */
 export default function HomeStart() {
   const router = useRouter();
   const [vin, setVin] = useState('');
@@ -24,14 +22,8 @@ export default function HomeStart() {
   };
 
   return (
-    <section aria-labelledby="home-title" className="px-4 pt-5">
-      <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-silver-300">Encyklopedia · Chevrolet / GMC 1988–2000</p>
-      <h1 id="home-title" className="mt-1 text-3xl font-bold leading-tight tracking-wide text-white">
-        GMT<span className="text-silver-600">400</span>
-        <span className="mt-1 block text-base font-medium tracking-normal text-neutral-300">Tahoe, Suburban, Silverado, Sierra, Yukon, Blazer — usterki, DIY i poradniki po polsku</span>
-      </h1>
-
-      <form onSubmit={submit} data-testid="home-vin-form" className="mt-4 rounded-2xl border-2 border-silver-600/70 bg-gradient-to-b from-silver-950/50 to-neutral-950 p-4">
+    <section aria-label="Sprawdź VIN" className="px-4 pt-2">
+      <form onSubmit={submit} data-testid="home-vin-form" className="rounded-2xl border-2 border-silver-600/70 bg-gradient-to-b from-silver-950/50 to-neutral-950 p-4">
         <label htmlFor="home-vin-input" className="block text-lg font-bold text-white">Sprawdź swój VIN</label>
         <p className="mt-0.5 text-xs text-neutral-300">Rocznik, silnik, nadwozie i fabryka z 17 znaków — plus kody RPO.</p>
         <input
@@ -57,33 +49,6 @@ export default function HomeStart() {
           Dekoduj VIN <span aria-hidden="true" className="ml-2">›</span>
         </button>
       </form>
-
-      <ul className="mt-3 grid grid-cols-2 gap-3" data-testid="home-main-entries">
-        <li className="col-span-2">
-          <Link href="/diagnoza" data-testid="home-diagnoza" className="group flex min-h-14 items-center gap-3 rounded-3xl border-2 border-silver-600/70 bg-gradient-to-b from-silver-950/50 to-neutral-950 p-2.5 transition hover:border-silver-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-silver-500">
-            <IconTile name="diagnoza" />
-            <span className="min-w-0 flex-1">
-              <span className="block text-lg font-bold leading-tight text-white">Co się dzieje z moim autem?</span>
-              <span className="mt-0.5 block text-xs text-neutral-300">Objaw → 1–2 pytania → przyczyny</span>
-            </span>
-            <span aria-hidden="true" className="text-xl text-silver-300">›</span>
-          </Link>
-        </li>
-        <li>
-          <Link href="/usterki" className="group flex h-full min-h-28 flex-col rounded-3xl border border-white/15 bg-neutral-900 p-4 transition hover:border-silver-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-silver-500">
-            <IconTile name="usterki" />
-            <span className="mt-3 text-lg font-bold text-white">Usterki</span>
-            <span className="mt-0.5 text-xs text-neutral-300">Objawy i diagnostyka: skrzynia, silnik, ABS, zawieszenie</span>
-          </Link>
-        </li>
-        <li>
-          <Link href="/diy" className="group flex h-full min-h-28 flex-col rounded-3xl border border-white/15 bg-neutral-900 p-4 transition hover:border-silver-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-silver-500">
-            <IconTile name="diy" />
-            <span className="mt-3 text-lg font-bold text-white">DIY</span>
-            <span className="mt-0.5 text-xs text-neutral-300">Naprawy krok po kroku z numerami części i momentami</span>
-          </Link>
-        </li>
-      </ul>
     </section>
   );
 }

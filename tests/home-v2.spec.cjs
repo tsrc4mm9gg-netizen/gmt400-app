@@ -1,4 +1,4 @@
-// Strona główna v2: VIN → usterki/DIY → poradniki PL (kolejność, widoczność na 390 px), VIN z adresu, hasła w /szukaj, JSON-LD.
+// Strona główna v2: karuzela modeli na górze → skróty → VIN → poradniki PL (kolejność, widoczność nad zgięciem), VIN z adresu, hasła w /szukaj, JSON-LD.
 const { test, expect } = require('@playwright/test');
 const path = require('node:path');
 const BASE = process.env.UX_BASE || 'http://127.0.0.1:3100';
@@ -12,41 +12,47 @@ async function setup(page) {
 }
 const noHorizontalScroll = async page => expect(await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth)).toBeLessThanOrEqual(1);
 
-test('home: jeden H1, kolejność VIN → usterki/DIY → poradniki PL → szukaj → modele', async ({ page }) => {
+test('home: jeden H1, kolejność karuzela modeli → skróty (VIN/diagnoza/usterki/DIY) → dekoder VIN → poradniki PL → szukaj', async ({ page }) => {
   const errors = await setup(page);
   await page.goto(BASE + '/');
   await expect(page.locator('h1')).toHaveCount(1);
   await expect(page.locator('h1')).toContainText('GMT400');
   await expect(page.locator('h1')).toContainText('Tahoe');
   const y = async sel => (await page.locator(sel).first().boundingBox()).y;
+  const carousel = await y('[data-testid=model-carousel]');
+  const quick = await y('[data-testid=home-main-entries]');
   const vin = await y('[data-testid=home-vin-form]');
-  const entries = await y('[data-testid=home-main-entries]');
   const owner = await y('[data-testid=owner-essentials]');
-  expect(vin).toBeLessThan(entries);
-  expect(entries).toBeLessThan(owner);
-  expect(owner).toBeLessThan(await y('h2:has-text("Wybierz model")'));
+  // karuzela jest pierwszym elementem głównym: przed nią tylko zwarty nagłówek H1
+  expect(await y('h1')).toBeLessThan(carousel);
+  expect(await y('main h2, [aria-label="Wybór modelu"] h2')).toBeLessThan(carousel);
+  expect(carousel).toBeLessThan(quick);
+  expect(quick).toBeLessThan(vin);
+  expect(vin).toBeLessThan(owner);
+  expect(owner).toBeLessThan(await y('[data-testid=home-problems]'));
+  expect(await y('[data-testid=home-problems]')).toBeLessThan(await y('#home-search'));
   await noHorizontalScroll(page);
   expect(errors).toEqual([]);
 });
 
-test('home: VIN, Usterki i DIY widoczne bez przewijania (viewport telefonu), cele dotyku ≥ 44 px', async ({ page }) => {
+test('home: karuzela modeli widoczna bez przewijania, skróty VIN/Diagnoza/Usterki/DIY tuż pod nią (cele dotyku ≥ 44 px)', async ({ page }) => {
   await setup(page);
   await page.goto(BASE + '/');
-  const h = page.viewportSize().height;
-  if (page.viewportSize().width > 500) test.skip(true, 'sprawdzenie „nad zgięciem” dotyczy telefonu');
-  for (const id of ['home-vin-cta']) {
-    const b = await page.getByTestId(id).boundingBox();
-    expect(b.y + b.height, id).toBeLessThanOrEqual(h);
-    expect(b.height).toBeGreaterThanOrEqual(44);
-  }
+  const { width, height: h } = page.viewportSize();
+  const c = await page.getByTestId('model-carousel').boundingBox();
+  // zdjęcie (16:9) całe nad zgięciem — z zapasem ≥ 20 px na różnice fontów w CI
+  expect(c.y + c.width * 9 / 16, 'zdjęcie karuzeli kończy się nad zgięciem').toBeLessThanOrEqual(h - 20);
+  expect(c.y, 'karuzela zaczyna się wysoko').toBeLessThan(h * 0.45);
   const list = page.getByTestId('home-main-entries');
-  for (const name of ['Usterki', 'DIY']) {
+  for (const name of ['Sprawdź VIN', 'Diagnoza', 'Usterki', 'DIY']) {
     const b = await list.getByRole('link', { name: new RegExp('^' + name) }).boundingBox();
-    expect(b.y + b.height, name).toBeLessThanOrEqual(h);
-    expect(b.height).toBeGreaterThanOrEqual(44);
+    expect(b.height, name).toBeGreaterThanOrEqual(44);
+    expect(b.width, name).toBeGreaterThanOrEqual(44);
+    if (width <= 500) expect(b.y + b.height, name + ' nad zgięciem na telefonie').toBeLessThanOrEqual(h - 20);
   }
-  // początek sekcji „Najważniejsze dla właściciela w PL” jest już widoczny tuż pod spodem
-  expect((await page.getByTestId('owner-essentials').boundingBox()).y).toBeLessThan(h);
+  // skróty są małe — karuzela pozostaje dominująca
+  const l = await list.boundingBox();
+  expect(l.height).toBeLessThan(c.height / 2);
 });
 
 test('home: VIN ze spacjami i myślnikami przechodzi na /vin?vin=… i od razu się dekoduje', async ({ page }) => {

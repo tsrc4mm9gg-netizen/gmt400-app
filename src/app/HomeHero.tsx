@@ -4,6 +4,8 @@ import ModelHero from './ModelHero';
 import CategoryGrid from './CategoryGrid';
 import HomeSearch from './HomeSearch';
 import HomeStart from './HomeStart';
+import HomeIntro from './HomeIntro';
+import HomeQuickLinks from './HomeQuickLinks';
 import OwnerEssentials from './OwnerEssentials';
 import HomeProblems from './HomeProblems';
 import { useModelSelection } from './ModelSelectionContext';
@@ -15,10 +17,7 @@ export default function HomeHero() {
 
   return (
     <div className="mx-auto w-full max-w-3xl">
-      <HomeStart />
-      <OwnerEssentials />
-      <HomeProblems />
-      <HomeSearch />
+      <HomeIntro />
       <ModelHero />
       {body && (
         <div data-testid="active-filters" role="region" aria-label="Aktywne filtry" className="mx-4 mb-3 rounded-lg border border-silver-600/30 bg-silver-950/30 px-3 py-2 text-sm text-neutral-300">
@@ -40,6 +39,11 @@ export default function HomeHero() {
           </div>
         </div>
       )}
+      <HomeQuickLinks />
+      <div className="pt-4"><HomeStart /></div>
+      <OwnerEssentials />
+      <HomeProblems />
+      <div className="pt-1"><HomeSearch /></div>
       <CategoryGrid />
     </div>
   );
