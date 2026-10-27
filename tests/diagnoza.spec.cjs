@@ -191,3 +191,54 @@ test('strona główna: wyraźny kafel „Co się dzieje z moim autem?” prowadz
   await expect(page.getByTestId('symptom-picker')).toBeVisible();
   await noHorizontalScroll(page);
 });
+
+test('/diagnoza: „karta kroku” — przyczyna rozwija się po kliknięciu, 2–4 kroki z wpisu, link do pełnego wpisu', async ({ page }) => {
+  const errors = await guard(page);
+  await open(page, '?objaw=klima-ogrzewanie');
+  const cards = page.getByTestId('cause-list').locator('> li');
+  const count = await cards.count();
+  expect(count).toBeGreaterThanOrEqual(3);
+  await expect(cards.first().locator('details[data-testid=cause-card]')).toHaveJSProperty('open', true); // tylko pierwsza otwarta
+  await expect(cards.nth(1).locator('details[data-testid=cause-card]')).toHaveJSProperty('open', false);
+  // znajdź przyczynę z krokami; zamknięta przyczyna ukrywa kroki, kliknięcie je pokazuje
+  let target = -1;
+  for (let i = 1; i < count && target < 0; i++) if (await cards.nth(i).getByTestId('step-list').count()) target = i;
+  expect(target, 'klima/ogrzewanie powinno mieć co najmniej jedną przyczynę z krokami z wpisu').toBeGreaterThan(0);
+  const card = cards.nth(target);
+  await expect(card.getByTestId('step-list').first()).toBeHidden();
+  await card.getByTestId('cause-toggle').click();
+  const list = card.getByTestId('step-list').first();
+  await expect(list).toBeVisible();
+  const n = await list.locator('ol > li').count();
+  expect(n).toBeGreaterThanOrEqual(2);
+  expect(n).toBeLessThanOrEqual(4);
+  for (const text of await list.locator('ol > li').allInnerTexts()) { expect(text.trim().length).toBeGreaterThan(7); expect(text.length).toBeLessThanOrEqual(140); }
+  const full = list.getByTestId('step-full-link');
+  await expect(full).toContainText('Pełny wpis');
+  expect(await full.getAttribute('href')).toMatch(/^\/baza\/[0-9a-f-]{36}$/);
+  await noHorizontalScroll(page);
+  await card.getByTestId('cause-toggle').click();
+  await expect(list).toBeHidden();
+  // wpis bez ponumerowanych kroków pokazuje tylko link (bez wymyślonych kroków)
+  const linkCount = await page.getByTestId('cause-link').count();
+  const stepBlocks = await page.getByTestId('step-list').count();
+  expect(linkCount).toBeGreaterThan(stepBlocks);
+  expect(errors).toEqual([]);
+});
+
+test('/diagnoza: karta kroku po zmianie odpowiedzi — otwarta jest tylko najlepsza przyczyna, a zwijanie nie psuje układu (390/768/1280)', async ({ page }) => {
+  const errors = await guard(page);
+  for (const width of [390, 768, 1280]) {
+    await page.setViewportSize({ width, height: 900 });
+    await open(page, '?objaw=skrzynia&typ=automat&rodzaj=slizga');
+    await expect(page.getByTestId('cause-list').locator('> li').first()).toBeVisible();
+    const open1 = await page.locator('details[data-testid=cause-card][open]').count();
+    expect(open1).toBe(1);
+    await page.getByTestId('cause-toggle').nth(1).click();
+    await expect(page.locator('details[data-testid=cause-card][open]')).toHaveCount(2);
+    await noHorizontalScroll(page);
+    const boxes = await page.getByTestId('cause-list').locator('> li').evaluateAll(els => els.map(e => { const r = e.getBoundingClientRect(); return [r.left, r.right]; }));
+    for (const [l, r] of boxes) { expect(l).toBeGreaterThanOrEqual(0); expect(r).toBeLessThanOrEqual(width + 1); }
+  }
+  expect(errors).toEqual([]);
+});

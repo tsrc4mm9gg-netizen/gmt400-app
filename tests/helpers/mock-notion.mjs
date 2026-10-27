@@ -10,7 +10,8 @@ const ms = list => ({ multi_select: (list || []).map(name => ({ name })) });
 const page = e => ({ id: e.id, properties: {
   Nazwa: { title: [{ plain_text: e.Nazwa }] }, Typ: { select: e.Typ ? { name: e.Typ } : null }, Model: { select: e.Model ? { name: e.Model } : null },
   Modele: ms(e.Modele), Opis: rt(e.Opis), Objawy: rt(e.Objawy), 'Rozwiązanie': rt(e['Rozwiązanie']), Lata: rt(e.Lata),
-  Marka: ms(e.applicability?.brand), Silnik: ms(e.applicability?.engine), 'Napęd': ms(e.applicability?.drive), Skrzynia: ms(e.applicability?.transmission) } });
+  Marka: ms(e.applicability?.brand), Silnik: ms(e.applicability?.engine), 'Napęd': ms(e.applicability?.drive), Skrzynia: ms(e.applicability?.transmission),
+  ...(e['Trudność'] ? { 'Trudność': { select: { name: e['Trudność'] } } } : {}), ...(e.Czas ? { Czas: rt(e.Czas) } : {}) } });
 http.createServer((req, res) => {
   let body = '';
   req.on('data', chunk => body += chunk);

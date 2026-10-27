@@ -17,6 +17,7 @@ import BackLink from '../../ui/BackLink';
 import { SCHEMATICS } from '../../../lib/schematics';
 import { getEntryMedia } from '../../../lib/entry-media';
 import EntryFigure from './EntryFigure';
+import EntryHeaderMeta from './EntryHeaderMeta';
 
 const SECTION_OF: Record<string, Crumb> = {
   'Usterka': { href: '/usterki', label: 'Usterki' },
@@ -59,7 +60,7 @@ const readEntry = cache(async (id: string) => {
   return {
     unavailable: false as const,
     id: page.id as string, Nazwa: text(p.Nazwa) || 'Materiał bez tytułu', Typ: p.Typ?.select?.name || '', Model: values(p.Model).join(', '), Modele: modele, Lata: values(p.Lata).join('; '),
-    Opis: text(p.Opis), Objawy: text(p.Objawy), Rozwiązanie: text(p['Rozwiązanie']), edited: typeof page.last_edited_time === 'string' ? page.last_edited_time.slice(0, 10) : '',
+    Opis: text(p.Opis), Objawy: text(p.Objawy), Rozwiązanie: text(p['Rozwiązanie']), Trudność: values(p['Trudność']).join(', '), Czas: text(p.Czas) || values(p.Czas).join(', '), edited: typeof page.last_edited_time === 'string' ? page.last_edited_time.slice(0, 10) : '',
     applicability: { brand: values(p.Marka), model: values(p.Model), years: values(p.Lata), engine: values(p.Silnik), drive: values(p['Napęd']), transmission: values(p.Skrzynia) },
   };
 });
@@ -159,6 +160,7 @@ export default async function KnowledgeEntry({ params }: Props) {
         {(entry.Modele.length ? entry.Modele.join(', ') : entry.Model) && <span className="rounded-full border border-white/20 bg-white/5 px-3 py-1 text-xs text-neutral-200">Model: {entry.Modele.length ? entry.Modele.map(m => m === 'Wszystkie' ? 'Wszystkie GMT400' : m).join(', ') : entry.Model}</span>}
         {entry.Lata && <span className="rounded-full border border-white/20 bg-white/5 px-3 py-1 text-xs text-neutral-200">Lata: {entry.Lata}</span>}
       </div>
+      <EntryHeaderMeta edited={entry.edited} difficulty={entry.Trudność} time={entry.Czas} texts={[entry.Rozwiązanie, entry.Opis]} />
       {body && <div className="flex flex-wrap items-center gap-3"><ModelThumb body={body} size="md" /><span className="text-xs text-neutral-500">Zdjęcie poglądowe modelu z katalogu</span></div>}
       <h1 className="text-3xl text-silver-400">{entry.Nazwa}</h1>
       {materialLead && <p className="text-lg leading-relaxed text-neutral-200">{materialLead}</p>}
@@ -176,7 +178,6 @@ export default async function KnowledgeEntry({ params }: Props) {
       {diagram && <figure><a href={diagram} target="_blank" rel="noopener noreferrer"><img src={diagram} alt="Grafika pomocnicza z biblioteki GMT400" loading="lazy" className="h-auto w-full rounded object-contain" /></a><figcaption className="mt-2 text-xs text-neutral-400">Grafika pomocnicza z biblioteki aplikacji, nie ilustracja przypisana w Notion do tego wpisu. Sprawdź jej zgodność z konkretnym pojazdem i procedurą.</figcaption></figure>}
       {(() => { const sch = relatedSchematics(entry.Nazwa, media?.schematics); return sch.length > 0 && <aside aria-label="Powiązane schematy" className="rounded-xl border border-silver-600/40 bg-neutral-950 p-4"><h2 className="text-lg font-semibold text-white">Schemat do tego tematu</h2><ul className="mt-2 space-y-2">{sch.map(s => <li key={s.id}><a href={`/schematy#${s.id}`} className="flex min-h-11 items-center justify-between gap-3 rounded-lg border border-white/10 px-3 py-2 text-neutral-100 hover:border-silver-600">{s.title}<span aria-hidden="true" className="text-silver-400">→</span></a></li>)}</ul><p className="mt-2 text-xs text-neutral-400">Schematy mają podany model i lata — sprawdź w swoim aucie / manualu.</p></aside>; })()}
       {!contentError && !entry.Opis && !entry.Objawy && !entry.Rozwiązanie && !blocks.length && <p>Ten wpis nie zawiera jeszcze szczegółowej treści.</p>}
-      {entry.edited && <p className="text-xs text-neutral-500">Ostatnia edycja wpisu w Notion: {entry.edited}. To nie jest data weryfikacji merytorycznej.</p>}
     </article>
     <RelatedMaterialSuggestions key={entry.id} current={entry} />
   </div>;

@@ -1,8 +1,9 @@
 import { excerptOf, modelLabel, yearsLabel } from './entry-tile';
 import { allNotionIds } from './diagnosis';
+import { extractSteps } from './diagnosis-steps';
 
 /** Dane wpisu potrzebne kafelkowi w narzędziu — mały obiekt, żeby nie przesyłać całych opisów. */
-export type EntryMeta = { type: string; title: string; models: string; years: string; excerpt: string };
+export type EntryMeta = { type: string; title: string; models: string; years: string; excerpt: string; steps?: string[]; tools?: string };
 export type MetaMap = Record<string, EntryMeta>;
 
 type EntryLike = { id: string; Nazwa: string; Typ: string; Opis?: string; Objawy?: string; Rozwiązanie?: string; Model?: string; Modele?: string[]; Lata?: string };
@@ -18,12 +19,15 @@ export function buildMeta(entries: EntryLike[]): MetaMap {
   const meta: MetaMap = {};
   for (const entry of entries) {
     if (!wanted.has(entry.id)) continue;
+    const { steps, tools } = extractSteps(entry.Rozwiązanie);
     meta[entry.id] = {
       type: entry.Typ,
       title: entry.Nazwa.replace(/\s+/g, ' ').trim(),
       models: modelLabel(entry),
       years: shortYears(yearsLabel(entry.Lata)),
       excerpt: excerptOf(entry, ['Objawy', 'Opis'], 150),
+      ...(steps.length ? { steps } : {}),
+      ...(steps.length && tools ? { tools } : {}),
     };
   }
   return meta;

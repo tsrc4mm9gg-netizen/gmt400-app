@@ -28,7 +28,7 @@ function urlFor(symptomId: string | null, answers: Answers): string {
   return `${PATH}?${params.toString()}`;
 }
 
-function LinkRow({ link, meta, metaState }: { link: DiagLink; meta: MetaMap | null; metaState: 'ok' | 'loading' | 'error' }) {
+function LinkRow({ link, meta, metaState, withSteps = false }: { link: DiagLink; meta: MetaMap | null; metaState: 'ok' | 'loading' | 'error'; withSteps?: boolean }) {
   const base = 'group flex min-h-11 flex-col justify-center rounded-xl border border-white/12 bg-neutral-950/70 px-3 py-2 transition hover:border-silver-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-silver-500';
   if ('href' in link) {
     return (
@@ -42,8 +42,9 @@ function LinkRow({ link, meta, metaState }: { link: DiagLink; meta: MetaMap | nu
   }
   const entry: EntryMeta | undefined = meta?.[link.id];
   if (entry) {
+    const steps = withSteps ? entry.steps ?? [] : [];
     return (
-      <li style={{ maxWidth: 'none' }}>
+      <li style={{ maxWidth: 'none' }} className={steps.length ? 'sm:col-span-2' : undefined} data-testid={steps.length ? 'step-card' : undefined}>
         <Link href={`/baza/${link.id}`} data-testid="cause-link" className={base}>
           <span className="text-[11px] font-semibold uppercase tracking-wider text-silver-300">{TYPE_LABEL[entry.type] ?? entry.type}</span>
           <span className="text-sm font-semibold leading-snug text-white [overflow-wrap:anywhere]">{entry.title}</span>
@@ -52,6 +53,21 @@ function LinkRow({ link, meta, metaState }: { link: DiagLink; meta: MetaMap | nu
             {entry.years && <span className="rounded-full border border-white/15 px-2 py-0.5">Lata: {entry.years}</span>}
           </span>
         </Link>
+        {steps.length > 0 && (
+          <div className="mt-2 rounded-xl border border-white/10 bg-black/30 p-3" data-testid="step-list">
+            <p className="!m-0 text-[11px] font-semibold uppercase tracking-wider text-silver-300">Kroki kontroli — skrót z wpisu</p>
+            <ol className="mt-2 list-none space-y-1.5 !p-0">
+              {steps.map((step, i) => (
+                <li key={i} style={{ maxWidth: 'none' }} className="flex gap-2 text-sm leading-snug text-neutral-100">
+                  <span aria-hidden="true" className="mt-0.5 inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full border border-silver-500/60 text-[11px] font-bold text-silver-200">{i + 1}</span>
+                  <span className="min-w-0 [overflow-wrap:anywhere]">{step}</span>
+                </li>
+              ))}
+            </ol>
+            {entry.tools && <p className="mt-2 !mb-0 text-xs leading-relaxed text-neutral-300" data-testid="step-tools"><span className="font-semibold text-silver-200">Narzędzia wg wpisu:</span> {entry.tools}</p>}
+            <Link href={`/baza/${link.id}`} data-testid="step-full-link" className="mt-2 inline-flex min-h-11 items-center rounded-xl border border-white/15 px-3 text-sm font-semibold text-silver-100 hover:border-silver-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-silver-500">Pełny wpis i procedura →</Link>
+          </div>
+        )}
       </li>
     );
   }
@@ -62,44 +78,56 @@ function LinkRow({ link, meta, metaState }: { link: DiagLink; meta: MetaMap | nu
 
 function CauseCard({ cause, rank, matched, meta, metaState }: { cause: Cause; rank: number; matched: string[]; meta: MetaMap | null; metaState: 'ok' | 'loading' | 'error' }) {
   const firstExcerpt = cause.links.map(l => ('id' in l ? meta?.[l.id]?.excerpt : undefined)).find(Boolean);
-  const rows = cause.links.map((link, i) => <LinkRow key={i} link={link} meta={meta} metaState={metaState} />);
+  // Kroki pokazujemy dla maks. dwóch wpisów przyczyny (pierwszych, które mają jawnie ponumerowane kroki) — reszta to zwykłe linki.
+  const stepIds = new Set(cause.links.flatMap(l => ('id' in l && meta?.[l.id]?.steps?.length ? [l.id] : [])).slice(0, 2));
+  const rows = cause.links.map((link, i) => <LinkRow key={i} link={link} meta={meta} metaState={metaState} withSteps={'id' in link && stepIds.has(link.id)} />);
   const visible = cause.links.filter(l => 'href' in l || metaState !== 'ok' || meta?.[l.id]);
-  const extra = Math.max(visible.length - 2, 0);
   const shown: typeof rows = [];
   const hidden: typeof rows = [];
   let count = 0;
   cause.links.forEach((l, i) => {
     if (!('href' in l) && metaState === 'ok' && !meta?.[l.id]) return;
-    (count++ < 2 ? shown : hidden).push(rows[i]);
+    const isStep = 'id' in l && stepIds.has(l.id);
+    (isStep || count++ < 2 ? shown : hidden).push(rows[i]);
   });
+  const stepCount = stepIds.size;
   return (
-    <li data-testid={`cause-${cause.id}`} style={{ maxWidth: 'none' }} className=" rounded-3xl border border-white/15 bg-neutral-900 p-4">
-      <div className="flex items-start gap-3">
-        <span aria-hidden="true" className="icon-tile !h-9 !w-9 !rounded-xl text-sm font-bold">{rank}</span>
-        <div className="min-w-0 flex-1">
-          <h3 className="!m-0 text-base font-bold leading-snug text-white">{cause.title}</h3>
-          {matched.length > 0 && (
-            <p className="mt-1 flex flex-wrap gap-1.5 text-[11px]" data-testid="cause-match">
-              {matched.map(label => <span key={label} className="rounded-full border border-silver-500/60 bg-white/5 px-2 py-0.5 font-semibold text-silver-200">Pasuje: {label}</span>)}
-            </p>
+    <li data-testid={`cause-${cause.id}`} style={{ maxWidth: 'none' }} className="rounded-3xl border border-white/15 bg-neutral-900">
+      <details className="group" open={rank === 1} data-testid="cause-card">
+        <summary data-testid="cause-toggle" className="flex min-h-14 cursor-pointer list-none items-start gap-3 rounded-3xl p-4 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-silver-500 [&::-webkit-details-marker]:hidden">
+          <span aria-hidden="true" className="icon-tile !h-9 !w-9 !rounded-xl text-sm font-bold">{rank}</span>
+          <span className="min-w-0 flex-1">
+            <span className="block text-base font-bold leading-snug text-white">{cause.title}</span>
+            {matched.length > 0 && (
+              <span className="mt-1 flex flex-wrap gap-1.5 text-[11px]" data-testid="cause-match">
+                {matched.map(label => <span key={label} className="rounded-full border border-silver-500/60 bg-white/5 px-2 py-0.5 font-semibold text-silver-200">Pasuje: {label}</span>)}
+              </span>
+            )}
+            {firstExcerpt && <span className="mt-2 line-clamp-2 block text-xs leading-relaxed text-neutral-300 group-open:line-clamp-none">Wg wpisu: {firstExcerpt}</span>}
+            <span className="mt-2 block text-xs font-semibold text-silver-300">
+              <span className="group-open:hidden">Pokaż {stepCount > 0 ? 'kroki kontroli i wpisy' : 'wpisy'}</span>
+              <span className="hidden group-open:inline">Zwiń</span>
+            </span>
+          </span>
+          <svg aria-hidden="true" viewBox="0 0 24 24" className="mt-1.5 h-5 w-5 shrink-0 text-silver-300 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m6 9 6 6 6-6" /></svg>
+        </summary>
+        <div className="px-4 pb-4" data-testid="cause-body">
+          {visible.length > 0 ? (
+            <>
+              <ul className="grid gap-2 sm:grid-cols-2">{shown}</ul>
+              {hidden.length > 0 && (
+                <details className="mt-2">
+                  <summary className="flex min-h-11 cursor-pointer items-center rounded-xl border border-white/15 px-3 text-sm font-semibold text-silver-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-silver-500">Pokaż pozostałe wpisy ({hidden.length})</summary>
+                  <ul className="mt-2 grid gap-2 sm:grid-cols-2">{hidden}</ul>
+                </details>
+              )}
+            </>
+          ) : (
+            <p className="!mb-0 rounded-xl border border-dashed border-white/15 p-3 text-sm text-neutral-300">Wpisy dla tej przyczyny są chwilowo niedostępne w bazie.</p>
           )}
-          {firstExcerpt && <p className="mt-2 !mb-0 text-xs leading-relaxed text-neutral-300">Wg wpisu: {firstExcerpt}</p>}
+          <p className="mt-3 !mb-0 text-[11px] text-neutral-400">Kroki to dosłowny skrót numerowanej listy z wpisu — gdy wpis nie ma takiej listy, pokazujemy tylko link. Zakres modeli i roczników jest przy każdym wpisie — sprawdź w swoim aucie / manualu.</p>
         </div>
-      </div>
-      {visible.length > 0 ? (
-        <>
-          <ul className="mt-3 grid gap-2 sm:grid-cols-2">{shown}</ul>
-          {extra > 0 && (
-            <details className="mt-2">
-              <summary className="flex min-h-11 cursor-pointer items-center rounded-xl border border-white/15 px-3 text-sm font-semibold text-silver-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-silver-500">Pokaż pozostałe wpisy ({extra})</summary>
-              <ul className="mt-2 grid gap-2 sm:grid-cols-2">{hidden}</ul>
-            </details>
-          )}
-        </>
-      ) : (
-        <p className="mt-3 !mb-0 rounded-xl border border-dashed border-white/15 p-3 text-sm text-neutral-300">Wpisy dla tej przyczyny są chwilowo niedostępne w bazie.</p>
-      )}
-      <p className="mt-3 !mb-0 text-[11px] text-neutral-400">Zakres modeli i roczników jest przy każdym wpisie — sprawdź w swoim aucie / manualu.</p>
+      </details>
     </li>
   );
 }

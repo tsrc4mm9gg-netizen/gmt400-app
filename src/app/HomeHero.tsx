@@ -5,6 +5,7 @@ import CategoryGrid from './CategoryGrid';
 import HomeSearch from './HomeSearch';
 import HomeStart from './HomeStart';
 import OwnerEssentials from './OwnerEssentials';
+import HomeProblems from './HomeProblems';
 import { useModelSelection } from './ModelSelectionContext';
 import { findBody } from '../lib/body-styles';
 
@@ -16,6 +17,7 @@ export default function HomeHero() {
     <div className="mx-auto w-full max-w-3xl">
       <HomeStart />
       <OwnerEssentials />
+      <HomeProblems />
       <HomeSearch />
       <ModelHero />
       {body && (
