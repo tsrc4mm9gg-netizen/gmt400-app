@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Własny rysunek wektorowy gmt400.pl (bez grafik AI, bez kopiowania ilustracji Haynes/GM). Dane: źródła podane na rysunku. Rysunek poglądowy, nie w skali. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1184" width="900" height="1184" role="img" aria-label="Odpowietrzanie hamulców: kolejność kół">
+<title>Odpowietrzanie hamulców: kolejność kół</title>
+<defs><pattern id="g" width="30" height="30" patternUnits="userSpaceOnUse"><circle cx="15" cy="15" r="1.2" fill="#1f1f24"/></pattern></defs>
+<rect width="900" height="1184" fill="#0d0d0f"/>
+<rect width="900" height="1184" fill="url(#g)"/>
+<g font-family="DejaVu Sans, Arial, sans-serif">
+<rect x="0" y="0" width="900" height="8" fill="#a1a1aa"/>
+<text x="870" y="40" font-size="16" fill="#a3a3a3" text-anchor="end">gmt400.pl · schemat</text>
+<text x="30" y="76" font-size="29" fill="#f5f5f5" font-weight="bold">Odpowietrzanie hamulców: kolejność kół</text>
+<text x="30" y="112" font-size="20" fill="#d4d4d8">C/K, Suburban, Tahoe, Yukon — GMT400 1988–1998. Schemat poglądowy</text>
+<text x="30" y="139" font-size="20" fill="#d4d4d8">(widok z góry), własny, wg Haynes rozdz. 9 §15.</text>
+<line x1="30" y1="166" x2="870" y2="166" stroke="#3f3f46" stroke-width="2"/>
+<text x="450" y="226" font-size="15" fill="#a1a1aa" text-anchor="middle">↑ przód pojazdu</text>
+<rect x="330" y="246" width="240" height="430" rx="30" fill="#141417" stroke="#71717a" stroke-width="3"/>
+<rect x="360" y="266" width="180" height="90" rx="12" fill="#202024" stroke="#e4e4e7" stroke-width="3"/>
+<text x="450" y="306" font-size="15" fill="#f5f5f5" text-anchor="middle" font-weight="bold">pompa hamulcowa</text>
+<text x="450" y="328" font-size="14" fill="#a1a1aa" text-anchor="middle">+ serwo (przód)</text>
+<line x1="250" y1="336" x2="650" y2="336" stroke="#52525b" stroke-width="6"/>
+<line x1="250" y1="596" x2="650" y2="596" stroke="#52525b" stroke-width="6"/>
+<rect x="220" y="296" width="40" height="80" rx="8" fill="#27272a" stroke="#e4e4e7" stroke-width="3"/>
+<rect x="640" y="296" width="40" height="80" rx="8" fill="#27272a" stroke="#e4e4e7" stroke-width="3"/>
+<rect x="220" y="556" width="40" height="80" rx="8" fill="#27272a" stroke="#e4e4e7" stroke-width="3"/>
+<rect x="640" y="556" width="40" height="80" rx="8" fill="#27272a" stroke="#e4e4e7" stroke-width="3"/>
+<text x="240" y="286" font-size="14" fill="#a1a1aa" text-anchor="middle">lewy przód</text>
+<text x="660" y="286" font-size="14" fill="#a1a1aa" text-anchor="middle">prawy przód</text>
+<text x="240" y="656" font-size="14" fill="#a1a1aa" text-anchor="middle">lewy tył</text>
+<text x="660" y="656" font-size="14" fill="#a1a1aa" text-anchor="middle">prawy tył</text>
+<circle cx="700" cy="596" r="19" fill="#e4e4e7"/>
+<text x="700" y="604" font-size="24" fill="#0d0d0f" text-anchor="middle" font-weight="bold">1</text>
+<circle cx="180" cy="596" r="19" fill="#e4e4e7"/>
+<text x="180" y="604" font-size="24" fill="#0d0d0f" text-anchor="middle" font-weight="bold">2</text>
+<circle cx="700" cy="336" r="19" fill="#e4e4e7"/>
+<text x="700" y="344" font-size="24" fill="#0d0d0f" text-anchor="middle" font-weight="bold">3</text>
+<circle cx="180" cy="336" r="19" fill="#e4e4e7"/>
+<text x="180" y="344" font-size="24" fill="#0d0d0f" text-anchor="middle" font-weight="bold">4</text>
+<path d="M 650 656 L 650 696" stroke="none"/>
+<text x="450" y="526" font-size="20" fill="#f5f5f5" text-anchor="middle" font-weight="bold">kolejność: 1 → 2 → 3 → 4</text>
+<text x="450" y="556" font-size="15" fill="#a1a1aa" text-anchor="middle">(prawy tył, lewy tył,</text>
+<text x="450" y="576" font-size="15" fill="#a1a1aa" text-anchor="middle">prawy przód, lewy przód)</text>
+<rect x="30" y="706" width="840" height="35" rx="6" fill="#27272a" stroke="#52525b" stroke-width="1.5"/>
+<text x="40" y="731" font-size="15" fill="#e4e4e7" font-weight="bold">Krok</text>
+<text x="130" y="731" font-size="15" fill="#e4e4e7" font-weight="bold">Co robisz (Haynes §15)</text>
+<rect x="30" y="745" width="840" height="56" rx="6" fill="#18181b" stroke="#3f3f46" stroke-width="1.5"/>
+<text x="40" y="767" font-size="15" fill="#f5f5f5" font-weight="bold">1</text>
+<text x="130" y="767" font-size="15" fill="#d4d4d8">Pedał z silnikiem wyłączonym kilka razy — usuń podciśnienie/ciśnienie z serwa;</text>
+<text x="130" y="788" font-size="15" fill="#d4d4d8">uzupełnij płyn w zbiorniku i często kontroluj poziom</text>
+<rect x="30" y="805" width="840" height="56" rx="6" fill="#18181b" stroke="#3f3f46" stroke-width="1.5"/>
+<text x="40" y="827" font-size="15" fill="#f5f5f5" font-weight="bold">2</text>
+<text x="130" y="827" font-size="15" fill="#d4d4d8">Rurka ø ok. 4,8 mm (3/16 in) na odpowietrznik, drugi koniec zanurzony w płynie w</text>
+<text x="130" y="848" font-size="15" fill="#d4d4d8">przezroczystym naczyniu; odpowietrznik lekko poluzuj i dokręć „na lekko”</text>
+<rect x="30" y="865" width="840" height="56" rx="6" fill="#18181b" stroke="#3f3f46" stroke-width="1.5"/>
+<text x="40" y="887" font-size="15" fill="#f5f5f5" font-weight="bold">3</text>
+<text x="130" y="887" font-size="15" fill="#d4d4d8">Pomocnik pompuje pedał kilka razy i trzyma go wciśnięty; otwórz odpowietrznik na</text>
+<text x="130" y="908" font-size="15" fill="#d4d4d8">chwilę, aż przestaną wychodzić pęcherzyki; zamknij, dopiero potem pedał puszczony</text>
+<rect x="30" y="925" width="840" height="56" rx="6" fill="#18181b" stroke="#3f3f46" stroke-width="1.5"/>
+<text x="40" y="947" font-size="15" fill="#f5f5f5" font-weight="bold">4</text>
+<text x="130" y="947" font-size="15" fill="#d4d4d8">Powtarzaj aż w rurce nie będzie powietrza; potem następne koło. Na koniec dolej</text>
+<text x="130" y="968" font-size="15" fill="#d4d4d8">płyn i sprawdź, czy pedał jest „twardy”</text>
+<rect x="30" y="997" width="840" height="87" rx="8" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<text x="44" y="1026" font-size="15" fill="#d4d4d8">Nigdy nie używaj starego płynu (zawiera wilgoć). Gdy wątpisz w skuteczność hamulców, nie</text>
+<text x="44" y="1047" font-size="15" fill="#d4d4d8">jedź. Sprawdź w swoim aucie / manualu, czy w Twoim roczniku nie ma dodatkowych wymagań dla</text>
+<text x="44" y="1068" font-size="15" fill="#d4d4d8">ABS.</text>
+<line x1="30" y1="1094" x2="870" y2="1094" stroke="#3f3f46" stroke-width="2"/>
+<text x="30" y="1122" font-size="17" fill="#a3a3a3">Źródło: Haynes, Chevrolet &amp; GMC Pick-ups 1988–1998, rozdz. 9 §15 (str. 9-18…9-19).</text>
+<text x="30" y="1146" font-size="17" fill="#a3a3a3">Rysunek własny, nie kopiuje ilustracji Haynes. Kolejność kół: wg Haynes.</text>
+</g>
+</svg>

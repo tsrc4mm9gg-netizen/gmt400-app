@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Własny rysunek wektorowy gmt400.pl (bez grafik AI, bez kopiowania ilustracji Haynes/GM). Dane: źródła podane na rysunku. Rysunek poglądowy, nie w skali. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1172" width="900" height="1172" role="img" aria-label="Ustawienie reflektorów na ścianie (metoda tymczasowa)">
+<title>Ustawienie reflektorów na ścianie (metoda tymczasowa)</title>
+<defs><pattern id="g" width="30" height="30" patternUnits="userSpaceOnUse"><circle cx="15" cy="15" r="1.2" fill="#1f1f24"/></pattern></defs>
+<rect width="900" height="1172" fill="#0d0d0f"/>
+<rect width="900" height="1172" fill="url(#g)"/>
+<g font-family="DejaVu Sans, Arial, sans-serif">
+<rect x="0" y="0" width="900" height="8" fill="#a1a1aa"/>
+<text x="870" y="40" font-size="16" fill="#a3a3a3" text-anchor="end">gmt400.pl · schemat</text>
+<text x="30" y="76" font-size="29" fill="#f5f5f5" font-weight="bold">Ustawienie reflektorów na ścianie (metoda</text>
+<text x="30" y="112" font-size="29" fill="#f5f5f5" font-weight="bold">tymczasowa)</text>
+<text x="30" y="148" font-size="20" fill="#d4d4d8">C/K, Suburban, Tahoe, Yukon — GMT400 1988–1998. Schemat poglądowy (nie</text>
+<text x="30" y="175" font-size="20" fill="#d4d4d8">w skali), własny, wg Haynes rozdz. 12 §8.</text>
+<line x1="30" y1="202" x2="870" y2="202" stroke="#3f3f46" stroke-width="2"/>
+<rect x="60" y="242" width="780" height="330" rx="10" fill="#141417" stroke="#52525b" stroke-width="3"/>
+<text x="450" y="270" font-size="16" fill="#a1a1aa" text-anchor="middle">ściana widziana z przodu auta (odległość 25 ft ≈ 7,6 m, równa podłoga)</text>
+<line x1="250" y1="287" x2="250" y2="562" stroke="#71717a" stroke-width="3" stroke-dasharray="10 6"/>
+<rect x="160" y="288" width="180" height="20" fill="#141417"/>
+<text x="250" y="302" font-size="14" fill="#a1a1aa" text-anchor="middle">oś lewego reflektora</text>
+<line x1="450" y1="287" x2="450" y2="562" stroke="#71717a" stroke-width="3" stroke-dasharray="10 6"/>
+<rect x="360" y="288" width="180" height="20" fill="#141417"/>
+<text x="450" y="302" font-size="14" fill="#a1a1aa" text-anchor="middle">oś auta</text>
+<line x1="650" y1="287" x2="650" y2="562" stroke="#71717a" stroke-width="3" stroke-dasharray="10 6"/>
+<rect x="560" y="288" width="180" height="20" fill="#141417"/>
+<text x="650" y="302" font-size="14" fill="#a1a1aa" text-anchor="middle">oś prawego reflektora</text>
+<line x1="80" y1="412" x2="820" y2="412" stroke="#a1a1aa" stroke-width="3"/>
+<text x="90" y="402" font-size="14" fill="#a1a1aa" text-anchor="start">pozioma taśma (oś reflektorów)</text>
+<ellipse cx="278" cy="440" rx="55" ry="22" fill="#d4d4d8" fill-opacity="0.55" stroke="#f5f5f5" stroke-width="2"/>
+<line x1="250" y1="412" x2="278" y2="440" stroke="#f5f5f5" stroke-width="2"/>
+<rect x="173" y="472" width="210" height="46" rx="6" fill="#141417"/>
+<text x="278" y="490" font-size="14" fill="#f5f5f5" text-anchor="middle">mijania: strefa jasności</text>
+<text x="278" y="508" font-size="14" fill="#f5f5f5" text-anchor="middle">~5 cm niżej, ~5 cm w prawo</text>
+<ellipse cx="678" cy="440" rx="55" ry="22" fill="#d4d4d8" fill-opacity="0.55" stroke="#f5f5f5" stroke-width="2"/>
+<line x1="650" y1="412" x2="678" y2="440" stroke="#f5f5f5" stroke-width="2"/>
+<rect x="573" y="472" width="210" height="46" rx="6" fill="#141417"/>
+<text x="678" y="490" font-size="14" fill="#f5f5f5" text-anchor="middle">mijania: strefa jasności</text>
+<text x="678" y="508" font-size="14" fill="#f5f5f5" text-anchor="middle">~5 cm niżej, ~5 cm w prawo</text>
+<rect x="290" y="525" width="320" height="24" fill="#141417"/>
+<text x="450" y="542" font-size="14" fill="#a1a1aa" text-anchor="middle">(przesunięcia wyolbrzymione dla czytelności)</text>
+<rect x="30" y="592" width="840" height="35" rx="6" fill="#27272a" stroke="#52525b" stroke-width="1.5"/>
+<text x="40" y="617" font-size="15" fill="#e4e4e7" font-weight="bold">Krok</text>
+<text x="130" y="617" font-size="15" fill="#e4e4e7" font-weight="bold">Co robisz (Haynes §8)</text>
+<rect x="30" y="631" width="840" height="56" rx="6" fill="#18181b" stroke="#3f3f46" stroke-width="1.5"/>
+<text x="40" y="653" font-size="15" fill="#f5f5f5" font-weight="bold">1</text>
+<text x="130" y="653" font-size="15" fill="#d4d4d8">Auto stoi poziomo, zbiornik paliwa ok. pół pełny, bez nietypowego obciążenia;</text>
+<text x="130" y="674" font-size="15" fill="#d4d4d8">ściana 25 ft (ok. 7,6 m) przed autem; podłoga równa</text>
+<rect x="30" y="691" width="840" height="56" rx="6" fill="#18181b" stroke="#3f3f46" stroke-width="1.5"/>
+<text x="40" y="713" font-size="15" fill="#f5f5f5" font-weight="bold">2</text>
+<text x="130" y="713" font-size="15" fill="#d4d4d8">Taśma pionowa na osi auta i na osiach obu reflektorów; pozioma taśma na wysokości</text>
+<text x="130" y="734" font-size="15" fill="#d4d4d8">osi reflektorów</text>
+<rect x="30" y="751" width="840" height="98" rx="6" fill="#18181b" stroke="#3f3f46" stroke-width="1.5"/>
+<text x="40" y="773" font-size="15" fill="#f5f5f5" font-weight="bold">3</text>
+<text x="130" y="773" font-size="15" fill="#d4d4d8">Mijania: strefa największej jasności 2 in (ok. 5 cm) pod poziomą linią i 2 in</text>
+<text x="130" y="794" font-size="15" fill="#d4d4d8">(ok. 5 cm) na prawo od pionowej osi reflektora; górna śruba: zgodnie z ruchem</text>
+<text x="130" y="815" font-size="15" fill="#d4d4d8">wskazówek zegara podnosi wiązkę, przeciwnie — obniża; boczna śruba działa tak</text>
+<text x="130" y="836" font-size="15" fill="#d4d4d8">samo na boki</text>
+<rect x="30" y="853" width="840" height="56" rx="6" fill="#18181b" stroke="#3f3f46" stroke-width="1.5"/>
+<text x="40" y="875" font-size="15" fill="#f5f5f5" font-weight="bold">4</text>
+<text x="130" y="875" font-size="15" fill="#d4d4d8">Drogowe: strefa na środku w pionie, dokładny środek tuż poniżej linii poziomej;</text>
+<text x="130" y="896" font-size="15" fill="#d4d4d8">przy kompromisie priorytet mają mijania</text>
+<rect x="30" y="913" width="840" height="56" rx="6" fill="#18181b" stroke="#3f3f46" stroke-width="1.5"/>
+<text x="40" y="935" font-size="15" fill="#f5f5f5" font-weight="bold">5</text>
+<text x="130" y="935" font-size="15" fill="#d4d4d8">To ustawienie tymczasowe — jak najszybciej ustaw reflektory w warsztacie ze</text>
+<text x="130" y="956" font-size="15" fill="#d4d4d8">sprzętem</text>
+<rect x="30" y="985" width="840" height="87" rx="8" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<text x="44" y="1014" font-size="15" fill="#d4d4d8">Haynes: sprawdzaj ustawienie co 12 miesięcy oraz po wymianie reflektora lub pracach przy</text>
+<text x="44" y="1035" font-size="15" fill="#d4d4d8">przodzie. Źle ustawione światła oślepiają kierowców z przeciwka. Sprawdź w swoim aucie /</text>
+<text x="44" y="1056" font-size="15" fill="#d4d4d8">manualu (reflektory mogą mieć regulację poziomu/inne mocowanie).</text>
+<line x1="30" y1="1082" x2="870" y2="1082" stroke="#3f3f46" stroke-width="2"/>
+<text x="30" y="1110" font-size="17" fill="#a3a3a3">Źródło: Haynes, Chevrolet &amp; GMC Pick-ups 1988–1998, rozdz. 12 §8, str. 12-3…12-5.</text>
+<text x="30" y="1134" font-size="17" fill="#a3a3a3">Rysunek własny, nie kopiuje ilustracji Haynes.</text>
+</g>
+</svg>

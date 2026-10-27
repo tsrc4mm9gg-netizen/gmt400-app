@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Własny rysunek wektorowy gmt400.pl (bez grafik AI, bez kopiowania ilustracji Haynes/GM). Dane: źródła podane na rysunku. Rysunek poglądowy, nie w skali. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 910" width="900" height="910" role="img" aria-label="4L80-E: co jest załączone na każdym biegu">
+<title>4L80-E: co jest załączone na każdym biegu</title>
+<defs><pattern id="g" width="30" height="30" patternUnits="userSpaceOnUse"><circle cx="15" cy="15" r="1.2" fill="#1f1f24"/></pattern></defs>
+<rect width="900" height="910" fill="#0d0d0f"/>
+<rect width="900" height="910" fill="url(#g)"/>
+<g font-family="DejaVu Sans, Arial, sans-serif">
+<rect x="0" y="0" width="900" height="8" fill="#a1a1aa"/>
+<text x="870" y="40" font-size="16" fill="#a3a3a3" text-anchor="end">gmt400.pl · schemat</text>
+<text x="30" y="76" font-size="29" fill="#f5f5f5" font-weight="bold">4L80-E: co jest załączone na każdym biegu</text>
+<text x="30" y="112" font-size="20" fill="#d4d4d8">Automat 4L80-E (RPO MT1) — GMT400 HD. Tabela własna, ułożona z danych</text>
+<text x="30" y="139" font-size="20" fill="#d4d4d8">GM (Range Reference Chart).</text>
+<line x1="30" y1="166" x2="870" y2="166" stroke="#3f3f46" stroke-width="2"/>
+<rect x="30" y="200" width="810" height="74" rx="6" fill="#27272a" stroke="#52525b" stroke-width="1.5"/>
+<text x="67.0" y="241.0" font-size="13" fill="#e4e4e7" font-weight="bold" text-anchor="middle">Zakres</text>
+<text x="124.0" y="241.0" font-size="13" fill="#e4e4e7" font-weight="bold" text-anchor="middle">Bieg</text>
+<text x="166.0" y="233.0" font-size="13" fill="#e4e4e7" font-weight="bold" text-anchor="middle">Sol.</text>
+<text x="166.0" y="249.0" font-size="13" fill="#e4e4e7" font-weight="bold" text-anchor="middle">1-2</text>
+<text x="210.0" y="233.0" font-size="13" fill="#e4e4e7" font-weight="bold" text-anchor="middle">Sol.</text>
+<text x="210.0" y="249.0" font-size="13" fill="#e4e4e7" font-weight="bold" text-anchor="middle">2-3</text>
+<text x="262.0" y="233.0" font-size="13" fill="#e4e4e7" font-weight="bold" text-anchor="middle">Sprz.</text>
+<text x="262.0" y="249.0" font-size="13" fill="#e4e4e7" font-weight="bold" text-anchor="middle">4</text>
+<text x="322.0" y="233.0" font-size="13" fill="#e4e4e7" font-weight="bold" text-anchor="middle">Sprz.</text>
+<text x="322.0" y="249.0" font-size="13" fill="#e4e4e7" font-weight="bold" text-anchor="middle">overrun</text>
+<text x="383.0" y="233.0" font-size="13" fill="#e4e4e7" font-weight="bold" text-anchor="middle">Rolka</text>
+<text x="383.0" y="249.0" font-size="13" fill="#e4e4e7" font-weight="bold" text-anchor="middle">OD</text>
+<text x="445.0" y="233.0" font-size="13" fill="#e4e4e7" font-weight="bold" text-anchor="middle">Sprz.</text>
+<text x="445.0" y="249.0" font-size="13" fill="#e4e4e7" font-weight="bold" text-anchor="middle">przednie</text>
+<text x="506.0" y="233.0" font-size="13" fill="#e4e4e7" font-weight="bold" text-anchor="middle">Sprz.</text>
+<text x="506.0" y="249.0" font-size="13" fill="#e4e4e7" font-weight="bold" text-anchor="middle">direct</text>
+<text x="564.0" y="233.0" font-size="13" fill="#e4e4e7" font-weight="bold" text-anchor="middle">Taśma</text>
+<text x="564.0" y="249.0" font-size="13" fill="#e4e4e7" font-weight="bold" text-anchor="middle">2-1</text>
+<text x="623.0" y="233.0" font-size="13" fill="#e4e4e7" font-weight="bold" text-anchor="middle">Sprag</text>
+<text x="623.0" y="249.0" font-size="13" fill="#e4e4e7" font-weight="bold" text-anchor="middle">pośr.</text>
+<text x="684.0" y="233.0" font-size="13" fill="#e4e4e7" font-weight="bold" text-anchor="middle">Sprz.</text>
+<text x="684.0" y="249.0" font-size="13" fill="#e4e4e7" font-weight="bold" text-anchor="middle">pośr.</text>
+<text x="744.0" y="233.0" font-size="13" fill="#e4e4e7" font-weight="bold" text-anchor="middle">Rolka</text>
+<text x="744.0" y="249.0" font-size="13" fill="#e4e4e7" font-weight="bold" text-anchor="middle">niska</text>
+<text x="807.0" y="233.0" font-size="13" fill="#e4e4e7" font-weight="bold" text-anchor="middle">Taśma</text>
+<text x="807.0" y="249.0" font-size="13" fill="#e4e4e7" font-weight="bold" text-anchor="middle">L&amp;R</text>
+<rect x="30" y="277" width="810" height="29" fill="#18181b" stroke="#3f3f46" stroke-width="1"/>
+<line x1="30" y1="277" x2="840" y2="277" stroke="#a1a1aa" stroke-width="2"/>
+<text x="38" y="296.5" font-size="15" fill="#f5f5f5" font-weight="bold">P-N</text>
+<text x="124.0" y="296.5" font-size="14" fill="#d4d4d8" text-anchor="middle"></text>
+<text x="166.0" y="296.5" font-size="13" fill="#f5f5f5" text-anchor="middle">ON</text>
+<text x="210.0" y="296.5" font-size="13" fill="#a1a1aa" text-anchor="middle">OFF</text>
+<circle cx="383.0" cy="291.5" r="8" fill="none" stroke="#e4e4e7" stroke-width="3"/>
+<rect x="30" y="306" width="810" height="29" fill="#18181b" stroke="#3f3f46" stroke-width="1"/>
+<line x1="30" y1="306" x2="840" y2="306" stroke="#a1a1aa" stroke-width="2"/>
+<text x="38" y="325.5" font-size="15" fill="#f5f5f5" font-weight="bold">R</text>
+<text x="124.0" y="325.5" font-size="14" fill="#d4d4d8" text-anchor="middle"></text>
+<text x="166.0" y="325.5" font-size="13" fill="#f5f5f5" text-anchor="middle">ON</text>
+<text x="210.0" y="325.5" font-size="13" fill="#a1a1aa" text-anchor="middle">OFF</text>
+<circle cx="383.0" cy="320.5" r="8" fill="none" stroke="#e4e4e7" stroke-width="3"/>
+<circle cx="506.0" cy="320.5" r="9" fill="#e4e4e7"/>
+<circle cx="807.0" cy="320.5" r="9" fill="#e4e4e7"/>
+<rect x="30" y="335" width="810" height="29" fill="#18181b" stroke="#3f3f46" stroke-width="1"/>
+<line x1="30" y1="335" x2="840" y2="335" stroke="#a1a1aa" stroke-width="2"/>
+<text x="38" y="354.5" font-size="15" fill="#f5f5f5" font-weight="bold">D 4 bieg.</text>
+<text x="124.0" y="354.5" font-size="14" fill="#d4d4d8" text-anchor="middle">1.</text>
+<text x="166.0" y="354.5" font-size="13" fill="#f5f5f5" text-anchor="middle">ON</text>
+<text x="210.0" y="354.5" font-size="13" fill="#a1a1aa" text-anchor="middle">OFF</text>
+<circle cx="383.0" cy="349.5" r="8" fill="none" stroke="#e4e4e7" stroke-width="3"/>
+<circle cx="445.0" cy="349.5" r="9" fill="#e4e4e7"/>
+<circle cx="623.0" cy="349.5" r="8" fill="none" stroke="#71717a" stroke-width="2" stroke-dasharray="3 3"/>
+<circle cx="744.0" cy="349.5" r="8" fill="none" stroke="#e4e4e7" stroke-width="3"/>
+<rect x="30" y="364" width="810" height="29" fill="#18181b" stroke="#3f3f46" stroke-width="1"/>
+<text x="38" y="383.5" font-size="15" fill="#f5f5f5" font-weight="bold"></text>
+<text x="124.0" y="383.5" font-size="14" fill="#d4d4d8" text-anchor="middle">2.</text>
+<text x="166.0" y="383.5" font-size="13" fill="#a1a1aa" text-anchor="middle">OFF</text>
+<text x="210.0" y="383.5" font-size="13" fill="#a1a1aa" text-anchor="middle">OFF</text>
+<circle cx="383.0" cy="378.5" r="8" fill="none" stroke="#e4e4e7" stroke-width="3"/>
+<circle cx="445.0" cy="378.5" r="9" fill="#e4e4e7"/>
+<circle cx="623.0" cy="378.5" r="8" fill="none" stroke="#e4e4e7" stroke-width="3"/>
+<circle cx="684.0" cy="378.5" r="9" fill="#e4e4e7"/>
+<line x1="735.0" y1="378.5" x2="753.0" y2="378.5" stroke="#a1a1aa" stroke-width="3" stroke-dasharray="4 3"/>
+<rect x="30" y="393" width="810" height="29" fill="#18181b" stroke="#3f3f46" stroke-width="1"/>
+<text x="38" y="412.5" font-size="15" fill="#f5f5f5" font-weight="bold"></text>
+<text x="124.0" y="412.5" font-size="14" fill="#d4d4d8" text-anchor="middle">3.</text>
+<text x="166.0" y="412.5" font-size="13" fill="#a1a1aa" text-anchor="middle">OFF</text>
+<text x="210.0" y="412.5" font-size="13" fill="#f5f5f5" text-anchor="middle">ON</text>
+<circle cx="383.0" cy="407.5" r="8" fill="none" stroke="#e4e4e7" stroke-width="3"/>
+<circle cx="445.0" cy="407.5" r="9" fill="#e4e4e7"/>
+<circle cx="506.0" cy="407.5" r="9" fill="#e4e4e7"/>
+<line x1="614.0" y1="407.5" x2="632.0" y2="407.5" stroke="#a1a1aa" stroke-width="3" stroke-dasharray="4 3"/>
+<circle cx="684.0" cy="407.5" r="9" fill="#e4e4e7"/>
+<line x1="735.0" y1="407.5" x2="753.0" y2="407.5" stroke="#a1a1aa" stroke-width="3" stroke-dasharray="4 3"/>
+<rect x="30" y="422" width="810" height="29" fill="#18181b" stroke="#3f3f46" stroke-width="1"/>
+<text x="38" y="441.5" font-size="15" fill="#f5f5f5" font-weight="bold"></text>
+<text x="124.0" y="441.5" font-size="14" fill="#d4d4d8" text-anchor="middle">4.</text>
+<text x="166.0" y="441.5" font-size="13" fill="#f5f5f5" text-anchor="middle">ON</text>
+<text x="210.0" y="441.5" font-size="13" fill="#f5f5f5" text-anchor="middle">ON</text>
+<circle cx="262.0" cy="436.5" r="9" fill="#e4e4e7"/>
+<line x1="374.0" y1="436.5" x2="392.0" y2="436.5" stroke="#a1a1aa" stroke-width="3" stroke-dasharray="4 3"/>
+<circle cx="445.0" cy="436.5" r="9" fill="#e4e4e7"/>
+<circle cx="506.0" cy="436.5" r="9" fill="#e4e4e7"/>
+<line x1="614.0" y1="436.5" x2="632.0" y2="436.5" stroke="#a1a1aa" stroke-width="3" stroke-dasharray="4 3"/>
+<circle cx="684.0" cy="436.5" r="9" fill="#e4e4e7"/>
+<line x1="735.0" y1="436.5" x2="753.0" y2="436.5" stroke="#a1a1aa" stroke-width="3" stroke-dasharray="4 3"/>
+<rect x="30" y="451" width="810" height="29" fill="#18181b" stroke="#3f3f46" stroke-width="1"/>
+<line x1="30" y1="451" x2="840" y2="451" stroke="#a1a1aa" stroke-width="2"/>
+<text x="38" y="470.5" font-size="15" fill="#f5f5f5" font-weight="bold">D (3)</text>
+<text x="124.0" y="470.5" font-size="14" fill="#d4d4d8" text-anchor="middle">1.</text>
+<text x="166.0" y="470.5" font-size="13" fill="#f5f5f5" text-anchor="middle">ON</text>
+<text x="210.0" y="470.5" font-size="13" fill="#a1a1aa" text-anchor="middle">OFF</text>
+<circle cx="322.0" cy="465.5" r="9" fill="#e4e4e7"/>
+<circle cx="383.0" cy="465.5" r="8" fill="none" stroke="#e4e4e7" stroke-width="3"/>
+<circle cx="445.0" cy="465.5" r="9" fill="#e4e4e7"/>
+<circle cx="623.0" cy="465.5" r="8" fill="none" stroke="#71717a" stroke-width="2" stroke-dasharray="3 3"/>
+<circle cx="744.0" cy="465.5" r="8" fill="none" stroke="#e4e4e7" stroke-width="3"/>
+<rect x="30" y="480" width="810" height="29" fill="#18181b" stroke="#3f3f46" stroke-width="1"/>
+<text x="38" y="499.5" font-size="15" fill="#f5f5f5" font-weight="bold"></text>
+<text x="124.0" y="499.5" font-size="14" fill="#d4d4d8" text-anchor="middle">2.</text>
+<text x="166.0" y="499.5" font-size="13" fill="#a1a1aa" text-anchor="middle">OFF</text>
+<text x="210.0" y="499.5" font-size="13" fill="#a1a1aa" text-anchor="middle">OFF</text>
+<circle cx="322.0" cy="494.5" r="9" fill="#e4e4e7"/>
+<circle cx="383.0" cy="494.5" r="8" fill="none" stroke="#e4e4e7" stroke-width="3"/>
+<circle cx="445.0" cy="494.5" r="9" fill="#e4e4e7"/>
+<circle cx="623.0" cy="494.5" r="8" fill="none" stroke="#e4e4e7" stroke-width="3"/>
+<circle cx="684.0" cy="494.5" r="9" fill="#e4e4e7"/>
+<line x1="735.0" y1="494.5" x2="753.0" y2="494.5" stroke="#a1a1aa" stroke-width="3" stroke-dasharray="4 3"/>
+<rect x="30" y="509" width="810" height="29" fill="#18181b" stroke="#3f3f46" stroke-width="1"/>
+<text x="38" y="528.5" font-size="15" fill="#f5f5f5" font-weight="bold"></text>
+<text x="124.0" y="528.5" font-size="14" fill="#d4d4d8" text-anchor="middle">3.</text>
+<text x="166.0" y="528.5" font-size="13" fill="#a1a1aa" text-anchor="middle">OFF</text>
+<text x="210.0" y="528.5" font-size="13" fill="#f5f5f5" text-anchor="middle">ON</text>
+<circle cx="322.0" cy="523.5" r="9" fill="#e4e4e7"/>
+<circle cx="383.0" cy="523.5" r="8" fill="none" stroke="#e4e4e7" stroke-width="3"/>
+<circle cx="445.0" cy="523.5" r="9" fill="#e4e4e7"/>
+<circle cx="506.0" cy="523.5" r="9" fill="#e4e4e7"/>
+<line x1="614.0" y1="523.5" x2="632.0" y2="523.5" stroke="#a1a1aa" stroke-width="3" stroke-dasharray="4 3"/>
+<circle cx="684.0" cy="523.5" r="9" fill="#e4e4e7"/>
+<line x1="735.0" y1="523.5" x2="753.0" y2="523.5" stroke="#a1a1aa" stroke-width="3" stroke-dasharray="4 3"/>
+<rect x="30" y="538" width="810" height="29" fill="#18181b" stroke="#3f3f46" stroke-width="1"/>
+<line x1="30" y1="538" x2="840" y2="538" stroke="#a1a1aa" stroke-width="2"/>
+<text x="38" y="557.5" font-size="15" fill="#f5f5f5" font-weight="bold">2</text>
+<text x="124.0" y="557.5" font-size="14" fill="#d4d4d8" text-anchor="middle">1.</text>
+<text x="166.0" y="557.5" font-size="13" fill="#f5f5f5" text-anchor="middle">ON</text>
+<text x="210.0" y="557.5" font-size="13" fill="#a1a1aa" text-anchor="middle">OFF</text>
+<circle cx="322.0" cy="552.5" r="9" fill="#e4e4e7"/>
+<circle cx="383.0" cy="552.5" r="8" fill="none" stroke="#e4e4e7" stroke-width="3"/>
+<circle cx="445.0" cy="552.5" r="9" fill="#e4e4e7"/>
+<circle cx="623.0" cy="552.5" r="8" fill="none" stroke="#71717a" stroke-width="2" stroke-dasharray="3 3"/>
+<circle cx="744.0" cy="552.5" r="8" fill="none" stroke="#e4e4e7" stroke-width="3"/>
+<rect x="30" y="567" width="810" height="29" fill="#18181b" stroke="#3f3f46" stroke-width="1"/>
+<text x="38" y="586.5" font-size="15" fill="#f5f5f5" font-weight="bold"></text>
+<text x="124.0" y="586.5" font-size="14" fill="#d4d4d8" text-anchor="middle">2.</text>
+<text x="166.0" y="586.5" font-size="13" fill="#a1a1aa" text-anchor="middle">OFF</text>
+<text x="210.0" y="586.5" font-size="13" fill="#a1a1aa" text-anchor="middle">OFF</text>
+<circle cx="322.0" cy="581.5" r="9" fill="#e4e4e7"/>
+<circle cx="383.0" cy="581.5" r="8" fill="none" stroke="#e4e4e7" stroke-width="3"/>
+<circle cx="445.0" cy="581.5" r="9" fill="#e4e4e7"/>
+<circle cx="564.0" cy="581.5" r="9" fill="#e4e4e7"/>
+<circle cx="623.0" cy="581.5" r="8" fill="none" stroke="#e4e4e7" stroke-width="3"/>
+<circle cx="684.0" cy="581.5" r="9" fill="#e4e4e7"/>
+<line x1="735.0" y1="581.5" x2="753.0" y2="581.5" stroke="#a1a1aa" stroke-width="3" stroke-dasharray="4 3"/>
+<rect x="30" y="596" width="810" height="29" fill="#18181b" stroke="#3f3f46" stroke-width="1"/>
+<line x1="30" y1="596" x2="840" y2="596" stroke="#a1a1aa" stroke-width="2"/>
+<text x="38" y="615.5" font-size="15" fill="#f5f5f5" font-weight="bold">1</text>
+<text x="124.0" y="615.5" font-size="14" fill="#d4d4d8" text-anchor="middle">1.</text>
+<text x="166.0" y="615.5" font-size="13" fill="#f5f5f5" text-anchor="middle">ON</text>
+<text x="210.0" y="615.5" font-size="13" fill="#a1a1aa" text-anchor="middle">OFF</text>
+<circle cx="322.0" cy="610.5" r="9" fill="#e4e4e7"/>
+<circle cx="383.0" cy="610.5" r="8" fill="none" stroke="#e4e4e7" stroke-width="3"/>
+<circle cx="445.0" cy="610.5" r="9" fill="#e4e4e7"/>
+<circle cx="623.0" cy="610.5" r="8" fill="none" stroke="#71717a" stroke-width="2" stroke-dasharray="3 3"/>
+<circle cx="744.0" cy="610.5" r="8" fill="none" stroke="#e4e4e7" stroke-width="3"/>
+<circle cx="807.0" cy="610.5" r="9" fill="#e4e4e7"/>
+<rect x="30" y="625" width="810" height="29" fill="#18181b" stroke="#3f3f46" stroke-width="1"/>
+<text x="38" y="644.5" font-size="15" fill="#f5f5f5" font-weight="bold"></text>
+<text x="124.0" y="644.5" font-size="14" fill="#d4d4d8" text-anchor="middle">2.</text>
+<text x="166.0" y="644.5" font-size="13" fill="#a1a1aa" text-anchor="middle">OFF</text>
+<text x="210.0" y="644.5" font-size="13" fill="#a1a1aa" text-anchor="middle">OFF</text>
+<circle cx="322.0" cy="639.5" r="9" fill="#e4e4e7"/>
+<circle cx="383.0" cy="639.5" r="8" fill="none" stroke="#e4e4e7" stroke-width="3"/>
+<circle cx="445.0" cy="639.5" r="9" fill="#e4e4e7"/>
+<circle cx="564.0" cy="639.5" r="9" fill="#e4e4e7"/>
+<circle cx="623.0" cy="639.5" r="8" fill="none" stroke="#e4e4e7" stroke-width="3"/>
+<circle cx="684.0" cy="639.5" r="9" fill="#e4e4e7"/>
+<line x1="735.0" y1="639.5" x2="753.0" y2="639.5" stroke="#a1a1aa" stroke-width="3" stroke-dasharray="4 3"/>
+<line x1="30" y1="654" x2="840" y2="654" stroke="#a1a1aa" stroke-width="2"/>
+<circle cx="39" cy="676" r="9" fill="#e4e4e7"/>
+<text x="56" y="681" font-size="15" fill="#d4d4d8">załączone</text>
+<circle cx="165" cy="676" r="8" fill="none" stroke="#e4e4e7" stroke-width="3"/>
+<text x="182" y="681" font-size="15" fill="#d4d4d8">trzyma</text>
+<line x1="256" y1="676" x2="274" y2="676" stroke="#a1a1aa" stroke-width="3" stroke-dasharray="4 3"/>
+<text x="282" y="681" font-size="15" fill="#d4d4d8">wolnobieg (obraca się)</text>
+<circle cx="504" cy="676" r="8" fill="none" stroke="#71717a" stroke-width="2" stroke-dasharray="3 3"/>
+<text x="521" y="681" font-size="15" fill="#d4d4d8">trzyma, ale bez efektu</text>
+<rect x="30" y="702" width="840" height="108" rx="8" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<text x="44" y="731" font-size="15" fill="#d4d4d8">Przełożenia wg GM: 1. 2,48; 2. 1,48; 3. 1,00; 4. 0,75; wsteczny 2,08. Zakres „D 4 bieg.”</text>
+<text x="44" y="752" font-size="15" fill="#d4d4d8">to zwykłe D (nadbieg), „D (3)” — ręczne trzecie. Stan solenoidów 1-2 i 2-3 wg tabeli GM</text>
+<text x="44" y="773" font-size="15" fill="#d4d4d8">dotyczy przyspieszania; GM zaznacza, że przy zmianie biegów zależy od prędkości i</text>
+<text x="44" y="794" font-size="15" fill="#d4d4d8">przepustnicy, nie od wybranego biegu. Sprawdź w swoim aucie / manualu.</text>
+<line x1="30" y1="820" x2="870" y2="820" stroke="#3f3f46" stroke-width="2"/>
+<text x="30" y="848" font-size="17" fill="#a3a3a3">Źródło: GM Powertrain, Hydra-Matic 4L80-E Technician's Guide, „Range Reference</text>
+<text x="30" y="872" font-size="17" fill="#a3a3a3">Chart”, str. 11 (plik PDF s. 15). Tabela własna — dane, nie kopia grafiki GM.</text>
+</g>
+</svg>

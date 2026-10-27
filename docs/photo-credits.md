@@ -29,7 +29,12 @@ Rejestr: `src/lib/entry-media.ts`. Atrybucja jest widoczna w podpisie przy zdję
 | `k2500-turbo-diesel-1998.webp` | Angilas89 | domena publiczna (autor zrzekł się praw) | https://commons.wikimedia.org/wiki/File:1998_K2500_Turbo_Diesel_with_NV_4500.jpg |
 | `k2500-diesel-suburban.webp` | Angilas89 | domena publiczna (autor zrzekł się praw) | https://commons.wikimedia.org/wiki/File:GMT400_K2500_Diesel_Suburban.jpg |
 | `skrzynia-4l80-przekroj.webp` | Michael Barera (Ypsilanti Automotive Heritage Museum, maj 2015) | CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0) | https://commons.wikimedia.org/wiki/File:Ypsilanti_Automotive_Heritage_Museum_May_2015_064_(Hydra-Matic_4L80_transmission).jpg |
+| `silnik-4-3-v6-s10-blazer.webp` | Musashi hai | CC BY-SA 3.0 (https://creativecommons.org/licenses/by-sa/3.0) | https://commons.wikimedia.org/wiki/File:4.3_V-6.JPG |
 
 Pliki `*.svg` w `public/baza/` to własne rysunki gmt400.pl wykonane od nowa (bez grafik AI, bez kopiowania ilustracji Haynes/GM) z danych tekstowych i tabel podanych w źródłach; źródło danych jest wypisane w stopce każdego rysunku.
 
 Brak legalnego zdjęcia (kafelek ma srebrną ikonę): 4L60E, EVAP, bezpieczniki i przekaźniki, VIN/RPO, uszczelki kolektora, punkty masy, płyny i momenty, pompa Stanadyne, tylny most, skrzynia rozdzielcza.
+
+Własne rysunki dodane 27.10.2026 (dane z podanych źródeł, bez kopiowania ilustracji): `regulacja-zaworow-v6-v8.svg`, `glowice-kolejnosc-dokrecania.svg`, `uklad-chlodzenia-obieg.svg` (Haynes rozdz. 2A, 3), `uklad-chlodzenia-6-5-td.svg`, `turbosprezarka-6-5-td-schemat.svg` (GM Service Training 6.5L TD 1991), `4l60e-tabela-zaladzen.svg`, `4l80e-tabela-zaladzen.svg` (GM Technician's Guide), `tylny-most-wycieki-schemat.svg`, `hamulce-odpowietrzanie-kolejnosc.svg`, `reflektory-ustawienie-sciana.svg` (Haynes rozdz. 8, 9, 12).
+
+Dodatkowo bez legalnego zdjęcia (srebrna ikona): oleje i wycieki, pokrywy zaworów, kolektory wydechowe, rozrząd, remont silnika, chłodnica/wentylator, klimatyzacja, 6.5 TD (turbo, wtryski, chłodzenie), skrzynie i most, hamulce, nadwozie i elektryka (reflektory, przełączniki, zestaw wskaźników, SIR). Zdjęcie 4.3 V6 pochodzi z S-10 Blazer — poglądowe.

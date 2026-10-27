@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Własny rysunek wektorowy gmt400.pl (bez grafik AI, bez kopiowania ilustracji Haynes/GM). Dane: źródła podane na rysunku. Rysunek poglądowy, nie w skali. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1089" width="900" height="1089" role="img" aria-label="Układ chłodzenia: obieg płynu (V6 i V8)">
+<title>Układ chłodzenia: obieg płynu (V6 i V8)</title>
+<defs><pattern id="g" width="30" height="30" patternUnits="userSpaceOnUse"><circle cx="15" cy="15" r="1.2" fill="#1f1f24"/></pattern></defs>
+<rect width="900" height="1089" fill="#0d0d0f"/>
+<rect width="900" height="1089" fill="url(#g)"/>
+<g font-family="DejaVu Sans, Arial, sans-serif">
+<rect x="0" y="0" width="900" height="8" fill="#a1a1aa"/>
+<text x="870" y="40" font-size="16" fill="#a3a3a3" text-anchor="end">gmt400.pl · schemat</text>
+<text x="30" y="76" font-size="29" fill="#f5f5f5" font-weight="bold">Układ chłodzenia: obieg płynu (V6 i V8)</text>
+<text x="30" y="112" font-size="20" fill="#d4d4d8">4.3 V6 · 5.0/5.7 small-block V8 · 7.4 V8 — GMT400 1988–2000. Schemat</text>
+<text x="30" y="139" font-size="20" fill="#d4d4d8">poglądowy, własny, wg opisu w Haynes.</text>
+<line x1="30" y1="166" x2="870" y2="166" stroke="#3f3f46" stroke-width="2"/>
+<defs><marker id="ar" markerUnits="userSpaceOnUse" markerWidth="18" markerHeight="18" refX="13" refY="9" orient="auto"><path d="M0,1 L16,9 L0,17 z" fill="#f5f5f5"/></marker></defs>
+<rect x="40" y="301" width="110" height="90" rx="10" fill="#18181b" stroke="#a1a1aa" stroke-width="3"/>
+<text x="95.0" y="342" font-size="16" fill="#f5f5f5" font-weight="bold" text-anchor="middle">Zbiornik</text>
+<text x="95.0" y="362" font-size="16" fill="#f5f5f5" font-weight="bold" text-anchor="middle">wyrównawczy</text>
+<rect x="195" y="286" width="110" height="265" rx="10" fill="#202024" stroke="#a1a1aa" stroke-width="3"/>
+<text x="250.0" y="403" font-size="17" fill="#f5f5f5" font-weight="bold" text-anchor="middle">Chłodnica</text>
+<text x="250.0" y="425" font-size="17" fill="#f5f5f5" font-weight="bold" text-anchor="middle">(cross-flow,</text>
+<text x="250.0" y="446" font-size="17" fill="#f5f5f5" font-weight="bold" text-anchor="middle">alu)</text>
+<rect x="205" y="506" width="90" height="34" rx="6" fill="#141417" stroke="#71717a" stroke-width="3"/>
+<text x="250.0" y="528" font-size="15" fill="#f5f5f5" font-weight="bold" text-anchor="middle">ATF*</text>
+<rect x="228" y="268" width="44" height="18" rx="5" fill="#d4d4d8"/>
+<text x="250" y="310" font-size="14" fill="#d4d4d8" text-anchor="middle">korek 15 psi</text>
+<polyline points="250,268 250,250 95,250 95,299" fill="none" stroke="#e4e4e7" stroke-width="5" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="10 8" marker-end="url(#ar)"/>
+<text x="172" y="240" font-size="15" fill="#d4d4d8" text-anchor="middle">wąż przelewowy</text>
+<rect x="450" y="324" width="340" height="96" rx="10" fill="#202024" stroke="#a1a1aa" stroke-width="3"/>
+<text x="620.0" y="368" font-size="15" fill="#f5f5f5" font-weight="bold" text-anchor="middle">GŁOWICA</text>
+<text x="620.0" y="387" font-size="15" fill="#f5f5f5" font-weight="bold" text-anchor="middle">(komory spalania, gniazda zaworów)</text>
+<rect x="450" y="426" width="340" height="110" rx="10" fill="#202024" stroke="#a1a1aa" stroke-width="3"/>
+<text x="620.0" y="476" font-size="17" fill="#f5f5f5" font-weight="bold" text-anchor="middle">BLOK CYLINDRÓW</text>
+<text x="620.0" y="498" font-size="17" fill="#f5f5f5" font-weight="bold" text-anchor="middle">(kanały wodne)</text>
+<rect x="458" y="268" width="92" height="38" rx="6" fill="#141417" stroke="#a1a1aa" stroke-width="3"/>
+<text x="504.0" y="293" font-size="16" fill="#f5f5f5" font-weight="bold" text-anchor="middle">Termostat</text>
+<rect x="388" y="456" width="62" height="82" rx="10" fill="#18181b" stroke="#a1a1aa" stroke-width="3"/>
+<text x="419.0" y="502" font-size="15" fill="#f5f5f5" font-weight="bold" text-anchor="middle">Pompa</text>
+<rect x="320" y="456" width="62" height="82" rx="10" fill="#141417" stroke="#71717a" stroke-width="3"/>
+<text x="351.0" y="493" font-size="14" fill="#f5f5f5" font-weight="bold" text-anchor="middle">Wentyl.</text>
+<text x="351.0" y="511" font-size="14" fill="#f5f5f5" font-weight="bold" text-anchor="middle">+ sprz.</text>
+<rect x="620" y="224" width="170" height="64" rx="10" fill="#141417" stroke="#71717a" stroke-width="3" stroke-dasharray="8 6"/>
+<text x="705.0" y="252" font-size="16" fill="#f5f5f5" font-weight="bold" text-anchor="middle">Nagrzewnica</text>
+<text x="705.0" y="272" font-size="16" fill="#f5f5f5" font-weight="bold" text-anchor="middle">(kabina)</text>
+<polyline points="705,324 705,290" fill="none" stroke="#a1a1aa" stroke-width="5" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="10 8"/>
+<polyline points="250,552 250,584 419,584 419,542" fill="none" stroke="#e4e4e7" stroke-width="7" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#ar)"/>
+<text x="335" y="610" font-size="16" fill="#d4d4d8" text-anchor="middle" font-weight="bold">1  dolny wąż: chłodnica → pompa</text>
+<polyline points="452,501 486,501" fill="none" stroke="#e4e4e7" stroke-width="6" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#ar)"/>
+<text x="465" y="476" font-size="18" fill="#d4d4d8" text-anchor="middle" font-weight="bold">2</text>
+<polyline points="745,476 745,430" fill="none" stroke="#e4e4e7" stroke-width="6" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#ar)"/>
+<text x="768" y="461" font-size="18" fill="#d4d4d8" text-anchor="middle" font-weight="bold">3</text>
+<polyline points="504,342 504,310" fill="none" stroke="#e4e4e7" stroke-width="6" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#ar)"/>
+<polyline points="504,268 504,260 340,260 340,326 307,326" fill="none" stroke="#e4e4e7" stroke-width="7" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#ar)"/>
+<text x="440" y="240" font-size="16" fill="#d4d4d8" text-anchor="middle" font-weight="bold">5  górny wąż: termostat → chłodnica</text>
+<text x="580" y="304" font-size="18" fill="#d4d4d8" text-anchor="middle" font-weight="bold">4</text>
+<rect x="30" y="631" width="840" height="120" rx="8" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<text x="44" y="662" font-size="17" fill="#f5f5f5">Obieg po rozgrzaniu silnika (opis Haynes 3-2): 1) dolny wąż prowadzi płyn z</text>
+<text x="44" y="686" font-size="17" fill="#f5f5f5">chłodnicy do pompy → 2) pompa tłoczy go w kanały bloku → 3) płyn idzie do</text>
+<text x="44" y="710" font-size="17" fill="#f5f5f5">głowicy, wokół komór spalania i gniazd zaworów → 4) przez otwarty termostat →</text>
+<text x="44" y="734" font-size="17" fill="#f5f5f5">5) górnym wężem z powrotem do chłodnicy.</text>
+<rect x="30" y="757" width="840" height="208" rx="8" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<text x="44" y="787" font-size="16" fill="#d4d4d8">Zimny silnik: termostat ogranicza przepływ do chłodnicy; zaczyna się otwierać po</text>
+<text x="44" y="810" font-size="16" fill="#d4d4d8">osiągnięciu temperatury minimalnej (195°F ≈ 91°C wg specyfikacji Haynesa).</text>
+<text x="44" y="833" font-size="16" fill="#d4d4d8">Korek 15 psi ≈ 103 kPa: po przekroczeniu ciśnienia zawór odsłania rurkę przelewową</text>
+<text x="44" y="856" font-size="16" fill="#d4d4d8">do zbiornika; po ostygnięciu płyn wraca do chłodnicy.</text>
+<text x="44" y="879" font-size="16" fill="#a3a3a3">* ATF: skrzynie automatyczne mają chłodnicę oleju wbudowaną w chłodnicę (przewody z</text>
+<text x="44" y="902" font-size="16" fill="#a3a3a3">boku). Nagrzewnica jest częścią obiegu przez węże ogrzewania — przebieg i kierunek</text>
+<text x="44" y="925" font-size="16" fill="#a3a3a3">zależą od silnika i roku: sprawdź w swoim aucie / manualu. Termostat leży według</text>
+<text x="44" y="948" font-size="16" fill="#a3a3a3">Haynesa z przodu kolektora ssącego.</text>
+<line x1="30" y1="975" x2="870" y2="975" stroke="#3f3f46" stroke-width="2"/>
+<text x="30" y="1003" font-size="17" fill="#a3a3a3">Źródło: Haynes Chevrolet &amp; GMC Pick-ups 1988–1998 (nr 24065), rozdz. 3, sekcja 1</text>
+<text x="30" y="1027" font-size="17" fill="#a3a3a3">(str. 3-2, PDF 112), specyfikacje (3-1). Rysunek własny, nie w skali; nie</text>
+<text x="30" y="1051" font-size="17" fill="#a3a3a3">przedstawia ułożenia węży konkretnego silnika.</text>
+</g>
+</svg>

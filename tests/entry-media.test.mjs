@@ -14,17 +14,17 @@ test('każdy plik z rejestru istnieje w public/baza', () => {
 test('każde zdjęcie ma autora, licencję i URL źródła, a docs/photo-credits.md je wymienia', () => {
   const docs = fs.readFileSync('docs/photo-credits.md', 'utf8');
   const photos = [...new Set(files.filter(f => f.endsWith('.webp')))];
-  assert.equal(photos.length, 4);
+  assert.equal(photos.length, 5);
   for (const f of photos) assert.ok(docs.includes(f), f);
-  assert.equal((src.match(/credit: \{/g) || []).length, 4);
-  for (const k of ['author', 'licence', 'sourceUrl']) assert.ok((src.match(new RegExp(`\\b${k}:`, 'g')) || []).length >= 4, k);
+  assert.equal((src.match(/credit: \{/g) || []).length, 5);
+  for (const k of ['author', 'licence', 'sourceUrl']) assert.ok((src.match(new RegExp(`\\b${k}:`, 'g')) || []).length >= 5, k);
 });
 
 test('klucze rejestru są 32-znakowymi id Notion bez myślników', () => {
   const keys = [...src.matchAll(/\[P \+ '([0-9a-f]+)'\]/g)].map(m => '406d7bf1c139' + m[1]);
-  assert.equal(keys.length, 14);
+  assert.equal(keys.length, 23);
   for (const k of keys) assert.match(k, /^[0-9a-f]{32}$/);
-  assert.equal(new Set(keys).size, 14);
+  assert.equal(new Set(keys).size, 23);
 });
 
 test('rysunki własne nie używają czerwieni ani żółci', () => {

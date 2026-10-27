@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Własny rysunek wektorowy gmt400.pl (bez grafik AI, bez kopiowania ilustracji Haynes/GM). Dane: źródła podane na rysunku. Rysunek poglądowy, nie w skali. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1046" width="900" height="1046" role="img" aria-label="Regulacja luzu zaworów: dwa ustawienia wału (V6 i V8)">
+<title>Regulacja luzu zaworów: dwa ustawienia wału (V6 i V8)</title>
+<defs><pattern id="g" width="30" height="30" patternUnits="userSpaceOnUse"><circle cx="15" cy="15" r="1.2" fill="#1f1f24"/></pattern></defs>
+<rect width="900" height="1046" fill="#0d0d0f"/>
+<rect width="900" height="1046" fill="url(#g)"/>
+<g font-family="DejaVu Sans, Arial, sans-serif">
+<rect x="0" y="0" width="900" height="8" fill="#a1a1aa"/>
+<text x="870" y="40" font-size="16" fill="#a3a3a3" text-anchor="end">gmt400.pl · schemat</text>
+<text x="30" y="76" font-size="29" fill="#f5f5f5" font-weight="bold">Regulacja luzu zaworów: dwa ustawienia wału (V6</text>
+<text x="30" y="112" font-size="29" fill="#f5f5f5" font-weight="bold">i V8)</text>
+<text x="30" y="148" font-size="20" fill="#d4d4d8">4.3 V6 do 1994 · 5.0/5.7 V8 · 7.4 V8 do 1996. Od 1995 (V6) i od 1997</text>
+<text x="30" y="175" font-size="20" fill="#d4d4d8">(7.4 L) nie reguluje się — dokręcić do momentu.</text>
+<line x1="30" y1="202" x2="870" y2="202" stroke="#3f3f46" stroke-width="2"/>
+<rect x="30" y="236" width="8" height="30" fill="#d4d4d8"/>
+<text x="50" y="258" font-size="24" fill="#f5f5f5" font-weight="bold">Numeracja cylindrów i kolejność zapłonu</text>
+<rect x="30" y="282" width="840" height="40" rx="6" fill="#27272a" stroke="#52525b" stroke-width="1.5"/>
+<text x="40" y="312" font-size="19" fill="#e4e4e7" font-weight="bold">Silnik</text>
+<text x="260" y="312" font-size="19" fill="#e4e4e7" font-weight="bold">Rzędy (od przodu)</text>
+<text x="640" y="312" font-size="19" fill="#e4e4e7" font-weight="bold">Kolejność zapłonu</text>
+<rect x="30" y="326" width="840" height="40" rx="6" fill="#18181b" stroke="#3f3f46" stroke-width="1.5"/>
+<text x="40" y="352" font-size="19" fill="#f5f5f5" font-weight="bold">4.3 V6</text>
+<text x="260" y="352" font-size="19" fill="#d4d4d8">lewy 1-3-5, prawy 2-4-6</text>
+<text x="640" y="352" font-size="19" fill="#d4d4d8">1-6-5-4-3-2</text>
+<rect x="30" y="370" width="840" height="40" rx="6" fill="#18181b" stroke="#3f3f46" stroke-width="1.5"/>
+<text x="40" y="396" font-size="19" fill="#f5f5f5" font-weight="bold">V8 (5.0/5.7/7.4)</text>
+<text x="260" y="396" font-size="19" fill="#d4d4d8">lewy 1-3-5-7, prawy 2-4-6-8</text>
+<text x="640" y="396" font-size="19" fill="#d4d4d8">1-8-4-3-6-5-7-2</text>
+<rect x="30" y="430" width="8" height="30" fill="#d4d4d8"/>
+<text x="50" y="452" font-size="24" fill="#f5f5f5" font-weight="bold">Ustawienie A: cylinder 1 w GMP sprężania</text>
+<rect x="30" y="476" width="840" height="40" rx="6" fill="#27272a" stroke="#52525b" stroke-width="1.5"/>
+<text x="40" y="506" font-size="19" fill="#e4e4e7" font-weight="bold">Silnik</text>
+<text x="260" y="506" font-size="19" fill="#e4e4e7" font-weight="bold">Zawory ssące</text>
+<text x="570" y="506" font-size="19" fill="#e4e4e7" font-weight="bold">Zawory wydechowe</text>
+<rect x="30" y="520" width="840" height="40" rx="6" fill="#18181b" stroke="#3f3f46" stroke-width="1.5"/>
+<text x="40" y="546" font-size="19" fill="#f5f5f5" font-weight="bold">4.3 V6</text>
+<text x="260" y="546" font-size="19" fill="#d4d4d8">1, 2, 3</text>
+<text x="570" y="546" font-size="19" fill="#d4d4d8">1, 5, 6</text>
+<rect x="30" y="564" width="840" height="40" rx="6" fill="#18181b" stroke="#3f3f46" stroke-width="1.5"/>
+<text x="40" y="590" font-size="19" fill="#f5f5f5" font-weight="bold">V8</text>
+<text x="260" y="590" font-size="19" fill="#d4d4d8">1, 2, 5, 7</text>
+<text x="570" y="590" font-size="19" fill="#d4d4d8">1, 3, 4, 8</text>
+<rect x="30" y="624" width="8" height="30" fill="#d4d4d8"/>
+<text x="50" y="646" font-size="24" fill="#f5f5f5" font-weight="bold">Ustawienie B: po obrocie wału o 360°</text>
+<rect x="30" y="670" width="840" height="40" rx="6" fill="#27272a" stroke="#52525b" stroke-width="1.5"/>
+<text x="40" y="700" font-size="19" fill="#e4e4e7" font-weight="bold">Silnik</text>
+<text x="260" y="700" font-size="19" fill="#e4e4e7" font-weight="bold">Zawory ssące</text>
+<text x="570" y="700" font-size="19" fill="#e4e4e7" font-weight="bold">Zawory wydechowe</text>
+<rect x="30" y="714" width="840" height="40" rx="6" fill="#18181b" stroke="#3f3f46" stroke-width="1.5"/>
+<text x="40" y="740" font-size="19" fill="#f5f5f5" font-weight="bold">4.3 V6</text>
+<text x="260" y="740" font-size="19" fill="#d4d4d8">4, 5, 6</text>
+<text x="570" y="740" font-size="19" fill="#d4d4d8">2, 3, 4</text>
+<rect x="30" y="758" width="840" height="40" rx="6" fill="#18181b" stroke="#3f3f46" stroke-width="1.5"/>
+<text x="40" y="784" font-size="19" fill="#f5f5f5" font-weight="bold">V8</text>
+<text x="260" y="784" font-size="19" fill="#d4d4d8">3, 4, 6, 8</text>
+<text x="570" y="784" font-size="19" fill="#d4d4d8">2, 5, 6, 7</text>
+<rect x="30" y="814" width="840" height="102" rx="8" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<text x="44" y="846" font-size="18" fill="#f5f5f5">Każdy zawór: obracaj popychacz palcami i dokręcaj nakrętkę, aż zniknie luz;</text>
+<text x="44" y="872" font-size="18" fill="#f5f5f5">potem jeszcze 3/4 obrotu (270°). Cylinder 1 w GMP sprężania: kreska na</text>
+<text x="44" y="898" font-size="18" fill="#f5f5f5">wibroamortyzatorze naprzeciw „0”, wirnik rozdzielacza na znaku cyl. 1.</text>
+<line x1="30" y1="932" x2="870" y2="932" stroke="#3f3f46" stroke-width="2"/>
+<text x="30" y="960" font-size="17" fill="#a3a3a3">Źródło: Haynes Chevrolet &amp; GMC Pick-ups 1988–1998 (nr 24065), rozdz. 2A, sekcja 4</text>
+<text x="30" y="984" font-size="17" fill="#a3a3a3">(2A-5…2A-6), sekcja 9 (2A-12), str. 2A-1. Tabele własne (zestawienie z opisu).</text>
+<text x="30" y="1008" font-size="17" fill="#a3a3a3">Sprawdź w swoim aucie / manualu.</text>
+</g>
+</svg>

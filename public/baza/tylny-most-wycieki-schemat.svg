@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Własny rysunek wektorowy gmt400.pl (bez grafik AI, bez kopiowania ilustracji Haynes/GM). Dane: źródła podane na rysunku. Rysunek poglądowy, nie w skali. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1069" width="900" height="1069" role="img" aria-label="Tylny most: skąd może cieknąć olej">
+<title>Tylny most: skąd może cieknąć olej</title>
+<defs><pattern id="g" width="30" height="30" patternUnits="userSpaceOnUse"><circle cx="15" cy="15" r="1.2" fill="#1f1f24"/></pattern></defs>
+<rect width="900" height="1069" fill="#0d0d0f"/>
+<rect width="900" height="1069" fill="url(#g)"/>
+<g font-family="DejaVu Sans, Arial, sans-serif">
+<rect x="0" y="0" width="900" height="8" fill="#a1a1aa"/>
+<text x="870" y="40" font-size="16" fill="#a3a3a3" text-anchor="end">gmt400.pl · schemat</text>
+<text x="30" y="76" font-size="29" fill="#f5f5f5" font-weight="bold">Tylny most: skąd może cieknąć olej</text>
+<text x="30" y="112" font-size="20" fill="#d4d4d8">C/K, Suburban, Tahoe, Yukon — GMT400 1988–1998. Schemat poglądowy</text>
+<text x="30" y="139" font-size="20" fill="#d4d4d8">(widok z góry), własny, wg Haynes rozdz. 8 i „Troubleshooting”.</text>
+<line x1="30" y1="166" x2="870" y2="166" stroke="#3f3f46" stroke-width="2"/>
+<text x="450" y="226" font-size="15" fill="#a1a1aa" text-anchor="middle">↑ przód pojazdu</text>
+<rect x="432" y="246" width="36" height="70" rx="10" fill="#202024" stroke="#71717a" stroke-width="3"/>
+<text x="482" y="276" font-size="13" fill="#a1a1aa" text-anchor="start">wał napędowy</text>
+<rect x="405" y="316" width="90" height="26" rx="10" fill="#27272a" stroke="#a1a1aa" stroke-width="3"/>
+<text x="508" y="334" font-size="13" fill="#a1a1aa" text-anchor="start">kołnierz</text>
+<rect x="80" y="366" width="740" height="50" rx="10" fill="#141417" stroke="#71717a" stroke-width="3"/>
+<rect x="365" y="342" width="170" height="150" rx="18" fill="#202024" stroke="#e4e4e7" stroke-width="3"/>
+<text x="450" y="406" font-size="17" fill="#f5f5f5" text-anchor="middle" font-weight="bold">obudowa</text>
+<text x="450" y="428" font-size="17" fill="#f5f5f5" text-anchor="middle" font-weight="bold">mechanizmu</text>
+<text x="450" y="450" font-size="17" fill="#f5f5f5" text-anchor="middle" font-weight="bold">różnicowego</text>
+<rect x="385" y="492" width="130" height="20" rx="10" fill="#27272a" stroke="#e4e4e7" stroke-width="3"/>
+<text x="530" y="508" font-size="14" fill="#a1a1aa" text-anchor="start">pokrywa (tył)</text>
+<rect x="60" y="354" width="40" height="74" rx="8" fill="#202024" stroke="#e4e4e7" stroke-width="3"/>
+<rect x="800" y="354" width="40" height="74" rx="8" fill="#202024" stroke="#e4e4e7" stroke-width="3"/>
+<text x="80" y="348" font-size="13" fill="#a1a1aa" text-anchor="middle">lewy koniec</text>
+<text x="820" y="348" font-size="13" fill="#a1a1aa" text-anchor="middle">prawy koniec</text>
+<text x="80" y="448" font-size="13" fill="#a1a1aa" text-anchor="middle">bęben + koło</text>
+<text x="820" y="448" font-size="13" fill="#a1a1aa" text-anchor="middle">bęben + koło</text>
+<circle cx="450" cy="329" r="15" fill="#e4e4e7"/>
+<text x="450" y="335" font-size="18" fill="#0d0d0f" text-anchor="middle" font-weight="bold">1</text>
+<circle cx="130" cy="391" r="15" fill="#e4e4e7"/>
+<text x="130" y="397" font-size="18" fill="#0d0d0f" text-anchor="middle" font-weight="bold">2</text>
+<circle cx="770" cy="391" r="15" fill="#e4e4e7"/>
+<text x="770" y="397" font-size="18" fill="#0d0d0f" text-anchor="middle" font-weight="bold">2</text>
+<circle cx="450" cy="502" r="15" fill="#e4e4e7"/>
+<text x="450" y="508" font-size="18" fill="#0d0d0f" text-anchor="middle" font-weight="bold">3</text>
+<rect x="30" y="546" width="840" height="35" rx="6" fill="#27272a" stroke="#52525b" stroke-width="1.5"/>
+<text x="40" y="571" font-size="15" fill="#e4e4e7" font-weight="bold">Nr</text>
+<text x="100" y="571" font-size="15" fill="#e4e4e7" font-weight="bold">Miejsce wycieku</text>
+<text x="500" y="571" font-size="15" fill="#e4e4e7" font-weight="bold">Co zrobić (Haynes)</text>
+<rect x="30" y="585" width="840" height="56" rx="6" fill="#18181b" stroke="#3f3f46" stroke-width="1.5"/>
+<text x="40" y="607" font-size="15" fill="#f5f5f5" font-weight="bold">1</text>
+<text x="100" y="607" font-size="15" fill="#d4d4d8">Uszczelniacz wałka atakującego (przy</text>
+<text x="100" y="628" font-size="15" fill="#d4d4d8">kołnierzu wału)</text>
+<text x="500" y="607" font-size="15" fill="#d4d4d8">Rozdz. 8, §19 — wymiana uszczelniacza,</text>
+<text x="500" y="628" font-size="15" fill="#d4d4d8">ze znakami i pomiarem oporu obrotu</text>
+<rect x="30" y="645" width="840" height="56" rx="6" fill="#18181b" stroke="#3f3f46" stroke-width="1.5"/>
+<text x="40" y="667" font-size="15" fill="#f5f5f5" font-weight="bold">2</text>
+<text x="100" y="667" font-size="15" fill="#d4d4d8">Uszczelniacze półosi (końce obudowy, od</text>
+<text x="100" y="688" font-size="15" fill="#d4d4d8">strony bębna)</text>
+<text x="500" y="667" font-size="15" fill="#d4d4d8">Rozdz. 8, §16 (półpływająca) lub §18/§21</text>
+<text x="500" y="688" font-size="15" fill="#d4d4d8">(pływająca)</text>
+<rect x="30" y="705" width="840" height="56" rx="6" fill="#18181b" stroke="#3f3f46" stroke-width="1.5"/>
+<text x="40" y="727" font-size="15" fill="#f5f5f5" font-weight="bold">3</text>
+<text x="100" y="727" font-size="15" fill="#d4d4d8">Pokrywa różnicowego (uszczelka, śruby)</text>
+<text x="500" y="727" font-size="15" fill="#d4d4d8">„Troubleshooting”: dokręć lub załóż nową</text>
+<text x="500" y="748" font-size="15" fill="#d4d4d8">uszczelkę</text>
+<rect x="30" y="765" width="840" height="77" rx="6" fill="#18181b" stroke="#3f3f46" stroke-width="1.5"/>
+<text x="40" y="787" font-size="15" fill="#f5f5f5" font-weight="bold">—</text>
+<text x="100" y="787" font-size="15" fill="#d4d4d8">Korek wlewu/spustu, odpowietrznik mostu</text>
+<text x="100" y="808" font-size="15" fill="#d4d4d8">(położenie zależy od mostu — nie rysowano)</text>
+<text x="500" y="787" font-size="15" fill="#d4d4d8">„Troubleshooting”: sprawdź korek;</text>
+<text x="500" y="808" font-size="15" fill="#d4d4d8">zapchany lub uszkodzony odpowietrznik</text>
+<text x="500" y="829" font-size="15" fill="#d4d4d8">też powoduje wyciek</text>
+<rect x="30" y="858" width="840" height="87" rx="8" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<text x="44" y="887" font-size="15" fill="#d4d4d8">Poziom oleju sprawdzaj przez otwór wlewu (olej do dolnej krawędzi). Wniosek własny: by</text>
+<text x="44" y="908" font-size="15" fill="#d4d4d8">ustalić źródło, umyj most i obejrzyj go ponownie po jeździe. Sprawdź w swoim aucie /</text>
+<text x="44" y="929" font-size="15" fill="#d4d4d8">manualu.</text>
+<line x1="30" y1="955" x2="870" y2="955" stroke="#3f3f46" stroke-width="2"/>
+<text x="30" y="983" font-size="17" fill="#a3a3a3">Źródło: Haynes, Chevrolet &amp; GMC Pick-ups 1988–1998, rozdz. 8 §10, §16, §19 (str.</text>
+<text x="30" y="1007" font-size="17" fill="#a3a3a3">8-7, 8-11, 8-12) i „Troubleshooting” (część D tylny most). Rysunek własny, nie</text>
+<text x="30" y="1031" font-size="17" fill="#a3a3a3">kopiuje ilustracji Haynes.</text>
+</g>
+</svg>

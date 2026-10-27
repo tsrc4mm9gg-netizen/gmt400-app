@@ -92,6 +92,21 @@ const SUBURBAN_DIESEL: MediaFigure = {
   },
 };
 
+const ENGINE_43: MediaFigure = {
+  src: '/baza/silnik-4-3-v6-s10-blazer.webp',
+  alt: 'Silnik Chevrolet 4.3 L V6 w komorze silnika, widok z góry',
+  width: 960,
+  height: 720,
+  caption: 'Silnik 4.3 L V6 GM (egzemplarz z komory silnika S-10 Blazer wg opisu na Commons) — zdjęcie poglądowe; głowice i pokrywy zaworów wyglądają podobnie w 4.3 w GMT400, ale sprawdź w swoim aucie / manualu.',
+  credit: {
+    author: 'Musashi hai',
+    licence: 'CC BY-SA 3.0',
+    licenceUrl: 'https://creativecommons.org/licenses/by-sa/3.0',
+    sourceUrl: COMMONS('4.3_V-6.JPG'),
+    sourceLabel: 'Wikimedia Commons',
+  },
+};
+
 const svg = (file: string, alt: string, height: number, caption: string, basis: string): MediaFigure => ({
   src: `/baza/${file}`, alt, width: 900, height, caption, basis,
 });
@@ -103,6 +118,16 @@ const FIG = {
   evap: svg('evap-schemat-blokowy.svg', 'Schemat blokowy układu EVAP: zbiornik, kanister, zawór purge, kolektor, zawór vent, czujnik ciśnienia i sterownik PCM', 1040, 'Układ EVAP — własny rysunek poglądowy (położenie elementów zależy od rocznika).', 'Haynes 1988–98, s. 6-22/6-23; GM Mode 6'),
   evapCodes: svg('evap-kody-p0449-p0455-p0505.svg', 'Karty kodów P0449, P0455 i P0505 z opisem wg SAE J2012, odpowiednikami w tabelach GM i listą kontroli', 1080, 'Trzy kody — własny rysunek; P0505 nie jest kodem EVAP.', 'SAE J2012; Haynes 1988–98, s. 6-7…6-23'),
   torques: svg('momenty-plyny-uklad-napedowy.svg', 'Tabele momentów dokręcania wału i tylnego mostu w N·m oraz płynów i pojemności mostu, skrzyni rozdzielczej i skrzyń biegów w litrach', 1767, 'Momenty (N·m) i płyny (litry) — własny rysunek, przeliczenia zaokrąglone.', 'Haynes 1988–98 (8-1, 1-2, 1-19, 1-25), OM C/K 1995 s. 6-33, SM GM 1998–99'),
+  valves: svg('regulacja-zaworow-v6-v8.svg', 'Dwa ustawienia wału korbowego przy regulacji luzu zaworów V6 i V8 oraz tabele zaworów do regulacji w każdym ustawieniu', 1046, 'Regulacja luzu zaworów — własny rysunek z opisu Haynes (tabele własne, bez rysunków Haynes).', 'Haynes 1988–98, rozdz. 2A §4, §9 (2A-1, 2A-5…2A-6, 2A-12)'),
+  heads: svg('glowice-kolejnosc-dokrecania.svg', 'Kolejność dokręcania śrub głowic silników V6 i V8 — numeracja śrub od 1 do ostatniej', 1975, 'Kolejność dokręcania głowic — własny rysunek (tylko numeracja, nie w skali); momenty w opisie wpisu.', 'Haynes 1988–98, rozdz. 2A, rys. 8.16a–c (2A-11…2A-12)'),
+  cooling: svg('uklad-chlodzenia-obieg.svg', 'Schemat obiegu płynu chłodzącego V6 i V8: pompa, termostat, chłodnica, zbiornik wyrównawczy, nagrzewnica', 1089, 'Obieg płynu chłodzącego — własny rysunek poglądowy (nie w skali).', 'Haynes 1988–98, rozdz. 3 §1 (3-1, 3-2)'),
+  cooling65: svg('uklad-chlodzenia-6-5-td.svg', 'Schemat obiegu płynu chłodzącego diesla 6.5 TD: pompa, termostat, chłodnica, zbiornik wyrównawczy, nagrzewnica', 1244, 'Obieg płynu 6.5 TD — własny rysunek poglądowy (nie w skali).', 'GM Service Training 6.5L Turbo Diesel 1991, rozdz. 4 (4-2…4-15), 1-11'),
+  turbo: svg('turbosprezarka-6-5-td-schemat.svg', 'Schemat turbosprężarki diesla 6.5 TD: droga powietrza dolotowego, spalin i oleju', 1304, 'Turbosprężarka 6.5 TD — własny rysunek poglądowy.', 'GM Service Training 6.5L Turbo Diesel 1991, rozdz. 6 (6-1…6-23)'),
+  l60e: svg('4l60e-tabela-zaladzen.svg', 'Tabela: które sprzęgła i hamulce są załączone na każdym biegu w skrzyni 4L60-E', 939, 'Załączenia 4L60-E na każdym biegu — własna tabela (dane z przewodnika GM, nie kopia grafiki).', 'GM Hydra-Matic 4L60-E Technician\'s Guide 1992, Range Reference Chart, s. 11'),
+  l80e: svg('4l80e-tabela-zaladzen.svg', 'Tabela: które sprzęgła i hamulce są załączone na każdym biegu w skrzyni 4L80-E', 910, 'Załączenia 4L80-E na każdym biegu — własna tabela (dane z przewodnika GM, nie kopia grafiki).', 'GM Hydra-Matic 4L80-E Technician\'s Guide, Range Reference Chart, s. 11'),
+  axle: svg('tylny-most-wycieki-schemat.svg', 'Schemat tylnego mostu z miejscami, skąd może cieknąć olej: uszczelniacz pinionu, półosi, pokrywa, odpowietrznik', 1069, 'Wycieki z tylnego mostu — własny rysunek poglądowy.', 'Haynes 1988–98, rozdz. 8 §10, §16, §19 (8-7, 8-11, 8-12)'),
+  bleed: svg('hamulce-odpowietrzanie-kolejnosc.svg', 'Kolejność odpowietrzania kół układu hamulcowego i schemat kroków', 1184, 'Kolejność odpowietrzania hamulców — własny rysunek.', 'Haynes 1988–98, rozdz. 9 §15 (9-18…9-19)'),
+  headlights: svg('reflektory-ustawienie-sciana.svg', 'Schemat ustawienia reflektorów na ścianie: oś auta, osie reflektorów, pozioma taśma i strefa jasności świateł mijania 5 cm niżej i 5 cm w prawo', 1172, 'Ustawienie reflektorów na ścianie — własny rysunek poglądowy (przesunięcia wyolbrzymione).', 'Haynes 1988–98, rozdz. 12 §8 (12-3…12-5)'),
   rpo: svg('rpo-vin-jak-odczytac.svg', 'Schemat 17 znaków VIN z zaznaczonym 8. (silnik) i 10. (rok) znakiem, tabele kodów roku, silnika i RPO oraz miejsca etykiety w aucie', 1797, 'Jak odczytać silnik, rok i RPO — własny rysunek.', 'instrukcje obsługi GM 1994–99, GM Heritage Center, 49 CFR § 565.15'),
 };
 
@@ -136,6 +161,24 @@ const entries: Record<string, EntryMedia> = {
   [P + '8147a57debe671e1771f']: { tile: null, figures: [], schematics: ['fuse-locations'] },
   // Punkty masy
   [P + '81f09747d6fafbe330b4']: { tile: null, figures: [], schematics: ['ground-points'] },
+  // A2 — regulacja zaworów V6/V8 (Haynes 2A)
+  [P + '81938f7cf5823aac0546']: { tile: null, figures: [FIG.valves], schematics: [] },
+  // A3a — głowice, kolejność dokręcania; zdjęcie 4.3 V6
+  [P + '8101b9c0e9ff8331ab3e']: { tile: '/baza/silnik-4-3-v6-s10-blazer.webp', figures: [ENGINE_43, FIG.heads], schematics: [] },
+  // B5b — układ chłodzenia V6/V8
+  [P + '81f685b5f20f15c442cb']: { tile: null, figures: [FIG.cooling], schematics: [] },
+  // B7a — chłodzenie 6.5 TD
+  [P + '816ca88cd7b3100113cd']: { tile: null, figures: [FIG.cooling65], schematics: [] },
+  // C9a — turbo 6.5 TD
+  [P + '81faaf72d169d02ae516']: { tile: null, figures: [FIG.turbo], schematics: [] },
+  // D12a — tabele załączeń 4L60-E / 4L80-E
+  [P + '81209cabda0543eea86b']: { tile: null, figures: [FIG.l60e, FIG.l80e], schematics: [] },
+  // D13e — wycieki z tylnego mostu
+  [P + '817faa33e67770ea31d2']: { tile: null, figures: [FIG.axle], schematics: [] },
+  // E15b — odpowietrzanie hamulców
+  [P + '815daeeed0472900e313']: { tile: null, figures: [FIG.bleed], schematics: [] },
+  // E17a — reflektory: wymiana i ustawienie
+  [P + '817a8ac7cdfbdc51ba26']: { tile: null, figures: [FIG.headlights], schematics: [] },
 };
 
 export const ENTRY_MEDIA: Readonly<Record<string, EntryMedia>> = entries;

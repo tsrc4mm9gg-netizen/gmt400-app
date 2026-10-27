@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Własny rysunek wektorowy gmt400.pl (bez grafik AI, bez kopiowania ilustracji Haynes/GM). Dane: źródła podane na rysunku. Rysunek poglądowy, nie w skali. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1975.0" width="900" height="1975.0" role="img" aria-label="Głowice: kolejność dokręcania śrub (od 1 do ostatniej)">
+<title>Głowice: kolejność dokręcania śrub (od 1 do ostatniej)</title>
+<defs><pattern id="g" width="30" height="30" patternUnits="userSpaceOnUse"><circle cx="15" cy="15" r="1.2" fill="#1f1f24"/></pattern></defs>
+<rect width="900" height="1975.0" fill="#0d0d0f"/>
+<rect width="900" height="1975.0" fill="url(#g)"/>
+<g font-family="DejaVu Sans, Arial, sans-serif">
+<rect x="0" y="0" width="900" height="8" fill="#a1a1aa"/>
+<text x="870" y="40" font-size="16" fill="#a3a3a3" text-anchor="end">gmt400.pl · schemat</text>
+<text x="30" y="76" font-size="29" fill="#f5f5f5" font-weight="bold">Głowice: kolejność dokręcania śrub (od 1 do</text>
+<text x="30" y="112" font-size="29" fill="#f5f5f5" font-weight="bold">ostatniej)</text>
+<text x="30" y="148" font-size="20" fill="#d4d4d8">4.3 V6 (13 śrub) · 5.0/5.7 small-block V8 (17 śrub) · 7.4 big-block V8</text>
+<text x="30" y="175" font-size="20" fill="#d4d4d8">(16 śrub) — GMT400 1988–2000. Schemat własny wg opisu w Haynes.</text>
+<line x1="30" y1="202" x2="870" y2="202" stroke="#3f3f46" stroke-width="2"/>
+<rect x="30" y="232" width="840" height="102" rx="8" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<text x="44" y="264" font-size="18" fill="#f5f5f5">Dokręcaj w kolejności numerów, w etapach (momenty i kąty: patrz wpis</text>
+<text x="44" y="290" font-size="18" fill="#f5f5f5">„Głowice cylindrów”). Luzuj w kolejności odwrotnej, po 1/4 obrotu. Rząd</text>
+<text x="44" y="316" font-size="18" fill="#f5f5f5">śrub przy świecach (u dołu rysunku) nie może zostać pominięty.</text>
+<rect x="30" y="342" width="8" height="30" fill="#d4d4d8"/>
+<text x="50" y="364" font-size="24" fill="#f5f5f5" font-weight="bold">4.3 V6 — jedna głowica, 13 śrub</text>
+<text x="30" y="410" font-size="17" fill="#a3a3a3">◀ PRZÓD SILNIKA</text>
+<line x1="30" y1="420" x2="200" y2="420" stroke="#a1a1aa" stroke-width="2" marker-end="none"/>
+<rect x="134" y="428" width="631" height="351" rx="22" fill="#141417" stroke="#71717a" stroke-width="3"/>
+<circle cx="272" cy="466" r="19" fill="#d4d4d8" stroke="#f5f5f5" stroke-width="2"/>
+<text x="272" y="473" font-size="19" font-weight="bold" fill="#0d0d0f" text-anchor="middle">8</text>
+<circle cx="434" cy="466" r="19" fill="#d4d4d8" stroke="#f5f5f5" stroke-width="2"/>
+<text x="434" y="473" font-size="19" font-weight="bold" fill="#0d0d0f" text-anchor="middle">5</text>
+<circle cx="597" cy="466" r="19" fill="#d4d4d8" stroke="#f5f5f5" stroke-width="2"/>
+<text x="597" y="473" font-size="19" font-weight="bold" fill="#0d0d0f" text-anchor="middle">9</text>
+<circle cx="184" cy="641" r="19" fill="#d4d4d8" stroke="#f5f5f5" stroke-width="2"/>
+<text x="184" y="648" font-size="19" font-weight="bold" fill="#0d0d0f" text-anchor="middle">12</text>
+<circle cx="353" cy="641" r="19" fill="#d4d4d8" stroke="#f5f5f5" stroke-width="2"/>
+<text x="353" y="648" font-size="19" font-weight="bold" fill="#0d0d0f" text-anchor="middle">4</text>
+<circle cx="516" cy="641" r="19" fill="#d4d4d8" stroke="#f5f5f5" stroke-width="2"/>
+<text x="516" y="648" font-size="19" font-weight="bold" fill="#0d0d0f" text-anchor="middle">1</text>
+<circle cx="684" cy="641" r="19" fill="#d4d4d8" stroke="#f5f5f5" stroke-width="2"/>
+<text x="684" y="648" font-size="19" font-weight="bold" fill="#0d0d0f" text-anchor="middle">13</text>
+<circle cx="184" cy="741" r="19" fill="#d4d4d8" stroke="#f5f5f5" stroke-width="2"/>
+<text x="184" y="748" font-size="19" font-weight="bold" fill="#0d0d0f" text-anchor="middle">11</text>
+<circle cx="291" cy="741" r="19" fill="#d4d4d8" stroke="#f5f5f5" stroke-width="2"/>
+<text x="291" y="748" font-size="19" font-weight="bold" fill="#0d0d0f" text-anchor="middle">7</text>
+<circle cx="397" cy="741" r="19" fill="#d4d4d8" stroke="#f5f5f5" stroke-width="2"/>
+<text x="397" y="748" font-size="19" font-weight="bold" fill="#0d0d0f" text-anchor="middle">3</text>
+<circle cx="503" cy="741" r="19" fill="#d4d4d8" stroke="#f5f5f5" stroke-width="2"/>
+<text x="503" y="748" font-size="19" font-weight="bold" fill="#0d0d0f" text-anchor="middle">2</text>
+<circle cx="603" cy="741" r="19" fill="#d4d4d8" stroke="#f5f5f5" stroke-width="2"/>
+<text x="603" y="748" font-size="19" font-weight="bold" fill="#0d0d0f" text-anchor="middle">6</text>
+<circle cx="716" cy="741" r="19" fill="#d4d4d8" stroke="#f5f5f5" stroke-width="2"/>
+<text x="716" y="748" font-size="19" font-weight="bold" fill="#0d0d0f" text-anchor="middle">10</text>
+<rect x="30" y="793.0" width="840" height="48" rx="8" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<text x="44" y="824.0" font-size="17" fill="#f5f5f5">Haynes rys. 8.16a (2A-11). Rząd przy świecach (u dołu): 11, 7, 3, 2, 6, 10.</text>
+<rect x="30" y="853.0" width="8" height="30" fill="#d4d4d8"/>
+<text x="50" y="875.0" font-size="24" fill="#f5f5f5" font-weight="bold">5.0 / 5.7 small-block V8 — jedna głowica, 17 śrub</text>
+<text x="30" y="921.0" font-size="17" fill="#a3a3a3">◀ PRZÓD SILNIKA</text>
+<line x1="30" y1="931.0" x2="200" y2="931.0" stroke="#a1a1aa" stroke-width="2" marker-end="none"/>
+<rect x="116" y="939" width="669" height="332" rx="22" fill="#141417" stroke="#71717a" stroke-width="3"/>
+<circle cx="253" cy="977" r="19" fill="#d4d4d8" stroke="#f5f5f5" stroke-width="2"/>
+<text x="253" y="984" font-size="19" font-weight="bold" fill="#0d0d0f" text-anchor="middle">13</text>
+<circle cx="397" cy="977" r="19" fill="#d4d4d8" stroke="#f5f5f5" stroke-width="2"/>
+<text x="397" y="984" font-size="19" font-weight="bold" fill="#0d0d0f" text-anchor="middle">5</text>
+<circle cx="528" cy="977" r="19" fill="#d4d4d8" stroke="#f5f5f5" stroke-width="2"/>
+<text x="528" y="984" font-size="19" font-weight="bold" fill="#0d0d0f" text-anchor="middle">2</text>
+<circle cx="672" cy="977" r="19" fill="#d4d4d8" stroke="#f5f5f5" stroke-width="2"/>
+<text x="672" y="984" font-size="19" font-weight="bold" fill="#0d0d0f" text-anchor="middle">10</text>
+<circle cx="166" cy="1046" r="19" fill="#d4d4d8" stroke="#f5f5f5" stroke-width="2"/>
+<text x="166" y="1053" font-size="19" font-weight="bold" fill="#0d0d0f" text-anchor="middle">17</text>
+<circle cx="324" cy="1046" r="19" fill="#d4d4d8" stroke="#f5f5f5" stroke-width="2"/>
+<text x="324" y="1053" font-size="19" font-weight="bold" fill="#0d0d0f" text-anchor="middle">9</text>
+<circle cx="469" cy="1046" r="19" fill="#d4d4d8" stroke="#f5f5f5" stroke-width="2"/>
+<text x="469" y="1053" font-size="19" font-weight="bold" fill="#0d0d0f" text-anchor="middle">1</text>
+<circle cx="601" cy="1046" r="19" fill="#d4d4d8" stroke="#f5f5f5" stroke-width="2"/>
+<text x="601" y="1053" font-size="19" font-weight="bold" fill="#0d0d0f" text-anchor="middle">6</text>
+<circle cx="734" cy="1046" r="19" fill="#d4d4d8" stroke="#f5f5f5" stroke-width="2"/>
+<text x="734" y="1053" font-size="19" font-weight="bold" fill="#0d0d0f" text-anchor="middle">14</text>
+<circle cx="178" cy="1233" r="19" fill="#d4d4d8" stroke="#f5f5f5" stroke-width="2"/>
+<text x="178" y="1240" font-size="19" font-weight="bold" fill="#0d0d0f" text-anchor="middle">16</text>
+<circle cx="278" cy="1233" r="19" fill="#d4d4d8" stroke="#f5f5f5" stroke-width="2"/>
+<text x="278" y="1240" font-size="19" font-weight="bold" fill="#0d0d0f" text-anchor="middle">12</text>
+<circle cx="341" cy="1233" r="19" fill="#d4d4d8" stroke="#f5f5f5" stroke-width="2"/>
+<text x="341" y="1240" font-size="19" font-weight="bold" fill="#0d0d0f" text-anchor="middle">8</text>
+<circle cx="416" cy="1233" r="19" fill="#d4d4d8" stroke="#f5f5f5" stroke-width="2"/>
+<text x="416" y="1240" font-size="19" font-weight="bold" fill="#0d0d0f" text-anchor="middle">4</text>
+<circle cx="497" cy="1233" r="19" fill="#d4d4d8" stroke="#f5f5f5" stroke-width="2"/>
+<text x="497" y="1240" font-size="19" font-weight="bold" fill="#0d0d0f" text-anchor="middle">3</text>
+<circle cx="584" cy="1233" r="19" fill="#d4d4d8" stroke="#f5f5f5" stroke-width="2"/>
+<text x="584" y="1240" font-size="19" font-weight="bold" fill="#0d0d0f" text-anchor="middle">7</text>
+<circle cx="653" cy="1233" r="19" fill="#d4d4d8" stroke="#f5f5f5" stroke-width="2"/>
+<text x="653" y="1240" font-size="19" font-weight="bold" fill="#0d0d0f" text-anchor="middle">11</text>
+<circle cx="734" cy="1233" r="19" fill="#d4d4d8" stroke="#f5f5f5" stroke-width="2"/>
+<text x="734" y="1240" font-size="19" font-weight="bold" fill="#0d0d0f" text-anchor="middle">15</text>
+<rect x="30" y="1285.25" width="840" height="72" rx="8" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<text x="44" y="1316.25" font-size="17" fill="#f5f5f5">Haynes rys. 8.16b (2A-12). Wersje Vortec 1996+: Haynes nie podaje osobnego</text>
+<text x="44" y="1340.25" font-size="17" fill="#f5f5f5">schematu — sprawdź w swoim manualu.</text>
+<rect x="30" y="1369.25" width="8" height="30" fill="#d4d4d8"/>
+<text x="50" y="1391.25" font-size="24" fill="#f5f5f5" font-weight="bold">7.4 big-block V8 — jedna głowica, 16 śrub</text>
+<text x="30" y="1437.25" font-size="17" fill="#a3a3a3">◀ PRZÓD SILNIKA</text>
+<line x1="30" y1="1447.25" x2="200" y2="1447.25" stroke="#a1a1aa" stroke-width="2" marker-end="none"/>
+<rect x="78" y="1455" width="744" height="330" rx="22" fill="#141417" stroke="#71717a" stroke-width="3"/>
+<circle cx="247" cy="1493" r="19" fill="#d4d4d8" stroke="#f5f5f5" stroke-width="2"/>
+<text x="247" y="1500" font-size="19" font-weight="bold" fill="#0d0d0f" text-anchor="middle">12</text>
+<circle cx="526" cy="1493" r="19" fill="#d4d4d8" stroke="#f5f5f5" stroke-width="2"/>
+<text x="526" y="1500" font-size="19" font-weight="bold" fill="#0d0d0f" text-anchor="middle">3</text>
+<circle cx="159" cy="1562" r="19" fill="#d4d4d8" stroke="#f5f5f5" stroke-width="2"/>
+<text x="159" y="1569" font-size="19" font-weight="bold" fill="#0d0d0f" text-anchor="middle">16</text>
+<circle cx="313" cy="1562" r="19" fill="#d4d4d8" stroke="#f5f5f5" stroke-width="2"/>
+<text x="313" y="1569" font-size="19" font-weight="bold" fill="#0d0d0f" text-anchor="middle">9</text>
+<circle cx="432" cy="1562" r="19" fill="#d4d4d8" stroke="#f5f5f5" stroke-width="2"/>
+<text x="432" y="1569" font-size="19" font-weight="bold" fill="#0d0d0f" text-anchor="middle">1</text>
+<circle cx="616" cy="1562" r="19" fill="#d4d4d8" stroke="#f5f5f5" stroke-width="2"/>
+<text x="616" y="1569" font-size="19" font-weight="bold" fill="#0d0d0f" text-anchor="middle">6</text>
+<circle cx="722" cy="1562" r="19" fill="#d4d4d8" stroke="#f5f5f5" stroke-width="2"/>
+<text x="722" y="1569" font-size="19" font-weight="bold" fill="#0d0d0f" text-anchor="middle">13</text>
+<circle cx="128" cy="1674" r="19" fill="#d4d4d8" stroke="#f5f5f5" stroke-width="2"/>
+<text x="128" y="1682" font-size="19" font-weight="bold" fill="#0d0d0f" text-anchor="middle">15</text>
+<circle cx="297" cy="1674" r="19" fill="#d4d4d8" stroke="#f5f5f5" stroke-width="2"/>
+<text x="297" y="1682" font-size="19" font-weight="bold" fill="#0d0d0f" text-anchor="middle">8</text>
+<circle cx="463" cy="1674" r="19" fill="#d4d4d8" stroke="#f5f5f5" stroke-width="2"/>
+<text x="463" y="1682" font-size="19" font-weight="bold" fill="#0d0d0f" text-anchor="middle">2</text>
+<circle cx="622" cy="1674" r="19" fill="#d4d4d8" stroke="#f5f5f5" stroke-width="2"/>
+<text x="622" y="1682" font-size="19" font-weight="bold" fill="#0d0d0f" text-anchor="middle">7</text>
+<circle cx="772" cy="1674" r="19" fill="#d4d4d8" stroke="#f5f5f5" stroke-width="2"/>
+<text x="772" y="1682" font-size="19" font-weight="bold" fill="#0d0d0f" text-anchor="middle">14</text>
+<circle cx="209" cy="1747" r="19" fill="#d4d4d8" stroke="#f5f5f5" stroke-width="2"/>
+<text x="209" y="1754" font-size="19" font-weight="bold" fill="#0d0d0f" text-anchor="middle">11</text>
+<circle cx="378" cy="1747" r="19" fill="#d4d4d8" stroke="#f5f5f5" stroke-width="2"/>
+<text x="378" y="1754" font-size="19" font-weight="bold" fill="#0d0d0f" text-anchor="middle">5</text>
+<circle cx="553" cy="1747" r="19" fill="#d4d4d8" stroke="#f5f5f5" stroke-width="2"/>
+<text x="553" y="1754" font-size="19" font-weight="bold" fill="#0d0d0f" text-anchor="middle">4</text>
+<circle cx="709" cy="1747" r="19" fill="#d4d4d8" stroke="#f5f5f5" stroke-width="2"/>
+<text x="709" y="1754" font-size="19" font-weight="bold" fill="#0d0d0f" text-anchor="middle">10</text>
+<rect x="30" y="1799.0" width="840" height="48" rx="8" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<text x="44" y="1830.0" font-size="17" fill="#f5f5f5">Haynes rys. 8.16c (2A-12).</text>
+<line x1="30" y1="1861.0" x2="870" y2="1861.0" stroke="#3f3f46" stroke-width="2"/>
+<text x="30" y="1889.0" font-size="17" fill="#a3a3a3">Źródło: Haynes Chevrolet &amp; GMC Pick-ups 1988–1998 (nr 24065), rozdz. 2A, rys.</text>
+<text x="30" y="1913.0" font-size="17" fill="#a3a3a3">8.16a–c (str. 2A-11…2A-12) — tylko numeracja śrub; rysunek własny, nie w skali.</text>
+<text x="30" y="1937.0" font-size="17" fill="#a3a3a3">Sprawdź w swoim aucie / manualu.</text>
+</g>
+</svg>

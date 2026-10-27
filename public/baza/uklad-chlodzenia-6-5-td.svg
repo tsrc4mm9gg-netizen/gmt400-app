@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Własny rysunek wektorowy gmt400.pl (bez grafik AI, bez kopiowania ilustracji Haynes/GM). Dane: źródła podane na rysunku. Rysunek poglądowy, nie w skali. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1244" width="900" height="1244" role="img" aria-label="6.5 TD: obieg płynu chłodzącego">
+<title>6.5 TD: obieg płynu chłodzącego</title>
+<defs><pattern id="g" width="30" height="30" patternUnits="userSpaceOnUse"><circle cx="15" cy="15" r="1.2" fill="#1f1f24"/></pattern></defs>
+<rect width="900" height="1244" fill="#0d0d0f"/>
+<rect width="900" height="1244" fill="url(#g)"/>
+<g font-family="DejaVu Sans, Arial, sans-serif">
+<rect x="0" y="0" width="900" height="8" fill="#a1a1aa"/>
+<text x="870" y="40" font-size="16" fill="#a3a3a3" text-anchor="end">gmt400.pl · schemat</text>
+<text x="30" y="76" font-size="29" fill="#f5f5f5" font-weight="bold">6.5 TD: obieg płynu chłodzącego</text>
+<text x="30" y="112" font-size="20" fill="#d4d4d8">Diesel 6.5L V8 turbo — GMT400 1992–1999. Schemat poglądowy, własny, wg</text>
+<text x="30" y="139" font-size="20" fill="#d4d4d8">opisu w GM Service Training (1991).</text>
+<line x1="30" y1="166" x2="870" y2="166" stroke="#3f3f46" stroke-width="2"/>
+<defs><marker id="ar" markerUnits="userSpaceOnUse" markerWidth="18" markerHeight="18" refX="13" refY="9" orient="auto"><path d="M0,1 L16,9 L0,17 z" fill="#f5f5f5"/></marker></defs>
+<rect x="40" y="296" width="110" height="85" rx="10" fill="#18181b" stroke="#a1a1aa" stroke-width="3"/>
+<text x="95.0" y="334" font-size="16" fill="#f5f5f5" font-weight="bold" text-anchor="middle">Zbiornik</text>
+<text x="95.0" y="354" font-size="16" fill="#f5f5f5" font-weight="bold" text-anchor="middle">wyrównawczy</text>
+<rect x="195" y="286" width="120" height="265" rx="10" fill="#202024" stroke="#a1a1aa" stroke-width="3"/>
+<text x="255.0" y="425" font-size="18" fill="#f5f5f5" font-weight="bold" text-anchor="middle">Chłodnica</text>
+<rect x="203" y="316" width="104" height="52" rx="6" fill="#141417" stroke="#71717a" stroke-width="3"/>
+<text x="255.0" y="338" font-size="13" fill="#f5f5f5" font-weight="bold" text-anchor="middle">olej silnika</text>
+<text x="255.0" y="355" font-size="13" fill="#f5f5f5" font-weight="bold" text-anchor="middle">(zbiornik A)</text>
+<rect x="203" y="486" width="104" height="52" rx="6" fill="#141417" stroke="#71717a" stroke-width="3"/>
+<text x="255.0" y="508" font-size="13" fill="#f5f5f5" font-weight="bold" text-anchor="middle">olej ATF</text>
+<text x="255.0" y="525" font-size="13" fill="#f5f5f5" font-weight="bold" text-anchor="middle">(zbiornik B)</text>
+<rect x="233" y="268" width="44" height="18" rx="5" fill="#d4d4d8"/>
+<text x="262" y="226" font-size="14" fill="#d4d4d8" text-anchor="start">korek 15 psi</text>
+<polyline points="255,268 255,236 95,236 95,294" fill="none" stroke="#e4e4e7" stroke-width="5" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="10 8" marker-end="url(#ar)"/>
+<text x="150" y="226" font-size="14" fill="#d4d4d8" text-anchor="middle">wąż przelewowy</text>
+<rect x="480" y="316" width="310" height="70" rx="10" fill="#202024" stroke="#a1a1aa" stroke-width="3"/>
+<text x="635.0" y="357" font-size="17" fill="#f5f5f5" font-weight="bold" text-anchor="middle">GŁOWICE L + P</text>
+<rect x="480" y="426" width="310" height="100" rx="10" fill="#202024" stroke="#a1a1aa" stroke-width="3"/>
+<text x="635.0" y="482" font-size="17" fill="#f5f5f5" font-weight="bold" text-anchor="middle">BLOK (kanały wodne)</text>
+<rect x="560" y="234" width="150" height="56" rx="10" fill="#141417" stroke="#a1a1aa" stroke-width="3"/>
+<text x="635.0" y="258" font-size="15" fill="#f5f5f5" font-weight="bold" text-anchor="middle">Kolektor wody +</text>
+<text x="635.0" y="277" font-size="15" fill="#f5f5f5" font-weight="bold" text-anchor="middle">termostat</text>
+<rect x="390" y="456" width="70" height="86" rx="10" fill="#18181b" stroke="#a1a1aa" stroke-width="3"/>
+<text x="425.0" y="495" font-size="15" fill="#f5f5f5" font-weight="bold" text-anchor="middle">Pompa</text>
+<text x="425.0" y="514" font-size="15" fill="#f5f5f5" font-weight="bold" text-anchor="middle">wody</text>
+<rect x="325" y="456" width="58" height="86" rx="10" fill="#141417" stroke="#71717a" stroke-width="3"/>
+<text x="354.0" y="495" font-size="13" fill="#f5f5f5" font-weight="bold" text-anchor="middle">Wentyl.</text>
+<text x="354.0" y="512" font-size="13" fill="#f5f5f5" font-weight="bold" text-anchor="middle">+ sprz.</text>
+<polyline points="255,552 255,582 425,582 425,546" fill="none" stroke="#e4e4e7" stroke-width="7" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#ar)"/>
+<text x="340" y="606" font-size="16" fill="#d4d4d8" text-anchor="middle" font-weight="bold">1  chłodnica → pompa (dolny wąż)</text>
+<polyline points="462,496 500,496" fill="none" stroke="#e4e4e7" stroke-width="6" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#ar)"/>
+<text x="480" y="478" font-size="18" fill="#d4d4d8" text-anchor="middle" font-weight="bold">2</text>
+<polyline points="640,424 640,390" fill="none" stroke="#e4e4e7" stroke-width="6" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#ar)"/>
+<text x="662" y="411" font-size="18" fill="#d4d4d8" text-anchor="middle" font-weight="bold">3</text>
+<polyline points="560,316 560,294" fill="none" stroke="#e4e4e7" stroke-width="6" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#ar)"/>
+<text x="582" y="310" font-size="18" fill="#d4d4d8" text-anchor="middle" font-weight="bold">4</text>
+<polyline points="620,234 620,214 425,214 425,452" fill="none" stroke="#a1a1aa" stroke-width="5" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="10 8" marker-end="url(#ar)"/>
+<text x="520" y="204" font-size="14" fill="#d4d4d8" text-anchor="middle">bypass do pompy: silnik zimny (&lt;88 °C)</text>
+<polyline points="560,262 335,262 335,336 320,336" fill="none" stroke="#e4e4e7" stroke-width="6" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#ar)"/>
+<text x="455" y="284" font-size="15" fill="#d4d4d8" text-anchor="middle" font-weight="bold">5  → chłodnica (≥88 °C)</text>
+<rect x="735" y="200" width="145" height="56" rx="10" fill="#141417" stroke="#71717a" stroke-width="3" stroke-dasharray="8 6"/>
+<text x="807.5" y="224" font-size="14" fill="#f5f5f5" font-weight="bold" text-anchor="middle">Nagrzewnica</text>
+<text x="807.5" y="242" font-size="14" fill="#f5f5f5" font-weight="bold" text-anchor="middle">(stały przepływ)</text>
+<polyline points="710,250 738,236" fill="none" stroke="#a1a1aa" stroke-width="4" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="10 8"/>
+<text x="880" y="278" font-size="12" fill="#a1a1aa" text-anchor="end">wylot do zbiornika chłodnicy</text>
+<rect x="30" y="636" width="840" height="36" rx="6" fill="#27272a" stroke="#52525b" stroke-width="1.5"/>
+<text x="40" y="662" font-size="16" fill="#e4e4e7" font-weight="bold">Próg</text>
+<text x="530" y="662" font-size="16" fill="#e4e4e7" font-weight="bold">Wartość (GM, 1991)</text>
+<text x="800" y="662" font-size="16" fill="#e4e4e7" font-weight="bold">Str.</text>
+<rect x="30" y="676" width="840" height="36" rx="6" fill="#18181b" stroke="#3f3f46" stroke-width="1.5"/>
+<text x="40" y="699" font-size="16" fill="#f5f5f5" font-weight="bold">Termostat zaczyna otwierać drogę do chłodnicy</text>
+<text x="530" y="699" font-size="16" fill="#d4d4d8">190 °F ≈ 88 °C</text>
+<text x="800" y="699" font-size="16" fill="#d4d4d8">4-7</text>
+<rect x="30" y="716" width="840" height="36" rx="6" fill="#18181b" stroke="#3f3f46" stroke-width="1.5"/>
+<text x="40" y="739" font-size="16" fill="#f5f5f5" font-weight="bold">Termostat otwarty w pełni (bypass zamknięty)</text>
+<text x="530" y="739" font-size="16" fill="#d4d4d8">215 °F ≈ 102 °C</text>
+<text x="800" y="739" font-size="16" fill="#d4d4d8">4-7</text>
+<rect x="30" y="756" width="840" height="58" rx="6" fill="#18181b" stroke="#3f3f46" stroke-width="1.5"/>
+<text x="40" y="779" font-size="16" fill="#f5f5f5" font-weight="bold">Sprzęgło wentylatora zaczyna załączać (powietrze</text>
+<text x="40" y="801" font-size="16" fill="#f5f5f5" font-weight="bold">za chłodnicą)</text>
+<text x="530" y="779" font-size="16" fill="#d4d4d8">165 °F ≈ 74 °C</text>
+<text x="800" y="779" font-size="16" fill="#d4d4d8">4-14</text>
+<rect x="30" y="818" width="840" height="36" rx="6" fill="#18181b" stroke="#3f3f46" stroke-width="1.5"/>
+<text x="40" y="841" font-size="16" fill="#f5f5f5" font-weight="bold">Zakres załączenia sprzęgła w teście (OK)</text>
+<text x="530" y="841" font-size="16" fill="#d4d4d8">150–195 °F ≈ 66–91 °C</text>
+<text x="800" y="841" font-size="16" fill="#d4d4d8">4-15</text>
+<rect x="30" y="858" width="840" height="58" rx="6" fill="#18181b" stroke="#3f3f46" stroke-width="1.5"/>
+<text x="40" y="881" font-size="16" fill="#f5f5f5" font-weight="bold">Lampka wysokiej temperatury (czujnik w lewej</text>
+<text x="40" y="903" font-size="16" fill="#f5f5f5" font-weight="bold">głowicy)</text>
+<text x="530" y="881" font-size="16" fill="#d4d4d8">258 °F ≈ 126 °C</text>
+<text x="800" y="881" font-size="16" fill="#d4d4d8">4-5</text>
+<rect x="30" y="920" width="840" height="36" rx="6" fill="#18181b" stroke="#3f3f46" stroke-width="1.5"/>
+<text x="40" y="943" font-size="16" fill="#f5f5f5" font-weight="bold">Korek chłodnicy (maks. ciśnienie)</text>
+<text x="530" y="943" font-size="16" fill="#d4d4d8">15 psi ≈ 103 kPa</text>
+<text x="800" y="943" font-size="16" fill="#d4d4d8">4-11</text>
+<rect x="30" y="960" width="840" height="36" rx="6" fill="#18181b" stroke="#3f3f46" stroke-width="1.5"/>
+<text x="40" y="983" font-size="16" fill="#f5f5f5" font-weight="bold">Pojemność układu (z A/C i bez)</text>
+<text x="530" y="983" font-size="16" fill="#d4d4d8">26,5 l (28 qt)</text>
+<text x="800" y="983" font-size="16" fill="#d4d4d8">1-11</text>
+<rect x="30" y="1012" width="840" height="108" rx="8" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<text x="44" y="1041" font-size="15" fill="#d4d4d8">Obieg po rozgrzaniu: pompa → blok (obie strony) → głowice → kolektor wody z termostatem →</text>
+<text x="44" y="1062" font-size="15" fill="#d4d4d8">chłodnica. Zimny silnik: płyn wraca do pompy bypassem. Nagrzewnica ma stały przepływ (bez</text>
+<text x="44" y="1083" font-size="15" fill="#d4d4d8">zaworu). W zbiornikach chłodnicy są chłodnice oleju silnika i skrzyni automatycznej.</text>
+<text x="44" y="1104" font-size="15" fill="#d4d4d8">Schemat poglądowy; przebieg węży zależy od rocznika — sprawdź w swoim aucie / manualu.</text>
+<line x1="30" y1="1130" x2="870" y2="1130" stroke="#3f3f46" stroke-width="2"/>
+<text x="30" y="1158" font-size="17" fill="#a3a3a3">Źródło: GM Service Training, 6.5L V8 Turbo Diesel (1991), rozdz. 4 „Cooling</text>
+<text x="30" y="1182" font-size="17" fill="#a3a3a3">System”, str. 4-2…4-15 oraz rozdz. 1, str. 1-11. Rysunek własny, nie w skali; nie</text>
+<text x="30" y="1206" font-size="17" fill="#a3a3a3">kopiuje ilustracji GM.</text>
+</g>
+</svg>
