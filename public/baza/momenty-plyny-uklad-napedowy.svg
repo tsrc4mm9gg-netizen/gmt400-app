@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Własny rysunek wektorowy gmt400.pl (bez grafik AI, bez kopiowania ilustracji Haynes/GM). Dane: źródła podane na rysunku. Rysunek poglądowy, nie w skali. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1797" width="900" height="1797" role="img" aria-label="Momenty (N·m) i płyny (litry): wał, most, skrzynia rozdzielcza">
+<title>Momenty (N·m) i płyny (litry): wał, most, skrzynia rozdzielcza</title>
+<defs><pattern id="g" width="30" height="30" patternUnits="userSpaceOnUse"><circle cx="15" cy="15" r="1.2" fill="#1f1f24"/></pattern></defs>
+<rect width="900" height="1797" fill="#0d0d0f"/>
+<rect width="900" height="1797" fill="url(#g)"/>
+<g font-family="DejaVu Sans, Arial, sans-serif">
+<rect x="0" y="0" width="900" height="8" fill="#a1a1aa"/>
+<text x="870" y="40" font-size="16" fill="#a3a3a3" text-anchor="end">gmt400.pl · schemat</text>
+<text x="30" y="76" font-size="29" fill="#f5f5f5" font-weight="bold">Momenty (N·m) i płyny (litry): wał, most,</text>
+<text x="30" y="112" font-size="29" fill="#f5f5f5" font-weight="bold">skrzynia rozdzielcza</text>
+<text x="30" y="148" font-size="20" fill="#d4d4d8">Model i lata: C/K i SUV GMT400, momenty wg Haynes 1988–98, płyny wg</text>
+<text x="30" y="175" font-size="20" fill="#d4d4d8">Haynes 1988–95 i SM GM 1998–99. Przeliczenie: 1 ft-lb = 1,356 N·m; 1</text>
+<text x="30" y="202" font-size="20" fill="#d4d4d8">qt = 0,946 l.</text>
+<line x1="30" y1="229" x2="870" y2="229" stroke="#3f3f46" stroke-width="2"/>
+<rect x="30" y="263" width="8" height="30" fill="#d4d4d8"/>
+<text x="50" y="285" font-size="24" fill="#f5f5f5" font-weight="bold">Momenty dokręcania (Haynes, str. 8-1)</text>
+<rect x="30" y="309" width="840" height="40" rx="6" fill="#27272a" stroke="#52525b" stroke-width="1.5"/>
+<text x="40" y="339" font-size="19" fill="#e4e4e7" font-weight="bold">Element</text>
+<text x="600" y="339" font-size="19" fill="#e4e4e7" font-weight="bold">N·m</text>
+<text x="740" y="339" font-size="19" fill="#e4e4e7" font-weight="bold">ft-lb</text>
+<rect x="30" y="353" width="840" height="40" rx="6" fill="#18181b" stroke="#3f3f46" stroke-width="1.5"/>
+<text x="40" y="379" font-size="19" fill="#f5f5f5" font-weight="bold">Wał: śruby paska jarzma, pickupy ½ i ¾ t</text>
+<text x="600" y="379" font-size="19" fill="#d4d4d8">20</text>
+<text x="740" y="379" font-size="19" fill="#d4d4d8">15</text>
+<rect x="30" y="397" width="840" height="40" rx="6" fill="#18181b" stroke="#3f3f46" stroke-width="1.5"/>
+<text x="40" y="423" font-size="19" fill="#f5f5f5" font-weight="bold">Wał: śruby paska jarzma, pickupy 1 t</text>
+<text x="600" y="423" font-size="19" fill="#d4d4d8">37</text>
+<text x="740" y="423" font-size="19" fill="#d4d4d8">27</text>
+<rect x="30" y="441" width="840" height="40" rx="6" fill="#18181b" stroke="#3f3f46" stroke-width="1.5"/>
+<text x="40" y="467" font-size="19" fill="#f5f5f5" font-weight="bold">Wał: nakrętki łożyska środkowego</text>
+<text x="600" y="467" font-size="19" fill="#d4d4d8">34</text>
+<text x="740" y="467" font-size="19" fill="#d4d4d8">25</text>
+<rect x="30" y="485" width="840" height="66" rx="6" fill="#18181b" stroke="#3f3f46" stroke-width="1.5"/>
+<text x="40" y="511" font-size="19" fill="#f5f5f5" font-weight="bold">Most: śruby płyty tarczy/bębna, koło talerzowe</text>
+<text x="40" y="537" font-size="19" fill="#f5f5f5" font-weight="bold">8,5″</text>
+<text x="600" y="511" font-size="19" fill="#d4d4d8">47</text>
+<text x="740" y="511" font-size="19" fill="#d4d4d8">35</text>
+<rect x="30" y="555" width="840" height="66" rx="6" fill="#18181b" stroke="#3f3f46" stroke-width="1.5"/>
+<text x="40" y="581" font-size="19" fill="#f5f5f5" font-weight="bold">Most: śruby płyty tarczy/bębna, koło talerzowe</text>
+<text x="40" y="607" font-size="19" fill="#f5f5f5" font-weight="bold">9,5″</text>
+<text x="600" y="581" font-size="19" fill="#d4d4d8">142</text>
+<text x="740" y="581" font-size="19" fill="#d4d4d8">105</text>
+<rect x="30" y="625" width="840" height="40" rx="6" fill="#18181b" stroke="#3f3f46" stroke-width="1.5"/>
+<text x="40" y="651" font-size="19" fill="#f5f5f5" font-weight="bold">Most pływający: śruby półoś–piasta</text>
+<text x="600" y="651" font-size="19" fill="#d4d4d8">156</text>
+<text x="740" y="651" font-size="19" fill="#d4d4d8">115</text>
+<rect x="30" y="669" width="840" height="40" rx="6" fill="#18181b" stroke="#3f3f46" stroke-width="1.5"/>
+<text x="40" y="695" font-size="19" fill="#f5f5f5" font-weight="bold">Most: śruba blokująca osi satelitów</text>
+<text x="600" y="695" font-size="19" fill="#d4d4d8">34</text>
+<text x="740" y="695" font-size="19" fill="#d4d4d8">25</text>
+<rect x="30" y="725" width="840" height="78" rx="8" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<text x="44" y="758" font-size="19" fill="#d4d4d8">Momenty korków wlewu/spustu MOSTU: Haynes i SM GM 1999 ich nie podają —</text>
+<text x="44" y="785" font-size="19" fill="#d4d4d8">sprawdź w swoim manualu.</text>
+<rect x="30" y="817" width="8" height="30" fill="#d4d4d8"/>
+<text x="50" y="839" font-size="24" fill="#f5f5f5" font-weight="bold">Skrzynia rozdzielcza — korki (SM GM 1998–99)</text>
+<rect x="30" y="863" width="840" height="40" rx="6" fill="#27272a" stroke="#52525b" stroke-width="1.5"/>
+<text x="40" y="893" font-size="19" fill="#e4e4e7" font-weight="bold">Skrzynia</text>
+<text x="600" y="893" font-size="19" fill="#e4e4e7" font-weight="bold">N·m</text>
+<text x="740" y="893" font-size="19" fill="#e4e4e7" font-weight="bold">lb-ft</text>
+<rect x="30" y="907" width="840" height="40" rx="6" fill="#18181b" stroke="#3f3f46" stroke-width="1.5"/>
+<text x="40" y="933" font-size="19" fill="#f5f5f5" font-weight="bold">NP241 i NV243: korek wlewu i spustowy</text>
+<text x="600" y="933" font-size="19" fill="#d4d4d8">25</text>
+<text x="740" y="933" font-size="19" fill="#d4d4d8">18</text>
+<rect x="30" y="951" width="840" height="40" rx="6" fill="#18181b" stroke="#3f3f46" stroke-width="1.5"/>
+<text x="40" y="977" font-size="19" fill="#f5f5f5" font-weight="bold">NV246: wg procedury wymiany SM</text>
+<text x="600" y="977" font-size="19" fill="#d4d4d8">47</text>
+<text x="740" y="977" font-size="19" fill="#d4d4d8">35</text>
+<rect x="30" y="995" width="840" height="40" rx="6" fill="#18181b" stroke="#3f3f46" stroke-width="1.5"/>
+<text x="40" y="1021" font-size="19" fill="#f5f5f5" font-weight="bold">NV246: wg tabeli momentów SM (niespójne)</text>
+<text x="600" y="1021" font-size="19" fill="#d4d4d8">20</text>
+<text x="740" y="1021" font-size="19" fill="#d4d4d8">15</text>
+<rect x="30" y="1055" width="8" height="30" fill="#d4d4d8"/>
+<text x="50" y="1077" font-size="24" fill="#f5f5f5" font-weight="bold">Płyny i pojemności</text>
+<rect x="30" y="1101" width="840" height="37" rx="6" fill="#27272a" stroke="#52525b" stroke-width="1.5"/>
+<text x="40" y="1128" font-size="17" fill="#e4e4e7" font-weight="bold">Układ</text>
+<text x="230" y="1128" font-size="17" fill="#e4e4e7" font-weight="bold">Płyn</text>
+<text x="580" y="1128" font-size="17" fill="#e4e4e7" font-weight="bold">Ilość</text>
+<rect x="30" y="1142" width="840" height="83" rx="6" fill="#18181b" stroke="#3f3f46" stroke-width="1.5"/>
+<text x="40" y="1166" font-size="17" fill="#f5f5f5" font-weight="bold">Tylny most</text>
+<text x="230" y="1166" font-size="17" fill="#d4d4d8">SAE 80W-90 GL-5 (Haynes 1-2); z</text>
+<text x="230" y="1189" font-size="17" fill="#d4d4d8">blokadą wg GM 1999: GM 1052271</text>
+<text x="230" y="1212" font-size="17" fill="#d4d4d8">bez friction modifier</text>
+<text x="580" y="1166" font-size="17" fill="#d4d4d8">Haynes/SM nie podają; C3500</text>
+<text x="580" y="1189" font-size="17" fill="#d4d4d8">HD Dana: 3,9 l (OM 1995, s.</text>
+<text x="580" y="1212" font-size="17" fill="#d4d4d8">6-33)</text>
+<rect x="30" y="1229" width="840" height="152" rx="6" fill="#18181b" stroke="#3f3f46" stroke-width="1.5"/>
+<text x="40" y="1253" font-size="17" fill="#f5f5f5" font-weight="bold">Skrzynia</text>
+<text x="40" y="1276" font-size="17" fill="#f5f5f5" font-weight="bold">rozdzielcza</text>
+<text x="230" y="1253" font-size="17" fill="#d4d4d8">Haynes 1988–95: ATF Dexron</text>
+<text x="230" y="1276" font-size="17" fill="#d4d4d8">II/IIE/III; GM 1999: manualna —</text>
+<text x="230" y="1299" font-size="17" fill="#d4d4d8">Dexron-III, automatyczna — GM</text>
+<text x="230" y="1322" font-size="17" fill="#d4d4d8">Automatic Transfer Case Fluid</text>
+<text x="230" y="1345" font-size="17" fill="#d4d4d8">(NV243 i NV246: źródła się</text>
+<text x="230" y="1368" font-size="17" fill="#d4d4d8">różnią — sprawdź manual)</text>
+<text x="580" y="1253" font-size="17" fill="#d4d4d8">NP241 2,1 l; NV243 2,1 l;</text>
+<text x="580" y="1276" font-size="17" fill="#d4d4d8">NV246 1,9 l; BW 4401/4470</text>
+<text x="580" y="1299" font-size="17" fill="#d4d4d8">1,5 l</text>
+<rect x="30" y="1385" width="840" height="83" rx="6" fill="#18181b" stroke="#3f3f46" stroke-width="1.5"/>
+<text x="40" y="1409" font-size="17" fill="#f5f5f5" font-weight="bold">Automat</text>
+<text x="40" y="1432" font-size="17" fill="#f5f5f5" font-weight="bold">3-biegowy (miska</text>
+<text x="40" y="1455" font-size="17" fill="#f5f5f5" font-weight="bold">+ filtr)</text>
+<text x="230" y="1409" font-size="17" fill="#d4d4d8">ATF wg manuala</text>
+<text x="580" y="1409" font-size="17" fill="#d4d4d8">ok. 4,0 l (4,2 qt)</text>
+<rect x="30" y="1472" width="840" height="37" rx="6" fill="#18181b" stroke="#3f3f46" stroke-width="1.5"/>
+<text x="40" y="1496" font-size="17" fill="#f5f5f5" font-weight="bold">4L60-E (od 1995)</text>
+<text x="230" y="1496" font-size="17" fill="#d4d4d8">ATF wg manuala</text>
+<text x="580" y="1496" font-size="17" fill="#d4d4d8">ok. 4,7 l (5 qt)</text>
+<rect x="30" y="1513" width="840" height="37" rx="6" fill="#18181b" stroke="#3f3f46" stroke-width="1.5"/>
+<text x="40" y="1537" font-size="17" fill="#f5f5f5" font-weight="bold">4L80-E</text>
+<text x="230" y="1537" font-size="17" fill="#d4d4d8">ATF wg manuala</text>
+<text x="580" y="1537" font-size="17" fill="#d4d4d8">ok. 7,3 l (7,7 qt)</text>
+<rect x="30" y="1554" width="840" height="83" rx="6" fill="#18181b" stroke="#3f3f46" stroke-width="1.5"/>
+<text x="40" y="1578" font-size="17" fill="#f5f5f5" font-weight="bold">Manualna NV3500</text>
+<text x="40" y="1601" font-size="17" fill="#f5f5f5" font-weight="bold">/ NV4500 (od</text>
+<text x="40" y="1624" font-size="17" fill="#f5f5f5" font-weight="bold">1992)</text>
+<text x="230" y="1578" font-size="17" fill="#d4d4d8">wg Haynes 1-2</text>
+<text x="580" y="1578" font-size="17" fill="#d4d4d8">ok. 2,1 l / ok. 3,8 l</text>
+<line x1="30" y1="1659" x2="870" y2="1659" stroke="#3f3f46" stroke-width="2"/>
+<text x="30" y="1687" font-size="17" fill="#a3a3a3">Źródła: Haynes Chevrolet &amp; GMC Pick-ups 1988–1998 (nr 24065), str. 8-1, 1-2, 1-19,</text>
+<text x="30" y="1711" font-size="17" fill="#a3a3a3">1-25…1-26; instrukcja obsługi C/K 1995 s. 6-33; SM GM 1998–99 (wpis</text>
+<text x="30" y="1735" font-size="17" fill="#a3a3a3">NP241/NV243/NV246). Przeliczenia własne, zaokrąglone. Sprawdź w swoim aucie /</text>
+<text x="30" y="1759" font-size="17" fill="#a3a3a3">manualu.</text>
+</g>
+</svg>

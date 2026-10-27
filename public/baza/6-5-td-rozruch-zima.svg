@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Własny rysunek wektorowy gmt400.pl (bez grafik AI, bez kopiowania ilustracji Haynes/GM). Dane: źródła podane na rysunku. Rysunek poglądowy, nie w skali. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1470" width="900" height="1470" role="img" aria-label="6.5 Turbo Diesel zimą: podgrzewacz bloku i procedura odpalania">
+<title>6.5 Turbo Diesel zimą: podgrzewacz bloku i procedura odpalania</title>
+<defs><pattern id="g" width="30" height="30" patternUnits="userSpaceOnUse"><circle cx="15" cy="15" r="1.2" fill="#1f1f24"/></pattern></defs>
+<rect width="900" height="1470" fill="#0d0d0f"/>
+<rect width="900" height="1470" fill="url(#g)"/>
+<g font-family="DejaVu Sans, Arial, sans-serif">
+<rect x="0" y="0" width="900" height="8" fill="#a1a1aa"/>
+<text x="870" y="40" font-size="16" fill="#a3a3a3" text-anchor="end">gmt400.pl · schemat</text>
+<text x="30" y="76" font-size="29" fill="#f5f5f5" font-weight="bold">6.5 Turbo Diesel zimą: podgrzewacz bloku i</text>
+<text x="30" y="112" font-size="29" fill="#f5f5f5" font-weight="bold">procedura odpalania</text>
+<text x="30" y="148" font-size="20" fill="#d4d4d8">Model i lata: C/K z 6.5 L V8 TD (L65), 1992–93; dane ze szkolenia GM z</text>
+<text x="30" y="175" font-size="20" fill="#d4d4d8">1991 r. Późniejsze roczniki — sprawdź w swoim aucie / manualu.</text>
+<line x1="30" y1="202" x2="870" y2="202" stroke="#3f3f46" stroke-width="2"/>
+<rect x="30" y="236" width="8" height="30" fill="#d4d4d8"/>
+<text x="50" y="258" font-size="24" fill="#f5f5f5" font-weight="bold">Minimalny czas podgrzewania bloku (GM, rys. 1-15)</text>
+<rect x="30" y="282" width="840" height="40" rx="6" fill="#27272a" stroke="#52525b" stroke-width="1.5"/>
+<text x="40" y="312" font-size="19" fill="#e4e4e7" font-weight="bold">Olej silnikowy</text>
+<text x="340" y="312" font-size="19" fill="#e4e4e7" font-weight="bold">0 … −18°C</text>
+<text x="620" y="312" font-size="19" fill="#e4e4e7" font-weight="bold">poniżej −18°C</text>
+<rect x="30" y="326" width="840" height="40" rx="6" fill="#18181b" stroke="#3f3f46" stroke-width="1.5"/>
+<text x="40" y="352" font-size="19" fill="#f5f5f5" font-weight="bold">klasa 30</text>
+<text x="340" y="352" font-size="19" fill="#d4d4d8">min. 2 h</text>
+<text x="620" y="352" font-size="19" fill="#d4d4d8">min. 8 h</text>
+<rect x="30" y="370" width="840" height="40" rx="6" fill="#18181b" stroke="#3f3f46" stroke-width="1.5"/>
+<text x="40" y="396" font-size="19" fill="#f5f5f5" font-weight="bold">15W-40</text>
+<text x="340" y="396" font-size="19" fill="#d4d4d8">niepotrzebny</text>
+<text x="620" y="396" font-size="19" fill="#d4d4d8">min. 8 h</text>
+<rect x="30" y="414" width="840" height="66" rx="6" fill="#18181b" stroke="#3f3f46" stroke-width="1.5"/>
+<text x="40" y="440" font-size="19" fill="#f5f5f5" font-weight="bold">10W-30</text>
+<text x="340" y="440" font-size="19" fill="#d4d4d8">niepotrzebny (jak</text>
+<text x="340" y="466" font-size="19" fill="#d4d4d8">15W-40)</text>
+<text x="620" y="440" font-size="19" fill="#d4d4d8">min. 8 h</text>
+<rect x="30" y="496" width="840" height="96" rx="8" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<text x="44" y="527" font-size="17" fill="#f5f5f5">Czasy są minimalne — dłuższe podłączenie nie szkodzi. Podgrzewacz GM: 120 V AC,</text>
+<text x="44" y="551" font-size="17" fill="#f5f5f5">600 W, ok. 5 A (s. 8-3). Moja uwaga, nie zapis GM: nie podłączaj go wprost do</text>
+<text x="44" y="575" font-size="17" fill="#f5f5f5">sieci 230 V.</text>
+<rect x="30" y="606" width="8" height="30" fill="#d4d4d8"/>
+<text x="50" y="628" font-size="24" fill="#f5f5f5" font-weight="bold">Paliwo</text>
+<rect x="30" y="652" width="840" height="154" rx="8" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<text x="44" y="684" font-size="18" fill="#f5f5f5">Poniżej −7°C (20°F): olej napędowy #1-D albo zimowa mieszanka #1-D z #2-D</text>
+<text x="44" y="710" font-size="18" fill="#f5f5f5">(GM, s. 1-15), żeby paliwo nie zawoskowało. Objaw zawoskowania: silnik</text>
+<text x="44" y="736" font-size="18" fill="#f5f5f5">zapala, po chwili gaśnie i nie chce zapalić. Oznaczenia #1-D/#2-D to klasy</text>
+<text x="44" y="762" font-size="18" fill="#f5f5f5">amerykańskie — w Polsce stosuj paliwo zimowe wg normy sezonowej (moja</text>
+<text x="44" y="788" font-size="18" fill="#f5f5f5">uwaga).</text>
+<rect x="30" y="820" width="8" height="30" fill="#d4d4d8"/>
+<text x="50" y="842" font-size="24" fill="#f5f5f5" font-weight="bold">Odpalanie krok po kroku (GM, s. 1-16)</text>
+<rect x="30" y="866" width="840" height="42" rx="8" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<circle cx="62" cy="887.0" r="18" fill="#d4d4d8"/><text x="62" y="894.0" font-size="20" font-weight="bold" fill="#18181b" text-anchor="middle">1</text>
+<text x="96" y="894" font-size="18" fill="#f5f5f5">Zapnij pasy, zaciągnij hamulec ręczny</text>
+<rect x="30" y="916" width="840" height="42" rx="8" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<circle cx="62" cy="937.0" r="18" fill="#d4d4d8"/><text x="62" y="944.0" font-size="20" font-weight="bold" fill="#18181b" text-anchor="middle">2</text>
+<text x="96" y="944" font-size="18" fill="#f5f5f5">Automat: P lub N; manual: luz i sprzęgło wciśnięte</text>
+<rect x="30" y="966" width="840" height="42" rx="8" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<circle cx="62" cy="987.0" r="18" fill="#d4d4d8"/><text x="62" y="994.0" font-size="20" font-weight="bold" fill="#18181b" text-anchor="middle">3</text>
+<text x="96" y="994" font-size="18" fill="#f5f5f5">Kluczyk w RUN — czekaj, aż zgaśnie kontrolka GLOW PLUGS (bez eteru)</text>
+<rect x="30" y="1016" width="840" height="42" rx="8" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<circle cx="62" cy="1037.0" r="18" fill="#d4d4d8"/><text x="62" y="1044.0" font-size="20" font-weight="bold" fill="#18181b" text-anchor="middle">4</text>
+<text x="96" y="1044" font-size="18" fill="#f5f5f5">Gaz do oporu i puść</text>
+<rect x="30" y="1066" width="840" height="42" rx="8" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<circle cx="62" cy="1087.0" r="18" fill="#d4d4d8"/><text x="62" y="1094.0" font-size="20" font-weight="bold" fill="#18181b" text-anchor="middle">5</text>
+<text x="96" y="1094" font-size="18" fill="#f5f5f5">Kluczyk w CRANK do zapalenia lub max 15 s</text>
+<rect x="30" y="1116" width="840" height="42" rx="8" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<circle cx="62" cy="1137.0" r="18" fill="#d4d4d8"/><text x="62" y="1144.0" font-size="20" font-weight="bold" fill="#18181b" text-anchor="middle">6</text>
+<text x="96" y="1144" font-size="18" fill="#f5f5f5">Wróć do RUN; jeśli nie zapalił — odczekaj 15 s i powtórz od kroku 3</text>
+<rect x="30" y="1166" width="840" height="42" rx="8" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<circle cx="62" cy="1187.0" r="18" fill="#d4d4d8"/><text x="62" y="1194.0" font-size="20" font-weight="bold" fill="#18181b" text-anchor="middle">7</text>
+<text x="96" y="1194" font-size="18" fill="#f5f5f5">Po zapaleniu odczekaj kilka sekund, zwolnij hamulec ręczny i jedź</text>
+<rect x="30" y="1220" width="840" height="120" rx="8" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<text x="44" y="1251" font-size="17" fill="#f5f5f5">Nie odpala: nie używaj eteru; sprawdź oba akumulatory i cykl lampki GLOW PLUGS</text>
+<text x="44" y="1275" font-size="17" fill="#f5f5f5">(GM: łącznie ok. 25 s; rozdz. 8 podaje ok. 20 s).</text>
+<text x="44" y="1299" font-size="17" fill="#f5f5f5">Test obrotów rozrusznika (warsztat, przyrząd GM): min. 100 obr/min na zimnym i</text>
+<text x="44" y="1323" font-size="17" fill="#f5f5f5">180 obr/min na ciepłym silniku.</text>
+<line x1="30" y1="1356" x2="870" y2="1356" stroke="#3f3f46" stroke-width="2"/>
+<text x="30" y="1384" font-size="17" fill="#a3a3a3">Źródło: GM Service Training, 6.5L V8 Turbo Diesel Engine – Student Workbook nr</text>
+<text x="30" y="1408" font-size="17" fill="#a3a3a3">16015.12-1 (1991): rozdz. 1 s. 1-15…1-16, rozdz. 8 s. 8-1…8-3, rozdz. 9 (PDF s.</text>
+<text x="30" y="1432" font-size="17" fill="#a3a3a3">274). Sprawdź w swoim aucie / manualu.</text>
+</g>
+</svg>

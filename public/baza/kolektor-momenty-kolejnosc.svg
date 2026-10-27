@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Własny rysunek wektorowy gmt400.pl (bez grafik AI, bez kopiowania ilustracji Haynes/GM). Dane: źródła podane na rysunku. Rysunek poglądowy, nie w skali. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1469" width="900" height="1469" role="img" aria-label="Kolektor dolotowy V6/V8: momenty (N·m) i kolejność prac">
+<title>Kolektor dolotowy V6/V8: momenty (N·m) i kolejność prac</title>
+<defs><pattern id="g" width="30" height="30" patternUnits="userSpaceOnUse"><circle cx="15" cy="15" r="1.2" fill="#1f1f24"/></pattern></defs>
+<rect width="900" height="1469" fill="#0d0d0f"/>
+<rect width="900" height="1469" fill="url(#g)"/>
+<g font-family="DejaVu Sans, Arial, sans-serif">
+<rect x="0" y="0" width="900" height="8" fill="#a1a1aa"/>
+<text x="870" y="40" font-size="16" fill="#a3a3a3" text-anchor="end">gmt400.pl · schemat</text>
+<text x="30" y="76" font-size="29" fill="#f5f5f5" font-weight="bold">Kolektor dolotowy V6/V8: momenty (N·m) i</text>
+<text x="30" y="112" font-size="29" fill="#f5f5f5" font-weight="bold">kolejność prac</text>
+<text x="30" y="148" font-size="20" fill="#d4d4d8">Model i lata: C/K i SUV GMT400 z silnikami 4.3, 5.0, 5.7 (V6/V8) i 7.4</text>
+<text x="30" y="175" font-size="20" fill="#d4d4d8">(V8), 1988–2000, wg Haynes 2A-3 i 2A-7…2A-10. Wartości odczytane z</text>
+<text x="30" y="202" font-size="20" fill="#d4d4d8">obrazu strony — zweryfikuj w manualu swojego rocznika.</text>
+<line x1="30" y1="229" x2="870" y2="229" stroke="#3f3f46" stroke-width="2"/>
+<rect x="30" y="263" width="8" height="30" fill="#d4d4d8"/>
+<text x="50" y="285" font-size="24" fill="#f5f5f5" font-weight="bold">Momenty śrub kolektora (Haynes 2A-3)</text>
+<rect x="30" y="309" width="840" height="39" rx="6" fill="#27272a" stroke="#52525b" stroke-width="1.5"/>
+<text x="40" y="338" font-size="18" fill="#e4e4e7" font-weight="bold">Kolektor / silnik</text>
+<text x="280" y="338" font-size="18" fill="#e4e4e7" font-weight="bold">Lata</text>
+<text x="490" y="338" font-size="18" fill="#e4e4e7" font-weight="bold">Moment</text>
+<rect x="30" y="352" width="840" height="39" rx="6" fill="#18181b" stroke="#3f3f46" stroke-width="1.5"/>
+<text x="40" y="377" font-size="18" fill="#f5f5f5" font-weight="bold">Dolny 4.3, 5.0, 5.7</text>
+<text x="280" y="377" font-size="18" fill="#d4d4d8">1988–95</text>
+<text x="490" y="377" font-size="18" fill="#d4d4d8">47 N·m (35 ft-lb), jeden etap</text>
+<rect x="30" y="395" width="840" height="64" rx="6" fill="#18181b" stroke="#3f3f46" stroke-width="1.5"/>
+<text x="40" y="420" font-size="18" fill="#f5f5f5" font-weight="bold">Dolny 4.3, 5.0, 5.7</text>
+<text x="280" y="420" font-size="18" fill="#d4d4d8">1996–2000</text>
+<text x="490" y="420" font-size="18" fill="#d4d4d8">3 → 12 → 15 N·m (27 in-lb → 106</text>
+<text x="490" y="445" font-size="18" fill="#d4d4d8">in-lb → 11 ft-lb)</text>
+<rect x="30" y="463" width="840" height="64" rx="6" fill="#18181b" stroke="#3f3f46" stroke-width="1.5"/>
+<text x="40" y="488" font-size="18" fill="#f5f5f5" font-weight="bold">Dolny 7.4 L</text>
+<text x="280" y="488" font-size="18" fill="#d4d4d8">1988–91 / 1992–93</text>
+<text x="490" y="488" font-size="18" fill="#d4d4d8">41 N·m (30 ft-lb) / 54 N·m (40 ft-</text>
+<text x="490" y="513" font-size="18" fill="#d4d4d8">lb)</text>
+<rect x="30" y="531" width="840" height="64" rx="6" fill="#18181b" stroke="#3f3f46" stroke-width="1.5"/>
+<text x="40" y="556" font-size="18" fill="#f5f5f5" font-weight="bold">Dolny 7.4 L</text>
+<text x="280" y="556" font-size="18" fill="#d4d4d8">1994–95 /</text>
+<text x="280" y="581" font-size="18" fill="#d4d4d8">1996–2000</text>
+<text x="490" y="556" font-size="18" fill="#d4d4d8">47 N·m (35 ft-lb) / 41 N·m (30 ft-</text>
+<text x="490" y="581" font-size="18" fill="#d4d4d8">lb)</text>
+<rect x="30" y="599" width="840" height="39" rx="6" fill="#18181b" stroke="#3f3f46" stroke-width="1.5"/>
+<text x="40" y="624" font-size="18" fill="#f5f5f5" font-weight="bold">Górny 4.3, 5.0, 5.7</text>
+<text x="280" y="624" font-size="18" fill="#d4d4d8">1996–2000</text>
+<text x="490" y="624" font-size="18" fill="#d4d4d8">5 → 10 N·m (44 in-lb → 88 in-lb)</text>
+<rect x="30" y="642" width="840" height="39" rx="6" fill="#18181b" stroke="#3f3f46" stroke-width="1.5"/>
+<text x="40" y="667" font-size="18" fill="#f5f5f5" font-weight="bold">Górny 7.4 L</text>
+<text x="280" y="667" font-size="18" fill="#d4d4d8">1996–97</text>
+<text x="490" y="667" font-size="18" fill="#d4d4d8">14 N·m (10 ft-lb)</text>
+<rect x="30" y="685" width="840" height="64" rx="6" fill="#18181b" stroke="#3f3f46" stroke-width="1.5"/>
+<text x="40" y="710" font-size="18" fill="#f5f5f5" font-weight="bold">Górny 7.4 L</text>
+<text x="280" y="710" font-size="18" fill="#d4d4d8">1998–2000</text>
+<text x="490" y="710" font-size="18" fill="#d4d4d8">8 → 18 N·m (71 in-lb → 13 ft-lb),</text>
+<text x="490" y="735" font-size="18" fill="#d4d4d8">Loctite 242</text>
+<rect x="30" y="769" width="8" height="30" fill="#d4d4d8"/>
+<text x="50" y="791" font-size="24" fill="#f5f5f5" font-weight="bold">Kolejność prac</text>
+<rect x="30" y="815" width="840" height="42" rx="8" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<circle cx="62" cy="836.0" r="16" fill="#d4d4d8"/><text x="62" y="843.0" font-size="19" font-weight="bold" fill="#18181b" text-anchor="middle">1</text>
+<text x="96" y="843" font-size="18" fill="#f5f5f5">Odłącz akumulator, spuść płyn chłodzący</text>
+<rect x="30" y="865" width="840" height="42" rx="8" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<circle cx="62" cy="886.0" r="16" fill="#d4d4d8"/><text x="62" y="893.0" font-size="19" font-weight="bold" fill="#18181b" text-anchor="middle">2</text>
+<text x="96" y="893" font-size="18" fill="#f5f5f5">Zdejmij filtr powietrza, osprzęt i przewody; opisz węże</text>
+<rect x="30" y="915" width="840" height="68" rx="8" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<circle cx="62" cy="949.0" r="16" fill="#d4d4d8"/><text x="62" y="956.0" font-size="19" font-weight="bold" fill="#18181b" text-anchor="middle">3</text>
+<text x="96" y="943" font-size="18" fill="#f5f5f5">Odkręcaj śruby stopniowo; nie podważaj w płaszczyznach</text>
+<text x="96" y="969" font-size="18" fill="#f5f5f5">uszczelniających</text>
+<rect x="30" y="991" width="840" height="68" rx="8" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<circle cx="62" cy="1025.0" r="16" fill="#d4d4d8"/><text x="62" y="1032.0" font-size="19" font-weight="bold" fill="#18181b" text-anchor="middle">4</text>
+<text x="96" y="1019" font-size="18" fill="#f5f5f5">Wyczyść płaszczyzny (skrobak + rozpuszczalnik) i gwinty; przedmuchaj</text>
+<text x="96" y="1045" font-size="18" fill="#f5f5f5">otwory</text>
+<rect x="30" y="1067" width="840" height="68" rx="8" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<circle cx="62" cy="1101.0" r="16" fill="#d4d4d8"/><text x="62" y="1108.0" font-size="19" font-weight="bold" fill="#18181b" text-anchor="middle">5</text>
+<text x="96" y="1095" font-size="18" fill="#f5f5f5">Nowe uszczelki THIS SIDE UP; RTV przy otworach płynu; paciorek RTV 5</text>
+<text x="96" y="1121" font-size="18" fill="#f5f5f5">mm na końcach bloku</text>
+<rect x="30" y="1143" width="840" height="42" rx="8" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<circle cx="62" cy="1164.0" r="16" fill="#d4d4d8"/><text x="62" y="1171.0" font-size="19" font-weight="bold" fill="#18181b" text-anchor="middle">6</text>
+<text x="96" y="1171" font-size="18" fill="#f5f5f5">Śruby z Loctite 242, od środka na krzyż, w trzech etapach</text>
+<rect x="30" y="1193" width="840" height="42" rx="8" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<circle cx="62" cy="1214.0" r="16" fill="#d4d4d8"/><text x="62" y="1221.0" font-size="19" font-weight="bold" fill="#18181b" text-anchor="middle">7</text>
+<text x="96" y="1221" font-size="18" fill="#f5f5f5">Po montażu: sprawdź olej, podciśnienie i płyn na stykach</text>
+<rect x="30" y="1243" width="840" height="96" rx="8" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<text x="44" y="1274" font-size="17" fill="#f5f5f5">Rysunki kolejności dokręcania Haynes (2A-9…2A-10) nie są tu kopiowane — użyj</text>
+<text x="44" y="1298" font-size="17" fill="#f5f5f5">kolejności z zestawu uszczelek lub manuala GM (schemat GM 1996 5.0/5.7:</text>
+<text x="44" y="1322" font-size="17" fill="#f5f5f5">kolejność 1–8, 3 → 12 → 15 N·m).</text>
+<line x1="30" y1="1355" x2="870" y2="1355" stroke="#3f3f46" stroke-width="2"/>
+<text x="30" y="1383" font-size="17" fill="#a3a3a3">Źródło: Haynes Chevrolet &amp; GMC Pick-ups 1988–1998 (nr 24065), str. 2A-3,</text>
+<text x="30" y="1407" font-size="17" fill="#a3a3a3">2A-7…2A-10 (PDF s. 67 i nast.); GM SM 1996 5.0/5.7. Przeliczenia na N·m własne,</text>
+<text x="30" y="1431" font-size="17" fill="#a3a3a3">zaokrąglone. Sprawdź w swoim aucie / manualu.</text>
+</g>
+</svg>

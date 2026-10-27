@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Własny rysunek wektorowy gmt400.pl (bez grafik AI, bez kopiowania ilustracji Haynes/GM). Dane: źródła podane na rysunku. Rysunek poglądowy, nie w skali. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1764" width="900" height="1764" role="img" aria-label="Jak odczytać silnik, rok i RPO: VIN i etykieta w schowku">
+<title>Jak odczytać silnik, rok i RPO: VIN i etykieta w schowku</title>
+<defs><pattern id="g" width="30" height="30" patternUnits="userSpaceOnUse"><circle cx="15" cy="15" r="1.2" fill="#1f1f24"/></pattern></defs>
+<rect width="900" height="1764" fill="#0d0d0f"/>
+<rect width="900" height="1764" fill="url(#g)"/>
+<g font-family="DejaVu Sans, Arial, sans-serif">
+<rect x="0" y="0" width="900" height="8" fill="#a1a1aa"/>
+<text x="870" y="40" font-size="16" fill="#a3a3a3" text-anchor="end">gmt400.pl · schemat</text>
+<text x="30" y="76" font-size="29" fill="#f5f5f5" font-weight="bold">Jak odczytać silnik, rok i RPO: VIN i etykieta w</text>
+<text x="30" y="112" font-size="29" fill="#f5f5f5" font-weight="bold">schowku</text>
+<text x="30" y="148" font-size="20" fill="#d4d4d8">Model i lata: C/K i SUV GMT400 1988–2000. Kody silnika w VIN wg</text>
+<text x="30" y="175" font-size="20" fill="#d4d4d8">instrukcji GM; rok modelowy wg 49 CFR § 565.15.</text>
+<line x1="30" y1="202" x2="870" y2="202" stroke="#3f3f46" stroke-width="2"/>
+<rect x="30" y="236" width="8" height="30" fill="#d4d4d8"/>
+<text x="50" y="258" font-size="24" fill="#f5f5f5" font-weight="bold">VIN — 17 znaków, ważne: 8. (silnik) i 10. (rok)</text>
+<rect x="30" y="282" width="44" height="50" rx="6" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<text x="52.0" y="304" font-size="15" fill="#a3a3a3" text-anchor="middle">1</text>
+<text x="52.0" y="324" font-size="20" fill="#f5f5f5" text-anchor="middle" font-weight="bold"></text>
+<rect x="78" y="282" width="44" height="50" rx="6" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<text x="100.0" y="304" font-size="15" fill="#a3a3a3" text-anchor="middle">2</text>
+<text x="100.0" y="324" font-size="20" fill="#f5f5f5" text-anchor="middle" font-weight="bold"></text>
+<rect x="126" y="282" width="44" height="50" rx="6" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<text x="148.0" y="304" font-size="15" fill="#a3a3a3" text-anchor="middle">3</text>
+<text x="148.0" y="324" font-size="20" fill="#f5f5f5" text-anchor="middle" font-weight="bold"></text>
+<rect x="174" y="282" width="44" height="50" rx="6" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<text x="196.0" y="304" font-size="15" fill="#a3a3a3" text-anchor="middle">4</text>
+<text x="196.0" y="324" font-size="20" fill="#f5f5f5" text-anchor="middle" font-weight="bold"></text>
+<rect x="222" y="282" width="44" height="50" rx="6" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<text x="244.0" y="304" font-size="15" fill="#a3a3a3" text-anchor="middle">5</text>
+<text x="244.0" y="324" font-size="20" fill="#f5f5f5" text-anchor="middle" font-weight="bold"></text>
+<rect x="270" y="282" width="44" height="50" rx="6" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<text x="292.0" y="304" font-size="15" fill="#a3a3a3" text-anchor="middle">6</text>
+<text x="292.0" y="324" font-size="20" fill="#f5f5f5" text-anchor="middle" font-weight="bold"></text>
+<rect x="318" y="282" width="44" height="50" rx="6" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<text x="340.0" y="304" font-size="15" fill="#a3a3a3" text-anchor="middle">7</text>
+<text x="340.0" y="324" font-size="20" fill="#f5f5f5" text-anchor="middle" font-weight="bold"></text>
+<rect x="366" y="282" width="44" height="50" rx="6" fill="#d4d4d8" stroke="#f5f5f5" stroke-width="2"/>
+<text x="388.0" y="304" font-size="15" fill="#18181b" text-anchor="middle">8</text>
+<text x="388.0" y="324" font-size="20" fill="#18181b" text-anchor="middle" font-weight="bold"></text>
+<rect x="414" y="282" width="44" height="50" rx="6" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<text x="436.0" y="304" font-size="15" fill="#a3a3a3" text-anchor="middle">9</text>
+<text x="436.0" y="324" font-size="20" fill="#f5f5f5" text-anchor="middle" font-weight="bold"></text>
+<rect x="462" y="282" width="44" height="50" rx="6" fill="#d4d4d8" stroke="#f5f5f5" stroke-width="2"/>
+<text x="484.0" y="304" font-size="15" fill="#18181b" text-anchor="middle">10</text>
+<text x="484.0" y="324" font-size="20" fill="#18181b" text-anchor="middle" font-weight="bold"></text>
+<rect x="510" y="282" width="44" height="50" rx="6" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<text x="532.0" y="304" font-size="15" fill="#a3a3a3" text-anchor="middle">11</text>
+<text x="532.0" y="324" font-size="20" fill="#f5f5f5" text-anchor="middle" font-weight="bold"></text>
+<rect x="558" y="282" width="44" height="50" rx="6" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<text x="580.0" y="304" font-size="15" fill="#a3a3a3" text-anchor="middle">12</text>
+<text x="580.0" y="324" font-size="20" fill="#f5f5f5" text-anchor="middle" font-weight="bold"></text>
+<rect x="606" y="282" width="44" height="50" rx="6" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<text x="628.0" y="304" font-size="15" fill="#a3a3a3" text-anchor="middle">13</text>
+<text x="628.0" y="324" font-size="20" fill="#f5f5f5" text-anchor="middle" font-weight="bold"></text>
+<rect x="654" y="282" width="44" height="50" rx="6" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<text x="676.0" y="304" font-size="15" fill="#a3a3a3" text-anchor="middle">14</text>
+<text x="676.0" y="324" font-size="20" fill="#f5f5f5" text-anchor="middle" font-weight="bold"></text>
+<rect x="702" y="282" width="44" height="50" rx="6" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<text x="724.0" y="304" font-size="15" fill="#a3a3a3" text-anchor="middle">15</text>
+<text x="724.0" y="324" font-size="20" fill="#f5f5f5" text-anchor="middle" font-weight="bold"></text>
+<rect x="750" y="282" width="44" height="50" rx="6" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<text x="772.0" y="304" font-size="15" fill="#a3a3a3" text-anchor="middle">16</text>
+<text x="772.0" y="324" font-size="20" fill="#f5f5f5" text-anchor="middle" font-weight="bold"></text>
+<rect x="798" y="282" width="44" height="50" rx="6" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<text x="820.0" y="304" font-size="15" fill="#a3a3a3" text-anchor="middle">17</text>
+<text x="820.0" y="324" font-size="20" fill="#f5f5f5" text-anchor="middle" font-weight="bold"></text>
+<text x="388.0" y="358" font-size="16" fill="#e4e4e7" text-anchor="middle">silnik</text>
+<text x="484.0" y="358" font-size="16" fill="#e4e4e7" text-anchor="middle">rok</text>
+<rect x="30" y="382" width="8" height="30" fill="#d4d4d8"/>
+<text x="50" y="404" font-size="24" fill="#f5f5f5" font-weight="bold">Rok modelowy — 10. znak VIN</text>
+<rect x="30" y="428" width="61" height="64" rx="6" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<text x="60.5" y="456" font-size="22" fill="#f5f5f5" text-anchor="middle" font-weight="bold">J</text>
+<text x="60.5" y="480" font-size="16" fill="#d4d4d8" text-anchor="middle">1988</text>
+<rect x="95" y="428" width="61" height="64" rx="6" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<text x="125.5" y="456" font-size="22" fill="#f5f5f5" text-anchor="middle" font-weight="bold">K</text>
+<text x="125.5" y="480" font-size="16" fill="#d4d4d8" text-anchor="middle">1989</text>
+<rect x="160" y="428" width="61" height="64" rx="6" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<text x="190.5" y="456" font-size="22" fill="#f5f5f5" text-anchor="middle" font-weight="bold">L</text>
+<text x="190.5" y="480" font-size="16" fill="#d4d4d8" text-anchor="middle">1990</text>
+<rect x="225" y="428" width="61" height="64" rx="6" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<text x="255.5" y="456" font-size="22" fill="#f5f5f5" text-anchor="middle" font-weight="bold">M</text>
+<text x="255.5" y="480" font-size="16" fill="#d4d4d8" text-anchor="middle">1991</text>
+<rect x="290" y="428" width="61" height="64" rx="6" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<text x="320.5" y="456" font-size="22" fill="#f5f5f5" text-anchor="middle" font-weight="bold">N</text>
+<text x="320.5" y="480" font-size="16" fill="#d4d4d8" text-anchor="middle">1992</text>
+<rect x="355" y="428" width="61" height="64" rx="6" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<text x="385.5" y="456" font-size="22" fill="#f5f5f5" text-anchor="middle" font-weight="bold">P</text>
+<text x="385.5" y="480" font-size="16" fill="#d4d4d8" text-anchor="middle">1993</text>
+<rect x="420" y="428" width="61" height="64" rx="6" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<text x="450.5" y="456" font-size="22" fill="#f5f5f5" text-anchor="middle" font-weight="bold">R</text>
+<text x="450.5" y="480" font-size="16" fill="#d4d4d8" text-anchor="middle">1994</text>
+<rect x="485" y="428" width="61" height="64" rx="6" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<text x="515.5" y="456" font-size="22" fill="#f5f5f5" text-anchor="middle" font-weight="bold">S</text>
+<text x="515.5" y="480" font-size="16" fill="#d4d4d8" text-anchor="middle">1995</text>
+<rect x="550" y="428" width="61" height="64" rx="6" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<text x="580.5" y="456" font-size="22" fill="#f5f5f5" text-anchor="middle" font-weight="bold">T</text>
+<text x="580.5" y="480" font-size="16" fill="#d4d4d8" text-anchor="middle">1996</text>
+<rect x="615" y="428" width="61" height="64" rx="6" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<text x="645.5" y="456" font-size="22" fill="#f5f5f5" text-anchor="middle" font-weight="bold">V</text>
+<text x="645.5" y="480" font-size="16" fill="#d4d4d8" text-anchor="middle">1997</text>
+<rect x="680" y="428" width="61" height="64" rx="6" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<text x="710.5" y="456" font-size="22" fill="#f5f5f5" text-anchor="middle" font-weight="bold">W</text>
+<text x="710.5" y="480" font-size="16" fill="#d4d4d8" text-anchor="middle">1998</text>
+<rect x="745" y="428" width="61" height="64" rx="6" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<text x="775.5" y="456" font-size="22" fill="#f5f5f5" text-anchor="middle" font-weight="bold">X</text>
+<text x="775.5" y="480" font-size="16" fill="#d4d4d8" text-anchor="middle">1999</text>
+<rect x="810" y="428" width="61" height="64" rx="6" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<text x="840.5" y="456" font-size="22" fill="#f5f5f5" text-anchor="middle" font-weight="bold">Y</text>
+<text x="840.5" y="480" font-size="16" fill="#d4d4d8" text-anchor="middle">2000</text>
+<rect x="30" y="510" width="8" height="30" fill="#d4d4d8"/>
+<text x="50" y="532" font-size="24" fill="#f5f5f5" font-weight="bold">Silnik — 8. znak VIN (wg instrukcji GM)</text>
+<rect x="30" y="556" width="840" height="39" rx="6" fill="#27272a" stroke="#52525b" stroke-width="1.5"/>
+<text x="40" y="585" font-size="18" fill="#e4e4e7" font-weight="bold">Lata</text>
+<text x="230" y="585" font-size="18" fill="#e4e4e7" font-weight="bold">Kod → silnik</text>
+<rect x="30" y="599" width="840" height="89" rx="6" fill="#18181b" stroke="#3f3f46" stroke-width="1.5"/>
+<text x="40" y="624" font-size="18" fill="#f5f5f5" font-weight="bold">1994–95</text>
+<text x="230" y="624" font-size="18" fill="#d4d4d8">Z = 4.3 V6 TBI; H = 5.0 V8 TBI; K = 5.7 V8 TBI; N = 7.4 V8</text>
+<text x="230" y="649" font-size="18" fill="#d4d4d8">TBI; P = 6.5 diesel wolnossący; S = 6.5 turbodiesel</text>
+<text x="230" y="674" font-size="18" fill="#d4d4d8">(lekki); F = 6.5 turbodiesel (ciężki)</text>
+<rect x="30" y="692" width="840" height="64" rx="6" fill="#18181b" stroke="#3f3f46" stroke-width="1.5"/>
+<text x="40" y="717" font-size="18" fill="#f5f5f5" font-weight="bold">1996–98 benzyna</text>
+<text x="230" y="717" font-size="18" fill="#d4d4d8">W = Vortec 4300 V6 (L35); M = Vortec 5000 (L30); R =</text>
+<text x="230" y="742" font-size="18" fill="#d4d4d8">Vortec 5700 (L31); J = Vortec 7400 (L29)</text>
+<rect x="30" y="760" width="840" height="64" rx="6" fill="#18181b" stroke="#3f3f46" stroke-width="1.5"/>
+<text x="40" y="785" font-size="18" fill="#f5f5f5" font-weight="bold">1998–2000</text>
+<text x="40" y="810" font-size="18" fill="#f5f5f5" font-weight="bold">diesel</text>
+<text x="230" y="785" font-size="18" fill="#d4d4d8">F = L65; S = L56 (dla diesla 1996–97 nie mamy tabeli VIN w</text>
+<text x="230" y="810" font-size="18" fill="#d4d4d8">źródłach — sprawdź manual)</text>
+<rect x="30" y="844" width="8" height="30" fill="#d4d4d8"/>
+<text x="50" y="866" font-size="24" fill="#f5f5f5" font-weight="bold">Kody RPO (lata występowania w dokumentach GM, C/K)</text>
+<rect x="30" y="890" width="840" height="37" rx="6" fill="#27272a" stroke="#52525b" stroke-width="1.5"/>
+<text x="40" y="917" font-size="17" fill="#e4e4e7" font-weight="bold">Kod</text>
+<text x="310" y="917" font-size="17" fill="#e4e4e7" font-weight="bold">Opis</text>
+<text x="680" y="917" font-size="17" fill="#e4e4e7" font-weight="bold">Lata</text>
+<rect x="30" y="931" width="840" height="60" rx="6" fill="#18181b" stroke="#3f3f46" stroke-width="1.5"/>
+<text x="40" y="955" font-size="17" fill="#f5f5f5" font-weight="bold">LB4 / L03 / L05 / L19</text>
+<text x="310" y="955" font-size="17" fill="#d4d4d8">4.3 V6 / 5.0 V8 / 5.7 V8 / 7.4 V8,</text>
+<text x="310" y="978" font-size="17" fill="#d4d4d8">TBI</text>
+<text x="680" y="955" font-size="17" fill="#d4d4d8">1988–95</text>
+<rect x="30" y="995" width="840" height="37" rx="6" fill="#18181b" stroke="#3f3f46" stroke-width="1.5"/>
+<text x="40" y="1019" font-size="17" fill="#f5f5f5" font-weight="bold">L35 / L30</text>
+<text x="310" y="1019" font-size="17" fill="#d4d4d8">4.3 V6 / 5.0 V8 Vortec CPI</text>
+<text x="680" y="1019" font-size="17" fill="#d4d4d8">1996–99</text>
+<rect x="30" y="1036" width="840" height="60" rx="6" fill="#18181b" stroke="#3f3f46" stroke-width="1.5"/>
+<text x="40" y="1060" font-size="17" fill="#f5f5f5" font-weight="bold">L31 / L29</text>
+<text x="310" y="1060" font-size="17" fill="#d4d4d8">5.7 V8 Vortec CPI / 7.4 V8 Vortec</text>
+<text x="310" y="1083" font-size="17" fill="#d4d4d8">MFI</text>
+<text x="680" y="1060" font-size="17" fill="#d4d4d8">1996–2000</text>
+<rect x="30" y="1100" width="840" height="60" rx="6" fill="#18181b" stroke="#3f3f46" stroke-width="1.5"/>
+<text x="40" y="1124" font-size="17" fill="#f5f5f5" font-weight="bold">L65 / L56</text>
+<text x="310" y="1124" font-size="17" fill="#d4d4d8">6.5 V8 turbodiesel</text>
+<text x="680" y="1124" font-size="17" fill="#d4d4d8">1992–2000 /</text>
+<text x="680" y="1147" font-size="17" fill="#d4d4d8">1994–2000</text>
+<rect x="30" y="1164" width="840" height="37" rx="6" fill="#18181b" stroke="#3f3f46" stroke-width="1.5"/>
+<text x="40" y="1188" font-size="17" fill="#f5f5f5" font-weight="bold">M30 / MT1</text>
+<text x="310" y="1188" font-size="17" fill="#d4d4d8">automat 4L60-E / 4L80-E</text>
+<text x="680" y="1188" font-size="17" fill="#d4d4d8">1993–2000</text>
+<rect x="30" y="1205" width="840" height="60" rx="6" fill="#18181b" stroke="#3f3f46" stroke-width="1.5"/>
+<text x="40" y="1229" font-size="17" fill="#f5f5f5" font-weight="bold">G80</text>
+<text x="310" y="1229" font-size="17" fill="#d4d4d8">Positraction (dyferencjał o</text>
+<text x="310" y="1252" font-size="17" fill="#d4d4d8">ograniczonym poślizgu)</text>
+<text x="680" y="1229" font-size="17" fill="#d4d4d8">1988–2000</text>
+<rect x="30" y="1269" width="840" height="60" rx="6" fill="#18181b" stroke="#3f3f46" stroke-width="1.5"/>
+<text x="40" y="1293" font-size="17" fill="#f5f5f5" font-weight="bold">GU4 3,08 · GU6 3,42 ·</text>
+<text x="40" y="1316" font-size="17" fill="#f5f5f5" font-weight="bold">GT4 3,73 · GT5 4,10</text>
+<text x="310" y="1293" font-size="17" fill="#d4d4d8">przełożenie tylnego mostu</text>
+<text x="680" y="1293" font-size="17" fill="#d4d4d8">wg GM, zależnie</text>
+<text x="680" y="1316" font-size="17" fill="#d4d4d8">od roku</text>
+<rect x="30" y="1333" width="840" height="83" rx="6" fill="#18181b" stroke="#3f3f46" stroke-width="1.5"/>
+<text x="40" y="1357" font-size="17" fill="#f5f5f5" font-weight="bold">NP1 / NP8</text>
+<text x="310" y="1357" font-size="17" fill="#d4d4d8">skrzynia rozdzielcza: NP1</text>
+<text x="310" y="1380" font-size="17" fill="#d4d4d8">elektroniczna 2-zakresowa; NP8</text>
+<text x="310" y="1403" font-size="17" fill="#d4d4d8">2-zakresowa, przyciski</text>
+<text x="680" y="1357" font-size="17" fill="#d4d4d8">1996–2000 /</text>
+<text x="680" y="1380" font-size="17" fill="#d4d4d8">1999–2000</text>
+<rect x="30" y="1436" width="8" height="30" fill="#d4d4d8"/>
+<text x="50" y="1458" font-size="24" fill="#f5f5f5" font-weight="bold">Gdzie szukać w aucie</text>
+<rect x="30" y="1482" width="840" height="128" rx="8" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<text x="44" y="1514" font-size="18" fill="#f5f5f5">1. Etykieta „Service Parts Identification” w schowku (glove box): VIN,</text>
+<text x="44" y="1540" font-size="18" fill="#f5f5f5">model, lakier i lista opcji RPO — nie zdejmuj jej.</text>
+<text x="44" y="1566" font-size="18" fill="#f5f5f5">2. Tabliczka VIN z przodu deski po stronie kierowcy, widoczna przez szybę;</text>
+<text x="44" y="1592" font-size="18" fill="#f5f5f5">VIN też na naklejce Vehicle Certification i w dowodzie rejestracyjnym.</text>
+<line x1="30" y1="1626" x2="870" y2="1626" stroke="#3f3f46" stroke-width="2"/>
+<text x="30" y="1654" font-size="17" fill="#a3a3a3">Źródła: instrukcje obsługi GM 1994–99 (VIN, etykieta SPID: Tahoe/Suburban 1999 s.</text>
+<text x="30" y="1678" font-size="17" fill="#a3a3a3">6-59; C/K 1996 s. 6-66/6-67); GM Heritage Center Vehicle Information Kits 1988–99;</text>
+<text x="30" y="1702" font-size="17" fill="#a3a3a3">SM GM 1998–2000 (RPO Code List); 49 CFR § 565.15. Sprawdź w swoim aucie / manualu</text>
+<text x="30" y="1726" font-size="17" fill="#a3a3a3">— kod silnika w VIN zależy od roku i DMC; lata RPO dotyczą ciężarówek C/K.</text>
+</g>
+</svg>

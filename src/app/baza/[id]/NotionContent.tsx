@@ -15,7 +15,7 @@ export async function readNotionBlocks(id: string, token: string): Promise<any[]
     const cursors = new Set<string>();
     let cursor: string | undefined;
     while (true) {
-      const url = new URL(`https://api.notion.com/v1/blocks/${encodeURIComponent(parent)}/children`);
+      const url = new URL(`${process.env.NOTION_API_BASE || 'https://api.notion.com'}/v1/blocks/${encodeURIComponent(parent)}/children`);
       url.searchParams.set('page_size', '100');
       if (cursor) url.searchParams.set('start_cursor', cursor);
       const response = await notionFetch(url.toString(), { token, revalidate: 300 });

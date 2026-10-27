@@ -22,6 +22,7 @@ import { PARTS } from '../lib/parts-catalog';
 import ModelThumb from './ModelThumb';
 import EntryTile from './ui/EntryTile';
 import { excerptOf, getIssueImage, getTipImage } from '../lib/entry-tile';
+import { tileImageFor } from '../lib/entry-media';
 import { isGeneralEntry, isSpecificToBody } from '../lib/model-images';
 import { hasSource } from './IssueDetails';
 
@@ -540,7 +541,7 @@ export default function Encyclopedia({ initialTab, initialItems }: { initialTab?
               <div className="space-y-3">
                 <p className="text-neutral-500 text-sm mb-4" role="status" data-testid="issue-count">Znaleziono: {filteredIssues.length} usterek</p>
                 {filteredIssues.map((i, idx) => (
-                  <EntryTile key={i.id || idx} item={i} icon="usterki" image={getIssueImage(i.Nazwa)} excerpt={excerptOf(i, ['Objawy', 'Opis', 'Rozwiązanie'])} sourced={hasSource(i)} sourcedTestId="issue-sourced">
+                  <EntryTile key={i.id || idx} item={i} icon="usterki" image={tileImageFor(i.id, getIssueImage(i.Nazwa))} excerpt={excerptOf(i, ['Objawy', 'Opis', 'Rozwiązanie'])} sourced={hasSource(i)} sourcedTestId="issue-sourced">
                     <VehicleMatchBadge item={i} />
                   </EntryTile>
                 ))}
@@ -594,7 +595,7 @@ export default function Encyclopedia({ initialTab, initialItems }: { initialTab?
             <p className="text-neutral-500 text-sm mb-4" role="status" data-testid="diy-count">Znaleziono: {diyTips.length}</p>
             <div className="space-y-3">
               {diyTips.map((t, idx) => (
-                <EntryTile key={t.id || idx} item={t} icon="diy" image={getTipImage(t.Nazwa)} excerpt={excerptOf(t, ['Opis', 'Rozwiązanie'])} sourced={hasSource(t)} sourcedTestId="diy-sourced">
+                <EntryTile key={t.id || idx} item={t} icon="diy" image={tileImageFor(t.id, getTipImage(t.Nazwa))} excerpt={excerptOf(t, ['Opis', 'Rozwiązanie'])} sourced={hasSource(t)} sourcedTestId="diy-sourced">
                   <VehicleMatchBadge item={t} />
                 </EntryTile>
               ))}

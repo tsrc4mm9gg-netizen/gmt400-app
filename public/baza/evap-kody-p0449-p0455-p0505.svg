@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Własny rysunek wektorowy gmt400.pl (bez grafik AI, bez kopiowania ilustracji Haynes/GM). Dane: źródła podane na rysunku. Rysunek poglądowy, nie w skali. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1056" width="900" height="1056" role="img" aria-label="Kody P0449, P0455, P0505: co znaczą i czego nie ma w tabelach GM">
+<title>Kody P0449, P0455, P0505: co znaczą i czego nie ma w tabelach GM</title>
+<defs><pattern id="g" width="30" height="30" patternUnits="userSpaceOnUse"><circle cx="15" cy="15" r="1.2" fill="#1f1f24"/></pattern></defs>
+<rect width="900" height="1056" fill="#0d0d0f"/>
+<rect width="900" height="1056" fill="url(#g)"/>
+<g font-family="DejaVu Sans, Arial, sans-serif">
+<rect x="0" y="0" width="900" height="8" fill="#a1a1aa"/>
+<text x="870" y="40" font-size="16" fill="#a3a3a3" text-anchor="end">gmt400.pl · schemat</text>
+<text x="30" y="76" font-size="29" fill="#f5f5f5" font-weight="bold">Kody P0449, P0455, P0505: co znaczą i czego nie</text>
+<text x="30" y="112" font-size="29" fill="#f5f5f5" font-weight="bold">ma w tabelach GM</text>
+<text x="30" y="148" font-size="20" fill="#d4d4d8">Model i lata: C/K i SUV GMT400 OBD-II 1996–2000. Definicje wg SAE</text>
+<text x="30" y="175" font-size="20" fill="#d4d4d8">J2012 (Hella); tabele GM/Haynes 1996–2000 sprawdzone osobno.</text>
+<line x1="30" y1="202" x2="870" y2="202" stroke="#3f3f46" stroke-width="2"/>
+<rect x="30" y="232" width="840" height="183" rx="10" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<rect x="30" y="232" width="840" height="42" rx="10" fill="#27272a"/>
+<text x="48" y="261" font-size="24" font-weight="bold" fill="#f5f5f5">P0449</text>
+<text x="170" y="260" font-size="18" fill="#e4e4e7" font-weight="bold">układ EVAP</text>
+<text x="48" y="300" font-size="18" fill="#f5f5f5">Wg SAE J2012: obwód zaworu / solenoidu odpowietrzającego (vent)</text>
+<text x="48" y="325" font-size="18" fill="#d4d4d8">Brak w tabelach GM/Haynes. Najbliższy kod GM: P0446 (odpowietrzenie</text>
+<text x="48" y="350" font-size="18" fill="#d4d4d8">niedrożne).</text>
+<text x="48" y="375" font-size="18" fill="#d4d4d8">Co sprawdzić: bezpiecznik i okablowanie zaworu vent, wtyczka, przewód</text>
+<text x="48" y="400" font-size="18" fill="#d4d4d8">odpowietrzenia (niezgnieciony), sam zawór (Haynes ch. 12 i 6-23)</text>
+<rect x="30" y="431" width="840" height="183" rx="10" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<rect x="30" y="431" width="840" height="42" rx="10" fill="#27272a"/>
+<text x="48" y="460" font-size="24" font-weight="bold" fill="#f5f5f5">P0455</text>
+<text x="170" y="459" font-size="18" fill="#e4e4e7" font-weight="bold">układ EVAP</text>
+<text x="48" y="499" font-size="18" fill="#f5f5f5">Wg SAE J2012: duża nieszczelność układu par paliwa</text>
+<text x="48" y="524" font-size="18" fill="#d4d4d8">GM/Haynes: P0440 (duży wyciek lub zatkanie) i P0442 (mała</text>
+<text x="48" y="549" font-size="18" fill="#d4d4d8">nieszczelność).</text>
+<text x="48" y="574" font-size="18" fill="#d4d4d8">Co sprawdzić: korek wlewu, odłączony lub zgnieciony wąż, kanister i</text>
+<text x="48" y="599" font-size="18" fill="#d4d4d8">węże, złącza szybkorozłączne, zawory purge/vent</text>
+<rect x="30" y="630" width="840" height="208" rx="10" fill="#18181b" stroke="#d4d4d8" stroke-width="2"/>
+<rect x="30" y="630" width="840" height="42" rx="10" fill="#27272a"/>
+<text x="48" y="659" font-size="24" font-weight="bold" fill="#f5f5f5">P0505</text>
+<text x="170" y="658" font-size="18" fill="#e4e4e7" font-weight="bold">NIE EVAP — bieg jałowy</text>
+<text x="48" y="698" font-size="18" fill="#f5f5f5">Wg SAE J2012: regulacja biegu jałowego (idle control)</text>
+<text x="48" y="723" font-size="18" fill="#d4d4d8">Brak w tabelach GM/Haynes. Są P0506, P0507, P1508, P1509; w OBD-I kody</text>
+<text x="48" y="748" font-size="18" fill="#d4d4d8">35 i 36.</text>
+<text x="48" y="773" font-size="18" fill="#d4d4d8">Co sprawdzić: zawór IAC (rezystancja A–B i C–D ok. 40–80 Ω),</text>
+<text x="48" y="798" font-size="18" fill="#d4d4d8">przepustnica, nieszczelności podciśnienia, okablowanie (Haynes</text>
+<text x="48" y="823" font-size="18" fill="#d4d4d8">6-19…6-20)</text>
+<rect x="30" y="854" width="840" height="72" rx="8" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<text x="44" y="885" font-size="17" fill="#f5f5f5">P0456 i P0457 istnieją w SAE J2012, ale nie występują w tabelach GM/Haynes z</text>
+<text x="44" y="909" font-size="17" fill="#f5f5f5">tych lat — nie traktuj ich jako kodów GM.</text>
+<line x1="30" y1="942" x2="870" y2="942" stroke="#3f3f46" stroke-width="2"/>
+<text x="30" y="970" font-size="17" fill="#a3a3a3">Źródła: SAE J2012 (opisy wg Hella); Haynes Chevrolet &amp; GMC Pick-ups 1988–1998,</text>
+<text x="30" y="994" font-size="17" fill="#a3a3a3">str. 6-7, 6-9, 6-10, 6-19…6-23; GM Mode 6 (1999 5.7 L). Pełna diagnoza wymaga</text>
+<text x="30" y="1018" font-size="17" fill="#a3a3a3">skanera GM i manuala. Sprawdź w swoim aucie / manualu.</text>
+</g>
+</svg>

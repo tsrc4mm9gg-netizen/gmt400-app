@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Własny rysunek wektorowy gmt400.pl (bez grafik AI, bez kopiowania ilustracji Haynes/GM). Dane: źródła podane na rysunku. Rysunek poglądowy, nie w skali. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1073" width="900" height="1073" role="img" aria-label="Skrzynia 4L60-E / 4L80-E: co sprawdzić przed remontem">
+<title>Skrzynia 4L60-E / 4L80-E: co sprawdzić przed remontem</title>
+<defs><pattern id="g" width="30" height="30" patternUnits="userSpaceOnUse"><circle cx="15" cy="15" r="1.2" fill="#1f1f24"/></pattern></defs>
+<rect width="900" height="1073" fill="#0d0d0f"/>
+<rect width="900" height="1073" fill="url(#g)"/>
+<g font-family="DejaVu Sans, Arial, sans-serif">
+<rect x="0" y="0" width="900" height="8" fill="#a1a1aa"/>
+<text x="870" y="40" font-size="16" fill="#a3a3a3" text-anchor="end">gmt400.pl · schemat</text>
+<text x="30" y="76" font-size="29" fill="#f5f5f5" font-weight="bold">Skrzynia 4L60-E / 4L80-E: co sprawdzić przed</text>
+<text x="30" y="112" font-size="29" fill="#f5f5f5" font-weight="bold">remontem</text>
+<text x="30" y="148" font-size="20" fill="#d4d4d8">Model i lata: C/K i SUV GMT400 z automatem 4L60-E / 4L80-E (od 1993).</text>
+<text x="30" y="175" font-size="20" fill="#d4d4d8">To lista kontrolna, nie diagnoza — kolejność od najtańszego do</text>
+<text x="30" y="202" font-size="20" fill="#d4d4d8">najdroższego.</text>
+<line x1="30" y1="229" x2="870" y2="229" stroke="#3f3f46" stroke-width="2"/>
+<rect x="30" y="259" width="840" height="158" rx="10" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<rect x="30" y="259" width="840" height="38" rx="10" fill="#27272a"/>
+<circle cx="62" cy="278" r="15" fill="#d4d4d8"/><text x="62" y="285" font-size="18" font-weight="bold" fill="#18181b" text-anchor="middle">1</text>
+<text x="90" y="286" font-size="19" font-weight="bold" fill="#f5f5f5">ZA GROSZE — zawsze</text>
+<text x="48" y="323" font-size="18" fill="#e4e4e7" xml:space="preserve">• ATF na gorąco: poziom, kolor, zapach (różowy nieprzezroczysty =</text>
+<text x="48" y="349" font-size="18" fill="#e4e4e7" xml:space="preserve">  chłodziwo w ATF; duże kawałki metalu w misce = remont)</text>
+<text x="48" y="375" font-size="18" fill="#e4e4e7" xml:space="preserve">• odczytaj i zapisz kody, zanim je skasujesz</text>
+<text x="48" y="401" font-size="18" fill="#e4e4e7" xml:space="preserve">• alarm / zdalny rozruch w aucie? (kody P0753/P0758 → tryb awaryjny)</text>
+<path d="M450 419 l-12 -2 l12 12 l12 -12 z" fill="#a1a1aa" transform="translate(0,6)"/>
+<rect x="30" y="439" width="840" height="158" rx="10" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<rect x="30" y="439" width="840" height="38" rx="10" fill="#27272a"/>
+<circle cx="62" cy="458" r="15" fill="#d4d4d8"/><text x="62" y="465" font-size="18" font-weight="bold" fill="#18181b" text-anchor="middle">2</text>
+<text x="90" y="466" font-size="19" font-weight="bold" fill="#f5f5f5">WIĄZKA I WTYCZKI</text>
+<text x="48" y="503" font-size="18" fill="#e4e4e7" xml:space="preserve">• wtyczka wyłącznika Park/Neutral (stopione wiązki)</text>
+<text x="48" y="529" font-size="18" fill="#e4e4e7" xml:space="preserve">• wiązka skrzyni wzdłuż nadwozia (przetarcia)</text>
+<text x="48" y="555" font-size="18" fill="#e4e4e7" xml:space="preserve">• obwód 1020: zasilanie solenoidów, końcówki</text>
+<text x="48" y="581" font-size="18" fill="#e4e4e7" xml:space="preserve">• wyłącznik zapłonu jako źródło tych samych objawów</text>
+<path d="M450 599 l-12 -2 l12 12 l12 -12 z" fill="#a1a1aa" transform="translate(0,6)"/>
+<rect x="30" y="619" width="840" height="132" rx="10" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<rect x="30" y="619" width="840" height="38" rx="10" fill="#27272a"/>
+<circle cx="62" cy="638" r="15" fill="#d4d4d8"/><text x="62" y="645" font-size="18" font-weight="bold" fill="#18181b" text-anchor="middle">3</text>
+<text x="90" y="646" font-size="19" font-weight="bold" fill="#f5f5f5">ZAWÓR TCC I HYDRAULIKA</text>
+<text x="48" y="683" font-size="18" fill="#e4e4e7" xml:space="preserve">• P1810: zespół wyłączników ciśnienia (PSA)</text>
+<text x="48" y="709" font-size="18" fill="#e4e4e7" xml:space="preserve">• P1870 (4L60E): poślizg elementu — nie zawsze TCC</text>
+<text x="48" y="735" font-size="18" fill="#e4e4e7" xml:space="preserve">• 4L80E: 2. bieg przy ruszaniu → o-ring tulei #11 w zaworze 3-4</text>
+<path d="M450 753 l-12 -2 l12 12 l12 -12 z" fill="#a1a1aa" transform="translate(0,6)"/>
+<rect x="30" y="773" width="840" height="158" rx="10" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<rect x="30" y="773" width="840" height="38" rx="10" fill="#27272a"/>
+<circle cx="62" cy="792" r="15" fill="#d4d4d8"/><text x="62" y="799" font-size="18" font-weight="bold" fill="#18181b" text-anchor="middle">4</text>
+<text x="90" y="800" font-size="19" font-weight="bold" fill="#f5f5f5">DECYZJA O REMONCIE</text>
+<text x="48" y="837" font-size="18" fill="#e4e4e7" xml:space="preserve">• duże kawałki metalu w misce, albo objawy wnętrza (brak R, 2. i 4. po</text>
+<text x="48" y="863" font-size="18" fill="#e4e4e7" xml:space="preserve">  1997 r. → skorupa koła słonecznego)</text>
+<text x="48" y="889" font-size="18" fill="#e4e4e7" xml:space="preserve">• zapisz dla warsztatu: kody, kiedy wchodzą, stan ATF, dodatki</text>
+<text x="48" y="915" font-size="18" fill="#e4e4e7" xml:space="preserve">  elektroniczne</text>
+<line x1="30" y1="959" x2="870" y2="959" stroke="#3f3f46" stroke-width="2"/>
+<text x="30" y="987" font-size="17" fill="#a3a3a3">Źródła: SM GM 1996 C/K (wpis „usterki, kody DTC i diagnostyka”, s. 6596, 6676);</text>
+<text x="30" y="1011" font-size="17" fill="#a3a3a3">biuletyn GM 502820; ATRA 2000 (wskazówki 4L60E/4L80E) i biuletyn ATRA #583.</text>
+<text x="30" y="1035" font-size="17" fill="#a3a3a3">Kolejność poziomów — własne zestawienie. Sprawdź w swoim aucie / manualu.</text>
+</g>
+</svg>

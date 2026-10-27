@@ -15,6 +15,8 @@ import { findObdCode } from '../../../lib/obd-codes';
 import Breadcrumbs, { type Crumb } from '../../ui/Breadcrumbs';
 import BackLink from '../../ui/BackLink';
 import { SCHEMATICS } from '../../../lib/schematics';
+import { getEntryMedia } from '../../../lib/entry-media';
+import EntryFigure from './EntryFigure';
 
 const SECTION_OF: Record<string, Crumb> = {
   'Usterka': { href: '/usterki', label: 'Usterki' },
@@ -39,7 +41,7 @@ const readEntry = cache(async (id: string) => {
   let response: Response;
   try {
     // Ponawianie przy 429/5xx/timeout; udane odpowiedzi są w cache danych Next przez 5 min.
-    response = await notionFetch(`https://api.notion.com/v1/pages/${encodeURIComponent(id)}`, { token, revalidate: 300 });
+    response = await notionFetch(`${process.env.NOTION_API_BASE || 'https://api.notion.com'}/v1/pages/${encodeURIComponent(id)}`, { token, revalidate: 300 });
   } catch (error) {
     Sentry.captureException(error, { level: 'warning', tags: { notion: 'page' } });
     return UNAVAILABLE;
@@ -79,7 +81,8 @@ function localDiagram(title: string): string | null {
   return mappings.find(([terms]) => terms.some(term => value.includes(term)))?.[1] || null;
 }
 // Powiązane schematy SVG (/schematy#id) po słowach kluczowych z tytułu — tylko dodatkowy link, grafiki AI bez zmian.
-function relatedSchematics(title: string): { id: string; title: string }[] {
+function relatedSchematics(title: string, forced?: string[]): { id: string; title: string }[] {
+  if (forced) return forced.map(id => SCHEMATICS.find(s => s.id === id)).filter((s): s is NonNullable<typeof s> => Boolean(s)).map(s => ({ id: s.id, title: s.title }));
   const value = title.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/ł/g, 'l');
   const map: [string[], string][] = [
     [['chlodz', 'termostat', 'pompa wody', 'przegrz', 'plyn chlodn', 'chlodnic'], 'vortec-cooling'],
@@ -137,7 +140,10 @@ export default async function KnowledgeEntry({ params }: Props) {
   let blocks: any[] = [];
   let contentError = false;
   try { blocks = await readNotionBlocks(entry.id, process.env.NOTION_TOKEN || ''); } catch { contentError = true; }
-  const diagram = entry.Typ === 'Porada' && !hasImage(blocks) ? localDiagram(entry.Nazwa) : null;
+  const media = getEntryMedia(entry.id);
+  const photos = (media?.figures || []).filter(f => f.credit);
+  const drawings = (media?.figures || []).filter(f => !f.credit);
+  const diagram = !media && entry.Typ === 'Porada' && !hasImage(blocks) ? localDiagram(entry.Nazwa) : null;
   const materialLead = lead(entry);
   const rawCode = obdCode(entry);
   const code = rawCode && findObdCode(rawCode) ? rawCode : null;
@@ -159,14 +165,16 @@ export default async function KnowledgeEntry({ params }: Props) {
       {code && <p className="rounded border border-silver-600/40 bg-silver-600/10 px-3 text-sm"><a className="inline-flex min-h-11 items-center font-semibold text-silver-300 underline" href={`/kody-obd/${code}`}>Otwórz kartę kodu OBD {code.toUpperCase()}</a></p>}
       <VehicleMatchBadge item={entry} />
       <MaterialContents entryId={entry.id} />
+      {photos.length > 0 && <section aria-label="Zdjęcia do tego tematu" className="space-y-3">{photos.map(f => <EntryFigure key={f.src} figure={f} />)}</section>}
       <p className="rounded border border-white/20 p-3 text-sm text-neutral-400">Dopasowanie do profilu opiera się na metadanych i nie potwierdza poprawności technicznej. Przed naprawą sprawdź zgodność procedury z pojazdem i dokumentacją serwisową.</p>
       {entry.Opis && <section><h2 className="mb-2 text-xl">Opis</h2><MaterialText text={entry.Opis} field="Opis" /></section>}
       {entry.Objawy && <section><h2 className="mb-2 text-xl">Objawy</h2><MaterialText text={entry.Objawy} field="Objawy" /></section>}
       {entry.Rozwiązanie && <section><h2 className="mb-2 text-xl">Rozwiązanie</h2><MaterialText text={entry.Rozwiązanie} field="Rozwiązanie" /></section>}
       {contentError && <p role="alert" className="rounded border border-danger-600/40 p-3">Nie udało się pobrać dodatkowej zawartości strony Notion. Powyższe pola są dostępne, ale materiał może być niekompletny. Odśwież stronę, aby ponowić pobieranie.</p>}
       {blocks.length > 0 && <section aria-label="Zawartość strony Notion"><h2 className="mb-3 text-xl">Treść materiału i ilustracje</h2><NotionContent blocks={blocks} /></section>}
+      {drawings.length > 0 && <section aria-label="Rysunki do tego tematu" className="space-y-3"><h2 className="text-xl">Rysunek do tego tematu</h2>{drawings.map(f => <EntryFigure key={f.src} figure={f} />)}</section>}
       {diagram && <figure><a href={diagram} target="_blank" rel="noopener noreferrer"><img src={diagram} alt="Grafika pomocnicza z biblioteki GMT400" loading="lazy" className="h-auto w-full rounded object-contain" /></a><figcaption className="mt-2 text-xs text-neutral-400">Grafika pomocnicza z biblioteki aplikacji, nie ilustracja przypisana w Notion do tego wpisu. Sprawdź jej zgodność z konkretnym pojazdem i procedurą.</figcaption></figure>}
-      {(() => { const sch = relatedSchematics(entry.Nazwa); return sch.length > 0 && <aside aria-label="Powiązane schematy" className="rounded-xl border border-silver-600/40 bg-neutral-950 p-4"><h2 className="text-lg font-semibold text-white">Schemat do tego tematu</h2><ul className="mt-2 space-y-2">{sch.map(s => <li key={s.id}><a href={`/schematy#${s.id}`} className="flex min-h-11 items-center justify-between gap-3 rounded-lg border border-white/10 px-3 py-2 text-neutral-100 hover:border-silver-600">{s.title}<span aria-hidden="true" className="text-silver-400">→</span></a></li>)}</ul><p className="mt-2 text-xs text-neutral-400">Schematy mają podany model i lata — sprawdź w swoim aucie / manualu.</p></aside>; })()}
+      {(() => { const sch = relatedSchematics(entry.Nazwa, media?.schematics); return sch.length > 0 && <aside aria-label="Powiązane schematy" className="rounded-xl border border-silver-600/40 bg-neutral-950 p-4"><h2 className="text-lg font-semibold text-white">Schemat do tego tematu</h2><ul className="mt-2 space-y-2">{sch.map(s => <li key={s.id}><a href={`/schematy#${s.id}`} className="flex min-h-11 items-center justify-between gap-3 rounded-lg border border-white/10 px-3 py-2 text-neutral-100 hover:border-silver-600">{s.title}<span aria-hidden="true" className="text-silver-400">→</span></a></li>)}</ul><p className="mt-2 text-xs text-neutral-400">Schematy mają podany model i lata — sprawdź w swoim aucie / manualu.</p></aside>; })()}
       {!contentError && !entry.Opis && !entry.Objawy && !entry.Rozwiązanie && !blocks.length && <p>Ten wpis nie zawiera jeszcze szczegółowej treści.</p>}
       {entry.edited && <p className="text-xs text-neutral-500">Ostatnia edycja wpisu w Notion: {entry.edited}. To nie jest data weryfikacji merytorycznej.</p>}
     </article>

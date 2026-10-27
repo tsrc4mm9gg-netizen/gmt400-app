@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Własny rysunek wektorowy gmt400.pl (bez grafik AI, bez kopiowania ilustracji Haynes/GM). Dane: źródła podane na rysunku. Rysunek poglądowy, nie w skali. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1197" width="900" height="1197" role="img" aria-label="Układ EVAP w GMT400: co z czym jest połączone">
+<title>Układ EVAP w GMT400: co z czym jest połączone</title>
+<defs><pattern id="g" width="30" height="30" patternUnits="userSpaceOnUse"><circle cx="15" cy="15" r="1.2" fill="#1f1f24"/></pattern></defs>
+<rect width="900" height="1197" fill="#0d0d0f"/>
+<rect width="900" height="1197" fill="url(#g)"/>
+<g font-family="DejaVu Sans, Arial, sans-serif">
+<rect x="0" y="0" width="900" height="8" fill="#a1a1aa"/>
+<text x="870" y="40" font-size="16" fill="#a3a3a3" text-anchor="end">gmt400.pl · schemat</text>
+<text x="30" y="76" font-size="29" fill="#f5f5f5" font-weight="bold">Układ EVAP w GMT400: co z czym jest połączone</text>
+<text x="30" y="112" font-size="20" fill="#d4d4d8">Model i lata: C/K i SUV GMT400 1988–2000; elementy różnią się</text>
+<text x="30" y="139" font-size="20" fill="#d4d4d8">rocznikiem (OBD-I do 1995 nie ma czujnika ciśnienia ani zaworu vent).</text>
+<line x1="30" y1="166" x2="870" y2="166" stroke="#3f3f46" stroke-width="2"/>
+<rect x="30" y="202" width="140" height="140" rx="10" fill="#18181b" stroke="#a1a1aa" stroke-width="2.5"/>
+<text x="100.0" y="228" font-size="16" font-weight="bold" fill="#f5f5f5" text-anchor="middle">Zbiornik</text>
+<text x="100.0" y="248" font-size="16" font-weight="bold" fill="#f5f5f5" text-anchor="middle">paliwa</text>
+<text x="100.0" y="276" font-size="13" fill="#a3a3a3" text-anchor="middle">opary z baku</text>
+<rect x="263" y="202" width="140" height="140" rx="10" fill="#18181b" stroke="#a1a1aa" stroke-width="2.5"/>
+<text x="333.0" y="228" font-size="16" font-weight="bold" fill="#f5f5f5" text-anchor="middle">Kanister z</text>
+<text x="333.0" y="248" font-size="16" font-weight="bold" fill="#f5f5f5" text-anchor="middle">węglem</text>
+<text x="333.0" y="268" font-size="16" font-weight="bold" fill="#f5f5f5" text-anchor="middle">aktywnym</text>
+<text x="333.0" y="296" font-size="13" fill="#a3a3a3" text-anchor="middle">zbiera opary</text>
+<rect x="496" y="202" width="140" height="140" rx="10" fill="#18181b" stroke="#a1a1aa" stroke-width="2.5"/>
+<text x="566.0" y="228" font-size="16" font-weight="bold" fill="#f5f5f5" text-anchor="middle">Zawór purge</text>
+<text x="566.0" y="256" font-size="13" fill="#a3a3a3" text-anchor="middle">na kanistrze</text>
+<text x="566.0" y="272" font-size="13" fill="#a3a3a3" text-anchor="middle">(wcz.) lub na</text>
+<text x="566.0" y="288" font-size="13" fill="#a3a3a3" text-anchor="middle">kolektorze</text>
+<text x="566.0" y="304" font-size="13" fill="#a3a3a3" text-anchor="middle">(późne)</text>
+<rect x="729" y="202" width="140" height="140" rx="10" fill="#18181b" stroke="#a1a1aa" stroke-width="2.5"/>
+<text x="799.0" y="228" font-size="16" font-weight="bold" fill="#f5f5f5" text-anchor="middle">Kolektor</text>
+<text x="799.0" y="248" font-size="16" font-weight="bold" fill="#f5f5f5" text-anchor="middle">dolotowy</text>
+<text x="799.0" y="276" font-size="13" fill="#a3a3a3" text-anchor="middle">podciśnienie</text>
+<text x="799.0" y="292" font-size="13" fill="#a3a3a3" text-anchor="middle">zasysa opary do</text>
+<text x="799.0" y="308" font-size="13" fill="#a3a3a3" text-anchor="middle">spalenia</text>
+<defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0L10 5L0 10z" fill="#d4d4d8"/></marker></defs>
+<line x1="173" y1="272.0" x2="260" y2="272.0" stroke="#d4d4d8" stroke-width="3" marker-end="url(#ar)"/>
+<text x="216.5" y="262.0" font-size="12" fill="#a3a3a3" text-anchor="middle">zaw. zwrotny</text>
+<line x1="406" y1="272.0" x2="493" y2="272.0" stroke="#d4d4d8" stroke-width="3" marker-end="url(#ar)"/>
+<text x="449.5" y="262.0" font-size="12" fill="#a3a3a3" text-anchor="middle">wąż par</text>
+<line x1="639" y1="272.0" x2="726" y2="272.0" stroke="#d4d4d8" stroke-width="3" marker-end="url(#ar)"/>
+<text x="682.5" y="262.0" font-size="12" fill="#a3a3a3" text-anchor="middle">przewód</text>
+<rect x="30" y="422" width="140" height="140" rx="10" fill="#18181b" stroke="#52525b" stroke-width="2"/>
+<text x="100.0" y="448" font-size="16" font-weight="bold" fill="#f5f5f5" text-anchor="middle">Czujnik</text>
+<text x="100.0" y="468" font-size="16" font-weight="bold" fill="#f5f5f5" text-anchor="middle">ciśnienia w</text>
+<text x="100.0" y="488" font-size="16" font-weight="bold" fill="#f5f5f5" text-anchor="middle">zbiorniku</text>
+<text x="100.0" y="516" font-size="13" fill="#a3a3a3" text-anchor="middle">1996–2000, w</text>
+<text x="100.0" y="532" font-size="13" fill="#a3a3a3" text-anchor="middle">module pompy</text>
+<text x="100.0" y="548" font-size="13" fill="#a3a3a3" text-anchor="middle">paliwa</text>
+<rect x="263" y="422" width="140" height="140" rx="10" fill="#18181b" stroke="#52525b" stroke-width="2"/>
+<text x="333.0" y="448" font-size="16" font-weight="bold" fill="#f5f5f5" text-anchor="middle">Zawór vent</text>
+<text x="333.0" y="476" font-size="13" fill="#a3a3a3" text-anchor="middle">1996–2000, na</text>
+<text x="333.0" y="492" font-size="13" fill="#a3a3a3" text-anchor="middle">wsporniku koło</text>
+<text x="333.0" y="508" font-size="13" fill="#a3a3a3" text-anchor="middle">zbiornika</text>
+<rect x="30" y="632" width="840" height="64" rx="10" fill="#27272a" stroke="#d4d4d8" stroke-width="2.5"/>
+<text x="450" y="660" font-size="20" font-weight="bold" fill="#f5f5f5" text-anchor="middle">ECM / PCM</text>
+<text x="450" y="683" font-size="15" fill="#d4d4d8" text-anchor="middle">steruje zaworami; OBD-II: autotest szczelności przy zimnym starcie</text>
+<line x1="100" y1="565" x2="100" y2="629" stroke="#a1a1aa" stroke-width="2.5" marker-end="url(#ar)"/>
+<line x1="333" y1="631" x2="333" y2="566" stroke="#a1a1aa" stroke-width="2.5" marker-end="url(#ar)"/>
+<line x1="566" y1="631" x2="566" y2="346" stroke="#a1a1aa" stroke-width="2.5" stroke-dasharray="7 5" marker-end="url(#ar)"/>
+<text x="110" y="602.0" font-size="13" fill="#a3a3a3">sygnał czujnika</text>
+<text x="343" y="602.0" font-size="13" fill="#a3a3a3">otwiera / zamyka</text>
+<text x="576" y="517.0" font-size="13" fill="#a3a3a3">sygnał wypełnienia, ok. 5–10 razy/s</text>
+<text x="576" y="535.0" font-size="13" fill="#a3a3a3">(po rozgrzaniu silnika)</text>
+<rect x="30" y="722" width="840" height="93" rx="8" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<text x="44" y="752" font-size="16" fill="#f5f5f5">Czujnik ciśnienia w zbiorniku (jak MAP: 5 V i masa z PCM): ok. 1,5 V przy ciśnieniu</text>
+<text x="44" y="775" font-size="16" fill="#f5f5f5">otoczenia, ok. 4,5 V przy podciśnieniu 14 in-Hg (ok. 47 kPa). Zawory purge i vent są</text>
+<text x="44" y="798" font-size="16" fill="#f5f5f5">normalnie zamknięte.</text>
+<rect x="30" y="829" width="8" height="30" fill="#d4d4d8"/>
+<text x="50" y="851" font-size="24" fill="#f5f5f5" font-weight="bold">Kolejność kontroli (Haynes 6-22/6-23 + GM)</text>
+<rect x="30" y="875" width="840" height="192" rx="8" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+<text x="44" y="906" font-size="17" fill="#f5f5f5">1. Węże — najpierw (Haynes: „Always check the hoses first”): odłączony,</text>
+<text x="44" y="930" font-size="17" fill="#f5f5f5">uszkodzony lub brakujący to najbardziej prawdopodobna przyczyna.</text>
+<text x="44" y="954" font-size="17" fill="#f5f5f5">2. Korek wlewu paliwa i przewody (zalecenie GM Mode 6).</text>
+<text x="44" y="978" font-size="17" fill="#f5f5f5">3. Bezpieczniki i okablowanie zaworów purge i vent; pełny test wymaga skanera.</text>
+<text x="44" y="1002" font-size="17" fill="#f5f5f5">4. Zawór purge „tyka”, brak kodów (1997–98): biuletyn GM 410891.</text>
+<text x="44" y="1026" font-size="17" fill="#f5f5f5">5. Kasowanie: zimny start (ECT i IAT 3,75–30°C), paliwo 12,5–87,5%, napięcie</text>
+<text x="44" y="1050" font-size="17" fill="#f5f5f5">10–17 V.</text>
+<line x1="30" y1="1083" x2="870" y2="1083" stroke="#3f3f46" stroke-width="2"/>
+<text x="30" y="1111" font-size="17" fill="#a3a3a3">Rysunek poglądowy zbudowany z opisu Haynes 6-22/6-23 (PDF s. 174–175) i GM Mode 6</text>
+<text x="30" y="1135" font-size="17" fill="#a3a3a3">(1999, 5.7 L); położenie i połączenia mogą się różnić wg rocznika. Sprawdź w swoim</text>
+<text x="30" y="1159" font-size="17" fill="#a3a3a3">aucie / manualu.</text>
+</g>
+</svg>

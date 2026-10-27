@@ -15,6 +15,13 @@ http.createServer((req, res) => {
   let body = '';
   req.on('data', chunk => body += chunk);
   req.on('end', () => {
+    const pm = /\/v1\/pages\/([0-9a-f-]+)$/i.exec(req.url || '');
+    if (pm) {
+      const e = entries.find(x => x.id.replace(/-/g, '') === pm[1].replace(/-/g, ''));
+      res.writeHead(e ? 200 : 404, { 'content-type': 'application/json' });
+      return res.end(JSON.stringify(e ? { ...page(e), parent: { database_id: '746973771d604f1e8276502851176af2' }, last_edited_time: '2026-10-27T00:00:00.000Z' } : {}));
+    }
+    if (/\/v1\/blocks\/.+\/children/.test(req.url || '')) { res.writeHead(200, { 'content-type': 'application/json' }); return res.end(JSON.stringify({ results: [], has_more: false, next_cursor: null })); }
     if (!/\/v1\/databases\/.+\/query$/.test(req.url || '')) { res.writeHead(404); return res.end('{}'); }
     const start = Number(JSON.parse(body || '{}').start_cursor || 0);
     const slice = entries.slice(start, start + 100);
