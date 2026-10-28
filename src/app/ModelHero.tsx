@@ -75,7 +75,7 @@ export default function ModelHero() {
     <section className="mx-auto w-full max-w-3xl px-4 pt-2 pb-2" aria-label="Wybór modelu">
       <div className="mb-2">
         <h2 className="text-lg font-bold text-white" style={{ margin: 0, fontSize: '1.125rem' }}>Wybierz model</h2>
-        <p className="text-xs text-neutral-400">Przesuń lub użyj strzałek — wybór zawęża usterki, DIY i kody.</p>
+        <p className="hidden text-xs text-neutral-400 sm:block" style={{ margin: 0, maxWidth: 'none' }}>Przesuń lub użyj strzałek — zawęża usterki, DIY i kody.</p>
       </div>
 
       <div
@@ -105,25 +105,30 @@ export default function ModelHero() {
             className="studio-slide object-cover"
             priority={index === 0}
           />
+        </div>
 
-          <div
-            className="absolute left-3 top-3 z-10 rounded-full border border-white/25 bg-black/55 px-3 py-1 text-sm font-semibold text-white backdrop-blur"
-            data-testid="year-badge"
-            aria-live="polite"
-          >
-            {badge}
+        {/* Sterowanie poza zdjęciem: strzałki po bokach nazwy modelu, kropki pod nią — nic nie zasłania auta. */}
+        <div className="border-t border-white/10 bg-neutral-950 px-2 pb-0.5 pt-2.5 text-white">
+          <div className="grid grid-cols-[2.75rem_minmax(0,1fr)_2.75rem] items-center gap-2">
+            <button type="button" onClick={prev} className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-white/25 bg-neutral-900 text-2xl leading-none text-white hover:border-silver-500 hover:bg-neutral-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-silver-500" aria-label="Poprzedni model" data-testid="carousel-prev">‹</button>
+            <div className="min-h-[5rem] min-w-0 text-center">
+              <h3 className="truncate text-xl font-bold sm:text-2xl" style={{ margin: 0 }}>{body.name}</h3>
+              <p className="flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-sm text-neutral-300" style={{ margin: '0.25rem 0 0', maxWidth: 'none' }}>
+                <span data-testid="year-badge" aria-live="polite" className="rounded-full border border-white/25 bg-white/5 px-2.5 py-0.5 font-semibold text-white">{badge}</span>
+                {filters.engine && <span>{ENGINES.find(e => e.value === filters.engine)?.label ?? filters.engine}</span>}
+                {filters.drivetrain && <span>{filters.drivetrain.toUpperCase()}</span>}
+              </p>
+              {body.note && <p className="text-xs text-neutral-400" style={{ margin: '0.25rem 0 0', maxWidth: 'none' }}>{body.note}</p>}
+            </div>
+            <button type="button" onClick={next} className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-white/25 bg-neutral-900 text-2xl leading-none text-white hover:border-silver-500 hover:bg-neutral-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-silver-500" aria-label="Następny model" data-testid="carousel-next">›</button>
           </div>
-
-          <button type="button" onClick={prev} className="absolute left-3 top-1/2 z-10 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-white/30 bg-black/70 text-2xl text-white backdrop-blur hover:bg-black/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-silver-500" aria-label="Poprzedni model">‹</button>
-          <button type="button" onClick={next} className="absolute right-3 top-1/2 z-10 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-white/30 bg-black/70 text-2xl text-white backdrop-blur hover:bg-black/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-silver-500" aria-label="Następny model">›</button>
-
-          <div className="absolute inset-x-0 bottom-0 z-10 flex justify-center">
+          <div className="flex justify-center" data-testid="carousel-dots">
             {BODY_STYLES.map((b, i) => (
               <button
                 key={b.id}
                 type="button"
                 onClick={() => go(i)}
-                className="flex h-9 w-6 items-center justify-center"
+                className="flex h-8 w-7 items-center justify-center"
                 aria-label={b.name}
                 aria-current={i === index ? 'true' : undefined}
               >
@@ -131,16 +136,6 @@ export default function ModelHero() {
               </button>
             ))}
           </div>
-        </div>
-
-        <div className="border-t border-white/10 bg-neutral-950 px-3 py-3 text-center text-white">
-          <h3 className="truncate text-xl font-bold sm:text-2xl">{body.name}</h3>
-          <p className="text-sm text-neutral-300">
-            {filters.year ? filters.year : bodyYears(body)}
-            {filters.engine ? ` · ${ENGINES.find(e => e.value === filters.engine)?.label ?? filters.engine}` : ''}
-            {filters.drivetrain ? ` · ${filters.drivetrain.toUpperCase()}` : ''}
-          </p>
-          {body.note && <p className="mt-0.5 text-xs text-neutral-400">{body.note}</p>}
         </div>
       </div>
 

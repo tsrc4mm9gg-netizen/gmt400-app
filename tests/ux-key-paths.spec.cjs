@@ -43,6 +43,38 @@ test('karuzela: strzałki, kropki, klawiatura i szybkie klikanie', async ({ page
   expect(errors).toEqual([]);
 });
 
+test('karuzela: sterowanie poza zdjęciem — na każdym slajdzie strzałki, kropki i plakietka lat nie dotykają zdjęcia, cele ≥ 44 px, bez skoku układu', async ({ page }) => {
+  const errors = await guard(page);
+  await page.goto(BASE + '/');
+  const total = Number((await carousel(page).getAttribute('aria-label')).match(/z (\d+)/)[1]);
+  expect(total).toBeGreaterThanOrEqual(9);
+  const intersects = (a, b) => a.x < b.x + b.width && a.x + a.width > b.x && a.y < b.y + b.height && a.y + a.height > b.y;
+  const heights = new Set();
+  for (let i = 0; i < total; i++) {
+    await expect(carousel(page)).toHaveAttribute('aria-label', new RegExp(`^Model ${i + 1} z ${total}:`));
+    await expect(carousel(page).locator('.studio img[alt]:not([alt=""])')).toBeVisible();
+    const frame = await carousel(page).locator('.studio').boundingBox();
+    const box = await carousel(page).boundingBox();
+    heights.add(Math.round(box.height));
+    for (const id of ['carousel-prev', 'carousel-next', 'year-badge']) {
+      const b = await page.getByTestId(id).boundingBox();
+      expect(intersects(b, frame), `${id} nie zasłania zdjęcia (slajd ${i + 1})`).toBe(false);
+      if (id !== 'year-badge') {
+        expect(b.width, id).toBeGreaterThanOrEqual(44);
+        expect(b.height, id).toBeGreaterThanOrEqual(44);
+        expect(b.x, id).toBeGreaterThanOrEqual(0);
+        expect(b.x + b.width, id).toBeLessThanOrEqual(page.viewportSize().width);
+      }
+    }
+    const dots = await page.getByTestId('carousel-dots').boundingBox();
+    expect(intersects(dots, frame), 'kropki poza zdjęciem').toBe(false);
+    await page.getByTestId('carousel-next').click();
+  }
+  expect([...heights], 'wysokość karuzeli jest stała na wszystkich slajdach (brak skoku układu)').toHaveLength(1);
+  await noHorizontalScroll(page);
+  expect(errors).toEqual([]);
+});
+
 test('karuzela: poziomy gest zmienia model, pionowy nie', async ({ page }, testInfo) => {
   test.skip(!testInfo.project.use.hasTouch, 'gesty tylko na telefonie');
   await guard(page);
