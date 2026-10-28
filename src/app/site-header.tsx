@@ -55,7 +55,7 @@ export default function SiteHeader() {
   );
 
   return (
-    <header className="border-b border-white/10 bg-black/95 text-white">
+    <header className="sticky top-0 z-40 border-b border-white/10 bg-black/95 text-white backdrop-blur-md">
       <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-x-3 gap-y-1 px-4 py-2 lg:flex-nowrap lg:py-3">
         <Link
           href="/"
