@@ -17,7 +17,8 @@ const changed = fs.readFileSync(process.env.CHANGED_FILES || '/tmp/changed-files
 const findings = [];
 for (const file of changed) {
   if (!fs.existsSync(file) || !fs.statSync(file).isFile()) continue;
-  if (/(^|\/)(package-lock\.json|\.next\/|node_modules\/)/.test(file)) continue;
+  // public/ocr/ = dołączone pliki tesseract.js (WASM osadzony jako base64, fałszywe trafienia wzorców)
+  if (/(^|\/)(package-lock\.json|public\/ocr\/|\.next\/|node_modules\/)/.test(file)) continue;
   const lines = fs.readFileSync(file, 'utf8').split('\n');
   lines.forEach((line, index) => {
     for (const pattern of patterns) {
