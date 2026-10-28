@@ -55,7 +55,7 @@ function MissingCode({ code }: { code: string }) {
 const severityVisual = {
   critical: { label: 'Waga: wysoka — nie ignoruj', className: 'bg-danger-500' },
   warning: { label: 'Waga: średnia — zdiagnozuj', className: 'bg-danger-600' },
-  info: { label: 'Waga: informacyjna', className: 'bg-sky-400' }
+  info: { label: 'Waga: informacyjna', className: 'bg-silver-400' }
 } as const;
 
 export default async function ObdCodePage({ params }: { params: Promise<{ code: string }> }) {

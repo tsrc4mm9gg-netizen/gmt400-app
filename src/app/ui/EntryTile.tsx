@@ -29,12 +29,12 @@ export default function EntryTile({ item, icon, image, excerpt, headingLevel = 3
   const titleClass = '!m-0 !text-[15px] !leading-snug !font-semibold text-neutral-100 line-clamp-2 break-words';
   return (
     <div
-      className="relative overflow-hidden rounded-2xl border border-white/10 bg-neutral-950 has-[a:active]:bg-neutral-900 has-[a:focus-visible]:outline has-[a:focus-visible]:outline-2 has-[a:focus-visible]:-outline-offset-2 has-[a:focus-visible]:outline-silver-400"
+      className="relative overflow-hidden rounded-2xl border border-white/10 bg-neutral-950 transition-colors hover:border-white/25 has-[a:active]:border-white/30 has-[a:active]:[background-image:none] has-[a:active]:bg-neutral-900 has-[a:focus-visible]:outline has-[a:focus-visible]:outline-2 has-[a:focus-visible]:-outline-offset-2 has-[a:focus-visible]:outline-silver-400"
       data-testid="entry-tile"
     >
       <div className="p-3">
         <div className="flex items-start gap-3">
-          <span className="relative flex h-16 w-16 shrink-0 items-center justify-center overflow-hidden rounded-xl border border-white/15 bg-neutral-900" data-testid="tile-thumb">
+          <span className="relative flex h-16 w-16 shrink-0 items-center justify-center overflow-hidden rounded-xl border border-white/15 bg-neutral-900 shadow-[inset_0_1px_0_rgba(255,255,255,.12)]" data-testid="tile-thumb">
             {image ? (
               <Image src={image} alt="" width={128} height={128} sizes="64px" className="h-full w-full object-cover" />
             ) : (
@@ -52,7 +52,7 @@ export default function EntryTile({ item, icon, image, excerpt, headingLevel = 3
             <div className="mt-1.5 flex flex-wrap gap-1.5">
               <span className={`${PILL} border-white/15 bg-white/5 text-neutral-300`} data-testid="tile-model">{modelLabel(item)}</span>
               {years && <span className={`${PILL} border-silver-600/40 text-silver-300`} data-testid="tile-years">{years}</span>}
-              {sourced && <span className={`${PILL} border-emerald-500/40 text-emerald-300`} data-testid={sourcedTestId || 'tile-sourced'}>ze źródłem</span>}
+              {sourced && <span className={`${PILL} border-silver-200/40 text-silver-100`} data-testid={sourcedTestId || 'tile-sourced'}>ze źródłem</span>}
             </div>
           </div>
           {href && <span aria-hidden="true" className="self-center text-xl text-silver-400">›</span>}

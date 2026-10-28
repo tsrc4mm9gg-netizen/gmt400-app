@@ -21,7 +21,7 @@ import { EngineTable, FluidsTable, PartSourceNote, OemQuickList, TorqueTable } f
 import { PARTS } from '../lib/parts-catalog';
 import ModelThumb from './ModelThumb';
 import EntryTile from './ui/EntryTile';
-import { excerptOf, getIssueImage, getTipImage } from '../lib/entry-tile';
+import { excerptOf, getIssueImage, getTipIcon, getTipImage } from '../lib/entry-tile';
 import { tileImageFor } from '../lib/entry-media';
 import { isGeneralEntry, isSpecificToBody } from '../lib/model-images';
 import { hasSource } from './IssueDetails';
@@ -674,7 +674,7 @@ export default function Encyclopedia({ initialTab, initialItems }: { initialTab?
             )}
             <div className="space-y-3">
               {diyTips.map((t, idx) => (
-                <EntryTile key={t.id || idx} item={t} icon="diy" image={tileImageFor(t.id, getTipImage(t.Nazwa))} excerpt={excerptOf(t, ['Opis', 'Rozwiązanie'])} sourced={hasSource(t)} sourcedTestId="diy-sourced">
+                <EntryTile key={t.id || idx} item={t} icon={getTipIcon(t.Nazwa)} image={tileImageFor(t.id, getTipImage(t.Nazwa))} excerpt={excerptOf(t, ['Opis', 'Rozwiązanie'])} sourced={hasSource(t)} sourcedTestId="diy-sourced">
                   <VehicleMatchBadge item={t} />
                 </EntryTile>
               ))}
@@ -1274,7 +1274,7 @@ export default function Encyclopedia({ initialTab, initialItems }: { initialTab?
                   <tr className="border-b border-white/5"><td className="p-2">Miejsca</td><td className="text-center">3-6</td><td className="text-center">3-6</td><td className="text-center">5-6</td><td className="text-center">6-9</td></tr>
                   <tr className="border-b border-white/5"><td className="p-2">Silniki</td><td className="text-center">4.3-5.7L</td><td className="text-center">4.3-5.7L</td><td className="text-center">5.7L</td><td className="text-center">5.7-7.4L</td></tr>
                   <tr className="border-b border-white/5"><td className="p-2">Spalanie</td><td className="text-center">12-15 L</td><td className="text-center">14-17 L</td><td className="text-center">14-16 L</td><td className="text-center">15-18 L</td></tr>
-                  <tr className="border-b border-white/5"><td className="p-2">Cena części</td><td className="text-center text-green-400">Niska</td><td className="text-center text-silver-400">Średnia</td><td className="text-center text-silver-400">Średnia</td><td className="text-center text-silver-400">Wyższa</td></tr>
+                  <tr className="border-b border-white/5"><td className="p-2">Cena części</td><td className="text-center font-semibold text-silver-100">Niska</td><td className="text-center text-silver-400">Średnia</td><td className="text-center text-silver-400">Średnia</td><td className="text-center text-silver-400">Wyższa</td></tr>
                 </tbody>
               </table>
             </div>

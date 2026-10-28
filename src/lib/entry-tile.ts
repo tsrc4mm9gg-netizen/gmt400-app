@@ -27,6 +27,30 @@ export function getTipImage(nazwa: string): string | null {
   return null;
 }
 
+/** Nazwy ikon liniowych (podzbiór CategoryIconName) używanych jako zastępnik miniatury DIY. */
+export type TileIconName = 'diy' | 'brake' | 'gear' | 'engine' | 'drop' | 'bolt' | 'snow' | 'thermo' | 'obd' | 'wave';
+
+/**
+ * Ikona zastępcza kafelka DIY (gdy wpis nie ma zdjęcia ani rysunku) wg tematu wpisu: hamulce, skrzynia, silnik, płyny,
+ * elektryka, klimatyzacja, chłodzenie, diagnostyka, zawieszenie. Bez dopasowania zostaje ogólna ikona „klucz”.
+ */
+export function getTipIcon(nazwa: string): TileIconName {
+  const n = nazwa.toLowerCase();
+  const rules: [TileIconName, string[]][] = [
+    ['brake', ['hamulc', 'klock', 'tarcz', 'zacisk', 'abs']],
+    ['gear', ['skrzyni', '4l60', '4l80', 'np231', 'rozdzielcz', 'sprzęg', 'sprzeg', 'most ', 'dyferencj']],
+    ['snow', ['klima', 'ogrzew', 'nagrzewnic']],
+    ['thermo', ['chłodz', 'chlodz', 'termostat', 'chłodnic', 'chlodnic']],
+    ['drop', ['płyn', 'plyn', 'olej', 'paliw', 'atf', 'wyciek']],
+    ['bolt', ['elektr', 'akumulator', 'alternator', 'rozrusz', 'bezpiecz', 'przekaź', 'przekaz', 'żarów', 'zarow', 'reflektor', 'lamp', 'światł', 'swiatl', 'instalacj']],
+    ['obd', ['obd', 'kod ', 'diagnost']],
+    ['wave', ['zawiesz', 'amortyz', 'wahacz', 'stabiliz', 'sworz']],
+    ['engine', ['silnik', 'kolektor', 'wtrysk', 'głowic', 'glowic', 'rozrząd', 'rozrzad', 'świec', 'swiec', 'uszczelk']],
+  ];
+  for (const [icon, keys] of rules) if (keys.some(k => n.includes(k))) return icon;
+  return 'diy';
+}
+
 /** Zdjęcie wpisu usterki (gdy jest) — w przeciwnym razie ilustracja z mapy tytułów. */
 export function getIssueImage(nazwa: string): string | null {
   const n = nazwa.toLowerCase();

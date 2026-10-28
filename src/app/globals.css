@@ -63,3 +63,10 @@ a:hover > .icon-tile, a:focus-visible > .icon-tile { border-color:rgba(255,255,2
 @keyframes studio-in { from { opacity:0; } to { opacity:1; } }
 .studio-slide { animation:studio-in .28s ease-out both; }
 @media (prefers-reduced-motion:reduce) { .studio-slide { animation:none; } }
+
+/* === Dopracowanie „aplikacyjne”: delikatny metaliczny połysk przycisków i kart (bez zmiany wymiarów układu) === */
+button, a, summary, [role='button'] { touch-action:manipulation; }
+.bg-silver-600:not([class*='bg-silver-600/']):not([class*='shadow']), .bg-silver-500:not([class*='bg-silver-500/']):not([class*='shadow']) { box-shadow:inset 0 1px 0 rgba(255,255,255,.85), inset 0 -1px 0 rgba(0,0,0,.18), 0 1px 2px rgba(0,0,0,.45); transition:filter 120ms ease, background-image 120ms ease; }
+.bg-silver-600:not([class*='bg-silver-600/']):active, .bg-silver-500:not([class*='bg-silver-500/']):active { filter:brightness(.93); }
+button.bg-neutral-800, a.bg-neutral-800 { background-image:linear-gradient(180deg,#2e2e33 0%,#222226 100%); box-shadow:inset 0 1px 0 rgba(255,255,255,.08); }
+@media (hover:hover) { :is(.bg-neutral-900,.bg-neutral-950).border:is(a, button):hover { border-color:rgba(255,255,255,.28); } }

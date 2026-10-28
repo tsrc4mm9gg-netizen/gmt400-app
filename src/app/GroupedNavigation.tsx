@@ -52,7 +52,7 @@ export default function GroupedNavigation({ categories, active, onSelect, instan
       </li>)}</ul>
     </div>
     <Link href="/narzedzia" prefetch={false} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: 48, marginTop: 12, padding: '8px 12px', borderRadius: 8, background: 'var(--accent)', color: '#111111', fontSize: 14, fontWeight: 700, textAlign: 'center', textDecoration: 'none' }}>Narzędzia: RPO, OBD, opony i części</Link>
-    {['vin', 'usterki', 'paliwo', 'mojeauto', 'kupujacy'].includes(active) && <div style={{ marginTop: 12, padding: 12, border: '1px solid #3f1d1f', borderRadius: 8 }}>
+    {['vin', 'usterki', 'paliwo', 'mojeauto', 'kupujacy'].includes(active) && <div style={{ marginTop: 12, padding: 12, border: '1px solid rgba(255,255,255,.14)', borderRadius: 8 }}>
       <Link href="/narzedzia/dane-pojazdu" prefetch={false} style={{ display: 'flex', alignItems: 'center', minHeight: 44, color: 'var(--accent-soft)', fontSize: 14, lineHeight: '20px', textDecoration: 'underline' }}>Oficjalne dane VIN, NHTSA i EPA</Link>
       <p style={{ margin: '4px 0 0', color: '#a7adb7', fontSize: 12, lineHeight: '18px' }}>Dekoder VIN, kampanie bezpieczeństwa, zgłoszenia właścicieli i spalanie. Dostęp także bez wpisywania VIN; wybierz model i rocznik w narzędziu.</p>
     </div>}

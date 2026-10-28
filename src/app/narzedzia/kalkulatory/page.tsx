@@ -58,8 +58,8 @@ export default function Calculators() {
  </div>
  </div>
 
- <div className="rounded-lg bg-blue-50 p-4">
- <h2 className="text-sm font-semibold text-blue-900">Planowane opony</h2>
+ <div className="rounded-lg bg-neutral-900 p-4">
+ <h2 className="text-sm font-semibold text-silver-100">Planowane opony</h2>
  <div className="mt-3 grid grid-cols-3 gap-3">
  <label className="text-sm">Szerokość, mm<input className="mt-1 w-full rounded border px-2 py-2" value={newWidth} onChange={event => setNewWidth(event.target.value)} /></label>
  <label className="text-sm">Profil, %<input className="mt-1 w-full rounded border px-2 py-2" value={newAspect} onChange={event => setNewAspect(event.target.value)} /></label>
@@ -72,7 +72,7 @@ export default function Calculators() {
  <label className="text-sm">Wskazanie licznika, km/h<input className="mt-1 w-full rounded border px-2 py-2" value={speed} onChange={event => setSpeed(event.target.value)} /></label>
  </div>
 
- <button type="submit" disabled={loading} className="w-full rounded-lg bg-blue-600 px-4 py-3 font-semibold text-white hover:bg-blue-700 disabled:opacity-50">
+ <button type="submit" disabled={loading} className="w-full rounded-lg bg-silver-600 px-4 py-3 font-semibold text-neutral-950 hover:bg-silver-500 disabled:opacity-50">
  {loading ? 'Obliczam…' : 'Porównaj opony'}
  </button>
  </form>

@@ -18,7 +18,7 @@ export default function Diagnostics() {
     finally { setLoading(false); }
   }
   const severityLabel: Record<string, string> = { information: 'Informacja', moderate: 'Umiarkowana pilność', high: 'Wysoka pilność' };
-  const severityStyle: Record<string, string> = { information: 'bg-blue-100 text-blue-800', moderate: 'bg-danger-950/60 text-danger-300', high: 'bg-danger-950/60 text-danger-300' };
+  const severityStyle: Record<string, string> = { information: 'bg-neutral-900 text-silver-200', moderate: 'bg-danger-950/60 text-danger-300', high: 'bg-danger-950/60 text-danger-300' };
   return <div className="mx-auto max-w-4xl space-y-4 p-4">
     <section className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
       <h1 className="text-2xl font-semibold text-slate-900">Co oznacza kod błędu?</h1>
@@ -28,7 +28,7 @@ export default function Diagnostics() {
           <label htmlFor="diagnostics-query" className="mb-1 block text-sm font-medium text-slate-900">Kod błędu lub objaw</label>
           <input id="diagnostics-query" value={query} onChange={event => setQuery(event.target.value)} placeholder="Wpisz kod błędu lub objaw" className="w-full rounded-lg border border-slate-300 px-3 py-2" />
         </div>
-        <button type="submit" disabled={loading} className="rounded-lg bg-blue-600 px-4 py-2 font-medium text-white hover:bg-blue-700 disabled:opacity-50">{loading ? 'Szukam…' : 'Sprawdź kod'}</button>
+        <button type="submit" disabled={loading} className="rounded-lg bg-silver-600 px-4 py-2 font-medium text-neutral-950 hover:bg-silver-500 disabled:opacity-50">{loading ? 'Szukam…' : 'Sprawdź kod'}</button>
       </form>
       <div className="mt-3 flex flex-wrap gap-2">{EXAMPLES.map(example => <button key={example} type="button" onClick={() => setQuery(example)} className="rounded-full bg-slate-100 px-3 py-1 text-xs text-slate-700 hover:bg-slate-200">{example}</button>)}</div>
       {error && <p className="mt-3 rounded bg-danger-950/60 p-3 text-sm text-danger-300">{error}</p>}

@@ -85,8 +85,8 @@ export function FluidsTable() {
 }
 
 const STATUS_CLASS: Record<Part['status'], string> = {
-  potwierdzone: 'border-emerald-500/40 text-emerald-300',
-  poprawione: 'border-sky-500/40 text-sky-300',
+  potwierdzone: 'border-silver-200/50 text-silver-100',
+  poprawione: 'border-silver-500/50 text-silver-300',
   niezweryfikowane: 'border-silver-500/50 text-silver-300',
 };
 

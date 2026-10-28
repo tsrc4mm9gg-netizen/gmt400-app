@@ -9,9 +9,9 @@
 .page .card { position:relative; display:flex; flex-direction:column; align-items:flex-start; justify-content:flex-start; width:100%; max-width:100%; min-width:0; min-height:0; gap:0; margin:0; padding:18px; border:1px solid rgba(255,255,255,.14); border-radius:20px; background-color:#1a1a1d; background-image:var(--card-gradient); box-shadow:var(--card-sheen); color:#ededed; text-align:left; text-decoration:none; white-space:normal; overflow-wrap:anywhere; transition:border-color .15s ease,background-color .15s ease; }
 .page .card:hover { background-color:#202024; border-color:var(--accent); }
 .page .card:focus-visible,.page .back:focus-visible { outline:3px solid var(--accent-soft); outline-offset:3px; }
-.page .icon { display:flex; align-items:center; justify-content:center; flex:0 0 auto; width:36px; height:36px; margin:0 0 10px; border:1px solid #5b2a2a; border-radius:8px; background:#261818; color:var(--accent-soft); }
+.page .icon { display:flex; align-items:center; justify-content:center; flex:0 0 auto; width:36px; height:36px; margin:0 0 10px; border:1px solid rgba(255,255,255,.2); border-radius:8px; background:#1f1f23; color:var(--accent-soft); }
 .page .icon svg { display:block; width:20px; height:20px; flex:0 0 auto; }
-.page .tag { display:block; margin:0 0 5px; color:#c2b391; font-size:10px; font-weight:650; line-height:1.5; letter-spacing:.06em; text-transform:uppercase; }
+.page .tag { display:block; margin:0 0 5px; color:var(--muted); font-size:10px; font-weight:650; line-height:1.5; letter-spacing:.06em; text-transform:uppercase; }
 .page .cardTitle { display:block; width:100%; margin:0 0 8px; padding:0; color:#fafafa; font-size:20px; font-weight:700; line-height:1.3; letter-spacing:-.015em; text-wrap:initial; white-space:normal; overflow-wrap:break-word; }
 .page .description { display:block; width:100%; max-width:100%; margin:0 0 8px; color:#d0d5dc; font-size:14px; line-height:1.6; white-space:normal; overflow-wrap:anywhere; }
 .page .example { display:block; width:100%; max-width:100%; margin:0 0 12px; color:#b5beca; font-size:12px; line-height:1.6; white-space:normal; overflow-wrap:anywhere; }
