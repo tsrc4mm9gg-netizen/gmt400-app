@@ -16,6 +16,7 @@ import { matchesYearRules } from '../lib/year-range.mjs';
 import VinDecoder from './VinDecoder';
 import OfficialVehicleData from './OfficialVehicleData';
 import { useModelSelection } from './ModelSelectionContext';
+import CategoryChips from './ui/CategoryChips';
 import { findBody } from '../lib/body-styles';
 import { EngineTable, FluidsTable, PartSourceNote, OemQuickList, TorqueTable } from './VerifiedSpecs';
 import { PARTS } from '../lib/parts-catalog';
@@ -102,18 +103,6 @@ function playGong(): void {
   }
 }
 
-/** Chipy kategorii (DIY i Usterki): graficie/srebro, cel dotyku ≥ 44 px, zawijane w wiersze. */
-function CategoryChips({ categories, value, onChange, prefix, label }: { categories: { id: string; label: string }[]; value: string; onChange: (id: string) => void; prefix: string; label: string }) {
-  return (
-    <div className="mb-3 flex flex-wrap gap-2" role="group" aria-label={label} data-testid={`${prefix}-categories`}>
-      {categories.map(c => (
-        <button key={c.id} type="button" aria-pressed={value === c.id} onClick={() => onChange(c.id)} data-testid={`${prefix}-cat-${c.id}`}
-          className={`min-h-11 rounded-full border px-4 text-sm font-semibold transition ${value === c.id ? 'border-silver-300 bg-silver-600 text-neutral-950' : 'border-white/20 bg-neutral-900 text-silver-200 hover:bg-neutral-800'}`}>{c.label}</button>
-      ))}
-    </div>
-  );
-}
-
 export default function Encyclopedia({ initialTab, initialItems }: { initialTab?: string; initialItems?: Item[] | null } = {}) {
   // initialItems: lista wyrenderowana na serwerze (ISR) — trafia do HTML dla wyszukiwarek, a użytkownik nie widzi ekranu ładowania.
   // Po montażu i tak pobieramy świeże dane z /api/notion (cache 5 min), więc nowe wpisy pojawiają się bez czekania na ISR.
@@ -126,7 +115,7 @@ export default function Encyclopedia({ initialTab, initialItems }: { initialTab?
   const [query, setQuery] = useState('');
   const [tab, setTab] = useSectionNavigation(CATEGORIES.map(category => category.id), initialTab);
   const materialScope = tab === 'diy' || tab === 'schematy' ? ['Porada'] : tab === 'kody' ? ['Kod błędu'] : tab === 'usterki' ? ['Usterka'] : undefined;
-  const { visibleItems, panel: vehicleFilterPanel } = useVehicleMaterialFilter(items, materialScope);
+  const { visibleItems, panel: vehicleFilterPanel, profileNarrowing, profileModeChanged, resetMode: resetProfileMode, showAllMode: showAllProfileMode } = useVehicleMaterialFilter(items, materialScope);
   const [selectedModel, setSelectedModel] = useState('Wszystkie');
   const [selectedModelItem, setSelectedModelItem] = useState<Item | null>(null);
   const [expanded, setExpanded] = useState<number | null>(null);
@@ -357,8 +346,8 @@ export default function Encyclopedia({ initialTab, initialItems }: { initialTab?
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [issues, query, issueQuery, selectedModel, issueModel, issueYear, bodyId, modelFilters, issueSourcedOnly, issueCategory]);
   const issueCategoryLabel = ISSUE_CATEGORIES.find(c => c.id === issueCategory)?.label ?? 'Wszystkie';
-  const issueFiltersActive = !!issueQuery || issueCategory !== 'wszystkie' || !!issueModel || !!issueYear || issueSourcedOnly || selectedModel !== 'Wszystkie';
-  const clearIssueFilters = () => { setIssueQuery(''); setIssueCategory('wszystkie'); setIssueModel(''); setIssueYear(''); setIssueSourcedOnly(false); setSelectedModel('Wszystkie'); setSelectedModelItem(null); };
+  const issueFiltersActive = profileModeChanged || !!issueQuery || issueCategory !== 'wszystkie' || !!issueModel || !!issueYear || issueSourcedOnly || selectedModel !== 'Wszystkie';
+  const clearIssueFilters = () => { setIssueQuery(''); setIssueCategory('wszystkie'); setIssueModel(''); setIssueYear(''); setIssueSourcedOnly(false); setSelectedModel('Wszystkie'); setSelectedModelItem(null); resetProfileMode(); };
 
   const filteredCodes = useMemo(() => {
     let result = filterByModel(codes);
@@ -388,8 +377,10 @@ export default function Encyclopedia({ initialTab, initialItems }: { initialTab?
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filteredTips, diyQuery, diySourcedOnly, diyCategory]);
   const diyCategoryLabel = DIY_CATEGORIES.find(c => c.id === diyCategory)?.label ?? 'Wszystkie';
-  const diyFiltersActive = !!diyQuery || diyCategory !== 'wszystkie' || diySourcedOnly || selectedModel !== 'Wszystkie';
-  const clearDiyFilters = () => { setDiyQuery(''); setDiyCategory('wszystkie'); setDiySourcedOnly(false); setSelectedModel('Wszystkie'); setSelectedModelItem(null); };
+  const diyFiltersActive = profileModeChanged || !!diyQuery || diyCategory !== 'wszystkie' || diySourcedOnly || selectedModel !== 'Wszystkie';
+  const clearDiyFilters = () => { setDiyQuery(''); setDiyCategory('wszystkie'); setDiySourcedOnly(false); setSelectedModel('Wszystkie'); setSelectedModelItem(null); resetProfileMode(); };
+  const profileScoped = !!bodyId || profileNarrowing;
+  const showAllProfile = () => { clearSelection(); showAllProfileMode(); };
 
   const selectModel = (model: string, item?: Item) => {
     setSelectedModel(model);
@@ -599,9 +590,12 @@ export default function Encyclopedia({ initialTab, initialItems }: { initialTab?
                 </p>
                 {filteredIssues.length === 0 && (
                   <div className="rounded-2xl border border-white/15 bg-neutral-900 p-4" data-testid="issue-empty">
-                    <p className="mb-3 font-semibold text-white" style={{ maxWidth: 'none' }}>Brak wyników</p>
+                    <p className="mb-3 font-semibold text-white" style={{ maxWidth: 'none' }} data-testid="issue-empty-title">{profileScoped ? 'Brak wyników dla Twojego profilu auta. ' : 'Brak wyników'}</p>
                     <p className="mb-3 text-sm text-neutral-300" style={{ maxWidth: 'none' }}>Żadna usterka nie pasuje do wybranych filtrów.</p>
-                    {issueFiltersActive && <button type="button" onClick={clearIssueFilters} data-testid="issue-clear-filters" className="min-h-11 rounded-full border border-silver-300 bg-silver-600 px-4 text-sm font-semibold text-neutral-950">Wyczyść filtry</button>}
+                    <div className="flex flex-wrap gap-2">
+                      {profileScoped && <button type="button" onClick={showAllProfile} data-testid="issue-show-all" className="min-h-11 rounded-full border border-silver-300 bg-silver-600 px-4 text-sm font-semibold text-neutral-950">Pokaż wszystko</button>}
+                      {issueFiltersActive && <button type="button" onClick={clearIssueFilters} data-testid="issue-clear-filters" className="min-h-11 rounded-full border border-silver-300 bg-neutral-800 px-4 text-sm font-semibold text-silver-100">Wyczyść filtry</button>}
+                    </div>
                   </div>
                 )}
                 {filteredIssues.map((i, idx) => (
@@ -667,9 +661,12 @@ export default function Encyclopedia({ initialTab, initialItems }: { initialTab?
             </p>
             {diyTips.length === 0 && (
               <div className="mb-4 rounded-2xl border border-white/15 bg-neutral-900 p-4" data-testid="diy-empty">
-                <p className="mb-3 font-semibold text-white" style={{ maxWidth: 'none' }}>Brak wyników</p>
+                <p className="mb-3 font-semibold text-white" style={{ maxWidth: 'none' }} data-testid="diy-empty-title">{profileScoped ? 'Brak wyników dla Twojego profilu auta. ' : 'Brak wyników'}</p>
                 <p className="mb-3 text-sm text-neutral-300" style={{ maxWidth: 'none' }}>Żaden poradnik nie pasuje do wybranych filtrów.</p>
-                {diyFiltersActive && <button type="button" onClick={clearDiyFilters} data-testid="diy-clear-filters" className="min-h-11 rounded-full border border-silver-300 bg-silver-600 px-4 text-sm font-semibold text-neutral-950">Wyczyść filtry</button>}
+                <div className="flex flex-wrap gap-2">
+                  {profileScoped && <button type="button" onClick={showAllProfile} data-testid="diy-show-all" className="min-h-11 rounded-full border border-silver-300 bg-silver-600 px-4 text-sm font-semibold text-neutral-950">Pokaż wszystko</button>}
+                  {diyFiltersActive && <button type="button" onClick={clearDiyFilters} data-testid="diy-clear-filters" className="min-h-11 rounded-full border border-silver-300 bg-neutral-800 px-4 text-sm font-semibold text-silver-100">Wyczyść filtry</button>}
+                </div>
               </div>
             )}
             <div className="space-y-3">

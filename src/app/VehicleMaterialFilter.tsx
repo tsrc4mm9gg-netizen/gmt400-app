@@ -1,5 +1,5 @@
 'use client';
-import { useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useVehicleProfile } from './VehicleProfileProvider';
 import CompactVehicleFilterPanel from './CompactVehicleFilterPanel';
 import { matchVehicle, type Applicability } from '../lib/vehicle-compatibility';
@@ -42,5 +42,8 @@ export function useVehicleMaterialFilter<T extends Material>(items: T[], scopeTy
     return items.filter(item => !scoped.has(item) || allowed.has(item));
   }, [items, active, mode, evaluated]);
   const panel = <CompactVehicleFilterPanel profile={profile} active={active} mode={mode} counts={counts} onModeChange={setMode} />;
-  return { visibleItems, panel };
+  const resetMode = useCallback(() => setMode('relevant'), []);
+  const showAllMode = useCallback(() => setMode('all'), []);
+  /** profileNarrowing: filtr profilu auta faktycznie zawęża listę (profil zapisany i tryb inny niż „Wszystkie”). */
+  return { visibleItems, panel, profileNarrowing: active && mode !== 'all', profileModeChanged: active && mode !== 'relevant', resetMode, showAllMode };
 }

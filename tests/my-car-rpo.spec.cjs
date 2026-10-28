@@ -36,7 +36,7 @@ test('Mój samochód: formularz → podsumowanie, plakietka, odświeżenie, zapo
   await page.getByRole('button', { name: 'Zapomnij auto' }).click();
   await page.getByRole('button', { name: 'Tak, zapomnij' }).click();
   await expect(page.getByRole('form', { name: 'Dane auta' })).toBeVisible();
-  await expect(page.getByTestId('header-car-badge')).toHaveCount(0);
+  await expect(page.getByTestId('header-car-badge')).toHaveAttribute('data-state', 'empty');
   expect(errors).toEqual([]);
 });
 

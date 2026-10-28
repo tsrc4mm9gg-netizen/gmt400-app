@@ -347,7 +347,7 @@ async function saveManualCar(page, { brand = 'Chevrolet', platform = 'C/K', mode
 test('Mój samochód: ręczny zapis → plakietka → dopasowane sekcje → przeładowanie → zapomnij', async ({ page }) => {
   const errors = await guard(page);
   await page.goto(BASE + '/moj-samochod');
-  await expect(page.getByTestId('header-car-badge')).toHaveCount(0);
+  await expect(page.getByTestId('header-car-badge')).toHaveAttribute('data-state', 'empty');
   await expect(page.getByTestId('my-car-form')).toBeVisible();
   await noHorizontalScroll(page);
   await saveManualCar(page);
@@ -380,7 +380,7 @@ test('Mój samochód: ręczny zapis → plakietka → dopasowane sekcje → prze
   await page.getByRole('button', { name: 'Zapomnij auto', exact: true }).click();
   await page.getByRole('button', { name: 'Tak, zapomnij', exact: true }).click();
   await expect(page.getByTestId('my-car-form')).toBeVisible();
-  await expect(page.getByTestId('header-car-badge')).toHaveCount(0);
+  await expect(page.getByTestId('header-car-badge')).toHaveAttribute('data-state', 'empty');
   expect(await page.evaluate(() => localStorage.getItem('gmt400_vehicle_profile_v2'))).toBeNull();
   expect(errors).toEqual([]);
 });

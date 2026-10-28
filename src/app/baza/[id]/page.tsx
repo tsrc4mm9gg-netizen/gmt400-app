@@ -18,6 +18,8 @@ import { SCHEMATICS } from '../../../lib/schematics';
 import { getEntryMedia } from '../../../lib/entry-media';
 import EntryFigure from './EntryFigure';
 import EntryHeaderMeta from './EntryHeaderMeta';
+import RecentTracker from '../../RecentTracker';
+import { recentTypeLabel } from '../../../lib/recent-viewed';
 
 const SECTION_OF: Record<string, Crumb> = {
   'Usterka': { href: '/usterki', label: 'Usterki' },
@@ -154,6 +156,7 @@ export default async function KnowledgeEntry({ params }: Props) {
     <div className="mt-1 flex flex-wrap items-center gap-x-3 text-sm">
       <BackLink fallback="/szukaj" label="← Wróć" className="inline-flex min-h-11 items-center text-silver-400 underline" />
     </div>
+    <RecentTracker id={entry.id} title={entry.Nazwa} href={`/baza/${entry.id}`} type={recentTypeLabel(entry.Typ)} />
     <article className="mt-6 min-w-0 space-y-6 [overflow-wrap:anywhere]">
       <div className="flex flex-wrap gap-2">
         {entry.Typ && <span className="rounded-full border border-silver-600/40 bg-silver-600/10 px-3 py-1 text-xs font-medium text-silver-300">Typ: {entry.Typ}</span>}

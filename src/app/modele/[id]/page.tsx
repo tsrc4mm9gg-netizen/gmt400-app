@@ -9,6 +9,7 @@ import { enginesForBody } from '../../../lib/model-engines';
 import { CHECK_NOTE, SOURCES, TRANSFER_CASES } from '../../../lib/verified-specs';
 import { SCHEMATICS } from '../../../lib/schematics';
 import ModelMaterials from './ModelMaterials';
+import RecentTracker from '../../RecentTracker';
 
 type Props = { params: Promise<{ id: string }> };
 
@@ -60,6 +61,7 @@ export default async function ModelPage({ params }: Props) {
   return (
     <div className="mx-auto min-h-screen max-w-5xl bg-black px-4 py-6 pb-28 text-white sm:px-5 sm:py-10">
       <Breadcrumbs items={[{ href: '/modele', label: 'Modele' }, { label: body.name }]} />
+      <RecentTracker id={`model-${body.id}`} title={body.name} href={modelHref(body)} type="Model" />
 
       <header className="mt-3 overflow-hidden rounded-2xl border border-white/10 bg-neutral-950">
         <div className="relative aspect-[16/9] w-full bg-neutral-900">
