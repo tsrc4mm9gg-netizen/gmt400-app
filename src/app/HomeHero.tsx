@@ -10,6 +10,7 @@ import OwnerEssentials from './OwnerEssentials';
 import HomeProblems from './HomeProblems';
 import { useModelSelection } from './ModelSelectionContext';
 import { findBody } from '../lib/body-styles';
+import RecentlyViewed from './RecentlyViewed';
 
 export default function HomeHero() {
   const { bodyId, filters, clearSelection, setSelection } = useModelSelection();
@@ -40,6 +41,7 @@ export default function HomeHero() {
         </div>
       )}
       <HomeQuickLinks />
+      <RecentlyViewed />
       <div className="pt-4"><HomeStart /></div>
       <OwnerEssentials />
       <HomeProblems />
