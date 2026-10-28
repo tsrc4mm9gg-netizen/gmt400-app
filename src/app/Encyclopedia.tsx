@@ -102,6 +102,18 @@ function playGong(): void {
   }
 }
 
+/** Chipy kategorii (DIY i Usterki): graficie/srebro, cel dotyku ≥ 44 px, zawijane w wiersze. */
+function CategoryChips({ categories, value, onChange, prefix, label }: { categories: { id: string; label: string }[]; value: string; onChange: (id: string) => void; prefix: string; label: string }) {
+  return (
+    <div className="mb-3 flex flex-wrap gap-2" role="group" aria-label={label} data-testid={`${prefix}-categories`}>
+      {categories.map(c => (
+        <button key={c.id} type="button" aria-pressed={value === c.id} onClick={() => onChange(c.id)} data-testid={`${prefix}-cat-${c.id}`}
+          className={`min-h-11 rounded-full border px-4 text-sm font-semibold transition ${value === c.id ? 'border-silver-300 bg-silver-600 text-neutral-950' : 'border-white/20 bg-neutral-900 text-silver-200 hover:bg-neutral-800'}`}>{c.label}</button>
+      ))}
+    </div>
+  );
+}
+
 export default function Encyclopedia({ initialTab, initialItems }: { initialTab?: string; initialItems?: Item[] | null } = {}) {
   // initialItems: lista wyrenderowana na serwerze (ISR) — trafia do HTML dla wyszukiwarek, a użytkownik nie widzi ekranu ładowania.
   // Po montażu i tak pobieramy świeże dane z /api/notion (cache 5 min), więc nowe wpisy pojawiają się bez czekania na ISR.
@@ -124,9 +136,11 @@ export default function Encyclopedia({ initialTab, initialItems }: { initialTab?
   const [issueSourcedOnly, setIssueSourcedOnly] = useState(false);
   const [issueModel, setIssueModel] = useState('');
   const [issueQuery, setIssueQuery] = useState('');
+  const [issueCategory, setIssueCategory] = useState('wszystkie');
   const [codeQuery, setCodeQuery] = useState('');
   const [diyQuery, setDiyQuery] = useState('');
   const [diySourcedOnly, setDiySourcedOnly] = useState(false);
+  const [diyCategory, setDiyCategory] = useState('wszystkie');
   const [schemaQuery, setSchemaQuery] = useState('');
   const [vinResult, setVinResult] = useState<Record<string, string> | null>(null);
   const [vinWarning, setVinWarning] = useState(false);
@@ -308,6 +322,15 @@ export default function Encyclopedia({ initialTab, initialItems }: { initialTab?
     return result.filter(m => m.Nazwa.toLowerCase().includes(query.toLowerCase()) || (m.Opis || '').toLowerCase().includes(query.toLowerCase()));
   }, [models, query, selectedModel]);
 
+  const ISSUE_CATEGORIES = [
+    { id: 'wszystkie', label: 'Wszystkie', keywords: [] as string[] },
+    { id: 'silnik', label: 'Silnik', keywords: ['silnik', 'nie odpala', 'szarpie', 'gaśnie', 'pompa', 'wtrysk', 'kolektor', 'świec'] },
+    { id: 'skrzynia', label: 'Skrzynia', keywords: ['skrzyni', '4l60', '4l80', 'ślizga', 'atf', 'transmis'] },
+    { id: 'hamulce', label: 'Hamulce', keywords: ['hamulc', 'abs', 'klock', 'tarcz', 'zacisk'] },
+    { id: 'zawieszenie', label: 'Zawieszenie', keywords: ['zawiesz', 'amortyz', 'stuk', 'sworz', 'wahacz'] },
+    { id: 'elektryka', label: 'Elektryka', keywords: ['elektr', 'czujnik', 'przekaź', 'kontrolka', 'obd'] },
+    { id: 'klima', label: 'Klima/Ogrzewanie', keywords: ['klima', 'ogrzew', 'sprężarka', 'nagrzewnica', 'dmuchawa'] },
+  ];
   const filteredIssues = useMemo(() => {
     let result = issueModel ? issues.filter(i => i.Model === issueModel || i.Model === 'Wszystkie') : filterByModel(issues);
     if (issueYear) {
@@ -325,8 +348,17 @@ export default function Encyclopedia({ initialTab, initialItems }: { initialTab?
       (i.Opis || '').toLowerCase().includes(q)
     );
     if (issueSourcedOnly) result = result.filter(hasSource);
+    const catWords = ISSUE_CATEGORIES.find(c => c.id === issueCategory)?.keywords ?? [];
+    if (catWords.length) result = result.filter(i => {
+      const hay = `${i.Nazwa} ${i.Objawy || ''} ${i.Opis || ''} ${i.Rozwiązanie || ''}`.toLowerCase();
+      return catWords.some(k => hay.includes(k));
+    });
     return result;
-  }, [issues, query, issueQuery, selectedModel, issueModel, issueYear, bodyId, modelFilters, issueSourcedOnly]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [issues, query, issueQuery, selectedModel, issueModel, issueYear, bodyId, modelFilters, issueSourcedOnly, issueCategory]);
+  const issueCategoryLabel = ISSUE_CATEGORIES.find(c => c.id === issueCategory)?.label ?? 'Wszystkie';
+  const issueFiltersActive = !!issueQuery || issueCategory !== 'wszystkie' || !!issueModel || !!issueYear || issueSourcedOnly || selectedModel !== 'Wszystkie';
+  const clearIssueFilters = () => { setIssueQuery(''); setIssueCategory('wszystkie'); setIssueModel(''); setIssueYear(''); setIssueSourcedOnly(false); setSelectedModel('Wszystkie'); setSelectedModelItem(null); };
 
   const filteredCodes = useMemo(() => {
     let result = filterByModel(codes);
@@ -337,10 +369,27 @@ export default function Encyclopedia({ initialTab, initialItems }: { initialTab?
     let result = filterByModel(tips);
     return result.filter(t => t.Nazwa.toLowerCase().includes(query.toLowerCase()) || (t.Rozwiązanie || '').toLowerCase().includes(query.toLowerCase()));
   }, [tips, query, selectedModel, bodyId, modelFilters]);
+  const DIY_CATEGORIES = [
+    { id: 'wszystkie', label: 'Wszystkie', keywords: [] as string[] },
+    { id: 'silnik', label: 'Silnik', keywords: ['silnik', 'olej', 'filtr', 'kolektor', 'świec', 'zapłon', 'rozrząd', 'pompa', 'wtrysk'] },
+    { id: 'skrzynia', label: 'Skrzynia', keywords: ['skrzyni', '4l60', '4l80', 'atf', 'transmis', 'reduktor', 'np241', 'np243'] },
+    { id: 'hamulce', label: 'Hamulce', keywords: ['hamulc', 'klock', 'tarcz', 'zacisk', 'abs'] },
+    { id: 'zawieszenie', label: 'Zawieszenie', keywords: ['zawiesz', 'amortyz', 'sworz', 'wahacz', 'resory'] },
+    { id: 'elektryka', label: 'Elektryka', keywords: ['elektr', 'czujnik', 'przekaź', 'alternator', 'rozrusznik', 'vin', 'obd'] },
+    { id: 'plyny', label: 'Płyny', keywords: ['płyn', 'olej', 'chłodnic', 'atf', 'dyferencjał', 'most'] },
+  ];
   const diyTips = useMemo(() => {
     const q = diyQuery.toLowerCase();
-    return filteredTips.filter(t => (!q || t.Nazwa.toLowerCase().includes(q) || (t.Rozwiązanie || '').toLowerCase().includes(q) || (t.Opis || '').toLowerCase().includes(q)) && (!diySourcedOnly || hasSource(t)));
-  }, [filteredTips, diyQuery, diySourcedOnly]);
+    const keywords = DIY_CATEGORIES.find(c => c.id === diyCategory)?.keywords ?? [];
+    return filteredTips.filter(t => {
+      const hay = `${t.Nazwa} ${t.Opis || ''} ${t.Rozwiązanie || ''}`.toLowerCase();
+      return (!q || hay.includes(q)) && (!keywords.length || keywords.some(k => hay.includes(k))) && (!diySourcedOnly || hasSource(t));
+    });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [filteredTips, diyQuery, diySourcedOnly, diyCategory]);
+  const diyCategoryLabel = DIY_CATEGORIES.find(c => c.id === diyCategory)?.label ?? 'Wszystkie';
+  const diyFiltersActive = !!diyQuery || diyCategory !== 'wszystkie' || diySourcedOnly || selectedModel !== 'Wszystkie';
+  const clearDiyFilters = () => { setDiyQuery(''); setDiyCategory('wszystkie'); setDiySourcedOnly(false); setSelectedModel('Wszystkie'); setSelectedModelItem(null); };
 
   const selectModel = (model: string, item?: Item) => {
     setSelectedModel(model);
@@ -495,13 +544,19 @@ export default function Encyclopedia({ initialTab, initialItems }: { initialTab?
             <h2 className="text-2xl mb-6" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>USTERKI</h2>
             
             <div className="bg-neutral-950 border border-white/10 p-4 mb-6">
-              <input aria-label="Szukaj usterki" 
-                type="text" 
-                placeholder="Szukaj usterki (np. wyciek, 4L60E, kolektor)..." 
-                value={issueQuery}
-                onChange={(e) => setIssueQuery(e.target.value)}
-                className="w-full bg-neutral-900 border border-white/10 px-4 py-3 text-sm focus:outline-none focus:border-silver-600 mb-4"
-              />
+              <div className="relative mb-4">
+                <input aria-label="Szukaj usterki" 
+                  type="text" 
+                  placeholder="Szukaj usterki (np. wyciek, 4L60E, kolektor)..." 
+                  value={issueQuery}
+                  onChange={(e) => setIssueQuery(e.target.value)}
+                  className={`w-full bg-neutral-900 border border-white/10 px-4 py-3 text-sm focus:outline-none focus:border-silver-600 ${issueQuery ? 'pr-28' : ''}`}
+                />
+                {issueQuery && (
+                  <button type="button" onClick={() => setIssueQuery('')} data-testid="issue-search-clear" className="absolute right-1 top-1/2 flex min-h-11 -translate-y-1/2 items-center rounded-full border border-white/20 bg-neutral-800 px-3 text-sm text-silver-200 hover:bg-neutral-700">Wyczyść</button>
+                )}
+              </div>
+              <CategoryChips categories={ISSUE_CATEGORIES} value={issueCategory} onChange={setIssueCategory} prefix="issue" label="Kategorie usterek" />
               <p className="text-neutral-400 text-sm mb-4">Lub filtruj po modelu i roczniku:</p>
               <div className="grid sm:grid-cols-2 gap-4">
                 <div>
@@ -539,7 +594,16 @@ export default function Encyclopedia({ initialTab, initialItems }: { initialTab?
 
             
               <div className="space-y-3">
-                <p className="text-neutral-500 text-sm mb-4" role="status" data-testid="issue-count">Znaleziono: {filteredIssues.length} usterek</p>
+                <p className="text-neutral-400 text-sm mb-4" role="status" data-testid="issue-count">
+                  Pokazano {filteredIssues.length} z {issues.length} usterek{issueCategory !== 'wszystkie' && ` · kategoria: ${issueCategoryLabel}`}{(issueModel || selectedModel !== 'Wszystkie') && ` · pojazd: ${issueModel || selectedModel}`}{issueYear && ` · rocznik: ${issueYear}`}
+                </p>
+                {filteredIssues.length === 0 && (
+                  <div className="rounded-2xl border border-white/15 bg-neutral-900 p-4" data-testid="issue-empty">
+                    <p className="mb-3 font-semibold text-white" style={{ maxWidth: 'none' }}>Brak wyników</p>
+                    <p className="mb-3 text-sm text-neutral-300" style={{ maxWidth: 'none' }}>Żadna usterka nie pasuje do wybranych filtrów.</p>
+                    {issueFiltersActive && <button type="button" onClick={clearIssueFilters} data-testid="issue-clear-filters" className="min-h-11 rounded-full border border-silver-300 bg-silver-600 px-4 text-sm font-semibold text-neutral-950">Wyczyść filtry</button>}
+                  </div>
+                )}
                 {filteredIssues.map((i, idx) => (
                   <EntryTile key={i.id || idx} item={i} icon="usterki" image={tileImageFor(i.id, getIssueImage(i.Nazwa))} excerpt={excerptOf(i, ['Objawy', 'Opis', 'Rozwiązanie'])} sourced={hasSource(i)} sourcedTestId="issue-sourced">
                     <VehicleMatchBadge item={i} />
@@ -581,18 +645,33 @@ export default function Encyclopedia({ initialTab, initialItems }: { initialTab?
         {tab === 'diy' && (
           <div>
             <h2 className="text-2xl mb-6" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>PORADNIKI DIY</h2>
-            <input aria-label="Szukaj porady DIY" 
-              type="text" 
-              placeholder="Szukaj porady (np. 4L60E, filtr, kolektor)..." 
-              value={diyQuery}
-              onChange={(e) => setDiyQuery(e.target.value)}
-              className="w-full bg-neutral-900 border border-white/10 px-4 py-3 text-sm focus:outline-none focus:border-silver-600 mb-4"
-            />
+            <div className="relative mb-3">
+              <input aria-label="Szukaj porady DIY" 
+                type="text" 
+                placeholder="Szukaj porady (np. 4L60E, filtr, kolektor)..." 
+                value={diyQuery}
+                onChange={(e) => setDiyQuery(e.target.value)}
+                className={`w-full bg-neutral-900 border border-white/10 px-4 py-3 text-sm focus:outline-none focus:border-silver-600 ${diyQuery ? 'pr-28' : ''}`}
+              />
+              {diyQuery && (
+                <button type="button" onClick={() => setDiyQuery('')} data-testid="diy-search-clear" className="absolute right-1 top-1/2 flex min-h-11 -translate-y-1/2 items-center rounded-full border border-white/20 bg-neutral-800 px-3 text-sm text-silver-200 hover:bg-neutral-700">Wyczyść</button>
+              )}
+            </div>
+            <CategoryChips categories={DIY_CATEGORIES} value={diyCategory} onChange={setDiyCategory} prefix="diy" label="Kategorie poradników" />
             <label className="mb-3 flex min-h-11 items-center gap-3 text-sm text-neutral-300">
               <input type="checkbox" checked={diySourcedOnly} onChange={(e) => setDiySourcedOnly(e.target.checked)} className="h-5 w-5 accent-silver-600" data-testid="diy-sourced-only" />
               Tylko procedury ze źródłami (instrukcje GM, biuletyny)
             </label>
-            <p className="text-neutral-500 text-sm mb-4" role="status" data-testid="diy-count">Znaleziono: {diyTips.length}</p>
+            <p className="text-neutral-400 text-sm mb-4" role="status" data-testid="diy-count">
+              Pokazano {diyTips.length} z {filteredTips.length} poradników{diyCategory !== 'wszystkie' && ` · kategoria: ${diyCategoryLabel}`}{selectedModel !== 'Wszystkie' && ` · pojazd: ${selectedModel}`}
+            </p>
+            {diyTips.length === 0 && (
+              <div className="mb-4 rounded-2xl border border-white/15 bg-neutral-900 p-4" data-testid="diy-empty">
+                <p className="mb-3 font-semibold text-white" style={{ maxWidth: 'none' }}>Brak wyników</p>
+                <p className="mb-3 text-sm text-neutral-300" style={{ maxWidth: 'none' }}>Żaden poradnik nie pasuje do wybranych filtrów.</p>
+                {diyFiltersActive && <button type="button" onClick={clearDiyFilters} data-testid="diy-clear-filters" className="min-h-11 rounded-full border border-silver-300 bg-silver-600 px-4 text-sm font-semibold text-neutral-950">Wyczyść filtry</button>}
+              </div>
+            )}
             <div className="space-y-3">
               {diyTips.map((t, idx) => (
                 <EntryTile key={t.id || idx} item={t} icon="diy" image={tileImageFor(t.id, getTipImage(t.Nazwa))} excerpt={excerptOf(t, ['Opis', 'Rozwiązanie'])} sourced={hasSource(t)} sourcedTestId="diy-sourced">
