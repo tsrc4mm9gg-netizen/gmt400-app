@@ -29,6 +29,7 @@ import { hasSource } from './IssueDetails';
 
 type Item = {
   id?: string;
+  Obraz?: string;
   applicability?: Applicability;
   Nazwa: string;
   Typ: string;
@@ -599,7 +600,7 @@ export default function Encyclopedia({ initialTab, initialItems }: { initialTab?
                   </div>
                 )}
                 {filteredIssues.map((i, idx) => (
-                  <EntryTile key={i.id || idx} item={i} icon="usterki" image={tileImageFor(i.id, getIssueImage(i.Nazwa))} drawing={hasDrawingOnly(i.id)} excerpt={excerptOf(i, ['Objawy', 'Opis', 'Rozwiązanie'])} sourced={hasSource(i)} sourcedTestId="issue-sourced">
+                  <EntryTile key={i.id || idx} item={i} icon="usterki" image={tileImageFor(i.id, getIssueImage(i.Nazwa), i.Obraz)} drawing={hasDrawingOnly(i.id)} excerpt={excerptOf(i, ['Objawy', 'Opis', 'Rozwiązanie'])} sourced={hasSource(i)} sourcedTestId="issue-sourced">
                     <VehicleMatchBadge item={i} />
                   </EntryTile>
                 ))}
@@ -671,7 +672,7 @@ export default function Encyclopedia({ initialTab, initialItems }: { initialTab?
             )}
             <div className="space-y-3">
               {diyTips.map((t, idx) => (
-                <EntryTile key={t.id || idx} item={t} icon={getTipIcon(t.Nazwa)} image={tileImageFor(t.id, getTipImage(t.Nazwa))} drawing={hasDrawingOnly(t.id)} excerpt={excerptOf(t, ['Opis', 'Rozwiązanie'])} sourced={hasSource(t)} sourcedTestId="diy-sourced">
+                <EntryTile key={t.id || idx} item={t} icon={getTipIcon(t.Nazwa)} image={tileImageFor(t.id, getTipImage(t.Nazwa), t.Obraz)} drawing={hasDrawingOnly(t.id)} excerpt={excerptOf(t, ['Opis', 'Rozwiązanie'])} sourced={hasSource(t)} sourcedTestId="diy-sourced">
                   <VehicleMatchBadge item={t} />
                 </EntryTile>
               ))}

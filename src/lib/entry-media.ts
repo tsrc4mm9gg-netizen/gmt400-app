@@ -1,3 +1,4 @@
+import { localTileImage } from './tile-image.mjs';
 /**
  * Grafiki i zdjęcia przypisane do konkretnych wpisów encyklopedii (klucz: id strony Notion, małe litery, bez myślników).
  * Zasady: tylko zdjęcia o potwierdzonej wolnej licencji (autor, licencja, URL widoczne przy zdjęciu i w docs/photo-credits.md)
@@ -193,9 +194,10 @@ export function getEntryMedia(id: string | undefined | null): EntryMedia | undef
 }
 
 /** Miniatura kafelka: rejestr ma pierwszeństwo (null = ikona), w przeciwnym razie `fallback`. */
-export function tileImageFor(id: string | undefined | null, fallback: string | null): string | null {
+export function tileImageFor(id: string | undefined | null, fallback: string | null, dataImage?: string | null): string | null {
   const m = getEntryMedia(id);
-  return m ? m.tile : fallback;
+  if (m) return m.tile;
+  return localTileImage(dataImage) || fallback;
 }
 
 /** Czy wpis ma własny rysunek (bez zdjęcia na miniaturze) — kafelek listy pokazuje wtedy plakietkę „z rysunkiem”. */

@@ -7,7 +7,7 @@ import { hasDrawingOnly, tileImageFor } from '../lib/entry-media';
 import RelatedMaterials from './RelatedMaterials';
 import { getRelatedMaterials } from '../lib/related-materials';
 import type { Applicability, MatchResult } from '../lib/vehicle-compatibility';
-type Entry = { id?: string; Nazwa: string; Typ: string; Model: string; Lata?: string; Opis?: string; Objawy?: string; Rozwiązanie?: string; applicability?: Applicability };
+type Entry = { id?: string; Obraz?: string; Nazwa: string; Typ: string; Model: string; Lata?: string; Opis?: string; Objawy?: string; Rozwiązanie?: string; applicability?: Applicability };
 const LINKS = [['modele', 'Modele'], ['usterki', 'Usterki'], ['kody-obd', 'Kody OBD'], ['poradniki', 'Poradniki'], ['schematy', 'Schematy']];
 const normalize = (text: string) => text.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/ł/g, 'l');
 export default function KnowledgeCategory({ section, initialItems }: { section: string; initialItems?: Entry[] | null }) {
@@ -59,7 +59,7 @@ export default function KnowledgeCategory({ section, initialItems }: { section: 
       <input id="category-query" type="search" maxLength={120} value={query} onChange={event => setQuery(event.target.value)} className="w-full rounded border border-white/20 bg-neutral-900 p-3" />
       <p role="status">Widoczne: {results.length}. Materiały tej kategorii przed filtrowaniem: {categoryTotal}.</p>
       {!categoryTotal ? <p>W pobranej bazie nie ma wpisów tej kategorii.</p> : !results.length ? <div data-testid="category-empty" className="rounded-2xl border border-white/15 bg-neutral-900 p-4"><p className="font-semibold text-white">{profileNarrowing ? 'Brak wyników dla Twojego profilu auta. ' : ''}Brak wyników przy obecnych ustawieniach. Sprawdź filtr profilu albo wyszukiwaną frazę.</p><div className="mt-3 flex flex-wrap gap-2">{profileNarrowing && <button type="button" data-testid="category-show-all" className="min-h-11 rounded-full border border-silver-300 bg-silver-600 px-4 text-sm font-semibold text-neutral-950" onClick={() => { setQuery(''); showAllMode(); }}>Pokaż wszystko</button>}{!!query && <button type="button" className="min-h-11 rounded-full border border-white/35 bg-neutral-800 px-4 text-sm font-semibold text-white" onClick={() => setQuery('')}>Wyczyść frazę wyszukiwania</button>}{(profileModeChanged || !!query) && <button type="button" data-testid="category-clear-filters" className="min-h-11 rounded-full border border-silver-300 bg-neutral-800 px-4 text-sm font-semibold text-silver-100" onClick={() => { setQuery(''); resetMode(); }}>Wyczyść filtry</button>}</div></div> : <ul className="space-y-3">{results.map((item, index) => <li key={item.id || index}>
-        <EntryTile item={item} headingLevel={2} icon={section === 'usterki' ? 'usterki' : section === 'kody-obd' ? 'obd' : section === 'modele' ? 'modele' : getTipIcon(item.Nazwa)} image={tileImageFor(item.id, getTipImage(item.Nazwa))} drawing={hasDrawingOnly(item.id)} excerpt={excerptOf(item, ['Opis', 'Objawy', 'Rozwiązanie'])}>
+        <EntryTile item={item} headingLevel={2} icon={section === 'usterki' ? 'usterki' : section === 'kody-obd' ? 'obd' : section === 'modele' ? 'modele' : getTipIcon(item.Nazwa)} image={tileImageFor(item.id, getTipImage(item.Nazwa), item.Obraz)} drawing={hasDrawingOnly(item.id)} excerpt={excerptOf(item, ['Opis', 'Objawy', 'Rozwiązanie'])}>
           <VehicleMatchBadge item={item} />
         </EntryTile>
       </li>)}</ul>}

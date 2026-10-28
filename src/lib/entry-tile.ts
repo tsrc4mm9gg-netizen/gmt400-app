@@ -9,6 +9,8 @@ export interface TileEntry {
   Model?: string;
   Modele?: string[];
   Lata?: string;
+  /** Opcjonalny obrazek miniatury z danych (kolumna Notion „Obraz”); brak = ikona kategorii. */
+  Obraz?: string;
 }
 
 export function getTipImage(nazwa: string): string | null {

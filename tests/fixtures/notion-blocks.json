@@ -1,0 +1,106 @@
+{
+ "406d7bf1c139817a8ac7cdfbdc51ba26": [
+  {
+   "object": "block",
+   "id": "b1",
+   "type": "heading_2",
+   "has_children": false,
+   "heading_2": {
+    "rich_text": [
+     {
+      "type": "text",
+      "plain_text": "Narzędzia",
+      "text": {
+       "content": "Narzędzia"
+      }
+     }
+    ]
+   }
+  },
+  {
+   "object": "block",
+   "id": "b2",
+   "type": "bulleted_list_item",
+   "has_children": false,
+   "bulleted_list_item": {
+    "rich_text": [
+     {
+      "type": "text",
+      "plain_text": "klucz 10 mm",
+      "text": {
+       "content": "klucz 10 mm"
+      }
+     }
+    ]
+   }
+  },
+  {
+   "object": "block",
+   "id": "b3",
+   "type": "bulleted_list_item",
+   "has_children": false,
+   "bulleted_list_item": {
+    "rich_text": [
+     {
+      "type": "text",
+      "plain_text": "zestaw nasadek 1/4",
+      "text": {
+       "content": "zestaw nasadek 1/4"
+      }
+     }
+    ]
+   }
+  },
+  {
+   "object": "block",
+   "id": "b4",
+   "type": "heading_2",
+   "has_children": false,
+   "heading_2": {
+    "rich_text": [
+     {
+      "type": "text",
+      "plain_text": "Części",
+      "text": {
+       "content": "Części"
+      }
+     }
+    ]
+   }
+  },
+  {
+   "object": "block",
+   "id": "b5",
+   "type": "bulleted_list_item",
+   "has_children": false,
+   "bulleted_list_item": {
+    "rich_text": [
+     {
+      "type": "text",
+      "plain_text": "żarówka H4 (komplet)",
+      "text": {
+       "content": "żarówka H4 (komplet)"
+      }
+     }
+    ]
+   }
+  },
+  {
+   "object": "block",
+   "id": "b6",
+   "type": "paragraph",
+   "has_children": false,
+   "paragraph": {
+    "rich_text": [
+     {
+      "type": "text",
+      "plain_text": "Dodatkowa uwaga z Notion.",
+      "text": {
+       "content": "Dodatkowa uwaga z Notion."
+      }
+     }
+    ]
+   }
+  }
+ ]
+}

@@ -11,10 +11,21 @@ const NOTION_API = process.env.NOTION_API_BASE || 'https://api.notion.com';
 
 export type NotionEntry = {
   Nazwa: string; Typ: string; Model: string; Modele: string[]; Opis: string; Objawy: string; Rozwiązanie: string; Lata: string; id: string;
+  /** Opcjonalna miniatura kafelka z kolumny Notion „Obraz” (lokalna ścieżka /…); brak = ikona kategorii. */
+  Obraz?: string;
   applicability: { brand: string[]; model: string[]; years: string[]; engine: string[]; drive: string[]; transmission: string[] };
 };
 
 export class NotionIncompleteError extends Error {}
+
+/** Kolumna „Obraz”/„Miniatura”: URL, tekst lub plik. Zwracamy surowy tekst; kafelek i tak przyjmie tylko lokalną ścieżkę. */
+function getImageField(prop: any): string {
+  if (!prop) return '';
+  if (typeof prop.url === 'string') return prop.url.trim();
+  if (Array.isArray(prop.rich_text)) return getRichText(prop).trim();
+  const file = Array.isArray(prop.files) ? prop.files[0] : null;
+  return String(file?.external?.url || file?.file?.url || '').trim();
+}
 
 function getRichText(prop: any): string {
   if (!prop?.rich_text) return '';
@@ -64,6 +75,7 @@ export async function fetchAllEntries(token: string, revalidate = 300): Promise<
       Rozwiązanie: getRichText(props['Rozwiązanie']),
       Lata: getRichText(props.Lata),
       id: page.id,
+      ...(getImageField(props.Obraz || props.Miniatura) ? { Obraz: getImageField(props.Obraz || props.Miniatura) } : {}),
       applicability: { brand: getValues(props.Marka), model: getValues(props.Model), years: getValues(props.Lata), engine: getValues(props.Silnik), drive: getValues(props['Napęd']), transmission: getValues(props.Skrzynia) },
     };
   }));

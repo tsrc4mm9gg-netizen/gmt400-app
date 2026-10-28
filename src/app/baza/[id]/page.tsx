@@ -18,6 +18,7 @@ import { SCHEMATICS } from '../../../lib/schematics';
 import { getEntryMedia } from '../../../lib/entry-media';
 import EntryFigure from './EntryFigure';
 import EntryHeaderMeta from './EntryHeaderMeta';
+import DiyBrief from './DiyBrief';
 import RecentTracker from '../../RecentTracker';
 import { recentTypeLabel } from '../../../lib/recent-viewed';
 
@@ -169,9 +170,9 @@ export default async function KnowledgeEntry({ params }: Props) {
       {materialLead && <p className="text-lg leading-relaxed text-neutral-200">{materialLead}</p>}
       {code && <p className="rounded border border-silver-600/40 bg-silver-600/10 px-3 text-sm"><a className="inline-flex min-h-11 items-center font-semibold text-silver-300 underline" href={`/kody-obd/${code}`}>Otwórz kartę kodu OBD {code.toUpperCase()}</a></p>}
       <VehicleMatchBadge item={entry} />
+      <DiyBrief entry={entry} blocks={blocks} />
       <MaterialContents entryId={entry.id} />
       {photos.length > 0 && <section aria-label="Zdjęcia do tego tematu" className="space-y-3">{photos.map(f => <EntryFigure key={f.src} figure={f} />)}</section>}
-      <p className="rounded border border-white/20 p-3 text-sm text-neutral-400">Dopasowanie do profilu opiera się na metadanych i nie potwierdza poprawności technicznej. Przed naprawą sprawdź zgodność procedury z pojazdem i dokumentacją serwisową.</p>
       {entry.Opis && <section><h2 className="mb-2 text-xl">Opis</h2><MaterialText text={entry.Opis} field="Opis" /></section>}
       {entry.Objawy && <section><h2 className="mb-2 text-xl">Objawy</h2><MaterialText text={entry.Objawy} field="Objawy" /></section>}
       {entry.Rozwiązanie && <section><h2 className="mb-2 text-xl">Rozwiązanie</h2><MaterialText text={entry.Rozwiązanie} field="Rozwiązanie" /></section>}
