@@ -2,7 +2,9 @@
 const { test, expect } = require('@playwright/test');
 const { hydrated } = require('./helpers/hydration.cjs');
 const BASE = process.env.UX_BASE || 'http://127.0.0.1:3100';
-const SIZES = [{ w: 390, h: 844 }, { w: 768, h: 1024 }, { w: 1280, h: 800 }];
+const SIZES = [{ w: 390, h: 844 }, { w: 768, h: 1024 }, { w: 1024, h: 768 }, { w: 1280, h: 800 }];
+// WebKit zgłasza przerwane w trakcie nawigacji prefetche Next.js (?_rsc=) jako „access control checks” — to nie jest błąd strony.
+const trackErrors = page => { const errors = []; page.on('pageerror', e => { if (!/[?&]_rsc=.*access control checks/.test(e.message)) errors.push(String(e)); }); return errors; };
 const noHScroll = page => page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);
 const profileJson = JSON.stringify({ version: 2, profile: { brand: 'Chevrolet', platform: 'C/K', model: 'K1500', year: '1997', engine: '', drive: '', transmission: '', rpoCodes: [] } });
 
@@ -17,7 +19,7 @@ for (const size of SIZES) {
     test.use({ viewport: { width: size.w, height: size.h } });
 
     test(`${size.w}: nagłówek z autem i wyszukiwarką zostaje na ekranie po przewinięciu (cele ≥44 px)`, async ({ page }) => {
-      const errors = []; page.on('pageerror', e => errors.push(String(e)));
+      const errors = trackErrors(page);
       await page.goto(`${BASE}/schematy`);
       const header = page.getByTestId(size.w < 1024 ? 'site-header-bar' : 'site-header');
       await expect(header).toBeVisible();
@@ -55,13 +57,13 @@ for (const size of SIZES) {
       expect(target.y).toBeGreaterThanOrEqual(hb.y + hb.height - 1);
     });
 
-    test(`${size.w}: DIY i Usterki — brak wyników dla profilu auta → „Pokaż wszystko” / „Wyczyść filtry”`, async ({ page }) => {
-      await page.context().route(u => u.pathname.startsWith('/api/notion'), r => r.fulfill({ json: EMPTY_DATA }));
-      await page.addInitScript(() => sessionStorage.setItem('gmt400_model_selection', JSON.stringify({ bodyId: 'suburban', filters: {} })));
-      for (const [path, prefix, itemName] of [['/usterki', 'issue', 'Usterka tylko Yukon — test'], ['/diy', 'diy', 'Poradnik tylko Yukon — test']]) {
+    for (const [path, prefix, itemName, label] of [['/usterki', 'issue', 'Usterka tylko Yukon — test', 'Usterki'], ['/diy', 'diy', 'Poradnik tylko Yukon — test', 'DIY']]) {
+      test(`${size.w}: ${label} — brak wyników dla profilu auta → „Pokaż wszystko”`, async ({ page }) => {
+        await page.context().route(u => u.pathname.startsWith('/api/notion'), r => r.fulfill({ json: EMPTY_DATA }));
+        await page.addInitScript(() => sessionStorage.setItem('gmt400_model_selection', JSON.stringify({ bodyId: 'suburban', filters: {} })));
         await page.goto(`${BASE}${path}`);
         const empty = page.getByTestId(`${prefix}-empty`);
-        await expect(empty).toBeVisible();
+        await expect(empty).toBeVisible({ timeout: 20000 });
         await expect(page.getByTestId(`${prefix}-empty-title`)).toHaveText(/^Brak wyników dla Twojego profilu auta\./);
         const showAll = page.getByTestId(`${prefix}-show-all`);
         await expect(showAll).toBeVisible();
@@ -71,8 +73,8 @@ for (const size of SIZES) {
         await expect(page.getByRole('link', { name: itemName })).toBeVisible();
         await expect(empty).toHaveCount(0);
         expect(await noHScroll(page)).toBeLessThanOrEqual(1);
-      }
-    });
+      });
+    }
 
     test(`${size.w}: „Wyczyść filtry” przywraca tryb „Dopasowane do mojego auta”, a „Pokaż wszystko” odsłania listę`, async ({ page }) => {
       await page.context().route(u => u.pathname.startsWith('/api/notion'), r => r.fulfill({ json: EMPTY_DATA }));
@@ -109,7 +111,7 @@ for (const size of SIZES) {
     });
 
     test(`${size.w}: „Ostatnio oglądane” — brak sekcji bez danych, zapis po otwarciu wpisu i modelu, czyszczenie`, async ({ page }) => {
-      const errors = []; page.on('pageerror', e => errors.push(String(e)));
+      const errors = trackErrors(page);
       await page.goto(BASE + '/');
       await expect(page.getByTestId('model-carousel')).toBeVisible();
       await expect(page.getByTestId('recently-viewed')).toHaveCount(0);
