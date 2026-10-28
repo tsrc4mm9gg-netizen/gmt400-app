@@ -197,3 +197,9 @@ export function tileImageFor(id: string | undefined | null, fallback: string | n
   const m = getEntryMedia(id);
   return m ? m.tile : fallback;
 }
+
+/** Czy wpis ma własny rysunek (bez zdjęcia na miniaturze) — kafelek listy pokazuje wtedy plakietkę „z rysunkiem”. */
+export function hasDrawingOnly(id: string | undefined | null): boolean {
+  const m = getEntryMedia(id);
+  return !!m && !m.tile && m.figures.some(f => !f.credit);
+}

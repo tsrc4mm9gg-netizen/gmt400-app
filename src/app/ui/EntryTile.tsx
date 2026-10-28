@@ -11,6 +11,8 @@ interface EntryTileProps {
   excerpt: string;
   headingLevel?: 2 | 3;
   sourced?: boolean;
+  /** Wpis ma własny rysunek w pełnej instrukcji, ale nie ma zdjęcia na miniaturze — pokazujemy plakietkę. */
+  drawing?: boolean;
   sourcedTestId?: string;
   /** Elementy interaktywne (np. plakietka dopasowania do auta) — poza linkiem, pod kafelkiem. */
   children?: ReactNode;
@@ -22,7 +24,7 @@ const PILL = 'inline-block max-w-full truncate rounded-full border px-2 py-0.5 t
  * Zwarty kafelek listy: miniatura, tytuł, tagi (model + lata), krótki fragment opisu (line-clamp).
  * Cały kafelek jest jednym linkiem do pełnego wpisu /baza/[id] — bez rozwijania, więc bez „skakania” po dotknięciu.
  */
-export default function EntryTile({ item, icon, image, excerpt, headingLevel = 3, sourced, sourcedTestId, children }: EntryTileProps) {
+export default function EntryTile({ item, icon, image, excerpt, headingLevel = 3, sourced, sourcedTestId, drawing, children }: EntryTileProps) {
   const years = yearsLabel(item.Lata);
   const Heading = headingLevel === 2 ? 'h2' : 'h3';
   const href = item.id ? '/baza/' + encodeURIComponent(item.id) : null;
@@ -52,6 +54,7 @@ export default function EntryTile({ item, icon, image, excerpt, headingLevel = 3
             <div className="mt-1.5 flex flex-wrap gap-1.5">
               <span className={`${PILL} border-white/15 bg-white/5 text-neutral-300`} data-testid="tile-model">{modelLabel(item)}</span>
               {years && <span className={`${PILL} border-silver-600/40 text-silver-300`} data-testid="tile-years">{years}</span>}
+              {drawing && !image && <span className={`${PILL} border-silver-500/40 text-silver-300`} data-testid="tile-drawing">z rysunkiem</span>}
               {sourced && <span className={`${PILL} border-silver-200/40 text-silver-100`} data-testid={sourcedTestId || 'tile-sourced'}>ze źródłem</span>}
             </div>
           </div>

@@ -22,7 +22,7 @@ import { PARTS } from '../lib/parts-catalog';
 import ModelThumb from './ModelThumb';
 import EntryTile from './ui/EntryTile';
 import { excerptOf, getIssueImage, getTipIcon, getTipImage } from '../lib/entry-tile';
-import { tileImageFor } from '../lib/entry-media';
+import { hasDrawingOnly, tileImageFor } from '../lib/entry-media';
 import { isGeneralEntry, isSpecificToBody } from '../lib/model-images';
 import { hasSource } from './IssueDetails';
 
@@ -605,7 +605,7 @@ export default function Encyclopedia({ initialTab, initialItems }: { initialTab?
                   </div>
                 )}
                 {filteredIssues.map((i, idx) => (
-                  <EntryTile key={i.id || idx} item={i} icon="usterki" image={tileImageFor(i.id, getIssueImage(i.Nazwa))} excerpt={excerptOf(i, ['Objawy', 'Opis', 'Rozwiązanie'])} sourced={hasSource(i)} sourcedTestId="issue-sourced">
+                  <EntryTile key={i.id || idx} item={i} icon="usterki" image={tileImageFor(i.id, getIssueImage(i.Nazwa))} drawing={hasDrawingOnly(i.id)} excerpt={excerptOf(i, ['Objawy', 'Opis', 'Rozwiązanie'])} sourced={hasSource(i)} sourcedTestId="issue-sourced">
                     <VehicleMatchBadge item={i} />
                   </EntryTile>
                 ))}
@@ -674,7 +674,7 @@ export default function Encyclopedia({ initialTab, initialItems }: { initialTab?
             )}
             <div className="space-y-3">
               {diyTips.map((t, idx) => (
-                <EntryTile key={t.id || idx} item={t} icon={getTipIcon(t.Nazwa)} image={tileImageFor(t.id, getTipImage(t.Nazwa))} excerpt={excerptOf(t, ['Opis', 'Rozwiązanie'])} sourced={hasSource(t)} sourcedTestId="diy-sourced">
+                <EntryTile key={t.id || idx} item={t} icon={getTipIcon(t.Nazwa)} image={tileImageFor(t.id, getTipImage(t.Nazwa))} drawing={hasDrawingOnly(t.id)} excerpt={excerptOf(t, ['Opis', 'Rozwiązanie'])} sourced={hasSource(t)} sourcedTestId="diy-sourced">
                   <VehicleMatchBadge item={t} />
                 </EntryTile>
               ))}
