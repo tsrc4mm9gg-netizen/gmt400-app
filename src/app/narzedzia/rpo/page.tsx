@@ -1,7 +1,9 @@
 'use client';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import Link from 'next/link';
 import { useVehicleProfile } from '../../VehicleProfileProvider';
+import StickerScan from './StickerScan';
+import RpoContentsTile from './RpoContentsTile';
 import { RPO_AGGREGATOR, RPO_CATALOG, RPO_CATEGORIES, RPO_DOCS, RPO_VEHICLES, decodeRpo, rpoFit, rpoVehicleFor, type RpoEntry, type RpoFit } from '@/lib/rpo-catalog';
 
 const YEARS = Array.from({ length: 13 }, (_, i) => String(1988 + i));
@@ -46,6 +48,10 @@ export default function RpoPage() {
   const [submitted, setSubmitted] = useState<{ query: string; category: string } | null>(null);
   const outcome = useMemo(() => submitted ? search(submitted.query, submitted.category) : null, [submitted]);
   const shown = outcome ? outcome.results.slice(0, LIMIT) : [];
+  const [scanCodes, setScanCodes] = useState<string[] | null>(null);
+  const scanRef = useRef<HTMLElement | null>(null);
+  const scanOutcome = useMemo(() => scanCodes ? decodeRpo(scanCodes.join(' ')) : null, [scanCodes]);
+  useEffect(() => { if (scanCodes) scanRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, [scanCodes]);
   const fillFromProfile = () => { if (profile?.rpoCodes.length) { setQuery(profile.rpoCodes.join(' ')); setSubmitted({ query: profile.rpoCodes.join(' '), category }); } };
 
   return <div className="mx-auto max-w-4xl space-y-4 p-4">
@@ -64,6 +70,20 @@ export default function RpoPage() {
       <p className="mt-3 text-xs text-neutral-400">Baza: <strong>{RPO_CATALOG.length}</strong> kodów wydrukowanych w dokumentach GM dla GMT400 (Chevrolet C/K, Suburban, Tahoe; GMC Sierra, Suburban, Yukon), lata 1988–2000. Kodów spoza dokumentów nie dopisujemy — pokażemy je jako „nieznany – sprawdź”.</p>
       {profile && <p className="mt-2 text-sm text-neutral-300">Twoje auto: <Link href="/moj-samochod" className="underline">{profile.brand} {profile.model}{profile.year ? ' ' + profile.year : ''}</Link>{profile.rpoCodes.length > 0 && <> · <button type="button" onClick={fillFromProfile} className="ml-1 rounded-lg border px-3 py-1 text-sm">Wstaw moje kody RPO ({profile.rpoCodes.length})</button></>}</p>}
     </section>
+
+    <StickerScan onShow={codes => setScanCodes(codes)} />
+
+    {scanOutcome && <section ref={scanRef} className="space-y-3 scroll-mt-4" aria-labelledby="rpo-scan-res-h" data-testid="rpo-scan-results">
+      <h2 id="rpo-scan-res-h" className="text-lg font-semibold text-white">Kody z naklejki — opisy</h2>
+      <p className="text-sm text-neutral-300" role="status" data-testid="rpo-scan-results-count">W bazie: <strong>{scanOutcome.results.filter(r => r.entry).length}</strong> · brak w bazie: <strong>{scanOutcome.results.filter(r => !r.entry).length}</strong></p>
+      {scanOutcome.ratioConflict && <p className="rounded-lg border border-silver-500/50 bg-neutral-950 p-3 text-sm text-neutral-200" data-testid="rpo-scan-ratio">Uwaga: odczytane kody wskazują różne przełożenia tylnego mostu. Auto ma jedno — to może być błąd odczytu, porównaj ze zdjęciem.</p>}
+      <div className="space-y-3" data-testid="rpo-scan-known">{scanOutcome.results.flatMap((r, i) => r.entry ? [<RpoCard key={`s-${r.code}-${i}`} entry={r.entry} vehicle={vehicle || null} year={year ? Number(year) : null} />] : [])}</div>
+      {scanOutcome.results.some(r => !r.entry) && <div className="rounded-lg border border-dashed border-silver-600 p-4" data-testid="rpo-scan-unknown">
+        <h3 className="text-base font-semibold text-white">Brak w bazie</h3>
+        <p className="mt-1 text-sm text-neutral-300">Tych kodów nie ma w dokumentach GM, z których korzystamy — nie zgadujemy ich opisów. To może być też błąd odczytu zdjęcia.</p>
+        <ul className="mt-2 flex flex-wrap gap-2">{scanOutcome.results.filter(r => !r.entry).map(r => <li key={r.code} className="rounded-full border border-neutral-600 px-3 py-1 font-mono text-base text-neutral-200" data-testid="rpo-scan-unknown-code">{r.code}</li>)}</ul>
+      </div>}
+    </section>}
 
     {outcome && outcome.mode !== 'none' && <p className="text-sm text-neutral-300" role="status" data-testid="rpo-count">{outcome.mode === 'decode' ? 'Rozkodowane pozycje' : 'Znaleziono wyników'}: <strong>{outcome.results.length}</strong>{outcome.results.length > LIMIT && ` (pokazano ${LIMIT} — zawęź kategorię lub frazę)`}</p>}
     {outcome?.mode === 'none' && <p className="text-sm text-neutral-300" role="status">Wpisz kody albo wybierz kategorię.</p>}
@@ -102,7 +122,8 @@ function RpoCard({ entry, vehicle, year }: { entry: RpoEntry; vehicle: string | 
     </div>
     {entry.hasPolish && <p className="mt-2 text-sm text-neutral-300">GM: <span lang="en">{entry.original}</span></p>}
     <p className="mt-2 text-sm text-neutral-300"><span className="font-semibold text-white">Model i lata (dokumenty GM): </span>{entry.applies.map((a, i) => <span key={a.vehicle}>{i > 0 && '; '}{a.vehicle} {a.years}{a.original ? <span lang="en"> („{a.original}”)</span> : null}</span>)}</p>
-    <p className="mt-1 text-xs text-neutral-400">Sprawdź w swoim aucie / manualu.</p>
+    <RpoContentsTile entry={entry} />
+    <p className="mt-2 text-xs text-neutral-400">Sprawdź w swoim aucie / manualu.</p>
     <details className="mt-2 text-sm">
       <summary className="flex min-h-11 cursor-pointer items-center text-neutral-200">Źródła ({entry.sources.length}){entry.notes ? ' i uwagi' : ''}</summary>
       {entry.notes && <p className="mt-1 text-xs text-neutral-400" lang="en">Uwagi zestawienia: {entry.notes}</p>}

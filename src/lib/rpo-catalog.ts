@@ -1,4 +1,5 @@
 import RAW from '../data/rpo-gmt400.json';
+import CONTENTS_RAW from '../data/rpo-contents.json';
 
 /**
  * Kody RPO GMT400 (1988–2000) — wyłącznie kody wydrukowane w dokumentach GM:
@@ -9,6 +10,9 @@ import RAW from '../data/rpo-gmt400.json';
 export type RpoCategory = 'Silniki' | 'Silnik – osprzęt' | 'Skrzynie' | 'Napęd' | 'Osie' | 'Hamulce' | 'Zawieszenie' | 'Koła i opony' | 'Masy (GVWR)' | 'Holowanie' | 'Pakiety' | 'Wyposażenie' | 'Audio i wskaźniki' | 'Lakiery' | 'Tapicerka' | 'Kody zakładowe';
 export type RpoDoc = { id: string; label: string; url: string };
 export type RpoApplies = { vehicle: string; years: string; original?: string };
+export type RpoContentGroup = { scope: string; items: string[]; sources: RpoDoc[] };
+/** Zawartość pakietu wg dokumentów GM (parafraza po polsku). `plain` = jednolinijkowe wyjaśnienie nazwy, tylko gdy pewne ze źródeł. */
+export type RpoContents = { plain?: string; groups: RpoContentGroup[] };
 export type RpoEntry = {
   code: string;
   category: RpoCategory;
@@ -24,11 +28,16 @@ export type RpoEntry = {
   hasPolish: boolean;
   notes: string;
   ratio?: string;
+  contents?: RpoContents;
 };
 
 type RawCode = { c: string; k: string; g: string; p?: string; a: [number, string, string?][]; s: number[]; i?: 1; d?: 1; n?: string };
 type RawData = { generated: string; vehicles: string[]; aggregator: { label: string; urls: string[] }; docs: RpoDoc[]; codes: RawCode[] };
 const DATA = RAW as unknown as RawData;
+type RawContents = { w?: string; g: { r: string; z: string[]; s: number[] }[] };
+const CONTENTS = CONTENTS_RAW as unknown as Record<string, RawContents | string>;
+export const RPO_CONTENTS_NOTE = 'Zawartość według GM dla modelu i rocznika – sprawdź w swoim aucie.';
+export const RPO_CONTENTS_MISSING = 'Brak opisu zawartości w dokumentach.';
 
 export const RPO_GENERATED = DATA.generated;
 export const RPO_VEHICLES = DATA.vehicles;
@@ -71,6 +80,11 @@ export const RPO_CATALOG: RpoEntry[] = DATA.codes.map(raw => {
     hasPolish: Boolean(raw.p),
     notes: raw.n ?? '',
     ...(ratio && /axle/i.test(raw.g) ? { ratio: (ratio[1] ?? ratio[2]) } : {}),
+    ...(() => {
+      const c = CONTENTS[raw.c];
+      if (!c || typeof c === 'string') return {};
+      return { contents: { ...(c.w ? { plain: c.w } : {}), groups: c.g.map(g => ({ scope: g.r, items: g.z, sources: g.s.map(i => DATA.docs[i]).filter(Boolean) })) } };
+    })(),
   };
 });
 
