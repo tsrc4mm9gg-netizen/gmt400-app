@@ -2,9 +2,9 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import Link from 'next/link';
 import { useVehicleProfile } from '../../VehicleProfileProvider';
-import StickerScan from './StickerScan';
+import { ScanButtons, ScanPanel, useStickerScan } from './StickerScan';
 import RpoContentsTile from './RpoContentsTile';
-import { RPO_AGGREGATOR, RPO_CATALOG, RPO_CATEGORIES, RPO_DOCS, RPO_VEHICLES, decodeRpo, rpoFit, rpoVehicleFor, type RpoEntry, type RpoFit } from '@/lib/rpo-catalog';
+import { RPO_AGGREGATOR, RPO_CATALOG, RPO_CATEGORIES, RPO_CONTENTS_NOTE, RPO_DOCS, RPO_VEHICLES, decodeRpo, rpoFit, rpoVehicleFor, type RpoEntry, type RpoFit } from '@/lib/rpo-catalog';
 
 const YEARS = Array.from({ length: 13 }, (_, i) => String(1988 + i));
 const LIMIT = 120;
@@ -48,18 +48,35 @@ export default function RpoPage() {
   const [submitted, setSubmitted] = useState<{ query: string; category: string } | null>(null);
   const outcome = useMemo(() => submitted ? search(submitted.query, submitted.category) : null, [submitted]);
   const shown = outcome ? outcome.results.slice(0, LIMIT) : [];
-  const [scanCodes, setScanCodes] = useState<string[] | null>(null);
-  const scanRef = useRef<HTMLElement | null>(null);
-  const scanOutcome = useMemo(() => scanCodes ? decodeRpo(scanCodes.join(' ')) : null, [scanCodes]);
-  useEffect(() => { if (scanCodes) scanRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, [scanCodes]);
+  const resultsRef = useRef<HTMLDivElement | null>(null);
+  const run = (next: string) => { setQuery(next); setSubmitted({ query: next, category }); };
+  const tokensOf = (text: string) => text.toUpperCase().split(/[\s,;|/]+/).filter(Boolean);
+  // Kody ze zdjęcia trafiają do tego samego pola (dopisane do już wpisanych kodów) i od razu są rozkodowane.
+  const scan = useStickerScan(codes => {
+    const existing = tokensOf(query);
+    const base = existing.every(t => /^[A-Z0-9]{3}$/.test(t)) ? existing : [];
+    run(Array.from(new Set([...base, ...codes])).join(' '));
+  });
+  useEffect(() => { if (scan.phase === 'review') resultsRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, [scan.phase]);
   const fillFromProfile = () => { if (profile?.rpoCodes.length) { setQuery(profile.rpoCodes.join(' ')); setSubmitted({ query: profile.rpoCodes.join(' '), category }); } };
 
   return <div className="mx-auto max-w-4xl space-y-4 p-4">
     <section className="rounded-xl border p-5">
       <h1 className="text-2xl font-semibold text-white">Co oznaczają kody RPO?</h1>
-      <p className="mt-1 text-sm text-neutral-300">Wklej kody z naklejki <strong>Service Parts Identification</strong> (zwykle w schowku lub na drzwiach), np. <strong>G80 Z71 GU6 L31 M30</strong> — każdy zostanie rozkodowany osobno. Możesz też szukać po nazwie, np. „przełożenie” albo „holowanie”, lub przeglądać kategorię.</p>
+      <p className="mt-1 text-sm text-neutral-300">Wklej kody z naklejki <strong>Service Parts Identification</strong> (zwykle w schowku lub na drzwiach), np. <strong>G80 Z71 GU6 L31 M30</strong> — każdy zostanie rozkodowany osobno. Kody możesz też odczytać ze zdjęcia naklejki (ikona aparatu przy polu). Możesz też szukać po nazwie, np. „przełożenie” albo „holowanie”, lub przeglądać kategorię.</p>
       <form onSubmit={event => { event.preventDefault(); setSubmitted({ query, category }); }} className="mt-4 grid gap-3 sm:grid-cols-2">
-        <div className="min-w-0 sm:col-span-2"><label htmlFor="rpo-query" className="mb-1 block text-sm font-medium text-white">Kody RPO lub szukana fraza</label><input id="rpo-query" value={query} onChange={event => setQuery(event.target.value)} placeholder="Wpisz kod lub szukaną frazę" autoCapitalize="characters" autoCorrect="off" spellCheck={false} autoComplete="off" className="w-full rounded-lg border px-3 py-2" /></div>
+        <div className="min-w-0 sm:col-span-2">
+          <label htmlFor="rpo-query" className="mb-1 block text-sm font-medium text-white">Kody RPO lub szukana fraza</label>
+          <div className="flex items-stretch gap-2" data-testid="rpo-input-row">
+            <input id="rpo-query" value={query} onChange={event => setQuery(event.target.value)} placeholder="Wpisz kod lub szukaną frazę" autoCapitalize="characters" autoCorrect="off" spellCheck={false} autoComplete="off" className="m-0! h-12 min-w-0 flex-1 rounded-lg border px-3 py-2" />
+            <ScanButtons scan={scan} />
+          </div>
+          <p className="mt-1 text-xs text-neutral-400" data-testid="rpo-scan-privacy">Zdjęcie jest przetwarzane tylko w Twojej przeglądarce.</p>
+          <ScanPanel scan={scan} query={query}
+            onRemove={code => run(tokensOf(query).filter(t => t !== code).join(' '))}
+            onReplace={(from, to) => run(Array.from(new Set(tokensOf(query).map(t => t === from ? to : t))).join(' '))}
+            onAdd={code => run(Array.from(new Set([...tokensOf(query), code])).join(' '))} />
+        </div>
         <div className="min-w-0"><label htmlFor="rpo-category" className="mb-1 block text-sm font-medium text-white">Kategoria kodów RPO</label><select id="rpo-category" value={category} onChange={event => setCategory(event.target.value)} className="w-full rounded-lg border px-3 py-2"><option value="">Wszystkie kategorie</option>{RPO_CATEGORIES.map(item => <option key={item} value={item}>{item}</option>)}</select></div>
         <div className="grid min-w-0 grid-cols-[1fr_6.5rem] gap-3">
           <div className="min-w-0"><label htmlFor="rpo-vehicle" className="mb-1 block text-sm font-medium text-white">Porównaj z modelem</label><select id="rpo-vehicle" value={vehicle} onChange={event => setVehicleChoice(event.target.value)} className="w-full rounded-lg border px-3 py-2"><option value="">— bez porównania —</option>{RPO_VEHICLES.map(v => <option key={v} value={v}>{v}</option>)}</select></div>
@@ -71,26 +88,12 @@ export default function RpoPage() {
       {profile && <p className="mt-2 text-sm text-neutral-300">Twoje auto: <Link href="/moj-samochod" className="underline">{profile.brand} {profile.model}{profile.year ? ' ' + profile.year : ''}</Link>{profile.rpoCodes.length > 0 && <> · <button type="button" onClick={fillFromProfile} className="ml-1 rounded-lg border px-3 py-1 text-sm">Wstaw moje kody RPO ({profile.rpoCodes.length})</button></>}</p>}
     </section>
 
-    <StickerScan onShow={codes => setScanCodes(codes)} />
-
-    {scanOutcome && <section ref={scanRef} className="space-y-3 scroll-mt-4" aria-labelledby="rpo-scan-res-h" data-testid="rpo-scan-results">
-      <h2 id="rpo-scan-res-h" className="text-lg font-semibold text-white">Kody z naklejki — opisy</h2>
-      <p className="text-sm text-neutral-300" role="status" data-testid="rpo-scan-results-count">W bazie: <strong>{scanOutcome.results.filter(r => r.entry).length}</strong> · brak w bazie: <strong>{scanOutcome.results.filter(r => !r.entry).length}</strong></p>
-      {scanOutcome.ratioConflict && <p className="rounded-lg border border-silver-500/50 bg-neutral-950 p-3 text-sm text-neutral-200" data-testid="rpo-scan-ratio">Uwaga: odczytane kody wskazują różne przełożenia tylnego mostu. Auto ma jedno — to może być błąd odczytu, porównaj ze zdjęciem.</p>}
-      <div className="space-y-3" data-testid="rpo-scan-known">{scanOutcome.results.flatMap((r, i) => r.entry ? [<RpoCard key={`s-${r.code}-${i}`} entry={r.entry} vehicle={vehicle || null} year={year ? Number(year) : null} />] : [])}</div>
-      {scanOutcome.results.some(r => !r.entry) && <div className="rounded-lg border border-dashed border-silver-600 p-4" data-testid="rpo-scan-unknown">
-        <h3 className="text-base font-semibold text-white">Brak w bazie</h3>
-        <p className="mt-1 text-sm text-neutral-300">Tych kodów nie ma w dokumentach GM, z których korzystamy — nie zgadujemy ich opisów. To może być też błąd odczytu zdjęcia.</p>
-        <ul className="mt-2 flex flex-wrap gap-2">{scanOutcome.results.filter(r => !r.entry).map(r => <li key={r.code} className="rounded-full border border-neutral-600 px-3 py-1 font-mono text-base text-neutral-200" data-testid="rpo-scan-unknown-code">{r.code}</li>)}</ul>
-      </div>}
-    </section>}
-
     {outcome && outcome.mode !== 'none' && <p className="text-sm text-neutral-300" role="status" data-testid="rpo-count">{outcome.mode === 'decode' ? 'Rozkodowane pozycje' : 'Znaleziono wyników'}: <strong>{outcome.results.length}</strong>{outcome.results.length > LIMIT && ` (pokazano ${LIMIT} — zawęź kategorię lub frazę)`}</p>}
     {outcome?.mode === 'none' && <p className="text-sm text-neutral-300" role="status">Wpisz kody albo wybierz kategorię.</p>}
     {outcome?.ratioConflict && <p className="rounded-lg border border-danger-600 p-3 text-sm text-danger-200" data-testid="rpo-ratio-conflict">Uwaga: podane kody wskazują różne przełożenia tylnego mostu. Auto ma jedno przełożenie — sprawdź naklejkę jeszcze raz.</p>}
     {outcome && (outcome.mode === 'search' || outcome.mode === 'browse') && outcome.results.length === 0 && <p className="text-sm text-neutral-300">Brak kodów pasujących do frazy w tej kategorii.</p>}
 
-    <div className="space-y-3" data-testid="rpo-results">{shown.map((item, index) => item.kind === 'unknown'
+    <div ref={resultsRef} className="scroll-mt-4 space-y-3" data-testid="rpo-results">{shown.map((item, index) => item.kind === 'unknown'
       ? <article key={`u-${item.code}-${index}`} data-testid="rpo-unknown" className="rounded-lg border p-4">
           <p className="text-base font-semibold text-white"><span className="mr-2 font-mono text-lg text-silver-300">{item.code}</span>nieznany – sprawdź</p>
           <p className="mt-1 text-sm text-neutral-300">{item.hint ?? 'Tego kodu nie ma w dokumentach GM dla GMT400, z których korzystamy. Sprawdź pisownię na naklejce i w instrukcji serwisowej swojego rocznika.'}</p>
@@ -113,21 +116,28 @@ export default function RpoPage() {
 
 function RpoCard({ entry, vehicle, year }: { entry: RpoEntry; vehicle: string | null; year: number | null }) {
   const fit = rpoFit(entry, vehicle, year);
-  return <article className="rounded-lg border p-4" data-testid="rpo-result" data-code={entry.code}>
-    <p className="text-base font-medium text-white"><span className="mr-2 font-mono text-lg font-bold text-silver-300">{entry.code}</span>{entry.description}</p>
-    <div className="mt-2 flex flex-wrap gap-2 text-xs">
+  const contentSources = Array.from(new Map((entry.contents?.groups ?? []).flatMap(g => g.sources).map(doc => [doc.id, doc])).values());
+  return <article className="rounded-lg border p-3 sm:p-4" data-testid="rpo-result" data-code={entry.code}>
+    <p className="text-base font-medium leading-snug text-white"><span className="mr-2 font-mono text-lg font-bold text-silver-300">{entry.code}</span>{entry.description}</p>
+    {entry.hasPolish && <p className="mt-0.5 break-words text-xs text-neutral-400" lang="en" data-testid="rpo-gm-name">GM: {entry.original}</p>}
+    <div className="mt-1.5 flex flex-wrap gap-1.5 text-xs">
       <span className="rounded-full border px-2 py-0.5">{entry.category}</span>
       {entry.status !== 'verified' && <span className="rounded-full border border-silver-600 px-2 py-0.5 text-silver-200">{STATUS_LABEL[entry.status]}</span>}
       {fit !== 'no-data' && <span data-testid="rpo-fit" data-fit={fit} className={`rounded-full border px-2 py-0.5 ${fit === 'listed' ? 'border-silver-500 text-white' : 'text-neutral-300'}`}>{fit === 'listed' ? '✓ ' : ''}{FIT_LABEL[fit]}</span>}
     </div>
-    {entry.hasPolish && <p className="mt-2 text-sm text-neutral-300">GM: <span lang="en">{entry.original}</span></p>}
-    <p className="mt-2 text-sm text-neutral-300"><span className="font-semibold text-white">Model i lata (dokumenty GM): </span>{entry.applies.map((a, i) => <span key={a.vehicle}>{i > 0 && '; '}{a.vehicle} {a.years}{a.original ? <span lang="en"> („{a.original}”)</span> : null}</span>)}</p>
     <RpoContentsTile entry={entry} />
-    <p className="mt-2 text-xs text-neutral-400">Sprawdź w swoim aucie / manualu.</p>
-    <details className="mt-2 text-sm">
-      <summary className="flex min-h-11 cursor-pointer items-center text-neutral-200">Źródła ({entry.sources.length}){entry.notes ? ' i uwagi' : ''}</summary>
-      {entry.notes && <p className="mt-1 text-xs text-neutral-400" lang="en">Uwagi zestawienia: {entry.notes}</p>}
-      <ul className="mt-1 space-y-1 text-xs">{entry.sources.map(doc => <li key={doc.id}><a href={doc.url} target="_blank" rel="noopener noreferrer" className="underline">{doc.label}</a></li>)}</ul>
+    <details className="mt-1 text-sm" data-testid="rpo-more">
+      <summary className="flex min-h-11 cursor-pointer items-center text-neutral-300" data-testid="rpo-more-toggle">Model, lata i źródła ({entry.sources.length + contentSources.length})</summary>
+      <div className="space-y-2 pb-1 text-xs text-neutral-300">
+        <p data-testid="rpo-applies"><span className="font-semibold text-white">Model i lata (dokumenty GM): </span>{entry.applies.map((a, i) => <span key={a.vehicle}>{i > 0 && '; '}{a.vehicle} {a.years}{a.original ? <span lang="en"> („{a.original}”)</span> : null}</span>)}</p>
+        {entry.contents && <p data-testid="rpo-contents-note">{RPO_CONTENTS_NOTE}</p>}
+        <p data-testid="rpo-check-note" className="text-neutral-400">Sprawdź w swoim aucie / manualu.</p>
+        {entry.notes && <p className="text-neutral-400" lang="en">Uwagi zestawienia: {entry.notes}</p>}
+        <div><p className="font-semibold text-white">Źródła</p>
+          <ul className="mt-1 space-y-1">{entry.sources.map(doc => <li key={doc.id}><a href={doc.url} target="_blank" rel="noopener noreferrer" className="underline">{doc.label}</a></li>)}</ul></div>
+        {contentSources.length > 0 && <div><p className="font-semibold text-white">Źródła opisu „Zawiera”</p>
+          <ul className="mt-1 space-y-1">{contentSources.map(doc => <li key={doc.id}><a href={doc.url} target="_blank" rel="noopener noreferrer" className="underline">{doc.label}</a></li>)}</ul></div>}
+      </div>
     </details>
   </article>;
 }

@@ -696,5 +696,256 @@
         ]
       }
     ]
+  },
+  "KL6": {
+    "w": "Fabryczna wersja na sprężony gaz ziemny (CNG) z zachowanym zasilaniem benzyną (bi-fuel).",
+    "g": [
+      {
+        "r": "C/K2500 1997",
+        "s": [
+          18
+        ],
+        "z": [
+          "Nowość 1997: pickup na gaz ziemny (CNG) dla flot i gmin, tylko C2500 Fleetside",
+          "Wymaga GVW 8600 lb (C6P, ok. 3900 kg), Vortec 5700 V8, skrzyni 4L80-E i osi 3,73"
+        ]
+      },
+      {
+        "r": "C/K2500 1998–1999",
+        "s": [
+          21,
+          24
+        ],
+        "z": [
+          "Wersja dwupaliwowa: CNG i benzyna; obejmuje KL5 (przygotowanie pod paliwa alternatywne LPG/CNG)",
+          "Wymaga: model C20903, silnik L31 (Vortec 5700), skrzynia MT1, nadwozie E63 (Fleetside), oś GT4 (3,73)",
+          "Niedostępna z wykładziną paki BZY; dealerzy w Teksasie musieli mieć certyfikację",
+          "System Passlock wymieniony w wyposażeniu standardowym tylko dla wersji bez KL6"
+        ]
+      },
+      {
+        "r": "C/K2500 – opis GM 1998",
+        "s": [
+          21
+        ],
+        "z": [
+          "Tylko C2500 Regular Cab z długą skrzynią, silnik Vortec 5700 V8 w wersji bi-fuel",
+          "Zbiornik CNG 13 gal (ok. 49 l), stalowy owinięty włóknem węglowym; zbiornik benzyny 34 gal (ok. 129 l)",
+          "Auto samo przełącza się z CNG na benzynę, bez żadnych przełączników; norma kalifornijska LEV"
+        ]
+      }
+    ]
+  },
+  "1SA": {
+    "w": "Grupa wyposażenia preferowanego (PEG) — wersja bazowa (Base Decor).",
+    "g": [
+      {
+        "r": "Tahoe i Suburban 1997",
+        "s": [
+          16,
+          17
+        ],
+        "z": [
+          "Razem z 1SA trzeba zamówić klimatyzację C60 albo zrezygnować z niej opcją YG6"
+        ]
+      },
+      {
+        "r": "Tahoe i Suburban 1998–1999",
+        "s": [
+          19,
+          20,
+          22,
+          23
+        ],
+        "z": [
+          "W tabeli grup GM pod 1SA stoi tylko „Base Decor” (1999: bez dopłaty) — bez wymienionych dodatków",
+          "Radio z kasetą, zdalny zamek i elektryczny fotel kierowcy GM wymienia dopiero dla dekoru LS (1SB)",
+          "W Suburbanie dla LS wymieniono też klimatyzację przód/tył C69 i tylne ogrzewanie C36"
+        ]
+      }
+    ]
+  },
+  "Z56": {
+    "g": [
+      {
+        "r": "C/K Pickup 2000 (zestawienie akumulatorów)",
+        "s": [
+          39
+        ],
+        "z": [
+          "Z silnikiem 5.7 (L31) akumulator 770 A (CCA) zamiast 600 A w wersji bazowej",
+          "Prąd testu obciążeniowego 390 A (wersja bazowa: 300 A)",
+          "Tabela GM podaje tylko dane akumulatora — pełna zawartość pakietu nie jest w niej opisana"
+        ]
+      }
+    ]
+  },
+  "YF2": {
+    "g": [
+      {
+        "r": "C/K Pickup 2000 (zestawienie akumulatorów)",
+        "s": [
+          39
+        ],
+        "z": [
+          "Z silnikiem 6.5 (L65) akumulator 690 A (CCA) zamiast 600 A w wersji bazowej",
+          "Prąd testu obciążeniowego 350 A (wersja bazowa: 300 A)",
+          "Tabela GM podaje tylko dane akumulatora — pełna zawartość pakietu nie jest w niej opisana"
+        ]
+      }
+    ]
+  },
+  "GT4": {
+    "g": [
+      {
+        "r": "C/K Pickup 1996, 1998–1999",
+        "s": [
+          15,
+          21,
+          24
+        ],
+        "z": [
+          "Przełożenie 3,73 wraz z chłodnicą oleju silnika"
+        ]
+      }
+    ]
+  },
+  "GT5": {
+    "g": [
+      {
+        "r": "C/K Pickup 1998–1999",
+        "s": [
+          21,
+          24
+        ],
+        "z": [
+          "Przełożenie 4,10 wraz z chłodnicą oleju silnika"
+        ]
+      }
+    ]
+  },
+  "GU6": {
+    "g": [
+      {
+        "r": "C/K Pickup 1997–1999",
+        "s": [
+          18,
+          21,
+          24
+        ],
+        "z": [
+          "Przełożenie 3,42; chłodnica oleju silnika w zestawie tylko z silnikiem Diesla"
+        ]
+      }
+    ]
+  },
+  "HC4": {
+    "g": [
+      {
+        "r": "C/K Pickup 1996–1999",
+        "s": [
+          15,
+          18,
+          21,
+          24
+        ],
+        "z": [
+          "Przełożenie 4,56 wraz z blokadą mechanizmu różnicowego G80"
+        ]
+      }
+    ]
+  },
+  "L49": {
+    "g": [
+      {
+        "r": "C/K Pickup 1994",
+        "s": [
+          9
+        ],
+        "z": [
+          "Zawiera osłony przedniego zderzaka V27 przy dekorze Silverado"
+        ]
+      }
+    ]
+  },
+  "L56": {
+    "g": [
+      {
+        "r": "C/K Pickup 1994",
+        "s": [
+          9
+        ],
+        "z": [
+          "Zawiera osłony przedniego zderzaka V27 przy dekorze Silverado"
+        ]
+      },
+      {
+        "r": "C/K Pickup i Tahoe 1998–1999",
+        "s": [
+          20,
+          21,
+          24
+        ],
+        "z": [
+          "Zawiera dodatkowy akumulator o zwiększonej wytrzymałości (HD)"
+        ]
+      }
+    ]
+  },
+  "L65": {
+    "g": [
+      {
+        "r": "C/K Pickup i Suburban 1997",
+        "s": [
+          16,
+          18
+        ],
+        "z": [
+          "Zawiera osłony przedniego zderzaka",
+          "Zlikwidowany schowek pod maską"
+        ]
+      },
+      {
+        "r": "C/K Pickup i Suburban 1998–1999",
+        "s": [
+          19,
+          21,
+          24
+        ],
+        "z": [
+          "Zawiera dodatkowy akumulator o zwiększonej wytrzymałości (HD)",
+          "Osłony przedniego zderzaka w zestawie (Suburban 1998, wybrane wersje C/K)"
+        ]
+      }
+    ]
+  },
+  "MT1": {
+    "g": [
+      {
+        "r": "C/K Pickup 1998–1999",
+        "s": [
+          21,
+          24
+        ],
+        "z": [
+          "Wzmocniona 4-biegowa automatyczna skrzynia z nadbiegiem; dodatkowa chłodnica oleju skrzyni w zestawie"
+        ]
+      }
+    ]
+  },
+  "B85": {
+    "g": [
+      {
+        "r": "C/K Pickup 1994, 1996",
+        "s": [
+          9,
+          15
+        ],
+        "z": [
+          "Jasne listwy zewnętrzne: boczne nadwozia i obramowania nadkoli",
+          "K2500 z zespołem C6P: tylko listwy boczne"
+        ]
+      }
+    ]
   }
 }

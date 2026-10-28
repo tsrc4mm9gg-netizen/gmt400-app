@@ -33,7 +33,7 @@ const contents = JSON.parse(readFileSync(new URL('../src/data/rpo-contents.json'
 const contentEntries = Object.entries(contents).filter(([key]) => key !== '_');
 
 test('zawartość pakietów: każdy kod istnieje w katalogu, grupy mają zakres, źródła i pozycje', () => {
-  assert.ok(contentEntries.length >= 30, 'co najmniej 30 kodów z opisem zawartości');
+  assert.ok(contentEntries.length >= 45, 'co najmniej 45 kodów z opisem zawartości');
   for (const [code, entry] of contentEntries) {
     assert.match(code, /^[A-Z0-9]{3}$/, code);
     assert.ok(byCode.has(code), `${code}: brak w katalogu RPO`);
@@ -41,7 +41,7 @@ test('zawartość pakietów: każdy kod istnieje w katalogu, grupy mają zakres,
     if ('w' in entry) assert.ok(typeof entry.w === 'string' && entry.w.trim().length >= 10, `${code}: puste wyjaśnienie`);
     const scopes = new Set();
     for (const group of entry.g) {
-      assert.ok(typeof group.r === 'string' && /19\d\d/.test(group.r), `${code}: zakres musi zawierać rocznik`);
+      assert.ok(typeof group.r === 'string' && /(19|20)\d\d/.test(group.r), `${code}: zakres musi zawierać rocznik`);
       assert.ok(!scopes.has(group.r), `${code}: zduplikowany zakres ${group.r}`);
       scopes.add(group.r);
       assert.ok(group.s.length > 0, `${code}/${group.r}: brak źródeł`);
@@ -65,4 +65,19 @@ test('zawartość pakietów: przykładowe znane fakty (YE9 / Z71 / NZZ)', () => 
   assert.match(ye9, /zamek|szyb/i, 'YE9 obejmuje zamki/szyby');
   assert.ok(contents.Z71.g.some(g => g.z.some(z => /Bilstein/.test(z))), 'Z71 z amortyzatorami Bilstein (1990)');
   assert.ok(contents.NZZ.g.length >= 1);
+});
+
+test('zawartość pakietów: nowe opisy z dokumentów GM (KL6 CNG, 1SA, akumulatory Z56/YF2 w kicie 2000)', () => {
+  const kl6 = contents.KL6.g.flatMap(g => g.z).join(' | ');
+  assert.match(kl6, /KL5/, 'KL6 (CNG) obejmuje KL5');
+  assert.match(kl6, /CNG|gaz/i);
+  assert.ok(contents['1SA'].g.length >= 2);
+  const doc2000 = data.docs.findIndex(d => d.id === 'HER-2000-Truck');
+  assert.ok(doc2000 >= 0, 'dokument kitu 2000 jest w katalogu źródeł');
+  for (const code of ['Z56', 'YF2']) {
+    assert.ok(contents[code].g.every(g => g.s.includes(doc2000)), `${code}: źródłem jest kit 2000`);
+    assert.ok(contents[code].g.some(g => g.z.some(z => /nie jest w niej opisana/.test(z))), `${code}: jawnie zaznaczone, że pełna zawartość nie jest opisana`);
+  }
+  // pakiety bez opisu w dokumentach nie dostają zgadniętej zawartości
+  for (const code of ['Y91', 'PAC', 'POD', 'VAJ', 'KL8']) assert.ok(!(code in contents), `${code}: brak opisu w dokumentach — nie zgadujemy`);
 });

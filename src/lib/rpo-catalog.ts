@@ -37,7 +37,7 @@ const DATA = RAW as unknown as RawData;
 type RawContents = { w?: string; g: { r: string; z: string[]; s: number[] }[] };
 const CONTENTS = CONTENTS_RAW as unknown as Record<string, RawContents | string>;
 export const RPO_CONTENTS_NOTE = 'Zawartość według GM dla modelu i rocznika – sprawdź w swoim aucie.';
-export const RPO_CONTENTS_MISSING = 'Brak opisu zawartości w dokumentach.';
+export const RPO_CONTENTS_MISSING = 'brak opisu w dokumentach';
 
 export const RPO_GENERATED = DATA.generated;
 export const RPO_VEHICLES = DATA.vehicles;
