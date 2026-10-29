@@ -109,10 +109,23 @@ test('VIN: błąd liczników pokazuje „?”, nigdy 0', async ({ page }) => {
   expect(errors).toEqual([]);
 });
 
-test('Historia VIN: walidacja, ta sama lista z licznikami, link do /vin, bez obrazków', async ({ page }) => {
+test('Historia VIN: walidacja, prośba → oczekiwanie → zatwierdzenie → wyniki (linki, liczniki, dane aukcyjne), bez obrazków', async ({ page }) => {
   const { errors } = await guard(page);
-  const hits = [];
-  await page.context().route(u => u.pathname === '/api/vin-hits', async r => { hits.push(r.request().postDataJSON()); await r.fulfill({ json: { counts: { nhtsaRecalls: 0, nhtsaComplaints: 12 }, notes: {}, scope: { make: 'Chevrolet', year: '1995', platform: 'C/K', nhtsaModels: ['C/K'] } } }); });
+  const { vinHistoryLinks } = await import('../src/lib/vin-decode.mjs');
+  const VIN = '1GCEK14K6SZ199684';
+  const created = []; let approved = false; const statusBodies = [];
+  const CODE = 'A'.repeat(22);
+  await page.context().route(u => u.pathname === '/api/vin-requests', async r => { created.push(r.request().postDataJSON()); await r.fulfill({ status: 201, json: { code: CODE, id: 'HV-0A1B2C3D', vin: VIN, status: 'pending', createdAt: '2026-10-29T09:00:00.000Z' } }); });
+  await page.context().route(u => u.pathname === '/api/vin-requests/status', async r => {
+    statusBodies.push(r.request().postDataJSON());
+    const base = { id: 'HV-0A1B2C3D', vin: VIN, createdAt: '2026-10-29T09:00:00.000Z' };
+    if (!approved) return r.fulfill({ json: { ...base, status: 'pending' } });
+    await r.fulfill({ json: { ...base, status: 'approved', results: {
+      links: vinHistoryLinks(VIN), counts: { nhtsaRecalls: 0, nhtsaComplaints: 12 }, notes: {}, scope: { make: 'Chevrolet', year: '1995', platform: 'C/K', nhtsaModels: ['C/K'] }, fetchedAt: '2026-10-29T10:00:00.000Z',
+      auction: { state: 'ok', fetchedAt: '2026-10-29T10:00:00.000Z',
+        vehicle: { platform: 'copart', lot: '12345678', title: '1995 CHEVROLET K1500', year: 1995, make: 'CHEVROLET', model: 'K1500', damage: 'Front end', lossType: null, run: null, odometerMi: null, odometerKm: 250000, outcome: 'Sold', auctionAt: '2026-05-01', state: null, priceUsd: { sale: 1200, lastSold: null, currentBid: null, buyNow: null, estimatedRetail: null }, photoCount: 14 },
+        history: [{ platform: 'copart', lot: '12345678', date: '2026-05-01', priceUsd: 1200, status: 'Sold' }], otherLots: [] } } } });
+  });
   await page.goto(BASE + '/narzedzia/historia-vin');
   await expect(page.getByRole('heading', { level: 1, name: 'Historia VIN' })).toBeVisible();
   const input = page.getByLabel('Numer VIN pojazdu', { exact: true });
@@ -125,12 +138,33 @@ test('Historia VIN: walidacja, ta sama lista z licznikami, link do /vin, bez obr
   await go.click();
   await expect(page.getByTestId('history-vin-errors')).toContainText('Cyfra kontrolna');
   await expect(page.getByTestId('history-vin-errors')).toContainText('6');
-  expect(hits).toHaveLength(0);
-  await input.fill('1GCEK14K6SZ199684');
+  expect(created).toHaveLength(0); // niepoprawny VIN nie tworzy prośby
+  await input.fill(VIN);
   await go.click();
+  // Wynik NIE jest widoczny przed zatwierdzeniem.
+  await expect(page.getByTestId('history-vin-pending')).toHaveText('Prośba wysłana — czekaj na zatwierdzenie administratora.');
+  expect(created).toEqual([{ vin: VIN }]);
+  await expect(page.getByTestId('vin-history')).toHaveCount(0);
+  await expect(page.getByTestId('history-vin-auction')).toHaveCount(0);
+  expect(await page.evaluate(() => JSON.parse(localStorage.getItem('gmt400_vin_request') || '{}').code)).toBe(CODE);
+  // Po przeładowaniu prośba jest odtwarzana z localStorage i nadal czeka.
+  await page.reload();
+  await expect(page.getByTestId('history-vin-pending')).toBeVisible();
+  await expect(page.getByTestId('vin-history')).toHaveCount(0);
+  expect(statusBodies.every(b => b.code === CODE)).toBe(true);
+  approved = true;
+  await page.getByRole('button', { name: 'Odśwież status' }).click();
+  await expect(page.getByTestId('history-vin-approved')).toBeVisible();
+  const auction = page.getByTestId('history-vin-auction');
+  await expect(auction.getByTestId('history-vin-auction-count')).toContainText('Znaleziono 2 rekordów');
+  await expect(auction).toContainText('Front end');
+  await expect(auction).toContainText('Cena sprzedaży: 1200 USD');
+  await expect(auction).toContainText('250 000 km');
+  await expect(auction.getByTestId('history-vin-auction-photos')).toContainText('Źródło ma 14 zdjęć');
+  await expect(auction.getByTestId('history-vin-auction-attribution')).toContainText('Auction data: Apibara.tech');
+  await expect(auction.getByRole('link', { name: /Copart · lot 12345678/ }).first()).toHaveAttribute('href', 'https://www.copart.com/lot/12345678');
   const hist = page.getByTestId('vin-history');
   await expect(hist.getByTestId('vin-hit-nhtsa-complaints')).toHaveText('12');
-  expect(hits).toEqual([{ vin: '1GCEK14K6SZ199684' }]);
   await expect(hist.getByTestId('vin-hit-nhtsa-recalls')).toHaveText('0');
   const items = hist.getByTestId('vin-history-list').locator('li');
   await expect(items.first()).toContainText('skargi');
@@ -139,8 +173,8 @@ test('Historia VIN: walidacja, ta sama lista z licznikami, link do /vin, bez obr
   await expect(hist.getByText('Dlaczego przy części linków nie ma liczby?')).toBeVisible();
   await expect(page.getByTestId('history-vin-summary')).toContainText('1995 Chevrolet K1500');
   await expect(hist.getByRole('link', { name: /pełne dekodowanie/ })).toHaveAttribute('href', '/vin');
-  await expect(page.locator('main img, [data-testid="vin-history"] img')).toHaveCount(0);
-  for (const a of await hist.locator('a[target="_blank"]').all()) await expect(a).toHaveAttribute('rel', /noopener/);
+  await expect(page.locator('main img, [data-testid="vin-history"] img, [data-testid="history-vin-auction"] img')).toHaveCount(0);
+  for (const a of await page.locator('main a[target="_blank"]').all()) await expect(a).toHaveAttribute('rel', /noopener/);
   await noHorizontalScroll(page);
   expect(errors).toEqual([]);
 });

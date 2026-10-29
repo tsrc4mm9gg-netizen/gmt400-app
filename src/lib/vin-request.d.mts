@@ -1,0 +1,18 @@
+export type RequestStatus = 'pending' | 'approved' | 'rejected';
+export const STATUSES: RequestStatus[];
+export const CODE_RE: RegExp;
+export const ID_RE: RegExp;
+export const IP_LIMIT_PER_HOUR: number;
+export const MAX_PENDING: number;
+export function validateVinForRequest(input: unknown): { ok: true; vin: string } | { ok: false; error: string };
+export function newRequestCode(): string;
+export function hashCode(code: string): string;
+export function publicId(codeHash: string): string;
+export function hashIp(ip: string, salt?: string): string;
+export function clientIp(headers: { get(name: string): string | null }): string;
+export function createLimiter(o: { max: number; windowMs: number; now?: () => number }): { take(key: string): { ok: true } | { ok: false; retryAfterSec: number }; reset(key: string): void };
+export type VinRequestRecord = { id: string; vin: string; status: RequestStatus; createdAt: string; decidedAt?: string | null };
+export function buildStatusBody<T>(record: VinRequestRecord, loadResults: (vin: string) => Promise<T>): Promise<VinRequestRecord & { results?: T }>;
+export function signSession(password: string, o?: { now?: number; ttlMs?: number }): string;
+export function verifySession(password: string | undefined, token: unknown, now?: number): boolean;
+export function passwordMatches(given: unknown, expected: string | undefined): boolean;

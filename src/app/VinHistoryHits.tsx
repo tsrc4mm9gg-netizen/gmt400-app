@@ -7,7 +7,7 @@
  */
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
-import { vinHistoryLinks } from '@/lib/vin-decode.mjs';
+import { vinHistoryLinks, type VinHistoryLink } from '@/lib/vin-decode.mjs';
 import { badgeText, NOT_COUNTABLE_REASON, sortByHits } from '@/lib/vin-hits.mjs';
 
 export const linkCls = 'inline-flex min-h-11 items-center text-silver-400 underline break-words';
@@ -17,9 +17,12 @@ export const Chevron = () => <span aria-hidden="true" className="text-silver-400
 
 type Hits = { state: 'idle' | 'loading' | 'error' } | { state: 'done'; counts: Record<string, number | null>; notes: Record<string, string>; models: string[]; label: string };
 
-export default function VinHistoryHits({ vin, variant = 'section' }: { vin: string; variant?: 'section' | 'page' }) {
-  const [hits, setHits] = useState<Hits>({ state: 'idle' });
-  const started = useRef(false);
+/** Wyniki przygotowane przez serwer (Historia VIN po zatwierdzeniu prośby) — wtedy nie ma własnego pobierania ani lokalnie liczonych linków. */
+export type PreloadedHits = { links: VinHistoryLink[]; counts: Record<string, number | null>; notes: Record<string, string>; scope: { make: string; year: string; nhtsaModels?: string[] } | null };
+
+export default function VinHistoryHits({ vin, variant = 'section', preloaded }: { vin: string; variant?: 'section' | 'page'; preloaded?: PreloadedHits }) {
+  const [hits, setHits] = useState<Hits>(preloaded ? { state: 'done', counts: preloaded.counts, notes: preloaded.notes, models: preloaded.scope?.nhtsaModels ?? [], label: preloaded.scope ? `${preloaded.scope.year} ${preloaded.scope.make}` : '' } : { state: 'idle' });
+  const started = useRef(!!preloaded);
   const load = () => {
     if (started.current) return;
     started.current = true;
@@ -32,7 +35,7 @@ export default function VinHistoryHits({ vin, variant = 'section' }: { vin: stri
   // Widok strony: użytkownik sam kliknął „Sprawdź historię”, więc liczymy od razu.
   useEffect(() => { if (variant === 'page') load(); }); // eslint-disable-line react-hooks/exhaustive-deps
 
-  const links = vinHistoryLinks(vin);
+  const links = preloaded?.links ?? vinHistoryLinks(vin);
   const countOf = (l: (typeof links)[number]) => (hits.state === 'done' && l.count ? hits.counts[l.count] : undefined);
   const ordered = hits.state === 'done' ? sortByHits(links, Object.fromEntries(links.map(l => [l.id, countOf(l)]))) : links;
 
