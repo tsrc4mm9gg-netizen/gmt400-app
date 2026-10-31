@@ -58,3 +58,44 @@ for (const [id, label] of [[PHOTO, 'zdjęcie'], [DRAWING, 'rysunek']]) {
     await expect(trigger).toBeFocused();
   });
 }
+
+// Zastąpione grafiki AI: Specyfikacje → zdjęcie z Commons z widoczną atrybucją; Kupujący → własne schematy SVG (bez kadrowania, z powiększeniem).
+test('Specyfikacje: zdjęcie komory silnika (webp) z atrybucją i linkami do pliku i licencji', async ({ page }) => {
+  await page.context().route(u => u.pathname.startsWith('/api/notion'), r => r.fulfill({ json: DATA }));
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto(BASE + '/baza?tab=specyfikacje');
+  const img = page.locator('img[src="/spec-komora-silnika-chevrolet-1500-1990.webp"]');
+  await img.scrollIntoViewIfNeeded();
+  await expect(img).toHaveAttribute('alt', /zdjęcie poglądowe/);
+  await expect(img).not.toHaveAttribute('alt', /punkt|lokalizacj|map/i);
+  await expect.poll(() => img.evaluate(el => el.complete && el.naturalWidth > 0)).toBe(true);
+  const author = page.getByRole('link', { name: 'Fot. Michael Barera' });
+  await expect(author).toBeVisible();
+  await expect(author).toHaveAttribute('href', /commons\.wikimedia\.org\/wiki\/File:2017_Bois_d%27Arc_Spring_Car_Show_50/);
+  await expect(page.getByRole('link', { name: 'CC BY-SA 4.0' })).toHaveAttribute('href', /creativecommons\.org\/licenses\/by-sa\/4\.0/);
+  await expect(page.locator('img[src$="spec-fluids-map.jpg"]')).toHaveCount(0);
+  expect(await page.evaluate(() => document.documentElement.scrollWidth - innerWidth)).toBeLessThanOrEqual(0);
+});
+
+test('Kupujący: schematy Rdza/Rama (SVG) w całości, bez kadrowania, z powiększeniem w lightboxie', async ({ page }) => {
+  await page.context().route(u => u.pathname.startsWith('/api/notion'), r => r.fulfill({ json: DATA }));
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto(BASE + '/baza?tab=kupujacy');
+  for (const src of ['/guide-rdza-schemat.svg', '/guide-rama-schemat.svg']) {
+    const img = page.locator(`img[src="${src}"]`);
+    await img.scrollIntoViewIfNeeded();
+    await expect(img).toHaveAttribute('alt', /^Schemat: .{20,}/);
+    await expect.poll(() => img.evaluate(el => el.complete && el.naturalWidth > 0)).toBe(true);
+    const box = await img.boundingBox();
+    expect(Math.abs(box.width / box.height - 1200 / 840)).toBeLessThan(0.03);
+    const trigger = page.getByRole('button', { name: 'Powiększ ilustrację' }).filter({ has: img });
+    await hydrated(trigger);
+    await trigger.click();
+    const dialog = page.getByRole('dialog');
+    await expect(dialog).toBeVisible();
+    await expect(dialog.locator(`img[src="${src}"]`)).toHaveCount(1);
+    await page.keyboard.press('Escape');
+    await expect(dialog).toHaveCount(0);
+  }
+  await expect(page.locator('img[src$="guide-rust.jpg"], img[src$="guide-frame.jpg"]')).toHaveCount(0);
+});

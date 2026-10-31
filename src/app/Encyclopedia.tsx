@@ -850,7 +850,8 @@ export default function Encyclopedia({ initialTab, initialItems }: { initialTab?
             
             <EngineTable />
 
-            <button type="button" aria-label="Powiększ ilustrację" className="block w-full rounded focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-silver-500" onClick={() => setLightbox('/spec-fluids-map.jpg')}><img loading="lazy" src="/spec-fluids-map.jpg" alt="Lokalizacje płynów" className="w-full mb-6 cursor-pointer"  /></button>
+            <button type="button" aria-label="Powiększ ilustrację" className="block w-full rounded focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-silver-500" onClick={() => setLightbox('/spec-komora-silnika-chevrolet-1500-1990.webp')}><img loading="lazy" src="/spec-komora-silnika-chevrolet-1500-1990.webp" width={1600} height={1067} alt="Komora silnika Chevroleta 1500 z 1990 roku — zdjęcie poglądowe" className="w-full h-auto cursor-pointer"  /></button>
+            <p className="text-xs text-neutral-400 mt-1 mb-6">Zdjęcie poglądowe (zmniejszone) — nie pokazuje punktów płynów; ich położenie sprawdź w swoim aucie / manualu. <a href="https://commons.wikimedia.org/wiki/File:2017_Bois_d%27Arc_Spring_Car_Show_50_(1990_Chevrolet_1500_engine).jpg" className="inline-flex min-h-11 items-center text-silver-300 underline underline-offset-2 hover:text-white">Fot. Michael Barera</a>, <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.pl" rel="license" className="inline-flex min-h-11 items-center text-silver-300 underline underline-offset-2 hover:text-white">CC BY-SA 4.0</a></p>
 
             <FluidsTable />
 
@@ -916,7 +917,7 @@ export default function Encyclopedia({ initialTab, initialItems }: { initialTab?
             <h2 className="text-2xl mb-6" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>PORADNIK KUPUJĄCEGO</h2>
             
             <div className="bg-neutral-950 border border-white/10 overflow-hidden mb-4">
-              <button type="button" aria-label="Powiększ ilustrację" className="block w-full rounded focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-silver-500" onClick={() => setLightbox('/guide-rust.jpg')}><img loading="lazy" src="/guide-rust.jpg" alt="Rdza GMT400" className="w-full h-48 object-cover cursor-pointer"  /></button>
+              <button type="button" aria-label="Powiększ ilustrację" className="block w-full rounded focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-silver-500" onClick={() => setLightbox('/guide-rdza-schemat.svg')}><img loading="lazy" src="/guide-rdza-schemat.svg" width={1200} height={840} alt="Schemat: gdzie szukać rdzy w GMT400 — progi, nadkola, podłoga kabiny, rama przy resorach, klapa, narożniki kabiny" className="w-full h-auto object-contain cursor-pointer"  /></button>
               <div className="p-4">
                 <h3 className="font-semibold text-silver-400 mb-2">1. RDZA — NAJWIĘKSZY WRÓG</h3>
                 <ul className="text-sm text-neutral-300 space-y-1">
@@ -931,7 +932,7 @@ export default function Encyclopedia({ initialTab, initialItems }: { initialTab?
             </div>
 
             <div className="bg-neutral-950 border border-white/10 overflow-hidden mb-4">
-              <button type="button" aria-label="Powiększ ilustrację" className="block w-full rounded focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-silver-500" onClick={() => setLightbox('/guide-frame.jpg')}><img loading="lazy" src="/guide-frame.jpg" alt="Rama GMT400" className="w-full h-48 object-cover cursor-pointer"  /></button>
+              <button type="button" aria-label="Powiększ ilustrację" className="block w-full rounded focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-silver-500" onClick={() => setLightbox('/guide-rama-schemat.svg')}><img loading="lazy" src="/guide-rama-schemat.svg" width={1200} height={840} alt="Schemat: rama GMT400 — co sprawdzić: mocowania zawieszenia, rama za kabiną, mocowania resorów, spawy i otwory, przód ramy, numer ramy" className="w-full h-auto object-contain cursor-pointer"  /></button>
               <div className="p-4">
                 <h3 className="font-semibold text-silver-400 mb-2">2. RAMA — SPRAWDŹ DOKŁADNIE</h3>
                 <ul className="text-sm text-neutral-300 space-y-1">
