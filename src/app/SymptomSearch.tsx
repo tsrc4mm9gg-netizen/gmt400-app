@@ -54,7 +54,7 @@ export default function SymptomSearch({ entries, headingLevel = 2, className = '
     <section aria-labelledby={`${inputId}-title`} data-testid="symptom-search" className={`${padded ? 'px-4 pt-5' : ''} ${className}`}>
       <Heading id={`${inputId}-title`} className="text-xl font-bold text-white">Co się dzieje z moim autem?</Heading>
       <p className="mt-0.5 text-xs text-neutral-300">Opisz objaw własnymi słowami — pokażemy pasujące usterki i porady DIY z bazy.</p>
-      <form role="search" onSubmit={e => e.preventDefault()} className="mt-3">
+      <form onSubmit={e => e.preventDefault()} className="mt-3">
         <label htmlFor={inputId} className="sr-only">Opisz objaw</label>
         <input
           id={inputId}

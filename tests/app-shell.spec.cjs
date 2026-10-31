@@ -45,7 +45,12 @@ test('PWA: manifest, ikony, meta iOS i service worker bez /admin i /api/vin-requ
 });
 
 test('offline: odwiedzona strona wpisu i /offline działają bez sieci (Chromium)', async ({ page, context, browserName }) => {
-  test.skip(browserName !== 'chromium', 'Service worker w trybie offline sprawdzamy w Chromium');
+  if (browserName !== 'chromium') {
+    // WebKit (Playwright/Linux) nie obsługuje pewnie trybu offline z SW — sprawdzamy stronę zapasową /offline online.
+    await page.goto(BASE + '/offline');
+    await expect(page.getByRole('heading', { name: 'Brak połączenia z internetem' }).first()).toBeVisible();
+    return;
+  }
   await page.goto(BASE + '/');
   await page.evaluate(() => localStorage.setItem('gmt400_sw', '1'));
   await page.reload();
