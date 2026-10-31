@@ -57,6 +57,15 @@ test('przeglądy z autem: zaległe → oznacz wykonane → OK po odświeżeniu, 
   expect(box.height).toBeGreaterThanOrEqual(44);
   await page.getByRole('button', { name: 'Ciężkie warunki' }).click();
   await expect(page.getByRole('button', { name: 'Ciężkie warunki' })).toHaveAttribute('aria-pressed', 'true');
+  // aktywny przełącznik i przycisk kalendarza: ciemny tekst na srebrnym tle (kontrast)
+  for (const locator of [page.getByRole('button', { name: 'Ciężkie warunki' }), page.getByTestId('przeglady-ics')]) {
+    const ratio = await locator.evaluate(el => {
+      const lum = c => { const [r, g, b] = c.match(/[\d.]+/g).slice(0, 3).map(Number).map(v => { v /= 255; return v <= 0.03928 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4; }); return 0.2126 * r + 0.7152 * g + 0.0722 * b; };
+      const s = getComputedStyle(el); const a = lum(s.color), b = lum(s.backgroundColor);
+      return (Math.max(a, b) + 0.05) / (Math.min(a, b) + 0.05);
+    });
+    expect(ratio).toBeGreaterThanOrEqual(4.5);
+  }
   await page.reload();
   await expect(page.locator('[data-testid="przeglady-item"][data-id="olej"]')).toHaveAttribute('data-state', 'ok');
   await expect(page.getByTestId('przeglady-odo')).toHaveValue('120000');

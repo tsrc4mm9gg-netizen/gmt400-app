@@ -60,7 +60,7 @@ export default function BuyerChecklist() {
                   <li key={item.id} style={{ maxWidth: 'none' }} className={`rounded-xl border p-2 ${on ? 'border-silver-500/70 bg-neutral-900' : 'border-white/10 bg-black'}`} data-testid="buyer-item" data-id={item.id} data-checked={on ? '1' : '0'}>
                     <label className="flex min-h-11 cursor-pointer items-start gap-3">
                       <input type="checkbox" checked={on} onChange={() => toggle(item.id)} className="mt-0.5 h-6 w-6 shrink-0 accent-silver-400" style={{ minWidth: 24 }} data-testid="buyer-check" />
-                      <span className={`text-sm leading-6 ${on ? 'text-neutral-400' : 'text-neutral-100'}`}>{item.text}</span>
+                      <span className={`text-sm leading-snug ${on ? 'text-neutral-400' : 'text-neutral-100'}`}>{item.text}</span>
                     </label>
                     <p className="mt-1 pl-9 text-xs text-neutral-400">
                       {item.page && <>Źródło: <a href={BUYER_SOURCE.url} target="_blank" rel="noopener noreferrer" className="underline decoration-silver-500 underline-offset-2 hover:text-white">instrukcja GM 1999</a>, {item.page}.</>}

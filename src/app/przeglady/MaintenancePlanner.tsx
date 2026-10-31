@@ -15,8 +15,8 @@ type CarState = { unit: 'km' | 'mi'; odo: string; lastKm: string; lastDate: stri
 const EMPTY: CarState = { unit: 'km', odo: '', lastKm: '', lastDate: '', kmPerYear: '', severe: false, emissions: 'LD', done: {} };
 const YEARS = ['1995', '1996', '1997', '1998', '1999'];
 const field = 'mt-1 block min-h-11 w-full min-w-0 rounded-lg border border-white/15 bg-neutral-950 px-3 text-base text-white focus:border-silver-600 focus:outline-none';
-const btn = 'inline-flex min-h-11 items-center justify-center rounded-lg border border-white/15 px-4 text-sm font-semibold text-white hover:border-silver-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-silver-500';
-const seg = (on: boolean) => `${btn} ${on ? 'border-silver-400 bg-silver-400 text-neutral-950 hover:border-silver-300' : ''}`;
+const btn = 'inline-flex min-h-11 items-center justify-center rounded-lg border border-white/15 px-4 text-sm font-semibold hover:border-silver-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-silver-500';
+const seg = (on: boolean) => `${btn} ${on ? 'border-silver-400 bg-silver-400 text-neutral-950 hover:border-silver-300' : 'text-white'}`;
 
 const STATE_LABEL: Record<ItemState, string> = { zalegle: 'Zaległe', wkrotce: 'Wkrótce', ok: 'OK', brak: 'Brak danych o wykonaniu', info: 'Bez interwału' };
 const STATE_CLASS: Record<ItemState, string> = {
@@ -125,7 +125,7 @@ export default function MaintenancePlanner() {
         <section className="rounded-xl border border-white/15 bg-neutral-900 p-4" data-testid="przeglady-no-car">
           <p className="font-semibold">Nie masz zapisanego auta.</p>
           <p className="mt-1 text-sm text-neutral-300">Zapisz auto w Moje auto, a harmonogram dopasujemy do rocznika, silnika, skrzyni i napędu. Poniżej widok ogólny — wszystkie pozycje (2WD i 4WD, automat i manual) dla wybranego rocznika.</p>
-          <Link href="/moj-samochod" className={`${btn} mt-3 border-silver-500/60`}>Zapisz auto</Link>
+          <Link href="/moj-samochod" className={`${btn} mt-3 border-silver-500/60 text-white`}>Zapisz auto</Link>
           <fieldset className="mt-4">
             <legend className="text-sm text-neutral-300">Rocznik (widok ogólny)</legend>
             <div className="mt-1 flex flex-wrap gap-2">{YEARS.map(y => <button key={y} type="button" aria-pressed={generalYear === y} onClick={() => setGeneralYear(y)} className={seg(generalYear === y)}>{y}</button>)}</div>
@@ -203,8 +203,8 @@ export default function MaintenancePlanner() {
                 <p className="mt-1 text-xs text-neutral-500">Źródło: {source?.label}, rozdz. 7 {item.page}</p>
                 {rule && (
                   <div className="mt-2 flex flex-wrap gap-2">
-                    <button type="button" onClick={() => markDone(item)} className={btn} data-testid="przeglady-done">Oznacz wykonane</button>
-                    {own && <button type="button" onClick={() => undo(item)} className={btn}>Cofnij</button>}
+                    <button type="button" onClick={() => markDone(item)} className={`${btn} text-white`} data-testid="przeglady-done">Oznacz wykonane</button>
+                    {own && <button type="button" onClick={() => undo(item)} className={`${btn} text-white`}>Cofnij</button>}
                   </div>
                 )}
               </li>
