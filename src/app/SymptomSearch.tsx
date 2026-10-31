@@ -2,6 +2,10 @@
 import { useCallback, useDeferredValue, useEffect, useId, useMemo, useRef, useState } from 'react';
 import Link from 'next/link';
 import { buildSymptomIndex, searchSymptoms, termLabels, type SymptomEntry } from '../lib/symptom-search.mjs';
+import { useStoredVehicleProfile } from '../lib/vehicle-profile-store';
+import { vehicleProfileShort } from '../lib/vehicle-profile';
+import { fitsActiveCar } from '../lib/profile-content-filter';
+import { useModelSelection } from './ModelSelectionContext';
 
 type Entry = SymptomEntry & { id: string };
 type Status = 'idle' | 'loading' | 'ready' | 'error';
@@ -43,11 +47,26 @@ export default function SymptomSearch({ entries, headingLevel = 2, className = '
   useEffect(() => { if (entries) setStatus('ready'); }, [entries]);
 
   const source = useMemo(() => (entries ? entries.filter(isEntry) : own), [entries, own]);
-  const index = useMemo(() => buildSymptomIndex(source), [source]);
+  // Filtr pod zapisane auto (profil + wybrane nadwozie) — ta sama reguła co listy Usterki/DIY.
+  const profile = useStoredVehicleProfile();
+  const { bodyId, clearSelection } = useModelSelection();
+  const [showAll, setShowAll] = useState(false);
+  const carLabel = vehicleProfileShort(profile);
+  const scoped = !showAll && (!!profile || !!bodyId);
+  const scopedSource = useMemo(() => (scoped ? source.filter(entry => fitsActiveCar(entry, profile, bodyId)) : source), [scoped, source, profile, bodyId]);
+  const index = useMemo(() => buildSymptomIndex(scopedSource), [scopedSource]);
   const result = useMemo(() => searchSymptoms(index, deferred), [index, deferred]);
+  const fullIndex = useMemo(() => (scoped ? buildSymptomIndex(source) : null), [scoped, source]);
   const q = deferred.trim();
   const showResults = q.length >= 3;
-  const empty = status === 'ready' && showResults && !result.faults.length && !result.diy.length;
+  const noHits = status === 'ready' && showResults && !result.faults.length && !result.diy.length;
+  const hiddenByProfile = useMemo(() => {
+    if (!noHits || !fullIndex) return false;
+    const all = searchSymptoms(fullIndex, deferred);
+    return all.faults.length + all.diy.length > 0;
+  }, [noHits, fullIndex, deferred]);
+  const empty = noHits && !hiddenByProfile;
+  const showEverything = () => { setShowAll(true); if (bodyId) clearSelection(); };
   const Heading = headingLevel === 2 ? 'h2' : 'h3';
 
   return (
@@ -89,8 +108,16 @@ export default function SymptomSearch({ entries, headingLevel = 2, className = '
         {showResults && status === 'error' && (
           <p className="text-sm text-neutral-300">Nie udało się wczytać bazy. <button type="button" onClick={load} className="min-h-11 font-semibold text-silver-300 underline">Spróbuj ponownie</button> albo przejdź do <Link href="/usterki" className="font-semibold text-silver-300 underline">listy usterek</Link>.</p>
         )}
-        {status === 'ready' && showResults && !empty && (
+        {status === 'ready' && showResults && hiddenByProfile && (
+          <div data-testid="symptom-profile-empty" className="rounded-xl border border-white/15 bg-neutral-900 p-3 text-sm text-neutral-200">
+            <p className="font-semibold text-white" style={{ maxWidth: 'none' }}>Brak wyników dla Twojego profilu auta.</p>
+            <button type="button" onClick={showEverything} data-testid="symptom-show-all" className="mt-2 min-h-11 rounded-full border border-silver-300 bg-silver-600 px-4 text-sm font-semibold text-neutral-950 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-silver-500">Pokaż wszystko</button>
+          </div>
+        )}
+        {status === 'ready' && showResults && !noHits && (
           <div data-testid="symptom-results">
+            {scoped && <p className="mb-1 text-xs text-neutral-400" data-testid="symptom-scope">Dla Twojego auta{carLabel ? `: ${carLabel}` : ''} · <button type="button" onClick={showEverything} className="inline-flex min-h-11 items-center font-semibold text-silver-300 underline">Pokaż wszystko</button></p>}
+            {!scoped && (profile || bodyId) && <p className="mb-1 text-xs text-neutral-400" data-testid="symptom-scope">Wszystkie wpisy · <button type="button" onClick={() => setShowAll(false)} className="inline-flex min-h-11 items-center font-semibold text-silver-300 underline">Tylko dla mojego auta</button></p>}
             {result.terms.length > 0 && <p className="text-xs text-neutral-400">Szukam: {termLabels(result.terms).join(' · ')}</p>}
             {result.faults.length > 0 && <ResultList title="Możliwe usterki" items={result.faults as Entry[]} testId="symptom-faults" />}
             {result.diy.length > 0 && <ResultList title="Powiązane porady DIY" items={result.diy as Entry[]} testId="symptom-diy" />}

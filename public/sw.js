@@ -9,7 +9,7 @@ const SHELL = `gmt400-shell-${VERSION}`;
 const PAGES = `gmt400-pages-${VERSION}`;
 const ASSETS = `gmt400-assets-${VERSION}`;
 const SAVED = 'gmt400-saved'; // „Zapisz offline” — bez wersji, żeby zapisane strony przetrwały aktualizację
-const SHELL_URLS = ['/', '/offline', '/diy', '/usterki', '/szukaj', '/manifest.json', '/icon-192.png', '/icon-512.png', '/apple-touch-icon.png'];
+const SHELL_URLS = ['/', '/offline', '/diy', '/usterki', '/szukaj', '/moj-samochod', '/manifest.json', '/icon-192.png', '/icon-512.png', '/apple-touch-icon.png'];
 const MAX_PAGES = 60;
 const MAX_ASSETS = 250;
 

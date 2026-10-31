@@ -11,6 +11,8 @@ import { knowledgeFit, partFit, scopeTextFit, type Fit } from '@/lib/my-car.mjs'
 import { PART_FITMENTS } from '@/lib/parts-compatibility';
 import { RPO_CATALOG, findRpo, rpoFit, rpoVehicleFor, type RpoEntry } from '@/lib/rpo-catalog';
 import { storageAvailable } from '@/lib/vehicle-profile-store';
+import { MAX_GARAGE_CARS, activateCar, addCar, removeActiveCar, removeGarageCar, saveActiveCar, useGarageOthers } from '@/lib/garage-store';
+import { CategoryIcon } from '../ui/CategoryIcon';
 import {
   EMPTY_VEHICLE_PROFILE, GMT400_YEAR_RANGE, VEHICLE_CATALOG, isValidVehicleProfile, normalizeRpoCodes,
   type VehicleMake, type VehiclePlatform, type VehicleProfile,
@@ -39,8 +41,7 @@ function rpoOptions(p: Pick<VehicleProfile, 'brand' | 'platform' | 'year'>, cate
 }
 
 /* ---------- Formularz: VIN albo model + rocznik ---------- */
-function CarForm({ initial, onDone, onCancel }: { initial: VehicleProfile | null; onDone: (persisted: boolean) => void; onCancel?: () => void }) {
-  const { save } = useVehicleProfile();
+function CarForm({ initial, onDone, onCancel, mode = 'edit' }: { initial: VehicleProfile | null; onDone: (persisted: boolean) => void; onCancel?: () => void; mode?: 'edit' | 'add' }) {
   const [draft, setDraft] = useState<VehicleProfile>(initial ?? EMPTY_VEHICLE_PROFILE);
   const [rpoText, setRpoText] = useState((initial?.rpoCodes ?? []).join(' '));
   const [vinNote, setVinNote] = useState('');
@@ -81,14 +82,14 @@ function CarForm({ initial, onDone, onCancel }: { initial: VehicleProfile | null
     if (!profile.vin) delete profile.vin;
     if (!isValidVehicleProfile(profile) || !profile.year) { setError('Wybierz markę, nadwozie, model i rocznik.'); return; }
     setError('');
-    onDone(save(profile));
+    onDone(mode === 'add' ? addCar(profile) : saveActiveCar(profile));
   };
 
   return (
     <div data-testid="my-car-form" className="mt-6 grid gap-4 lg:grid-cols-2">
       <div className="min-w-0 rounded-xl border border-white/10 bg-neutral-950 p-4 sm:p-5">
         <h2 className="text-xl font-semibold text-silver-300">1. Masz VIN? (opcjonalnie)</h2>
-        <p className="mb-3 mt-1 text-sm text-neutral-400">Odczytamy markę, napęd, model, rocznik i silnik z tabel GM (każde pole ze źródłem) i wypełnimy profil. VIN zostaje w przeglądarce.</p>
+        <p className="mb-3 mt-1 text-sm text-neutral-400">Odczytamy markę, napęd, model, rocznik i silnik z tabel GM (każde pole ze źródłem) i wypełnimy profil. Dekodowanie działa w przeglądarce — VIN zostaje na tym urządzeniu.</p>
         <VinDecoder onDecoded={onVin} />
         {vinNote && <p data-testid="my-car-vin-note" role="status" className="rounded-lg border border-silver-600/40 bg-silver-600/10 p-3 text-sm text-silver-100">{vinNote}</p>}
       </div>
@@ -250,8 +251,10 @@ function RpoList({ codes, profile }: { codes: string[]; profile: VehicleProfile 
 
 /* ---------- Strona ---------- */
 export default function MyCar() {
-  const { profile, ready, clear } = useVehicleProfile();
+  const { profile, ready } = useVehicleProfile();
+  const others = useGarageOthers();
   const [editing, setEditing] = useState(false);
+  const [adding, setAdding] = useState(false);
   const [confirmForget, setConfirmForget] = useState(false);
   const [notice, setNotice] = useState('');
   const [storageOk, setStorageOk] = useState(true);
@@ -260,21 +263,76 @@ export default function MyCar() {
   if (!ready) return <p data-testid="my-car-loading" className="mt-6 text-neutral-400">Wczytywanie zapisanego auta…</p>;
 
   const storageNote = !storageOk && <p data-testid="my-car-storage-note" role="status" className="mt-4 rounded-lg border border-white/15 bg-white/5 p-3 text-sm text-neutral-200">Pamięć przeglądarki jest niedostępna (np. tryb prywatny lub zablokowane dane witryn). Auto zadziała tylko do zamknięcia tej karty.</p>;
-  const done = (persisted: boolean) => { setEditing(false); setNotice(persisted ? 'Zapisano auto w tej przeglądarce.' : 'Auto ustawione tylko w tej karcie – pamięć przeglądarki jest niedostępna.'); };
+  const done = (persisted: boolean) => { setEditing(false); setAdding(false); setNotice(persisted ? 'Zapisano auto w tej przeglądarce.' : 'Auto ustawione tylko w tej karcie – pamięć przeglądarki jest niedostępna.'); };
 
-  if (!profile || editing) {
+  if (!profile || editing || adding) {
     return (
       <>
         {storageNote}
         {!profile && <p className="mt-6 text-neutral-300">Nie masz jeszcze zapisanego auta. Wystarczy model i rocznik – VIN jest opcjonalny.</p>}
-        <CarForm initial={profile} onDone={done} onCancel={profile ? () => setEditing(false) : undefined} />
+        {adding && <p className="mt-6 text-neutral-300" data-testid="my-car-adding">Dodajesz kolejne auto. Po zapisie stanie się aktywne, a obecne zostanie w Twoim garażu.</p>}
+        <CarForm key={adding ? 'add' : 'edit'} mode={adding ? 'add' : 'edit'} initial={adding ? null : profile} onDone={done} onCancel={profile ? () => { setEditing(false); setAdding(false); } : undefined} />
+        <PrivacyNote />
       </>
     );
   }
-  return <CarView profile={profile} notice={notice} storageNote={storageNote} onEdit={() => { setNotice(''); setEditing(true); }} confirmForget={confirmForget} setConfirmForget={setConfirmForget} onForget={() => { clear(); setConfirmForget(false); setNotice('Zapomniano auto. Dane usunięto z tej przeglądarki.'); }} />;
+  const forget = () => {
+    const { ok, next } = removeActiveCar();
+    setConfirmForget(false);
+    setNotice(next ? `Usunięto auto z tej przeglądarki. Aktywne jest teraz: ${next.brand} ${next.model}${next.year ? ' ' + next.year : ''}.` : ok ? 'Zapomniano auto. Dane usunięto z tej przeglądarki.' : 'Auto wyłączono, ale nie udało się usunąć wszystkich zapisów z pamięci.');
+  };
+  return <>
+    <CarView profile={profile} notice={notice} storageNote={storageNote} onEdit={() => { setNotice(''); setEditing(true); }} confirmForget={confirmForget} setConfirmForget={setConfirmForget} onForget={forget}
+      garage={<Garage profile={profile} others={others} onAdd={() => { setNotice(''); setAdding(true); }} onNotice={setNotice} />} />
+    <PrivacyNote />
+  </>;
 }
 
-function CarView({ profile, notice, storageNote, onEdit, confirmForget, setConfirmForget, onForget }: { profile: VehicleProfile; notice: string; storageNote: React.ReactNode; onEdit: () => void; confirmForget: boolean; setConfirmForget: (v: boolean) => void; onForget: () => void }) {
+function PrivacyNote() {
+  return (
+    <p data-testid="my-car-privacy" className="mt-6 rounded-xl border border-white/10 bg-neutral-950 p-4 text-sm text-neutral-300">
+      <strong className="text-silver-200">Prywatność:</strong> auta (także VIN) zapisujemy tylko na tym urządzeniu, w pamięci tej przeglądarki — bez konta i bez wysyłania na nasz serwer. VIN dekodujemy w przeglądarce; do bazy NHTSA trafia tylko wtedy, gdy sam klikniesz pobranie danych lub historii w dekoderze. Wyczyszczenie danych witryny usuwa zapisane auta.
+    </p>
+  );
+}
+
+const carLabel = (p: VehicleProfile) => `${p.brand} ${p.model} · ${p.year || 'rocznik ?'}`;
+
+/** Garaż: kilka aut w tej przeglądarce, jedno aktywne (to ono filtruje Usterki, DIY, szukajkę i RPO). */
+function Garage({ profile, others, onAdd, onNotice }: { profile: VehicleProfile; others: VehicleProfile[]; onAdd: () => void; onNotice: (text: string) => void }) {
+  const [confirm, setConfirm] = useState<number | null>(null);
+  const full = others.length + 1 >= MAX_GARAGE_CARS;
+  return (
+    <section data-testid="my-car-garage" aria-labelledby="my-car-garage-h" className="mt-4 min-w-0 rounded-xl border border-white/10 bg-neutral-950 p-4 sm:p-5">
+      <h2 id="my-car-garage-h" className="text-lg font-semibold text-silver-300">Twój garaż ({others.length + 1})</h2>
+      <ul className="mt-3 space-y-2">
+        <li className="flex min-h-11 flex-wrap items-center gap-2 rounded-lg border border-silver-500/50 bg-silver-600/10 px-3 py-2" style={{ maxWidth: 'none' }} data-testid="my-car-garage-active">
+          <span className="min-w-0 flex-1 break-words font-semibold text-white">{carLabel(profile)}</span>
+          <span className={`${chip} border-silver-400/60 text-silver-100`}>Aktywne</span>
+        </li>
+        {others.map((car, index) => (
+          <li key={`${index}-${carLabel(car)}`} className="flex flex-wrap items-center gap-2 rounded-lg border border-white/10 px-3 py-2" style={{ maxWidth: 'none' }} data-testid="my-car-garage-item">
+            <span className="min-w-0 flex-1 break-words text-neutral-100">{carLabel(car)}</span>
+            {confirm === index
+              ? <span className="flex flex-wrap items-center gap-2" role="group" aria-label={`Potwierdź usunięcie: ${carLabel(car)}`}>
+                  <button type="button" className={`${btn} border-silver-600 bg-silver-600 text-neutral-950 hover:bg-silver-500`} onClick={() => { removeGarageCar(index); setConfirm(null); onNotice(`Usunięto z garażu: ${carLabel(car)}.`); }}>Tak, usuń</button>
+                  <button type="button" className={btn} onClick={() => setConfirm(null)}>Nie</button>
+                </span>
+              : <>
+                  <button type="button" className={btn} onClick={() => { activateCar(index); onNotice(`Aktywne auto: ${carLabel(car)}. Listy i szukajka pokazują teraz materiały dla niego.`); }} aria-label={`Ustaw jako aktywne: ${carLabel(car)}`}>Ustaw jako aktywne</button>
+                  <button type="button" className={btn} onClick={() => setConfirm(index)} aria-label={`Usuń z garażu: ${carLabel(car)}`}>Usuń</button>
+                </>}
+          </li>
+        ))}
+      </ul>
+      {full
+        ? <p className="mt-3 text-sm text-neutral-400">Garaż mieści {MAX_GARAGE_CARS} aut. Usuń jedno, żeby dodać kolejne.</p>
+        : <button type="button" onClick={onAdd} className={`${btn} mt-3`} data-testid="my-car-add">+ Dodaj kolejne auto</button>}
+    </section>
+  );
+}
+
+function CarView({ profile, notice, storageNote, onEdit, confirmForget, setConfirmForget, onForget, garage }: { profile: VehicleProfile; notice: string; storageNote: React.ReactNode; onEdit: () => void; confirmForget: boolean; setConfirmForget: (v: boolean) => void; onForget: () => void; garage?: React.ReactNode }) {
   const knowledge = useKnowledge();
   const year = profile.year;
   const vin = profile.vin ? decodeVin(profile.vin) : null;
@@ -289,16 +347,24 @@ function CarView({ profile, notice, storageNote, onEdit, confirmForget, setConfi
     <>
       {storageNote}
       {notice && <p role="status" data-testid="my-car-notice" className="mt-4 rounded-lg border border-silver-600/40 bg-silver-600/10 p-3 text-sm text-silver-100">{notice}</p>}
-      <section data-testid="my-car-summary" aria-labelledby="my-car-summary-h" className="mt-6 min-w-0 rounded-xl border border-silver-600/40 bg-neutral-950 p-4 sm:p-5">
-        <p className="text-xs uppercase tracking-wider text-silver-300">Twoje auto</p>
-        <h2 id="my-car-summary-h" className="mt-1 break-words text-2xl font-bold text-white">{profile.brand} {profile.model} · {year || 'rocznik ?'}</h2>
+      <section data-testid="my-car-summary" aria-labelledby="my-car-summary-h" className="mt-6 min-w-0 rounded-2xl border border-silver-500/50 bg-[linear-gradient(160deg,#26262b_0%,#0b0b0d_55%,#060607_100%)] p-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.14),0_10px_30px_rgba(0,0,0,0.5)] sm:p-5">
+        <div className="flex items-start gap-3">
+          <span aria-hidden="true" className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[linear-gradient(180deg,#e5e7eb,#9ca3af)] text-neutral-950 shadow-[inset_0_1px_0_rgba(255,255,255,0.6)]"><CategoryIcon name="car" className="h-7 w-7" /></span>
+          <div className="min-w-0">
+            <p className="text-xs uppercase tracking-wider text-silver-300">Twoje auto · aktywne</p>
+            <h2 id="my-car-summary-h" className="mt-1 break-words text-2xl font-bold text-white">{profile.brand} {profile.model} · {year || 'rocznik ?'}</h2>
+          </div>
+        </div>
         <dl className="mt-3 grid gap-x-6 gap-y-2 text-sm sm:grid-cols-2">
           <div className="min-w-0"><dt className="text-neutral-400">Silnik</dt><dd className="break-words text-neutral-100">{profile.engine ? `${profile.engine}${engine ? ` — ${engine.description}` : ''}` : 'nie podano'}</dd></div>
           <div className="min-w-0"><dt className="text-neutral-400">Skrzynia</dt><dd className="break-words text-neutral-100">{profile.transmission ? `${profile.transmission}${gearbox ? ` — ${gearbox.description}` : ''}` : 'nie podano'}</dd></div>
           <div className="min-w-0"><dt className="text-neutral-400">Napęd</dt><dd className="text-neutral-100">{profile.drive || 'nie podano'}</dd></div>
-          <div className="min-w-0"><dt className="text-neutral-400">VIN</dt><dd className="break-all font-mono text-neutral-100">{profile.vin ? `${profile.vin}${vin?.ok ? (vin.check.ok ? ' ✓ cyfra kontrolna OK' : ' ⚠ cyfra kontrolna się nie zgadza') : ''}` : 'nie podano'}</dd></div>
+          <div className="min-w-0"><dt className="text-neutral-400">VIN</dt><dd className="break-all font-mono text-neutral-100">{profile.vin ? `${profile.vin}${vin?.ok ? (vin.check.ok ? ' ✓ cyfra kontrolna OK' : ' · cyfra kontrolna się nie zgadza — sprawdź VIN') : ''}` : 'nie podano'}</dd></div>
         </dl>
-        <p className="mt-3 text-xs text-neutral-400">Zapisane tylko w tej przeglądarce. Dane z formularza – {CHECK}.</p>
+        <p className="mt-3 text-xs text-neutral-400">Zapisane tylko na tym urządzeniu. Dane z formularza – {CHECK}.</p>
+        <ul className="mt-3 flex flex-wrap gap-2" aria-label="Treści dopasowane do auta" data-testid="my-car-filter-links">
+          {[['/usterki', 'Usterki dla tego auta'], ['/diy', 'DIY dla tego auta'], ['/szukaj', 'Szukaj objawu'], ['/narzedzia/rpo', 'Kody RPO']].map(([href, label]) => <li key={href}><Link href={href} className={`${btn} border-silver-500/40`}>{label}</Link></li>)}
+        </ul>
         <div className="mt-4 flex flex-wrap gap-3">
           <button type="button" onClick={onEdit} className={btn}>Zmień auto</button>
           {!confirmForget
@@ -310,6 +376,7 @@ function CarView({ profile, notice, storageNote, onEdit, confirmForget, setConfi
               </span>}
         </div>
       </section>
+      {garage}
       <nav aria-label="Sekcje dla Twojego auta" className="mt-4">
         <ul className="flex flex-wrap gap-2">{nav.map(([id, label]) => <li key={id}><a href={`#${id}`} className="inline-flex min-h-11 items-center rounded-lg border border-white/15 bg-neutral-950 px-3 text-sm text-neutral-200 hover:border-silver-600 hover:text-white">{label}</a></li>)}</ul>
       </nav>
@@ -319,7 +386,7 @@ function CarView({ profile, notice, storageNote, onEdit, confirmForget, setConfi
           <>
             <div className="mt-2 flex flex-wrap gap-2 text-xs">
               <span className={`${chip} border-silver-600/50 bg-silver-600/10 text-silver-200`}>Tabela z instrukcji GM: rocznik {year}</span>
-              <span className={`${chip} border-white/15 bg-white/5 text-neutral-200`}>⚠ {CHECK.replace(/^s/, 'S')}</span>
+              <span className={`${chip} border-white/15 bg-white/5 text-neutral-200`}>{CHECK.replace(/^s/, 'S')}</span>
             </div>
             {!fuseOwnModel && <p data-testid="my-car-fuse-warning" className="mt-2 text-sm text-neutral-300">Tabele pochodzą z instrukcji C/K Pickup (1994–1998) i Suburban (1999). Twoje nadwozie może mieć inną obsadę – porównaj z pokrywą skrzynki.</p>}
             <details data-testid="my-car-fuses" className="mt-3 rounded-lg border border-white/10 p-3">

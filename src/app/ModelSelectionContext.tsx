@@ -3,6 +3,7 @@
 import { createContext, useCallback, useContext, useEffect, useState, type ReactNode } from 'react';
 import { useStoredVehicleProfile } from '@/lib/vehicle-profile-store';
 import { BODY_STYLES } from '@/lib/body-styles';
+import { ENGINES as ENGINE_SPECS } from '@/lib/verified-specs';
 
 export type Filters = {
   year?: string;
@@ -24,6 +25,14 @@ const STORAGE_KEY = 'gmt400_model_selection';
 const EMPTY: Selection = { bodyId: null, filters: {} };
 const ModelSelectionContext = createContext<ContextValue | null>(null);
 
+// Profil trzyma kod RPO silnika (np. L31), a filtr modelu — pojemność (np. 5.7). Mapowanie wg zweryfikowanej tabeli silników.
+function engineDisplacement(engine: string): string | undefined {
+  const code = engine.trim().toUpperCase();
+  const spec = ENGINE_SPECS.find(e => e.rpo.toUpperCase().split(/[^A-Z0-9]+/).includes(code));
+  const source = spec ? spec.name : engine;
+  return source.match(/\b\d\.\d\b/)?.[0];
+}
+
 function profileToSelection(profile: ReturnType<typeof useStoredVehicleProfile>): Selection | null {
   if (!profile?.model) return null;
   const model = profile.model.toLowerCase();
@@ -40,7 +49,7 @@ function profileToSelection(profile: ReturnType<typeof useStoredVehicleProfile>)
   if (!bodyId || !BODY_STYLES.some(b => b.id === bodyId)) return null;
   const filters: Filters = {};
   if (profile.year) filters.year = profile.year;
-  if (profile.engine) filters.engine = profile.engine.replace(/[^0-9.]/g, '').slice(0, 4) || undefined;
+  if (profile.engine) filters.engine = engineDisplacement(profile.engine);
   if (profile.drive) filters.drivetrain = profile.drive.toLowerCase() as '2wd' | '4wd';
   return { bodyId, filters };
 }
@@ -60,8 +69,8 @@ export function ModelSelectionProvider({ children }: { children: ReactNode }) {
         }
       }
     } catch {}
-    const fromProfile = profileToSelection(profile);
-    if (fromProfile) setSelectionState(fromProfile);
+    // Bez wyboru z sesji wybór podąża za aktywnym autem (zmiana auta w garażu, usunięcie auta).
+    setSelectionState(profileToSelection(profile) ?? EMPTY);
   }, [profile]);
 
   const setSelection = useCallback((s: Selection) => {
