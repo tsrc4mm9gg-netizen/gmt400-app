@@ -2,6 +2,7 @@ import Image from 'next/image';
 import type { ReactNode } from 'react';
 import { CategoryIcon, type CategoryIconName } from './CategoryIcon';
 import { modelLabel, yearsLabel, type TileEntry } from '../../lib/entry-tile';
+import { creditForSrc, shortCredit } from '../../lib/topic-photos';
 
 interface EntryTileProps {
   item: TileEntry;
@@ -26,6 +27,7 @@ const PILL = 'inline-block max-w-full truncate rounded-full border px-2 py-0.5 t
  */
 export default function EntryTile({ item, icon, image, excerpt, headingLevel = 3, sourced, sourcedTestId, drawing, children }: EntryTileProps) {
   const years = yearsLabel(item.Lata);
+  const credit = image ? creditForSrc(image) : undefined;
   const Heading = headingLevel === 2 ? 'h2' : 'h3';
   const href = item.id ? '/baza/' + encodeURIComponent(item.id) : null;
   const titleClass = '!m-0 !text-[15px] !leading-snug !font-semibold text-neutral-100 line-clamp-2 break-words';
@@ -61,6 +63,7 @@ export default function EntryTile({ item, icon, image, excerpt, headingLevel = 3
           {href && <span aria-hidden="true" className="self-center text-xl text-silver-400">›</span>}
         </div>
         {excerpt && <p className="mt-2 text-sm leading-snug text-neutral-400 line-clamp-2 break-words" data-testid="tile-excerpt">{excerpt}</p>}
+        {credit && <p className="mt-1 truncate text-[11px] leading-4 text-neutral-500" data-testid="tile-credit" title={`${credit.author}, ${credit.licence} — ${credit.sourceLabel}`}>{shortCredit(credit)} (zdjęcie poglądowe, Wikimedia Commons)</p>}
       </div>
       {children && <div className="relative z-10 px-3 pb-2 empty:hidden">{children}</div>}
     </div>

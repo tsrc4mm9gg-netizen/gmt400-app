@@ -38,3 +38,23 @@ Brak legalnego zdjęcia (kafelek ma srebrną ikonę): 4L60E, EVAP, bezpieczniki 
 Własne rysunki dodane 27.10.2026 (dane z podanych źródeł, bez kopiowania ilustracji): `regulacja-zaworow-v6-v8.svg`, `glowice-kolejnosc-dokrecania.svg`, `uklad-chlodzenia-obieg.svg` (Haynes rozdz. 2A, 3), `uklad-chlodzenia-6-5-td.svg`, `turbosprezarka-6-5-td-schemat.svg` (GM Service Training 6.5L TD 1991), `4l60e-tabela-zaladzen.svg`, `4l80e-tabela-zaladzen.svg` (GM Technician's Guide), `tylny-most-wycieki-schemat.svg`, `hamulce-odpowietrzanie-kolejnosc.svg`, `reflektory-ustawienie-sciana.svg` (Haynes rozdz. 8, 9, 12).
 
 Dodatkowo bez legalnego zdjęcia (srebrna ikona): oleje i wycieki, pokrywy zaworów, kolektory wydechowe, rozrząd, remont silnika, chłodnica/wentylator, klimatyzacja, 6.5 TD (turbo, wtryski, chłodzenie), skrzynie i most, hamulce, nadwozie i elektryka (reflektory, przełączniki, zestaw wskaźników, SIR). Zdjęcie 4.3 V6 pochodzi z S-10 Blazer — poglądowe.
+
+
+## Zdjęcia poglądowe tematów — miniatury kafelków DIY / usterek (`/baza/foto/`, 31.10.2026)
+
+Rejestr i reguły dopasowania: `src/lib/topic-photos.ts`. Zastępują wcześniejsze grafiki AI (`/diy-*.jpg`, `/issue-*.jpg`) na kafelkach i na stronach wpisów — te pliki nie są już używane przez kafelki ani strony `/baza/[id]`. Atrybucja jest widoczna na kafelku („Fot. autor · licencja”) i w podpisie zdjęcia na stronie wpisu (autor, licencja z linkiem, link do strony pliku na Commons). Licencje sprawdzone przez API Wikimedia Commons 31.10.2026. Pliki to zmniejszone kopie WebP (maks. 960 px, bez innych zmian). Temat bez pasującego zdjęcia ma srebrną ikonę kategorii. Pole Notion „Obraz” przyjmuje już tylko pliki z `/baza/`.
+
+Dodatkowo jako zdjęcia tematów używane są wcześniejsze pliki `skrzynia-4l80-przekroj.webp` (automaty) i `silnik-6-5-rysunek-army.webp` (6.5 TD) z tabeli powyżej.
+
+| Plik w `public/baza/` | Autor | Licencja | Źródło |
+|---|---|---|---|
+| `foto/nadwozie-tahoe-1997.webp` | Cutlass | CC0 | https://commons.wikimedia.org/wiki/File:1997_Chevrolet_Tahoe_2-door_in_Dark_Cherry_Metallic,_front_right,_2-19-2022.jpg |
+| `foto/silnik-v8-c1500-1990.webp` | Michael Barera | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:2017_Bois_d%27Arc_Spring_Car_Show_50_(1990_Chevrolet_1500_engine).jpg |
+| `foto/plyn-chlodniczy-chlodnica.webp` | EvelynGiggles | CC BY 2.0 | https://commons.wikimedia.org/wiki/File:Antifreeze_in_the_radiator.jpg |
+| `foto/opona-wskazniki-zuzycia.webp` | Brianc333a | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:BLC_2636.jpg |
+| `foto/hak-przyczepa.webp` | Tony Webster | CC BY 2.0 | https://commons.wikimedia.org/wiki/File:Camping_Trailer_on_Ball_Hitch_-_Towing_with_Safety_Chains_(52953247534).jpg |
+| `foto/wnetrze-c1500.webp` | TKOIII | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Chevrolet_C1500_Sport_Interior.jpg |
+| `foto/filtr-oleju.webp` | Dvortygirl | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Engine_oil_filter.JPG |
+| `foto/zawieszenie-przod-ifs-suburban-1998.webp` | simonov | CC BY-SA 2.0 | https://commons.wikimedia.org/wiki/File:New_front_axles_assembly-_driver%27s_side.jpg |
+| `foto/hamulce-przod-suburban-1998.webp` | simonov | CC BY-SA 2.0 | https://commons.wikimedia.org/wiki/File:New_front_brakes_-_49020391443.jpg |
+| `foto/swiece-zaplonowe.webp` | Myke2020 | Public domain | https://commons.wikimedia.org/wiki/File:Spark_plugs_old_and_replacement_7058.JPG |

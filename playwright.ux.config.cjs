@@ -13,7 +13,7 @@ const all = [
 const only = (process.env.PW_PROJECTS || '').split(',').filter(Boolean);
 module.exports = defineConfig({
   testDir: './tests',
-  testMatch: ['ux-key-paths.spec.cjs', 'my-car-rpo.spec.cjs', 'vin-full.spec.cjs', 'issues-ux.spec.cjs', 'guides.spec.cjs', 'home-v2.spec.cjs', 'ssr-lists.spec.cjs', 'diagnoza.spec.cjs', 'etap2.spec.cjs', 'diy-illustrations.spec.cjs', 'rpo-scan.spec.cjs', 'punkt4.spec.cjs', 'diy-brief.spec.cjs', 'vin-requests.spec.cjs'],
+  testMatch: ['ux-key-paths.spec.cjs', 'my-car-rpo.spec.cjs', 'vin-full.spec.cjs', 'issues-ux.spec.cjs', 'guides.spec.cjs', 'home-v2.spec.cjs', 'ssr-lists.spec.cjs', 'diagnoza.spec.cjs', 'etap2.spec.cjs', 'diy-illustrations.spec.cjs', 'rpo-scan.spec.cjs', 'punkt4.spec.cjs', 'diy-brief.spec.cjs', 'vin-requests.spec.cjs', 'app-shell.spec.cjs'],
   timeout: 60000, expect: { timeout: 10000 }, workers: 2, retries: 0,
   use: { trace: 'retain-on-failure', screenshot: 'only-on-failure' },
   projects: only.length ? all.filter(project => only.some(prefix => project.name.startsWith(prefix))) : all,

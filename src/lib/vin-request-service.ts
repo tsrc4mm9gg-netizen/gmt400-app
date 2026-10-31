@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { createNotionStore, storeConfig, type VinRequestStore } from './vin-request-store.mjs';
 import { passwordMatches, verifySession } from './vin-request.mjs';
+import { decodeVin } from './vin-decode.mjs';
 import { fetchAuctionData, needsRefresh, type AuctionData } from './apibara.mjs';
 
 export const ADMIN_COOKIE = 'gmt400_admin';
@@ -28,12 +29,36 @@ export function isAdmin(cookieValue: string | undefined) { return adminConfigure
 export function checkPassword(given: unknown) { return adminConfigured() && passwordMatches(given, process.env.ADMIN_PASSWORD); }
 export const ipSalt = () => process.env.ADMIN_PASSWORD || 'gmt400';
 
-/** Powiadomienie admina przez webhook (VIN_REQUEST_WEBHOOK_URL: Slack/Discord/ntfy…); brak zmiennej = brak powiadomienia. */
-export async function notifyAdmin(id: string, vin: string) {
+/** Treść powiadomienia bez pełnego VIN: tylko ostatnie 6 znaków i rocznik (z 10. znaku VIN), żeby VIN nie trafiał do usług zewnętrznych. */
+export function adminNotification(id: string, vin: string) {
+  const v = String(vin || '').toUpperCase();
+  const tail = v.slice(-6);
+  const decoded = decodeVin(v) as { ok: boolean; year?: number | null };
+  const year = decoded.ok && decoded.year ? String(decoded.year) : 'rocznik nieznany';
+  return {
+    title: 'GMT400: nowa prośba Historia VIN',
+    body: `Prośba ${id}: VIN …${tail}, ${year}. Zatwierdź lub odrzuć w panelu admina.`,
+    click: ADMIN_PANEL_URL,
+  };
+}
+export const ADMIN_PANEL_URL = 'https://www.gmt400.pl/admin/historia-vin';
+
+/** Zapytanie powiadomienia: ntfy (https://ntfy.sh/<topic> lub własny serwer ntfy) — zwykły tekst + nagłówki; inne webhooki — JSON (Slack/Discord). */
+export function buildAdminNotificationRequest(url: string, id: string, vin: string): RequestInit {
+  const n = adminNotification(id, vin);
+  if (/^https:\/\/(?:[\w-]+\.)*ntfy\.sh\//i.test(url) || /\/ntfy\//i.test(url)) {
+    // Nagłówki HTTP muszą być ASCII — tytuł bez ogonków; treść (UTF-8) z ogonkami.
+    return { method: 'POST', headers: { 'Content-Type': 'text/plain; charset=utf-8', Title: 'GMT400: nowa prosba Historia VIN', Tags: 'oncoming_automobile,mag', Priority: 'default', Click: n.click }, body: n.body };
+  }
+  const message = `${n.title}. ${n.body} ${n.click}`;
+  return { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ text: message, content: message }) };
+}
+
+/** Powiadomienie admina przez webhook (VIN_REQUEST_WEBHOOK_URL: ntfy/Slack/Discord); brak zmiennej = brak powiadomienia. */
+export async function notifyAdmin(id: string, vin: string, fetchImpl: typeof fetch = fetch) {
   const url = process.env.VIN_REQUEST_WEBHOOK_URL;
   if (!url || !/^https:\/\//i.test(url)) return;
-  const message = `Nowa prośba o historię VIN ${id} (${vin}). Zatwierdź lub odrzuć: https://www.gmt400.pl/admin/historia-vin`;
-  try { await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ text: message, content: message }), signal: AbortSignal.timeout(4000) }); } catch { /* powiadomienie jest dodatkiem — prośba i tak jest zapisana */ }
+  try { await fetchImpl(url, { ...buildAdminNotificationRequest(url, id, vin), signal: AbortSignal.timeout(4000) }); } catch { /* powiadomienie jest dodatkiem — prośba i tak jest zapisana */ }
 }
 
 /**

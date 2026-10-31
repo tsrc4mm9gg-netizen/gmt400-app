@@ -16,6 +16,8 @@ import Breadcrumbs, { type Crumb } from '../../ui/Breadcrumbs';
 import BackLink from '../../ui/BackLink';
 import { SCHEMATICS } from '../../../lib/schematics';
 import { getEntryMedia } from '../../../lib/entry-media';
+import { topicPhotoFor } from '../../../lib/topic-photos';
+import SaveOfflineButton from '../../pwa/SaveOfflineButton';
 import EntryFigure from './EntryFigure';
 import EntryHeaderMeta from './EntryHeaderMeta';
 import DiyBrief from './DiyBrief';
@@ -67,23 +69,6 @@ const readEntry = cache(async (id: string) => {
     applicability: { brand: values(p.Marka), model: values(p.Model), years: values(p.Lata), engine: values(p.Silnik), drive: values(p['Napęd']), transmission: values(p.Skrzynia) },
   };
 });
-function localDiagram(title: string): string | null {
-  const value = title.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/ł/g, 'l');
-  const mappings: [string[], string][] = [
-    [['4l60e','atf','miska'], '/diy-4l60e-pan-pl.jpg'],
-    [['kolektor','intake','uszczelk'], '/diy-intake-pl.jpg'],
-    [['np231','rozdzielcz','4x4'], '/diy-np231-pl.jpg'],
-    [['hamulc','przewod'], '/diy-brakes-pl.jpg'],
-    [['chlodz','termostat','pompa wody'], '/diy-cooling-sys.jpg'],
-    [['paliw','pompa paliwa'], '/diy-fuel.jpg'],
-    [['masa','punkt mas','uziemien'], '/diy-grounds.jpg'],
-    [['obd','kod'], '/diy-obd.jpg'],
-    [['czujnik','maf','sonda','tps','iac'], '/diy-sensors.jpg'],
-    [['pompa paliwa','fuel pump'], '/diy-fuelpump.jpg'],
-    [['rdza','korozj','rama'], '/issue-rust.jpg'],
-  ];
-  return mappings.find(([terms]) => terms.some(term => value.includes(term)))?.[1] || null;
-}
 // Powiązane schematy SVG (/schematy#id) po słowach kluczowych z tytułu — tylko dodatkowy link, grafiki AI bez zmian.
 function relatedSchematics(title: string, forced?: string[]): { id: string; title: string }[] {
   if (forced) return forced.map(id => SCHEMATICS.find(s => s.id === id)).filter((s): s is NonNullable<typeof s> => Boolean(s)).map(s => ({ id: s.id, title: s.title }));
@@ -147,7 +132,8 @@ export default async function KnowledgeEntry({ params }: Props) {
   const media = getEntryMedia(entry.id);
   const photos = (media?.figures || []).filter(f => f.credit);
   const drawings = (media?.figures || []).filter(f => !f.credit);
-  const diagram = !media && entry.Typ === 'Porada' && !hasImage(blocks) ? localDiagram(entry.Nazwa) : null;
+  // Wpis bez własnej grafiki: zdjęcie poglądowe tematu z biblioteki legalnych zdjęć (Commons, z atrybucją) albo nic.
+  const topicPhoto = !media && (entry.Typ === 'Porada' || entry.Typ === 'Usterka') && !hasImage(blocks) ? topicPhotoFor(entry.Nazwa) : null;
   const materialLead = lead(entry);
   const rawCode = obdCode(entry);
   const code = rawCode && findObdCode(rawCode) ? rawCode : null;
@@ -156,6 +142,7 @@ export default async function KnowledgeEntry({ params }: Props) {
     <Breadcrumbs items={[...(SECTION_OF[entry.Typ] ? [SECTION_OF[entry.Typ]] : [{ href: '/baza', label: 'Baza wiedzy' }]), { label: entry.Nazwa }]} />
     <div className="mt-1 flex flex-wrap items-center gap-x-3 text-sm">
       <BackLink fallback="/szukaj" label="← Wróć" className="inline-flex min-h-11 items-center text-silver-400 underline" />
+      {(entry.Typ === 'Porada' || entry.Typ === 'Usterka') && <span className="ml-auto"><SaveOfflineButton title={entry.Nazwa} /></span>}
     </div>
     <RecentTracker id={entry.id} title={entry.Nazwa} href={`/baza/${entry.id}`} type={recentTypeLabel(entry.Typ)} />
     <article className="mt-6 min-w-0 space-y-6 [overflow-wrap:anywhere]">
@@ -179,7 +166,7 @@ export default async function KnowledgeEntry({ params }: Props) {
       {contentError && <p role="alert" className="rounded border border-danger-600/40 p-3">Nie udało się pobrać dodatkowej zawartości strony Notion. Powyższe pola są dostępne, ale materiał może być niekompletny. Odśwież stronę, aby ponowić pobieranie.</p>}
       {blocks.length > 0 && <section aria-label="Zawartość strony Notion"><h2 className="mb-3 text-xl">Treść materiału i ilustracje</h2><NotionContent blocks={blocks} /></section>}
       {drawings.length > 0 && <section aria-label="Rysunki do tego tematu" className="space-y-3"><h2 className="text-xl">Rysunek do tego tematu</h2>{drawings.map(f => <EntryFigure key={f.src} figure={f} />)}</section>}
-      {diagram && <figure><a href={diagram} target="_blank" rel="noopener noreferrer"><img src={diagram} alt="Grafika pomocnicza z biblioteki GMT400" loading="lazy" className="h-auto w-full rounded object-contain" /></a><figcaption className="mt-2 text-xs text-neutral-400">Grafika pomocnicza z biblioteki aplikacji, nie ilustracja przypisana w Notion do tego wpisu. Sprawdź jej zgodność z konkretnym pojazdem i procedurą.</figcaption></figure>}
+      {topicPhoto && <section aria-label="Zdjęcie poglądowe tematu"><EntryFigure figure={topicPhoto} /></section>}
       {(() => { const sch = relatedSchematics(entry.Nazwa, media?.schematics); return sch.length > 0 && <aside aria-label="Powiązane schematy" className="rounded-xl border border-silver-600/40 bg-neutral-950 p-4"><h2 className="text-lg font-semibold text-white">Schemat do tego tematu</h2><ul className="mt-2 space-y-2">{sch.map(s => <li key={s.id}><a href={`/schematy#${s.id}`} className="flex min-h-11 items-center justify-between gap-3 rounded-lg border border-white/10 px-3 py-2 text-neutral-100 hover:border-silver-600">{s.title}<span aria-hidden="true" className="text-silver-400">→</span></a></li>)}</ul><p className="mt-2 text-xs text-neutral-400">Schematy mają podany model i lata — sprawdź w swoim aucie / manualu.</p></aside>; })()}
       {!contentError && !entry.Opis && !entry.Objawy && !entry.Rozwiązanie && !blocks.length && <p>Ten wpis nie zawiera jeszcze szczegółowej treści.</p>}
     </article>

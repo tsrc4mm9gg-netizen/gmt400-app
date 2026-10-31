@@ -11,6 +11,7 @@ import HomeProblems from './HomeProblems';
 import { useModelSelection } from './ModelSelectionContext';
 import { findBody } from '../lib/body-styles';
 import RecentlyViewed from './RecentlyViewed';
+import SymptomSearch from './SymptomSearch';
 
 export default function HomeHero() {
   const { bodyId, filters, clearSelection, setSelection } = useModelSelection();
@@ -41,6 +42,7 @@ export default function HomeHero() {
         </div>
       )}
       <HomeQuickLinks />
+      <SymptomSearch className="pb-1" />
       <RecentlyViewed />
       <div className="pt-4"><HomeStart /></div>
       <OwnerEssentials />

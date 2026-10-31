@@ -9,7 +9,7 @@ const TIRES = '406d7bf1-c139-81bf-9d1c-ff68bf51b9d5';   // Usterka ze źródłem
 test.describe('DIY: kafelek z obrazkiem z danych', () => {
   const ID = n => `00000000-0000-0000-0000-00000000020${n}`;
   const DATA = { complete: true, results: [
-    { id: ID(1), Nazwa: 'Wpis z obrazkiem w danych', Typ: 'Porada', Model: 'Wszystkie', Modele: ['Wszystkie'], Obraz: '/diy-brakes-pl.jpg', Opis: 'Krótki opis.' },
+    { id: ID(1), Nazwa: 'Wpis z obrazkiem w danych', Typ: 'Porada', Model: 'Wszystkie', Modele: ['Wszystkie'], Obraz: '/baza/foto/filtr-oleju.webp', Opis: 'Krótki opis.' },
     { id: ID(2), Nazwa: 'Wpis ze zdalnym obrazkiem', Typ: 'Porada', Model: 'Wszystkie', Modele: ['Wszystkie'], Obraz: 'https://obcy.example/a.jpg', Opis: 'Krótki opis.' },
     { id: ID(3), Nazwa: 'Wpis bez obrazka', Typ: 'Porada', Model: 'Wszystkie', Modele: ['Wszystkie'], Opis: 'Krótki opis.' },
   ] };
@@ -18,7 +18,7 @@ test.describe('DIY: kafelek z obrazkiem z danych', () => {
     await page.goto(BASE + '/diy');
     const thumb = n => page.getByTestId('entry-tile').filter({ hasText: n }).getByTestId('tile-thumb');
     await expect(thumb('Wpis z obrazkiem w danych').locator('img')).toHaveCount(1);
-    await expect(thumb('Wpis z obrazkiem w danych').locator('img')).toHaveAttribute('src', /diy-brakes-pl\.jpg/);
+    await expect(thumb('Wpis z obrazkiem w danych').locator('img')).toHaveAttribute('src', /filtr-oleju\.webp/);
     await expect(thumb('Wpis ze zdalnym obrazkiem')).toBeVisible();
     await expect(thumb('Wpis ze zdalnym obrazkiem').locator('img')).toHaveCount(0);
     await expect(thumb('Wpis bez obrazka').locator('img')).toHaveCount(0);

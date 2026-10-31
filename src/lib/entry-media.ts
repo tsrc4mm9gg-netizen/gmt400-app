@@ -36,7 +36,7 @@ export interface EntryMedia {
 
 const COMMONS = (file: string) => `https://commons.wikimedia.org/wiki/File:${file}`;
 
-const ARMY_DRAWING: MediaFigure = {
+export const ARMY_DRAWING: MediaFigure = {
   src: '/baza/silnik-6-5-rysunek-army.webp',
   alt: 'Czarno-biały rysunek techniczny silnika Chevrolet 6.2/6.5 L V8 diesel z osprzętem',
   width: 502,
@@ -50,7 +50,7 @@ const ARMY_DRAWING: MediaFigure = {
   },
 };
 
-const CUTAWAY_4L80: MediaFigure = {
+export const CUTAWAY_4L80: MediaFigure = {
   src: '/baza/skrzynia-4l80-przekroj.webp',
   alt: 'Skrzynia biegów Hydra-Matic 4L80 w przekroju — eksponat muzealny',
   width: 1280,

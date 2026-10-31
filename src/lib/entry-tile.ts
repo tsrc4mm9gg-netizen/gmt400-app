@@ -1,4 +1,5 @@
 /** Wspólna logika kafelków list (DIY, usterki, kody, poradniki): miniatura, fragment opisu, tagi. */
+import { topicPhotoFor } from './topic-photos';
 
 export interface TileEntry {
   id?: string;
@@ -13,20 +14,12 @@ export interface TileEntry {
   Obraz?: string;
 }
 
+/**
+ * Zdjęcie poglądowe miniatury wg tematu tytułu — tylko legalne zdjęcia z biblioteki /baza (Commons CC/PD, z atrybucją,
+ * patrz topic-photos.ts). Brak dopasowania = null, wtedy kafelek pokazuje ikonę kategorii (bez grafik AI).
+ */
 export function getTipImage(nazwa: string): string | null {
-  const n = nazwa.toLowerCase();
-  if (n.includes('4l60e') || n.includes('skrzyni') || n.includes('atf') || n.includes('miska')) return '/diy-4l60e-pan-pl.jpg';
-  if (n.includes('kolektor') || n.includes('uszczelk') || n.includes('intake')) return '/diy-intake-pl.jpg';
-  if (n.includes('np231') || n.includes('4x4') || n.includes('rozdzielcz')) return '/diy-np231-pl.jpg';
-  if (n.includes('hamulc') || n.includes('przewod')) return '/diy-brakes-pl.jpg';
-  if (n.includes('chłodz') || n.includes('termostat') || n.includes('pompa wody')) return '/diy-cooling-sys.jpg';
-  if (n.includes('paliw') || n.includes('pompa paliwa') || n.includes('filtr paliwa')) return '/diy-fuel.jpg';
-  if (n.includes('masa') || n.includes('punkt') || n.includes('uziemien')) return '/diy-grounds.jpg';
-  if (n.includes('obd') || n.includes('kod') || n.includes('diagnost')) return '/diy-obd.jpg';
-  if (n.includes('czujnik') || n.includes('maf') || n.includes('sonda') || n.includes('tps') || n.includes('iac')) return '/diy-sensors.jpg';
-  if (n.includes('pompa paliwa') || n.includes('fuel pump')) return '/diy-fuelpump.jpg';
-  if (n.includes('rdza') || n.includes('korozj') || n.includes('rama')) return '/issue-rust.jpg';
-  return null;
+  return topicPhotoFor(nazwa)?.src ?? null;
 }
 
 /** Nazwy ikon liniowych (podzbiór CategoryIconName) używanych jako zastępnik miniatury DIY. */
@@ -53,11 +46,8 @@ export function getTipIcon(nazwa: string): TileIconName {
   return 'diy';
 }
 
-/** Zdjęcie wpisu usterki (gdy jest) — w przeciwnym razie ilustracja z mapy tytułów. */
+/** Miniatura usterki — ta sama biblioteka zdjęć tematów co DIY (brak dopasowania = ikona). */
 export function getIssueImage(nazwa: string): string | null {
-  const n = nazwa.toLowerCase();
-  if (n.includes('kolektor')) return '/issue-intake.jpg';
-  if (n.includes('4l60')) return '/issue-4l60e.jpg';
   return getTipImage(nazwa);
 }
 

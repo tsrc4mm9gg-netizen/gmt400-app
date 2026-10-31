@@ -58,7 +58,7 @@ export default function SiteHeader() {
   return (
     <header data-testid="site-header" className="contents lg:sticky lg:top-0 lg:z-40 lg:block lg:border-b lg:border-white/10 lg:bg-black/95 lg:backdrop-blur-md">
       <div className="contents lg:mx-auto lg:flex lg:max-w-7xl lg:flex-nowrap lg:items-center lg:justify-between lg:gap-x-3 lg:px-4 lg:py-3">
-        {/* Mobile/tablet: górny pasek (logo, auto, szukaj) jest „przyklejony”, a rząd z menu przewija się razem ze stroną. Od lg całość to jeden przyklejony pasek. */}
+        {/* Na telefonie (< md) „Strona główna” i „Mój samochód” są w dolnym pasku, więc nie dublujemy ich w rzędzie menu. Mobile/tablet: górny pasek (logo, auto, szukaj) jest „przyklejony”, a rząd z menu przewija się razem ze stroną. Od lg całość to jeden przyklejony pasek. */}
         <div data-testid="site-header-bar" className="sticky top-0 z-40 flex items-center justify-between gap-x-2 border-b border-white/10 bg-black/95 px-4 py-1 text-white backdrop-blur-md lg:contents">
           <Link
             href="/"
@@ -76,7 +76,7 @@ export default function SiteHeader() {
               const active = isActive(pathname, href);
 
               return (
-                <li key={href} className={href === '/' ? 'lg:hidden 2xl:block' : undefined}>
+                <li key={href} className={href === '/' ? 'hidden md:block lg:hidden 2xl:block' : href === '/moj-samochod' ? 'hidden md:block' : undefined}>
                   <Link
                     href={href}
                     aria-current={active ? 'page' : undefined}

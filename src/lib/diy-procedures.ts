@@ -27,8 +27,7 @@ export const DIY_PROCEDURES: DiyProcedure[] = [
     control: 'Poziom na bagnecie po kilku minutach, brak wycieków przy korku i filtrze.',
     source: 'https://assets.gm.com/manuals/chevrolet/1995_chevrolet_1500_owners.pdf',
     sourceTitle: 'OM95 — 1995 Chevrolet C/K 1500 Owners Manual',
-    note: 'Sprawdź w swoim aucie / manualu — GMT400 ma wiele wariantów (rocznik, GVWR, silnik, skrzynia, RPO).',
-    image: '/diy-oil.jpg'
+    note: 'Sprawdź w swoim aucie / manualu — GMT400 ma wiele wariantów (rocznik, GVWR, silnik, skrzynia, RPO).'
   },
   {
     id: 'coolant-change',
@@ -42,8 +41,7 @@ export const DIY_PROCEDURES: DiyProcedure[] = [
     control: 'Poziom na zimnym silniku, brak wycieków, brak powietrza w układzie.',
     source: 'https://www.chevrolet.com/ownercenter/content/dam/gmownercenter/gmna/dynamic/manuals/1999/chevrolet/suburban/1999_chevrolet_suburban_owners.pdf',
     sourceTitle: 'OM99 — 1999 Chevrolet Suburban Owners Manual',
-    note: 'Nie mieszaj technologii płynów. Sprawdź w swoim aucie / manualu — GMT400 ma wiele wariantów (rocznik, GVWR, silnik, skrzynia, RPO).',
-    image: '/diy-cooling-pl.jpg'
+    note: 'Nie mieszaj technologii płynów. Sprawdź w swoim aucie / manualu — GMT400 ma wiele wariantów (rocznik, GVWR, silnik, skrzynia, RPO).'
   },
   {
     id: 'atf-4l60e-change',
@@ -57,8 +55,7 @@ export const DIY_PROCEDURES: DiyProcedure[] = [
     control: 'Poziom na bagnecie po rozgrzaniu, brak wycieków przy misce i filtrze.',
     source: 'https://assets.gm.com/manuals/chevrolet/1995_chevrolet_1500_owners.pdf',
     sourceTitle: 'OM95 — 1995 Chevrolet C/K 1500 Owners Manual',
-    note: 'Sprawdź w swoim aucie / manualu — GMT400 ma wiele wariantów (rocznik, GVWR, silnik, skrzynia, RPO).',
-    image: '/diy-4l60e-pan-pl.jpg'
+    note: 'Sprawdź w swoim aucie / manualu — GMT400 ma wiele wariantów (rocznik, GVWR, silnik, skrzynia, RPO).'
   },
   {
     id: 'transfer-case-fluid-change',
@@ -72,8 +69,7 @@ export const DIY_PROCEDURES: DiyProcedure[] = [
     control: 'Poziom na korku wlewowym, brak wycieków.',
     source: 'https://www.chevrolet.com/ownercenter/content/dam/gmownercenter/gmna/dynamic/manuals/1999/chevrolet/suburban/1999_chevrolet_suburban_owners.pdf',
     sourceTitle: 'OM99 — 1999 Chevrolet Suburban Owners Manual',
-    note: 'Sprawdź w swoim aucie / manualu — GMT400 ma wiele wariantów (rocznik, GVWR, silnik, skrzynia, RPO).',
-    image: '/diy-np231-pl.jpg'
+    note: 'Sprawdź w swoim aucie / manualu — GMT400 ma wiele wariantów (rocznik, GVWR, silnik, skrzynia, RPO).'
   },
   {
     id: 'differential-fluid-change',
@@ -87,8 +83,7 @@ export const DIY_PROCEDURES: DiyProcedure[] = [
     control: 'Poziom na korku wlewowym, brak wycieków.',
     source: 'https://assets.gm.com/manuals/chevrolet/1995_chevrolet_1500_owners.pdf',
     sourceTitle: 'OM95 — 1995 Chevrolet C/K 1500 Owners Manual',
-    note: 'Sprawdź w swoim aucie / manualu — GMT400 ma wiele wariantów (rocznik, GVWR, silnik, skrzynia, RPO).',
-    image: '/diy-diff.jpg'
+    note: 'Sprawdź w swoim aucie / manualu — GMT400 ma wiele wariantów (rocznik, GVWR, silnik, skrzynia, RPO).'
   },
   {
     id: 'brake-pads-change',
@@ -102,8 +97,7 @@ export const DIY_PROCEDURES: DiyProcedure[] = [
     control: 'Pedal twardy, brak wycieków, równomierne hamowanie.',
     source: 'https://assets.gm.com/manuals/chevrolet/1995_chevrolet_1500_owners.pdf',
     sourceTitle: 'OM95 — 1995 Chevrolet C/K 1500 Owners Manual',
-    note: 'Sprawdź w swoim aucie / manualu — GMT400 ma wiele wariantów (rocznik, GVWR, silnik, skrzynia, RPO).',
-    image: '/diy-brakes-pl.jpg'
+    note: 'Sprawdź w swoim aucie / manualu — GMT400 ma wiele wariantów (rocznik, GVWR, silnik, skrzynia, RPO).'
   }
 ];
 

@@ -67,6 +67,6 @@ test('bloki Notion: nagłówek „Narzędzia” + lista punktowana', () => {
 });
 
 test('obrazek miniatury z danych: tylko lokalna ścieżka graficzna', () => {
-  assert.equal(localTileImage('/diy/olej.jpg'), '/diy/olej.jpg');
-  for (const bad of ['https://x.pl/a.jpg', '//x.pl/a.jpg', '/a/../b.jpg', '/a.svg', 'a.jpg', '', null, 5]) assert.equal(localTileImage(bad), null);
+  assert.equal(localTileImage('/baza/foto/filtr-oleju.webp'), '/baza/foto/filtr-oleju.webp');
+  for (const bad of ['/diy-brakes-pl.jpg', '/diy/olej.jpg', '/baza//x.jpg', 'https://x.pl/a.jpg', '//x.pl/a.jpg', '/a/../b.jpg', '/a.svg', 'a.jpg', '', null, 5]) assert.equal(localTileImage(bad), null);
 });

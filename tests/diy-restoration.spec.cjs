@@ -19,7 +19,7 @@ test('DIY shows compact tiles (graphic + excerpt) and opens the full instruction
   await expect(tile).toHaveCount(1);
   // w liście jest tylko zwarty fragment, a nie pełna instrukcja
   await expect(tile.getByTestId('tile-excerpt')).toContainText('TEST OPIS');
-  const image = page.locator('#content img[src*="diy-4l60e-pan"]').first();
+  const image = page.locator('#content img[src*="skrzynia-4l80"]').first();
   await image.scrollIntoViewIfNeeded();
   await expect(image).toBeVisible();
   await expect.poll(() => image.evaluate(node => node.complete && node.naturalWidth > 0)).toBe(true);

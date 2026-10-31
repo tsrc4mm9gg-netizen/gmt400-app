@@ -7,6 +7,9 @@ import ToolsLauncher from "./ToolsLauncher";
 import SiteHeader from "./site-header";
 import SiteFooter from "./site-footer";
 import { ModelSelectionProvider } from "./ModelSelectionContext";
+import MobileTabBar from "./MobileTabBar";
+import ServiceWorkerRegister from "./pwa/ServiceWorkerRegister";
+import IosInstallHint from "./pwa/IosInstallHint";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -26,6 +29,11 @@ export const metadata: Metadata = {
   },
   description: "Baza wiedzy dla właścicieli Chevrolet C/K, Tahoe, Suburban i GMC (1988–2000)",
   manifest: "/manifest.json",
+  applicationName: "GMT400",
+  appleWebApp: { capable: true, title: "GMT400", statusBarStyle: "black-translucent" },
+  formatDetection: { telephone: false },
+  // Next.js generuje „mobile-web-app-capable”; starsze iOS czytają wersję z prefiksem apple-.
+  other: { "apple-mobile-web-app-capable": "yes" },
   openGraph: {
     type: "website",
     locale: "pl_PL",
@@ -42,7 +50,10 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#000000",
+  themeColor: "#0a0a0b",
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
 };
 
 export default function RootLayout({
@@ -69,6 +80,9 @@ export default function RootLayout({
           <SiteFooter />
           <ToolsLauncher />
           <BackToTop />
+          <MobileTabBar />
+          <IosInstallHint />
+          <ServiceWorkerRegister />
         </ModelSelectionProvider>
       </body>
     </html>

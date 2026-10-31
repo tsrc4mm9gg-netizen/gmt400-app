@@ -5,6 +5,7 @@ import { buildKnowledgeIndex, getKnowledgeEntries, searchKnowledge, type Knowled
 import { prepareQuery } from '../../lib/search-aliases.mjs';
 import RandomCodeLink from './random-code-link';
 import Breadcrumbs from '../ui/Breadcrumbs';
+import SymptomSearch from '../SymptomSearch';
 import ModelThumb from '../ModelThumb';
 import { bodyForEntry } from '../../lib/model-images';
 
@@ -83,6 +84,8 @@ export default function SearchPage({ query }: { query: string }) {
           <RandomCodeLink />
         </div>
       </form>
+
+      <SymptomSearch entries={status === 'ready' ? items : undefined} padded={false} className="mb-6 rounded-xl border border-white/10 bg-neutral-900/40 p-4" />
 
       <section aria-labelledby="search-examples-title" className="mb-6 rounded-xl border border-white/10 bg-neutral-900 p-4">
         <h2 id="search-examples-title" className="text-lg font-semibold text-silver-400">Popularne hasła</h2>

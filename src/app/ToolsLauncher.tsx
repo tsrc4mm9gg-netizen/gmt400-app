@@ -16,7 +16,7 @@ export default function ToolsLauncher() {
       style={{
         position: 'fixed',
         right: 16,
-        bottom: 'calc(16px + env(safe-area-inset-bottom, 0px))',
+        bottom: 'calc(16px + var(--tabbar-h, 0px) + env(safe-area-inset-bottom, 0px))',
         zIndex: 90,
         display: 'inline-flex',
         alignItems: 'center',

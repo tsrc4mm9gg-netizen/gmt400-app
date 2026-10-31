@@ -1,6 +1,7 @@
-// Obrazek miniatury z danych wpisu (kolumna Notion „Obraz”): tylko lokalny plik aplikacji, bez zdalnych adresów i bez „..”.
+// Obrazek miniatury z danych wpisu (kolumna Notion „Obraz”): tylko lokalny plik z biblioteki legalnych zdjęć /baza/
+// (Commons CC/PD z atrybucją albo własne rysunki), bez zdalnych adresów, bez „..” i bez starych grafik AI z katalogu głównego.
 export function localTileImage(src) {
   if (typeof src !== 'string') return null;
   const s = src.trim();
-  return /^\/(?!\/)[\w\-./]+\.(?:jpe?g|png|webp|avif)$/i.test(s) && !s.includes('..') ? s : null;
+  return /^\/baza\/[\w\-./]+\.(?:jpe?g|png|webp|avif)$/i.test(s) && !s.includes('..') && !s.includes('//') ? s : null;
 }
