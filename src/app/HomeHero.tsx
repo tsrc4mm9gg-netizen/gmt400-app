@@ -6,6 +6,7 @@ import HomeSearch from './HomeSearch';
 import HomeStart from './HomeStart';
 import HomeIntro from './HomeIntro';
 import HomeQuickLinks from './HomeQuickLinks';
+import HomeBuyerGuide from './HomeBuyerGuide';
 import OwnerEssentials from './OwnerEssentials';
 import HomeProblems from './HomeProblems';
 import { useModelSelection } from './ModelSelectionContext';
@@ -42,6 +43,7 @@ export default function HomeHero() {
         </div>
       )}
       <HomeQuickLinks />
+      <HomeBuyerGuide />
       <SymptomSearch className="pb-1" />
       <RecentlyViewed />
       <div className="pt-4"><HomeStart /></div>

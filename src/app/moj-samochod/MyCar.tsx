@@ -363,7 +363,7 @@ function CarView({ profile, notice, storageNote, onEdit, confirmForget, setConfi
         </dl>
         <p className="mt-3 text-xs text-neutral-400">Zapisane tylko na tym urządzeniu. Dane z formularza – {CHECK}.</p>
         <ul className="mt-3 flex flex-wrap gap-2" aria-label="Treści dopasowane do auta" data-testid="my-car-filter-links">
-          {[['/usterki', 'Usterki dla tego auta'], ['/diy', 'DIY dla tego auta'], ['/szukaj', 'Szukaj objawu'], ['/narzedzia/rpo', 'Kody RPO']].map(([href, label]) => <li key={href}><Link href={href} className={`${btn} border-silver-500/40`}>{label}</Link></li>)}
+          {[['/przeglady', 'Harmonogram przeglądów'], ['/usterki', 'Usterki dla tego auta'], ['/diy', 'DIY dla tego auta'], ['/szukaj', 'Szukaj objawu'], ['/narzedzia/rpo', 'Kody RPO']].map(([href, label]) => <li key={href}><Link href={href} className={`${btn} border-silver-500/40`}>{label}</Link></li>)}
         </ul>
         <div className="mt-4 flex flex-wrap gap-3">
           <button type="button" onClick={onEdit} className={btn}>Zmień auto</button>
