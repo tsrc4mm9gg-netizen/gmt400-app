@@ -71,7 +71,7 @@ jobs:
             const body = 'Read-only observations, not a blanket PASS. A null deployment SHA means the deployed version could not be verified.\n\n```json\n' + JSON.stringify(report, null, 2) + '\n```';
             const issue = await github.rest.issues.create({ ...repo, title: `Production and CI audit ${context.runId}`, body });
             await core.summary.addHeading('Read-only production audit').addRaw('Report: ' + issue.data.html_url + '\nNo deployment or DNS changes were made. Read the report; workflow success alone is not proof of healthy production.').write();
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         if: always()
         with:
           name: production-audit-${{ github.run_id }}-${{ github.run_attempt }}

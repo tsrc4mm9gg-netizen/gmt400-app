@@ -51,7 +51,7 @@ jobs:
           fs.writeFileSync('/tmp/release-preflight.json', JSON.stringify(report,null,2));
           fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, '## Release preflight\nCommit: '+report.codeSha+'\n\nResult: '+(passed?'PASS (limited scope)':'FAIL')+'\n\nNo deployment performed. Browser UI and live production verification remain separate.\n');
           NODE
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         if: always()
         with:
           name: release-preflight-${{ github.sha }}-${{ github.run_attempt }}

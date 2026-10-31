@@ -44,7 +44,7 @@ jobs:
         run: |
           set -o pipefail
           npx playwright test tests/navigation.spec.cjs tests/navigation-polish.spec.cjs tests/new-tools.spec.cjs --workers=1 --reporter=list 2>&1 | tee /tmp/tools-tests.log
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         if: always()
         with:
           name: tools-regression-${{ github.run_id }}-${{ github.run_attempt }}
