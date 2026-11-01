@@ -12,6 +12,7 @@ import HomeProblems from './HomeProblems';
 import { useModelSelection } from './ModelSelectionContext';
 import { findBody } from '../lib/body-styles';
 import RecentlyViewed from './RecentlyViewed';
+import HomeQuickStart from './HomeQuickStart';
 import HomeFAQ from './HomeFAQ';
 import SymptomSearch from './SymptomSearch';
 
@@ -22,6 +23,7 @@ export default function HomeHero() {
   return (
     <div className="mx-auto w-full max-w-3xl">
       <HomeIntro />
+      <HomeQuickStart />
       <ModelHero />
       {body && (
         <div data-testid="active-filters" role="region" aria-label="Aktywne filtry" className="mx-4 mb-3 rounded-lg border border-silver-600/30 bg-silver-950/30 px-3 py-2 text-sm text-neutral-300">
