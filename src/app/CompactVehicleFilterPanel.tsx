@@ -7,7 +7,7 @@ export default function CompactVehicleFilterPanel({ profile, active, mode, count
   const [expanded, setExpanded] = useState(false);
   const controls = useId();
   const button = (value: Mode) => <button key={value} type="button" aria-pressed={mode === value} onClick={() => onModeChange(value)} className="min-h-11 rounded-lg border px-3 py-2 text-[0.9375rem] font-semibold" style={{ background: mode === value ? 'var(--surface-hi)' : '#151517', borderColor: mode === value ? 'var(--border-strong)' : 'rgba(255,255,255,.3)', color: mode === value ? 'var(--accent-soft)' : '#fff' }}>{mode === value ? '✓ ' : ''}{LABELS[value]} ({counts[value]})</button>;
-  return <section aria-label="Filtrowanie według profilu auta" className="mb-5 rounded-xl border border-white/15 bg-neutral-950 p-3">
+  return <section aria-label="Filtrowanie według profilu auta" className="sticky top-14 z-30 mb-5 rounded-xl border border-white/15 bg-neutral-950/95 p-3 backdrop-blur-md">
     <h3 className="text-xs font-medium text-neutral-400">Materiały według profilu auta</h3>
     <div className="mt-2 flex items-center gap-2"><div id="vehicle-profile-launcher" className="min-w-0 flex-1" />{active && <button type="button" aria-label="Filtry zaawansowane" aria-expanded={expanded} aria-controls={controls} onClick={() => setExpanded(value => !value)} className="min-h-11 shrink-0 rounded-lg border border-white/35 px-3 text-[0.9375rem] font-semibold text-white">Filtry</button>}</div>
     {!active ? <p className="mt-2 text-xs text-neutral-400">Obecnie nie ograniczamy list według konfiguracji. Profil jest opcjonalny.</p> : <>
