@@ -4,9 +4,13 @@ import Breadcrumbs from '../ui/Breadcrumbs';
 import VinDecoder from '../VinDecoder';
 
 export const metadata: Metadata = {
-  title: 'Sprawdź swój VIN — dekoder GMT400 1988–2000',
-  description: 'Wpisz 17-znakowy VIN Chevroleta lub GMC C/K, Suburbana, Tahoe albo Yukona 1988–2000: rocznik, silnik, nadwozie i fabryka ze źródłami GM, a do tego kody RPO z naklejki.',
+  title: 'Dekoder VIN GMT400 — Tahoe, Suburban, Silverado 1988–2000',
+  description: 'Rozkoduj 17-znakowy VIN Chevroleta lub GMC GMT400 (Tahoe, Suburban, Silverado, Sierra, Yukon). Rocznik, silnik, nadwozie, fabryka i kody RPO. Darmowy dekoder po polsku.',
   alternates: { canonical: 'https://www.gmt400.pl/vin' },
+  openGraph: {
+    title: 'Dekoder VIN GMT400',
+    description: 'Sprawdź rocznik, silnik i nadwozie swojego Tahoe, Suburban lub Silverado po VIN.',
+  },
 };
 
 export default function VinPage() {
