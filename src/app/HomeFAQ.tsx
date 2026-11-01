@@ -21,6 +21,21 @@ const FAQ = [
     a: 'Wpisz 17-znakowy VIN w dekoderze. Dostaniesz rocznik, silnik, nadwozie i fabrykę.',
     href: '/vin',
   },
+  {
+    q: 'Jakie płyny i momenty dokręcania są typowe dla GMT400?',
+    a: 'W bazie wiedzy znajdziesz tabele płynów i momentów dla popularnych silników i układów.',
+    href: '/baza',
+  },
+  {
+    q: 'Co oznacza kod OBD w moim Tahoe / Suburban?',
+    a: 'W sekcji Kody OBD możesz wyszukać kod i zobaczyć możliwe przyczyny oraz co sprawdzić najpierw.',
+    href: '/kody-obd',
+  },
+  {
+    q: 'Czy mogę używać strony offline?',
+    a: 'Tak. Strona działa jako PWA — po dodaniu do ekranu głównego część treści jest dostępna bez internetu.',
+    href: '/',
+  },
 ];
 
 export default function HomeFAQ() {
