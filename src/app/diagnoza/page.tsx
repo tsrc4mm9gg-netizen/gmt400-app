@@ -6,12 +6,15 @@ import { buildMeta } from '../../lib/diagnosis-meta';
 import { SYMPTOMS } from '../../lib/diagnosis';
 
 export const metadata: Metadata = {
-  title: 'Co się dzieje z moim autem? Diagnoza objawów GMT400 — Tahoe, Suburban, Silverado',
-  description: 'Wybierz objaw (nie odpala, szarpie, Check Engine, wycieki, hałasy, hamulce, skrzynia, klima, elektryka, przegrzewanie, dymienie), odpowiedz na 1–2 pytania i zobacz możliwe przyczyny z linkami do usterek i poradników GMT400.',
+  title: 'Diagnoza objawów GMT400 — nie odpala, szarpie, Check Engine | Tahoe, Suburban',
+  description: 'Wybierz objaw (nie odpala, szarpie, wycieki, skrzynia 4L60-E, hamulce, klima, przegrzewanie). Odpowiedz na 1–2 pytania i zobacz możliwe przyczyny z linkami do usterek i DIY dla GMT400.',
   alternates: { canonical: 'https://www.gmt400.pl/diagnoza' },
+  openGraph: {
+    title: 'Diagnoza objawów GMT400',
+    description: 'Szybka diagnoza problemów Tahoe, Suburban, Silverado i innych GMT400.',
+  },
 };
 
-// ISR: wpisy użyte w narzędziu są w HTML od pierwszego żądania; gdy Notion nie odpowiada, narzędzie pobiera je w przeglądarce.
 export const revalidate = 900;
 
 export default async function Page() {
