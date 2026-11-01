@@ -13,6 +13,7 @@ import { useModelSelection } from './ModelSelectionContext';
 import { findBody } from '../lib/body-styles';
 import RecentlyViewed from './RecentlyViewed';
 import HomeQuickStart from './HomeQuickStart';
+import HomeTips from './HomeTips';
 import HomeFAQ from './HomeFAQ';
 import SymptomSearch from './SymptomSearch';
 
@@ -52,6 +53,7 @@ export default function HomeHero() {
       <div className="pt-4"><HomeStart /></div>
       <OwnerEssentials />
       <HomeProblems />
+      <HomeTips />
       <div className="pt-1"><HomeSearch /></div>
       <HomeFAQ />
       <CategoryGrid />
