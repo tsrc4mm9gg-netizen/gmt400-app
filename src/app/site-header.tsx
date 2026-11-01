@@ -82,8 +82,10 @@ export default function SiteHeader() {
                     <Link
                       href={href}
                       aria-current={active ? 'page' : undefined}
-                      className={`inline-flex min-h-11 items-center rounded px-2 underline-offset-4 transition-colors hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-silver-500 ${
-                        active ? 'font-semibold text-silver-400' : 'text-neutral-200 hover:text-silver-300'
+                      className={`inline-flex min-h-11 items-center rounded-full px-3 underline-offset-4 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-silver-500 ${
+                        active
+                          ? 'bg-silver-600/20 font-semibold text-silver-200 ring-1 ring-silver-500/50'
+                          : 'text-neutral-200 hover:bg-white/5 hover:text-silver-300'
                       }`}
                     >
                       {label}
