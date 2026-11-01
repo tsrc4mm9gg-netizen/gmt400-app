@@ -3,9 +3,13 @@ import Link from 'next/link';
 const links = [
   { href: '/', label: 'Strona główna' },
   { href: '/modele', label: 'Modele' },
-  { href: '/baza', label: 'Baza wiedzy' },
+  { href: '/diy', label: 'DIY' },
+  { href: '/usterki', label: 'Usterki' },
+  { href: '/diagnoza', label: 'Diagnoza' },
+  { href: '/vin', label: 'VIN' },
   { href: '/kody-obd', label: 'Kody OBD' },
-  { href: '/schematy', label: 'Schematy' },
+  { href: '/dla-wlasciciela', label: 'Dla właściciela' },
+  { href: '/poradnik-kupujacego', label: 'Poradnik kupującego' },
   { href: '/szukaj', label: 'Szukaj' },
 ];
 
