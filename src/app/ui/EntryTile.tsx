@@ -26,12 +26,12 @@ export default function EntryTile({ item, icon, image, excerpt, headingLevel = 3
   const titleClass = '!m-0 !text-[15px] !leading-snug !font-semibold text-neutral-100 line-clamp-2 break-words';
   return (
     <div
-      className="relative min-h-[4.5rem] overflow-hidden rounded-2xl border border-white/10 bg-neutral-950 transition-colors hover:border-white/25 has-[a:active]:border-white/30 has-[a:active]:[background-image:none] has-[a:active]:bg-neutral-900 has-[a:focus-visible]:outline has-[a:focus-visible]:outline-2 has-[a:focus-visible]:-outline-offset-2 has-[a:focus-visible]:outline-silver-400"
+      className="relative min-h-[4.5rem] overflow-hidden rounded-[var(--radius-lg)] border border-white/15 bg-[var(--card-gradient)] shadow-[var(--card-sheen)] transition-colors hover:border-white/30 has-[a:active]:border-white/40 has-[a:active]:bg-neutral-900 has-[a:focus-visible]:outline has-[a:focus-visible]:outline-2 has-[a:focus-visible]:-outline-offset-2 has-[a:focus-visible]:outline-silver-400"
       data-testid="entry-tile"
     >
       <div className="p-4">
         <div className="flex items-start gap-3">
-          <span className="relative flex h-16 w-16 shrink-0 items-center justify-center overflow-hidden rounded-xl border border-white/15 bg-neutral-900 shadow-[inset_0_1px_0_rgba(255,255,255,.12)]" data-testid="tile-thumb">
+          <span className="relative flex h-16 w-16 shrink-0 items-center justify-center overflow-hidden rounded-[var(--radius-md)] border border-white/15 bg-neutral-900 shadow-[inset_0_1px_0_rgba(255,255,255,.12)]" data-testid="tile-thumb">
             {image ? (
               <Image src={image} alt="" width={128} height={128} sizes="64px" className="h-full w-full object-cover" />
             ) : (
