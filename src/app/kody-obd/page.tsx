@@ -5,9 +5,13 @@ import RandomCodeLink from './random-code-link';
 import Breadcrumbs from '../ui/Breadcrumbs';
 
 export const metadata: Metadata = {
-  title: 'Kody OBD-II GMT400 (1996+) — baza, przyczyny i diagnostyka',
-  description: 'Baza kodów OBD-II dla Chevroleta i GMC GMT400: znaczenie kodu, typowe przyczyny, kolejność diagnostyki i powiązane materiały.',
+  title: 'Kody OBD GMT400 — P0300, P0171 i inne | Tahoe, Suburban, Silverado',
+  description: 'Baza kodów OBD-II dla Chevrolet Tahoe, Suburban, Silverado i GMC GMT400 (1996+). Znaczenie kodu, typowe przyczyny i co sprawdzić najpierw.',
   alternates: { canonical: 'https://www.gmt400.pl/kody-obd' },
+  openGraph: {
+    title: 'Kody OBD GMT400',
+    description: 'Objaśnienia kodów diagnostycznych dla Tahoe, Suburban i Silverado.',
+  },
 };
 
 const systemFilters = ['Paliwo', 'Powietrze', 'Zapłon', 'Chłodzenie', 'Emisje', 'Skrzynia biegów'];
