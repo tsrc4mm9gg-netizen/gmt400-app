@@ -14,6 +14,7 @@ import { findBody } from '../lib/body-styles';
 import RecentlyViewed from './RecentlyViewed';
 import HomeQuickStart from './HomeQuickStart';
 import HomeTips from './HomeTips';
+import HomePopular from './HomePopular';
 import HomeFAQ from './HomeFAQ';
 import SymptomSearch from './SymptomSearch';
 
@@ -54,6 +55,7 @@ export default function HomeHero() {
       <OwnerEssentials />
       <HomeProblems />
       <HomeTips />
+      <HomePopular />
       <div className="pt-1"><HomeSearch /></div>
       <HomeFAQ />
       <CategoryGrid />
