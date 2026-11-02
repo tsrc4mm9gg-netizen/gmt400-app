@@ -24,6 +24,7 @@ import HomeQuickActions from './HomeQuickActions';
 import HomeSafety from './HomeSafety';
 import HomeAbout from './HomeAbout';
 import HomeYearRange from './HomeYearRange';
+import HomeLinks from './HomeLinks';
 import HomeFAQ from './HomeFAQ';
 import SymptomSearch from './SymptomSearch';
 
@@ -74,6 +75,7 @@ export default function HomeHero() {
       <HomeSafety />
       <HomeAbout />
       <HomeYearRange />
+      <HomeLinks />
       <div className="pt-1"><HomeSearch /></div>
       <HomeFAQ />
       <CategoryGrid />
