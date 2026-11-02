@@ -18,6 +18,7 @@ import HomePopular from './HomePopular';
 import HomeEngines from './HomeEngines';
 import HomeMaintenance from './HomeMaintenance';
 import HomeOwner from './HomeOwner';
+import HomeTools from './HomeTools';
 import HomeFAQ from './HomeFAQ';
 import SymptomSearch from './SymptomSearch';
 
@@ -62,6 +63,7 @@ export default function HomeHero() {
       <HomeEngines />
       <HomeMaintenance />
       <HomeOwner />
+      <HomeTools />
       <div className="pt-1"><HomeSearch /></div>
       <HomeFAQ />
       <CategoryGrid />
