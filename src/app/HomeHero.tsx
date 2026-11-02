@@ -21,6 +21,7 @@ import HomeOwner from './HomeOwner';
 import HomeTools from './HomeTools';
 import HomeCommunity from './HomeCommunity';
 import HomeQuickActions from './HomeQuickActions';
+import HomeSafety from './HomeSafety';
 import HomeFAQ from './HomeFAQ';
 import SymptomSearch from './SymptomSearch';
 
@@ -68,6 +69,7 @@ export default function HomeHero() {
       <HomeTools />
       <HomeCommunity />
       <HomeQuickActions />
+      <HomeSafety />
       <div className="pt-1"><HomeSearch /></div>
       <HomeFAQ />
       <CategoryGrid />
