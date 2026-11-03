@@ -1,19 +1,38 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { FUSE_TABLES, FUSE_YEARS, filterFuseTables, normalizeFuseText, yearsLabel } from '../src/lib/fuses.mjs';
+import { BULB_TABLES, FUSE_TABLES, FUSE_YEARS, filterFuseTables, normalizeFuseText, yearsLabel } from '../src/lib/fuses.mjs';
 import { decodeVin, expectedCheckDigit, YEAR_CODES, POSITION_TABLES, VIN_SOURCES, UNKNOWN, profileFromVin, vinHistoryLinks } from '../src/lib/vin-decode.mjs';
 
 test('każda tabela bezpieczników ma model + lata, źródła i kompletne pozycje', () => {
-  assert.equal(FUSE_TABLES.length, 3);
+  assert.equal(FUSE_TABLES.length, 5);
   for (const t of FUSE_TABLES) {
     assert.match(t.models, /(19\d\d)/);
     assert.ok(t.sources.length >= t.years.length, t.id);
-    for (const s of t.sources) assert.match(s.url, /^https:\/\//);
+    for (const s of t.sources) { assert.ok(s.title); if (s.url !== undefined) assert.match(s.url, /^https:\/\//); }
+    assert.equal(new Set(t.rows.map(r => r.pos)).size, t.rows.length, `${t.id}: powtórzone gniazdo`);
     for (const r of t.rows) { assert.ok(r.pos && r.variants.length, `${t.id} ${r.pos}`); for (const v of r.variants) assert.ok(v.years.every(y => t.years.includes(y))); }
   }
   const ip = FUSE_TABLES.find(t => t.id === 'ip-1995-1999');
   assert.deepEqual(ip.rows.map(r => r.pos), [...Array.from({ length: 24 }, (_, i) => String(i + 1)), 'A', 'B']);
   assert.equal(FUSE_TABLES.find(t => t.id === 'ip-1994').rows.find(r => r.name === 'WIPER').amps, '25 A');
+});
+
+test('bezpieczniki 1988–1993 i żarówki 1990–1993 z EDD (etykiety źródeł bez URL)', () => {
+  const old = FUSE_TABLES.filter(t => t.years.some(y => Number(y) < 1994));
+  assert.deepEqual(old.map(t => t.id), ['ip-1988', 'ip-1989-1993']);
+  for (const t of old) for (const s of t.sources) { assert.equal(s.url, undefined); assert.match(s.title, /EDD/); }
+  assert.deepEqual(filterFuseTables(FUSE_TABLES, { year: '1990' }).map(t => t.id), ['ip-1989-1993']);
+  const y88 = filterFuseTables(FUSE_TABLES, { year: '1988' })[0];
+  assert.ok(!y88.rows.some(r => r.name === '4WD'));
+  const y91 = filterFuseTables(FUSE_TABLES, { year: '1991' })[0];
+  assert.ok(y91.rows.some(r => r.name === 'TRANS') && !y91.rows.some(r => r.name === 'RR HVAC'));
+  const y93 = filterFuseTables(FUSE_TABLES, { year: '1993' })[0];
+  assert.ok(['RR HVAC', 'RR WIPER', 'T/GREL'].every(n => y93.rows.some(r => r.name === n)));
+  assert.equal(BULB_TABLES.length, 1);
+  const hl = BULB_TABLES[0].rows.find(r => r.name.includes('4 lamp'));
+  assert.equal(hl.variants.find(v => v.years.includes('1990')).trade, 'H4701 + H4703');
+  assert.equal(hl.variants.find(v => v.years.includes('1993')).trade, '9005 + 9006');
+  for (const r of BULB_TABLES[0].rows) for (const v of r.variants) assert.ok(v.years.every(y => BULB_TABLES[0].years.includes(y)));
 });
 
 test('filtr bezpieczników: rocznik i wyszukiwanie bez polskich znaków', () => {
@@ -27,7 +46,7 @@ test('filtr bezpieczników: rocznik i wyszukiwanie bez polskich znaków', () => 
   assert.ok(wip.some(t => t.rows.length));
   assert.equal(filterFuseTables(FUSE_TABLES, { query: 'zzzz-nie-ma' }).length, 0);
   assert.equal(yearsLabel(['1996', '1997', '1998']), '1996–1998');
-  assert.deepEqual(FUSE_YEARS, ['1994', '1995', '1996', '1997', '1998', '1999']);
+  assert.deepEqual(FUSE_YEARS, ['1988', '1989', '1990', '1991', '1992', '1993', '1994', '1995', '1996', '1997', '1998', '1999']);
 });
 
 test('VIN: cyfra kontrolna wg 49 CFR 565.15 (przykład z X)', () => {

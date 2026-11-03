@@ -340,7 +340,7 @@ function CarView({ profile, notice, storageNote, onEdit, confirmForget, setConfi
   const gearbox = findRpo(RPO_BY_TRANSMISSION[profile.transmission] ?? profile.transmission);
   const fuseYear = (FUSE_YEARS as readonly string[]).includes(year);
   const fuseOwnModel = profile.platform === 'C/K' || profile.platform === 'Sierra' || (profile.platform === 'Suburban' && year === '1999');
-  const tips = ILLUSTRATED_TIPS.map<Row>(t => ({ key: t.id, href: '/baza?tab=tips', title: t.title, scope: t.scope, fit: scopeTextFit(t.scope, profile).fit, extra: `Źródło: Owner’s Manual 1999 Suburban/Tahoe — ${t.reference}` }));
+  const tips = ILLUSTRATED_TIPS.map<Row>(t => ({ key: t.id, href: '/porady-wlasciciela#porada-' + t.id, title: t.title, scope: t.scope, fit: scopeTextFit(t.scope, profile).fit, extra: `Źródło: Owner’s Manual 1999 Suburban/Tahoe — ${t.reference}` }));
   const parts = PART_FITMENTS.map<Row>(p => ({ key: p.part, href: p.source, external: true, title: p.part, scope: `${p.fitsModels.join(', ')} · ${p.yearRange[0]}–${p.yearRange[1]}`, fit: partFit(p, profile).fit, extra: `${p.sourceTitle} (${p.confidence === 'factory' ? 'dane fabryczne' : 'do potwierdzenia'}). ${p.notes}` }));
   const nav = [['bezpieczniki', 'Bezpieczniki'], ['usterki', 'Usterki'], ['diy', 'DIY i porady'], ['porady', 'Porady ilustrowane'], ['czesci', 'Części'], ['model', 'Model'], ['rpo', 'Kody RPO']];
   return (
@@ -385,16 +385,16 @@ function CarView({ profile, notice, storageNote, onEdit, confirmForget, setConfi
         {fuseYear ? (
           <>
             <div className="mt-2 flex flex-wrap gap-2 text-xs">
-              <span className={`${chip} border-silver-600/50 bg-silver-600/10 text-silver-200`}>Tabela z instrukcji GM: rocznik {year}</span>
+              <span className={`${chip} border-silver-600/50 bg-silver-600/10 text-silver-200`}>{Number(year) < 1994 ? `Tabela z podręcznika GM (EDD): rocznik ${year}` : `Tabela z instrukcji GM: rocznik ${year}`}</span>
               <span className={`${chip} border-white/15 bg-white/5 text-neutral-200`}>{CHECK.replace(/^s/, 'S')}</span>
             </div>
-            {!fuseOwnModel && <p data-testid="my-car-fuse-warning" className="mt-2 text-sm text-neutral-300">Tabele pochodzą z instrukcji C/K Pickup (1994–1998) i Suburban (1999). Twoje nadwozie może mieć inną obsadę – porównaj z pokrywą skrzynki.</p>}
+            {!fuseOwnModel && <p data-testid="my-car-fuse-warning" className="mt-2 text-sm text-neutral-300">Tabele pochodzą z podręczników EDD C/K (1988–1993), instrukcji C/K Pickup (1994–1998) i Suburban (1999). Twoje nadwozie może mieć inną obsadę – porównaj z pokrywą skrzynki.</p>}
             <details data-testid="my-car-fuses" className="mt-3 rounded-lg border border-white/10 p-3">
               <summary className="min-h-11 cursor-pointer content-center font-semibold text-white">Pokaż tabelę bezpieczników dla rocznika {year}</summary>
               <FuseTable initialYear={year} />
             </details>
           </>
-        ) : <p className="mt-2 text-sm text-neutral-300">Dla rocznika {year} nie mamy tabeli z instrukcji GM (mamy 1994–1999). Zobacz <Link href="/schematy#fuse-locations" className="text-silver-400 underline">położenie skrzynek bezpieczników</Link> i {CHECK}.</p>}
+        ) : <p className="mt-2 text-sm text-neutral-300">Dla rocznika {year} nie mamy tabeli z instrukcji GM (mamy 1988–1999). Zobacz <Link href="/schematy#fuse-locations" className="text-silver-400 underline">położenie skrzynek bezpieczników</Link> i {CHECK}.</p>}
       </Section>
 
       {knowledge.status !== 'ok' ? (
@@ -416,6 +416,7 @@ function CarView({ profile, notice, storageNote, onEdit, confirmForget, setConfi
 
       <Section id="porady" title="Porady ilustrowane" lead="Z Owner’s Manual 1999 Suburban/Tahoe.">
         <Rows rows={tips} testId="my-car-tip" empty="Te porady dotyczą Tahoe/Suburban 1999 – dla Twojego auta brak pasujących." />
+        <Link href="/porady-wlasciciela" className="mt-3 flex min-h-11 items-center justify-center rounded-lg border border-silver-600/50 text-sm font-semibold text-silver-300" data-testid="my-car-owner-tips">Wszystkie porady właściciela (z filtrem wg Twojego auta) →</Link>
         <p className="mt-2 text-xs text-neutral-500"><a href={ILLUSTRATED_TIPS_MANUAL} target="_blank" rel="noopener noreferrer" className="text-silver-400 underline">Instrukcja (PDF, GM)</a></p>
       </Section>
 

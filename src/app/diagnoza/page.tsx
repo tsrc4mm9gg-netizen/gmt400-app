@@ -1,5 +1,7 @@
 import type { Metadata } from 'next';
+import Link from 'next/link';
 import JsonLd from '../ui/JsonLd';
+import { DIAG_GUIDES } from '../../lib/diagnosis-guides';
 import DiagnozaTool from './DiagnozaTool';
 import { getListEntries } from '../../lib/notion-entries';
 import { buildMeta } from '../../lib/diagnosis-meta';
@@ -35,6 +37,13 @@ export default async function Page() {
   };
   return <>
     <DiagnozaTool initialMeta={meta} />
+    <section data-testid="diag-guides" aria-labelledby="poradniki-gm" className="mx-auto w-full max-w-5xl px-4 pb-28">
+      <h2 id="poradniki-gm" className="text-xl font-semibold text-white">Poradniki diagnostyczne z instrukcji GM</h2>
+      <p className="mt-1 max-w-prose text-sm text-neutral-300">Typowe odczyty testera, hałasy, olej, pasek, detonacja i falowanie — kolejność kontroli według instrukcji serwisowych, opisana własnymi słowami, ze stronami źródła.</p>
+      <ul className="mt-4 grid gap-2 sm:grid-cols-2">
+        {DIAG_GUIDES.map(g => <li key={g.slug}><Link href={`/diagnoza/${g.slug}`} className="flex min-h-11 flex-col justify-center rounded-xl border border-neutral-800 bg-neutral-900/60 px-4 py-3 text-sm text-silver-100 hover:border-silver-500 focus-visible:outline-2 focus-visible:outline-silver-500"><span className="font-semibold">{g.title}</span></Link></li>)}
+      </ul>
+    </section>
     <JsonLd data={jsonLd} />
   </>;
 }

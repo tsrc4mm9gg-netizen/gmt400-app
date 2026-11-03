@@ -11,6 +11,9 @@ const nextConfig: NextConfig = {
     NEXT_PUBLIC_VERCEL_ENV: process.env.VERCEL_ENV || '',
     NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA: process.env.VERCEL_GIT_COMMIT_SHA || '',
   },
+  async redirects() {
+    return [{ source: '/tips', destination: '/porady-wlasciciela', permanent: true }];
+  },
   async headers() {
     return [
       { source: '/sw.js', headers: [

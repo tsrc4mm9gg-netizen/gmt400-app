@@ -6,6 +6,7 @@ import { notFound } from 'next/navigation';
 import { BODY_STYLES, bodyYears, findBody } from '../../../lib/body-styles';
 import { bodyImage, modelHref } from '../../../lib/model-images';
 import { enginesForBody } from '../../../lib/model-engines';
+import { MECH_SOURCE, mechForRpos } from '../../../lib/engine-mech-1998';
 import { CHECK_NOTE, SOURCES, TRANSFER_CASES } from '../../../lib/verified-specs';
 import { SCHEMATICS } from '../../../lib/schematics';
 import ModelMaterials from './ModelMaterials';
@@ -46,6 +47,7 @@ export default async function ModelPage({ params }: Props) {
   const body = findBody((await params).id);
   if (!body) notFound();
   const engines = enginesForBody(body.id, body.from, body.to);
+  const mech = body.to >= 1996 ? mechForRpos(engines.map(e => e.rpo)) : [];
   const index = BODY_STYLES.findIndex(b => b.id === body.id);
   const prev = BODY_STYLES[(index - 1 + BODY_STYLES.length) % BODY_STYLES.length];
   const next = BODY_STYLES[(index + 1) % BODY_STYLES.length];
@@ -99,6 +101,24 @@ export default async function ModelPage({ params }: Props) {
             </tbody>
           </table>
         </div>
+        {mech.length > 0 && (
+          <div className="mt-5" data-testid="engine-mech">
+            <h3 className="text-lg font-semibold text-silver-100">Dane mechaniczne silników Vortec i 6.5 TD (instrukcja GM 1998)</h3>
+            <p className="mt-1 text-sm text-neutral-400">Wybrane dane ogólne z tabel „Engine Mechanical Specifications”. Dotyczą rocznika 1998 — w latach 1996–97 i 1999 mogą się różnić.</p>
+            <div className="mt-3 space-y-2">
+              {mech.map(m => (
+                <details key={m.rpo} className="rounded-xl border border-white/10 bg-neutral-950">
+                  <summary className="flex min-h-11 cursor-pointer items-center justify-between gap-3 px-4 py-2 font-medium text-white">{m.title}<span className="text-xs font-normal text-neutral-500">{m.pages}</span></summary>
+                  <dl className="grid gap-x-4 gap-y-1 border-t border-white/10 px-4 py-3 text-sm sm:grid-cols-[minmax(0,14rem)_1fr]">
+                    {m.rows.map(([k, v]) => <div key={k} className="contents"><dt className="text-neutral-400">{k}</dt><dd className="mb-1 text-neutral-100">{v}</dd></div>)}
+                  </dl>
+                  {m.note && <p className="border-t border-white/10 px-4 py-2 text-xs text-neutral-400">{m.note}</p>}
+                </details>
+              ))}
+            </div>
+            <p className="mt-2 text-xs text-neutral-500">Źródło: {MECH_SOURCE} (strony przy każdym silniku). Wartości graniczne (luzy, średnice) i próby sprężania — w instrukcji; jak czytać hałasy i ciśnienie oleju: <Link href="/diagnoza/halas-silnika" className="inline-flex min-h-11 items-center text-silver-400 underline">hałasy silnika</Link> · <Link href="/diagnoza/zuzycie-oleju-wycieki" className="inline-flex min-h-11 items-center text-silver-400 underline">olej i wycieki</Link>.</p>
+          </div>
+        )}
         {has4wd && <p className="mt-3 text-sm text-neutral-400">{TRANSFER_CASES}</p>}
         <p className="mt-3 rounded-lg border border-silver-600/40 bg-silver-600/10 p-3 text-sm text-silver-100">⚠ {CHECK_NOTE} Kod silnika (RPO) znajdziesz na naklejce Service Parts Identification w schowku.</p>
         <p className="mt-2 text-xs text-neutral-500">Źródła: <a className="inline-flex min-h-11 items-center text-silver-400 underline" href={SOURCES.W1.url} target="_blank" rel="noopener noreferrer">{SOURCES.W1.label}</a> · <a className="inline-flex min-h-11 items-center text-silver-400 underline" href={SOURCES.W2.url} target="_blank" rel="noopener noreferrer">{SOURCES.W2.label}</a></p>

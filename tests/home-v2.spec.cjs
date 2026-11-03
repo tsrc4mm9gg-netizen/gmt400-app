@@ -44,7 +44,7 @@ test('home: karuzela modeli widoczna bez przewijania, skróty VIN/Diagnoza/Uster
   expect(c.y + c.width * 9 / 16, 'zdjęcie karuzeli kończy się nad zgięciem').toBeLessThanOrEqual(h - 20);
   expect(c.y, 'karuzela zaczyna się wysoko').toBeLessThan(h * 0.45);
   const list = page.getByTestId('home-main-entries');
-  for (const name of ['Sprawdź VIN', 'Diagnoza', 'Usterki', 'DIY']) {
+  for (const name of ['Sprawdź VIN', 'Diagnoza', 'Usterki', 'DIY', 'Porady']) {
     const b = await list.getByRole('link', { name: new RegExp('^' + name) }).boundingBox();
     expect(b.height, name).toBeGreaterThanOrEqual(44);
     expect(b.width, name).toBeGreaterThanOrEqual(44);
@@ -73,7 +73,7 @@ test('home: VIN ze spacjami i myślnikami przechodzi na /vin?vin=… i od razu s
 test('home: Usterki, DIY i cztery poradniki PL prowadzą do właściwych stron', async ({ page }) => {
   await setup(page);
   const main = page.getByTestId('home-main-entries');
-  for (const [name, url] of [['Usterki', '/usterki'], ['DIY', '/diy']]) {
+  for (const [name, url] of [['Usterki', '/usterki'], ['DIY', '/diy'], ['Porady', '/porady-wlasciciela']]) {
     await page.goto(BASE + '/');
     await main.getByRole('link', { name: new RegExp('^' + name) }).click();
     await expect(page).toHaveURL(BASE + url);

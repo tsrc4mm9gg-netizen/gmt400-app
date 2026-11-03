@@ -30,6 +30,10 @@ export default function GuidesHub() {
             </li>
           ))}
         </ul>
+        <Link href="/porady-wlasciciela" className="mt-6 block rounded-xl border-2 border-silver-700/50 bg-neutral-900 p-5 hover:border-silver-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-silver-500">
+          <h2 className="text-xl font-semibold">Porady właściciela (tips &amp; tricks) →</h2>
+          <p className="mt-2 text-sm leading-6 text-neutral-300">4×4, przyczepa, opony i łańcuchy, pilot i PassLock, bezpieczniki, kody ALDL, test kompresji — z instrukcji GM, ze stroną źródła i filtrem wg Twojego auta.</p>
+        </Link>
       </div>
     </div>
   );

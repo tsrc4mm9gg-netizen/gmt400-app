@@ -1,18 +1,28 @@
 'use client';
 import { useId, useMemo, useState } from 'react';
-import { FUSE_COLORS, FUSE_COLORS_SOURCE, FUSE_TABLES, FUSE_YEARS, filterFuseTables, yearsLabel } from '@/lib/fuses.mjs';
+import { BULB_TABLES, FUSE_COLORS, FUSE_COLORS_SOURCE, FUSE_TABLES, FUSE_YEARS, filterFuseTables, normalizeFuseText, yearsLabel } from '@/lib/fuses.mjs';
 
-/** Wyszukiwalna tabela bezpieczników (kabina + pod maską) z OM GM 1994–1999. */
+/** Wyszukiwalna tabela bezpieczników (kabina + pod maską): OM GM 1994–1999 i EDD GM 1988–1993, plus żarówki 1990–1993. */
+function SourceLink({ s }: { s: { title: string; url?: string } }) {
+  return s.url
+    ? <a href={s.url} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center text-silver-400 underline">{s.title}</a>
+    : <span className="text-neutral-400">{s.title}</span>;
+}
+
 export default function FuseTable({ initialYear = '' }: { initialYear?: string } = {}) {
   const [year, setYear] = useState(FUSE_YEARS.includes(initialYear) ? initialYear : '');
   const [query, setQuery] = useState('');
   const inputId = useId();
   const tables = useMemo(() => filterFuseTables(FUSE_TABLES, { year, query }), [year, query]);
   const count = tables.reduce((sum, t) => sum + t.rows.length, 0);
+  const words = normalizeFuseText(query).split(' ').filter(Boolean);
+  const bulbs = BULB_TABLES.filter(t => !year || t.years.includes(year)).map(t => ({ ...t, rows: t.rows
+    .map(r => ({ ...r, variants: year ? r.variants.filter(v => v.years.includes(year)) : r.variants }))
+    .filter(r => r.variants.length && words.every(w => normalizeFuseText([r.name, ...r.variants.map(v => v.trade)].join(' ')).includes(w))) })).filter(t => t.rows.length);
   return (
     <div className="mt-5 rounded-lg border border-white/10 bg-black/30 p-3 sm:p-4" data-testid="fuse-table">
       <h3 className="text-lg font-semibold text-white">Tabela bezpieczników — wyszukaj obwód</h3>
-      <p className="mt-1 text-sm text-neutral-400">{initialYear ? 'Dane z instrukcji obsługi GM (Owner’s Manual), te same co na stronie Schematy.' : <>Te same dane co na schematach powyżej, z instrukcji obsługi GM (Owner&apos;s Manual).</>} Wpisz np. <em>radio</em>, <em>wycieraczki</em>, <em>ABS</em> albo numer gniazda.</p>
+      <p className="mt-1 text-sm text-neutral-400">{initialYear ? 'Dane z instrukcji obsługi GM (Owner’s Manual) i podręczników EDD 1988–1993, te same co na stronie Schematy.' : <>Te same dane co na schematach powyżej: instrukcje obsługi GM (Owner&apos;s Manual) 1994–1999 i podręczniki EDD GM 1988–1993.</>} Wpisz np. <em>radio</em>, <em>wycieraczki</em>, <em>ABS</em> albo numer gniazda.</p>
       <div className="mt-3 flex flex-col gap-2 sm:flex-row">
         <label htmlFor={inputId} className="sr-only">Szukaj w tabeli bezpieczników</label>
         <input id={inputId} type="search" value={query} onChange={e => setQuery(e.target.value)} placeholder="Szukaj: obwód, nazwa, numer…" autoComplete="off"
@@ -53,16 +63,34 @@ export default function FuseTable({ initialYear = '' }: { initialYear?: string }
           </ul>
           <p className="mt-2 text-xs text-neutral-400">{table.note}</p>
           <p className="mt-1 text-xs text-neutral-500">Źródła:{' '}
-            {table.sources.map((s, i) => <span key={s.url}>{i > 0 && ' · '}<a href={s.url} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center text-silver-400 underline">{s.title}</a></span>)}
+            {table.sources.map((s, i) => <span key={s.url ?? s.title}>{i > 0 && ' · '}<SourceLink s={s} /></span>)}
           </p>
         </section>
+      ))}
+      {bulbs.map(table => (
+        <details key={table.id} className="mt-4 rounded-lg border border-white/10 p-3 text-sm text-neutral-300" data-testid="bulb-table">
+          <summary className="flex min-h-11 cursor-pointer items-center font-semibold text-white">Żarówki {yearsLabel(table.years)} — numery handlowe ({table.rows.length})</summary>
+          <p className="mt-1"><span className="inline-block rounded-full border border-silver-600/50 bg-silver-600/10 px-3 py-1 text-xs text-silver-200">Model i lata: {table.models}</span></p>
+          <ul className="mt-2 divide-y divide-white/10 rounded-lg border border-white/10">
+            {table.rows.map(r => (
+              <li key={r.name} className="grid grid-cols-[1fr_auto] gap-x-3 p-3">
+                <span className="text-neutral-100">{r.name} <span className="text-neutral-400">× {r.qty}</span></span>
+                <span className="text-right">
+                  {r.variants.map(v => <span key={v.years.join()} className="block">{(r.variants.length > 1 || v.years.length < table.years.length) && <strong className="mr-1 text-neutral-100">{yearsLabel(v.years)}:</strong>}<span className="font-mono text-silver-200">{v.trade}</span> <span className="text-neutral-400">{v.rating}</span></span>)}
+                </span>
+              </li>
+            ))}
+          </ul>
+          <p className="mt-2 text-xs text-neutral-400">{table.note}</p>
+          <p className="mt-1 text-xs text-neutral-500">Źródła: {table.sources.map((s, i) => <span key={s.title}>{i > 0 && ' · '}<SourceLink s={s} /></span>)}</p>
+        </details>
       ))}
       <details className="mt-4 text-sm text-neutral-300">
         <summary className="flex min-h-11 cursor-pointer items-center font-semibold text-white">Kolory bezpieczników wg amperażu</summary>
         <ul className="mt-2 grid grid-cols-2 gap-1 sm:grid-cols-4">{FUSE_COLORS.map(c => <li key={c.amps}><strong className="text-white">{c.amps}</strong> — {c.color}</li>)}</ul>
         <p className="mt-1 text-xs text-neutral-500">{FUSE_COLORS_SOURCE}</p>
       </details>
-      <p className="mt-3 text-xs text-neutral-400">Lata 1988–1993 i inne nadwozia (Tahoe, Yukon, Sierra, Blazer) mogą mieć inną obsadę — sprawdź w swoim aucie / manualu. Zawsze wkładaj bezpiecznik o tym samym amperażu.</p>
+      <p className="mt-3 text-xs text-neutral-400">Tabele 1988–1993 pochodzą z podręczników EDD dla C/K, 1994–1999 z instrukcji obsługi C/K i Suburbana; inne nadwozia (Tahoe, Yukon, Blazer) i wyposażenie mogą mieć inną obsadę — sprawdź na pokrywie skrzynki. Zawsze wkładaj bezpiecznik o tym samym amperażu.</p>
     </div>
   );
 }

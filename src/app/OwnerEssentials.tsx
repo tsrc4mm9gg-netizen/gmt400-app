@@ -31,6 +31,7 @@ export default function OwnerEssentials() {
         ))}
       </ul>
       <Link href="/dla-wlasciciela" className="mt-3 flex min-h-11 items-center justify-center rounded-lg border border-silver-600/50 text-sm font-semibold text-silver-300 hover:bg-silver-950/40 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-silver-500">Wszystkie poradniki PL →</Link>
+      <Link href="/porady-wlasciciela" className="mt-2 flex min-h-11 items-center justify-center rounded-lg border border-silver-600/50 text-sm font-semibold text-silver-300 hover:bg-silver-950/40 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-silver-500">Porady z instrukcji obsługi →</Link>
     </section>
   );
 }

@@ -288,7 +288,7 @@ test('bezpieczniki: wyszukiwanie, filtr rocznika i brak wyników', async ({ page
   await table.scrollIntoViewIfNeeded();
   const count = table.getByTestId('fuse-count');
   const all = Number((await count.innerText()).match(/\d+/)[0]);
-  expect(all).toBe(65);
+  expect(all).toBe(101);
   await table.getByRole('searchbox', { name: 'Szukaj w tabeli bezpieczników' }).fill('wycieraczki');
   await expect.poll(async () => Number((await count.innerText()).match(/\d+/)[0])).toBeLessThan(all);
   await table.getByRole('combobox', { name: 'Rocznik' }).selectOption('1994');

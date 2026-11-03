@@ -116,14 +116,16 @@ export const SCHEMATICS: Schematic[] = [
  {
  id: 'fuse-locations',
  title: 'Bezpieczniki: skrzynki, numery i obwody',
- scope: 'Kabina: C/K Pickup 1994–1998 i Suburban 1999; pod maską: C/K Pickup 1996–1998 i Suburban 1999 (wg instrukcji obsługi GM).',
+ scope: 'Kabina: C/K 1988–1993 (podręczniki EDD GM), C/K Pickup 1994–1998 i Suburban 1999; pod maską: C/K Pickup 1996–1998 i Suburban 1999 (wg instrukcji obsługi GM). Żarówki C/K 1990–1993 (EDD).',
  description: 'Skrzynka w kabinie jest na bocznej krawędzi deski po stronie kierowcy (zdejmij pokrywę, w niej szczypce). Skrzynka bezpieczników i przekaźników pod maską jest z tyłu komory silnika, przy zbiorniczku płynu hamulcowego. Poniżej: gdzie są skrzynki, układ gniazd z numerami wg rocznika i tabela z opisem każdego obwodu.',
  rows: [
  { label: 'Kabina 1994', value: 'Gniazda bez numerów w OM — oznaczamy je rząd·kolumna wg rysunku; amperaż podany w OM94' },
  { label: 'Kabina 1995–1999', value: 'Gniazda 1–24 + wyłączniki termiczne A i B; obsada części gniazd różni się wg rocznika' },
  { label: 'Pod maską 1996–1999', value: 'Gniazda opisane nazwą (np. ECM-1, IGN-A, ABS); przekaźniki rozrusznika, A/C, pompy paliwa, świateł stop, A.I.R., klaksonu' },
  { label: 'Amperaż 1995–1999', value: 'Instrukcje nie podają amperażu gniazd — odczytaj go z wyjętego bezpiecznika lub pokrywy' },
- { label: '1988–1993, Tahoe/Yukon/Sierra', value: 'Brak w tych danych — sprawdź opis na pokrywie i w instrukcji swojego auta' }
+ { label: 'Kabina 1988–1993', value: 'Ten sam typ skrzynki (5 rzędów, wyłączniki termiczne 30 A); 1988 bez 4WD/DRL/TRANS, od 1991 gniazdo TRANS, od 1992 RR HVAC, 1993 RR WIPER i T/GREL — wg EDD GM' },
+ { label: 'Żarówki 1990–1993', value: 'Numery handlowe z tabel Lamp Bulb Data EDD — w tabeli poniżej (rozwiń „Żarówki”)' },
+ { label: 'Tahoe/Yukon i inne nadwozia', value: 'Brak osobnych tabel — sprawdź opis na pokrywie i w instrukcji swojego auta' }
  ],
  source: 'https://assets.gm.com/manuals/chevrolet/1997_chevrolet_1500_owners.pdf',
  sourceTitle: 'GM Owner\'s Manual 1997 Chevrolet C/K (pełna lista źródeł 1994–1999 przy tabeli)',
