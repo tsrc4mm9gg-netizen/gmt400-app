@@ -16,7 +16,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (!g) return {};
   const url = `https://www.gmt400.pl/diagnoza/${g.slug}`;
   return {
-    title: `${g.title} | GMT400`,
+    title: g.title,
     description: g.summary,
     alternates: { canonical: url },
     openGraph: { type: 'article', locale: 'pl_PL', siteName: 'GMT400', url, title: g.title, description: g.summary },
