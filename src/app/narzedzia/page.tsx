@@ -45,6 +45,7 @@ export default function ToolsPage() {
  <span style={s.action}>Otwórz narzędzie <span aria-hidden="true">→</span></span>
  </Link>)}
  </section>
+ <p style={{ ...s.noticeText, margin:'18px 0 0', fontSize:14 }} data-tools-data-links>Dane z dokumentów GM: <Link href="/pojemnosci" style={{ color:'var(--accent-soft)', textDecoration:'underline' }}>Pojemności i płyny</Link> · <Link href="/momenty-dokrecania" style={{ color:'var(--accent-soft)', textDecoration:'underline' }}>Momenty dokręcania</Link></p>
  <aside style={s.notice} aria-label="Ważne informacje">
  <h2 style={s.noticeTitle}>Informacje pomocnicze, nie instrukcja naprawy</h2>
  <p style={s.noticeText}>Przed zakupem części lub serwisem potwierdź dane dla konkretnego auta, rocznika i zamontowanych podzespołów. Brak wyniku nie oznacza braku usterki ani niezgodności części.</p>

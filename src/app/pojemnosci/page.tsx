@@ -32,6 +32,7 @@ export default function PojemnosciPage() {
         Wartości wyłącznie z instrukcji serwisowych, naprawczych i instrukcji obsługi GM, z numerem strony pliku PDF.
         GM podaje je jako przybliżone — po wymianie zawsze sprawdź poziom (bagnet, korek wlewu, zbiornik wyrównawczy).
         Gdy dokumenty się różnią, wartości nie podajemy — trafia na listę rozbieżności na dole strony. Sprawdź w swoim aucie.
+        Momenty dokręcania śrub i korków: <Link href="/momenty-dokrecania" className="text-silver-300 underline">Momenty dokręcania</Link>.
       </p>
       <nav aria-label="Spis treści" className="mt-4 flex flex-wrap gap-2 text-sm">
         {CAPACITY_GROUPS.map(g => (

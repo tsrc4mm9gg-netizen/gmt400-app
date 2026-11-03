@@ -14,7 +14,8 @@ test('kody RPO uzupełnione z press kitów GM (B4U, L49, N88, V08) mają opis, l
       assert.ok(data.vehicles[vehicle], `${code}: pojazd ${vehicle}`);
       assert.match(years, /^19\d\d(–19\d\d)?(, 19\d\d(–19\d\d)?)*$/, `${code}: lata`);
     }
-    for (const s of c.s) assert.ok(data.docs[s]?.url?.startsWith('https://www.gm.com/'), `${code}: dokument ${s}`);
+    assert.ok(c.s.some(s => data.docs[s]?.url?.startsWith('https://www.gm.com/')), `${code}: brak press kitu GM`);
+    for (const s of c.s) assert.ok(validDoc(data.docs[s]), `${code}: dokument ${s}`);
   }
 });
 
@@ -28,6 +29,11 @@ test('L49 to silnik wolnossący, nie turbo (L56/L65 mają turbo)', () => {
   assert.match(byCode.get('L56').g, /turbo/);
 });
 
+// Dokumenty: publiczne press kity GM (https) albo pliki z prywatnego archiwum Drive (id DRIVE-*, bez linku).
+function validDoc(doc) {
+  return Boolean(doc && (doc.url?.startsWith('https://') || (doc.id.startsWith('DRIVE-') && doc.url === '')));
+}
+
 // ---- „Zawiera”: zawartość pakietów z dokumentów GM (src/data/rpo-contents.json) ----
 const contents = JSON.parse(readFileSync(new URL('../src/data/rpo-contents.json', import.meta.url), 'utf8'));
 const contentEntries = Object.entries(contents).filter(([key]) => key !== '_');
@@ -37,8 +43,9 @@ test('zawartość pakietów: każdy kod istnieje w katalogu, grupy mają zakres,
   for (const [code, entry] of contentEntries) {
     assert.match(code, /^[A-Z0-9]{3}$/, code);
     assert.ok(byCode.has(code), `${code}: brak w katalogu RPO`);
-    assert.ok(Array.isArray(entry.g) && entry.g.length > 0, `${code}: brak grup`);
     if ('w' in entry) assert.ok(typeof entry.w === 'string' && entry.w.trim().length >= 10, `${code}: puste wyjaśnienie`);
+    // Bez grup dozwolone tylko samo rozwinięcie oznaczenia (np. opony) — UI pokazuje wtedy „brak opisu w dokumentach”.
+    assert.ok(Array.isArray(entry.g) && (entry.g.length > 0 || 'w' in entry), `${code}: brak grup`);
     const scopes = new Set();
     for (const group of entry.g) {
       assert.ok(typeof group.r === 'string' && /(19|20)\d\d/.test(group.r), `${code}: zakres musi zawierać rocznik`);
@@ -46,7 +53,7 @@ test('zawartość pakietów: każdy kod istnieje w katalogu, grupy mają zakres,
       scopes.add(group.r);
       assert.ok(group.s.length > 0, `${code}/${group.r}: brak źródeł`);
       assert.equal(new Set(group.s).size, group.s.length, `${code}: zduplikowane źródła`);
-      for (const s of group.s) assert.ok(data.docs[s]?.url?.startsWith('https://'), `${code}: dokument ${s}`);
+      for (const s of group.s) assert.ok(validDoc(data.docs[s]), `${code}: dokument ${s}`);
       assert.ok(group.z.length > 0, `${code}/${group.r}: brak pozycji`);
       const seen = new Set();
       for (const item of group.z) {

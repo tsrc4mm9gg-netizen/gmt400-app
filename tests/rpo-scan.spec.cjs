@@ -159,7 +159,7 @@ test('Kafelek kodu: domyślnie zwarty (kod, nazwa PL, nazwa GM, kategoria, Zawie
   expect(errors).toEqual([]);
 });
 
-test('Kody wpisane ręcznie: Zawiera dla pakietu z opisem i jawny brak opisu dla pakietu bez opisu', async ({ page }) => {
+test('Kody wpisane ręcznie: Zawiera dla pakietu z opisem i jawny brak opisu dla kodu bez opisu', async ({ page }) => {
   const errors = await guard(page);
   await page.goto(BASE + '/narzedzia/rpo');
   await hydrated(page.getByRole('button', { name: 'Sprawdź kody' }));
@@ -170,8 +170,8 @@ test('Kody wpisane ręcznie: Zawiera dla pakietu z opisem i jawny brak opisu dla
   const y91 = page.locator('[data-testid="rpo-result"][data-code="Y91"]');
   await expect(y91.getByTestId('rpo-contents')).toHaveAttribute('data-state', 'missing');
   await expect(y91.getByTestId('rpo-contents')).toContainText('Zawiera: brak opisu w dokumentach');
-  // kod spoza kategorii „Pakiety” bez opisu nie dostaje kafelka
-  await expect(page.locator('[data-testid="rpo-result"][data-code="G80"]').getByTestId('rpo-contents')).toHaveCount(0);
+  // każdy kod ma kafelek „Zawiera” — z opisem z dokumentów albo z jawnym „brak opisu w dokumentach”
+  await expect(page.locator('[data-testid="rpo-result"][data-code="G80"]').getByTestId('rpo-contents')).toHaveCount(1);
   await noHorizontalScroll(page);
   expect(errors).toEqual([]);
 });

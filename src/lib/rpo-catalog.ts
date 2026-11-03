@@ -29,9 +29,11 @@ export type RpoEntry = {
   notes: string;
   ratio?: string;
   contents?: RpoContents;
+  /** Wykazy RPO w podręcznikach serwisowych GM (pliki z archiwum dokumentów): dokument + strona PDF. */
+  manualRefs: { doc: RpoDoc; page: number }[];
 };
 
-type RawCode = { c: string; k: string; g: string; p?: string; a: [number, string, string?][]; s: number[]; i?: 1; d?: 1; n?: string };
+type RawCode = { c: string; k: string; g: string; p?: string; a: [number, string, string?][]; s: number[]; i?: 1; d?: 1; n?: string; m?: [number, number][]; x?: 1 };
 type RawData = { generated: string; vehicles: string[]; aggregator: { label: string; urls: string[] }; docs: RpoDoc[]; codes: RawCode[] };
 const DATA = RAW as unknown as RawData;
 type RawContents = { w?: string; g: { r: string; z: string[]; s: number[] }[] };
@@ -74,8 +76,9 @@ export const RPO_CATALOG: RpoEntry[] = DATA.codes.map(raw => {
     models: raw.a.map(([v, years]) => `${DATA.vehicles[v]} ${years}`),
     applies: raw.a.map(([v, years, alt]) => ({ vehicle: DATA.vehicles[v], years, ...(alt ? { original: alt } : {}) })),
     sources,
-    source: sources[0]?.url ?? DATA.aggregator.urls[0],
-    sourceTitle: sources[0]?.label ?? DATA.aggregator.label,
+    source: sources.find(d => d.url)?.url ?? DATA.aggregator.urls[0],
+    sourceTitle: sources.find(d => d.url)?.label ?? DATA.aggregator.label,
+    manualRefs: (raw.m ?? []).map(([i, page]) => ({ doc: DATA.docs[i], page })).filter(r => r.doc),
     status: raw.d ? 'disputed' : raw.i ? 'internal' : 'verified',
     hasPolish: Boolean(raw.p),
     notes: raw.n ?? '',

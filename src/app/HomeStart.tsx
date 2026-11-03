@@ -11,7 +11,10 @@ export default function HomeStart() {
 
   const submit = (e: React.FormEvent) => {
     e.preventDefault();
-    const clean = vin.replace(/[\s-]/g, '').toUpperCase();
+    // Wartość z pola (DOM), nie tylko ze stanu: VIN wpisany przed hydratacją nie trafia do stanu Reacta.
+    const field = (e.currentTarget as HTMLFormElement).elements.namedItem('vin');
+    const raw = field instanceof HTMLInputElement && field.value ? field.value : vin;
+    const clean = raw.replace(/[\s-]/g, '').toUpperCase();
     router.push(clean ? `/vin?vin=${encodeURIComponent(clean)}` : '/vin');
   };
   const onPaste = (e: React.ClipboardEvent<HTMLInputElement>) => {
@@ -23,7 +26,7 @@ export default function HomeStart() {
 
   return (
     <section aria-label="Sprawdź VIN" className="px-4 pt-2">
-      <form onSubmit={submit} data-testid="home-vin-form" className="rounded-2xl border-2 border-silver-600/70 bg-gradient-to-b from-silver-950/50 to-neutral-950 p-4">
+      <form action="/vin" method="get" onSubmit={submit} data-testid="home-vin-form" className="rounded-2xl border-2 border-silver-600/70 bg-gradient-to-b from-silver-950/50 to-neutral-950 p-4">
         <label htmlFor="home-vin-input" className="block text-lg font-bold text-white">Sprawdź swój VIN</label>
         <p className="mt-0.5 text-xs text-neutral-300">Rocznik, silnik, nadwozie i fabryka z 17 znaków — plus kody RPO.</p>
         <input

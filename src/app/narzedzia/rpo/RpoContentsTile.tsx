@@ -3,16 +3,17 @@ import { useId, useState } from 'react';
 import { RPO_CONTENTS_MISSING, type RpoEntry } from '@/lib/rpo-catalog';
 
 const PREVIEW = 3;
+const docShort = (id: string) => id.replace(/^HER-/, 'GM ').replace(/^DRIVE-/, 'GM ').replace(/-/g, ' ');
 
 /** Kafelek „Zawiera”: co dokumenty GM mówią o zawartości pakietu. Bez zapisu w dokumentach — jawna informacja o braku, nic nie zgadujemy. */
 export default function RpoContentsTile({ entry }: { entry: RpoEntry }) {
   const [open, setOpen] = useState(false);
   const panel = useId();
   const contents = entry.contents;
-  if (!contents) {
-    if (entry.category !== 'Pakiety') return null;
+  if (!contents || contents.groups.length === 0) {
     return <div className="mt-2 rounded-lg border border-dashed border-neutral-700 bg-neutral-950/60 px-3 py-2 text-sm text-neutral-400" data-testid="rpo-contents" data-state="missing">
       <span className="font-semibold text-neutral-300">Zawiera: </span>{RPO_CONTENTS_MISSING}
+      {contents?.plain && <p className="mt-1 text-neutral-300" data-testid="rpo-contents-plain">{contents.plain}</p>}
     </div>;
   }
   const total = contents.groups.reduce((n, g) => n + g.items.length, 0);
@@ -26,7 +27,7 @@ export default function RpoContentsTile({ entry }: { entry: RpoEntry }) {
       {visible.map(group => <div key={group.scope} data-testid="rpo-contents-group">
         <p className="text-xs font-medium text-neutral-300">{group.scope}</p>
         <ul className="mt-1 list-disc space-y-0.5 pl-5 text-sm text-neutral-200">{group.items.map(item => <li key={item}>{item}</li>)}</ul>
-        {open && <p className="mt-1 text-xs text-neutral-400">Źródło: {group.sources.map((doc, i) => <span key={doc.id}>{i > 0 && ', '}<a href={doc.url} target="_blank" rel="noopener noreferrer" className="underline">{doc.id.replace(/^HER-/, 'GM ').replace(/-/g, ' ')}</a></span>)}</p>}
+        {open && <p className="mt-1 text-xs text-neutral-400">Źródło: {group.sources.map((doc, i) => <span key={doc.id}>{i > 0 && ', '}{doc.url ? <a href={doc.url} target="_blank" rel="noopener noreferrer" className="underline">{docShort(doc.id)}</a> : <span>{docShort(doc.id)}</span>}</span>)}</p>}
       </div>)}
     </div>
     {long && <button type="button" onClick={() => setOpen(o => !o)} aria-expanded={open} aria-controls={panel} data-testid="rpo-contents-toggle" className="mt-1 inline-flex min-h-11 items-center rounded-lg border border-silver-500/60 px-3 text-sm font-medium text-white">

@@ -1,5 +1,5 @@
 {
-  "_": "Zawartość pakietów RPO — tłumaczenie/parafraza wyłącznie z jawnych zapisów w dokumentach GM (indeksy s = pozycje listy docs w rpo-gmt400.json). Bez zapisu w dokumentach kod nie ma wpisu. Nie zgadujemy.",
+  "_": "Zawartość pakietów RPO — tłumaczenie/parafraza wyłącznie z jawnych zapisów w dokumentach GM (indeksy s = pozycje listy docs w rpo-gmt400.json). Bez zapisu w dokumentach kod nie ma grup; opony mają tylko rozwinięcie oznaczenia rozmiaru (w, bez grup) — UI pokazuje wtedy „brak opisu w dokumentach”. Nie zgadujemy.",
   "YE9": {
     "w": "Wyższy poziom wyposażenia pickupa: Silverado (Chevrolet) / SLE (GMC) — ponad Cheyenne i Scottsdale; w Tahoe i Suburban to wersja LS.",
     "g": [
@@ -865,6 +865,17 @@
         "z": [
           "Zawiera osłony przedniego zderzaka V27 przy dekorze Silverado"
         ]
+      },
+      {
+        "r": "C/K Pickup 1995",
+        "s": [
+          12
+        ],
+        "z": [
+          "Wolnossący diesel V8 6,5 l, wtrysk pośredni",
+          "Moc 116 kW (155 hp SAE netto) przy 3600 obr./min, moment 373 N·m przy 1700 obr./min",
+          "Dwa akumulatory po 600 A (CCA), alternator 100 A"
+        ]
       }
     ]
   },
@@ -877,6 +888,17 @@
         ],
         "z": [
           "Zawiera osłony przedniego zderzaka V27 przy dekorze Silverado"
+        ]
+      },
+      {
+        "r": "C/K Pickup 1995–1996",
+        "s": [
+          12,
+          15
+        ],
+        "z": [
+          "Turbodiesel V8 6,5 l z wtryskiem pośrednim",
+          "Moc 134 kW (180 hp SAE netto) przy 3400 obr./min, moment 488 N·m przy 1700 obr./min"
         ]
       },
       {
@@ -894,6 +916,27 @@
   },
   "L65": {
     "g": [
+      {
+        "r": "C/K Pickup 1992",
+        "s": [
+          5
+        ],
+        "z": [
+          "Turbodiesel V8 6,5 l z wtryskiem bezpośrednim (dostępny od połowy roku)",
+          "Moc 134 kW (180 hp SAE netto) przy 3500 obr./min, moment 515 N·m przy 1700 obr./min",
+          "Dwa akumulatory po 570 A (CCA)"
+        ]
+      },
+      {
+        "r": "C/K Pickup 1995–1996",
+        "s": [
+          12,
+          15
+        ],
+        "z": [
+          "Wersja HD z wtryskiem bezpośrednim turbo (TIDI): Moc 142 kW (190 hp SAE netto) przy 3400 obr./min, moment 522 N·m przy 1700 obr./min"
+        ]
+      },
       {
         "r": "C/K Pickup i Suburban 1997",
         "s": [
@@ -922,6 +965,17 @@
   "MT1": {
     "g": [
       {
+        "r": "C/K Pickup 1995–1996",
+        "s": [
+          12,
+          15
+        ],
+        "z": [
+          "Automat 4L80-E w wersji HD: elektronicznie sterowany, 4 biegi z nadbiegiem",
+          "Przełożenia: 2,48 / 1,48 / 1,00 / 0,75, wsteczny 2,08"
+        ]
+      },
+      {
         "r": "C/K Pickup 1998–1999",
         "s": [
           21,
@@ -947,5 +1001,2083 @@
         ]
       }
     ]
+  },
+  "LB4": {
+    "g": [
+      {
+        "r": "C/K Pickup 1988",
+        "s": [
+          0
+        ],
+        "z": [
+          "Benzynowy V6 4,3 l (262 cale³) z wtryskiem elektronicznym EFI",
+          "Moc 119 kW (160 hp SAE netto) przy 4000 obr./min, moment 319 N·m przy 2400 obr./min"
+        ]
+      },
+      {
+        "r": "C/K Pickup 1992",
+        "s": [
+          5
+        ],
+        "z": [
+          "Wtrysk jednopunktowy TBI, akumulator 630 A (CCA)",
+          "Poniżej 8600 lb DMC (3901 kg): Moc 119 kW (160 hp SAE netto) przy 4000 obr./min, moment 319 N·m przy 2400 obr./min",
+          "Powyżej 8600 lb: Moc 116 kW (155 hp SAE netto) przy 4000 obr./min, moment 312 N·m przy 2400 obr./min",
+          "Sprzęgło 11 cali (279 mm)"
+        ]
+      },
+      {
+        "r": "C/K Pickup 1995",
+        "s": [
+          12
+        ],
+        "z": [
+          "Wtrysk EFI, Moc 119 kW (160 hp SAE netto) przy 4000 obr./min, moment 319 N·m przy 2400 obr./min",
+          "Akumulator 600 A (CCA), alternator 100 A"
+        ]
+      }
+    ]
+  },
+  "L03": {
+    "g": [
+      {
+        "r": "C/K Pickup 1988",
+        "s": [
+          0
+        ],
+        "z": [
+          "Benzynowy V8 5,0 l (305 cali³) z wtryskiem elektronicznym EFI",
+          "Moc 130 kW (175 hp SAE netto) przy 4000 obr./min, moment 366 N·m przy 2400 obr./min"
+        ]
+      },
+      {
+        "r": "C/K Pickup 1992",
+        "s": [
+          5
+        ],
+        "z": [
+          "Wtrysk TBI, Moc 130 kW (175 hp SAE netto) przy 4000 obr./min, moment 366 N·m przy 2400 obr./min",
+          "Dla DMC do 7200 lb (3266 kg); akumulator 630 A (CCA)"
+        ]
+      }
+    ]
+  },
+  "L05": {
+    "g": [
+      {
+        "r": "C/K Pickup 1988",
+        "s": [
+          0
+        ],
+        "z": [
+          "Benzynowy V8 5,7 l (350 cali³) z wtryskiem EFI",
+          "Do DMC 8500 lb: Moc 157 kW (210 hp SAE netto) przy 4000 obr./min, moment 407 N·m przy 2800 obr./min",
+          "DMC 8501–10 000 lb: Moc 138 kW (185 hp SAE netto) przy 4000 obr./min, moment 400 N·m przy 2400 obr./min"
+        ]
+      },
+      {
+        "r": "C/K Pickup 1992",
+        "s": [
+          5
+        ],
+        "z": [
+          "Wtrysk TBI, akumulator 630 A (CCA)",
+          "Poniżej 8600 lb: Moc 157 kW (210 hp SAE netto) przy 4000 obr./min, moment 407 N·m przy 2800 obr./min",
+          "Wersja 8600–10 000 lb: Moc 142 kW (190 hp SAE netto) przy 4000 obr./min, moment 407 N·m przy 2400 obr./min"
+        ]
+      }
+    ]
+  },
+  "L19": {
+    "g": [
+      {
+        "r": "C/K Pickup 1988–1992",
+        "s": [
+          0,
+          5
+        ],
+        "z": [
+          "Benzynowy V8 7,4 l (454 cale³) z wtryskiem EFI/TBI dla cięższych wersji",
+          "Moc 172 kW (230 hp SAE netto) przy 3600 obr./min, moment 522 N·m przy 1600 obr./min"
+        ]
+      },
+      {
+        "r": "454 SS 1992",
+        "s": [
+          5
+        ],
+        "z": [
+          "Wersja do modelu 454 SS: Moc 190 kW (255 hp SAE netto) przy 4000 obr./min, moment 549 N·m przy 2400 obr./min"
+        ]
+      },
+      {
+        "r": "C/K Pickup 1995",
+        "s": [
+          12
+        ],
+        "z": [
+          "Wersja HD: Moc 172 kW (230 hp SAE netto) przy 3600 obr./min, moment 522 N·m przy 1600 obr./min",
+          "Akumulator 600 A (CCA), alternator 100 A"
+        ]
+      }
+    ]
+  },
+  "LH6": {
+    "g": [
+      {
+        "r": "C/K Pickup 1988",
+        "s": [
+          0
+        ],
+        "z": [
+          "Wolnossący diesel V8 6,2 l (379 cali³) dla DMC do 8500 lb",
+          "Ze skrzynią manualną: Moc 94 kW (126 hp SAE netto) przy 3600 obr./min, moment 325 N·m przy 2000 obr./min",
+          "Z automatem: Moc 104 kW (140 hp SAE netto) przy 3600 obr./min, moment 335 N·m przy 2000 obr./min"
+        ]
+      },
+      {
+        "r": "C/K Pickup 1992",
+        "s": [
+          5
+        ],
+        "z": [
+          "Wtrysk bezpośredni, Moc 104 kW (140 hp SAE netto) przy 3600 obr./min, moment 346 N·m przy 1900 obr./min",
+          "Dwa akumulatory po 570 A (CCA)"
+        ]
+      }
+    ]
+  },
+  "L35": {
+    "g": [
+      {
+        "r": "C/K Pickup 1996",
+        "s": [
+          15
+        ],
+        "z": [
+          "Benzynowy Vortec 4300 V6 z sekwencyjnym wtryskiem SFI",
+          "Moc 149 kW (200 hp SAE netto) przy 4400 obr./min, moment 346 N·m przy 2800 obr./min"
+        ]
+      }
+    ]
+  },
+  "L30": {
+    "g": [
+      {
+        "r": "C/K Pickup 1996",
+        "s": [
+          15
+        ],
+        "z": [
+          "Benzynowy Vortec 5000 V8 z wtryskiem SFI",
+          "Moc 164 kW (220 hp SAE netto) przy 4600 obr./min, moment 386 N·m przy 2800 obr./min"
+        ]
+      }
+    ]
+  },
+  "L31": {
+    "g": [
+      {
+        "r": "C/K Pickup 1996",
+        "s": [
+          15
+        ],
+        "z": [
+          "Benzynowy Vortec 5700 V8 z wtryskiem SFI",
+          "Moc 190 kW (255 hp SAE netto) przy 4600 obr./min, moment 447 N·m przy 2800 obr./min"
+        ]
+      }
+    ]
+  },
+  "L29": {
+    "g": [
+      {
+        "r": "C/K Pickup 1996",
+        "s": [
+          15
+        ],
+        "z": [
+          "Benzynowy Vortec 7400 V8 z sekwencyjnym wtryskiem SFI (zastąpił L19)",
+          "Moc 216 kW (290 hp SAE netto) przy 4000 obr./min, moment 556 N·m przy 3200 obr./min",
+          "Alternator 124 A"
+        ]
+      },
+      {
+        "r": "Suburban 1996",
+        "s": [
+          13
+        ],
+        "z": [
+          "Nowość roku: zastąpił L19, ma sekwencyjny wtrysk paliwa",
+          "Płyn chłodzący Dex-Cool o trwałości 5 lat / 100 000 mil (161 000 km)"
+        ]
+      },
+      {
+        "r": "C/K 2500 2000",
+        "s": [
+          56
+        ],
+        "z": [
+          "Z tym silnikiem K2500 ma seryjnie wzmocnioną chłodnicę płynu wspomagania kierownicy"
+        ]
+      }
+    ]
+  },
+  "MG5": {
+    "g": [
+      {
+        "r": "C/K Pickup 1995–1996",
+        "s": [
+          12,
+          15
+        ],
+        "z": [
+          "Manualna 5-biegowa z nadbiegiem, synchronizacja 1–5",
+          "Przełożenia: 4,02 / 2,32 / 1,40 / 1,00 / 0,73, wsteczny 3,55"
+        ]
+      }
+    ]
+  },
+  "MW3": {
+    "g": [
+      {
+        "r": "C/K Pickup 1995–1996",
+        "s": [
+          12,
+          15
+        ],
+        "z": [
+          "Manualna 5-biegowa HD z nadbiegiem i bardzo krótkim pierwszym biegiem",
+          "Przełożenia: 5,61 / 3,04 / 1,67 / 1,00 / 0,75, wsteczny 5,61",
+          "Ma otwór pod przystawkę odbioru mocy (PTO)"
+        ]
+      },
+      {
+        "r": "C/K 1998",
+        "s": [
+          57
+        ],
+        "z": [
+          "Skrzynia NV4500; olej przekładniowy SAE 75W-90 GL-4"
+        ]
+      }
+    ]
+  },
+  "M50": {
+    "g": [
+      {
+        "r": "C/K Pickup 1996",
+        "s": [
+          15
+        ],
+        "z": [
+          "Manualna 5-biegowa z nadbiegiem, tylko z L31",
+          "Przełożenia: 3,49 / 2,16 / 1,40 / 1,00 / 0,73"
+        ]
+      }
+    ]
+  },
+  "M30": {
+    "g": [
+      {
+        "r": "C/K Pickup 1995–1996",
+        "s": [
+          12,
+          15
+        ],
+        "z": [
+          "Automat 4L60-E: elektronicznie sterowany, 4 biegi z nadbiegiem",
+          "Przełożenia: 3,06 / 1,63 / 1,00 / 0,70, wsteczny 2,29"
+        ]
+      }
+    ]
+  },
+  "NP1": {
+    "g": [
+      {
+        "r": "Suburban 1996",
+        "s": [
+          13
+        ],
+        "z": [
+          "Skrzynia rozdzielcza 2-biegowa przełączana elektronicznie, tylko 4×4 — nowość 1996"
+        ]
+      }
+    ]
+  },
+  "JB5": {
+    "g": [
+      {
+        "r": "C/K 2000",
+        "s": [
+          56
+        ],
+        "z": [
+          "Wspomaganie podciśnieniowe (membranowe, serwo z podciśnieniem silnika)"
+        ]
+      }
+    ]
+  },
+  "JB6": {
+    "g": [
+      {
+        "r": "C/K 2000",
+        "s": [
+          56
+        ],
+        "z": [
+          "Wspomaganie podciśnieniowe (membranowe, serwo z podciśnieniem silnika)"
+        ]
+      }
+    ]
+  },
+  "JB7": {
+    "g": [
+      {
+        "r": "C/K 2000",
+        "s": [
+          56
+        ],
+        "z": [
+          "Wspomaganie podciśnieniowe (membranowe, serwo z podciśnieniem silnika)"
+        ]
+      }
+    ]
+  },
+  "JB8": {
+    "g": [
+      {
+        "r": "C/K 2000",
+        "s": [
+          56
+        ],
+        "z": [
+          "Wspomaganie hydrauliczne zamiast podciśnieniowego (do cięższych wersji)"
+        ]
+      }
+    ]
+  },
+  "JD5": {
+    "g": [
+      {
+        "r": "C/K 2000",
+        "s": [
+          56
+        ],
+        "z": [
+          "Wspomaganie hydrauliczne zamiast podciśnieniowego (do cięższych wersji)"
+        ]
+      }
+    ]
+  },
+  "JD6": {
+    "g": [
+      {
+        "r": "C/K 2000",
+        "s": [
+          56
+        ],
+        "z": [
+          "Wspomaganie hydrauliczne zamiast podciśnieniowego (do cięższych wersji)"
+        ]
+      }
+    ]
+  },
+  "JD7": {
+    "g": [
+      {
+        "r": "C/K 2000",
+        "s": [
+          56
+        ],
+        "z": [
+          "Wspomaganie hydrauliczne zamiast podciśnieniowego (do cięższych wersji)"
+        ]
+      }
+    ]
+  },
+  "G80": {
+    "g": [
+      {
+        "r": "C/K Pickup 1989–1995",
+        "s": [
+          1,
+          9
+        ],
+        "z": [
+          "Samoblokujący mechanizm różnicowy tylnego mostu (Locking Differential) — przy poślizgu jednego koła blokuje się i napędza oba",
+          "Nie z każdym przełożeniem mostu (1994: nie z GU4, czyli 3,08)"
+        ]
+      }
+    ]
+  },
+  "F44": {
+    "g": [
+      {
+        "r": "C/K Pickup 1994",
+        "s": [
+          9
+        ],
+        "z": [
+          "Tylko K1500 Extended Cab; w zestawie z dieslem L49 lub L56"
+        ]
+      }
+    ]
+  },
+  "F51": {
+    "g": [
+      {
+        "r": "C/K 1500 1988–1989",
+        "s": [
+          0,
+          1
+        ],
+        "z": [
+          "Wzmocnione amortyzatory przednie i tylne",
+          "W zestawie z pakietem holowniczym Z82; niedostępne z pakietem terenowym Z71"
+        ]
+      }
+    ]
+  },
+  "F60": {
+    "g": [
+      {
+        "r": "Suburban 1992",
+        "s": [
+          4
+        ],
+        "z": [
+          "Wzmocnione przednie drążki skrętne (4×4): nośność 1963 lb (890 kg) na stronę w K1500, 2125 lb (964 kg) w K2500",
+          "Zalecane przy osprzęcie montowanym z przodu (np. pług)"
+        ]
+      },
+      {
+        "r": "C/K Pickup 1993–1994",
+        "s": [
+          7,
+          9
+        ],
+        "z": [
+          "Wzmocnione przednie sprężyny/drążki skrętne, tylko 4×4; w zestawie z VYU (pług)"
+        ]
+      }
+    ]
+  },
+  "F59": {
+    "g": [
+      {
+        "r": "C/K Pickup 1988–1989",
+        "s": [
+          0,
+          1
+        ],
+        "z": [
+          "Przedni stabilizator o średnicy 1 cala (25 mm)",
+          "W zestawie z Z71 (terenowy) i Z81 (kamper)"
+        ]
+      }
+    ]
+  },
+  "F61": {
+    "g": [
+      {
+        "r": "C/K 3500 1993–1995",
+        "s": [
+          7,
+          12
+        ],
+        "z": [
+          "Tylny stabilizator, tylko modele C/K31003 i 31403"
+        ]
+      }
+    ]
+  },
+  "5J9": {
+    "g": [
+      {
+        "r": "C/K Pickup 1993",
+        "s": [
+          7
+        ],
+        "z": [
+          "Tylne sprężyny pomocnicze do korekty wysokości, tylko C20903, nośność osi 6000 lb (2722 kg)"
+        ]
+      }
+    ]
+  },
+  "VR4": {
+    "g": [
+      {
+        "r": "C/K Pickup 1988–1990",
+        "s": [
+          0,
+          2
+        ],
+        "z": [
+          "Hak platformowy przystosowany do zaczepu z rozkładem nacisku (weight distributing)",
+          "Wymaga zderzaka ze stopniem V43 lub VB3; w zestawie z Z82"
+        ]
+      }
+    ]
+  },
+  "V76": {
+    "g": [
+      {
+        "r": "C/K Pickup 1988–1994",
+        "s": [
+          0,
+          9
+        ],
+        "z": [
+          "Dwa przednie haki holownicze; seryjne w K2500 (1994)"
+        ]
+      }
+    ]
+  },
+  "UY7": {
+    "g": [
+      {
+        "r": "C/K Pickup 1990–1993",
+        "s": [
+          2,
+          7
+        ],
+        "z": [
+          "Wzmocniona 7-przewodowa wiązka elektryczna do przyczepy; w zestawie z Z82"
+        ]
+      }
+    ]
+  },
+  "C36": {
+    "g": [
+      {
+        "r": "Suburban 1992–1996",
+        "s": [
+          4,
+          13
+        ],
+        "z": [
+          "Dodatkowa nagrzewnica dla pasażerów z tyłu"
+        ]
+      }
+    ]
+  },
+  "C49": {
+    "g": [
+      {
+        "r": "C/K Pickup 1989",
+        "s": [
+          1
+        ],
+        "z": [
+          "Elektrycznie podgrzewana tylna szyba; nie z przesuwną tylną szybą A28"
+        ]
+      },
+      {
+        "r": "Suburban 1994–1995",
+        "s": [
+          8,
+          10
+        ],
+        "z": [
+          "Elektryczne ogrzewanie szyby tylnej (w drzwiach panelowych lub klapie); w zestawie z ZP6 (wycieraczka/spryskiwacz)"
+        ]
+      }
+    ]
+  },
+  "K05": {
+    "g": [
+      {
+        "r": "C/K Pickup 1988–1989",
+        "s": [
+          0,
+          1
+        ],
+        "z": [
+          "Grzałka bloku silnika 600 W na 120 V (do gniazdka); w pakiecie Cold Climate V10"
+        ]
+      }
+    ]
+  },
+  "K47": {
+    "g": [
+      {
+        "r": "Suburban 1996",
+        "s": [
+          13
+        ],
+        "z": [
+          "Filtr powietrza o zwiększonej pojemności; nie z dieslem"
+        ]
+      }
+    ]
+  },
+  "KC4": {
+    "g": [
+      {
+        "r": "C/K Pickup 1990–1993",
+        "s": [
+          2,
+          7
+        ],
+        "z": [
+          "Chłodnica oleju silnikowego; w zestawie z pakietem holowniczym Z82, nie z dieslem"
+        ]
+      },
+      {
+        "r": "C/K 2000",
+        "s": [
+          56
+        ],
+        "z": [
+          "Chłodnica oleju typu ciecz–olej, tylko silniki benzynowe"
+        ]
+      }
+    ]
+  },
+  "KNP": {
+    "g": [
+      {
+        "r": "C/K Pickup 1994",
+        "s": [
+          9
+        ],
+        "z": [
+          "Dodatkowa chłodnica oleju skrzyni automatycznej (HD)"
+        ]
+      },
+      {
+        "r": "C/K 2000",
+        "s": [
+          56
+        ],
+        "z": [
+          "Dodatkowa wzmocniona chłodnica oleju skrzyni, tylko z automatem"
+        ]
+      }
+    ]
+  },
+  "V01": {
+    "g": [
+      {
+        "r": "C/K Pickup 1992",
+        "s": [
+          5
+        ],
+        "z": [
+          "Wzmocniona chłodnica silnika do holowania, jazdy terenowej i ciężkiej pracy"
+        ]
+      }
+    ]
+  },
+  "V02": {
+    "g": [
+      {
+        "r": "C/K Pickup 1989–1992",
+        "s": [
+          1,
+          5
+        ],
+        "z": [
+          "Wzmocniona chłodnica silnika plus chłodnica oleju skrzyni automatycznej, do holowania i ciężkiej pracy",
+          "W zestawie z pakietem holowniczym Z82"
+        ]
+      }
+    ]
+  },
+  "V08": {
+    "g": [
+      {
+        "r": "C/K Pickup i Suburban 1994",
+        "s": [
+          9,
+          8
+        ],
+        "z": [
+          "Chłodnice oleju silnika i skrzyni (tylko automat); w zestawie z Z82"
+        ]
+      }
+    ]
+  },
+  "TP2": {
+    "g": [
+      {
+        "r": "C/K Pickup 1988–1992",
+        "s": [
+          0,
+          1,
+          5
+        ],
+        "z": [
+          "Dodatkowy akumulator Delco Freedom 540 A (CCA) do zasilania kampera; w zestawie z Z81, nie z dieslem"
+        ]
+      }
+    ]
+  },
+  "UA1": {
+    "g": [
+      {
+        "r": "C/K Pickup 1988–1989",
+        "s": [
+          0,
+          1
+        ],
+        "z": [
+          "Wzmocniony akumulator Delco Freedom 630 A (CCA); w pakiecie V10 (bez L19)"
+        ]
+      }
+    ]
+  },
+  "N05": {
+    "g": [
+      {
+        "r": "C/K Pickup 1988",
+        "s": [
+          0
+        ],
+        "z": [
+          "Korek wlewu paliwa zamykany na kluczyk"
+        ]
+      }
+    ]
+  },
+  "NJ8": {
+    "g": [
+      {
+        "r": "C/K Pickup 1988–1989",
+        "s": [
+          0,
+          1
+        ],
+        "z": [
+          "Zbiornik(i) paliwa o łącznej pojemności ok. 34 galonów (129 l); w zestawie z kamperem Z81"
+        ]
+      }
+    ]
+  },
+  "NK7": {
+    "g": [
+      {
+        "r": "C/K 3500 1993–1995",
+        "s": [
+          7,
+          12
+        ],
+        "z": [
+          "Zbiornik paliwa ok. 31 galonów (117 l), tylko modele C/K31003, 31403 i C31803"
+        ]
+      }
+    ]
+  },
+  "NM8": {
+    "g": [
+      {
+        "r": "C/K 2000",
+        "s": [
+          56
+        ],
+        "z": [
+          "Do silników L29/L30/L31/L35 montowany jest inny zespół rury (inny numer części GM) niż bez tej opcji"
+        ]
+      }
+    ]
+  },
+  "K46": {
+    "g": [
+      {
+        "r": "C/K Pickup 1988–1989",
+        "s": [
+          0,
+          1
+        ],
+        "z": [
+          "Wzmocniony filtr powietrza ze wstępnym oczyszczaczem (pre-cleaner)"
+        ]
+      }
+    ]
+  },
+  "C42": {
+    "g": [
+      {
+        "r": "C/K Pickup 1988–1989",
+        "s": [
+          0,
+          1
+        ],
+        "z": [
+          "Wzmocnione ogrzewanie z nawiewem na szybę; w pakiecie V10, nie z klimatyzacją C60"
+        ]
+      }
+    ]
+  },
+  "8W5": {
+    "g": [
+      {
+        "r": "C/K Pickup 1993",
+        "s": [
+          7
+        ],
+        "z": [
+          "Alternator Delco 105 A, z silnikami 5,7 l, 6,2 l lub 7,4 l"
+        ]
+      }
+    ]
+  },
+  "A20": {
+    "g": [
+      {
+        "r": "C/K Pickup 1989–1994",
+        "s": [
+          1,
+          9
+        ],
+        "z": [
+          "Uchylne (otwierane na zawiasach) boczne szyby z tyłu kabiny, tylko Extended Cab",
+          "W zestawie z szybami przyciemnianymi AJ1 lub AA3 albo z dekorem Silverado"
+        ]
+      }
+    ]
+  },
+  "A28": {
+    "g": [
+      {
+        "r": "C/K Pickup 1989–1994",
+        "s": [
+          1,
+          9
+        ],
+        "z": [
+          "Przesuwana tylna szyba kabiny na całą szerokość",
+          "Nie z ogrzewaniem tylnej szyby C49"
+        ]
+      }
+    ]
+  },
+  "AA3": {
+    "g": [
+      {
+        "r": "C/K Pickup 1988–1989",
+        "s": [
+          0,
+          1
+        ],
+        "z": [
+          "Mocno przyciemniane szyby, tylna szyba przyciemniona lekko; tylko Extended Cab",
+          "W zestawie uchylne tylne szyby boczne A20"
+        ]
+      }
+    ]
+  },
+  "A01": {
+    "g": [
+      {
+        "r": "C/K Pickup 1988–1989",
+        "s": [
+          0,
+          1
+        ],
+        "z": [
+          "Wszystkie szyby lekko przyciemniane; seryjnie w Extended Cab"
+        ]
+      }
+    ]
+  },
+  "AG9": {
+    "g": [
+      {
+        "r": "C/K Pickup i Suburban 1992–1995",
+        "s": [
+          5,
+          4,
+          10
+        ],
+        "z": [
+          "Elektryczna regulacja fotela kierowcy",
+          "Wymaga dzielonej kanapy lub foteli kubełkowych (nie z pełną kanapą)"
+        ]
+      }
+    ]
+  },
+  "AM7": {
+    "g": [
+      {
+        "r": "C/K Pickup 1988–1990",
+        "s": [
+          0,
+          2
+        ],
+        "z": [
+          "Składana tylna kanapa w Extended Cab",
+          "W zestawie z przednimi fotelami kubełkowymi lub dzieloną kanapą"
+        ]
+      }
+    ]
+  },
+  "APC": {
+    "g": [
+      {
+        "r": "C/K Pickup 1994",
+        "s": [
+          9
+        ],
+        "z": [
+          "Same mocowania pasów bezpieczeństwa pod fotele kubełkowe (fotele montuje zabudowca), wymaga VK5"
+        ]
+      }
+    ]
+  },
+  "APD": {
+    "g": [
+      {
+        "r": "C/K Pickup 1994",
+        "s": [
+          9
+        ],
+        "z": [
+          "Same mocowania pasów bezpieczeństwa pod kanapę (kanapę montuje zabudowca), wymaga VK5"
+        ]
+      }
+    ]
+  },
+  "ATZ": {
+    "g": [
+      {
+        "r": "Suburban 1993–1994",
+        "s": [
+          6,
+          9
+        ],
+        "z": [
+          "Bez przedniej i środkowej kanapy (wymaga VK5) — auto pod zabudowę"
+        ]
+      }
+    ]
+  },
+  "AU3": {
+    "g": [
+      {
+        "r": "Suburban 1992",
+        "s": [
+          4
+        ],
+        "z": [
+          "Centralny zamek czterech drzwi bocznych i tylnych drzwi panelowych",
+          "W zestawie z ZQ2 lub dekorem Silverado"
+        ]
+      }
+    ]
+  },
+  "B32": {
+    "g": [
+      {
+        "r": "C/K Pickup 1988–1989",
+        "s": [
+          0,
+          1
+        ],
+        "z": [
+          "Zdejmowane dywaniki przednie w kolorze wnętrza; wymaga dekoru Silverado"
+        ]
+      }
+    ]
+  },
+  "B33": {
+    "g": [
+      {
+        "r": "C/K Pickup 1988–1989",
+        "s": [
+          0,
+          1
+        ],
+        "z": [
+          "Zdejmowane dywaniki tylne w kolorze wnętrza; tylko Extended Cab z kanapą AM7 i dywanikami B32"
+        ]
+      }
+    ]
+  },
+  "BG9": {
+    "g": [
+      {
+        "r": "C/K Pickup 1993–1995",
+        "s": [
+          7,
+          12
+        ],
+        "z": [
+          "Pełna gumowa wykładzina podłogi w kolorze wnętrza zamiast dywanu i dywaników"
+        ]
+      },
+      {
+        "r": "C/K 2000",
+        "s": [
+          56
+        ],
+        "z": [
+          "Wzmocnione gumowe maty podłogowe"
+        ]
+      }
+    ]
+  },
+  "BNP": {
+    "g": [
+      {
+        "r": "C/K Pickup 1994",
+        "s": [
+          9
+        ],
+        "z": [
+          "Usunięcie listew nadkoli (tańsza wersja)",
+          "Niedostępne m.in. z podwójnymi tylnymi kołami R05"
+        ]
+      }
+    ]
+  },
+  "BVE": {
+    "g": [
+      {
+        "r": "Suburban 1996",
+        "s": [
+          13
+        ],
+        "z": [
+          "Czarne boczne stopnie (running boards) o nośności 600 lb (272 kg), montowane przez dealera"
+        ]
+      }
+    ]
+  },
+  "BZY": {
+    "g": [
+      {
+        "r": "C/K Pickup 1992–1994",
+        "s": [
+          5,
+          7,
+          9
+        ],
+        "z": [
+          "Wkładka skrzyni ładunkowej (pod krawędzią burt), tylko Fleetside E63",
+          "Nie z kołem zapasowym mocowanym z boku skrzyni P13"
+        ]
+      }
+    ]
+  },
+  "C25": {
+    "g": [
+      {
+        "r": "Suburban 1992–1996",
+        "s": [
+          4,
+          8,
+          13
+        ],
+        "z": [
+          "Wycieraczka z przerywaną pracą i spryskiwacz tylnej szyby",
+          "W zestawie z ZP6 (razem z ogrzewaniem tylnej szyby C49)"
+        ]
+      }
+    ]
+  },
+  "D44": {
+    "g": [
+      {
+        "r": "C/K Pickup 1988–1990",
+        "s": [
+          0,
+          1,
+          2
+        ],
+        "z": [
+          "Lusterka zewnętrzne lewe i prawe poniżej linii wzroku, malowane na czarno, 9×6,5 cala (229×165 mm)"
+        ]
+      }
+    ]
+  },
+  "D45": {
+    "g": [
+      {
+        "r": "C/K Pickup 1988–1992",
+        "s": [
+          0,
+          2,
+          5
+        ],
+        "z": [
+          "Lusterka zewnętrzne lewe i prawe poniżej linii wzroku ze stali nierdzewnej, 9×6,5 cala (229×165 mm)",
+          "Nie z pakietem Sport BYP"
+        ]
+      }
+    ]
+  },
+  "D48": {
+    "g": [
+      {
+        "r": "C/K Pickup i Suburban 1992–1994",
+        "s": [
+          4,
+          6,
+          9
+        ],
+        "z": [
+          "Lusterka zewnętrzne poniżej linii wzroku, regulowane elektrycznie z wnętrza, czarne (lustro 6,5×9 cala)",
+          "Suburban 1992: tylko z Silverado i ZQ2"
+        ]
+      }
+    ]
+  },
+  "D55": {
+    "g": [
+      {
+        "r": "C/K Pickup 1988–1994",
+        "s": [
+          0,
+          1,
+          9
+        ],
+        "z": [
+          "Konsola podłogowa między przednimi fotelami; wymaga foteli kubełkowych"
+        ]
+      }
+    ]
+  },
+  "D85": {
+    "g": [
+      {
+        "r": "C/K Pickup 1991–1992",
+        "s": [
+          3,
+          4
+        ],
+        "z": [
+          "Dolny pasek ozdobny na boku nadwozia (kolory wg tabeli lakierów); wymaga lakieru dwukolorowego ZY1 lub ZY2"
+        ]
+      }
+    ]
+  },
+  "DD7": {
+    "g": [
+      {
+        "r": "Suburban 1995",
+        "s": [
+          10
+        ],
+        "z": [
+          "Lusterko wewnętrzne 10 cali (254 mm), samościemniające (elektrochromatyczne), z kompasem 8-kierunkowym"
+        ]
+      }
+    ]
+  },
+  "DF2": {
+    "g": [
+      {
+        "r": "C/K Pickup 1990–1993",
+        "s": [
+          2,
+          5,
+          7
+        ],
+        "z": [
+          "Lusterka typu kamper ze stali nierdzewnej, lustro 7,5×10,5 cala (191×267 mm) na wysięgniku",
+          "W zestawie z pakietem kamper Z81; nie z pakietem Sport BYP"
+        ]
+      }
+    ]
+  },
+  "DG5": {
+    "g": [
+      {
+        "r": "C/K Pickup 1993–1995",
+        "s": [
+          7,
+          12
+        ],
+        "z": [
+          "Duże lusterka typu „West Coast” ze stali nierdzewnej, lewe i prawe; lustro 7×16 cali (178×406 mm) w 1995"
+        ]
+      }
+    ]
+  },
+  "DK6": {
+    "g": [
+      {
+        "r": "C/K Pickup 1994",
+        "s": [
+          9
+        ],
+        "z": [
+          "Konsola sufitowa; wymaga foteli kubełkowych lub VK5"
+        ]
+      }
+    ]
+  },
+  "E62": {
+    "g": [
+      {
+        "r": "C/K Pickup 1989–1990",
+        "s": [
+          1,
+          2
+        ],
+        "z": [
+          "Skrzynia Sportside/Stepside z wystającymi błotnikami tylnymi i stopniem, długość 6,5 stopy (1,98 m)"
+        ]
+      }
+    ]
+  },
+  "E63": {
+    "g": [
+      {
+        "r": "C/K Pickup 1989–1990",
+        "s": [
+          1,
+          2
+        ],
+        "z": [
+          "Skrzynia Fleetside/Wideside z prostymi burtami — wersja o najwyższym DMC, także z silnikiem 7,4 l"
+        ]
+      }
+    ]
+  },
+  "N33": {
+    "g": [
+      {
+        "r": "C/K Pickup 1988–1989",
+        "s": [
+          0,
+          1
+        ],
+        "z": [
+          "Kolumna kierownicy z regulacją pochylenia (Comfortilt)"
+        ]
+      }
+    ]
+  },
+  "U01": {
+    "g": [
+      {
+        "r": "C/K Pickup 1990–1992",
+        "s": [
+          2,
+          3,
+          5
+        ],
+        "z": [
+          "Pięć lamp obrysowych na dachu kabiny; w zestawie z podwójnymi tylnymi kołami R05",
+          "Nie z kalifornijską homologacją YF5"
+        ]
+      }
+    ]
+  },
+  "U88": {
+    "g": [
+      {
+        "r": "Suburban 1992–1993",
+        "s": [
+          4,
+          6
+        ],
+        "z": [
+          "Zestaw głośników premium; wymaga dekoru Silverado, pakietu ZQ2 i radia UX1"
+        ]
+      }
+    ]
+  },
+  "UF2": {
+    "g": [
+      {
+        "r": "C/K Pickup 1990–1993",
+        "s": [
+          2,
+          5,
+          7
+        ],
+        "z": [
+          "Lampa oświetlająca skrzynię ładunkową; w zestawie z pakietem oświetlenia TR9"
+        ]
+      }
+    ]
+  },
+  "UM6": {
+    "g": [
+      {
+        "r": "C/K Pickup 1994",
+        "s": [
+          9
+        ],
+        "z": [
+          "Radio AM/FM stereo ze strojeniem elektronicznym, wyszukiwaniem stacji, magnetofonem i zegarem cyfrowym; z anteną masztową"
+        ]
+      }
+    ]
+  },
+  "U63": {
+    "g": [
+      {
+        "r": "C/K Pickup 1988–1992",
+        "s": [
+          0,
+          3,
+          5
+        ],
+        "z": [
+          "Radio tylko AM; w WT1500 jako opcja"
+        ]
+      }
+    ]
+  },
+  "U73": {
+    "g": [
+      {
+        "r": "C/K Pickup 1988–1989",
+        "s": [
+          0,
+          1
+        ],
+        "z": [
+          "Stała antena masztowa; w zestawie z każdym radiem"
+        ]
+      }
+    ]
+  },
+  "UK4": {
+    "g": [
+      {
+        "r": "C/K Pickup 1988",
+        "s": [
+          0
+        ],
+        "z": [
+          "Radio AM/FM stereo ze strojeniem elektronicznym i wyszukiwaniem stacji (seek/scan)"
+        ]
+      }
+    ]
+  },
+  "UK5": {
+    "g": [
+      {
+        "r": "C/K Pickup 1988",
+        "s": [
+          0
+        ],
+        "z": [
+          "Radio AM/FM stereo ze strojeniem elektronicznym, seek/scan i magnetofonem stereo"
+        ]
+      }
+    ]
+  },
+  "UP4": {
+    "g": [
+      {
+        "r": "C/K Pickup 1993–1994",
+        "s": [
+          7,
+          9
+        ],
+        "z": [
+          "Radio AM ze strojeniem elektronicznym, ze stałą anteną masztową"
+        ]
+      }
+    ]
+  },
+  "UL5": {
+    "g": [
+      {
+        "r": "C/K Pickup 1991–1994",
+        "s": [
+          3,
+          5,
+          9
+        ],
+        "z": [
+          "Brak radia (zaślepka); seryjnie w WT1500"
+        ]
+      }
+    ]
+  },
+  "V27": {
+    "g": [
+      {
+        "r": "C/K Pickup 1989–1994",
+        "s": [
+          1,
+          9
+        ],
+        "z": [
+          "Czarne osłony (kły) przedniego zderzaka; wymagają chromowanego zderzaka VG3 lub dekoru Silverado"
+        ]
+      }
+    ]
+  },
+  "V43": {
+    "g": [
+      {
+        "r": "C/K Pickup 1993–1994",
+        "s": [
+          7,
+          9
+        ],
+        "z": [
+          "Lakierowany tylny zderzak ze stopniem; tylko Fleetside E63"
+        ]
+      }
+    ]
+  },
+  "V54": {
+    "g": [
+      {
+        "r": "Suburban 1993–1994",
+        "s": [
+          6,
+          8
+        ],
+        "z": [
+          "Bagażnik dachowy (relingi) lakierowany na czarno"
+        ]
+      }
+    ]
+  },
+  "VB3": {
+    "g": [
+      {
+        "r": "C/K Pickup 1989–1994",
+        "s": [
+          1,
+          9
+        ],
+        "z": [
+          "Chromowany tylny zderzak ze stopniem i gumową listwą; wymaga przedniego zderzaka VG3 lub dekoru Silverado"
+        ]
+      }
+    ]
+  },
+  "VG3": {
+    "g": [
+      {
+        "r": "C/K Pickup 1989–1994",
+        "s": [
+          1,
+          3,
+          9
+        ],
+        "z": [
+          "Chromowany przedni zderzak Deluxe z gumową listwą; w zestawie z dekorem Scottsdale lub Silverado"
+        ]
+      }
+    ]
+  },
+  "YG4": {
+    "g": [
+      {
+        "r": "C/K Pickup 1993–1994",
+        "s": [
+          7,
+          9
+        ],
+        "z": [
+          "Rezygnacja z tylnej 3-osobowej kanapy w Extended Cab"
+        ]
+      }
+    ]
+  },
+  "7L4": {
+    "g": [
+      {
+        "r": "C/K Pickup 1993",
+        "s": [
+          7
+        ],
+        "z": [
+          "Ręczny gaz (regulowany, wyciągany cięgnem)"
+        ]
+      }
+    ]
+  },
+  "7Z1": {
+    "g": [
+      {
+        "r": "C/K Pickup 1993",
+        "s": [
+          7
+        ],
+        "z": [
+          "Dodatkowy klakson o wysokim tonie; w zestawie z C3500 HD"
+        ]
+      }
+    ]
+  },
+  "9W7": {
+    "g": [
+      {
+        "r": "C/K Pickup 1993",
+        "s": [
+          7
+        ],
+        "z": [
+          "Sygnał ostrzegający o niewyłączonych światłach; w zestawie z pakietem oświetlenia TR9"
+        ]
+      }
+    ]
+  },
+  "6L8": {
+    "g": [
+      {
+        "r": "C/K Pickup 1993",
+        "s": [
+          7
+        ],
+        "z": [
+          "Lusterka zewnętrzne Velvac ze stali nierdzewnej: płaskie 6,5×10 cali i wypukłe 6,5×6 cali po każdej stronie"
+        ]
+      }
+    ]
+  },
+  "TT4": {
+    "g": [
+      {
+        "r": "C/K Pickup 1988–1989",
+        "s": [
+          0,
+          1
+        ],
+        "z": [
+          "Halogenowe reflektory; w zestawie z pakietem V22 lub dekorem Silverado"
+        ]
+      }
+    ]
+  },
+  "U37": {
+    "g": [
+      {
+        "r": "C/K Pickup 1988–1989",
+        "s": [
+          0,
+          1
+        ],
+        "z": [
+          "Zapalniczka; w zestawie z dekorem Silverado"
+        ]
+      }
+    ]
+  },
+  "Z53": {
+    "g": [
+      {
+        "r": "C/K Pickup 1988–1989",
+        "s": [
+          0,
+          1
+        ],
+        "z": [
+          "Dodatkowe wskaźniki: woltomierz, temperatura płynu i ciśnienie oleju; w zestawie z Silverado"
+        ]
+      }
+    ]
+  },
+  "B84": {
+    "g": [
+      {
+        "r": "C/K Pickup 1989–1991",
+        "s": [
+          2,
+          3
+        ],
+        "z": [
+          "Czarne listwy boczne nadwozia; w zestawie z dekorem Scottsdale bez pakietu Sport",
+          "Nie z podwójnymi tylnymi kołami R05"
+        ]
+      }
+    ]
+  },
+  "B96": {
+    "g": [
+      {
+        "r": "C/K Pickup 1988–1989",
+        "s": [
+          0,
+          1
+        ],
+        "z": [
+          "Chromowane listwy nadkoli; w zestawie z dekorem Silverado (bez pakietu Sport)"
+        ]
+      }
+    ]
+  },
+  "B71": {
+    "g": [
+      {
+        "r": "Suburban 1993–1995",
+        "s": [
+          6,
+          10,
+          13
+        ],
+        "z": [
+          "Poszerzenia nadkoli (wheel flares), tylko 4×4; wymagają opon LT245, seryjne w K2500"
+        ]
+      }
+    ]
+  },
+  "3EC": {
+    "w": "Oznaczenie: opona do lekkiej ciężarówki (LT); szerokość 215 mm, profil 85% szerokości, felga 16 cala (406 mm); nośność E (10 warstw); czarny bok; opona radialna, osnowa stalowa; bezdętkowa; bieżnik szosowy (highway).",
+    "g": []
+  },
+  "3ED": {
+    "w": "Oznaczenie: opona do lekkiej ciężarówki (LT); szerokość 215 mm, profil 85% szerokości, felga 16 cala (406 mm); nośność E (10 warstw); czarny bok; opona radialna, osnowa stalowa; bezdętkowa; bieżnik całoroczny (all season); opasanie stalowe.",
+    "g": []
+  },
+  "4EC": {
+    "w": "Oznaczenie: opona do lekkiej ciężarówki (LT); szerokość 215 mm, profil 85% szerokości, felga 16 cala (406 mm); nośność E (10 warstw); czarny bok; opona radialna, osnowa stalowa; bezdętkowa; bieżnik szosowy (highway); opasanie stalowe.",
+    "g": []
+  },
+  "4ED": {
+    "w": "Oznaczenie: opona do lekkiej ciężarówki (LT); szerokość 215 mm, profil 85% szerokości, felga 16 cala (406 mm); nośność E (10 warstw); czarny bok; opona radialna, osnowa stalowa; bezdętkowa; bieżnik całoroczny (all season); opasanie stalowe.",
+    "g": []
+  },
+  "Q2G": {
+    "w": "Oznaczenie: opona osobowa (P-metric); szerokość 235 mm, profil 70% szerokości, felga 15 cala (381 mm); czarny bok; opona radialna, osnowa poliestrowa; bezdętkowa; indeks nośności 102, prędkość do 240 km/h; opasanie stalowe.",
+    "g": []
+  },
+  "QBN": {
+    "w": "Oznaczenie: opona do lekkiej ciężarówki (LT); szerokość 245 mm, profil 75% szerokości, felga 16 cala (406 mm); nośność C (odpowiednik 6 warstw); czarny bok; opona radialna, osnowa poliestrowa; bezdętkowa; bieżnik szosowo-terenowy (on/off road); opasanie stalowe.",
+    "g": []
+  },
+  "QBX": {
+    "w": "Oznaczenie: opona do lekkiej ciężarówki (LT); szerokość 245 mm, profil 75% szerokości, felga 16 cala (406 mm); nośność C (odpowiednik 6 warstw); napisy obwiedzione na biało; opona radialna, osnowa poliestrowa; bezdętkowa; bieżnik szosowo-terenowy (on/off road); opasanie stalowe.",
+    "g": []
+  },
+  "QFL": {
+    "w": "Oznaczenie: opona osobowa (P-metric); szerokość 235 mm, profil 75% szerokości, felga 15 cala (381 mm); czarny bok; opona radialna, osnowa poliestrowa; bezdętkowa; bieżnik całoroczny (all season); indeks nośności 105, prędkość do 180 km/h; opasanie stalowe.",
+    "g": []
+  },
+  "QFN": {
+    "w": "Oznaczenie: opona osobowa (P-metric); szerokość 235 mm, profil 75% szerokości, felga 15 cala (381 mm); białe napisy; opona radialna, osnowa poliestrowa; bezdętkowa; bieżnik całoroczny (all season); indeks nośności 105, prędkość do 180 km/h; opasanie stalowe.",
+    "g": []
+  },
+  "QGA": {
+    "w": "Oznaczenie: opona osobowa (P-metric); szerokość 245 mm, profil 75% szerokości, felga 16 cala (406 mm); czarny bok; opona radialna, osnowa poliestrowa; bezdętkowa; bieżnik całoroczny (all season); indeks nośności 109, prędkość do 180 km/h; opasanie stalowe.",
+    "g": []
+  },
+  "QGB": {
+    "w": "Oznaczenie: opona osobowa (P-metric); szerokość 245 mm, profil 75% szerokości, felga 16 cala (406 mm); napisy obwiedzione na biało; opona radialna, osnowa poliestrowa; bezdętkowa; bieżnik całoroczny (all season); indeks nośności 109, prędkość do 180 km/h; opasanie stalowe.",
+    "g": []
+  },
+  "QGC": {
+    "w": "Oznaczenie: opona osobowa (P-metric); szerokość 265 mm, profil 75% szerokości, felga 16 cala (406 mm); czarny bok; opona radialna, osnowa poliestrowa; bezdętkowa; bieżnik całoroczny (all season); indeks nośności 114, prędkość do 180 km/h; opasanie stalowe.",
+    "g": []
+  },
+  "QGD": {
+    "w": "Oznaczenie: opona osobowa (P-metric); szerokość 265 mm, profil 75% szerokości, felga 16 cala (406 mm); napisy obwiedzione na biało; opona radialna, osnowa poliestrowa; bezdętkowa; bieżnik całoroczny (all season); indeks nośności 114, prędkość do 180 km/h; opasanie stalowe.",
+    "g": []
+  },
+  "QHA": {
+    "w": "Oznaczenie: opona osobowa (P-metric); szerokość 235 mm, profil 75% szerokości, felga 15 cala (381 mm); wersja o podwyższonej nośności (XL); czarny bok; opona radialna, osnowa poliestrowa; bezdętkowa; bieżnik całoroczny (all season); opasanie stalowe.",
+    "g": []
+  },
+  "QHM": {
+    "w": "Oznaczenie: opona osobowa (P-metric); szerokość 235 mm, profil 75% szerokości, felga 15 cala (381 mm); wersja o podwyższonej nośności (XL); napisy obwiedzione na biało; opona radialna, osnowa poliestrowa; bezdętkowa; bieżnik całoroczny (all season); indeks nośności 108, prędkość do 180 km/h; opasanie stalowe.",
+    "g": []
+  },
+  "QIT": {
+    "w": "Oznaczenie: opona do lekkiej ciężarówki (LT); szerokość 245 mm, profil 75% szerokości, felga 16 cala (406 mm); nośność C (odpowiednik 6 warstw); czarny bok; opona radialna, osnowa poliestrowa; radialna z opasaniem stalowym; bieżnik całoroczny (all season).",
+    "g": []
+  },
+  "QIW": {
+    "w": "Oznaczenie: opona osobowa (P-metric); szerokość 245 mm, profil 75% szerokości, felga 16 cala (406 mm); czarny bok; opona radialna, osnowa poliestrowa; bezdętkowa; bieżnik szosowo-terenowy (on/off road); opasanie stalowe.",
+    "g": []
+  },
+  "QIX": {
+    "w": "Oznaczenie: opona do lekkiej ciężarówki (LT); szerokość 265 mm, profil 75% szerokości, felga 16 cala (406 mm); nośność C (odpowiednik 6 warstw); czarny bok; opona radialna, osnowa poliestrowa; radialna z opasaniem stalowym; bieżnik szosowo-terenowy (on/off road).",
+    "g": []
+  },
+  "QIY": {
+    "w": "Oznaczenie: opona do lekkiej ciężarówki (LT); szerokość 265 mm, profil 75% szerokości, felga 16 cala (406 mm); nośność C (odpowiednik 6 warstw); napisy obwiedzione na biało; opona radialna, osnowa poliestrowa; radialna z opasaniem stalowym; bieżnik szosowo-terenowy (on/off road).",
+    "g": []
+  },
+  "QIZ": {
+    "w": "Oznaczenie: opona osobowa (P-metric); szerokość 245 mm, profil 75% szerokości, felga 16 cala (406 mm); czarny bok; opona radialna, osnowa poliestrowa; bezdętkowa; bieżnik całoroczny (all season); opasanie stalowe.",
+    "g": []
+  },
+  "QMJ": {
+    "w": "Oznaczenie: opona osobowa (P-metric); szerokość 265 mm, profil 70% szerokości, felga 16 cala (406 mm); czarny bok; opona radialna, osnowa poliestrowa; bezdętkowa; indeks nośności 111, prędkość do 180 km/h; opasanie stalowe.",
+    "g": []
+  },
+  "XBN": {
+    "w": "Oznaczenie: opona do lekkiej ciężarówki (LT); szerokość 245 mm, profil 75% szerokości, felga 16 cala (406 mm); nośność C (odpowiednik 6 warstw); czarny bok; opona radialna, osnowa poliestrowa; bezdętkowa; bieżnik szosowo-terenowy (on/off road); opasanie stalowe.",
+    "g": []
+  },
+  "XBX": {
+    "w": "Oznaczenie: opona do lekkiej ciężarówki (LT); szerokość 245 mm, profil 75% szerokości, felga 16 cala (406 mm); nośność C (odpowiednik 6 warstw); napisy obwiedzione na biało; opona radialna, osnowa poliestrowa; bezdętkowa; bieżnik szosowo-terenowy (on/off road); opasanie stalowe.",
+    "g": []
+  },
+  "XFL": {
+    "w": "Oznaczenie: opona osobowa (P-metric); szerokość 235 mm, profil 75% szerokości, felga 15 cala (381 mm); bezdętkowa; bieżnik całoroczny (all season); opasanie stalowe.",
+    "g": []
+  },
+  "XFN": {
+    "w": "Oznaczenie: opona osobowa (P-metric); szerokość 235 mm, profil 75% szerokości, felga 15 cala (381 mm); białe napisy; opona radialna, osnowa poliestrowa; bezdętkowa; bieżnik całoroczny (all season); indeks nośności 105, prędkość do 180 km/h; opasanie stalowe.",
+    "g": []
+  },
+  "XGA": {
+    "w": "Oznaczenie: opona osobowa (P-metric); szerokość 245 mm, profil 75% szerokości, felga 16 cala (406 mm); czarny bok; opona radialna, osnowa poliestrowa; bezdętkowa; bieżnik all-terrain; indeks nośności 109, prędkość do 180 km/h; opasanie stalowe.",
+    "g": []
+  },
+  "XGB": {
+    "w": "Oznaczenie: opona osobowa (P-metric); szerokość 245 mm, profil 75% szerokości, felga 16 cala (406 mm); napisy obwiedzione na biało; opona radialna, osnowa poliestrowa; bezdętkowa; bieżnik all-terrain; indeks nośności 109, prędkość do 180 km/h; opasanie stalowe.",
+    "g": []
+  },
+  "XGC": {
+    "w": "Oznaczenie: opona osobowa (P-metric); szerokość 265 mm, profil 75% szerokości, felga 16 cala (406 mm); czarny bok; opona radialna, osnowa poliestrowa; bezdętkowa; bieżnik all-terrain; indeks nośności 114, prędkość do 180 km/h; opasanie stalowe.",
+    "g": []
+  },
+  "XGD": {
+    "w": "Oznaczenie: opona osobowa (P-metric); szerokość 265 mm, profil 75% szerokości, felga 16 cala (406 mm); napisy obwiedzione na biało; opona radialna, osnowa poliestrowa; bezdętkowa; bieżnik all-terrain; indeks nośności 114, prędkość do 180 km/h; opasanie stalowe.",
+    "g": []
+  },
+  "XGK": {
+    "w": "Oznaczenie: opona do lekkiej ciężarówki (LT); szerokość 245 mm, profil 75% szerokości, felga 16 cala (406 mm); czarny bok; opona radialna, osnowa poliestrowa; bieżnik szosowo-terenowy (on/off road); opasanie stalowe.",
+    "g": []
+  },
+  "XHA": {
+    "w": "Oznaczenie: opona osobowa (P-metric); szerokość 235 mm, profil 75% szerokości, felga 15 cala (381 mm); wersja o podwyższonej nośności (XL); czarny bok; opona radialna, osnowa poliestrowa; bezdętkowa; bieżnik całoroczny (all season); opasanie stalowe.",
+    "g": []
+  },
+  "XHE": {
+    "w": "Oznaczenie: opona do lekkiej ciężarówki (LT); szerokość 235 mm, profil 75% szerokości, felga 16 cala (406 mm); nośność C (odpowiednik 6 warstw); czarny bok; opona radialna, osnowa poliestrowa; bieżnik całoroczny (all season); opasanie stalowe.",
+    "g": []
+  },
+  "XHH": {
+    "w": "Oznaczenie: opona do lekkiej ciężarówki (LT); szerokość 245 mm, profil 75% szerokości, felga 16 cala (406 mm); nośność E (10 warstw); czarny bok; opona radialna, osnowa poliestrowa; bieżnik całoroczny (all season); opasanie stalowe.",
+    "g": []
+  },
+  "XHM": {
+    "w": "Oznaczenie: opona osobowa (P-metric); szerokość 235 mm, profil 75% szerokości, felga 15 cala (381 mm); wersja o podwyższonej nośności (XL); napisy obwiedzione na biało; opona radialna, osnowa poliestrowa; bezdętkowa; bieżnik całoroczny (all season); indeks nośności 108, prędkość do 180 km/h; opasanie stalowe.",
+    "g": []
+  },
+  "XHP": {
+    "w": "Oznaczenie: opona do lekkiej ciężarówki (LT); szerokość 225 mm, profil 75% szerokości, felga 16 cala (406 mm); nośność D (8 warstw); czarny bok; opona radialna, osnowa poliestrowa; bezdętkowa; bieżnik całoroczny (all season); opasanie stalowe.",
+    "g": []
+  },
+  "XHR": {
+    "w": "Oznaczenie: opona do lekkiej ciężarówki (LT); szerokość 225 mm, profil 75% szerokości, felga 16 cala (406 mm); nośność D (8 warstw); czarny bok; opona radialna, osnowa poliestrowa; bezdętkowa; bieżnik szosowo-terenowy (on/off road); opasanie stalowe.",
+    "g": []
+  },
+  "XMJ": {
+    "w": "Oznaczenie: opona osobowa (P-metric); szerokość 265 mm, profil 70% szerokości, felga 16 cala (406 mm); czarny bok; opona radialna, osnowa poliestrowa; bezdętkowa; indeks nośności 111, prędkość do 180 km/h; opasanie stalowe.",
+    "g": []
+  },
+  "XQG": {
+    "w": "Oznaczenie: opona osobowa (P-metric); szerokość 235 mm, profil 70% szerokości, felga 15 cala (381 mm); czarny bok; opona radialna, osnowa poliestrowa; bezdętkowa; indeks nośności 102, prędkość do 240 km/h; opasanie stalowe.",
+    "g": []
+  },
+  "XTN": {
+    "w": "Oznaczenie: opona do lekkiej ciężarówki (LT); szerokość 225 mm, profil 70% szerokości, felga 19,5 cala (495 mm); nośność F (12 warstw); czarny bok; opona radialna, osnowa stalowa; bezdętkowa; bieżnik szosowy (highway); opasanie stalowe.",
+    "g": []
+  },
+  "XYK": {
+    "w": "Oznaczenie: opona do lekkiej ciężarówki (LT); szerokość 215 mm, profil 85% szerokości, felga 16 cala (406 mm); nośność D (8 warstw); czarny bok; opona radialna, osnowa poliestrowa; bezdętkowa; bieżnik szosowo-terenowy (on/off road); opasanie stalowe.",
+    "g": []
+  },
+  "XYL": {
+    "w": "Oznaczenie: opona do lekkiej ciężarówki (LT); szerokość 215 mm, profil 85% szerokości, felga 16 cala (406 mm); nośność D (8 warstw); czarny bok; opona radialna, osnowa poliestrowa; bezdętkowa; bieżnik szosowy (highway); opasanie stalowe.",
+    "g": []
+  },
+  "YBN": {
+    "w": "Oznaczenie: opona do lekkiej ciężarówki (LT); szerokość 245 mm, profil 75% szerokości, felga 16 cala (406 mm); nośność C (odpowiednik 6 warstw); czarny bok; opona radialna, osnowa poliestrowa; bezdętkowa; bieżnik szosowo-terenowy (on/off road); opasanie stalowe.",
+    "g": []
+  },
+  "YBX": {
+    "w": "Oznaczenie: opona do lekkiej ciężarówki (LT); szerokość 245 mm, profil 75% szerokości, felga 16 cala (406 mm); nośność C (odpowiednik 6 warstw); napisy obwiedzione na biało; opona radialna, osnowa poliestrowa; bezdętkowa; bieżnik szosowo-terenowy (on/off road); opasanie stalowe.",
+    "g": []
+  },
+  "YFL": {
+    "w": "Oznaczenie: opona osobowa (P-metric); szerokość 235 mm, profil 75% szerokości, felga 15 cala (381 mm); czarny bok; opona radialna, osnowa poliestrowa; bezdętkowa; bieżnik całoroczny (all season); opasanie stalowe.",
+    "g": []
+  },
+  "YFN": {
+    "w": "Oznaczenie: opona osobowa (P-metric); szerokość 235 mm, profil 75% szerokości, felga 15 cala (381 mm); podniesione białe litery na boku; opona radialna, osnowa poliestrowa; bezdętkowa; bieżnik całoroczny (all season); indeks nośności 105, prędkość do 180 km/h; opasanie stalowe.",
+    "g": []
+  },
+  "YGA": {
+    "w": "Oznaczenie: opona osobowa (P-metric); szerokość 245 mm, profil 75% szerokości, felga 16 cala (406 mm); czarny bok; opona radialna, osnowa poliestrowa; bezdętkowa; bieżnik all-terrain; indeks nośności 109, prędkość do 180 km/h; opasanie stalowe.",
+    "g": []
+  },
+  "YGB": {
+    "w": "Oznaczenie: opona osobowa (P-metric); szerokość 245 mm, profil 75% szerokości, felga 16 cala (406 mm); napisy obwiedzione na biało; opona radialna, osnowa poliestrowa; bezdętkowa; bieżnik all-terrain; indeks nośności 109, prędkość do 180 km/h; opasanie stalowe.",
+    "g": []
+  },
+  "YGC": {
+    "w": "Oznaczenie: opona osobowa (P-metric); szerokość 265 mm, profil 75% szerokości, felga 16 cala (406 mm); czarny bok; opona radialna, osnowa poliestrowa; bezdętkowa; bieżnik all-terrain; indeks nośności 114, prędkość do 180 km/h; opasanie stalowe.",
+    "g": []
+  },
+  "YGD": {
+    "w": "Oznaczenie: opona osobowa (P-metric); szerokość 265 mm, profil 75% szerokości, felga 16 cala (406 mm); napisy obwiedzione na biało; opona radialna, osnowa poliestrowa; bezdętkowa; bieżnik all-terrain; indeks nośności 114, prędkość do 180 km/h; opasanie stalowe.",
+    "g": []
+  },
+  "YGK": {
+    "w": "Oznaczenie: opona do lekkiej ciężarówki (LT); szerokość 245 mm, profil 75% szerokości, felga 16 cala (406 mm); nośność E (10 warstw); czarny bok; opona radialna, osnowa poliestrowa; bieżnik szosowo-terenowy (on/off road); opasanie stalowe.",
+    "g": []
+  },
+  "YHA": {
+    "w": "Oznaczenie: opona osobowa (P-metric); szerokość 235 mm, profil 75% szerokości, felga 15 cala (381 mm); wersja o podwyższonej nośności (XL); czarny bok; opona radialna, osnowa poliestrowa; bezdętkowa; bieżnik całoroczny (all season); opasanie stalowe.",
+    "g": []
+  },
+  "YHH": {
+    "w": "Oznaczenie: opona do lekkiej ciężarówki (LT); szerokość 245 mm, profil 75% szerokości, felga 16 cala (406 mm); nośność E (10 warstw); czarny bok; opona radialna, osnowa poliestrowa; bieżnik całoroczny (all season); opasanie stalowe.",
+    "g": []
+  },
+  "YHM": {
+    "w": "Oznaczenie: opona osobowa (P-metric); szerokość 235 mm, profil 75% szerokości, felga 15 cala (381 mm); wersja o podwyższonej nośności (XL); napisy obwiedzione na biało; opona radialna, osnowa poliestrowa; bezdętkowa; bieżnik całoroczny (all season); indeks nośności 108, prędkość do 180 km/h; opasanie stalowe.",
+    "g": []
+  },
+  "YHP": {
+    "w": "Oznaczenie: opona do lekkiej ciężarówki (LT); szerokość 225 mm, profil 75% szerokości, felga 16 cala (406 mm); nośność D (8 warstw); czarny bok; opona radialna, osnowa poliestrowa; bezdętkowa; bieżnik całoroczny (all season); opasanie stalowe.",
+    "g": []
+  },
+  "YHR": {
+    "w": "Oznaczenie: opona do lekkiej ciężarówki (LT); szerokość 225 mm, profil 75% szerokości, felga 16 cala (406 mm); nośność D (8 warstw); czarny bok; opona radialna, osnowa poliestrowa; bezdętkowa; bieżnik szosowo-terenowy (on/off road); opasanie stalowe.",
+    "g": []
+  },
+  "YMJ": {
+    "w": "Oznaczenie: opona osobowa (P-metric); szerokość 265 mm, profil 70% szerokości, felga 16 cala (406 mm); czarny bok; opona radialna, osnowa poliestrowa; bezdętkowa; indeks nośności 111, prędkość do 180 km/h; opasanie stalowe.",
+    "g": []
+  },
+  "YQG": {
+    "w": "Oznaczenie: opona osobowa (P-metric); szerokość 235 mm, profil 70% szerokości, felga 15 cala (381 mm); czarny bok; opona radialna, osnowa poliestrowa; bezdętkowa; indeks nośności 102, prędkość do 240 km/h; opasanie stalowe.",
+    "g": []
+  },
+  "YTN": {
+    "w": "Oznaczenie: opona do lekkiej ciężarówki (LT); szerokość 225 mm, profil 70% szerokości, felga 19,5 cala (495 mm); czarny bok; opona radialna, osnowa stalowa; bezdętkowa; bieżnik szosowy (highway); opasanie stalowe.",
+    "g": []
+  },
+  "YYK": {
+    "w": "Oznaczenie: opona do lekkiej ciężarówki (LT); szerokość 215 mm, profil 85% szerokości, felga 16 cala (406 mm); nośność D (8 warstw); czarny bok; opona radialna, osnowa poliestrowa; bezdętkowa; bieżnik szosowy (highway); opasanie stalowe.",
+    "g": []
+  },
+  "YYL": {
+    "w": "Oznaczenie: opona do lekkiej ciężarówki (LT); szerokość 215 mm, profil 85% szerokości, felga 16 cala (406 mm); nośność D (8 warstw); czarny bok; opona radialna, osnowa poliestrowa; bezdętkowa; bieżnik szosowo-terenowy (on/off road); opasanie stalowe.",
+    "g": []
+  },
+  "ZBN": {
+    "w": "Oznaczenie: opona do lekkiej ciężarówki (LT); szerokość 245 mm, profil 75% szerokości, felga 16 cala (406 mm); nośność C (odpowiednik 6 warstw); czarny bok; opona radialna, osnowa poliestrowa; bezdętkowa; bieżnik szosowo-terenowy (on/off road); opasanie stalowe.",
+    "g": []
+  },
+  "ZBX": {
+    "w": "Oznaczenie: opona do lekkiej ciężarówki (LT); szerokość 245 mm, profil 75% szerokości, felga 16 cala (406 mm); nośność C (odpowiednik 6 warstw); napisy obwiedzione na biało; opona radialna, osnowa poliestrowa; bezdętkowa; bieżnik szosowo-terenowy (on/off road); opasanie stalowe.",
+    "g": []
+  },
+  "ZFL": {
+    "w": "Oznaczenie: opona osobowa (P-metric); szerokość 235 mm, profil 75% szerokości, felga 15 cala (381 mm); czarny bok; opona radialna, osnowa poliestrowa; bezdętkowa; bieżnik całoroczny (all season); indeks nośności 105, prędkość do 180 km/h; opasanie stalowe.",
+    "g": []
+  },
+  "ZFN": {
+    "w": "Oznaczenie: opona osobowa (P-metric); szerokość 235 mm, profil 75% szerokości, felga 15 cala (381 mm); podniesione białe litery na boku; opona radialna, osnowa poliestrowa; bezdętkowa; bieżnik całoroczny (all season); indeks nośności 105, prędkość do 180 km/h; opasanie stalowe.",
+    "g": []
+  },
+  "ZGA": {
+    "w": "Oznaczenie: opona osobowa (P-metric); szerokość 245 mm, profil 75% szerokości, felga 16 cala (406 mm); czarny bok; opona radialna, osnowa poliestrowa; bezdętkowa; bieżnik całoroczny (all season); indeks nośności 109, prędkość do 180 km/h; opasanie stalowe.",
+    "g": []
+  },
+  "ZGB": {
+    "w": "Oznaczenie: opona osobowa (P-metric); szerokość 245 mm, profil 75% szerokości, felga 16 cala (406 mm); napisy obwiedzione na biało; opona radialna, osnowa poliestrowa; bezdętkowa; bieżnik all-terrain; indeks nośności 109, prędkość do 180 km/h; opasanie stalowe.",
+    "g": []
+  },
+  "ZGC": {
+    "w": "Oznaczenie: opona osobowa (P-metric); szerokość 265 mm, profil 75% szerokości, felga 16 cala (406 mm); czarny bok; opona radialna, osnowa poliestrowa; bezdętkowa; bieżnik all-terrain; indeks nośności 114, prędkość do 180 km/h; opasanie stalowe.",
+    "g": []
+  },
+  "ZGD": {
+    "w": "Oznaczenie: opona osobowa (P-metric); szerokość 265 mm, profil 75% szerokości, felga 16 cala (406 mm); napisy obwiedzione na biało; opona radialna, osnowa poliestrowa; bezdętkowa; bieżnik all-terrain; indeks nośności 114, prędkość do 180 km/h; opasanie stalowe.",
+    "g": []
+  },
+  "ZGK": {
+    "w": "Oznaczenie: opona do lekkiej ciężarówki (LT); szerokość 245 mm, profil 75% szerokości, felga 16 cala (406 mm); nośność E (10 warstw); czarny bok; opona radialna, osnowa poliestrowa; bieżnik szosowo-terenowy (on/off road); opasanie stalowe.",
+    "g": []
+  },
+  "ZHA": {
+    "w": "Oznaczenie: opona osobowa (P-metric); szerokość 235 mm, profil 75% szerokości, felga 15 cala (381 mm); wersja o podwyższonej nośności (XL); czarny bok; opona radialna, osnowa poliestrowa; bezdętkowa; bieżnik całoroczny (all season); opasanie stalowe.",
+    "g": []
+  },
+  "ZHH": {
+    "w": "Oznaczenie: opona do lekkiej ciężarówki (LT); szerokość 245 mm, profil 75% szerokości, felga 16 cala (406 mm); nośność E (10 warstw); czarny bok; opona radialna, osnowa poliestrowa; bieżnik całoroczny (all season); opasanie stalowe.",
+    "g": []
+  },
+  "ZHM": {
+    "w": "Oznaczenie: opona osobowa (P-metric); szerokość 235 mm, profil 75% szerokości, felga 15 cala (381 mm); wersja o podwyższonej nośności (XL); napisy obwiedzione na biało; opona radialna, osnowa poliestrowa; bezdętkowa; bieżnik całoroczny (all season); indeks nośności 108, prędkość do 180 km/h; opasanie stalowe.",
+    "g": []
+  },
+  "ZHP": {
+    "w": "Oznaczenie: opona do lekkiej ciężarówki (LT); szerokość 225 mm, profil 75% szerokości, felga 16 cala (406 mm); nośność D (8 warstw); czarny bok; opona radialna, osnowa poliestrowa; bezdętkowa; bieżnik całoroczny (all season); opasanie stalowe.",
+    "g": []
+  },
+  "ZHR": {
+    "w": "Oznaczenie: opona do lekkiej ciężarówki (LT); szerokość 225 mm, profil 75% szerokości, felga 16 cala (406 mm); nośność D (8 warstw); czarny bok; opona radialna, osnowa poliestrowa; bezdętkowa; bieżnik szosowo-terenowy (on/off road); opasanie stalowe.",
+    "g": []
+  },
+  "ZMJ": {
+    "w": "Oznaczenie: opona osobowa (P-metric); szerokość 265 mm, profil 70% szerokości, felga 16 cala (406 mm); czarny bok; opona radialna, osnowa poliestrowa; bezdętkowa; indeks nośności 111, prędkość do 180 km/h; opasanie stalowe.",
+    "g": []
+  },
+  "ZQG": {
+    "w": "Oznaczenie: opona osobowa (P-metric); szerokość 235 mm, profil 70% szerokości, felga 15 cala (381 mm); czarny bok; opona radialna, osnowa poliestrowa; bezdętkowa; indeks nośności 102, prędkość do 240 km/h; opasanie stalowe.",
+    "g": []
+  },
+  "ZTN": {
+    "w": "Oznaczenie: opona do lekkiej ciężarówki (LT); szerokość 225 mm, profil 70% szerokości, felga 19,5 cala (495 mm); nośność F (12 warstw); czarny bok; opona radialna, osnowa stalowa; bezdętkowa; bieżnik szosowy (highway); opasanie stalowe.",
+    "g": []
+  },
+  "ZYK": {
+    "w": "Oznaczenie: opona do lekkiej ciężarówki (LT); szerokość 215 mm, profil 85% szerokości, felga 16 cala (406 mm); nośność D (8 warstw); czarny bok; opona radialna, osnowa poliestrowa; bezdętkowa; bieżnik szosowy (highway); opasanie stalowe.",
+    "g": []
+  },
+  "ZYL": {
+    "w": "Oznaczenie: opona do lekkiej ciężarówki (LT); szerokość 215 mm, profil 85% szerokości, felga 16 cala (406 mm); nośność D (8 warstw); czarny bok; opona radialna, osnowa poliestrowa; bezdętkowa; bieżnik szosowo-terenowy (on/off road); opasanie stalowe.",
+    "g": []
+  },
+  "Q1T": {
+    "w": "Oznaczenie: opona do lekkiej ciężarówki (LT); szerokość 245 mm, profil 75% szerokości, felga 16 cala (406 mm); nośność C (odpowiednik 6 warstw); czarny bok; opona radialna, osnowa poliestrowa; bezdętkowa; bieżnik całoroczny (all season); opasanie stalowe.",
+    "g": []
+  },
+  "Q1X": {
+    "w": "Oznaczenie: opona do lekkiej ciężarówki (LT); szerokość 265 mm, profil 75% szerokości, felga 16 cala (406 mm); nośność C (odpowiednik 6 warstw); czarny bok; opona radialna, osnowa poliestrowa; bezdętkowa; bieżnik szosowo-terenowy (on/off road); opasanie stalowe.",
+    "g": []
+  },
+  "Q1Y": {
+    "w": "Oznaczenie: opona do lekkiej ciężarówki (LT); szerokość 265 mm, profil 75% szerokości, felga 16 cala (406 mm); nośność C (odpowiednik 6 warstw); napisy obwiedzione na biało; opona radialna, osnowa poliestrowa; bezdętkowa; bieżnik szosowo-terenowy (on/off road); opasanie stalowe.",
+    "g": []
+  },
+  "QHB": {
+    "w": "Oznaczenie: opona osobowa (P-metric); szerokość 235 mm, profil 75% szerokości, felga 15 cala (381 mm); wersja o podwyższonej nośności (XL); opona radialna, osnowa poliestrowa; bezdętkowa; bieżnik całoroczny (all season); opasanie stalowe.",
+    "g": []
+  },
+  "QHP": {
+    "w": "Oznaczenie: opona do lekkiej ciężarówki (LT); szerokość 225 mm, profil 75% szerokości, felga 16 cala (406 mm); nośność D (8 warstw); czarny bok; opona radialna, osnowa poliestrowa; bezdętkowa; bieżnik całoroczny (all season); opasanie stalowe.",
+    "g": []
+  },
+  "QHR": {
+    "w": "Oznaczenie: opona do lekkiej ciężarówki (LT); szerokość 225 mm, profil 75% szerokości, felga 16 cala (406 mm); nośność D (8 warstw); czarny bok; opona radialna, osnowa poliestrowa; bezdętkowa; bieżnik szosowo-terenowy (on/off road); opasanie stalowe.",
+    "g": []
+  },
+  "QJV": {
+    "w": "Oznaczenie: opona do lekkiej ciężarówki (LT); szerokość 225 mm, profil 75% szerokości, felga 16 cala (406 mm); nośność C (odpowiednik 6 warstw); czarny bok; opona radialna, osnowa poliestrowa; bezdętkowa; bieżnik całoroczny (all season); opasanie stalowe.",
+    "g": []
+  },
+  "XBK": {
+    "w": "Oznaczenie: opona do lekkiej ciężarówki (LT); szerokość 245 mm, profil 75% szerokości, felga 16 cala (406 mm); nośność C (odpowiednik 6 warstw); czarny bok; opona radialna, osnowa poliestrowa; bezdętkowa; bieżnik całoroczny (all season); opasanie stalowe.",
+    "g": []
+  },
+  "XCN": {
+    "w": "Oznaczenie: opona osobowa (P-metric); szerokość 275 mm, profil 60% szerokości, felga 15 cala (381 mm); czarny bok; opona radialna, osnowa poliestrowa; bezdętkowa; opasanie stalowe.",
+    "g": []
+  },
+  "XET": {
+    "w": "Oznaczenie: opona osobowa (P-metric); szerokość 225 mm, profil 75% szerokości, felga 15 cala (381 mm); czarny bok; opona radialna, osnowa poliestrowa; bezdętkowa; bieżnik całoroczny (all season); opasanie stalowe.",
+    "g": []
+  },
+  "XEV": {
+    "w": "Oznaczenie: opona osobowa (P-metric); szerokość 225 mm, profil 75% szerokości, felga 15 cala (381 mm); podniesione białe litery na boku; opona radialna, osnowa poliestrowa; bezdętkowa; bieżnik całoroczny (all season); opasanie stalowe.",
+    "g": []
+  },
+  "XFM": {
+    "w": "Oznaczenie: opona osobowa (P-metric); szerokość 235 mm, profil 75% szerokości, felga 15 cala (381 mm); opona radialna, osnowa poliestrowa; bezdętkowa; bieżnik całoroczny (all season); opasanie stalowe.",
+    "g": []
+  },
+  "XGL": {
+    "w": "Oznaczenie: opona do lekkiej ciężarówki (LT); szerokość 265 mm, profil 75% szerokości, felga 16 cala (406 mm); nośność C (odpowiednik 6 warstw); czarny bok; opona radialna, osnowa poliestrowa; bieżnik szosowo-terenowy (on/off road); opasanie stalowe.",
+    "g": []
+  },
+  "XGM": {
+    "w": "Oznaczenie: opona do lekkiej ciężarówki (LT); szerokość 265 mm, profil 75% szerokości, felga 16 cala (406 mm); nośność C (odpowiednik 6 warstw); napisy obwiedzione na biało; opona radialna, osnowa poliestrowa; bieżnik szosowo-terenowy (on/off road); opasanie stalowe.",
+    "g": []
+  },
+  "XHB": {
+    "w": "Oznaczenie: opona osobowa (P-metric); szerokość 235 mm, profil 75% szerokości, felga 15 cala (381 mm); wersja o podwyższonej nośności (XL); opona radialna, osnowa poliestrowa; bezdętkowa; bieżnik całoroczny (all season); opasanie stalowe.",
+    "g": []
+  },
+  "XHJ": {
+    "w": "Oznaczenie: opona do lekkiej ciężarówki (LT); szerokość 225 mm, profil 75% szerokości, felga 16 cala (406 mm); nośność C (odpowiednik 6 warstw); czarny bok; opona radialna, osnowa poliestrowa; bieżnik szosowo-terenowy (on/off road); opasanie stalowe.",
+    "g": []
+  },
+  "XHN": {
+    "w": "Oznaczenie: opona do lekkiej ciężarówki (LT); szerokość 225 mm, profil 75% szerokości, felga 16 cala (406 mm); nośność C (odpowiednik 6 warstw); napisy obwiedzione na biało; opona radialna, osnowa poliestrowa; bieżnik szosowo-terenowy (on/off road); opasanie stalowe.",
+    "g": []
+  },
+  "YBK": {
+    "w": "Oznaczenie: opona do lekkiej ciężarówki (LT); szerokość 245 mm, profil 75% szerokości, felga 16 cala (406 mm); nośność C (odpowiednik 6 warstw); czarny bok; opona radialna, osnowa poliestrowa; bezdętkowa; bieżnik całoroczny (all season); opasanie stalowe.",
+    "g": []
+  },
+  "YCN": {
+    "w": "Oznaczenie: opona osobowa (P-metric); szerokość 275 mm, profil 60% szerokości, felga 15 cala (381 mm); czarny bok; opona radialna, osnowa poliestrowa; bezdętkowa; opasanie stalowe.",
+    "g": []
+  },
+  "YET": {
+    "w": "Oznaczenie: opona osobowa (P-metric); szerokość 225 mm, profil 75% szerokości, felga 15 cala (381 mm); czarny bok; opona radialna, osnowa poliestrowa; bezdętkowa; bieżnik całoroczny (all season); opasanie stalowe.",
+    "g": []
+  },
+  "YEV": {
+    "w": "Oznaczenie: opona osobowa (P-metric); szerokość 225 mm, profil 75% szerokości, felga 15 cala (381 mm); podniesione białe litery na boku; opona radialna, osnowa poliestrowa; bezdętkowa; bieżnik całoroczny (all season); opasanie stalowe.",
+    "g": []
+  },
+  "YFM": {
+    "w": "Oznaczenie: opona osobowa (P-metric); szerokość 235 mm, profil 75% szerokości, felga 15 cala (381 mm); opona radialna, osnowa poliestrowa; bezdętkowa; bieżnik całoroczny (all season); opasanie stalowe.",
+    "g": []
+  },
+  "YGL": {
+    "w": "Oznaczenie: opona do lekkiej ciężarówki (LT); szerokość 265 mm, profil 75% szerokości, felga 16 cala (406 mm); nośność C (odpowiednik 6 warstw); czarny bok; opona radialna, osnowa poliestrowa; bieżnik szosowo-terenowy (on/off road); opasanie stalowe.",
+    "g": []
+  },
+  "YGM": {
+    "w": "Oznaczenie: opona do lekkiej ciężarówki (LT); szerokość 265 mm, profil 75% szerokości, felga 16 cala (406 mm); nośność C (odpowiednik 6 warstw); napisy obwiedzione na biało; opona radialna, osnowa poliestrowa; bieżnik szosowo-terenowy (on/off road); opasanie stalowe.",
+    "g": []
+  },
+  "YHB": {
+    "w": "Oznaczenie: opona osobowa (P-metric); szerokość 235 mm, profil 75% szerokości, felga 15 cala (381 mm); wersja o podwyższonej nośności (XL); opona radialna, osnowa poliestrowa; bezdętkowa; bieżnik całoroczny (all season); opasanie stalowe.",
+    "g": []
+  },
+  "YHE": {
+    "w": "Oznaczenie: opona do lekkiej ciężarówki (LT); szerokość 225 mm, profil 75% szerokości, felga 16 cala (406 mm); nośność C (odpowiednik 6 warstw); czarny bok; opona radialna, osnowa poliestrowa; bieżnik całoroczny (all season); opasanie stalowe.",
+    "g": []
+  },
+  "YHJ": {
+    "w": "Oznaczenie: opona do lekkiej ciężarówki (LT); szerokość 225 mm, profil 75% szerokości, felga 16 cala (406 mm); nośność C (odpowiednik 6 warstw); czarny bok; opona radialna, osnowa poliestrowa; bieżnik szosowo-terenowy (on/off road); opasanie stalowe.",
+    "g": []
+  },
+  "YHN": {
+    "w": "Oznaczenie: opona do lekkiej ciężarówki (LT); szerokość 225 mm, profil 75% szerokości, felga 16 cala (406 mm); nośność D (8 warstw); czarny bok; opona radialna, osnowa poliestrowa; bezdętkowa; bieżnik całoroczny (all season); opasanie stalowe.",
+    "g": []
+  },
+  "ZBK": {
+    "w": "Oznaczenie: opona do lekkiej ciężarówki (LT); szerokość 245 mm, profil 75% szerokości, felga 16 cala (406 mm); nośność C (odpowiednik 6 warstw); czarny bok; opona radialna, osnowa poliestrowa; bezdętkowa; bieżnik szosowo-terenowy (on/off road); opasanie stalowe.",
+    "g": []
+  },
+  "ZCN": {
+    "w": "Oznaczenie: opona osobowa (P-metric); szerokość 275 mm, profil 60% szerokości, felga 15 cala (381 mm); czarny bok; opona radialna, osnowa poliestrowa; bezdętkowa; opasanie stalowe.",
+    "g": []
+  },
+  "ZET": {
+    "w": "Oznaczenie: opona osobowa (P-metric); szerokość 225 mm, profil 75% szerokości, felga 15 cala (381 mm); czarny bok; opona radialna, osnowa poliestrowa; bezdętkowa; bieżnik całoroczny (all season); opasanie stalowe.",
+    "g": []
+  },
+  "ZEV": {
+    "w": "Oznaczenie: opona osobowa (P-metric); szerokość 225 mm, profil 75% szerokości, felga 15 cala (381 mm); podniesione białe litery na boku; opona radialna, osnowa poliestrowa; bezdętkowa; bieżnik całoroczny (all season); opasanie stalowe.",
+    "g": []
+  },
+  "ZFM": {
+    "w": "Oznaczenie: opona osobowa (P-metric); szerokość 235 mm, profil 75% szerokości, felga 15 cala (381 mm); opona radialna, osnowa poliestrowa; bezdętkowa; bieżnik całoroczny (all season); opasanie stalowe.",
+    "g": []
+  },
+  "ZHB": {
+    "w": "Oznaczenie: opona osobowa (P-metric); szerokość 235 mm, profil 75% szerokości, felga 15 cala (381 mm); wersja o podwyższonej nośności (XL); opona radialna, osnowa poliestrowa; bieżnik całoroczny (all season); opasanie stalowe.",
+    "g": []
+  },
+  "ZHE": {
+    "w": "Oznaczenie: opona do lekkiej ciężarówki (LT); szerokość 225 mm, profil 75% szerokości, felga 16 cala (406 mm); nośność C (odpowiednik 6 warstw); czarny bok; opona radialna, osnowa poliestrowa; bieżnik całoroczny (all season); opasanie stalowe.",
+    "g": []
+  },
+  "ZHJ": {
+    "w": "Oznaczenie: opona do lekkiej ciężarówki (LT); szerokość 225 mm, profil 75% szerokości, felga 16 cala (406 mm); nośność C (odpowiednik 6 warstw); czarny bok; opona radialna, osnowa poliestrowa; bieżnik szosowo-terenowy (on/off road); opasanie stalowe.",
+    "g": []
+  },
+  "ZHN": {
+    "w": "Oznaczenie: opona do lekkiej ciężarówki (LT); szerokość 225 mm, profil 75% szerokości, felga 16 cala (406 mm); nośność C (odpowiednik 6 warstw); napisy obwiedzione na biało; opona radialna, osnowa poliestrowa; bieżnik szosowo-terenowy (on/off road); opasanie stalowe.",
+    "g": []
   }
 }

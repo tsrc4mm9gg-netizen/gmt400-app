@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useVehicleProfile } from '../../VehicleProfileProvider';
 import { ScanButtons, ScanPanel, useStickerScan } from './StickerScan';
 import RpoContentsTile from './RpoContentsTile';
-import { RPO_AGGREGATOR, RPO_CATALOG, RPO_CATEGORIES, RPO_CONTENTS_NOTE, RPO_DOCS, RPO_VEHICLES, decodeRpo, rpoFit, rpoVehicleFor, type RpoEntry, type RpoFit } from '@/lib/rpo-catalog';
+import { RPO_AGGREGATOR, RPO_CATALOG, RPO_CATEGORIES, RPO_CONTENTS_NOTE, RPO_DOCS, RPO_VEHICLES, decodeRpo, rpoFit, rpoVehicleFor, type RpoDoc, type RpoEntry, type RpoFit } from '@/lib/rpo-catalog';
 
 const YEARS = Array.from({ length: 13 }, (_, i) => String(1988 + i));
 const LIMIT = 120;
@@ -114,6 +114,15 @@ export default function RpoPage() {
   </div>;
 }
 
+function DocLink({ doc }: { doc: RpoDoc }) {
+  return doc.url ? <a href={doc.url} target="_blank" rel="noopener noreferrer" className="underline">{doc.label}</a> : <span>{doc.label}</span>;
+}
+
+function ManualPages({ entry, id }: { entry: RpoEntry; id: string }) {
+  const pages = entry.manualRefs.filter(r => r.doc.id === id).map(r => r.page);
+  return pages.length ? <span className="text-neutral-400"> — s. PDF {pages.join(', ')}</span> : null;
+}
+
 function RpoCard({ entry, vehicle, year }: { entry: RpoEntry; vehicle: string | null; year: number | null }) {
   const fit = rpoFit(entry, vehicle, year);
   const contentSources = Array.from(new Map((entry.contents?.groups ?? []).flatMap(g => g.sources).map(doc => [doc.id, doc])).values());
@@ -130,13 +139,13 @@ function RpoCard({ entry, vehicle, year }: { entry: RpoEntry; vehicle: string | 
       <summary className="flex min-h-11 cursor-pointer items-center text-neutral-300" data-testid="rpo-more-toggle">Model, lata i źródła ({entry.sources.length + contentSources.length})</summary>
       <div className="space-y-2 pb-1 text-xs text-neutral-300">
         <p data-testid="rpo-applies"><span className="font-semibold text-white">Model i lata (dokumenty GM): </span>{entry.applies.map((a, i) => <span key={a.vehicle}>{i > 0 && '; '}{a.vehicle} {a.years}{a.original ? <span lang="en"> („{a.original}”)</span> : null}</span>)}</p>
-        {entry.contents && <p data-testid="rpo-contents-note">{RPO_CONTENTS_NOTE}</p>}
+        <p data-testid="rpo-contents-note">{RPO_CONTENTS_NOTE}</p>
         <p data-testid="rpo-check-note" className="text-neutral-400">Sprawdź w swoim aucie / manualu.</p>
         {entry.notes && <p className="text-neutral-400" lang="en">Uwagi zestawienia: {entry.notes}</p>}
         <div><p className="font-semibold text-white">Źródła</p>
-          <ul className="mt-1 space-y-1">{entry.sources.map(doc => <li key={doc.id}><a href={doc.url} target="_blank" rel="noopener noreferrer" className="underline">{doc.label}</a></li>)}</ul></div>
+          <ul className="mt-1 space-y-1">{entry.sources.map(doc => <li key={doc.id}><DocLink doc={doc} />{doc.url ? null : <ManualPages entry={entry} id={doc.id} />}</li>)}</ul></div>
         {contentSources.length > 0 && <div><p className="font-semibold text-white">Źródła opisu „Zawiera”</p>
-          <ul className="mt-1 space-y-1">{contentSources.map(doc => <li key={doc.id}><a href={doc.url} target="_blank" rel="noopener noreferrer" className="underline">{doc.label}</a></li>)}</ul></div>}
+          <ul className="mt-1 space-y-1">{contentSources.map(doc => <li key={doc.id}><DocLink doc={doc} /></li>)}</ul></div>}
       </div>
     </details>
   </article>;
