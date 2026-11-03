@@ -13,7 +13,7 @@ export const PRZEGLADY_STORAGE_KEY = 'gmt400_przeglady_v1';
 type Done = Record<string, { km?: number; date?: string }>;
 type CarState = { unit: 'km' | 'mi'; odo: string; lastKm: string; lastDate: string; kmPerYear: string; severe: boolean; emissions: 'LD' | 'HD'; done: Done };
 const EMPTY: CarState = { unit: 'km', odo: '', lastKm: '', lastDate: '', kmPerYear: '', severe: false, emissions: 'LD', done: {} };
-const YEARS = ['1995', '1996', '1997', '1998', '1999'];
+const YEARS = ['1988', '1989', '1990', '1991', '1992', '1993', '1994', '1995', '1996', '1997', '1998', '1999'];
 const field = 'mt-1 block min-h-11 w-full min-w-0 rounded-lg border border-white/15 bg-neutral-950 px-3 text-base text-white focus:border-silver-600 focus:outline-none';
 const btn = 'inline-flex min-h-11 items-center justify-center rounded-lg border border-white/15 px-4 text-sm font-semibold hover:border-silver-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-silver-500';
 const seg = (on: boolean) => `${btn} ${on ? 'border-silver-400 bg-silver-400 text-neutral-950 hover:border-silver-300' : 'text-white'}`;
@@ -142,14 +142,14 @@ export default function MaintenancePlanner() {
           <button type="button" aria-pressed={st.severe} onClick={() => update({ severe: true })} className={seg(st.severe)}>Ciężkie warunki</button>
         </div>
         <p className="mt-2 text-sm text-neutral-300">{st.severe ? SEVERE_DEFINITION : NORMAL_DEFINITION}</p>
-        {schedule.basisYear === 1995 && !schedule.diesel && (
+        {schedule.basisYear >= 1988 && schedule.basisYear <= 1995 && !schedule.diesel && (
           <fieldset className="mt-3">
-            <legend className="text-sm text-neutral-300">Klasa emisji (instrukcja 1995) — zależy od GVWR na etykiecie certyfikacyjnej</legend>
+            <legend className="text-sm text-neutral-300">Klasa emisji (instrukcja {schedule.basisYear}) — zależy od GVWR na etykiecie certyfikacyjnej</legend>
             <div className="mt-1 grid grid-cols-2 gap-2">
               <button type="button" aria-pressed={st.emissions === 'LD'} onClick={() => update({ emissions: 'LD' })} className={seg(st.emissions === 'LD')}>Light Duty</button>
               <button type="button" aria-pressed={st.emissions === 'HD'} onClick={() => update({ emissions: 'HD' })} className={seg(st.emissions === 'HD')}>Heavy Duty</button>
             </div>
-            <p className="mt-1 text-xs text-neutral-400">Klasę emisji podaje etykieta emisji pod maską (Vehicle Emission Control Information). Instrukcja: s. 7-4.</p>
+            <p className="mt-1 text-xs text-neutral-400">Klasę emisji podaje etykieta emisji pod maską (Vehicle Emission Control Information). {schedule.basisYear === 1995 ? 'Instrukcja: s. 7-4.' : 'Instrukcja serwisowa: sekcja 0B (tabela klasyfikacji emisji).'}</p>
           </fieldset>
         )}
       </section>
@@ -200,7 +200,7 @@ export default function MaintenancePlanner() {
                 )}
                 {own && <p className="mt-1 text-xs text-neutral-400">Oznaczone jako wykonane: {fmtDate(st.done[item.id].date)}{st.done[item.id].km != null && `, ${formatNumber(st.done[item.id].km!)} km`}</p>}
                 {item.note && <p className="mt-1 text-xs text-neutral-400">{item.note}</p>}
-                <p className="mt-1 text-xs text-neutral-500">Źródło: {source?.label}, rozdz. 7 {item.page}</p>
+                <p className="mt-1 text-xs text-neutral-500">Źródło: {source?.label}, {source?.chapter || 'rozdz. 7'} {item.page}</p>
                 {rule && (
                   <div className="mt-2 flex flex-wrap gap-2">
                     <button type="button" onClick={() => markDone(item)} className={`${btn} text-white`} data-testid="przeglady-done">Oznacz wykonane</button>
@@ -217,10 +217,10 @@ export default function MaintenancePlanner() {
         <h2 className="text-lg font-bold text-silver-300">Źródła</h2>
         <ul className="mt-2 list-disc space-y-1 pl-5">
           {Object.entries(SCHEDULE_SOURCES).map(([k, s]) => (
-            <li key={k} className={k === schedule.source ? 'text-white' : ''}><a href={s.url} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center underline">{s.label}</a> — rozdz. 7 „Maintenance Schedule”; kopia w „Dokumenty GMT400”: {s.drive}</li>
+            <li key={k} className={k === schedule.source ? 'text-white' : ''}>{s.url ? <a href={s.url} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center underline">{s.label}</a> : <span className="font-semibold">{s.label}</span>} — {s.url ? 'rozdz. 7 „Maintenance Schedule”' : 'sekcja 0B „Scheduled Maintenance Services”'}; kopia w „Dokumenty GMT400”: <span className="break-all">{s.drive}</span></li>
           ))}
         </ul>
-        <p className="mt-2">Silniki diesla 1996–1999: instrukcja odsyła do „Diesel Engine Supplement” — {NO_DATA}. Roczniki 1988–1994 i 2000: {NO_DATA} (pokazujemy najbliższą instrukcję jako odniesienie). Wymiana płynu hamulcowego i oleju skrzyni rozdzielczej: {NO_DATA}.</p>
+        <p className="mt-2">Silniki diesla 1996–1999: instrukcja odsyła do „Diesel Engine Supplement” — {NO_DATA}. Roczniki 1990, 1993 i 2000 oraz 1988 Heavy Duty: {NO_DATA} (pokazujemy najbliższą instrukcję jako odniesienie). Diesle 1988–1994: instrukcje serwisowe (6,2 l i 6,5 l). Wymiana płynu hamulcowego i oleju skrzyni rozdzielczej: {NO_DATA}.</p>
         <p className="mt-2 font-semibold text-white">{CHECK}</p>
       </section>
     </div>

@@ -116,7 +116,7 @@ export default function Encyclopedia({ initialTab, initialItems }: { initialTab?
   const [query, setQuery] = useState('');
   const [tab, setTab] = useSectionNavigation(CATEGORIES.map(category => category.id), initialTab);
   const materialScope = tab === 'diy' || tab === 'schematy' ? ['Porada'] : tab === 'kody' ? ['Kod błędu'] : tab === 'usterki' ? ['Usterka'] : undefined;
-  const { visibleItems, panel: vehicleFilterPanel, profileNarrowing, profileModeChanged, resetMode: resetProfileMode, showAllMode: showAllProfileMode } = useVehicleMaterialFilter(items, materialScope);
+  const { visibleItems, renderPanel: vehicleFilterPanel, profileNarrowing, profileModeChanged, resetMode: resetProfileMode, showAllMode: showAllProfileMode } = useVehicleMaterialFilter(items, materialScope);
   const [selectedModel, setSelectedModel] = useState('Wszystkie');
   const [selectedModelItem, setSelectedModelItem] = useState<Item | null>(null);
   const [expanded, setExpanded] = useState<number | null>(null);
@@ -498,7 +498,7 @@ export default function Encyclopedia({ initialTab, initialItems }: { initialTab?
         </div>
       )}
       <div id="content" className="max-w-7xl mx-auto px-4 py-8">
-        {listTab(tab) && vehicleFilterPanel}
+        {listTab(tab) && vehicleFilterPanel(({diy:diyTips,kody:filteredCodes,usterki:filteredIssues} as Record<string,Item[]>)[tab])}
         
         {selectedModel !== 'Wszystkie' && (
           <div className="mb-6 flex items-center justify-between bg-silver-600/10 border border-silver-600/30 p-3">

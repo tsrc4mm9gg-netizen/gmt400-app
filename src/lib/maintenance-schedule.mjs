@@ -1,5 +1,5 @@
-// Harmonogram przeglądów GMT400 — WYŁĄCZNIE z instrukcji obsługi GM (Owner's Manual 1995–1999,
-// rozdz. 7 „Maintenance Schedule”; kopie w folderze Google Drive „Dokumenty GMT400 / 01 Instrukcje obsługi”).
+// Harmonogram przeglądów GMT400 — WYŁĄCZNIE z dokumentów GM: instrukcje obsługi 1995–1999 (rozdz. 7 „Maintenance Schedule”)
+// i instrukcje serwisowe 1988–1994 (sekcja 0B „Scheduled Maintenance Services”); kopie w folderze Google Drive „Dokumenty GMT400”.
 // Interwały w milach jak w instrukcji; km liczone z mil (1 mila = 1,609344 km) i zaokrąglane:
 // < 10 000 km do 500 km, < 50 000 km do 1 000 km, wyżej do 5 000 km. Gdzie instrukcja milczy — „brak danych w dokumentach”.
 
@@ -20,6 +20,12 @@ export const SCHEDULE_SOURCES = {
   OM97: { label: 'GM Owner’s Manual 1997 Chevrolet C/K', url: 'https://assets.gm.com/manuals/chevrolet/1997_chevrolet_1500_owners.pdf', drive: 'Instrukcja obsługi Chevrolet C-K 1997' },
   OM98: { label: 'GM Owner’s Manual 1998 Chevrolet C/K', url: 'https://assets.gm.com/manuals/chevrolet/1998_chevrolet_1500_owners.pdf', drive: 'Instrukcja obsługi Chevrolet C-K 1998' },
   OM99: { label: 'GM Owner’s Manual 1999 Chevrolet Tahoe/Suburban', url: 'https://assets.gm.com/manuals/chevrolet/1999_chevrolet_suburban_owners.pdf', drive: 'Instrukcja obsługi Chevrolet Tahoe i Suburban 1999' },
+  // Instrukcje serwisowe GM (Service Manual) — bez publicznego adresu, tylko kopia w „Dokumenty GMT400”; strony = numer strony pliku PDF.
+  SM88: { label: 'GM Service Manual 1988 C/K Light Duty Trucks', url: '', drive: '1988_GM_CK_LIGHT_DUTY_TRUCKS_SERVICE_MANUAL.pdf', chapter: 'sekcja 0B, PDF' },
+  SM89: { label: 'GM Service Manual 1989 C/K 10–30 (ST375-89)', url: '', drive: 'ST375-89_1989_GM_Light_Truck_CK_10-30_Service_Driveability_and_Emissions_Manual.pdf', chapter: 'sekcja 0B, PDF' },
+  SM91: { label: 'GM Service Manual 1991 C/K Light Duty Trucks', url: '', drive: '1991_GM_CK_LIGHT_DUTY_TRUCKS_SERVICE_MANUAL_WITH_EMISSIONS_AND_DRIVEABILITY.pdf', chapter: 'sekcja 0B, PDF' },
+  SM92: { label: 'GM Service Manual 1992 C/K 10–30 (ST375-92)', url: '', drive: 'ST375-92_1992_GM_Light_Truck_CK_10-30_Service_Driveability_and_Emissions_Manual.pdf', chapter: 'sekcja 0B, PDF' },
+  SM94: { label: 'GM Service Manual 1994 C/K (NATP 9431)', url: '', drive: '1994_NATP_9431_1994_CK_TRUCK_SERVICE_MANUAL.pdf', chapter: 'sekcja 0B, PDF' },
 };
 
 // Definicje harmonogramów z instrukcji (1995: Schedule I/II, 1996+: Short Trip/City i Long Trip/Highway).
@@ -133,6 +139,100 @@ function y1995(kind) {
   ] };
 }
 
+// ---------- 1988–1994: wykresy „Scheduled Maintenance Services” z instrukcji serwisowych GM (sekcja 0B) ----------
+// Schedule 1/I = ciężkie warunki, Schedule 2/II = normalne. Pozycje, których znaczników nie da się pewnie odczytać ze skanu,
+// mają regułę null i opis zamiast zgadywania.
+const UNREAD = 'W skanie znaczniki Schedule 1 dla tej pozycji są nieczytelne — interwału nie podajemy (sprawdź w instrukcji).';
+const SM_PAGES = {
+  SM88: { LD: 's. 22', D: 's. 23', text: 's. 24–25' },
+  SM89: { LD: 's. 26', HD: 's. 27–28', D: 's. 29', text: 's. 30–32' },
+  SM91: { LD: 's. 28', HD: 's. 29–30', D: 's. 31', text: 's. 33–34' },
+  SM92: { LD: 's. 30–31', HD: 's. 32–33', D: 's. 34–35', text: 's. 28–29' },
+  SM94: { LD: 's. 35–36', HD: 's. 37–38', D: 's. 39–40', text: 's. 41–45' },
+};
+const SM_COOLANT = 'Zielony płyn na bazie glikolu etylenowego 50/50 z wodą — nie DEX-COOL. Przy wymianie: płukanie, kontrola węży i paska, próba ciśnieniowa układu i korka.';
+function smSchedule(src, kind) {
+  const P = SM_PAGES[src][kind];
+  const T = SM_PAGES[src].text;
+  const y = Number(src.slice(2)) + 1900;
+  const faint = src === 'SM89'; // Schedule 1 drukowany jasnymi kółkami — część nieczytelna
+  const sev = rule => (faint ? null : rule);
+  const atf = y === 1992
+    ? { id: 'atf', group: 'Skrzynia', label: 'ATF + filtr (automat)', transmission: 'auto', normal: null, severe: null, page: P, info: `Wykres odsyła do instrukcji obsługi — w dokumencie serwisowym 1992: ${NO_DATA}.` }
+    : { id: 'atf', group: 'Skrzynia', label: 'ATF + filtr (automat)', transmission: 'auto', normal: r(30000), severe: r(15000), page: T, note: 'Wartości dla GVWR do 8 600 lb (3 900 kg). Powyżej 8 600 lb: ciężkie warunki co 20 000 km (12 000 mil), normalne co 40 000 km (24 000 mil). Ciężkie warunki dla ATF: gęsty ruch miejski, temperatura regularnie od 32 °C, teren górzysty, częste holowanie, taxi/policja/dostawy.' };
+  const manual = { id: 'skrzynia-reczna', group: 'Skrzynia', label: 'Olej skrzyni ręcznej', transmission: 'manual', normal: null, severe: null, page: y === 1992 ? P : T, info: y === 1992 ? `Wymiana: ${NO_DATA}.` : 'Instrukcja serwisowa: olej w skrzyni ręcznej nie wymaga okresowej wymiany.' };
+  const transfer0 = y === 1994
+    ? { id: 'skrzynia-rozdzielcza', group: 'Napęd 4WD', label: 'Olej skrzyni rozdzielczej', drive: '4WD', normal: null, severe: r(30000), page: T, info: 'Wymiana tylko przy ciężkim holowaniu — co 50 000 km (30 000 mil). Poza tym instrukcja nie podaje wymiany.' }
+    : { ...TRANSFER, page: P };
+  const transfer = transfer0;
+  const clutch = { id: 'sprzeglo', group: 'Skrzynia', label: 'Smarowanie sworznia widełek sprzęgła', transmission: 'manual', ...both(r(30000)), page: P };
+  const tail = [atf, manual, transfer, { ...BRAKE_FLUID, page: P, info: `Wymiana: ${NO_DATA}. Kontrola hamulców według instrukcji przy rotacji opon.` }];
+  const axleChange = y === 1994 ? [{ id: 'most-wymiana', group: 'Napęd', label: 'Most napędowy — wymiana oleju (kurz, przyczepa)', normal: null, severe: r(15000), page: T, info: AXLE_CHANGE_NOTE, note: 'Modele 3500 HD przy ekstremalnym obciążeniu lub holowaniu: co 5 000 km (3 000 mil) lub 3 mies., albo syntetyczny olej 75W-140.' }] : [];
+  if (kind === 'LD') {
+    const tires = y <= 1989 ? { normal: r(7500), severe: r(6000) } : y === 1992 ? null : { normal: r(15000, null, { firstMi: 7500 }), severe: r(15000, null, { firstMi: 6000 }) };
+    return { source: src, items: [
+      { id: 'olej', group: 'Silnik', label: 'Olej silnikowy', normal: r(7500, 12), severe: r(3000, 3), page: P },
+      { id: 'filtr-oleju', group: 'Silnik', label: 'Filtr oleju', normal: r(15000, null, { firstMi: 7500 }), severe: sev(r(3000, 3)), page: P, note: 'Harmonogram normalny: pierwszy filtr przy 12 000 km (7 500 mil), potem co drugą wymianę oleju.', info: faint ? UNREAD : undefined },
+      { id: 'smarowanie', group: 'Podwozie', label: 'Smarowanie podwozia (przeguby, sworznie)', normal: r(7500, 12), severe: r(3000, 12), page: P, note: CHASSIS_NOTE },
+      { id: 'most-kontrola', group: 'Napęd', label: 'Most napędowy — kontrola oleju', normal: r(7500), severe: r(3000), page: P, note: AXLE_NOTE },
+      ...axleChange,
+      tires ? { id: 'opony', group: 'Koła', label: 'Rotacja opon', ...tires, page: T } : { id: 'opony', group: 'Koła', label: 'Rotacja opon', normal: null, severe: null, page: P, info: `Wykres odsyła do instrukcji obsługi — ${NO_DATA}.` },
+      { id: 'filtr-powietrza', group: 'Silnik', label: 'Filtr powietrza — wymiana', ...both(r(30000)), page: P, note: 'W kurzu częściej.' },
+      { id: 'swiece', group: 'Zapłon', label: 'Świece zapłonowe — wymiana', ...both(r(30000)), page: P },
+      ...(y === 1988 ? [] : [{ id: 'filtr-paliwa', group: 'Silnik', label: 'Filtr paliwa', normal: r(60000), severe: y === 1989 ? null : r(30000), page: P, info: y === 1989 ? UNREAD : undefined }]),
+      ...(y <= 1991 ? [{ id: 'pcv', group: 'Silnik', label: 'Układ PCV — kontrola', ...both(r(60000)), page: P }] : []),
+      { id: 'pasek', group: 'Silnik', label: 'Pasek osprzętu, przewody zapłonowe, zapłon, zawór EVRV, zbiornik i przewody paliwa — kontrola', ...both(r(60000)), page: P, note: y === 1991 ? 'Zbiornik i przewody paliwa w ciężkich warunkach co 48 000 km (30 000 mil).' : undefined },
+      clutch,
+      { id: 'lozyska', group: 'Podwozie', label: 'Łożyska przednich kół — czyszczenie i smarowanie (2WD)', drive: '2WD', normal: r(30000), severe: r(15000), page: P },
+      { id: 'chlodzenie', group: 'Chłodzenie', label: 'Płyn chłodniczy (zielony) — wymiana z płukaniem', ...both(r(30000, 24)), page: P, note: SM_COOLANT },
+      ...tail,
+    ] };
+  }
+  if (kind === 'HD') {
+    const tires = y === 1994 ? { normal: r(12000, null, { firstMi: 6000 }), severe: r(15000, null, { firstMi: 6000 }) } : null;
+    return { source: src, items: [
+      { id: 'olej', group: 'Silnik', label: 'Olej silnikowy', normal: r(6000, 12), severe: r(3000, 3), page: P },
+      { id: 'filtr-oleju', group: 'Silnik', label: 'Filtr oleju', normal: r(12000, null, { firstMi: 6000 }), severe: sev(r(3000, 3)), page: P, note: 'Harmonogram normalny: pierwszy filtr przy 10 000 km (6 000 mil), potem co drugą wymianę oleju.', info: faint ? UNREAD : undefined },
+      { id: 'smarowanie', group: 'Podwozie', label: 'Smarowanie podwozia (przeguby, sworznie)', normal: r(6000, 12), severe: r(3000, 12), page: P, note: CHASSIS_NOTE },
+      { id: 'most-kontrola', group: 'Napęd', label: 'Most napędowy — kontrola oleju', normal: r(6000), severe: r(3000), page: P, note: AXLE_NOTE },
+      ...axleChange,
+      tires ? { id: 'opony', group: 'Koła', label: 'Rotacja opon', ...tires, page: P } : { id: 'opony', group: 'Koła', label: 'Rotacja opon', normal: null, severe: null, page: P, info: `Dla silników Heavy Duty w tej instrukcji: ${NO_DATA}.` },
+      { id: 'filtr-powietrza', group: 'Silnik', label: 'Filtr powietrza i filtr PCV — wymiana', ...both(r(24000)), page: P },
+      y === 1989
+        ? { id: 'swiece', group: 'Zapłon', label: 'Świece zapłonowe — wymiana', normal: r(30000), severe: null, page: P, note: 'Paliwo bezołowiowe. Przy benzynie ołowiowej instrukcja podaje 19 000 km (12 000 mil).', info: UNREAD }
+        : { id: 'swiece', group: 'Zapłon', label: 'Świece zapłonowe — wymiana', ...both(r(27000)), page: P },
+      { id: 'filtr-paliwa', group: 'Silnik', label: 'Filtr paliwa', normal: r(24000), severe: sev(r(12000)), page: P, info: faint ? UNREAD : undefined },
+      { id: 'zaplon', group: 'Zapłon', label: 'Kontrola ustawienia zapłonu', normal: r(24000), severe: sev(r(24000)), page: P, info: faint ? UNREAD : undefined },
+      { id: 'pasek', group: 'Silnik', label: 'Pasek osprzętu — kontrola', normal: r(12000), severe: sev(r(12000)), page: P, info: faint ? UNREAD : undefined },
+      { id: 'emisja', group: 'Silnik', label: 'Przewody zapłonowe, EGR, zbiornik i przewody paliwa, PCV — kontrola', ...both(r(60000)), page: P },
+      clutch,
+      { id: 'lozyska', group: 'Podwozie', label: 'Łożyska przednich kół — czyszczenie i smarowanie', normal: r(24000), severe: sev(r(12000)), page: P, info: faint ? UNREAD : undefined },
+      { id: 'chlodzenie', group: 'Chłodzenie', label: 'Płyn chłodniczy (zielony) — wymiana z płukaniem', ...both(r(24000, 24)), page: P, note: SM_COOLANT },
+      ...tail,
+    ] };
+  }
+  // diesel 6.2 / 6.5
+  const airNote = y === 1994 ? 'Ciężkie warunki: co 24 000 km (15 000 mil), w kurzu częściej; w ekstremalnym kurzu kontrola co 480 km (300 mil).'
+    : y === 1992 ? 'Silniki VIN J (RPO LL4) i VIN F (RPO L65): co 24 000 km (15 000 mil).' : 'Silnik VIN J (RPO LL4): co 24 000 km (15 000 mil).';
+  const tires = y === 1994 ? { normal: r(10000, null, { firstMi: 5000 }), severe: r(15000, null, { firstMi: 7500 }) } : null;
+  return { source: src, items: [
+    { id: 'olej', group: 'Silnik', label: 'Olej silnikowy (diesel)', normal: r(5000, y === 1988 ? null : 12), severe: r(2500, y === 1988 ? null : 3), page: P },
+    { id: 'filtr-oleju', group: 'Silnik', label: 'Filtr oleju', normal: r(5000, y === 1988 ? null : 12), severe: sev(r(2500, y === 1988 ? null : 3)), page: P, info: faint ? UNREAD : undefined },
+    { id: 'smarowanie', group: 'Podwozie', label: 'Smarowanie podwozia (przeguby, sworznie)', normal: r(5000, 12), severe: r(2500, 12), page: P, note: CHASSIS_NOTE },
+    { id: 'most-kontrola', group: 'Napęd', label: 'Most napędowy — kontrola oleju', normal: r(5000), severe: y === 1994 ? r(5000) : r(2500), page: P, note: AXLE_NOTE },
+    ...axleChange,
+    tires ? { id: 'opony', group: 'Koła', label: 'Rotacja opon', ...tires, page: P } : { id: 'opony', group: 'Koła', label: 'Rotacja opon', normal: null, severe: null, page: P, info: `Dla diesla w tej instrukcji: ${NO_DATA}.` },
+    { id: 'filtr-powietrza', group: 'Silnik', label: 'Filtr powietrza — wymiana', normal: r(30000), severe: y === 1994 ? r(15000) : r(30000), page: P, note: airNote },
+    ...(y >= 1991 ? [{ id: 'filtr-paliwa', group: 'Silnik', label: 'Filtr paliwa', ...both(r(30000)), page: P }] : []),
+    ...(y === 1988 ? [] : [{ id: 'obroty', group: 'Silnik', label: 'Regulacja obrotów biegu jałowego', ...both(r(30000, null, { firstMi: 5000 })), page: P, note: 'Pierwsza przy 8 000 km (5 000 mil), potem co 48 000 km (30 000 mil).' }]),
+    { id: 'pasek', group: 'Silnik', label: 'Pasek osprzętu, zawór CDRV, zawór ciśnienia wydechu — kontrola', ...both(r(60000)), page: P },
+    clutch,
+    { id: 'lozyska', group: 'Podwozie', label: 'Łożyska przednich kół — czyszczenie i smarowanie', normal: r(30000), severe: sev(r(15000)), page: P, info: faint ? UNREAD : undefined },
+    { id: 'chlodzenie', group: 'Chłodzenie', label: 'Płyn chłodniczy (zielony) — wymiana z płukaniem', ...both(r(30000, 24)), page: P, note: SM_COOLANT },
+    ...tail,
+  ] };
+}
+
 const AUTO = new Set(['4L60E', '4L80E', 'M30', 'MT1', 'MX0', 'MXO', 'MX1', '4L60', '700R4', 'TH400']);
 const MANUAL = new Set(['M50', 'MG5', 'MM4', 'MM5', 'MT8', 'MW3', 'NV4500', 'NV3500', 'SM465']);
 const DIESEL = new Set(['L49', 'L56', 'L57', 'L65', 'LH6', 'LL4']);
@@ -148,14 +248,29 @@ export function transmissionKind(value) {
 export const isDiesel = engine => DIESEL.has(String(engine || '').toUpperCase().trim()) || /diesel/i.test(String(engine || ''));
 
 /**
- * Zwraca harmonogram dla auta. `emissions` (LD/HD) dotyczy tylko benzyny z instrukcji 1995.
- * Roczniki 1988–1994 i 2000: brak instrukcji w dokumentach — pokazujemy najbliższy rocznik jako odniesienie (`reference`).
+ * Zwraca harmonogram dla auta. `emissions` (LD/HD) dotyczy benzyny 1989–1995 (1988: tylko Light Duty w dokumencie).
+ * 1988–1994: instrukcje serwisowe GM; 1990 i 1993 — najbliższa instrukcja jako odniesienie (`reference`); 1995–1999: instrukcje obsługi; 2000: odniesienie 1999.
  */
+const SM_BY_YEAR = { 1988: 'SM88', 1989: 'SM89', 1990: 'SM89', 1991: 'SM91', 1992: 'SM92', 1993: 'SM92', 1994: 'SM94' };
 export function getSchedule({ year, engine, transmission, drive, emissions } = {}) {
   const y = Number(year) || 0;
   const diesel = isDiesel(engine);
   const kind = transmissionKind(transmission);
-  let basisYear = y >= 1995 && y <= 1999 ? y : y && y < 1995 ? 1995 : y >= 2000 ? 1999 : 0;
+  const filt = items => items.filter(it => (!it.drive || !drive || it.drive === drive) && (!it.transmission || !kind || it.transmission === kind));
+  if (y >= 1988 && y <= 1994) {
+    let src = SM_BY_YEAR[y];
+    const em = diesel ? 'D' : emissions === 'HD' ? 'HD' : 'LD';
+    if (src === 'SM88' && em === 'HD') src = 'SM89';
+    const basisYear = Number(src.slice(2)) + 1900;
+    const reference = basisYear !== y;
+    const notice = reference
+      ? `Dla rocznika ${y}${y === 1988 ? ' (Heavy Duty)' : ''} nie ma harmonogramu w dokumentach (${NO_DATA}). Poniżej harmonogram z instrukcji serwisowej ${basisYear} — tylko jako odniesienie.`
+      : `Harmonogram z instrukcji serwisowej GM ${basisYear} (sekcja 0B). Interwały w milach przeliczone na km.`;
+    const base = smSchedule(src, em);
+    return { basisYear, reference, diesel, emissions: em, notice, source: base.source, items: filt(base.items) };
+  }
+  let basisYear = y >= 1995 && y <= 1999 ? y : y >= 2000 ? 1999 : y ? 1988 : 0;
+  if (y && y < 1988) return { basisYear: 0, reference: true, diesel, emissions: '', notice: `Rocznik ${y} jest poza zakresem GMT400 (1988–2000) — ${NO_DATA}.`, source: '', items: [] };
   const reference = Boolean(y) && basisYear !== y;
   let notice = '';
   if (reference) notice = `Dla rocznika ${y} nie ma instrukcji obsługi w dokumentach (${NO_DATA}). Poniżej harmonogram z instrukcji ${basisYear} — tylko jako odniesienie.`;
@@ -166,8 +281,7 @@ export function getSchedule({ year, engine, transmission, drive, emissions } = {
   if (!basisYear) return { basisYear, reference: false, diesel, emissions: '', notice: 'Brak rocznika — uzupełnij rocznik w Moje auto, żeby zobaczyć harmonogram.', source: '', items: [] };
   const em = basisYear === 1995 ? (diesel ? 'D' : emissions === 'HD' ? 'HD' : 'LD') : '';
   const base = basisYear === 1995 ? y1995(em) : gas9699(basisYear);
-  const items = base.items.filter(it => (!it.drive || !drive || it.drive === drive) && (!it.transmission || !kind || it.transmission === kind));
-  return { basisYear, reference, diesel, emissions: em, notice, source: base.source, items };
+  return { basisYear, reference, diesel, emissions: em, notice, source: base.source, items: filt(base.items) };
 }
 
 const DAY = 86400000;

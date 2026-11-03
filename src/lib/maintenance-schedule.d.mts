@@ -1,6 +1,6 @@
 export type ScheduleRule = { mi: number | null; km: number | null; months: number | null; firstMi?: number };
 export type ScheduleItem = { id: string; group: string; label: string; normal: ScheduleRule | null; severe: ScheduleRule | null; page?: string; note?: string; info?: string; drive?: '2WD' | '4WD'; transmission?: 'auto' | 'manual' };
-export type SourceKey = 'OM95' | 'OM96' | 'OM97' | 'OM98' | 'OM99';
+export type SourceKey = 'OM95' | 'OM96' | 'OM97' | 'OM98' | 'OM99' | 'SM88' | 'SM89' | 'SM91' | 'SM92' | 'SM94';
 export type Schedule = { basisYear: number; reference: boolean; diesel: boolean; emissions: '' | 'LD' | 'HD' | 'D'; notice: string; source: SourceKey | ''; items: ScheduleItem[] };
 export type ItemState = 'zalegle' | 'wkrotce' | 'ok' | 'brak' | 'info';
 export type ItemStatus = { state: ItemState; dueKm?: number | null; kmLeft?: number | null; dueDate?: string | null; daysLeft?: number | null; reminderDate?: string | null };
@@ -9,7 +9,7 @@ export const NO_DATA: string;
 export const CHECK: string;
 export const SEVERE_DEFINITION: string;
 export const NORMAL_DEFINITION: string;
-export const SCHEDULE_SOURCES: Record<SourceKey, { label: string; url: string; drive: string }>;
+export const SCHEDULE_SOURCES: Record<SourceKey, { label: string; url: string; drive: string; chapter?: string }>;
 export function roundKm(km: number): number;
 export function milesToKm(mi: number): number;
 export function formatNumber(n: number): string;

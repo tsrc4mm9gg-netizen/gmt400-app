@@ -1,30 +1,217 @@
-export type Obd1Code = {
- code: number;
- description: string;
- causes: string[];
- scope: string;
- source: string;
- sourceTitle: string;
- note: string;
+// Kody OBD-I GMT400 1988–1995 — zebrane z instrukcji GM „Fuel and Emissions / Driveability” (folder „dokumenty gmt400”).
+// Opisy własnymi słowami; każda grupa ma dokument i stronę (numer strony w instrukcji, w nawiasie strona PDF).
+export const OBD1_DOCS = {
+  X8836: 'GM X8836 — 1988 Light Duty Truck Fuel and Emissions (Driveability)',
+  X8936: 'GM X8936 — 1989 Light Duty Truck Fuel and Emissions (Driveability)',
+  X9136: 'GM X9136 — 1991 Light Duty Truck Fuel and Emissions (Driveability)',
+  X9236: 'GM X-9236 — 1992 Light Duty Truck Fuel and Emissions',
+  ST33693: 'GM ST-336-93 — 1993 Light Duty Truck Fuel and Emissions',
+  NATP9442: 'GM NATP-9442 — 1994 Driveability, Emissions and Electrical Diagnosis',
+  NATP94D: 'GM NATP-94-DIESEL — 1994 C/K Diesel Driveability and Emissions Supplement',
+  CK2_95: 'GM CK-2 1995 — C/K Truck Driveability, Emissions and Wiring Diagrams',
+} as const;
+export type Obd1DocKey = keyof typeof OBD1_DOCS;
+export type Obd1Cite = { doc: Obd1DocKey; page: string };
+export type Obd1Trans = '4L60-E' | '4L80-E' | '4L60-E i 4L80-E';
+export type Obd1Code = { code: number; name: string; detail?: string; trans?: Obd1Trans };
+export type Obd1Group = { id: string; title: string; years: string; applies: string; intro: string; sources: Obd1Cite[]; codes: Obd1Code[] };
+
+export const OBD1_NOTE = 'Kod wskazuje obwód lub układ, a nie konkretną część — najpierw sprawdź złącza, przewody i podciśnienie. Sprawdź w swoim aucie / manualu — GMT400 ma wiele wariantów (rocznik, GVWR, silnik, skrzynia, RPO).';
+
+export const OBD1_READING = {
+  steps: [
+    'Zapłon wyłączony.',
+    'Złącze diagnostyczne ALDL jest pod deską rozdzielczą po stronie kierowcy.',
+    'Połącz zworką styki A i B złącza ALDL.',
+    'Włącz zapłon, silnika nie uruchamiaj.',
+    'Kontrolka „Service Engine Soon” miga kod 12 (jedno mignięcie, przerwa, dwa mignięcia) — to znak, że tryb diagnostyczny działa, a nie usterka.',
+    'Kod 12 powtarza się trzy razy, potem w ten sam sposób migają zapisane kody. Same powtórzenia kodu 12 oznaczają brak zapisanych kodów.',
+  ],
+  facts: [
+    'Kontrolka świeci tylko, gdy usterka trwa; po jej ustąpieniu gaśnie, a kod zostaje w pamięci sterownika.',
+    'Zapisany kod kasuje się sam, jeśli usterka nie powróci przez 50 uruchomień silnika.',
+    'Przy kilku kodach zaczynaj od najniższego numeru — część kodów silnikowych wywołuje kody skrzyni.',
+  ],
+  sources: [{ doc: 'X8836', page: '3-8 (PDF 38)' }, { doc: 'X8836', page: '3-15 (PDF 45)' }, { doc: 'NATP9442', page: 'PDF 97' }] as Obd1Cite[],
 };
 
-export const OBD1_CODES: Obd1Code[] = [
- { code: 12, description: 'Brak impulsu referencyjnego rozdzielacza (aktywny tryb diagnostyczny)', causes: ['Normalny podczas odczytu kodów', 'Jeśli występuje przy pracującym silniku: obwód referencyjny'], scope: '1988–1995', source: 'https://repairpal.com/gm-obd-i-code-chart', sourceTitle: 'GM OBD-I Trouble Code Chart — RepairPal', note: 'Kod wskazuje obwód, a nie konkretną część. Sprawdź w swoim aucie / manualu — GMT400 ma wiele wariantów (rocznik, GVWR, silnik, skrzynia, RPO).' },
- { code: 13, description: 'Obwód czujnika O2 otwarty lub brak aktywności', causes: ['Czujnik O2', 'Okablowanie', 'Bezpiecznik/relay'], scope: '1988–1995', source: 'https://repairpal.com/gm-obd-i-code-chart', sourceTitle: 'GM OBD-I Trouble Code Chart — RepairPal', note: 'Kod wskazuje obwód, a nie konkretną część. Sprawdź w swoim aucie / manualu — GMT400 ma wiele wariantów (rocznik, GVWR, silnik, skrzynia, RPO).' },
- { code: 14, description: 'Czujnik ECT — wskazana wysoka temperatura', causes: ['Obwód ECT o niskiej rezystancji / zwarcie', 'Czujnik ECT', 'Okablowanie'], scope: '1988–1995', source: 'https://repairpal.com/gm-obd-i-code-chart', sourceTitle: 'GM OBD-I Trouble Code Chart — RepairPal', note: 'Kod wskazuje obwód, a nie konkretną część. Sprawdź w swoim aucie / manualu — GMT400 ma wiele wariantów (rocznik, GVWR, silnik, skrzynia, RPO).' },
- { code: 15, description: 'Czujnik ECT — wskazana niska temperatura', causes: ['Obwód ECT otwarty / wysoka rezystancja', 'Czujnik ECT', 'Okablowanie'], scope: '1988–1995', source: 'https://www.tradecraftspecialties.com/GM-OBD-I-codes', sourceTitle: 'GM OBD-I codes — Tradecraft Specialties', note: 'Kod wskazuje obwód, a nie konkretną część. Sprawdź w swoim aucie / manualu — GMT400 ma wiele wariantów (rocznik, GVWR, silnik, skrzynia, RPO).' },
- { code: 21, description: 'Sygnał TPS poza zakresem (wysoki)', causes: ['Czujnik TPS', 'Okablowanie', 'Regulacja TPS'], scope: '1988–1995', source: 'https://www.tradecraftspecialties.com/GM-OBD-I-codes', sourceTitle: 'GM OBD-I codes — Tradecraft Specialties', note: 'Kod wskazuje obwód, a nie konkretną część. Sprawdź w swoim aucie / manualu — GMT400 ma wiele wariantów (rocznik, GVWR, silnik, skrzynia, RPO).' },
- { code: 22, description: 'Sygnał TPS poza zakresem (niski)', causes: ['Czujnik TPS', 'Okablowanie', 'Regulacja TPS'], scope: '1988–1995', source: 'https://www.tradecraftspecialties.com/GM-OBD-I-codes', sourceTitle: 'GM OBD-I codes — Tradecraft Specialties', note: 'Kod wskazuje obwód, a nie konkretną część. Sprawdź w swoim aucie / manualu — GMT400 ma wiele wariantów (rocznik, GVWR, silnik, skrzynia, RPO).' },
- { code: 32, description: 'Usterka obwodu EGR / układu EGR', causes: ['Zawór EGR', 'Elektrozawór EGR', 'Okablowanie', 'Próżnia'], scope: '1988–1995', source: 'https://wardspecialtyperformance.com/blog/gm-obd1-vs-obd2-classic-trucks', sourceTitle: 'GM OBD-I vs OBD-II Diagnostics for Classic Trucks', note: 'Kod wskazuje obwód, a nie konkretną część. Sprawdź w swoim aucie / manualu — GMT400 ma wiele wariantów (rocznik, GVWR, silnik, skrzynia, RPO).' },
- { code: 33, description: 'Sygnał MAP poza zakresem (niska próżnia wskazana)', causes: ['Czujnik MAP', 'Próżnia', 'Okablowanie'], scope: '1988–1995', source: 'https://www.tradecraftspecialties.com/GM-OBD-I-codes', sourceTitle: 'GM OBD-I codes — Tradecraft Specialties', note: 'Kod wskazuje obwód, a nie konkretną część. Sprawdź w swoim aucie / manualu — GMT400 ma wiele wariantów (rocznik, GVWR, silnik, skrzynia, RPO).' },
- { code: 34, description: 'Sygnał MAP poza zakresem (wysoka próżnia wskazana)', causes: ['Czujnik MAP', 'Próżnia', 'Okablowanie'], scope: '1988–1995', source: 'https://www.tradecraftspecialties.com/GM-OBD-I-codes', sourceTitle: 'GM OBD-I codes — Tradecraft Specialties', note: 'Kod wskazuje obwód, a nie konkretną część. Sprawdź w swoim aucie / manualu — GMT400 ma wiele wariantów (rocznik, GVWR, silnik, skrzynia, RPO).' },
- { code: 35, description: 'Usterka obwodu ISC (sterowanie wolnymi obrotami)', causes: ['Silnik ISC', 'Okablowanie', 'Zabrudzenie przepustnicy'], scope: '1988–1995', source: 'https://straighttalkautomotive.com/OBD1/GM_OBD1.html', sourceTitle: 'GM OBD1 Diagnostic Trouble Codes & Cures', note: 'Kod wskazuje obwód, a nie konkretną część. Sprawdź w swoim aucie / manualu — GMT400 ma wiele wariantów (rocznik, GVWR, silnik, skrzynia, RPO).' },
- { code: 42, description: 'Usterka obwodu EST bypass', causes: ['Moduł zapłonowy', 'Okablowanie EST', 'Zasilanie modułu'], scope: '1988–1995', source: 'https://wardspecialtyperformance.com/blog/gm-obd1-vs-obd2-classic-trucks', sourceTitle: 'GM OBD-I vs OBD-II Diagnostics for Classic Trucks', note: 'Kod wskazuje obwód, a nie konkretną część. Sprawdź w swoim aucie / manualu — GMT400 ma wiele wariantów (rocznik, GVWR, silnik, skrzynia, RPO).' },
- { code: 43, description: 'Usterka obwodu czujnika spalania stukowego / ESC', causes: ['Czujnik spalania stukowego', 'Moduł ESC', 'Okablowanie'], scope: '1988–1995', source: 'https://www.tradecraftspecialties.com/GM-OBD-I-codes', sourceTitle: 'GM OBD-I codes — Tradecraft Specialties', note: 'Kod wskazuje obwód, a nie konkretną część. Sprawdź w swoim aucie / manualu — GMT400 ma wiele wariantów (rocznik, GVWR, silnik, skrzynia, RPO).' },
- { code: 44, description: 'O2 — wskazana mieszanka uboga', causes: ['Nieszczelność próżni', 'Dostawa paliwa', 'Czujnik O2', 'Okablowanie'], scope: '1988–1995', source: 'https://www.tradecraftspecialties.com/GM-OBD-I-codes', sourceTitle: 'GM OBD-I codes — Tradecraft Specialties', note: 'Kod wskazuje obwód, a nie konkretną część. Sprawdź w swoim aucie / manualu — GMT400 ma wiele wariantów (rocznik, GVWR, silnik, skrzynia, RPO).' },
- { code: 45, description: 'O2 — wskazana mieszanka bogata', causes: ['Ciśnienie paliwa', 'Wtryskiwacz', 'Czujnik O2', 'Okablowanie'], scope: '1988–1995', source: 'https://www.tradecraftspecialties.com/GM-OBD-I-codes', sourceTitle: 'GM OBD-I codes — Tradecraft Specialties', note: 'Kod wskazuje obwód, a nie konkretną część. Sprawdź w swoim aucie / manualu — GMT400 ma wiele wariantów (rocznik, GVWR, silnik, skrzynia, RPO).' }
+const t = (code: number, name: string, trans?: Obd1Trans, detail?: string): Obd1Code => ({ code, name, trans, detail });
+
+export const OBD1_GROUPS: Obd1Group[] = [
+  {
+    id: 'benzyna-ecm-88-92',
+    title: 'Benzyna 1988–1992 — sterownik ECM (wtrysk TBI)',
+    years: '1988–1992',
+    applies: 'Silniki benzynowe 4.3, 5.0, 5.7 i 7.4 z wtryskiem TBI (lista wspólna dla rodziny ECM; nie każdy silnik ma każdy czujnik).',
+    intro: 'Te same numery i znaczenia w instrukcjach z lat 1988, 1989, 1991 i 1992. Warunki ustawienia kodu w skrócie, własnymi słowami.',
+    sources: [{ doc: 'X8836', page: '3-15 (PDF 45)' }, { doc: 'X8936', page: '3-15 (PDF 45)' }, { doc: 'X9136', page: '3-16 (PDF 60)' }, { doc: 'X9236', page: '3-23 (PDF 67)' }],
+    codes: [
+      t(12, 'Tryb diagnostyczny działa — to nie usterka', undefined, 'Miga po zmostkowaniu styków A–B złącza ALDL przy włączonym zapłonie (instrukcja 1988, s. 3-8).'),
+      t(13, 'Czujnik tlenu (O2) — obwód otwarty', undefined, 'Sygnał O2 bez aktywności przez ok. 1 minutę poza biegiem jałowym.'),
+      t(14, 'Czujnik temperatury płynu chłodzącego — wskazana wysoka temperatura', undefined, 'Sygnał zwarty do masy przez ok. 3 s.'),
+      t(15, 'Czujnik temperatury płynu chłodzącego — wskazana niska temperatura', undefined, 'Przerwa w czujniku, złączu lub przewodzie przez ok. 3 s.'),
+      t(21, 'Czujnik położenia przepustnicy (TPS) — napięcie za wysokie', undefined, 'Powyżej 2,5 V przez 3 s przy obrotach poniżej 1200/min.'),
+      t(22, 'Czujnik położenia przepustnicy (TPS) — napięcie za niskie', undefined, 'Zwarcie do masy lub przerwa w obwodzie sygnału przez 3 s.'),
+      t(23, 'Czujnik temperatury powietrza (MAT/IAT) — wskazana niska temperatura', undefined, 'Przerwa w czujniku, złączu lub przewodzie przez 3 s.'),
+      t(24, 'Czujnik prędkości pojazdu (VSS) — brak sygnału', undefined, 'Brak sygnału prędkości podczas hamowania silnikiem w czasie jazdy.'),
+      t(25, 'Czujnik temperatury powietrza (MAT/IAT) — wskazana wysoka temperatura', undefined, 'Sygnał zwarty do masy przez 3 s.'),
+      t(32, 'Układ recyrkulacji spalin (EGR)', undefined, 'Czujnik podciśnienia EGR zwarty przy rozruchu, niezamknięty po włączeniu EGR albo przerwa w obwodzie elektrozaworu.'),
+      t(33, 'Czujnik MAP — sygnał za wysoki (niskie podciśnienie)', undefined, 'Za wysoki sygnał przez 5 s lub przerwa w przewodzie sygnału.'),
+      t(34, 'Czujnik MAP — sygnał za niski (wysokie podciśnienie)', undefined, 'Niski lub brak sygnału przy pracującym silniku.'),
+      t(35, 'Sterowanie biegiem jałowym (IAC) — błąd'),
+      t(42, 'Elektroniczne sterowanie zapłonem (EST) — przerwa lub zwarcie obwodu EST albo bypass'),
+      t(43, 'Układ przeciwstukowy (ESC) — sygnał za długo niski lub nieudany test układu'),
+      t(44, 'Czujnik O2 — mieszanka uboga', undefined, 'Napięcie O2 poniżej 0,2 V przez ok. 20 s.'),
+      t(45, 'Czujnik O2 — mieszanka bogata', undefined, 'Napięcie O2 powyżej 0,7 V przez ok. 1 minutę.'),
+      t(51, 'Uszkodzony moduł kalibracji (MEM-CAL / PROM) lub sterownik'),
+      t(52, 'Brak lub uszkodzenie modułu CALPAK'),
+      t(53, 'Za wysokie napięcie instalacji — zwykle usterka alternatora'),
+      t(54, 'Pompa paliwa — za niskie napięcie', undefined, 'Poniżej 2 V na obwodzie pompy, gdy sterownik dostaje impulsy zapłonu.'),
+      t(55, 'Uszkodzony sterownik (ECM)'),
+    ],
+  },
+  {
+    id: 'benzyna-pcm-93-95',
+    title: 'Benzyna 1993–1995 — sterownik PCM ze skrzynią 4L60-E / 4L80-E',
+    years: '1993–1995',
+    applies: '1993: 4.3, 5.0 i 5.7 (PCM ze skrzynią 4L60-E) oraz 4.3, 5.7 i 7.4 (PCM z 4L80-E). 1994–1995: silniki benzynowe z elektronicznie sterowaną skrzynią. Kody skrzyni oznaczono typem skrzyni.',
+    intro: 'Numery i nazwy z list 1993, 1994 i 1995. Przy skrzyni ręcznej (5.0/5.7 z ECM) obowiązuje krótsza lista bez kodów skrzyni — patrz instrukcja 1994 s. PDF 211 i 1995 s. PDF 210.',
+    sources: [{ doc: 'ST33693', page: '3D-46–3D-47 (PDF 411–412)' }, { doc: 'ST33693', page: '3E-32–3E-33 (PDF 559–560)' }, { doc: 'NATP9442', page: 'PDF 97–98' }, { doc: 'CK2_95', page: 'PDF 96–97' }],
+    codes: [
+      t(12, 'Tryb diagnostyczny działa — to nie usterka'),
+      t(13, 'Czujnik tlenu (O2) — obwód otwarty'),
+      t(14, 'Czujnik temperatury płynu chłodzącego (ECT) — wskazana wysoka temperatura', undefined, '1993: sygnał odpowiada ponad 145 °C przez 0,5 s.'),
+      t(15, 'Czujnik temperatury płynu chłodzącego (ECT) — wskazana niska temperatura', undefined, '1993: sygnał odpowiada poniżej −33 °C przez 0,5 s.'),
+      t(16, 'Bufor sygnału prędkości (VSS) / prędkość wyjściowa skrzyni — usterka', undefined, 'Przerwa w obwodzie lub brak zasilania bufora VSS.'),
+      t(21, 'Czujnik położenia przepustnicy (TP) — napięcie za wysokie', undefined, '1993: powyżej 4,88 V przez 4 s przy obrotach poniżej 1200/min.'),
+      t(22, 'Czujnik położenia przepustnicy (TP) — napięcie za niskie', undefined, '1993: poniżej 0,16 V przez 4 s albo zwarcie/przerwa.'),
+      t(24, 'Czujnik prędkości pojazdu (VSS) — sygnał za niski', '4L60-E i 4L80-E'),
+      t(28, 'Przełącznik zakresów / ciśnienia skrzyni (TR) — niedozwolona kombinacja sygnałów', '4L60-E i 4L80-E'),
+      t(32, 'Układ recyrkulacji spalin (EGR) — błąd'),
+      t(33, 'Czujnik MAP — sygnał za wysoki (niskie podciśnienie)'),
+      t(34, 'Czujnik MAP — sygnał za niski (wysokie podciśnienie)'),
+      t(35, 'Sterowanie biegiem jałowym (IAC) — błąd'),
+      t(37, 'Włącznik hamulca (sprzęgło TCC) — zablokowany w pozycji włączonej', '4L60-E i 4L80-E'),
+      t(38, 'Włącznik hamulca (sprzęgło TCC) — zablokowany w pozycji wyłączonej', '4L60-E i 4L80-E'),
+      t(39, 'Sprzęgło przemiennika (TCC) — nie załącza się', '4L80-E'),
+      t(42, 'Sterowanie zapłonem (IC / EST) — przerwa lub zwarcie obwodu albo bypass'),
+      t(43, 'Czujnik spalania stukowego (KS) — usterka obwodu'),
+      t(44, 'Czujnik O2 — mieszanka uboga', undefined, 'Poniżej 0,2 V przez ok. 20 s.'),
+      t(45, 'Czujnik O2 — mieszanka bogata', undefined, 'Powyżej 0,7 V przez ok. 1 minutę.'),
+      t(51, 'Błąd modułu kalibracji (PROM / MEM-CAL) lub sterownika'),
+      t(52, 'Za wysokie napięcie instalacji przez dłuższy czas', '4L60-E i 4L80-E', 'Lista 1994–1995.'),
+      t(53, 'Za wysokie napięcie instalacji', '4L60-E i 4L80-E', '1993: powyżej 19,5 V przez 2 s.'),
+      t(54, 'Obwód przekaźnika pompy paliwa — za niskie napięcie'),
+      t(55, 'Uszkodzony sterownik (PCM)'),
+      t(58, 'Czujnik temperatury oleju skrzyni (TFT) — wskazana wysoka temperatura', '4L60-E i 4L80-E', '1993 (4L60-E): ponad 154 °C przez 1 s.'),
+      t(59, 'Czujnik temperatury oleju skrzyni (TFT) — wskazana niska temperatura', '4L60-E i 4L80-E'),
+      t(66, 'Elektrozawór redukcji 3–2 — usterka obwodu', '4L60-E'),
+      t(67, 'Elektrozawór sprzęgła przemiennika (TCC) — usterka obwodu', '4L60-E'),
+      t(68, 'Poślizg elementów skrzyni (błąd przełożenia nadbiegu)', '4L80-E'),
+      t(69, 'Sprzęgło przemiennika (TCC) — zablokowane w pozycji załączonej', '4L60-E i 4L80-E'),
+      t(72, 'Czujnik prędkości pojazdu (VSS / prędkość wyjściowa skrzyni) — utrata sygnału', '4L60-E i 4L80-E'),
+      t(73, 'Elektrozawór regulacji ciśnienia (PCS) — prąd odbiega od zadanego', '4L60-E i 4L80-E'),
+      t(74, 'Czujnik prędkości wejściowej skrzyni (TIS) — usterka obwodu', '4L80-E'),
+      t(75, 'Za niskie napięcie instalacji', '4L60-E i 4L80-E', '1993: poniżej 7,3 V (w niskiej temperaturze) lub 11,7 V (w wysokiej) przez 4 s.'),
+      t(79, 'Przegrzanie oleju skrzyni', '4L60-E i 4L80-E', '1993: 150–154 °C przez 15 minut.'),
+      t(81, 'Elektrozawór zmiany biegów 2–3 — usterka obwodu', '4L60-E i 4L80-E'),
+      t(82, 'Elektrozawór zmiany biegów 1–2 — usterka obwodu', '4L60-E i 4L80-E'),
+      t(83, 'Elektrozawór PWM sprzęgła przemiennika (TCC) — usterka obwodu', '4L80-E'),
+      t(85, 'Niezdefiniowane przełożenie', '4L80-E'),
+      t(86, 'Błąd niskiego przełożenia', '4L80-E'),
+      t(87, 'Błąd wysokiego przełożenia', '4L80-E'),
+    ],
+  },
+  {
+    id: 'diesel-65td-94-95',
+    title: 'Diesel 6.5 1994–1995 — elektroniczna pompa wtryskowa (PCM)',
+    years: '1994–1995',
+    applies: 'Silnik 6.5 V8 diesel z elektronicznie sterowaną pompą wtryskową (1994–1995). Kody skrzyni oznaczono typem skrzyni; kody 61, 62 i 78 dotyczą wersji z turbosprężarką (w liście 1995 dla 4L60-E ich nie ma).',
+    intro: 'Te same numery i nazwy w suplemencie diesla 1994 i w instrukcji 1995. W dieslu wiele numerów znaczy co innego niż w silniku benzynowym — nie korzystaj z tabeli benzynowej.',
+    sources: [{ doc: 'NATP94D', page: 'PDF 42–44' }, { doc: 'CK2_95', page: 'PDF 745–746 (4L60-E)' }, { doc: 'CK2_95', page: 'PDF 807–808 (4L80-E)' }],
+    codes: [
+      t(13, 'Elektrozawór odcięcia paliwa — usterka obwodu'),
+      t(14, 'Czujnik temperatury płynu chłodzącego (ECT) — sygnał niski (wskazana wysoka temperatura)'),
+      t(15, 'Czujnik temperatury płynu chłodzącego (ECT) — sygnał wysoki (wskazana niska temperatura)'),
+      t(16, 'Bufor czujnika prędkości pojazdu (VSS) — usterka'),
+      t(17, 'Obwód sygnału wysokiej rozdzielczości (pompa) — usterka'),
+      t(18, 'Sygnał odniesienia krzywki pompy — błąd'),
+      t(19, 'Sygnał położenia wału korbowego — błąd'),
+      t(21, 'Czujnik pedału przyspieszenia nr 1 — sygnał za wysoki'),
+      t(22, 'Czujnik pedału przyspieszenia nr 1 — sygnał za niski'),
+      t(23, 'Czujnik pedału przyspieszenia nr 1 — sygnał poza zakresem'),
+      t(24, 'Czujnik prędkości pojazdu (VSS) — sygnał za niski', '4L60-E i 4L80-E'),
+      t(25, 'Czujnik pedału przyspieszenia nr 2 — sygnał za wysoki'),
+      t(26, 'Czujnik pedału przyspieszenia nr 2 — sygnał za niski'),
+      t(27, 'Czujnik pedału przyspieszenia nr 2 — sygnał poza zakresem'),
+      t(28, 'Przełącznik zakresów / ciśnienia skrzyni — usterka obwodu', '4L60-E i 4L80-E'),
+      t(29, 'Przekaźnik świec żarowych — usterka'),
+      t(31, 'Czujnik ciśnienia sterowania EGR / ciśnienia atmosferycznego — sygnał za niski'),
+      t(32, 'Układ EGR — błąd obwodu'),
+      t(33, 'Czujnik ciśnienia sterowania EGR / ciśnienia atmosferycznego — sygnał za wysoki'),
+      t(34, 'Silnik krokowy kąta wtrysku — usterka'),
+      t(35, 'Czas impulsu wtrysku — odpowiedź za krótka'),
+      t(36, 'Czas impulsu wtrysku — odpowiedź za długa'),
+      t(37, 'Włącznik hamulca (sprzęgło TCC) — zablokowany w pozycji włączonej', '4L60-E i 4L80-E'),
+      t(38, 'Włącznik hamulca (sprzęgło TCC) — zablokowany w pozycji wyłączonej', '4L60-E i 4L80-E'),
+      t(39, 'Sprzęgło przemiennika (TCC) — nie załącza się', '4L80-E'),
+      t(41, 'Włącznik świateł hamowania — usterka obwodu'),
+      t(42, 'Czujnik temperatury paliwa — sygnał niski (wskazana wysoka temperatura)'),
+      t(43, 'Czujnik temperatury paliwa — sygnał wysoki (wskazana niska temperatura)'),
+      t(44, 'Sterowanie EGR — błąd szerokości impulsu'),
+      t(45, 'Odpowietrzenie (vent) układu EGR — błąd'),
+      t(46, 'Kontrolka MIL („Service Engine Soon”) — usterka obwodu'),
+      t(47, 'Czujnik temperatury powietrza (IAT) — sygnał niski (wskazana wysoka temperatura)'),
+      t(48, 'Czujnik temperatury powietrza (IAT) — sygnał wysoki (wskazana niska temperatura)'),
+      t(49, 'Kontrolka „Service Throttle Soon” — usterka obwodu'),
+      t(51, 'Błąd modułu kalibracji (PROM)'),
+      t(52, 'Za wysokie napięcie instalacji przez dłuższy czas', '4L60-E i 4L80-E'),
+      t(53, 'Za wysokie napięcie instalacji', '4L60-E i 4L80-E'),
+      t(54, 'Obwód paliwa w sterowniku (PCM) — błąd', undefined, 'W liście 1994; w listach 1995 nie występuje.'),
+      t(56, 'Rezystor kalibracyjny pompy wtryskowej — błąd'),
+      t(57, 'Zwarcie zasilania 5 V w sterowniku (PCM)'),
+      t(58, 'Czujnik temperatury oleju skrzyni — sygnał niski', '4L60-E i 4L80-E'),
+      t(59, 'Czujnik temperatury oleju skrzyni — sygnał wysoki', '4L60-E i 4L80-E'),
+      t(61, 'Czujnik ciśnienia doładowania — sygnał za wysoki', undefined, 'Wersje z turbosprężarką.'),
+      t(62, 'Czujnik ciśnienia doładowania — sygnał za niski', undefined, 'Wersje z turbosprężarką.'),
+      t(63, 'Czujnik pedału przyspieszenia nr 3 — sygnał za wysoki'),
+      t(64, 'Czujnik pedału przyspieszenia nr 3 — sygnał za niski'),
+      t(65, 'Czujnik pedału przyspieszenia nr 3 — sygnał poza zakresem'),
+      t(66, 'Elektrozawór redukcji 3–2 — usterka obwodu', '4L60-E'),
+      t(67, 'Elektrozawór sprzęgła przemiennika (TCC) — usterka obwodu', '4L60-E'),
+      t(68, 'Poślizg elementów skrzyni', '4L60-E i 4L80-E'),
+      t(69, 'Sprzęgło przemiennika (TCC) — zablokowane w pozycji załączonej', '4L60-E i 4L80-E'),
+      t(71, 'Przełącznik tempomatu Set/Coast — usterka'),
+      t(72, 'Czujnik prędkości pojazdu (prędkość wyjściowa skrzyni) — utrata sygnału', '4L60-E i 4L80-E'),
+      t(73, 'Elektrozawór regulacji ciśnienia skrzyni — usterka obwodu', '4L60-E i 4L80-E'),
+      t(74, 'Czujnik prędkości wejściowej skrzyni (TIS) — usterka obwodu', '4L80-E'),
+      t(75, 'Za niskie napięcie instalacji', '4L60-E i 4L80-E'),
+      t(76, 'Przełącznik tempomatu Resume/Accel — usterka'),
+      t(78, 'Elektrozawór zaworu upustowego turbosprężarki (wastegate) — usterka', undefined, 'Wersje z turbosprężarką.'),
+      t(79, 'Przegrzanie oleju skrzyni', '4L60-E i 4L80-E'),
+      t(81, 'Elektrozawór zmiany biegów 2–3 — usterka obwodu', '4L60-E i 4L80-E'),
+      t(82, 'Elektrozawór zmiany biegów 1–2 — usterka obwodu', '4L60-E i 4L80-E'),
+      t(83, 'Elektrozawór PWM sprzęgła przemiennika (TCC) — usterka obwodu', '4L80-E'),
+      t(84, 'Czujnik pedału przyspieszenia — usterka obwodu', undefined, 'W listach z 4L80-E.'),
+      t(85, 'Niezdefiniowane przełożenie', '4L80-E'),
+      t(86, 'Błąd niskiego przełożenia', '4L80-E'),
+      t(87, 'Błąd wysokiego przełożenia', '4L80-E'),
+      t(88, 'Przesunięcie GMP (TDC offset) — błąd'),
+      ...[1, 2, 3, 4, 5, 6, 7, 8].map(cyl => t(90 + cyl, `Nierówna praca cylindra nr ${cyl} (test wyrównania cylindrów)`)),
+      t(99, 'Czujnik pedału przyspieszenia nr 2 — błąd zasilania odniesienia 5 V'),
+    ],
+  },
 ];
 
+export const OBD1_DOUBTS = [
+  'Lista ECM 1988–1992 jest wspólna dla rodziny sterowników TBI; instrukcje nie rozpisują jej na pojedyncze silniki (np. czujnik MAT/IAT — kody 23 i 25 — nie występuje w każdym silniku).',
+  'Kod 59 (1993): opis progu w instrukcji jest nieczytelny/niespójny po OCR — próg temperatury pominięto.',
+  'Instrukcja 1994 zawiera dodatkowe listy PCM (s. PDF 376 i 435) z kodami 23 i 25 bez jednoznacznego przypisania do C/K — pominięte.',
+  'Kody 4L80-E dla lat 1991–1992 (MEM-CAL z 4L80-E): brak listy w instrukcjach 1991/1992 w folderze — nieopublikowane.',
+];
+
+/** Spłaszczona lista (kompatybilność): każdy kod z każdej grupy. */
+export const OBD1_CODES = OBD1_GROUPS.flatMap(group => group.codes.map(code => ({ ...code, group: group.id, years: group.years })));
 export function findObd1Code(code: number) {
- return OBD1_CODES.find(item => item.code === code);
+  return OBD1_CODES.filter(item => item.code === code);
 }

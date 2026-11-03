@@ -52,6 +52,20 @@ if (differentialItem) {
  differentialItem.notes = 'SAE 80W-90 GL-5 (GM 1052271). G80: bez dodatku tarciowego. Sprawdź w swoim aucie / manualu — GMT400 ma wiele wariantów (rocznik, GVWR, silnik, skrzynia, RPO).';
 }
 
+// OM95 (1995, s. 7-4–7-6, 7-12, 7-23) — interwały potwierdzone w instrukcji GM; instrukcje serwisowe 1988–1994 podają te same wartości dla oleju, filtra powietrza i płynu chłodniczego (szczegóły i inne roczniki: /przeglady).
+const OM95_URL = 'https://assets.gm.com/manuals/chevrolet/1995_chevrolet_1500_owners.pdf';
+const CHECK = 'Sprawdź w swoim aucie / manualu — GMT400 ma wiele wariantów (rocznik, GVWR, silnik, skrzynia, RPO).';
+function confirm(id: string, values: Partial<MaintenanceItem>) {
+ const entry = MAINTENANCE_ITEMS.find(candidate => candidate.id === id);
+ if (entry) Object.assign(entry, { confidence: 'reference', source: OM95_URL, sourceTitle: 'OM95 — 1995 Chevrolet C/K 1500 Owners Manual', ...values });
+}
+confirm('engine-oil', { intervalMiles: 7500, intervalMonths: 12, severeServiceMiles: 3000, severeServiceMonths: 3, notes: `OM95 (1995, s. 7-4–7-6), silniki benzynowe do 8 600 lb GVWR: olej i filtr co 12 000 km (7 500 mil) lub 12 mies.; ciężka eksploatacja co 5 000 km (3 000 mil) lub 3 mies. Powyżej 8 600 lb GVWR (HD): co 10 000 km (6 000 mil) / 3 mies. Instrukcje serwisowe 1988–1994 podają te same wartości. Rocznik 1999 i diesel 6.5 mają inne zasady — zob. /przeglady. ${CHECK}` });
+confirm('air-filter', { intervalMiles: 30000, severeServiceMiles: 30000, notes: `OM95 (1995, s. 7-4–7-6): wymiana co 48 000 km (30 000 mil); w kurzu kontrola co 24 000 km (15 000 mil). To samo w instrukcjach serwisowych 1988–1994. ${CHECK}` });
+confirm('coolant', { intervalMiles: 30000, intervalMonths: 24, severeServiceMiles: 30000, severeServiceMonths: 24, notes: `OM95 (1995, s. 7-4–7-6): zielony płyn GM 6038-M 50/50 z wodą, wymiana z płukaniem co 48 000 km (30 000 mil) / 24 mies. (to samo 1988–1994). 1999 DEX-COOL: pierwsza wymiana 240 000 km (150 000 mil) / 60 mies. Nie mieszaj technologii płynów. ${CHECK}` });
+confirm('tire-rotation', { intervalMiles: 15000, severeServiceMiles: 12000, notes: `OM95 (1995, s. 7-4–7-6): pierwsza rotacja po 12 000 km (7 500 mil), potem co 24 000 km (15 000 mil); ciężka eksploatacja: pierwsza po ok. 10 000 km (6 000 mil), potem co 19 000 km (12 000 mil); HD powyżej 8 600 lb: pierwsza po 10 000 km, potem co 19 000 km. Ciśnienie według naklejki na drzwiach. ${CHECK}` });
+confirm('manual-transmission-fluid', { notes: `OM95 (1995, s. 7-23): olej w skrzyni ręcznej nie wymaga okresowej wymiany — tylko kontrola poziomu. Pojemności i typ oleju: /pojemnosci. ${CHECK}` });
+confirm('differential-fluid', { severeServiceMiles: 15000, notes: `OM95 (1995, s. 7-12): wymiana oleju w moście co 24 000 km (15 000 mil) tylko przy jeździe w kurzu lub holowaniu przyczepy; bez tego tylko kontrola poziomu. SAE 80W-90 GL-5 (GM 1052271); G80 bez dodatku tarciowego. Pojemności: /pojemnosci. ${CHECK}` });
+
 export function findMaintenance(parameters: { fuel?: string; drivetrain?: string; transmission?: string; severeService?: boolean }) {
  const fuel = normalizeMaintenanceValue(parameters.fuel);
  const drivetrain = normalizeMaintenanceValue(parameters.drivetrain);

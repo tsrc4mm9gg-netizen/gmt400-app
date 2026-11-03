@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { CHECK_NOTE, ENGINES, FLUIDS, SOURCES, TRANSFER_CASES } from '../lib/verified-specs';
 import { PARTS, PART_SOURCES, STATUS_LABEL, type Part } from '../lib/parts-catalog';
 import { TORQUE_SPECS } from '../lib/torque-specs';
@@ -77,6 +78,7 @@ export function FluidsTable() {
         </table>
       </div>
       <p className="mt-3 text-sm text-neutral-400">{TRANSFER_CASES}</p>
+      <p className="mt-2 text-sm text-neutral-400">Pełne pojemności dla każdego silnika, skrzyni i rocznika 1988–1999 (z numerem strony instrukcji GM): <Link href="/pojemnosci" className="text-silver-300 underline">Pojemności i płyny</Link>.</p>
       <p className="mt-2 text-sm text-neutral-400">Harmonogram GM dla GMT400 nie przewiduje wymiany paska rozrządu — wymienia tylko kontrolę paska osprzętu <Src id="OM99" />.</p>
       <CheckNote />
       <SourceList />

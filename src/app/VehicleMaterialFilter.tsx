@@ -48,9 +48,11 @@ export function useVehicleMaterialFilter<T extends Material>(items: T[], scopeTy
   // Z zapisanym autem: wpisy wprost zgodne (model/silnik/napęd/skrzynia) na górę; kolejność reszty bez zmian, nic dodatkowo nie znika.
   const fitting = useMemo(() => new Set(active && profile ? evaluated.filter(row => fitsProfileExplicitly(profile, row.item.applicability)).map(row => row.item) : []), [active, profile, evaluated]);
   const sortedItems = useMemo(() => fitting.size ? [...visibleItems].sort((a, b) => Number(fitting.has(b)) - Number(fitting.has(a))) : visibleItems, [visibleItems, fitting]);
-  const panel = <CompactVehicleFilterPanel profile={profile} active={active} scoped={Boolean(scopeKey)} mode={mode} counts={counts} fitting={fitting.size} onModeChange={setMode} />;
+  // Licznik „pasuje do Twojego auta” liczymy na liście faktycznie wyświetlanej (po filtrach modelu, nadwozia, rocznika i kategorii).
+  const renderPanel = (displayed?: readonly T[]) => <CompactVehicleFilterPanel profile={profile} active={active} scoped={Boolean(scopeKey)} mode={mode} counts={counts} fitting={displayed ? displayed.filter(item => fitting.has(item)).length : fitting.size} onModeChange={setMode} />;
+  const panel = renderPanel();
   const resetMode = useCallback(() => setMode('relevant'), []);
   const showAllMode = useCallback(() => setMode('all'), []);
   /** profileNarrowing: filtr profilu auta faktycznie zawęża listę (profil zapisany i tryb inny niż „Wszystkie”). */
-  return { visibleItems: sortedItems, panel, profileNarrowing: active && mode !== 'all', profileModeChanged: active && mode !== 'relevant', resetMode, showAllMode };
+  return { visibleItems: sortedItems, panel, renderPanel, profileNarrowing: active && mode !== 'all', profileModeChanged: active && mode !== 'relevant', resetMode, showAllMode };
 }

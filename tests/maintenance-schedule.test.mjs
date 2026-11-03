@@ -23,7 +23,10 @@ test('harmonogram 1996–99 benzyna: źródło, strony, filtr napędu', () => {
     const s2 = getSchedule({ year, engine: 'L31', transmission: '4L60E', drive: '2WD' });
     assert.ok(!s2.items.find(i => i.drive === '4WD'));
   }
-  for (const k of Object.keys(SCHEDULE_SOURCES)) assert.match(SCHEDULE_SOURCES[k].url, /^https:\/\/assets\.gm\.com\//);
+  for (const k of Object.keys(SCHEDULE_SOURCES)) {
+    if (k.startsWith('OM')) assert.match(SCHEDULE_SOURCES[k].url, /^https:\/\/assets\.gm\.com\//);
+    else { assert.equal(SCHEDULE_SOURCES[k].url, ''); assert.match(SCHEDULE_SOURCES[k].drive, /\.pdf$/); }
+  }
 });
 
 test('braki danych: diesel 1996+, brak rocznika, poza zakresem', () => {
@@ -33,6 +36,10 @@ test('braki danych: diesel 1996+, brak rocznika, poza zakresem', () => {
   assert.ok(getSchedule({}).notice.length > 0);
   assert.equal(getSchedule({ year: 1990, engine: 'L05' }).reference, true);
   assert.equal(getSchedule({ year: 2000, engine: 'L31' }).reference, true);
+  assert.equal(getSchedule({ year: 1990, engine: 'L05' }).source, 'SM89');
+  assert.equal(getSchedule({ year: 1993, engine: 'L05' }).source, 'SM92');
+  assert.equal(getSchedule({ year: 1988, engine: 'L05', emissions: 'HD' }).source, 'SM89');
+  assert.equal(getSchedule({ year: 1987, engine: 'L05' }).items.length, 0);
   assert.equal(intervalText(null), '');
   assert.equal(NO_DATA, 'brak danych w dokumentach');
 });
@@ -83,4 +90,27 @@ test('poradnik kupującego: unikalne id, źródło lub link, istniejące trasy',
   assert.ok(BUYER_SECTIONS.find(s => s.id === 'vin').links.some(([h]) => h === '/vin'));
   assert.deepEqual(readChecked('{"checked":{"rdza-podwozie":true,"x":true}}'), { 'rdza-podwozie': true });
   assert.deepEqual(readChecked('nie-json'), {});
+});
+
+test('harmonogram 1988–1994 z instrukcji serwisowych: LD / HD / diesel', () => {
+  for (const [year, src] of [[1988, 'SM88'], [1989, 'SM89'], [1991, 'SM91'], [1992, 'SM92'], [1994, 'SM94']]) {
+    const ld = getSchedule({ year, engine: 'L05', transmission: '4L60', drive: '2WD' });
+    assert.equal(ld.source, src); assert.equal(ld.reference, false); assert.equal(ld.emissions, 'LD');
+    const oil = ld.items.find(i => i.id === 'olej');
+    assert.deepEqual([oil.normal.mi, oil.normal.months, oil.severe.mi, oil.severe.months], [7500, 12, 3000, 3]);
+    assert.ok(ld.items.every(i => i.page), `strona: ${year}`);
+    assert.equal(ld.items.find(i => i.id === 'chlodzenie').normal.months, 24);
+    const d = getSchedule({ year, engine: 'LH6', transmission: '4L60', drive: '2WD' });
+    assert.equal(d.emissions, 'D');
+    assert.equal(d.items.find(i => i.id === 'olej').normal.mi, 5000);
+    assert.equal(d.items.find(i => i.id === 'olej').severe.mi, 2500);
+  }
+  const hd = getSchedule({ year: 1992, engine: 'L19', emissions: 'HD', transmission: '4L80E', drive: '2WD' });
+  assert.equal(hd.items.find(i => i.id === 'olej').normal.mi, 6000);
+  assert.equal(hd.items.find(i => i.id === 'swiece').normal.mi, 27000);
+  assert.equal(hd.items.find(i => i.id === 'filtr-oleju').normal.firstMi, 6000);
+  // 1989: nieczytelne znaczniki Schedule 1 — bez zgadywania
+  const s89 = getSchedule({ year: 1989, engine: 'L05' });
+  assert.equal(s89.items.find(i => i.id === 'filtr-oleju').severe, null);
+  assert.ok(s89.items.find(i => i.id === 'filtr-oleju').info);
 });
