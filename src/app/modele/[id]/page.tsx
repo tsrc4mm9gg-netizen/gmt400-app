@@ -14,28 +14,15 @@ import RecentTracker from '../../RecentTracker';
 type Props = { params: Promise<{ id: string }> };
 
 const DESCRIPTIONS: Record<string, string> = {
-  'tahoe-4d': 'Pięciodrzwiowy SUV na ramie GMT400, wprowadzony na rok modelowy 1995. Napęd 4x2 lub 4x4, głównie V8 5.7 Vortec. Popularny w Polsce jako auto rodzinne i terenowe.',
-  'tahoe-2d': 'Trzydrzwiowy SUV: K5 Blazer (1992–1994), od 1995 jako Tahoe 2-drzwi. Jedyna wersja z opcjonalnym 6.5 turbodieslem w 4WD. Rzadszy na rynku wtórnym.',
-  suburban: 'Długi SUV (C/K 1500 i 2500) z trzecim rzędem siedzeń. W 2500 dostępne V8 7.4 i 6.5 turbodiesel. Najpopularniejszy duży SUV GMT400 w Polsce.',
-  yukon: 'Bliźniak Tahoe marki GMC: 2-drzwi od 1992, 4-drzwi od 1995. Denali od 1998 (4-drzwi). Często lepiej wyposażony niż Tahoe.',
-  'ck-reg': 'Pickup z kabiną pojedynczą, krótką lub długą skrzynią. Serie 1500/2500/3500, napęd C (4x2) lub K (4x4). Klasyczny amerykański pickup.',
-  'ck-ext': 'Pickup z kabiną przedłużoną (Extended Cab). Od 1996 opcjonalne trzecie drzwi po stronie pasażera. Więcej miejsca w kabinie.',
-  k1500: 'Półtonowy pickup 4x4 (K = napęd 4WD). Przednie zawieszenie niezależne na drążkach skrętnych. Popularny w wersjach terenowych.',
-  sierra: 'Pickup marki GMC — technicznie bliźniak Chevroleta C/K, różni się atrapą, wyposażeniem i oznaczeniami. Często bogatsze wyposażenie.',
-  dually: 'Ciężka seria 3500 z podwójnymi tylnymi kołami. C3500HD produkowany do 2002 roku. Do ciężkiej pracy i zabudów.',
-};
-
-const TIPS: Record<string, string[]> = {
-  'tahoe-4d': ['Rdza na ramie i progach', 'Skrzynia 4L60-E (ślizganie)', 'Uszczelki kolektora Vortec 5.7 (1996+)', 'Stan hamulców i ABS'],
-  'tahoe-2d': ['Rdza (rzadszy model)', 'Opcjonalny 6.5 TD — PMD i pompa', 'Skrzynia 4L60-E'],
-  suburban: ['Rdza na ramie (długie nadwozie)', 'Skrzynia 4L60-E / 4L80-E', 'Tylne zawieszenie i resory', 'Stan trzeciego rzędu siedzeń'],
-  yukon: ['Rdza i rama', 'Wyposażenie Denali (jeśli dotyczy)', 'Skrzynia i silnik Vortec'],
-  'ck-reg': ['Rdza na ramie i kabinie', 'Skrzynia (4L60-E lub manual)', 'Stan skrzyni ładunkowej'],
-  'ck-ext': ['Rdza', 'Trzecie drzwi (od 1996)', 'Skrzynia i silnik'],
-  k1500: ['Rdza na ramie 4x4', 'Drążki skrętne i przednie zawieszenie', 'Skrzynia 4L60-E', 'Napęd 4WD'],
-  sierra: ['To samo co C/K', 'Wyposażenie i różnice względem Chevroleta'],
-  dually: ['Rdza i stan ramy (ciężka praca)', 'Podwójne koła tylne', 'Skrzynia i silnik (często 7.4 / 6.5)'],
-  default: ['Rdza na ramie', 'Praca skrzyni automatycznej', 'Wycieki oleju i płynów'],
+  'tahoe-4d': 'Pięciodrzwiowy SUV na ramie GMT400, wprowadzony na rok modelowy 1995. Napęd 4x2 lub 4x4, głównie V8 5.7.',
+  'tahoe-2d': 'Trzydrzwiowy SUV: K5 Blazer (1992–1994), od 1995 jako Tahoe 2-drzwi. Jedyna wersja z opcjonalnym 6.5 turbodieslem w 4WD.',
+  suburban: 'Długi SUV (C/K 1500 i 2500) z trzecim rzędem siedzeń. W 2500 dostępne V8 7.4 i 6.5 turbodiesel.',
+  yukon: 'Bliźniak Tahoe marki GMC: 2-drzwi od 1992, 4-drzwi od 1995. Denali od 1998 (4-drzwi).',
+  'ck-reg': 'Pickup z kabiną pojedynczą, krótką lub długą skrzynią. Serie 1500/2500/3500, napęd C (4x2) lub K (4x4).',
+  'ck-ext': 'Pickup z kabiną przedłużoną (Extended Cab). Od 1996 opcjonalne trzecie drzwi po stronie pasażera.',
+  k1500: 'Półtonowy pickup 4x4 (K = napęd 4WD). Przednie zawieszenie niezależne na drążkach skrętnych.',
+  sierra: 'Pickup marki GMC — technicznie bliźniak Chevroleta C/K, różni się atrapą, wyposażeniem i oznaczeniami.',
+  dually: 'Ciężka seria 3500 z podwójnymi tylnymi kołami. C3500HD produkowany do 2002 roku.',
 };
 
 export function generateStaticParams() {
@@ -63,7 +50,7 @@ export default async function ModelPage({ params }: Props) {
   const prev = BODY_STYLES[(index - 1 + BODY_STYLES.length) % BODY_STYLES.length];
   const next = BODY_STYLES[(index + 1) % BODY_STYLES.length];
   const has4wd = !['ck-ext'].includes(body.id);
-  const tips = TIPS[body.id] || TIPS.default;
+  // Zakres lat, których dotyczy schemat (wg źródła w schematics.ts) — pokazujemy tylko pasujące do rocznika nadwozia.
   const yearRange: Record<string, [number, number]> = {
     'aldl-12-pin': [1988, 1995], 'obd-ii-16-pin': [1996, 2000], 'vortec-cooling': [1996, 2000], 'fuel-system': [1988, 2000],
     'vortec-intake-gaskets': [1996, 2000], 'ground-points': [1996, 1996], 'brakes-abs': [1995, 1999], 'fluids-1995-1999': [1995, 1999],
@@ -91,14 +78,6 @@ export default async function ModelPage({ params }: Props) {
           <p className="mt-3 text-xs text-neutral-500">Zdjęcie poglądowe z katalogu modeli — kolor i wyposażenie mogą się różnić od Twojego auta.</p>
         </div>
       </header>
-
-      <section className="mt-6 rounded-2xl border border-white/15 bg-neutral-900 p-4">
-        <h2 className="text-lg font-semibold text-white">Co sprawdzić najpierw w {body.name}</h2>
-        <ul className="mt-2 list-inside list-disc space-y-1 text-sm text-neutral-300">
-          {tips.map(tip => <li key={tip}>{tip}</li>)}
-        </ul>
-        <Link href="/diagnoza" className="mt-3 inline-block text-sm font-semibold text-silver-300 underline-offset-2 hover:underline">Przejdź do diagnozy objawów →</Link>
-      </section>
 
       <ModelMaterials bodyId={body.id} bodyName={body.name} />
 

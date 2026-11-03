@@ -9,6 +9,10 @@ export const metadata: Metadata = {
   description: 'Baza kodów OBD-II dla Chevrolet Tahoe, Suburban, Silverado i GMC GMT400 (1996+). Znaczenie kodu, typowe przyczyny i co sprawdzić najpierw.',
   alternates: { canonical: 'https://www.gmt400.pl/kody-obd' },
   openGraph: {
+    type: 'website',
+    locale: 'pl_PL',
+    siteName: 'GMT400',
+    url: 'https://www.gmt400.pl/kody-obd',
     title: 'Kody OBD GMT400',
     description: 'Objaśnienia kodów diagnostycznych dla Tahoe, Suburban i Silverado.',
   },

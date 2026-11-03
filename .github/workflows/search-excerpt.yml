@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
   push:
     branches: [main]
-    paths: ['src/lib/search-excerpt.ts','src/app/SearchExcerpt.tsx','src/app/GlobalSearch.tsx','tests/search-excerpt.test.cjs','.github/workflows/search-excerpt.yml','package.json','package-lock.json']
+    paths: ['src/lib/search-excerpt.ts','src/app/SearchExcerpt.tsx','src/app/SearchOverlay.tsx','tests/search-excerpt.test.cjs','.github/workflows/search-excerpt.yml','package.json','package-lock.json']
 permissions: {contents: read}
 concurrency: {group: search-excerpt-verification, cancel-in-progress: true}
 jobs:

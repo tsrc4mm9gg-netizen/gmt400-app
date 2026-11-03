@@ -9,7 +9,6 @@ import ImportCostCalculator from './ImportCostCalculator';
 import GroupedNavigation from './GroupedNavigation';
 import useSectionNavigation from './useSectionNavigation';
 import ModelCatalog from './ModelCatalog';
-import GlobalSearch from './GlobalSearch';
 import { useVehicleMaterialFilter, VehicleMatchBadge } from './VehicleMaterialFilter';
 import type { Applicability } from '../lib/vehicle-compatibility';
 import { matchesYearRules } from '../lib/year-range.mjs';
@@ -421,7 +420,6 @@ export default function Encyclopedia({ initialTab, initialItems }: { initialTab?
       </div>
       <h1 className="sr-only">{CATEGORIES.find(c => c.id === tab)?.label || tab} — GMT400</h1>
 
-      {showSearch && <GlobalSearch items={items} onClose={() => setShowSearch(false)} />}
 
 
       {selectedModel !== 'Wszystkie' && (

@@ -28,12 +28,13 @@ export const MAINTENANCE_ITEMS: MaintenanceItem[] = [
 
 const transmissionFluid = MAINTENANCE_ITEMS.find(item => item.id === 'transmission-fluid');
 if (transmissionFluid) {
- transmissionFluid.intervalMiles = 100000;
+ // OM95 (s. 7-23, harmonogram silników benzynowych): przy normalnej eksploatacji płyn i filtr nie wymagają wymiany.
+ transmissionFluid.intervalMiles = null;
  transmissionFluid.severeServiceMiles = 50000;
  transmissionFluid.confidence = 'reference';
  transmissionFluid.source = 'https://assets.gm.com/manuals/chevrolet/1995_chevrolet_1500_owners.pdf';
  transmissionFluid.sourceTitle = 'OM95 — 1995 Chevrolet C/K 1500 Owners Manual';
- transmissionFluid.notes = 'Wymiana płynu i filtra: 160 000 km (100 000 mil) normalnie, 80 000 km (50 000 mil) przy ciężkiej eksploatacji. Płyn DEXRON-III. Sprawdź w swoim aucie / manualu — GMT400 ma wiele wariantów (rocznik, GVWR, silnik, skrzynia, RPO).';
+ transmissionFluid.notes = 'OM95 (1995, s. 7-23): wymiana płynu i filtra co 50 000 mil (w instrukcji: 83 000 km) tylko przy ciężkiej eksploatacji — gęsty ruch miejski przy temperaturze regularnie od 32 °C, teren górzysty, częste holowanie przyczepy, taxi/policja/dostawy. Bez tych warunków instrukcja 1995 mówi, że płyn i filtr nie wymagają wymiany. Od rocznika 1998 instrukcja dodaje wymianę co 160 000 km (100 000 mil) przy normalnej eksploatacji i 80 000 km przy GVWR powyżej 8 600 lb — szczegóły w Harmonogramie przeglądów (/przeglady). Płyn DEXRON-III. Sprawdź w swoim aucie / manualu — GMT400 ma wiele wariantów (rocznik, GVWR, silnik, skrzynia, RPO).';
 }
 
 const coolantItem = MAINTENANCE_ITEMS.find(item => item.id === 'coolant');

@@ -8,11 +8,16 @@ export const metadata: Metadata = {
   description: 'Typowe usterki Chevrolet Tahoe, Suburban, Silverado i GMC Sierra/Yukon (GMT400 1988–2000). Objawy, przyczyny, co sprawdzić najpierw i rozwiązania krok po kroku.',
   alternates: { canonical: 'https://www.gmt400.pl/usterki' },
   openGraph: {
+    type: 'website',
+    locale: 'pl_PL',
+    siteName: 'GMT400',
+    url: 'https://www.gmt400.pl/usterki',
     title: 'Usterki GMT400 — Tahoe, Suburban, Silverado',
     description: 'Objawy, przyczyny i naprawa typowych usterek GMT400. Sprawdź, co warto zbadać jako pierwsze.',
   },
 };
 
+// ISR: lista jest w HTML od pierwszego żądania (dla wyszukiwarek), odświeżana co 15 min. Gdy Notion nie odpowiada, strona pobiera dane w przeglądarce.
 export const revalidate = 900;
 
 export default async function Page() {

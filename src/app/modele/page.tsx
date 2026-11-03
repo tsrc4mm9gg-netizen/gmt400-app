@@ -8,11 +8,16 @@ export const metadata: Metadata = {
   description: 'Katalog modeli Chevrolet i GMC GMT400: Tahoe, Suburban, Silverado, Sierra, Yukon, Blazer, C/K. Rodziny, odmiany, roczniki i typowe konfiguracje.',
   alternates: { canonical: 'https://www.gmt400.pl/modele' },
   openGraph: {
+    type: 'website',
+    locale: 'pl_PL',
+    siteName: 'GMT400',
+    url: 'https://www.gmt400.pl/modele',
     title: 'Modele GMT400',
     description: 'Tahoe, Suburban, Silverado i inne modele GMT400 1988–2000.',
   },
 };
 
+// ISR: lista jest w HTML od pierwszego żądania (dla wyszukiwarek), odświeżana co 15 min. Gdy Notion nie odpowiada, strona pobiera dane w przeglądarce.
 export const revalidate = 900;
 
 export default async function Page() {

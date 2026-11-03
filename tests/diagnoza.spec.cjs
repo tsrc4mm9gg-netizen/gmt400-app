@@ -32,7 +32,7 @@ test('/diagnoza: 11 kategorii objawów + „Inny objaw”, jeden H1, tytuł i ca
   await open(page);
   await expect(page.locator('h1')).toHaveCount(1);
   await expect(page.locator('h1')).toHaveText('Co się dzieje z moim autem?');
-  await expect(page).toHaveTitle(/Co się dzieje z moim autem/);
+  await expect(page).toHaveTitle(/Diagnoza objawów GMT400/);
   await expect(page.locator('link[rel=canonical]')).toHaveAttribute('href', 'https://www.gmt400.pl/diagnoza');
   for (const id of SYMPTOM_IDS) {
     const tile = page.getByTestId('symptom-' + id);

@@ -144,8 +144,11 @@ test('menu w nagłówku: każda sekcja się otwiera, aktywna pozycja i przycisk 
   await expect(page).toHaveURL(BASE + '/kody-obd');
   await page.goBack();
   await expect(page).toHaveURL(/\/baza(\?tab=[a-z]+)?$/);
-  await page.getByRole('link', { name: 'Szukaj' }).first().click();
-  await expect(page).toHaveURL(/\/szukaj/);
+  // Pole „Szukaj kodu, objawu…” w nagłówku otwiera nakładkę; Enter prowadzi do pełnych wyników /szukaj.
+  await page.getByTestId('header-search').click();
+  await page.getByTestId('search-overlay-input').fill('P0300');
+  await page.getByTestId('search-overlay-input').press('Enter');
+  await expect(page).toHaveURL(/\/szukaj\?q=P0300/);
   expect(errors).toEqual([]);
 });
 

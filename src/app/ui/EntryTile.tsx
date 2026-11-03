@@ -6,18 +6,25 @@ import { creditForSrc, shortCredit } from '../../lib/topic-photos';
 
 interface EntryTileProps {
   item: TileEntry;
+  /** Nazwa ikony kategorii używanej, gdy wpis nie ma własnej miniatury. */
   icon: CategoryIconName;
   image?: string | null;
   excerpt: string;
   headingLevel?: 2 | 3;
   sourced?: boolean;
+  /** Wpis ma własny rysunek w pełnej instrukcji, ale nie ma zdjęcia na miniaturze — pokazujemy plakietkę. */
   drawing?: boolean;
   sourcedTestId?: string;
+  /** Elementy interaktywne (np. plakietka dopasowania do auta) — poza linkiem, pod kafelkiem. */
   children?: ReactNode;
 }
 
 const PILL = 'inline-block max-w-full truncate rounded-full border px-2 py-0.5 text-[11px] leading-4';
 
+/**
+ * Zwarty kafelek listy: miniatura, tytuł, tagi (model + lata), krótki fragment opisu (line-clamp).
+ * Cały kafelek jest jednym linkiem do pełnego wpisu /baza/[id] — bez rozwijania, więc bez „skakania” po dotknięciu.
+ */
 export default function EntryTile({ item, icon, image, excerpt, headingLevel = 3, sourced, sourcedTestId, drawing, children }: EntryTileProps) {
   const years = yearsLabel(item.Lata);
   const credit = image ? creditForSrc(image) : undefined;

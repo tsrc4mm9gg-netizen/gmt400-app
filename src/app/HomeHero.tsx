@@ -12,19 +12,6 @@ import HomeProblems from './HomeProblems';
 import { useModelSelection } from './ModelSelectionContext';
 import { findBody } from '../lib/body-styles';
 import RecentlyViewed from './RecentlyViewed';
-import HomeQuickStart from './HomeQuickStart';
-import HomeTips from './HomeTips';
-import HomePopular from './HomePopular';
-import HomeEngines from './HomeEngines';
-import HomeMaintenance from './HomeMaintenance';
-import HomeOwner from './HomeOwner';
-import HomeTools from './HomeTools';
-import HomeCommunity from './HomeCommunity';
-import HomeQuickActions from './HomeQuickActions';
-import HomeSafety from './HomeSafety';
-import HomeAbout from './HomeAbout';
-import HomeYearRange from './HomeYearRange';
-import HomeLinks from './HomeLinks';
 import HomeFAQ from './HomeFAQ';
 import SymptomSearch from './SymptomSearch';
 
@@ -35,7 +22,6 @@ export default function HomeHero() {
   return (
     <div className="mx-auto w-full max-w-3xl">
       <HomeIntro />
-      <HomeQuickStart />
       <ModelHero />
       {body && (
         <div data-testid="active-filters" role="region" aria-label="Aktywne filtry" className="mx-4 mb-3 rounded-lg border border-silver-600/30 bg-silver-950/30 px-3 py-2 text-sm text-neutral-300">
@@ -64,18 +50,6 @@ export default function HomeHero() {
       <div className="pt-4"><HomeStart /></div>
       <OwnerEssentials />
       <HomeProblems />
-      <HomeTips />
-      <HomePopular />
-      <HomeEngines />
-      <HomeMaintenance />
-      <HomeOwner />
-      <HomeTools />
-      <HomeCommunity />
-      <HomeQuickActions />
-      <HomeSafety />
-      <HomeAbout />
-      <HomeYearRange />
-      <HomeLinks />
       <div className="pt-1"><HomeSearch /></div>
       <HomeFAQ />
       <CategoryGrid />

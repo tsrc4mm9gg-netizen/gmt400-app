@@ -29,7 +29,9 @@ button { min-height:var(--control-height); }
 @media (hover:hover) { .gmt-navigation button:hover, .gmt-profile-trigger:hover { color:#fff !important; border-color:rgba(255,255,255,.34) !important; } }
 @media (prefers-reduced-motion:reduce) { .gmt-navigation button, .gmt-profile-trigger { transition:none; } }
 
+
 /* === Graphite + silver (czarne tło, grafitowe karty, srebrne akcenty) === */
+/* Karty: grafitowy gradient z delikatnym połyskiem, cienka jasna ramka, duże zaokrąglenia. */
 :is(.bg-neutral-900,.bg-neutral-950,.bg-neutral-900\/60,.bg-neutral-900\/50):is(.border,[class*='rounded']) { background-image:var(--card-gradient); }
 .bg-neutral-950:is(input,select,textarea) { background-image:none; }
 .bg-neutral-900.border, .bg-neutral-950.border, .bg-neutral-900\/60.border, .bg-neutral-900\/50.border { border-color:rgba(255,255,255,.14); box-shadow:var(--card-sheen); }
@@ -37,16 +39,22 @@ button { min-height:var(--control-height); }
 .rounded-xl.border, .rounded-2xl.border { border-radius:var(--radius-lg); }
 .border-neutral-700, .border-neutral-600 { border-color:rgba(255,255,255,.18); }
 .bg-neutral-950.min-h-screen { background-color:var(--background); }
+/* Główne przyciski (dawne czerwone) — jasne, srebrno-białe, ciemny tekst. */
 .bg-silver-600:not([class*='bg-silver-600/']), .bg-silver-500:not([class*='bg-silver-500/']) { background-image:linear-gradient(180deg,#f5f5f7 0%,#c9c9cf 100%); color:var(--accent-ink); }
 .bg-silver-600:not([class*='bg-silver-600/']):hover, .bg-silver-500:not([class*='bg-silver-500/']):hover { background-image:linear-gradient(180deg,#ffffff 0%,#d9d9de 100%); }
 .shadow-silver-600\/30, .shadow-silver-600\/40 { --tw-shadow-color:rgba(255,255,255,.12); }
+/* Błędy i ostrzeżenia zostają czerwone (semantyka): klasy danger-*. */
 ::selection { background:#ffffff; color:#000; }
+/* iOS Safari powiększa stronę po dotknięciu pola z czcionką < 16px — na telefonie wymuszamy 16px. */
 @media (max-width: 767px) { input:not([type=checkbox]):not([type=radio]):not([type=range]), select, textarea { font-size: 16px !important; } }
+/* Zakotwiczenia (#sekcja) nie chowają się pod lepkim nagłówkiem. */
 html { scroll-padding-top: 5rem; }
 @media (min-width: 1024px) { html { scroll-padding-top: 6rem; } }
 
+/* === Ikony kategorii i zdjęcia „studyjne” (bez grafik AI — tylko CSS) === */
 .icon-tile { display:inline-flex; align-items:center; justify-content:center; flex:0 0 auto; width:2.75rem; height:2.75rem; border-radius:.9rem; border:1px solid rgba(255,255,255,.2); background:linear-gradient(155deg,#34343a 0%,#1a1a1d 55%,#101011 100%); box-shadow:inset 0 1px 0 rgba(255,255,255,.14),0 2px 8px rgba(0,0,0,.45); color:#e4e4e9; }
 a:hover > .icon-tile, a:focus-visible > .icon-tile { border-color:rgba(255,255,255,.4); color:#fff; }
+/* Zdjęcie auta na ciemnym tle studyjnym: białe/szare tło zdjęcia „wtapia się” w radialny gradient (multiply), winieta, lekkie przyciemnienie. */
 .studio { position:relative; isolation:isolate; overflow:hidden; background:radial-gradient(ellipse 100% 90% at 50% 56%,#b0b6c0 0%,#6c7078 40%,#2b2d33 74%,#0e0f11 100%); }
 .studio img { mix-blend-mode:multiply; filter:brightness(2.05) contrast(1.1) saturate(1.15); }
 .studio::after { content:''; position:absolute; inset:0; pointer-events:none; background:radial-gradient(ellipse at 50% 50%,transparent 68%,rgba(0,0,0,.3) 100%),linear-gradient(to bottom,transparent 82%,rgba(0,0,0,.28)); }
@@ -57,14 +65,16 @@ a:hover > .icon-tile, a:focus-visible > .icon-tile { border-color:rgba(255,255,2
 .studio-slide { animation:studio-in .28s ease-out both; }
 @media (prefers-reduced-motion:reduce) { .studio-slide { animation:none; } }
 
+/* === Dopracowanie „aplikacyjne”: delikatny metaliczny połysk przycisków i kart (bez zmiany wymiarów układu) === */
 button, a, summary, [role='button'] { touch-action:manipulation; }
 .bg-silver-600:not([class*='bg-silver-600/']):not([class*='shadow']), .bg-silver-500:not([class*='bg-silver-500/']):not([class*='shadow']) { box-shadow:inset 0 1px 0 rgba(255,255,255,.85), inset 0 -1px 0 rgba(0,0,0,.18), 0 1px 2px rgba(0,0,0,.45); transition:filter 120ms ease, background-image 120ms ease; }
 .bg-silver-600:not([class*='bg-silver-600/']):active, .bg-silver-500:not([class*='bg-silver-500/']):active { filter:brightness(.93); }
 button.bg-neutral-800, a.bg-neutral-800 { background-image:linear-gradient(180deg,#2e2e33 0%,#222226 100%); box-shadow:inset 0 1px 0 rgba(255,255,255,.08); }
 @media (hover:hover) { :is(.bg-neutral-900,.bg-neutral-950).border:is(a, button):hover { border-color:rgba(255,255,255,.28); } }
 
+/* Dolny pasek nawigacji (telefon < md): treść i pływające przyciski nie chowają się pod paskiem ani pod wskaźnikiem iPhone'a. */
 :root { --tabbar-h: 0px; }
 @media (max-width: 767.98px) {
-  :root { --tabbar-h: 4rem; }
+  :root { --tabbar-h: calc(4rem + 1px); } /* h-16 zakładek + 1 px górnej ramki paska */
   body { padding-bottom: calc(var(--tabbar-h) + env(safe-area-inset-bottom, 0px)); }
 }

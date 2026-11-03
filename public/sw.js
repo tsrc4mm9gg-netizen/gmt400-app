@@ -78,7 +78,7 @@ self.addEventListener('fetch', event => {
     return;
   }
   // Dane encyklopedii (lista wpisów do wyszukiwarki i list DIY/usterek) i obrazy: sieć, bez sieci kopia.
-  if (url.pathname === '/api/notion' || url.pathname.startsWith('/_next/image') || /\.(?:webp|png|jpe?g|svg|avif|ico|woff2?)$/i.test(url.pathname)) {
+  if (url.pathname === '/api/notion' || url.pathname === '/api/search-index' || url.pathname.startsWith('/_next/image') || /\.(?:webp|png|jpe?g|svg|avif|ico|woff2?)$/i.test(url.pathname)) {
     event.respondWith(fetch(request).then(res => { event.waitUntil(put(ASSETS, request, res.clone(), MAX_ASSETS)); return res; }).catch(async () => (await caches.match(request, { ignoreVary: true })) || Response.error()));
   }
 });
