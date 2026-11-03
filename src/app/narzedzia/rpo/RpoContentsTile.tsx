@@ -14,6 +14,11 @@ export default function RpoContentsTile({ entry }: { entry: RpoEntry }) {
     return <div className="mt-2 rounded-lg border border-dashed border-neutral-700 bg-neutral-950/60 px-3 py-2 text-sm text-neutral-400" data-testid="rpo-contents" data-state="missing">
       <span className="font-semibold text-neutral-300">Zawiera: </span>{RPO_CONTENTS_MISSING}
       {contents?.plain && <p className="mt-1 text-neutral-300" data-testid="rpo-contents-plain">{contents.plain}</p>}
+      {contents?.online && <div className="mt-2 border-t border-neutral-800 pt-2" data-testid="rpo-contents-online">
+        <p className="text-xs font-semibold uppercase tracking-wide text-neutral-400">Opis z innych źródeł (nie GM)</p>
+        <p className="mt-1 break-words text-neutral-200">{contents.online.text}</p>
+        <p className="mt-1 break-words text-xs text-neutral-400">Źródło (nie GM): {contents.online.sources.map((s, i) => <span key={s.url}>{i > 0 && ', '}<a href={s.url} target="_blank" rel="noopener noreferrer" className="underline">{s.label}</a></span>)}</p>
+      </div>}
     </div>;
   }
   const total = contents.groups.reduce((n, g) => n + g.items.length, 0);

@@ -2616,6 +2616,327 @@
       }
     ]
   },
+  "NP8": {
+    "g": [
+      {
+        "r": "Suburban i Tahoe 1998",
+        "s": [
+          19,
+          20
+        ],
+        "z": [
+          "Aktywny reduktor AutoTrac (napęd 4x4 dołączany automatycznie), przełączany przyciskami",
+          "Zastąpił elektrycznie przełączany reduktor NP1",
+          "Wymagał pakietu ZQ3 Convenience albo wersji LS lub LT"
+        ]
+      }
+    ]
+  },
+  "FG5": {
+    "g": [
+      {
+        "r": "C/K Pickup 1995–1996",
+        "s": [
+          12,
+          15
+        ],
+        "z": [
+          "Gazowe amortyzatory Bilstein 46 mm z przodu i z tyłu",
+          "W 1995 także w pakiecie terenowym Z71 (tylko K1500, razem z osłonami podwozia)"
+        ]
+      }
+    ]
+  },
+  "E24": {
+    "g": [
+      {
+        "r": "C/K Pickup Extended Cab 1996–1998",
+        "s": [
+          15,
+          18,
+          21
+        ],
+        "z": [
+          "Trzecie drzwi boczne ułatwiające dostęp do tylnej kanapy (Extended Cab z krótką skrzynią, C/K10753)",
+          "Wymagały silnika 5,0 l L30 lub 5,7 l L31 i automatu 4-biegowego M30",
+          "Zamek tych drzwi nie jest elektryczny",
+          "Niedostępne z gumową wykładziną BG9, lakierem ZY4 ani tapicerką winylową",
+          "1998: wymagane przy skrzyni Sportside E62 w C*10753"
+        ]
+      }
+    ]
+  },
+  "B39": {
+    "g": [
+      {
+        "r": "Suburban i Tahoe 1999",
+        "s": [
+          22,
+          23
+        ],
+        "z": [
+          "Dywaniki z wykładziny z przodu i z tyłu",
+          "W zestawie dwustronna mata bagażnika (wykładzina/winyl)",
+          "W pakiecie ZM9; w Suburbanie niedostępne z bazowym PEG 1SA"
+        ]
+      }
+    ]
+  },
+  "NQZ": {
+    "g": [
+      {
+        "r": "C/K 3500 HD (podwozie pod zabudowę) 1996–1999",
+        "s": [
+          15,
+          21,
+          24
+        ],
+        "z": [
+          "Rezygnacja z tylnego zbiornika paliwa 18 gal (68 l) – miejsce dla zabudowy",
+          "Zamawiane w porozumieniu z producentem zabudowy; podwozia C/K31*03"
+        ]
+      }
+    ]
+  },
+  "TP3": {
+    "g": [
+      {
+        "r": "Suburban 1999",
+        "s": [
+          22
+        ],
+        "z": [
+          "Dwa akumulatory po 600 CCA",
+          "Wymaga 4x4 z silnikiem 5,7 l L31 i pakietu ZM9; niedostępne z emisją kalifornijską YF5",
+          "GM zalecał je w K2500 z silnikiem L31"
+        ]
+      }
+    ]
+  },
+  "YG6": {
+    "g": [
+      {
+        "r": "Suburban, Tahoe i C/K 1997",
+        "s": [
+          16,
+          17,
+          18
+        ],
+        "z": [
+          "W 1997 YG6 oznaczał „klimatyzacja niepożądana” – dealer musiał go zamówić, gdy nie zamawiał klimatyzacji, a nie była seryjna"
+        ]
+      }
+    ]
+  },
+  "K60": {
+    "g": [
+      {
+        "r": "C/K 2000",
+        "s": [
+          39
+        ],
+        "z": [
+          "Alternator CS130D, 100 A znamionowo (70 A w teście obciążenia)",
+          "Silniki 5,7 l i 6,5 l"
+        ]
+      }
+    ]
+  },
+  "K68": {
+    "g": [
+      {
+        "r": "C/K 2000",
+        "s": [
+          39
+        ],
+        "z": [
+          "Alternator CS130D, 105 A znamionowo (73 A w teście obciążenia)",
+          "Silniki 5,7 l i 6,5 l"
+        ]
+      }
+    ]
+  },
+  "KW2": {
+    "g": [
+      {
+        "r": "C/K 2000",
+        "s": [
+          39
+        ],
+        "z": [
+          "Alternator CS144, 124 A znamionowo (86 A w teście obciążenia)",
+          "Silniki 5,7 l, 6,5 l i 7,4 l"
+        ]
+      }
+    ]
+  },
+  "KG9": {
+    "g": [
+      {
+        "r": "C/K 2000",
+        "s": [
+          39
+        ],
+        "z": [
+          "Alternator CS144, 140 A znamionowo (98 A w teście obciążenia)",
+          "Silniki 5,7 l, 6,5 l i 7,4 l"
+        ]
+      }
+    ]
+  },
+  "GK9": {
+    "g": [
+      {
+        "r": "C/K 1993–1998",
+        "s": [
+          7,
+          21
+        ],
+        "z": [
+          "Przełożenie tylnego mostu 4,63 – dla najcięższych wersji",
+          "1998: C3500 HD (podwozie pod zabudowę, DMC 15 000 lb / 6804 kg) z silnikiem 7,4 l L29 lub 6,5 l turbodiesel"
+        ]
+      }
+    ]
+  },
+  "HC7": {
+    "g": [
+      {
+        "r": "C/K 1993–1998",
+        "s": [
+          7,
+          21
+        ],
+        "z": [
+          "Przełożenie tylnego mostu 5,13 – dla najcięższych wersji",
+          "1998: C3500 HD (podwozie pod zabudowę, DMC 15 000 lb / 6804 kg) z silnikiem 7,4 l L29 lub 6,5 l turbodiesel"
+        ]
+      }
+    ]
+  },
+  "GTY": {
+    "g": [
+      {
+        "r": "C/K 3500 (podwozie) 1993–1999",
+        "s": [
+          7,
+          12,
+          24
+        ],
+        "z": [
+          "Tylna oś o szerokim rozstawie kół, 92,2 cala (2342 mm)",
+          "Tylko podwozia C/K31003 i 31403; w 1999 niedostępna w C-K39093"
+        ]
+      }
+    ]
+  },
+  "KL5": {
+    "g": [
+      {
+        "r": "C/K Pickup 1993 i Suburban 1994",
+        "s": [
+          7,
+          8
+        ],
+        "z": [
+          "Przygotowanie do paliwa alternatywnego (LPG lub CNG) – auto gotowe do przeróbki",
+          "1993: wymagał silnika 5,7 l L05, automatu MX0 i DMC 6100 lb (2767 kg)",
+          "Suburban 1994: wymagał osi GT4 (3,73)"
+        ]
+      }
+    ],
+    "w": "KL5 w podręcznikach serwisowych 1992–1995 (i suplemencie CNG 1992) to „Conversion: Natural Gas” – przeróbka na gaz ziemny; w listach 1997–2000 to silnik 6,0 l V8 zasilany gazem (wersje CNG)."
+  },
+  "MT8": {
+    "g": [
+      {
+        "r": "C/K Pickup 1992–1993",
+        "s": [
+          5,
+          7
+        ],
+        "z": [
+          "Ciężka 5-biegowa skrzynia manualna z nadbiegiem",
+          "1992: seryjna w C/K1500 i C/K2500 z dieslem oraz w C/K2500 z C6P"
+        ]
+      }
+    ]
+  },
+  "U16": {
+    "g": [
+      {
+        "r": "C/K Pickup 1991–1993, Suburban 1992",
+        "s": [
+          3,
+          5,
+          4
+        ],
+        "z": [
+          "Obrotomierz w analogowym zestawie wskaźników",
+          "Seryjny w 454 SS"
+        ]
+      }
+    ]
+  },
+  "VBA": {
+    "g": [
+      {
+        "r": "C/K Pickup 1988",
+        "s": [
+          0
+        ],
+        "z": [
+          "Pakiet Custom: podsufitka i dopasowane kolorystycznie pokrycie podłogi"
+        ]
+      }
+    ]
+  },
+  "BYQ": {
+    "g": [
+      {
+        "r": "C/K Pickup 1989",
+        "s": [
+          1
+        ],
+        "z": [
+          "Grafika „4x4 Sport” na nadwoziu",
+          "Niedostępna z listwami B74, B84, B85, B96 i paskiem D85"
+        ]
+      }
+    ]
+  },
+  "A50": {
+    "g": [
+      {
+        "r": "Tahoe 1996–1997",
+        "s": [
+          14,
+          17
+        ],
+        "z": [
+          "Przednie fotele kubełkowe z regulacją pochylenia oparcia",
+          "W wersji bazowej z tapicerką winylową"
+        ]
+      }
+    ]
+  },
+  "E55": {
+    "g": [
+      {
+        "r": "Suburban 1992–1995",
+        "s": [
+          4,
+          6
+        ],
+        "z": [
+          "Tylna klapa z podnoszoną szybą (liftgate glass) i opuszczaną dolną klapą (drop gate)",
+          "Elektryczne zwalnianie szyby",
+          "Alternatywa dla dwuskrzydłowych drzwi tylnych ZW9"
+        ]
+      }
+    ],
+    "w": "E55 (heritage 1992–1997): tylna klapa złożona z podnoszonej szyby (liftgate glass) i opuszczanej dolnej klapy (drop gate) z elektrycznym zwalnianiem szyby – zamiast dwuskrzydłowych drzwi tylnych ZW9. Podręczniki 1992–1995 piszą „Endgate: Suburban”, schematy 1992–1994 „Rear Liftgate Glass”."
+  },
   "3EC": {
     "w": "Oznaczenie: opona do lekkiej ciężarówki (LT); szerokość 215 mm, profil 85% szerokości, felga 16 cala (406 mm); nośność E (10 warstw); czarny bok; opona radialna, osnowa stalowa; bezdętkowa; bieżnik szosowy (highway).",
     "g": []
@@ -2936,12 +3257,20 @@
     "w": "Oznaczenie: opona do lekkiej ciężarówki (LT); szerokość 245 mm, profil 75% szerokości, felga 16 cala (406 mm); nośność C (odpowiednik 6 warstw); czarny bok; opona radialna, osnowa poliestrowa; bezdętkowa; bieżnik całoroczny (all season); opasanie stalowe.",
     "g": []
   },
+  "Q1W": {
+    "w": "Oznaczenie: opona do lekkiej ciężarówki (LT); szerokość 245 mm, profil 75% szerokości, felga 16 cala (406 mm); nośność E (10 warstw); czarny bok; opona radialna, osnowa poliestrowa; bezdętkowa; bieżnik szosowo-terenowy (on/off road); opasanie stalowe. Ten sam rozmiar co Q1Z, różnica nieopisana w dokumentach.",
+    "g": []
+  },
   "Q1X": {
     "w": "Oznaczenie: opona do lekkiej ciężarówki (LT); szerokość 265 mm, profil 75% szerokości, felga 16 cala (406 mm); nośność C (odpowiednik 6 warstw); czarny bok; opona radialna, osnowa poliestrowa; bezdętkowa; bieżnik szosowo-terenowy (on/off road); opasanie stalowe.",
     "g": []
   },
   "Q1Y": {
     "w": "Oznaczenie: opona do lekkiej ciężarówki (LT); szerokość 265 mm, profil 75% szerokości, felga 16 cala (406 mm); nośność C (odpowiednik 6 warstw); napisy obwiedzione na biało; opona radialna, osnowa poliestrowa; bezdętkowa; bieżnik szosowo-terenowy (on/off road); opasanie stalowe.",
+    "g": []
+  },
+  "Q1Z": {
+    "w": "Oznaczenie: opona do lekkiej ciężarówki (LT); szerokość 245 mm, profil 75% szerokości, felga 16 cala (406 mm); nośność E (10 warstw); czarny bok; opona radialna, osnowa poliestrowa; bezdętkowa; bieżnik szosowo-terenowy (on/off road); opasanie stalowe. Ten sam rozmiar co Q1W, różnica nieopisana w dokumentach.",
     "g": []
   },
   "QHB": {
@@ -3064,6 +3393,14 @@
     "w": "Oznaczenie: opona osobowa (P-metric); szerokość 235 mm, profil 75% szerokości, felga 15 cala (381 mm); opona radialna, osnowa poliestrowa; bezdętkowa; bieżnik całoroczny (all season); opasanie stalowe.",
     "g": []
   },
+  "ZGL": {
+    "w": "Oznaczenie: opona do lekkiej ciężarówki (LT); szerokość 265 mm, profil 75% szerokości, felga 16 cala (406 mm); nośność E (10 warstw); czarny bok; opona radialna, osnowa poliestrowa; bieżnik szosowo-terenowy (on/off road); opasanie stalowe. Ten sam rozmiar co ZGM, różnica nieopisana w dokumentach.",
+    "g": []
+  },
+  "ZGM": {
+    "w": "Oznaczenie: opona do lekkiej ciężarówki (LT); szerokość 265 mm, profil 75% szerokości, felga 16 cala (406 mm); nośność E (10 warstw); czarny bok; opona radialna, osnowa poliestrowa; bieżnik szosowo-terenowy (on/off road); opasanie stalowe. Ten sam rozmiar co ZGL, różnica nieopisana w dokumentach.",
+    "g": []
+  },
   "ZHB": {
     "w": "Oznaczenie: opona osobowa (P-metric); szerokość 235 mm, profil 75% szerokości, felga 15 cala (381 mm); wersja o podwyższonej nośności (XL); opona radialna, osnowa poliestrowa; bieżnik całoroczny (all season); opasanie stalowe.",
     "g": []
@@ -3079,5 +3416,1175 @@
   "ZHN": {
     "w": "Oznaczenie: opona do lekkiej ciężarówki (LT); szerokość 225 mm, profil 75% szerokości, felga 16 cala (406 mm); nośność C (odpowiednik 6 warstw); napisy obwiedzione na biało; opona radialna, osnowa poliestrowa; bieżnik szosowo-terenowy (on/off road); opasanie stalowe.",
     "g": []
+  },
+  "12U": {
+    "g": [],
+    "w": "Ten sam kod 12U ma w dokumentach GM dwie nazwy: Linen White (listy RPO 1998–2000) i Yellow White (podręczniki serwisowe 1992, 1994, 1995, 1998). Kolor sprawdź na naklejce SPID."
+  },
+  "24U": {
+    "g": [],
+    "w": "GM drukuje 24U pod dwiema nazwami: Opal Blue (listy 1998–2000; w Tahoe 1997 Medium Opal Blue Metallic) i Medium Blue metalik (podręczniki serwisowe 1992, 1994, 1995, 1998). Listy 1998–2000 podają 24U dwukrotnie."
+  },
+  "27A": {
+    "g": [],
+    "w": "Pasek 27A: lista RPO 1998 – Light Indigo/Dark Indigo; podręczniki serwisowe 1992, 1994, 1995, 1998 – dwukolorowy Light Blue/Dark Blue."
+  },
+  "36U": {
+    "g": [],
+    "w": "36U: Teal Blue Metallic w zestawieniach 1995 (Suburban, Tahoe), Medium Dark Teal metalik w podręcznikach serwisowych 1992 i 1994."
+  },
+  "51A": {
+    "g": [],
+    "w": "51A: Gunmetal/Ultra Silver w liście 1998, dwukolorowy Gray/Silver w podręcznikach serwisowych 1994–1995."
+  },
+  "76U": {
+    "g": [],
+    "w": "76U: Burnt Red Metallic w zestawieniach 1995 (Suburban, Tahoe), Dark Garnet Red metalik w podręcznikach serwisowych 1992 i 1995."
+  },
+  "76L": {
+    "g": [],
+    "w": "76L (kolor drugi przy lakierowaniu dwukolorowym): Burnt Red Metallic w zestawieniach 1995, Dark Garnet Red metalik w podręcznikach serwisowych 1992 i 1995."
+  },
+  "80A": {
+    "g": [],
+    "w": "80A: Gunmetal/Light Silver w liście 1998, dwukolorowy Gunmetal/Red w podręcznikach serwisowych 1994, 1995 i 1998."
+  },
+  "96U": {
+    "g": [],
+    "w": "96U: Quicksilver Metallic w zestawieniach 1995–1997 (Suburban, Tahoe), Ultra Silver metalik w podręcznikach serwisowych 1992, 1994, 1995."
+  },
+  "96L": {
+    "g": [],
+    "w": "96L (kolor drugi przy lakierowaniu dwukolorowym): Quicksilver Metallic w zestawieniach 1995–1997, Ultra Silver metalik w podręcznikach serwisowych 1992, 1994, 1995."
+  },
+  "50L": {
+    "g": [],
+    "w": "50L (kolor drugi, Olympic White) występuje w listach RPO podręczników serwisowych 1992, 1994, 1995 i 1998 oraz w zestawieniu 1998 – razem lata 1992–1998."
+  },
+  "13I": {
+    "g": [],
+    "w": "13I: Light Gray w listach 1998–2000, Light Smoke Gray w podręcznikach serwisowych 1992, 1994, 1995, 1998."
+  },
+  "P06": {
+    "g": [],
+    "w": "P06: zestawienia 1995–2000 piszą „Wheel, trim discs”, a podręczniki serwisowe 1989–1998 „Trim Rings” – czyli ozdobne pierścienie na obręcz felgi stalowej, nie pełne kołpaki.",
+    "o": {
+      "t": "W zestawach GM dla pełnowymiarowego Blazera 1992–1994: ozdobne wykończenie kół typu „rally” – pierścienie felg i kołpaki piast; w komplecie z YE9, niedostępne z felgami PF4.",
+      "s": [
+        {
+          "l": "RPO Archive – Chevrolet (niezależne zestawienie, nie GM)",
+          "u": "https://rpoarchive.com/code/chevrolet/p06/"
+        },
+        {
+          "l": "RPO Archive – GMC (niezależne zestawienie, nie GM)",
+          "u": "https://rpoarchive.com/code/gmc/p06/"
+        }
+      ]
+    }
+  },
+  "C6W": {
+    "g": [],
+    "w": "C6W: 9200 lb (4173 kg) w podręcznikach 1994, 1995, 1998 i listach 1998–2000. Podręcznik 1992 (SM92) podaje 8600 lb (3901 kg) – dla rocznika 1992 sprawdź DMC na naklejce na słupku drzwi."
+  },
+  "Z49": {
+    "g": [],
+    "w": "Z49 (podręczniki 1991–1998, listy 1998–2000): wyposażenie wymagane w Kanadzie; podręczniki i schematy wymieniają w nim m.in. światła do jazdy dziennej (DRL)."
+  },
+  "PF4": {
+    "g": [],
+    "w": "PF4: podręczniki serwisowe 1988–1998 opisują felgę jako kutą (forged), zestawienia 1992–2000 jako odlewaną (cast). Rozmiar 16×7 cala zgodny.",
+    "o": {
+      "t": "W pełnowymiarowym Blazerze 1992–1994 w komplecie stalowe koło zapasowe 16×6,5 cala; felgi zawarte w pakiecie BYP.",
+      "s": [
+        {
+          "l": "RPO Archive – Chevrolet (niezależne zestawienie, nie GM)",
+          "u": "https://rpoarchive.com/code/chevrolet/pf4/"
+        },
+        {
+          "l": "RPO Archive – GMC (niezależne zestawienie, nie GM)",
+          "u": "https://rpoarchive.com/code/gmc/pf4/"
+        }
+      ]
+    }
+  },
+  "MC0": {
+    "g": [],
+    "w": "MC0: 4-biegowa skrzynia manualna Getrag o rozstawie osi wałków 84 mm, w listach RPO z 1988 (SM88) i 1989 (schematy W89). W skanie litera O/0 jest niewyraźna (MC0/MCO)."
+  },
+  "AG2": {
+    "g": [],
+    "o": {
+      "t": "Elektryczna regulacja fotela pasażera; lista RPO 1998 opisuje ją jako regulację w 6 kierunkach, a listy 1999–2000 dopisują, że wymaga kodu IP2.",
+      "s": [
+        {
+          "l": "RPO Archive – Chevrolet (niezależne zestawienie, nie GM)",
+          "u": "https://rpoarchive.com/code/chevrolet/ag2/"
+        },
+        {
+          "l": "RPO Archive – GMC (niezależne zestawienie, nie GM)",
+          "u": "https://rpoarchive.com/code/gmc/ag2/"
+        }
+      ]
+    }
+  },
+  "B3J": {
+    "g": [],
+    "o": {
+      "t": "W C/K 1988–1989 strony modeli zestawiają ten kod z silnikiem diesla 6,2 l (razem z E63) – wyposażenie towarzyszące wersji diesel.",
+      "s": [
+        {
+          "l": "RPO Archive – Chevrolet (niezależne zestawienie, nie GM)",
+          "u": "https://rpoarchive.com/code/chevrolet/b3j/"
+        }
+      ]
+    }
+  },
+  "MM4": {
+    "g": [],
+    "o": {
+      "t": "W tabelach skrzyń biegów 1990–1991 opisana jako 4-biegowa skrzynia manualna SM465.",
+      "s": [
+        {
+          "l": "RPO Archive – Chevrolet (niezależne zestawienie, nie GM)",
+          "u": "https://rpoarchive.com/code/chevrolet/mm4/"
+        }
+      ]
+    }
+  },
+  "MM5": {
+    "g": [],
+    "o": {
+      "t": "W tabelach skrzyń 1990–1991: 5-biegowa skrzynia manualna z nadbiegiem; w pełnowymiarowym Blazerze 1992 strona układu napędowego podaje skrzynię 5LM60.",
+      "s": [
+        {
+          "l": "RPO Archive – Chevrolet (niezależne zestawienie, nie GM)",
+          "u": "https://rpoarchive.com/code/chevrolet/mm5/"
+        }
+      ]
+    }
+  },
+  "MX0": {
+    "g": [],
+    "o": {
+      "t": "4-biegowy automat z nadbiegiem: w tabeli z 1990 r. to 700R4; w Suburbanie i Blazerze od 1993 opisywany jako sterowany elektronicznie. W pełnowymiarowym Blazerze wymagany z pakietem holowniczym Z82.",
+      "s": [
+        {
+          "l": "RPO Archive – Chevrolet (niezależne zestawienie, nie GM)",
+          "u": "https://rpoarchive.com/code/chevrolet/mx0/"
+        }
+      ]
+    }
+  },
+  "UYT": {
+    "g": [],
+    "o": {
+      "t": "W C/K 1991 wiązka ta wchodzi w skład pakietu holowniczego Z82.",
+      "s": [
+        {
+          "l": "RPO Archive – Chevrolet (niezależne zestawienie, nie GM)",
+          "u": "https://rpoarchive.com/code/chevrolet/uyt/"
+        }
+      ]
+    }
+  },
+  "X81": {
+    "g": [],
+    "o": {
+      "t": "Kod rozliczeniowy, ale w cennikach C/K 1994–1999 X81 oznacza pakiet Work Truck (wersja robocza).",
+      "s": [
+        {
+          "l": "RPO Archive – Chevrolet (niezależne zestawienie, nie GM)",
+          "u": "https://rpoarchive.com/code/chevrolet/x81/"
+        },
+        {
+          "l": "RPO Archive – GMC (niezależne zestawienie, nie GM)",
+          "u": "https://rpoarchive.com/code/gmc/x81/"
+        }
+      ]
+    }
+  },
+  "ZW9": {
+    "g": [],
+    "o": {
+      "t": "W Suburbanie 1992–1997 cenniki opisują ZW9 jako nadwozie z tylnymi drzwiami dwuskrzydłowymi (panel doors); w Tahoe – nadwozie bazowe z drzwiami typu panel. Alternatywa dla klapy E55.",
+      "s": [
+        {
+          "l": "RPO Archive – Chevrolet (niezależne zestawienie, nie GM)",
+          "u": "https://rpoarchive.com/code/chevrolet/zw9/"
+        },
+        {
+          "l": "RPO Archive – GMC (niezależne zestawienie, nie GM)",
+          "u": "https://rpoarchive.com/code/gmc/zw9/"
+        }
+      ]
+    }
+  },
+  "ZY2": {
+    "g": [],
+    "o": {
+      "t": "Konwencjonalne malowanie dwukolorowe; w pełnowymiarowym Blazerze 1992–1994 wymagane z pakietem BYP.",
+      "s": [
+        {
+          "l": "RPO Archive – Chevrolet (niezależne zestawienie, nie GM)",
+          "u": "https://rpoarchive.com/code/chevrolet/zy2/"
+        },
+        {
+          "l": "RPO Archive – GMC (niezależne zestawienie, nie GM)",
+          "u": "https://rpoarchive.com/code/gmc/zy2/"
+        }
+      ]
+    }
+  },
+  "GQ1": {
+    "g": [],
+    "o": {
+      "t": "Standardowe przełożenie tylnego mostu; w cennikach 1993 bez dopłaty.",
+      "s": [
+        {
+          "l": "RPO Archive – Chevrolet (niezależne zestawienie, nie GM)",
+          "u": "https://rpoarchive.com/code/chevrolet/gq1/"
+        }
+      ]
+    }
+  },
+  "NB8": {
+    "g": [],
+    "o": {
+      "t": "Kod wewnętrzny emisji: w 1994 r. nadpisanie wymagań emisyjnych na kalifornijskie lub stanu Nowy Jork; wymagał FE9 albo NA6.",
+      "s": [
+        {
+          "l": "RPO Archive – Chevrolet (niezależne zestawienie, nie GM)",
+          "u": "https://rpoarchive.com/code/chevrolet/nb8/"
+        },
+        {
+          "l": "RPO Archive – GMC (niezależne zestawienie, nie GM)",
+          "u": "https://rpoarchive.com/code/gmc/nb8/"
+        }
+      ]
+    }
+  },
+  "NC7": {
+    "g": [],
+    "o": {
+      "t": "Kod wewnętrzny emisji: w 1994 r. nadpisanie na wymagania federalne lub wysokogórskie; wymagał NG1 albo YF5.",
+      "s": [
+        {
+          "l": "RPO Archive – Chevrolet (niezależne zestawienie, nie GM)",
+          "u": "https://rpoarchive.com/code/chevrolet/nc7/"
+        },
+        {
+          "l": "RPO Archive – GMC (niezależne zestawienie, nie GM)",
+          "u": "https://rpoarchive.com/code/gmc/nc7/"
+        }
+      ]
+    }
+  },
+  "NG1": {
+    "g": [],
+    "o": {
+      "t": "Kod wewnętrzny emisji: w 1994 r. oznaczał spełnienie wymagań emisyjnych stanu Nowy Jork (rejestracja ograniczona geograficznie).",
+      "s": [
+        {
+          "l": "RPO Archive – Chevrolet (niezależne zestawienie, nie GM)",
+          "u": "https://rpoarchive.com/code/chevrolet/ng1/"
+        },
+        {
+          "l": "RPO Archive – GMC (niezależne zestawienie, nie GM)",
+          "u": "https://rpoarchive.com/code/gmc/ng1/"
+        }
+      ]
+    }
+  },
+  "NA5": {
+    "g": [],
+    "o": {
+      "t": "Kod wewnętrzny emisji: federalna norma Tier 0 (lista 1998); w 1993 r. opisywany jako standardowe wyposażenie emisyjne.",
+      "s": [
+        {
+          "l": "RPO Archive – Chevrolet (niezależne zestawienie, nie GM)",
+          "u": "https://rpoarchive.com/code/chevrolet/na5/"
+        },
+        {
+          "l": "RPO Archive – GMC (niezależne zestawienie, nie GM)",
+          "u": "https://rpoarchive.com/code/gmc/na5/"
+        }
+      ]
+    }
+  },
+  "X88": {
+    "g": [],
+    "o": {
+      "t": "Kod wewnętrzny marki: pojazd z tabliczkami własnej marki Chevrolet.",
+      "s": [
+        {
+          "l": "RPO Archive – Chevrolet (niezależne zestawienie, nie GM)",
+          "u": "https://rpoarchive.com/code/chevrolet/x88/"
+        }
+      ]
+    }
+  },
+  "Z88": {
+    "g": [],
+    "o": {
+      "t": "Kod wewnętrzny marki: pojazd z tabliczkami własnej marki GMC.",
+      "s": [
+        {
+          "l": "RPO Archive – GMC (niezależne zestawienie, nie GM)",
+          "u": "https://rpoarchive.com/code/gmc/z88/"
+        }
+      ]
+    }
+  },
+  "ARL": {
+    "g": [],
+    "o": {
+      "t": "Kod wewnętrzny: zakład montażu w Arlington (Teksas), gdzie powstawały m.in. Suburbany, Tahoe i Yukony GMT400.",
+      "s": [
+        {
+          "l": "RPO Archive – Chevrolet (niezależne zestawienie, nie GM)",
+          "u": "https://rpoarchive.com/code/chevrolet/arl/"
+        },
+        {
+          "l": "RPO Archive – GMC (niezależne zestawienie, nie GM)",
+          "u": "https://rpoarchive.com/code/gmc/arl/"
+        }
+      ]
+    }
+  },
+  "JAN": {
+    "g": [],
+    "o": {
+      "t": "Kod wewnętrzny: zakład montażu w Janesville (Wisconsin), m.in. Suburbany, Tahoe i Yukony GMT400.",
+      "s": [
+        {
+          "l": "RPO Archive – Chevrolet (niezależne zestawienie, nie GM)",
+          "u": "https://rpoarchive.com/code/chevrolet/jan/"
+        },
+        {
+          "l": "RPO Archive – GMC (niezależne zestawienie, nie GM)",
+          "u": "https://rpoarchive.com/code/gmc/jan/"
+        }
+      ]
+    }
+  },
+  "GAM": {
+    "g": [],
+    "o": {
+      "t": "Kod wewnętrzny (rozliczeniowy): pojazd sprzedawany administracji rządowej USA (sprzedaż przez GSA); nie oznacza wyposażenia.",
+      "s": [
+        {
+          "l": "RPO Archive – Chevrolet (niezależne zestawienie, nie GM)",
+          "u": "https://rpoarchive.com/code/chevrolet/gam/"
+        },
+        {
+          "l": "RPO Archive – GMC (niezależne zestawienie, nie GM)",
+          "u": "https://rpoarchive.com/code/gmc/gam/"
+        }
+      ]
+    }
+  },
+  "VXS": {
+    "g": [],
+    "o": {
+      "t": "Kod wewnętrzny: pojazd kompletny – opuszcza fabrykę gotowy do sprzedaży, bez dalszej zabudowy.",
+      "s": [
+        {
+          "l": "RPO Archive – Chevrolet (niezależne zestawienie, nie GM)",
+          "u": "https://rpoarchive.com/code/chevrolet/vxs/"
+        },
+        {
+          "l": "RPO Archive – GMC (niezależne zestawienie, nie GM)",
+          "u": "https://rpoarchive.com/code/gmc/vxs/"
+        }
+      ]
+    }
+  },
+  "VXT": {
+    "g": [],
+    "o": {
+      "t": "Kod wewnętrzny: pojazd niekompletny – np. podwozie z kabiną, które kończy firma zabudowująca.",
+      "s": [
+        {
+          "l": "RPO Archive – Chevrolet (niezależne zestawienie, nie GM)",
+          "u": "https://rpoarchive.com/code/chevrolet/vxt/"
+        },
+        {
+          "l": "RPO Archive – GMC (niezależne zestawienie, nie GM)",
+          "u": "https://rpoarchive.com/code/gmc/vxt/"
+        }
+      ]
+    }
+  },
+  "MSL": {
+    "g": [],
+    "o": {
+      "t": "Kod wewnętrzny: zakład montażu w Silao (Meksyk).",
+      "s": [
+        {
+          "l": "RPO Archive – Chevrolet (niezależne zestawienie, nie GM)",
+          "u": "https://rpoarchive.com/code/chevrolet/msl/"
+        },
+        {
+          "l": "RPO Archive – GMC (niezależne zestawienie, nie GM)",
+          "u": "https://rpoarchive.com/code/gmc/msl/"
+        }
+      ]
+    }
+  },
+  "APR": {
+    "g": [],
+    "o": {
+      "t": "Kod wewnętrzny (administracyjny) – służy do rozliczeń sprzedaży (programy dla dealerów i flot); nie zmienia wyposażenia.",
+      "s": [
+        {
+          "l": "RPO Archive – Chevrolet (niezależne zestawienie, nie GM)",
+          "u": "https://rpoarchive.com/code/chevrolet/apr/"
+        },
+        {
+          "l": "RPO Archive – GMC (niezależne zestawienie, nie GM)",
+          "u": "https://rpoarchive.com/code/gmc/apr/"
+        }
+      ]
+    }
+  },
+  "B4L": {
+    "g": [],
+    "o": {
+      "t": "Kod wewnętrzny (administracyjny) – dotyczy dokumentów i etykiet dołączanych do pojazdu lub obiegu zamówienia; nie zmienia wyposażenia.",
+      "s": [
+        {
+          "l": "RPO Archive – Chevrolet (niezależne zestawienie, nie GM)",
+          "u": "https://rpoarchive.com/code/chevrolet/b4l/"
+        },
+        {
+          "l": "RPO Archive – GMC (niezależne zestawienie, nie GM)",
+          "u": "https://rpoarchive.com/code/gmc/b4l/"
+        }
+      ]
+    }
+  },
+  "BAG": {
+    "g": [],
+    "o": {
+      "t": "Kod wewnętrzny (administracyjny) – oznacza wersję lub obsługę eksportową; konkretna zawartość nie jest opisana.",
+      "s": [
+        {
+          "l": "RPO Archive – Chevrolet (niezależne zestawienie, nie GM)",
+          "u": "https://rpoarchive.com/code/chevrolet/bag/"
+        },
+        {
+          "l": "RPO Archive – GMC (niezależne zestawienie, nie GM)",
+          "u": "https://rpoarchive.com/code/gmc/bag/"
+        }
+      ]
+    }
+  },
+  "CKD": {
+    "g": [],
+    "o": {
+      "t": "Kod wewnętrzny (administracyjny) – dotyczy obsługi pojazdu w fabryce, transportu lub planowania produkcji; nie oznacza wyposażenia dla klienta.",
+      "s": [
+        {
+          "l": "RPO Archive – Chevrolet (niezależne zestawienie, nie GM)",
+          "u": "https://rpoarchive.com/code/chevrolet/ckd/"
+        },
+        {
+          "l": "RPO Archive – GMC (niezależne zestawienie, nie GM)",
+          "u": "https://rpoarchive.com/code/gmc/ckd/"
+        }
+      ]
+    }
+  },
+  "CMD": {
+    "g": [],
+    "o": {
+      "t": "Kod wewnętrzny (administracyjny) – oznacza zakład montażu pojazdu.",
+      "s": [
+        {
+          "l": "RPO Archive – Chevrolet (niezależne zestawienie, nie GM)",
+          "u": "https://rpoarchive.com/code/chevrolet/cmd/"
+        },
+        {
+          "l": "RPO Archive – GMC (niezależne zestawienie, nie GM)",
+          "u": "https://rpoarchive.com/code/gmc/cmd/"
+        }
+      ]
+    }
+  },
+  "EXP": {
+    "g": [],
+    "o": {
+      "t": "Kod wewnętrzny (administracyjny) – oznacza wersję lub obsługę eksportową; konkretna zawartość nie jest opisana.",
+      "s": [
+        {
+          "l": "RPO Archive – Chevrolet (niezależne zestawienie, nie GM)",
+          "u": "https://rpoarchive.com/code/chevrolet/exp/"
+        },
+        {
+          "l": "RPO Archive – GMC (niezależne zestawienie, nie GM)",
+          "u": "https://rpoarchive.com/code/gmc/exp/"
+        }
+      ]
+    }
+  },
+  "FE9": {
+    "g": [],
+    "o": {
+      "t": "Kod wewnętrzny (administracyjny) – określa wymagania emisyjne (homologację), które pojazd ma spełniać – zależnie od rynku docelowego i DMC.",
+      "s": [
+        {
+          "l": "RPO Archive – Chevrolet (niezależne zestawienie, nie GM)",
+          "u": "https://rpoarchive.com/code/chevrolet/fe9/"
+        },
+        {
+          "l": "RPO Archive – GMC (niezależne zestawienie, nie GM)",
+          "u": "https://rpoarchive.com/code/gmc/fe9/"
+        }
+      ]
+    }
+  },
+  "KFU": {
+    "g": [],
+    "o": {
+      "t": "Kod wewnętrzny (administracyjny) – służy do rozliczeń sprzedaży (programy dla dealerów i flot); nie zmienia wyposażenia.",
+      "s": [
+        {
+          "l": "RPO Archive – Chevrolet (niezależne zestawienie, nie GM)",
+          "u": "https://rpoarchive.com/code/chevrolet/kfu/"
+        },
+        {
+          "l": "RPO Archive – GMC (niezależne zestawienie, nie GM)",
+          "u": "https://rpoarchive.com/code/gmc/kfu/"
+        }
+      ]
+    }
+  },
+  "NA1": {
+    "g": [],
+    "o": {
+      "t": "Kod wewnętrzny (administracyjny) – określa wymagania emisyjne (homologację), które pojazd ma spełniać – zależnie od rynku docelowego i DMC.",
+      "s": [
+        {
+          "l": "RPO Archive – Chevrolet (niezależne zestawienie, nie GM)",
+          "u": "https://rpoarchive.com/code/chevrolet/na1/"
+        },
+        {
+          "l": "RPO Archive – GMC (niezależne zestawienie, nie GM)",
+          "u": "https://rpoarchive.com/code/gmc/na1/"
+        }
+      ]
+    }
+  },
+  "NA4": {
+    "g": [],
+    "o": {
+      "t": "Kod wewnętrzny (administracyjny) – określa wymagania emisyjne (homologację), które pojazd ma spełniać – zależnie od rynku docelowego i DMC.",
+      "s": [
+        {
+          "l": "RPO Archive – Chevrolet (niezależne zestawienie, nie GM)",
+          "u": "https://rpoarchive.com/code/chevrolet/na4/"
+        },
+        {
+          "l": "RPO Archive – GMC (niezależne zestawienie, nie GM)",
+          "u": "https://rpoarchive.com/code/gmc/na4/"
+        }
+      ]
+    }
+  },
+  "NA6": {
+    "g": [],
+    "o": {
+      "t": "Kod wewnętrzny (administracyjny) – określa wymagania emisyjne (homologację), które pojazd ma spełniać – zależnie od rynku docelowego i DMC.",
+      "s": [
+        {
+          "l": "RPO Archive – Chevrolet (niezależne zestawienie, nie GM)",
+          "u": "https://rpoarchive.com/code/chevrolet/na6/"
+        }
+      ]
+    }
+  },
+  "NB2": {
+    "g": [],
+    "o": {
+      "t": "Kod wewnętrzny (administracyjny) – określa wymagania emisyjne (homologację), które pojazd ma spełniać – zależnie od rynku docelowego i DMC.",
+      "s": [
+        {
+          "l": "RPO Archive – Chevrolet (niezależne zestawienie, nie GM)",
+          "u": "https://rpoarchive.com/code/chevrolet/nb2/"
+        },
+        {
+          "l": "RPO Archive – GMC (niezależne zestawienie, nie GM)",
+          "u": "https://rpoarchive.com/code/gmc/nb2/"
+        }
+      ]
+    }
+  },
+  "NB6": {
+    "g": [],
+    "o": {
+      "t": "Kod wewnętrzny (administracyjny) – określa wymagania emisyjne (homologację), które pojazd ma spełniać – zależnie od rynku docelowego i DMC.",
+      "s": [
+        {
+          "l": "RPO Archive – Chevrolet (niezależne zestawienie, nie GM)",
+          "u": "https://rpoarchive.com/code/chevrolet/nb6/"
+        },
+        {
+          "l": "RPO Archive – GMC (niezależne zestawienie, nie GM)",
+          "u": "https://rpoarchive.com/code/gmc/nb6/"
+        }
+      ]
+    }
+  },
+  "NC1": {
+    "g": [],
+    "o": {
+      "t": "Kod wewnętrzny (administracyjny) – określa wymagania emisyjne (homologację), które pojazd ma spełniać – zależnie od rynku docelowego i DMC.",
+      "s": [
+        {
+          "l": "RPO Archive – Chevrolet (niezależne zestawienie, nie GM)",
+          "u": "https://rpoarchive.com/code/chevrolet/nc1/"
+        },
+        {
+          "l": "RPO Archive – GMC (niezależne zestawienie, nie GM)",
+          "u": "https://rpoarchive.com/code/gmc/nc1/"
+        }
+      ]
+    }
+  },
+  "NF2": {
+    "g": [],
+    "o": {
+      "t": "Kod wewnętrzny (administracyjny) – określa wymagania emisyjne (homologację), które pojazd ma spełniać – zależnie od rynku docelowego i DMC.",
+      "s": [
+        {
+          "l": "RPO Archive – Chevrolet (niezależne zestawienie, nie GM)",
+          "u": "https://rpoarchive.com/code/chevrolet/nf2/"
+        },
+        {
+          "l": "RPO Archive – GMC (niezależne zestawienie, nie GM)",
+          "u": "https://rpoarchive.com/code/gmc/nf2/"
+        }
+      ]
+    }
+  },
+  "NN8": {
+    "g": [],
+    "o": {
+      "t": "Kod wewnętrzny (administracyjny) – określa wymagania emisyjne (homologację), które pojazd ma spełniać – zależnie od rynku docelowego i DMC.",
+      "s": [
+        {
+          "l": "RPO Archive – Chevrolet (niezależne zestawienie, nie GM)",
+          "u": "https://rpoarchive.com/code/chevrolet/nn8/"
+        },
+        {
+          "l": "RPO Archive – GMC (niezależne zestawienie, nie GM)",
+          "u": "https://rpoarchive.com/code/gmc/nn8/"
+        }
+      ]
+    }
+  },
+  "OSG": {
+    "g": [],
+    "o": {
+      "t": "Kod wewnętrzny (administracyjny) – oznacza zakład montażu pojazdu.",
+      "s": [
+        {
+          "l": "RPO Archive – Chevrolet (niezależne zestawienie, nie GM)",
+          "u": "https://rpoarchive.com/code/chevrolet/osg/"
+        },
+        {
+          "l": "RPO Archive – GMC (niezależne zestawienie, nie GM)",
+          "u": "https://rpoarchive.com/code/gmc/osg/"
+        }
+      ]
+    }
+  },
+  "R8S": {
+    "g": [],
+    "o": {
+      "t": "Kod wewnętrzny (administracyjny) – dotyczy dokumentów i etykiet dołączanych do pojazdu lub obiegu zamówienia; nie zmienia wyposażenia.",
+      "s": [
+        {
+          "l": "RPO Archive – Chevrolet (niezależne zestawienie, nie GM)",
+          "u": "https://rpoarchive.com/code/chevrolet/r8s/"
+        }
+      ]
+    }
+  },
+  "R8T": {
+    "g": [],
+    "o": {
+      "t": "Kod wewnętrzny (administracyjny) – dotyczy dokumentów i etykiet dołączanych do pojazdu lub obiegu zamówienia; nie zmienia wyposażenia.",
+      "s": [
+        {
+          "l": "RPO Archive – Chevrolet (niezależne zestawienie, nie GM)",
+          "u": "https://rpoarchive.com/code/chevrolet/r8t/"
+        }
+      ]
+    }
+  },
+  "SGB": {
+    "g": [],
+    "o": {
+      "t": "Kod wewnętrzny (administracyjny) – dotyczy dokumentów i etykiet dołączanych do pojazdu lub obiegu zamówienia; nie zmienia wyposażenia.",
+      "s": [
+        {
+          "l": "RPO Archive – Chevrolet (niezależne zestawienie, nie GM)",
+          "u": "https://rpoarchive.com/code/chevrolet/sgb/"
+        },
+        {
+          "l": "RPO Archive – GMC (niezależne zestawienie, nie GM)",
+          "u": "https://rpoarchive.com/code/gmc/sgb/"
+        }
+      ]
+    }
+  },
+  "TFE": {
+    "g": [],
+    "o": {
+      "t": "Kod wewnętrzny (administracyjny) – służy do rozliczeń sprzedaży (programy dla dealerów i flot); nie zmienia wyposażenia.",
+      "s": [
+        {
+          "l": "RPO Archive – Chevrolet (niezależne zestawienie, nie GM)",
+          "u": "https://rpoarchive.com/code/chevrolet/tfe/"
+        },
+        {
+          "l": "RPO Archive – GMC (niezależne zestawienie, nie GM)",
+          "u": "https://rpoarchive.com/code/gmc/tfe/"
+        }
+      ]
+    }
+  },
+  "V60": {
+    "g": [],
+    "o": {
+      "t": "Kod wewnętrzny (administracyjny) – dotyczy dokumentów i etykiet dołączanych do pojazdu lub obiegu zamówienia; nie zmienia wyposażenia.",
+      "s": [
+        {
+          "l": "RPO Archive – Chevrolet (niezależne zestawienie, nie GM)",
+          "u": "https://rpoarchive.com/code/chevrolet/v60/"
+        },
+        {
+          "l": "RPO Archive – GMC (niezależne zestawienie, nie GM)",
+          "u": "https://rpoarchive.com/code/gmc/v60/"
+        }
+      ]
+    }
+  },
+  "V73": {
+    "g": [],
+    "o": {
+      "t": "Kod wewnętrzny (administracyjny) – dotyczy dokumentów i etykiet dołączanych do pojazdu lub obiegu zamówienia; nie zmienia wyposażenia.",
+      "s": [
+        {
+          "l": "RPO Archive – Chevrolet (niezależne zestawienie, nie GM)",
+          "u": "https://rpoarchive.com/code/chevrolet/v73/"
+        },
+        {
+          "l": "RPO Archive – GMC (niezależne zestawienie, nie GM)",
+          "u": "https://rpoarchive.com/code/gmc/v73/"
+        }
+      ]
+    }
+  },
+  "V78": {
+    "g": [],
+    "o": {
+      "t": "Kod wewnętrzny (administracyjny) – dotyczy dokumentów i etykiet dołączanych do pojazdu lub obiegu zamówienia; nie zmienia wyposażenia.",
+      "s": [
+        {
+          "l": "RPO Archive – Chevrolet (niezależne zestawienie, nie GM)",
+          "u": "https://rpoarchive.com/code/chevrolet/v78/"
+        },
+        {
+          "l": "RPO Archive – GMC (niezależne zestawienie, nie GM)",
+          "u": "https://rpoarchive.com/code/gmc/v78/"
+        }
+      ]
+    }
+  },
+  "V87": {
+    "g": [],
+    "o": {
+      "t": "Kod wewnętrzny (administracyjny) – dotyczy dokumentów i etykiet dołączanych do pojazdu lub obiegu zamówienia; nie zmienia wyposażenia.",
+      "s": [
+        {
+          "l": "RPO Archive – Chevrolet (niezależne zestawienie, nie GM)",
+          "u": "https://rpoarchive.com/code/chevrolet/v87/"
+        },
+        {
+          "l": "RPO Archive – GMC (niezależne zestawienie, nie GM)",
+          "u": "https://rpoarchive.com/code/gmc/v87/"
+        }
+      ]
+    }
+  },
+  "V98": {
+    "g": [],
+    "o": {
+      "t": "Kod wewnętrzny (administracyjny) – dotyczy obsługi pojazdu w fabryce, transportu lub planowania produkcji; nie oznacza wyposażenia dla klienta.",
+      "s": [
+        {
+          "l": "RPO Archive – Chevrolet (niezależne zestawienie, nie GM)",
+          "u": "https://rpoarchive.com/code/chevrolet/v98/"
+        },
+        {
+          "l": "RPO Archive – GMC (niezależne zestawienie, nie GM)",
+          "u": "https://rpoarchive.com/code/gmc/v98/"
+        }
+      ]
+    }
+  },
+  "VB1": {
+    "g": [],
+    "o": {
+      "t": "Kod wewnętrzny (administracyjny) – dotyczy dokumentów i etykiet dołączanych do pojazdu lub obiegu zamówienia; nie zmienia wyposażenia.",
+      "s": [
+        {
+          "l": "RPO Archive – Chevrolet (niezależne zestawienie, nie GM)",
+          "u": "https://rpoarchive.com/code/chevrolet/vb1/"
+        },
+        {
+          "l": "RPO Archive – GMC (niezależne zestawienie, nie GM)",
+          "u": "https://rpoarchive.com/code/gmc/vb1/"
+        }
+      ]
+    }
+  },
+  "VC0": {
+    "g": [],
+    "o": {
+      "t": "Kod wewnętrzny (administracyjny) – dotyczy dokumentów i etykiet dołączanych do pojazdu lub obiegu zamówienia; nie zmienia wyposażenia.",
+      "s": [
+        {
+          "l": "RPO Archive – Chevrolet (niezależne zestawienie, nie GM)",
+          "u": "https://rpoarchive.com/code/chevrolet/vc0/"
+        },
+        {
+          "l": "RPO Archive – GMC (niezależne zestawienie, nie GM)",
+          "u": "https://rpoarchive.com/code/gmc/vc0/"
+        }
+      ]
+    }
+  },
+  "VC4": {
+    "g": [],
+    "o": {
+      "t": "Kod wewnętrzny (administracyjny) – dotyczy dokumentów i etykiet dołączanych do pojazdu lub obiegu zamówienia; nie zmienia wyposażenia.",
+      "s": [
+        {
+          "l": "RPO Archive – Chevrolet (niezależne zestawienie, nie GM)",
+          "u": "https://rpoarchive.com/code/chevrolet/vc4/"
+        },
+        {
+          "l": "RPO Archive – GMC (niezależne zestawienie, nie GM)",
+          "u": "https://rpoarchive.com/code/gmc/vc4/"
+        }
+      ]
+    }
+  },
+  "VC5": {
+    "g": [],
+    "o": {
+      "t": "Kod wewnętrzny (administracyjny) – dotyczy dokumentów i etykiet dołączanych do pojazdu lub obiegu zamówienia; nie zmienia wyposażenia.",
+      "s": [
+        {
+          "l": "RPO Archive – Chevrolet (niezależne zestawienie, nie GM)",
+          "u": "https://rpoarchive.com/code/chevrolet/vc5/"
+        },
+        {
+          "l": "RPO Archive – GMC (niezależne zestawienie, nie GM)",
+          "u": "https://rpoarchive.com/code/gmc/vc5/"
+        }
+      ]
+    }
+  },
+  "VC7": {
+    "g": [],
+    "o": {
+      "t": "Kod wewnętrzny (administracyjny) – dotyczy dokumentów i etykiet dołączanych do pojazdu lub obiegu zamówienia; nie zmienia wyposażenia.",
+      "s": [
+        {
+          "l": "RPO Archive – Chevrolet (niezależne zestawienie, nie GM)",
+          "u": "https://rpoarchive.com/code/chevrolet/vc7/"
+        },
+        {
+          "l": "RPO Archive – GMC (niezależne zestawienie, nie GM)",
+          "u": "https://rpoarchive.com/code/gmc/vc7/"
+        }
+      ]
+    }
+  },
+  "VG8": {
+    "g": [],
+    "o": {
+      "t": "Kod wewnętrzny (administracyjny) – dotyczy dokumentów i etykiet dołączanych do pojazdu lub obiegu zamówienia; nie zmienia wyposażenia.",
+      "s": [
+        {
+          "l": "RPO Archive – Chevrolet (niezależne zestawienie, nie GM)",
+          "u": "https://rpoarchive.com/code/chevrolet/vg8/"
+        },
+        {
+          "l": "RPO Archive – GMC (niezależne zestawienie, nie GM)",
+          "u": "https://rpoarchive.com/code/gmc/vg8/"
+        }
+      ]
+    }
+  },
+  "VK5": {
+    "g": [],
+    "o": {
+      "t": "Kod wewnętrzny (administracyjny) – dotyczy obsługi pojazdu w fabryce, transportu lub planowania produkcji; nie oznacza wyposażenia dla klienta.",
+      "s": [
+        {
+          "l": "RPO Archive – Chevrolet (niezależne zestawienie, nie GM)",
+          "u": "https://rpoarchive.com/code/chevrolet/vk5/"
+        },
+        {
+          "l": "RPO Archive – GMC (niezależne zestawienie, nie GM)",
+          "u": "https://rpoarchive.com/code/gmc/vk5/"
+        }
+      ]
+    }
+  },
+  "VL3": {
+    "g": [],
+    "o": {
+      "t": "Kod wewnętrzny (administracyjny) – dotyczy dokumentów i etykiet dołączanych do pojazdu lub obiegu zamówienia; nie zmienia wyposażenia.",
+      "s": [
+        {
+          "l": "RPO Archive – Chevrolet (niezależne zestawienie, nie GM)",
+          "u": "https://rpoarchive.com/code/chevrolet/vl3/"
+        },
+        {
+          "l": "RPO Archive – GMC (niezależne zestawienie, nie GM)",
+          "u": "https://rpoarchive.com/code/gmc/vl3/"
+        }
+      ]
+    }
+  },
+  "VPH": {
+    "g": [],
+    "o": {
+      "t": "Kod wewnętrzny (administracyjny) – dotyczy obsługi pojazdu w fabryce, transportu lub planowania produkcji; nie oznacza wyposażenia dla klienta.",
+      "s": [
+        {
+          "l": "RPO Archive – Chevrolet (niezależne zestawienie, nie GM)",
+          "u": "https://rpoarchive.com/code/chevrolet/vph/"
+        },
+        {
+          "l": "RPO Archive – GMC (niezależne zestawienie, nie GM)",
+          "u": "https://rpoarchive.com/code/gmc/vph/"
+        }
+      ]
+    }
+  },
+  "VR6": {
+    "g": [],
+    "o": {
+      "t": "Kod wewnętrzny (administracyjny) – dotyczy obsługi pojazdu w fabryce, transportu lub planowania produkcji; nie oznacza wyposażenia dla klienta.",
+      "s": [
+        {
+          "l": "RPO Archive – Chevrolet (niezależne zestawienie, nie GM)",
+          "u": "https://rpoarchive.com/code/chevrolet/vr6/"
+        },
+        {
+          "l": "RPO Archive – GMC (niezależne zestawienie, nie GM)",
+          "u": "https://rpoarchive.com/code/gmc/vr6/"
+        }
+      ]
+    }
+  },
+  "VS7": {
+    "g": [],
+    "o": {
+      "t": "Kod wewnętrzny (administracyjny) – dotyczy obsługi pojazdu w fabryce, transportu lub planowania produkcji; nie oznacza wyposażenia dla klienta.",
+      "s": [
+        {
+          "l": "RPO Archive – Chevrolet (niezależne zestawienie, nie GM)",
+          "u": "https://rpoarchive.com/code/chevrolet/vs7/"
+        },
+        {
+          "l": "RPO Archive – GMC (niezależne zestawienie, nie GM)",
+          "u": "https://rpoarchive.com/code/gmc/vs7/"
+        }
+      ]
+    }
+  },
+  "W99": {
+    "g": [],
+    "o": {
+      "t": "Kod wewnętrzny (administracyjny) – oznacza wersję lub obsługę eksportową; konkretna zawartość nie jest opisana.",
+      "s": [
+        {
+          "l": "RPO Archive – Chevrolet (niezależne zestawienie, nie GM)",
+          "u": "https://rpoarchive.com/code/chevrolet/w99/"
+        },
+        {
+          "l": "RPO Archive – GMC (niezależne zestawienie, nie GM)",
+          "u": "https://rpoarchive.com/code/gmc/w99/"
+        }
+      ]
+    }
+  },
+  "WD1": {
+    "g": [],
+    "o": {
+      "t": "Kod wewnętrzny (administracyjny) – dotyczy obsługi pojazdu w fabryce, transportu lub planowania produkcji; nie oznacza wyposażenia dla klienta.",
+      "s": [
+        {
+          "l": "RPO Archive – Chevrolet (niezależne zestawienie, nie GM)",
+          "u": "https://rpoarchive.com/code/chevrolet/wd1/"
+        },
+        {
+          "l": "RPO Archive – GMC (niezależne zestawienie, nie GM)",
+          "u": "https://rpoarchive.com/code/gmc/wd1/"
+        }
+      ]
+    }
+  },
+  "X78": {
+    "g": [],
+    "o": {
+      "t": "Kod wewnętrzny (administracyjny) – oznacza wersję lub obsługę eksportową; konkretna zawartość nie jest opisana.",
+      "s": [
+        {
+          "l": "RPO Archive – Chevrolet (niezależne zestawienie, nie GM)",
+          "u": "https://rpoarchive.com/code/chevrolet/x78/"
+        },
+        {
+          "l": "RPO Archive – GMC (niezależne zestawienie, nie GM)",
+          "u": "https://rpoarchive.com/code/gmc/x78/"
+        }
+      ]
+    }
+  },
+  "YA7": {
+    "g": [],
+    "o": {
+      "t": "Kod wewnętrzny (administracyjny) – określa wymagania emisyjne (homologację), które pojazd ma spełniać – zależnie od rynku docelowego i DMC.",
+      "s": [
+        {
+          "l": "RPO Archive – Chevrolet (niezależne zestawienie, nie GM)",
+          "u": "https://rpoarchive.com/code/chevrolet/ya7/"
+        },
+        {
+          "l": "RPO Archive – GMC (niezależne zestawienie, nie GM)",
+          "u": "https://rpoarchive.com/code/gmc/ya7/"
+        }
+      ]
+    }
+  },
+  "YD3": {
+    "g": [],
+    "o": {
+      "t": "Kod wewnętrzny (administracyjny) – dotyczy obsługi pojazdu w fabryce, transportu lub planowania produkcji; nie oznacza wyposażenia dla klienta.",
+      "s": [
+        {
+          "l": "RPO Archive – Chevrolet (niezależne zestawienie, nie GM)",
+          "u": "https://rpoarchive.com/code/chevrolet/yd3/"
+        },
+        {
+          "l": "RPO Archive – GMC (niezależne zestawienie, nie GM)",
+          "u": "https://rpoarchive.com/code/gmc/yd3/"
+        }
+      ]
+    }
+  },
+  "YD7": {
+    "g": [],
+    "o": {
+      "t": "Kod wewnętrzny (administracyjny) – dotyczy obsługi pojazdu w fabryce, transportu lub planowania produkcji; nie oznacza wyposażenia dla klienta.",
+      "s": [
+        {
+          "l": "RPO Archive – Chevrolet (niezależne zestawienie, nie GM)",
+          "u": "https://rpoarchive.com/code/chevrolet/yd7/"
+        },
+        {
+          "l": "RPO Archive – GMC (niezależne zestawienie, nie GM)",
+          "u": "https://rpoarchive.com/code/gmc/yd7/"
+        }
+      ]
+    }
+  },
+  "YF4": {
+    "g": [],
+    "o": {
+      "t": "Kod wewnętrzny (administracyjny) – dotyczy obsługi pojazdu w fabryce, transportu lub planowania produkcji; nie oznacza wyposażenia dla klienta.",
+      "s": [
+        {
+          "l": "RPO Archive – Chevrolet (niezależne zestawienie, nie GM)",
+          "u": "https://rpoarchive.com/code/chevrolet/yf4/"
+        },
+        {
+          "l": "RPO Archive – GMC (niezależne zestawienie, nie GM)",
+          "u": "https://rpoarchive.com/code/gmc/yf4/"
+        }
+      ]
+    }
+  },
+  "YF5": {
+    "g": [],
+    "o": {
+      "t": "Kod wewnętrzny (administracyjny) – określa wymagania emisyjne (homologację), które pojazd ma spełniać – zależnie od rynku docelowego i DMC.",
+      "s": [
+        {
+          "l": "RPO Archive – Chevrolet (niezależne zestawienie, nie GM)",
+          "u": "https://rpoarchive.com/code/chevrolet/yf5/"
+        },
+        {
+          "l": "RPO Archive – GMC (niezależne zestawienie, nie GM)",
+          "u": "https://rpoarchive.com/code/gmc/yf5/"
+        }
+      ]
+    }
+  },
+  "ZA6": {
+    "g": [],
+    "o": {
+      "t": "Kod wewnętrzny (administracyjny) – służy do rozliczeń sprzedaży (programy dla dealerów i flot); nie zmienia wyposażenia.",
+      "s": [
+        {
+          "l": "RPO Archive – Chevrolet (niezależne zestawienie, nie GM)",
+          "u": "https://rpoarchive.com/code/chevrolet/za6/"
+        },
+        {
+          "l": "RPO Archive – GMC (niezależne zestawienie, nie GM)",
+          "u": "https://rpoarchive.com/code/gmc/za6/"
+        }
+      ]
+    }
+  },
+  "ZA7": {
+    "g": [],
+    "o": {
+      "t": "Kod wewnętrzny (administracyjny) – służy do rozliczeń sprzedaży (programy dla dealerów i flot); nie zmienia wyposażenia.",
+      "s": [
+        {
+          "l": "RPO Archive – Chevrolet (niezależne zestawienie, nie GM)",
+          "u": "https://rpoarchive.com/code/chevrolet/za7/"
+        },
+        {
+          "l": "RPO Archive – GMC (niezależne zestawienie, nie GM)",
+          "u": "https://rpoarchive.com/code/gmc/za7/"
+        }
+      ]
+    }
+  },
+  "ZK3": {
+    "g": [],
+    "o": {
+      "t": "Kod wewnętrzny (administracyjny) – dotyczy obsługi pojazdu w fabryce, transportu lub planowania produkcji; nie oznacza wyposażenia dla klienta.",
+      "s": [
+        {
+          "l": "RPO Archive – Chevrolet (niezależne zestawienie, nie GM)",
+          "u": "https://rpoarchive.com/code/chevrolet/zk3/"
+        },
+        {
+          "l": "RPO Archive – GMC (niezależne zestawienie, nie GM)",
+          "u": "https://rpoarchive.com/code/gmc/zk3/"
+        }
+      ]
+    }
   }
 }

@@ -121,6 +121,7 @@ export default function PojemnosciPage() {
           {Object.entries(GM_DOCS).map(([k, v]) => <li key={k}><strong className="text-neutral-400">{k}</strong> — {v}</li>)}
         </ul>
         <p className="mt-3 text-sm text-neutral-400">Interwały wymian znajdziesz w <Link href="/przeglady" className="text-silver-300 underline">harmonogramie przeglądów</Link>.</p>
+        <p className="mt-2 text-sm text-neutral-300" data-testid="fuel-filter-advice"><span className="font-medium text-white">Filtr paliwa — ogólna rada:</span> wymieniaj co 48 000 km. Dokumenty GM różnią się: podręcznik 1989–1994 (harmonogram II) podaje 96 000 km, instrukcja 1995 — 48 000 km; krótszy interwał jest bezpieczniejszy.</p>
       </section>
     </div>
   );

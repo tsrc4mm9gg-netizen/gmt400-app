@@ -142,6 +142,8 @@ function y1995(kind) {
 // ---------- 1988–1994: wykresy „Scheduled Maintenance Services” z instrukcji serwisowych GM (sekcja 0B) ----------
 // Schedule 1/I = ciężkie warunki, Schedule 2/II = normalne. Pozycje, których znaczników nie da się pewnie odczytać ze skanu,
 // mają regułę null i opis zamiast zgadywania.
+/** Ogólna rada (nie GM): dokumenty podają różne interwały filtra paliwa — krótszy jest bezpieczniejszy. */
+const FUEL_FILTER_ADVICE = 'Dokumenty GM: podręcznik 1989–1994 (harmonogram II) 96 000 km, instrukcja 1995 48 000 km. Ogólna rada: wymieniaj filtr paliwa co 48 000 km — krótszy interwał jest bezpieczniejszy.';
 const UNREAD = 'W skanie znaczniki Schedule 1 dla tej pozycji są nieczytelne — interwału nie podajemy (sprawdź w instrukcji).';
 const SM_PAGES = {
   SM88: { LD: 's. 22', D: 's. 23', text: 's. 24–25' },
@@ -179,7 +181,7 @@ function smSchedule(src, kind) {
       tires ? { id: 'opony', group: 'Koła', label: 'Rotacja opon', ...tires, page: T } : { id: 'opony', group: 'Koła', label: 'Rotacja opon', normal: null, severe: null, page: P, info: `Wykres odsyła do instrukcji obsługi — ${NO_DATA}.` },
       { id: 'filtr-powietrza', group: 'Silnik', label: 'Filtr powietrza — wymiana', ...both(r(30000)), page: P, note: 'W kurzu częściej.' },
       { id: 'swiece', group: 'Zapłon', label: 'Świece zapłonowe — wymiana', ...both(r(30000)), page: P },
-      ...(y === 1988 ? [] : [{ id: 'filtr-paliwa', group: 'Silnik', label: 'Filtr paliwa', normal: r(60000), severe: y === 1989 ? null : r(30000), page: P, info: y === 1989 ? UNREAD : undefined }]),
+      ...(y === 1988 ? [] : [{ id: 'filtr-paliwa', group: 'Silnik', label: 'Filtr paliwa', normal: r(60000), severe: y === 1989 ? null : r(30000), page: P, info: y === 1989 ? UNREAD : undefined, note: FUEL_FILTER_ADVICE }]),
       ...(y <= 1991 ? [{ id: 'pcv', group: 'Silnik', label: 'Układ PCV — kontrola', ...both(r(60000)), page: P }] : []),
       { id: 'pasek', group: 'Silnik', label: 'Pasek osprzętu, przewody zapłonowe, zapłon, zawór EVRV, zbiornik i przewody paliwa — kontrola', ...both(r(60000)), page: P, note: y === 1991 ? 'Zbiornik i przewody paliwa w ciężkich warunkach co 48 000 km (30 000 mil).' : undefined },
       clutch,

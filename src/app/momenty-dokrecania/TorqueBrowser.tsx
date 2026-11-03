@@ -4,7 +4,7 @@ import { useMemo, useState } from 'react';
 import { SYSTEM_LABEL, TORQUE_DOCS, TORQUE_ROWS, TORQUE_SYSTEMS, foldText, yearsLabel } from '@/lib/torque-gm';
 
 const ENGINES = ['4.3L', '5.0L', '5.7L', '7.4L', '6.2L', '6.5L'];
-const INDEX = TORQUE_ROWS.map(r => foldText(`${r.name} ${r.original} ${r.variant} ${r.system} ${SYSTEM_LABEL[r.system] ?? ''}`));
+const INDEX = TORQUE_ROWS.map(r => foldText(`${r.name} ${r.original} ${r.variant} ${r.appliesTo} ${r.system} ${SYSTEM_LABEL[r.system] ?? ''}`));
 const PAGE = 60;
 
 const field = 'min-h-11 w-full rounded-xl border border-white/15 bg-neutral-900 px-3 text-base text-white focus:border-silver-500 focus:outline-none focus:ring-2 focus:ring-silver-600/40';
@@ -58,10 +58,11 @@ export default function TorqueBrowser() {
           <h2 className="text-xl font-semibold text-silver-300">{SYSTEM_LABEL[g.s] ?? g.s}</h2>
           <ul className="mt-2 divide-y divide-white/5 rounded-xl border border-white/10 bg-neutral-950">
             {g.rows.map(r => (
-              <li key={`${r.original}-${r.nm}-${r.variant}-${r.years.join()}`} className="grid min-w-0 gap-1 p-3 sm:grid-cols-[1fr_auto] sm:gap-4" data-testid="torque-row">
+              <li key={`${r.original}-${r.nm}-${r.variant}-${r.years.join()}-${r.appliesTo}`} className="grid min-w-0 gap-1 p-3 sm:grid-cols-[1fr_auto] sm:gap-4" data-testid="torque-row">
                 <div className="min-w-0">
                   <p className="break-words font-medium text-white">{r.name}</p>
                   <p className="break-words text-xs text-neutral-500">GM: {r.original}</p>
+                  {r.appliesTo ? <p className="mt-1 break-words text-sm text-neutral-200" data-testid="torque-applies"><span className="text-neutral-400">Dotyczy:</span> {r.appliesTo}</p> : null}
                   <p className="mt-1 text-xs text-neutral-300">
                     {r.variant ? <span className="mr-2 inline-block rounded border border-white/15 px-1.5">{r.variant}</span> : null}
                     {yearsLabel(r.years)}

@@ -12,7 +12,8 @@ export type RpoDoc = { id: string; label: string; url: string };
 export type RpoApplies = { vehicle: string; years: string; original?: string };
 export type RpoContentGroup = { scope: string; items: string[]; sources: RpoDoc[] };
 /** Zawartość pakietu wg dokumentów GM (parafraza po polsku). `plain` = jednolinijkowe wyjaśnienie nazwy, tylko gdy pewne ze źródeł. */
-export type RpoContents = { plain?: string; groups: RpoContentGroup[] };
+export type RpoOnline = { text: string; sources: { label: string; url: string }[] };
+export type RpoContents = { plain?: string; groups: RpoContentGroup[]; online?: RpoOnline };
 export type RpoEntry = {
   code: string;
   category: RpoCategory;
@@ -36,7 +37,7 @@ export type RpoEntry = {
 type RawCode = { c: string; k: string; g: string; p?: string; a: [number, string, string?][]; s: number[]; i?: 1; d?: 1; n?: string; m?: [number, number][]; x?: 1 };
 type RawData = { generated: string; vehicles: string[]; aggregator: { label: string; urls: string[] }; docs: RpoDoc[]; codes: RawCode[] };
 const DATA = RAW as unknown as RawData;
-type RawContents = { w?: string; g: { r: string; z: string[]; s: number[] }[] };
+type RawContents = { w?: string; g: { r: string; z: string[]; s: number[] }[]; o?: { t: string; s: { l: string; u: string }[] } };
 const CONTENTS = CONTENTS_RAW as unknown as Record<string, RawContents | string>;
 export const RPO_CONTENTS_NOTE = 'Zawartość według GM dla modelu i rocznika – sprawdź w swoim aucie.';
 export const RPO_CONTENTS_MISSING = 'brak opisu w dokumentach';
@@ -86,7 +87,7 @@ export const RPO_CATALOG: RpoEntry[] = DATA.codes.map(raw => {
     ...(() => {
       const c = CONTENTS[raw.c];
       if (!c || typeof c === 'string') return {};
-      return { contents: { ...(c.w ? { plain: c.w } : {}), groups: c.g.map(g => ({ scope: g.r, items: g.z, sources: g.s.map(i => DATA.docs[i]).filter(Boolean) })) } };
+      return { contents: { ...(c.w ? { plain: c.w } : {}), ...(c.o ? { online: { text: c.o.t, sources: c.o.s.map(s => ({ label: s.l, url: s.u })) } } : {}), groups: c.g.map(g => ({ scope: g.r, items: g.z, sources: g.s.map(i => DATA.docs[i]).filter(Boolean) })) } };
     })(),
   };
 });

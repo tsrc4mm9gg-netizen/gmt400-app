@@ -45,7 +45,17 @@ test('zawartość pakietów: każdy kod istnieje w katalogu, grupy mają zakres,
     assert.ok(byCode.has(code), `${code}: brak w katalogu RPO`);
     if ('w' in entry) assert.ok(typeof entry.w === 'string' && entry.w.trim().length >= 10, `${code}: puste wyjaśnienie`);
     // Bez grup dozwolone tylko samo rozwinięcie oznaczenia (np. opony) — UI pokazuje wtedy „brak opisu w dokumentach”.
-    assert.ok(Array.isArray(entry.g) && (entry.g.length > 0 || 'w' in entry), `${code}: brak grup`);
+    assert.ok(Array.isArray(entry.g) && (entry.g.length > 0 || 'w' in entry || 'o' in entry), `${code}: brak grup`);
+    if ('o' in entry) {
+      // Opis spoza dokumentów GM: tylko dla kodów bez grup, własne słowa, zawsze ze źródłem (https).
+      assert.equal(entry.g.length, 0, `${code}: opis online tylko gdy brak opisu GM`);
+      assert.ok(typeof entry.o.t === 'string' && entry.o.t.length >= 20 && entry.o.t.length <= 400, `${code}: opis online`);
+      assert.ok(Array.isArray(entry.o.s) && entry.o.s.length > 0, `${code}: opis online bez źródła`);
+      for (const s of entry.o.s) {
+        assert.match(s.u, /^https:\/\//, `${code}: źródło online`);
+        assert.match(s.l, /nie GM/, `${code}: źródło musi być oznaczone jako nie-GM`);
+      }
+    }
     const scopes = new Set();
     for (const group of entry.g) {
       assert.ok(typeof group.r === 'string' && /(19|20)\d\d/.test(group.r), `${code}: zakres musi zawierać rocznik`);

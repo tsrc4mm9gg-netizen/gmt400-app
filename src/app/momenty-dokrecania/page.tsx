@@ -16,8 +16,9 @@ export default function MomentyPage() {
       <h1 className="text-3xl font-bold text-silver-400">Momenty dokręcania (1988–2000)</h1>
       <p className="mt-2 text-neutral-300">
         {TORQUE_ROWS.length} wartości wyłącznie z instrukcji serwisowych i naprawczych GM, z numerem strony pliku PDF. Najpierw Nm, w nawiasie
-        jednostka z instrukcji (lb-ft lub lb-in). Gdy dokumenty podają różne wartości dla tej samej części i tej samej wersji, wartości nie
-        publikujemy. Momenty kół i świec znajdziesz też w <Link href="/pojemnosci" className="text-silver-300 underline">Pojemnościach i płynach</Link>.
+        jednostka z instrukcji (lb-ft lub lb-in). Gdy ta sama nazwa części ma w dokumentach kilka wartości, każdą przypisaliśmy do konkretnego
+        podzespołu, wersji i rocznika (linia „Dotyczy”) na podstawie stron instrukcji. Wartości, których nie da się jednoznacznie
+        przypisać, oraz te dotyczące zespołów spoza GMT400 nie są publikowane. Momenty kół i świec znajdziesz też w <Link href="/pojemnosci" className="text-silver-300 underline">Pojemnościach i płynach</Link>.
       </p>
       <p className="mt-2 rounded-xl border border-silver-600/40 bg-silver-950/30 p-3 text-sm text-neutral-200">
         Sprawdź w swoim aucie: wersja silnika, skrzyni i mostu oraz rocznik muszą się zgadzać. Część wartości pochodzi z podręczników
