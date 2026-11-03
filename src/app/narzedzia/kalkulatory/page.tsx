@@ -68,7 +68,10 @@ export default function Calculators() {
  </div>
 
  <div className="grid gap-3 sm:grid-cols-2">
- <label className="text-sm">Przełożenie tylnej osi<input className="mt-1 w-full rounded border px-2 py-2" value={axleRatio} onChange={event => setAxleRatio(event.target.value)} /></label>
+ <label className="text-sm">Przełożenie tylnej osi
+            <input className="mt-1 w-full rounded border px-2 py-2" value={axleRatio} onChange={event => setAxleRatio(event.target.value)} />
+            <span className="mt-1 block text-xs text-neutral-500">Typowe GMT400: 3.42 (GU6), 3.73 (GT4), 4.10 (GT5)</span>
+          </label>
  <label className="text-sm">Wskazanie licznika, km/h<input className="mt-1 w-full rounded border px-2 py-2" value={speed} onChange={event => setSpeed(event.target.value)} /></label>
  </div>
 
