@@ -55,6 +55,12 @@ const snippet = (value: unknown, max = 140) => {
   return text.length > max ? `${text.slice(0, max - 1).replace(/\s+\S*$/, '')}…` : text;
 };
 const body = (parts: unknown[], max = 1200) => fold(parts.filter(Boolean).join(' ')).slice(0, max);
+/** Wpisy Notion: unikalne słowa całej treści (bez krótkich spójników), żeby nakładka znajdowała to samo co /szukaj (np. „termostat” w dalszej części opisu), a indeks pozostał lekki. */
+const keywords = (parts: unknown[], max = 3200) => {
+  const seen = new Set<string>();
+  for (const word of fold(parts.filter(Boolean).join(' ')).match(/[a-z0-9][a-z0-9./–-]*[a-z0-9]|[a-z0-9]/g) || []) if (word.length >= 3 || /^\d+$/.test(word)) seen.add(word);
+  return [...seen].join(' ').slice(0, max);
+};
 const ENGINE_CODES = ['L03', 'L05', 'L19', 'L29', 'L30', 'L31', 'L35', 'L56', 'L65', 'LB4', 'LH6', 'LL4'];
 
 type NotionLike = KnowledgeEntry & { id?: string; Modele?: string[] };
@@ -67,7 +73,7 @@ export function buildSearchIndex(notion: NotionLike[] | null): SearchIndex {
     const doc: SearchIndexDoc = {
       g: GROUP_BY_TYPE[e.Typ] ?? 'diy', k: e.id, t: e.Nazwa, u: `/baza/${encodeURIComponent(e.id)}`,
       s: snippet(e.Opis || e.Objawy || e.Rozwiązanie),
-      b: body([e.Typ, e.Model, e.Lata, e.Opis, e.Objawy, e.Rozwiązanie]),
+      b: keywords([e.Typ, e.Model, e.Lata, e.Opis, e.Objawy, e.Rozwiązanie]),
     };
     if (e.Lata) doc.y = e.Lata;
     if (Array.isArray(e.Modele) && e.Modele.length) doc.m = e.Modele;

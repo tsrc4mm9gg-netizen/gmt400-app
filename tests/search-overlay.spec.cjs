@@ -130,7 +130,7 @@ test('API /api/search-index: lekki indeks z grupami i bez stron administracyjnyc
   const response = await request.get(BASE + '/api/search-index');
   expect(response.status()).toBe(200);
   const text = await response.text();
-  expect(text.length).toBeLessThan(450000);
+  expect(text.length).toBeLessThan(650000); // pełne słowa wpisów Notion; ładowane dopiero po otwarciu/fokusie wyszukiwarki
   const data = JSON.parse(text);
   expect(data.version).toBe(1);
   const groups = new Set(data.docs.map(doc => doc.g));

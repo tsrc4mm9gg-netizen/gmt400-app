@@ -97,7 +97,7 @@ export default function SiteHeader() {
         {/* Od 1280 px krótki napis — pełne pole razem z plakietką auta i menu nie mieści się w jednym rzędzie (nagłówek ma stałą szerokość). */}
         <span aria-hidden="true" className="hidden xl:inline">Szukaj</span>
       </button>
-      <input ref={proxyRef} type="text" tabIndex={-1} aria-hidden="true" data-search-focus-proxy="" className="pointer-events-none fixed left-0 top-0 h-px w-px opacity-0" style={{ fontSize: 16 }} readOnly={false} />
+      <input ref={proxyRef} type="text" tabIndex={-1} aria-hidden="true" aria-label="Pomocnicze pole klawiatury wyszukiwarki" data-search-focus-proxy="" className="pointer-events-none fixed left-0 top-0 h-px w-px opacity-0" style={{ fontSize: 16 }} readOnly={false} />
       {open && <SearchOverlay onClose={closeSearch} />}
     </>
   );
