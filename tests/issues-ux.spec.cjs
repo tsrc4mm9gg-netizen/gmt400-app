@@ -18,6 +18,7 @@ test('usterki: kafelek wpisu i filtr źródeł', async ({ page }) => {
   await expect(card.getByTestId('tile-excerpt')).toContainText('Dudnienie na biegu jałowym.');
   await expect(card.getByTestId('issue-steps')).toHaveCount(0);
   await expect(card.getByRole('link', { name: 'Dudnienie wydechu na biegu D — test' })).toHaveAttribute('href', '/baza/a');
+  await page.getByTestId('filters-open').click();
   await page.getByTestId('issue-sourced-only').check();
   await expect(page.getByTestId('issue-count')).toHaveText('Pokazano 1 z 2 usterek');
   expect(await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth)).toBeLessThanOrEqual(1);
@@ -40,6 +41,7 @@ test('diy: kafelek wpisu, źródła i filtr', async ({ page }) => {
   await expect(card.getByTestId('tile-excerpt')).toContainText('Procedura GM.');
   await expect(card.getByTestId('issue-steps')).toHaveCount(0);
   await expect(card.getByRole('link', { name: 'Wymiana oleju — test DIY' })).toHaveAttribute('href', '/baza/d1');
+  await page.getByTestId('filters-open').click();
   await page.getByTestId('diy-sourced-only').check();
   await expect(page.getByTestId('diy-count')).toHaveText('Pokazano 1 z 2 poradników');
   expect(await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth)).toBeLessThanOrEqual(1);
@@ -59,6 +61,7 @@ test('diy: chipy kategorii, Wyczyść w wyszukiwarce, licznik i Brak wyników', 
   const count = page.getByTestId('diy-count');
   await expect(count).toHaveText('Pokazano 3 z 3 poradników');
   await hydrated(page.getByTestId('diy-cat-hamulce'));
+  await page.getByTestId('filters-open').click();
   const chips = page.getByTestId('diy-categories').getByRole('button');
   await expect(chips).toHaveCount(7);
   for (const chip of await chips.all()) expect((await chip.boundingBox()).height).toBeGreaterThanOrEqual(44);
@@ -69,13 +72,16 @@ test('diy: chipy kategorii, Wyczyść w wyszukiwarce, licznik i Brak wyników', 
   await expect(page.getByTestId('entry-tile')).toHaveCount(1);
   await page.getByTestId('diy-cat-wszystkie').click();
   await expect(count).toHaveText('Pokazano 3 z 3 poradników');
+  await page.getByTestId('filters-close').click();
   await expect(page.getByTestId('diy-search-clear')).toHaveCount(0);
   await page.getByLabel('Szukaj porady DIY').fill('nic-takiego');
   await expect(page.getByTestId('diy-empty')).toContainText('Brak wyników');
   await page.getByTestId('diy-search-clear').click();
   await expect(page.getByLabel('Szukaj porady DIY')).toHaveValue('');
   await expect(count).toHaveText('Pokazano 3 z 3 poradników');
+  await page.getByTestId('filters-open').click();
   await page.getByTestId('diy-cat-silnik').click();
+  await page.getByTestId('filters-close').click();
   await page.getByLabel('Szukaj porady DIY').fill('felg');
   await expect(page.getByTestId('diy-empty')).toBeVisible();
   await page.getByTestId('diy-clear-filters').click();
@@ -100,6 +106,7 @@ test('usterki: chipy kategorii, Wyczyść w wyszukiwarce, licznik i Brak wynikó
   const count = page.getByTestId('issue-count');
   await expect(count).toHaveText('Pokazano 3 z 3 usterek');
   await hydrated(page.getByTestId('issue-cat-hamulce'));
+  await page.getByTestId('filters-open').click();
   const chips = page.getByTestId('issue-categories').getByRole('button');
   await expect(chips).toHaveCount(7);
   for (const chip of await chips.all()) expect((await chip.boundingBox()).height).toBeGreaterThanOrEqual(44);
@@ -108,13 +115,16 @@ test('usterki: chipy kategorii, Wyczyść w wyszukiwarce, licznik i Brak wynikó
   await expect(count).toHaveText('Pokazano 1 z 3 usterek · kategoria: Hamulce');
   await expect(page.getByTestId('entry-tile')).toHaveCount(1);
   await page.getByTestId('issue-cat-wszystkie').click();
+  await page.getByTestId('filters-close').click();
   await expect(page.getByTestId('issue-search-clear')).toHaveCount(0);
   await page.getByLabel('Szukaj usterki').fill('nic-takiego');
   await expect(page.getByTestId('issue-empty')).toContainText('Brak wyników');
   await page.getByTestId('issue-search-clear').click();
   await expect(page.getByLabel('Szukaj usterki')).toHaveValue('');
   await expect(count).toHaveText('Pokazano 3 z 3 usterek');
+  await page.getByTestId('filters-open').click();
   await page.getByTestId('issue-cat-skrzynia').click();
+  await page.getByTestId('filters-close').click();
   await page.getByLabel('Szukaj usterki').fill('wycieraczki');
   await expect(page.getByTestId('issue-empty')).toBeVisible();
   await page.getByTestId('issue-clear-filters').click();

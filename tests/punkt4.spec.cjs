@@ -64,7 +64,7 @@ for (const size of SIZES) {
         await page.goto(`${BASE}${path}`);
         const empty = page.getByTestId(`${prefix}-empty`);
         await expect(empty).toBeVisible({ timeout: 20000 });
-        await expect(page.getByTestId(`${prefix}-empty-title`)).toHaveText(/^Brak wyników dla Twojego profilu auta\./);
+        await expect(page.getByTestId(`${prefix}-empty-title`)).toHaveText('Brak wyników dla Twojego profilu — pokaż wszystko');
         const showAll = page.getByTestId(`${prefix}-show-all`);
         await expect(showAll).toBeVisible();
         expect((await showAll.boundingBox()).height).toBeGreaterThanOrEqual(43.5);
@@ -91,6 +91,7 @@ for (const size of SIZES) {
 
     test(`${size.w}: chipy kategorii i przyciski filtrów mają ≥44 px i czytelny stan`, async ({ page }) => {
       await page.goto(`${BASE}/diy`);
+      await page.getByTestId('filters-open').click();
       const chips = page.getByTestId('diy-categories').getByRole('button');
       await expect(chips.first()).toBeVisible();
       const n = await chips.count();
@@ -104,6 +105,7 @@ for (const size of SIZES) {
       await expect(chips.nth(1)).toHaveAttribute('aria-pressed', 'true');
       await expect(chips.nth(1)).toContainText('✓');
       await page.goto(`${BASE}/usterki`);
+      await page.getByTestId('filters-open').click();
       const issueChips = page.getByTestId('issue-categories').getByRole('button');
       await expect(issueChips.first()).toBeVisible();
       for (let i = 0; i < await issueChips.count(); i++) expect((await issueChips.nth(i).boundingBox()).height).toBeGreaterThanOrEqual(43.5);

@@ -13,19 +13,21 @@ async function prepare(page) {
   await page.addInitScript(({ profile }) => localStorage.setItem('gmt400_vehicle_profile_v1', JSON.stringify({ version: 1, profile })), { profile });
   await page.route('**/api/notion', route => route.fulfill({ json: { results, count: results.length, complete: true } }));
 }
-test('vehicle relevance excludes unknown materials', async({page}) => {
+test('vehicle relevance hides only materials outside the profile scope', async({page}) => {
   await prepare(page);
   await page.goto(BASE + '/usterki');
+  await page.getByTestId('filters-open').click();
   await expect(page.getByRole('button', { name: /Dla mojego auta \(2\)/ })).toBeVisible();
   await expect(page.getByRole('link', { name: 'Zgodna usterka' })).toBeVisible();
-  await expect(page.getByRole('link', { name: 'Ogólna porada' })).toBeVisible();
-  await expect(page.getByRole('link', { name: 'Nieustalony zakres' })).toHaveCount(0);
+  // „Ogólna porada” to Porada — nie należy do listy Usterek; „Dla mojego auta” ukrywa tylko wpisy poza zakresem.
+  await expect(page.getByRole('link', { name: 'Ogólna porada' })).toHaveCount(0);
+  await expect(page.getByRole('link', { name: 'Nieustalony zakres' })).toBeVisible();
   await expect(page.getByRole('link', { name: 'Poza zakresem' })).toHaveCount(0);
 });
 test('unknown materials remain available in their explicit mode', async({page}) => {
   await prepare(page);
   await page.goto(BASE + '/usterki');
-  await page.getByRole('button', { name: 'Filtry zaawansowane' }).click();
-  await page.getByRole('button', { name: /Nieustalone \(1\)/ }).click();
+  await page.getByTestId('filters-open').click();
+  await page.getByRole('button', { name: /Nieustalone \(2\)/ }).click();
   await expect(page.getByRole('link', { name: 'Nieustalony zakres' })).toBeVisible();
 });

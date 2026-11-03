@@ -1,5 +1,5 @@
 // „Moje auto”: zapis/odczyt w localStorage (bez konta), garaż kilku aut, filtrowanie Usterek, DIY i szukajki objawów
-// pod aktywne auto (selection/bodyId + profil), puste stany „Brak wyników dla Twojego profilu auta.” + „Pokaż wszystko”, usuwanie, offline.
+// pod aktywne auto (selection/bodyId + profil), puste stany „Brak wyników dla Twojego profilu — pokaż wszystko” + przycisk, usuwanie, offline.
 const { test, expect } = require('@playwright/test');
 const { hydrated } = require('./helpers/hydration.cjs');
 const BASE = process.env.UX_BASE || 'http://127.0.0.1:3100';
@@ -101,13 +101,15 @@ test('filtrowanie Usterek pod auto + pusty stan i „Pokaż wszystko”', async 
   const errors = await prepare(page, { ...SUBURBAN, engine: 'L31' });
   await page.goto(BASE + '/usterki');
   // Kod RPO silnika z profilu trafia do filtra modelu jako pojemność (L31 → 5.7), nie jako „31”.
+  await page.getByTestId('filters-open').click();
   await expect(page.getByText('Suburban · 1997 · 5.7 · 4WD').first()).toBeVisible();
+  await page.getByTestId('filters-close').click();
   await expect(heading(page, 'TEST SUBURBAN HAMULCE')).toBeVisible();
   await expect(heading(page, 'TEST OGOLNA PALIWO')).toBeVisible();
   await expect(heading(page, 'TEST YUKON SZARPANIE')).toHaveCount(0);
   await hydrated(page.getByLabel('Szukaj usterki'));
   await page.getByLabel('Szukaj usterki').fill('yukon');
-  await expect(page.getByTestId('issue-empty-title')).toHaveText('Brak wyników dla Twojego profilu auta.');
+  await expect(page.getByTestId('issue-empty-title')).toHaveText('Brak wyników dla Twojego profilu — pokaż wszystko');
   const showAll = page.getByTestId('issue-show-all');
   expect((await showAll.boundingBox()).height).toBeGreaterThanOrEqual(44);
   await showAll.click();
@@ -122,7 +124,7 @@ test('filtrowanie DIY pod auto + pusty stan i „Pokaż wszystko”', async ({ p
   await expect(page.getByText('TEST DIY YUKON')).toHaveCount(0);
   await hydrated(page.getByLabel('Szukaj porady DIY'));
   await page.getByLabel('Szukaj porady DIY').fill('yukon');
-  await expect(page.getByTestId('diy-empty-title')).toHaveText('Brak wyników dla Twojego profilu auta.');
+  await expect(page.getByTestId('diy-empty-title')).toHaveText('Brak wyników dla Twojego profilu — pokaż wszystko');
   await page.getByTestId('diy-show-all').click();
   await expect(page.getByText('TEST DIY YUKON').first()).toBeVisible();
   expect(errors).toEqual([]);

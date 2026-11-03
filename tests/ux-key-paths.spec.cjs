@@ -118,7 +118,10 @@ test('filtr modelu: chip, usuwanie, odświeżenie, wyczyść i przejście do ust
   await expect(active.getByRole('button', { name: 'Usuń filtr napęd: 4wd' })).toBeVisible();
   await page.getByRole('link', { name: /Usterki/ }).first().click();
   await expect(page).toHaveURL(/\/usterki$/);
+  await expect(page.getByTestId('filters-open')).toHaveAccessibleName(/aktywne: model/);
+  await page.getByTestId('filters-open').click();
   await expect(page.getByText('Pokazuję materiały dla:')).toBeVisible();
+  await page.getByTestId('filters-close').click();
   await page.goBack();
   await expect(page).toHaveURL(BASE + '/');
   await expect(active).toContainText(name);

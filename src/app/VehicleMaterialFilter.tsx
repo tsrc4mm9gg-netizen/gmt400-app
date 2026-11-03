@@ -3,6 +3,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useVehicleProfile } from './VehicleProfileProvider';
 import CompactVehicleFilterPanel from './CompactVehicleFilterPanel';
 import { matchVehicle, type Applicability } from '../lib/vehicle-compatibility';
+import { fitsProfileExplicitly } from '../lib/profile-fit';
 const EMPTY: Applicability = { brand: [], model: [], years: [], engine: [], drive: [], transmission: [] };
 const LABELS = { relevant: 'Dla mojego auta', all: 'Wszystkie', within_scope: 'Zgodne z zakresem', general: 'Ogólne', unknown: 'Nieustalone', outside_scope: 'Poza zakresem' };
 type Mode = keyof typeof LABELS;
@@ -12,6 +13,9 @@ export function VehicleMatchBadge({ item }: { item: Material }) {
   const { profile, ready } = useVehicleProfile();
   if (!ready || !profile) return null;
   const match = matchVehicle(profile, item.applicability || EMPTY);
+  const fits = fitsProfileExplicitly(profile, item.applicability);
+  // Wpis wprost zgodny z autem: sama plakietka (bez „Nieustalone” z powodu pustej marki w metadanych).
+  if (fits) return <span data-testid="profile-fit-badge" className="my-1 inline-flex items-center gap-1 rounded-full border border-silver-300/50 bg-neutral-800 px-2 py-0.5 text-xs font-semibold text-silver-100"><span aria-hidden="true">✓</span>pasuje do Twojego auta</span>;
   return <details className="my-2 text-xs text-neutral-400"><summary className="cursor-pointer text-silver-400">{LABELS[match.status]}</summary><ul className="mt-1 list-disc pl-4">{match.reasons.map(reason => <li key={reason}>{reason}</li>)}</ul></details>;
 }
 export function useVehicleMaterialFilter<T extends Material>(items: T[], scopeTypes?: string[]) {
@@ -41,9 +45,12 @@ export function useVehicleMaterialFilter<T extends Material>(items: T[], scopeTy
     ).map(row => row.item));
     return items.filter(item => !scoped.has(item) || allowed.has(item));
   }, [items, active, mode, evaluated]);
-  const panel = <CompactVehicleFilterPanel profile={profile} active={active} mode={mode} counts={counts} onModeChange={setMode} />;
+  // Z zapisanym autem: wpisy wprost zgodne (model/silnik/napęd/skrzynia) na górę; kolejność reszty bez zmian, nic dodatkowo nie znika.
+  const fitting = useMemo(() => new Set(active && profile ? evaluated.filter(row => fitsProfileExplicitly(profile, row.item.applicability)).map(row => row.item) : []), [active, profile, evaluated]);
+  const sortedItems = useMemo(() => fitting.size ? [...visibleItems].sort((a, b) => Number(fitting.has(b)) - Number(fitting.has(a))) : visibleItems, [visibleItems, fitting]);
+  const panel = <CompactVehicleFilterPanel profile={profile} active={active} scoped={Boolean(scopeKey)} mode={mode} counts={counts} fitting={fitting.size} onModeChange={setMode} />;
   const resetMode = useCallback(() => setMode('relevant'), []);
   const showAllMode = useCallback(() => setMode('all'), []);
   /** profileNarrowing: filtr profilu auta faktycznie zawęża listę (profil zapisany i tryb inny niż „Wszystkie”). */
-  return { visibleItems, panel, profileNarrowing: active && mode !== 'all', profileModeChanged: active && mode !== 'relevant', resetMode, showAllMode };
+  return { visibleItems: sortedItems, panel, profileNarrowing: active && mode !== 'all', profileModeChanged: active && mode !== 'relevant', resetMode, showAllMode };
 }

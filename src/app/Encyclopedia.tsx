@@ -16,6 +16,7 @@ import VinDecoder from './VinDecoder';
 import OfficialVehicleData from './OfficialVehicleData';
 import { useModelSelection } from './ModelSelectionContext';
 import CategoryChips from './ui/CategoryChips';
+import InSheet, { listTab } from './FilterSheetSlot';
 import { findBody } from '../lib/body-styles';
 import { EngineTable, FluidsTable, PartSourceNote, OemQuickList, TorqueTable } from './VerifiedSpecs';
 import { PARTS } from '../lib/parts-catalog';
@@ -455,7 +456,7 @@ export default function Encyclopedia({ initialTab, initialItems }: { initialTab?
         </div>
       )}
 
-      <div className="bg-neutral-950 border-y border-white/5 py-3">
+      <InSheet inline={!listTab(tab)}><div className="bg-neutral-950 border-y border-white/5 py-3">
         <div className="max-w-7xl mx-auto px-4 flex flex-wrap items-center gap-2 text-sm">
           {selectedBody ? (
             <>
@@ -477,7 +478,7 @@ export default function Encyclopedia({ initialTab, initialItems }: { initialTab?
             </>
           )}
         </div>
-      </div>
+      </div></InSheet>
 
       <div className="flex flex-col [&>*]:w-full [&>*]:min-w-0 [overflow-wrap:anywhere]">
       <div id="sekcje" className="order-last bg-neutral-900 py-4 md:order-none">
@@ -497,7 +498,7 @@ export default function Encyclopedia({ initialTab, initialItems }: { initialTab?
         </div>
       )}
       <div id="content" className="max-w-7xl mx-auto px-4 py-8">
-        {['usterki', 'kody', 'diy', 'schematy'].includes(tab) && vehicleFilterPanel}
+        {listTab(tab) && vehicleFilterPanel}
         
         {selectedModel !== 'Wszystkie' && (
           <div className="mb-6 flex items-center justify-between bg-silver-600/10 border border-silver-600/30 p-3">
@@ -546,7 +547,7 @@ export default function Encyclopedia({ initialTab, initialItems }: { initialTab?
                   <button type="button" onClick={() => setIssueQuery('')} data-testid="issue-search-clear" className="absolute right-1 top-1/2 flex min-h-11 -translate-y-1/2 items-center rounded-full border border-white/20 bg-neutral-800 px-3 text-sm text-silver-200 hover:bg-neutral-700">Wyczyść</button>
                 )}
               </div>
-              <CategoryChips categories={ISSUE_CATEGORIES} value={issueCategory} onChange={setIssueCategory} prefix="issue" label="Kategorie usterek" />
+              <InSheet><CategoryChips categories={ISSUE_CATEGORIES} value={issueCategory} onChange={setIssueCategory} prefix="issue" label="Kategorie usterek" />
               <p className="text-neutral-400 text-sm mb-4">Lub filtruj po modelu i roczniku:</p>
               <div className="grid sm:grid-cols-2 gap-4">
                 <div>
@@ -579,7 +580,7 @@ export default function Encyclopedia({ initialTab, initialItems }: { initialTab?
               <label className="mt-4 flex min-h-11 cursor-pointer items-center gap-3 text-sm text-neutral-300">
                 <input type="checkbox" checked={issueSourcedOnly} onChange={(e) => setIssueSourcedOnly(e.target.checked)} className="h-5 w-5 accent-silver-600" data-testid="issue-sourced-only" />
                 Tylko wpisy ze źródłami (biuletyny GM, instrukcje, katalogi)
-              </label>
+              </label></InSheet>
             </div>
 
             
@@ -589,7 +590,7 @@ export default function Encyclopedia({ initialTab, initialItems }: { initialTab?
                 </p>
                 {filteredIssues.length === 0 && (
                   <div className="rounded-2xl border border-white/15 bg-neutral-900 p-4" data-testid="issue-empty">
-                    <p className="mb-3 font-semibold text-white" style={{ maxWidth: 'none' }} data-testid="issue-empty-title">{profileScoped ? 'Brak wyników dla Twojego profilu auta. ' : 'Brak wyników'}</p>
+                    <p className="mb-3 font-semibold text-white" style={{ maxWidth: 'none' }} data-testid="issue-empty-title">{profileScoped ? 'Brak wyników dla Twojego profilu — pokaż wszystko' : 'Brak wyników'}</p>
                     <p className="mb-3 text-sm text-neutral-300" style={{ maxWidth: 'none' }}>Żadna usterka nie pasuje do wybranych filtrów.</p>
                     <div className="flex flex-wrap gap-2">
                       {profileScoped && <button type="button" onClick={showAllProfile} data-testid="issue-show-all" className="min-h-11 rounded-full border border-silver-300 bg-silver-600 px-4 text-sm font-semibold text-neutral-950">Pokaż wszystko</button>}
@@ -650,17 +651,17 @@ export default function Encyclopedia({ initialTab, initialItems }: { initialTab?
                 <button type="button" onClick={() => setDiyQuery('')} data-testid="diy-search-clear" className="absolute right-1 top-1/2 flex min-h-11 -translate-y-1/2 items-center rounded-full border border-white/20 bg-neutral-800 px-3 text-sm text-silver-200 hover:bg-neutral-700">Wyczyść</button>
               )}
             </div>
-            <CategoryChips categories={DIY_CATEGORIES} value={diyCategory} onChange={setDiyCategory} prefix="diy" label="Kategorie poradników" />
+            <InSheet><CategoryChips categories={DIY_CATEGORIES} value={diyCategory} onChange={setDiyCategory} prefix="diy" label="Kategorie poradników" />
             <label className="mb-3 flex min-h-11 items-center gap-3 text-sm text-neutral-300">
               <input type="checkbox" checked={diySourcedOnly} onChange={(e) => setDiySourcedOnly(e.target.checked)} className="h-5 w-5 accent-silver-600" data-testid="diy-sourced-only" />
               Tylko procedury ze źródłami (instrukcje GM, biuletyny)
-            </label>
+            </label></InSheet>
             <p className="text-neutral-400 text-sm mb-4" role="status" data-testid="diy-count">
               Pokazano {diyTips.length} z {filteredTips.length} poradników{diyCategory !== 'wszystkie' && ` · kategoria: ${diyCategoryLabel}`}{selectedModel !== 'Wszystkie' && ` · pojazd: ${selectedModel}`}
             </p>
             {diyTips.length === 0 && (
               <div className="mb-4 rounded-2xl border border-white/15 bg-neutral-900 p-4" data-testid="diy-empty">
-                <p className="mb-3 font-semibold text-white" style={{ maxWidth: 'none' }} data-testid="diy-empty-title">{profileScoped ? 'Brak wyników dla Twojego profilu auta. ' : 'Brak wyników'}</p>
+                <p className="mb-3 font-semibold text-white" style={{ maxWidth: 'none' }} data-testid="diy-empty-title">{profileScoped ? 'Brak wyników dla Twojego profilu — pokaż wszystko' : 'Brak wyników'}</p>
                 <p className="mb-3 text-sm text-neutral-300" style={{ maxWidth: 'none' }}>Żaden poradnik nie pasuje do wybranych filtrów.</p>
                 <div className="flex flex-wrap gap-2">
                   {profileScoped && <button type="button" onClick={showAllProfile} data-testid="diy-show-all" className="min-h-11 rounded-full border border-silver-300 bg-silver-600 px-4 text-sm font-semibold text-neutral-950">Pokaż wszystko</button>}
