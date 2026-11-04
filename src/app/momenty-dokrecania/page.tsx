@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import Breadcrumbs from '../ui/Breadcrumbs';
+import AffiliateBox from '../ui/AffiliateBox';
 import TorqueBrowser from './TorqueBrowser';
 import { TORQUE_ROWS } from '@/lib/torque-gm';
 
@@ -25,6 +26,14 @@ export default function MomentyPage() {
         podzespołów (Unit Repair) — dotyczą danego zespołu, montowanego także w innych autach GM. Przy śrubach dokręcanych kątowo lub
         jednorazowych postępuj według procedury z instrukcji.
       </p>
+      <AffiliateBox
+        title="Przydatne przy dokręcaniu"
+        items={[
+          { name: 'Klucz dynamometryczny', search: 'torque wrench' },
+          { name: 'Zestaw kluczy nasadowych', search: 'socket set metric' },
+          { name: 'Klucz dynamometryczny 1/2"', search: 'torque wrench 1/2 inch' },
+        ]}
+      />
       <TorqueBrowser />
     </div>
   );
