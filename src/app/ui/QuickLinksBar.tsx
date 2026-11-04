@@ -4,6 +4,7 @@ import { usePathname } from 'next/navigation';
 
 const QUICK_LINKS = [
   { href: '/vin', label: 'VIN', icon: 'VIN' },
+  { href: '/narzedzia/rpo', label: 'RPO', icon: 'RPO' },
   { href: '/diagnoza', label: 'Diagnoza', icon: 'D' },
   { href: '/usterki', label: 'Usterki', icon: 'U' },
   { href: '/diy', label: 'DIY', icon: 'DIY' },
