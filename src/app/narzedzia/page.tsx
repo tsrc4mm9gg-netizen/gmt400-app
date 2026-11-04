@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import type { CSSProperties } from 'react';
 import FAQ from '../ui/FAQ';
+import AffiliateBox from '../ui/AffiliateBox';
 
 const TOOLS = [
  { href: '/narzedzia/rpo', title: 'Kody RPO', tag: 'Wyposażenie pojazdu', description: 'Odczytaj kody z tabliczki i sprawdź ich znaczenie po polsku. Możesz wpisać kilka kodów naraz.', example: 'Na przykład: G80, Z71, GU6', icon: 'M9 5H6a2 2 0 0 0-2 2v13h16V7a2 2 0 0 0-2-2h-3M9 3h6v4H9zM8 12h8M8 16h6' },
@@ -8,6 +9,12 @@ const TOOLS = [
  { href: '/narzedzia/kalkulatory', title: 'Kalkulator opon', tag: 'Opony i przełożenia', description: 'Porównaj obecne i planowane opony. Oblicz zmianę średnicy oraz wpływ na prędkość i przełożenie osi.', example: 'Na przykład: 235/75 R16 → 265/75 R16', icon: 'M4 5h16v14H4zM4 10h16M10 10v9M7 7h1M13 14h4M15 12v4' },
  { href: '/narzedzia/historia-vin', title: 'Historia VIN', tag: 'Akcje serwisowe i aukcje', description: 'Wpisz VIN: liczba akcji serwisowych i skarg w oficjalnej bazie NHTSA oraz linki do archiwów aukcji i raportów historii.', example: 'Bez kopiowania cudzych zdjęć i raportów.', icon: 'M12 8v4l3 2M3 12a9 9 0 1 0 3-6.7L3 8M3 3v5h5' },
  { href: '/narzedzia/czesci', title: 'Dobór części', tag: 'Wstępna weryfikacja', description: 'Przejrzyj referencyjne informacje według modelu, rocznika, silnika i skrzyni. Przed zakupem potwierdź numer części.', example: 'Wynik nie potwierdza zamienności części.', icon: 'M14 4a6 6 0 0 0-7 8l-4 4a3 3 0 0 0 5 5l4-4a6 6 0 0 0 8-7l-4 3-4-4z' }
+];
+
+const SCANNER_TIPS = [
+  { title: 'Skaner OBD2 Bluetooth', tip: 'Najtańsza opcja (50–150 zł). Podłączasz do gniazda OBD2 i odczytujesz kody przez aplikację na telefonie. Wystarczy do podstawowej diagnostyki.' },
+  { title: 'Skaner z wyświetlaczem', tip: 'Droższy (150–400 zł), ale nie wymaga telefonu. Pokazuje kody, dane live, pozwala czyścić kody. Wygodniejszy w warsztacie.' },
+  { title: 'Profesjonalny skaner', tip: 'Najdroższy (500+ zł). Pokazuje wszystkie dane, pozwala programować moduły. Dla zaawansowanych użytkowników i warsztatów.' },
 ];
 
 const faqItems = [
@@ -22,6 +29,10 @@ const faqItems = [
   {
     question: 'Czy narzędzia pokazują dokładne dane?',
     answer: 'Narzędzia pokazują dane referencyjne z dokumentów GM. Zawsze sprawdzaj w swoim aucie — GMT400 ma wiele wariantów. Przed zakupem części potwierdź numer.',
+  },
+  {
+    question: 'Jaki skaner OBD2 do GMT400?',
+    answer: 'Do podstawowej diagnostyki wystarczy skaner Bluetooth (50–150 zł). Do zaawansowanej — skaner z wyświetlaczem (150–400 zł). Sprawdź, czy obsługuje protokół GM (J1850 VPW dla starszych, CAN dla nowszych).',
   },
 ];
 
@@ -53,6 +64,27 @@ export default function ToolsPage() {
  <h1 style={s.title}>Narzędzia GMT400</h1>
  <p style={s.intro}>Wybierz, co chcesz sprawdzić. Proste formularze, polskie opisy i informacje w jednym miejscu.</p>
  </header>
+
+ <section style={{ marginBottom: 24 }}>
+ <h2 style={{ margin: '0 0 12px', color: '#fafafa', fontSize: 20, fontWeight: 600 }}>Narzędzia do skanowania</h2>
+ <div style={{ display: 'grid', gap: 12 }}>
+ {SCANNER_TIPS.map(item => (
+ <div key={item.title} style={{ padding: 16, border: '1px solid rgba(255,255,255,.16)', borderRadius: 12, background: '#1a1a1d' }}>
+ <h3 style={{ margin: '0 0 8px', color: 'var(--accent-soft)', fontSize: 16, fontWeight: 600 }}>{item.title}</h3>
+ <p style={{ margin: 0, color: '#c7ccd3', fontSize: 14, lineHeight: 1.6 }}>{item.tip}</p>
+ </div>
+ ))}
+ </div>
+ <AffiliateBox
+ title="Polecane skanery"
+ items={[
+ { name: 'Skaner OBD2 Bluetooth', search: 'OBD2 scanner Bluetooth' },
+ { name: 'Skaner OBD2 z wyświetlaczem', search: 'OBD2 scanner handheld' },
+ { name: 'Skaner profesjonalny', search: 'OBD2 scanner professional' },
+ ]}
+ />
+ </section>
+
  <section style={s.grid} aria-label="Dostępne narzędzia">
  {TOOLS.map(tool => <Link key={tool.href} href={tool.href} style={s.card} data-tool-card>
  <span style={s.icon} aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" focusable="false"><path d={tool.icon} /></svg></span>
