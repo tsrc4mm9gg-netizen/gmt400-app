@@ -91,11 +91,10 @@ export default function KontaktPage() {
       </form>
 
       <section className="mt-8 rounded-xl border border-white/10 bg-neutral-900 p-4">
-        <h2 className="font-semibold text-silver-300">Alternatywne formy kontaktu</h2>
-        <ul className="mt-2 space-y-2 text-sm text-neutral-300">
-          <li>Email: <a href="mailto:kontakt@gmt400.pl" className="text-silver-400 hover:underline">kontakt@gmt400.pl</a></li>
-          <li>Forum: <a href="https://www.gmt400.com" target="_blank" rel="noopener noreferrer" className="text-silver-400 hover:underline">GMT400.com</a></li>
-        </ul>
+        <h2 className="font-semibold text-silver-300">Email</h2>
+        <p className="mt-2 text-sm text-neutral-300">
+          <a href="mailto:kontakt@gmt400.pl" className="text-silver-400 hover:underline">kontakt@gmt400.pl</a>
+        </p>
       </section>
 
       <FAQ items={faqItems} />
