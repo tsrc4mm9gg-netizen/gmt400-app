@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Encyclopedia from '../Encyclopedia';
 import JsonLd from '../ui/JsonLd';
+import AffiliateBox from '../ui/AffiliateBox';
 import { getListEntries, itemListJsonLd } from '../../lib/notion-entries';
 
 export const metadata: Metadata = {
@@ -17,7 +18,6 @@ export const metadata: Metadata = {
   },
 };
 
-// ISR: lista jest w HTML od pierwszego żądania (dla wyszukiwarek), odświeżana co 15 min. Gdy Notion nie odpowiada, strona pobiera dane w przeglądarce.
 export const revalidate = 900;
 
 export default async function Page() {
@@ -25,6 +25,16 @@ export default async function Page() {
   const list = (items ?? []).filter(entry => entry.Typ === 'Model');
   return <>
     <Encyclopedia initialTab="modele" initialItems={items} />
+    <div className="mx-auto max-w-3xl px-4">
+      <AffiliateBox
+        title="Przydatne przy każdym modelu"
+        items={[
+          { name: 'ACDelco PF52 — filtr oleju', search: 'ACDelco PF52' },
+          { name: 'Skaner OBD2', search: 'OBD2 scanner' },
+          { name: 'Klucz dynamometryczny', search: 'torque wrench' },
+        ]}
+      />
+    </div>
     {list.length > 0 && <JsonLd data={itemListJsonLd('Modele GMT400', 'https://www.gmt400.pl/modele', list)} />}
   </>;
 }
