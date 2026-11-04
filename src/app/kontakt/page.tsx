@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Breadcrumbs from '../ui/Breadcrumbs';
 import FAQ from '../ui/FAQ';
+import AccordionSection from '../ui/AccordionSection';
 
 export const metadata: Metadata = {
   title: 'Kontakt — GMT400.pl',
@@ -97,7 +98,11 @@ export default function KontaktPage() {
         </p>
       </section>
 
-      <FAQ items={faqItems} />
+      <div className="mt-6">
+        <AccordionSection title="Częste pytania">
+          <FAQ items={faqItems} />
+        </AccordionSection>
+      </div>
     </div>
   );
 }
