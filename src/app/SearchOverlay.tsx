@@ -21,7 +21,21 @@ const GROUPS: { id: SearchGroup; label: string }[] = [
   { id: 'poradniki', label: 'Poradniki' },
   { id: 'strony', label: 'Strony i narzędzia' },
 ];
-const SUGGESTIONS = ['P0300', 'stuka', 'RPO', 'przegląd', 'nie odpala', 'LPG'];
+
+const SUGGESTIONS = [
+  'P0300',
+  'nie odpala',
+  'stuka',
+  'pompa paliwa',
+  '4L60-E',
+  'przegląd',
+  'LPG',
+  'RPO',
+  'filtr oleju',
+  'świece',
+  'hamulce',
+  'VIN',
+];
 
 /* ---------- indeks: jedno pobranie na kartę ---------- */
 let indexPromise: Promise<SearchIndex> | null = null;
@@ -94,7 +108,6 @@ export default function SearchOverlay({ onClose, initialQuery = '' }: { onClose:
   const dialogRef = useRef<HTMLDivElement>(null);
   const [viewport, setViewport] = useState<{ top: number; height: number } | null>(null);
 
-  // Fokus od razu po zamontowaniu (iOS: klawiatura jest już otwarta dzięki polu-zastępcy w nagłówku).
   useLayoutEffect(() => { inputRef.current?.focus({ preventScroll: true }); }, []);
 
   useEffect(() => {
@@ -103,7 +116,6 @@ export default function SearchOverlay({ onClose, initialQuery = '' }: { onClose:
     return () => { live = false; };
   }, [attempt]);
 
-  // Blokada przewijania strony pod nakładką.
   useEffect(() => {
     const html = document.documentElement; const body = document.body;
     const prev = [html.style.overflow, body.style.overflow];
@@ -111,7 +123,6 @@ export default function SearchOverlay({ onClose, initialQuery = '' }: { onClose:
     return () => { html.style.overflow = prev[0]; body.style.overflow = prev[1]; };
   }, []);
 
-  // Klawiatura ekranowa (iOS/Android): dopasowanie do widocznej części ekranu.
   useEffect(() => {
     const vv = window.visualViewport;
     if (!vv) return;
@@ -121,7 +132,6 @@ export default function SearchOverlay({ onClose, initialQuery = '' }: { onClose:
     return () => { vv.removeEventListener('resize', update); vv.removeEventListener('scroll', update); };
   }, []);
 
-  // Escape zamyka, Tab nie wychodzi poza okno.
   useEffect(() => {
     const onKey = (event: KeyboardEvent) => {
       if (event.key === 'Escape') { event.preventDefault(); onClose(); return; }
@@ -250,7 +260,7 @@ export default function SearchOverlay({ onClose, initialQuery = '' }: { onClose:
                 </ul>
               </section>
             )}
-            <h2 className="text-sm font-semibold uppercase tracking-wide text-neutral-400">Spróbuj</h2>
+            <h2 className="text-sm font-semibold uppercase tracking-wide text-neutral-400">Popularne wyszukiwania</h2>
             <div className="mt-2 flex flex-wrap gap-2">
               {SUGGESTIONS.map(item => (
                 <button key={item} type="button" onClick={() => { setQuery(item); inputRef.current?.focus(); }} className={`min-h-11 rounded-full border border-white/15 bg-neutral-900 px-4 text-sm text-silver-100 hover:border-silver-400 ${focusRing}`}>{item}</button>
