@@ -40,7 +40,6 @@ const categories: { name: string; items: Product[] }[] = [
     items: [
       { name: 'Pompa paliwa ACDelco EP381', asin: 'B000C9SU1A', note: 'Pompa w zbiorniku', fitment: 'GMT400 1988–1997' },
       { name: 'Filtr paliwa ACDelco GF626', asin: 'B000C9SU1A', note: 'Filtr w linii', fitment: '1996–1999' },
-      { name: 'Przewody paliwowe', asin: 'B000C9SU1A', note: 'Węże paliwowe', fitment: 'Sprawdź średnicę' },
     ],
   },
   {
@@ -54,18 +53,17 @@ const categories: { name: string; items: Product[] }[] = [
   {
     name: 'Chłodzenie',
     items: [
-      { name: 'Pompa wody ACDelco 252-711', asin: 'B000C9SU1A', note: 'Pompa wody', fitment: '4.3/5.0/5.7 Vortec' },
+      { name: 'Pompa wody ACDelco 252-711', asin: 'B000C9SU1A', note: 'Pompa wody (GM 88926225)', fitment: '4.3/5.0/5.7 Vortec' },
       { name: 'Termostat ACDelco 131-113', asin: 'B000C9SU1A', note: '195°F (91°C)', fitment: 'C/K 1500 1996–1999' },
       { name: 'Chłodnica', asin: 'B000C9SU1A', note: 'Chłodnica', fitment: 'Sprawdź pasowanie' },
-      { name: 'DEX-COOL płyn chłodniczy', asin: 'B000C9SU1A', note: 'Oryginalny GM od 1996', fitment: 'Vortec 1996+' },
     ],
   },
   {
     name: 'Zapłon',
     items: [
-      { name: 'Świece ACDelco 41-932', asin: 'B000C9SU1A', note: 'Do Vortec', fitment: '5.0/5.7/7.4 Vortec 1996–1999' },
+      { name: 'Świece ACDelco 41-932', asin: 'B0012P3X9C', note: 'Platynowe, do Vortec', fitment: '5.0/5.7/7.4 Vortec 1996–1999' },
       { name: 'Przewody zapłonowe ACDelco 9718D', asin: 'B000S2SUCU', note: 'Zestaw przewodów', fitment: 'GMT400 V8' },
-      { name: 'Cewka zapłonowa ACDelco D577', asin: 'B000C9SU1A', note: 'Cewka', fitment: 'Vortec 1996+' },
+      { name: 'Cewka zapłonowa ACDelco D577', asin: 'B000BYGD4W', note: 'Cewka (GM 10489421)', fitment: 'Vortec 1996+' },
     ],
   },
   {
