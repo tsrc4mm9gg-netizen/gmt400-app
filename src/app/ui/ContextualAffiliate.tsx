@@ -15,55 +15,55 @@ function getRelevantProducts(title: string): { name: string; search: string }[] 
     products.push({ name: 'Olej silnikowy 5W-30', search: '5W-30 engine oil' });
   }
   if (t.includes('filtr powietrza') || t.includes('powietrza')) {
-    products.push({ name: 'Filtr powietrza', search: 'air filter GMT400 Tahoe Suburban' });
+    products.push({ name: 'Filtr powietrza ACDelco A1300C', search: 'ACDelco A1300C' });
   }
   if (t.includes('filtr paliwa') || t.includes('paliwa')) {
-    products.push({ name: 'Filtr paliwa', search: 'fuel filter GMT400' });
+    products.push({ name: 'Filtr paliwa ACDelco GF626', search: 'ACDelco GF626' });
   }
 
   // Skrzynia i ATF
   if (t.includes('atf') || t.includes('skrzyn') || t.includes('4l60') || t.includes('4l80') || t.includes('automat')) {
     products.push({ name: 'MANNOL Dexron III ATF', search: 'MANNOL Dexron III ATF' });
-    products.push({ name: 'Filtr ATF 4L60-E', search: 'transmission filter 4L60E' });
-    products.push({ name: 'Uszczelka miski ATF', search: 'transmission pan gasket 4L60E' });
+    products.push({ name: 'Filtr ATF 4L60-E ACDelco TF289', search: 'ACDelco TF289' });
+    products.push({ name: 'Uszczelka miski ATF Fel-Pro TOS18663', search: 'Fel-Pro TOS18663' });
   }
 
   // Chłodzenie
   if (t.includes('chłodz') || t.includes('termostat') || t.includes('pompa wody') || t.includes('przegrz')) {
-    products.push({ name: 'Płyn chłodniczy', search: 'coolant antifreeze' });
-    products.push({ name: 'Termostat', search: 'thermostat GMT400 Vortec' });
-    products.push({ name: 'Pompa wody', search: 'water pump GMT400' });
+    products.push({ name: 'Płyn chłodniczy DEX-COOL', search: 'DEX-COOL coolant' });
+    products.push({ name: 'Termostat ACDelco 131-113', search: 'ACDelco 131-113' });
+    products.push({ name: 'Pompa wody ACDelco 252-711', search: 'ACDelco 252-711' });
   }
 
   // Hamulce
   if (t.includes('hamul') || t.includes('abs') || t.includes('klock') || t.includes('tarcz')) {
     products.push({ name: 'Płyn hamulcowy DOT3', search: 'brake fluid DOT3' });
-    products.push({ name: 'Klocki hamulcowe', search: 'brake pads GMT400' });
-    products.push({ name: 'Tarcze hamulcowe', search: 'brake rotors GMT400' });
+    products.push({ name: 'Klocki hamulcowe ACDelco 17D369MH', search: 'ACDelco 17D369MH' });
+    products.push({ name: 'Tarcze hamulcowe', search: 'brake rotors Chevy Tahoe' });
   }
 
   // Zapłon
   if (t.includes('świec') || t.includes('zapłon') || t.includes('cewka') || t.includes('rozdzielacz')) {
-    products.push({ name: 'Świece zapłonowe', search: 'spark plugs GMT400 Vortec' });
-    products.push({ name: 'Przewody zapłonowe', search: 'spark plug wires GMT400' });
-    products.push({ name: 'Cewka zapłonowa', search: 'ignition coil GMT400' });
+    products.push({ name: 'Świece ACDelco 41-932', search: 'ACDelco 41-932' });
+    products.push({ name: 'Przewody zapłonowe', search: 'spark plug wires Chevy Tahoe' });
+    products.push({ name: 'Cewka zapłonowa ACDelco D577', search: 'ACDelco D577' });
   }
 
   // Paliwo
   if (t.includes('paliw') || t.includes('wtrysk') || t.includes('pompa paliwa') || t.includes('csfi') || t.includes('tbi')) {
-    products.push({ name: 'Filtr paliwa', search: 'fuel filter GMT400' });
-    products.push({ name: 'Pompa paliwa', search: 'fuel pump GMT400' });
+    products.push({ name: 'Filtr paliwa ACDelco GF626', search: 'ACDelco GF626' });
+    products.push({ name: 'Pompa paliwa ACDelco EP381', search: 'ACDelco EP381' });
   }
 
   // Zawieszenie
   if (t.includes('amortyz') || t.includes('zawiesz') || t.includes('wahacz') || t.includes('sprężyn')) {
-    products.push({ name: 'Amortyzatory', search: 'shock absorbers GMT400' });
-    products.push({ name: 'Wahacze', search: 'control arm GMT400' });
+    products.push({ name: 'Amortyzatory', search: 'shock absorbers Chevy Tahoe' });
+    products.push({ name: 'Wahacze', search: 'control arm Chevy Tahoe' });
   }
 
   // Elektryka
   if (t.includes('akumulator') || t.includes('alternator') || t.includes('rozrusznik') || t.includes('elektryk')) {
-    products.push({ name: 'Akumulator', search: 'car battery' });
+    products.push({ name: 'Akumulator samochodowy', search: 'car battery' });
     products.push({ name: 'Multimetr', search: 'digital multimeter' });
   }
 
