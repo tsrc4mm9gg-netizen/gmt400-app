@@ -2,6 +2,8 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import Breadcrumbs from '../ui/Breadcrumbs';
 import FAQ from '../ui/FAQ';
+import PartLink from '../ui/PartLink';
+import AffiliateBox from '../ui/AffiliateBox';
 
 export const metadata: Metadata = {
   title: 'Holowanie i ładowność GMT400 — według rocznika i wersji',
@@ -33,6 +35,10 @@ const faqItems = [
   {
     question: 'Czy 4L60-E nadaje się do holowania?',
     answer: 'Tak, ale z ograniczeniami. 4L60-E wytrzymuje do ~5000 lb. Przy cięższym holowaniu lepiej 4L80-E. Regularna wymiana ATF jest kluczowa przy holowaniu.',
+  },
+  {
+    question: 'Jakie hamulce do przyczepy?',
+    answer: 'Przy przyczepach powyżej 1500 kg wymagane są hamulce. Sterownik hamulców przyczepy montuje się w kabinie. Sprawdź przepisy w swoim kraju.',
   },
 ];
 
@@ -86,6 +92,37 @@ export default function TowingPage() {
           Sprawdź kody RPO swojego auta →
         </Link>
       </section>
+
+      <section className="mt-8">
+        <h2 className="text-xl font-semibold">Kody RPO przełożeń mostu</h2>
+        <ul className="mt-3 list-inside list-disc space-y-1 text-sm text-neutral-300">
+          <li><strong>GU4</strong> — 3.08 (rzadkie, oszczędne)</li>
+          <li><strong>GU6</strong> — 3.42 (uniwersalne)</li>
+          <li><strong>GT4</strong> — 3.73 (do holowania)</li>
+          <li><strong>GT5</strong> — 4.10 (ciężkie holowanie)</li>
+        </ul>
+        <p className="mt-2 text-xs text-neutral-400">Kody RPO znajdziesz na naklejce w schowku lub na słupku drzwi.</p>
+      </section>
+
+      <section className="mt-8">
+        <h2 className="text-xl font-semibold">Wyposażenie do holowania</h2>
+        <ul className="mt-3 list-inside list-disc space-y-2 text-neutral-300">
+          <li>Hak holowniczy (sprawdź klasę: II, III, IV)</li>
+          <li>Wiązka elektryczna (7-pin lub 13-pin)</li>
+          <li>Sterownik hamulców przyczepy</li>
+          <li>Dodatkowa chłodnica ATF (przy ciężkim holowaniu)</li>
+          <li>Lusterka holownicze (opcjonalnie)</li>
+        </ul>
+      </section>
+
+      <AffiliateBox
+        title="Przydatne przy holowaniu"
+        items={[
+          { name: 'MANNOL Dexron III ATF', search: 'MANNOL Dexron III ATF' },
+          { name: 'Filtr ATF TF289', search: 'ACDelco TF289' },
+          { name: 'Płyn chłodniczy', search: 'coolant antifreeze' },
+        ]}
+      />
 
       <FAQ items={faqItems} />
     </div>
