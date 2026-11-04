@@ -4,6 +4,7 @@ import { OBD_CODES, searchObdCodes } from '@/lib/obd-codes';
 import RandomCodeLink from './random-code-link';
 import Breadcrumbs from '../ui/Breadcrumbs';
 import AffiliateBox from '../ui/AffiliateBox';
+import FAQ from '../ui/FAQ';
 
 export const metadata: Metadata = {
   title: 'Kody OBD GMT400 — P0300, P0171 i inne | Tahoe, Suburban, Silverado',
@@ -27,6 +28,25 @@ const systemCounts = Object.fromEntries(
     OBD_CODES.filter(code => code.systems.includes(system)).length
   ])
 );
+
+const faqItems = [
+  {
+    question: 'Jak odczytać kody OBD w GMT400?',
+    answer: 'W modelach 1996+ (OBD-II) użyj skanera OBD2 podłączonego do gniazda 16-pin. W starszych (1988–1995, OBD-I) zwrzyj piny A–B w złączu ALDL 12-pin i odczytaj migającą lampkę Check Engine.',
+  },
+  {
+    question: 'Co oznacza kod P0300?',
+    answer: 'P0300 to losowe/wielo-cylindrowe wypadanie zapłonu. Przyczyny: zużyte świece, przewody, cewka, problemy z paliwem lub kompresją. Sprawdź najpierw świece i przewody.',
+  },
+  {
+    question: 'Czy kody OBD zawsze oznaczają usterkę?',
+    answer: 'Nie. Kody wskazują na problem wykryty przez komputer, ale nie zawsze oznaczają uszkodzoną część. Mogą być spowodowane luźnym złączem, niskim napięciem akumulatora lub tymczasowym problemem. Zawsze potwierdź diagnozę pomiarami.',
+  },
+  {
+    question: 'Jak wyczyścić kody OBD?',
+    answer: 'Skanerem OBD2 (opcja Clear Codes) lub przez odłączenie akumulatora na 15 minut. Uwaga: wyczyszczenie kodów bez naprawy usterki spowoduje ich powrót. Niektóre kody wymagają kilku cykli jazdy, aby się potwierdzić.',
+  },
+];
 
 export default function ObdCodesPage({ searchParams }: { searchParams: Promise<{ q?: string }> }) {
   return searchParams.then(({ q }) => {
@@ -101,6 +121,7 @@ export default function ObdCodesPage({ searchParams }: { searchParams: Promise<{
         </ul>
         {!results.length && query && <p className="rounded border border-white/10 bg-neutral-900/60 p-4 text-neutral-300">Brak wyników dla filtra: <strong className="text-neutral-200">{query}</strong>. <Link href="/kody-obd" className="text-silver-400 underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-silver-500">Wyczyść filtr</Link>, aby zobaczyć wszystkie kody.</p>}
         {!results.length && !query && <p className="rounded border border-white/10 bg-neutral-900/60 p-4 text-neutral-300">Brak wyników. Spróbuj samego kodu, np. „P0300”, albo krótszej frazy.</p>}
+        <FAQ items={faqItems} />
       </div>
     );
   });
