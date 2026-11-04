@@ -10,6 +10,7 @@ const links = [
   { href: '/kody-obd', label: 'Kody OBD' },
   { href: '/dla-wlasciciela', label: 'Dla właściciela' },
   { href: '/poradnik-kupujacego', label: 'Poradnik kupującego' },
+  { href: '/eksploatacja', label: 'Eksploatacja' },
   { href: '/polecane', label: 'Polecane' },
   { href: '/szukaj', label: 'Szukaj' },
 ];
