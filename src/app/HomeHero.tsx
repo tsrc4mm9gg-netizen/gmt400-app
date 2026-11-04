@@ -18,6 +18,7 @@ import HomeTorque from './HomeTorque';
 import HomeFAQ from './HomeFAQ';
 import SymptomSearch from './SymptomSearch';
 import AffiliateBox from './ui/AffiliateBox';
+import SearchWithSuggestions from './ui/SearchWithSuggestions';
 
 const QUICK_ACTIONS = [
   { href: '/diagnoza', icon: 'M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z', label: 'Diagnoza', desc: 'Sprawdź objawy' },
@@ -74,19 +75,7 @@ export default function HomeHero() {
         </div>
       )}
 
-      <div className="mx-4 mb-4">
-        <form action="/szukaj" method="get" className="relative">
-          <svg className="absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 text-neutral-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-          </svg>
-          <input
-            type="search"
-            name="q"
-            placeholder="Wpisz problem lub część..."
-            className="w-full rounded-xl border border-white/10 bg-neutral-900 py-3 pl-10 pr-4 text-white placeholder-neutral-500 focus:border-silver-500 focus:outline-none"
-          />
-        </form>
-      </div>
+      <SearchWithSuggestions />
 
       <div className="mx-4 mb-4 grid grid-cols-2 gap-2 sm:grid-cols-4">
         {QUICK_ACTIONS.map(action => (
