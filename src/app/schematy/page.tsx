@@ -5,6 +5,8 @@ import SchematicPhotos from './SchematicPhotos';
 import FuseTable from './FuseTable';
 import Breadcrumbs from '../ui/Breadcrumbs';
 import FAQ from '../ui/FAQ';
+import PartLink from '../ui/PartLink';
+import AffiliateBox from '../ui/AffiliateBox';
 
 export const metadata = {
   title: 'Schematy — GMT400',
@@ -26,6 +28,10 @@ const faqItems = [
   {
     question: 'Czy schematy pasują do wszystkich GMT400?',
     answer: 'Schematy są poglądowe i obejmują typowe konfiguracje. GMT400 ma wiele wariantów (silniki, skrzynie, wyposażenie). Zawsze sprawdzaj w swoim aucie lub manualu serwisowym przed pracą.',
+  },
+  {
+    question: 'Gdzie kupić bezpieczniki do GMT400?',
+    answer: 'Bezpieczniki są standardowe (ATO/ATC). Można kupić zestawy na Amazonie lub w sklepach motoryzacyjnych. Sprawdź wartość (ampery) na pokrywie skrzynki lub w instrukcji.',
   },
 ];
 
@@ -91,6 +97,26 @@ export default function SchematyPage() {
           <p className="mt-1 text-xs text-neutral-400">{item.note}</p>
         </section>
       ))}
+
+      <section className="mt-8">
+        <h2 className="text-xl font-semibold text-silver-300">Przydatne części</h2>
+        <ul className="mt-3 list-inside list-disc space-y-2 text-neutral-300">
+          <li>Filtr paliwa: <PartLink partNumber="GF626" /></li>
+          <li>Pompa paliwa: <PartLink partNumber="EP381" /></li>
+          <li>Termostat: <PartLink partNumber="131-113" /></li>
+          <li>Pompa wody: <PartLink partNumber="252-711" /></li>
+        </ul>
+      </section>
+
+      <AffiliateBox
+        title="Przydatne przy diagnostyce"
+        items={[
+          { name: 'Skaner OBD2', search: 'OBD2 scanner' },
+          { name: 'Zestaw bezpieczników', search: 'ATO fuse kit' },
+          { name: 'Multimetr', search: 'multimeter' },
+        ]}
+      />
+
       <FAQ items={faqItems} />
       <p className="mt-8 text-sm text-neutral-400">Schematy dla konkretnego nadwozia znajdziesz też na <Link href="/modele" className="inline-flex min-h-11 items-center text-silver-400 underline">stronach modeli</Link>.</p>
     </div>
