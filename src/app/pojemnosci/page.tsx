@@ -3,6 +3,7 @@ import Breadcrumbs from '../ui/Breadcrumbs';
 import AffiliateBox from '../ui/AffiliateBox';
 import PartLink from '../ui/PartLink';
 import FAQ from '../ui/FAQ';
+import AccordionSection from '../ui/AccordionSection';
 import {
   CAPACITY_DOUBTS, CAPACITY_GROUPS, FLUID_SPECS, GM_DOCS, SERVICE_PARTS, WHEEL_NUT_TORQUE, type Cite,
 } from '@/lib/gm-capacities';
@@ -58,7 +59,7 @@ const faqItems = [
 
 export default function PojemnosciPage() {
   return (
-    <div className="mx-auto w-full max-w-5xl px-4 py-6 text-white sm:py-10">
+    <div className="mx-auto w-full max-w-5xl px-4 py-6 pb-28 text-white sm:py-10">
       <Breadcrumbs className="mb-2" items={[{ label: 'Mój samochód', href: '/moj-samochod' }, { label: 'Pojemności i płyny' }]} />
       <h1 className="text-3xl font-bold text-silver-400">Pojemności i płyny (1988–1999)</h1>
       <p className="mt-2 text-neutral-300">
@@ -68,17 +69,18 @@ export default function PojemnosciPage() {
         Momenty dokręcania śrub i korków: <Link href="/momenty-dokrecania" className="text-silver-300 underline">Momenty dokręcania</Link>.
       </p>
 
-      <section className="mt-6">
-        <h2 className="text-xl font-semibold text-silver-300">Wskazówki wymiany płynów</h2>
-        <div className="mt-3 space-y-3">
-          {TIPS.map(item => (
-            <div key={item.title} className="rounded-xl border border-white/10 bg-neutral-900 p-4">
-              <h3 className="font-semibold text-silver-200">{item.title}</h3>
-              <p className="mt-1 text-sm text-neutral-300">{item.tip}</p>
-            </div>
-          ))}
-        </div>
-      </section>
+      <div className="mt-6">
+        <AccordionSection title="Wskazówki wymiany płynów" defaultOpen>
+          <div className="space-y-3">
+            {TIPS.map(item => (
+              <div key={item.title} className="rounded-lg border border-white/10 bg-neutral-800 p-3">
+                <h3 className="font-semibold text-silver-200">{item.title}</h3>
+                <p className="mt-1 text-sm text-neutral-300">{item.tip}</p>
+              </div>
+            ))}
+          </div>
+        </AccordionSection>
+      </div>
 
       <nav aria-label="Spis treści" className="mt-4 flex flex-wrap gap-2 text-sm">
         {CAPACITY_GROUPS.map(g => (
@@ -130,14 +132,18 @@ export default function PojemnosciPage() {
             </tbody>
           </table>
         </div>
-        <AffiliateBox
-          title="Gdzie kupić płyny"
-          items={[
-            { name: 'MANNOL Dexron III ATF', search: 'MANNOL Dexron III ATF' },
-            { name: 'Olej silnikowy 5W-30', search: '5W-30 engine oil' },
-            { name: 'Płyn chłodniczy', search: 'coolant antifreeze' },
-          ]}
-        />
+        <div className="mt-4">
+          <AccordionSection title="Gdzie kupić płyny">
+            <AffiliateBox
+              title=""
+              items={[
+                { name: 'MANNOL Dexron III ATF', search: 'MANNOL Dexron III ATF' },
+                { name: 'Olej silnikowy 5W-30', search: '5W-30 engine oil' },
+                { name: 'Płyn chłodniczy', search: 'coolant antifreeze' },
+              ]}
+            />
+          </AccordionSection>
+        </div>
       </section>
 
       <section id="czesci" className="mt-8 scroll-mt-20">
@@ -165,14 +171,18 @@ export default function PojemnosciPage() {
             </tbody>
           </table>
         </div>
-        <AffiliateBox
-          title="Gdzie kupić filtry"
-          items={[
-            { name: 'ACDelco PF52 — filtr oleju', search: 'ACDelco PF52' },
-            { name: 'Filtr powietrza', search: 'air filter GMT400' },
-            { name: 'Filtr paliwa', search: 'fuel filter GMT400' },
-          ]}
-        />
+        <div className="mt-4">
+          <AccordionSection title="Gdzie kupić filtry">
+            <AffiliateBox
+              title=""
+              items={[
+                { name: 'ACDelco PF52 — filtr oleju', search: 'ACDelco PF52' },
+                { name: 'Filtr powietrza', search: 'air filter GMT400' },
+                { name: 'Filtr paliwa', search: 'fuel filter GMT400' },
+              ]}
+            />
+          </AccordionSection>
+        </div>
         <p className="mt-3 text-sm text-neutral-400">Nakrętki kół ({WHEEL_NUT_TORQUE.variant}, {WHEEL_NUT_TORQUE.years}): <strong className="text-white">{WHEEL_NUT_TORQUE.value}</strong> <Sources src={WHEEL_NUT_TORQUE.src} />.</p>
       </section>
 
@@ -192,7 +202,11 @@ export default function PojemnosciPage() {
         <p className="mt-2 text-sm text-neutral-300" data-testid="fuel-filter-advice"><span className="font-medium text-white">Filtr paliwa — ogólna rada:</span> wymieniaj co 48 000 km. Dokumenty GM różnią się: podręcznik 1989–1994 (harmonogram II) podaje 96 000 km, instrukcja 1995 — 48 000 km; krótszy interwał jest bezpieczniejszy.</p>
       </section>
 
-      <FAQ items={faqItems} />
+      <div className="mt-6">
+        <AccordionSection title="Częste pytania">
+          <FAQ items={faqItems} />
+        </AccordionSection>
+      </div>
     </div>
   );
 }
