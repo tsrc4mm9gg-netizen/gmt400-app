@@ -4,6 +4,7 @@ import Breadcrumbs from '../ui/Breadcrumbs';
 import AffiliateBox from '../ui/AffiliateBox';
 import FAQ from '../ui/FAQ';
 import PartLink from '../ui/PartLink';
+import AccordionSection from '../ui/AccordionSection';
 import VinDecoder from '../VinDecoder';
 
 export const metadata: Metadata = {
@@ -43,46 +44,51 @@ const faqItems = [
 
 export default function VinPage() {
   return (
-    <div className="mx-auto w-full max-w-3xl px-4 py-6 text-white sm:py-10">
+    <div className="mx-auto w-full max-w-3xl px-4 py-6 pb-28 text-white sm:py-10">
       <Breadcrumbs className="mb-2" items={[{ label: 'Sprawdź VIN' }]} />
       <h1 className="text-3xl font-bold text-silver-400">Sprawdź swój VIN</h1>
       <p className="mb-5 mt-2 text-neutral-300">Wpisz albo wklej VIN — zobaczysz rocznik, silnik, nadwozie i fabrykę. Szczegóły każdej pozycji i źródła są niżej w rozwijanych sekcjach. Wynik możesz zapisać w <Link href="/moj-samochod" className="text-silver-400 underline">Mój samochód</Link>.</p>
       <VinDecoder withRpo prefillFromUrl />
 
-      <section className="mt-8">
-        <h2 className="text-xl font-semibold text-silver-300">Wskazówki dekodowania</h2>
-        <div className="mt-3 space-y-3">
-          {TIPS.map(item => (
-            <div key={item.title} className="rounded-xl border border-white/10 bg-neutral-900 p-4">
-              <h3 className="font-semibold text-silver-200">{item.title}</h3>
-              <p className="mt-1 text-sm text-neutral-300">{item.tip}</p>
-            </div>
-          ))}
-        </div>
-      </section>
+      <div className="mt-8">
+        <AccordionSection title="Wskazówki dekodowania" defaultOpen>
+          <div className="space-y-3">
+            {TIPS.map(item => (
+              <div key={item.title} className="rounded-lg border border-white/10 bg-neutral-800 p-3">
+                <h3 className="font-semibold text-silver-200">{item.title}</h3>
+                <p className="mt-1 text-sm text-neutral-300">{item.tip}</p>
+              </div>
+            ))}
+          </div>
+        </AccordionSection>
 
-      <section className="mt-8">
-        <h2 className="text-xl font-semibold text-silver-300">Uniwersalne części do GMT400</h2>
-        <p className="mt-2 text-sm text-neutral-400">Po zdekodowaniu VIN sprawdź, które części pasują do Twojego auta:</p>
-        <ul className="mt-3 list-inside list-disc space-y-2 text-neutral-300">
-          <li>Filtr oleju: <PartLink partNumber="PF52" /></li>
-          <li>Świece Vortec (1996+): <PartLink partNumber="41-932" /></li>
-          <li>Przewody zapłonowe: <PartLink partNumber="9718D" /></li>
-          <li>Klocki hamulcowe: <PartLink partNumber="14D52" /></li>
-        </ul>
-        <Link href="/eksploatacja" className="mt-4 inline-block text-sm font-semibold text-silver-300 underline-offset-2 hover:underline">
-          Wszystkie części eksploatacyjne →
-        </Link>
-      </section>
+        <AccordionSection title="Uniwersalne części do GMT400">
+          <p className="mb-3 text-sm text-neutral-400">Po zdekodowaniu VIN sprawdź, które części pasują do Twojego auta:</p>
+          <ul className="list-inside list-disc space-y-2 text-neutral-300">
+            <li>Filtr oleju: <PartLink partNumber="PF52" /></li>
+            <li>Świece Vortec (1996+): <PartLink partNumber="41-932" /></li>
+            <li>Przewody zapłonowe: <PartLink partNumber="9718D" /></li>
+            <li>Klocki hamulcowe: <PartLink partNumber="14D52" /></li>
+          </ul>
+          <Link href="/eksploatacja" className="mt-3 inline-block text-sm font-semibold text-silver-300 underline-offset-2 hover:underline">
+            Wszystkie części eksploatacyjne →
+          </Link>
+        </AccordionSection>
 
-      <AffiliateBox
-        title="Przydatne przy identyfikacji"
-        items={[
-          { name: 'Skaner OBD2', search: 'OBD2 scanner' },
-          { name: 'Latarka inspekcyjna', search: 'inspection flashlight LED' },
-        ]}
-      />
-      <FAQ items={faqItems} />
+        <AccordionSection title="Przydatne przy identyfikacji">
+          <AffiliateBox
+            title=""
+            items={[
+              { name: 'Skaner OBD2', search: 'OBD2 scanner' },
+              { name: 'Latarka inspekcyjna', search: 'inspection flashlight LED' },
+            ]}
+          />
+        </AccordionSection>
+
+        <AccordionSection title="Częste pytania">
+          <FAQ items={faqItems} />
+        </AccordionSection>
+      </div>
     </div>
   );
 }
