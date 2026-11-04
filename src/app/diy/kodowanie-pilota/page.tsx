@@ -67,8 +67,8 @@ const faqItems = [
     answer: 'Niektórzy użytkownicy zgłaszają problemy po instalacji radia aftermarket. Spróbuj odłączyć radio i powtórzyć procedurę.',
   },
   {
-    question: 'Pilot synchronizuje się, ale potem nie działa — co robić?',
-    answer: 'To częsty problem z tanimi zamiennikami. Pilot udaje, że się synchronizuje (zamki reagują), ale po usunięciu spinacza nie działa. Rozwiązanie: kup inny pilot, najlepiej oryginalny GM lub z dokładnym FCC ID AB01502T. Użytkownicy potwierdzają, że nowy pilot rozwiązuje problem.',
+    question: 'Pilot działał, a teraz synchronizuje się ale nie działa — co robić?',
+    answer: 'Jeśli pilot wcześniej działał, a teraz po synchronizacji nie działa: 1) Sprawdź baterię (nawet nowa może być słaba). 2) Oczyść styki. 3) Spróbuj resynchronizacji (przytrzymaj LOCK+UNLOCK przez 30-45 sekund bez spinacza). 4) Jeśli nie pomoże — pilot się zużył lub moduł ma problem. Kup nowy pilot.',
   },
 ];
 
@@ -151,22 +151,41 @@ Dolny rząd:
             <p className="mt-2 text-sm text-neutral-300">
               Procedura wygląda poprawnie: po zwarciu pinów 4 i 8 zamki reagują (blokują/odblokowują się). Przytrzymujesz LOCK+UNLOCK na pilocie i zamki znowu reagują — pilot się synchronizuje. Ale po usunięciu spinacza pilot nie działa. Wkładasz spinacz ponownie — znowu się synchronizuje, ale po wyjściu z trybu programowania nadal nie działa.
             </p>
-            <h3 className="mt-4 font-semibold text-amber-300">Przyczyna</h3>
+            <h3 className="mt-4 font-semibold text-amber-300">Przyczyna (nowy pilot)</h3>
             <p className="mt-2 text-sm text-neutral-300">
-              Najczęściej to problem z tanim zamiennikiem pilota. Pilot udaje, że się synchronizuje (wysyła sygnał, na który moduł reaguje), ale jego kod nie jest prawidłowo zapisywany w pamięci modułu. Może to być spowodowane:
+              Najczęściej to problem z tanim zamiennikiem pilota. Pilot udaje, że się synchronizuje, ale jego kod nie jest prawidłowo zapisywany w pamięci modułu.
             </p>
-            <ul className="mt-2 list-inside list-disc text-sm text-neutral-300">
-              <li>Niepasującym FCC ID (pilot ma inny kod niż podany na naklejce)</li>
-              <li>Uszkodzonym układem w pilocie</li>
-              <li>Niekompatybilnym protokołem komunikacji</li>
-              <li>Słabą jakością chińskich zamienników</li>
-            </ul>
             <h3 className="mt-4 font-semibold text-amber-300">Rozwiązanie</h3>
             <p className="mt-2 text-sm text-neutral-300">
-              <strong>Kup inny pilot.</strong> Użytkownicy forów GMT400.com potwierdzają, że nowy pilot (najlepiej oryginalny GM lub z dokładnym FCC ID AB01502T) rozwiązuje problem. Tanie zamienniki z Amazon/eBay często mają ten problem — synchronizują się, ale nie działają.
+              <strong>Kup inny pilot.</strong> Użytkownicy potwierdzają, że nowy pilot (najlepiej oryginalny GM lub z dokładnym FCC ID AB01502T) rozwiązuje problem.
             </p>
-            <p className="mt-2 text-sm text-neutral-400">
-              Jeśli nowy pilot też nie działa, problem może być w module odbiornika (uszkodzone luty, przekaźniki).
+          </div>
+        </AccordionSection>
+
+        <AccordionSection title="Pilot działał, a teraz nie działa">
+          <div className="rounded-lg border border-silver-500/30 bg-silver-950/20 p-4">
+            <h3 className="font-semibold text-silver-300">Pilot wcześniej działał, a teraz synchronizuje się ale nie działa</h3>
+            <p className="mt-2 text-sm text-neutral-300">
+              Jeśli pilot działał przez dłuższy czas, a teraz po synchronizacji nie działa, to inna sytuacja. Możliwe przyczyny:
+            </p>
+            <ol className="mt-3 list-inside list-decimal space-y-2 text-sm text-neutral-300">
+              <li><strong>Słaba bateria</strong> — nawet nowa bateria może być słaba lub źle włożona. Sprawdź napięcie (powinno być ~3V).</li>
+              <li><strong>Brudne styki</strong> — otwórz pilota i oczyść styki przycisków alkoholem izopropylowym.</li>
+              <li><strong>Rozsynchronizowanie</strong> — po wymianie baterii lub odłączeniu akumulatora pilot może wymagać resynchronizacji.</li>
+              <li><strong>Zużyty pilot</strong> — tanie zamienniki mają krótką żywotność. Po roku-dwóch mogą przestać działać.</li>
+              <li><strong>Problem z modułem</strong> — jeśli kilka pilotów nie działa, problem jest w module odbiornika.</li>
+            </ol>
+            <h3 className="mt-4 font-semibold text-silver-300">Resynchronizacja (bez spinacza)</h3>
+            <p className="mt-2 text-sm text-neutral-300">
+              Zanim kupisz nowy pilot, spróbuj resynchronizacji:
+            </p>
+            <ol className="mt-2 list-inside list-decimal space-y-1 text-sm text-neutral-300">
+              <li>Stań przy drzwiach kierowcy (blisko auta)</li>
+              <li>Przytrzymaj jednocześnie LOCK i UNLOCK przez 30–45 sekund</li>
+              <li>Klakson powinien krótko zabrzmieć — pilot zsynchronizowany</li>
+            </ol>
+            <p className="mt-3 text-sm text-neutral-400">
+              Jeśli to nie pomoże, kup nowy pilot. Użytkownicy zgłaszają, że tanie zamienniki często przestają działać po roku-dwóch.
             </p>
           </div>
         </AccordionSection>
