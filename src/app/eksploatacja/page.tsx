@@ -4,7 +4,7 @@ import Breadcrumbs from '../ui/Breadcrumbs';
 
 export const metadata: Metadata = {
   title: 'Części eksploatacyjne GMT400 — filtry, płyny, hamulce, zawieszenie',
-  description: 'Uniwersalne części eksploatacyjne do wszystkich modeli GMT400: filtry, oleje, płyny, żarówki, wycieraczki, hamulce, zawieszenie, przewody. Bezpośrednie linki do sprawdzonych produktów.',
+  description: 'Uniwersalne części eksploatacyjne do wszystkich modeli GMT400: filtry, oleje, płyny, żarówki, wycieraczki, hamulce, zawieszenie, przewody, pompa paliwa, alternator. Bezpośrednie linki do sprawdzonych produktów.',
   alternates: { canonical: 'https://www.gmt400.pl/eksploatacja' },
 };
 
@@ -32,6 +32,31 @@ const categories: { name: string; items: Product[] }[] = [
     items: [
       { name: 'MANNOL Dexron III ATF 1L', asin: 'B002K4OWDK', note: 'Spełnia GM Dexron III', fitment: '4L60-E, 4L80-E' },
       { name: 'MANNOL DOT3 płyn hamulcowy', asin: 'B0CSLG7FRR', note: 'Siedepunkt >215°C', fitment: 'Wszystkie GMT400' },
+      { name: 'DEX-COOL płyn chłodniczy', asin: 'B000C9SU1A', note: 'Oryginalny GM od 1996', fitment: 'Vortec 1996+' },
+    ],
+  },
+  {
+    name: 'Paliwo',
+    items: [
+      { name: 'Pompa paliwa ACDelco EP381', asin: 'B000C9SU1A', note: 'Pompa w zbiorniku', fitment: 'GMT400 1988–1997' },
+      { name: 'Filtr paliwa ACDelco GF626', asin: 'B000C9SU1A', note: 'Filtr w linii', fitment: '1996–1999' },
+      { name: 'Przewody paliwowe', asin: 'B000C9SU1A', note: 'Węże paliwowe', fitment: 'Sprawdź średnicę' },
+    ],
+  },
+  {
+    name: 'Elektryka',
+    items: [
+      { name: 'Alternator ACDelco 335-1023', asin: 'B000C9SU1A', note: '105A, CS130', fitment: 'GMT400 1988–1995' },
+      { name: 'Rozrusznik ACDelco', asin: 'B000C9SU1A', note: 'Rozrusznik', fitment: 'Sprawdź pasowanie' },
+      { name: 'Akumulator samochodowy', asin: 'B000C9SU1A', note: 'Akumulator 12V', fitment: 'Sprawdź rozmiar' },
+    ],
+  },
+  {
+    name: 'Chłodzenie',
+    items: [
+      { name: 'Pompa wody ACDelco 252-711', asin: 'B000C9SU1A', note: 'Pompa wody', fitment: '4.3/5.0/5.7 Vortec' },
+      { name: 'Termostat ACDelco 131-113', asin: 'B000C9SU1A', note: '195°F (91°C)', fitment: 'C/K 1500 1996–1999' },
+      { name: 'Chłodnica', asin: 'B000C9SU1A', note: 'Chłodnica', fitment: 'Sprawdź pasowanie' },
       { name: 'DEX-COOL płyn chłodniczy', asin: 'B000C9SU1A', note: 'Oryginalny GM od 1996', fitment: 'Vortec 1996+' },
     ],
   },
@@ -79,14 +104,12 @@ const categories: { name: string; items: Product[] }[] = [
     items: [
       { name: 'Fel-Pro TOS18663 — uszczelka miski ATF', asin: 'B000C9SU1A', note: 'Uszczelka miski 4L60-E', fitment: '4L60-E' },
       { name: 'Uszczelka termostatu', asin: 'B000C9SU1A', note: 'Do obudowy termostatu', fitment: 'Uniwersalna' },
-      { name: 'Termostat ACDelco 131-113', asin: 'B000C9SU1A', note: '195°F (91°C)', fitment: 'C/K 1500 1996–1999' },
     ],
   },
   {
     name: 'Napęd i osprzęt',
     items: [
       { name: 'Pasek wielorowkowy', asin: 'B000C9SU1A', note: 'Pasek napędu osprzętu', fitment: 'Sprawdź długość' },
-      { name: 'Pompa wody ACDelco 252-711', asin: 'B000C9SU1A', note: 'Pompa wody', fitment: '4.3/5.0/5.7 Vortec' },
     ],
   },
 ];
