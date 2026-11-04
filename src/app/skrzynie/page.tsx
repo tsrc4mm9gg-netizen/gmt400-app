@@ -11,6 +11,25 @@ export const metadata: Metadata = {
   alternates: { canonical: 'https://www.gmt400.pl/skrzynie' },
 };
 
+const PROBLEMS = [
+  {
+    symptom: 'Ślizga się',
+    checks: ['Sprawdź poziom ATF', 'Sprawdź kolor ATF (powinien być czerwony)', 'Odczytaj kody OBD', 'Sprawdź filtr ATF'],
+  },
+  {
+    symptom: 'Szarpie przy zmianach',
+    checks: ['Sprawdź poziom ATF', 'Sprawdź kody P0751–P0758', 'Sprawdź czujnik TPS', 'Sprawdź mocowania skrzyni'],
+  },
+  {
+    symptom: 'Nie zmienia biegów',
+    checks: ['Sprawdź poziom ATF', 'Sprawdź bezpieczniki', 'Odczytaj kody OBD', 'Sprawdź złącza elektryczne'],
+  },
+  {
+    symptom: 'Przegrzewa się',
+    checks: ['Sprawdź poziom ATF', 'Sprawdź chłodnicę ATF', 'Unikaj holowania na zimnej skrzyni', 'Rozważ dodatkową chłodnicę'],
+  },
+];
+
 const faqItems = [
   {
     question: 'Czym różni się 4L60-E od 4L80-E?',
@@ -76,6 +95,20 @@ export default function TransmissionPage() {
       </section>
 
       <section className="mt-8">
+        <h2 className="text-xl font-semibold">Szybka diagnoza problemów</h2>
+        <div className="mt-3 space-y-3">
+          {PROBLEMS.map(item => (
+            <div key={item.symptom} className="rounded-xl border border-white/10 bg-neutral-900 p-4">
+              <h3 className="font-semibold text-silver-200">{item.symptom}</h3>
+              <ul className="mt-2 list-inside list-disc space-y-1 text-sm text-neutral-300">
+                {item.checks.map((check, i) => <li key={i}>{check}</li>)}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="mt-8">
         <h2 className="text-xl font-semibold">Części eksploatacyjne</h2>
         <ul className="mt-3 list-inside list-disc space-y-2 text-neutral-300">
           <li>Filtr ATF: <PartLink partNumber="TF289" /></li>
@@ -83,20 +116,6 @@ export default function TransmissionPage() {
           <li>Płyn ATF: Dexron III (np. MANNOL)</li>
           <li>Solenoid zmiany: sprawdź numer na starej części</li>
         </ul>
-      </section>
-
-      <section className="mt-8">
-        <h2 className="text-xl font-semibold">Co sprawdzić przy problemach ze zmianami</h2>
-        <ul className="mt-3 list-inside list-disc space-y-2 text-neutral-300">
-          <li>Poziom i stan ATF (kolor, zapach, poziom)</li>
-          <li>Kody błędów (P0700, P0751–P0758 itp.)</li>
-          <li>Czujnik prędkości (VSS)</li>
-          <li>Czujnik położenia przepustnicy (TPS)</li>
-          <li>Filtr ATF (wymiana co 100000 km)</li>
-        </ul>
-        <Link href="/diagnoza?objaw=skrzynia" className="mt-4 inline-block text-sm font-semibold text-silver-300 underline-offset-2 hover:underline">
-          Diagnoza skrzyni →
-        </Link>
       </section>
 
       <section className="mt-8">
@@ -108,6 +127,9 @@ export default function TransmissionPage() {
           <li>Wymieniaj filtr ATF co drugą wymianę płynu</li>
           <li>Przy ciężkim holowaniu rozważ dodatkową chłodnicę ATF</li>
         </ul>
+        <Link href="/diagnoza?objaw=skrzynia" className="mt-4 inline-block text-sm font-semibold text-silver-300 underline-offset-2 hover:underline">
+          Pełna diagnoza skrzyni →
+        </Link>
       </section>
 
       <AffiliateBox
