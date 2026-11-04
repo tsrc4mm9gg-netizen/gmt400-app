@@ -3,30 +3,25 @@ import { useEffect, useState } from 'react';
 
 export default function BackToTop() {
   const [visible, setVisible] = useState(false);
+
   useEffect(() => {
-    let frame = 0;
-    const update = () => { frame = 0; setVisible(window.scrollY > Math.max(900, window.innerHeight * 1.5)); };
-    const onScroll = () => { if (!frame) frame = requestAnimationFrame(update); };
-    update();
+    const onScroll = () => setVisible(window.scrollY > 400);
     window.addEventListener('scroll', onScroll, { passive: true });
-    return () => { window.removeEventListener('scroll', onScroll); if (frame) cancelAnimationFrame(frame); };
+    return () => window.removeEventListener('scroll', onScroll);
   }, []);
+
+  if (!visible) return null;
+
   return (
     <button
       type="button"
-      aria-label="Przewiń na górę strony"
-      data-testid="back-to-top"
-      tabIndex={visible ? 0 : -1}
-      aria-hidden={!visible}
-      onClick={() => {
-        const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
-        document.getElementById('main-content')?.focus({ preventScroll: true });
-      }}
-      className={`fixed left-4 z-[89] inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/20 bg-neutral-900/95 text-lg text-white shadow-lg shadow-black/50 transition-[opacity,visibility] duration-200 hover:border-silver-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-silver-500 ${visible ? 'visible opacity-100' : 'invisible pointer-events-none opacity-0'}`}
-      style={{ bottom: 'calc(16px + var(--tabbar-h, 0px) + env(safe-area-inset-bottom, 0px))' }}
+      onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+      aria-label="Wróć na górę"
+      className="fixed bottom-20 right-4 z-40 flex h-12 w-12 items-center justify-center rounded-full border border-silver-500/50 bg-neutral-900/90 text-silver-300 shadow-lg backdrop-blur transition hover:border-silver-400 hover:text-white"
     >
-      <span aria-hidden="true">↑</span>
+      <svg aria-hidden="true" viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M18 15l-6-6-6 6" />
+      </svg>
     </button>
   );
 }
