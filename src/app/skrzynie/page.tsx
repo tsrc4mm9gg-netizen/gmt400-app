@@ -3,6 +3,7 @@ import Link from 'next/link';
 import Breadcrumbs from '../ui/Breadcrumbs';
 import FAQ from '../ui/FAQ';
 import AffiliateBox from '../ui/AffiliateBox';
+import PartLink from '../ui/PartLink';
 
 export const metadata: Metadata = {
   title: 'Punkty zmiany biegów 4L60-E i 4L80-E — GMT400',
@@ -72,6 +73,16 @@ export default function TransmissionPage() {
             <p className="mt-2 text-xs text-neutral-400">Moment: do ~600 Nm. Holowanie: do ~10000 lb.</p>
           </div>
         </div>
+      </section>
+
+      <section className="mt-8">
+        <h2 className="text-xl font-semibold">Części eksploatacyjne</h2>
+        <ul className="mt-3 list-inside list-disc space-y-2 text-neutral-300">
+          <li>Filtr ATF: <PartLink partNumber="TF289" /></li>
+          <li>Uszczelka miski: <PartLink partNumber="TOS18663" /></li>
+          <li>Płyn ATF: Dexron III (np. MANNOL)</li>
+          <li>Solenoid zmiany: sprawdź numer na starej części</li>
+        </ul>
       </section>
 
       <section className="mt-8">
