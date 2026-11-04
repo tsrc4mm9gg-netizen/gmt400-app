@@ -43,7 +43,6 @@ const TROUBLESHOOTING = [
   { problem: 'Pilot działa tylko z bliska', solution: 'Słaba bateria lub uszkodzony pilot. Wymień baterię lub pilot. Tanie zamienniki często mają słaby zasięg.' },
   { problem: 'Po programowaniu stary pilot nie działa', solution: 'Powtórzyłeś całą procedurę dla nowego pilota. Programuj wszystkie piloty w jednej sesji (krok 5–6).' },
   { problem: 'Pilot otwiera tylko drzwi kierowcy', solution: 'Problem w module odbiornika lub okablowaniu. Sprawdź przekaźniki w module. Może wymagać naprawy lutów.' },
-  { problem: 'Pilot synchronizuje się, ale nie działa', solution: 'Częsty problem z tanimi zamiennikami. Spróbuj oryginalnego pilota GM lub innego z pasującym FCC ID.' },
 ];
 
 const faqItems = [
@@ -66,6 +65,10 @@ const faqItems = [
   {
     question: 'Czy aftermarket radio wpływa na programowanie?',
     answer: 'Niektórzy użytkownicy zgłaszają problemy po instalacji radia aftermarket. Spróbuj odłączyć radio i powtórzyć procedurę.',
+  },
+  {
+    question: 'Pilot synchronizuje się, ale potem nie działa — co robić?',
+    answer: 'To częsty problem z tanimi zamiennikami. Pilot udaje, że się synchronizuje (zamki reagują), ale po usunięciu spinacza nie działa. Rozwiązanie: kup inny pilot, najlepiej oryginalny GM lub z dokładnym FCC ID AB01502T. Użytkownicy potwierdzają, że nowy pilot rozwiązuje problem.',
   },
 ];
 
@@ -139,6 +142,32 @@ Dolny rząd:
                 <p className="mt-1 text-sm text-neutral-300">{t.tip}</p>
               </div>
             ))}
+          </div>
+        </AccordionSection>
+
+        <AccordionSection title="Pilot synchronizuje się, ale nie działa" defaultOpen>
+          <div className="rounded-lg border border-amber-500/30 bg-amber-950/20 p-4">
+            <h3 className="font-semibold text-amber-300">Opis problemu</h3>
+            <p className="mt-2 text-sm text-neutral-300">
+              Procedura wygląda poprawnie: po zwarciu pinów 4 i 8 zamki reagują (blokują/odblokowują się). Przytrzymujesz LOCK+UNLOCK na pilocie i zamki znowu reagują — pilot się synchronizuje. Ale po usunięciu spinacza pilot nie działa. Wkładasz spinacz ponownie — znowu się synchronizuje, ale po wyjściu z trybu programowania nadal nie działa.
+            </p>
+            <h3 className="mt-4 font-semibold text-amber-300">Przyczyna</h3>
+            <p className="mt-2 text-sm text-neutral-300">
+              Najczęściej to problem z tanim zamiennikiem pilota. Pilot udaje, że się synchronizuje (wysyła sygnał, na który moduł reaguje), ale jego kod nie jest prawidłowo zapisywany w pamięci modułu. Może to być spowodowane:
+            </p>
+            <ul className="mt-2 list-inside list-disc text-sm text-neutral-300">
+              <li>Niepasującym FCC ID (pilot ma inny kod niż podany na naklejce)</li>
+              <li>Uszkodzonym układem w pilocie</li>
+              <li>Niekompatybilnym protokołem komunikacji</li>
+              <li>Słabą jakością chińskich zamienników</li>
+            </ul>
+            <h3 className="mt-4 font-semibold text-amber-300">Rozwiązanie</h3>
+            <p className="mt-2 text-sm text-neutral-300">
+              <strong>Kup inny pilot.</strong> Użytkownicy forów GMT400.com potwierdzają, że nowy pilot (najlepiej oryginalny GM lub z dokładnym FCC ID AB01502T) rozwiązuje problem. Tanie zamienniki z Amazon/eBay często mają ten problem — synchronizują się, ale nie działają.
+            </p>
+            <p className="mt-2 text-sm text-neutral-400">
+              Jeśli nowy pilot też nie działa, problem może być w module odbiornika (uszkodzone luty, przekaźniki).
+            </p>
           </div>
         </AccordionSection>
 
