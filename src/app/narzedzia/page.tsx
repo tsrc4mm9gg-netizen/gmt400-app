@@ -2,6 +2,7 @@ import Link from 'next/link';
 import type { CSSProperties } from 'react';
 import FAQ from '../ui/FAQ';
 import AffiliateBox from '../ui/AffiliateBox';
+import AccordionSection from '../ui/AccordionSection';
 
 const TOOLS = [
  { href: '/narzedzia/rpo', title: 'Kody RPO', tag: 'Wyposażenie pojazdu', description: 'Odczytaj kody z tabliczki i sprawdź ich znaczenie po polsku. Możesz wpisać kilka kodów naraz.', example: 'Na przykład: G80, Z71, GU6', icon: 'M9 5H6a2 2 0 0 0-2 2v13h16V7a2 2 0 0 0-2-2h-3M9 3h6v4H9zM8 12h8M8 16h6' },
@@ -74,22 +75,6 @@ export default function ToolsPage() {
  <p style={s.intro}>Wybierz, co chcesz sprawdzić. Proste formularze, polskie opisy i informacje w jednym miejscu.</p>
  </header>
 
- <section style={{ marginBottom: 24 }}>
- <h2 style={{ margin: '0 0 12px', color: '#fafafa', fontSize: 20, fontWeight: 600 }}>Narzędzia diagnostyczne</h2>
- <div style={{ display: 'grid', gap: 12 }}>
- {DIAGNOSTIC_TOOLS.map(item => (
- <div key={item.title} style={{ padding: 16, border: '1px solid rgba(255,255,255,.16)', borderRadius: 12, background: '#1a1a1d' }}>
- <h3 style={{ margin: '0 0 8px', color: 'var(--accent-soft)', fontSize: 16, fontWeight: 600 }}>{item.title}</h3>
- <p style={{ margin: 0, color: '#c7ccd3', fontSize: 14, lineHeight: 1.6 }}>{item.desc}</p>
- </div>
- ))}
- </div>
- <AffiliateBox
- title="Polecane narzędzia"
- items={DIAGNOSTIC_TOOLS.map(t => ({ name: t.title, search: t.search }))}
- />
- </section>
-
  <section style={s.grid} aria-label="Dostępne narzędzia">
  {TOOLS.map(tool => <Link key={tool.href} href={tool.href} style={s.card} data-tool-card>
  <span style={s.icon} aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" focusable="false"><path d={tool.icon} /></svg></span>
@@ -100,11 +85,32 @@ export default function ToolsPage() {
  <span style={s.action}>Otwórz narzędzie <span aria-hidden="true">→</span></span>
  </Link>)}
  </section>
+
+ <div style={{ marginTop: 24 }}>
+ <AccordionSection title="Narzędzia diagnostyczne">
+ <div style={{ display: 'grid', gap: 12 }}>
+ {DIAGNOSTIC_TOOLS.map(item => (
+ <div key={item.title} style={{ padding: 12, border: '1px solid rgba(255,255,255,.16)', borderRadius: 8, background: '#1a1a1d' }}>
+ <h3 style={{ margin: '0 0 6px', color: 'var(--accent-soft)', fontSize: 15, fontWeight: 600 }}>{item.title}</h3>
+ <p style={{ margin: 0, color: '#c7ccd3', fontSize: 13, lineHeight: 1.5 }}>{item.desc}</p>
+ </div>
+ ))}
+ </div>
+ <AffiliateBox
+ title="Polecane narzędzia"
+ items={DIAGNOSTIC_TOOLS.map(t => ({ name: t.title, search: t.search }))}
+ />
+ </AccordionSection>
+
+ <AccordionSection title="Częste pytania">
+ <FAQ items={faqItems} />
+ </AccordionSection>
+ </div>
+
  <p style={{ ...s.noticeText, margin:'18px 0 0', fontSize:14 }} data-tools-data-links>Dane z dokumentów GM: <Link href="/pojemnosci" style={{ color:'var(--accent-soft)', textDecoration:'underline' }}>Pojemności i płyny</Link> · <Link href="/momenty-dokrecania" style={{ color:'var(--accent-soft)', textDecoration:'underline' }}>Momenty dokręcania</Link></p>
  <aside style={s.notice} aria-label="Ważne informacje">
  <h2 style={s.noticeTitle}>Informacje pomocnicze, nie instrukcja naprawy</h2>
  <p style={s.noticeText}>Przed zakupem części lub serwisem potwierdź dane dla konkretnego auta, rocznika i zamontowanych podzespołów. Brak wyniku nie oznacza braku usterki ani niezgodności części.</p>
  </aside>
- <FAQ items={faqItems} />
  </div>;
 }
