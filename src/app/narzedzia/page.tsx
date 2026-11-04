@@ -11,10 +11,15 @@ const TOOLS = [
  { href: '/narzedzia/czesci', title: 'Dobór części', tag: 'Wstępna weryfikacja', description: 'Przejrzyj referencyjne informacje według modelu, rocznika, silnika i skrzyni. Przed zakupem potwierdź numer części.', example: 'Wynik nie potwierdza zamienności części.', icon: 'M14 4a6 6 0 0 0-7 8l-4 4a3 3 0 0 0 5 5l4-4a6 6 0 0 0 8-7l-4 3-4-4z' }
 ];
 
-const SCANNER_TIPS = [
-  { title: 'Skaner OBD2 Bluetooth', tip: 'Najtańsza opcja (50–150 zł). Podłączasz do gniazda OBD2 i odczytujesz kody przez aplikację na telefonie. Wystarczy do podstawowej diagnostyki.' },
-  { title: 'Skaner z wyświetlaczem', tip: 'Droższy (150–400 zł), ale nie wymaga telefonu. Pokazuje kody, dane live, pozwala czyścić kody. Wygodniejszy w warsztacie.' },
-  { title: 'Profesjonalny skaner', tip: 'Najdroższy (500+ zł). Pokazuje wszystkie dane, pozwala programować moduły. Dla zaawansowanych użytkowników i warsztatów.' },
+const DIAGNOSTIC_TOOLS = [
+  { title: 'Skaner OBD2 Bluetooth', desc: 'Najtańsza opcja (50–150 zł). Podłączasz do gniazda OBD2 i odczytujesz kody przez aplikację na telefonie. Wystarczy do podstawowej diagnostyki.', search: 'OBD2 scanner Bluetooth' },
+  { title: 'Skaner z wyświetlaczem', desc: 'Droższy (150–400 zł), ale nie wymaga telefonu. Pokazuje kody, dane live, pozwala czyścić kody. Wygodniejszy w warsztacie.', search: 'OBD2 scanner handheld' },
+  { title: 'Multimetr', desc: 'Niezbędny do pomiarów elektrycznych. Sprawdza napięcie, rezystancję, ciągłość. Do diagnostyki czujników, bezpieczników, przewodów.', search: 'digital multimeter' },
+  { title: 'Manometr paliwa', desc: 'Mierzy ciśnienie paliwa. Norma dla Vortec: 60–66 psi. Do diagnostyki pompy paliwa i regulatora.', search: 'fuel pressure gauge' },
+  { title: 'Lampa stroboskopowa', desc: 'Do ustawiania zapłonu w starszych modelach (TBI). Pokazuje moment zapłonu względem znaków na kole zamachowym.', search: 'timing light' },
+  { title: 'Termometr laserowy', desc: 'Mierzy temperaturę bez kontaktu. Do diagnostyki przegrzewania, sprawdzania termostatu, chłodnicy.', search: 'infrared thermometer' },
+  { title: 'Szczelinomierz', desc: 'Do sprawdzania przerwy świec (1.5 mm dla Vortec). Niezbędny przy wymianie świec.', search: 'feeler gauge spark plug' },
+  { title: 'Klucz dynamometryczny', desc: 'Do dokręcania śrub odpowiednim momentem. Niezbędny przy hamulcach, zawieszeniu, kołach.', search: 'torque wrench' },
 ];
 
 const faqItems = [
@@ -33,6 +38,10 @@ const faqItems = [
   {
     question: 'Jaki skaner OBD2 do GMT400?',
     answer: 'Do podstawowej diagnostyki wystarczy skaner Bluetooth (50–150 zł). Do zaawansowanej — skaner z wyświetlaczem (150–400 zł). Sprawdź, czy obsługuje protokół GM (J1850 VPW dla starszych, CAN dla nowszych).',
+  },
+  {
+    question: 'Jakie narzędzia do podstawowej diagnostyki?',
+    answer: 'Minimum: skaner OBD2, multimetr, szczelinomierz. Do zaawansowanej: manometr paliwa, lampa stroboskopowa, termometr laserowy. Klucz dynamometryczny jest niezbędny przy naprawach.',
   },
 ];
 
@@ -66,22 +75,18 @@ export default function ToolsPage() {
  </header>
 
  <section style={{ marginBottom: 24 }}>
- <h2 style={{ margin: '0 0 12px', color: '#fafafa', fontSize: 20, fontWeight: 600 }}>Narzędzia do skanowania</h2>
+ <h2 style={{ margin: '0 0 12px', color: '#fafafa', fontSize: 20, fontWeight: 600 }}>Narzędzia diagnostyczne</h2>
  <div style={{ display: 'grid', gap: 12 }}>
- {SCANNER_TIPS.map(item => (
+ {DIAGNOSTIC_TOOLS.map(item => (
  <div key={item.title} style={{ padding: 16, border: '1px solid rgba(255,255,255,.16)', borderRadius: 12, background: '#1a1a1d' }}>
  <h3 style={{ margin: '0 0 8px', color: 'var(--accent-soft)', fontSize: 16, fontWeight: 600 }}>{item.title}</h3>
- <p style={{ margin: 0, color: '#c7ccd3', fontSize: 14, lineHeight: 1.6 }}>{item.tip}</p>
+ <p style={{ margin: 0, color: '#c7ccd3', fontSize: 14, lineHeight: 1.6 }}>{item.desc}</p>
  </div>
  ))}
  </div>
  <AffiliateBox
- title="Polecane skanery"
- items={[
- { name: 'Skaner OBD2 Bluetooth', search: 'OBD2 scanner Bluetooth' },
- { name: 'Skaner OBD2 z wyświetlaczem', search: 'OBD2 scanner handheld' },
- { name: 'Skaner profesjonalny', search: 'OBD2 scanner professional' },
- ]}
+ title="Polecane narzędzia"
+ items={DIAGNOSTIC_TOOLS.map(t => ({ name: t.title, search: t.search }))}
  />
  </section>
 
