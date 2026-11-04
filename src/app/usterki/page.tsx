@@ -4,6 +4,7 @@ import JsonLd from '../ui/JsonLd';
 import AffiliateBox from '../ui/AffiliateBox';
 import FAQ from '../ui/FAQ';
 import PartLink from '../ui/PartLink';
+import Link from 'next/link';
 import { getListEntries, itemListJsonLd } from '../../lib/notion-entries';
 
 export const metadata: Metadata = {
@@ -21,6 +22,49 @@ export const metadata: Metadata = {
 };
 
 export const revalidate = 900;
+
+const QUICK_CHECKS = [
+  {
+    symptom: 'Nie odpala',
+    checks: [
+      'Sprawdź napięcie akumulatora (min. 12.4V)',
+      'Czy rozrusznik kręci? Jeśli nie — bezpiecznik, przekaźnik',
+      'Czy pompa paliwa buczy przy włączeniu zapłonu?',
+      'Sprawdź iskrę (świece, cewka)',
+    ],
+    parts: ['EP381', '41-932', 'D577'],
+  },
+  {
+    symptom: 'Szarpie / gaśnie',
+    checks: [
+      'Odczytaj kody OBD (skaner)',
+      'Sprawdź filtr powietrza',
+      'Sprawdź świece i przewody',
+      'Sprawdź ciśnienie paliwa (60–66 psi Vortec)',
+    ],
+    parts: ['41-932', '9718D', 'A1300C', 'GF626'],
+  },
+  {
+    symptom: 'Skrzynia ślizga',
+    checks: [
+      'Sprawdź poziom i stan ATF',
+      'Odczytaj kody (P0700, P0751–P0758)',
+      'Sprawdź filtr ATF',
+      'Sprawdź czujnik prędkości (VSS)',
+    ],
+    parts: ['TF289', 'TOS18663'],
+  },
+  {
+    symptom: 'Przegrzewa się',
+    checks: [
+      'Sprawdź poziom płynu chłodniczego',
+      'Sprawdź, czy wentylator się włącza',
+      'Sprawdź termostat (otwiera się przy ~91°C)',
+      'Sprawdź pompę wody (wycieki, hałas)',
+    ],
+    parts: ['131-113', '252-711'],
+  },
+];
 
 const faqItems = [
   {
@@ -47,6 +91,27 @@ export default async function Page() {
   return <>
     <Encyclopedia initialTab="usterki" initialItems={items} />
     <div className="mx-auto max-w-3xl px-4">
+      <section className="mb-8">
+        <h2 className="text-xl font-semibold text-silver-300">Szybka diagnoza — co sprawdzić najpierw</h2>
+        <p className="mt-2 text-sm text-neutral-400">Wybierz objaw i sprawdź najczęstsze przyczyny przed wymianą części.</p>
+        <div className="mt-4 space-y-4">
+          {QUICK_CHECKS.map(item => (
+            <div key={item.symptom} className="rounded-xl border border-white/10 bg-neutral-900 p-4">
+              <h3 className="font-semibold text-silver-200">{item.symptom}</h3>
+              <ol className="mt-2 list-inside list-decimal space-y-1 text-sm text-neutral-300">
+                {item.checks.map((check, i) => <li key={i}>{check}</li>)}
+              </ol>
+              <div className="mt-3 flex flex-wrap gap-2">
+                {item.parts.map(part => <PartLink key={part} partNumber={part} />)}
+              </div>
+            </div>
+          ))}
+        </div>
+        <Link href="/diagnoza" className="mt-4 inline-block text-sm font-semibold text-silver-300 underline-offset-2 hover:underline">
+          Pełna diagnoza objawów →
+        </Link>
+      </section>
+
       <section className="mb-6">
         <h2 className="text-xl font-semibold text-silver-300">Części do najczęstszych usterek</h2>
         <ul className="mt-3 list-inside list-disc space-y-2 text-neutral-300">
