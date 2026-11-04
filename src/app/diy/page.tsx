@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Link from 'next/link';
 import Encyclopedia from '../Encyclopedia';
 import JsonLd from '../ui/JsonLd';
 import AffiliateBox from '../ui/AffiliateBox';
@@ -28,6 +29,10 @@ const AFFILIATE_TAG = 'gmt400pl-20';
 function amazonSearch(query: string) {
   return `https://www.amazon.de/s?k=${encodeURIComponent(query)}&tag=${AFFILIATE_TAG}`;
 }
+
+const FEATURED_GUIDES = [
+  { href: '/diy/kodowanie-pilota', title: 'Kodowanie pilota centralnego zamka', desc: 'Jak zaprogramować pilot do GMT400 — procedura z gniazdem OBD2' },
+];
 
 const TOOLS_LIST = [
   { category: 'Podstawowe', items: [
@@ -88,7 +93,20 @@ export default async function Page() {
   return <>
     <Encyclopedia initialTab="diy" initialItems={items} />
     <div className="mx-auto max-w-3xl px-4">
-      <AccordionSection title="Lista narzędzi" defaultOpen>
+      <AccordionSection title="Poradniki krok po kroku" defaultOpen>
+        <ul className="space-y-2">
+          {FEATURED_GUIDES.map(g => (
+            <li key={g.href}>
+              <Link href={g.href} className="block rounded-lg border border-white/10 bg-neutral-800 p-3 hover:border-silver-500">
+                <h3 className="font-semibold text-silver-200">{g.title}</h3>
+                <p className="mt-1 text-sm text-neutral-400">{g.desc}</p>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </AccordionSection>
+
+      <AccordionSection title="Lista narzędzi">
         <p className="mb-3 text-sm text-neutral-400">Podstawowy zestaw do większości napraw GMT400. Kliknij, aby zobaczyć na Amazonie.</p>
         <div className="grid gap-3 sm:grid-cols-2">
           {TOOLS_LIST.map(cat => (
