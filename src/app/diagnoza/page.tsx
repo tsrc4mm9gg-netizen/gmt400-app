@@ -3,6 +3,7 @@ import Link from 'next/link';
 import JsonLd from '../ui/JsonLd';
 import AffiliateBox from '../ui/AffiliateBox';
 import FAQ from '../ui/FAQ';
+import PartLink from '../ui/PartLink';
 import { DIAG_GUIDES } from '../../lib/diagnosis-guides';
 import DiagnozaTool from './DiagnozaTool';
 import { getListEntries } from '../../lib/notion-entries';
@@ -65,6 +66,16 @@ export default async function Page() {
       </ul>
     </section>
     <div className="mx-auto max-w-3xl px-4 pb-20">
+      <section className="mb-6">
+        <h2 className="text-xl font-semibold text-silver-300">Części do diagnostyki</h2>
+        <ul className="mt-3 list-inside list-disc space-y-2 text-neutral-300">
+          <li>Świece zapłonowe: <PartLink partNumber="41-932" /></li>
+          <li>Przewody zapłonowe: <PartLink partNumber="9718D" /></li>
+          <li>Pompa paliwa: <PartLink partNumber="EP381" /></li>
+          <li>Filtr paliwa: <PartLink partNumber="GF626" /></li>
+          <li>Cewka zapłonowa: <PartLink partNumber="D577" /></li>
+        </ul>
+      </section>
       <AffiliateBox
         title="Narzędzia do diagnostyki"
         items={[

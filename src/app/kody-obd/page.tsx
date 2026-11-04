@@ -5,6 +5,7 @@ import RandomCodeLink from './random-code-link';
 import Breadcrumbs from '../ui/Breadcrumbs';
 import AffiliateBox from '../ui/AffiliateBox';
 import FAQ from '../ui/FAQ';
+import PartLink from '../ui/PartLink';
 
 export const metadata: Metadata = {
   title: 'Kody OBD GMT400 — P0300, P0171 i inne | Tahoe, Suburban, Silverado',
@@ -74,6 +75,18 @@ export default function ObdCodesPage({ searchParams }: { searchParams: Promise<{
             </ul>
           </nav>
         </header>
+
+        <section className="mb-6">
+          <h2 className="text-xl font-semibold text-silver-300">Części do kodów OBD</h2>
+          <ul className="mt-3 list-inside list-disc space-y-2 text-neutral-300">
+            <li>Świece (P0300): <PartLink partNumber="41-932" /></li>
+            <li>Przewody zapłonowe: <PartLink partNumber="9718D" /></li>
+            <li>Cewka zapłonowa: <PartLink partNumber="D577" /></li>
+            <li>Filtr powietrza (P0171): <PartLink partNumber="A1300C" /></li>
+            <li>Czujnik O2: sprawdź numer na starej części</li>
+          </ul>
+        </section>
+
         <AffiliateBox
           title="Do odczytu kodów"
           items={[
