@@ -32,6 +32,11 @@ function amazonSearch(query: string) {
 
 const FEATURED_GUIDES = [
   { href: '/diy/kodowanie-pilota', title: 'Kodowanie pilota centralnego zamka', desc: 'Jak zaprogramować pilot do GMT400 — procedura z gniazdem OBD2' },
+  { href: '/diy/wymiana-pompy-paliwa', title: 'Wymiana pompy paliwa', desc: 'Jak wymienić pompę paliwa w zbiorniku — procedura krok po kroku' },
+  { href: '/diy/wymiana-termostatu', title: 'Wymiana termostatu', desc: 'Jak wymienić termostat — prosta naprawa w 30–60 minut' },
+  { href: '/diy/wymiana-pompy-wody', title: 'Wymiana pompy wody', desc: 'Jak wymienić pompę wody — procedura z przodu silnika' },
+  { href: '/diy/wymiana-klockow-hamulcowych', title: 'Wymiana klocków hamulcowych', desc: 'Jak wymienić klocki hamulcowe — podstawowa konserwacja' },
+  { href: '/diy/wymiana-swiec-zaplonowych', title: 'Wymiana świec zapłonowych', desc: 'Jak wymienić świece — odstęp elektrod i procedura' },
 ];
 
 const TOOLS_LIST = [
