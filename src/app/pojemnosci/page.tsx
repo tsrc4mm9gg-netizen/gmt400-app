@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import Breadcrumbs from '../ui/Breadcrumbs';
+import AffiliateBox from '../ui/AffiliateBox';
 import {
   CAPACITY_DOUBTS, CAPACITY_GROUPS, FLUID_SPECS, GM_DOCS, SERVICE_PARTS, WHEEL_NUT_TORQUE, type Cite,
 } from '@/lib/gm-capacities';
@@ -84,6 +85,14 @@ export default function PojemnosciPage() {
             </tbody>
           </table>
         </div>
+        <AffiliateBox
+          title="Gdzie kupić płyny"
+          items={[
+            { name: 'MANNOL Dexron III ATF', search: 'MANNOL Dexron III ATF' },
+            { name: 'Olej silnikowy 5W-30', search: '5W-30 engine oil' },
+            { name: 'Płyn chłodniczy', search: 'coolant antifreeze' },
+          ]}
+        />
       </section>
 
       <section id="czesci" className="mt-8 scroll-mt-20">
@@ -105,6 +114,14 @@ export default function PojemnosciPage() {
             </tbody>
           </table>
         </div>
+        <AffiliateBox
+          title="Gdzie kupić filtry"
+          items={[
+            { name: 'ACDelco PF52 — filtr oleju', search: 'ACDelco PF52' },
+            { name: 'Filtr powietrza', search: 'air filter GMT400' },
+            { name: 'Filtr paliwa', search: 'fuel filter GMT400' },
+          ]}
+        />
         <p className="mt-3 text-sm text-neutral-400">Nakrętki kół ({WHEEL_NUT_TORQUE.variant}, {WHEEL_NUT_TORQUE.years}): <strong className="text-white">{WHEEL_NUT_TORQUE.value}</strong> <Sources src={WHEEL_NUT_TORQUE.src} />.</p>
       </section>
 
