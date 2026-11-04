@@ -1,11 +1,31 @@
 import type { Metadata } from 'next';
 import Breadcrumbs from '../ui/Breadcrumbs';
+import FAQ from '../ui/FAQ';
 
 export const metadata: Metadata = {
   title: 'Przerwa świec GMT400 — 4.3, 5.7, 7.4',
   description: 'Typowa przerwa elektrod świec w GMT400. Wartości fabryczne mogą się różnić między silnikami i źródłami.',
   alternates: { canonical: 'https://www.gmt400.pl/swiece' },
 };
+
+const faqItems = [
+  {
+    question: 'Jakie świece do GMT400 Vortec?',
+    answer: 'ACDelco 41-932 (platynowe) są zalecane do silników Vortec 1996+. Przerwa: ok. 1.5 mm (0.060"). Można też użyć NGK lub Bosch o podobnych parametrach.',
+  },
+  {
+    question: 'Jak często wymieniać świece?',
+    answer: 'Platynowe (41-932): co 100000 km. Standardowe: co 30000–50000 km. Sprawdź przerwę przy wymianie. Zużyte świece powodują wypadanie zapłonu i wyższe zużycie paliwa.',
+  },
+  {
+    question: 'Jak sprawdzić przerwę świec?',
+    answer: 'Użyj szczelinomierza (feeler gauge). Wsuń blaszkę 1.5 mm między elektrody. Powinna wchodzić z lekkim oporem. Zbyt duża przerwa = słaba iskra. Zbyt mała = szybkie zużycie.',
+  },
+  {
+    question: 'Czy można używać świec irydowych?',
+    answer: 'Tak, ale nie są konieczne. Platynowe (41-932) są wystarczające dla GMT400. Irydowe mogą działać dłużej, ale są droższe. Ważniejsze jest regularne sprawdzanie przerwy.',
+  },
+];
 
 export default function SparkPlugsPage() {
   return (
@@ -57,6 +77,8 @@ export default function SparkPlugsPage() {
           Wartości orientacyjne. W razie wątpliwości sprawdź naklejkę w komorze silnika lub instrukcję serwisową swojego rocznika.
         </p>
       </section>
+
+      <FAQ items={faqItems} />
     </div>
   );
 }

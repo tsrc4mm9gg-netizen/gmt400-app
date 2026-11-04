@@ -1,12 +1,32 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import Breadcrumbs from '../ui/Breadcrumbs';
+import FAQ from '../ui/FAQ';
 
 export const metadata: Metadata = {
   title: 'Punkty zmiany biegów 4L60-E i 4L80-E — GMT400',
   description: 'Jak działają punkty zmiany biegów w skrzyniach 4L60-E i 4L80-E w GMT400. PCM steruje zmianami na podstawie obciążenia, prędkości i pozycji gazu.',
   alternates: { canonical: 'https://www.gmt400.pl/skrzynie' },
 };
+
+const faqItems = [
+  {
+    question: 'Czym różni się 4L60-E od 4L80-E?',
+    answer: '4L60-E jest lżejsza i częstsza w modelach 1500. 4L80-E jest mocniejsza, przeznaczona do 2500/3500 i diesla. 4L80-E ma niższe przełożenie 1. biegu (2.48 vs 3.06) i jest bardziej wytrzymała.',
+  },
+  {
+    question: 'Jakie są objawy zużytej skrzyni 4L60-E?',
+    answer: 'Opóźnione zmiany biegów, szarpanie, ślizganie, przegrzewanie, wycieki ATF. Najczęstsze problemy: zużyte sprzęgła, uszkodzony solenoid, problemy z pompą. Regularna wymiana ATF przedłuża żywotność.',
+  },
+  {
+    question: 'Ile kosztuje naprawa 4L60-E?',
+    answer: 'Regeneracja: 2000–4000 zł. Wymiana na używaną: 1000–2000 zł. Nowa: 5000–8000 zł. Koszt zależy od zakresu uszkodzeń. Regularna wymiana ATF może zapobiec drogim naprawom.',
+  },
+  {
+    question: 'Jak często wymieniać ATF?',
+    answer: 'Co 50000–80000 km przy normalnej eksploatacji. Przy ciężkich warunkach (holowanie, góry) co 30000–50000 km. Użyj Dexron III lub nowszego. Wymiana filtra co drugą wymianę płynu.',
+  },
+];
 
 export default function TransmissionPage() {
   return (
@@ -59,6 +79,8 @@ export default function TransmissionPage() {
           Diagnoza skrzyni →
         </Link>
       </section>
+
+      <FAQ items={faqItems} />
     </div>
   );
 }
