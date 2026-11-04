@@ -9,28 +9,35 @@ export const metadata: Metadata = {
 
 const AFFILIATE_TAG = 'gmt400pl-20';
 
-const categories = [
+type Product = {
+  name: string;
+  note: string;
+  asin?: string;
+  search?: string;
+};
+
+const categories: { name: string; items: Product[] }[] = [
   {
     name: 'Diagnostyka',
     items: [
-      { name: 'Skaner OBD2', search: 'OBD2 scanner', note: 'Do odczytu kodów błędów' },
-      { name: 'Multimetr', search: 'digital multimeter', note: 'Do pomiarów elektrycznych' },
+      { name: 'Skaner OBD2 Bluetooth (ELM327)', asin: 'B0DGXVWWP2', note: 'Do odczytu kodów błędów — działa z GMT400 OBD-II (1996+)' },
+      { name: 'Multimetr cyfrowy', search: 'digital multimeter', note: 'Do pomiarów elektrycznych' },
     ],
   },
   {
     name: 'Oleje i płyny',
     items: [
-      { name: 'Olej silnikowy 5W-30', search: '5W-30 engine oil', note: 'Do silników benzynowych' },
-      { name: 'ATF Dexron III', search: 'Dexron III ATF', note: 'Do skrzyń 4L60-E / 4L80-E' },
-      { name: 'Płyn chłodniczy', search: 'coolant antifreeze', note: 'Do układu chłodzenia' },
+      { name: 'MANNOL Dexron III ATF (1L)', asin: 'B002K4OWDK', note: 'Do skrzyń 4L60-E / 4L80-E — spełnia GM Dexron III' },
+      { name: 'MANNOL 5W-30 Energy (5L)', search: 'MANNOL 5W-30 Energy 5L', note: 'Olej silnikowy — sprawdź specyfikację dla swojego silnika' },
+      { name: 'Płyn chłodniczy', search: 'coolant antifreeze', note: 'Do układu chłodzenia — sprawdź kolor i specyfikację' },
     ],
   },
   {
     name: 'Filtry',
     items: [
-      { name: 'Filtr oleju', search: 'oil filter', note: 'Wymiana co 5000–8000 km' },
-      { name: 'Filtr powietrza', search: 'air filter car', note: 'Wymiana co 15 000 km' },
-      { name: 'Filtr paliwa', search: 'fuel filter', note: 'Wymiana co 30 000 km' },
+      { name: 'Filtr oleju', search: 'oil filter', note: 'Sprawdź pasowanie do swojego silnika przed zakupem' },
+      { name: 'Filtr powietrza', search: 'air filter car', note: 'Sprawdź pasowanie do swojego modelu' },
+      { name: 'Filtr paliwa', search: 'fuel filter', note: 'Sprawdź pasowanie do swojego silnika' },
     ],
   },
   {
@@ -42,8 +49,11 @@ const categories = [
   },
 ];
 
-function amazonLink(search: string) {
-  return `https://www.amazon.de/s?k=${encodeURIComponent(search)}&tag=${AFFILIATE_TAG}&ref=nb_sb_noss`;
+function productLink(item: Product) {
+  if (item.asin) {
+    return `https://www.amazon.de/dp/${item.asin}?tag=${AFFILIATE_TAG}`;
+  }
+  return `https://www.amazon.de/s?k=${encodeURIComponent(item.search || '')}&tag=${AFFILIATE_TAG}`;
 }
 
 export default function PolecanePage() {
@@ -53,6 +63,9 @@ export default function PolecanePage() {
       <p className="mt-2 text-sm text-neutral-400">
         Linki do sklepów mogą być afiliacyjne — nie płacisz więcej, a wspierasz GMT400.pl.
       </p>
+      <p className="mt-1 text-xs text-neutral-500">
+        Zawsze sprawdź pasowanie do swojego modelu przed zakupem.
+      </p>
 
       {categories.map((cat) => (
         <section key={cat.name} className="mt-8">
@@ -61,7 +74,7 @@ export default function PolecanePage() {
             {cat.items.map((item) => (
               <li key={item.name} className="rounded-lg border border-white/10 bg-neutral-900/50 px-4 py-3">
                 <a
-                  href={amazonLink(item.search)}
+                  href={productLink(item)}
                   target="_blank"
                   rel="noopener noreferrer sponsored"
                   className="font-medium text-silver-200 hover:text-white hover:underline"
