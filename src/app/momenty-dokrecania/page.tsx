@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import Breadcrumbs from '../ui/Breadcrumbs';
 import AffiliateBox from '../ui/AffiliateBox';
+import FAQ from '../ui/FAQ';
 import TorqueBrowser from './TorqueBrowser';
 import { TORQUE_ROWS } from '@/lib/torque-gm';
 
@@ -9,6 +10,25 @@ export const metadata = {
   description: 'Momenty dokręcania śrub i nakrętek GMT400 1988–2000 według układów: silnik, paliwo, skrzynia, mosty, układ kierowniczy, hamulce, elektryka, klimatyzacja i nadwozie — w Nm i lb-ft, z silnikiem, rocznikiem i stroną instrukcji GM.',
   alternates: { canonical: 'https://www.gmt400.pl/momenty-dokrecania' },
 };
+
+const faqItems = [
+  {
+    question: 'Dlaczego momenty dokręcania są ważne?',
+    answer: 'Zbyt słabe dokręcenie może spowodować poluzowanie śruby i uszkodzenie. Zbyt mocne może zerwać gwint lub uszkodzić część. Klucz dynamometryczny zapewnia prawidłową siłę dokręcenia.',
+  },
+  {
+    question: 'Jak przeliczyć lb-ft na Nm?',
+    answer: '1 lb-ft = 1.356 Nm. Przykład: 100 lb-ft = 136 Nm. W tabelach podajemy obie jednostki. Zawsze sprawdzaj, którą jednostkę używa Twój klucz.',
+  },
+  {
+    question: 'Czy wszystkie śruby wymagają klucza dynamometrycznego?',
+    answer: 'Krytyczne połączenia (głowica, koła, zawieszenie, hamulce) wymagają klucza dynamometrycznego. Mniej krytyczne można dokręcać ręcznie, ale lepiej użyć klucza dla pewności.',
+  },
+  {
+    question: 'Co oznacza dokręcanie kątowe?',
+    answer: 'Niektóre śruby (np. głowicy) dokręca się najpierw do określonego momentu, a potem o dodatkowy kąt (np. +90°). Wymaga to specjalnego narzędzia lub zaznaczenia pozycji. Procedura jest w instrukcji.',
+  },
+];
 
 export default function MomentyPage() {
   return (
@@ -35,6 +55,7 @@ export default function MomentyPage() {
         ]}
       />
       <TorqueBrowser />
+      <FAQ items={faqItems} />
     </div>
   );
 }
