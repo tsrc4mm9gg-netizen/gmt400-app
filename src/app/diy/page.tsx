@@ -4,6 +4,7 @@ import JsonLd from '../ui/JsonLd';
 import AffiliateBox from '../ui/AffiliateBox';
 import FAQ from '../ui/FAQ';
 import PartLink from '../ui/PartLink';
+import AccordionSection from '../ui/AccordionSection';
 import { getListEntries, itemListJsonLd } from '../../lib/notion-entries';
 
 export const metadata: Metadata = {
@@ -61,12 +62,11 @@ export default async function Page() {
   return <>
     <Encyclopedia initialTab="diy" initialItems={items} />
     <div className="mx-auto max-w-3xl px-4">
-      <section className="mb-6">
-        <h2 className="text-xl font-semibold text-silver-300">Lista narzędzi</h2>
-        <p className="mt-2 text-sm text-neutral-400">Podstawowy zestaw do większości napraw GMT400.</p>
-        <div className="mt-4 grid gap-4 sm:grid-cols-2">
+      <AccordionSection title="Lista narzędzi" defaultOpen>
+        <p className="mb-3 text-sm text-neutral-400">Podstawowy zestaw do większości napraw GMT400.</p>
+        <div className="grid gap-3 sm:grid-cols-2">
           {TOOLS_LIST.map(cat => (
-            <div key={cat.category} className="rounded-xl border border-white/10 bg-neutral-900 p-4">
+            <div key={cat.category} className="rounded-lg border border-white/10 bg-neutral-800 p-3">
               <h3 className="font-semibold text-silver-200">{cat.category}</h3>
               <ul className="mt-2 list-inside list-disc space-y-1 text-sm text-neutral-300">
                 {cat.items.map((item, i) => <li key={i}>{item}</li>)}
@@ -74,23 +74,21 @@ export default async function Page() {
             </div>
           ))}
         </div>
-      </section>
+      </AccordionSection>
 
-      <section className="mb-6">
-        <h2 className="text-xl font-semibold text-silver-300">Wskazówki przed rozpoczęciem</h2>
-        <div className="mt-3 grid gap-3 sm:grid-cols-2">
+      <AccordionSection title="Wskazówki przed rozpoczęciem">
+        <div className="grid gap-3 sm:grid-cols-2">
           {DIY_TIPS.map(item => (
-            <div key={item.title} className="rounded-xl border border-white/10 bg-neutral-900 p-4">
+            <div key={item.title} className="rounded-lg border border-white/10 bg-neutral-800 p-3">
               <h3 className="font-semibold text-silver-200">{item.title}</h3>
               <p className="mt-1 text-sm text-neutral-300">{item.tip}</p>
             </div>
           ))}
         </div>
-      </section>
+      </AccordionSection>
 
-      <section className="mb-6">
-        <h2 className="text-xl font-semibold text-silver-300">Części do napraw DIY</h2>
-        <ul className="mt-3 list-inside list-disc space-y-2 text-neutral-300">
+      <AccordionSection title="Części do napraw DIY">
+        <ul className="list-inside list-disc space-y-2 text-neutral-300">
           <li>Filtr oleju: <PartLink partNumber="PF52" /></li>
           <li>Świece zapłonowe: <PartLink partNumber="41-932" /></li>
           <li>Przewody zapłonowe: <PartLink partNumber="9718D" /></li>
@@ -98,17 +96,23 @@ export default async function Page() {
           <li>Filtr ATF: <PartLink partNumber="TF289" /></li>
           <li>Pompa wody: <PartLink partNumber="252-711" /></li>
         </ul>
-      </section>
-      <AffiliateBox
-        title="Przydatne przy naprawach DIY"
-        items={[
-          { name: 'Klucz dynamometryczny', search: 'torque wrench' },
-          { name: 'Zestaw kluczy nasadowych', search: 'socket set metric' },
-          { name: 'Skaner OBD2', search: 'OBD2 scanner' },
-          { name: 'Multimetr', search: 'digital multimeter' },
-        ]}
-      />
-      <FAQ items={faqItems} />
+      </AccordionSection>
+
+      <AccordionSection title="Przydatne przy naprawach DIY">
+        <AffiliateBox
+          title=""
+          items={[
+            { name: 'Klucz dynamometryczny', search: 'torque wrench' },
+            { name: 'Zestaw kluczy nasadowych', search: 'socket set metric' },
+            { name: 'Skaner OBD2', search: 'OBD2 scanner' },
+            { name: 'Multimetr', search: 'digital multimeter' },
+          ]}
+        />
+      </AccordionSection>
+
+      <AccordionSection title="Częste pytania">
+        <FAQ items={faqItems} />
+      </AccordionSection>
     </div>
     {list.length > 0 && <JsonLd data={itemListJsonLd('Poradniki DIY GMT400', 'https://www.gmt400.pl/diy', list)} />}
   </>;
