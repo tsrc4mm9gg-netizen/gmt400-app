@@ -31,6 +31,12 @@ function extractPartNumber(part: string): string | null {
   return match ? match[1] : null;
 }
 
+const TIPS = [
+  { title: 'Przed wymianą', tip: 'Sprawdź pojemność w tabeli dla swojego silnika. Przygotuj odpowiednią ilość płynu. Rozgrzej silnik przed wymianą oleju.' },
+  { title: 'Podczas wymiany', tip: 'Nie przepełniaj — lepiej dolać później. Sprawdź poziom bagnetem na płaskim podłożu. Użyj odpowiedniego płynu (specyfikacja w tabeli).' },
+  { title: 'Po wymianie', tip: 'Sprawdź poziom po przejechaniu kilku km. Sprawdź, czy nie ma wycieków. Zanotuj, co wymieniłeś i kiedy.' },
+];
+
 const faqItems = [
   {
     question: 'Ile oleju potrzebuje silnik GMT400?',
@@ -61,6 +67,19 @@ export default function PojemnosciPage() {
         Gdy dokumenty się różnią, wartości nie podajemy — trafia na listę rozbieżności na dole strony. Sprawdź w swoim aucie.
         Momenty dokręcania śrub i korków: <Link href="/momenty-dokrecania" className="text-silver-300 underline">Momenty dokręcania</Link>.
       </p>
+
+      <section className="mt-6">
+        <h2 className="text-xl font-semibold text-silver-300">Wskazówki wymiany płynów</h2>
+        <div className="mt-3 space-y-3">
+          {TIPS.map(item => (
+            <div key={item.title} className="rounded-xl border border-white/10 bg-neutral-900 p-4">
+              <h3 className="font-semibold text-silver-200">{item.title}</h3>
+              <p className="mt-1 text-sm text-neutral-300">{item.tip}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
       <nav aria-label="Spis treści" className="mt-4 flex flex-wrap gap-2 text-sm">
         {CAPACITY_GROUPS.map(g => (
           <a key={g.id} href={`#${g.id}`} className="rounded-lg border border-white/10 px-3 py-1 text-neutral-300 hover:border-silver-400/50 hover:text-white">{g.title}</a>
