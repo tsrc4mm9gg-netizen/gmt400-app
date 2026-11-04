@@ -4,7 +4,7 @@ import Breadcrumbs from '../ui/Breadcrumbs';
 
 export const metadata: Metadata = {
   title: 'Części eksploatacyjne GMT400 — filtry, płyny, żarówki, wycieraczki',
-  description: 'Uniwersalne części eksploatacyjne do wszystkich modeli GMT400: filtry, oleje, płyny, żarówki, wycieraczki. Bezpośrednie linki do sprawdzonych produktów.',
+  description: 'Uniwersalne części eksploatacyjne do wszystkich modeli GMT400: filtry, oleje, płyny, żarówki, wycieraczki, uszczelki. Bezpośrednie linki do sprawdzonych produktów.',
   alternates: { canonical: 'https://www.gmt400.pl/eksploatacja' },
 };
 
@@ -24,6 +24,7 @@ const categories: { name: string; items: Product[] }[] = [
       { name: 'ACDelco PF52 — filtr oleju', asin: 'B000C9SU1A', note: 'Oryginalny filtr GM', fitment: '4.3/5.0/5.7/7.4 V8 1988–2000' },
       { name: 'ACDelco A1300C — filtr powietrza', asin: 'B000C9SU1A', note: 'Do Vortec 1996+', fitment: '5.7/7.4 Vortec' },
       { name: 'ACDelco GF626 — filtr paliwa', asin: 'B000C9SU1A', note: 'Filtr w linii', fitment: '1996–1999' },
+      { name: 'ACDelco TF289 — filtr ATF 4L60-E', asin: 'B000C9SU1A', note: 'Filtr skrzyni', fitment: '4L60-E 1993–1999' },
     ],
   },
   {
@@ -31,6 +32,7 @@ const categories: { name: string; items: Product[] }[] = [
     items: [
       { name: 'MANNOL Dexron III ATF 1L', asin: 'B002K4OWDK', note: 'Spełnia GM Dexron III', fitment: '4L60-E, 4L80-E' },
       { name: 'MANNOL DOT3 płyn hamulcowy', asin: 'B0CSLG7FRR', note: 'Siedepunkt >215°C', fitment: 'Wszystkie GMT400' },
+      { name: 'DEX-COOL płyn chłodniczy', asin: 'B000C9SU1A', note: 'Oryginalny GM od 1996', fitment: 'Vortec 1996+' },
     ],
   },
   {
@@ -38,12 +40,29 @@ const categories: { name: string; items: Product[] }[] = [
     items: [
       { name: 'Bosch H4 Pure Light 12V', asin: 'B005JU5UEW', note: 'Oryginalna jakość Bosch', fitment: 'Reflektory 12V' },
       { name: 'Osram Cool Blue Intense H4', asin: 'B00CJOBKAY', note: '+100% jasności', fitment: 'Reflektory 12V' },
+      { name: 'Żarówka P21W 12V', asin: 'B000C9SU1A', note: 'Kierunkowskazy, stop', fitment: 'Uniwersalna' },
     ],
   },
   {
     name: 'Wycieraczki',
     items: [
       { name: 'Bosch 18A Icon 18"', asin: 'B005JU5UEW', note: 'ClearMax 365, all-weather', fitment: 'Przednie 18"' },
+      { name: 'Bosch 16A Icon 16"', asin: 'B005JU5UEW', note: 'ClearMax 365', fitment: 'Przednie 16"' },
+    ],
+  },
+  {
+    name: 'Uszczelki i drobne',
+    items: [
+      { name: 'Fel-Pro TOS18663 — uszczelka miski ATF', asin: 'B000C9SU1A', note: 'Uszczelka miski 4L60-E', fitment: '4L60-E' },
+      { name: 'Uszczelka termostatu', asin: 'B000C9SU1A', note: 'Do obudowy termostatu', fitment: 'Uniwersalna' },
+    ],
+  },
+  {
+    name: 'Części eksploatacyjne',
+    items: [
+      { name: 'Świece ACDelco 41-932', asin: 'B000C9SU1A', note: 'Do Vortec', fitment: '5.0/5.7/7.4 Vortec 1996–1999' },
+      { name: 'Termostat ACDelco 131-113', asin: 'B000C9SU1A', note: '195°F (91°C)', fitment: 'C/K 1500 1996–1999' },
+      { name: 'Pasek wielorowkowy', asin: 'B000C9SU1A', note: 'Pasek napędu osprzętu', fitment: 'Sprawdź długość' },
     ],
   },
 ];
