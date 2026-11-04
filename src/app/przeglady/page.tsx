@@ -1,6 +1,7 @@
 import Breadcrumbs from '../ui/Breadcrumbs';
 import AffiliateBox from '../ui/AffiliateBox';
 import FAQ from '../ui/FAQ';
+import PartLink from '../ui/PartLink';
 import MaintenancePlanner from './MaintenancePlanner';
 
 export const metadata = {
@@ -26,6 +27,10 @@ const faqItems = [
     question: 'Co obejmuje przegląd GMT400?',
     answer: 'Podstawowy: olej + filtr, sprawdzenie płynów, opon, hamulców. Rozszerzony: filtry (powietrze, paliwo), świece, ATF, płyn chłodniczy. Pełny: wszystkie powyższe + diagnostyka, zawieszenie, układ wydechowy.',
   },
+  {
+    question: 'Jakie filtry wymieniać regularnie?',
+    answer: 'Filtr oleju: przy każdej wymianie oleju. Filtr powietrza: co 15000–30000 km. Filtr paliwa: co 30000–60000 km. Filtr ATF: co 100000 km lub przy wymianie płynu.',
+  },
 ];
 
 export default function PrzegladyPage() {
@@ -35,6 +40,19 @@ export default function PrzegladyPage() {
       <h1 className="text-3xl font-bold text-silver-400">Harmonogram przeglądów</h1>
       <p className="mt-2 text-neutral-300">Interwały wyłącznie z dokumentów GM: instrukcje serwisowe 1988–1994 (sekcja 0B „Scheduled Maintenance Services”) i instrukcje obsługi 1995–1999 (rozdział 7 „Maintenance Schedule”). Kilometry przeliczone z mil i zaokrąglone — oryginał w milach podajemy obok. Stan licznika i daty zostają tylko w tej przeglądarce. Sprawdź w swoim aucie.</p>
       <MaintenancePlanner />
+
+      <section className="mt-8">
+        <h2 className="text-xl font-semibold text-silver-300">Części eksploatacyjne</h2>
+        <ul className="mt-3 list-inside list-disc space-y-2 text-neutral-300">
+          <li>Filtr oleju: <PartLink partNumber="PF52" /></li>
+          <li>Filtr powietrza Vortec: <PartLink partNumber="A1300C" /></li>
+          <li>Filtr paliwa: <PartLink partNumber="GF626" /></li>
+          <li>Filtr ATF 4L60-E: <PartLink partNumber="TF289" /></li>
+          <li>Świece platynowe: <PartLink partNumber="41-932" /></li>
+          <li>Przewody zapłonowe: <PartLink partNumber="9718D" /></li>
+        </ul>
+      </section>
+
       <AffiliateBox
         title="Przydatne przy przeglądach"
         items={[
