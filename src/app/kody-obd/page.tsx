@@ -30,6 +30,12 @@ const systemCounts = Object.fromEntries(
   ])
 );
 
+const TIPS = [
+  { title: 'Przed odczytem', tip: 'Upewnij się, że akumulator jest naładowany (min. 12V). Słaby akumulator może powodować fałszywe kody.' },
+  { title: 'Podczas odczytu', tip: 'Zapisz wszystkie kody przed czyszczeniem. Niektóre kody wymagają kilku cykli jazdy, aby się potwierdzić.' },
+  { title: 'Po odczycie', tip: 'Nie czyść kodów przed naprawą. Sprawdź dane live (wartości czujników). Potwierdź diagnozę pomiarami.' },
+];
+
 const faqItems = [
   {
     question: 'Jak odczytać kody OBD w GMT400?',
@@ -75,6 +81,18 @@ export default function ObdCodesPage({ searchParams }: { searchParams: Promise<{
             </ul>
           </nav>
         </header>
+
+        <section className="mb-6">
+          <h2 className="text-xl font-semibold text-silver-300">Wskazówki odczytu kodów</h2>
+          <div className="mt-3 space-y-3">
+            {TIPS.map(item => (
+              <div key={item.title} className="rounded-xl border border-white/10 bg-neutral-900 p-4">
+                <h3 className="font-semibold text-silver-200">{item.title}</h3>
+                <p className="mt-1 text-sm text-neutral-300">{item.tip}</p>
+              </div>
+            ))}
+          </div>
+        </section>
 
         <section className="mb-6">
           <h2 className="text-xl font-semibold text-silver-300">Części do kodów OBD</h2>
