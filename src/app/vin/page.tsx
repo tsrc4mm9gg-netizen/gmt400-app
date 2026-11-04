@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import Breadcrumbs from '../ui/Breadcrumbs';
+import AffiliateBox from '../ui/AffiliateBox';
 import VinDecoder from '../VinDecoder';
 
 export const metadata: Metadata = {
@@ -16,6 +17,13 @@ export default function VinPage() {
       <h1 className="text-3xl font-bold text-silver-400">Sprawdź swój VIN</h1>
       <p className="mb-5 mt-2 text-neutral-300">Wpisz albo wklej VIN — zobaczysz rocznik, silnik, nadwozie i fabrykę. Szczegóły każdej pozycji i źródła są niżej w rozwijanych sekcjach. Wynik możesz zapisać w <Link href="/moj-samochod" className="text-silver-400 underline">Mój samochód</Link>.</p>
       <VinDecoder withRpo prefillFromUrl />
+      <AffiliateBox
+        title="Przydatne przy identyfikacji"
+        items={[
+          { name: 'Skaner OBD2', search: 'OBD2 scanner' },
+          { name: 'Latarka inspekcyjna', search: 'inspection flashlight LED' },
+        ]}
+      />
     </div>
   );
 }
