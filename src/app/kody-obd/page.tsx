@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { OBD_CODES, searchObdCodes } from '@/lib/obd-codes';
 import RandomCodeLink from './random-code-link';
 import Breadcrumbs from '../ui/Breadcrumbs';
+import AffiliateBox from '../ui/AffiliateBox';
 
 export const metadata: Metadata = {
   title: 'Kody OBD GMT400 — P0300, P0171 i inne | Tahoe, Suburban, Silverado',
@@ -53,6 +54,13 @@ export default function ObdCodesPage({ searchParams }: { searchParams: Promise<{
             </ul>
           </nav>
         </header>
+        <AffiliateBox
+          title="Do odczytu kodów"
+          items={[
+            { name: 'Skaner OBD2 Bluetooth', search: 'OBD2 scanner Bluetooth' },
+            { name: 'Skaner OBD2 z wyświetlaczem', search: 'OBD2 scanner handheld' },
+          ]}
+        />
         <section aria-labelledby="obd-generations" className="mb-6 rounded-xl border border-white/10 bg-neutral-900/60 p-4">
           <h2 id="obd-generations" className="text-xl font-semibold text-white">OBD-I czy OBD-II?</h2>
           <div className="mt-3 grid gap-4 sm:grid-cols-2">
