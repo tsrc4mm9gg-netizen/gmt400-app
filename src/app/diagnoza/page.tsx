@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import JsonLd from '../ui/JsonLd';
 import AffiliateBox from '../ui/AffiliateBox';
+import FAQ from '../ui/FAQ';
 import { DIAG_GUIDES } from '../../lib/diagnosis-guides';
 import DiagnozaTool from './DiagnozaTool';
 import { getListEntries } from '../../lib/notion-entries';
@@ -23,6 +24,25 @@ export const metadata: Metadata = {
 };
 
 export const revalidate = 900;
+
+const faqItems = [
+  {
+    question: 'Jak zdiagnozować problem z GMT400?',
+    answer: 'Zacznij od objawów: czy auto nie odpala, szarpie, świeci Check Engine? Sprawdź kody OBD (skaner), poziom płynów, stan filtrów. Użyj narzędzia diagnozy na tej stronie — wybierz objaw i odpowiedz na pytania.',
+  },
+  {
+    question: 'Co sprawdzić, gdy auto nie odpala?',
+    answer: 'Sprawdź: akumulator (napięcie), rozrusznik (czy kręci), iskrę (świece, cewka), paliwo (pompa, filtr, przekaźnik). W modelach 1996+ odczytaj kody OBD. W starszych sprawdź bezpieczniki i przekaźniki.',
+  },
+  {
+    question: 'Dlaczego świeci Check Engine?',
+    answer: 'Check Engine oznacza problem wykryty przez komputer. Odczytaj kod skanerem OBD2. Najczęstsze przyczyny: zużyte świece, problemy z paliwem (mieszanka), czujniki (MAF, O2), problemy z emisjami.',
+  },
+  {
+    question: 'Jak sprawdzić, czy pompa paliwa działa?',
+    answer: 'Włącz zapłon (nie kręć) — powinieneś usłyszeć buczenie pompy przez 2–3 sekundy. Jeśli nie, sprawdź bezpiecznik, przekaźnik i zasilanie. Ciśnienie paliwa można zmierzyć manometrem (norma: 60–66 psi dla Vortec).',
+  },
+];
 
 export default async function Page() {
   const entries = await getListEntries();
@@ -54,6 +74,7 @@ export default async function Page() {
           { name: 'Lampa stroboskopowa', search: 'timing light' },
         ]}
       />
+      <FAQ items={faqItems} />
     </div>
     <JsonLd data={jsonLd} />
   </>;
