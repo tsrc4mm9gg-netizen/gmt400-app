@@ -10,6 +10,12 @@ export const metadata = {
   alternates: { canonical: 'https://www.gmt400.pl/przeglady' },
 };
 
+const TIPS = [
+  { title: 'Przed przeglądem', tip: 'Sprawdź, co masz w garażu. Przygotuj filtry, olej, narzędzia. Rozgrzej silnik przed wymianą oleju.' },
+  { title: 'Podczas przeglądu', tip: 'Zawsze wymieniaj filtr oleju razem z olejem. Sprawdź poziom wszystkich płynów. Zanotuj, co wymieniłeś.' },
+  { title: 'Po przeglądzie', tip: 'Sprawdź poziom oleju po przejechaniu kilku km. Sprawdź, czy nie ma wycieków. Zresetuj przypomnienia.' },
+];
+
 const faqItems = [
   {
     question: 'Jak często wymieniać olej w GMT400?',
@@ -40,6 +46,18 @@ export default function PrzegladyPage() {
       <h1 className="text-3xl font-bold text-silver-400">Harmonogram przeglądów</h1>
       <p className="mt-2 text-neutral-300">Interwały wyłącznie z dokumentów GM: instrukcje serwisowe 1988–1994 (sekcja 0B „Scheduled Maintenance Services”) i instrukcje obsługi 1995–1999 (rozdział 7 „Maintenance Schedule”). Kilometry przeliczone z mil i zaokrąglone — oryginał w milach podajemy obok. Stan licznika i daty zostają tylko w tej przeglądarce. Sprawdź w swoim aucie.</p>
       <MaintenancePlanner />
+
+      <section className="mt-8">
+        <h2 className="text-xl font-semibold text-silver-300">Wskazówki przeglądów</h2>
+        <div className="mt-3 space-y-3">
+          {TIPS.map(item => (
+            <div key={item.title} className="rounded-xl border border-white/10 bg-neutral-900 p-4">
+              <h3 className="font-semibold text-silver-200">{item.title}</h3>
+              <p className="mt-1 text-sm text-neutral-300">{item.tip}</p>
+            </div>
+          ))}
+        </div>
+      </section>
 
       <section className="mt-8">
         <h2 className="text-xl font-semibold text-silver-300">Części eksploatacyjne</h2>
