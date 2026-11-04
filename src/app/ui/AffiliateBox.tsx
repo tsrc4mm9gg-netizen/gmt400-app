@@ -12,8 +12,8 @@ function amazonLink(search: string) {
 export default function AffiliateBox({ title = 'Gdzie kupić', items }: Props) {
   if (!items.length) return null;
   return (
-    <aside className="my-4 rounded-xl border border-silver-500/30 bg-gradient-to-br from-neutral-900 to-neutral-950 px-4 py-3">
-      <p className="text-xs font-semibold uppercase tracking-wide text-silver-400">{title}</p>
+    <aside className="my-4 rounded-xl border border-amber-500/30 bg-gradient-to-br from-neutral-900 to-neutral-950 px-4 py-3">
+      <p className="text-xs font-semibold uppercase tracking-wide text-amber-400">{title}</p>
       <ul className="mt-2 flex flex-wrap gap-2">
         {items.map((item) => (
           <li key={item.name}>
@@ -21,7 +21,7 @@ export default function AffiliateBox({ title = 'Gdzie kupić', items }: Props) {
               href={amazonLink(item.search)}
               target="_blank"
               rel="noopener noreferrer sponsored"
-              className="inline-flex items-center gap-1 rounded-lg border border-silver-500/40 bg-silver-600/10 px-3 py-1.5 text-sm font-medium text-silver-300 transition hover:border-silver-400 hover:bg-silver-600/20 hover:text-white"
+              className="inline-flex items-center gap-1 rounded-lg border border-amber-500/40 bg-amber-600/10 px-3 py-1.5 text-sm font-medium text-amber-300 transition hover:border-amber-400 hover:bg-amber-600/20 hover:text-amber-200"
             >
               {item.name}
               <span className="text-xs opacity-50">↗</span>
