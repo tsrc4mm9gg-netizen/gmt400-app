@@ -22,6 +22,13 @@ export const metadata: Metadata = {
 
 export const revalidate = 900;
 
+const DIY_TIPS = [
+  { title: 'Przygotuj narzędzia', tip: 'Przed rozpoczęciem sprawdź, czy masz wszystkie potrzebne narzędzia. Brak klucza w połowie pracy to strata czasu.' },
+  { title: 'Używaj podpór', tip: 'Nigdy nie pracuj pod autem opartym tylko na podnośniku. Zawsze używaj podpór (jack stands).' },
+  { title: 'Odłącz akumulator', tip: 'Przy pracach elektrycznych odłącz minus akumulatora. Zapobiega zwarciom i przypadkowemu uruchomieniu.' },
+  { title: 'Dokręcaj momentem', tip: 'Krytyczne połączenia (koła, hamulce, zawieszenie) dokręcaj kluczem dynamometrycznym. Wartości są w sekcji Momenty.' },
+];
+
 const faqItems = [
   {
     question: 'Czy mogę samodzielnie naprawiać GMT400?',
@@ -47,6 +54,18 @@ export default async function Page() {
   return <>
     <Encyclopedia initialTab="diy" initialItems={items} />
     <div className="mx-auto max-w-3xl px-4">
+      <section className="mb-6">
+        <h2 className="text-xl font-semibold text-silver-300">Wskazówki przed rozpoczęciem</h2>
+        <div className="mt-3 grid gap-3 sm:grid-cols-2">
+          {DIY_TIPS.map(item => (
+            <div key={item.title} className="rounded-xl border border-white/10 bg-neutral-900 p-4">
+              <h3 className="font-semibold text-silver-200">{item.title}</h3>
+              <p className="mt-1 text-sm text-neutral-300">{item.tip}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
       <section className="mb-6">
         <h2 className="text-xl font-semibold text-silver-300">Części do napraw DIY</h2>
         <ul className="mt-3 list-inside list-disc space-y-2 text-neutral-300">
