@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Encyclopedia from '../Encyclopedia';
 import JsonLd from '../ui/JsonLd';
 import AffiliateBox from '../ui/AffiliateBox';
+import FAQ from '../ui/FAQ';
 import { getListEntries, itemListJsonLd } from '../../lib/notion-entries';
 
 export const metadata: Metadata = {
@@ -20,6 +21,25 @@ export const metadata: Metadata = {
 
 export const revalidate = 900;
 
+const faqItems = [
+  {
+    question: 'Czym różni się Tahoe od Suburbana?',
+    answer: 'Tahoe to krótszy SUV (2- lub 4-drzwiowy), Suburban to dłuższa wersja z więcej miejscem na bagaż i pasażerów. Oba bazują na tej samej platformie GMT400 i dzielą większość części mechanicznych.',
+  },
+  {
+    question: 'Który silnik jest najlepszy w GMT400?',
+    answer: '5.7 Vortec (L31) jest najpopularniejszy — dobry kompromis między mocą a zużyciem paliwa. 7.4 (L29) daje więcej mocy do holowania, ale pali więcej. 4.3 V6 jest oszczędniejszy, ale słabszy. 6.5 diesel jest wytrzymały, ale wymaga dobrej konserwacji.',
+  },
+  {
+    question: 'Czy części pasują między modelami?',
+    answer: 'Większość części mechanicznych (hamulce, zawieszenie, silnik, skrzynia) jest wspólna dla całej rodziny GMT400. Różnice dotyczą głównie nadwozia, wnętrza i wyposażenia. Zawsze sprawdzaj numer części przed zakupem.',
+  },
+  {
+    question: 'Które roczniki są najlepsze?',
+    answer: '1996–1999 (Vortec) są najpopularniejsze — nowocześniejsza elektronika, lepsze osiągi. 1988–1995 (TBI) są prostsze w naprawie. Unikaj egzemplarzy z dużą korozją, niezależnie od rocznika.',
+  },
+];
+
 export default async function Page() {
   const items = await getListEntries();
   const list = (items ?? []).filter(entry => entry.Typ === 'Model');
@@ -34,6 +54,7 @@ export default async function Page() {
           { name: 'Klucz dynamometryczny', search: 'torque wrench' },
         ]}
       />
+      <FAQ items={faqItems} />
     </div>
     {list.length > 0 && <JsonLd data={itemListJsonLd('Modele GMT400', 'https://www.gmt400.pl/modele', list)} />}
   </>;
