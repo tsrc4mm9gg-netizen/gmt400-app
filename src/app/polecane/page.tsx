@@ -14,30 +14,58 @@ type Product = {
   note: string;
   asin?: string;
   search?: string;
+  fitment?: string;
 };
 
 const categories: { name: string; items: Product[] }[] = [
   {
+    name: 'Filtry — sprawdzone do GMT400',
+    items: [
+      { 
+        name: 'ACDelco PF52 — filtr oleju', 
+        asin: 'B000C9SU1A', 
+        note: 'Oryginalny filtr GM do GMT400 (1988–2000)',
+        fitment: 'Pasuje do: 4.3 V6, 5.0 V8, 5.7 V8, 7.4 V8'
+      },
+      { 
+        name: 'Filtr powietrza', 
+        search: 'air filter GMT400 Tahoe Suburban', 
+        note: 'Sprawdź pasowanie do swojego silnika',
+        fitment: 'Różne dla benzyny i diesla'
+      },
+    ],
+  },
+  {
+    name: 'Płyny — specyfikacje GMT400',
+    items: [
+      { 
+        name: 'MANNOL Dexron III ATF (1L)', 
+        asin: 'B002K4OWDK', 
+        note: 'Spełnia GM Dexron III',
+        fitment: 'Do skrzyń 4L60-E i 4L80-E'
+      },
+      { 
+        name: 'Olej silnikowy 5W-30', 
+        search: '5W-30 engine oil', 
+        note: 'Sprawdź specyfikację w instrukcji',
+        fitment: 'Typowo do silników benzynowych GMT400'
+      },
+    ],
+  },
+  {
     name: 'Diagnostyka',
     items: [
-      { name: 'Skaner OBD2 Bluetooth (ELM327)', asin: 'B0DGXVWWP2', note: 'Do odczytu kodów błędów — działa z GMT400 OBD-II (1996+)' },
-      { name: 'Multimetr cyfrowy', search: 'digital multimeter', note: 'Do pomiarów elektrycznych' },
-    ],
-  },
-  {
-    name: 'Oleje i płyny',
-    items: [
-      { name: 'MANNOL Dexron III ATF (1L)', asin: 'B002K4OWDK', note: 'Do skrzyń 4L60-E / 4L80-E — spełnia GM Dexron III' },
-      { name: 'MANNOL 5W-30 Energy (5L)', search: 'MANNOL 5W-30 Energy 5L', note: 'Olej silnikowy — sprawdź specyfikację dla swojego silnika' },
-      { name: 'Płyn chłodniczy', search: 'coolant antifreeze', note: 'Do układu chłodzenia — sprawdź kolor i specyfikację' },
-    ],
-  },
-  {
-    name: 'Filtry',
-    items: [
-      { name: 'Filtr oleju', search: 'oil filter', note: 'Sprawdź pasowanie do swojego silnika przed zakupem' },
-      { name: 'Filtr powietrza', search: 'air filter car', note: 'Sprawdź pasowanie do swojego modelu' },
-      { name: 'Filtr paliwa', search: 'fuel filter', note: 'Sprawdź pasowanie do swojego silnika' },
+      { 
+        name: 'Skaner OBD2 Bluetooth (ELM327)', 
+        asin: 'B0DGXVWWP2', 
+        note: 'Do odczytu kodów błędów',
+        fitment: 'Działa z GMT400 OBD-II (1996+)'
+      },
+      { 
+        name: 'Multimetr cyfrowy', 
+        search: 'digital multimeter', 
+        note: 'Do pomiarów elektrycznych'
+      },
     ],
   },
   {
@@ -63,14 +91,11 @@ export default function PolecanePage() {
       <p className="mt-2 text-sm text-neutral-400">
         Linki do sklepów mogą być afiliacyjne — nie płacisz więcej, a wspierasz GMT400.pl.
       </p>
-      <p className="mt-1 text-xs text-neutral-500">
-        Zawsze sprawdź pasowanie do swojego modelu przed zakupem.
-      </p>
 
       {categories.map((cat) => (
         <section key={cat.name} className="mt-8">
           <h2 className="text-lg font-semibold text-silver-300">{cat.name}</h2>
-          <ul className="mt-3 space-y-2">
+          <ul className="mt-3 space-y-3">
             {cat.items.map((item) => (
               <li key={item.name} className="rounded-lg border border-white/10 bg-neutral-900/50 px-4 py-3">
                 <a
@@ -81,7 +106,10 @@ export default function PolecanePage() {
                 >
                   {item.name} ↗
                 </a>
-                <p className="mt-1 text-xs text-neutral-500">{item.note}</p>
+                <p className="mt-1 text-sm text-neutral-400">{item.note}</p>
+                {item.fitment && (
+                  <p className="mt-1 text-xs text-silver-400">{item.fitment}</p>
+                )}
               </li>
             ))}
           </ul>
