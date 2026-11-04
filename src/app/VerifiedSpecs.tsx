@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { CHECK_NOTE, ENGINES, FLUIDS, SOURCES, TRANSFER_CASES } from '../lib/verified-specs';
 import { PARTS, PART_SOURCES, STATUS_LABEL, type Part } from '../lib/parts-catalog';
 import { TORQUE_SPECS } from '../lib/torque-specs';
+import PartLink from './ui/PartLink';
 
 function Src({ id }: { id: string }) {
   const s = SOURCES[id];
@@ -92,7 +93,6 @@ const STATUS_CLASS: Record<Part['status'], string> = {
   niezweryfikowane: 'border-silver-500/50 text-silver-300',
 };
 
-/** Mały przypis ze statusem i linkami do źródeł — czytelny na telefonie (linki ≥ 44 px wysokości dotyku). */
 export function PartSourceNote({ part }: { part: Part }) {
   return (
     <div className="mt-2 text-xs leading-relaxed">
@@ -121,7 +121,7 @@ export function OemQuickList({ filtersOnly = false }: { filtersOnly?: boolean })
         <div key={p.oem} className="border-b border-white/5 pb-2 last:border-0">
           <div className="flex items-start justify-between gap-3">
             <span className="text-neutral-300">{p.nazwa}</span>
-            <span className="shrink-0 text-right font-medium text-silver-400">{p.oem.replace('AC Delco ', '')}</span>
+            <PartLink partNumber={p.oem.replace('AC Delco ', '')} className="shrink-0 text-right" />
           </div>
           <p className="text-xs text-neutral-500">{p.model}</p>
           {p.src && <p className="text-xs text-neutral-500">Źródło: {p.src.map((id, i) => <span key={id}>{i > 0 && ', '}<a href={PART_SOURCES[id].url} target="_blank" rel="noopener noreferrer" className="text-silver-300 underline underline-offset-2">{PART_SOURCES[id].label}</a></span>)}</p>}
