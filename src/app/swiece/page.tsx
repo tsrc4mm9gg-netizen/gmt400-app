@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 import Breadcrumbs from '../ui/Breadcrumbs';
 import FAQ from '../ui/FAQ';
+import PartLink from '../ui/PartLink';
+import AffiliateBox from '../ui/AffiliateBox';
 
 export const metadata: Metadata = {
   title: 'Przerwa świec GMT400 — 4.3, 5.7, 7.4',
@@ -25,6 +27,10 @@ const faqItems = [
     question: 'Czy można używać świec irydowych?',
     answer: 'Tak, ale nie są konieczne. Platynowe (41-932) są wystarczające dla GMT400. Irydowe mogą działać dłużej, ale są droższe. Ważniejsze jest regularne sprawdzanie przerwy.',
   },
+  {
+    question: 'Jakie przewody zapłonowe do GMT400?',
+    answer: 'ACDelco 9718D to standardowy zestaw do V8. Sprawdź długość i kolejność podłączenia. Zużyte przewody powodują wypadanie zapłonu i problemy z rozruchem.',
+  },
 ];
 
 export default function SparkPlugsPage() {
@@ -46,29 +52,29 @@ export default function SparkPlugsPage() {
               <tr>
                 <th className="p-3">Silnik</th>
                 <th className="p-3">Typowa przerwa</th>
-                <th className="p-3">Uwagi</th>
+                <th className="p-3">Świece</th>
               </tr>
             </thead>
             <tbody>
               <tr className="border-t border-white/10">
                 <td className="p-3 font-medium">4.3 V6</td>
                 <td className="p-3 text-silver-300">ok. 1.5 mm (0.060")</td>
-                <td className="p-3 text-neutral-400">Vortec</td>
+                <td className="p-3"><PartLink partNumber="41-932" /></td>
               </tr>
               <tr className="border-t border-white/10">
                 <td className="p-3 font-medium">5.7 Vortec (L31)</td>
                 <td className="p-3 text-silver-300">ok. 1.5 mm (0.060")</td>
-                <td className="p-3 text-neutral-400">najczęstsza</td>
+                <td className="p-3"><PartLink partNumber="41-932" /></td>
               </tr>
               <tr className="border-t border-white/10">
                 <td className="p-3 font-medium">7.4 Vortec (L29)</td>
                 <td className="p-3 text-silver-300">ok. 1.5 mm (0.060")</td>
-                <td className="p-3 text-neutral-400">sprawdź w instrukcji</td>
+                <td className="p-3"><PartLink partNumber="41-932" /></td>
               </tr>
               <tr className="border-t border-white/10">
                 <td className="p-3 font-medium">6.5 TD</td>
                 <td className="p-3 text-silver-300">świece żarowe</td>
-                <td className="p-3 text-neutral-400">nie świece zapłonowe</td>
+                <td className="p-3 text-neutral-400">nie zapłonowe</td>
               </tr>
             </tbody>
           </table>
@@ -77,6 +83,37 @@ export default function SparkPlugsPage() {
           Wartości orientacyjne. W razie wątpliwości sprawdź naklejkę w komorze silnika lub instrukcję serwisową swojego rocznika.
         </p>
       </section>
+
+      <section className="mt-8">
+        <h2 className="text-xl font-semibold">Części zapłonu</h2>
+        <ul className="mt-3 list-inside list-disc space-y-2 text-neutral-300">
+          <li>Świece platynowe: <PartLink partNumber="41-932" /></li>
+          <li>Przewody zapłonowe V8: <PartLink partNumber="9718D" /></li>
+          <li>Cewka zapłonowa Vortec: <PartLink partNumber="D577" /></li>
+          <li>Rozdzielacz (TBI 1988–1995): sprawdź numer na starej części</li>
+        </ul>
+      </section>
+
+      <section className="mt-8">
+        <h2 className="text-xl font-semibold">Objawy zużytych świec</h2>
+        <ul className="mt-3 list-inside list-disc space-y-2 text-neutral-300">
+          <li>Trudny rozruch (szczególnie na zimno)</li>
+          <li>Wypadanie zapłonu (szarpanie, Check Engine)</li>
+          <li>Wyższe zużycie paliwa</li>
+          <li>Słabsze przyspieszenie</li>
+          <li>Nierówna praca na biegu jałowym</li>
+        </ul>
+      </section>
+
+      <AffiliateBox
+        title="Przydatne przy wymianie świec"
+        items={[
+          { name: 'Świece ACDelco 41-932', search: 'ACDelco 41-932' },
+          { name: 'Przewody zapłonowe 9718D', search: 'ACDelco 9718D' },
+          { name: 'Szczelinomierz', search: 'feeler gauge spark plug' },
+          { name: 'Klucz do świec', search: 'spark plug socket 5/8' },
+        ]}
+      />
 
       <FAQ items={faqItems} />
     </div>
