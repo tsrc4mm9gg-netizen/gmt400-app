@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Breadcrumbs from '../ui/Breadcrumbs';
 import FAQ from '../ui/FAQ';
+import AccordionSection from '../ui/AccordionSection';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
@@ -57,52 +58,53 @@ export default function HistoryPage() {
         </p>
       </header>
 
-      <section className="mt-6">
-        <h2 className="text-xl font-semibold">Wskazówki dla kupujących</h2>
-        <div className="mt-3 space-y-3">
-          {TIPS.map(item => (
-            <div key={item.title} className="rounded-xl border border-white/10 bg-neutral-900 p-4">
-              <h3 className="font-semibold text-silver-200">{item.title}</h3>
-              <p className="mt-1 text-sm text-neutral-300">{item.tip}</p>
-            </div>
-          ))}
-        </div>
-      </section>
+      <div className="mt-6">
+        <AccordionSection title="Wskazówki dla kupujących" defaultOpen>
+          <div className="space-y-3">
+            {TIPS.map(item => (
+              <div key={item.title} className="rounded-lg border border-white/10 bg-neutral-800 p-3">
+                <h3 className="font-semibold text-silver-200">{item.title}</h3>
+                <p className="mt-1 text-sm text-neutral-300">{item.tip}</p>
+              </div>
+            ))}
+          </div>
+        </AccordionSection>
 
-      <section className="mt-6">
-        <ul className="space-y-3">
-          {YEARS.map(item => (
-            <li key={item.year} className="rounded-xl border border-white/10 bg-neutral-900 p-4">
-              <span className="font-semibold text-silver-300">{item.year}</span>
-              <p className="mt-1 text-sm text-neutral-300">{item.note}</p>
-            </li>
-          ))}
-        </ul>
-      </section>
+        <AccordionSection title="Historia rok po roku">
+          <ul className="space-y-2">
+            {YEARS.map(item => (
+              <li key={item.year} className="rounded-lg border border-white/10 bg-neutral-800 p-3">
+                <span className="font-semibold text-silver-300">{item.year}</span>
+                <p className="mt-1 text-sm text-neutral-300">{item.note}</p>
+              </li>
+            ))}
+          </ul>
+        </AccordionSection>
 
-      <section className="mt-8">
-        <h2 className="text-xl font-semibold">Z71</h2>
-        <p className="mt-2 text-sm text-neutral-300">
-          Z71 to fabryczny pakiet terenowy. Zwykle obejmuje mocniejsze zawieszenie, osłony podwozia, inne opony i czasem inne przełożenie mostu. Kod Z71 sprawdzisz na naklejce RPO w schowku.
-        </p>
-      </section>
+        <AccordionSection title="Z71 — pakiet terenowy">
+          <p className="text-sm text-neutral-300">
+            Z71 to fabryczny pakiet terenowy. Zwykle obejmuje mocniejsze zawieszenie, osłony podwozia, inne opony i czasem inne przełożenie mostu. Kod Z71 sprawdzisz na naklejce RPO w schowku.
+          </p>
+        </AccordionSection>
 
-      <section className="mt-8">
-        <h2 className="text-xl font-semibold">Silniki</h2>
-        <ul className="mt-3 list-inside list-disc space-y-2 text-neutral-300">
-          <li><strong>4.3 V6</strong> — najoszczędniejszy, najsłabszy</li>
-          <li><strong>5.0 V8</strong> — kompromis, rzadki</li>
-          <li><strong>5.7 TBI</strong> — 1988–1995, prosty w naprawie</li>
-          <li><strong>5.7 Vortec (L31)</strong> — 1996+, najpopularniejszy</li>
-          <li><strong>7.4 Vortec (L29)</strong> — do holowania, duże zużycie</li>
-          <li><strong>6.5 TD</strong> — diesel, wytrzymały, wymaga konserwacji</li>
-        </ul>
-        <Link href="/modele" className="mt-4 inline-block text-sm font-semibold text-silver-300 underline-offset-2 hover:underline">
-          Porównaj modele →
-        </Link>
-      </section>
+        <AccordionSection title="Silniki">
+          <ul className="list-inside list-disc space-y-2 text-neutral-300">
+            <li><strong>4.3 V6</strong> — najoszczędniejszy, najsłabszy</li>
+            <li><strong>5.0 V8</strong> — kompromis, rzadki</li>
+            <li><strong>5.7 TBI</strong> — 1988–1995, prosty w naprawie</li>
+            <li><strong>5.7 Vortec (L31)</strong> — 1996+, najpopularniejszy</li>
+            <li><strong>7.4 Vortec (L29)</strong> — do holowania, duże zużycie</li>
+            <li><strong>6.5 TD</strong> — diesel, wytrzymały, wymaga konserwacji</li>
+          </ul>
+          <Link href="/modele" className="mt-3 inline-block text-sm font-semibold text-silver-300 underline-offset-2 hover:underline">
+            Porównaj modele →
+          </Link>
+        </AccordionSection>
 
-      <FAQ items={faqItems} />
+        <AccordionSection title="Częste pytania">
+          <FAQ items={faqItems} />
+        </AccordionSection>
+      </div>
     </div>
   );
 }
