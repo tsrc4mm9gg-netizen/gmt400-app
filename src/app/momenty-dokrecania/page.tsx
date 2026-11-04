@@ -2,6 +2,7 @@ import Link from 'next/link';
 import Breadcrumbs from '../ui/Breadcrumbs';
 import AffiliateBox from '../ui/AffiliateBox';
 import FAQ from '../ui/FAQ';
+import PartLink from '../ui/PartLink';
 import TorqueBrowser from './TorqueBrowser';
 import { TORQUE_ROWS } from '@/lib/torque-gm';
 
@@ -10,6 +11,14 @@ export const metadata = {
   description: 'Momenty dokręcania śrub i nakrętek GMT400 1988–2000 według układów: silnik, paliwo, skrzynia, mosty, układ kierowniczy, hamulce, elektryka, klimatyzacja i nadwozie — w Nm i lb-ft, z silnikiem, rocznikiem i stroną instrukcji GM.',
   alternates: { canonical: 'https://www.gmt400.pl/momenty-dokrecania' },
 };
+
+const COMMON_TORQUES = [
+  { name: 'Śruba koła (nakrętka)', torque: '140 Nm (100 lb-ft)', note: 'Wszystkie modele' },
+  { name: 'Świeca zapłonowa', torque: '15–20 Nm (11–15 lb-ft)', note: 'Vortec' },
+  { name: 'Miska olejowa', torque: '12 Nm (9 lb-ft)', note: 'Silnik' },
+  { name: 'Pokrywa zaworów', torque: '10 Nm (7 lb-ft)', note: 'Silnik' },
+  { name: 'Filtr oleju', torque: 'Ręcznie + 3/4 obrotu', note: 'Nie kluczem' },
+];
 
 const faqItems = [
   {
@@ -46,6 +55,32 @@ export default function MomentyPage() {
         podzespołów (Unit Repair) — dotyczą danego zespołu, montowanego także w innych autach GM. Przy śrubach dokręcanych kątowo lub
         jednorazowych postępuj według procedury z instrukcji.
       </p>
+
+      <section className="mt-6">
+        <h2 className="text-xl font-semibold text-silver-300">Najczęstsze momenty</h2>
+        <div className="mt-3 overflow-x-auto rounded-xl border border-white/10">
+          <table className="w-full text-left text-sm">
+            <thead className="bg-neutral-900 text-neutral-300">
+              <tr>
+                <th className="p-3">Połączenie</th>
+                <th className="p-3">Moment</th>
+                <th className="p-3">Uwagi</th>
+              </tr>
+            </thead>
+            <tbody>
+              {COMMON_TORQUES.map(row => (
+                <tr key={row.name} className="border-t border-white/10">
+                  <td className="p-3 font-medium">{row.name}</td>
+                  <td className="p-3 text-silver-300">{row.torque}</td>
+                  <td className="p-3 text-neutral-400">{row.note}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <p className="mt-2 text-xs text-neutral-500">Wartości orientacyjne. Sprawdź w pełnej tabeli poniżej lub w instrukcji.</p>
+      </section>
+
       <AffiliateBox
         title="Przydatne przy dokręcaniu"
         items={[
