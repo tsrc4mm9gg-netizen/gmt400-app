@@ -3,6 +3,7 @@ import Encyclopedia from '../Encyclopedia';
 import JsonLd from '../ui/JsonLd';
 import AffiliateBox from '../ui/AffiliateBox';
 import FAQ from '../ui/FAQ';
+import PartLink from '../ui/PartLink';
 import { getListEntries, itemListJsonLd } from '../../lib/notion-entries';
 
 export const metadata: Metadata = {
@@ -46,6 +47,17 @@ export default async function Page() {
   return <>
     <Encyclopedia initialTab="diy" initialItems={items} />
     <div className="mx-auto max-w-3xl px-4">
+      <section className="mb-6">
+        <h2 className="text-xl font-semibold text-silver-300">Części do napraw DIY</h2>
+        <ul className="mt-3 list-inside list-disc space-y-2 text-neutral-300">
+          <li>Filtr oleju: <PartLink partNumber="PF52" /></li>
+          <li>Świece zapłonowe: <PartLink partNumber="41-932" /></li>
+          <li>Przewody zapłonowe: <PartLink partNumber="9718D" /></li>
+          <li>Klocki hamulcowe: <PartLink partNumber="14D52" /></li>
+          <li>Filtr ATF: <PartLink partNumber="TF289" /></li>
+          <li>Pompa wody: <PartLink partNumber="252-711" /></li>
+        </ul>
+      </section>
       <AffiliateBox
         title="Przydatne przy naprawach DIY"
         items={[
