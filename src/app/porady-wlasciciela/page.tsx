@@ -4,6 +4,7 @@ import Breadcrumbs from '../ui/Breadcrumbs';
 import FAQ from '../ui/FAQ';
 import PartLink from '../ui/PartLink';
 import AffiliateBox from '../ui/AffiliateBox';
+import AccordionSection from '../ui/AccordionSection';
 import OwnerTipsList from './OwnerTipsList';
 
 export const metadata: Metadata = {
@@ -49,40 +50,44 @@ export default function OwnerTipsPage() {
           <p className="mt-3 text-sm leading-6 text-neutral-400">Dłuższe instrukcje krok po kroku (wymiany, naprawy) znajdziesz w <Link href="/poradniki" className="text-silver-300 underline">Poradnikach</Link>. Przepisy PL (LPG, rejestracja, światła) — w <Link href="/dla-wlasciciela" className="text-silver-300 underline">Dla właściciela</Link>.</p>
         </header>
 
-        <section className="mb-6">
-          <h2 className="text-xl font-semibold text-silver-300">Codzienne wskazówki</h2>
-          <div className="mt-3 space-y-3">
+        <AccordionSection title="Codzienne wskazówki" defaultOpen>
+          <div className="space-y-3">
             {TIPS.map(item => (
-              <div key={item.title} className="rounded-xl border border-white/10 bg-neutral-900 p-4">
+              <div key={item.title} className="rounded-lg border border-white/10 bg-neutral-800 p-3">
                 <h3 className="font-semibold text-silver-200">{item.title}</h3>
                 <p className="mt-1 text-sm text-neutral-300">{item.tip}</p>
               </div>
             ))}
           </div>
-        </section>
+        </AccordionSection>
 
         <OwnerTipsList />
 
-        <section className="mt-8">
-          <h2 className="text-xl font-semibold text-silver-300">Przydatne części</h2>
-          <ul className="mt-3 list-inside list-disc space-y-2 text-neutral-300">
-            <li>Filtr oleju: <PartLink partNumber="PF52" /></li>
-            <li>Świece zapłonowe: <PartLink partNumber="41-932" /></li>
-            <li>Filtr powietrza: <PartLink partNumber="A1300C" /></li>
-            <li>Wycieraczki: sprawdź rozmiar w instrukcji</li>
-          </ul>
-        </section>
+        <div className="mt-6">
+          <AccordionSection title="Przydatne części">
+            <ul className="list-inside list-disc space-y-2 text-neutral-300">
+              <li>Filtr oleju: <PartLink partNumber="PF52" /></li>
+              <li>Świece zapłonowe: <PartLink partNumber="41-932" /></li>
+              <li>Filtr powietrza: <PartLink partNumber="A1300C" /></li>
+              <li>Wycieraczki: sprawdź rozmiar w instrukcji</li>
+            </ul>
+          </AccordionSection>
 
-        <AffiliateBox
-          title="Przydatne dla właściciela"
-          items={[
-            { name: 'Skaner OBD2', search: 'OBD2 scanner' },
-            { name: 'Klucz dynamometryczny', search: 'torque wrench' },
-            { name: 'Latarka inspekcyjna', search: 'inspection flashlight LED' },
-          ]}
-        />
+          <AccordionSection title="Przydatne dla właściciela">
+            <AffiliateBox
+              title=""
+              items={[
+                { name: 'Skaner OBD2', search: 'OBD2 scanner' },
+                { name: 'Klucz dynamometryczny', search: 'torque wrench' },
+                { name: 'Latarka inspekcyjna', search: 'inspection flashlight LED' },
+              ]}
+            />
+          </AccordionSection>
 
-        <FAQ items={faqItems} />
+          <AccordionSection title="Częste pytania">
+            <FAQ items={faqItems} />
+          </AccordionSection>
+        </div>
       </div>
     </div>
   );
