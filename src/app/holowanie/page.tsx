@@ -19,6 +19,12 @@ const DATA = [
   { model: 'C/K 2500/3500', years: '1988–2000', tow: 'ok. 6000–10000+ lb', note: '7.4 i 6.5 TD wyżej' },
 ];
 
+const TIPS = [
+  { title: 'Przed holowaniem', tip: 'Sprawdź poziom ATF, płynu chłodniczego, ciśnienie w oponach. Rozgrzej silnik i skrzynię.' },
+  { title: 'Podczas holowania', tip: 'Unikaj pełnego gazu na zimnej skrzyni. Używaj niższych biegów pod górę. Monitoruj temperaturę.' },
+  { title: 'Po holowaniu', tip: 'Sprawdź poziom ATF (może się zmienić). Sprawdź hamulce. Odczekaj przed wyłączeniem silnika.' },
+];
+
 const faqItems = [
   {
     question: 'Ile może holować GMT400?',
@@ -78,6 +84,18 @@ export default function TowingPage() {
           </table>
         </div>
         <p className="mt-3 text-xs text-neutral-500">Źródła: instrukcje GM i dane fabryczne. Wartości orientacyjne.</p>
+      </section>
+
+      <section className="mt-8">
+        <h2 className="text-xl font-semibold">Wskazówki holowania</h2>
+        <div className="mt-3 space-y-3">
+          {TIPS.map(item => (
+            <div key={item.title} className="rounded-xl border border-white/10 bg-neutral-900 p-4">
+              <h3 className="font-semibold text-silver-200">{item.title}</h3>
+              <p className="mt-1 text-sm text-neutral-300">{item.tip}</p>
+            </div>
+          ))}
+        </div>
       </section>
 
       <section className="mt-8">
