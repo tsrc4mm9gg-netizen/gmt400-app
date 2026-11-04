@@ -26,6 +26,13 @@ export const metadata: Metadata = {
 
 export const revalidate = 900;
 
+const DIAGNOSTIC_TIPS = [
+  { title: 'Zacznij od prostych rzeczy', tip: 'Sprawdź poziom płynów, stan filtrów, napięcie akumulatora. 50% problemów to proste przyczyny.' },
+  { title: 'Odczytaj kody OBD', tip: 'Skaner OBD2 pokaże kody błędów. Zapisz je przed czyszczeniem — pomogą w diagnozie.' },
+  { title: 'Nie wymieniaj części na oślep', tip: 'Potwierdź usterkę pomiarami. Wymiana sprawnej części nie rozwiąże problemu.' },
+  { title: 'Sprawdź połączenia', tip: 'Luźne złącza i skorodowane styki powodują wiele problemów. Sprawdź przed wymianą części.' },
+];
+
 const faqItems = [
   {
     question: 'Jak zdiagnozować problem z GMT400?',
@@ -66,6 +73,18 @@ export default async function Page() {
       </ul>
     </section>
     <div className="mx-auto max-w-3xl px-4 pb-20">
+      <section className="mb-6">
+        <h2 className="text-xl font-semibold text-silver-300">Wskazówki diagnostyczne</h2>
+        <div className="mt-3 grid gap-3 sm:grid-cols-2">
+          {DIAGNOSTIC_TIPS.map(item => (
+            <div key={item.title} className="rounded-xl border border-white/10 bg-neutral-900 p-4">
+              <h3 className="font-semibold text-silver-200">{item.title}</h3>
+              <p className="mt-1 text-sm text-neutral-300">{item.tip}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
       <section className="mb-6">
         <h2 className="text-xl font-semibold text-silver-300">Części do diagnostyki</h2>
         <ul className="mt-3 list-inside list-disc space-y-2 text-neutral-300">
