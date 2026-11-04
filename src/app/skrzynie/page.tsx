@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import Breadcrumbs from '../ui/Breadcrumbs';
 import FAQ from '../ui/FAQ';
+import AffiliateBox from '../ui/AffiliateBox';
 
 export const metadata: Metadata = {
   title: 'Punkty zmiany biegów 4L60-E i 4L80-E — GMT400',
@@ -25,6 +26,10 @@ const faqItems = [
   {
     question: 'Jak często wymieniać ATF?',
     answer: 'Co 50000–80000 km przy normalnej eksploatacji. Przy ciężkich warunkach (holowanie, góry) co 30000–50000 km. Użyj Dexron III lub nowszego. Wymiana filtra co drugą wymianę płynu.',
+  },
+  {
+    question: 'Czy można wymienić 4L60-E na 4L80-E?',
+    answer: 'Tak, ale wymaga to przeróbek: inna skrzynia rozdzielcza, inny wał napędowy, inna elektronika. Koszt przeróbki: 5000–10000 zł. Warto rozważyć przy ciężkim holowaniu.',
   },
 ];
 
@@ -59,10 +64,12 @@ export default function TransmissionPage() {
           <div className="rounded-xl border border-white/10 bg-neutral-900 p-4">
             <h3 className="font-semibold text-silver-300">4L60-E</h3>
             <p className="mt-1 text-sm text-neutral-300">Najczęstsza w 1500. Przełożenia: 3.06 / 1.63 / 1.00 / 0.70</p>
+            <p className="mt-2 text-xs text-neutral-400">Moment: do ~450 Nm. Holowanie: do ~5000 lb.</p>
           </div>
           <div className="rounded-xl border border-white/10 bg-neutral-900 p-4">
             <h3 className="font-semibold text-silver-300">4L80-E</h3>
             <p className="mt-1 text-sm text-neutral-300">W 2500/3500 i dieslu. Przełożenia: 2.48 / 1.48 / 1.00 / 0.75</p>
+            <p className="mt-2 text-xs text-neutral-400">Moment: do ~600 Nm. Holowanie: do ~10000 lb.</p>
           </div>
         </div>
       </section>
@@ -70,15 +77,36 @@ export default function TransmissionPage() {
       <section className="mt-8">
         <h2 className="text-xl font-semibold">Co sprawdzić przy problemach ze zmianami</h2>
         <ul className="mt-3 list-inside list-disc space-y-2 text-neutral-300">
-          <li>Poziom i stan ATF</li>
+          <li>Poziom i stan ATF (kolor, zapach, poziom)</li>
           <li>Kody błędów (P0700, P0751–P0758 itp.)</li>
           <li>Czujnik prędkości (VSS)</li>
           <li>Czujnik położenia przepustnicy (TPS)</li>
+          <li>Filtr ATF (wymiana co 100000 km)</li>
         </ul>
         <Link href="/diagnoza?objaw=skrzynia" className="mt-4 inline-block text-sm font-semibold text-silver-300 underline-offset-2 hover:underline">
           Diagnoza skrzyni →
         </Link>
       </section>
+
+      <section className="mt-8">
+        <h2 className="text-xl font-semibold">Wskazówki eksploatacyjne</h2>
+        <ul className="mt-3 list-inside list-disc space-y-2 text-neutral-300">
+          <li>Rozgrzewaj skrzynię przed jazdą (szczególnie zimą)</li>
+          <li>Unikaj holowania na zimnej skrzyni</li>
+          <li>Sprawdzaj poziom ATF co 10000 km</li>
+          <li>Wymieniaj filtr ATF co drugą wymianę płynu</li>
+          <li>Przy ciężkim holowaniu rozważ dodatkową chłodnicę ATF</li>
+        </ul>
+      </section>
+
+      <AffiliateBox
+        title="Przydatne przy obsłudze skrzyni"
+        items={[
+          { name: 'MANNOL Dexron III ATF', search: 'MANNOL Dexron III ATF' },
+          { name: 'Filtr ATF TF289', search: 'ACDelco TF289' },
+          { name: 'Uszczelka miski ATF', search: 'Fel-Pro TOS18663' },
+        ]}
+      />
 
       <FAQ items={faqItems} />
     </div>
