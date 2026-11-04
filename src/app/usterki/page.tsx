@@ -33,7 +33,7 @@ const QUICK_CHECKS = [
       'Czy pompa paliwa buczy przy włączeniu zapłonu?',
       'Sprawdź iskrę (świece, cewka)',
     ],
-    parts: ['EP381', '41-932', 'D577'],
+    parts: ['EP381', '41-932', 'D577', 'GF626'],
   },
   {
     symptom: 'Szarpie / gaśnie',
@@ -43,7 +43,7 @@ const QUICK_CHECKS = [
       'Sprawdź świece i przewody',
       'Sprawdź ciśnienie paliwa (60–66 psi Vortec)',
     ],
-    parts: ['41-932', '9718D', 'A1300C', 'GF626'],
+    parts: ['41-932', '9718D', 'A1300C', 'GF626', 'EP381'],
   },
   {
     symptom: 'Skrzynia ślizga',
@@ -65,6 +65,41 @@ const QUICK_CHECKS = [
     ],
     parts: ['131-113', '252-711'],
   },
+  {
+    symptom: 'Stuki w zawieszeniu',
+    checks: [
+      'Sprawdź końcówki drążków',
+      'Sprawdź tuleje wahaczy',
+      'Sprawdź amortyzatory',
+      'Sprawdź łączniki stabilizatora',
+    ],
+    parts: ['14D52'],
+  },
+  {
+    symptom: 'Hałas z kół',
+    checks: [
+      'Sprawdź łożyska (piasty)',
+      'Sprawdź klocki hamulcowe',
+      'Sprawdź tarcze',
+      'Sprawdź opony',
+    ],
+    parts: ['14D52'],
+  },
+];
+
+const COMMON_PARTS = [
+  { name: 'Pompa paliwa', part: 'EP381' },
+  { name: 'Filtr paliwa', part: 'GF626' },
+  { name: 'Świece zapłonowe', part: '41-932' },
+  { name: 'Przewody zapłonowe', part: '9718D' },
+  { name: 'Cewka zapłonowa', part: 'D577' },
+  { name: 'Klocki hamulcowe', part: '14D52' },
+  { name: 'Filtr oleju', part: 'PF52' },
+  { name: 'Filtr powietrza', part: 'A1300C' },
+  { name: 'Filtr ATF', part: 'TF289' },
+  { name: 'Termostat', part: '131-113' },
+  { name: 'Pompa wody', part: '252-711' },
+  { name: 'Uszczelka miski ATF', part: 'TOS18663' },
 ];
 
 const faqItems = [
@@ -93,7 +128,7 @@ export default async function Page() {
     <Encyclopedia initialTab="usterki" initialItems={items} />
     <div className="mx-auto max-w-3xl px-4">
       <AccordionSection title="Szybka diagnoza — co sprawdzić najpierw" defaultOpen>
-        <p className="mb-3 text-sm text-neutral-400">Wybierz objaw i sprawdź najczęstsze przyczyny przed wymianą części.</p>
+        <p className="mb-3 text-sm text-neutral-400">Wybierz objaw i sprawdź najczęstsze przyczyny przed wymianą części. Kliknij numer części, aby wyszukać na Amazonie.</p>
         <div className="space-y-3">
           {QUICK_CHECKS.map(item => (
             <div key={item.symptom} className="rounded-lg border border-white/10 bg-neutral-800 p-3">
@@ -113,13 +148,13 @@ export default async function Page() {
       </AccordionSection>
 
       <AccordionSection title="Części do najczęstszych usterek">
-        <ul className="list-inside list-disc space-y-2 text-neutral-300">
-          <li>Pompa paliwa: <PartLink partNumber="EP381" /></li>
-          <li>Filtr paliwa: <PartLink partNumber="GF626" /></li>
-          <li>Świece zapłonowe: <PartLink partNumber="41-932" /></li>
-          <li>Przewody zapłonowe: <PartLink partNumber="9718D" /></li>
-          <li>Klocki hamulcowe: <PartLink partNumber="14D52" /></li>
-          <li>Filtr oleju: <PartLink partNumber="PF52" /></li>
+        <ul className="space-y-2 text-neutral-300">
+          {COMMON_PARTS.map(item => (
+            <li key={item.part} className="flex items-center gap-2">
+              <span>{item.name}:</span>
+              <PartLink partNumber={item.part} />
+            </li>
+          ))}
         </ul>
       </AccordionSection>
 
@@ -131,6 +166,7 @@ export default async function Page() {
             { name: 'Multimetr', search: 'digital multimeter' },
             { name: 'Manometr paliwa', search: 'fuel pressure gauge' },
             { name: 'Termometr laserowy', search: 'infrared thermometer' },
+            { name: 'Klucz dynamometryczny', search: 'torque wrench' },
           ]}
         />
       </AccordionSection>
