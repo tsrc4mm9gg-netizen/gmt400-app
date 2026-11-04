@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import Breadcrumbs from '../ui/Breadcrumbs';
 import FAQ from '../ui/FAQ';
+import AccordionSection from '../ui/AccordionSection';
 
 export const metadata: Metadata = {
   title: 'Części eksploatacyjne GMT400 — filtry, płyny, hamulce, zawieszenie',
@@ -144,7 +145,7 @@ function productLink(asin: string) {
 
 export default function EksploatacjaPage() {
   return (
-    <div className="mx-auto max-w-3xl px-4 py-8">
+    <div className="mx-auto max-w-3xl px-4 py-8 pb-28">
       <Breadcrumbs items={[{ label: 'Części eksploatacyjne' }]} />
       <h1 className="mt-4 text-2xl font-bold text-white">Części eksploatacyjne</h1>
       <p className="mt-2 text-sm text-neutral-400">
@@ -152,45 +153,47 @@ export default function EksploatacjaPage() {
         Linki mogą być afiliacyjne — nie płacisz więcej.
       </p>
 
-      <section className="mt-6">
-        <h2 className="text-lg font-semibold text-silver-300">Wskazówki zakupu</h2>
-        <div className="mt-3 space-y-3">
-          {TIPS.map(item => (
-            <div key={item.title} className="rounded-xl border border-white/10 bg-neutral-900 p-4">
-              <h3 className="font-semibold text-silver-200">{item.title}</h3>
-              <p className="mt-1 text-sm text-neutral-300">{item.tip}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {categories.map((cat) => (
-        <section key={cat.name} className="mt-8">
-          <h2 className="text-lg font-semibold text-silver-300">{cat.name}</h2>
-          <ul className="mt-3 space-y-3">
-            {cat.items.map((item) => (
-              <li key={item.name} className="rounded-lg border border-white/10 bg-neutral-900/50 px-4 py-3">
-                <a
-                  href={productLink(item.asin)}
-                  target="_blank"
-                  rel="noopener noreferrer sponsored"
-                  className="inline-flex items-center gap-1 font-medium text-silver-200 hover:text-white hover:underline"
-                >
-                  {item.name} <span className="text-xs opacity-50">↗</span>
-                </a>
-                <p className="mt-1 text-sm text-neutral-400">{item.note}</p>
-                {item.fitment && (
-                  <p className="mt-1 text-xs text-silver-400">{item.fitment}</p>
-                )}
-              </li>
+      <div className="mt-6">
+        <AccordionSection title="Wskazówki zakupu" defaultOpen>
+          <div className="space-y-3">
+            {TIPS.map(item => (
+              <div key={item.title} className="rounded-lg border border-white/10 bg-neutral-800 p-3">
+                <h3 className="font-semibold text-silver-200">{item.title}</h3>
+                <p className="mt-1 text-sm text-neutral-300">{item.tip}</p>
+              </div>
             ))}
-          </ul>
-        </section>
-      ))}
+          </div>
+        </AccordionSection>
 
-      <FAQ items={faqItems} />
+        {categories.map((cat) => (
+          <AccordionSection key={cat.name} title={cat.name}>
+            <ul className="space-y-2">
+              {cat.items.map((item) => (
+                <li key={item.name} className="rounded-lg border border-white/10 bg-neutral-800 px-3 py-2">
+                  <a
+                    href={productLink(item.asin)}
+                    target="_blank"
+                    rel="noopener noreferrer sponsored"
+                    className="inline-flex items-center gap-1 font-medium text-amber-400 hover:text-amber-300 hover:underline"
+                  >
+                    {item.name} <span className="text-xs opacity-50">↗</span>
+                  </a>
+                  <p className="mt-1 text-sm text-neutral-400">{item.note}</p>
+                  {item.fitment && (
+                    <p className="mt-1 text-xs text-silver-400">{item.fitment}</p>
+                  )}
+                </li>
+              ))}
+            </ul>
+          </AccordionSection>
+        ))}
 
-      <p className="mt-8 text-xs text-neutral-500">
+        <AccordionSection title="Częste pytania">
+          <FAQ items={faqItems} />
+        </AccordionSection>
+      </div>
+
+      <p className="mt-6 text-xs text-neutral-500">
         <Link href="/polecane" className="text-silver-400 hover:underline">Zobacz wszystkie polecane produkty →</Link>
       </p>
     </div>
