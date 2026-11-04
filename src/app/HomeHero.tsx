@@ -15,6 +15,7 @@ import RecentlyViewed from './RecentlyViewed';
 import HomeTorque from './HomeTorque';
 import HomeFAQ from './HomeFAQ';
 import SymptomSearch from './SymptomSearch';
+import AffiliateBox from './ui/AffiliateBox';
 
 export default function HomeHero() {
   const { bodyId, filters, clearSelection, setSelection } = useModelSelection();
@@ -55,6 +56,17 @@ export default function HomeHero() {
       <div className="pt-1"><HomeSearch /></div>
       <HomeFAQ />
       <CategoryGrid />
+      <div className="mx-4">
+        <AffiliateBox
+          title="Popularne części i narzędzia"
+          items={[
+            { name: 'ACDelco PF52 — filtr oleju', search: 'ACDelco PF52' },
+            { name: 'Skaner OBD2', search: 'OBD2 scanner' },
+            { name: 'Klucz dynamometryczny', search: 'torque wrench' },
+            { name: 'MANNOL Dexron III ATF', search: 'MANNOL Dexron III ATF' },
+          ]}
+        />
+      </div>
       <div className="mx-4 my-6 rounded-xl border border-silver-500/40 bg-silver-950/40 px-4 py-4 text-center">
         <p className="text-sm text-neutral-300">
           Podoba Ci się GMT400.pl?
