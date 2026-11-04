@@ -11,6 +11,8 @@ export const metadata: Metadata = {
   alternates: { canonical: 'https://www.gmt400.pl/diy/kodowanie-pilota' },
 };
 
+const AFFILIATE_TAG = 'gmt400pl-20';
+
 const STEPS = [
   { step: 1, title: 'Sprawdź kod RPO', desc: 'Na naklejce w schowku lub na słupku drzwi znajdź kod AU0. To oznacza fabryczny centralny zamek z pilotem. Bez tego kodu auto nie ma systemu keyless entry.' },
   { step: 2, title: 'Przygotuj pilota', desc: 'Sprawdź baterię w pilocie (CR2032). Wymień jeśli słaba. Oczyść styki przycisków jeśli są brudne.' },
@@ -60,15 +62,11 @@ const faqItems = [
   },
   {
     question: 'Co jeśli procedura nie działa?',
-    answer: 'Sprawdź bezpieczniki, baterię w pilocie, FCC ID. Jeśli nadal nie działa, problem może być w module odbiornika (pod deską) lub okablowaniu. Użytkownicy zgłaszają problemy z lutami na płytce modułu.',
+    answer: 'Sprawdź bezpieczniki, baterię w pilocie, FCC ID. Jeśli nadal nie działa, problem może być w module odbiornika (pod deską) lub okablowaniu.',
   },
   {
-    question: 'Czy aftermarket radio wpływa na programowanie?',
-    answer: 'Niektórzy użytkownicy zgłaszają problemy po instalacji radia aftermarket. Spróbuj odłączyć radio i powtórzyć procedurę.',
-  },
-  {
-    question: 'Pilot działał, a teraz synchronizuje się ale nie działa — co robić?',
-    answer: 'Jeśli pilot wcześniej działał, a teraz po synchronizacji nie działa: 1) Sprawdź baterię (nawet nowa może być słaba). 2) Oczyść styki. 3) Spróbuj resynchronizacji (przytrzymaj LOCK+UNLOCK przez 30-45 sekund bez spinacza). 4) Jeśli nie pomoże — pilot się zużył lub moduł ma problem. Kup nowy pilot.',
+    question: 'Pilot działał, a teraz nie działa — co robić?',
+    answer: 'Sprawdź baterię, oczyść styki, spróbuj resynchronizacji (przytrzymaj LOCK+UNLOCK przez 30-45 sekund bez spinacza). Jeśli nie pomoże — kup nowy pilot.',
   },
 ];
 
@@ -105,20 +103,42 @@ export default function KodowaniePilotaPage() {
           </ol>
         </AccordionSection>
 
-        <AccordionSection title="Schemat gniazda OBD2">
+        <AccordionSection title="Schemat gniazda OBD2 — zwarcie pinów" defaultOpen>
           <div className="rounded-lg border border-white/10 bg-neutral-800 p-4">
-            <p className="mb-3 text-sm text-neutral-300">Gniazdo OBD2 (16 pinów). Pin 4 i pin 8 są w górnym rzędzie:</p>
-            <pre className="overflow-x-auto rounded bg-neutral-900 p-3 text-xs text-neutral-300">
-{`Górny rząd (od lewej):
-[1] [2] [3] [4] [5] [6] [7] [8]
-              ↑       ↑
-            Pin 4   Pin 8
-            (masa)  (sygnał)
+            <p className="mb-4 text-sm text-neutral-300">Gniazdo OBD2 znajduje się pod deską rozdzielczą, po lewej stronie (pod kolumną kierownicy). Ma 16 pinów w dwóch rzędach.</p>
+            
+            <div className="mb-4 rounded-lg bg-neutral-900 p-4">
+              <p className="mb-2 text-center text-xs font-semibold text-silver-400">WIDOK OD PRZODU (jak patrzysz na gniazdo)</p>
+              <pre className="overflow-x-auto text-center text-sm text-neutral-300">
+{`
+    ┌───────────────────────────────────┐
+    │  1   2   3   4   5   6   7   8  │  ← GÓRNY RZĄD
+    │                             │
+    │  9  10  11  12  13  14  15  16 │  ← DOLNY RZĄD
+    └───────────────────────────────────┘
 
-Dolny rząd:
-[9] [10] [11] [12] [13] [14] [15] [16]`}
-            </pre>
-            <p className="mt-3 text-sm text-neutral-400">Zewrzyj pin 4 i pin 8 spinaczem. Zamki powinny zablokować/odblokować się.</p>
+         ↑           ↑
+       PIN 4       PIN 8
+       (masa)    (sygnał)
+`}
+              </pre>
+            </div>
+
+            <div className="mb-4 rounded-lg border border-amber-500/30 bg-amber-950/30 p-3">
+              <p className="text-sm font-semibold text-amber-300">Jak zewrzeć piny:</p>
+              <ol className="mt-2 list-inside list-decimal space-y-1 text-sm text-neutral-300">
+                <li>Weź spinacz biurowy lub kawałek drutu (ok. 5 cm)</li>
+                <li>Wsuń jeden koniec do <strong>pinu 4</strong> (4. od lewej w górnym rzędzie)</li>
+                <li>Wsuń drugi koniec do <strong>pinu 8</strong> (ostatni w górnym rzędzie)</li>
+                <li>Zamki powinny zablokować i odblokować się — jesteś w trybie programowania</li>
+              </ol>
+            </div>
+
+            <div className="rounded-lg border border-silver-500/30 bg-silver-950/20 p-3">
+              <p className="text-sm text-neutral-300">
+                <strong>Uwaga:</strong> Pin 4 to masa (ground), pin 8 to sygnał programowania. Oba są w <strong>górnym rzędzie</strong>. Nie myl z dolnym rzędem!
+              </p>
+            </div>
           </div>
         </AccordionSection>
 
@@ -145,19 +165,15 @@ Dolny rząd:
           </div>
         </AccordionSection>
 
-        <AccordionSection title="Pilot synchronizuje się, ale nie działa" defaultOpen>
+        <AccordionSection title="Pilot synchronizuje się, ale nie działa">
           <div className="rounded-lg border border-amber-500/30 bg-amber-950/20 p-4">
             <h3 className="font-semibold text-amber-300">Opis problemu</h3>
             <p className="mt-2 text-sm text-neutral-300">
-              Procedura wygląda poprawnie: po zwarciu pinów 4 i 8 zamki reagują (blokują/odblokowują się). Przytrzymujesz LOCK+UNLOCK na pilocie i zamki znowu reagują — pilot się synchronizuje. Ale po usunięciu spinacza pilot nie działa. Wkładasz spinacz ponownie — znowu się synchronizuje, ale po wyjściu z trybu programowania nadal nie działa.
-            </p>
-            <h3 className="mt-4 font-semibold text-amber-300">Przyczyna (nowy pilot)</h3>
-            <p className="mt-2 text-sm text-neutral-300">
-              Najczęściej to problem z tanim zamiennikiem pilota. Pilot udaje, że się synchronizuje, ale jego kod nie jest prawidłowo zapisywany w pamięci modułu.
+              Procedura wygląda poprawnie: po zwarciu pinów 4 i 8 zamki reagują. Przytrzymujesz LOCK+UNLOCK i zamki znowu reagują — pilot się synchronizuje. Ale po usunięciu spinacza pilot nie działa.
             </p>
             <h3 className="mt-4 font-semibold text-amber-300">Rozwiązanie</h3>
             <p className="mt-2 text-sm text-neutral-300">
-              <strong>Kup inny pilot.</strong> Użytkownicy potwierdzają, że nowy pilot (najlepiej oryginalny GM lub z dokładnym FCC ID AB01502T) rozwiązuje problem.
+              <strong>Kup inny pilot.</strong> Użytkownicy potwierdzają, że nowy pilot z dokładnym FCC ID AB01502T rozwiązuje problem. Tanie zamienniki często mają ten problem.
             </p>
           </div>
         </AccordionSection>
@@ -165,28 +181,18 @@ Dolny rząd:
         <AccordionSection title="Pilot działał, a teraz nie działa">
           <div className="rounded-lg border border-silver-500/30 bg-silver-950/20 p-4">
             <h3 className="font-semibold text-silver-300">Pilot wcześniej działał, a teraz synchronizuje się ale nie działa</h3>
-            <p className="mt-2 text-sm text-neutral-300">
-              Jeśli pilot działał przez dłuższy czas, a teraz po synchronizacji nie działa, to inna sytuacja. Możliwe przyczyny:
-            </p>
             <ol className="mt-3 list-inside list-decimal space-y-2 text-sm text-neutral-300">
-              <li><strong>Słaba bateria</strong> — nawet nowa bateria może być słaba lub źle włożona. Sprawdź napięcie (powinno być ~3V).</li>
-              <li><strong>Brudne styki</strong> — otwórz pilota i oczyść styki przycisków alkoholem izopropylowym.</li>
-              <li><strong>Rozsynchronizowanie</strong> — po wymianie baterii lub odłączeniu akumulatora pilot może wymagać resynchronizacji.</li>
-              <li><strong>Zużyty pilot</strong> — tanie zamienniki mają krótką żywotność. Po roku-dwóch mogą przestać działać.</li>
-              <li><strong>Problem z modułem</strong> — jeśli kilka pilotów nie działa, problem jest w module odbiornika.</li>
+              <li><strong>Słaba bateria</strong> — sprawdź napięcie (~3V)</li>
+              <li><strong>Brudne styki</strong> — oczyść alkoholem</li>
+              <li><strong>Rozsynchronizowanie</strong> — spróbuj resynchronizacji</li>
+              <li><strong>Zużyty pilot</strong> — tanie zamienniki mają krótką żywotność</li>
             </ol>
             <h3 className="mt-4 font-semibold text-silver-300">Resynchronizacja (bez spinacza)</h3>
-            <p className="mt-2 text-sm text-neutral-300">
-              Zanim kupisz nowy pilot, spróbuj resynchronizacji:
-            </p>
             <ol className="mt-2 list-inside list-decimal space-y-1 text-sm text-neutral-300">
-              <li>Stań przy drzwiach kierowcy (blisko auta)</li>
-              <li>Przytrzymaj jednocześnie LOCK i UNLOCK przez 30–45 sekund</li>
-              <li>Klakson powinien krótko zabrzmieć — pilot zsynchronizowany</li>
+              <li>Stań przy drzwiach kierowcy</li>
+              <li>Przytrzymaj LOCK + UNLOCK przez 30–45 sekund</li>
+              <li>Klakson powinien krótko zabrzmieć</li>
             </ol>
-            <p className="mt-3 text-sm text-neutral-400">
-              Jeśli to nie pomoże, kup nowy pilot. Użytkownicy zgłaszają, że tanie zamienniki często przestają działać po roku-dwóch.
-            </p>
           </div>
         </AccordionSection>
 
@@ -201,15 +207,34 @@ Dolny rząd:
           </div>
         </AccordionSection>
 
-        <AccordionSection title="Przydatne">
-          <AffiliateBox
-            title=""
-            items={[
-              { name: 'Bateria CR2032', search: 'CR2032 battery' },
-              { name: 'Pilot GMT400', search: 'GMT400 keyless remote' },
-              { name: 'Alkohol izopropylowy', search: 'isopropyl alcohol' },
-            ]}
-          />
+        <AccordionSection title="Gdzie kupić pilot" defaultOpen>
+          <div className="rounded-lg border border-amber-500/30 bg-amber-950/20 p-4">
+            <h3 className="font-semibold text-amber-300">Polecany pilot</h3>
+            <p className="mt-2 text-sm text-neutral-300">
+              Szukaj pilota z FCC ID <strong>AB01502T</strong> lub <strong>AB01502R</strong>. To standardowe piloty GMT400.
+            </p>
+            <a
+              href={`https://www.amazon.de/s?k=GMT400+keyless+remote+AB01502T&tag=${AFFILIATE_TAG}`}
+              target="_blank"
+              rel="noopener noreferrer sponsored"
+              className="mt-3 inline-flex items-center gap-2 rounded-lg bg-amber-600 px-4 py-2 text-sm font-semibold text-white hover:bg-amber-500"
+            >
+              Szukaj pilota na Amazon.de ↗
+            </a>
+            <p className="mt-3 text-xs text-neutral-400">
+              Użytkownicy forów GMT400.com polecają piloty KeylessOption i oryginalne GM. Tanie zamienniki często nie działają lub działają krótko.
+            </p>
+          </div>
+          <div className="mt-4">
+            <AffiliateBox
+              title=""
+              items={[
+                { name: 'Pilot GMT400 AB01502T', search: 'GMT400 keyless remote AB01502T' },
+                { name: 'Bateria CR2032', search: 'CR2032 battery' },
+                { name: 'Alkohol izopropylowy', search: 'isopropyl alcohol' },
+              ]}
+            />
+          </div>
         </AccordionSection>
 
         <AccordionSection title="Częste pytania">
