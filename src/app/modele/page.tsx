@@ -22,6 +22,12 @@ export const metadata: Metadata = {
 
 export const revalidate = 900;
 
+const TIPS = [
+  { title: 'Tahoe vs Suburban', tip: 'Tahoe jest krótszy (2- lub 4-drzwiowy), Suburban dłuższy z więcej miejscem. Oba dzielą większość części mechanicznych.' },
+  { title: 'Który silnik', tip: '5.7 Vortec (L31) jest najpopularniejszy — dobry kompromis. 7.4 do holowania. 4.3 V6 oszczędniejszy, ale słabszy. 6.5 diesel wytrzymały, ale wymaga konserwacji.' },
+  { title: 'Który rocznik', tip: '1996–1999 (Vortec) najpopularniejsze. 1988–1995 (TBI) prostsze w naprawie. Unikaj egzemplarzy z dużą korozją.' },
+];
+
 const faqItems = [
   {
     question: 'Czym różni się Tahoe od Suburbana?',
@@ -47,6 +53,18 @@ export default async function Page() {
   return <>
     <Encyclopedia initialTab="modele" initialItems={items} />
     <div className="mx-auto max-w-3xl px-4">
+      <section className="mb-6">
+        <h2 className="text-xl font-semibold text-silver-300">Wskazówki wyboru modelu</h2>
+        <div className="mt-3 space-y-3">
+          {TIPS.map(item => (
+            <div key={item.title} className="rounded-xl border border-white/10 bg-neutral-900 p-4">
+              <h3 className="font-semibold text-silver-200">{item.title}</h3>
+              <p className="mt-1 text-sm text-neutral-300">{item.tip}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
       <section className="mb-6">
         <h2 className="text-xl font-semibold text-silver-300">Uniwersalne części do GMT400</h2>
         <ul className="mt-3 list-inside list-disc space-y-2 text-neutral-300">

@@ -11,6 +11,12 @@ export const metadata: Metadata = {
   alternates: { canonical: 'https://www.gmt400.pl/dla-wlasciciela' },
 };
 
+const TIPS = [
+  { title: 'Przed zakupem', tip: 'Sprawdź VIN, historię serwisową, stan karoserii. Porównaj ceny w USA i Polsce. Uwzględnij koszty transportu i rejestracji.' },
+  { title: 'Przy rejestracji', tip: 'Przygotuj dokumenty: dowód, umowa, tłumaczenia. Sprawdź wymagania dotyczące świateł. Rozważ żółte tablice (powyżej 25 lat).' },
+  { title: 'Po rejestracji', tip: 'Zamontuj LPG (jeśli planujesz). Wymień światła na europejskie. Zaplanuj przegląd i wymianę płynów.' },
+];
+
 const faqItems = [
   {
     question: 'Czy warto montować LPG w GMT400?',
@@ -40,6 +46,19 @@ export default function GuidesHub() {
           <h1 className="mt-3 text-3xl font-semibold sm:text-4xl">Poradniki dla właściciela GMT400 w Polsce</h1>
           <p className="mt-4 text-lg leading-8 text-neutral-300">Cztery tematy, o które pytacie najczęściej. Każda kwota i przepis ma źródło z datą; rozbieżności i braki oznaczamy wprost. Przepisy się zmieniają — sprawdź w urzędzie.</p>
         </header>
+
+        <section className="mb-6">
+          <h2 className="text-xl font-semibold text-silver-300">Wskazówki dla właściciela w PL</h2>
+          <div className="mt-3 space-y-3">
+            {TIPS.map(item => (
+              <div key={item.title} className="rounded-xl border border-white/10 bg-neutral-900 p-4">
+                <h3 className="font-semibold text-silver-200">{item.title}</h3>
+                <p className="mt-1 text-sm text-neutral-300">{item.tip}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
         <ul className="grid gap-4 sm:grid-cols-2">
           {GUIDES.map(g => (
             <li key={g.slug}>
