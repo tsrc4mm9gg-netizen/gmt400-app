@@ -28,10 +28,16 @@ const categories: { name: string; items: Product[] }[] = [
         fitment: 'Pasuje do: 4.3 V6, 5.0 V8, 5.7 V8, 7.4 V8'
       },
       { 
-        name: 'Filtr powietrza', 
-        search: 'air filter GMT400 Tahoe Suburban', 
-        note: 'Sprawdź pasowanie do swojego silnika',
-        fitment: 'Różne dla benzyny i diesla'
+        name: 'ACDelco A1300C — filtr powietrza', 
+        search: 'ACDelco A1300C', 
+        note: 'Do silników Vortec 1996+',
+        fitment: '5.7/7.4 Vortec 1996–1999'
+      },
+      { 
+        name: 'ACDelco GF626 — filtr paliwa', 
+        search: 'ACDelco GF626', 
+        note: 'Filtr paliwa w linii',
+        fitment: '1996–1999'
       },
     ],
   },
@@ -49,6 +55,35 @@ const categories: { name: string; items: Product[] }[] = [
         search: '5W-30 engine oil', 
         note: 'Sprawdź specyfikację w instrukcji',
         fitment: 'Typowo do silników benzynowych GMT400'
+      },
+      { 
+        name: 'Płyn chłodniczy DEX-COOL', 
+        search: 'DEX-COOL coolant', 
+        note: 'Oryginalny płyn GM od 1996',
+        fitment: 'Vortec 1996+'
+      },
+    ],
+  },
+  {
+    name: 'Części eksploatacyjne',
+    items: [
+      { 
+        name: 'Świece ACDelco 41-932', 
+        search: 'ACDelco 41-932', 
+        note: 'Do silników Vortec',
+        fitment: '5.0/5.7/7.4 Vortec 1996–1999'
+      },
+      { 
+        name: 'Termostat ACDelco 131-113', 
+        search: 'ACDelco 131-113', 
+        note: 'Termostat 195°F (91°C)',
+        fitment: 'C/K 1500 1996–1999 5.0/5.7'
+      },
+      { 
+        name: 'Pompa wody ACDelco 252-711', 
+        search: 'ACDelco 252-711', 
+        note: 'Pompa wody (GM 88926225)',
+        fitment: '4.3/5.0/5.7 Vortec 1996–1999'
       },
     ],
   },
@@ -102,9 +137,9 @@ export default function PolecanePage() {
                   href={productLink(item)}
                   target="_blank"
                   rel="noopener noreferrer sponsored"
-                  className="font-medium text-silver-200 hover:text-white hover:underline"
+                  className="inline-flex items-center gap-1 font-medium text-silver-200 hover:text-white hover:underline"
                 >
-                  {item.name} ↗
+                  {item.name} <span className="text-xs opacity-50">↗</span>
                 </a>
                 <p className="mt-1 text-sm text-neutral-400">{item.note}</p>
                 {item.fitment && (
