@@ -39,7 +39,7 @@ const categories: { name: string; items: Product[] }[] = [
   {
     name: 'Paliwo',
     items: [
-      { name: 'Pompa paliwa ACDelco EP381', asin: 'B000C9SU1A', note: 'Pompa w zbiorniku', fitment: 'GMT400 1988–1997' },
+      { name: 'Pompa paliwa EP381 (kompatybilna)', asin: 'B0F9D5BL3H', note: 'Zamienna do Tahoe/Yukon 5.7', fitment: 'GMT400 1996–1997' },
       { name: 'Filtr paliwa ACDelco GF626', asin: 'B000C9SU1A', note: 'Filtr w linii', fitment: '1996–1999' },
     ],
   },
@@ -55,7 +55,7 @@ const categories: { name: string; items: Product[] }[] = [
     name: 'Chłodzenie',
     items: [
       { name: 'Pompa wody ACDelco 252-711', asin: 'B000C9SU1A', note: 'Pompa wody (GM 88926225)', fitment: '4.3/5.0/5.7 Vortec' },
-      { name: 'Termostat ACDelco 131-113', asin: 'B000C9SU1A', note: '195°F (91°C)', fitment: 'C/K 1500 1996–1999' },
+      { name: 'Termostat ACDelco 131-122', asin: 'B000C9BZYO', note: '195°F (91°C), podobny do 131-113', fitment: 'C/K 1500 1996–1999' },
       { name: 'Chłodnica', asin: 'B000C9SU1A', note: 'Chłodnica', fitment: 'Sprawdź pasowanie' },
     ],
   },
@@ -125,6 +125,10 @@ const faqItems = [
   {
     question: 'Gdzie kupić części do GMT400 w Polsce?',
     answer: 'Amazon.de (szybka dostawa), Allegro, sklepy z częściami amerykańskimi. Numery GM są uniwersalne — można zamawiać z USA lub Europy.',
+  },
+  {
+    question: 'Jak sprawdzić, czy część pasuje do mojego auta?',
+    answer: 'Sprawdź numer części w instrukcji lub na starej części. Użyj dekoder VIN na stronie, aby poznać rocznik i silnik. Przy zakupie na Amazonie sprawdź listę kompatybilnych pojazdów.',
   },
 ];
 
