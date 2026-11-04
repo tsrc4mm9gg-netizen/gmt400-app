@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Breadcrumbs from '../ui/Breadcrumbs';
+import AffiliateBox from '../ui/AffiliateBox';
 import BuyerChecklist from './BuyerChecklist';
 
 export const metadata: Metadata = {
@@ -36,6 +37,14 @@ export default function PoradnikKupujacegoPage() {
           <li>Działanie 4WD / napędu</li>
         </ul>
       </div>
+      <AffiliateBox
+        title="Przydatne przy oględzinach"
+        items={[
+          { name: 'Skaner OBD2', search: 'OBD2 scanner' },
+          { name: 'Latarka inspekcyjna', search: 'inspection flashlight LED' },
+          { name: 'Miernik grubości lakieru', search: 'paint thickness gauge' },
+        ]}
+      />
       <BuyerChecklist />
     </div>
   );

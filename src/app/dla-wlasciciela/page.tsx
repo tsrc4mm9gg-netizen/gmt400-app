@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { GUIDES } from '../../lib/guides';
 import Breadcrumbs from '../ui/Breadcrumbs';
+import AffiliateBox from '../ui/AffiliateBox';
 
 export const metadata: Metadata = {
   title: 'Najważniejsze dla właściciela w PL — poradniki GMT400',
@@ -34,6 +35,14 @@ export default function GuidesHub() {
           <h2 className="text-xl font-semibold">Porady właściciela (tips &amp; tricks) →</h2>
           <p className="mt-2 text-sm leading-6 text-neutral-300">4×4, przyczepa, opony i łańcuchy, pilot i PassLock, bezpieczniki, kody ALDL, test kompresji — z instrukcji GM, ze stroną źródła i filtrem wg Twojego auta.</p>
         </Link>
+        <AffiliateBox
+          title="Przydatne dla właściciela"
+          items={[
+            { name: 'Skaner OBD2', search: 'OBD2 scanner' },
+            { name: 'Klucz dynamometryczny', search: 'torque wrench' },
+            { name: 'Zestaw kluczy', search: 'socket set metric' },
+          ]}
+        />
       </div>
     </div>
   );
