@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import VehicleProfileProvider from "./VehicleProfileProvider";
 import BackToTop from './ui/BackToTop';
+import QuickLinksBar from './ui/QuickLinksBar';
 import ToolsLauncher from "./ToolsLauncher";
 import SiteHeader from "./site-header";
 import SiteFooter from "./site-footer";
@@ -32,7 +33,6 @@ export const metadata: Metadata = {
   applicationName: "GMT400",
   appleWebApp: { capable: true, title: "GMT400", statusBarStyle: "black-translucent" },
   formatDetection: { telephone: false },
-  // Next.js generuje „mobile-web-app-capable”; starsze iOS czytają wersję z prefiksem apple-.
   other: { "apple-mobile-web-app-capable": "yes" },
   openGraph: {
     type: "website",
@@ -72,6 +72,7 @@ export default function RootLayout({
         </a>
         <ModelSelectionProvider>
           <SiteHeader />
+          <QuickLinksBar />
           <div className="flex-1">
             <main id="main-content" tabIndex={-1} className="outline-none">
               <VehicleProfileProvider>{children}</VehicleProfileProvider>
