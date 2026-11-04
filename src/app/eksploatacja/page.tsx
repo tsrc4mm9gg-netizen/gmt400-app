@@ -87,7 +87,7 @@ const categories: { name: string; items: Product[] }[] = [
     name: 'Oświetlenie',
     items: [
       { name: 'Bosch H4 Pure Light 12V', asin: 'B003JY828G', note: 'Oryginalna jakość Bosch', fitment: 'Reflektory 12V' },
-      { name: 'Osram Cool Blue Intense H4', asin: 'B00CJOBKAY', note: '+100% jasności', fitment: 'Reflektory 12V' },
+      { name: 'Osram Cool Blue Intense H4', asin: 'B099X6S3BT', note: '+100% jasności, duo box', fitment: 'Reflektory 12V' },
       { name: 'Żarówka P21W 12V', asin: 'B000C9SU1A', note: 'Kierunkowskazy, stop', fitment: 'Uniwersalna' },
     ],
   },
