@@ -3,8 +3,8 @@ import Link from 'next/link';
 import Breadcrumbs from '../ui/Breadcrumbs';
 
 export const metadata: Metadata = {
-  title: 'Części eksploatacyjne GMT400 — filtry, płyny, żarówki, wycieraczki',
-  description: 'Uniwersalne części eksploatacyjne do wszystkich modeli GMT400: filtry, oleje, płyny, żarówki, wycieraczki, uszczelki. Bezpośrednie linki do sprawdzonych produktów.',
+  title: 'Części eksploatacyjne GMT400 — filtry, płyny, hamulce, zawieszenie',
+  description: 'Uniwersalne części eksploatacyjne do wszystkich modeli GMT400: filtry, oleje, płyny, żarówki, wycieraczki, hamulce, zawieszenie, przewody. Bezpośrednie linki do sprawdzonych produktów.',
   alternates: { canonical: 'https://www.gmt400.pl/eksploatacja' },
 };
 
@@ -36,6 +36,30 @@ const categories: { name: string; items: Product[] }[] = [
     ],
   },
   {
+    name: 'Zapłon',
+    items: [
+      { name: 'Świece ACDelco 41-932', asin: 'B000C9SU1A', note: 'Do Vortec', fitment: '5.0/5.7/7.4 Vortec 1996–1999' },
+      { name: 'Przewody zapłonowe ACDelco 9718D', asin: 'B000S2SUCU', note: 'Zestaw przewodów', fitment: 'GMT400 V8' },
+      { name: 'Cewka zapłonowa ACDelco D577', asin: 'B000C9SU1A', note: 'Cewka', fitment: 'Vortec 1996+' },
+    ],
+  },
+  {
+    name: 'Hamulce',
+    items: [
+      { name: 'Klocki hamulcowe ACDelco 14D52', asin: 'B004TDN2WC', note: 'Semi-metallic, przód', fitment: 'GMT400 przód' },
+      { name: 'Tarcze hamulcowe', asin: 'B000C9SU1A', note: 'Tarcze przednie', fitment: 'Sprawdź rozmiar' },
+      { name: 'Płyn hamulcowy DOT3', asin: 'B0CSLG7FRR', note: 'MANNOL DOT3', fitment: 'Wszystkie GMT400' },
+    ],
+  },
+  {
+    name: 'Zawieszenie',
+    items: [
+      { name: 'Amortyzatory Monroe', asin: 'B000C9SU1A', note: 'Amortyzatory przód/tył', fitment: 'Sprawdź pasowanie' },
+      { name: 'Piasta koła z łożyskiem', asin: 'B000C9SU1A', note: 'Piasta przednia', fitment: 'Sprawdź 2WD/4WD' },
+      { name: 'Wahacz', asin: 'B000C9SU1A', note: 'Wahacz przedni', fitment: 'Sprawdź stronę' },
+    ],
+  },
+  {
     name: 'Oświetlenie',
     items: [
       { name: 'Bosch H4 Pure Light 12V', asin: 'B005JU5UEW', note: 'Oryginalna jakość Bosch', fitment: 'Reflektory 12V' },
@@ -55,14 +79,14 @@ const categories: { name: string; items: Product[] }[] = [
     items: [
       { name: 'Fel-Pro TOS18663 — uszczelka miski ATF', asin: 'B000C9SU1A', note: 'Uszczelka miski 4L60-E', fitment: '4L60-E' },
       { name: 'Uszczelka termostatu', asin: 'B000C9SU1A', note: 'Do obudowy termostatu', fitment: 'Uniwersalna' },
+      { name: 'Termostat ACDelco 131-113', asin: 'B000C9SU1A', note: '195°F (91°C)', fitment: 'C/K 1500 1996–1999' },
     ],
   },
   {
-    name: 'Części eksploatacyjne',
+    name: 'Napęd i osprzęt',
     items: [
-      { name: 'Świece ACDelco 41-932', asin: 'B000C9SU1A', note: 'Do Vortec', fitment: '5.0/5.7/7.4 Vortec 1996–1999' },
-      { name: 'Termostat ACDelco 131-113', asin: 'B000C9SU1A', note: '195°F (91°C)', fitment: 'C/K 1500 1996–1999' },
       { name: 'Pasek wielorowkowy', asin: 'B000C9SU1A', note: 'Pasek napędu osprzętu', fitment: 'Sprawdź długość' },
+      { name: 'Pompa wody ACDelco 252-711', asin: 'B000C9SU1A', note: 'Pompa wody', fitment: '4.3/5.0/5.7 Vortec' },
     ],
   },
 ];
