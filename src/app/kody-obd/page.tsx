@@ -31,6 +31,19 @@ const systemCounts = Object.fromEntries(
   ])
 );
 
+const CODE_PARTS = [
+  { code: 'P0300', name: 'Wypadanie zapłonu', parts: ['41-932', '9718D', 'D577'] },
+  { code: 'P0171', name: 'Uboga mieszanka', parts: ['A1300C', 'GF626', 'EP381'] },
+  { code: 'P0174', name: 'Uboga mieszanka (bank 2)', parts: ['A1300C', 'GF626'] },
+  { code: 'P0440', name: 'EVAP', parts: [] },
+  { code: 'P0442', name: 'Mały wyciek EVAP', parts: [] },
+  { code: 'P0700', name: 'Skrzynia biegów', parts: ['TF289'] },
+  { code: 'P0751', name: 'Elektrozawór 1/2', parts: ['TF289'] },
+  { code: 'P0758', name: 'Elektrozawór 2/3', parts: ['TF289'] },
+  { code: 'P0128', name: 'Termostat', parts: ['131-113'] },
+  { code: 'P0420', name: 'Katalizator', parts: [] },
+];
+
 const TIPS = [
   { title: 'Przed odczytem', tip: 'Upewnij się, że akumulator jest naładowany (min. 12V). Słaby akumulator może powodować fałszywe kody.' },
   { title: 'Podczas odczytu', tip: 'Zapisz wszystkie kody przed czyszczeniem. Niektóre kody wymagają kilku cykli jazdy, aby się potwierdzić.' },
@@ -83,7 +96,26 @@ export default function ObdCodesPage({ searchParams }: { searchParams: Promise<{
           </nav>
         </header>
 
-        <AccordionSection title="Wskazówki odczytu kodów" defaultOpen>
+        <AccordionSection title="Najczęstsze kody i części" defaultOpen>
+          <p className="mb-3 text-sm text-neutral-400">Kliknij numer części, aby wyszukać na Amazonie.</p>
+          <div className="space-y-3">
+            {CODE_PARTS.map(item => (
+              <div key={item.code} className="rounded-lg border border-white/10 bg-neutral-800 p-3">
+                <div className="flex items-center gap-2">
+                  <Link href={`/kody-obd/${item.code.toLowerCase()}`} className="font-semibold text-silver-300 hover:underline">{item.code}</Link>
+                  <span className="text-neutral-400">— {item.name}</span>
+                </div>
+                {item.parts.length > 0 && (
+                  <div className="mt-2 flex flex-wrap gap-2">
+                    {item.parts.map(part => <PartLink key={part} partNumber={part} />)}
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        </AccordionSection>
+
+        <AccordionSection title="Wskazówki odczytu kodów">
           <div className="space-y-3">
             {TIPS.map(item => (
               <div key={item.title} className="rounded-lg border border-white/10 bg-neutral-800 p-3">
@@ -95,12 +127,15 @@ export default function ObdCodesPage({ searchParams }: { searchParams: Promise<{
         </AccordionSection>
 
         <AccordionSection title="Części do kodów OBD">
-          <ul className="list-inside list-disc space-y-2 text-neutral-300">
-            <li>Świece (P0300): <PartLink partNumber="41-932" /></li>
-            <li>Przewody zapłonowe: <PartLink partNumber="9718D" /></li>
-            <li>Cewka zapłonowa: <PartLink partNumber="D577" /></li>
-            <li>Filtr powietrza (P0171): <PartLink partNumber="A1300C" /></li>
-            <li>Czujnik O2: sprawdź numer na starej części</li>
+          <ul className="space-y-2 text-neutral-300">
+            <li className="flex items-center gap-2">Świece (P0300): <PartLink partNumber="41-932" /></li>
+            <li className="flex items-center gap-2">Przewody zapłonowe: <PartLink partNumber="9718D" /></li>
+            <li className="flex items-center gap-2">Cewka zapłonowa: <PartLink partNumber="D577" /></li>
+            <li className="flex items-center gap-2">Filtr powietrza (P0171): <PartLink partNumber="A1300C" /></li>
+            <li className="flex items-center gap-2">Filtr paliwa: <PartLink partNumber="GF626" /></li>
+            <li className="flex items-center gap-2">Pompa paliwa: <PartLink partNumber="EP381" /></li>
+            <li className="flex items-center gap-2">Termostat (P0128): <PartLink partNumber="131-113" /></li>
+            <li className="flex items-center gap-2">Filtr ATF (P0700): <PartLink partNumber="TF289" /></li>
           </ul>
         </AccordionSection>
 
@@ -110,6 +145,7 @@ export default function ObdCodesPage({ searchParams }: { searchParams: Promise<{
             items={[
               { name: 'Skaner OBD2 Bluetooth', search: 'OBD2 scanner Bluetooth' },
               { name: 'Skaner OBD2 z wyświetlaczem', search: 'OBD2 scanner handheld' },
+              { name: 'Multimetr', search: 'digital multimeter' },
             ]}
           />
         </AccordionSection>
