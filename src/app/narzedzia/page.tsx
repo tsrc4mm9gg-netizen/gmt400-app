@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import type { CSSProperties } from 'react';
+import FAQ from '../ui/FAQ';
 
 const TOOLS = [
  { href: '/narzedzia/rpo', title: 'Kody RPO', tag: 'Wyposażenie pojazdu', description: 'Odczytaj kody z tabliczki i sprawdź ich znaczenie po polsku. Możesz wpisać kilka kodów naraz.', example: 'Na przykład: G80, Z71, GU6', icon: 'M9 5H6a2 2 0 0 0-2 2v13h16V7a2 2 0 0 0-2-2h-3M9 3h6v4H9zM8 12h8M8 16h6' },
@@ -8,6 +9,22 @@ const TOOLS = [
  { href: '/narzedzia/historia-vin', title: 'Historia VIN', tag: 'Akcje serwisowe i aukcje', description: 'Wpisz VIN: liczba akcji serwisowych i skarg w oficjalnej bazie NHTSA oraz linki do archiwów aukcji i raportów historii.', example: 'Bez kopiowania cudzych zdjęć i raportów.', icon: 'M12 8v4l3 2M3 12a9 9 0 1 0 3-6.7L3 8M3 3v5h5' },
  { href: '/narzedzia/czesci', title: 'Dobór części', tag: 'Wstępna weryfikacja', description: 'Przejrzyj referencyjne informacje według modelu, rocznika, silnika i skrzyni. Przed zakupem potwierdź numer części.', example: 'Wynik nie potwierdza zamienności części.', icon: 'M14 4a6 6 0 0 0-7 8l-4 4a3 3 0 0 0 5 5l4-4a6 6 0 0 0 8-7l-4 3-4-4z' }
 ];
+
+const faqItems = [
+  {
+    question: 'Co to są kody RPO?',
+    answer: 'RPO (Regular Production Option) to kody wyposażenia fabrycznego. Znajdują się na naklejce w schowku lub na słupku drzwi. Określają silnik, skrzynię, przełożenie mostu, kolor i inne opcje.',
+  },
+  {
+    question: 'Jak używać kalkulatora opon?',
+    answer: 'Wpisz aktualny rozmiar opon i planowany. Kalkulator pokaże różnicę w średnicy, wpływ na prędkość i przełożenie. Ważne przy zmianie rozmiaru — zbyt duża różnica może wpłynąć na działanie ABS i licznika.',
+  },
+  {
+    question: 'Czy narzędzia pokazują dokładne dane?',
+    answer: 'Narzędzia pokazują dane referencyjne z dokumentów GM. Zawsze sprawdzaj w swoim aucie — GMT400 ma wiele wariantów. Przed zakupem części potwierdź numer.',
+  },
+];
+
 const s: Record<string, CSSProperties> = {
  page: { boxSizing:'border-box', width:'100%', maxWidth:1000, minWidth:0, margin:'0 auto', padding:'20px 16px calc(100px + env(safe-area-inset-bottom, 0px))', background:'#0a0a0a', color:'#ededed', fontFamily:'var(--font-geist-sans), system-ui, sans-serif' },
  header: { position:'static', display:'block', width:'100%', minWidth:0, margin:'0 0 22px', padding:0, border:0, background:'transparent' },
@@ -27,6 +44,7 @@ const s: Record<string, CSSProperties> = {
  noticeTitle: { display:'block', margin:'0 0 6px', color:'#e2e7ed', fontSize:13, fontWeight:650, lineHeight:1.5 },
  noticeText: { display:'block', maxWidth:'100%', margin:0, color:'#bdc6d2', fontSize:12, lineHeight:1.65 }
 };
+
 export default function ToolsPage() {
  return <div style={s.page} data-tools-appearance="inline-v1">
  <header style={s.header}>
@@ -50,5 +68,6 @@ export default function ToolsPage() {
  <h2 style={s.noticeTitle}>Informacje pomocnicze, nie instrukcja naprawy</h2>
  <p style={s.noticeText}>Przed zakupem części lub serwisem potwierdź dane dla konkretnego auta, rocznika i zamontowanych podzespołów. Brak wyniku nie oznacza braku usterki ani niezgodności części.</p>
  </aside>
+ <FAQ items={faqItems} />
  </div>;
 }
