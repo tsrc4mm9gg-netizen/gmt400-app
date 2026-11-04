@@ -21,8 +21,8 @@ export default function PrzegladyPage() {
           { name: 'ACDelco PF52 — filtr oleju', search: 'ACDelco PF52' },
           { name: 'Olej silnikowy 5W-30', search: '5W-30 engine oil' },
           { name: 'MANNOL Dexron III ATF', search: 'MANNOL Dexron III ATF' },
-          { name: 'Płyn chłodniczy', search: 'coolant antifreeze' },
-          { name: 'Świece zapłonowe', search: 'spark plugs GMT400 Vortec' },
+          { name: 'Płyn chłodniczy DEX-COOL', search: 'DEX-COOL coolant' },
+          { name: 'Świece ACDelco 41-932', search: 'ACDelco 41-932' },
         ]}
       />
     </div>
