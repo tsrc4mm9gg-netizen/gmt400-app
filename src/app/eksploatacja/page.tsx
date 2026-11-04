@@ -18,6 +18,12 @@ type Product = {
   fitment?: string;
 };
 
+const TIPS = [
+  { title: 'Przed zakupem', tip: 'Sprawdź numer części w instrukcji lub na starej części. Użyj dekoder VIN, aby poznać rocznik i silnik. Sprawdź pasowanie na Amazonie.' },
+  { title: 'Przy zakupie', tip: 'Porównaj ceny na Amazon.de i Allegro. Sprawdź opinie. Zamów z wyprzedzeniem — dostawa może trwać kilka dni.' },
+  { title: 'Po zakupie', tip: 'Sprawdź, czy część pasuje przed montażem. Zachowaj paragon. Zapisz numer części na przyszłość.' },
+];
+
 const categories: { name: string; items: Product[] }[] = [
   {
     name: 'Filtry',
@@ -145,6 +151,18 @@ export default function EksploatacjaPage() {
         Uniwersalne części do wszystkich modeli GMT400. Linki prowadzą bezpośrednio do produktów na Amazon.de.
         Linki mogą być afiliacyjne — nie płacisz więcej.
       </p>
+
+      <section className="mt-6">
+        <h2 className="text-lg font-semibold text-silver-300">Wskazówki zakupu</h2>
+        <div className="mt-3 space-y-3">
+          {TIPS.map(item => (
+            <div key={item.title} className="rounded-xl border border-white/10 bg-neutral-900 p-4">
+              <h3 className="font-semibold text-silver-200">{item.title}</h3>
+              <p className="mt-1 text-sm text-neutral-300">{item.tip}</p>
+            </div>
+          ))}
+        </div>
+      </section>
 
       {categories.map((cat) => (
         <section key={cat.name} className="mt-8">

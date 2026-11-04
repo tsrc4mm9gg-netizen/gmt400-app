@@ -12,6 +12,12 @@ export const metadata: Metadata = {
   alternates: { canonical: 'https://www.gmt400.pl/vin' },
 };
 
+const TIPS = [
+  { title: 'Gdzie znaleźć VIN', tip: 'VIN jest na tabliczce w lewym dolnym rogu przedniej szyby, na słupku drzwi kierowcy, na ramie (pod siedzeniem pasażera) oraz w dokumentach.' },
+  { title: 'Co oznacza VIN', tip: 'VIN (Vehicle Identification Number) to 17-znakowy kod. Zawiera informacje o producencie, modelu, roczniku, silniku, fabryce i numerze seryjnym.' },
+  { title: 'Po zdekodowaniu', tip: 'Zapisz wynik w „Mój samochód”. Sprawdź kody RPO na naklejce w schowku. Użyj informacji do doboru części.' },
+];
+
 const faqItems = [
   {
     question: 'Gdzie znajdę VIN w GMT400?',
@@ -42,6 +48,18 @@ export default function VinPage() {
       <h1 className="text-3xl font-bold text-silver-400">Sprawdź swój VIN</h1>
       <p className="mb-5 mt-2 text-neutral-300">Wpisz albo wklej VIN — zobaczysz rocznik, silnik, nadwozie i fabrykę. Szczegóły każdej pozycji i źródła są niżej w rozwijanych sekcjach. Wynik możesz zapisać w <Link href="/moj-samochod" className="text-silver-400 underline">Mój samochód</Link>.</p>
       <VinDecoder withRpo prefillFromUrl />
+
+      <section className="mt-8">
+        <h2 className="text-xl font-semibold text-silver-300">Wskazówki dekodowania</h2>
+        <div className="mt-3 space-y-3">
+          {TIPS.map(item => (
+            <div key={item.title} className="rounded-xl border border-white/10 bg-neutral-900 p-4">
+              <h3 className="font-semibold text-silver-200">{item.title}</h3>
+              <p className="mt-1 text-sm text-neutral-300">{item.tip}</p>
+            </div>
+          ))}
+        </div>
+      </section>
 
       <section className="mt-8">
         <h2 className="text-xl font-semibold text-silver-300">Uniwersalne części do GMT400</h2>
