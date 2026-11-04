@@ -28,11 +28,22 @@ const TIPS = [
   { title: 'Bateria', tip: 'Jeśli pilot nie działa po programowaniu, sprawdź baterię. CR2032 jest standardem. Wymień i spróbuj ponownie.' },
 ];
 
+const USER_TIPS = [
+  { title: 'Programuj wszystkie piloty w jednej sesji', tip: 'Jeśli powtórzysz całą procedurę dla każdego pilota osobno, poprzednie zostaną wymazane. Po pierwszym pilocie od razu programuj kolejne (przytrzymaj LOCK+UNLOCK), bez powtarzania zwarcia pinów.' },
+  { title: 'Tanie piloty z Amazon/eBay', tip: 'Użytkownicy zgłaszają, że tanie zamienniki często nie działają lub działają krótko. Szukaj pilotów z dokładnym FCC ID (AB01502T). Oryginalne GM są droższe, ale pewniejsze.' },
+  { title: 'Styki przycisków', tip: 'Jeśli pilot nie reaguje, otwórz go i oczyść styki przycisków alkoholem izopropylowym. Brud i korozja to częsta przyczyna.' },
+  { title: 'Moduł odbiornika', tip: 'Jeśli procedura nie działa mimo poprawnego kodu AU0, problem może być w module odbiornika (pod deską, przy kolumnie kierownicy). Użytkownicy zgłaszają problemy z lutami na płytce.' },
+  { title: 'Tylko drzwi kierowcy', tip: 'Jeśli pilot otwiera tylko drzwi kierowcy, problem może być w przekaźnikach w module lub okablowaniu do pozostałych drzwi. Drzwi kierowcy mają osobne połączenie.' },
+  { title: 'Aftermarket radio', tip: 'Niektórzy użytkownicy zgłaszają problemy z programowaniem po instalacji radia aftermarket. Spróbuj odłączyć radio i powtórzyć procedurę.' },
+];
+
 const TROUBLESHOOTING = [
-  { problem: 'Zamki nie reagują na zwarcie pinów', solution: 'Sprawdź bezpieczniki. Sprawdź, czy auto ma kod AU0. Sprawdź połączenie spinacza (musi być pewne).' },
-  { problem: 'Pilot nie programuje się', solution: 'Sprawdź baterię. Oczyść styki przycisków. Sprawdź FCC ID — musi pasować do modułu.' },
-  { problem: 'Pilot działa tylko z bliska', solution: 'Słaba bateria lub uszkodzony pilot. Wymień baterię lub pilot.' },
+  { problem: 'Zamki nie reagują na zwarcie pinów', solution: 'Sprawdź bezpieczniki. Sprawdź, czy auto ma kod AU0. Sprawdź połączenie spinacza (musi być pewne). Sprawdź, czy nie ma aftermarket systemu.' },
+  { problem: 'Pilot nie programuje się', solution: 'Sprawdź baterię. Oczyść styki przycisków. Sprawdź FCC ID — musi pasować do modułu. Spróbuj innego pilota.' },
+  { problem: 'Pilot działa tylko z bliska', solution: 'Słaba bateria lub uszkodzony pilot. Wymień baterię lub pilot. Tanie zamienniki często mają słaby zasięg.' },
   { problem: 'Po programowaniu stary pilot nie działa', solution: 'Powtórzyłeś całą procedurę dla nowego pilota. Programuj wszystkie piloty w jednej sesji (krok 5–6).' },
+  { problem: 'Pilot otwiera tylko drzwi kierowcy', solution: 'Problem w module odbiornika lub okablowaniu. Sprawdź przekaźniki w module. Może wymagać naprawy lutów.' },
+  { problem: 'Pilot synchronizuje się, ale nie działa', solution: 'Częsty problem z tanimi zamiennikami. Spróbuj oryginalnego pilota GM lub innego z pasującym FCC ID.' },
 ];
 
 const faqItems = [
@@ -46,11 +57,15 @@ const faqItems = [
   },
   {
     question: 'Jaki pilot kupić?',
-    answer: 'Szukaj pilota z FCC ID AB01502T lub AB01502R. To standardowe piloty GMT400. Można kupić na eBay, Amazon lub w sklepach z częściami GM.',
+    answer: 'Szukaj pilota z FCC ID AB01502T lub AB01502R. To standardowe piloty GMT400. Użytkownicy zgłaszają problemy z tanimi zamiennikami — oryginalne GM są pewniejsze.',
   },
   {
     question: 'Co jeśli procedura nie działa?',
-    answer: 'Sprawdź bezpieczniki, baterię w pilocie, FCC ID. Jeśli nadal nie działa, problem może być w module odbiornika (pod deską) lub okablowaniu.',
+    answer: 'Sprawdź bezpieczniki, baterię w pilocie, FCC ID. Jeśli nadal nie działa, problem może być w module odbiornika (pod deską) lub okablowaniu. Użytkownicy zgłaszają problemy z lutami na płytce modułu.',
+  },
+  {
+    question: 'Czy aftermarket radio wpływa na programowanie?',
+    answer: 'Niektórzy użytkownicy zgłaszają problemy po instalacji radia aftermarket. Spróbuj odłączyć radio i powtórzyć procedurę.',
   },
 ];
 
@@ -115,6 +130,18 @@ Dolny rząd:
           </div>
         </AccordionSection>
 
+        <AccordionSection title="Porady od użytkowników">
+          <p className="mb-3 text-sm text-neutral-400">Zebrane z forów GMT400.com i doświadczeń właścicieli.</p>
+          <div className="space-y-3">
+            {USER_TIPS.map(t => (
+              <div key={t.title} className="rounded-lg border border-silver-500/30 bg-silver-950/20 p-3">
+                <h3 className="font-semibold text-silver-300">{t.title}</h3>
+                <p className="mt-1 text-sm text-neutral-300">{t.tip}</p>
+              </div>
+            ))}
+          </div>
+        </AccordionSection>
+
         <AccordionSection title="Rozwiązywanie problemów">
           <div className="space-y-3">
             {TROUBLESHOOTING.map(t => (
@@ -132,6 +159,7 @@ Dolny rząd:
             items={[
               { name: 'Bateria CR2032', search: 'CR2032 battery' },
               { name: 'Pilot GMT400', search: 'GMT400 keyless remote' },
+              { name: 'Alkohol izopropylowy', search: 'isopropyl alcohol' },
             ]}
           />
         </AccordionSection>
