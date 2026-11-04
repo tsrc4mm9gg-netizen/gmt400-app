@@ -114,6 +114,15 @@ export default function SiteHeader() {
             GMT400
           </Link>
           <CarBadge active={isActive(pathname, '/moj-samochod')} />
+          <a
+            href="https://www.buymeacoffee.com/gmt400"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Wesprzyj GMT400.pl"
+            className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-full border border-silver-500/40 bg-neutral-900 text-silver-300 transition hover:border-silver-400 hover:bg-neutral-800 hover:text-silver-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-silver-500 lg:order-4"
+          >
+            <svg aria-hidden="true" viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1" /><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z" /><line x1="6" y1="1" x2="6" y2="4" /><line x1="10" y1="1" x2="10" y2="4" /><line x1="14" y1="1" x2="14" y2="4" /></svg>
+          </a>
           <div className="min-w-0 flex-1 lg:order-3 lg:flex-none">{search}</div>
         </div>
 
