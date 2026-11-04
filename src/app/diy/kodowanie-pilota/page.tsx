@@ -209,27 +209,32 @@ export default function KodowaniePilotaPage() {
 
         <AccordionSection title="Gdzie kupić pilot" defaultOpen>
           <div className="rounded-lg border border-amber-500/30 bg-amber-950/20 p-4">
-            <h3 className="font-semibold text-amber-300">Polecany pilot</h3>
+            <h3 className="font-semibold text-amber-300">Polecany pilot: KeylessOption</h3>
             <p className="mt-2 text-sm text-neutral-300">
-              Szukaj pilota z FCC ID <strong>AB01502T</strong> lub <strong>AB01502R</strong>. To standardowe piloty GMT400.
+              Pilot KeylessOption z FCC ID <strong>AB01502T</strong> / numer części <strong>16245100-29</strong>. Kompatybilny z GMT400 (Tahoe, Suburban, Silverado 1996–2000). Ocena 4.1/5 z 285 opinii.
             </p>
+            <ul className="mt-2 list-inside list-disc text-sm text-neutral-300">
+              <li>FCC ID: AB01502T, ABO1502T</li>
+              <li>Numer części: 16245100-29</li>
+              <li>Programowanie: samodzielne (instrukcja w zestawie)</li>
+              <li>Bateria: w zestawie</li>
+            </ul>
             <a
-              href={`https://www.amazon.de/s?k=GMT400+keyless+remote+AB01502T&tag=${AFFILIATE_TAG}`}
+              href={`https://www.amazon.de/dp/B00SC0ZGAY?tag=${AFFILIATE_TAG}`}
               target="_blank"
               rel="noopener noreferrer sponsored"
-              className="mt-3 inline-flex items-center gap-2 rounded-lg bg-amber-600 px-4 py-2 text-sm font-semibold text-white hover:bg-amber-500"
+              className="mt-4 inline-flex items-center gap-2 rounded-lg bg-amber-600 px-4 py-2 text-sm font-semibold text-white hover:bg-amber-500"
             >
-              Szukaj pilota na Amazon.de ↗
+              Kup pilota KeylessOption na Amazon.de ↗
             </a>
             <p className="mt-3 text-xs text-neutral-400">
-              Użytkownicy forów GMT400.com polecają piloty KeylessOption i oryginalne GM. Tanie zamienniki często nie działają lub działają krótko.
+              Jeśli niedostępny, szukaj innego z FCC ID AB01502T. Użytkownicy forów GMT400.com potwierdzają, że KeylessOption działa.
             </p>
           </div>
           <div className="mt-4">
             <AffiliateBox
               title=""
               items={[
-                { name: 'Pilot GMT400 AB01502T', search: 'GMT400 keyless remote AB01502T' },
                 { name: 'Bateria CR2032', search: 'CR2032 battery' },
                 { name: 'Alkohol izopropylowy', search: 'isopropyl alcohol' },
               ]}
