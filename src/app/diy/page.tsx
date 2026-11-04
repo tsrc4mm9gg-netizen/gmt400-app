@@ -23,11 +23,37 @@ export const metadata: Metadata = {
 
 export const revalidate = 900;
 
+const AFFILIATE_TAG = 'gmt400pl-20';
+
+function amazonSearch(query: string) {
+  return `https://www.amazon.de/s?k=${encodeURIComponent(query)}&tag=${AFFILIATE_TAG}`;
+}
+
 const TOOLS_LIST = [
-  { category: 'Podstawowe', items: ['Zestaw kluczy nasadowych (metryczne i calowe)', 'Klucz dynamometryczny', 'Śrubokręty (płaskie i krzyżakowe)', 'Szczypce', 'Młotek gumowy'] },
-  { category: 'Do podnoszenia', items: ['Podnośnik hydrauliczny', 'Podpory (jack stands) — minimum 2', 'Kliny pod koła'] },
-  { category: 'Do płynów', items: ['Lejek', 'Pojemniki na zużyty olej', 'Rękawice nitrylowe', 'Czyściwo / szmaty'] },
-  { category: 'Do diagnostyki', items: ['Skaner OBD2', 'Multimetr', 'Szczelinomierz (do świec)', 'Latarka'] },
+  { category: 'Podstawowe', items: [
+    { name: 'Zestaw kluczy nasadowych', search: 'socket set metric' },
+    { name: 'Klucz dynamometryczny', search: 'torque wrench' },
+    { name: 'Śrubokręty', search: 'screwdriver set' },
+    { name: 'Szczypce', search: 'pliers set' },
+    { name: 'Młotek gumowy', search: 'rubber mallet' },
+  ]},
+  { category: 'Do podnoszenia', items: [
+    { name: 'Podnośnik hydrauliczny', search: 'hydraulic floor jack' },
+    { name: 'Podpory (jack stands)', search: 'jack stands' },
+    { name: 'Kliny pod koła', search: 'wheel chocks' },
+  ]},
+  { category: 'Do płynów', items: [
+    { name: 'Lejek', search: 'funnel' },
+    { name: 'Pojemniki na zużyty olej', search: 'oil drain pan' },
+    { name: 'Rękawice nitrylowe', search: 'nitrile gloves' },
+    { name: 'Czyściwo / szmaty', search: 'shop towels' },
+  ]},
+  { category: 'Do diagnostyki', items: [
+    { name: 'Skaner OBD2', search: 'OBD2 scanner' },
+    { name: 'Multimetr', search: 'digital multimeter' },
+    { name: 'Szczelinomierz', search: 'feeler gauge' },
+    { name: 'Latarka', search: 'LED flashlight' },
+  ]},
 ];
 
 const DIY_TIPS = [
@@ -63,13 +89,24 @@ export default async function Page() {
     <Encyclopedia initialTab="diy" initialItems={items} />
     <div className="mx-auto max-w-3xl px-4">
       <AccordionSection title="Lista narzędzi" defaultOpen>
-        <p className="mb-3 text-sm text-neutral-400">Podstawowy zestaw do większości napraw GMT400.</p>
+        <p className="mb-3 text-sm text-neutral-400">Podstawowy zestaw do większości napraw GMT400. Kliknij, aby zobaczyć na Amazonie.</p>
         <div className="grid gap-3 sm:grid-cols-2">
           {TOOLS_LIST.map(cat => (
             <div key={cat.category} className="rounded-lg border border-white/10 bg-neutral-800 p-3">
               <h3 className="font-semibold text-silver-200">{cat.category}</h3>
-              <ul className="mt-2 list-inside list-disc space-y-1 text-sm text-neutral-300">
-                {cat.items.map((item, i) => <li key={i}>{item}</li>)}
+              <ul className="mt-2 space-y-1 text-sm">
+                {cat.items.map((item, i) => (
+                  <li key={i}>
+                    <a
+                      href={amazonSearch(item.search)}
+                      target="_blank"
+                      rel="noopener noreferrer sponsored"
+                      className="inline-flex items-center gap-1 text-amber-400 hover:text-amber-300 hover:underline"
+                    >
+                      {item.name} <span className="text-xs opacity-50">↗</span>
+                    </a>
+                  </li>
+                ))}
               </ul>
             </div>
           ))}
