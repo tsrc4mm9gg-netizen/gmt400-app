@@ -4,6 +4,12 @@ import FAQ from '../ui/FAQ';
 import AffiliateBox from '../ui/AffiliateBox';
 import AccordionSection from '../ui/AccordionSection';
 
+const AFFILIATE_TAG = 'gmt400pl-20';
+
+function amazonSearch(query: string) {
+  return `https://www.amazon.de/s?k=${encodeURIComponent(query)}&tag=${AFFILIATE_TAG}`;
+}
+
 const TOOLS = [
  { href: '/narzedzia/rpo', title: 'Kody RPO', tag: 'Wyposażenie pojazdu', description: 'Odczytaj kody z tabliczki i sprawdź ich znaczenie po polsku. Możesz wpisać kilka kodów naraz.', example: 'Na przykład: G80, Z71, GU6', icon: 'M9 5H6a2 2 0 0 0-2 2v13h16V7a2 2 0 0 0-2-2h-3M9 3h6v4H9zM8 12h8M8 16h6' },
  { href: '/narzedzia/diagnostyka', title: 'Kody błędów OBD', tag: 'Diagnostyka', description: 'Sprawdź znaczenie kodu ze skanera, możliwe przyczyny i pierwsze czynności diagnostyczne.', example: 'Na przykład: P0300 lub P0171', icon: 'M5 4h14v12H5zM9 20h6M12 16v4M8 10h2l1-3 2 6 1-3h2' },
@@ -91,8 +97,15 @@ export default function ToolsPage() {
  <div style={{ display: 'grid', gap: 12 }}>
  {DIAGNOSTIC_TOOLS.map(item => (
  <div key={item.title} style={{ padding: 12, border: '1px solid rgba(255,255,255,.16)', borderRadius: 8, background: '#1a1a1d' }}>
- <h3 style={{ margin: '0 0 6px', color: 'var(--accent-soft)', fontSize: 15, fontWeight: 600 }}>{item.title}</h3>
- <p style={{ margin: 0, color: '#c7ccd3', fontSize: 13, lineHeight: 1.5 }}>{item.desc}</p>
+ <a
+ href={amazonSearch(item.search)}
+ target="_blank"
+ rel="noopener noreferrer sponsored"
+ style={{ display: 'inline-flex', alignItems: 'center', gap: 4, color: '#f59e0b', fontSize: 15, fontWeight: 600, textDecoration: 'none' }}
+ >
+ {item.title} <span style={{ fontSize: 12, opacity: 0.6 }}>↗</span>
+ </a>
+ <p style={{ margin: '6px 0 0', color: '#c7ccd3', fontSize: 13, lineHeight: 1.5 }}>{item.desc}</p>
  </div>
  ))}
  </div>
