@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import Breadcrumbs from '../ui/Breadcrumbs';
+import FAQ from '../ui/FAQ';
 
 export const metadata: Metadata = {
   title: 'Holowanie i ładowność GMT400 — według rocznika i wersji',
@@ -14,6 +15,25 @@ const DATA = [
   { model: 'Tahoe 1500', years: '1995–2000', tow: 'ok. 5000–6000 lb', note: 'głównie 5.7 Vortec' },
   { model: 'C/K 1500', years: '1988–1998', tow: 'ok. 4000–7000 lb', note: 'zależnie od silnika i mostu' },
   { model: 'C/K 2500/3500', years: '1988–2000', tow: 'ok. 6000–10000+ lb', note: '7.4 i 6.5 TD wyżej' },
+];
+
+const faqItems = [
+  {
+    question: 'Ile może holować GMT400?',
+    answer: 'Zależy od modelu i wyposażenia. Tahoe/Suburban 1500: 5000–6500 lb (2300–3000 kg). 2500/3500: 7500–10000+ lb (3400–4500 kg). Sprawdź naklejkę w schowku lub instrukcję.',
+  },
+  {
+    question: 'Czy potrzebuję specjalnego wyposażenia do holowania?',
+    answer: 'Tak: hak holowniczy, wiązka elektryczna, ewentualnie pakiet chłodzenia (dodatkowa chłodnica ATF). Przy ciężkim holowaniu rozważ skrzynię 4L80-E i przełożenie mostu 3.73 lub 4.10.',
+  },
+  {
+    question: 'Jakie przełożenie mostu do holowania?',
+    answer: '3.42: uniwersalne, dobre na autostradę. 3.73: lepsze do holowania, wyższe obroty. 4.10: najlepsze do ciężkiego holowania, ale wyższe zużycie paliwa. Sprawdź kod RPO (GU4, GU6, GT4, GT5).',
+  },
+  {
+    question: 'Czy 4L60-E nadaje się do holowania?',
+    answer: 'Tak, ale z ograniczeniami. 4L60-E wytrzymuje do ~5000 lb. Przy cięższym holowaniu lepiej 4L80-E. Regularna wymiana ATF jest kluczowa przy holowaniu.',
+  },
 ];
 
 export default function TowingPage() {
@@ -66,6 +86,8 @@ export default function TowingPage() {
           Sprawdź kody RPO swojego auta →
         </Link>
       </section>
+
+      <FAQ items={faqItems} />
     </div>
   );
 }
