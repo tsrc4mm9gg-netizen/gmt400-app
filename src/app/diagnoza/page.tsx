@@ -27,6 +27,19 @@ export const metadata: Metadata = {
 
 export const revalidate = 900;
 
+const SYMPTOM_PARTS = [
+  { symptom: 'Nie odpala', parts: ['EP381', '41-932', 'D577', 'GF626'], codes: ['P0300', 'P0335'] },
+  { symptom: 'Szarpie / gaśnie', parts: ['41-932', '9718D', 'A1300C', 'GF626'], codes: ['P0300', 'P0171', 'P0174'] },
+  { symptom: 'Check Engine', parts: ['41-932', '9718D', 'D577'], codes: ['P0300', 'P0171', 'P0440'] },
+  { symptom: 'Skrzynia ślizga', parts: ['TF289', 'TOS18663'], codes: ['P0700', 'P0751', 'P0758'] },
+  { symptom: 'Przegrzewa się', parts: ['131-113', '252-711'], codes: [] },
+  { symptom: 'Stuki w zawieszeniu', parts: ['14D52'], codes: [] },
+  { symptom: 'Hałas z kół', parts: ['14D52'], codes: [] },
+  { symptom: 'Słabe hamulce', parts: ['14D52'], codes: [] },
+  { symptom: 'Wycieki oleju', parts: ['PF52'], codes: [] },
+  { symptom: 'Klima nie chłodzi', parts: [], codes: [] },
+];
+
 const DIAGNOSTIC_TIPS = [
   { title: 'Zacznij od prostych rzeczy', tip: 'Sprawdź poziom płynów, stan filtrów, napięcie akumulatora. 50% problemów to proste przyczyny.' },
   { title: 'Odczytaj kody OBD', tip: 'Skaner OBD2 pokaże kody błędów. Zapisz je przed czyszczeniem — pomogą w diagnozie.' },
@@ -74,7 +87,32 @@ export default async function Page() {
       </ul>
     </section>
     <div className="mx-auto max-w-3xl px-4 pb-20">
-      <AccordionSection title="Wskazówki diagnostyczne" defaultOpen>
+      <AccordionSection title="Objawy i części" defaultOpen>
+        <p className="mb-3 text-sm text-neutral-400">Kliknij numer części, aby wyszukać na Amazonie. Kliknij kod, aby zobaczyć szczegóły.</p>
+        <div className="space-y-3">
+          {SYMPTOM_PARTS.map(item => (
+            <div key={item.symptom} className="rounded-lg border border-white/10 bg-neutral-800 p-3">
+              <h3 className="font-semibold text-silver-200">{item.symptom}</h3>
+              {item.parts.length > 0 && (
+                <div className="mt-2 flex flex-wrap gap-2">
+                  {item.parts.map(part => <PartLink key={part} partNumber={part} />)}
+                </div>
+              )}
+              {item.codes.length > 0 && (
+                <div className="mt-2 flex flex-wrap gap-2">
+                  {item.codes.map(code => (
+                    <Link key={code} href={`/kody-obd/${code.toLowerCase()}`} className="rounded bg-neutral-700 px-2 py-0.5 text-xs text-silver-300 hover:bg-neutral-600">
+                      {code}
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      </AccordionSection>
+
+      <AccordionSection title="Wskazówki diagnostyczne">
         <div className="grid gap-3 sm:grid-cols-2">
           {DIAGNOSTIC_TIPS.map(item => (
             <div key={item.title} className="rounded-lg border border-white/10 bg-neutral-800 p-3">
@@ -86,12 +124,17 @@ export default async function Page() {
       </AccordionSection>
 
       <AccordionSection title="Części do diagnostyki">
-        <ul className="list-inside list-disc space-y-2 text-neutral-300">
-          <li>Świece zapłonowe: <PartLink partNumber="41-932" /></li>
-          <li>Przewody zapłonowe: <PartLink partNumber="9718D" /></li>
-          <li>Pompa paliwa: <PartLink partNumber="EP381" /></li>
-          <li>Filtr paliwa: <PartLink partNumber="GF626" /></li>
-          <li>Cewka zapłonowa: <PartLink partNumber="D577" /></li>
+        <ul className="space-y-2 text-neutral-300">
+          <li className="flex items-center gap-2">Świece zapłonowe: <PartLink partNumber="41-932" /></li>
+          <li className="flex items-center gap-2">Przewody zapłonowe: <PartLink partNumber="9718D" /></li>
+          <li className="flex items-center gap-2">Cewka zapłonowa: <PartLink partNumber="D577" /></li>
+          <li className="flex items-center gap-2">Pompa paliwa: <PartLink partNumber="EP381" /></li>
+          <li className="flex items-center gap-2">Filtr paliwa: <PartLink partNumber="GF626" /></li>
+          <li className="flex items-center gap-2">Filtr powietrza: <PartLink partNumber="A1300C" /></li>
+          <li className="flex items-center gap-2">Termostat: <PartLink partNumber="131-113" /></li>
+          <li className="flex items-center gap-2">Pompa wody: <PartLink partNumber="252-711" /></li>
+          <li className="flex items-center gap-2">Klocki hamulcowe: <PartLink partNumber="14D52" /></li>
+          <li className="flex items-center gap-2">Filtr ATF: <PartLink partNumber="TF289" /></li>
         </ul>
       </AccordionSection>
 
@@ -103,6 +146,7 @@ export default async function Page() {
             { name: 'Multimetr', search: 'digital multimeter' },
             { name: 'Manometr paliwa', search: 'fuel pressure gauge' },
             { name: 'Lampa stroboskopowa', search: 'timing light' },
+            { name: 'Termometr laserowy', search: 'infrared thermometer' },
           ]}
         />
       </AccordionSection>
