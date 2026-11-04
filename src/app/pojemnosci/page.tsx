@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import Breadcrumbs from '../ui/Breadcrumbs';
 import AffiliateBox from '../ui/AffiliateBox';
+import PartLink from '../ui/PartLink';
 import {
   CAPACITY_DOUBTS, CAPACITY_GROUPS, FLUID_SPECS, GM_DOCS, SERVICE_PARTS, WHEEL_NUT_TORQUE, type Cite,
 } from '@/lib/gm-capacities';
@@ -23,6 +24,11 @@ function Sources({ src }: { src: Cite[] }) {
 
 const th = 'p-2 text-left font-medium text-silver-400';
 const td = 'p-2 align-top';
+
+function extractPartNumber(part: string): string | null {
+  const match = part.match(/\b(PF-?\d+|A\d+C|GF-?\d+|TP-?\d+|CV-?\d+C|RC-?\d+|41-\d+|CR\d+TS|\d{8})\b/i);
+  return match ? match[1] : null;
+}
 
 export default function PojemnosciPage() {
   return (
@@ -97,20 +103,26 @@ export default function PojemnosciPage() {
 
       <section id="czesci" className="mt-8 scroll-mt-20">
         <h2 className="text-xl font-semibold text-silver-300">Filtry i części eksploatacyjne</h2>
-        <p className="mt-1 text-sm text-neutral-400">Numery AC Delco / GM z tabel „Maintenance Items” i „Normal Maintenance Replacement Parts”. Litery w nawiasach to kod silnika (8. znak VIN).</p>
+        <p className="mt-1 text-sm text-neutral-400">Numery AC Delco / GM z tabel „Maintenance Items” i „Normal Maintenance Replacement Parts”. Litery w nawiasach to kod silnika (8. znak VIN). <strong>Kliknij numer, aby wyszukać na Amazonie.</strong></p>
         <div className="mt-3 overflow-x-auto rounded-xl border border-white/10 bg-neutral-950">
           <table className="w-full min-w-[640px] text-sm">
             <thead><tr className="border-b border-white/10"><th className={th}>Część</th><th className={th}>Silnik</th><th className={th}>Lata</th><th className={th}>Numer</th><th className={th}>Źródło</th></tr></thead>
             <tbody className="text-neutral-300">
-              {SERVICE_PARTS.map(r => (
-                <tr key={r.item + r.variant + r.years} className="border-b border-white/5">
-                  <td className={`${td} font-medium text-white`}>{r.item}</td>
-                  <td className={td}>{r.variant}</td>
-                  <td className={`${td} whitespace-nowrap`}>{r.years}</td>
-                  <td className={td}>{r.part}</td>
-                  <td className={td}><Sources src={r.src} /></td>
-                </tr>
-              ))}
+              {SERVICE_PARTS.map(r => {
+                const partNum = extractPartNumber(r.part);
+                return (
+                  <tr key={r.item + r.variant + r.years} className="border-b border-white/5">
+                    <td className={`${td} font-medium text-white`}>{r.item}</td>
+                    <td className={td}>{r.variant}</td>
+                    <td className={`${td} whitespace-nowrap`}>{r.years}</td>
+                    <td className={td}>
+                      {partNum ? <PartLink partNumber={partNum} /> : r.part}
+                      {partNum && r.part.includes('(') && <span className="text-neutral-500"> {r.part.match(/\([^)]+\)/)?.[0]}</span>}
+                    </td>
+                    <td className={td}><Sources src={r.src} /></td>
+                  </tr>
+                );
+              })}
             </tbody>
           </table>
         </div>
