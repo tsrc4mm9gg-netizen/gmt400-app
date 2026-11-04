@@ -14,7 +14,7 @@ export default function PartLink({ partNumber, className = '' }: Props) {
       href={href}
       target="_blank"
       rel="noopener noreferrer sponsored"
-      className={`inline-flex items-center gap-1 rounded bg-silver-600/20 px-2 py-0.5 font-semibold text-silver-300 underline decoration-silver-400 underline-offset-2 transition hover:bg-silver-600/40 hover:text-white ${className}`}
+      className={`inline-flex items-center gap-1 rounded bg-amber-600/20 px-2 py-0.5 font-semibold text-amber-400 underline decoration-amber-400 underline-offset-2 transition hover:bg-amber-600/40 hover:text-amber-300 ${className}`}
     >
       {partNumber}
       <span className="text-xs opacity-60">↗</span>
