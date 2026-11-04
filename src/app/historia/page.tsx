@@ -20,6 +20,12 @@ const YEARS = [
   { year: '2000', note: 'Koniec generacji. Silverado/Sierra przechodzą na GMT800.' },
 ];
 
+const TIPS = [
+  { title: 'TBI vs Vortec', tip: 'TBI (1988–1995) jest prostszy w naprawie, ale mniej wydajny. Vortec (1996+) ma więcej mocy i lepsze zużycie paliwa, ale wymaga OBD-II.' },
+  { title: 'Który rocznik wybrać', tip: '1996–1999 (Vortec) są najpopularniejsze. 1988–1995 (TBI) są prostsze w naprawie. Unikaj egzemplarzy z dużą korozją.' },
+  { title: 'Co sprawdzić przy zakupie', tip: 'Sprawdź VIN, kody RPO, stan karoserii, silnika, skrzyni. Poproś o historię serwisową. Sprawdź, czy nie ma wycieków.' },
+];
+
 const faqItems = [
   {
     question: 'Czym różni się TBI od Vortec?',
@@ -50,6 +56,18 @@ export default function HistoryPage() {
           Najważniejsze zmiany w generacji GMT400 (1988–2000). Z71 to pakiet terenowy (zawieszenie, osłony, opony).
         </p>
       </header>
+
+      <section className="mt-6">
+        <h2 className="text-xl font-semibold">Wskazówki dla kupujących</h2>
+        <div className="mt-3 space-y-3">
+          {TIPS.map(item => (
+            <div key={item.title} className="rounded-xl border border-white/10 bg-neutral-900 p-4">
+              <h3 className="font-semibold text-silver-200">{item.title}</h3>
+              <p className="mt-1 text-sm text-neutral-300">{item.tip}</p>
+            </div>
+          ))}
+        </div>
+      </section>
 
       <section className="mt-6">
         <ul className="space-y-3">

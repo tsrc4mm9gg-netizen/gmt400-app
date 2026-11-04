@@ -12,6 +12,12 @@ export const metadata: Metadata = {
   alternates: { canonical: 'https://www.gmt400.pl/porady-wlasciciela' },
 };
 
+const TIPS = [
+  { title: 'Przed jazdą', tip: 'Sprawdź poziom płynów, ciśnienie w oponach, działanie świateł. Rozgrzej silnik przed jazdą (szczególnie zimą).' },
+  { title: 'Podczas jazdy', tip: 'Słuchaj nietypowych dźwięków. Obserwuj wskaźniki (temperatura, olej). Nie ignoruj kontrolek.' },
+  { title: 'Po jeździe', tip: 'Sprawdź, czy nie ma wycieków. Zanotuj nietypowe objawy. Zaplanuj przegląd, jeśli coś niepokoi.' },
+];
+
 const faqItems = [
   {
     question: 'Jak używać napędu 4×4 w GMT400?',
@@ -42,6 +48,19 @@ export default function OwnerTipsPage() {
           <p className="mt-4 text-lg leading-8 text-neutral-300">Krótkie, praktyczne porady na podstawie instrukcji obsługi (Owner’s Manual 1995–1999) i instrukcji serwisowych GM (1988, 1991, 1998). Opisujemy je własnymi słowami i przy każdej podajemy dokument oraz stronę. Wyposażenie zależy od rocznika i wersji, więc zawsze sprawdź w swoim aucie.</p>
           <p className="mt-3 text-sm leading-6 text-neutral-400">Dłuższe instrukcje krok po kroku (wymiany, naprawy) znajdziesz w <Link href="/poradniki" className="text-silver-300 underline">Poradnikach</Link>. Przepisy PL (LPG, rejestracja, światła) — w <Link href="/dla-wlasciciela" className="text-silver-300 underline">Dla właściciela</Link>.</p>
         </header>
+
+        <section className="mb-6">
+          <h2 className="text-xl font-semibold text-silver-300">Codzienne wskazówki</h2>
+          <div className="mt-3 space-y-3">
+            {TIPS.map(item => (
+              <div key={item.title} className="rounded-xl border border-white/10 bg-neutral-900 p-4">
+                <h3 className="font-semibold text-silver-200">{item.title}</h3>
+                <p className="mt-1 text-sm text-neutral-300">{item.tip}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
         <OwnerTipsList />
 
         <section className="mt-8">
