@@ -99,13 +99,22 @@ export default function MomentyPage() {
           <p className="mt-2 text-xs text-neutral-500">Wartości orientacyjne. Sprawdź w pełnej tabeli poniżej lub w instrukcji.</p>
         </AccordionSection>
 
+        <AccordionSection title="Uszczelki i części">
+          <ul className="space-y-2 text-neutral-300">
+            <li className="flex items-center gap-2">Uszczelka miski ATF: <PartLink partNumber="TOS18663" /></li>
+            <li className="flex items-center gap-2">Filtr oleju: <PartLink partNumber="PF52" /></li>
+            <li className="flex items-center gap-2">Świece zapłonowe: <PartLink partNumber="41-932" /></li>
+          </ul>
+        </AccordionSection>
+
         <AccordionSection title="Przydatne przy dokręcaniu">
           <AffiliateBox
             title=""
             items={[
-              { name: 'Klucz dynamometryczny', search: 'torque wrench' },
-              { name: 'Zestaw kluczy nasadowych', search: 'socket set metric' },
               { name: 'Klucz dynamometryczny 1/2"', search: 'torque wrench 1/2 inch' },
+              { name: 'Klucz dynamometryczny 3/8"', search: 'torque wrench 3/8 inch' },
+              { name: 'Zestaw kluczy nasadowych', search: 'socket set metric' },
+              { name: 'Klucz dynamometryczny kątowy', search: 'angle torque wrench' },
             ]}
           />
         </AccordionSection>
