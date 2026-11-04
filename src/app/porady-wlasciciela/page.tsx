@@ -2,6 +2,8 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import Breadcrumbs from '../ui/Breadcrumbs';
 import FAQ from '../ui/FAQ';
+import PartLink from '../ui/PartLink';
+import AffiliateBox from '../ui/AffiliateBox';
 import OwnerTipsList from './OwnerTipsList';
 
 export const metadata: Metadata = {
@@ -41,6 +43,26 @@ export default function OwnerTipsPage() {
           <p className="mt-3 text-sm leading-6 text-neutral-400">Dłuższe instrukcje krok po kroku (wymiany, naprawy) znajdziesz w <Link href="/poradniki" className="text-silver-300 underline">Poradnikach</Link>. Przepisy PL (LPG, rejestracja, światła) — w <Link href="/dla-wlasciciela" className="text-silver-300 underline">Dla właściciela</Link>.</p>
         </header>
         <OwnerTipsList />
+
+        <section className="mt-8">
+          <h2 className="text-xl font-semibold text-silver-300">Przydatne części</h2>
+          <ul className="mt-3 list-inside list-disc space-y-2 text-neutral-300">
+            <li>Filtr oleju: <PartLink partNumber="PF52" /></li>
+            <li>Świece zapłonowe: <PartLink partNumber="41-932" /></li>
+            <li>Filtr powietrza: <PartLink partNumber="A1300C" /></li>
+            <li>Wycieraczki: sprawdź rozmiar w instrukcji</li>
+          </ul>
+        </section>
+
+        <AffiliateBox
+          title="Przydatne dla właściciela"
+          items={[
+            { name: 'Skaner OBD2', search: 'OBD2 scanner' },
+            { name: 'Klucz dynamometryczny', search: 'torque wrench' },
+            { name: 'Latarka inspekcyjna', search: 'inspection flashlight LED' },
+          ]}
+        />
+
         <FAQ items={faqItems} />
       </div>
     </div>
