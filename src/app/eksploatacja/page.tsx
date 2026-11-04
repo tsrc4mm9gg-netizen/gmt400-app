@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import Breadcrumbs from '../ui/Breadcrumbs';
+import FAQ from '../ui/FAQ';
 
 export const metadata: Metadata = {
   title: 'Części eksploatacyjne GMT400 — filtry, płyny, hamulce, zawieszenie',
@@ -24,7 +25,7 @@ const categories: { name: string; items: Product[] }[] = [
       { name: 'ACDelco PF52 — filtr oleju', asin: 'B000C9SU1A', note: 'Oryginalny filtr GM', fitment: '4.3/5.0/5.7/7.4 V8 1988–2000' },
       { name: 'ACDelco A1300C — filtr powietrza', asin: 'B000C9SU1A', note: 'Do Vortec 1996+', fitment: '5.7/7.4 Vortec' },
       { name: 'ACDelco GF626 — filtr paliwa', asin: 'B000C9SU1A', note: 'Filtr w linii', fitment: '1996–1999' },
-      { name: 'ACDelco TF289 — filtr ATF 4L60-E', asin: 'B000C9SU1A', note: 'Filtr skrzyni', fitment: '4L60-E 1993–1999' },
+      { name: 'ACDelco TF289 — filtr ATF 4L60-E', asin: 'B000C9QX50', note: 'Filtr skrzyni + uszczelka', fitment: '4L60-E 1993–1999' },
     ],
   },
   {
@@ -46,7 +47,7 @@ const categories: { name: string; items: Product[] }[] = [
     name: 'Elektryka',
     items: [
       { name: 'Alternator ACDelco 335-1023', asin: 'B000C9SU1A', note: '105A, CS130', fitment: 'GMT400 1988–1995' },
-      { name: 'Rozrusznik ACDelco', asin: 'B000C9SU1A', note: 'Rozrusznik', fitment: 'Sprawdź pasowanie' },
+      { name: 'Rozrusznik ACDelco 337-1018', asin: 'B000C9SU1A', note: 'Rozrusznik 12V', fitment: 'GMT400 1995–2000' },
       { name: 'Akumulator samochodowy', asin: 'B000C9SU1A', note: 'Akumulator 12V', fitment: 'Sprawdź rozmiar' },
     ],
   },
@@ -85,7 +86,7 @@ const categories: { name: string; items: Product[] }[] = [
   {
     name: 'Oświetlenie',
     items: [
-      { name: 'Bosch H4 Pure Light 12V', asin: 'B005JU5UEW', note: 'Oryginalna jakość Bosch', fitment: 'Reflektory 12V' },
+      { name: 'Bosch H4 Pure Light 12V', asin: 'B003JY828G', note: 'Oryginalna jakość Bosch', fitment: 'Reflektory 12V' },
       { name: 'Osram Cool Blue Intense H4', asin: 'B00CJOBKAY', note: '+100% jasności', fitment: 'Reflektory 12V' },
       { name: 'Żarówka P21W 12V', asin: 'B000C9SU1A', note: 'Kierunkowskazy, stop', fitment: 'Uniwersalna' },
     ],
@@ -109,6 +110,21 @@ const categories: { name: string; items: Product[] }[] = [
     items: [
       { name: 'Pasek wielorowkowy', asin: 'B000C9SU1A', note: 'Pasek napędu osprzętu', fitment: 'Sprawdź długość' },
     ],
+  },
+];
+
+const faqItems = [
+  {
+    question: 'Jakie części eksploatacyjne wymieniać regularnie?',
+    answer: 'Co 5000–10000 km: olej i filtr oleju. Co 15000–30000 km: filtr powietrza, filtr paliwa, świece. Co 30000–60000 km: filtr ATF, płyn hamulcowy, płyn chłodniczy. Wycieraczki i żarówki wymieniaj w razie potrzeby.',
+  },
+  {
+    question: 'Czy części ACDelco są oryginalne?',
+    answer: 'ACDelco to marka części GM. Linia Gold/Professional to wysokiej jakości zamienniki spełniające specyfikacje GM. Są tańsze od oryginalnych GM, ale zachowują wysoką jakość.',
+  },
+  {
+    question: 'Gdzie kupić części do GMT400 w Polsce?',
+    answer: 'Amazon.de (szybka dostawa), Allegro, sklepy z częściami amerykańskimi. Numery GM są uniwersalne — można zamawiać z USA lub Europy.',
   },
 ];
 
@@ -149,6 +165,8 @@ export default function EksploatacjaPage() {
           </ul>
         </section>
       ))}
+
+      <FAQ items={faqItems} />
 
       <p className="mt-8 text-xs text-neutral-500">
         <Link href="/polecane" className="text-silver-400 hover:underline">Zobacz wszystkie polecane produkty →</Link>
