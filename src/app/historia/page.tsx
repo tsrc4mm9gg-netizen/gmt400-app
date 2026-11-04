@@ -1,5 +1,7 @@
 import type { Metadata } from 'next';
 import Breadcrumbs from '../ui/Breadcrumbs';
+import FAQ from '../ui/FAQ';
+import Link from 'next/link';
 
 export const metadata: Metadata = {
   title: 'Historia GMT400 rok po roku — Z71, zmiany, silniki',
@@ -16,6 +18,25 @@ const YEARS = [
   { year: '1998', note: 'AutoTrac (opcjonalny) w 4x4. Denali (Yukon).' },
   { year: '1999', note: 'Ostatni pełny rok Suburban/Tahoe GMT400.' },
   { year: '2000', note: 'Koniec generacji. Silverado/Sierra przechodzą na GMT800.' },
+];
+
+const faqItems = [
+  {
+    question: 'Czym różni się TBI od Vortec?',
+    answer: 'TBI (1988–1995) to prostszy układ wtrysku z jedną lub dwiema dyszami. Vortec (1996+) ma wtrysk wielopunktowy, więcej mocy i lepsze zużycie paliwa. Vortec wymaga OBD-II.',
+  },
+  {
+    question: 'Co to jest Z71?',
+    answer: 'Z71 to fabryczny pakiet terenowy. Obejmuje mocniejsze zawieszenie, osłony podwozia, inne opony i czasem inne przełożenie mostu. Kod Z71 sprawdzisz na naklejce RPO w schowku.',
+  },
+  {
+    question: 'Które roczniki mają OBD-II?',
+    answer: 'OBD-II jest w modelach 1996+. Starsze (1988–1995) mają OBD-I z złączem ALDL 12-pin. OBD-II używa gniazda 16-pin i skanera.',
+  },
+  {
+    question: 'Czy części pasują między rocznikami?',
+    answer: 'Większość części mechanicznych pasuje w całej generacji. Różnice dotyczą elektroniki (TBI vs Vortec), nadwozia (zmiana pasa 1996) i wyposażenia. Zawsze sprawdzaj numer części.',
+  },
 ];
 
 export default function HistoryPage() {
@@ -47,6 +68,23 @@ export default function HistoryPage() {
           Z71 to fabryczny pakiet terenowy. Zwykle obejmuje mocniejsze zawieszenie, osłony podwozia, inne opony i czasem inne przełożenie mostu. Kod Z71 sprawdzisz na naklejce RPO w schowku.
         </p>
       </section>
+
+      <section className="mt-8">
+        <h2 className="text-xl font-semibold">Silniki</h2>
+        <ul className="mt-3 list-inside list-disc space-y-2 text-neutral-300">
+          <li><strong>4.3 V6</strong> — najoszczędniejszy, najsłabszy</li>
+          <li><strong>5.0 V8</strong> — kompromis, rzadki</li>
+          <li><strong>5.7 TBI</strong> — 1988–1995, prosty w naprawie</li>
+          <li><strong>5.7 Vortec (L31)</strong> — 1996+, najpopularniejszy</li>
+          <li><strong>7.4 Vortec (L29)</strong> — do holowania, duże zużycie</li>
+          <li><strong>6.5 TD</strong> — diesel, wytrzymały, wymaga konserwacji</li>
+        </ul>
+        <Link href="/modele" className="mt-4 inline-block text-sm font-semibold text-silver-300 underline-offset-2 hover:underline">
+          Porównaj modele →
+        </Link>
+      </section>
+
+      <FAQ items={faqItems} />
     </div>
   );
 }
