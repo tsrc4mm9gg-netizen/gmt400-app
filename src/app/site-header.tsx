@@ -15,6 +15,7 @@ const links = [
   { href: '/', label: 'Strona główna' },
   { href: '/vin', label: 'Sprawdź VIN' },
   { href: '/modele', label: 'Modele' },
+  { href: '/eksploatacja', label: 'Eksploatacja' },
   { href: '/dla-wlasciciela', label: 'Dla właściciela' },
   { href: '/baza', label: 'Baza wiedzy' },
   { href: '/kody-obd', label: 'Kody OBD' },
@@ -112,7 +113,7 @@ export default function SiteHeader() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Wesprzyj GMT400.pl"
-            className="inline-flex min-h-11 items-center justify-center gap-1.5 rounded-full border border-silver-500/50 bg-silver-900/40 px-3 text-silver-200 transition hover:border-silver-400 hover:bg-silver-800/50 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-silver-500 lg:order-4"
+            className="inline-flex min-h-11 items-center justify-center gap-1.5 rounded-full border border-amber-500/60 bg-amber-600 px-3 text-white transition hover:bg-amber-500 hover:border-amber-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-amber-500 lg:order-4"
           >
             <svg aria-hidden="true" viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1" /><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z" /><line x1="6" y1="1" x2="6" y2="4" /><line x1="10" y1="1" x2="10" y2="4" /><line x1="14" y1="1" x2="14" y2="4" /></svg>
             <span className="hidden text-xs font-medium sm:inline">Wesprzyj</span>
