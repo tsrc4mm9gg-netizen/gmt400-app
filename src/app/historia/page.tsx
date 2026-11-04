@@ -5,20 +5,35 @@ import AccordionSection from '../ui/AccordionSection';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
-  title: 'Historia GMT400 rok po roku — Z71, zmiany, silniki',
-  description: 'Krótka historia generacji GMT400 (1988–2000): najważniejsze zmiany, Z71, silniki Vortec i OBD-II.',
+  title: 'Historia GMT400 rok po roku — Z71, zmiany, silniki, kolory',
+  description: 'Krótka historia generacji GMT400 (1988–2000): najważniejsze zmiany, Z71, silniki Vortec, OBD-II i kolory lakierów.',
   alternates: { canonical: 'https://www.gmt400.pl/historia' },
 };
 
 const YEARS = [
-  { year: '1988', note: 'Start generacji GMT400. C/K z silnikami TBI.' },
+  { year: '1988', note: 'Start generacji GMT400. C/K z silnikami TBI. Nowy design, prostokątne reflektory.' },
+  { year: '1989', note: 'Drobne zmiany. Wprowadzenie nowych opcji wyposażenia.' },
+  { year: '1990', note: 'Pojawia się 454 SS (5.7 V8, 2WD, krótka skrzynia).' },
+  { year: '1991', note: 'Zmiany w zawieszeniu. Nowe opcje audio.' },
   { year: '1992', note: 'Suburban na platformie GMT400. Blazer/Tahoe 2-drzwi.' },
-  { year: '1994', note: 'Pojawia się 6.5 TD w wybranych wersjach.' },
-  { year: '1995', note: 'Tahoe 4-drzwi. Koniec K5 Blazer.' },
-  { year: '1996', note: 'Vortec (L31 5.7, L29 7.4). OBD-II. Zmiana przedniego pasa.' },
-  { year: '1998', note: 'AutoTrac (opcjonalny) w 4x4. Denali (Yukon).' },
-  { year: '1999', note: 'Ostatni pełny rok Suburban/Tahoe GMT400.' },
+  { year: '1993', note: '4L60-E zastępuje 700R4. Nowa elektronika skrzyni.' },
+  { year: '1994', note: 'Pojawia się 6.5 TD w wybranych wersjach. Airbag kierowcy.' },
+  { year: '1995', note: 'Tahoe 4-drzwi. Koniec K5 Blazer. Airbag pasażera.' },
+  { year: '1996', note: 'Vortec (L31 5.7, L29 7.4). OBD-II. Zmiana przedniego pasa. Nowy design reflektorów.' },
+  { year: '1997', note: 'Drobne zmiany. Nowe kolory lakierów.' },
+  { year: '1998', note: 'AutoTrac (opcjonalny) w 4x4. Denali (Yukon). Nowe fotele.' },
+  { year: '1999', note: 'Ostatni pełny rok Suburban/Tahoe GMT400. Nowe kolory.' },
   { year: '2000', note: 'Koniec generacji. Silverado/Sierra przechodzą na GMT800.' },
+];
+
+const COLORS = [
+  { name: 'Summit White', code: '50', years: '1988–2000' },
+  { name: 'Onyx Black', code: '41', years: '1988–2000' },
+  { name: 'Victory Red', code: '74', years: '1988–2000' },
+  { name: 'Dark Green Metallic', code: '43', years: '1996–1999' },
+  { name: 'Light Pewter Metallic', code: '14', years: '1996–1999' },
+  { name: 'Indigo Blue Metallic', code: '25', years: '1996–1999' },
+  { name: 'Sunset Orange', code: '67', years: '1998–1999' },
 ];
 
 const TIPS = [
@@ -81,20 +96,39 @@ export default function HistoryPage() {
           </ul>
         </AccordionSection>
 
+        <AccordionSection title="Kolory lakierów">
+          <p className="mb-3 text-sm text-neutral-400">Popularne kolory GMT400. Kod koloru znajdziesz na naklejce RPO.</p>
+          <ul className="space-y-2">
+            {COLORS.map(c => (
+              <li key={c.code} className="flex items-center justify-between rounded-lg border border-white/10 bg-neutral-800 px-3 py-2">
+                <span className="text-neutral-200">{c.name}</span>
+                <span className="text-sm text-neutral-400">{c.code} · {c.years}</span>
+              </li>
+            ))}
+          </ul>
+        </AccordionSection>
+
         <AccordionSection title="Z71 — pakiet terenowy">
           <p className="text-sm text-neutral-300">
             Z71 to fabryczny pakiet terenowy. Zwykle obejmuje mocniejsze zawieszenie, osłony podwozia, inne opony i czasem inne przełożenie mostu. Kod Z71 sprawdzisz na naklejce RPO w schowku.
           </p>
+          <ul className="mt-3 list-inside list-disc text-sm text-neutral-300">
+            <li>Mocniejsze amortyzatory</li>
+            <li>Osłony podwozia</li>
+            <li>Opony AT (All-Terrain)</li>
+            <li>Czasem inne przełożenie mostu (3.73 lub 4.10)</li>
+            <li>Naklejki Z71</li>
+          </ul>
         </AccordionSection>
 
         <AccordionSection title="Silniki">
           <ul className="list-inside list-disc space-y-2 text-neutral-300">
-            <li><strong>4.3 V6</strong> — najoszczędniejszy, najsłabszy</li>
-            <li><strong>5.0 V8</strong> — kompromis, rzadki</li>
-            <li><strong>5.7 TBI</strong> — 1988–1995, prosty w naprawie</li>
-            <li><strong>5.7 Vortec (L31)</strong> — 1996+, najpopularniejszy</li>
-            <li><strong>7.4 Vortec (L29)</strong> — do holowania, duże zużycie</li>
-            <li><strong>6.5 TD</strong> — diesel, wytrzymały, wymaga konserwacji</li>
+            <li><strong>4.3 V6</strong> — najoszczędniejszy, najsłabszy (~160 KM)</li>
+            <li><strong>5.0 V8</strong> — kompromis, rzadki (~175 KM)</li>
+            <li><strong>5.7 TBI</strong> — 1988–1995, prosty w naprawie (~210 KM)</li>
+            <li><strong>5.7 Vortec (L31)</strong> — 1996+, najpopularniejszy (~255 KM)</li>
+            <li><strong>7.4 Vortec (L29)</strong> — do holowania, duże zużycie (~290 KM)</li>
+            <li><strong>6.5 TD</strong> — diesel, wytrzymały, wymaga konserwacji (~180 KM)</li>
           </ul>
           <Link href="/modele" className="mt-3 inline-block text-sm font-semibold text-silver-300 underline-offset-2 hover:underline">
             Porównaj modele →
