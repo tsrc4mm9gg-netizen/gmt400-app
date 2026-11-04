@@ -22,6 +22,13 @@ export const metadata: Metadata = {
 
 export const revalidate = 900;
 
+const TOOLS_LIST = [
+  { category: 'Podstawowe', items: ['Zestaw kluczy nasadowych (metryczne i calowe)', 'Klucz dynamometryczny', 'Śrubokręty (płaskie i krzyżakowe)', 'Szczypce', 'Młotek gumowy'] },
+  { category: 'Do podnoszenia', items: ['Podnośnik hydrauliczny', 'Podpory (jack stands) — minimum 2', 'Kliny pod koła'] },
+  { category: 'Do płynów', items: ['Lejek', 'Pojemniki na zużyty olej', 'Rękawice nitrylowe', 'Czyściwo / szmaty'] },
+  { category: 'Do diagnostyki', items: ['Skaner OBD2', 'Multimetr', 'Szczelinomierz (do świec)', 'Latarka'] },
+];
+
 const DIY_TIPS = [
   { title: 'Przygotuj narzędzia', tip: 'Przed rozpoczęciem sprawdź, czy masz wszystkie potrzebne narzędzia. Brak klucza w połowie pracy to strata czasu.' },
   { title: 'Używaj podpór', tip: 'Nigdy nie pracuj pod autem opartym tylko na podnośniku. Zawsze używaj podpór (jack stands).' },
@@ -54,6 +61,21 @@ export default async function Page() {
   return <>
     <Encyclopedia initialTab="diy" initialItems={items} />
     <div className="mx-auto max-w-3xl px-4">
+      <section className="mb-6">
+        <h2 className="text-xl font-semibold text-silver-300">Lista narzędzi</h2>
+        <p className="mt-2 text-sm text-neutral-400">Podstawowy zestaw do większości napraw GMT400.</p>
+        <div className="mt-4 grid gap-4 sm:grid-cols-2">
+          {TOOLS_LIST.map(cat => (
+            <div key={cat.category} className="rounded-xl border border-white/10 bg-neutral-900 p-4">
+              <h3 className="font-semibold text-silver-200">{cat.category}</h3>
+              <ul className="mt-2 list-inside list-disc space-y-1 text-sm text-neutral-300">
+                {cat.items.map((item, i) => <li key={i}>{item}</li>)}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </section>
+
       <section className="mb-6">
         <h2 className="text-xl font-semibold text-silver-300">Wskazówki przed rozpoczęciem</h2>
         <div className="mt-3 grid gap-3 sm:grid-cols-2">
