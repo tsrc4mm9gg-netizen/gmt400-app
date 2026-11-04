@@ -4,6 +4,7 @@ import SchematicViewer from './SchematicViewer';
 import SchematicPhotos from './SchematicPhotos';
 import FuseTable from './FuseTable';
 import Breadcrumbs from '../ui/Breadcrumbs';
+import FAQ from '../ui/FAQ';
 
 export const metadata = {
   title: 'Schematy — GMT400',
@@ -12,6 +13,21 @@ export const metadata = {
 };
 
 const titleOf = (id: string) => SCHEMATICS.find(item => item.id === id)?.title ?? id;
+
+const faqItems = [
+  {
+    question: 'Gdzie znajdę schemat bezpieczników GMT400?',
+    answer: 'Schemat bezpieczników jest na tej stronie (sekcja „Bezpieczniki”). Lokalizacja skrzynek: pod maską (silnik) i pod deską rozdzielczą (kabina). Numery bezpieczników mogą się różnić między rocznikami — sprawdź w swoim aucie.',
+  },
+  {
+    question: 'Jak odczytać kody OBD w starszych GMT400?',
+    answer: 'W modelach 1988–1995 (OBD-I) użyj złącza ALDL 12-pin. Zewrzyj piny A–B i odczytaj migającą lampkę Check Engine. Kod 12 oznacza tryb diagnostyczny. Schemat pinów jest na tej stronie.',
+  },
+  {
+    question: 'Czy schematy pasują do wszystkich GMT400?',
+    answer: 'Schematy są poglądowe i obejmują typowe konfiguracje. GMT400 ma wiele wariantów (silniki, skrzynie, wyposażenie). Zawsze sprawdzaj w swoim aucie lub manualu serwisowym przed pracą.',
+  },
+];
 
 export default function SchematyPage() {
   return (
@@ -75,6 +91,7 @@ export default function SchematyPage() {
           <p className="mt-1 text-xs text-neutral-400">{item.note}</p>
         </section>
       ))}
+      <FAQ items={faqItems} />
       <p className="mt-8 text-sm text-neutral-400">Schematy dla konkretnego nadwozia znajdziesz też na <Link href="/modele" className="inline-flex min-h-11 items-center text-silver-400 underline">stronach modeli</Link>.</p>
     </div>
   );
