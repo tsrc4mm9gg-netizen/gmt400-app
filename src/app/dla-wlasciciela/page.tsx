@@ -4,6 +4,7 @@ import { GUIDES } from '../../lib/guides';
 import Breadcrumbs from '../ui/Breadcrumbs';
 import AffiliateBox from '../ui/AffiliateBox';
 import FAQ from '../ui/FAQ';
+import AccordionSection from '../ui/AccordionSection';
 
 export const metadata: Metadata = {
   title: 'Najważniejsze dla właściciela w PL — poradniki GMT400',
@@ -47,19 +48,18 @@ export default function GuidesHub() {
           <p className="mt-4 text-lg leading-8 text-neutral-300">Cztery tematy, o które pytacie najczęściej. Każda kwota i przepis ma źródło z datą; rozbieżności i braki oznaczamy wprost. Przepisy się zmieniają — sprawdź w urzędzie.</p>
         </header>
 
-        <section className="mb-6">
-          <h2 className="text-xl font-semibold text-silver-300">Wskazówki dla właściciela w PL</h2>
-          <div className="mt-3 space-y-3">
+        <AccordionSection title="Wskazówki dla właściciela w PL" defaultOpen>
+          <div className="space-y-3">
             {TIPS.map(item => (
-              <div key={item.title} className="rounded-xl border border-white/10 bg-neutral-900 p-4">
+              <div key={item.title} className="rounded-lg border border-white/10 bg-neutral-800 p-3">
                 <h3 className="font-semibold text-silver-200">{item.title}</h3>
                 <p className="mt-1 text-sm text-neutral-300">{item.tip}</p>
               </div>
             ))}
           </div>
-        </section>
+        </AccordionSection>
 
-        <ul className="grid gap-4 sm:grid-cols-2">
+        <ul className="mt-4 grid gap-4 sm:grid-cols-2">
           {GUIDES.map(g => (
             <li key={g.slug}>
               <Link href={'/dla-wlasciciela/' + g.slug} className="block h-full rounded-xl border-2 border-silver-700/50 bg-neutral-900 p-5 hover:border-silver-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-silver-500">
@@ -74,15 +74,23 @@ export default function GuidesHub() {
           <h2 className="text-xl font-semibold">Porady właściciela (tips &amp; tricks) →</h2>
           <p className="mt-2 text-sm leading-6 text-neutral-300">4×4, przyczepa, opony i łańcuchy, pilot i PassLock, bezpieczniki, kody ALDL, test kompresji — z instrukcji GM, ze stroną źródła i filtrem wg Twojego auta.</p>
         </Link>
-        <AffiliateBox
-          title="Przydatne dla właściciela"
-          items={[
-            { name: 'Skaner OBD2', search: 'OBD2 scanner' },
-            { name: 'Klucz dynamometryczny', search: 'torque wrench' },
-            { name: 'Zestaw kluczy', search: 'socket set metric' },
-          ]}
-        />
-        <FAQ items={faqItems} />
+
+        <div className="mt-6">
+          <AccordionSection title="Przydatne dla właściciela">
+            <AffiliateBox
+              title=""
+              items={[
+                { name: 'Skaner OBD2', search: 'OBD2 scanner' },
+                { name: 'Klucz dynamometryczny', search: 'torque wrench' },
+                { name: 'Zestaw kluczy', search: 'socket set metric' },
+              ]}
+            />
+          </AccordionSection>
+
+          <AccordionSection title="Częste pytania">
+            <FAQ items={faqItems} />
+          </AccordionSection>
+        </div>
       </div>
     </div>
   );
