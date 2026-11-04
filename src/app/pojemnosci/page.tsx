@@ -2,6 +2,7 @@ import Link from 'next/link';
 import Breadcrumbs from '../ui/Breadcrumbs';
 import AffiliateBox from '../ui/AffiliateBox';
 import PartLink from '../ui/PartLink';
+import FAQ from '../ui/FAQ';
 import {
   CAPACITY_DOUBTS, CAPACITY_GROUPS, FLUID_SPECS, GM_DOCS, SERVICE_PARTS, WHEEL_NUT_TORQUE, type Cite,
 } from '@/lib/gm-capacities';
@@ -29,6 +30,25 @@ function extractPartNumber(part: string): string | null {
   const match = part.match(/\b(PF-?\d+|A\d+C|GF-?\d+|TP-?\d+|CV-?\d+C|RC-?\d+|41-\d+|CR\d+TS|\d{8})\b/i);
   return match ? match[1] : null;
 }
+
+const faqItems = [
+  {
+    question: 'Ile oleju potrzebuje silnik GMT400?',
+    answer: 'Zależy od silnika: 4.3 V6 ~4.5L, 5.0/5.7 V8 ~5L, 7.4 V8 ~6L. Dokładne wartości są w tabelach powyżej. Zawsze sprawdzaj poziom bagnetem po wymianie.',
+  },
+  {
+    question: 'Jaki olej do GMT400?',
+    answer: 'GM zaleca olej spełniający specyfikację API. Dla silników benzynowych: 5W-30 lub 10W-30. Dla diesla 6.5: 15W-40. Sprawdź specyfikację w tabeli płynów.',
+  },
+  {
+    question: 'Jaki płyn do skrzyni 4L60-E?',
+    answer: 'Dexron III (lub nowszy Dexron VI). Pojemność ~10-12L przy pełnej wymianie, ~4-5L przy wymianie filtra. Użyj MANNOL Dexron III lub oryginalnego GM.',
+  },
+  {
+    question: 'Jak często wymieniać płyny?',
+    answer: 'Olej: co 5000-10000 km. ATF: co 50000-80000 km. Płyn chłodniczy: co 2-3 lata. Płyn hamulcowy: co 2 lata. Sprawdź harmonogram przeglądów.',
+  },
+];
 
 export default function PojemnosciPage() {
   return (
@@ -152,6 +172,8 @@ export default function PojemnosciPage() {
         <p className="mt-3 text-sm text-neutral-400">Interwały wymian znajdziesz w <Link href="/przeglady" className="text-silver-300 underline">harmonogramie przeglądów</Link>.</p>
         <p className="mt-2 text-sm text-neutral-300" data-testid="fuel-filter-advice"><span className="font-medium text-white">Filtr paliwa — ogólna rada:</span> wymieniaj co 48 000 km. Dokumenty GM różnią się: podręcznik 1989–1994 (harmonogram II) podaje 96 000 km, instrukcja 1995 — 48 000 km; krótszy interwał jest bezpieczniejszy.</p>
       </section>
+
+      <FAQ items={faqItems} />
     </div>
   );
 }
