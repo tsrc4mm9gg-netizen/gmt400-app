@@ -55,17 +55,20 @@ export default function HomeHero() {
       <div className="pt-1"><HomeSearch /></div>
       <HomeFAQ />
       <CategoryGrid />
-      <div className="mx-4 my-6 rounded-lg border border-silver-600/20 bg-neutral-900/50 px-4 py-3 text-center text-sm text-neutral-400">
-        Podoba Ci się GMT400.pl?{' '}
+      <div className="mx-4 my-6 rounded-xl border border-silver-500/40 bg-silver-950/40 px-4 py-4 text-center">
+        <p className="text-sm text-neutral-300">
+          Podoba Ci się GMT400.pl?
+        </p>
         <a
           href="https://www.buymeacoffee.com/gmt400"
           target="_blank"
           rel="noopener noreferrer"
-          className="text-silver-400 underline-offset-2 hover:text-silver-300 hover:underline"
+          className="mt-2 inline-flex items-center gap-2 rounded-full border border-silver-500/50 bg-silver-900/50 px-4 py-2 text-sm font-semibold text-silver-200 transition hover:border-silver-400 hover:bg-silver-800/60 hover:text-white"
         >
+          <svg aria-hidden="true" viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1" /><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z" /><line x1="6" y1="1" x2="6" y2="4" /><line x1="10" y1="1" x2="10" y2="4" /><line x1="14" y1="1" x2="14" y2="4" /></svg>
           Postaw kawę
         </a>
-        {' '}— pomaga utrzymać stronę.
+        <p className="mt-2 text-xs text-neutral-500">Pomaga utrzymać stronę</p>
       </div>
     </div>
   );
