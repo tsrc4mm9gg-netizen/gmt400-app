@@ -55,6 +55,18 @@ export default function HomeHero() {
       <div className="pt-1"><HomeSearch /></div>
       <HomeFAQ />
       <CategoryGrid />
+      <div className="mx-4 my-6 rounded-lg border border-silver-600/20 bg-neutral-900/50 px-4 py-3 text-center text-sm text-neutral-400">
+        Podoba Ci się GMT400.pl?{' '}
+        <a
+          href="https://www.buymeacoffee.com/gmt400"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-silver-400 underline-offset-2 hover:text-silver-300 hover:underline"
+        >
+          Postaw kawę
+        </a>
+        {' '}— pomaga utrzymać stronę.
+      </div>
     </div>
   );
 }

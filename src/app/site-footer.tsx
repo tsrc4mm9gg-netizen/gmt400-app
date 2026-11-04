@@ -35,6 +35,17 @@ export default function SiteFooter() {
           Materiały w serwisie mają charakter pomocniczy i nie zastępują dokumentacji serwisowej,
           instrukcji producenta ani diagnozy wykwalifikowanego mechanika.
         </p>
+        <p className="mt-3 text-xs text-neutral-500">
+          GMT400.pl jest darmowe.{' '}
+          <a
+            href="https://www.buymeacoffee.com/gmt400"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-silver-400 underline-offset-2 hover:text-silver-300 hover:underline"
+          >
+            Wesprzyj stronę
+          </a>
+        </p>
       </div>
     </footer>
   );
