@@ -66,6 +66,17 @@ const QUICK_CHECKS = [
   },
 ];
 
+const COST_ESTIMATES = [
+  { repair: 'Wymiana piasty koła', diy: '200–400 zł', workshop: '500–800 zł' },
+  { repair: 'Pompa paliwa', diy: '300–600 zł', workshop: '800–1200 zł' },
+  { repair: 'Amortyzatory (komplet)', diy: '400–600 zł', workshop: '800–1200 zł' },
+  { repair: 'Klocki hamulcowe (przód)', diy: '100–200 zł', workshop: '300–500 zł' },
+  { repair: 'Świece + przewody', diy: '150–250 zł', workshop: '400–600 zł' },
+  { repair: 'Regeneracja 4L60-E', diy: '—', workshop: '2000–4000 zł' },
+  { repair: 'Pompa wody', diy: '200–400 zł', workshop: '600–900 zł' },
+  { repair: 'Termostat', diy: '50–100 zł', workshop: '200–350 zł' },
+];
+
 const faqItems = [
   {
     question: 'Jakie są najczęstsze usterki GMT400?',
@@ -110,6 +121,32 @@ export default async function Page() {
         <Link href="/diagnoza" className="mt-4 inline-block text-sm font-semibold text-silver-300 underline-offset-2 hover:underline">
           Pełna diagnoza objawów →
         </Link>
+      </section>
+
+      <section className="mb-8">
+        <h2 className="text-xl font-semibold text-silver-300">Orientacyjne koszty napraw</h2>
+        <p className="mt-2 text-sm text-neutral-400">Ceny orientacyjne (części + robocizna). Samodzielna naprawa (DIY) obniża koszty o 50–70%.</p>
+        <div className="mt-4 overflow-x-auto rounded-xl border border-white/10">
+          <table className="w-full text-left text-sm">
+            <thead className="bg-neutral-900 text-neutral-300">
+              <tr>
+                <th className="p-3">Naprawa</th>
+                <th className="p-3">DIY</th>
+                <th className="p-3">Warsztat</th>
+              </tr>
+            </thead>
+            <tbody>
+              {COST_ESTIMATES.map(row => (
+                <tr key={row.repair} className="border-t border-white/10">
+                  <td className="p-3 font-medium">{row.repair}</td>
+                  <td className="p-3 text-silver-300">{row.diy}</td>
+                  <td className="p-3 text-neutral-300">{row.workshop}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <p className="mt-2 text-xs text-neutral-500">Ceny orientacyjne na 2026. Sprawdź aktualne ceny w sklepach.</p>
       </section>
 
       <section className="mb-6">
