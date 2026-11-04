@@ -4,6 +4,7 @@ import { GUIDES } from '../../lib/guides';
 import Breadcrumbs from '../ui/Breadcrumbs';
 import AffiliateBox from '../ui/AffiliateBox';
 import FAQ from '../ui/FAQ';
+import PartLink from '../ui/PartLink';
 import AccordionSection from '../ui/AccordionSection';
 
 export const metadata: Metadata = {
@@ -76,6 +77,26 @@ export default function GuidesHub() {
         </Link>
 
         <div className="mt-6">
+          <AccordionSection title="Części do przeglądu po zakupie">
+            <ul className="space-y-2 text-neutral-300">
+              <li className="flex items-center gap-2">Filtr oleju: <PartLink partNumber="PF52" /></li>
+              <li className="flex items-center gap-2">Filtr powietrza: <PartLink partNumber="A1300C" /></li>
+              <li className="flex items-center gap-2">Filtr paliwa: <PartLink partNumber="GF626" /></li>
+              <li className="flex items-center gap-2">Świece zapłonowe: <PartLink partNumber="41-932" /></li>
+            </ul>
+          </AccordionSection>
+
+          <AccordionSection title="Światła europejskie">
+            <AffiliateBox
+              title=""
+              items={[
+                { name: 'Reflektory H4 europejskie', search: 'H4 headlight assembly' },
+                { name: 'Żarówki H4', search: 'H4 bulb' },
+                { name: 'Kierunkowskazy pomarańczowe', search: 'amber turn signal' },
+              ]}
+            />
+          </AccordionSection>
+
           <AccordionSection title="Przydatne dla właściciela">
             <AffiliateBox
               title=""
