@@ -4,6 +4,7 @@ import JsonLd from '../ui/JsonLd';
 import AffiliateBox from '../ui/AffiliateBox';
 import FAQ from '../ui/FAQ';
 import PartLink from '../ui/PartLink';
+import AccordionSection from '../ui/AccordionSection';
 import { DIAG_GUIDES } from '../../lib/diagnosis-guides';
 import DiagnozaTool from './DiagnozaTool';
 import { getListEntries } from '../../lib/notion-entries';
@@ -73,38 +74,42 @@ export default async function Page() {
       </ul>
     </section>
     <div className="mx-auto max-w-3xl px-4 pb-20">
-      <section className="mb-6">
-        <h2 className="text-xl font-semibold text-silver-300">Wskazówki diagnostyczne</h2>
-        <div className="mt-3 grid gap-3 sm:grid-cols-2">
+      <AccordionSection title="Wskazówki diagnostyczne" defaultOpen>
+        <div className="grid gap-3 sm:grid-cols-2">
           {DIAGNOSTIC_TIPS.map(item => (
-            <div key={item.title} className="rounded-xl border border-white/10 bg-neutral-900 p-4">
+            <div key={item.title} className="rounded-lg border border-white/10 bg-neutral-800 p-3">
               <h3 className="font-semibold text-silver-200">{item.title}</h3>
               <p className="mt-1 text-sm text-neutral-300">{item.tip}</p>
             </div>
           ))}
         </div>
-      </section>
+      </AccordionSection>
 
-      <section className="mb-6">
-        <h2 className="text-xl font-semibold text-silver-300">Części do diagnostyki</h2>
-        <ul className="mt-3 list-inside list-disc space-y-2 text-neutral-300">
+      <AccordionSection title="Części do diagnostyki">
+        <ul className="list-inside list-disc space-y-2 text-neutral-300">
           <li>Świece zapłonowe: <PartLink partNumber="41-932" /></li>
           <li>Przewody zapłonowe: <PartLink partNumber="9718D" /></li>
           <li>Pompa paliwa: <PartLink partNumber="EP381" /></li>
           <li>Filtr paliwa: <PartLink partNumber="GF626" /></li>
           <li>Cewka zapłonowa: <PartLink partNumber="D577" /></li>
         </ul>
-      </section>
-      <AffiliateBox
-        title="Narzędzia do diagnostyki"
-        items={[
-          { name: 'Skaner OBD2', search: 'OBD2 scanner' },
-          { name: 'Multimetr', search: 'digital multimeter' },
-          { name: 'Manometr paliwa', search: 'fuel pressure gauge' },
-          { name: 'Lampa stroboskopowa', search: 'timing light' },
-        ]}
-      />
-      <FAQ items={faqItems} />
+      </AccordionSection>
+
+      <AccordionSection title="Narzędzia do diagnostyki">
+        <AffiliateBox
+          title=""
+          items={[
+            { name: 'Skaner OBD2', search: 'OBD2 scanner' },
+            { name: 'Multimetr', search: 'digital multimeter' },
+            { name: 'Manometr paliwa', search: 'fuel pressure gauge' },
+            { name: 'Lampa stroboskopowa', search: 'timing light' },
+          ]}
+        />
+      </AccordionSection>
+
+      <AccordionSection title="Częste pytania">
+        <FAQ items={faqItems} />
+      </AccordionSection>
     </div>
     <JsonLd data={jsonLd} />
   </>;
