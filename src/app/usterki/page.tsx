@@ -4,6 +4,7 @@ import JsonLd from '../ui/JsonLd';
 import AffiliateBox from '../ui/AffiliateBox';
 import FAQ from '../ui/FAQ';
 import PartLink from '../ui/PartLink';
+import AccordionSection from '../ui/AccordionSection';
 import Link from 'next/link';
 import { getListEntries, itemListJsonLd } from '../../lib/notion-entries';
 
@@ -91,30 +92,28 @@ export default async function Page() {
   return <>
     <Encyclopedia initialTab="usterki" initialItems={items} />
     <div className="mx-auto max-w-3xl px-4">
-      <section className="mb-8">
-        <h2 className="text-xl font-semibold text-silver-300">Szybka diagnoza — co sprawdzić najpierw</h2>
-        <p className="mt-2 text-sm text-neutral-400">Wybierz objaw i sprawdź najczęstsze przyczyny przed wymianą części.</p>
-        <div className="mt-4 space-y-4">
+      <AccordionSection title="Szybka diagnoza — co sprawdzić najpierw" defaultOpen>
+        <p className="mb-3 text-sm text-neutral-400">Wybierz objaw i sprawdź najczęstsze przyczyny przed wymianą części.</p>
+        <div className="space-y-3">
           {QUICK_CHECKS.map(item => (
-            <div key={item.symptom} className="rounded-xl border border-white/10 bg-neutral-900 p-4">
+            <div key={item.symptom} className="rounded-lg border border-white/10 bg-neutral-800 p-3">
               <h3 className="font-semibold text-silver-200">{item.symptom}</h3>
               <ol className="mt-2 list-inside list-decimal space-y-1 text-sm text-neutral-300">
                 {item.checks.map((check, i) => <li key={i}>{check}</li>)}
               </ol>
-              <div className="mt-3 flex flex-wrap gap-2">
+              <div className="mt-2 flex flex-wrap gap-2">
                 {item.parts.map(part => <PartLink key={part} partNumber={part} />)}
               </div>
             </div>
           ))}
         </div>
-        <Link href="/diagnoza" className="mt-4 inline-block text-sm font-semibold text-silver-300 underline-offset-2 hover:underline">
+        <Link href="/diagnoza" className="mt-3 inline-block text-sm font-semibold text-silver-300 underline-offset-2 hover:underline">
           Pełna diagnoza objawów →
         </Link>
-      </section>
+      </AccordionSection>
 
-      <section className="mb-6">
-        <h2 className="text-xl font-semibold text-silver-300">Części do najczęstszych usterek</h2>
-        <ul className="mt-3 list-inside list-disc space-y-2 text-neutral-300">
+      <AccordionSection title="Części do najczęstszych usterek">
+        <ul className="list-inside list-disc space-y-2 text-neutral-300">
           <li>Pompa paliwa: <PartLink partNumber="EP381" /></li>
           <li>Filtr paliwa: <PartLink partNumber="GF626" /></li>
           <li>Świece zapłonowe: <PartLink partNumber="41-932" /></li>
@@ -122,17 +121,23 @@ export default async function Page() {
           <li>Klocki hamulcowe: <PartLink partNumber="14D52" /></li>
           <li>Filtr oleju: <PartLink partNumber="PF52" /></li>
         </ul>
-      </section>
-      <AffiliateBox
-        title="Przydatne przy diagnostyce"
-        items={[
-          { name: 'Skaner OBD2', search: 'OBD2 scanner' },
-          { name: 'Multimetr', search: 'digital multimeter' },
-          { name: 'Manometr paliwa', search: 'fuel pressure gauge' },
-          { name: 'Termometr laserowy', search: 'infrared thermometer' },
-        ]}
-      />
-      <FAQ items={faqItems} />
+      </AccordionSection>
+
+      <AccordionSection title="Przydatne przy diagnostyce">
+        <AffiliateBox
+          title=""
+          items={[
+            { name: 'Skaner OBD2', search: 'OBD2 scanner' },
+            { name: 'Multimetr', search: 'digital multimeter' },
+            { name: 'Manometr paliwa', search: 'fuel pressure gauge' },
+            { name: 'Termometr laserowy', search: 'infrared thermometer' },
+          ]}
+        />
+      </AccordionSection>
+
+      <AccordionSection title="Częste pytania">
+        <FAQ items={faqItems} />
+      </AccordionSection>
     </div>
     {list.length > 0 && <JsonLd data={itemListJsonLd('Usterki Chevrolet/GMC GMT400', 'https://www.gmt400.pl/usterki', list)} />}
   </>;
