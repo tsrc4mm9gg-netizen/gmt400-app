@@ -20,6 +20,12 @@ const COMMON_TORQUES = [
   { name: 'Filtr oleju', torque: 'Ręcznie + 3/4 obrotu', note: 'Nie kluczem' },
 ];
 
+const TIPS = [
+  { title: 'Przed dokręcaniem', tip: 'Sprawdź, czy klucz dynamometryczny jest skalibrowany. Oczyść gwinty. Użyj odpowiedniego smaru (jeśli wymagany).' },
+  { title: 'Podczas dokręcania', tip: 'Dokręcaj w odpowiedniej kolejności (np. głowica — od środka). Nie dokręcaj na siłę — jeśli śruba nie wchodzi, sprawdź gwint.' },
+  { title: 'Po dokręceniu', tip: 'Sprawdź moment po przejechaniu kilku km (niektóre śruby się luzują). Nie dokręcaj ponownie bez potrzeby.' },
+];
+
 const faqItems = [
   {
     question: 'Dlaczego momenty dokręcania są ważne?',
@@ -55,6 +61,18 @@ export default function MomentyPage() {
         podzespołów (Unit Repair) — dotyczą danego zespołu, montowanego także w innych autach GM. Przy śrubach dokręcanych kątowo lub
         jednorazowych postępuj według procedury z instrukcji.
       </p>
+
+      <section className="mt-6">
+        <h2 className="text-xl font-semibold text-silver-300">Wskazówki dokręcania</h2>
+        <div className="mt-3 space-y-3">
+          {TIPS.map(item => (
+            <div key={item.title} className="rounded-xl border border-white/10 bg-neutral-900 p-4">
+              <h3 className="font-semibold text-silver-200">{item.title}</h3>
+              <p className="mt-1 text-sm text-neutral-300">{item.tip}</p>
+            </div>
+          ))}
+        </div>
+      </section>
 
       <section className="mt-6">
         <h2 className="text-xl font-semibold text-silver-300">Najczęstsze momenty</h2>
