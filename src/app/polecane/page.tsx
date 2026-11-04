@@ -13,37 +13,37 @@ const categories = [
   {
     name: 'Diagnostyka',
     items: [
-      { name: 'Skaner OBD2', search: 'OBD2+scanner+car', note: 'Do odczytu kodów błędów' },
-      { name: 'Multimetr', search: 'digital+multimeter', note: 'Do pomiarów elektrycznych' },
+      { name: 'Skaner OBD2', search: 'OBD2 scanner', note: 'Do odczytu kodów błędów' },
+      { name: 'Multimetr', search: 'digital multimeter', note: 'Do pomiarów elektrycznych' },
     ],
   },
   {
     name: 'Oleje i płyny',
     items: [
-      { name: 'Olej silnikowy 5W-30', search: '5W-30+engine+oil', note: 'Do silników benzynowych' },
-      { name: 'ATF Dexron III', search: 'Dexron+III+ATF', note: 'Do skrzyń 4L60-E / 4L80-E' },
-      { name: 'Płyn chłodniczy', search: 'coolant+antifreeze', note: 'Do układu chłodzenia' },
+      { name: 'Olej silnikowy 5W-30', search: '5W-30 engine oil', note: 'Do silników benzynowych' },
+      { name: 'ATF Dexron III', search: 'Dexron III ATF', note: 'Do skrzyń 4L60-E / 4L80-E' },
+      { name: 'Płyn chłodniczy', search: 'coolant antifreeze', note: 'Do układu chłodzenia' },
     ],
   },
   {
     name: 'Filtry',
     items: [
-      { name: 'Filtr oleju', search: 'oil+filter+GMT400', note: 'Wymiana co 5000–8000 km' },
-      { name: 'Filtr powietrza', search: 'air+filter+GMT400', note: 'Wymiana co 15 000 km' },
-      { name: 'Filtr paliwa', search: 'fuel+filter+GMT400', note: 'Wymiana co 30 000 km' },
+      { name: 'Filtr oleju', search: 'oil filter', note: 'Wymiana co 5000–8000 km' },
+      { name: 'Filtr powietrza', search: 'air filter car', note: 'Wymiana co 15 000 km' },
+      { name: 'Filtr paliwa', search: 'fuel filter', note: 'Wymiana co 30 000 km' },
     ],
   },
   {
     name: 'Narzędzia',
     items: [
-      { name: 'Klucz dynamometryczny', search: 'torque+wrench', note: 'Do dokręcania z momentem' },
-      { name: 'Zestaw kluczy nasadowych', search: 'socket+set+metric', note: 'Podstawowe narzędzia' },
+      { name: 'Klucz dynamometryczny', search: 'torque wrench', note: 'Do dokręcania z momentem' },
+      { name: 'Zestaw kluczy nasadowych', search: 'socket set metric', note: 'Podstawowe narzędzia' },
     ],
   },
 ];
 
 function amazonLink(search: string) {
-  return `https://www.amazon.de/s?k=${encodeURIComponent(search)}&tag=${AFFILIATE_TAG}`;
+  return `https://www.amazon.de/s?k=${encodeURIComponent(search)}&tag=${AFFILIATE_TAG}&ref=nb_sb_noss`;
 }
 
 export default function PolecanePage() {
@@ -63,10 +63,10 @@ export default function PolecanePage() {
                 <a
                   href={amazonLink(item.search)}
                   target="_blank"
-                  rel="noopener noreferrer"
+                  rel="noopener noreferrer sponsored"
                   className="font-medium text-silver-200 hover:text-white hover:underline"
                 >
-                  {item.name}
+                  {item.name} ↗
                 </a>
                 <p className="mt-1 text-xs text-neutral-500">{item.note}</p>
               </li>
