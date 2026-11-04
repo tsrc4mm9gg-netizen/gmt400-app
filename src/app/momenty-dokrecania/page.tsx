@@ -3,6 +3,7 @@ import Breadcrumbs from '../ui/Breadcrumbs';
 import AffiliateBox from '../ui/AffiliateBox';
 import FAQ from '../ui/FAQ';
 import PartLink from '../ui/PartLink';
+import AccordionSection from '../ui/AccordionSection';
 import TorqueBrowser from './TorqueBrowser';
 import { TORQUE_ROWS } from '@/lib/torque-gm';
 
@@ -47,7 +48,7 @@ const faqItems = [
 
 export default function MomentyPage() {
   return (
-    <div className="mx-auto w-full max-w-5xl px-4 py-6 text-white sm:py-10">
+    <div className="mx-auto w-full max-w-5xl px-4 py-6 pb-28 text-white sm:py-10">
       <Breadcrumbs className="mb-2" items={[{ label: 'Mój samochód', href: '/moj-samochod' }, { label: 'Momenty dokręcania' }]} />
       <h1 className="text-3xl font-bold text-silver-400">Momenty dokręcania (1988–2000)</h1>
       <p className="mt-2 text-neutral-300">
@@ -62,53 +63,61 @@ export default function MomentyPage() {
         jednorazowych postępuj według procedury z instrukcji.
       </p>
 
-      <section className="mt-6">
-        <h2 className="text-xl font-semibold text-silver-300">Wskazówki dokręcania</h2>
-        <div className="mt-3 space-y-3">
-          {TIPS.map(item => (
-            <div key={item.title} className="rounded-xl border border-white/10 bg-neutral-900 p-4">
-              <h3 className="font-semibold text-silver-200">{item.title}</h3>
-              <p className="mt-1 text-sm text-neutral-300">{item.tip}</p>
-            </div>
-          ))}
-        </div>
-      </section>
+      <div className="mt-6">
+        <AccordionSection title="Wskazówki dokręcania" defaultOpen>
+          <div className="space-y-3">
+            {TIPS.map(item => (
+              <div key={item.title} className="rounded-lg border border-white/10 bg-neutral-800 p-3">
+                <h3 className="font-semibold text-silver-200">{item.title}</h3>
+                <p className="mt-1 text-sm text-neutral-300">{item.tip}</p>
+              </div>
+            ))}
+          </div>
+        </AccordionSection>
 
-      <section className="mt-6">
-        <h2 className="text-xl font-semibold text-silver-300">Najczęstsze momenty</h2>
-        <div className="mt-3 overflow-x-auto rounded-xl border border-white/10">
-          <table className="w-full text-left text-sm">
-            <thead className="bg-neutral-900 text-neutral-300">
-              <tr>
-                <th className="p-3">Połączenie</th>
-                <th className="p-3">Moment</th>
-                <th className="p-3">Uwagi</th>
-              </tr>
-            </thead>
-            <tbody>
-              {COMMON_TORQUES.map(row => (
-                <tr key={row.name} className="border-t border-white/10">
-                  <td className="p-3 font-medium">{row.name}</td>
-                  <td className="p-3 text-silver-300">{row.torque}</td>
-                  <td className="p-3 text-neutral-400">{row.note}</td>
+        <AccordionSection title="Najczęstsze momenty">
+          <div className="overflow-x-auto rounded-lg border border-white/10">
+            <table className="w-full text-left text-sm">
+              <thead className="bg-neutral-800 text-neutral-300">
+                <tr>
+                  <th className="p-3">Połączenie</th>
+                  <th className="p-3">Moment</th>
+                  <th className="p-3">Uwagi</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-        <p className="mt-2 text-xs text-neutral-500">Wartości orientacyjne. Sprawdź w pełnej tabeli poniżej lub w instrukcji.</p>
-      </section>
+              </thead>
+              <tbody>
+                {COMMON_TORQUES.map(row => (
+                  <tr key={row.name} className="border-t border-white/10">
+                    <td className="p-3 font-medium">{row.name}</td>
+                    <td className="p-3 text-silver-300">{row.torque}</td>
+                    <td className="p-3 text-neutral-400">{row.note}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <p className="mt-2 text-xs text-neutral-500">Wartości orientacyjne. Sprawdź w pełnej tabeli poniżej lub w instrukcji.</p>
+        </AccordionSection>
 
-      <AffiliateBox
-        title="Przydatne przy dokręcaniu"
-        items={[
-          { name: 'Klucz dynamometryczny', search: 'torque wrench' },
-          { name: 'Zestaw kluczy nasadowych', search: 'socket set metric' },
-          { name: 'Klucz dynamometryczny 1/2"', search: 'torque wrench 1/2 inch' },
-        ]}
-      />
+        <AccordionSection title="Przydatne przy dokręcaniu">
+          <AffiliateBox
+            title=""
+            items={[
+              { name: 'Klucz dynamometryczny', search: 'torque wrench' },
+              { name: 'Zestaw kluczy nasadowych', search: 'socket set metric' },
+              { name: 'Klucz dynamometryczny 1/2"', search: 'torque wrench 1/2 inch' },
+            ]}
+          />
+        </AccordionSection>
+      </div>
+
       <TorqueBrowser />
-      <FAQ items={faqItems} />
+
+      <div className="mt-6">
+        <AccordionSection title="Częste pytania">
+          <FAQ items={faqItems} />
+        </AccordionSection>
+      </div>
     </div>
   );
 }
