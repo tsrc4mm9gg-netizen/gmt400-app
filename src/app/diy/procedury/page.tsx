@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import Breadcrumbs from '../../ui/Breadcrumbs';
+import AffiliateBox from '../../ui/AffiliateBox';
 
 export const metadata: Metadata = {
   title: 'Procedury DIY GMT400 — wymiana termostatu, pompy wody, czujnika',
@@ -24,6 +25,10 @@ const PROCEDURES = [
       'Uzupełnij płyn chłodniczy i odpowietrz układ (grzejnik na max, silnik pracuje).',
     ],
     warning: 'Nie otwieraj układu na gorącym silniku — ryzyko poparzenia.',
+    products: [
+      { name: 'Termostat', search: 'thermostat GMT400 Vortec' },
+      { name: 'Płyn chłodniczy', search: 'coolant antifreeze' },
+    ],
   },
   {
     id: 'pompa-wody',
@@ -39,6 +44,11 @@ const PROCEDURES = [
       'Załóż pasek, uzupełnij płyn, odpowietrz.',
     ],
     warning: 'Sprawdź stan paska i rolek — często warto wymienić razem.',
+    products: [
+      { name: 'Pompa wody', search: 'water pump GMT400' },
+      { name: 'Płyn chłodniczy', search: 'coolant antifreeze' },
+      { name: 'Pasek wielorowkowy', search: 'serpentine belt GMT400' },
+    ],
   },
   {
     id: 'czujnik-walu',
@@ -54,6 +64,10 @@ const PROCEDURES = [
       'Wymaż kody błędów i sprawdź rozruch.',
     ],
     warning: 'W niektórych rocznikach dostęp jest utrudniony — może być potrzebne podniesienie auta.',
+    products: [
+      { name: 'Czujnik położenia wału (CKP)', search: 'crankshaft position sensor GMT400' },
+      { name: 'Skaner OBD2', search: 'OBD2 scanner' },
+    ],
   },
 ];
 
@@ -84,6 +98,7 @@ export default function ProceduresPage() {
             {proc.warning && (
               <p className="mt-3 rounded-lg bg-red-950/40 p-3 text-sm text-red-300">{proc.warning}</p>
             )}
+            <AffiliateBox title="Czego potrzebujesz" items={proc.products} />
           </article>
         ))}
       </div>

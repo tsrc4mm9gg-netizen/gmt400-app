@@ -1,4 +1,5 @@
 import Breadcrumbs from '../ui/Breadcrumbs';
+import AffiliateBox from '../ui/AffiliateBox';
 import MaintenancePlanner from './MaintenancePlanner';
 
 export const metadata = {
@@ -14,6 +15,16 @@ export default function PrzegladyPage() {
       <h1 className="text-3xl font-bold text-silver-400">Harmonogram przeglądów</h1>
       <p className="mt-2 text-neutral-300">Interwały wyłącznie z dokumentów GM: instrukcje serwisowe 1988–1994 (sekcja 0B „Scheduled Maintenance Services”) i instrukcje obsługi 1995–1999 (rozdział 7 „Maintenance Schedule”). Kilometry przeliczone z mil i zaokrąglone — oryginał w milach podajemy obok. Stan licznika i daty zostają tylko w tej przeglądarce. Sprawdź w swoim aucie.</p>
       <MaintenancePlanner />
+      <AffiliateBox
+        title="Przydatne przy przeglądach"
+        items={[
+          { name: 'ACDelco PF52 — filtr oleju', search: 'ACDelco PF52' },
+          { name: 'Olej silnikowy 5W-30', search: '5W-30 engine oil' },
+          { name: 'MANNOL Dexron III ATF', search: 'MANNOL Dexron III ATF' },
+          { name: 'Płyn chłodniczy', search: 'coolant antifreeze' },
+          { name: 'Świece zapłonowe', search: 'spark plugs GMT400 Vortec' },
+        ]}
+      />
     </div>
   );
 }
