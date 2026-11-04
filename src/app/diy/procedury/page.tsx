@@ -26,8 +26,8 @@ const PROCEDURES = [
     ],
     warning: 'Nie otwieraj układu na gorącym silniku — ryzyko poparzenia.',
     products: [
-      { name: 'Termostat', search: 'thermostat GMT400 Vortec' },
-      { name: 'Płyn chłodniczy', search: 'coolant antifreeze' },
+      { name: 'Termostat ACDelco 131-113', search: 'ACDelco 131-113' },
+      { name: 'Płyn chłodniczy DEX-COOL', search: 'DEX-COOL coolant' },
     ],
   },
   {
@@ -45,9 +45,9 @@ const PROCEDURES = [
     ],
     warning: 'Sprawdź stan paska i rolek — często warto wymienić razem.',
     products: [
-      { name: 'Pompa wody', search: 'water pump GMT400' },
-      { name: 'Płyn chłodniczy', search: 'coolant antifreeze' },
-      { name: 'Pasek wielorowkowy', search: 'serpentine belt GMT400' },
+      { name: 'Pompa wody ACDelco 252-711', search: 'ACDelco 252-711' },
+      { name: 'Płyn chłodniczy DEX-COOL', search: 'DEX-COOL coolant' },
+      { name: 'Pasek wielorowkowy', search: 'serpentine belt Chevy Tahoe' },
     ],
   },
   {
@@ -65,7 +65,7 @@ const PROCEDURES = [
     ],
     warning: 'W niektórych rocznikach dostęp jest utrudniony — może być potrzebne podniesienie auta.',
     products: [
-      { name: 'Czujnik położenia wału (CKP)', search: 'crankshaft position sensor GMT400' },
+      { name: 'Czujnik położenia wału (CKP)', search: 'crankshaft position sensor Chevy Tahoe' },
       { name: 'Skaner OBD2', search: 'OBD2 scanner' },
     ],
   },
