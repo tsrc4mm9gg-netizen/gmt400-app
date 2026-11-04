@@ -14,6 +14,12 @@ export const metadata = {
   alternates: { canonical: 'https://www.gmt400.pl/pojemnosci' },
 };
 
+const AFFILIATE_TAG = 'gmt400pl-20';
+
+function amazonSearch(query: string) {
+  return `https://www.amazon.de/s?k=${encodeURIComponent(query)}&tag=${AFFILIATE_TAG}`;
+}
+
 function Sources({ src }: { src: Cite[] }) {
   return (
     <span className="text-xs text-neutral-500">
@@ -36,6 +42,18 @@ const TIPS = [
   { title: 'Przed wymianą', tip: 'Sprawdź pojemność w tabeli dla swojego silnika. Przygotuj odpowiednią ilość płynu. Rozgrzej silnik przed wymianą oleju.' },
   { title: 'Podczas wymiany', tip: 'Nie przepełniaj — lepiej dolać później. Sprawdź poziom bagnetem na płaskim podłożu. Użyj odpowiedniego płynu (specyfikacja w tabeli).' },
   { title: 'Po wymianie', tip: 'Sprawdź poziom po przejechaniu kilku km. Sprawdź, czy nie ma wycieków. Zanotuj, co wymieniłeś i kiedy.' },
+];
+
+const FLUID_PRODUCTS = [
+  { name: 'MANNOL Dexron III ATF', search: 'MANNOL Dexron III ATF', note: 'Do skrzyń 4L60-E, 4L80-E' },
+  { name: 'Olej 5W-30', search: '5W-30 engine oil', note: 'Silniki benzynowe' },
+  { name: 'Olej 10W-30', search: '10W-30 engine oil', note: 'Silniki benzynowe (cieplejszy klimat)' },
+  { name: 'Olej 15W-40', search: '15W-40 diesel oil', note: 'Diesel 6.5 TD' },
+  { name: 'DEX-COOL płyn chłodniczy', search: 'DEX-COOL coolant', note: 'Vortec 1996+' },
+  { name: 'Płyn chłodniczy zielony', search: 'green coolant antifreeze', note: 'TBI 1988–1995' },
+  { name: 'Płyn hamulcowy DOT3', search: 'DOT3 brake fluid', note: 'Wszystkie GMT400' },
+  { name: 'Płyn wspomagania', search: 'power steering fluid', note: 'Układ wspomagania' },
+  { name: 'Olej przekładniowy 75W-90', search: '75W-90 gear oil', note: 'Mosty, skrzynia rozdzielcza' },
 ];
 
 const faqItems = [
@@ -116,7 +134,7 @@ export default function PojemnosciPage() {
 
       <section id="plyny" className="mt-8 scroll-mt-20">
         <h2 className="text-xl font-semibold text-silver-300">Specyfikacje płynów i smarów</h2>
-        <p className="mt-1 text-sm text-neutral-400">Numery GM to oryginalne opakowania z epoki — dziś kupisz odpowiednik o tej samej specyfikacji.</p>
+        <p className="mt-1 text-sm text-neutral-400">Numery GM to oryginalne opakowania z epoki — dziś kupisz odpowiednik o tej samej specyfikacji. <strong>Kliknij nazwę, aby wyszukać na Amazonie.</strong></p>
         <div className="mt-3 overflow-x-auto rounded-xl border border-white/10 bg-neutral-950">
           <table className="w-full min-w-[640px] text-sm">
             <thead><tr className="border-b border-white/10"><th className={th}>Układ</th><th className={th}>Lata</th><th className={th}>Specyfikacja</th><th className={th}>Źródło</th></tr></thead>
@@ -133,15 +151,22 @@ export default function PojemnosciPage() {
           </table>
         </div>
         <div className="mt-4">
-          <AccordionSection title="Gdzie kupić płyny">
-            <AffiliateBox
-              title=""
-              items={[
-                { name: 'MANNOL Dexron III ATF', search: 'MANNOL Dexron III ATF' },
-                { name: 'Olej silnikowy 5W-30', search: '5W-30 engine oil' },
-                { name: 'Płyn chłodniczy', search: 'coolant antifreeze' },
-              ]}
-            />
+          <AccordionSection title="Gdzie kupić płyny" defaultOpen>
+            <ul className="space-y-2">
+              {FLUID_PRODUCTS.map(item => (
+                <li key={item.name} className="flex items-center justify-between rounded-lg border border-white/10 bg-neutral-800 px-3 py-2">
+                  <a
+                    href={amazonSearch(item.search)}
+                    target="_blank"
+                    rel="noopener noreferrer sponsored"
+                    className="inline-flex items-center gap-1 font-medium text-amber-400 hover:text-amber-300 hover:underline"
+                  >
+                    {item.name} <span className="text-xs opacity-50">↗</span>
+                  </a>
+                  <span className="text-xs text-neutral-400">{item.note}</span>
+                </li>
+              ))}
+            </ul>
           </AccordionSection>
         </div>
       </section>
@@ -177,8 +202,9 @@ export default function PojemnosciPage() {
               title=""
               items={[
                 { name: 'ACDelco PF52 — filtr oleju', search: 'ACDelco PF52' },
-                { name: 'Filtr powietrza', search: 'air filter GMT400' },
-                { name: 'Filtr paliwa', search: 'fuel filter GMT400' },
+                { name: 'Filtr powietrza A1300C', search: 'ACDelco A1300C' },
+                { name: 'Filtr paliwa GF626', search: 'ACDelco GF626' },
+                { name: 'Filtr ATF TF289', search: 'ACDelco TF289' },
               ]}
             />
           </AccordionSection>
