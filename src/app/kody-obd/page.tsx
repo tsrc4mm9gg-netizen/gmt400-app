@@ -6,6 +6,7 @@ import Breadcrumbs from '../ui/Breadcrumbs';
 import AffiliateBox from '../ui/AffiliateBox';
 import FAQ from '../ui/FAQ';
 import PartLink from '../ui/PartLink';
+import AccordionSection from '../ui/AccordionSection';
 
 export const metadata: Metadata = {
   title: 'Kody OBD GMT400 — P0300, P0171 i inne | Tahoe, Suburban, Silverado',
@@ -61,7 +62,7 @@ export default function ObdCodesPage({ searchParams }: { searchParams: Promise<{
     const results = searchObdCodes(query);
     const activeSystemCount = systemCounts[query];
     return (
-      <div className="mx-auto max-w-5xl px-4 py-8">
+      <div className="mx-auto max-w-5xl px-4 py-8 pb-28">
         <Breadcrumbs className="mb-2" items={[{ label: 'Kody OBD' }]} />
         <header className="mb-6">
           <p className="text-sm uppercase tracking-wide text-silver-400">Diagnostyka</p>
@@ -82,39 +83,39 @@ export default function ObdCodesPage({ searchParams }: { searchParams: Promise<{
           </nav>
         </header>
 
-        <section className="mb-6">
-          <h2 className="text-xl font-semibold text-silver-300">Wskazówki odczytu kodów</h2>
-          <div className="mt-3 space-y-3">
+        <AccordionSection title="Wskazówki odczytu kodów" defaultOpen>
+          <div className="space-y-3">
             {TIPS.map(item => (
-              <div key={item.title} className="rounded-xl border border-white/10 bg-neutral-900 p-4">
+              <div key={item.title} className="rounded-lg border border-white/10 bg-neutral-800 p-3">
                 <h3 className="font-semibold text-silver-200">{item.title}</h3>
                 <p className="mt-1 text-sm text-neutral-300">{item.tip}</p>
               </div>
             ))}
           </div>
-        </section>
+        </AccordionSection>
 
-        <section className="mb-6">
-          <h2 className="text-xl font-semibold text-silver-300">Części do kodów OBD</h2>
-          <ul className="mt-3 list-inside list-disc space-y-2 text-neutral-300">
+        <AccordionSection title="Części do kodów OBD">
+          <ul className="list-inside list-disc space-y-2 text-neutral-300">
             <li>Świece (P0300): <PartLink partNumber="41-932" /></li>
             <li>Przewody zapłonowe: <PartLink partNumber="9718D" /></li>
             <li>Cewka zapłonowa: <PartLink partNumber="D577" /></li>
             <li>Filtr powietrza (P0171): <PartLink partNumber="A1300C" /></li>
             <li>Czujnik O2: sprawdź numer na starej części</li>
           </ul>
-        </section>
+        </AccordionSection>
 
-        <AffiliateBox
-          title="Do odczytu kodów"
-          items={[
-            { name: 'Skaner OBD2 Bluetooth', search: 'OBD2 scanner Bluetooth' },
-            { name: 'Skaner OBD2 z wyświetlaczem', search: 'OBD2 scanner handheld' },
-          ]}
-        />
-        <section aria-labelledby="obd-generations" className="mb-6 rounded-xl border border-white/10 bg-neutral-900/60 p-4">
-          <h2 id="obd-generations" className="text-xl font-semibold text-white">OBD-I czy OBD-II?</h2>
-          <div className="mt-3 grid gap-4 sm:grid-cols-2">
+        <AccordionSection title="Do odczytu kodów">
+          <AffiliateBox
+            title=""
+            items={[
+              { name: 'Skaner OBD2 Bluetooth', search: 'OBD2 scanner Bluetooth' },
+              { name: 'Skaner OBD2 z wyświetlaczem', search: 'OBD2 scanner handheld' },
+            ]}
+          />
+        </AccordionSection>
+
+        <AccordionSection title="OBD-I czy OBD-II?">
+          <div className="grid gap-4 sm:grid-cols-2">
             <div>
               <h3 className="font-semibold text-silver-400">OBD-I (1988–1995)</h3>
               <ul className="mt-2 list-disc pl-5 text-neutral-300">
@@ -132,7 +133,8 @@ export default function ObdCodesPage({ searchParams }: { searchParams: Promise<{
               </ul>
             </div>
           </div>
-        </section>
+        </AccordionSection>
+
         <form role="search" className="mb-6 flex flex-wrap gap-3">
           <label htmlFor="obd-search" className="sr-only">Szukaj kodu OBD</label>
           <input id="obd-search" name="q" type="search" defaultValue={query} placeholder="Szukaj kodu lub systemu, np. P0300" className="min-h-12 min-w-0 flex-1 rounded border border-white/20 bg-neutral-900 px-4 py-3 text-white" />
@@ -152,7 +154,10 @@ export default function ObdCodesPage({ searchParams }: { searchParams: Promise<{
         </ul>
         {!results.length && query && <p className="rounded border border-white/10 bg-neutral-900/60 p-4 text-neutral-300">Brak wyników dla filtra: <strong className="text-neutral-200">{query}</strong>. <Link href="/kody-obd" className="text-silver-400 underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-silver-500">Wyczyść filtr</Link>, aby zobaczyć wszystkie kody.</p>}
         {!results.length && !query && <p className="rounded border border-white/10 bg-neutral-900/60 p-4 text-neutral-300">Brak wyników. Spróbuj samego kodu, np. „P0300”, albo krótszej frazy.</p>}
-        <FAQ items={faqItems} />
+
+        <AccordionSection title="Częste pytania">
+          <FAQ items={faqItems} />
+        </AccordionSection>
       </div>
     );
   });
