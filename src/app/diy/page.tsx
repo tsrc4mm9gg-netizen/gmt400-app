@@ -37,6 +37,11 @@ const FEATURED_GUIDES = [
   { href: '/diy/wymiana-pompy-wody', title: 'Wymiana pompy wody', desc: 'Jak wymienić pompę wody — procedura z przodu silnika' },
   { href: '/diy/wymiana-klockow-hamulcowych', title: 'Wymiana klocków hamulcowych', desc: 'Jak wymienić klocki hamulcowe — podstawowa konserwacja' },
   { href: '/diy/wymiana-swiec-zaplonowych', title: 'Wymiana świec zapłonowych', desc: 'Jak wymienić świece — odstęp elektrod i procedura' },
+  { href: '/diy/wymiana-czujnika-vss', title: 'Wymiana czujnika prędkości (VSS)', desc: 'Jak wymienić czujnik VSS na skrzyni biegów' },
+  { href: '/diy/wymiana-uszczelki-kolektora', title: 'Wymiana uszczelki kolektora dolotowego', desc: 'Jak wymienić uszczelkę kolektora — klasyczna usterka Vortec' },
+  { href: '/diy/wymiana-filtra-atf', title: 'Wymiana filtra ATF i płynu skrzyni', desc: 'Jak wymienić filtr ATF w skrzyni 4L60E/4L80E' },
+  { href: '/diy/wymiana-czujnika-abs', title: 'Wymiana czujnika ABS', desc: 'Jak wymienić czujnik ABS przy kole' },
+  { href: '/diy/wymiana-silnika-dmuchawy', title: 'Wymiana silnika dmuchawy', desc: 'Jak wymienić silnik dmuchawy ogrzewania pod deską' },
 ];
 
 const TOOLS_LIST = [
