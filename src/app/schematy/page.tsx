@@ -16,6 +16,12 @@ export const metadata = {
 
 const titleOf = (id: string) => SCHEMATICS.find(item => item.id === id)?.title ?? id;
 
+const TIPS = [
+  { title: 'Przed pracą', tip: 'Sprawdź, czy schemat pasuje do Twojego rocznika. GMT400 ma wiele wariantów — zawsze weryfikuj w swoim aucie.' },
+  { title: 'Podczas pracy', tip: 'Odłącz akumulator przed pracami elektrycznymi. Oznacz przewody przed odłączeniem. Nie polegaj tylko na kolorach — sprawdzaj numery.' },
+  { title: 'Po pracy', tip: 'Sprawdź wszystkie połączenia. Przetestuj układ przed złożeniem. Sprawdź bezpieczniki.' },
+];
+
 const faqItems = [
   {
     question: 'Gdzie znajdę schemat bezpieczników GMT400?',
@@ -41,6 +47,19 @@ export default function SchematyPage() {
       <Breadcrumbs className="mb-2" items={[{ label: 'Schematy' }]} />
       <h1 className="text-3xl font-bold text-silver-400">Schematy — GMT400</h1>
       <p className="mt-2 text-neutral-300">Własne, uproszczone schematy i pinouty. Bez skanów FSM ani materiałów © GM. Przy części schematów są prawdziwe zdjęcia z Wikimedia Commons (autor i licencja pod zdjęciem). Każdy rysunek ma podany model i lata — <strong className="text-white">sprawdź w swoim aucie / manualu</strong>, bo GMT400 ma wiele wariantów.</p>
+
+      <section className="mt-6">
+        <h2 className="text-xl font-semibold text-silver-300">Wskazówki pracy ze schematami</h2>
+        <div className="mt-3 space-y-3">
+          {TIPS.map(item => (
+            <div key={item.title} className="rounded-xl border border-white/10 bg-neutral-900 p-4">
+              <h3 className="font-semibold text-silver-200">{item.title}</h3>
+              <p className="mt-1 text-sm text-neutral-300">{item.tip}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
       <nav aria-label="Spis schematów" className="mt-5">
         <ul className="flex flex-wrap gap-2">
           {SCHEMATICS.map(item => (
