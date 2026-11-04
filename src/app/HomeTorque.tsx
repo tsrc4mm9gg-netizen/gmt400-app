@@ -1,4 +1,6 @@
+'use client';
 import Link from 'next/link';
+import CollapsibleSection from './ui/CollapsibleSection';
 
 const ITEMS = [
   { title: 'Momenty dokręcania', desc: '930 pozycji z instrukcji GM', href: '/momenty-dokrecania' },
@@ -9,9 +11,12 @@ const ITEMS = [
 
 export default function HomeTorque() {
   return (
-    <section aria-labelledby="home-torque-title" className="px-4 pt-6">
-      <h2 id="home-torque-title" className="text-xl font-bold text-white">Dane serwisowe</h2>
-      <ul className="mt-3 grid grid-cols-2 gap-2.5">
+    <CollapsibleSection
+      title="Dane serwisowe"
+      id="home-torque"
+      defaultOpen={false}
+    >
+      <ul className="grid grid-cols-2 gap-2.5">
         {ITEMS.map(item => (
           <li key={item.title}>
             <Link href={item.href} className="flex h-full flex-col rounded-2xl border border-white/15 bg-neutral-900 p-3 transition hover:border-silver-500">
@@ -21,6 +26,6 @@ export default function HomeTorque() {
           </li>
         ))}
       </ul>
-    </section>
+    </CollapsibleSection>
   );
 }
