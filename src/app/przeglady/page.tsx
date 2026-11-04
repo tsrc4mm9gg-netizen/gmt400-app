@@ -2,6 +2,7 @@ import Breadcrumbs from '../ui/Breadcrumbs';
 import AffiliateBox from '../ui/AffiliateBox';
 import FAQ from '../ui/FAQ';
 import PartLink from '../ui/PartLink';
+import AccordionSection from '../ui/AccordionSection';
 import MaintenancePlanner from './MaintenancePlanner';
 
 export const metadata = {
@@ -41,47 +42,52 @@ const faqItems = [
 
 export default function PrzegladyPage() {
   return (
-    <div className="mx-auto w-full max-w-3xl px-4 py-6 text-white sm:py-10">
+    <div className="mx-auto w-full max-w-3xl px-4 py-6 pb-28 text-white sm:py-10">
       <Breadcrumbs className="mb-2" items={[{ label: 'Mój samochód', href: '/moj-samochod' }, { label: 'Harmonogram przeglądów' }]} />
       <h1 className="text-3xl font-bold text-silver-400">Harmonogram przeglądów</h1>
       <p className="mt-2 text-neutral-300">Interwały wyłącznie z dokumentów GM: instrukcje serwisowe 1988–1994 (sekcja 0B „Scheduled Maintenance Services”) i instrukcje obsługi 1995–1999 (rozdział 7 „Maintenance Schedule”). Kilometry przeliczone z mil i zaokrąglone — oryginał w milach podajemy obok. Stan licznika i daty zostają tylko w tej przeglądarce. Sprawdź w swoim aucie.</p>
       <MaintenancePlanner />
 
-      <section className="mt-8">
-        <h2 className="text-xl font-semibold text-silver-300">Wskazówki przeglądów</h2>
-        <div className="mt-3 space-y-3">
-          {TIPS.map(item => (
-            <div key={item.title} className="rounded-xl border border-white/10 bg-neutral-900 p-4">
-              <h3 className="font-semibold text-silver-200">{item.title}</h3>
-              <p className="mt-1 text-sm text-neutral-300">{item.tip}</p>
-            </div>
-          ))}
-        </div>
-      </section>
+      <div className="mt-8">
+        <AccordionSection title="Wskazówki przeglądów" defaultOpen>
+          <div className="space-y-3">
+            {TIPS.map(item => (
+              <div key={item.title} className="rounded-lg border border-white/10 bg-neutral-800 p-3">
+                <h3 className="font-semibold text-silver-200">{item.title}</h3>
+                <p className="mt-1 text-sm text-neutral-300">{item.tip}</p>
+              </div>
+            ))}
+          </div>
+        </AccordionSection>
 
-      <section className="mt-8">
-        <h2 className="text-xl font-semibold text-silver-300">Części eksploatacyjne</h2>
-        <ul className="mt-3 list-inside list-disc space-y-2 text-neutral-300">
-          <li>Filtr oleju: <PartLink partNumber="PF52" /></li>
-          <li>Filtr powietrza Vortec: <PartLink partNumber="A1300C" /></li>
-          <li>Filtr paliwa: <PartLink partNumber="GF626" /></li>
-          <li>Filtr ATF 4L60-E: <PartLink partNumber="TF289" /></li>
-          <li>Świece platynowe: <PartLink partNumber="41-932" /></li>
-          <li>Przewody zapłonowe: <PartLink partNumber="9718D" /></li>
-        </ul>
-      </section>
+        <AccordionSection title="Części eksploatacyjne">
+          <ul className="list-inside list-disc space-y-2 text-neutral-300">
+            <li>Filtr oleju: <PartLink partNumber="PF52" /></li>
+            <li>Filtr powietrza Vortec: <PartLink partNumber="A1300C" /></li>
+            <li>Filtr paliwa: <PartLink partNumber="GF626" /></li>
+            <li>Filtr ATF 4L60-E: <PartLink partNumber="TF289" /></li>
+            <li>Świece platynowe: <PartLink partNumber="41-932" /></li>
+            <li>Przewody zapłonowe: <PartLink partNumber="9718D" /></li>
+          </ul>
+        </AccordionSection>
 
-      <AffiliateBox
-        title="Przydatne przy przeglądach"
-        items={[
-          { name: 'ACDelco PF52 — filtr oleju', search: 'ACDelco PF52' },
-          { name: 'Olej silnikowy 5W-30', search: '5W-30 engine oil' },
-          { name: 'MANNOL Dexron III ATF', search: 'MANNOL Dexron III ATF' },
-          { name: 'Płyn chłodniczy DEX-COOL', search: 'DEX-COOL coolant' },
-          { name: 'Świece ACDelco 41-932', search: 'ACDelco 41-932' },
-        ]}
-      />
-      <FAQ items={faqItems} />
+        <AccordionSection title="Przydatne przy przeglądach">
+          <AffiliateBox
+            title=""
+            items={[
+              { name: 'ACDelco PF52 — filtr oleju', search: 'ACDelco PF52' },
+              { name: 'Olej silnikowy 5W-30', search: '5W-30 engine oil' },
+              { name: 'MANNOL Dexron III ATF', search: 'MANNOL Dexron III ATF' },
+              { name: 'Płyn chłodniczy DEX-COOL', search: 'DEX-COOL coolant' },
+              { name: 'Świece ACDelco 41-932', search: 'ACDelco 41-932' },
+            ]}
+          />
+        </AccordionSection>
+
+        <AccordionSection title="Częste pytania">
+          <FAQ items={faqItems} />
+        </AccordionSection>
+      </div>
     </div>
   );
 }
