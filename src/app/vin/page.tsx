@@ -3,6 +3,7 @@ import Link from 'next/link';
 import Breadcrumbs from '../ui/Breadcrumbs';
 import AffiliateBox from '../ui/AffiliateBox';
 import FAQ from '../ui/FAQ';
+import PartLink from '../ui/PartLink';
 import VinDecoder from '../VinDecoder';
 
 export const metadata: Metadata = {
@@ -28,6 +29,10 @@ const faqItems = [
     question: 'Czy dekoder VIN pokazuje historię pojazdu?',
     answer: 'Dekoder pokazuje dane fabryczne (rocznik, silnik, nadwozie). Historia pojazdu (wypadki, przebieg, właściciele) wymaga płatnych raportów z baz typu Carfax lub VinAudit.',
   },
+  {
+    question: 'Jakie części pasują do mojego VIN?',
+    answer: 'Po zdekodowaniu VIN poznasz rocznik i silnik. Większość części eksploatacyjnych (filtry, świece, płyny) pasuje do całej rodziny GMT400. Sprawdź stronę Eksploatacja dla uniwersalnych części.',
+  },
 ];
 
 export default function VinPage() {
@@ -37,6 +42,21 @@ export default function VinPage() {
       <h1 className="text-3xl font-bold text-silver-400">Sprawdź swój VIN</h1>
       <p className="mb-5 mt-2 text-neutral-300">Wpisz albo wklej VIN — zobaczysz rocznik, silnik, nadwozie i fabrykę. Szczegóły każdej pozycji i źródła są niżej w rozwijanych sekcjach. Wynik możesz zapisać w <Link href="/moj-samochod" className="text-silver-400 underline">Mój samochód</Link>.</p>
       <VinDecoder withRpo prefillFromUrl />
+
+      <section className="mt-8">
+        <h2 className="text-xl font-semibold text-silver-300">Uniwersalne części do GMT400</h2>
+        <p className="mt-2 text-sm text-neutral-400">Po zdekodowaniu VIN sprawdź, które części pasują do Twojego auta:</p>
+        <ul className="mt-3 list-inside list-disc space-y-2 text-neutral-300">
+          <li>Filtr oleju: <PartLink partNumber="PF52" /></li>
+          <li>Świece Vortec (1996+): <PartLink partNumber="41-932" /></li>
+          <li>Przewody zapłonowe: <PartLink partNumber="9718D" /></li>
+          <li>Klocki hamulcowe: <PartLink partNumber="14D52" /></li>
+        </ul>
+        <Link href="/eksploatacja" className="mt-4 inline-block text-sm font-semibold text-silver-300 underline-offset-2 hover:underline">
+          Wszystkie części eksploatacyjne →
+        </Link>
+      </section>
+
       <AffiliateBox
         title="Przydatne przy identyfikacji"
         items={[
