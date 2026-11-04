@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import AccordionSection from '../ui/AccordionSection';
 
 export const metadata: Metadata = {
   title: 'Polecane produkty GMT400 — części, narzędzia, diagnostyka',
@@ -121,37 +122,38 @@ function productLink(item: Product) {
 
 export default function PolecanePage() {
   return (
-    <div className="mx-auto max-w-3xl px-4 py-8">
+    <div className="mx-auto max-w-3xl px-4 py-8 pb-28">
       <h1 className="text-2xl font-bold text-white">Polecane produkty</h1>
       <p className="mt-2 text-sm text-neutral-400">
         Linki do sklepów mogą być afiliacyjne — nie płacisz więcej, a wspierasz GMT400.pl.
       </p>
 
-      {categories.map((cat) => (
-        <section key={cat.name} className="mt-8">
-          <h2 className="text-lg font-semibold text-silver-300">{cat.name}</h2>
-          <ul className="mt-3 space-y-3">
-            {cat.items.map((item) => (
-              <li key={item.name} className="rounded-lg border border-white/10 bg-neutral-900/50 px-4 py-3">
-                <a
-                  href={productLink(item)}
-                  target="_blank"
-                  rel="noopener noreferrer sponsored"
-                  className="inline-flex items-center gap-1 font-medium text-silver-200 hover:text-white hover:underline"
-                >
-                  {item.name} <span className="text-xs opacity-50">↗</span>
-                </a>
-                <p className="mt-1 text-sm text-neutral-400">{item.note}</p>
-                {item.fitment && (
-                  <p className="mt-1 text-xs text-silver-400">{item.fitment}</p>
-                )}
-              </li>
-            ))}
-          </ul>
-        </section>
-      ))}
+      <div className="mt-6">
+        {categories.map((cat) => (
+          <AccordionSection key={cat.name} title={cat.name} defaultOpen={cat.name.includes('Filtry')}>
+            <ul className="space-y-2">
+              {cat.items.map((item) => (
+                <li key={item.name} className="rounded-lg border border-white/10 bg-neutral-800 px-3 py-2">
+                  <a
+                    href={productLink(item)}
+                    target="_blank"
+                    rel="noopener noreferrer sponsored"
+                    className="inline-flex items-center gap-1 font-medium text-amber-400 hover:text-amber-300 hover:underline"
+                  >
+                    {item.name} <span className="text-xs opacity-50">↗</span>
+                  </a>
+                  <p className="mt-1 text-sm text-neutral-400">{item.note}</p>
+                  {item.fitment && (
+                    <p className="mt-1 text-xs text-silver-400">{item.fitment}</p>
+                  )}
+                </li>
+              ))}
+            </ul>
+          </AccordionSection>
+        ))}
+      </div>
 
-      <p className="mt-8 text-xs text-neutral-500">
+      <p className="mt-6 text-xs text-neutral-500">
         <Link href="/" className="text-silver-400 hover:underline">← Wróć na stronę główną</Link>
       </p>
     </div>
