@@ -1,7 +1,7 @@
 const { defineConfig } = require('@playwright/test');
 module.exports = defineConfig({
   testDir: './tests',
-  testMatch: ['reminders-storage.spec.cjs', 'a11y-package.spec.cjs', 'faq-accessibility.spec.cjs', 'homepage-accessibility.spec.cjs'],
+  testMatch: ['reminders-storage.spec.cjs', 'a11y-package.spec.cjs', 'faq-accessibility.spec.cjs', 'homepage-accessibility.spec.cjs', 'diy-heading-audit.spec.cjs'],
   timeout: 45000,
   expect: { timeout: 10000 },
   workers: 1,
