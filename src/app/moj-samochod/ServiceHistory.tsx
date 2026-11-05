@@ -3,7 +3,8 @@
 import { useId, useMemo, useState } from 'react';
 import { useServiceHistory } from '@/lib/service-history-store';
 import { vehicleIdFromProfile } from '@/lib/vehicle-id';
-import type { ServiceRecord, VehicleProfile } from '@/lib/service-history';
+import type { ServiceRecord } from '@/lib/service-history';
+import type { VehicleProfile } from '@/lib/vehicle-profile';
 
 const field = 'mt-1 min-h-11 w-full rounded-lg border border-white/15 bg-neutral-950 px-3 text-base text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-silver-400';
 const button = 'inline-flex min-h-11 items-center justify-center rounded-lg border border-white/15 px-4 text-sm font-semibold text-white hover:border-silver-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-silver-400';
