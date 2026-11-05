@@ -1,10 +1,10 @@
 export default function HomeSearch() {
   return (
     <form action="/szukaj" method="get" role="search" className="px-4 pb-4">
-      <label htmlFor="home-search" className="sr-only">Szukaj w encyklopedii GMT400</label>
+      <label htmlFor="home-search-secondary" className="sr-only">Szukaj w encyklopedii GMT400</label>
       <div className="flex gap-2">
         <input
-          id="home-search"
+          id="home-search-secondary"
           name="q"
           type="search"
           maxLength={120}

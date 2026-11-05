@@ -1,0 +1,54 @@
+name: A11y package verification
+on:
+  push:
+    branches: [fix/a11y-accordion-headings]
+  pull_request:
+    branches: [main]
+    paths:
+      - 'src/app/ui/AccordionSection.tsx'
+      - 'src/app/moj-samochod/**'
+      - 'tests/a11y-package.spec.cjs'
+      - 'tests/reminders-storage.spec.cjs'
+      - 'playwright.a11y-package.config.cjs'
+      - '.github/workflows/a11y-package.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: a11y-package-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  verify:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 25
+    env:
+      BASE_URL: http://127.0.0.1:3100
+      NEXT_TELEMETRY_DISABLED: '1'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+      - name: Install locked dependencies
+        run: npm ci
+      - name: Build application
+        run: npm run build
+      - name: Install browser test tooling
+        run: npm install --no-save --package-lock=false @playwright/test@1.56.1
+      - name: Install Chromium and WebKit
+        run: npx playwright install --with-deps chromium webkit
+      - name: Run package browser tests
+        run: npx playwright test --config=playwright.a11y-package.config.cjs
+      - name: Save browser diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: a11y-package-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            playwright-report/
+            test-results/
+          retention-days: 7
+          if-no-files-found: warn

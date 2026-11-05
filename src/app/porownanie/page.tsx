@@ -115,13 +115,13 @@ export default function PorownaniePage() {
           <AccordionSection key={m.name} title={m.name}>
             <div className="grid gap-4 sm:grid-cols-2">
               <div>
-                <h4 className="font-medium text-silver-300">Zalety</h4>
+                <h3 className="font-medium text-silver-300">Zalety</h3>
                 <ul className="mt-2 list-inside list-disc text-sm text-neutral-300">
                   {m.pros.map(p => <li key={p}>{p}</li>)}
                 </ul>
               </div>
               <div>
-                <h4 className="font-medium text-silver-300">Wady</h4>
+                <h3 className="font-medium text-silver-300">Wady</h3>
                 <ul className="mt-2 list-inside list-disc text-sm text-neutral-300">
                   {m.cons.map(c => <li key={c}>{c}</li>)}
                 </ul>

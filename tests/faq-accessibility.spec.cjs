@@ -1,0 +1,34 @@
+const { test, expect } = require('@playwright/test');
+
+test('FAQ opens with Enter, switches answers and closes with Space', async ({ page }) => {
+  await page.goto('/diy/wymiana-oleju-silnikowego');
+  const outer = page.getByRole('button', { name: 'Częste pytania', exact: true });
+  await outer.click();
+  await expect(outer.locator('..')).toHaveJSProperty('tagName', 'H2');
+  const faq = page.getByRole('region', { name: 'Często zadawane pytania', exact: true });
+  await expect(faq).toBeVisible();
+  await expect(faq.getByRole('heading', { name: 'Często zadawane pytania', level: 3, exact: true })).toBeVisible();
+  const first = faq.getByRole('button', { name: 'Jaki olej do GMT400?', exact: true });
+  const second = faq.getByRole('button', { name: 'Jak często wymieniać olej?', exact: true });
+  await expect(first.locator('..')).toHaveJSProperty('tagName', 'H4');
+  await expect(second.locator('..')).toHaveJSProperty('tagName', 'H4');
+  const panelId = await first.getAttribute('aria-controls');
+  const panel = page.locator(`[id=${JSON.stringify(panelId)}]`);
+  await expect(first).toHaveAttribute('aria-expanded', 'false');
+  await expect(panel).toBeAttached();
+  await expect(panel).toBeHidden();
+  await expect(panel).toHaveAttribute('aria-labelledby', await first.getAttribute('id'));
+  await first.focus();
+  await page.keyboard.press('Enter');
+  await expect(first).toHaveAttribute('aria-expanded', 'true');
+  await expect(panel).toBeVisible();
+  await expect(first).toBeFocused();
+  await second.focus();
+  await page.keyboard.press('Enter');
+  await expect(first).toHaveAttribute('aria-expanded', 'false');
+  await expect(panel).toBeHidden();
+  await expect(second).toHaveAttribute('aria-expanded', 'true');
+  await page.keyboard.press('Space');
+  await expect(second).toHaveAttribute('aria-expanded', 'false');
+  await expect(second).toBeFocused();
+});

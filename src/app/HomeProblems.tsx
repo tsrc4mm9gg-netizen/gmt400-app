@@ -2,16 +2,11 @@
 import Link from 'next/link';
 import { IconTile } from './ui/CategoryIcon';
 import { HOME_PROBLEMS } from '../lib/home-problems';
-import CollapsibleSection from './ui/CollapsibleSection';
 
 export default function HomeProblems() {
   return (
-    <CollapsibleSection
-      title="Najczęstsze problemy"
-      subtitle="Skróty do diagnozy objawów — tematy, o które właściciele najczęściej pytają."
-      id="home-problems"
-      defaultOpen={false}
-    >
+    <div data-testid="home-problems" className="space-y-3">
+      <p className="text-sm text-neutral-300">Skróty do diagnozy objawów — tematy, o które właściciele najczęściej pytają.</p>
       <ul className="grid grid-cols-2 gap-2.5 sm:grid-cols-3">
         {HOME_PROBLEMS.map(problem => (
           <li key={problem.id} style={{ maxWidth: 'none' }}>
@@ -23,6 +18,6 @@ export default function HomeProblems() {
           </li>
         ))}
       </ul>
-    </CollapsibleSection>
+    </div>
   );
 }

@@ -91,6 +91,14 @@ function analyze(source, file) {
       if (!nonempty(attr(node, 'aria-label')) && !nonempty(attr(node, 'aria-labelledby')) && !linked && !wrapped) report(node, 'form control without accessible label');
     }
     if (attr(node, 'dangerouslySetInnerHTML') && !safeJsonLd(node)) report(node, 'dangerouslySetInnerHTML requires explicit review');
+    if (name === 'AccordionSection') {
+      const headingLevelValue = valueOf(attr(node, 'headingLevel'));
+      const headingLevel = headingLevelValue && ts.isNumericLiteral(headingLevelValue) ? Number(headingLevelValue.text) : 2;
+      if (headingLevel === 2) {
+        const scope = owner(node);
+        previousHeadings.set(scope, 2);
+      }
+    }
     if (/^h[1-6]$/.test(name)) {
       const level = Number(name[1]), scope = owner(node), previous = previousHeadings.get(scope);
       if (previous && level - previous > 1) report(node, `heading level jumps from h${previous} to h${level}`);
@@ -117,9 +125,12 @@ function selfTest() {
   check('const x = <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }} />;', 1);
   check('const x = <script type="text/javascript" dangerouslySetInnerHTML={{ __html: JSON.stringify(data).replace(/</g, "\\\\u003c") }} />;', 1);
   check('const x = <div type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(data).replace(/</g, "\\\\u003c") }} />;', 1);
-  check('const x = <script type="application/ld+json" onLoad={f} dangerouslySetInnerHTML={{ __html: JSON.stringify(data).replace(/</g, "\\\\u003c") }} />;', 1);
+  check('const x = <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(data).replace(/</g, "\\\\u003c") }} onLoad={f} />;', 1);
   check('const x = <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: html.replace(/</g, "\\\\u003c") }} />;', 1);
   check('const x = <><h1>Tytuł</h1><h3>Sekcja</h3></>;', 1);
+  check('const x = <><h1>Tytuł</h1><AccordionSection title="Sekcja"><h3>Podsekcja</h3></AccordionSection></>;', 0);
+  check('const x = <><h1>Tytuł</h1><AccordionSection title="Sekcja" headingLevel={2}><h3>Podsekcja</h3></AccordionSection></>;', 0);
+  check('const x = <><h1>Tytuł</h1><AccordionSection title="Sekcja" headingLevel={3}><h3>Podsekcja</h3></AccordionSection></>;', 1);
   check('const A = () => <label htmlFor="q">Szukaj</label>; const B = () => <input id="q" />;', 1);
   check('function A(){ const id = useId(); return <><label htmlFor={id + "-q"}>Szukaj</label><textarea id={id + "-q"} /></>; }', 0);
   check('function A(){ const id = useId(); return <><label htmlFor={id + "-a"}>Szukaj</label><input id={id + "-b"} /></>; }', 1);
