@@ -1,18 +1,21 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import Link from 'next/link';
 import * as Sentry from '@sentry/nextjs';
 
 export default function Error({ error, reset }: { error: Error & { digest?: string }; reset: () => void }) {
+  const titleRef = useRef<HTMLHeadingElement>(null);
+
   useEffect(() => {
+    titleRef.current?.focus();
     Sentry.captureException(error);
   }, [error]);
 
   return (
     <div className="mx-auto flex min-h-[60vh] max-w-3xl flex-col items-center justify-center px-5 py-16 text-center text-white">
-      <p className="text-sm font-semibold uppercase tracking-wide text-danger-400">Błąd serwera</p>
-      <h1 className="mt-3 text-3xl font-bold text-danger-400 sm:text-4xl">Wystąpił błąd</h1>
+      <p className="text-sm font-semibold uppercase tracking-wide text-danger-400">Błąd wyświetlania</p>
+      <h1 id="page-error-title" ref={titleRef} tabIndex={-1} className="mt-3 rounded text-3xl font-bold text-danger-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-silver-500 sm:text-4xl">Nie udało się wyświetlić strony</h1>
       <p role="alert" className="mt-4 max-w-xl text-neutral-300">
         Wystąpił nieoczekiwany problem. Może to być chwilowa usterka — spróbuj ponownie lub wróć do głównej strony serwisu.
       </p>
