@@ -19,7 +19,7 @@ concurrency:
   cancel-in-progress: true
 jobs:
   verify:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     timeout-minutes: 25
     env:
       BASE_URL: http://127.0.0.1:3100
