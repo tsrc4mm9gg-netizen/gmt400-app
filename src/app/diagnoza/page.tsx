@@ -101,7 +101,7 @@ export default async function Page() {
               {item.codes.length > 0 && (
                 <div className="mt-2 flex flex-wrap gap-2">
                   {item.codes.map(code => (
-                    <Link key={code} href={`/kody-obd/${code.toLowerCase()}`} className="rounded bg-neutral-700 px-2 py-0.5 text-xs text-silver-300 hover:bg-neutral-600">
+                    <Link key={code} href={`/kody-obd/${code.toLowerCase()}`} className="inline-flex min-h-11 items-center rounded bg-neutral-700 px-3 py-1 text-xs text-silver-300 hover:bg-neutral-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-silver-400">
                       {code}
                     </Link>
                   ))}
