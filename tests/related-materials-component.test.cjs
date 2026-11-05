@@ -3,7 +3,7 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const ts = require('typescript');
 const compile = (path) => ts.transpileModule(fs.readFileSync(path, 'utf8'), { compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2020, jsx: ts.JsxEmit.React } }).outputText;
-const suggestionsSource = compile('src/app/RelatedMaterialSuggestions.tsx');
+const suggestionsSource = fs.readFileSync('src/app/RelatedMaterialSuggestions.tsx', 'utf8');
 const listSource = compile('src/app/RelatedMaterials.tsx');
 const libSource = compile('src/lib/related-materials.ts');
 const React = require('react');
