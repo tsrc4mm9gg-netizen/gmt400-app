@@ -1,15 +1,18 @@
 'use client';
-import { useId, useState } from 'react';
+import { useContext, useId, useState } from 'react';
+import { AccordionHeadingLevelContext } from './AccordionSection';
 
 type FAQItem = { question: string; answer: string };
 type Level = 2 | 3 | 4 | 5;
 type Props = { items: FAQItem[]; title?: string; headingLevel?: Level };
 
-export default function FAQ({ items, title = 'Często zadawane pytania', headingLevel = 2 }: Props) {
+export default function FAQ({ items, title = 'Często zadawane pytania', headingLevel }: Props) {
+  const parentLevel = useContext(AccordionHeadingLevelContext);
+  const resolvedLevel: Level = headingLevel ?? (parentLevel === null ? 2 : Math.min(parentLevel + 1, 5) as Level);
   const [open, setOpen] = useState<number | null>(null);
   const id = useId();
-  const Heading = `h${headingLevel}` as 'h2' | 'h3' | 'h4' | 'h5';
-  const QuestionHeading = `h${headingLevel + 1}` as 'h3' | 'h4' | 'h5' | 'h6';
+  const Heading = `h${resolvedLevel}` as 'h2' | 'h3' | 'h4' | 'h5';
+  const QuestionHeading = `h${resolvedLevel + 1}` as 'h3' | 'h4' | 'h5' | 'h6';
   return (
     <section aria-labelledby={`${id}-title`} className="mt-12 rounded-xl border border-white/10 bg-neutral-900/50 p-6">
       <Heading id={`${id}-title`} className="text-lg font-semibold text-silver-300">{title}</Heading>

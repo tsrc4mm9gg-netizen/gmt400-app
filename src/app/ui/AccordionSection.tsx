@@ -1,6 +1,8 @@
 'use client';
 
-import { useId, useState, type ReactNode } from 'react';
+import { createContext, useId, useState, type ReactNode } from 'react';
+
+export const AccordionHeadingLevelContext = createContext<number | null>(null);
 
 type Props = {
   title: string;
@@ -46,7 +48,9 @@ export default function AccordionSection({ title, children, defaultOpen = false,
         hidden={!open}
         className="border-t border-white/10 px-4 py-3"
       >
-        {children}
+        <AccordionHeadingLevelContext.Provider value={headingLevel}>
+          {children}
+        </AccordionHeadingLevelContext.Provider>
       </div>
     </div>
   );

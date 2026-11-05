@@ -4,10 +4,14 @@ test('FAQ opens with Enter, switches answers and closes with Space', async ({ pa
   await page.goto('/diy/wymiana-oleju-silnikowego');
   const outer = page.getByRole('button', { name: 'Częste pytania', exact: true });
   await outer.click();
+  await expect(outer.locator('..')).toHaveJSProperty('tagName', 'H2');
   const faq = page.getByRole('region', { name: 'Często zadawane pytania', exact: true });
   await expect(faq).toBeVisible();
+  await expect(faq.getByRole('heading', { name: 'Często zadawane pytania', level: 3, exact: true })).toBeVisible();
   const first = faq.getByRole('button', { name: 'Jaki olej do GMT400?', exact: true });
   const second = faq.getByRole('button', { name: 'Jak często wymieniać olej?', exact: true });
+  await expect(first.locator('..')).toHaveJSProperty('tagName', 'H4');
+  await expect(second.locator('..')).toHaveJSProperty('tagName', 'H4');
   const panelId = await first.getAttribute('aria-controls');
   const panel = page.locator(`[id=${JSON.stringify(panelId)}]`);
   await expect(first).toHaveAttribute('aria-expanded', 'false');
