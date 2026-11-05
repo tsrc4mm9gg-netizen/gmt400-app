@@ -1,0 +1,57 @@
+name: MyCar regression checks
+on:
+  push:
+    branches: [feature/service-history]
+    paths:
+      - 'src/**'
+      - 'tests/**'
+      - 'package.json'
+      - 'package-lock.json'
+      - 'next.config.ts'
+      - 'tsconfig.json'
+      - '.github/workflows/mycar-regression.yml'
+  pull_request:
+    paths:
+      - 'src/**'
+      - 'tests/**'
+      - 'package.json'
+      - 'package-lock.json'
+      - 'next.config.ts'
+      - 'tsconfig.json'
+      - '.github/workflows/mycar-regression.yml'
+permissions:
+  contents: read
+concurrency:
+  group: mycar-regression-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      CI: 'true'
+      NEXT_TELEMETRY_DISABLED: '1'
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+      - name: Record runtime versions
+        run: |
+          node --version
+          npm --version
+      - name: Install locked dependencies
+        run: npm ci --no-audit --no-fund
+      - name: Test service history and vehicle identity
+        run: node --test tests/service-history.test.cjs tests/vehicle-id.test.cjs
+      - name: Test vehicle matching and maintenance schedule
+        if: ${{ !cancelled() }}
+        run: node --test tests/my-car.test.mjs tests/maintenance-schedule.test.mjs
+      - name: Check frontend quality and accessibility rules
+        if: ${{ !cancelled() }}
+        run: node scripts/check-frontend-quality.cjs
+      - name: Build and check TypeScript
+        if: ${{ !cancelled() }}
+        run: npm run build
+      - name: Verify production bundle exists
+        if: ${{ success() }}
+        run: test -f .next/BUILD_ID
