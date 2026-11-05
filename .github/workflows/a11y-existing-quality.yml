@@ -34,6 +34,16 @@ jobs:
         run: |
           set -o pipefail
           node scripts/check-frontend-quality.cjs 2>&1 | tee /tmp/a11y-existing-frontend.log
+      - name: Show frontend check tail
+        if: always()
+        run: |
+          if [ -f /tmp/a11y-existing-frontend.log ]; then
+            echo '::group::Frontend check tail (last 100 lines)'
+            tail -n 100 /tmp/a11y-existing-frontend.log
+            echo '::endgroup::'
+          else
+            echo 'Frontend log not found.'
+          fi
       - name: Existing unit test suites
         id: unit
         if: ${{ !cancelled() && steps.install.outcome == 'success' }}
