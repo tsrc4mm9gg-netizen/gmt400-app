@@ -1,0 +1,71 @@
+name: Repair MyCar after verified build
+on:
+  push:
+    branches: [feature/service-history]
+    paths: [.github/workflows/repair-mycar-verified.yml]
+permissions:
+  contents: write
+concurrency:
+  group: repair-mycar-verified
+  cancel-in-progress: false
+jobs:
+  repair:
+    if: github.repository == 'tsrc4mm9gg-netizen/gmt400-app'
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    env:
+      NEXT_TELEMETRY_DISABLED: '1'
+      CI: 'true'
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 0
+      - name: Verify starting commit and restore complete component
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD^)" = 88adcf1ff65c78e0c826c45b0b4654fc3f201af1
+          git restore --source=8f360fc0043cf208cd86c0a46c08bf45d4ab050d -- src/app/moj-samochod/MyCar.tsx
+          test "$(git hash-object src/app/moj-samochod/MyCar.tsx)" = "$(git rev-parse 8f360fc0043cf208cd86c0a46c08bf45d4ab050d:src/app/moj-samochod/MyCar.tsx)"
+      - name: Apply the sandbox-tested integration fixes
+        shell: python
+        run: |
+          from pathlib import Path
+          p = Path('src/app/moj-samochod/ServiceHistory.tsx')
+          s = p.read_text()
+          old = "import type { ServiceRecord, VehicleProfile } from '@/lib/service-history';"
+          assert s.count(old) == 1
+          p.write_text(s.replace(old, "import type { ServiceRecord } from '@/lib/service-history';\nimport type { VehicleProfile } from '@/lib/vehicle-profile';"))
+          p = Path('src/app/moj-samochod/page.tsx')
+          s = p.read_text()
+          for old in ["import MaintenanceReminders from './MaintenanceReminders';\n", '      <MaintenanceReminders />\n']:
+              assert s.count(old) == 1
+              s = s.replace(old, '')
+          p.write_text(s)
+          p = Path('src/app/moj-samochod/MyCar.tsx')
+          s = p.read_text()
+          old = "'use client';\n"
+          assert s.count(old) == 1
+          s = s.replace(old, old + "import MaintenanceReminders from './MaintenanceReminders';\nimport ServiceHistory from './ServiceHistory';\nimport { vehicleIdFromProfile } from '@/lib/vehicle-id';\n", 1)
+          old = '    <PrivacyNote />\n  </>;'
+          assert s.count(old) == 1
+          s = s.replace(old, '    <MaintenanceReminders key={`reminders-${vehicleIdFromProfile(profile)}`} vehicleId={vehicleIdFromProfile(profile)} />\n    <ServiceHistory key={`history-${vehicleIdFromProfile(profile)}`} profile={profile} />\n' + old, 1)
+          p.write_text(s)
+      - name: Validate and build before any commit
+        shell: bash
+        run: |
+          set -euo pipefail
+          git diff --check
+          node --version
+          npm ci --no-audit --no-fund
+          npm run build
+      - name: Commit only the three verified source files
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -- src/app/moj-samochod/MyCar.tsx src/app/moj-samochod/ServiceHistory.tsx src/app/moj-samochod/page.tsx
+          git commit -m 'fix(my-car): restore complete view and integrate service history'
+          git push origin HEAD:refs/heads/feature/service-history
