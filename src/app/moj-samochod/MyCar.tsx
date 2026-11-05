@@ -1,11 +1,16 @@
-RESTORE_FROM_BASE_AND_INTEGRATE
+RESTORE_FULL_FILE_FROM_BASE_BRANCH
 
-1. Przywróć pełną zawartość pliku z refs/heads/fix/a11y-accordion-headings:src/app/moj-samochod/MyCar.tsx.
-2. Dodaj importy:
+Źródło: refs/heads/fix/a11y-accordion-headings:src/app/moj-samochod/MyCar.tsx
+
+Po przywróceniu pełnej treści dodaj wyłącznie:
+
 import MaintenanceReminders from './MaintenanceReminders';
 import ServiceHistory from './ServiceHistory';
 import { vehicleIdFromProfile } from '@/lib/vehicle-id';
-3. W CarView, bezpośrednio przed </>, dodaj:
+
+A w CarView, bezpośrednio przed zamykającym </>, dodaj:
+
 <MaintenanceReminders vehicleId={vehicleIdFromProfile(profile)} />
 <ServiceHistory profile={profile} />
-4. Nie usuwaj żadnej istniejącej funkcjonalności.
+
+Nie usuwaj żadnej istniejącej funkcjonalności.
