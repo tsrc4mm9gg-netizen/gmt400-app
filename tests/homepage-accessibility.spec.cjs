@@ -29,15 +29,20 @@ for (const route of ['/', '/kody-obd', '/diy/wymiana-oleju-silnikowego', '/moj-s
   test(`rendered headings after expansion: ${route}`, async ({ page }) => {
     await page.goto(route);
     await expect(page.locator('main h1')).toBeVisible();
+    const visited = new Set();
     for (let pass = 0; pass < 6; pass++) {
-      const candidates = page.locator('main button[aria-expanded="false"][aria-controls]');
+      const candidateIds = await page.locator('main button[aria-expanded="false"][aria-controls]').evaluateAll(nodes => nodes.filter(node => node.getClientRects().length > 0 && node.parentElement?.matches('h2,h3,h4,h5,h6')).map(node => node.id));
       let changed = false;
-      for (const candidate of await candidates.all()) {
+      for (const candidateId of candidateIds) {
+        expect(candidateId, 'Accordion trigger must have a stable id').toBeTruthy();
+        if (visited.has(candidateId)) continue;
+        const candidate = page.locator(`[id=${JSON.stringify(candidateId)}]`);
+        await expect(candidate).toHaveCount(1);
         if (!await candidate.isVisible()) continue;
-        const inHeading = await candidate.evaluate(node => Boolean(node.parentElement?.matches('h2,h3,h4,h5,h6')));
-        if (!inHeading) continue;
+        if (await candidate.getAttribute('aria-expanded') !== 'false') continue;
         await candidate.click();
         await expect(candidate).toHaveAttribute('aria-expanded', 'true');
+        visited.add(candidateId);
         changed = true;
       }
       if (!changed) break;
