@@ -1,0 +1,79 @@
+name: Existing quality checks for a11y branch
+on:
+  push:
+    branches: [fix/a11y-accordion-headings]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: a11y-existing-quality-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  verify:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 20
+    env:
+      NEXT_TELEMETRY_DISABLED: '1'
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+      - name: Install locked dependencies
+        id: install
+        run: npm ci
+      - name: Existing static frontend checks
+        id: frontend
+        if: ${{ !cancelled() && steps.install.outcome == 'success' }}
+        run: |
+          set -o pipefail
+          node scripts/check-frontend-quality.cjs 2>&1 | tee /tmp/a11y-existing-frontend.log
+      - name: Existing unit test suites
+        id: unit
+        if: ${{ !cancelled() && steps.install.outcome == 'success' }}
+        run: |
+          set -euo pipefail
+          shopt -s nullglob
+          files=(tests/*.test.cjs tests/*.test.mjs)
+          if [ ${#files[@]} -eq 0 ]; then
+            echo 'No existing unit tests found; refusing empty verification.'
+            exit 1
+          fi
+          printf '%s\n' "${files[@]}" > /tmp/a11y-existing-unit-files.txt
+          node --test "${files[@]}" 2>&1 | tee /tmp/a11y-existing-unit.log
+      - name: Record scoped results
+        if: always()
+        env:
+          INSTALL_RESULT: ${{ steps.install.outcome }}
+          FRONTEND_RESULT: ${{ steps.frontend.outcome }}
+          UNIT_RESULT: ${{ steps.unit.outcome }}
+        run: |
+          node <<'NODE'
+          const fs = require('node:fs');
+          const report = {
+            sha: process.env.GITHUB_SHA,
+            install: process.env.INSTALL_RESULT,
+            frontend: process.env.FRONTEND_RESULT,
+            unit: process.env.UNIT_RESULT,
+            scope: 'Existing repository static frontend checks and unit tests only. No deployment, automatic repair, browser or content accuracy certification.'
+          };
+          fs.writeFileSync('/tmp/a11y-existing-quality.json', JSON.stringify(report, null, 2));
+          fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, '## Existing quality checks\n\n```json\n' + JSON.stringify(report, null, 2) + '\n```\n');
+          NODE
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: a11y-existing-quality-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            /tmp/a11y-existing-frontend.log
+            /tmp/a11y-existing-unit.log
+            /tmp/a11y-existing-unit-files.txt
+            /tmp/a11y-existing-quality.json
+          retention-days: 7
+          if-no-files-found: warn
