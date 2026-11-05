@@ -1,14 +1,16 @@
 'use client';
 
-import { useId, useState } from 'react';
+import { useId, useMemo, useState } from 'react';
 import { useServiceHistory } from '@/lib/service-history-store';
-import type { ServiceRecord } from '@/lib/service-history';
+import { vehicleIdFromProfile } from '@/lib/vehicle-id';
+import type { ServiceRecord, VehicleProfile } from '@/lib/service-history';
 
 const field = 'mt-1 min-h-11 w-full rounded-lg border border-white/15 bg-neutral-950 px-3 text-base text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-silver-400';
 const button = 'inline-flex min-h-11 items-center justify-center rounded-lg border border-white/15 px-4 text-sm font-semibold text-white hover:border-silver-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-silver-400';
 
-export default function ServiceHistory({ vehicleId }: { vehicleId: string }) {
+export default function ServiceHistory({ profile }: { profile: VehicleProfile }) {
   const id = useId();
+  const vehicleId = useMemo(() => vehicleIdFromProfile(profile), [profile]);
   const { records, addRecord, deleteRecord, exportJson } = useServiceHistory(vehicleId);
   const [title, setTitle] = useState('');
   const [date, setDate] = useState('');
@@ -44,7 +46,7 @@ export default function ServiceHistory({ vehicleId }: { vehicleId: string }) {
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
     link.href = url;
-    link.download = `historia-serwisowa-${vehicleId}.json`;
+    link.download = `historia-serwisowa-${vehicleId.replace(/[^a-z0-9]+/g, '-')}.json`;
     link.click();
     URL.revokeObjectURL(url);
   };
@@ -52,7 +54,7 @@ export default function ServiceHistory({ vehicleId }: { vehicleId: string }) {
   return (
     <section aria-labelledby={`${id}-h`} className="mt-6 rounded-xl border border-white/10 bg-neutral-950 p-4 sm:p-5">
       <h2 id={`${id}-h`} className="text-xl font-semibold text-silver-300">Historia serwisowa</h2>
-      <p className="mt-1 text-sm text-neutral-400">Wpisy są przypisane do aktywnego auta i zapisywane wyłącznie w tej przeglądarce.</p>
+      <p className="mt-1 text-sm text-neutral-400">Wpisy są przypisane do aktywnej konfiguracji auta i zapisywane wyłącznie w tej przeglądarce.</p>
       <p role="status" aria-live="polite" className="mt-2 min-h-5 text-sm text-silver-200">{notice}</p>
       <p role="alert" className="mt-2 min-h-5 text-sm text-danger-300">{error}</p>
 
@@ -101,7 +103,7 @@ export default function ServiceHistory({ vehicleId }: { vehicleId: string }) {
           ))}
         </ul>
       ) : (
-        <p className="mt-4 text-sm text-neutral-300">Brak wpisów dla tego auta.</p>
+        <p className="mt-4 text-sm text-neutral-300">Brak wpisów dla tej konfiguracji auta.</p>
       )}
     </section>
   );
