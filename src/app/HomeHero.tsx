@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useId, useState } from 'react';
 import Link from 'next/link';
 import ModelHero from './ModelHero';
 import CategoryGrid from './CategoryGrid';
@@ -31,19 +31,29 @@ const QUICK_ACTIONS = [
 
 function AccordionSection({ title, children }: { title: string; children: React.ReactNode }) {
   const [open, setOpen] = useState(false);
+  const id = useId();
+  const triggerId = `${id}-trigger`;
+  const panelId = `${id}-panel`;
   return (
     <div className="mx-4 mb-2 rounded-xl border border-white/10 bg-neutral-900">
-      <button
-        type="button"
-        onClick={() => setOpen(!open)}
-        className="flex w-full items-center justify-between px-4 py-3 text-left"
-      >
-        <span className="font-medium text-silver-200">{title}</span>
-        <svg className={`h-5 w-5 text-neutral-400 transition-transform ${open ? 'rotate-180' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-        </svg>
-      </button>
-      {open && <div className="border-t border-white/10 px-4 py-3">{children}</div>}
+      <h2 className="m-0 text-base">
+        <button
+          id={triggerId}
+          type="button"
+          onClick={() => setOpen(value => !value)}
+          aria-expanded={open}
+          aria-controls={panelId}
+          className="flex min-h-11 w-full items-center justify-between gap-3 rounded-xl px-4 py-3 text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-silver-400"
+        >
+          <span className="font-medium text-silver-200">{title}</span>
+          <svg aria-hidden="true" focusable="false" className={`h-5 w-5 shrink-0 text-neutral-400 transition-transform motion-reduce:transition-none ${open ? 'rotate-180' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+          </svg>
+        </button>
+      </h2>
+      <div id={panelId} aria-labelledby={triggerId} hidden={!open} className="border-t border-white/10 px-4 py-3">
+        {open ? children : null}
+      </div>
     </div>
   );
 }
