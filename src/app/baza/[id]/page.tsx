@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { cache } from 'react';
-import { notFound } from 'next/navigation';
+import { notFound, permanentRedirect } from 'next/navigation';
 import { VehicleMatchBadge } from '../../VehicleMaterialFilter';
 import { NotionContent, readNotionBlocks } from './NotionContent';
 import MaterialContents from '../../MaterialContents';
@@ -24,6 +24,7 @@ import DiyBrief from './DiyBrief';
 import RecentTracker from '../../RecentTracker';
 import { recentTypeLabel } from '../../../lib/recent-viewed';
 import ContextualAffiliate from '../../ui/ContextualAffiliate';
+import { getKnowledgeIdBySlug, getKnowledgeSlug, isNotionId } from '../../../lib/knowledge-slugs';
 
 const SECTION_OF: Record<string, Crumb> = {
   'Usterka': { href: '/usterki', label: 'Usterki' },
@@ -67,6 +68,26 @@ const readEntry = cache(async (id: string) => {
     applicability: { brand: values(p.Marka), model: values(p.Model), years: values(p.Lata), engine: values(p.Silnik), drive: values(p['Napęd']), transmission: values(p.Skrzynia) },
   };
 });
+
+/**
+ * Rozpoznaje zarówno historyczny identyfikator Notion, jak i trwały slug.
+ * Dla identyfikatora zwraca również docelowy slug — pozwala to wykonać 301
+ * na kanoniczny adres bez łamania dotychczasowych linków.
+ */
+const resolveEntry = cache(async (param: string) => {
+  if (isNotionId(param)) {
+    const entry = await readEntry(param);
+    if (!entry || entry.unavailable) return { entry, slug: null as string | null };
+    const slugInfo = await getKnowledgeSlug(entry.id);
+    return { entry, slug: slugInfo?.slug ?? null };
+  }
+
+  const slugInfo = await getKnowledgeIdBySlug(param);
+  if (!slugInfo) return { entry: null, slug: null as string | null };
+  const entry = await readEntry(slugInfo.id);
+  return { entry, slug: slugInfo.slug };
+});
+
 function relatedSchematics(title: string, forced?: string[]): { id: string; title: string }[] {
   if (forced) return forced.map(id => SCHEMATICS.find(s => s.id === id)).filter((s): s is NonNullable<typeof s> => Boolean(s)).map(s => ({ id: s.id, title: s.title }));
   const value = title.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/ł/g, 'l');
@@ -96,11 +117,11 @@ const lead = (entry: { Opis: string; Objawy: string }): string => {
 };
 type Props = { params: Promise<{ id: string }> };
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const entry = await readEntry((await params).id);
+  const { entry, slug } = await resolveEntry((await params).id);
   if (!entry) return { title: 'Nie znaleziono materiału — GMT400', robots: { index: false, follow: false } };
   if (entry.unavailable) return { title: 'Baza wiedzy chwilowo niedostępna — GMT400', robots: { index: false, follow: false } };
   const description = (entry.Opis || entry.Objawy || entry.Rozwiązanie || entry.Nazwa).slice(0, 160);
-  const url = `/baza/${entry.id}`;
+  const url = `/baza/${encodeURIComponent(slug || entry.id)}`;
   return {
     title: `${entry.Nazwa} — GMT400`,
     description,
@@ -120,9 +141,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 export default async function KnowledgeEntry({ params }: Props) {
-  const entry = await readEntry((await params).id);
+  const { entry, slug } = await resolveEntry((await params).id);
   if (!entry) notFound();
   if (entry.unavailable) return <NotionUnavailable />;
+
+  // Historyczny adres UUID zawsze prowadzi 301 do trwałego adresu slugowego.
+  if (isNotionId((await params).id) && slug && slug !== (await params).id) {
+    permanentRedirect(`/baza/${encodeURIComponent(slug)}`);
+  }
+
+  const canonicalSlug = slug || entry.id;
   let blocks: any[] = [];
   let contentError = false;
   try { blocks = await readNotionBlocks(entry.id, process.env.NOTION_TOKEN || ''); } catch { contentError = true; }
@@ -140,7 +168,7 @@ export default async function KnowledgeEntry({ params }: Props) {
       <BackLink fallback="/szukaj" label="← Wróć" className="inline-flex min-h-11 items-center text-silver-400 underline" />
       {(entry.Typ === 'Porada' || entry.Typ === 'Usterka') && <span className="ml-auto"><SaveOfflineButton title={entry.Nazwa} /></span>}
     </div>
-    <RecentTracker id={entry.id} title={entry.Nazwa} href={`/baza/${entry.id}`} type={recentTypeLabel(entry.Typ)} />
+    <RecentTracker id={entry.id} title={entry.Nazwa} href={`/baza/${encodeURIComponent(canonicalSlug)}`} type={recentTypeLabel(entry.Typ)} />
     <article className="mt-6 min-w-0 space-y-6 [overflow-wrap:anywhere]">
       <div className="flex flex-wrap gap-2">
         {entry.Typ && <span className="rounded-full border border-silver-600/40 bg-silver-600/10 px-3 py-1 text-xs font-medium text-silver-300">Typ: {entry.Typ}</span>}

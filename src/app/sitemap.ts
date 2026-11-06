@@ -3,45 +3,10 @@ import { GUIDES } from '../lib/guides';
 import { DIAG_GUIDES } from '../lib/diagnosis-guides';
 import type { MetadataRoute } from 'next'
 import { OBD_CODES } from '@/lib/obd-codes'
-import { notionFetch } from '@/lib/notion-fetch'
-import { isSuperseded } from '../lib/superseded.mjs'
+import { getKnowledgeSlugs } from '@/lib/knowledge-slugs'
 
 const BASE = 'https://www.gmt400.pl'
-const DATABASE_ID = '746973771d604f1e8276502851176af2'
 const UPDATED = new Date()
-
-async function getKnowledgeIds(): Promise<string[]> {
-  const token = process.env.NOTION_TOKEN
-  if (!token) return []
-  const ids: string[] = []
-  const seenCursors = new Set<string>()
-  let cursor: string | undefined
-  try {
-    // Pełna paginacja (baza ma kilkaset wpisów); wpisy „Do usunięcia – zastąpione przez…” nie trafiają do mapy.
-    for (let page = 0; page < 20; page++) {
-      const body: Record<string, unknown> = { page_size: 100 }
-      if (cursor) body.start_cursor = cursor
-      const response = await notionFetch(`https://api.notion.com/v1/databases/${DATABASE_ID}/query`, { token, method: 'POST', body: JSON.stringify(body), revalidate: 3600 })
-      if (!response.ok) break
-      const data = await response.json()
-      if (!Array.isArray(data.results)) break
-      for (const entry of data.results) {
-        const id = typeof entry?.id === 'string' ? entry.id : ''
-        if (!/^[a-f0-9]{32}$/i.test(id.replace(/-/g, ''))) continue
-        const opis = (entry?.properties?.Opis?.rich_text ?? []).map((part: any) => part?.plain_text || '').join('')
-        if (isSuperseded({ Opis: opis })) continue
-        ids.push(id)
-      }
-      const next = data.next_cursor
-      if (!data.has_more || typeof next !== 'string' || !next || seenCursors.has(next)) break
-      seenCursors.add(next)
-      cursor = next
-    }
-  } catch {
-    // zwracamy to, co już pobrano
-  }
-  return ids
-}
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const staticRoutes: MetadataRoute.Sitemap = [
@@ -79,9 +44,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.6,
   }))
 
-  const knowledgeIds = await getKnowledgeIds()
-  const knowledgeRoutes: MetadataRoute.Sitemap = knowledgeIds.map(id => ({
-    url: `${BASE}/baza/${id}`,
+  // Kanoniczne, trwałe adresy wpisów. Stare adresy UUID pozostają dostępne
+  // jako 301, więc dotychczasowe linki i indeksacja nie zostają utracone.
+  const knowledgeSlugs = await getKnowledgeSlugs()
+  const knowledgeRoutes: MetadataRoute.Sitemap = knowledgeSlugs.map(({ slug }) => ({
+    url: `${BASE}/baza/${encodeURIComponent(slug)}`,
     lastModified: UPDATED,
     changeFrequency: 'monthly' as const,
     priority: 0.5,
