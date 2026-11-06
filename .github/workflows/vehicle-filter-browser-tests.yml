@@ -31,7 +31,7 @@ jobs:
           cat /tmp/gmt400-app.log
           exit 1
       - run: npx playwright test tests/vehicle-filters.spec.cjs --workers=1 --reporter=line
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         if: failure()
         with:
           name: vehicle-filter-test-results

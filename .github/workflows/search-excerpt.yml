@@ -23,7 +23,7 @@ jobs:
         run: |
           set -o pipefail
           npm run build 2>&1 | tee /tmp/search-excerpt-build.log
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         if: always()
         with:
           name: search-excerpts-${{ github.run_id }}-${{ github.run_attempt }}
