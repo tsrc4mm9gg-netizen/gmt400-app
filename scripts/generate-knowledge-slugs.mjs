@@ -1,136 +1,76 @@
-#!/usr/bin/env node
-/**
- * Generuje trwałe, SEO-przyjazne adresy slugowe bazy wiedzy GMT400.
- *
- * Źródło prawdy: baza Notion.
- * Artefakt: data/knowledge-slugs.json
- *
- * Wymagane zmienne środowiskowe:
- * - NOTION_TOKEN
- * - NOTION_DATABASE_ID
- *
- * Użycie:
- *   node scripts/generate-knowledge-slugs.mjs
- */
+import { readFile, writeFile, rename, unlink } from 'node:fs/promises';
+import { fileURLToPath } from 'node:url';
 
-import { mkdir, writeFile } from "node:fs/promises";
-import path from "node:path";
-
-const NOTION_API = "https://api.notion.com/v1";
-const NOTION_VERSION = "2022-06-28";
-const DATABASE_ID = process.env.NOTION_DATABASE_ID;
-const TOKEN = process.env.NOTION_TOKEN;
-const OUTPUT_PATH = path.resolve("data/knowledge-slugs.json");
-
-if (!TOKEN) {
-  console.error("Brak zmiennej środowiskowej NOTION_TOKEN.");
-  process.exit(1);
-}
-
-if (!DATABASE_ID) {
-  console.error("Brak zmiennej środowiskowej NOTION_DATABASE_ID.");
-  process.exit(1);
-}
-
-const POLISH_MAP = new Map([
-  ["ą", "a"], ["ć", "c"], ["ę", "e"], ["ł", "l"],
-  ["ń", "n"], ["ó", "o"], ["ś", "s"], ["ź", "z"], ["ż", "z"],
-]);
-
-function normalizeTitle(title) {
-  return title
-    .replace(/[ąćęłńóśźż]/g, (character) => POLISH_MAP.get(character))
-    .normalize("NFKD")
-    .toLowerCase()
-    .replace(/[„”’]/g, "")
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/^-+|-+$/g, "")
-    .slice(0, 80)
-    .replace(/-+$/g, "");
-}
-
-function createSlug(title, usedSlugs) {
-  const base = normalizeTitle(title) || "wpis";
-  const count = (usedSlugs.get(base) ?? 0) + 1;
-  usedSlugs.set(base, count);
-  return count === 1 ? base : `${base}-${count}`;
-}
-
-function extractTitle(page) {
-  const titleProperty = Object.values(page.properties ?? {}).find(
-    (property) => property.type === "title",
-  );
-
-  return (titleProperty?.title ?? [])
-    .map((part) => part.plain_text ?? "")
-    .join("")
-    .trim();
-}
-
-async function fetchAllPages() {
-  const pages = [];
-  let cursor;
-
-  do {
-    const response = await fetch(`${NOTION_API}/databases/${DATABASE_ID}/query`, {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${TOKEN}`,
-        "Notion-Version": NOTION_VERSION,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(cursor ? { start_cursor: cursor } : {}),
-    });
-
-    if (!response.ok) {
-      const details = await response.text();
-      throw new Error(`Notion API zwróciło ${response.status}: ${details}`);
-    }
-
-    const payload = await response.json();
-    pages.push(...payload.results);
-    cursor = payload.has_more ? payload.next_cursor : undefined;
-  } while (cursor);
-
-  return pages;
-}
+const output = fileURLToPath(new URL('../data/knowledge-slugs.json', import.meta.url));
+const normalizeId = value => {
+  if (typeof value !== 'string' || !/^(?:[a-f0-9]{32}|[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12})$/i.test(value)) throw new Error('Invalid Notion ID');
+  return value.replaceAll('-', '').toLowerCase();
+};
+const compare = (a, b) => a.id < b.id ? -1 : a.id > b.id ? 1 : 0;
 
 async function main() {
-  const pages = await fetchAllPages();
-  const usedSlugs = new Map();
-  const entries = pages
-    .map((page) => ({
-      id: page.id.replaceAll("-", ""),
-      title: extractTitle(page),
-    }))
-    .sort((a, b) => a.id.localeCompare(b.id))
-    .map(({ id, title }) => ({
-      id,
-      title,
-      slug: createSlug(title, usedSlugs),
-    }));
-
-  const slugs = entries.map((entry) => entry.slug);
-  const duplicates = slugs.length - new Set(slugs).size;
-
-  if (duplicates > 0) {
-    throw new Error(`Wygenerowano ${duplicates} zduplikowanych slugów.`);
+  const existing = JSON.parse(await readFile(output, 'utf8'));
+  if (!Array.isArray(existing)) throw new Error('Registry must be an array');
+  const byId = new Map();
+  const used = new Set();
+  for (const row of existing) {
+    const id = normalizeId(row?.id);
+    const slug = row?.slug;
+    if (typeof slug !== 'string' || !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug) || /^(?:[a-f0-9]{32}|[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12})$/i.test(slug) || byId.has(id) || used.has(slug)) throw new Error('Invalid or duplicate registry row');
+    byId.set(id, { id, slug });
+    used.add(slug);
   }
-
-  const registry = {
-    version: 1,
-    source: `notion:database:${DATABASE_ID}`,
-    count: entries.length,
-    entries,
-  };
-
-  await mkdir(path.dirname(OUTPUT_PATH), { recursive: true });
-  await writeFile(OUTPUT_PATH, `${JSON.stringify(registry, null, 2)}\n`, "utf8");
-
-  console.log(`Wygenerowano ${entries.length} wpisów w ${OUTPUT_PATH}.`);
+  const token = process.env.NOTION_TOKEN;
+  const database = normalizeId(process.env.NOTION_DATABASE_ID);
+  if (!token) throw new Error('Missing NOTION_TOKEN');
+  const pages = new Map();
+  const cursors = new Set();
+  let cursor;
+  do {
+    const response = await fetch(`https://api.notion.com/v1/databases/${database}/query`, {
+      method: 'POST',
+      headers: { Authorization: `Bearer ${token}`, 'Notion-Version': '2022-06-28', 'Content-Type': 'application/json' },
+      body: JSON.stringify({ page_size: 100, ...(cursor ? { start_cursor: cursor } : {}) }),
+      signal: AbortSignal.timeout(30000),
+    });
+    if (!response.ok) throw new Error(`Notion HTTP ${response.status}; registry unchanged`);
+    const payload = await response.json();
+    if (!Array.isArray(payload.results) || typeof payload.has_more !== 'boolean') throw new Error('Invalid Notion response');
+    for (const page of payload.results) {
+      const id = normalizeId(page.id);
+      if (pages.has(id)) throw new Error('Duplicate page across API results');
+      const property = Object.values(page.properties ?? {}).find(p => p.type === 'title');
+      if (!Array.isArray(property?.title)) throw new Error('Missing title property');
+      const title = property.title.map(p => p.plain_text ?? '').join('').trim();
+      if (!title) throw new Error('Empty page title');
+      pages.set(id, { id, title });
+    }
+    cursor = undefined;
+    if (payload.has_more) {
+      if (typeof payload.next_cursor !== 'string' || !payload.next_cursor || cursors.has(payload.next_cursor)) throw new Error('Invalid pagination cursor');
+      cursor = payload.next_cursor;
+      cursors.add(cursor);
+    }
+  } while (cursor);
+  if (!pages.size) throw new Error('Empty source; registry unchanged');
+  for (const { id, title } of [...pages.values()].sort(compare)) {
+    if (byId.has(id)) continue;
+    const base = title.toLowerCase().replaceAll('ł', 'l').normalize('NFKD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 80).replace(/-+$/g, '') || 'wpis';
+    let slug = base;
+    let suffix = 2;
+    while (used.has(slug) || /^(?:[a-f0-9]{32}|[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12})$/i.test(slug)) slug = `${base}-${suffix++}`;
+    byId.set(id, { id, slug });
+    used.add(slug);
+  }
+  const rows = [...byId.values()].sort(compare);
+  const temporary = `${output}.${process.pid}.tmp`;
+  try {
+    await writeFile(temporary, `${JSON.stringify(rows, null, 2)}\n`, { encoding: 'utf8', flag: 'wx' });
+    await rename(temporary, output);
+  } finally {
+    await unlink(temporary).catch(error => { if (error.code !== 'ENOENT') throw error; });
+  }
+  console.log(`Registry: ${rows.length}; fetched: ${pages.size}; added: ${rows.length - existing.length}`);
 }
 
-main().catch((error) => {
-  console.error(error.message);
-  process.exit(1);
-});
+main().catch(error => { console.error(error.message); process.exitCode = 1; });
