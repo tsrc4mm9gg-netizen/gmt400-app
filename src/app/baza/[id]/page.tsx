@@ -86,7 +86,7 @@ const resolveEntry = cache(async (param: string) => {
 });
 
 function relatedSchematics(title: string, forced?: string[]): { id: string; title: string }[] {
-  if (forced) return forced.map(id => SCHEMATICS.find(s => s.id === id)).filter((s): s is NonNullable<typeof s> => Boolean(s)).map(s => ({ id, title: s.title }));
+  if (forced) return forced.map(id => SCHEMATICS.find(s => s.id === id)).filter((s): s is NonNullable<typeof s> => Boolean(s)).map(s => ({ id: s.id, title: s.title }));
   const value = title.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/ł/g, 'l');
   const map: [string[], string][] = [
     [['chlodz', 'termostat', 'pompa wody', 'przegrz', 'plyn chlodn', 'chlodnic'], 'vortec-cooling'],
