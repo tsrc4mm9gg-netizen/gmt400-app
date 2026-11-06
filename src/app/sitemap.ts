@@ -45,17 +45,21 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.6,
   }))
 
-  // Kanoniczne, trwałe adresy wpisów. Stare adresy UUID pozostają dostępne
-  // jako 301, więc dotychczasowe linki i indeksacja nie zostają utracone.
+  // Kanoniczne, trwałe adresy wpisów.
   const knowledgeSlugs = await getKnowledgeSlugs()
   const entries = await getListEntries()
+  const normalizeId = (id: string) => id.replace(/-/g, '').toLowerCase()
+  // getListEntries zwraca kompletną listę bez zastąpionych wpisów albo null.
+  // Przy awarii Notion zachowujemy rejestr zamiast usuwać wszystkie adresy.
+  const activeIds = entries === null ? null : new Set(entries.map(entry => normalizeId(entry.id)))
+  const activeSlugs = activeIds === null ? knowledgeSlugs : knowledgeSlugs.filter(({ id }) => activeIds.has(normalizeId(id)))
   const editedById = new Map<string, string>()
   for (const entry of entries ?? []) {
-    if (entry.lastEditedTime) editedById.set(entry.id.replace(/-/g, '').toLowerCase(), entry.lastEditedTime)
+    if (entry.lastEditedTime) editedById.set(normalizeId(entry.id), entry.lastEditedTime)
   }
-  const knowledgeRoutes: MetadataRoute.Sitemap = knowledgeSlugs.map(({ id, slug }) => ({
+  const knowledgeRoutes: MetadataRoute.Sitemap = activeSlugs.map(({ id, slug }) => ({
     url: `${BASE}/baza/${encodeURIComponent(slug)}`,
-    lastModified: editedById.get(id.replace(/-/g, '').toLowerCase()) ?? UPDATED,
+    lastModified: editedById.get(normalizeId(id)) ?? UPDATED,
     changeFrequency: 'monthly' as const,
     priority: 0.5,
   }))
