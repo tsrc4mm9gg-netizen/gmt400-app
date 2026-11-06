@@ -1,0 +1,48 @@
+name: Verify related materials on iPhone
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'src/app/RelatedMaterialSuggestions.tsx'
+      - 'src/app/RelatedMaterialSuggestionsClient.tsx'
+      - 'src/app/RelatedMaterials.tsx'
+      - 'src/lib/related-materials.ts'
+      - 'src/lib/vehicle-profile.ts'
+      - 'src/lib/vehicle-profile-store.ts'
+      - 'tests/e2e/related-materials-ios.mjs'
+      - '.github/workflows/related-materials-ios-e2e.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  iphone-e2e:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+
+      - name: Install Playwright without changing project dependencies
+        run: npm install --no-save --no-package-lock playwright
+
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Run iPhone E2E test
+        env:
+          E2E_BASE_URL: https://www.gmt400.pl
+        run: node tests/e2e/related-materials-ios.mjs
+
+      - name: Upload screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: iphone-related-materials-screenshots
+          path: artifacts/
+          if-no-files-found: warn
