@@ -44,7 +44,7 @@ jobs:
         run: npx playwright test --config=playwright.a11y-package.config.cjs
       - name: Save browser diagnostics
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: a11y-package-${{ github.run_id }}-${{ github.run_attempt }}
           path: |

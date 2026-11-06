@@ -76,7 +76,7 @@ jobs:
           fs.writeFileSync('/tmp/a11y-existing-quality.json', JSON.stringify(report, null, 2));
           fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, '## Existing quality checks\n\n```json\n' + JSON.stringify(report, null, 2) + '\n```\n');
           NODE
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         if: always()
         with:
           name: a11y-existing-quality-${{ github.run_id }}-${{ github.run_attempt }}

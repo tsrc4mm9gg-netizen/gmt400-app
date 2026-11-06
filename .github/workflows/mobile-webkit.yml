@@ -118,7 +118,7 @@ jobs:
           fs.writeFileSync('.diagnostics/mobile-webkit-report.json',JSON.stringify({codeSha:process.env.GITHUB_SHA,runId:process.env.GITHUB_RUN_ID,checkedAt:new Date().toISOString(),scope:'Linux WebKit with mobile viewport and touch; local production build, tools API tests and mocked Notion fixtures. Not physical iPhone, production Safari or live provider certification.',passed,stages,stats,coverage,parseError,runnerErrors:raw.errors || [],tests,ux:{passed:uxPassed,stats:ux.stats || {},parseError:uxParseError,runnerErrors:ux.errors || [],tests:uxTests}},null,2)+'\n');
           fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, 'Mobile WebKit verification: ' + (passed ? 'PASS' : 'FAIL') + '\nReport is attached as a workflow artifact; it is not committed to the repository.');
           NODE
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         if: always()
         with:
           name: mobile-webkit-${{ github.run_id }}-${{ github.run_attempt }}
