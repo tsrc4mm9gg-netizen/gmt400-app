@@ -13,6 +13,8 @@ export type NotionEntry = {
   Nazwa: string; Typ: string; Model: string; Modele: string[]; Opis: string; Objawy: string; Rozwiązanie: string; Lata: string; id: string;
   /** Opcjonalna miniatura kafelka z kolumny Notion „Obraz” (lokalna ścieżka /…); brak = ikona kategorii. */
   Obraz?: string;
+  /** Data ostatniej edycji strony Notion w formacie ISO 8601; używana przez sitemap i dane strukturalne. */
+  lastEditedTime?: string;
   applicability: { brand: string[]; model: string[]; years: string[]; engine: string[]; drive: string[]; transmission: string[] };
 };
 
@@ -76,6 +78,7 @@ export async function fetchAllEntries(token: string, revalidate = 300): Promise<
       Lata: getRichText(props.Lata),
       id: page.id,
       ...(getImageField(props.Obraz || props.Miniatura) ? { Obraz: getImageField(props.Obraz || props.Miniatura) } : {}),
+      ...(typeof page.last_edited_time === 'string' && page.last_edited_time ? { lastEditedTime: page.last_edited_time } : {}),
       applicability: { brand: getValues(props.Marka), model: getValues(props.Model), years: getValues(props.Lata), engine: getValues(props.Silnik), drive: getValues(props['Napęd']), transmission: getValues(props.Skrzynia) },
     };
   }));
