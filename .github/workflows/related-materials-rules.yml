@@ -5,7 +5,13 @@ on:
     branches: [main]
     paths:
       - 'src/lib/related-materials.ts'
+      - 'src/lib/knowledge-slug-map.ts'
+      - 'data/knowledge-slugs.json'
+      - 'src/app/RelatedMaterialSuggestions.tsx'
+      - 'src/app/RelatedMaterialSuggestionsClient.tsx'
+      - 'src/app/RelatedMaterials.tsx'
       - 'tests/related-materials-rules.test.cjs'
+      - 'tests/related-materials-component.test.cjs'
       - '.github/workflows/related-materials-rules.yml'
       - 'package.json'
       - 'package-lock.json'
@@ -21,5 +27,5 @@ jobs:
         with:
           node-version: '24'
       - run: npm ci
-      - name: Test related material rules
-        run: node --test tests/related-materials-rules.test.cjs
+      - name: Test related material rules and server-rendered baseline
+        run: node --test tests/related-materials-rules.test.cjs tests/related-materials-component.test.cjs
