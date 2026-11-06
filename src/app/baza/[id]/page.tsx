@@ -6,6 +6,7 @@ import { NotionContent, readNotionBlocks } from './NotionContent';
 import MaterialContents from '../../MaterialContents';
 import MaterialText from '../../MaterialText';
 import RelatedMaterialSuggestions from '../../RelatedMaterialSuggestions';
+import SavedMaterialButton from '../../SavedMaterialButton';
 import ModelThumb from '../../ModelThumb';
 import * as Sentry from '@sentry/nextjs';
 import { bodyForEntry } from '../../../lib/model-images';
@@ -85,7 +86,7 @@ const resolveEntry = cache(async (param: string) => {
 });
 
 function relatedSchematics(title: string, forced?: string[]): { id: string; title: string }[] {
-  if (forced) return forced.map(id => SCHEMATICS.find(s => s.id === id)).filter((s): s is NonNullable<typeof s> => Boolean(s)).map(s => ({ id: s.id, title: s.title }));
+  if (forced) return forced.map(id => SCHEMATICS.find(s => s.id === id)).filter((s): s is NonNullable<typeof s> => Boolean(s)).map(s => ({ id, title: s.title }));
   const value = title.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/ł/g, 'l');
   const map: [string[], string][] = [
     [['chlodz', 'termostat', 'pompa wody', 'przegrz', 'plyn chlodn', 'chlodnic'], 'vortec-cooling'],
@@ -167,7 +168,7 @@ export default async function KnowledgeEntry({ params }: Props) {
     <Breadcrumbs items={breadcrumbs} />
     <div className="mt-1 flex flex-wrap items-center gap-x-3 text-sm">
       <BackLink fallback="/szukaj" label="← Wróć" className="inline-flex min-h-11 items-center text-silver-400 underline" />
-      {(entry.Typ === 'Porada' || entry.Typ === 'Usterka') && <span className="ml-auto"><SaveOfflineButton title={entry.Nazwa} /></span>}
+      {(entry.Typ === 'Porada' || entry.Typ === 'Usterka') && <span className="ml-auto flex items-center gap-2"><SavedMaterialButton id={entry.id} title={entry.Nazwa} href={canonicalUrl} type={recentTypeLabel(entry.Typ)} /><SaveOfflineButton title={entry.Nazwa} /></span>}
     </div>
     <RecentTracker id={entry.id} title={entry.Nazwa} href={canonicalUrl} type={recentTypeLabel(entry.Typ)} />
     <article className="mt-6 min-w-0 space-y-6 [overflow-wrap:anywhere]">
@@ -192,7 +193,7 @@ export default async function KnowledgeEntry({ params }: Props) {
       {blocks.length > 0 && <section aria-label="Zawartość strony Notion"><h2 className="mb-3 text-xl">Treść materiału i ilustracje</h2><NotionContent blocks={blocks} /></section>}
       {drawings.length > 0 && <section aria-label="Rysunki do tego tematu" className="space-y-3"><h2 className="text-xl">Rysunek do tego tematu</h2>{drawings.map(f => <EntryFigure key={f.src} figure={f} />)}</section>}
       {topicPhoto && <section aria-label="Zdjęcie poglądowe tematu"><EntryFigure figure={topicPhoto} /></section>}
-      {(() => { const sch = relatedSchematics(entry.Nazwa, media?.schematics); return sch.length > 0 && <aside aria-label="Powiązane schematy" className="rounded-xl border border-silver-600/40 bg-neutral-950 p-4"><h2 className="text-lg font-semibold text-white">Schemat do tego tematu</h2><ul className="mt-2 space-y-2">{sch.map(s => <li key={s.id}><a href={`/schematy#${s.id}`} className="flex min-h-11 items-center justify-between gap-3 rounded-lg border border-white/10 px-3 py-2 text-neutral-100 hover:border-silver-600">{s.title}<span aria-hidden="true" className="text-silver-400">→</span></a></li>)}</ul><p className="mt-2 text-xs text-neutral-400">Schematy mają podany model i lata — sprawdź w swoim aucie / manualu.</p></aside>; })()}
+      {(() => { const sch = relatedSchematics(entry.Nazwa, media?.schematics); return sch.length > 0 && <aside aria-label="Powiązane schematy" className="rounded-xl border border-silver-600/40 bg-neutral-950 p-4"><h2 className="text-lg font-semibold text-white">Schemat do tego tematu</h2><ul className="mt-2 space-y-2">{sch.map(s => <li key={s.id}><a href={`/schematy#${s.id}`} className="flex min-h-11 items-center justify-between gap-3 rounded-lg border border-white/10 px-3 py-2 text-neutral-100 hover:border-silver-600">{s.title}<span aria-hidden="true" className="text-silver-400">→</span></a></li>)} </ul><p className="mt-2 text-xs text-neutral-400">Schematy mają podany model i lata — sprawdź w swoim aucie / manualu.</p></aside>; })()}
       <ContextualAffiliate title={entry.Nazwa} type={entry.Typ} />
       {!contentError && !entry.Opis && !entry.Objawy && !entry.Rozwiązanie && !blocks.length && <p>Ten wpis nie zawiera jeszcze szczegółowej treści.</p>}
     </article>
