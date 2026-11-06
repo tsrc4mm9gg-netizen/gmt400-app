@@ -1,7 +1,7 @@
 import registry from '../../data/knowledge-slugs.json';
 import type { NotionEntry } from './notion-entries';
 
-const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+const UUID_RE = /^(?:[0-9a-f]{32}|[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})$/i;
 
 export function isNotionId(value: string): boolean {
   return UUID_RE.test(value);
