@@ -1,5 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import { readFileSync } from 'node:fs';
+import { createRequire } from 'node:module';
+import ts from 'typescript';
 import { buildKnowledgeIndex, searchKnowledge, getKnowledgeEntries } from '../src/lib/knowledge-index.mjs';
 import { matchesYearRules } from '../src/lib/year-range.mjs';
 
@@ -67,4 +70,29 @@ test('OBD entries use canonical detail routes', () => {
   assert.ok(p0300);
   assert.match(p0300.Nazwa, /^P0300 — /);
   assert.match(p0300.Rozwiązanie, /liczniki misfire/);
+});
+
+const slugMapUrl = new URL('../src/lib/knowledge-slug-map.ts', import.meta.url);
+const slugExports = {};
+const slugCode = ts.transpileModule(readFileSync(slugMapUrl, 'utf8'), {
+  compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2022, esModuleInterop: true }
+}).outputText;
+new Function('exports', 'require', slugCode)(slugExports, createRequire(slugMapUrl));
+const registry = JSON.parse(readFileSync(new URL('../data/knowledge-slugs.json', import.meta.url), 'utf8'));
+
+test('Client slug lookup resolves every registry ID in compact, UUID and uppercase forms', () => {
+  assert.ok(registry.length > 0);
+  for (const entry of registry) {
+    const compact = entry.id.replace(/-/g, '').toLowerCase();
+    assert.match(compact, /^[a-f0-9]{32}$/);
+    const uuid = [compact.slice(0, 8), compact.slice(8, 12), compact.slice(12, 16), compact.slice(16, 20), compact.slice(20)].join('-');
+    for (const id of [compact, uuid, compact.toUpperCase(), uuid.toUpperCase()]) {
+      assert.equal(slugExports.knowledgeSlugFor(id), entry.slug, id);
+    }
+  }
+});
+
+test('Client slug lookup preserves null fallback for unknown IDs', () => {
+  assert.equal(slugExports.knowledgeSlugFor('not-a-notion-id'), null);
+  assert.equal(slugExports.knowledgeSlugFor(''), null);
 });
