@@ -12,7 +12,12 @@ const nextConfig: NextConfig = {
     NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA: process.env.VERCEL_GIT_COMMIT_SHA || '',
   },
   async redirects() {
-    return [{ source: '/tips', destination: '/porady-wlasciciela', permanent: true }];
+    return [
+      { source: '/tips', destination: '/porady-wlasciciela', permanent: true },
+      { source: '/baza/problemy-z-rozrusznikiem-gmt400', destination: '/baza/402d7bf1-c139-81e8-8ef4-ce93ecc0417a', permanent: true },
+      { source: '/baza/3fad7bf1c1398100b7e0cd224833baf9', destination: '/baza/402d7bf1-c139-81e8-8ef4-ce93ecc0417a', permanent: true },
+      { source: '/baza/3fad7bf1-c139-8100-b7e0-cd224833baf9', destination: '/baza/402d7bf1-c139-81e8-8ef4-ce93ecc0417a', permanent: true },
+    ];
   },
   async headers() {
     return [
