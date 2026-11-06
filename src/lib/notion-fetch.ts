@@ -14,10 +14,21 @@ export class NotionUnavailableError extends Error {
 
 type NotionInit = Omit<RequestInit, 'headers' | 'signal'> & { token: string; revalidate?: number; attempts?: number; timeoutMs?: number };
 
-/** Opóźnienie przed kolejną próbą: Retry-After (sekundy) albo wykładniczy backoff z losowym rozrzutem. */
-export function retryDelay(attempt: number, retryAfter: string | null): number {
-  const seconds = Number(retryAfter);
-  if (Number.isFinite(seconds) && seconds > 0) return Math.min(seconds * 1000, 5000);
+/** Retry-After: sekundy albo data HTTP; bez skracania zalecenia serwera. */
+export function retryDelay(attempt: number, retryAfter: string | null, now = Date.now()): number {
+  const value = retryAfter?.trim() ?? '';
+  let delay: number | null = null;
+  if (/^\d+$/.test(value)) delay = Number(value) * 1000;
+  else if (/^[A-Za-z]{3},/.test(value)) {
+    const date = Date.parse(value);
+    if (Number.isFinite(date)) delay = Math.max(0, date - now);
+  }
+  if (delay !== null) {
+    if (!Number.isFinite(delay) || delay > 2_147_483_647) {
+      throw new NotionUnavailableError('Retry-After przekracza bezpieczny zakres timera; nie ponawiamy przed zalecanym terminem.');
+    }
+    return delay;
+  }
   return Math.min(400 * 2 ** attempt, 3000) + Math.floor(Math.random() * 200);
 }
 
@@ -33,8 +44,11 @@ export async function notionFetch(url: string, { token, revalidate = 300, attemp
         signal: AbortSignal.timeout(timeoutMs),
       });
       if (!RETRY_STATUS.has(response.status) || attempt === attempts - 1) return response;
-      await sleep(retryDelay(attempt, response.headers.get('retry-after')));
+      const delay = retryDelay(attempt, response.headers.get('retry-after'));
+      await response.body?.cancel();
+      await sleep(delay);
     } catch (error) {
+      if (error instanceof NotionUnavailableError) throw error;
       lastError = error;
       if (attempt === attempts - 1) break;
       await sleep(retryDelay(attempt, null));
