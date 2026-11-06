@@ -21,6 +21,7 @@ const links = [
   { href: '/kody-obd', label: 'Kody OBD' },
   { href: '/schematy', label: 'Schematy' },
   { href: '/moj-samochod', label: 'Mój samochód' },
+  { href: '/moje-kolekcje', label: 'Kolekcje' },
 ];
 
 function isActive(pathname: string, href: string) {
