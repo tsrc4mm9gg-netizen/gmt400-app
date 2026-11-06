@@ -14,9 +14,9 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       { source: '/tips', destination: '/porady-wlasciciela', permanent: true },
-      { source: '/baza/problemy-z-rozrusznikiem-gmt400', destination: '/baza/402d7bf1-c139-81e8-8ef4-ce93ecc0417a', permanent: true },
-      { source: '/baza/3fad7bf1c1398100b7e0cd224833baf9', destination: '/baza/402d7bf1-c139-81e8-8ef4-ce93ecc0417a', permanent: true },
-      { source: '/baza/3fad7bf1-c139-8100-b7e0-cd224833baf9', destination: '/baza/402d7bf1-c139-81e8-8ef4-ce93ecc0417a', permanent: true },
+      { source: '/baza/problemy-z-rozrusznikiem-gmt400', destination: '/baza/rozrusznik-klika-i-nie-kreci-kreci-wolno-albo-nie-wylacza-sie-diagnostyka-spadko', permanent: true },
+      { source: '/baza/3fad7bf1c1398100b7e0cd224833baf9', destination: '/baza/rozrusznik-klika-i-nie-kreci-kreci-wolno-albo-nie-wylacza-sie-diagnostyka-spadko', permanent: true },
+      { source: '/baza/3fad7bf1-c139-8100-b7e0-cd224833baf9', destination: '/baza/rozrusznik-klika-i-nie-kreci-kreci-wolno-albo-nie-wylacza-sie-diagnostyka-spadko', permanent: true },
     ];
   },
   async headers() {
