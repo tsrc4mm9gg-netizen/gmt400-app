@@ -1,11 +1,6 @@
 name: Generate knowledge slug registry
 
 on:
-  push:
-    branches:
-      - seo/baza-slug-urls
-    paths-ignore:
-      - "data/knowledge-slugs.json"
   workflow_dispatch:
 
 permissions:
