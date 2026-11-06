@@ -1,8 +1,21 @@
+import type { Metadata } from 'next';
 import Link from 'next/link';
 import type { CSSProperties } from 'react';
 import FAQ from '../ui/FAQ';
 import AffiliateBox from '../ui/AffiliateBox';
 import AccordionSection from '../ui/AccordionSection';
+
+const title = 'Narzędzia GMT400';
+const description = 'Dekoder kodów RPO, wyszukiwarka kodów błędów OBD, kalkulator opon, historia VIN i informacje o częściach do GMT400.';
+const url = 'https://www.gmt400.pl/narzedzia';
+
+export const metadata: Metadata = {
+  title,
+  description,
+  alternates: { canonical: url },
+  openGraph: { type: 'website', locale: 'pl_PL', siteName: 'GMT400', title, description, url },
+  twitter: { card: 'summary', title, description },
+};
 
 const AFFILIATE_TAG = 'gmt400pl-20';
 
