@@ -1,16 +1,22 @@
 name: Sync knowledge slug registry
 on:
   workflow_dispatch:
+  push:
+    branches: [fix/knowledge-slug-completeness]
+    paths:
+      - '.github/workflows/sync-knowledge-slugs.yml'
+      - 'scripts/sync-knowledge-slugs.mjs'
+      - 'src/lib/slug-registry.mjs'
   schedule:
     - cron: '17 3 * * *'
 permissions:
   contents: write
 concurrency:
-  group: sync-knowledge-slugs
+  group: sync-knowledge-slugs-${{ github.ref }}
   cancel-in-progress: false
 jobs:
   sync:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
@@ -20,6 +26,21 @@ jobs:
       - run: node scripts/sync-knowledge-slugs.mjs
         env:
           NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+      - name: Verify existing slugs remain unchanged
+        run: |
+          node --input-type=module <<'NODE'
+          import assert from 'node:assert/strict';
+          import { readFileSync } from 'node:fs';
+          import { execFileSync } from 'node:child_process';
+          import { extendSlugRegistry, normalizeId } from './src/lib/slug-registry.mjs';
+          const before = JSON.parse(execFileSync('git', ['show', 'HEAD:data/knowledge-slugs.json'], { encoding: 'utf8' }));
+          const after = JSON.parse(readFileSync('data/knowledge-slugs.json', 'utf8'));
+          extendSlugRegistry(after, []);
+          const byId = new Map(after.map(row => [normalizeId(row.id), row.slug]));
+          for (const row of before) assert.equal(byId.get(normalizeId(row.id)), row.slug, `Changed or missing slug: ${row.id}`);
+          assert.ok(after.length >= before.length, 'Registry must not shrink');
+          console.log(JSON.stringify({ previous: before.length, current: after.length, added: after.length - before.length, existingSlugsPreserved: true }));
+          NODE
       - name: Commit registry changes
         run: |
           if [[ -n "$(git status --porcelain data/knowledge-slugs.json)" ]]; then
