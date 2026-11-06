@@ -4,6 +4,7 @@ import { DIAG_GUIDES } from '../lib/diagnosis-guides';
 import type { MetadataRoute } from 'next'
 import { OBD_CODES } from '@/lib/obd-codes'
 import { getKnowledgeSlugs } from '@/lib/knowledge-slugs'
+import { getListEntries } from '@/lib/notion-entries'
 
 const BASE = 'https://www.gmt400.pl'
 const UPDATED = new Date()
@@ -47,9 +48,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // Kanoniczne, trwałe adresy wpisów. Stare adresy UUID pozostają dostępne
   // jako 301, więc dotychczasowe linki i indeksacja nie zostają utracone.
   const knowledgeSlugs = await getKnowledgeSlugs()
-  const knowledgeRoutes: MetadataRoute.Sitemap = knowledgeSlugs.map(({ slug }) => ({
+  const entries = await getListEntries()
+  const editedById = new Map<string, string>()
+  for (const entry of entries ?? []) {
+    if (entry.lastEditedTime) editedById.set(entry.id.replace(/-/g, '').toLowerCase(), entry.lastEditedTime)
+  }
+  const knowledgeRoutes: MetadataRoute.Sitemap = knowledgeSlugs.map(({ id, slug }) => ({
     url: `${BASE}/baza/${encodeURIComponent(slug)}`,
-    lastModified: UPDATED,
+    lastModified: editedById.get(id.replace(/-/g, '').toLowerCase()) ?? UPDATED,
     changeFrequency: 'monthly' as const,
     priority: 0.5,
   }))
