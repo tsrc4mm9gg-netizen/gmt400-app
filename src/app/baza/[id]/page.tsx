@@ -24,6 +24,7 @@ import DiyBrief from './DiyBrief';
 import RecentTracker from '../../RecentTracker';
 import { recentTypeLabel } from '../../../lib/recent-viewed';
 import ContextualAffiliate from '../../ui/ContextualAffiliate';
+import StructuredData from './StructuredData';
 import { getKnowledgeIdBySlug, getKnowledgeSlug, isNotionId } from '../../../lib/knowledge-slugs';
 
 const SECTION_OF: Record<string, Crumb> = {
@@ -69,11 +70,6 @@ const readEntry = cache(async (id: string) => {
   };
 });
 
-/**
- * Rozpoznaje zarówno historyczny identyfikator Notion, jak i trwały slug.
- * Dla identyfikatora zwraca również docelowy slug — pozwala to wykonać 301
- * na kanoniczny adres bez łamania dotychczasowych linków.
- */
 const resolveEntry = cache(async (param: string) => {
   if (isNotionId(param)) {
     const entry = await readEntry(param);
@@ -145,12 +141,16 @@ export default async function KnowledgeEntry({ params }: Props) {
   if (!entry) notFound();
   if (entry.unavailable) return <NotionUnavailable />;
 
-  // Historyczny adres UUID zawsze prowadzi 301 do trwałego adresu slugowego.
   if (isNotionId((await params).id) && slug && slug !== (await params).id) {
     permanentRedirect(`/baza/${encodeURIComponent(slug)}`);
   }
 
   const canonicalSlug = slug || entry.id;
+  const canonicalUrl = `/baza/${encodeURIComponent(canonicalSlug)}`;
+  const breadcrumbs: Crumb[] = [
+    ...(SECTION_OF[entry.Typ] ? [SECTION_OF[entry.Typ]] : [{ href: '/baza', label: 'Baza wiedzy' }]),
+    { label: entry.Nazwa },
+  ];
   let blocks: any[] = [];
   let contentError = false;
   try { blocks = await readNotionBlocks(entry.id, process.env.NOTION_TOKEN || ''); } catch { contentError = true; }
@@ -163,12 +163,13 @@ export default async function KnowledgeEntry({ params }: Props) {
   const code = rawCode && findObdCode(rawCode) ? rawCode : null;
   const body = entry.Typ === 'Kod błędu' ? null : bodyForEntry(entry);
   return <div className="mx-auto min-h-screen max-w-4xl bg-black px-5 py-10 pb-28 text-white">
-    <Breadcrumbs items={[...(SECTION_OF[entry.Typ] ? [SECTION_OF[entry.Typ]] : [{ href: '/baza', label: 'Baza wiedzy' }]), { label: entry.Nazwa }]} />
+    <StructuredData title={entry.Nazwa} description={materialLead || entry.Nazwa} url={canonicalUrl} edited={entry.edited} breadcrumbs={breadcrumbs} />
+    <Breadcrumbs items={breadcrumbs} />
     <div className="mt-1 flex flex-wrap items-center gap-x-3 text-sm">
       <BackLink fallback="/szukaj" label="← Wróć" className="inline-flex min-h-11 items-center text-silver-400 underline" />
       {(entry.Typ === 'Porada' || entry.Typ === 'Usterka') && <span className="ml-auto"><SaveOfflineButton title={entry.Nazwa} /></span>}
     </div>
-    <RecentTracker id={entry.id} title={entry.Nazwa} href={`/baza/${encodeURIComponent(canonicalSlug)}`} type={recentTypeLabel(entry.Typ)} />
+    <RecentTracker id={entry.id} title={entry.Nazwa} href={canonicalUrl} type={recentTypeLabel(entry.Typ)} />
     <article className="mt-6 min-w-0 space-y-6 [overflow-wrap:anywhere]">
       <div className="flex flex-wrap gap-2">
         {entry.Typ && <span className="rounded-full border border-silver-600/40 bg-silver-600/10 px-3 py-1 text-xs font-medium text-silver-300">Typ: {entry.Typ}</span>}
