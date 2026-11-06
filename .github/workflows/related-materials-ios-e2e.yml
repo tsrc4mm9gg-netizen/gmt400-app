@@ -15,7 +15,7 @@ on:
       - '.github/workflows/related-materials-ios-e2e.yml'
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   iphone-e2e:
@@ -38,6 +38,22 @@ jobs:
         env:
           E2E_BASE_URL: https://www.gmt400.pl
         run: node tests/e2e/related-materials-ios.mjs
+
+      - name: Publish screenshots as public release assets
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release view related-materials-iphone --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1 || \
+            gh release create related-materials-iphone \
+              --repo "$GITHUB_REPOSITORY" \
+              --title "iPhone screenshots — related materials" \
+              --notes "Automatyczne zrzuty z testu SSR powiązanych materiałów i personalizacji profilu auta."
+          gh release upload related-materials-iphone \
+            artifacts/iphone-no-profile.png \
+            artifacts/iphone-with-profile.png \
+            --repo "$GITHUB_REPOSITORY" \
+            --clobber
 
       - name: Upload screenshots
         if: always()
