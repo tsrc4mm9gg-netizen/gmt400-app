@@ -8,7 +8,7 @@ permissions:
   contents: read
 jobs:
   browser-capture:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 20
     env:
       NEXT_PUBLIC_SENTRY_DSN: http://ci@127.0.0.1:4319/1
@@ -22,7 +22,9 @@ jobs:
           node-version: '24'
       - run: npm ci --ignore-scripts
       - run: npm install --no-save --package-lock=false --ignore-scripts @playwright/test@1.61.0
-      - run: npx playwright install --with-deps chromium webkit
+      - name: Install browser dependencies and engines
+        timeout-minutes: 8
+        run: npx playwright install --with-deps chromium webkit
       - name: Generate CI-only error fixture
         run: node scripts/test-sentry-browser.cjs prepare
       - run: npm run build
