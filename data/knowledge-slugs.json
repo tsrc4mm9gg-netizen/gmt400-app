@@ -1,1 +1,3078 @@
-[{"id":"3fad7bf1c139810089aee9a8062f84a1","slug":"problemy-z-ukladem-paliwowym-tbi-szczegoly"},{"id":"3fad7bf1c1398100b7e0cd224833baf9","slug":"problemy-z-rozrusznikiem-gmt400"},{"id":"3fad7bf1c1398100b7f8dd5e2a1719eb","slug":"kod-p0102-maf-rozwiazanie-tipy"},{"id":"3fad7bf1c1398100b816c94af4a883e2","slug":"problemy-z-ukladem-zaplonowym-cewki-vortec"},{"id":"3fad7bf1c13981019ae2f4160de4368c","slug":"kod-p0507-wysokie-obroty-rozwiazanie-tipy"},{"id":"3fad7bf1c1398101b178ce90098d63a8","slug":"kod-p0340-cmp-rozwiazanie-tipy"},{"id":"3fad7bf1c1398101bb7ed7290e634b66","slug":"problemy-z-ukladem-hamulcowym-tarcze-tipy"},{"id":"3fad7bf1c1398102984dc398001ed7b1","slug":"wymiana-oleju-silnikowego-szczegoly-2"},{"id":"3fad7bf1c1398102aa8ee58c0084c5c5","slug":"wymiana-plynu-hamulcowego-i-odpowietrzanie-diy"},{"id":"3fad7bf1c1398103947ae4436521e204","slug":"wymiana-oleju-w-mostach-przednich-szczegoly"},{"id":"3fad7bf1c1398103a995f87258ce71d0","slug":"kod-p0121-czujnik-tps-zakres"},{"id":"3fad7bf1c139810494b4fc135fa41b10","slug":"kod-p0301p0308-wypadanie-zaplonu-na-cylindrze"},{"id":"3fad7bf1c139810581d6e95b027fac7b","slug":"problemy-z-ukladem-napedowym-waly"},{"id":"3fad7bf1c13981058c52f81a29daaa00","slug":"kod-p1860-tcc-pwm-szczegoly-2"},{"id":"3fad7bf1c13981059806ecdac1b3192a","slug":"kod-p0442-mala-nieszczelnosc-evap-rozwiazanie-tipy-2"},{"id":"3fad7bf1c139810699d8f30bbbe3f703","slug":"kod-p0753-cewka-1-2-rozwiazanie-tipy-2"},{"id":"3fad7bf1c1398106aa63f4339fe41780","slug":"kod-p0505-iac-rozwiazanie-tipy-2"},{"id":"3fad7bf1c139810781fdf950456c1d6c","slug":"p0300-misfire-detected-losowe-cylindry"},{"id":"3fad7bf1c13981078cb3d7a5e2c0c07c","slug":"kod-p0135-grzalka-sondy-rozwiazanie-tipy-2"},{"id":"3fad7bf1c13981079c2efe4d2ab0bd33","slug":"kod-p1810-prndl-szczegoly-2"},{"id":"3fad7bf1c1398107bd8ceb1f1b10df00","slug":"wymiana-koncowek-drazkow-kierowniczych-diy"},{"id":"3fad7bf1c13981089ac7e55396e637a0","slug":"kod-p1626-komunikacja-skrzyni-rozwiazanie-tipy"},{"id":"3fad7bf1c1398108a12cdfce68bb804e","slug":"kod-p0500-czujnik-predkosci-pojazdu-vss"},{"id":"3fad7bf1c1398108a7a0e6efc763bd52","slug":"problemy-z-ukladem-zawieszenia-amortyzatory"},{"id":"3fad7bf1c1398108bb5cfd8fc76e6947","slug":"kod-p0440-uklad-evap-ogolny"},{"id":"3fad7bf1c13981099b7fcd5cfcd54907","slug":"wymiana-oleju-w-mostach-4x4-szczegoly-2"},{"id":"3fad7bf1c139810ab77fe944482fa04e","slug":"kod-p0303-cylinder-3-rozwiazanie-tipy"},{"id":"3fad7bf1c139810b8ca3cb2a6ee2e19f","slug":"czyszczenie-przepustnicy-vortec-tipy"},{"id":"3fad7bf1c139810bab66ed7fbf19c416","slug":"wymiana-filtrow-powietrza-szczegoly"},{"id":"3fad7bf1c139810cafc3f0bb2166d712","slug":"jak-wymienic-sworznie-wahaczy-przednich"},{"id":"3fad7bf1c139810da89aec3474636505","slug":"kod-p0756-cewka-2-3-wydajnosc"},{"id":"3fad7bf1c139810eb86dc87470e78d8b","slug":"wymiana-oleju-w-reduktorze-skrzynia-rozdzielcza"},{"id":"3fad7bf1c139810f8f9ae6eb534d29e9","slug":"kod-p0305-cylinder-5-rozwiazanie-tipy"},{"id":"3fad7bf1c139810f9cb1c9080631b71b","slug":"kod-p0128-termostat-szczegoly-2"},{"id":"3fad7bf1c139810fb6c4d1f40b3ea2ca","slug":"wymiana-oleju-w-skrzyni-4l80e-szczegoly"},{"id":"3fad7bf1c1398110943bdc188bb7b989","slug":"kod-p0507-wysokie-obroty-szczegoly"},{"id":"3fad7bf1c13981109631e021ee0edf7f","slug":"problemy-z-ukladem-abs-czujniki"},{"id":"3fad7bf1c13981118b75c0b417a71291","slug":"problemy-z-ukladem-napedowym-4x4"},{"id":"3fad7bf1c13981119ddeec540793d27f","slug":"chevrolet-suburban-1500-4-drzwi"},{"id":"3fad7bf1c1398111a713eea670648b8c","slug":"problemy-z-ukladem-chlodzenia-wentylator"},{"id":"3fad7bf1c1398111ad2ff45a4917383b","slug":"problemy-z-ukladem-chlodzenia-pompa-wody"},{"id":"3fad7bf1c1398111be4bc4769c0c675d","slug":"kod-p0730-przelozenie-skrzyni-szczegoly"},{"id":"3fad7bf1c1398112841bc20777f83202","slug":"jak-wymienic-alternator-w-gmt400-diy"},{"id":"3fad7bf1c1398112a026fff41af91702","slug":"kod-p0463-poziom-paliwa-szczegoly"},{"id":"3fad7bf1c13981138178ff23af30df67","slug":"specyfikacje-silnikow-gmt400-tabela"},{"id":"3fad7bf1c1398113b5e4d63d65251e2c","slug":"kod-p0102-czujnik-przeplywu-powietrza-maf"},{"id":"3fad7bf1c13981159eedd2c014be9f11","slug":"4l60e-cewki-solenoidy-i-kody"},{"id":"3fad7bf1c1398116b638fee0b574b95f","slug":"wymiana-plynu-wspomagania-kierownicy-pelna-instrukcja"},{"id":"3fad7bf1c1398117abafdbab39a5c95a","slug":"kod-p1441-uklad-evap-przeplyw"},{"id":"3fad7bf1c1398118b939db19302e4fad","slug":"kod-p0174-uboga-mieszanka-bank-2-rozwiazanie-tipy"},{"id":"3fad7bf1c1398119a1c1e4c7afa2f7cd","slug":"wymiana-oleju-w-np241c-np243c-nv246-szczegoly-2"},{"id":"3fad7bf1c139811a8a1ed96ace3b08b4","slug":"gmc-yukon-xl-suburban-gmc"},{"id":"3fad7bf1c139811a92fdc26f34455f2d","slug":"kod-p0440-evap-rozwiazanie-tipy-2"},{"id":"3fad7bf1c139811bb1c2fedd7511194a","slug":"kod-p0730-przelozenie-skrzyni-rozwiazanie-tipy-2"},{"id":"3fad7bf1c139811c85e6fd3d947dd290","slug":"wymiana-plynu-chlodniczego-pelna-instrukcja"},{"id":"3fad7bf1c139811d8d93ca310b2730aa","slug":"problemy-z-ukladem-hamulcowym-tarcze-szczegoly"},{"id":"3fad7bf1c139811d90dfcb66fb7f8dc3","slug":"kod-p0758-cewka-2-3-rozwiazanie-tipy"},{"id":"3fad7bf1c139811ea4e1da96ff8d604d","slug":"kod-p0251-pompa-wtryskowa-diesel"},{"id":"3fad7bf1c139811f9d5fc2ee5caac334","slug":"kod-p0300-wypadanie-zaplonu-ogolne"},{"id":"3fad7bf1c139811fa8b9d33bfe7b36b4","slug":"chevrolet-suburban-2500"},{"id":"3fad7bf1c139811faf6edf3a88d424da","slug":"p0171-p0174-system-too-lean"},{"id":"3fad7bf1c13981208b35c95d2c06ec75","slug":"kod-p0785-cewka-3-2-rozwiazanie-tipy"},{"id":"3fad7bf1c1398120b171c4e134743366","slug":"problemy-z-ukladem-paliwowym-pompa-szczegoly"},{"id":"3fad7bf1c1398120b1faf6425e3b7593","slug":"problemy-z-ukladem-wydechowym-katalizator-szczegoly"},{"id":"3fad7bf1c1398120bb95fc07f6d87bcd","slug":"chevrolet-c-k-2500-extended-cab"},{"id":"3fad7bf1c1398120bc4cebebf9fb538d","slug":"atra-biuletyn-583-kody-elektryczne-4l60e-4l80e"},{"id":"3fad7bf1c13981219695f730de782220","slug":"wymiana-swiec-zaplonowych-vortec-tipy"},{"id":"3fad7bf1c139812290d6dbb1bf5d3cb9","slug":"wymiana-amortyzatorow-gmt400"},{"id":"3fad7bf1c13981229e31e24142e463b6","slug":"kod-p0300-wypadanie-zaplonu-rozwiazanie-tipy"},{"id":"3fad7bf1c1398122ae6cd17e3ac2db9e","slug":"wymiana-przewodow-hamulcowych-korozja"},{"id":"3fad7bf1c1398122b3e2f772a51cdf76","slug":"kod-p0102-maf-rozwiazanie-tipy-2"},{"id":"3fad7bf1c1398122b5c7dc1b93b47c3b","slug":"problemy-z-ukladem-zawieszenia-amortyzatory-szczegoly"},{"id":"3fad7bf1c1398122bb9fc5483ef754cc","slug":"kod-p0340-cmp-szczegoly"},{"id":"3fad7bf1c1398123abd5dba6ede6de11","slug":"problemy-z-ukladem-zawieszenia-tuleje-szczegoly"},{"id":"3fad7bf1c1398125990bc0cf540d0c03","slug":"6-5l-turbo-diesel-uklad-smarowania"},{"id":"3fad7bf1c1398125af76de070e326591","slug":"wymiana-oleju-w-skrzyni-manualnej-szczegoly-2"},{"id":"3fad7bf1c1398126927ef102068d1d46","slug":"gmc-sierra-2500-3500"},{"id":"3fad7bf1c139812697f1e1183f0c7535","slug":"kod-p0420-katalizator-rozwiazanie-tipy-2"},{"id":"3fad7bf1c1398126a484fb5070924681","slug":"wymiana-oleju-w-mostach-przednich-szczegoly-3"},{"id":"3fad7bf1c1398126abf9d1a7145327e2","slug":"kod-p1860-szczegoly-tcc"},{"id":"3fad7bf1c1398126b992c4f929818ce4","slug":"problemy-z-ukladem-chlodzenia-termostat"},{"id":"3fad7bf1c1398127b90fc15389ae9a2a","slug":"wymiana-tarcz-i-klockow-hamulcowych"},{"id":"3fad7bf1c1398127bc76c314c81ab76a","slug":"chevrolet-c-k-1500-regular-cab"},{"id":"3fad7bf1c13981289311f292903fecd5","slug":"problemy-z-ukladem-hamulcowym-tarcze"},{"id":"3fad7bf1c13981298725e3a954dcc077","slug":"kod-p1810-prndl-szczegoly"},{"id":"3fad7bf1c13981298e00e96d683d0d8d","slug":"chevrolet-c-k-3500-dually"},{"id":"3fad7bf1c1398129b1ddd7aaed052f42","slug":"problemy-z-ukladem-zaplonowym-tbi-szczegoly"},{"id":"3fad7bf1c139812a8679f4277a67731a","slug":"kod-p0174-uboga-mieszanka-bank-2"},{"id":"3fad7bf1c139812aa425e718398d7d79","slug":"4l60e-podstawowe-dane-techniczne"},{"id":"3fad7bf1c139812aa4c2da7af8a7cd8a","slug":"uklad-chlodzenia-gmt400-schemat-i-serwis"},{"id":"3fad7bf1c139812ab6e9fd77cab38fef","slug":"plyny-i-przeglady-1995-c-k"},{"id":"3fad7bf1c139812ba2b4fc78a5ffe656","slug":"kod-p0442-nieszczelnosc-ukladu-evap"},{"id":"3fad7bf1c139812bab67c803cea90965","slug":"wymiana-oleju-silnikowego-gmt400"},{"id":"3fad7bf1c139812babfdf62116d819bb","slug":"kod-p0442-mala-nieszczelnosc-evap"},{"id":"3fad7bf1c139812c8c88cb9ef810ff48","slug":"wymiana-uszczelek-kolektora-dolotowego-vortec-l31-diy"},{"id":"3fad7bf1c139812ca682fcab2a5f37bb","slug":"problemy-z-ukladem-kierowniczym-pompa-szczegoly"},{"id":"3fad7bf1c139812ca987ea87f525aabd","slug":"kod-p0562-niskie-napiecie-rozwiazanie-tipy"},{"id":"3fad7bf1c139812d930cca853326e5d1","slug":"chevrolet-tahoe-4-drzwi"},{"id":"3fad7bf1c139812d9befc14bcd64e479","slug":"gmc-yukon-4-drzwi"},{"id":"3fad7bf1c139812da529c005ce25f6ad","slug":"wymiana-oleju-w-4l80e-szczegoly-2"},{"id":"3fad7bf1c139812e9c67c7d600490218","slug":"kod-p1404-egr-pozycja-szczegoly"},{"id":"3fad7bf1c139812ea4dace0778760f2b","slug":"kod-p0300-wypadanie-zaplonu-szczegoly-2"},{"id":"3fad7bf1c139812ea79df7e81e7b10ed","slug":"pelna-wymiana-atf-w-4l60e-krok-po-kroku"},{"id":"3fad7bf1c139812eaeb4e06f738bb35b","slug":"kod-p0135-grzalka-sondy-lambda-rozwiazanie-tipy"},{"id":"3fad7bf1c139812eb76ee9fcae84ed71","slug":"kod-p0175-bogata-mieszanka-bank-2-rozwiazanie-tipy"},{"id":"3fad7bf1c139812f84bbdba4d135d20e","slug":"wymiana-oleju-silnikowego-szczegoly"},{"id":"3fad7bf1c1398130818ad9a83664e97f","slug":"wymiana-swiec-zarowych-6-5l-tipy"},{"id":"3fad7bf1c139813082becf645124a1fd","slug":"wymiana-plynu-chlodniczego-tipy-2"},{"id":"3fad7bf1c1398130abf9f4fb31715c6c","slug":"kod-p0302-cylinder-2-rozwiazanie-tipy"},{"id":"3fad7bf1c139813189c0fd6dd81eb9da","slug":"regeneracja-skrzyni-rozdzielczej-np241c-np243c-nv246-tipy"},{"id":"3fad7bf1c13981318b7dd5b435cc311d","slug":"problemy-z-przelaczaniem-4x4-np241c-np243c-nv246"},{"id":"3fad7bf1c13981338675c95cf23663e0","slug":"kod-p0420-katalizator"},{"id":"3fad7bf1c1398133b6ddd286062ab5f6","slug":"kod-p0135-grzalka-sondy-szczegoly-2"},{"id":"3fad7bf1c13981349115d680d6cc7f0a","slug":"kod-p0300-wypadanie-zaplonu-rozwiazanie-tipy-2"},{"id":"3fad7bf1c13981349585eec5477339fd","slug":"kod-p1860-tcc-pwm-rozwiazanie-tipy"},{"id":"3fad7bf1c1398134bb50c3a138c72b9e","slug":"wymiana-cewek-w-4l60e-diy"},{"id":"3fad7bf1c1398135876fc7ddd188b2c0","slug":"jak-wymienic-czujnik-vss-w-gmt400"},{"id":"3fad7bf1c1398135ad4fd3b2f49dc7c2","slug":"punkty-masy-gmt400-lokalizacje"},{"id":"3fad7bf1c13981369485ffaff3fad667","slug":"kod-p0758-cewka-2-3-elektryczna"},{"id":"3fad7bf1c1398136a1d4d5fd3d8a214e","slug":"kody-rpo-najwazniejsze"},{"id":"3fad7bf1c13981379548ef38021a7a1a","slug":"kod-p0304-cylinder-4-rozwiazanie-tipy"},{"id":"3fad7bf1c1398137b6ffca6095ad3b08","slug":"sprawdzenie-cisnienia-paliwa-gmt400-tipy"},{"id":"3fad7bf1c1398137bc3be34aff9b5f82","slug":"chevrolet-tahoe-4-drzwi-2"},{"id":"3fad7bf1c1398137bc3ed2ce6fd44820","slug":"kod-p0251-sterowanie-pompa-wtryskowa-diesel"},{"id":"3fad7bf1c1398138a105fe6bdfb94867","slug":"kod-p0251-pompa-diesel-rozwiazanie-tipy"},{"id":"3fad7bf1c1398139821ee9be671974fa","slug":"gmc-sierra-1500-odpowiednik-c-k"},{"id":"3fad7bf1c13981398718eba84bb6e80b","slug":"wymiana-uszczelek-kolektora-dolotowego-instrukcja"},{"id":"3fad7bf1c139813a8f7cf18f707da424","slug":"jak-sprawdzic-i-wymienic-czujniki-abs"},{"id":"3fad7bf1c139813b98d2e8a59a4cbbdf","slug":"skrzynia-4l80e"},{"id":"3fad7bf1c139813b9d8cef2ff7c6283b","slug":"problemy-z-ukladem-klimatyzacji-szczegoly"},{"id":"3fad7bf1c139813ba3ebf5f63266af3b","slug":"kod-p0505-iac-szczegoly"},{"id":"3fad7bf1c139813bb58dd9a05f5643b0","slug":"problemy-z-ukladem-napedowym-waly-szczegoly"},{"id":"3fad7bf1c139813bb78ad2aaa2184854","slug":"kod-p1626-komunikacja-skrzyni-szczegoly-2"},{"id":"3fad7bf1c139813c923eed7bc91a5fe0","slug":"plywajacy-wskaznik-paliwa-czujnik-w-zbiorniku"},{"id":"3fad7bf1c139813cbefcf6a0cfa39a27","slug":"kod-p0340-cmp-szczegoly-2"},{"id":"3fad7bf1c139813d9a6bf05fc9fb51d3","slug":"wymiana-oleju-w-skrzyni-rozdzielczej-szczegoly-2"},{"id":"3fad7bf1c139813da8fafd0847363ce6","slug":"jak-sprawdzic-i-wymienic-czujnik-ckp"},{"id":"3fad7bf1c139813f8d3acd5a545d08df","slug":"wymiana-filtra-i-plynu-4l60e-procedura"},{"id":"3fad7bf1c139814188aece3ef552c46d","slug":"kod-p1441-evap-przeplyw-rozwiazanie-tipy"},{"id":"3fad7bf1c13981418a31e96db320e149","slug":"wymiana-oleju-w-mostach-4x4-szczegoly"},{"id":"3fad7bf1c1398141a807f88fd1e49c3d","slug":"pelna-wymiana-oleju-w-skrzyni-4l80e-diy"},{"id":"3fad7bf1c1398141afe5f3584d00581e","slug":"silnik-4-3l-v6-l35-lf6"},{"id":"3fad7bf1c13981428376ed86a23f6d41","slug":"jak-sprawdzic-pompe-wtryskowa-6-5l"},{"id":"3fad7bf1c13981428e6fe5d84f727e92","slug":"kod-p0117-ect-rozwiazanie-tipy-2"},{"id":"3fad7bf1c1398142ad66e73cf1fd9e0a","slug":"problemy-z-ukladem-kierowniczym-gmt400-tipy"},{"id":"3fad7bf1c1398142b7d5d3039d5cdf14","slug":"silnik-5-7l-vortec-l31"},{"id":"3fad7bf1c13981438647cf9249077ae2","slug":"kod-p0740-tcc-szczegoly-2"},{"id":"3fad7bf1c13981449a62fad1350655d8","slug":"kod-p0756-cewka-2-3-wydajnosc-rozwiazanie-tipy-2"},{"id":"3fad7bf1c13981449cebd7a145051787","slug":"problemy-z-ukladem-zaplonowym-vortec-tipy"},{"id":"3fad7bf1c1398144a94bdfb123d5a040","slug":"problemy-z-ukladem-abs-gmt400-tipy"},{"id":"3fad7bf1c139814589b2d93b144ac13b","slug":"p0131-o2-sensor-circuit-low-bank-1-sensor-1"},{"id":"3fad7bf1c13981459035cdba26f7e501","slug":"poradnik-kupujacego-gmt400-checklista"},{"id":"3fad7bf1c139814592ecd98eb12e33f3","slug":"kod-p0500-vss-szczegoly-2"},{"id":"3fad7bf1c1398145a2d2d4c74981301c","slug":"kod-p0753-cewka-1-2-szczegoly-2"},{"id":"3fad7bf1c1398146845ad5914fffe9db","slug":"chevrolet-tahoe-4-drzwi-pelny-opis"},{"id":"3fad7bf1c139814694cdffbd5c022f9b","slug":"kod-p0446-zawor-odpowietrzajacy-evap"},{"id":"3fad7bf1c13981469526e8f412e8fd46","slug":"wymiana-plynu-wspomagania-kierownicy-tipy"},{"id":"3fad7bf1c13981479c25f214358c3ec8","slug":"problemy-z-ukladem-wydechowym-gmt400"},{"id":"3fad7bf1c13981488853fb36cfcd34e6","slug":"problemy-z-ukladem-wydechowym-katalizator"},{"id":"3fad7bf1c1398149bc1cea389ca4478c","slug":"chevrolet-k5-blazer-pelnowymiarowy"},{"id":"3fad7bf1c1398149bddefb8f767c81ec","slug":"problemy-z-ukladem-chlodzenia-pompa-wody-szczegoly"},{"id":"3fad7bf1c139814a99e2e5659d4385e2","slug":"wymiana-uszczelek-kolektora-vortec-l31-pelna-procedura"},{"id":"3fad7bf1c139814a9ff4e69e3d64ec45","slug":"kod-p0455-duza-nieszczelnosc-evap-rozwiazanie-tipy"},{"id":"3fad7bf1c139814ab120fefb37d91425","slug":"kod-p0753-cewka-1-2-4l60e"},{"id":"3fad7bf1c139814b8739fd45f6a95e92","slug":"kod-p0304-wypadanie-na-cylindrze-4"},{"id":"3fad7bf1c139814bb7cbf70ec299acd0","slug":"wymiana-swiec-zaplonowych-vortec-pelna-instrukcja"},{"id":"3fad7bf1c139814c97e6c383023ad4d9","slug":"kod-p0121-tps-zakres-rozwiazanie-tipy"},{"id":"3fad7bf1c139814d897bd69002520733","slug":"problemy-z-ukladem-hamulcowym-przewody"},{"id":"3fad7bf1c139814d8db3d871fe646d8c","slug":"chevrolet-c-k-2500-regular-cab"},{"id":"3fad7bf1c139814e9208c6bfd51e3376","slug":"chevrolet-c-k-3500"},{"id":"3fad7bf1c139814f9278da9c5fd44ea1","slug":"kod-p0307-wypadanie-na-cylindrze-7"},{"id":"3fad7bf1c139814fa0cfe0004bb069dc","slug":"problemy-z-ukladem-chlodzenia-chlodnica-szczegoly"},{"id":"3fad7bf1c13981508314d83907d09960","slug":"problemy-z-ukladem-zaplonowym-cewki-szczegoly"},{"id":"3fad7bf1c13981508c2bf021a6dbb7c4","slug":"kod-p0113-iat-szczegoly"},{"id":"3fad7bf1c1398150965bf3ae04d1ebc5","slug":"kod-p0102-maf-szczegoly"},{"id":"3fad7bf1c1398150ac14cd727755ecc9","slug":"kod-p0751-cewka-1-2-wydajnosc"},{"id":"3fad7bf1c1398151bbc5c12f03f67274","slug":"kod-p0758-cewka-2-3-szczegoly-2"},{"id":"3fad7bf1c1398152b2f9cb2f92e9ddb5","slug":"wymiana-oleju-silnikowego-gmt400-tipy"},{"id":"3fad7bf1c13981538af5f551a9547707","slug":"kod-p0740-tcc-rozwiazanie-tipy"},{"id":"3fad7bf1c139815396cbfb3dfb53f3c3","slug":"kod-p0449-zawor-evap-rozwiazanie-tipy"},{"id":"3fad7bf1c1398153a247df6fe475b113","slug":"silnik-7-4l-big-block-l29-l19"},{"id":"3fad7bf1c13981558fb3de295d872497","slug":"kod-p0117-ect-szczegoly"},{"id":"3fad7bf1c13981559fccc3af54684488","slug":"1995-tahoe-suburban-instrukcja-obslugi"},{"id":"3fad7bf1c1398155abadce5ed16ddc1c","slug":"gmc-yukon-2-drzwi-4-drzwi"},{"id":"3fad7bf1c1398155b5cbc6ed28c80463","slug":"wymiana-filtrow-kabinowych-powietrza"},{"id":"3fad7bf1c1398156a46ffb92f9d58499","slug":"problemy-z-ukladem-kierowniczym-przekladnia"},{"id":"3fad7bf1c1398156a707c4b3e4ac4e0f","slug":"4l60e-wymiana-atf-i-filtra"},{"id":"3fad7bf1c1398158aaf0c0dafc8c497b","slug":"problemy-z-alternatorem-gmt400-tipy"},{"id":"3fad7bf1c1398158bbdccf1b1369a438","slug":"gmc-sierra-1500"},{"id":"3fad7bf1c13981598dfadf718ea2179f","slug":"jak-sprawdzic-cisnienie-paliwa-diy"},{"id":"3fad7bf1c1398159a989cbffca757d0f","slug":"wymiana-oleju-w-skrzyni-4l80e"},{"id":"3fad7bf1c139815aa30bc36593b71df0","slug":"problemy-z-ukladem-zaplonowym-tbi"},{"id":"3fad7bf1c139815bb2dfffe9b01eff7f","slug":"plyny-rekomendacje-gmt400"},{"id":"3fad7bf1c139815d8cc9f5817899d040","slug":"1995-tahoe-suburban-wymiana-kola-zapasowego-underbody"},{"id":"3fad7bf1c139815d9fa6de6fd52ed60e","slug":"problemy-z-ukladem-zaplonowym-przewody"},{"id":"3fad7bf1c139815e8590c7385f0f3aba","slug":"wymiana-oleju-w-reduktorze-szczegoly"},{"id":"3fad7bf1c139815eaf61e77bb38887fd","slug":"kod-p0113-iat-rozwiazanie-tipy"},{"id":"3fad7bf1c13981608d72f28afde20e5e","slug":"gmc-yukon-4-drzwi-2"},{"id":"3fad7bf1c139816182eff0526ce3cd8c","slug":"wymiana-plynu-hamulcowego-gmt400-tipy"},{"id":"3fad7bf1c13981618f0df0993ca875e3","slug":"kod-p0700-usterka-skrzyni-ogolny-rozwiazanie-tipy"}]
+[
+  {
+    "id": "3fad7bf1c139810089aee9a8062f84a1",
+    "slug": "problemy-z-ukladem-paliwowym-tbi-szczegoly"
+  },
+  {
+    "id": "3fad7bf1c1398100b7e0cd224833baf9",
+    "slug": "problemy-z-rozrusznikiem-gmt400"
+  },
+  {
+    "id": "3fad7bf1c1398100b7f8dd5e2a1719eb",
+    "slug": "kod-p0102-maf-rozwiazanie-tipy"
+  },
+  {
+    "id": "3fad7bf1c1398100b816c94af4a883e2",
+    "slug": "problemy-z-ukladem-zaplonowym-cewki-vortec"
+  },
+  {
+    "id": "3fad7bf1c13981019ae2f4160de4368c",
+    "slug": "kod-p0507-wysokie-obroty-rozwiazanie-tipy"
+  },
+  {
+    "id": "3fad7bf1c1398101b178ce90098d63a8",
+    "slug": "kod-p0340-cmp-rozwiazanie-tipy"
+  },
+  {
+    "id": "3fad7bf1c1398101bb7ed7290e634b66",
+    "slug": "problemy-z-ukladem-hamulcowym-tarcze-tipy"
+  },
+  {
+    "id": "3fad7bf1c1398102984dc398001ed7b1",
+    "slug": "wymiana-oleju-silnikowego-szczegoly-2"
+  },
+  {
+    "id": "3fad7bf1c1398102aa8ee58c0084c5c5",
+    "slug": "wymiana-plynu-hamulcowego-i-odpowietrzanie-diy"
+  },
+  {
+    "id": "3fad7bf1c1398103947ae4436521e204",
+    "slug": "wymiana-oleju-w-mostach-przednich-szczegoly"
+  },
+  {
+    "id": "3fad7bf1c1398103a995f87258ce71d0",
+    "slug": "kod-p0121-czujnik-tps-zakres"
+  },
+  {
+    "id": "3fad7bf1c139810494b4fc135fa41b10",
+    "slug": "kod-p0301p0308-wypadanie-zaplonu-na-cylindrze"
+  },
+  {
+    "id": "3fad7bf1c139810581d6e95b027fac7b",
+    "slug": "problemy-z-ukladem-napedowym-waly"
+  },
+  {
+    "id": "3fad7bf1c13981058c52f81a29daaa00",
+    "slug": "kod-p1860-tcc-pwm-szczegoly-2"
+  },
+  {
+    "id": "3fad7bf1c13981059806ecdac1b3192a",
+    "slug": "kod-p0442-mala-nieszczelnosc-evap-rozwiazanie-tipy-2"
+  },
+  {
+    "id": "3fad7bf1c139810699d8f30bbbe3f703",
+    "slug": "kod-p0753-cewka-1-2-rozwiazanie-tipy-2"
+  },
+  {
+    "id": "3fad7bf1c1398106aa63f4339fe41780",
+    "slug": "kod-p0505-iac-rozwiazanie-tipy-2"
+  },
+  {
+    "id": "3fad7bf1c139810781fdf950456c1d6c",
+    "slug": "p0300-misfire-detected-losowe-cylindry"
+  },
+  {
+    "id": "3fad7bf1c13981078cb3d7a5e2c0c07c",
+    "slug": "kod-p0135-grzalka-sondy-rozwiazanie-tipy-2"
+  },
+  {
+    "id": "3fad7bf1c13981079c2efe4d2ab0bd33",
+    "slug": "kod-p1810-prndl-szczegoly-2"
+  },
+  {
+    "id": "3fad7bf1c1398107bd8ceb1f1b10df00",
+    "slug": "wymiana-koncowek-drazkow-kierowniczych-diy"
+  },
+  {
+    "id": "3fad7bf1c13981089ac7e55396e637a0",
+    "slug": "kod-p1626-komunikacja-skrzyni-rozwiazanie-tipy"
+  },
+  {
+    "id": "3fad7bf1c1398108a12cdfce68bb804e",
+    "slug": "kod-p0500-czujnik-predkosci-pojazdu-vss"
+  },
+  {
+    "id": "3fad7bf1c1398108a7a0e6efc763bd52",
+    "slug": "problemy-z-ukladem-zawieszenia-amortyzatory"
+  },
+  {
+    "id": "3fad7bf1c1398108bb5cfd8fc76e6947",
+    "slug": "kod-p0440-uklad-evap-ogolny"
+  },
+  {
+    "id": "3fad7bf1c13981099b7fcd5cfcd54907",
+    "slug": "wymiana-oleju-w-mostach-4x4-szczegoly-2"
+  },
+  {
+    "id": "3fad7bf1c139810ab77fe944482fa04e",
+    "slug": "kod-p0303-cylinder-3-rozwiazanie-tipy"
+  },
+  {
+    "id": "3fad7bf1c139810b8ca3cb2a6ee2e19f",
+    "slug": "czyszczenie-przepustnicy-vortec-tipy"
+  },
+  {
+    "id": "3fad7bf1c139810bab66ed7fbf19c416",
+    "slug": "wymiana-filtrow-powietrza-szczegoly"
+  },
+  {
+    "id": "3fad7bf1c139810cafc3f0bb2166d712",
+    "slug": "jak-wymienic-sworznie-wahaczy-przednich"
+  },
+  {
+    "id": "3fad7bf1c139810da89aec3474636505",
+    "slug": "kod-p0756-cewka-2-3-wydajnosc"
+  },
+  {
+    "id": "3fad7bf1c139810eb86dc87470e78d8b",
+    "slug": "wymiana-oleju-w-reduktorze-skrzynia-rozdzielcza"
+  },
+  {
+    "id": "3fad7bf1c139810f8f9ae6eb534d29e9",
+    "slug": "kod-p0305-cylinder-5-rozwiazanie-tipy"
+  },
+  {
+    "id": "3fad7bf1c139810f9cb1c9080631b71b",
+    "slug": "kod-p0128-termostat-szczegoly-2"
+  },
+  {
+    "id": "3fad7bf1c139810fb6c4d1f40b3ea2ca",
+    "slug": "wymiana-oleju-w-skrzyni-4l80e-szczegoly"
+  },
+  {
+    "id": "3fad7bf1c1398110943bdc188bb7b989",
+    "slug": "kod-p0507-wysokie-obroty-szczegoly"
+  },
+  {
+    "id": "3fad7bf1c13981109631e021ee0edf7f",
+    "slug": "problemy-z-ukladem-abs-czujniki"
+  },
+  {
+    "id": "3fad7bf1c13981118b75c0b417a71291",
+    "slug": "problemy-z-ukladem-napedowym-4x4"
+  },
+  {
+    "id": "3fad7bf1c13981119ddeec540793d27f",
+    "slug": "chevrolet-suburban-1500-4-drzwi"
+  },
+  {
+    "id": "3fad7bf1c1398111a713eea670648b8c",
+    "slug": "problemy-z-ukladem-chlodzenia-wentylator"
+  },
+  {
+    "id": "3fad7bf1c1398111ad2ff45a4917383b",
+    "slug": "problemy-z-ukladem-chlodzenia-pompa-wody"
+  },
+  {
+    "id": "3fad7bf1c1398111be4bc4769c0c675d",
+    "slug": "kod-p0730-przelozenie-skrzyni-szczegoly"
+  },
+  {
+    "id": "3fad7bf1c1398112841bc20777f83202",
+    "slug": "jak-wymienic-alternator-w-gmt400-diy"
+  },
+  {
+    "id": "3fad7bf1c1398112a026fff41af91702",
+    "slug": "kod-p0463-poziom-paliwa-szczegoly"
+  },
+  {
+    "id": "3fad7bf1c13981138178ff23af30df67",
+    "slug": "specyfikacje-silnikow-gmt400-tabela"
+  },
+  {
+    "id": "3fad7bf1c1398113b5e4d63d65251e2c",
+    "slug": "kod-p0102-czujnik-przeplywu-powietrza-maf"
+  },
+  {
+    "id": "3fad7bf1c13981159eedd2c014be9f11",
+    "slug": "4l60e-cewki-solenoidy-i-kody"
+  },
+  {
+    "id": "3fad7bf1c1398116b638fee0b574b95f",
+    "slug": "wymiana-plynu-wspomagania-kierownicy-pelna-instrukcja"
+  },
+  {
+    "id": "3fad7bf1c1398117abafdbab39a5c95a",
+    "slug": "kod-p1441-uklad-evap-przeplyw"
+  },
+  {
+    "id": "3fad7bf1c1398118b939db19302e4fad",
+    "slug": "kod-p0174-uboga-mieszanka-bank-2-rozwiazanie-tipy"
+  },
+  {
+    "id": "3fad7bf1c1398119a1c1e4c7afa2f7cd",
+    "slug": "wymiana-oleju-w-np241c-np243c-nv246-szczegoly-2"
+  },
+  {
+    "id": "3fad7bf1c139811a8a1ed96ace3b08b4",
+    "slug": "gmc-yukon-xl-suburban-gmc"
+  },
+  {
+    "id": "3fad7bf1c139811a92fdc26f34455f2d",
+    "slug": "kod-p0440-evap-rozwiazanie-tipy-2"
+  },
+  {
+    "id": "3fad7bf1c139811bb1c2fedd7511194a",
+    "slug": "kod-p0730-przelozenie-skrzyni-rozwiazanie-tipy-2"
+  },
+  {
+    "id": "3fad7bf1c139811c85e6fd3d947dd290",
+    "slug": "wymiana-plynu-chlodniczego-pelna-instrukcja"
+  },
+  {
+    "id": "3fad7bf1c139811d8d93ca310b2730aa",
+    "slug": "problemy-z-ukladem-hamulcowym-tarcze-szczegoly"
+  },
+  {
+    "id": "3fad7bf1c139811d90dfcb66fb7f8dc3",
+    "slug": "kod-p0758-cewka-2-3-rozwiazanie-tipy"
+  },
+  {
+    "id": "3fad7bf1c139811ea4e1da96ff8d604d",
+    "slug": "kod-p0251-pompa-wtryskowa-diesel"
+  },
+  {
+    "id": "3fad7bf1c139811f9d5fc2ee5caac334",
+    "slug": "kod-p0300-wypadanie-zaplonu-ogolne"
+  },
+  {
+    "id": "3fad7bf1c139811fa8b9d33bfe7b36b4",
+    "slug": "chevrolet-suburban-2500"
+  },
+  {
+    "id": "3fad7bf1c139811faf6edf3a88d424da",
+    "slug": "p0171-p0174-system-too-lean"
+  },
+  {
+    "id": "3fad7bf1c13981208b35c95d2c06ec75",
+    "slug": "kod-p0785-cewka-3-2-rozwiazanie-tipy"
+  },
+  {
+    "id": "3fad7bf1c1398120b171c4e134743366",
+    "slug": "problemy-z-ukladem-paliwowym-pompa-szczegoly"
+  },
+  {
+    "id": "3fad7bf1c1398120b1faf6425e3b7593",
+    "slug": "problemy-z-ukladem-wydechowym-katalizator-szczegoly"
+  },
+  {
+    "id": "3fad7bf1c1398120bb95fc07f6d87bcd",
+    "slug": "chevrolet-c-k-2500-extended-cab"
+  },
+  {
+    "id": "3fad7bf1c1398120bc4cebebf9fb538d",
+    "slug": "atra-biuletyn-583-kody-elektryczne-4l60e-4l80e"
+  },
+  {
+    "id": "3fad7bf1c13981219695f730de782220",
+    "slug": "wymiana-swiec-zaplonowych-vortec-tipy"
+  },
+  {
+    "id": "3fad7bf1c139812290d6dbb1bf5d3cb9",
+    "slug": "wymiana-amortyzatorow-gmt400"
+  },
+  {
+    "id": "3fad7bf1c13981229e31e24142e463b6",
+    "slug": "kod-p0300-wypadanie-zaplonu-rozwiazanie-tipy"
+  },
+  {
+    "id": "3fad7bf1c1398122ae6cd17e3ac2db9e",
+    "slug": "wymiana-przewodow-hamulcowych-korozja"
+  },
+  {
+    "id": "3fad7bf1c1398122b3e2f772a51cdf76",
+    "slug": "kod-p0102-maf-rozwiazanie-tipy-2"
+  },
+  {
+    "id": "3fad7bf1c1398122b5c7dc1b93b47c3b",
+    "slug": "problemy-z-ukladem-zawieszenia-amortyzatory-szczegoly"
+  },
+  {
+    "id": "3fad7bf1c1398122bb9fc5483ef754cc",
+    "slug": "kod-p0340-cmp-szczegoly"
+  },
+  {
+    "id": "3fad7bf1c1398123abd5dba6ede6de11",
+    "slug": "problemy-z-ukladem-zawieszenia-tuleje-szczegoly"
+  },
+  {
+    "id": "3fad7bf1c1398125990bc0cf540d0c03",
+    "slug": "6-5l-turbo-diesel-uklad-smarowania"
+  },
+  {
+    "id": "3fad7bf1c1398125af76de070e326591",
+    "slug": "wymiana-oleju-w-skrzyni-manualnej-szczegoly-2"
+  },
+  {
+    "id": "3fad7bf1c1398126927ef102068d1d46",
+    "slug": "gmc-sierra-2500-3500"
+  },
+  {
+    "id": "3fad7bf1c139812697f1e1183f0c7535",
+    "slug": "kod-p0420-katalizator-rozwiazanie-tipy-2"
+  },
+  {
+    "id": "3fad7bf1c1398126a484fb5070924681",
+    "slug": "wymiana-oleju-w-mostach-przednich-szczegoly-3"
+  },
+  {
+    "id": "3fad7bf1c1398126abf9d1a7145327e2",
+    "slug": "kod-p1860-szczegoly-tcc"
+  },
+  {
+    "id": "3fad7bf1c1398126b992c4f929818ce4",
+    "slug": "problemy-z-ukladem-chlodzenia-termostat"
+  },
+  {
+    "id": "3fad7bf1c1398127b90fc15389ae9a2a",
+    "slug": "wymiana-tarcz-i-klockow-hamulcowych"
+  },
+  {
+    "id": "3fad7bf1c1398127bc76c314c81ab76a",
+    "slug": "chevrolet-c-k-1500-regular-cab"
+  },
+  {
+    "id": "3fad7bf1c13981289311f292903fecd5",
+    "slug": "problemy-z-ukladem-hamulcowym-tarcze"
+  },
+  {
+    "id": "3fad7bf1c13981298725e3a954dcc077",
+    "slug": "kod-p1810-prndl-szczegoly"
+  },
+  {
+    "id": "3fad7bf1c13981298e00e96d683d0d8d",
+    "slug": "chevrolet-c-k-3500-dually"
+  },
+  {
+    "id": "3fad7bf1c1398129b1ddd7aaed052f42",
+    "slug": "problemy-z-ukladem-zaplonowym-tbi-szczegoly"
+  },
+  {
+    "id": "3fad7bf1c139812a8679f4277a67731a",
+    "slug": "kod-p0174-uboga-mieszanka-bank-2"
+  },
+  {
+    "id": "3fad7bf1c139812aa425e718398d7d79",
+    "slug": "4l60e-podstawowe-dane-techniczne"
+  },
+  {
+    "id": "3fad7bf1c139812aa4c2da7af8a7cd8a",
+    "slug": "uklad-chlodzenia-gmt400-schemat-i-serwis"
+  },
+  {
+    "id": "3fad7bf1c139812ab6e9fd77cab38fef",
+    "slug": "plyny-i-przeglady-1995-c-k"
+  },
+  {
+    "id": "3fad7bf1c139812ba2b4fc78a5ffe656",
+    "slug": "kod-p0442-nieszczelnosc-ukladu-evap"
+  },
+  {
+    "id": "3fad7bf1c139812bab67c803cea90965",
+    "slug": "wymiana-oleju-silnikowego-gmt400"
+  },
+  {
+    "id": "3fad7bf1c139812babfdf62116d819bb",
+    "slug": "kod-p0442-mala-nieszczelnosc-evap"
+  },
+  {
+    "id": "3fad7bf1c139812c8c88cb9ef810ff48",
+    "slug": "wymiana-uszczelek-kolektora-dolotowego-vortec-l31-diy"
+  },
+  {
+    "id": "3fad7bf1c139812ca682fcab2a5f37bb",
+    "slug": "problemy-z-ukladem-kierowniczym-pompa-szczegoly"
+  },
+  {
+    "id": "3fad7bf1c139812ca987ea87f525aabd",
+    "slug": "kod-p0562-niskie-napiecie-rozwiazanie-tipy"
+  },
+  {
+    "id": "3fad7bf1c139812d930cca853326e5d1",
+    "slug": "chevrolet-tahoe-4-drzwi"
+  },
+  {
+    "id": "3fad7bf1c139812d9befc14bcd64e479",
+    "slug": "gmc-yukon-4-drzwi"
+  },
+  {
+    "id": "3fad7bf1c139812da529c005ce25f6ad",
+    "slug": "wymiana-oleju-w-4l80e-szczegoly-2"
+  },
+  {
+    "id": "3fad7bf1c139812e9c67c7d600490218",
+    "slug": "kod-p1404-egr-pozycja-szczegoly"
+  },
+  {
+    "id": "3fad7bf1c139812ea4dace0778760f2b",
+    "slug": "kod-p0300-wypadanie-zaplonu-szczegoly-2"
+  },
+  {
+    "id": "3fad7bf1c139812ea79df7e81e7b10ed",
+    "slug": "pelna-wymiana-atf-w-4l60e-krok-po-kroku"
+  },
+  {
+    "id": "3fad7bf1c139812eaeb4e06f738bb35b",
+    "slug": "kod-p0135-grzalka-sondy-lambda-rozwiazanie-tipy"
+  },
+  {
+    "id": "3fad7bf1c139812eb76ee9fcae84ed71",
+    "slug": "kod-p0175-bogata-mieszanka-bank-2-rozwiazanie-tipy"
+  },
+  {
+    "id": "3fad7bf1c139812f84bbdba4d135d20e",
+    "slug": "wymiana-oleju-silnikowego-szczegoly"
+  },
+  {
+    "id": "3fad7bf1c1398130818ad9a83664e97f",
+    "slug": "wymiana-swiec-zarowych-6-5l-tipy"
+  },
+  {
+    "id": "3fad7bf1c139813082becf645124a1fd",
+    "slug": "wymiana-plynu-chlodniczego-tipy-2"
+  },
+  {
+    "id": "3fad7bf1c1398130abf9f4fb31715c6c",
+    "slug": "kod-p0302-cylinder-2-rozwiazanie-tipy"
+  },
+  {
+    "id": "3fad7bf1c139813189c0fd6dd81eb9da",
+    "slug": "regeneracja-skrzyni-rozdzielczej-np241c-np243c-nv246-tipy"
+  },
+  {
+    "id": "3fad7bf1c13981318b7dd5b435cc311d",
+    "slug": "problemy-z-przelaczaniem-4x4-np241c-np243c-nv246"
+  },
+  {
+    "id": "3fad7bf1c13981338675c95cf23663e0",
+    "slug": "kod-p0420-katalizator"
+  },
+  {
+    "id": "3fad7bf1c1398133b6ddd286062ab5f6",
+    "slug": "kod-p0135-grzalka-sondy-szczegoly-2"
+  },
+  {
+    "id": "3fad7bf1c13981349115d680d6cc7f0a",
+    "slug": "kod-p0300-wypadanie-zaplonu-rozwiazanie-tipy-2"
+  },
+  {
+    "id": "3fad7bf1c13981349585eec5477339fd",
+    "slug": "kod-p1860-tcc-pwm-rozwiazanie-tipy"
+  },
+  {
+    "id": "3fad7bf1c1398134bb50c3a138c72b9e",
+    "slug": "wymiana-cewek-w-4l60e-diy"
+  },
+  {
+    "id": "3fad7bf1c1398135876fc7ddd188b2c0",
+    "slug": "jak-wymienic-czujnik-vss-w-gmt400"
+  },
+  {
+    "id": "3fad7bf1c1398135ad4fd3b2f49dc7c2",
+    "slug": "punkty-masy-gmt400-lokalizacje"
+  },
+  {
+    "id": "3fad7bf1c13981369485ffaff3fad667",
+    "slug": "kod-p0758-cewka-2-3-elektryczna"
+  },
+  {
+    "id": "3fad7bf1c1398136a1d4d5fd3d8a214e",
+    "slug": "kody-rpo-najwazniejsze"
+  },
+  {
+    "id": "3fad7bf1c13981379548ef38021a7a1a",
+    "slug": "kod-p0304-cylinder-4-rozwiazanie-tipy"
+  },
+  {
+    "id": "3fad7bf1c1398137b6ffca6095ad3b08",
+    "slug": "sprawdzenie-cisnienia-paliwa-gmt400-tipy"
+  },
+  {
+    "id": "3fad7bf1c1398137bc3be34aff9b5f82",
+    "slug": "chevrolet-tahoe-4-drzwi-2"
+  },
+  {
+    "id": "3fad7bf1c1398137bc3ed2ce6fd44820",
+    "slug": "kod-p0251-sterowanie-pompa-wtryskowa-diesel"
+  },
+  {
+    "id": "3fad7bf1c1398138a105fe6bdfb94867",
+    "slug": "kod-p0251-pompa-diesel-rozwiazanie-tipy"
+  },
+  {
+    "id": "3fad7bf1c1398139821ee9be671974fa",
+    "slug": "gmc-sierra-1500-odpowiednik-c-k"
+  },
+  {
+    "id": "3fad7bf1c13981398718eba84bb6e80b",
+    "slug": "wymiana-uszczelek-kolektora-dolotowego-instrukcja"
+  },
+  {
+    "id": "3fad7bf1c139813a8f7cf18f707da424",
+    "slug": "jak-sprawdzic-i-wymienic-czujniki-abs"
+  },
+  {
+    "id": "3fad7bf1c139813b98d2e8a59a4cbbdf",
+    "slug": "skrzynia-4l80e"
+  },
+  {
+    "id": "3fad7bf1c139813b9d8cef2ff7c6283b",
+    "slug": "problemy-z-ukladem-klimatyzacji-szczegoly"
+  },
+  {
+    "id": "3fad7bf1c139813ba3ebf5f63266af3b",
+    "slug": "kod-p0505-iac-szczegoly"
+  },
+  {
+    "id": "3fad7bf1c139813bb58dd9a05f5643b0",
+    "slug": "problemy-z-ukladem-napedowym-waly-szczegoly"
+  },
+  {
+    "id": "3fad7bf1c139813bb78ad2aaa2184854",
+    "slug": "kod-p1626-komunikacja-skrzyni-szczegoly-2"
+  },
+  {
+    "id": "3fad7bf1c139813c923eed7bc91a5fe0",
+    "slug": "plywajacy-wskaznik-paliwa-czujnik-w-zbiorniku"
+  },
+  {
+    "id": "3fad7bf1c139813cbefcf6a0cfa39a27",
+    "slug": "kod-p0340-cmp-szczegoly-2"
+  },
+  {
+    "id": "3fad7bf1c139813d9a6bf05fc9fb51d3",
+    "slug": "wymiana-oleju-w-skrzyni-rozdzielczej-szczegoly-2"
+  },
+  {
+    "id": "3fad7bf1c139813da8fafd0847363ce6",
+    "slug": "jak-sprawdzic-i-wymienic-czujnik-ckp"
+  },
+  {
+    "id": "3fad7bf1c139813f8d3acd5a545d08df",
+    "slug": "wymiana-filtra-i-plynu-4l60e-procedura"
+  },
+  {
+    "id": "3fad7bf1c139814188aece3ef552c46d",
+    "slug": "kod-p1441-evap-przeplyw-rozwiazanie-tipy"
+  },
+  {
+    "id": "3fad7bf1c13981418a31e96db320e149",
+    "slug": "wymiana-oleju-w-mostach-4x4-szczegoly"
+  },
+  {
+    "id": "3fad7bf1c1398141a807f88fd1e49c3d",
+    "slug": "pelna-wymiana-oleju-w-skrzyni-4l80e-diy"
+  },
+  {
+    "id": "3fad7bf1c1398141afe5f3584d00581e",
+    "slug": "silnik-4-3l-v6-l35-lf6"
+  },
+  {
+    "id": "3fad7bf1c13981428376ed86a23f6d41",
+    "slug": "jak-sprawdzic-pompe-wtryskowa-6-5l"
+  },
+  {
+    "id": "3fad7bf1c13981428e6fe5d84f727e92",
+    "slug": "kod-p0117-ect-rozwiazanie-tipy-2"
+  },
+  {
+    "id": "3fad7bf1c1398142ad66e73cf1fd9e0a",
+    "slug": "problemy-z-ukladem-kierowniczym-gmt400-tipy"
+  },
+  {
+    "id": "3fad7bf1c1398142b7d5d3039d5cdf14",
+    "slug": "silnik-5-7l-vortec-l31"
+  },
+  {
+    "id": "3fad7bf1c13981438647cf9249077ae2",
+    "slug": "kod-p0740-tcc-szczegoly-2"
+  },
+  {
+    "id": "3fad7bf1c13981449a62fad1350655d8",
+    "slug": "kod-p0756-cewka-2-3-wydajnosc-rozwiazanie-tipy-2"
+  },
+  {
+    "id": "3fad7bf1c13981449cebd7a145051787",
+    "slug": "problemy-z-ukladem-zaplonowym-vortec-tipy"
+  },
+  {
+    "id": "3fad7bf1c1398144a94bdfb123d5a040",
+    "slug": "problemy-z-ukladem-abs-gmt400-tipy"
+  },
+  {
+    "id": "3fad7bf1c139814589b2d93b144ac13b",
+    "slug": "p0131-o2-sensor-circuit-low-bank-1-sensor-1"
+  },
+  {
+    "id": "3fad7bf1c13981459035cdba26f7e501",
+    "slug": "poradnik-kupujacego-gmt400-checklista"
+  },
+  {
+    "id": "3fad7bf1c139814592ecd98eb12e33f3",
+    "slug": "kod-p0500-vss-szczegoly-2"
+  },
+  {
+    "id": "3fad7bf1c1398145a2d2d4c74981301c",
+    "slug": "kod-p0753-cewka-1-2-szczegoly-2"
+  },
+  {
+    "id": "3fad7bf1c1398146845ad5914fffe9db",
+    "slug": "chevrolet-tahoe-4-drzwi-pelny-opis"
+  },
+  {
+    "id": "3fad7bf1c139814694cdffbd5c022f9b",
+    "slug": "kod-p0446-zawor-odpowietrzajacy-evap"
+  },
+  {
+    "id": "3fad7bf1c13981469526e8f412e8fd46",
+    "slug": "wymiana-plynu-wspomagania-kierownicy-tipy"
+  },
+  {
+    "id": "3fad7bf1c13981479c25f214358c3ec8",
+    "slug": "problemy-z-ukladem-wydechowym-gmt400"
+  },
+  {
+    "id": "3fad7bf1c13981488853fb36cfcd34e6",
+    "slug": "problemy-z-ukladem-wydechowym-katalizator"
+  },
+  {
+    "id": "3fad7bf1c1398149bc1cea389ca4478c",
+    "slug": "chevrolet-k5-blazer-pelnowymiarowy"
+  },
+  {
+    "id": "3fad7bf1c1398149bddefb8f767c81ec",
+    "slug": "problemy-z-ukladem-chlodzenia-pompa-wody-szczegoly"
+  },
+  {
+    "id": "3fad7bf1c139814a99e2e5659d4385e2",
+    "slug": "wymiana-uszczelek-kolektora-vortec-l31-pelna-procedura"
+  },
+  {
+    "id": "3fad7bf1c139814a9ff4e69e3d64ec45",
+    "slug": "kod-p0455-duza-nieszczelnosc-evap-rozwiazanie-tipy"
+  },
+  {
+    "id": "3fad7bf1c139814ab120fefb37d91425",
+    "slug": "kod-p0753-cewka-1-2-4l60e"
+  },
+  {
+    "id": "3fad7bf1c139814b8739fd45f6a95e92",
+    "slug": "kod-p0304-wypadanie-na-cylindrze-4"
+  },
+  {
+    "id": "3fad7bf1c139814bb7cbf70ec299acd0",
+    "slug": "wymiana-swiec-zaplonowych-vortec-pelna-instrukcja"
+  },
+  {
+    "id": "3fad7bf1c139814c97e6c383023ad4d9",
+    "slug": "kod-p0121-tps-zakres-rozwiazanie-tipy"
+  },
+  {
+    "id": "3fad7bf1c139814d897bd69002520733",
+    "slug": "problemy-z-ukladem-hamulcowym-przewody"
+  },
+  {
+    "id": "3fad7bf1c139814d8db3d871fe646d8c",
+    "slug": "chevrolet-c-k-2500-regular-cab"
+  },
+  {
+    "id": "3fad7bf1c139814e9208c6bfd51e3376",
+    "slug": "chevrolet-c-k-3500"
+  },
+  {
+    "id": "3fad7bf1c139814f9278da9c5fd44ea1",
+    "slug": "kod-p0307-wypadanie-na-cylindrze-7"
+  },
+  {
+    "id": "3fad7bf1c139814fa0cfe0004bb069dc",
+    "slug": "problemy-z-ukladem-chlodzenia-chlodnica-szczegoly"
+  },
+  {
+    "id": "3fad7bf1c13981508314d83907d09960",
+    "slug": "problemy-z-ukladem-zaplonowym-cewki-szczegoly"
+  },
+  {
+    "id": "3fad7bf1c13981508c2bf021a6dbb7c4",
+    "slug": "kod-p0113-iat-szczegoly"
+  },
+  {
+    "id": "3fad7bf1c1398150965bf3ae04d1ebc5",
+    "slug": "kod-p0102-maf-szczegoly"
+  },
+  {
+    "id": "3fad7bf1c1398150ac14cd727755ecc9",
+    "slug": "kod-p0751-cewka-1-2-wydajnosc"
+  },
+  {
+    "id": "3fad7bf1c1398151bbc5c12f03f67274",
+    "slug": "kod-p0758-cewka-2-3-szczegoly-2"
+  },
+  {
+    "id": "3fad7bf1c1398152b2f9cb2f92e9ddb5",
+    "slug": "wymiana-oleju-silnikowego-gmt400-tipy"
+  },
+  {
+    "id": "3fad7bf1c13981538af5f551a9547707",
+    "slug": "kod-p0740-tcc-rozwiazanie-tipy"
+  },
+  {
+    "id": "3fad7bf1c139815396cbfb3dfb53f3c3",
+    "slug": "kod-p0449-zawor-evap-rozwiazanie-tipy"
+  },
+  {
+    "id": "3fad7bf1c1398153a247df6fe475b113",
+    "slug": "silnik-7-4l-big-block-l29-l19"
+  },
+  {
+    "id": "3fad7bf1c13981558fb3de295d872497",
+    "slug": "kod-p0117-ect-szczegoly"
+  },
+  {
+    "id": "3fad7bf1c13981559fccc3af54684488",
+    "slug": "1995-tahoe-suburban-instrukcja-obslugi"
+  },
+  {
+    "id": "3fad7bf1c1398155abadce5ed16ddc1c",
+    "slug": "gmc-yukon-2-drzwi-4-drzwi"
+  },
+  {
+    "id": "3fad7bf1c1398155b5cbc6ed28c80463",
+    "slug": "wymiana-filtrow-kabinowych-powietrza"
+  },
+  {
+    "id": "3fad7bf1c1398156a46ffb92f9d58499",
+    "slug": "problemy-z-ukladem-kierowniczym-przekladnia"
+  },
+  {
+    "id": "3fad7bf1c1398156a707c4b3e4ac4e0f",
+    "slug": "4l60e-wymiana-atf-i-filtra"
+  },
+  {
+    "id": "3fad7bf1c1398158aaf0c0dafc8c497b",
+    "slug": "problemy-z-alternatorem-gmt400-tipy"
+  },
+  {
+    "id": "3fad7bf1c1398158bbdccf1b1369a438",
+    "slug": "gmc-sierra-1500"
+  },
+  {
+    "id": "3fad7bf1c13981598dfadf718ea2179f",
+    "slug": "jak-sprawdzic-cisnienie-paliwa-diy"
+  },
+  {
+    "id": "3fad7bf1c1398159a989cbffca757d0f",
+    "slug": "wymiana-oleju-w-skrzyni-4l80e"
+  },
+  {
+    "id": "3fad7bf1c139815aa30bc36593b71df0",
+    "slug": "problemy-z-ukladem-zaplonowym-tbi"
+  },
+  {
+    "id": "3fad7bf1c139815bb2dfffe9b01eff7f",
+    "slug": "plyny-rekomendacje-gmt400"
+  },
+  {
+    "id": "3fad7bf1c139815d8cc9f5817899d040",
+    "slug": "1995-tahoe-suburban-wymiana-kola-zapasowego-underbody"
+  },
+  {
+    "id": "3fad7bf1c139815d9fa6de6fd52ed60e",
+    "slug": "problemy-z-ukladem-zaplonowym-przewody"
+  },
+  {
+    "id": "3fad7bf1c139815e8590c7385f0f3aba",
+    "slug": "wymiana-oleju-w-reduktorze-szczegoly"
+  },
+  {
+    "id": "3fad7bf1c139815eaf61e77bb38887fd",
+    "slug": "kod-p0113-iat-rozwiazanie-tipy"
+  },
+  {
+    "id": "3fad7bf1c13981608d72f28afde20e5e",
+    "slug": "gmc-yukon-4-drzwi-2"
+  },
+  {
+    "id": "3fad7bf1c139816182eff0526ce3cd8c",
+    "slug": "wymiana-plynu-hamulcowego-gmt400-tipy"
+  },
+  {
+    "id": "3fad7bf1c13981618f0df0993ca875e3",
+    "slug": "kod-p0700-usterka-skrzyni-ogolny-rozwiazanie-tipy"
+  },
+  {
+    "id": "3fad7bf1c1398161a7bbfd2da7f4fbcd",
+    "slug": "skrzynia-rozdzielcza-np241-np243"
+  },
+  {
+    "id": "3fad7bf1c139816297b3e370756351ab",
+    "slug": "wymiana-amortyzatorow-gmt400-tipy"
+  },
+  {
+    "id": "3fad7bf1c13981639528ce020d4bb814",
+    "slug": "jak-wymienic-czujnik-tps-diy"
+  },
+  {
+    "id": "3fad7bf1c1398163a55ac7e8927ea1fd",
+    "slug": "kod-p0301-wypadanie-na-cylindrze-1"
+  },
+  {
+    "id": "3fad7bf1c1398163b6c9c8d7e64692ec",
+    "slug": "problemy-z-ukladem-chlodzenia-gmt400-tipy"
+  },
+  {
+    "id": "3fad7bf1c1398164b90ad86d2dec623a",
+    "slug": "jak-wymienic-pasek-klinowy-instrukcja"
+  },
+  {
+    "id": "3fad7bf1c139816584b9ce45f5aff0a7",
+    "slug": "kod-p0308-wypadanie-na-cylindrze-8"
+  },
+  {
+    "id": "3fad7bf1c13981658562c8f74dceb81d",
+    "slug": "problemy-z-ukladem-abs-czujniki-szczegoly"
+  },
+  {
+    "id": "3fad7bf1c1398165939dd3c3c9278b37",
+    "slug": "kod-p0401-uklad-egr"
+  },
+  {
+    "id": "3fad7bf1c139816594d5cc4713462ea3",
+    "slug": "wymiana-termostatu-i-pompy-wody-zestaw-diy"
+  },
+  {
+    "id": "3fad7bf1c1398165a152f268a6ca3d5a",
+    "slug": "kod-p0785-cewka-3-2-szczegoly"
+  },
+  {
+    "id": "3fad7bf1c1398166967bea502112b105",
+    "slug": "wymiana-oleju-w-mostach-tylnych-tipy"
+  },
+  {
+    "id": "3fad7bf1c1398166ba36d927760cc110",
+    "slug": "kod-p0758-cewka-2-3-4l60e"
+  },
+  {
+    "id": "3fad7bf1c13981678d30f81f42f0a3c9",
+    "slug": "kod-p0135-grzalka-sondy-lambda"
+  },
+  {
+    "id": "3fad7bf1c1398167a0ddf2903516d49d",
+    "slug": "skrzynia-4l60e-slizganie-brak-biegow"
+  },
+  {
+    "id": "3fad7bf1c1398167a20adb9c8829ffd1",
+    "slug": "wymiana-czujnika-cmp-instrukcja"
+  },
+  {
+    "id": "3fad7bf1c1398167a4dcf623c8b120db",
+    "slug": "kod-p1810-czujnik-zakresu-skrzyni-prndl"
+  },
+  {
+    "id": "3fad7bf1c1398167ae72e301b5bc27c9",
+    "slug": "kod-p0449-zawor-evap-rozwiazanie-tipy-2"
+  },
+  {
+    "id": "3fad7bf1c1398167af4af720c745303a",
+    "slug": "kod-p0303-wypadanie-na-cylindrze-3"
+  },
+  {
+    "id": "3fad7bf1c1398168bef7fbbc46ba7c61",
+    "slug": "problemy-z-ukladem-chlodzenia-chlodnica"
+  },
+  {
+    "id": "3fad7bf1c1398169b989d62da1fac12b",
+    "slug": "kod-p1133-sonda-lambda-wydajnosc"
+  },
+  {
+    "id": "3fad7bf1c139816aa694dcac3bdc9160",
+    "slug": "kod-p1441-evap-przeplyw-szczegoly"
+  },
+  {
+    "id": "3fad7bf1c139816ab3d8e3452ac6b0e6",
+    "slug": "kod-12-tryb-diagnostyczny-obd-i"
+  },
+  {
+    "id": "3fad7bf1c139816ab6d6ee3cc4af3ab3",
+    "slug": "numery-czesci-filtry-i-plyny"
+  },
+  {
+    "id": "3fad7bf1c139816cbbd3da647eb617f5",
+    "slug": "problemy-z-ukladem-wydechowym-tlumiki"
+  },
+  {
+    "id": "3fad7bf1c139816d90d7e8fa72fca4cd",
+    "slug": "uklad-hamulcowy-gmt400-schemat"
+  },
+  {
+    "id": "3fad7bf1c139816d9693f64519ee113b",
+    "slug": "wymiana-plynu-w-skrzyni-automatycznej-pelna"
+  },
+  {
+    "id": "3fad7bf1c139816e8253d655c4e11117",
+    "slug": "problemy-z-ukladem-wydechowym-gmt400-tipy"
+  },
+  {
+    "id": "3fad7bf1c139816e9843d0d6c2846367",
+    "slug": "hydra-matic-4l60-e-przewodnik-technika"
+  },
+  {
+    "id": "3fad7bf1c139816f8dafe760a1f9dd41",
+    "slug": "wymiana-oleju-w-mostach-tylnych"
+  },
+  {
+    "id": "3fad7bf1c139816fafc4ce2808be2822",
+    "slug": "problemy-z-ukladem-klimatyzacji-gmt400-tipy"
+  },
+  {
+    "id": "3fad7bf1c13981708d26dbdb9cb22982",
+    "slug": "jak-wymienic-czujnik-poziomu-paliwa"
+  },
+  {
+    "id": "3fad7bf1c1398170a87edda047889908",
+    "slug": "diagnostyka-kodow-skrzyni-4l60e-praktyczny-przewodnik"
+  },
+  {
+    "id": "3fad7bf1c1398171a9f9e8070a6fd884",
+    "slug": "uszczelki-kolektora-dolotowego-vortec-l31"
+  },
+  {
+    "id": "3fad7bf1c1398172b617d3623728f154",
+    "slug": "silnik-5-0l-tbi-l03-l30"
+  },
+  {
+    "id": "3fad7bf1c13981748487d6b1ac2e7fee",
+    "slug": "silnik-6-5l-turbo-diesel-l56-l65"
+  },
+  {
+    "id": "3fad7bf1c13981748aeec66b80e9335d",
+    "slug": "kod-p1860-tcc-pwm-rozwiazanie-tipy-2"
+  },
+  {
+    "id": "3fad7bf1c1398174a55bdb6edc100e5b",
+    "slug": "wymiana-oleju-w-mostach-gmt400-tipy"
+  },
+  {
+    "id": "3fad7bf1c139817581dffcfb133f6281",
+    "slug": "kod-p0740-tcc-rozwiazanie-tipy-2"
+  },
+  {
+    "id": "3fad7bf1c1398175836ef48378a77d9d",
+    "slug": "1995-chevrolet-c-k-instrukcja-obslugi-owner-s-manual"
+  },
+  {
+    "id": "3fad7bf1c1398176821adf79ae61ce75",
+    "slug": "wymiana-paska-klinowego-gmt400-tipy"
+  },
+  {
+    "id": "3fad7bf1c13981768cd2d12cb6ab6f9d",
+    "slug": "problemy-z-ukladem-hamulcowym-przewody-szczegoly"
+  },
+  {
+    "id": "3fad7bf1c1398176b31feb13a58a2af7",
+    "slug": "jak-sprawdzic-i-wyczyscic-zawor-egr-diy"
+  },
+  {
+    "id": "3fad7bf1c13981779927eb59bb13d715",
+    "slug": "wymiana-oleju-w-mostach-4x4"
+  },
+  {
+    "id": "3fad7bf1c1398177af5cfe7d3621c8f4",
+    "slug": "wymiana-filtra-paliwa-gmt400"
+  },
+  {
+    "id": "3fad7bf1c1398177b609ec3731ac2d70",
+    "slug": "kod-p0730-nieprawidlowe-przelozenie-rozwiazanie-tipy"
+  },
+  {
+    "id": "3fad7bf1c139817980e2e487268e13ee",
+    "slug": "kod-p1404-zawor-egr-pozycja"
+  },
+  {
+    "id": "3fad7bf1c1398179a10be256f5a75dc3",
+    "slug": "usterka-czujnika-map-maf"
+  },
+  {
+    "id": "3fad7bf1c1398179a62ccd047c856905",
+    "slug": "problemy-z-ukladem-kierowniczym-koncowki"
+  },
+  {
+    "id": "3fad7bf1c1398179b259ebc4e904e387",
+    "slug": "kod-p0117-czujnik-temperatury-plynu-ect"
+  },
+  {
+    "id": "3fad7bf1c139817a8229cad960681fab",
+    "slug": "wymiana-pompy-paliwa-instrukcja"
+  },
+  {
+    "id": "3fad7bf1c139817aa8c7cf9f4c7e0d44",
+    "slug": "wymiana-plynu-chlodniczego-gmt400"
+  },
+  {
+    "id": "3fad7bf1c139817aaa35f55ff3341596",
+    "slug": "kod-p0562-niskie-napiecie-szczegoly"
+  },
+  {
+    "id": "3fad7bf1c139817b9297e63542b331c6",
+    "slug": "kod-p0507-wysokie-obroty-wolne"
+  },
+  {
+    "id": "3fad7bf1c139817baccff3fecd8f53f0",
+    "slug": "jak-sprawdzic-i-wyczyscic-przepustnice-diy"
+  },
+  {
+    "id": "3fad7bf1c139817c8101d385a7b2cbf8",
+    "slug": "jak-wymienic-filtr-paliwa-krok-po-kroku"
+  },
+  {
+    "id": "3fad7bf1c139817c8d06cb2d5a31433b",
+    "slug": "wymiana-plynu-wspomagania-szczegoly"
+  },
+  {
+    "id": "3fad7bf1c139817c9162eeeae8dc1089",
+    "slug": "problemy-z-pompa-wody-vortec"
+  },
+  {
+    "id": "3fad7bf1c139817c998add6cb28dd1b0",
+    "slug": "diagnostyka-kodow-evap-praktyczny-poradnik"
+  },
+  {
+    "id": "3fad7bf1c139817e9341ea54a03215ce",
+    "slug": "wymiana-oleju-w-skrzyni-rozdzielczej-np241c-np243c-nv246-diy"
+  },
+  {
+    "id": "3fad7bf1c139817e9a94fcc494ec01fc",
+    "slug": "tahoe-2-drzwi"
+  },
+  {
+    "id": "3fad7bf1c139817eb4b5c8f1670edeec",
+    "slug": "wymiana-filtrow-powietrza-gmt400-tipy"
+  },
+  {
+    "id": "3fad7bf1c139817f825afc4cb160e0db",
+    "slug": "kod-p0122-tps-szczegoly"
+  },
+  {
+    "id": "3fad7bf1c139817fa876d88e5ff9bbcf",
+    "slug": "wymiana-swiec-zarowych-diesel-6-5l"
+  },
+  {
+    "id": "3fad7bf1c1398180989bd0f9e913f437",
+    "slug": "jak-wymienic-amortyzatory-przednie-gmt400"
+  },
+  {
+    "id": "3fad7bf1c13981818596ee7e1ccbfd58",
+    "slug": "wymiana-oleju-w-skrzyni-rozdzielczej-tipy-2"
+  },
+  {
+    "id": "3fad7bf1c13981828a91f2eb2163f1ae",
+    "slug": "kod-p1860-4l60e-tcc-pwm-solenoid"
+  },
+  {
+    "id": "3fad7bf1c13981839c7beb61b63aa27d",
+    "slug": "kod-p0449-zawor-odpowietrzajacy-evap"
+  },
+  {
+    "id": "3fad7bf1c13981849b9bf872c6190d9d",
+    "slug": "uszczelki-kolektora-dolotowego-vortec-objawy-i-naprawa"
+  },
+  {
+    "id": "3fad7bf1c139818582e8d11b46454a39",
+    "slug": "wymiana-swiec-zarowych-6-5l-diesel-diy"
+  },
+  {
+    "id": "3fad7bf1c13981858d3bc70ce734a609",
+    "slug": "chevrolet-tahoe-2-drzwi"
+  },
+  {
+    "id": "3fad7bf1c13981859a88ff1295724b3d",
+    "slug": "problemy-z-ukladem-zaplonowym-tbi-tipy"
+  },
+  {
+    "id": "3fad7bf1c1398185a0edef882ee971cd",
+    "slug": "skrzynia-rozdzielcza-np241c-np243c-nv246"
+  },
+  {
+    "id": "3fad7bf1c1398186b47ff6e3a30f8104",
+    "slug": "kod-p0505-uklad-wolnych-obrotow-iac"
+  },
+  {
+    "id": "3fad7bf1c13981879497fa3b9dc915d9",
+    "slug": "problemy-z-ukladem-zawieszenia-sworznie"
+  },
+  {
+    "id": "3fad7bf1c1398187bf56ef93fb16fb14",
+    "slug": "kod-p0171-uboga-mieszanka-rozwiazanie-tipy"
+  },
+  {
+    "id": "3fad7bf1c1398188884ff1578b480073",
+    "slug": "kod-p0785-cewka-3-2"
+  },
+  {
+    "id": "3fad7bf1c13981888ffce4706b391b9a",
+    "slug": "chevrolet-c-k-1500-regular-cab-pelny-opis"
+  },
+  {
+    "id": "3fad7bf1c1398188a330ea56ff16affa",
+    "slug": "pojemnosci-plynow-gmt400-1995-tahoe-suburban"
+  },
+  {
+    "id": "3fad7bf1c1398188afe5d8c38b591577",
+    "slug": "kod-p0751-cewka-1-2-wydajnosc-rozwiazanie-tipy-2"
+  },
+  {
+    "id": "3fad7bf1c1398188be5cd64190b76736",
+    "slug": "wymiana-oleju-w-skrzyni-manualnej-szczegoly"
+  },
+  {
+    "id": "3fad7bf1c13981898d8bfd9a8fd52695",
+    "slug": "kod-p0128-termostat-szczegoly"
+  },
+  {
+    "id": "3fad7bf1c139818a8c99d0c688385345",
+    "slug": "problemy-z-ukladem-abs-modul"
+  },
+  {
+    "id": "3fad7bf1c139818a970cd79c5f70d8fc",
+    "slug": "kod-p0306-cylinder-6-szczegoly"
+  },
+  {
+    "id": "3fad7bf1c139818aaa76f1ba68b079ea",
+    "slug": "kod-p0440-evap-ogolny-rozwiazanie-tipy"
+  },
+  {
+    "id": "3fad7bf1c139818aadaec59c190108e2",
+    "slug": "kod-p0449-zawor-evap-szczegoly"
+  },
+  {
+    "id": "3fad7bf1c139818ab2fdecc71ece0a62",
+    "slug": "np241c-np243c-nv246-identyfikacja-i-serwis"
+  },
+  {
+    "id": "3fad7bf1c139818ba5bddd736e4c9f33",
+    "slug": "kod-p0500-vss-rozwiazanie-tipy-2"
+  },
+  {
+    "id": "3fad7bf1c139818bb82ddc9d1c7a6697",
+    "slug": "wymiana-tarczy-hamulcowej-przedniej-diy"
+  },
+  {
+    "id": "3fad7bf1c139818c9e97d50c97ccb192",
+    "slug": "kod-p0171-p0174-zbyt-uboga-mieszanka"
+  },
+  {
+    "id": "3fad7bf1c139818ca843ffc227de415f",
+    "slug": "diagnostyka-np241c-np243c-nv246-4x4-nie-dziala"
+  },
+  {
+    "id": "3fad7bf1c139818db2d9f92818449a93",
+    "slug": "kod-p0171-uboga-mieszanka-szczegoly"
+  },
+  {
+    "id": "3fad7bf1c139818e8f85ef2cf6338443",
+    "slug": "kod-p0308-cylinder-8-rozwiazanie-tipy"
+  },
+  {
+    "id": "3fad7bf1c139818e9d6ceba87b9849d6",
+    "slug": "wymiana-oleju-mostow-gmt400"
+  },
+  {
+    "id": "3fad7bf1c139818f8989ec1e3f1e13e9",
+    "slug": "kod-p1860-cewka-tcc-pwm"
+  },
+  {
+    "id": "3fad7bf1c139818f911ce8ab1f65e25d",
+    "slug": "uszczelki-kolektora-dolotowego-vortec"
+  },
+  {
+    "id": "3fad7bf1c139818f9e38fa670cb25335",
+    "slug": "wymiana-oleju-w-skrzyni-rozdzielczej"
+  },
+  {
+    "id": "3fad7bf1c139818fabf3eb2a53c44d34",
+    "slug": "momenty-dokrecania-kolektor-dolotowy-vortec"
+  },
+  {
+    "id": "3fad7bf1c1398190b550c0e4356526a9",
+    "slug": "chevrolet-c-k-2500"
+  },
+  {
+    "id": "3fad7bf1c1398192ac13e387e8019c67",
+    "slug": "problemy-z-zawieszeniem-przednim-gmt400-tipy"
+  },
+  {
+    "id": "3fad7bf1c1398192ae6bfb330e6d10c4",
+    "slug": "wymiana-oleju-w-4l60e-szczegoly-2"
+  },
+  {
+    "id": "3fad7bf1c1398192bc7ddd3c3dc610d2",
+    "slug": "kod-p0751-cewka-1-2-wydajnosc-3fad7bf1c1398192bc7ddd3c3dc610d2"
+  },
+  {
+    "id": "3fad7bf1c13981939614e8e4a33ee66c",
+    "slug": "kod-p0401-egr-szczegoly-2"
+  },
+  {
+    "id": "3fad7bf1c139819484d8df2e10814115",
+    "slug": "problemy-z-ukladem-paliwowym-pompa"
+  },
+  {
+    "id": "3fad7bf1c1398194a00ee6ba36f50d94",
+    "slug": "kod-p0307-cylinder-7-rozwiazanie-tipy"
+  },
+  {
+    "id": "3fad7bf1c1398194b00acf6404bfe8f9",
+    "slug": "wymiana-oleju-i-filtra-4l60e-pelna-instrukcja"
+  },
+  {
+    "id": "3fad7bf1c1398195981dd48730ebe11a",
+    "slug": "kod-p1133-sonda-lambda-wydajnosc-rozwiazanie-tipy"
+  },
+  {
+    "id": "3fad7bf1c139819785afd74272f17702",
+    "slug": "chevrolet-c-k-1500"
+  },
+  {
+    "id": "3fad7bf1c139819788c3f70ee2a22ea1",
+    "slug": "kod-p0751-cewka-1-2-wydajnosc-szczegoly-2"
+  },
+  {
+    "id": "3fad7bf1c13981978e96f1efc56b910b",
+    "slug": "p0101-maf-range-rationality-5-7l-l31"
+  },
+  {
+    "id": "3fad7bf1c1398197b7deecc57295e023",
+    "slug": "problemy-z-alternatorem-gmt400"
+  },
+  {
+    "id": "3fad7bf1c1398198a433e116a00839c4",
+    "slug": "kod-p0122-tps-rozwiazanie-tipy-2"
+  },
+  {
+    "id": "3fad7bf1c13981998e01d58c47d6ec49",
+    "slug": "wymiana-plynu-hamulcowego"
+  },
+  {
+    "id": "3fad7bf1c139819999eac88c4e545199",
+    "slug": "problemy-z-ukladem-zaplonowym-vortec"
+  },
+  {
+    "id": "3fad7bf1c1398199ad96f0cc8d5622ab",
+    "slug": "p0420-catalyst-efficiency-below-threshold"
+  },
+  {
+    "id": "3fad7bf1c139819ab4cdec05f862bbbd",
+    "slug": "czyszczenie-zaworu-egr-tipy"
+  },
+  {
+    "id": "3fad7bf1c139819b81e7ec387784d779",
+    "slug": "kod-p0758-cewka-2-3-rozwiazanie-tipy-2"
+  },
+  {
+    "id": "3fad7bf1c139819b8220ef4e9bdaf62d",
+    "slug": "harmonogram-serwisowy-gmt400-podstawowy"
+  },
+  {
+    "id": "3fad7bf1c139819bbfcfd54f635206bb",
+    "slug": "jak-rozpoznac-skrzynie-rozdzielcza-new-process"
+  },
+  {
+    "id": "3fad7bf1c139819d94a5fe586de88181",
+    "slug": "problemy-z-zawieszeniem-przednim-gmt400"
+  },
+  {
+    "id": "3fad7bf1c139819d9beded5e887c976b",
+    "slug": "problemy-z-ukladem-kierowniczym-przekladnia-szczegoly"
+  },
+  {
+    "id": "3fad7bf1c139819dac3ae5ea749c3d3e",
+    "slug": "wymiana-oleju-silnikowego-pelna-procedura"
+  },
+  {
+    "id": "3fad7bf1c139819e93edd7d7cfd9104d",
+    "slug": "problemy-z-pompa-wody-vortec-tipy"
+  },
+  {
+    "id": "3fad7bf1c139819f876ffbffefb498f0",
+    "slug": "kod-p0455-duza-nieszczelnosc-evap-szczegoly"
+  },
+  {
+    "id": "3fad7bf1c139819f9d2bc7f3ffb83e82",
+    "slug": "wymiana-atf-w-4l60e-pelna-procedura"
+  },
+  {
+    "id": "3fad7bf1c13981a084ade81fdaab40cc",
+    "slug": "kod-p0440-evap-szczegoly-2"
+  },
+  {
+    "id": "3fad7bf1c13981a19e4be0967779ac95",
+    "slug": "wymiana-oleju-w-skrzyni-4l60e-tipy"
+  },
+  {
+    "id": "3fad7bf1c13981a29e01cac7b306cc6d",
+    "slug": "wymiana-plynu-chlodniczego-szczegoly-2"
+  },
+  {
+    "id": "3fad7bf1c13981a2b1a7c0717421b63a",
+    "slug": "np241c-np243c-nv246-przelozenia-i-zastosowanie"
+  },
+  {
+    "id": "3fad7bf1c13981a2b5dbf1026f180788",
+    "slug": "kod-p0500-vss-szczegoly"
+  },
+  {
+    "id": "3fad7bf1c13981a3bcc9c582fef80d50",
+    "slug": "wymiana-oleju-w-skrzyni-rozdzielczej-szczegoly"
+  },
+  {
+    "id": "3fad7bf1c13981a48595cd6d22d8682d",
+    "slug": "sprawdzenie-cisnienia-w-oponach-gmt400-tipy"
+  },
+  {
+    "id": "3fad7bf1c13981a4a13dff2d6916e398",
+    "slug": "kod-p0335-ckp-rozwiazanie-tipy"
+  },
+  {
+    "id": "3fad7bf1c13981a4bce1c193c2cb2d6c",
+    "slug": "wymiana-plynu-hamulcowego-szczegoly"
+  },
+  {
+    "id": "3fad7bf1c13981a681f9c587cbcfe8ab",
+    "slug": "kod-p0753-cewka-1-2-rozwiazanie-tipy"
+  },
+  {
+    "id": "3fad7bf1c13981a68995c8da4cf191e6",
+    "slug": "kod-p0440-evap-ogolny-szczegoly"
+  },
+  {
+    "id": "3fad7bf1c13981a696d9cd3a6fc96fc1",
+    "slug": "problemy-z-4l60e-diagnostyka"
+  },
+  {
+    "id": "3fad7bf1c13981a78263d65db46a7875",
+    "slug": "wymiana-oleju-w-np241c-np243c-nv246-szczegoly-3"
+  },
+  {
+    "id": "3fad7bf1c13981a78d78dcbc3ecd7ba6",
+    "slug": "kod-p0128-termostat-rozwiazanie-tipy"
+  },
+  {
+    "id": "3fad7bf1c13981a7a1b1c5d6fcf0afc4",
+    "slug": "kod-p1133-sonda-lambda-wydajnosc-szczegoly"
+  },
+  {
+    "id": "3fad7bf1c13981a89d77e67433c15f21",
+    "slug": "kod-p0251-pompa-diesel-szczegoly-2"
+  },
+  {
+    "id": "3fad7bf1c13981a8b597c029196a7d57",
+    "slug": "kod-p1404-egr-pozycja-rozwiazanie-tipy"
+  },
+  {
+    "id": "3fad7bf1c13981a8bcd4c8d9056f4c27",
+    "slug": "regulacja-wolnych-obrotow-tbi-tipy"
+  },
+  {
+    "id": "3fad7bf1c13981a98aeccd358d634734",
+    "slug": "wymiana-oleju-w-skrzyni-4l80e-tipy"
+  },
+  {
+    "id": "3fad7bf1c13981a9af11d0dbb3e03272",
+    "slug": "problemy-z-ukladem-zawieszenia-tuleje"
+  },
+  {
+    "id": "3fad7bf1c13981a9b26bec23cb8a1255",
+    "slug": "problemy-z-ukladem-napedowym-4x4-tipy"
+  },
+  {
+    "id": "3fad7bf1c13981aaa0c6f296c66b68dd",
+    "slug": "kod-p0420-katalizator-rozwiazanie-tipy"
+  },
+  {
+    "id": "3fad7bf1c13981aab0fecdb10a7d5a62",
+    "slug": "kod-p1810-prndl-rozwiazanie-tipy"
+  },
+  {
+    "id": "3fad7bf1c13981ab8395e9726e93bd20",
+    "slug": "problemy-z-ukladem-paliwowym-tbi"
+  },
+  {
+    "id": "3fad7bf1c13981ab8bfff6f4bf6d442c",
+    "slug": "kod-p0301-cylinder-1-szczegoly-2"
+  },
+  {
+    "id": "3fad7bf1c13981aca7d7c45fe184d5d3",
+    "slug": "wymiana-paska-wieloklinowego-vortec"
+  },
+  {
+    "id": "3fad7bf1c13981acae4fdf2c6ddfd647",
+    "slug": "problemy-z-ukladem-zaplonowym-przewody-szczegoly"
+  },
+  {
+    "id": "3fad7bf1c13981acbe1aca764818c84b",
+    "slug": "wymiana-filtra-paliwa-gmt400-tipy"
+  },
+  {
+    "id": "3fad7bf1c13981adb05de46aad48578c",
+    "slug": "kod-p0113-czujnik-temperatury-powietrza-dolotowego-iat"
+  },
+  {
+    "id": "3fad7bf1c13981adb623c90e44359767",
+    "slug": "kod-p0700-usterka-skrzyni-ogolny"
+  },
+  {
+    "id": "3fad7bf1c13981adb8efd8677881b3a2",
+    "slug": "chevrolet-suburban-1500"
+  },
+  {
+    "id": "3fad7bf1c13981ae8855f4b2bd906dc8",
+    "slug": "identyfikacja-skrzyni-rozdzielczej-gmt400"
+  },
+  {
+    "id": "3fad7bf1c13981af8235cd84a6e7c6e7",
+    "slug": "p0320-ignition-distributor-engine-speed-input-circuit"
+  },
+  {
+    "id": "3fad7bf1c13981af8aafc4c701b51c5a",
+    "slug": "wymiana-oleju-w-skrzyni-rozdzielczej-np241c-np243c-nv246"
+  },
+  {
+    "id": "3fad7bf1c13981afbe03e9a6cba6e3a3",
+    "slug": "kod-p0401-egr-rozwiazanie-tipy"
+  },
+  {
+    "id": "3fad7bf1c13981b0895ad467135612e2",
+    "slug": "p0740-p0753-p0758-brak-zmiany-biegow-4l60e"
+  },
+  {
+    "id": "3fad7bf1c13981b19a52d200086476be",
+    "slug": "wymiana-swiec-zaplonowych-vortec"
+  },
+  {
+    "id": "3fad7bf1c13981b1ba4eebcba1035690",
+    "slug": "kod-p0711-czujnik-temperatury-atf"
+  },
+  {
+    "id": "3fad7bf1c13981b28ee4c5018e4bc016",
+    "slug": "wymiana-klockow-hamulcowych-tipy"
+  },
+  {
+    "id": "3fad7bf1c13981b29ac3e25e7c8f7adf",
+    "slug": "wymiana-oleju-w-mostach-tylnych-pelna-instrukcja"
+  },
+  {
+    "id": "3fad7bf1c13981b29e5fd89306e918eb",
+    "slug": "kod-p0562-niskie-napiecie-ukladu"
+  },
+  {
+    "id": "3fad7bf1c13981b48374c41653d47c65",
+    "slug": "wymiana-oleju-w-mostach-ogolna"
+  },
+  {
+    "id": "3fad7bf1c13981b499b0f194de034ee4",
+    "slug": "problemy-z-ukladem-kierowniczym-gmt400"
+  },
+  {
+    "id": "3fad7bf1c13981b595b3cf7a2062c425",
+    "slug": "wymiana-oleju-w-skrzyni-manualnej-tipy"
+  },
+  {
+    "id": "3fad7bf1c13981b885f0d27f3c2f7a9b",
+    "slug": "wymiana-oleju-w-skrzyni-rozdzielczej-np241c-np243c-nv246-3fad7bf1c13981b885f0d27f3c2f7a9b"
+  },
+  {
+    "id": "3fad7bf1c13981b88882d6fffeecfb9e",
+    "slug": "wymiana-plynu-chlodniczego-gmt400-tipy"
+  },
+  {
+    "id": "3fad7bf1c13981b894d9c6c7114354c8",
+    "slug": "jak-wymienic-pompe-paliwa-w-gmt400"
+  },
+  {
+    "id": "3fad7bf1c13981b8b03dee379ac2218e",
+    "slug": "kod-p0335-czujnik-polozenia-walu-korbowego-ckp"
+  },
+  {
+    "id": "3fad7bf1c13981b9b7b7c378fa80532c",
+    "slug": "wymiana-oleju-w-np241c-np243c-nv246-tipy"
+  },
+  {
+    "id": "3fad7bf1c13981bab519d97ae0a7fc6b",
+    "slug": "czyszczenie-i-regeneracja-zaworu-iac-diy"
+  },
+  {
+    "id": "3fad7bf1c13981bab834f27ed3804fa2",
+    "slug": "kod-p1626-komunikacja-z-modulem-skrzyni"
+  },
+  {
+    "id": "3fad7bf1c13981bba90fcba0c0e1242b",
+    "slug": "wymiana-oleju-w-mostach-przednich-tipy"
+  },
+  {
+    "id": "3fad7bf1c13981bbb0c1dadcec43c342",
+    "slug": "kod-p0730-nieprawidlowe-przelozenie-skrzyni"
+  },
+  {
+    "id": "3fad7bf1c13981bc8b51d05e997fbfed",
+    "slug": "problemy-z-ukladem-abs-modul-szczegoly"
+  },
+  {
+    "id": "3fad7bf1c13981bcbfc7fc2ece4284a8",
+    "slug": "kod-p0455-duza-nieszczelnosc-evap-rozwiazanie-tipy-2"
+  },
+  {
+    "id": "3fad7bf1c13981bd912ff9068f15e5ba",
+    "slug": "jak-sprawdzic-i-wymienic-czujnik-ect"
+  },
+  {
+    "id": "3fad7bf1c13981bd9f06f464c656a814",
+    "slug": "kod-p0562-niskie-napiecie-szczegoly-2"
+  },
+  {
+    "id": "3fad7bf1c13981be8728d26a3e112639",
+    "slug": "kod-p0172-bogata-mieszanka-szczegoly"
+  },
+  {
+    "id": "3fad7bf1c13981be897ff818b5e8565e",
+    "slug": "kod-p0175-bogata-mieszanka-bank-2"
+  },
+  {
+    "id": "3fad7bf1c13981beab1ef3ad995a5072",
+    "slug": "kod-p0301-cylinder-1-rozwiazanie-tipy-2"
+  },
+  {
+    "id": "3fad7bf1c13981beb123cbcc810547d4",
+    "slug": "kod-p0305-cylinder-5-szczegoly"
+  },
+  {
+    "id": "3fad7bf1c13981bfadc7fa5734b1dc39",
+    "slug": "kod-p0335-ckp-szczegoly"
+  },
+  {
+    "id": "3fad7bf1c13981c0aad8e100b913de22",
+    "slug": "kod-p0172-bogata-mieszanka-rozwiazanie-tipy"
+  },
+  {
+    "id": "3fad7bf1c13981c2ad20e3d1c946f206",
+    "slug": "wymiana-atf-w-4l60e"
+  },
+  {
+    "id": "3fad7bf1c13981c2bc86ed33566da18c",
+    "slug": "kod-p0335-ckp-szczegoly-2"
+  },
+  {
+    "id": "3fad7bf1c13981c39e6fc1cb615b4163",
+    "slug": "gmc-yukon-2-drzwi"
+  },
+  {
+    "id": "3fad7bf1c13981c497cecc812b93ea68",
+    "slug": "wymiana-oleju-w-skrzyni-rozdzielczej-ogolna"
+  },
+  {
+    "id": "3fad7bf1c13981c4a177f421b4d0ebe7",
+    "slug": "kod-p0303-cylinder-3-szczegoly"
+  },
+  {
+    "id": "3fad7bf1c13981c4ab4de6d53a327793",
+    "slug": "chevrolet-tahoe-2-drzwi-3fad7bf1c13981c4ab4de6d53a327793"
+  },
+  {
+    "id": "3fad7bf1c13981c78ceddd94fbc30c1f",
+    "slug": "zardzewiale-przewody-hamulcowe-typowa-usterka"
+  },
+  {
+    "id": "3fad7bf1c13981c8be8ff1524a944366",
+    "slug": "kod-p0420-katalizator-szczegoly"
+  },
+  {
+    "id": "3fad7bf1c13981c9b223fa3ea70416f0",
+    "slug": "kod-p0753-cewka-1-2-elektryczna"
+  },
+  {
+    "id": "3fad7bf1c13981cab6c1e2e1529c039f",
+    "slug": "problemy-z-ukladem-chlodzenia-gmt400"
+  },
+  {
+    "id": "3fad7bf1c13981cba0e5d8c745972cfc",
+    "slug": "kod-p0302-cylinder-2-szczegoly-2"
+  },
+  {
+    "id": "3fad7bf1c13981cba684e43b97e7accc",
+    "slug": "diagnostyka-problemow-z-4x4-np241c-np243c-nv246-praktyczny-poradnik"
+  },
+  {
+    "id": "3fad7bf1c13981cc9112fc9520b1b6f7",
+    "slug": "kod-p0306-wypadanie-na-cylindrze-6"
+  },
+  {
+    "id": "3fad7bf1c13981cc9219c66a1165a191",
+    "slug": "kod-12"
+  },
+  {
+    "id": "3fad7bf1c13981cc9381dcc47ba06504",
+    "slug": "kod-p0455-duza-nieszczelnosc-evap"
+  },
+  {
+    "id": "3fad7bf1c13981cc9ebbd077fff0c865",
+    "slug": "kod-p0420-katalizator-bank-1-szczegoly-2"
+  },
+  {
+    "id": "3fad7bf1c13981ccb688dc06effe9ef8",
+    "slug": "wymiana-czujnika-maf-instrukcja"
+  },
+  {
+    "id": "3fad7bf1c13981ccbbc9fba30ab581b0",
+    "slug": "kod-p0302-wypadanie-na-cylindrze-2"
+  },
+  {
+    "id": "3fad7bf1c13981cda32bc828ba5c1441",
+    "slug": "kod-p0128-termostat-rozwiazanie-tipy-2"
+  },
+  {
+    "id": "3fad7bf1c13981cdae73c7eb95a98ef8",
+    "slug": "kod-p0401-egr-rozwiazanie-tipy-2"
+  },
+  {
+    "id": "3fad7bf1c13981cdb312dced2fa651a3",
+    "slug": "chevrolet-suburban-1500-pelny-opis"
+  },
+  {
+    "id": "3fad7bf1c13981ce95dffe43a945082b",
+    "slug": "kod-p0740-sprzeglo-hydrokinetyczne-tcc"
+  },
+  {
+    "id": "3fad7bf1c13981ceaa08d296a18c12f6",
+    "slug": "chevrolet-suburban-2500-3fad7bf1c13981ceaa08d296a18c12f6"
+  },
+  {
+    "id": "3fad7bf1c13981cf86e8f15f4cfe5af0",
+    "slug": "wymiana-oleju-w-mostach-przednich-4x4"
+  },
+  {
+    "id": "3fad7bf1c13981cf896ed54cc44d7579",
+    "slug": "kod-p0740-cewka-tcc"
+  },
+  {
+    "id": "3fad7bf1c13981cfbd42e6dd2eca994d",
+    "slug": "kod-p1626-komunikacja-skrzyni-szczegoly"
+  },
+  {
+    "id": "3fad7bf1c13981d18da7fdfd236b2a5a",
+    "slug": "6-5l-problemy-z-pompa-wtryskowa"
+  },
+  {
+    "id": "3fad7bf1c13981d198e5e389040d901f",
+    "slug": "wymiana-oleju-w-skrzyni-4l60e"
+  },
+  {
+    "id": "3fad7bf1c13981d2b322e9481453ee8b",
+    "slug": "wymiana-oleju-w-mostach-tylnych-szczegoly"
+  },
+  {
+    "id": "3fad7bf1c13981d3a427c089e741aba8",
+    "slug": "kod-p0122-czujnik-polozenia-przepustnicy-tps"
+  },
+  {
+    "id": "3fad7bf1c13981d3a852dda493cb0f11",
+    "slug": "kod-p0300-wypadanie-zaplonu"
+  },
+  {
+    "id": "3fad7bf1c13981d3b195c31a29a5f43c",
+    "slug": "kod-p0121-tps-zakres-szczegoly"
+  },
+  {
+    "id": "3fad7bf1c13981d5be69eda59df62405",
+    "slug": "kod-p0135-grzalka-sondy-szczegoly"
+  },
+  {
+    "id": "3fad7bf1c13981d6995be738efd4a0d5",
+    "slug": "wymiana-oleju-silnikowego-tipy-2"
+  },
+  {
+    "id": "3fad7bf1c13981d79bf8f05beb676ea3",
+    "slug": "jak-wymienic-pompe-wspomagania-gmt400"
+  },
+  {
+    "id": "3fad7bf1c13981d7ad93eee563d67d62",
+    "slug": "kod-p0172-p0175-zbyt-bogata-mieszanka"
+  },
+  {
+    "id": "3fad7bf1c13981d88aeec6c393bddc74",
+    "slug": "kod-p0463-czujnik-poziomu-paliwa"
+  },
+  {
+    "id": "3fad7bf1c13981d8ac7ed8eff92c52d2",
+    "slug": "kod-p0446-zawor-evap-rozwiazanie-tipy"
+  },
+  {
+    "id": "3fad7bf1c13981d8ad4cd43f861b6680",
+    "slug": "kod-p0711-temperatura-atf-rozwiazanie-tipy"
+  },
+  {
+    "id": "3fad7bf1c13981d9a16adfbf1f2c2a48",
+    "slug": "jak-sprawdzic-poziom-i-stan-atf-pelny-poradnik"
+  },
+  {
+    "id": "3fad7bf1c13981d9a8f9f788e48a91ea",
+    "slug": "wymiana-oleju-w-mostach-przednich-szczegoly-2"
+  },
+  {
+    "id": "3fad7bf1c13981d9b260e6fc3cdf4c1c",
+    "slug": "kod-p0122-tps-rozwiazanie-tipy"
+  },
+  {
+    "id": "3fad7bf1c13981da841cd1f1b9f66e17",
+    "slug": "gmc-yukon-xl-odpowiednik-suburban"
+  },
+  {
+    "id": "3fad7bf1c13981da8607fb9fe3398b30",
+    "slug": "np241c-np243c-nv246-tryby-pracy-i-typowe-usterki"
+  },
+  {
+    "id": "3fad7bf1c13981da8de8fe2b4b75cfc7",
+    "slug": "kod-p0306-cylinder-6-rozwiazanie-tipy"
+  },
+  {
+    "id": "3fad7bf1c13981dbafc1d374a8589420",
+    "slug": "p0440-evap-system"
+  },
+  {
+    "id": "3fad7bf1c13981dca40ed15b8c02ffc0",
+    "slug": "problemy-z-ukladem-zawieszenia-stabilizatory"
+  },
+  {
+    "id": "3fad7bf1c13981dcbc6ac269f404ab99",
+    "slug": "wymiana-filtrow-kabinowych-tipy"
+  },
+  {
+    "id": "3fad7bf1c13981dd9854f55cc6885971",
+    "slug": "kod-p0756-cewka-2-3-wydajnosc-rozwiazanie-tipy"
+  },
+  {
+    "id": "3fad7bf1c13981de8bbecac04049d8c9",
+    "slug": "wymiana-oleju-w-skrzyni-manualnej"
+  },
+  {
+    "id": "3fad7bf1c13981de9cafef0da8acc30d",
+    "slug": "kod-p0171-uboga-mieszanka-rozwiazanie-tipy-2"
+  },
+  {
+    "id": "3fad7bf1c13981dfa6e5ef1f6eb293c5",
+    "slug": "chevrolet-c-k-1500-extended-cab"
+  },
+  {
+    "id": "3fad7bf1c13981e0b874d0bcc6a0dcef",
+    "slug": "jak-sprawdzic-i-wymienic-termostat-gmt400"
+  },
+  {
+    "id": "3fad7bf1c13981e18c17ea89b6671e75",
+    "slug": "kod-p0308-cylinder-8-szczegoly"
+  },
+  {
+    "id": "3fad7bf1c13981e1ad13e5098db6e8b4",
+    "slug": "kod-p0562-niskie-napiecie-rozwiazanie-tipy-2"
+  },
+  {
+    "id": "3fad7bf1c13981e2a7aee840610fb3f6",
+    "slug": "4l80e-roznice-wzgledem-4l60e"
+  },
+  {
+    "id": "3fad7bf1c13981e3821dc3a85996f3d7",
+    "slug": "problemy-z-rozrusznikiem-gmt400-tipy"
+  },
+  {
+    "id": "3fad7bf1c13981e48115ed30577559bb",
+    "slug": "problemy-z-ukladem-kierowniczym-pompa"
+  },
+  {
+    "id": "3fad7bf1c13981e4979feae429f04b13",
+    "slug": "pelna-procedura-wymiany-oleju-w-mostach-4x4"
+  },
+  {
+    "id": "3fad7bf1c13981e594f5c08f53d323fc",
+    "slug": "1996-5-7l-l31-parametry-diagnostyczne-mode-6"
+  },
+  {
+    "id": "3fad7bf1c13981e59f28e9b5ab38ae2b",
+    "slug": "wymiana-oleju-w-np241c-np243c-nv246-szczegoly"
+  },
+  {
+    "id": "3fad7bf1c13981e68120f016dff4a332",
+    "slug": "kod-p0442-mala-nieszczelnosc-evap-rozwiazanie-tipy"
+  },
+  {
+    "id": "3fad7bf1c13981e688becc269da257c9",
+    "slug": "problemy-z-ukladem-abs-gmt400"
+  },
+  {
+    "id": "3fad7bf1c13981e6abbbc40f1d86b699",
+    "slug": "jak-wymienic-cewki-zaplonowe-vortec"
+  },
+  {
+    "id": "3fad7bf1c13981e6b474cbd832603225",
+    "slug": "wymiana-swiec-zarowych-szczegoly"
+  },
+  {
+    "id": "3fad7bf1c13981e78482c761fca4c872",
+    "slug": "wymiana-rozrusznika-gmt400-krok-po-kroku"
+  },
+  {
+    "id": "3fad7bf1c13981e79393d9215db37678",
+    "slug": "wymiana-oleju-w-mostach-tylnych-szczegoly-3"
+  },
+  {
+    "id": "3fad7bf1c13981e7b426c016db51d736",
+    "slug": "kod-p0446-zawor-evap-szczegoly"
+  },
+  {
+    "id": "3fad7bf1c13981e883a5ccc728cb33f9",
+    "slug": "sprawdzenie-poziomu-atf-w-4l60e-tipy"
+  },
+  {
+    "id": "3fad7bf1c13981e980b6f297da95285d",
+    "slug": "kod-p0463-poziom-paliwa-rozwiazanie-tipy"
+  },
+  {
+    "id": "3fad7bf1c13981e9a159f353341cc10d",
+    "slug": "wymiana-tulei-wahaczy-tipy-diy"
+  },
+  {
+    "id": "3fad7bf1c13981e9a3d0fd3c7cc0ad3b",
+    "slug": "jak-sprawdzic-uszczelki-kolektora-vortec-bez-demontazu"
+  },
+  {
+    "id": "3fad7bf1c13981ea8fd0fa5f78597b50",
+    "slug": "problemy-z-ukladem-wydechowym-rdza"
+  },
+  {
+    "id": "3fad7bf1c13981ea9a0ad0b7b48e3301",
+    "slug": "wymiana-plynu-chlodniczego-gmt400-3fad7bf1c13981ea9a0ad0b7b48e3301"
+  },
+  {
+    "id": "3fad7bf1c13981eaac5ede90ad53eaa9",
+    "slug": "chevrolet-tahoe-2-drzwi-4x4-pelny-opis"
+  },
+  {
+    "id": "3fad7bf1c13981eb86bbfa4f43a0e3e8",
+    "slug": "kod-p0305-wypadanie-na-cylindrze-5"
+  },
+  {
+    "id": "3fad7bf1c13981eb9242fe5f354cad64",
+    "slug": "cisnienie-opon-gmt400-podstawowe-wartosci"
+  },
+  {
+    "id": "3fad7bf1c13981eba9f4e8594aedf23c",
+    "slug": "import-gmt400-do-polski-formalnosci"
+  },
+  {
+    "id": "3fad7bf1c13981ed81ecd378373e3b1b",
+    "slug": "kod-p0304-cylinder-4-szczegoly"
+  },
+  {
+    "id": "3fad7bf1c13981eeb4caf7c72fe013cb",
+    "slug": "wymiana-paska-wieloklinowego-vortec-pelna-instrukcja"
+  },
+  {
+    "id": "3fad7bf1c13981eeb8b2eb5011165543",
+    "slug": "wymiana-oleju-w-skrzyni-4l60e-szczegoly"
+  },
+  {
+    "id": "3fad7bf1c13981eeba10f1a60f4733f8",
+    "slug": "problemy-z-ukladem-4x4-np241c-np243c-nv246-tipy"
+  },
+  {
+    "id": "3fad7bf1c13981ef8514c676e0548aa4",
+    "slug": "wymiana-oleju-w-mostach-ogolna-szczegoly"
+  },
+  {
+    "id": "3fad7bf1c13981ef864dfc60eeba1e1a",
+    "slug": "kod-p0307-cylinder-7-szczegoly"
+  },
+  {
+    "id": "3fad7bf1c13981f1a635e5be9ce73bad",
+    "slug": "kod-p0128-termostat"
+  },
+  {
+    "id": "3fad7bf1c13981f2902af40d0530e987",
+    "slug": "kod-p0301-cylinder-1-rozwiazanie-tipy"
+  },
+  {
+    "id": "3fad7bf1c13981f38241d36a8c756a59",
+    "slug": "wymiana-plynu-wspomagania-kierownicy"
+  },
+  {
+    "id": "3fad7bf1c13981f48832c1eb2b93f307",
+    "slug": "wymiana-oleju-w-4l80e-szczegoly-3"
+  },
+  {
+    "id": "3fad7bf1c13981f5a1fbc61125d592c6",
+    "slug": "kod-p0500-vss-rozwiazanie-tipy"
+  },
+  {
+    "id": "3fad7bf1c13981f5a555f5153e110c47",
+    "slug": "chevrolet-tahoe-2-drzwi-4x4"
+  },
+  {
+    "id": "3fad7bf1c13981f5b63ee06a085f9d06",
+    "slug": "dekoder-vin-gmt400-podstawy"
+  },
+  {
+    "id": "3fad7bf1c13981f6beb3c4b00ee1956b",
+    "slug": "kod-p0401-egr-szczegoly"
+  },
+  {
+    "id": "3fad7bf1c13981f78904fb4268c7025c",
+    "slug": "kod-p0505-iac-rozwiazanie-tipy"
+  },
+  {
+    "id": "3fad7bf1c13981f78cc7f095cfe0f3f9",
+    "slug": "kod-p1810-prndl-rozwiazanie-tipy-2"
+  },
+  {
+    "id": "3fad7bf1c13981f78f53ead44af934c6",
+    "slug": "wymiana-oleju-w-mostach-tylnych-szczegoly-2"
+  },
+  {
+    "id": "3fad7bf1c13981f79f62e4941abfd1cc",
+    "slug": "silnik-5-7l-vortec-l31-1996"
+  },
+  {
+    "id": "3fad7bf1c13981f8a6c7f8b73684adb3",
+    "slug": "wymiana-paska-klinowego-wieloklinowego"
+  },
+  {
+    "id": "3fad7bf1c13981f99047e9a9a689ac3e",
+    "slug": "kod-p0711-temperatura-atf-szczegoly"
+  },
+  {
+    "id": "3fad7bf1c13981f9b60ded20edfc9bf3",
+    "slug": "wymiana-pompy-wody-vortec-diy"
+  },
+  {
+    "id": "3fad7bf1c13981f9bcccd3d96c3a49e2",
+    "slug": "wymiana-plynu-chlodniczego-szczegoly"
+  },
+  {
+    "id": "3fad7bf1c13981fa9cfbee3ff4ea65ed",
+    "slug": "wymiana-oleju-w-skrzyni-rozdzielczej-szczegoly-3"
+  },
+  {
+    "id": "3fad7bf1c13981fab7d0d6c977041c48",
+    "slug": "kod-p0117-ect-rozwiazanie-tipy"
+  },
+  {
+    "id": "3fad7bf1c13981fb958ffe75fb21ee0a",
+    "slug": "problemy-z-ukladem-klimatyzacji-gmt400"
+  },
+  {
+    "id": "3fad7bf1c13981fbbf19d6168260af32",
+    "slug": "kod-p0172-bogata-mieszanka-szczegoly-2"
+  },
+  {
+    "id": "3fad7bf1c13981fc8e9fd066a80061a3",
+    "slug": "gmc-sierra-2500"
+  },
+  {
+    "id": "3fad7bf1c13981fcaa9efd0f1d162876",
+    "slug": "problemy-z-ukladem-napedowym-4x4-szczegoly"
+  },
+  {
+    "id": "3fad7bf1c13981fcbe0cf64c8fe45ede",
+    "slug": "sprawdzenie-ladowania-alternatora-tipy"
+  },
+  {
+    "id": "3fad7bf1c13981fdad0bcc705a1ba196",
+    "slug": "problemy-z-pompa-wtryskowa-6-5l-tipy"
+  },
+  {
+    "id": "3fad7bf1c13981fea6eccb99e4898bb8",
+    "slug": "wymiana-oleju-w-skrzyni-manualnej-szczegoly-3"
+  },
+  {
+    "id": "3fad7bf1c13981ffa0a9ef0c1521c9c5",
+    "slug": "kod-p0340-czujnik-polozenia-walka-rozrzadu-cmp"
+  },
+  {
+    "id": "401d7bf1c139813f869bd1451f493253",
+    "slug": "gmc-yukon-denali-1998-2000"
+  },
+  {
+    "id": "401d7bf1c1398192ac17cf89b5c1a034",
+    "slug": "procedury-diy-gmt400-om95-om99"
+  },
+  {
+    "id": "401d7bf1c139819d937ce6ad234c38e8",
+    "slug": "gmc-suburban-1992-1999"
+  },
+  {
+    "id": "401d7bf1c13981a690caed0401a970b5",
+    "slug": "c3500hd"
+  },
+  {
+    "id": "401d7bf1c13981fd9f79f28ae4aa5b8c",
+    "slug": "cadillac-escalade-1999-2000"
+  },
+  {
+    "id": "402d7bf1c1398103bb85d3ba6ac83fb6",
+    "slug": "ladowanie-alternator-kontrolka-za-niskie-lub-za-wysokie-napiecie-halas-diagnosty"
+  },
+  {
+    "id": "402d7bf1c13981109770e25962ebdc5e",
+    "slug": "abs-kontrolka-swieci-kody-czujnikow-kol-c0221-i-inne-dzialanie-w-deszczu-diagnos"
+  },
+  {
+    "id": "402d7bf1c1398110ad21c60372d502f8",
+    "slug": "pulsacja-bicie-przy-hamowaniu-tarcze-bicie-boczne-roznica-grubosci-kiedy-przetac"
+  },
+  {
+    "id": "402d7bf1c1398119840ef55ae18aae4d",
+    "slug": "vortec-csfi-szarpniecia-mis-przy-odpuszczaniu-gazu-na-cieplym-silniku-wtryski-w"
+  },
+  {
+    "id": "402d7bf1c139811f8259f42eb16c0786",
+    "slug": "wymiana-oleju-w-mostach-przod-ifs-4x4-i-tyl-8-6-9-5-10-5-11-cala-procedura-gm"
+  },
+  {
+    "id": "402d7bf1c1398123a9b4d311d27200b1",
+    "slug": "termostat-i-pompa-wody-5-0-5-7-7-4-wymiana-i-odpowietrzenie-procedura-gm"
+  },
+  {
+    "id": "402d7bf1c1398125903fe6a768c34a90",
+    "slug": "wydech-nieszczelnosc-halas-drgania-zatkany-katalizator-diagnostyka-krok-po-kroku"
+  },
+  {
+    "id": "402d7bf1c139813a8526cd4b236989e7",
+    "slug": "dudnienie-grzechotanie-wydechu-na-biegu-d-z-wcisnietym-hamulcem-uszczelki-rura-k"
+  },
+  {
+    "id": "402d7bf1c1398150b5bcec4be54ae825",
+    "slug": "cisnienie-paliwa-tbi-csfi-sfi-wartosci-i-test-instrukcja-serwisowa-gm-1996-i-199"
+  },
+  {
+    "id": "402d7bf1c13981578fd8f70d7949ccb3",
+    "slug": "plyn-spryskiwacza-wycieka-z-tylnej-dyszy-opuszczona-klapa-postoj-na-pochylosci-b"
+  },
+  {
+    "id": "402d7bf1c1398157b58dde948a027c3d",
+    "slug": "przeguby-kulowe-sworznie-wahaczy-kontrola-luzu-i-wymiana-procedura-gm"
+  },
+  {
+    "id": "402d7bf1c139815f9f97fe4e2f8b5089",
+    "slug": "zbiornik-paliwa-tasmy-mocujace-13-n-m-falszywe-wskazanie-paliwa-ocieranie-o-prog"
+  },
+  {
+    "id": "402d7bf1c13981658cdce2a28bc3c177",
+    "slug": "zawieszenie-przednie-sworznie-wahaczy-amortyzatory-laczniki-stabilizatora-stuki"
+  },
+  {
+    "id": "402d7bf1c13981669f8aee8f05ebf43e",
+    "slug": "uklad-kierowniczy-luzy-sciaganie-i-plywanie-ciezka-praca-buczenie-lub-pienienie"
+  },
+  {
+    "id": "402d7bf1c1398166b632f360981b422d",
+    "slug": "kontrolka-brake-swieci-po-naprawie-hamulcow-zawor-zespolony-instrukcja-serwisowa"
+  },
+  {
+    "id": "402d7bf1c1398166b709f14fa49ec96c",
+    "slug": "klimatyzacja-grzeje-wysokie-cisnienie-po-stronie-tlocznej-suv-z-tylna-klima-c69"
+  },
+  {
+    "id": "402d7bf1c1398166bc47f170b43a1961",
+    "slug": "7-4-l29-trabienie-wycie-przez-kilka-sekund-po-rozruchu-rezonans-zaworow-a-i-r-bi"
+  },
+  {
+    "id": "402d7bf1c139816eacf5e4f4e2003d2b",
+    "slug": "zawor-iac-i-przepustnica-vortec-1996-2000-czyszczenie-i-wymiana-procedura-gm"
+  },
+  {
+    "id": "402d7bf1c139816f87a0de785c41eede",
+    "slug": "csfi-pajak-nierowna-praca-po-zimnym-starcie-misfire-biuletyn-gm"
+  },
+  {
+    "id": "402d7bf1c13981708b2ecb01ac7ba1d1",
+    "slug": "hydro-boost-pedal-hamulca-opada-lub-sam-hamuje-przy-pelnym-skrecie-biuletyn-gm"
+  },
+  {
+    "id": "402d7bf1c1398180855bfea500f29c68",
+    "slug": "skrzynia-4l60-e-4l80-e-usterki-kody-dtc-i-diagnostyka-gmt400-1993-2000"
+  },
+  {
+    "id": "402d7bf1c13981858a97d84b2039be8c",
+    "slug": "5-7-l31-kalifornia-rpo-k18-tykanie-pod-obciazeniem-jak-zawory-lub-spalanie-stuko"
+  },
+  {
+    "id": "402d7bf1c139818a8ea7ecfb98ff7d85",
+    "slug": "pompa-paliwa-i-cisnienie-dlugi-rozruch-przerywanie-gasniecie-na-zimno-wycie-pomp"
+  },
+  {
+    "id": "402d7bf1c139818c9996e72f26d59c84",
+    "slug": "6-5l-diesel-nie-odpala-gasnie-falujace-obroty-pompa-wtryskowa-czujnik-optyczny-s"
+  },
+  {
+    "id": "402d7bf1c1398191b036d6333f487e57",
+    "slug": "przednie-drzwi-ciezko-sie-otwieraja-nie-zostaja-otwarte-halasuja-zuzyty-ogranicz"
+  },
+  {
+    "id": "402d7bf1c139819f95ecc16e487cc418",
+    "slug": "pompa-paliwa-czujnik-poziomu-w-zbiorniku-wymiana-procedura-gm"
+  },
+  {
+    "id": "402d7bf1c13981a0a66ddbd9486becfc",
+    "slug": "wymiana-piasty-z-lozyskiem-4x4-ifs-i-regulacja-lozysk-2wd-procedura-gm"
+  },
+  {
+    "id": "402d7bf1c13981a4b345e9c491a58dce",
+    "slug": "4l60-e-wymiana-atf-i-filtra-oraz-kontrola-poziomu-procedura-gm-sm-1996-c-k-sm-19"
+  },
+  {
+    "id": "402d7bf1c13981a79d25f31d3a26f424",
+    "slug": "kod-p0338-bez-kontrolki-kopniecie-i-strzaly-przy-rozruchu-zgrzyt-peknieta-obudow"
+  },
+  {
+    "id": "402d7bf1c13981aaa6a2fcab5b0e8d6b",
+    "slug": "7-4-l29-syk-nierowna-praca-gorne-uszczelki-kolektora-kampania-96047-i-pocenie-ol"
+  },
+  {
+    "id": "402d7bf1c13981b4b968dfc56370ec5c",
+    "slug": "przegrzewanie-ubytek-plynu-1999-2000-szyjka-chlodnicy-z-tworzywa-i-korek-biulety"
+  },
+  {
+    "id": "402d7bf1c13981b7ba8ce74b84bbdffa",
+    "slug": "kod-p1345-korelacja-ckp-cmp-ustawienie-rozdzielacza-vortec-cam-retard-0-instrukc"
+  },
+  {
+    "id": "402d7bf1c13981b7bdcbd321d231cb6a",
+    "slug": "opadajace-drzwi-trudne-domykanie-skrzypienie-zuzyte-sworznie-i-tuleje-zawiasow-g"
+  },
+  {
+    "id": "402d7bf1c13981bd8abaffb0600703b0",
+    "slug": "przegrzewanie-i-ubytek-plynu-chlodzacego-diagnostyka-krok-po-kroku-termostat-spr"
+  },
+  {
+    "id": "402d7bf1c13981bebe99c3cb946d08cb",
+    "slug": "ramie-pitmana-i-ramie-posrednie-idler-kontrola-i-wymiana-procedura-gm"
+  },
+  {
+    "id": "402d7bf1c13981bf91b9e67c828a4012",
+    "slug": "zaplon-kopulka-palec-przewody-cewka-przerywanie-szarpanie-brak-odpalenia-tbi-198"
+  },
+  {
+    "id": "402d7bf1c13981c39c55d9d8c1e25e03",
+    "slug": "trudny-rozruch-brak-odpalenia-1992-1996-pekniety-pulsator-pompy-paliwa-biuletyn"
+  },
+  {
+    "id": "402d7bf1c13981c496d9c54b3cfbbcce",
+    "slug": "klimatyzacja-nie-chlodzi-sprezarka-sie-nie-zalacza-halas-diagnostyka-krok-po-kro"
+  },
+  {
+    "id": "402d7bf1c13981d38be9ceb0d8b94b2e",
+    "slug": "wymiana-oleju-w-skrzyni-rozdzielczej-np241-nv243-nv246-procedura-gm"
+  },
+  {
+    "id": "402d7bf1c13981d6beebda3c05788a92",
+    "slug": "waly-napedowe-i-krzyzaki-stuk-ok-16-km-h-halas-krzyzakow-wibracje-wyciek-przy-pr"
+  },
+  {
+    "id": "402d7bf1c13981d88656e162cf88d654",
+    "slug": "nagrzewnica-i-silownik-klapy-temperatury-wymiana-procedura-gm"
+  },
+  {
+    "id": "402d7bf1c13981d89cb1f55e3d314887",
+    "slug": "wymiana-polosi-przedniej-ifs-4x4-procedura-gm"
+  },
+  {
+    "id": "402d7bf1c13981dd9a49f62035636463",
+    "slug": "dlugi-rozruch-zwlaszcza-na-zimno-potem-auto-pracuje-normalnie-przekaznik-pompy-p"
+  },
+  {
+    "id": "402d7bf1c13981e0abc0fb01fc603140",
+    "slug": "abs-wlacza-sie-przy-malej-predkosci-rdza-pod-czujnikiem-kola-biuletyn-gm"
+  },
+  {
+    "id": "402d7bf1c13981e28a3acc7c931942e8",
+    "slug": "naped-4x4-nie-wlacza-sie-wyskakuje-z-4h-4l-przycisk-nie-przelacza-skrzynia-rozdz"
+  },
+  {
+    "id": "402d7bf1c13981e3afc1e609b284a3ab",
+    "slug": "swiece-zaplonowe-vortec-5-0-5-7-7-4-wymiana-typ-ac-41-932-przerwa-1-52-mm-moment"
+  },
+  {
+    "id": "402d7bf1c13981e69c48da28f48479ae",
+    "slug": "przewody-hamulcowe-sztywne-wymiana-i-odpowietrzanie-procedura-gm"
+  },
+  {
+    "id": "402d7bf1c13981e88ef4ce93ecc0417a",
+    "slug": "rozrusznik-klika-i-nie-kreci-kreci-wolno-albo-nie-wylacza-sie-diagnostyka-spadko"
+  },
+  {
+    "id": "402d7bf1c13981f19884e349ab26554e",
+    "slug": "drzwi-nie-otwieraja-sie-ani-klamka-ani-kluczem-ciegna-klipsy-klamka-wewnetrzna-z"
+  },
+  {
+    "id": "404d7bf1c139811196fbd3ac8b218cfa",
+    "slug": "spalanie-gmt400-ile-pali-tahoe-suburban-i-c-k-1500-dane-epa-przeliczone-na-l-100"
+  },
+  {
+    "id": "404d7bf1c139812f8165e2b9196cdde6",
+    "slug": "klimatyzacja-gmt400-r12-czy-r134a-przerobka-wg-biuletynu-gm-43-12-07-c-k-1988-93"
+  },
+  {
+    "id": "404d7bf1c139814885eec3d514357dd7",
+    "slug": "rdza-w-gmt400-progi-narozniki-kabiny-nadkola-podloga-i-rama-gdzie-szukac-jak-oce"
+  },
+  {
+    "id": "404d7bf1c139815ba9d9fd1caee6b2c3",
+    "slug": "dmuchawa-gmt400-dziala-tylko-na-najwyzszym-biegu-albo-wcale-rezystor-dmuchawy-be"
+  },
+  {
+    "id": "404d7bf1c1398197870adf3f2a99ca89",
+    "slug": "6-5-turbo-diesel-w-gmt400-slabe-punkty-i-co-sprawdzic-przed-zakupem-pompa-ds4-i"
+  },
+  {
+    "id": "404d7bf1c139819cab46ca26e2d30254",
+    "slug": "naprawa-rdzy-w-gmt400-diy-narozniki-kabiny-progi-nadkola-jak-ciac-czym-zabezpiec"
+  },
+  {
+    "id": "404d7bf1c13981ccbc2bfd3bf56e2ef7",
+    "slug": "wkladka-stacyjki-gmt400-brak-pozycji-acc-klucz-wychodzi-w-kazdej-pozycji-lub-nie"
+  },
+  {
+    "id": "405d7bf1c1398103b0e0cdf14de10362",
+    "slug": "kody-p0401-p0404-p0405-p1404-egr-progi-i-warunki-testu-gm-mode-6-1999-5-7-l"
+  },
+  {
+    "id": "405d7bf1c13981188309de5476a77d0b",
+    "slug": "7-4-l19-1995-zuzycie-oleju-swiece-zalane-po-jednej-stronie-nierowny-bieg-zle-obr"
+  },
+  {
+    "id": "405d7bf1c1398119aea3eb698ff1667d",
+    "slug": "4-3-v6-lb4-niebieski-dym-zaraz-po-rozruchu-po-postoju-uszczelniacze-zaworow-biul"
+  },
+  {
+    "id": "405d7bf1c1398120a07fc8399aafb31a",
+    "slug": "kody-p0171-p0172-p0174-p0175-mieszanka-za-uboga-za-bogata-progi-i-warunki-gm-mod"
+  },
+  {
+    "id": "405d7bf1c13981278b94cc54cc433600",
+    "slug": "kody-p0131-p0132-p0133-p0135-p1133-sonda-lambda-b1s1-progi-i-testy-gm-mode-6-199"
+  },
+  {
+    "id": "405d7bf1c13981338420f7afd6de0265",
+    "slug": "harmonogram-przegladow-wg-instrukcji-gm-1995-1999-benzyna-v8-i-diesel-6-5-krotki"
+  },
+  {
+    "id": "405d7bf1c13981369c46f792e70b2576",
+    "slug": "skrzynia-4l60-e-solenoidy-a-b-pcs-tcc-tryb-awaryjny-wtyczka-i-biuletyn-atra-583"
+  },
+  {
+    "id": "405d7bf1c1398137a88ad2d524a18d8d",
+    "slug": "czujnik-temperatury-plynu-ect-i-czujnik-polozenia-przepustnicy-tps-wymiana-i-mom"
+  },
+  {
+    "id": "405d7bf1c1398143b1dae86dce43c2fa",
+    "slug": "4-3-v6-lb4-l35-stukanie-lub-klekotanie-zaworow-po-rozruchu-do-ok-1-min-luz-zawor"
+  },
+  {
+    "id": "405d7bf1c13981479779d910f530d4d4",
+    "slug": "4-3-l35-v6-vortec-kod-p1345-korelacja-ckp-cmp-specyfikacja-cmp-0-2-i-przypadek-p"
+  },
+  {
+    "id": "405d7bf1c1398148bcb1c339d7396ce5",
+    "slug": "kody-p0106-p0107-p0108-czujnik-map-progi-i-warunki-testu-gm-mode-6-1999-5-7-l"
+  },
+  {
+    "id": "405d7bf1c1398149a2f0cb4816d502b4",
+    "slug": "koncowki-drazkow-kierowniczych-wymiana-momenty-54-62-n-m-zbieznosc-po-wymianie-s"
+  },
+  {
+    "id": "405d7bf1c1398152ac4fe2676be40f81",
+    "slug": "zarowki-w-gmt400-numery-h6054-9006-9005-3057-3156-194-921-wg-instrukcji-gm-1995"
+  },
+  {
+    "id": "405d7bf1c139815bb795e432f7b3bf19",
+    "slug": "7-4-l19-halas-silnika-glosniejszy-na-zimno-spaczony-zeliwny-kolektor-wydechowy-b"
+  },
+  {
+    "id": "405d7bf1c139815cb447e24abaddf739",
+    "slug": "oleje-w-skrzyni-manualnej-nvg-3500-4500-skrzyni-rozdzielczej-i-mostach-typy-poje"
+  },
+  {
+    "id": "405d7bf1c13981669413dfa3913992c3",
+    "slug": "filtr-paliwa-benzyna-liniowy-i-diesel-6-5l-interwal-50-000-km-numery-momenty-pro"
+  },
+  {
+    "id": "405d7bf1c139816bb488c500835a0d3c",
+    "slug": "plyn-i-pompa-wspomagania-kierownicy-poziom-odpowietrzanie-momenty-pompy-5-0-5-7"
+  },
+  {
+    "id": "405d7bf1c1398170999dca2ab4e3a136",
+    "slug": "kody-p0440-p0442-p0446-p0452-p1441-uklad-evap-testy-i-progi-gm-mode-6-1999-5-7-l"
+  },
+  {
+    "id": "405d7bf1c13981719b15c78125dec748",
+    "slug": "kody-p0500-p0506-p0507-p0601-p0604-vss-bieg-jalowy-iac-i-pamiec-pcm-progi-gm-mod"
+  },
+  {
+    "id": "405d7bf1c139817683cedb749cc8622d",
+    "slug": "7-4-l29-brak-odpalenia-lub-nierowna-praca-po-wymianie-silnika-nieprawidlowy-relu"
+  },
+  {
+    "id": "405d7bf1c1398176b1f7c503ab36fc75",
+    "slug": "pojemnosci-i-czesci-serwisowe-gmt400-wg-gm-1995-1999-olej-plyn-chlodzacy-zbiorni"
+  },
+  {
+    "id": "405d7bf1c139818585f6db37c1f29505",
+    "slug": "kody-p0121-p0122-p0123-czujnik-polozenia-przepustnicy-tp-progi-i-warunki-testu-g"
+  },
+  {
+    "id": "405d7bf1c1398187b30bea0bb17d425f",
+    "slug": "plyn-chlodniczy-dex-cool-wymiana-mieszanka-50-50-pojemnosc-ukladu-i-interwal-wg"
+  },
+  {
+    "id": "405d7bf1c139819290f9c3f4ef7fa97e",
+    "slug": "wymiana-oleju-silnikowego-i-filtra-vortec-5-0-5-7-7-4-i-diesel-6-5-interwal-poje"
+  },
+  {
+    "id": "405d7bf1c13981989d7ae16960391d97",
+    "slug": "skrzynia-4l80-e-mt1-dane-przelozenia-kolejnosc-solenoidow-rezystancje-i-zachowan"
+  },
+  {
+    "id": "405d7bf1c139819babb2f4f035aab320",
+    "slug": "pasek-napedu-osprzetu-wieloklinowy-5-0-5-7-i-6-5l-wymiana-kontrola-procedura-gm"
+  },
+  {
+    "id": "405d7bf1c139819caaf2f7a7c8d2e621",
+    "slug": "kody-p0112-p0113-p0117-p0118-p0125-czujniki-iat-i-ect-progi-i-warunki-testu-gm-m"
+  },
+  {
+    "id": "405d7bf1c139819d8b1cd292c7fb83c2",
+    "slug": "amortyzatory-wymiana-przod-tyl-wymog-zgodnosci-dlugosci-i-momenty-sm-gm-1999"
+  },
+  {
+    "id": "405d7bf1c139819da9b4f8ca231426f7",
+    "slug": "skrzynia-rozdzielcza-np241-np241hd-np243-jak-odczytac-numer-np-i-czemu-np231-233"
+  },
+  {
+    "id": "405d7bf1c139819db12cd150004650cd",
+    "slug": "klocki-tarcze-i-zaciski-hamulcowe-wymiana-momenty-docieranie-plyn-dot-3-sm-gm-19"
+  },
+  {
+    "id": "405d7bf1c13981a6b7a7c9cf996e0837",
+    "slug": "kody-p0336-p0337-p0340-czujnik-walu-i-walka-rozrzadu-progi-i-warunki-gm-mode-6-1"
+  },
+  {
+    "id": "405d7bf1c13981abaef5f93b25478a05",
+    "slug": "skrzynia-4l80-e-wymiana-atf-i-filtra-kontrola-poziomu-pojemnosc-i-momenty-sm-gm"
+  },
+  {
+    "id": "405d7bf1c13981b3a502e52df2f36753",
+    "slug": "swiece-zarowe-diesla-6-5l-wymiana-narzedzie-j-39083-moment-17-n-m-sm-gm-1999"
+  },
+  {
+    "id": "405d7bf1c13981b7bfbcd102e59e6331",
+    "slug": "czujniki-polozenia-walu-korbowego-ckp-i-walka-rozrzadu-cmp-5-0-5-7-wymiana-momen"
+  },
+  {
+    "id": "405d7bf1c13981be8d03fcb2d55f1a86",
+    "slug": "4-3-5-7-7-4-lb4-l05-l19-zimne-stukanie-po-rozruchu-filtr-z-zaworem-zwrotnym-kali"
+  },
+  {
+    "id": "405d7bf1c13981c69468f44c55819983",
+    "slug": "kody-p0101-p0102-p0103-czujnik-maf-progi-i-warunki-testu-gm-mode-6-1999-5-7-l"
+  },
+  {
+    "id": "405d7bf1c13981d1b9ecf5c2a09a3133",
+    "slug": "plyny-i-smary-wg-gm-numery-gm-dexron-iii-dex-cool-80w-90-jak-sprawdzic-poziom-at"
+  },
+  {
+    "id": "405d7bf1c13981ea8780c7663602baad",
+    "slug": "czujnik-predkosci-pojazdu-vss-skrzyni-4l60-e-i-czujniki-predkosci-kol-abs-wymian"
+  },
+  {
+    "id": "405d7bf1c13981ea9b6af2188bfe62ce",
+    "slug": "zawor-egr-liniowy-5-0-5-7-wymiana-i-obchodzenie-sie-momenty-10-25-n-m-sm-gm-1999"
+  },
+  {
+    "id": "405d7bf1c13981f19f02dea1e48f7d7f",
+    "slug": "tykanie-jak-detonacja-przy-niskich-temperaturach-bez-kodow-zawor-evap-purge-4-3"
+  },
+  {
+    "id": "405d7bf1c13981f5a211e97fc62c5767",
+    "slug": "moc-i-moment-silnikow-gmt400-wg-gm-tabele-1993-2000-technical-guide-product-info"
+  },
+  {
+    "id": "405d7bf1c13981fe940bc897ac7382b6",
+    "slug": "alternator-generator-cs-130d-cs-144-wymiana-momenty-50-i-8-n-m-sm-gm-1999"
+  },
+  {
+    "id": "406d7bf1c1398100bb25ee874c7ef81f",
+    "slug": "alternator-i-rozrusznik-test-napiecia-12-4-14-7-v-8-5-v-przy-rozruchu-diagnostyk"
+  },
+  {
+    "id": "406d7bf1c1398101b9c0e9ff8331ab3e",
+    "slug": "glowice-cylindrow-w-4-3-5-0-5-7-7-4-zdjecie-kolejnosc-dokrecania-srub-momenty-w"
+  },
+  {
+    "id": "406d7bf1c1398107bbd1d9387033f320",
+    "slug": "sprzeglo-manual-diagnostyka-wymiana-tarczy-docisku-lozyska-pompa-i-silownik-odpo"
+  },
+  {
+    "id": "406d7bf1c13981139454f41554ff969e",
+    "slug": "kody-obd-ii-1996-2000-pelna-lista-p0xxx-p1xxx-dla-gmt400-pogrupowana-tematycznie"
+  },
+  {
+    "id": "406d7bf1c13981158fd6e9e49ba8251c",
+    "slug": "silnik-gmt400-dane-fabryczne-4-3-l35-5-0-l30-5-7-l31-7-4-l29-6-5-td-l56-l65-poje"
+  },
+  {
+    "id": "406d7bf1c1398115a9d8fe012ae842cf",
+    "slug": "gmc-yukon-2-i-4-drzwiowy-1995-99-blizniak-tahoe-co-wiemy-z-dokumentow-a-czego-br"
+  },
+  {
+    "id": "406d7bf1c1398115bf74c84d1702ad13",
+    "slug": "diesel-6-5-l-l56-1999-kody-p0251-p0335-p0370-p0216-p1214-p1218-turbo-egr-swiece"
+  },
+  {
+    "id": "406d7bf1c1398116bf25e64cf6239c54",
+    "slug": "kolektory-wydechowe-4-3-5-0-5-7-7-4-wymiana-pekniete-szpilki-i-sruby-uszczelki-i"
+  },
+  {
+    "id": "406d7bf1c1398119997ee6ab1983cbee",
+    "slug": "przelaczniki-kolumny-i-deski-swiatla-dimmer-wycieraczki-kierunkowskazy-stacyjka"
+  },
+  {
+    "id": "406d7bf1c139811a9209db7177d38751",
+    "slug": "6-5-td-zuzycie-oleju-paliwa-i-plynu-wycieki-zanieczyszczony-olej-lub-plyn-wysoka"
+  },
+  {
+    "id": "406d7bf1c139811ab584ddb4e517e60f",
+    "slug": "zestaw-wskaznikow-i-radio-demontaz-zestawu-do-1994-i-od-1995-radio-glosniki-pane"
+  },
+  {
+    "id": "406d7bf1c139811b80dbea4c3e7c643a",
+    "slug": "6-5-td-brak-paliwa-przy-pompie-powietrze-w-paliwie-slaba-pompa-podajaca-diagnoza"
+  },
+  {
+    "id": "406d7bf1c139811c8fcef9b7bdafdc12",
+    "slug": "skrzynia-rozdzielcza-np-nv241-w-4x4-regulacja-drazka-uszczelniacz-demontaz-kolej"
+  },
+  {
+    "id": "406d7bf1c139811c921befe71b2ad390",
+    "slug": "6-5-td-niskie-lub-wysokie-cisnienie-oleju-stuki-drgania-zatarcie-niska-kompresja"
+  },
+  {
+    "id": "406d7bf1c139811ca416fc963419e269",
+    "slug": "tylny-most-zdjecie-i-montaz-calego-mostu-haynes-rozdz-8-20-kolejnosc-co-odlaczyc"
+  },
+  {
+    "id": "406d7bf1c139811da531fee19ec4bfd2",
+    "slug": "chevrolet-tahoe-2-drzwiowy-c-k1500-1995-99-wymiary-masy-silnik-5-7-hamulce-holow"
+  },
+  {
+    "id": "406d7bf1c139811e9a1bd710efc17fce",
+    "slug": "zamek-drzwi-wkladka-kluczyka-klamka-zewnetrzna-i-wewnetrzna-wymiana-ciegna-hayne"
+  },
+  {
+    "id": "406d7bf1c139811fb52ff489214c4558",
+    "slug": "odpalanie-z-kabli-jump-start-w-gmt400-kolejnosc-podpinania-gdzie-wpiac-minus-cze"
+  },
+  {
+    "id": "406d7bf1c13981209cabda0543eea86b",
+    "slug": "automaty-4l60-e-i-4l80-e-tabela-zalaczen-ktore-sprzeglo-tasma-i-rolka-pracuje-w"
+  },
+  {
+    "id": "406d7bf1c1398124921adee08082c695",
+    "slug": "tylny-most-polplywajacy-wyjecie-polosi-wymiana-uszczelniacza-polosi-i-lozyska-po"
+  },
+  {
+    "id": "406d7bf1c13981298930c5394e17e93a",
+    "slug": "chevrolet-suburban-c-k-1500-i-2500-1992-99-wymiary-masy-silniki-skrzynie-hamulce"
+  },
+  {
+    "id": "406d7bf1c13981298b3cee11c907b482",
+    "slug": "kody-obd-i-1988-95-odczyt-kodu-12-zworka-aldl-kasowanie-i-lista-kodow-13-87-z-pr"
+  },
+  {
+    "id": "406d7bf1c139812c84fee4076107f7a8",
+    "slug": "kody-p0300-p0308-p0420-i-p0325-jak-pcm-ocenia-wypadanie-zaplonow-katalizator-i-c"
+  },
+  {
+    "id": "406d7bf1c13981338a92ca465bf7e2fa",
+    "slug": "remont-bloku-silnika-benzynowego-4-3-5-0-5-7-7-4-czyszczenie-bloku-pomiar-i-hono"
+  },
+  {
+    "id": "406d7bf1c13981348c33c1ecd25aca28",
+    "slug": "tabela-momentow-n-m-i-plynow-litry-tylny-most-wal-napedowy-skrzynia-rozdzielcza"
+  },
+  {
+    "id": "406d7bf1c1398135a20fcdd34499a536",
+    "slug": "chevrolet-gmc-c-k-1500-2500-3500-1988-99-wymiary-masy-silniki-skrzynie-hamulce-i"
+  },
+  {
+    "id": "406d7bf1c139813780baf1bdc2e559ca",
+    "slug": "skrzynie-4l60-e-4l80-e-co-sprawdzic-przed-remontem-lista-kontrolna-od-najtanszeg"
+  },
+  {
+    "id": "406d7bf1c13981379e13fda698764cce",
+    "slug": "uklad-kierowniczy-gmt400-pomiar-luzow-koncowki-drazkow-wahacz-posredni-pitman-pr"
+  },
+  {
+    "id": "406d7bf1c139813b8908f08ccf545acb",
+    "slug": "tylny-most-plywajacy-full-floating-wyjecie-polosi-bez-podnoszenia-auta-piasta-i"
+  },
+  {
+    "id": "406d7bf1c139813bb110eb3a79ddbee4",
+    "slug": "tylny-most-wymiana-uszczelniacza-walka-atakujacego-pinion-znaki-liczenie-gwintow"
+  },
+  {
+    "id": "406d7bf1c139813cba24e7152af1d86f",
+    "slug": "czy-silnik-benzynowy-4-3-5-0-5-7-7-4-nadaje-sie-do-remontu-cisnienie-oleju-podci"
+  },
+  {
+    "id": "406d7bf1c13981419ec6e58b223bd701",
+    "slug": "zawieszenie-gmt400-tabela-momentow-n-m-2wd-4wd-tyl-sworznie-sprezyna-drazek-skre"
+  },
+  {
+    "id": "406d7bf1c1398141a77cf2e13f660ac8",
+    "slug": "chevrolet-k5-blazer-k1500-1992-94-wymiary-masy-silniki-skrzynie-i-osie-wg-gm-199"
+  },
+  {
+    "id": "406d7bf1c1398142854bd6f6a60791a9",
+    "slug": "6-5-td-przegrzewanie-sie-silnika-diagnoza-krok-po-kroku-wg-gm-poziom-plynu-pasek"
+  },
+  {
+    "id": "406d7bf1c139814393e9e51e7571254d",
+    "slug": "6-5-td-zwrot-paliwa-i-cisnienie-pompy-transferowej-regulator-cisnienia-obudowy-5"
+  },
+  {
+    "id": "406d7bf1c1398143b534c9eda31d638c",
+    "slug": "tylna-klapa-pickupa-klapa-suv-end-gate-i-jej-szyba-zdejmowanie-haynes-rozdz-11-1"
+  },
+  {
+    "id": "406d7bf1c1398147a57debe671e1771f",
+    "slug": "bezpieczniki-i-przekazniki-gmt400-gdzie-jest-skrzynka-numeracja-gniazd-1-24-1995"
+  },
+  {
+    "id": "406d7bf1c1398148a4b9ed5baf130559",
+    "slug": "hamulce-tylne-bebnowe-cylinderki-hamulec-postojowy-regulacja-linki-serwo-i-hydro"
+  },
+  {
+    "id": "406d7bf1c139814d9d4ac2e1af26e598",
+    "slug": "6-5-turbo-diesel-pompa-podajaca-solenoid-odciecia-paliwa-szybki-bieg-jalowy-hpca"
+  },
+  {
+    "id": "406d7bf1c139814e8bb5da61f7a3e105",
+    "slug": "maska-zawiasy-zatrzask-linka-zwalniania-maski-grill-i-blotnik-przedni-zdejmowani"
+  },
+  {
+    "id": "406d7bf1c139814fa765f9a1370aaf0c",
+    "slug": "kody-rpo-i-silnikow-gmt400-wg-roku-modelowego-tabela-silnik-skrzynia-most-skrzyn"
+  },
+  {
+    "id": "406d7bf1c1398150aa06c2981f2b4a54",
+    "slug": "kody-p0128-p0449-p0455-p0505-p0562-p0700-p0730-p0751-p1626-czego-nie-ma-w-tabela"
+  },
+  {
+    "id": "406d7bf1c1398156a709cc6f04b6946a",
+    "slug": "konserwacja-nadwozia-smarowanie-zawiasow-i-zamkow-mycie-rdza-drobne-naprawy-laki"
+  },
+  {
+    "id": "406d7bf1c139815a91c7fcdb98554dd9",
+    "slug": "cisnienie-w-oponach-gmt400-gdzie-jest-wartosc-naklejka-certification-co-znaczy-z"
+  },
+  {
+    "id": "406d7bf1c139815daeeed0472900e313",
+    "slug": "odpowietrzanie-hamulcow-kolejnosc-kol-ile-trzeba-odpowietrzyc-po-ktorej-pracy-pl"
+  },
+  {
+    "id": "406d7bf1c139815e88ffc66410a0b29d",
+    "slug": "sterownik-skrzyni-4l60e-4l80e-zamiast-pcm-aftermarket-us-shift-quick-4-kiedy-ma"
+  },
+  {
+    "id": "406d7bf1c139815eb5ddf3661067d5e9",
+    "slug": "klimatyzacja-slabo-chlodzi-lub-nie-chlodzi-szybka-kontrola-ilosci-czynnika-i-prz"
+  },
+  {
+    "id": "406d7bf1c139815f90d4fc1d239180d6",
+    "slug": "poduszki-silnika-i-kolo-zamachowe-tarcza-napedowa-w-4-3-5-0-5-7-7-4-sprawdzenie"
+  },
+  {
+    "id": "406d7bf1c139815fa311f2d5638e438f",
+    "slug": "wymiana-uszczelek-kolektora-dolotowego-v6-v8-4-3-5-0-5-7-7-4-kolejnosc-prac-wg-h"
+  },
+  {
+    "id": "406d7bf1c139816388efc00c32b1b212",
+    "slug": "silnik-benzynowy-nie-odpala-gasnie-nierowny-bieg-jalowy-szarpie-brak-mocy-strzal"
+  },
+  {
+    "id": "406d7bf1c139816581f5ede37c7a2714",
+    "slug": "4l80e-wskazowki-atra-2000-brak-wstecznego-po-remoncie-p0756-start-na-2-biegu-zmi"
+  },
+  {
+    "id": "406d7bf1c13981659ec2e488575a493f",
+    "slug": "silnik-odglosy-stuk-lozysk-tykanie-zaworow-lancuszek-zuzycie-oleju-niskie-cisnie"
+  },
+  {
+    "id": "406d7bf1c13981669541d2696c8e9449",
+    "slug": "holowanie-samochodu-gmt400-laweta-hol-na-kolach-limity-predkosci-i-dystansu-2wd"
+  },
+  {
+    "id": "406d7bf1c139816784ace1937bdbcaa8",
+    "slug": "automat-3l80-4l60-4l60-e-4l80-e-regulacja-dzwigni-lub-linki-zmiany-biegow-linka"
+  },
+  {
+    "id": "406d7bf1c139816ca88cd7b3100113cd",
+    "slug": "6-5-td-diesel-v8-jak-dziala-uklad-chlodzenia-pompa-termostat-chlodnica-wentylato"
+  },
+  {
+    "id": "406d7bf1c139816d8b24e77527a39098",
+    "slug": "6-5-turbo-diesel-l65-dane-techniczne-luzy-momenty-dokrecania-i-numery-czesci-gm"
+  },
+  {
+    "id": "406d7bf1c1398170baaae6b530b16491",
+    "slug": "abs-w-gmt400-rwal-tylne-kola-i-4wal-cztery-kola-z-czego-sie-sklada-i-co-sprawdzi"
+  },
+  {
+    "id": "406d7bf1c1398171aa7df87b93f833d2",
+    "slug": "kierunkowskazy-i-swiatla-awaryjne-przekazniki-przerywaczy-wylaczniki-termiczne-w"
+  },
+  {
+    "id": "406d7bf1c1398172a0f6ee1cd5ba408e",
+    "slug": "czujniki-map-maf-iat-i-ect-sprawdzenie-woltomierzem-5-v-12-v-4-9-g-s-tabela-opor"
+  },
+  {
+    "id": "406d7bf1c1398175958ad9b9dc9f13bf",
+    "slug": "skrzynia-4l80-e-kody-p0711-p0712-p0713-p0218-p0502-p0503-p0716-p0717-p1810-p0741"
+  },
+  {
+    "id": "406d7bf1c1398179b47bfaad9af12812",
+    "slug": "zdjecie-silnika-benzynowego-4-3-5-0-5-7-7-4-z-auta-gmt400-i-rozbiorka-do-remontu"
+  },
+  {
+    "id": "406d7bf1c139817a8ac7cdfbdc51ba26",
+    "slug": "reflektory-gmt400-wymiana-sealed-beam-i-zespolone-oraz-ustawienie-na-scianie-hay"
+  },
+  {
+    "id": "406d7bf1c139817faa33e67770ea31d2",
+    "slug": "wyciek-oleju-z-tylnego-mostu-skad-cieknie-uszczelniacz-walka-atakujacego-uszczel"
+  },
+  {
+    "id": "406d7bf1c1398182b0c4dcb8fa305a1e",
+    "slug": "wyciek-plynu-atf-z-automatu-jak-znalezc-zrodlo-miska-uszczelniacze-obudowa-odpow"
+  },
+  {
+    "id": "406d7bf1c13981839410cd7eebdd7530",
+    "slug": "drzwi-zdejmowanie-i-regulacja-zaczepu-lusterko-zewnetrzne-haynes-rozdz-11-15-i-2"
+  },
+  {
+    "id": "406d7bf1c13981879eddf1c45d619079",
+    "slug": "6-5-turbo-diesel-pompa-wtryskowa-stanadyne-montaz-i-naped-kontrola-wyprzedzenia"
+  },
+  {
+    "id": "406d7bf1c13981938f7cf5823aac0546",
+    "slug": "pokrywy-zaworow-wahacze-popychacze-i-uszczelniacze-zaworow-w-4-3-5-0-5-7-7-4-wym"
+  },
+  {
+    "id": "406d7bf1c13981968ae2f13d4750dd99",
+    "slug": "hamulce-miekki-pedal-dlugi-skok-sciaganie-pisk-duzy-wysilek-zacieranie-blokowani"
+  },
+  {
+    "id": "406d7bf1c139819ab71ffef4718f06a5",
+    "slug": "6-5-turbo-diesel-uklad-smarowania-test-cisnienia-oleju-test-sprezania-cisnienie"
+  },
+  {
+    "id": "406d7bf1c139819cb8e5f5eed4ff3cb0",
+    "slug": "uklad-napedowy-halasy-i-wibracje-po-trybie-2h-4h-4l-skrzynia-manualna-rozdzielcz"
+  },
+  {
+    "id": "406d7bf1c13981a48a83de81dbb37fd2",
+    "slug": "6-5-td-turbosprezarka-brak-mocy-halas-czarny-niebieski-dym-kontrola-kola-sprezar"
+  },
+  {
+    "id": "406d7bf1c13981a9a9a7e6a1ed37cc97",
+    "slug": "6-5-td-dym-z-wydechu-bialy-czarny-szary-niebieski-przyczyny-i-kolejnosc-kontroli"
+  },
+  {
+    "id": "406d7bf1c13981aeb728fee9c6edd953",
+    "slug": "kontrolki-i-wskazniki-na-desce-gmt400-service-engine-soon-swieci-miga-brake-abs"
+  },
+  {
+    "id": "406d7bf1c13981b2970fe84ef7440cb1",
+    "slug": "6-5-td-wlot-powietrza-wentylacja-skrzyni-korbowej-cdrv-i-wydech-jak-dzialaja-i-j"
+  },
+  {
+    "id": "406d7bf1c13981b58b76e89f3c2bd772",
+    "slug": "6-5-turbo-diesel-swiece-zarowe-sterownik-cykl-pracy-i-diagnostyka-pradow-rezysta"
+  },
+  {
+    "id": "406d7bf1c13981b69872edf9006c5d2b",
+    "slug": "klimatyzacja-wymiana-sprezarki-skraplacza-i-akumulatora-osuszacza-kolejnosc-prac"
+  },
+  {
+    "id": "406d7bf1c13981b8a2f9d2638e744d13",
+    "slug": "pompa-hamulcowa-gmt400-wymiana-regeneracja-i-odpowietrzanie-na-stole-przed-monta"
+  },
+  {
+    "id": "406d7bf1c13981b99235cc0dbb6d2c98",
+    "slug": "6-5-td-walek-rozrzadu-sprawdzenie-wzniosu-krzywek-7-063-mm-luz-lancucha-rozrzadu"
+  },
+  {
+    "id": "406d7bf1c13981bda56acc366bcee094",
+    "slug": "diagnostyka-ukladu-evap-pary-paliwa-w-gmt400-jak-dziala-uklad-od-czego-zaczac-i"
+  },
+  {
+    "id": "406d7bf1c13981bf9d1cff68bf51b9d5",
+    "slug": "zuzycie-opon-drgania-kierownicy-sciaganie-kolysanie-plywanie-co-oznacza-wzorzec"
+  },
+  {
+    "id": "406d7bf1c13981bfa68dd6eab2e69aba",
+    "slug": "poduszka-powietrzna-sir-1995-98-jak-wylaczyc-przed-pracami-derm-sdm-kontrolka-ai"
+  },
+  {
+    "id": "406d7bf1c13981c192abca8e623fc247",
+    "slug": "przegrzewanie-sie-silnika-ubytek-plynu-chlodzacego-i-wycieki-z-ukladu-chlodzenia"
+  },
+  {
+    "id": "406d7bf1c13981c2822cea95b16955da",
+    "slug": "6-5-td-skazone-paliwo-woda-grzyby-i-bakterie-albo-benzyna-w-oleju-napedowym-czys"
+  },
+  {
+    "id": "406d7bf1c13981c2bc99cb00bb4258c5",
+    "slug": "wycieki-oleju-z-silnika-benzynowego-4-3-5-0-5-7-7-4-pokrywy-zaworow-miska-pokryw"
+  },
+  {
+    "id": "406d7bf1c13981c4ac83d25235e2a323",
+    "slug": "silnik-wycieraczek-przedni-i-tylny-szyba-tylna-wymiana-haynes-rozdz-12-13-14"
+  },
+  {
+    "id": "406d7bf1c13981c7a5dfcabcd0d06741",
+    "slug": "6-5-turbo-diesel-rozruch-zima-podgrzewacz-bloku-paliwo-zimowe-procedura-odpalani"
+  },
+  {
+    "id": "406d7bf1c13981ca8770db744543acc9",
+    "slug": "uklad-paliwowy-benzynowy-tbi-csfi-mpfi-cisnienie-paliwa-w-kpa-test-pompy-zbiorni"
+  },
+  {
+    "id": "406d7bf1c13981cc8a8bdbfa552bb68f",
+    "slug": "ogrzewanie-kabiny-dmuchawa-sterowanie-i-nagrzewnica-wymiana-i-skala-trudnosci-gm"
+  },
+  {
+    "id": "406d7bf1c13981cd9ccef1addbe10d98",
+    "slug": "remont-silnika-benzynowego-4-3-5-0-5-7-7-4-wal-korbowy-panewki-plastigage-montaz"
+  },
+  {
+    "id": "406d7bf1c13981ceb12bdcb3d59fe6e2",
+    "slug": "rozrzad-w-4-3-5-0-5-7-7-4-lancuch-i-kola-pokrywa-rozrzadu-walek-rozrzadu-popycha"
+  },
+  {
+    "id": "406d7bf1c13981d18a42f342ccbfcb23",
+    "slug": "uklad-sterowania-silnikiem-1988-95-pcm-tbi-4l60-e-4l80-e-wejscia-wyjscia-i-jak-c"
+  },
+  {
+    "id": "406d7bf1c13981d5a32ff2a15d6c26a1",
+    "slug": "zdjecie-i-montaz-automatu-3l80-4l60-4l60-e-4l80-e-1988-98-oraz-poduszka-skrzyni"
+  },
+  {
+    "id": "406d7bf1c13981da8762f262b9ebd6b4",
+    "slug": "4l60e-wskazowki-atra-2000-wtyczki-wylacznika-park-neutral-p1810-p1870-nie-tylko"
+  },
+  {
+    "id": "406d7bf1c13981dcb635cb1e77dc1e72",
+    "slug": "6-5-td-pasek-osprzetu-napinacz-pompa-wody-pompa-podcisnienia-i-diagnoza-halasu-p"
+  },
+  {
+    "id": "406d7bf1c13981e0b10de7bc5de11d0f",
+    "slug": "holowanie-przyczepy-dopuszczalna-masa-wg-gm-c-k-1500-2500-1996-tahoe-yukon-subur"
+  },
+  {
+    "id": "406d7bf1c13981e28bc2c1ec46d0c241",
+    "slug": "szyba-drzwi-i-podnosnik-reczny-elektryczny-wymiana-modul-drzwi-nity-zamiast-srub"
+  },
+  {
+    "id": "406d7bf1c13981e8b98bda19acd79bbc",
+    "slug": "wtrysk-paliwa-tbi-central-sfi-mpfi-kontrola-krok-po-kroku-i-wymiana-korpusu-wtry"
+  },
+  {
+    "id": "406d7bf1c13981ea914bfd965d26bdee",
+    "slug": "chevrolet-tahoe-4-drzwiowy-c-k1500-1995-99-wymiary-masy-holowanie-silnik-5-7-ham"
+  },
+  {
+    "id": "406d7bf1c13981ea9df5ec7cc3eae663",
+    "slug": "boczek-drzwi-panel-tapicerki-zdejmowanie-i-zakladanie-roznice-do-1994-i-od-1995"
+  },
+  {
+    "id": "406d7bf1c13981ec8bd1eb1af37778e2",
+    "slug": "przelozenia-skrzyn-i-tylnych-osi-pickupow-c-k-gmt400-wg-gm-1994-1998-kody-gu4-gt"
+  },
+  {
+    "id": "406d7bf1c13981f09747d6fafbe330b4",
+    "slug": "punkty-masy-gmt400-gdzie-sa-sm-1996-c-k-jak-sprawdzic-mase-i-zasada-bez-podklade"
+  },
+  {
+    "id": "406d7bf1c13981f1be71d2de46443215",
+    "slug": "kontrola-przed-zakupem-gmt400-c-k-tahoe-yukon-suburban-1988-2000-lista-kontrolna"
+  },
+  {
+    "id": "406d7bf1c13981f29955ddcf187a821b",
+    "slug": "kody-p0449-p0455-i-p0505-w-gmt400-co-znacza-wg-sae-j2012-czego-nie-ma-w-tabelach"
+  },
+  {
+    "id": "406d7bf1c13981f3b5eff2b869eea5a4",
+    "slug": "uklad-zaplonowy-hei-1988-95-i-edi-1996-2000-test-iskry-diagnostyka-modulu-cewki"
+  },
+  {
+    "id": "406d7bf1c13981f685b5f20f15c442cb",
+    "slug": "uklad-chlodzenia-chlodnica-zbiornik-wyrownawczy-wentylator-ze-sprzeglem-termosta"
+  },
+  {
+    "id": "406d7bf1c13981faaf72d169d02ae516",
+    "slug": "6-5-td-turbosprezarka-i-wastegate-budowa-smarowanie-cisnienie-doladowania-34-kpa"
+  },
+  {
+    "id": "406d7bf1c13981feb470c20e56bd41c3",
+    "slug": "6-5-turbo-diesel-diagnoza-wedlug-objawow-spis-tablic-gm-slaba-moc-trudny-rozruch"
+  },
+  {
+    "id": "40dd7bf1c1398100b80dd14608b47a3f",
+    "slug": "pisk-przednich-hamulcow-c-k-1988-biuletyn-gm-88-t-175"
+  },
+  {
+    "id": "40dd7bf1c13981069e18c65ef3d64291",
+    "slug": "dlugosc-popychacza-serwa-hamulca-c-k-1988-1989-biuletyn-gm-89-t-51"
+  },
+  {
+    "id": "40dd7bf1c1398110a753e6093d8824e8",
+    "slug": "twarde-wrzucanie-wstecznego-thm400-3l80-c-k-1988-biuletyn-gm-88-t-197"
+  },
+  {
+    "id": "40dd7bf1c1398113a8dbc4306410ed61",
+    "slug": "niebieskawy-bialy-dym-przy-rozruchu-5-0-5-7-tbi-c-k-1988-biuletyn-gm-88-t-195"
+  },
+  {
+    "id": "40dd7bf1c139811c8066e9d5cafc1adf",
+    "slug": "luszczenie-lakieru-maski-c-k-1989-biuletyn-gm-89-t-12"
+  },
+  {
+    "id": "40dd7bf1c139811cb921dbbb283c9b73",
+    "slug": "akcja-serwisowa-gm-hak-holowniczy-za-slabo-dokrecony-1989-89-c-06"
+  },
+  {
+    "id": "40dd7bf1c139811fbe38ea8d838fff0d",
+    "slug": "nawiew-zablokowany-w-trybie-a-c-lub-ogrzewania-c-k-1988-1989-biuletyn-gm-89-t-18"
+  },
+  {
+    "id": "40dd7bf1c1398127bc17de699ccfaa2a",
+    "slug": "wycie-predkosciomierza-c-k-1988-1989-biuletyn-gm-89-t-27"
+  },
+  {
+    "id": "40dd7bf1c13981298e2dc59b32094e68",
+    "slug": "ulepszona-uszczelka-pod-glowice-5-0-5-7-c-k-1988-1989-biuletyn-gm-89-t-16"
+  },
+  {
+    "id": "40dd7bf1c13981319662c50e63f36972",
+    "slug": "pozorne-pekniecie-kola-pasowego-pompy-wspomagania-c-k-1988-1989-biuletyn-gm-89-t"
+  },
+  {
+    "id": "40dd7bf1c13981359ba1fdcdcd97dc49",
+    "slug": "glosniejsza-praca-7-4-c-k-1988-1989-biuletyn-gm-89-t-23"
+  },
+  {
+    "id": "40dd7bf1c13981369cb1eb1fea4f7a65",
+    "slug": "obroty-biegu-jalowego-i-licznik-iac-1990-c-k-1990-biuletyn-gm-90-206-6c"
+  },
+  {
+    "id": "40dd7bf1c1398138a093e96e15f7f3b4",
+    "slug": "redukcja-3-2-w-700r4-4l60-plyta-posrednia-c-k-1989-biuletyn-gm-89-t-44"
+  },
+  {
+    "id": "40dd7bf1c1398138aa6ce422a400eeba",
+    "slug": "luzujace-sie-zawiasy-okna-uchylnego-extended-cab-c-k-1988-biuletyn-gm-88-t-205"
+  },
+  {
+    "id": "40dd7bf1c1398138b928c452ad67f309",
+    "slug": "gwiazdziste-pekniecia-lakieru-blotnikow-sportside-c-k-1988-1989-biuletyn-gm-89-t"
+  },
+  {
+    "id": "40dd7bf1c139813c8ef2c09fa4e16d93",
+    "slug": "porowatosc-obudowy-700r4-4l60-c-k-1988-1989-biuletyn-gm-89-t-47"
+  },
+  {
+    "id": "40dd7bf1c139813eb195f1039f5269f9",
+    "slug": "halas-walu-napedowego-i-zuzycie-podpory-srodkowej-c-k-1988-biuletyn-gm-88-t-176"
+  },
+  {
+    "id": "40dd7bf1c1398141bfe3d489ce399258",
+    "slug": "nierowny-nawiew-na-szybe-c-k-1988-1989-biuletyn-gm-89-t-30"
+  },
+  {
+    "id": "40dd7bf1c139814987baca0568e0bbce",
+    "slug": "czujnik-map-nowe-sciezki-diagnostyczne-c-k-1988-1990-biuletyn-gm-90-199-6e"
+  },
+  {
+    "id": "40dd7bf1c1398153aef1eb620847a6cd",
+    "slug": "luzujace-sie-tylne-amortyzatory-c-k-1988-1989-biuletyn-gm-89-t-34"
+  },
+  {
+    "id": "40dd7bf1c139815db1f8ee502668f5a1",
+    "slug": "wyciek-z-przewodow-chlodnicy-oleju-silnika-c-k-1988-1989-biuletyn-gm-89-t-77"
+  },
+  {
+    "id": "40dd7bf1c13981618cecc23ab27e22a1",
+    "slug": "cwierkanie-na-biegu-jalowym-zawory-a-i-r-c-k-1988-biuletyn-gm-88-t-185"
+  },
+  {
+    "id": "40dd7bf1c1398172a080fd8ae5249246",
+    "slug": "halas-tylnych-resorow-c-k-1988-1989-biuletyn-gm-89-t-91"
+  },
+  {
+    "id": "40dd7bf1c1398173ba86f439583d4d6a",
+    "slug": "tykanie-dmuchawy-c-k-1988-biuletyn-gm-88-t-161"
+  },
+  {
+    "id": "40dd7bf1c13981798724f136a6866f40",
+    "slug": "trudny-rozruch-6-2-diesel-swiece-zarowe-c-k-1988-1989-biuletyn-gm-89-t-28"
+  },
+  {
+    "id": "40dd7bf1c1398180942dd5198581324d",
+    "slug": "ladowanie-gleboko-rozladowanego-akumulatora-freedom-c-k-1988-biuletyn-gm-88-t-17"
+  },
+  {
+    "id": "40dd7bf1c1398180b089cfc01956a4b1",
+    "slug": "sciety-klin-kola-rozrzadu-6-2-diesel-c-k-1988-1989-biuletyn-gm-89-t-26"
+  },
+  {
+    "id": "40dd7bf1c139818293e6e2ba1581e218",
+    "slug": "ucieczka-czynnika-przez-zawory-serwisowe-a-c-c-k-1988-1989-biuletyn-gm-89-t-78"
+  },
+  {
+    "id": "40dd7bf1c13981848deccfac03f4bff1",
+    "slug": "wstepna-kontrola-4l60-i-tabela-zmiany-biegow-1990-c-k-1990-biuletyn-gm-90-77-7a"
+  },
+  {
+    "id": "40dd7bf1c1398184904bedce87ebfc64",
+    "slug": "obwod-420-rwal-rezystor-c-k-1988-1989-biuletyn-gm-89-t-39"
+  },
+  {
+    "id": "40dd7bf1c139818ea42cf86a1da49ff8",
+    "slug": "piszczenie-tylnych-kol-przy-hamowaniu-rwal-blizniaki-c-k-1988-biuletyn-gm-88-t-1"
+  },
+  {
+    "id": "40dd7bf1c139818fa7a3f664745bb932",
+    "slug": "uszczelniacz-w-plynie-chlodzacym-fabryczny-c-k-1988-biuletyn-gm-88-t-183"
+  },
+  {
+    "id": "40dd7bf1c1398191985ef795fc2a4e65",
+    "slug": "brak-hamowania-silnikiem-w-d2-thm400-c-k-1988-biuletyn-gm-88-t-200"
+  },
+  {
+    "id": "40dd7bf1c1398198a787cea7311ce1af",
+    "slug": "nowy-zespol-elektrozaworow-700r4-c-k-1988-biuletyn-gm-89-t-03"
+  },
+  {
+    "id": "40dd7bf1c1398198a9a4e64fd9a1d76b",
+    "slug": "wymiana-zegarow-program-wymiany-c-k-1989-biuletyn-gm-89-t-17"
+  },
+  {
+    "id": "40dd7bf1c13981a08c79c5e1aa76f23a",
+    "slug": "samoczynne-wlaczanie-4-4-np1370-c-k-1989-biuletyn-gm-89-t-96"
+  },
+  {
+    "id": "40dd7bf1c13981a18905d4eaf771fb64",
+    "slug": "drgania-silnika-zla-poduszka-skrzyni-c-k-1988-1990-biuletyn-gm-90-t-04"
+  },
+  {
+    "id": "40dd7bf1c13981a2ac9ff179afeca866",
+    "slug": "zlamany-zatrzask-modulu-rwal-c-k-1988-1989-biuletyn-gm-89-t-29"
+  },
+  {
+    "id": "40dd7bf1c13981a4b958fbce992309b5",
+    "slug": "zle-uszczelki-plyty-posredniej-w-zestawie-naprawczym-700r4-c-k-1988-1989-biulety"
+  },
+  {
+    "id": "40dd7bf1c13981a4bedff38b1cd9d9ff",
+    "slug": "halas-i-zuzycie-paska-wieloklinowego-7-4-c-k-1988-1989-biuletyn-gm-89-t-22"
+  },
+  {
+    "id": "40dd7bf1c13981a5afa5cfa65ad08ace",
+    "slug": "falszywa-kontrolka-service-engine-soon-c-k-1989-biuletyn-gm-89-t-74"
+  },
+  {
+    "id": "40dd7bf1c13981a5b8a7db0bed10d12d",
+    "slug": "przerywajaca-praca-elektrycznych-szyb-c-k-1988-biuletyn-gm-88-t-204"
+  },
+  {
+    "id": "40dd7bf1c13981b99b50e5923c9a1606",
+    "slug": "akcja-serwisowa-gm-sruby-prawego-dolnego-wahacza-1989-89-c-08"
+  },
+  {
+    "id": "40dd7bf1c13981bfadf9cdcf0c716861",
+    "slug": "woda-z-odplywu-parownika-w-kabinie-c-k-1988-1989-biuletyn-gm-89-t-86"
+  },
+  {
+    "id": "40dd7bf1c13981c9b890f39f2000dd1c",
+    "slug": "przyciski-radia-bas-sopran-balans-c-k-1988-1989-biuletyn-gm-89-t-57"
+  },
+  {
+    "id": "40dd7bf1c13981ce92cded65bdeaeb65",
+    "slug": "pozorny-wyciek-z-nagrzewnicy-c-k-1988-1989-biuletyn-gm-89-t-42"
+  },
+  {
+    "id": "40dd7bf1c13981ceb4fff4fa6698dc43",
+    "slug": "smarowalne-dolne-sworznie-wahaczy-c-k-1988-1989-biuletyn-gm-89-t-88"
+  },
+  {
+    "id": "40dd7bf1c13981cfbee0c982e8338314",
+    "slug": "pomiar-zamarzania-plynu-refraktometr-c-k-1988-1990-biuletyn-gm-90-t-01"
+  },
+  {
+    "id": "40dd7bf1c13981d59dbeed864b518cb1",
+    "slug": "stuk-w-ukladzie-napedowym-przy-zatrzymaniu-c-k-1988-1989-biuletyn-gm-89-t-98"
+  },
+  {
+    "id": "40dd7bf1c13981da97b1f6390ba0f494",
+    "slug": "uszkodzenie-oslony-gornego-sworznia-przy-wymianie-amortyzatora-c-k-1988-1989-biu"
+  },
+  {
+    "id": "40dd7bf1c13981de9ad6ee5e90694f0e",
+    "slug": "slabe-grzanie-nagrzewnicy-c-k-1988-biuletyn-gm-88-t-177"
+  },
+  {
+    "id": "40dd7bf1c13981e0a14cd95bf90c455d",
+    "slug": "falszywy-kod-9-rwal-c-k-1988-1989-biuletyn-gm-89-t-38"
+  },
+  {
+    "id": "40dd7bf1c13981e0b498d7e3fda175db",
+    "slug": "odczyt-kodow-rwal-c-k-1988-1989-biuletyn-gm-89-t-45"
+  },
+  {
+    "id": "40dd7bf1c13981e6a836d3502c6f41a5",
+    "slug": "opaski-oslon-polosi-przednich-4-4-c-k-1988-1989-biuletyn-gm-89-t-08"
+  },
+  {
+    "id": "40dd7bf1c13981ed9a7cec09746fe23f",
+    "slug": "regulacja-wlacznika-swiatel-stopu-c-k-1988-1989-biuletyn-gm-89-t-32"
+  },
+  {
+    "id": "40dd7bf1c13981ee8aeae4a09f4de324",
+    "slug": "odklejona-wewnetrzna-uszczelka-szyby-drzwi-c-k-1988-biuletyn-gm-88-t-181"
+  },
+  {
+    "id": "40dd7bf1c13981eeb73cd9cf59c3527b",
+    "slug": "czarny-dym-na-jalowym-6-2-diesel-c-k-1988-1989-biuletyn-gm-89-t-71"
+  },
+  {
+    "id": "40dd7bf1c13981ef8cdcdf5c7b995d7d",
+    "slug": "kod-5-rwal-nowa-procedura-c-k-1988-1990-biuletyn-gm-90-269-5"
+  },
+  {
+    "id": "40dd7bf1c13981f98890ca3924280312",
+    "slug": "wypaczona-maskownica-glosnika-c-k-1988-biuletyn-gm-88-t-173"
+  },
+  {
+    "id": "40dd7bf1c13981fa9abbda7a59bad8bb",
+    "slug": "akcja-serwisowa-gm-adapter-chlodnicy-filtra-oleju-7-4-1988-1989-89-c-02"
+  },
+  {
+    "id": "40dd7bf1c13981fb9f89d6395f404d44",
+    "slug": "buczenie-hoot-przy-autostradowych-predkosciach-c-k-1988-1989-biuletyn-gm-89-t-10"
+  }
+]
