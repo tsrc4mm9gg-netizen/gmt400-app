@@ -30,6 +30,7 @@ jobs:
           async function get(url) {
             const u = new URL(url);
             if (u.protocol !== 'https:' || !['www.gmt400.pl', 'gmt400.pl'].includes(u.hostname)) throw new Error('Unexpected origin: ' + u.origin);
+            await new Promise(resolve => setTimeout(resolve, 1500));
             return fetch(u, { redirect: 'manual', signal: AbortSignal.timeout(20000), headers: { 'User-Agent': 'GMT400-SEO-Audit/1.0', 'Cache-Control': 'no-cache' } });
           }
           async function inspect(url, kind) {
@@ -85,13 +86,9 @@ jobs:
             if (!urls.length || new Set(urls).size !== urls.length) report.errors.push('sitemap_empty_or_duplicate');
             const queue = urls.map(url => ({ url, kind: 'sitemap' }));
             for (const path of ['problemy-z-rozrusznikiem-gmt400', '3fad7bf1c1398100b7e0cd224833baf9', '3fad7bf1-c139-8100-b7e0-cd224833baf9']) queue.push({ url: origin + '/baza/' + path, kind: 'legacy' });
-            await Promise.all(Array.from({ length: 3 }, async () => {
-              while (queue.length) {
-                const item = queue.shift();
-                await inspect(item.url, item.kind);
-                await new Promise(resolve => setTimeout(resolve, 500));
-              }
-            }));
+            for (const item of queue) {
+              await inspect(item.url, item.kind);
+            }
           } catch (e) { report.errors.push(String(e.message)); }
           report.rows.sort((a, b) => a.url.localeCompare(b.url));
           report.flagged = report.rows.filter(r => r.issues.length).length;
