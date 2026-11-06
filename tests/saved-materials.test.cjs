@@ -1,0 +1,13 @@
+const test=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs'),ts=require('typescript');
+const loaded={exports:{}};
+new Function('exports','require','module',ts.transpileModule(fs.readFileSync('src/lib/saved-materials.ts','utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2020}}).outputText)(loaded.exports,require,loaded);
+const item=(id,title='Pompa paliwa',extra={})=>({id,title,href:'/baza/pompa',type:'Porada',...extra});
+function withStorage(callback){const store=new Map();global.window={localStorage:{getItem:key=>store.get(key)??null,setItem:(key,value)=>store.set(key,value),removeItem:key=>store.delete(key)},dispatchEvent:()=>{}};try{return callback();}finally{delete global.window;}}
+
+test('default collection exists and empty state is valid',()=>withStorage(()=>{const state=loaded.exports.readSaved();assert.equal(state.items.length,0);assert.equal(state.collections[0].id,'do-sprawdzenia');}));
+test('save and remove material updates local state',()=>withStorage(()=>{loaded.exports.saveMaterial(item('a'));let state=loaded.exports.readSaved();assert.equal(state.items.length,1);assert.equal(state.items[0].collectionId,'do-sprawdzenia');loaded.exports.removeSaved('a');state=loaded.exports.readSaved();assert.equal(state.items.length,0);}));
+test('invalid href is rejected',()=>withStorage(()=>{loaded.exports.saveMaterial(item('a',{href:'https://example.com'}));assert.equal(loaded.exports.readSaved().items.length,0);}));
+test('collection can be created and removed',()=>withStorage(()=>{const created=loaded.exports.createCollection('Serwis');assert.ok(created);let state=loaded.exports.readSaved();assert.equal(state.collections.length,2);loaded.exports.removeCollection(created.id);state=loaded.exports.readSaved();assert.equal(state.collections.length,1);}));
+test('default collection cannot be removed',()=>withStorage(()=>{loaded.exports.removeCollection('do-sprawdzenia');assert.equal(loaded.exports.readSaved().collections.length,1);}));
+test('clear collection removes only its items',()=>withStorage(()=>{loaded.exports.createCollection('Serwis');loaded.exports.saveMaterial(item('a',{collectionId:'do-sprawdzenia'}));loaded.exports.saveMaterial(item('b',{collectionId:'serwis'}));loaded.exports.clearCollection('serwis');const state=loaded.exports.readSaved();assert.equal(state.items.length,1);assert.equal(state.items[0].id,'a');}));
+test('saved materials respect limit',()=>withStorage(()=>{for(let i=0;i<120;i++)loaded.exports.saveMaterial(item(`id-${i}`));assert.equal(loaded.exports.readSaved().items.length,100);}));
