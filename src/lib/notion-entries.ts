@@ -1,6 +1,7 @@
 import { cache } from 'react';
 import { notionFetch } from './notion-fetch';
 import { withoutSuperseded } from './superseded.mjs';
+import { knowledgeHref } from './knowledge-slugs';
 
 /** Baza wiedzy GMT400 w Notion — jedno źródło dla /api/notion i stron renderowanych na serwerze (ISR). */
 export const DATABASE_ID = '746973771d604f1e8276502851176af2';
@@ -91,11 +92,11 @@ export const getListEntries = cache(async (): Promise<NotionEntry[] | null> => {
   try { return await fetchAllEntries(token, LIST_REVALIDATE_SECONDS); } catch { return null; }
 });
 
-/** Dane strukturalne ItemList dla listy wpisów (adresy /baza/[id] istnieją i są w sitemap). */
+/** Dane strukturalne ItemList: kanoniczne slugi z rejestru, UUID tylko jako fallback. */
 export function itemListJsonLd(name: string, url: string, entries: { id: string; Nazwa: string }[]) {
   return {
     '@context': 'https://schema.org', '@type': 'ItemList', name, url,
     numberOfItems: entries.length,
-    itemListElement: entries.map((entry, index) => ({ '@type': 'ListItem', position: index + 1, name: entry.Nazwa, url: `https://www.gmt400.pl/baza/${entry.id}` })),
+    itemListElement: entries.map((entry, index) => ({ '@type': 'ListItem', position: index + 1, name: entry.Nazwa, url: new URL(knowledgeHref(entry), 'https://www.gmt400.pl').toString() })),
   };
 }
