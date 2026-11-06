@@ -1,4 +1,4 @@
-import registry from '../data/knowledge-slugs.json';
+import registry from '../../data/knowledge-slugs.json';
 import type { NotionEntry } from './notion-entries';
 
 const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
