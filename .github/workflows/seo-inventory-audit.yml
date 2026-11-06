@@ -1,0 +1,97 @@
+name: SEO inventory reconciliation
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/seo-inventory-audit.yml']
+permissions:
+  contents: read
+concurrency:
+  group: seo-inventory-audit
+  cancel-in-progress: false
+jobs:
+  reconcile:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Compare publication sets without modifying data
+        run: |
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          const origin = 'https://www.gmt400.pl';
+          const clean = id => String(id ?? '').replace(/-/g, '').toLowerCase();
+          const report = { codeSha: process.env.GITHUB_SHA, checkedAt: new Date().toISOString(), scope: 'Active public API vs repository registry vs live sitemap. Not a raw Notion inventory, editorial review or internal-link crawl. Registry-only entries require review, not automatic deletion.', errors: [], rows: [] };
+          async function request(path) {
+            await new Promise(resolve => setTimeout(resolve, 1500));
+            const response = await fetch(origin + path, { redirect: 'manual', signal: AbortSignal.timeout(60000), headers: { 'User-Agent': 'GMT400-SEO-Inventory/1.0' } });
+            if (response.status !== 200) throw new Error(path + ': HTTP ' + response.status);
+            return response;
+          }
+          try {
+            const registry = JSON.parse(fs.readFileSync('data/knowledge-slugs.json', 'utf8'));
+            if (!Array.isArray(registry)) throw new Error('Registry is not an array');
+            const data = await (await request('/api/notion')).json();
+            if (data.complete !== true || !Array.isArray(data.results) || data.count !== data.results.length) throw new Error('Public inventory is incomplete or inconsistent');
+            const xml = await (await request('/sitemap.xml')).text();
+            if (!/<urlset\b/i.test(xml)) throw new Error('Expected sitemap urlset');
+            const locations = [...xml.matchAll(/<loc>\s*([^<]+)\s*<\/loc>/g)].map(m => new URL(m[1].trim().replace(/&amp;/g, '&')).href);
+            if (!locations.length) throw new Error('Empty sitemap');
+            const sitemap = new Set(locations);
+            const active = new Map();
+            for (const entry of data.results) {
+              const id = clean(entry.id);
+              if (!/^[a-f0-9]{32}$/.test(id) || active.has(id)) throw new Error('Invalid or duplicate active ID');
+              active.set(id, entry);
+            }
+            const byId = new Map();
+            const bySlug = new Map();
+            for (const row of registry) {
+              const id = clean(row.id);
+              if (!/^[a-f0-9]{32}$/.test(id) || typeof row.slug !== 'string' || !row.slug.trim() || byId.has(id) || bySlug.has(row.slug)) throw new Error('Invalid or duplicate registry record');
+              byId.set(id, row);
+              bySlug.set(row.slug, row);
+            }
+            const registryUrls = new Set();
+            for (const [id, row] of byId) {
+              const url = origin + '/baza/' + encodeURIComponent(row.slug);
+              registryUrls.add(url);
+              const isActive = active.has(id);
+              const inSitemap = sitemap.has(url);
+              const status = isActive ? (inSitemap ? 'active_covered' : 'active_missing_sitemap') : (inSitemap ? 'inactive_registry_in_sitemap' : 'registry_not_in_active_api_review');
+              report.rows.push({ id, slug: row.slug, url, active: isActive, inSitemap, status, title: active.get(id)?.Nazwa ?? '' });
+            }
+            for (const [id, entry] of active) if (!byId.has(id)) report.rows.push({ id, slug: '', url: '', active: true, inSitemap: false, status: 'active_missing_registry', title: entry.Nazwa ?? '' });
+            for (const url of sitemap) {
+              const parsed = new URL(url);
+              if (parsed.pathname.startsWith('/baza/') && !registryUrls.has(url)) report.rows.push({ id: '', slug: '', url, active: false, inSitemap: true, status: 'sitemap_knowledge_url_without_registry', title: '' });
+              if (parsed.origin !== origin) report.errors.push('Unexpected sitemap origin: ' + parsed.origin);
+            }
+            report.counts = { registry: registry.length, activeApi: active.size, sitemap: locations.length, sitemapUnique: sitemap.size, activeByType: {}, byStatus: {} };
+            for (const entry of active.values()) report.counts.activeByType[entry.Typ || 'missing_type'] = (report.counts.activeByType[entry.Typ || 'missing_type'] || 0) + 1;
+            for (const row of report.rows) report.counts.byStatus[row.status] = (report.counts.byStatus[row.status] || 0) + 1;
+            if (locations.length !== sitemap.size) report.errors.push('Duplicate sitemap URLs');
+            const failures = new Set(['active_missing_sitemap', 'inactive_registry_in_sitemap', 'active_missing_registry', 'sitemap_knowledge_url_without_registry']);
+            report.flagged = report.rows.filter(row => failures.has(row.status)).length;
+          } catch (error) { report.errors.push(String(error.message)); }
+          report.passed = report.errors.length === 0 && report.flagged === 0;
+          fs.mkdirSync('reports/seo-inventory', { recursive: true });
+          fs.writeFileSync('reports/seo-inventory/inventory.json', JSON.stringify(report, null, 2));
+          const columns = ['id', 'slug', 'url', 'active', 'inSitemap', 'status', 'title'];
+          const cell = value => '"' + String(value ?? '').replace(/"/g, '""') + '"';
+          fs.writeFileSync('reports/seo-inventory/inventory.csv', [columns.join(','), ...report.rows.map(row => columns.map(key => cell(row[key])).join(','))].join('\n'));
+          console.log('SEO_INVENTORY_SUMMARY ' + JSON.stringify({ checkedAt: report.checkedAt, counts: report.counts, flagged: report.flagged, errors: report.errors, passed: report.passed }));
+          for (const row of report.rows) if (!['active_covered', 'registry_not_in_active_api_review'].includes(row.status)) console.log('SEO_INVENTORY_ROW ' + JSON.stringify(row));
+          fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, '## SEO inventory\n' + JSON.stringify({ counts: report.counts, flagged: report.flagged, errors: report.errors, passed: report.passed }, null, 2) + '\nRegistry-only records require review, not deletion.\n');
+          if (!report.passed) process.exitCode = 1;
+          NODE
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: seo-inventory-${{ github.run_id }}-${{ github.run_attempt }}
+          path: reports/seo-inventory/
+          retention-days: 30
+          if-no-files-found: error
