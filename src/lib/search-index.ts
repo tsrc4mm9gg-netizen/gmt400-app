@@ -79,9 +79,10 @@ const GROUP_BY_TYPE: Record<string, SearchGroup> = { Usterka: 'usterki', Porada:
 export function buildSearchIndex(notion: NotionLike[] | null): SearchIndex {
   const docs: SearchIndexDoc[] = [];
   for (const e of notion ?? []) {
-    if (!e?.id || !e.Nazwa) continue;
+    const { id, Nazwa } = e;
+    if (!id || !Nazwa) continue;
     const doc: SearchIndexDoc = {
-      g: GROUP_BY_TYPE[e.Typ] ?? 'diy', k: e.id, t: e.Nazwa, u: knowledgeHref(e),
+      g: GROUP_BY_TYPE[e.Typ] ?? 'diy', k: id, t: Nazwa, u: knowledgeHref({ ...e, id, Nazwa }),
       s: snippet(e.Opis || e.Objawy || e.Rozwiązanie),
       b: keywords([e.Typ, e.Model, e.Lata, e.Opis, e.Objawy, e.Rozwiązanie]),
     };
