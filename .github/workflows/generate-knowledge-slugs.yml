@@ -1,6 +1,11 @@
 name: Generate knowledge slug registry
 
 on:
+  push:
+    branches:
+      - seo/baza-slug-urls
+    paths-ignore:
+      - "data/knowledge-slugs.json"
   workflow_dispatch:
 
 permissions:
@@ -31,10 +36,9 @@ jobs:
         run: node scripts/generate-knowledge-slugs.mjs
 
       - name: Commit registry changes
-        id: commit
+        if: steps.commit.outputs.changed == 'true'
         run: |
           if git diff --quiet -- data/knowledge-slugs.json; then
-            echo "changed=false" >> "$GITHUB_OUTPUT"
             echo "No registry changes."
             exit 0
           fi
@@ -43,4 +47,3 @@ jobs:
           git add data/knowledge-slugs.json
           git commit -m "chore(seo): update knowledge slug registry"
           git push origin HEAD:seo/baza-slug-urls
-          echo "changed=true" >> "$GITHUB_OUTPUT"
