@@ -33,7 +33,7 @@ jobs:
             return fetch(u, { redirect: 'manual', signal: AbortSignal.timeout(20000), headers: { 'User-Agent': 'GMT400-SEO-Audit/1.0', 'Cache-Control': 'no-cache' } });
           }
           async function inspect(url, kind) {
-            const row = { kind, url, hops: [], finalUrl: url, status: null, canonical: '', robots: '', issues: [] };
+            const row = { kind, url, hops: [], finalUrl: url, status: null, canonical: '', robots: '', title: '', unavailableMarker: false, responseHeaders: {}, issues: [] };
             try {
               const seen = new Set();
               for (let i = 0; i < 8; i++) {
@@ -49,14 +49,18 @@ jobs:
                   if (i === 7) throw new Error('Redirect limit');
                   continue;
                 }
+                row.responseHeaders = Object.fromEntries(['content-type', 'cache-control', 'age', 'x-vercel-cache', 'x-nextjs-cache', 'retry-after', 'x-robots-tag'].map(key => [key, r.headers.get(key)]));
                 row.robots = r.headers.get('x-robots-tag') || '';
                 const html = await r.text();
+                row.title = decode(html.match(/<title\b[^>]*>([\s\S]*?)<\/title>/i)?.[1] || '');
+                row.unavailableMarker = /Baza wiedzy chwilowo niedostępna|Nie udało się pobrać dodatkowej zawartości strony Notion/i.test(html);
                 for (const tag of html.match(/<link\b[^>]*>/gi) || []) if (attr(tag, 'rel').toLowerCase() === 'canonical') row.canonical = attr(tag, 'href');
                 for (const tag of html.match(/<meta\b[^>]*>/gi) || []) if (['robots', 'googlebot'].includes(attr(tag, 'name').toLowerCase())) row.robots += ' ' + attr(tag, 'content');
                 if (r.status !== 200) row.issues.push('final_status_not_200');
                 if (!row.canonical) row.issues.push('canonical_missing_or_unparsed');
-                else if (new URL(row.canonical, row.finalUrl).href !== row.finalUrl) row.issues.push('canonical_differs_from_final');
+                else if (new URL(row.canonical, row.finalUrl).href !== new URL(row.finalUrl).href) row.issues.push('canonical_differs_from_final');
                 if (/\bnoindex\b|\bnone\b/i.test(row.robots)) row.issues.push('noindex');
+                if (row.unavailableMarker) row.issues.push('notion_unavailable_marker');
                 break;
               }
               if (kind === 'sitemap' && row.hops.length > 1) row.issues.push('sitemap_url_redirects');
@@ -94,10 +98,12 @@ jobs:
           report.passed = !report.errors.length && !report.flagged && report.rows.length > 0;
           fs.mkdirSync('reports/seo', { recursive: true });
           fs.writeFileSync('reports/seo/audit.json', JSON.stringify(report, null, 2));
-          const columns = ['kind', 'url', 'status', 'finalUrl', 'canonical', 'robots', 'hops', 'issues'];
+          const columns = ['kind', 'url', 'status', 'finalUrl', 'canonical', 'robots', 'title', 'unavailableMarker', 'responseHeaders', 'hops', 'issues'];
           const cell = v => '"' + String(typeof v === 'object' ? JSON.stringify(v) : v ?? '').replace(/"/g, '""') + '"';
           fs.writeFileSync('reports/seo/audit.csv', [columns.join(','), ...report.rows.map(r => columns.map(k => cell(r[k])).join(','))].join('\n'));
-          fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, `## SEO audit\nChecked: ${report.rows.length}; flagged: ${report.flagged}; execution errors: ${report.errors.length}.\nResult: ${report.passed ? 'PASS' : 'REVIEW REQUIRED'}. See JSON/CSV artifacts. This does not establish Google indexation.\n`);
+          console.log('SEO_AUDIT_SUMMARY ' + JSON.stringify({ checkedAt: report.checkedAt, registry: report.registry, sitemap: report.sitemap, robots: report.robots, checked: report.rows.length, flagged: report.flagged, errors: report.errors, passed: report.passed }));
+          for (const row of report.rows) if (row.issues.length || row.kind === 'legacy') console.log('SEO_AUDIT_ROW ' + JSON.stringify(row));
+          fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, `## SEO audit\nChecked: ${report.rows.length}; flagged: ${report.flagged}; execution errors: ${report.errors.length}.\nResult: ${report.passed ? 'PASS' : 'REVIEW REQUIRED'}. See JSON/CSV artifacts and SEO_AUDIT log records. This does not establish Google indexation.\n`);
           if (!report.passed) process.exitCode = 1;
           NODE
       - uses: actions/upload-artifact@v4
