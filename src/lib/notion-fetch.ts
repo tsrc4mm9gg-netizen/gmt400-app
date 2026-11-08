@@ -33,7 +33,7 @@ export function retryDelay(attempt: number, retryAfter: string | null, now = Dat
 }
 
 /** fetch do api.notion.com z ponawianiem. Zwraca ostatnią odpowiedź (także 4xx) — o 404 decyduje wywołujący. */
-export async function notionFetch(url: string, { token, revalidate = 300, attempts = 3, timeoutMs = 10000, ...init }: NotionInit): Promise<Response> {
+export async function notionFetch(url: string, { token, revalidate = 300, attempts = 5, timeoutMs = 15000, ...init }: NotionInit): Promise<Response> {
   let lastError: unknown;
   for (let attempt = 0; attempt < attempts; attempt++) {
     try {
@@ -50,7 +50,10 @@ export async function notionFetch(url: string, { token, revalidate = 300, attemp
     } catch (error) {
       if (error instanceof NotionUnavailableError) throw error;
       lastError = error;
-      if (attempt === attempts - 1) break;
+      if (attempt === attempts - 1) {
+        console.error(`[notion-fetch] Nie udało się pobrać ${url} po ${attempts} próbach.`, error);
+        break;
+      }
       await sleep(retryDelay(attempt, null));
     }
   }
