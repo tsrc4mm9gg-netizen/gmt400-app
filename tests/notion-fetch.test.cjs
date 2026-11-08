@@ -31,10 +31,18 @@ test('notionFetch does not retry 404 (missing entry stays a 404)', async () => {
   assert.equal(calls, 1);
 });
 
-test('notionFetch throws NotionUnavailableError after repeated network failures', async () => {
-  let calls = 0;
-  const fetch = async () => { calls++; throw new Error('timeout'); };
-  const { notionFetch } = load('notion-fetch.ts', { fetch });
-  await assert.rejects(notionFetch('u', { token: 't' }), error => error.name === 'NotionUnavailableError');
-  assert.equal(calls, 3);
-});
+for (const attempts of [undefined, 1, 3]) {
+  const expected = attempts ?? 5;
+  test(`notionFetch throws after ${expected} network attempts (${attempts === undefined ? 'default' : 'explicit'})`, async () => {
+    let calls = 0;
+    const delays = [];
+    const fetch = async () => { calls++; throw new Error('timeout'); };
+    const { notionFetch } = load('notion-fetch.ts', { fetch });
+    const options = { token: 't', sleep: async ms => { delays.push(ms); } };
+    if (attempts !== undefined) options.attempts = attempts;
+    await assert.rejects(notionFetch('u', options), error => error.name === 'NotionUnavailableError');
+    assert.equal(calls, expected);
+    assert.equal(delays.length, expected - 1);
+    assert.ok(delays.every(ms => Number.isFinite(ms) && ms >= 0 && ms < 3200));
+  });
+}
