@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import "./header-reflow.css";
 import VehicleProfileProvider from "./VehicleProfileProvider";
 import BackToTop from './ui/BackToTop';
 import QuickLinksBar from './ui/QuickLinksBar';

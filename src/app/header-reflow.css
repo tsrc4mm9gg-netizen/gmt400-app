@@ -1,0 +1,25 @@
+@media (min-width: 1024px) {
+  [data-testid='site-header'] > div {
+    min-width: 0;
+  }
+
+  [data-testid='site-header'] nav[aria-label='Nawigacja główna'] {
+    min-width: 0;
+  }
+
+  [data-testid='site-header'] nav[aria-label='Nawigacja główna'] > ul {
+    flex-wrap: wrap;
+    white-space: normal;
+    row-gap: 0.25rem;
+  }
+
+  [data-testid='site-header'] nav[aria-label='Nawigacja główna'] li {
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  [data-testid='site-header'] nav[aria-label='Nawigacja główna'] a {
+    max-width: 100%;
+    overflow-wrap: anywhere;
+  }
+}
