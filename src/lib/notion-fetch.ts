@@ -3,7 +3,7 @@
 export const NOTION_VERSION = '2022-06-28';
 
 const RETRY_STATUS = new Set([429, 500, 502, 503, 504]);
-const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
+const sleep = (ms: number): Promise<void> => new Promise<void>(resolve => setTimeout(resolve, ms));
 
 export class NotionUnavailableError extends Error {
   constructor(message = 'Baza wiedzy jest chwilowo niedostępna.') {
