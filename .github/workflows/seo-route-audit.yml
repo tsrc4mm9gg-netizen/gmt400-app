@@ -103,7 +103,7 @@ jobs:
           fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, `## SEO audit\nChecked: ${report.rows.length}; flagged: ${report.flagged}; execution errors: ${report.errors.length}.\nResult: ${report.passed ? 'PASS' : 'REVIEW REQUIRED'}. See JSON/CSV artifacts and SEO_AUDIT log records. This does not establish Google indexation.\n`);
           if (!report.passed) process.exitCode = 1;
           NODE
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         if: always()
         with:
           name: seo-audit-${{ github.run_id }}-${{ github.run_attempt }}
