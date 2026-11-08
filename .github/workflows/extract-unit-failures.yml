@@ -1,0 +1,41 @@
+name: Extract unit test failures
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/extract-unit-failures.yml']
+permissions:
+  contents: read
+  actions: read
+  issues: write
+concurrency:
+  group: extract-unit-42534649804
+  cancel-in-progress: false
+jobs:
+  extract:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Read existing failed test log and publish diagnostics
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: python
+        run: |
+          import json, re, subprocess
+          repo = 'tsrc4mm9gg-netizen/gmt400-app'
+          def gh(*args):
+              return subprocess.check_output(['gh', *args, '--repo', repo], text=True)
+          identity = json.loads(gh('run', 'view', '42534649804', '--json', 'headSha'))
+          if identity['headSha'] != '3a4f07fad8163ee79adca2bacb8a12004d303050':
+              raise SystemExit('Unexpected source commit')
+          log = gh('run', 'view', '42534649804', '--job', '128896160000', '--log-failed')
+          log = re.sub(r'\x1b\[[0-?]*[ -/]*[@-~]', '', log)
+          if not log.strip():
+              raise SystemExit('Empty failure log')
+          prefix = 'Unit diagnostics run 42534649804 part '
+          existing = {item['title'] for item in json.loads(gh('issue', 'list', '--state', 'all', '--limit', '100', '--search', 'in:title Unit diagnostics run 42534649804', '--json', 'title'))}
+          for index, start in enumerate(range(0, len(log), 40000), 1):
+              title = prefix + f'{index:04d}'
+              if title in existing:
+                  continue
+              body = 'Existing failed-step log; not a new test execution. Continued in numbered parts when necessary.\n\n~~~~text\n' + log[start:start+40000] + '\n~~~~\n'
+              subprocess.run(['gh', 'issue', 'create', '--repo', repo, '--title', title, '--body-file', '-'], input=body, text=True, check=True)
