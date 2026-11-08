@@ -17,13 +17,16 @@ export default function SavedMaterialButton({ id, title, href, type }: Props) {
   }, [id]);
 
   const toggle = () => {
-    if (saved) {
-      removeSaved(id);
-      setMessage('Usunięto z zapisanych.');
-    } else {
-      saveMaterial({ id, title, href, type, collectionId: DEFAULT_COLLECTION_ID });
-      setMessage('Zapisano w kolekcji „Do sprawdzenia”.');
+    const removing = saved;
+    const ok = removing
+      ? removeSaved(id)
+      : saveMaterial({ id, title, href, type, collectionId: DEFAULT_COLLECTION_ID });
+    if (!ok) {
+      setMessage('Nie udało się zmienić zapisanych materiałów. Pamięć przeglądarki może być niedostępna lub pełna albo dane materiału są nieprawidłowe.');
+      return;
     }
+    setSaved(!removing);
+    setMessage(removing ? 'Usunięto z zapisanych.' : 'Zapisano w kolekcji „Do sprawdzenia”.');
   };
 
   return <>

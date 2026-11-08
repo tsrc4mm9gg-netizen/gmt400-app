@@ -5,17 +5,16 @@ export const SAVED_EVENT = 'gmt400-saved-materials-change';
 export const SAVED_MAX = 100;
 export const DEFAULT_COLLECTION_ID = 'do-sprawdzenia';
 const DEFAULT_COLLECTION = { id: DEFAULT_COLLECTION_ID, name: 'Do sprawdzenia' } as const;
-
 type SavedState = { items: SavedMaterial[]; collections: SavedCollection[] };
-const EMPTY: SavedState = { items: [], collections: [DEFAULT_COLLECTION] };
+const emptyState = (): SavedState => ({ items: [], collections: [{ ...DEFAULT_COLLECTION }] });
 
 function parseSaved(raw: string | null): SavedState {
-  if (!raw) return EMPTY;
+  if (!raw) return emptyState();
   let data: unknown;
-  try { data = JSON.parse(raw); } catch { return EMPTY; }
-  if (!data || typeof data !== 'object') return EMPTY;
+  try { data = JSON.parse(raw); } catch { return emptyState(); }
+  if (!data || typeof data !== 'object') return emptyState();
   const value = data as { items?: unknown; collections?: unknown };
-  const collections: SavedCollection[] = [DEFAULT_COLLECTION];
+  const collections: SavedCollection[] = [{ ...DEFAULT_COLLECTION }];
   if (Array.isArray(value.collections)) {
     for (const entry of value.collections) {
       if (!entry || typeof entry !== 'object') continue;
@@ -43,60 +42,56 @@ function parseSaved(raw: string | null): SavedState {
   return { items, collections };
 }
 
-function writeSaved(state: SavedState): void {
-  try {
-    window.localStorage.setItem(SAVED_STORAGE_KEY, JSON.stringify(state));
-    window.dispatchEvent(new Event(SAVED_EVENT));
-  } catch { /* pamięć niedostępna — zapis jest opcjonalny */ }
+function readForWrite(): SavedState | null {
+  if (typeof window === 'undefined') return null;
+  try { return parseSaved(window.localStorage.getItem(SAVED_STORAGE_KEY)); } catch { return null; }
 }
-
+function writeSaved(state: SavedState): boolean {
+  if (typeof window === 'undefined') return false;
+  try { window.localStorage.setItem(SAVED_STORAGE_KEY, JSON.stringify(state)); } catch { return false; }
+  window.dispatchEvent(new Event(SAVED_EVENT));
+  return true;
+}
 export function readSaved(): SavedState {
-  if (typeof window === 'undefined') return EMPTY;
-  try { return parseSaved(window.localStorage.getItem(SAVED_STORAGE_KEY)); } catch { return EMPTY; }
+  return readForWrite() ?? emptyState();
 }
-
-export function saveMaterial(item: Omit<SavedMaterial, 'collectionId'> & { collectionId?: string }): void {
-  if (typeof window === 'undefined') return;
-  const state = readSaved();
+export function saveMaterial(item: Omit<SavedMaterial, 'collectionId'> & { collectionId?: string }): boolean {
+  const state = readForWrite();
+  if (!state) return false;
   const collectionId = state.collections.some(collection => collection.id === item.collectionId) ? item.collectionId || DEFAULT_COLLECTION_ID : DEFAULT_COLLECTION_ID;
-  const next = { id: item.id, title: item.title, href: item.href, type: item.type, collectionId };
-  const items = [next, ...state.items.filter(entry => entry.id !== item.id)].slice(0, SAVED_MAX);
-  writeSaved({ items, collections: state.collections });
+  const next = parseSaved(JSON.stringify({ collections: state.collections, items: [{ ...item, collectionId }] })).items[0];
+  if (!next) return false;
+  return writeSaved({ items: [next, ...state.items.filter(entry => entry.id !== next.id)].slice(0, SAVED_MAX), collections: state.collections });
 }
-
-export function removeSaved(id: string): void {
-  if (typeof window === 'undefined') return;
-  const state = readSaved();
-  writeSaved({ items: state.items.filter(item => item.id !== id), collections: state.collections });
+export function removeSaved(id: string): boolean {
+  const state = readForWrite();
+  if (!state) return false;
+  return writeSaved({ items: state.items.filter(item => item.id !== id), collections: state.collections });
 }
-
-export function clearCollection(collectionId: string): void {
-  if (typeof window === 'undefined') return;
-  const state = readSaved();
-  writeSaved({ items: state.items.filter(item => item.collectionId !== collectionId), collections: state.collections });
+export function clearCollection(collectionId: string): boolean {
+  const state = readForWrite();
+  if (!state) return false;
+  return writeSaved({ items: state.items.filter(item => item.collectionId !== collectionId), collections: state.collections });
 }
-
 export function createCollection(name: string): SavedCollection | null {
   if (typeof window === 'undefined') return null;
   const clean = name.trim();
   if (!clean || clean.length > 60) return null;
-  const state = readSaved();
+  const state = readForWrite();
+  if (!state) return null;
   const id = clean.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/ł/g, 'l').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '') || `kolekcja-${Date.now()}`;
   if (state.collections.some(collection => collection.id === id)) return null;
   const collection = { id, name: clean };
-  writeSaved({ items: state.items, collections: [...state.collections, collection] });
-  return collection;
+  return writeSaved({ items: state.items, collections: [...state.collections, collection] }) ? collection : null;
 }
-
-export function removeCollection(id: string): void {
-  if (typeof window === 'undefined' || id === DEFAULT_COLLECTION_ID) return;
-  const state = readSaved();
-  writeSaved({ items: state.items.filter(item => item.collectionId !== id), collections: state.collections.filter(collection => collection.id !== id) });
+export function removeCollection(id: string): boolean {
+  if (id === DEFAULT_COLLECTION_ID) return false;
+  const state = readForWrite();
+  if (!state) return false;
+  return writeSaved({ items: state.items.filter(item => item.collectionId !== id), collections: state.collections.filter(collection => collection.id !== id) });
 }
-
-export function changeCollection(id: string, collectionId: string): void {
-  if (typeof window === 'undefined') return;
-  const state = readSaved();
-  if (!state.collections.some(collection => collection.id === collectionId)) return;
-  writeSaved({ items: state.items.map(item => item.id === id ? { ...item, collectionId } : item), collections: state.collections });
+export function changeCollection(id: string, collectionId: string): boolean {
+  const state = readForWrite();
+  if (!state || !state.collections.some(collection => collection.id === collectionId)) return false;
+  return writeSaved({ items: state.items.map(item => item.id === id ? { ...item, collectionId } : item), collections: state.collections });
 }
