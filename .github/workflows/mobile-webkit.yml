@@ -1,33 +1,42 @@
 name: Mobile WebKit regression verification
+
 on:
   push:
     branches: [main]
     paths: ['src/**','tests/**','package.json','package-lock.json','next.config.ts','playwright.webkit.config.cjs','playwright.ux.config.cjs','.github/workflows/mobile-webkit.yml']
   workflow_dispatch:
+
 permissions:
   contents: read
+
 env:
   PLAYWRIGHT_VERSION: '1.64.1'
+
 concurrency:
   group: mobile-webkit-verification
   cancel-in-progress: true
+
 jobs:
   verify:
     runs-on: ubuntu-latest
     timeout-minutes: 45
     steps:
       - uses: actions/checkout@v4
+
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
           cache: npm
+
       - id: install
         timeout-minutes: 12
         run: |
           # npm ci z jedną ponowną próbą (zawieszenia rejestru npm na runnerze)
           timeout 300 npm ci --no-audit --no-fund || { echo 'npm ci: ponowna próba'; rm -rf node_modules; timeout 300 npm ci --no-audit --no-fund; }
+
       - id: build
         run: npm run build
+
       - id: mock
         # Atrapa API Notion: listy /usterki /diy /modele /poradniki /baza są renderowane na serwerze (ISR), więc testy SSR potrzebują danych
         # już przy buildzie. Dlatego powstają dwa buildy: zwykły (bez danych — test komunikatu o błędzie pobierania) i z atrapą (.next-ssr).
@@ -38,17 +47,20 @@ jobs:
             cat /tmp/mock-notion.log
             exit 1
           fi
+
       - id: build_ssr
         run: npm run build
         env:
           NEXT_DIST_DIR: .next-ssr
           NOTION_API_BASE: http://127.0.0.1:4010
           NOTION_TOKEN: ci-mock-token
+
       - name: Cache Playwright browsers
         uses: actions/cache@v4
         with:
           path: ~/.cache/ms-playwright
           key: ms-playwright-${{ runner.os }}-${{ env.PLAYWRIGHT_VERSION }}-webkit-chromium
+
       - id: tooling
         timeout-minutes: 15
         run: |
@@ -58,6 +70,7 @@ jobs:
             timeout 360 npx playwright install --with-deps webkit chromium
           }
           install_tooling || { echo 'Instalacja Playwright: ponowna próba'; sleep 10; install_tooling; }
+
       - id: server
         run: |
           npm run start -- --hostname 127.0.0.1 --port 3100 > /tmp/mobile-webkit-server.log 2>&1 &
@@ -67,6 +80,7 @@ jobs:
             sleep 1
           done
           exit 1
+
       - id: server_ssr
         run: |
           NEXT_DIST_DIR=.next-ssr NOTION_API_BASE=http://127.0.0.1:4010 NOTION_TOKEN=ci-mock-token npm run start -- --hostname 127.0.0.1 --port 3101 > /tmp/mobile-webkit-server-ssr.log 2>&1 &
@@ -74,15 +88,18 @@ jobs:
             cat /tmp/mobile-webkit-server-ssr.log
             exit 1
           fi
+
       - id: tests
         continue-on-error: true
         run: npx playwright test --config=playwright.webkit.config.cjs --reporter=json > /tmp/mobile-webkit-tests.json 2>/tmp/mobile-webkit-errors.log
+
       - id: ux
         continue-on-error: true
         env:
           SSR_LISTS: '1'
           UX_BASE: http://127.0.0.1:3101
         run: npx playwright test --config=playwright.ux.config.cjs --reporter=json > /tmp/ux-key-paths.json 2>/tmp/ux-key-paths-errors.log
+
       - name: Generate report
         if: always()
         env:
@@ -116,8 +133,27 @@ jobs:
           passed = passed && uxPassed;
           fs.mkdirSync('.diagnostics',{recursive:true});
           fs.writeFileSync('.diagnostics/mobile-webkit-report.json',JSON.stringify({codeSha:process.env.GITHUB_SHA,runId:process.env.GITHUB_RUN_ID,checkedAt:new Date().toISOString(),scope:'Linux WebKit with mobile viewport and touch; local production build, tools API tests and mocked Notion fixtures. Not physical iPhone, production Safari or live provider certification.',passed,stages,stats,coverage,parseError,runnerErrors:raw.errors || [],tests,ux:{passed:uxPassed,stats:ux.stats || {},parseError:uxParseError,runnerErrors:ux.errors || [],tests:uxTests}},null,2)+'\n');
-          fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, 'Mobile WebKit verification: ' + (passed ? 'PASS' : 'FAIL') + '\nReport is attached as a workflow artifact; it is not committed to the repository.');
+          const lines = ['Mobile WebKit verification: ' + (passed ? 'PASS' : 'FAIL'), '', '## Diagnostyka', '', 'Stages: `' + JSON.stringify(stages) + '`', '', 'WebKit parse error: ' + (parseError || 'brak'), 'UX parse error: ' + (uxParseError || 'brak'), '', 'WebKit runner errors: `' + JSON.stringify(raw.errors || []) + '`', '', 'UX runner errors: `' + JSON.stringify(ux.errors || []) + '`'];
+          const failingTests = tests.filter(test => test.status !== 'expected');
+          if (failingTests.length) {
+            lines.push('', '## Nieudane testy WebKit');
+            failingTests.forEach(test => {
+              const error = test.attempts.map(item => item.error).filter(Boolean).join('\n');
+              lines.push('', '### ' + test.title, '', 'Plik: `' + test.file + '`', 'Status: `' + test.status + '`', '', (error ? '```text\n' + error + '\n```' : 'Brak zapisanego komunikatu błędu.'));
+            });
+          }
+          const failingUxTests = uxTests.filter(test => test.status !== 'expected' && !(test.status === 'skipped' && test.project.endsWith('-desktop') && test.skipReason));
+          if (failingUxTests.length) {
+            lines.push('', '## Nieudane testy UX');
+            failingUxTests.forEach(test => {
+              const error = test.attempts.map(item => item.error).filter(Boolean).join('\n');
+              lines.push('', '### ' + test.title, '', 'Projekt: `' + test.project + '`', 'Status: `' + test.status + '`', '', (error ? '```text\n' + error + '\n```' : 'Brak zapisanego komunikatu błędu.'));
+            });
+          }
+          lines.push('', '## Artefakty', '', 'Raport i logi są dostępne jako artefakt workflow: `mobile-webkit-' + process.env.GITHUB_RUN_ID + '-' + process.env.GITHUB_RUN_ATTEMPT + '`.');
+          fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, lines.join('\n') + '\n');
           NODE
+
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -130,6 +166,7 @@ jobs:
             /tmp/ux-key-paths-errors.log
             /tmp/mobile-webkit-server.log
             test-results
+
       - name: Require complete verification
         if: always()
         run: node -e "if (!require('./.diagnostics/mobile-webkit-report.json').passed) process.exit(1)"
