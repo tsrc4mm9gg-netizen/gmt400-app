@@ -48,7 +48,7 @@ jobs:
           for file in /tmp/diagnostic-parts/*.md; do
             part="$(basename "$file" .md)"
             title="WebKit diagnostics run 42505091584 part $part"
-            count="$(gh issue list --repo tsrc4mm9gg-netizen/gmt400-app --state all --search "in:title $title" --json title --jq --arg title "$title" '[.[] | select(.title == $title)] | length')"
+            count="$(gh issue list --repo tsrc4mm9gg-netizen/gmt400-app --state all --search "in:title $title" --json title | jq --arg title "$title" '[.[] | select(.title == $title)] | length')"
             if [ "$count" = '0' ]; then
               gh issue create --repo tsrc4mm9gg-netizen/gmt400-app --title "$title" --body-file "$file"
             fi
