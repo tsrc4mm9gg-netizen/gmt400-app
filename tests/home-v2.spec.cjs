@@ -1,4 +1,3 @@
-// Strona główna v2: karuzela modeli na górze → skróty → VIN → poradniki PL (kolejność, widoczność nad zgięciem), VIN z adresu, hasła w /szukaj, JSON-LD.
 const { test, expect } = require('@playwright/test');
 const path = require('node:path');
 const BASE = process.env.UX_BASE || 'http://127.0.0.1:3100';
@@ -23,7 +22,6 @@ test('home: jeden H1, kolejność karuzela modeli → skróty (VIN/diagnoza/uste
   const quick = await y('[data-testid=home-main-entries]');
   const vin = await y('[data-testid=home-vin-form]');
   const owner = await y('[data-testid=owner-essentials]');
-  // karuzela jest pierwszym elementem głównym: przed nią tylko zwarty nagłówek H1
   expect(await y('h1')).toBeLessThan(carousel);
   expect(await y('main h2, [aria-label="Wybór modelu"] h2')).toBeLessThan(carousel);
   expect(carousel).toBeLessThan(quick);
@@ -40,7 +38,6 @@ test('home: karuzela modeli widoczna bez przewijania, skróty VIN/Diagnoza/Uster
   await page.goto(BASE + '/');
   const { width, height: h } = page.viewportSize();
   const c = await page.getByTestId('model-carousel').boundingBox();
-  // zdjęcie (16:9) całe nad zgięciem — z zapasem ≥ 20 px na różnice fontów w CI
   expect(c.y + c.width * 9 / 16, 'zdjęcie karuzeli kończy się nad zgięciem').toBeLessThanOrEqual(h - 20);
   expect(c.y, 'karuzela zaczyna się wysoko').toBeLessThan(h * 0.45);
   const list = page.getByTestId('home-main-entries');
@@ -50,7 +47,6 @@ test('home: karuzela modeli widoczna bez przewijania, skróty VIN/Diagnoza/Uster
     expect(b.width, name).toBeGreaterThanOrEqual(44);
     if (width <= 500) expect(b.y + b.height, name + ' nad zgięciem na telefonie').toBeLessThanOrEqual(h - 20);
   }
-  // skróty są małe — karuzela pozostaje dominująca
   const l = await list.boundingBox();
   expect(l.height).toBeLessThan(c.height / 2);
 });
@@ -60,7 +56,6 @@ test('home: VIN ze spacjami i myślnikami przechodzi na /vin?vin=… i od razu s
   await page.goto(BASE + '/');
   const input = page.locator('#home-vin-input');
   await input.fill('1gcek19r9ve 112233');
-  // Sprawdzamy samo pole (nie podpowiedź): wpis przed hydratacją nie aktualizuje stanu, a formularz i tak czyta wartość z pola.
   await expect(input).toHaveValue(/^1gcek19r9ve 112233$/i);
   await page.getByTestId('home-vin-cta').click();
   await expect(page).toHaveURL(/\/vin\?vin=1GCEK19R9VE112233$/);
@@ -118,10 +113,31 @@ test('SEO: poradniki mają tytuł z modelami, kanoniczny adres, Article + FAQPag
   expect(szukaj).toContain('noindex');
 });
 
-test('sitemap.ts: usterki/DIY/poradniki są, /szukaj (noindex) nie ma, baza jest pobierana ze stronicowaniem bez wpisów „do usunięcia”', () => {
+test('sitemap.ts: usterki/DIY/poradniki są, /szukaj (noindex) nie ma, wpisy pochodzą ze wspólnego modułu', () => {
   const src = require('node:fs').readFileSync(path.join(__dirname, '../src/app/sitemap.ts'), 'utf8');
   for (const p of ['/usterki', '/diy', '/poradniki']) expect(src).toContain('${BASE}' + p);
   expect(src).not.toContain('${BASE}/szukaj');
-  expect(src).toContain('start_cursor');
-  expect(src).toContain('isSuperseded');
+  expect(src).toMatch(/import\s*\{\s*getListEntries\s*\}\s*from\s*['"]@\/lib\/notion-entries['"]/);
+  expect(src).toMatch(/await\s+getListEntries\(\)/);
+});
+
+test('wspólny moduł pobiera kolejne strony i odrzuca zastąpione wpisy', async () => {
+  const { fetchAllEntries } = require('../src/lib/notion-entries.ts');
+  const original = global.fetch;
+  const calls = [];
+  const entry = (id, name) => ({ id, properties: { Nazwa: { title: [{ plain_text: name }] } } });
+  global.fetch = async (_url, options) => {
+    const body = JSON.parse(options.body);
+    calls.push(body);
+    return { ok: true, json: async () => body.start_cursor
+      ? { results: [entry('active-second', 'Drugi aktywny wpis')], has_more: false, next_cursor: null }
+      : { results: [entry('active-first', 'Pierwszy aktywny wpis'), entry('superseded', 'Do usunięcia – zastąpione przez nowy wpis')], has_more: true, next_cursor: 'page-two' } };
+  };
+  try {
+    const entries = await fetchAllEntries('test-placeholder');
+    expect(calls).toEqual([{ page_size: 100 }, { page_size: 100, start_cursor: 'page-two' }]);
+    expect(entries.map(entry => entry.id)).toEqual(['active-first', 'active-second']);
+  } finally {
+    global.fetch = original;
+  }
 });
