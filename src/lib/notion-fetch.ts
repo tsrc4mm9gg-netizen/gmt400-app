@@ -12,7 +12,13 @@ export class NotionUnavailableError extends Error {
   }
 }
 
-type NotionInit = Omit<RequestInit, 'headers' | 'signal'> & { token: string; revalidate?: number; attempts?: number; timeoutMs?: number };
+type NotionInit = Omit<RequestInit, 'headers' | 'signal'> & {
+  token: string;
+  revalidate?: number;
+  attempts?: number;
+  timeoutMs?: number;
+  sleep?: (ms: number) => Promise<void>;
+};
 
 /** Retry-After: sekundy albo data HTTP; bez skracania zalecenia serwera. */
 export function retryDelay(attempt: number, retryAfter: string | null, now = Date.now()): number {
@@ -33,20 +39,34 @@ export function retryDelay(attempt: number, retryAfter: string | null, now = Dat
 }
 
 /** fetch do api.notion.com z ponawianiem. Zwraca ostatnią odpowiedź (także 4xx) — o 404 decyduje wywołujący. */
-export async function notionFetch(url: string, { token, revalidate = 300, attempts = 5, timeoutMs = 15000, ...init }: NotionInit): Promise<Response> {
+export async function notionFetch(
+  url: string,
+  {
+    token,
+    revalidate = 300,
+    attempts = 5,
+    timeoutMs = 15000,
+    sleep: sleepFn = sleep,
+    ...init
+  }: NotionInit,
+): Promise<Response> {
   let lastError: unknown;
   for (let attempt = 0; attempt < attempts; attempt++) {
     try {
       const response = await fetch(url, {
         ...init,
-        headers: { Authorization: `Bearer ${token}`, 'Notion-Version': NOTION_VERSION, ...(init.body ? { 'Content-Type': 'application/json' } : {}) },
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Notion-Version': NOTION_VERSION,
+          ...(init.body ? { 'Content-Type': 'application/json' } : {}),
+        },
         next: { revalidate },
         signal: AbortSignal.timeout(timeoutMs),
       });
       if (!RETRY_STATUS.has(response.status) || attempt === attempts - 1) return response;
       const delay = retryDelay(attempt, response.headers.get('retry-after'));
       await response.body?.cancel();
-      await sleep(delay);
+      await sleepFn(delay);
     } catch (error) {
       if (error instanceof NotionUnavailableError) throw error;
       lastError = error;
@@ -54,8 +74,12 @@ export async function notionFetch(url: string, { token, revalidate = 300, attemp
         console.error(`[notion-fetch] Nie udało się pobrać ${url} po ${attempts} próbach.`, error);
         break;
       }
-      await sleep(retryDelay(attempt, null));
+      await sleepFn(retryDelay(attempt, null));
     }
   }
-  throw new NotionUnavailableError(lastError instanceof Error ? `Baza wiedzy jest chwilowo niedostępna (${lastError.name}).` : undefined);
+  throw new NotionUnavailableError(
+    lastError instanceof Error
+      ? `Baza wiedzy jest chwilowo niedostępna (${lastError.name}).`
+      : undefined,
+  );
 }
