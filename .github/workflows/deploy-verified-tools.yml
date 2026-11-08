@@ -24,7 +24,7 @@ jobs:
       VERCEL_PROJECT_ID: prj_QDy2DhLpYy0CKhHhEv5sVeRyx4r6
       VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           ref: '653d437b8e05490878d2f74816816c74d6082446'
 
