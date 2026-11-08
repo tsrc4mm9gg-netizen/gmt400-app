@@ -27,10 +27,16 @@ export default function SavedMaterialButton({ id, title, href, type }: Props) {
   };
 
   return <>
-    <button type="button" onClick={toggle} aria-pressed={saved} className="inline-flex min-h-11 items-center gap-2 rounded-xl border border-white/20 bg-[linear-gradient(180deg,#2a2a2f,#151517)] px-4 text-sm font-semibold text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.12)] hover:border-silver-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-silver-500">
+    <button
+      type="button"
+      onClick={toggle}
+      aria-pressed={saved}
+      aria-label={saved ? `Zapisano: ${title}. Usuń z zapisanych` : `Zapisz materiał: ${title}`}
+      className="inline-flex min-h-11 min-w-11 max-w-full items-center gap-2 rounded-xl border border-white/20 bg-[linear-gradient(180deg,#2a2a2f,#151517)] px-4 text-sm font-semibold text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.12)] hover:border-silver-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-silver-500 motion-reduce:transition-none"
+    >
       <span aria-hidden="true">{saved ? '★' : '☆'}</span>
       {saved ? 'Zapisano' : 'Zapisz'}
     </button>
-    <p role="status" className="sr-only">{message}</p>
+    <p role="status" aria-atomic="true" className="mt-2 text-sm text-neutral-300">{message}</p>
   </>;
 }
