@@ -1,0 +1,30 @@
+.outline {
+  min-width: 0;
+}
+
+.outline summary {
+  border-radius: 4px;
+}
+
+.outline a {
+  border-radius: 4px;
+  text-underline-offset: 0.2em;
+  text-decoration-thickness: 1px;
+}
+
+.outline a:hover {
+  text-decoration-thickness: 2px;
+}
+
+.outline a:focus-visible,
+.outline summary:focus-visible {
+  outline: 3px solid #fbbf24;
+  outline-offset: 3px;
+}
+
+@media (forced-colors: active) {
+  .outline a:focus-visible,
+  .outline summary:focus-visible {
+    outline-color: Highlight;
+  }
+}

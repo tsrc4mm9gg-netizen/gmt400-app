@@ -29,7 +29,15 @@ function getRelevantProducts(title: string): { name: string; search: string }[] 
   }
 
   // Chłodzenie
-  if (t.includes('chłodz') || t.includes('termostat') || t.includes('pompa wody') || t.includes('przegrz')) {
+  if (
+    t.includes('chłodz') ||
+    t.includes('chłodnic') ||
+    t.includes('termostat') ||
+    t.includes('pompa wody') ||
+    t.includes('przegrz') ||
+    t.includes('wentylator silnika') ||
+    t.includes('płyn chłodn')
+  ) {
     products.push({ name: 'Płyn chłodniczy DEX-COOL', search: 'DEX-COOL coolant' });
     products.push({ name: 'Termostat ACDelco 131-113', search: 'ACDelco 131-113' });
     products.push({ name: 'Pompa wody ACDelco 252-711', search: 'ACDelco 252-711' });
