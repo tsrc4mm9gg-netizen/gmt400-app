@@ -35,8 +35,7 @@ function getRelevantProducts(title: string): { name: string; search: string }[] 
     t.includes('termostat') ||
     t.includes('pompa wody') ||
     t.includes('przegrz') ||
-    t.includes('wentylator') ||
-    t.includes('wyciek płynu') ||
+    t.includes('wentylator silnika') ||
     t.includes('płyn chłodn')
   ) {
     products.push({ name: 'Płyn chłodniczy DEX-COOL', search: 'DEX-COOL coolant' });
