@@ -31,6 +31,7 @@ function amazonSearch(query: string) {
 }
 
 const FEATURED_GUIDES = [
+  { href: '/diy/ls-swap', title: 'LS swap do GMT400 — plan 11 etapów', desc: 'Zamiana Vortec 5.7 L31 na LS: decyzja, mocowania, napęd, paliwo, elektryka, legalizacja i odbiór.' },
   { href: '/diy/kodowanie-pilota', title: 'Kodowanie pilota centralnego zamka', desc: 'Jak zaprogramować pilot do GMT400 — procedura z gniazdem OBD2' },
   { href: '/diy/wymiana-pompy-paliwa', title: 'Wymiana pompy paliwa', desc: 'Jak wymienić pompę paliwa w zbiorniku' },
   { href: '/diy/wymiana-termostatu', title: 'Wymiana termostatu', desc: 'Jak wymienić termostat — prosta naprawa' },
@@ -121,7 +122,7 @@ export default async function Page() {
         <ul className="space-y-2">
           {FEATURED_GUIDES.map(g => (
             <li key={g.href}>
-              <Link href={g.href} className="block rounded-lg border border-white/10 bg-neutral-800 p-3 hover:border-silver-500">
+              <Link href={g.href} className={g.href === '/diy/ls-swap' ? 'block rounded-lg border border-amber-400/50 bg-neutral-800 p-3 hover:border-amber-400' : 'block rounded-lg border border-white/10 bg-neutral-800 p-3 hover:border-silver-500'}>
                 <h3 className="font-semibold text-silver-200">{g.title}</h3>
                 <p className="mt-1 text-sm text-neutral-400">{g.desc}</p>
               </Link>
