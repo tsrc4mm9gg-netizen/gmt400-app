@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { SWAP_BASE, SWAP_STAGES, SWAP_SOURCES } from '../../../lib/ls-swap';
 
-export const metadata: Metadata = { title: 'LS swap do GMT400 — plan i 11 etapów', description: 'Modułowy plan zamiany Vortec 5.7 na LS z osobnymi uwagami 2WD i 4WD.', alternates: { canonical: 'https://www.gmt400.pl/diy/ls-swap' }, robots: { index: false, follow: true } };
+export const metadata: Metadata = { title: 'LS swap do GMT400 — plan i 11 etapów', description: 'Modułowy plan zamiany Vortec 5.7 na LS z osobnymi uwagami 2WD i 4WD.', alternates: { canonical: 'https://www.gmt400.pl/diy/ls-swap' }, robots: { index: true, follow: true } };
 
 export default function SwapHub() {
   return <article className="mx-auto max-w-5xl space-y-8 px-4 py-8 text-neutral-200">
