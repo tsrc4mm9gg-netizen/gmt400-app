@@ -3,9 +3,11 @@ import { NotionContent, readNotionBlocks } from '../../baza/[id]/NotionContent';
 
 export const metadata: Metadata = {
   title: 'Felgi i opony GMT400 — poradnik modułowy',
-  description: 'Dane fabryczne, rozmiary 2WD i 4WD, średnice opon, offset, numery części, opinie właścicieli, przepisy PL i FAQ.',
+  description:
+    'Dane fabryczne, rozmiary 2WD i 4WD, średnice opon, offset, numery części, opinie właścicieli, przepisy PL i FAQ.',
   alternates: { canonical: 'https://www.gmt400.pl/diy/felgi-i-opony' },
 };
+
 export const revalidate = 300;
 
 const modules = [
@@ -19,30 +21,86 @@ const modules = [
   ['faq', 'FAQ', '414d7bf1-c139-817f-a9b7-c1868258b1d1'],
 ] as const;
 
-export default async function Page() {
+async function loadModules() {
   const token = process.env.NOTION_TOKEN;
-  const sections = await Promise.all(modules.map(async ([slug, title, id]) => {
-    try {
-      if (!token) throw new Error('Brak konfiguracji Notion');
-      const blocks = await readNotionBlocks(id, token);
-      return { slug, title, blocks, error: false };
-    } catch {
-      return { slug, title, blocks: [], error: true };
-    }
-  }));
-  return <article className="mx-auto max-w-4xl space-y-6 px-4 py-8 text-neutral-200">
-    <a href="/diy" className="inline-flex min-h-11 items-center rounded text-amber-400 underline focus-visible:outline-2 focus-visible:outline-amber-400">Wróć do tematów DIY</a>
-    <header className="space-y-3">
-      <h1 className="text-3xl font-bold">Felgi i opony GMT400</h1>
-      <p>Kliknij tytuł podkategorii, aby rozwinąć jej tabele, kroki i źródła. Ponowne kliknięcie zwija treść.</p>
-      <p className="rounded-xl border border-amber-400/40 p-4 text-sm">Wersja robocza. Status POTWIERDZONE w materiale nie stanowi gwarancji dopasowania do konkretnego auta. Dane i momenty dokręcania sprawdź w instrukcji właściwego modelu i rocznika. OPINIA oznacza relację właściciela; DO WERYFIKACJI — dane niepotwierdzone; OBLICZONE — wynik wzoru.</p>
-    </header>
-    {sections.some(section => section.error) && <p role="alert" className="rounded-xl border border-amber-400/40 p-4">Nie udało się pobrać wszystkich modułów. Poradnik jest niekompletny. Odśwież stronę, aby ponowić próbę.</p>}
-    <section aria-label="Podkategorie poradnika felg i opon" className="space-y-3">
-      {sections.map((section, index) => <details id={section.slug} key={section.slug} className="scroll-mt-32 rounded-xl border border-white/15 p-4">
-        <summary className="min-h-11 cursor-pointer rounded text-xl font-semibold focus-visible:outline-2 focus-visible:outline-amber-400">{index + 1}. {section.title}</summary>
-        {section.error ? <p className="mt-3">Nie udało się pobrać tego modułu. Odśwież stronę, aby spróbować ponownie.</p> : <NotionContent blocks={section.blocks} />}
-      </details>)}
-    </section>
-  </article>;
+
+  if (!token) {
+    return modules.map(([slug, title]) => ({
+      slug,
+      title,
+      blocks: [],
+      error: true,
+    }));
+  }
+
+  return Promise.all(
+    modules.map(async ([slug, title, id]) => {
+      try {
+        const blocks = await readNotionBlocks(id, token);
+        return { slug, title, blocks, error: false };
+      } catch {
+        return { slug, title, blocks: [], error: true };
+      }
+    }),
+  );
+}
+
+export default async function Page() {
+  const sections = await loadModules();
+  const failedCount = sections.filter((section) => section.error).length;
+
+  return (
+    <article className="mx-auto max-w-4xl space-y-6 px-4 py-8 text-neutral-200">
+      <a
+        href="/diy"
+        className="inline-flex min-h-11 items-center rounded text-amber-400 underline focus-visible:outline-2 focus-visible:outline-amber-400"
+      >
+        Wróć do tematów DIY
+      </a>
+
+      <header className="space-y-3">
+        <h1 className="text-3xl font-bold">Felgi i opony GMT400</h1>
+        <p>
+          Wybierz podkategorię, aby wyświetlić jej tabele, kroki i źródła. Otwarcie jednej
+          podkategorii zamyka poprzednią.
+        </p>
+        <p className="rounded-xl border border-amber-400/40 p-4 text-sm">
+          Wersja robocza. Status POTWIERDZONE w materiale nie stanowi gwarancji dopasowania do
+          konkretnego auta. Dane i momenty dokręcania sprawdź w instrukcji właściwego modelu i
+          rocznika. OPINIA oznacza relację właściciela; DO WERYFIKACJI — dane niepotwierdzone;
+          OBLICZONE — wynik wzoru.
+        </p>
+      </header>
+
+      {failedCount > 0 && (
+        <p role="alert" className="rounded-xl border border-amber-400/40 p-4">
+          Nie udało się pobrać {failedCount} z {sections.length} modułów. Poradnik jest
+          niekompletny. Odśwież stronę, aby ponowić próbę.
+        </p>
+      )}
+
+      <section aria-label="Podkategorie poradnika felg i opon" className="space-y-3">
+        {sections.map((section, index) => (
+          <details
+            key={section.slug}
+            id={section.slug}
+            name="wheel-guide"
+            className="scroll-mt-32 rounded-xl border border-white/15 p-4"
+          >
+            <summary className="min-h-11 cursor-pointer rounded text-xl font-semibold focus-visible:outline-2 focus-visible:outline-amber-400">
+              {index + 1}. {section.title}
+            </summary>
+
+            {section.error ? (
+              <p className="mt-3">
+                Nie udało się pobrać tego modułu. Odśwież stronę, aby spróbować ponownie.
+              </p>
+            ) : (
+              <NotionContent blocks={section.blocks} />
+            )}
+          </details>
+        ))}
+      </section>
+    </article>
+  );
 }
