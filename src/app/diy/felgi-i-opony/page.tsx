@@ -34,15 +34,15 @@ export default async function Page() {
     <a href="/diy" className="inline-flex min-h-11 items-center rounded text-amber-400 underline focus-visible:outline-2 focus-visible:outline-amber-400">Wróć do tematów DIY</a>
     <header className="space-y-3">
       <h1 className="text-3xl font-bold">Felgi i opony GMT400</h1>
-      <p>Wybierz moduł. Cały poradnik jest dostępny tutaj, bez przechodzenia do Notion.</p>
+      <p>Kliknij tytuł podkategorii, aby rozwinąć jej tabele, kroki i źródła. Ponowne kliknięcie zwija treść.</p>
       <p className="rounded-xl border border-amber-400/40 p-4 text-sm">Wersja robocza. Status POTWIERDZONE w materiale nie stanowi gwarancji dopasowania do konkretnego auta. Dane i momenty dokręcania sprawdź w instrukcji właściwego modelu i rocznika. OPINIA oznacza relację właściciela; DO WERYFIKACJI — dane niepotwierdzone; OBLICZONE — wynik wzoru.</p>
     </header>
-    <nav aria-label="Moduły poradnika felg i opon">
-      <ol className="grid gap-2 sm:grid-cols-2">{sections.map((section, index) => <li key={section.slug}><a href={'#' + section.slug} className="block min-h-11 rounded-lg border border-white/15 p-3 text-amber-400 underline focus-visible:outline-2 focus-visible:outline-amber-400">{index + 1}. {section.title}</a></li>)}</ol>
-    </nav>
-    {sections.map((section, index) => <details id={section.slug} key={section.slug} className="scroll-mt-32 rounded-xl border border-white/15 p-4" open>
-      <summary className="min-h-11 cursor-pointer rounded text-xl font-semibold focus-visible:outline-2 focus-visible:outline-amber-400">{index + 1}. {section.title}</summary>
-      {section.error ? <p role="alert" className="mt-3">Nie udało się pobrać tego modułu. Materiał jest niekompletny — odśwież stronę, aby spróbować ponownie.</p> : <NotionContent blocks={section.blocks} />}
-    </details>)}
+    {sections.some(section => section.error) && <p role="alert" className="rounded-xl border border-amber-400/40 p-4">Nie udało się pobrać wszystkich modułów. Poradnik jest niekompletny. Odśwież stronę, aby ponowić próbę.</p>}
+    <section aria-label="Podkategorie poradnika felg i opon" className="space-y-3">
+      {sections.map((section, index) => <details id={section.slug} key={section.slug} className="scroll-mt-32 rounded-xl border border-white/15 p-4">
+        <summary className="min-h-11 cursor-pointer rounded text-xl font-semibold focus-visible:outline-2 focus-visible:outline-amber-400">{index + 1}. {section.title}</summary>
+        {section.error ? <p className="mt-3">Nie udało się pobrać tego modułu. Odśwież stronę, aby spróbować ponownie.</p> : <NotionContent blocks={section.blocks} />}
+      </details>)}
+    </section>
   </article>;
 }
