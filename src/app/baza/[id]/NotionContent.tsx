@@ -35,10 +35,15 @@ export async function readNotionBlocks(id: string, token: string): Promise<any[]
   }
   return read(id, 0);
 }
+function normalizeNotionId(value: string): string | null {
+  const hex = value.replace(/-/g, '').toLowerCase();
+  if (!/^[0-9a-f]{32}$/.test(hex)) return null;
+  return `${hex.slice(0, 8)}-${hex.slice(8, 12)}-${hex.slice(12, 16)}-${hex.slice(16, 20)}-${hex.slice(20)}`;
+}
 function getChildPageIdFromUrl(value: unknown): string | null {
   if (typeof value !== 'string') return null;
-  const match = value.match(/\/baza\/([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})(?:[/?#]|$)/i);
-  return match ? match[1] : null;
+  const match = value.match(/(?:^|\/)(?:baza\/)([0-9a-f]{32}|[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})(?:[/?#]|$)/i);
+  return match ? normalizeNotionId(match[1]) : null;
 }
 function Rich({ parts = [], childPageIds }: { parts?: any[]; childPageIds?: Set<string> }): ReactNode {
   return parts.map((part, index) => {
@@ -58,7 +63,7 @@ export function NotionContent({ blocks }: { blocks: any[] }): ReactNode {
   const childPageIds = new Set(
     blocks
       .filter((block) => block.type === 'child_page' && typeof block.id === 'string')
-      .map((block) => block.id),
+      .map((block) => normalizeNotionId(block.id) || block.id),
   );
   return blocks.map((block, index) => {
     const data = block[block.type] || {};
@@ -81,7 +86,7 @@ export function NotionContent({ blocks }: { blocks: any[] }): ReactNode {
       case 'bookmark': case 'link_preview': case 'embed': case 'video': case 'file': case 'pdf': { const href = safeUrl(data.url || data.file?.url || data.external?.url); content = href ? <a href={href} className="text-silver-400 underline [overflow-wrap:anywhere]" rel="noopener noreferrer">{data.name || 'Otwórz załącznik lub materiał źródłowy'}</a> : <p>Załącznik ma niedostępny adres.</p>; break; }
       case 'child_page': content = (
         <section
-          id={`notion-child-${block.id}`}
+          id={`notion-child-${normalizeNotionId(block.id) || block.id}`}
           tabIndex={-1}
           className="scroll-mt-24 outline-none"
         >
