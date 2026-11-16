@@ -25,7 +25,8 @@ export const metadata: Metadata = {
   },
 };
 
-export const revalidate = 900;
+export const dynamic = 'force-static';
+export const revalidate = false;
 
 const SYMPTOM_PARTS = [
   { symptom: 'Nie odpala', parts: ['EP381', '41-932', 'D577', 'GF626'], codes: ['P0300', 'P0335'] },

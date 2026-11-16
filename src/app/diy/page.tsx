@@ -22,7 +22,8 @@ export const metadata: Metadata = {
   },
 };
 
-export const revalidate = 900;
+export const dynamic = 'force-static';
+export const revalidate = false;
 
 const AFFILIATE_TAG = 'gmt400pl-20';
 
