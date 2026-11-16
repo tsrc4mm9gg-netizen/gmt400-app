@@ -57,7 +57,7 @@ async function handle(p: URLSearchParams, privateVin = false) {
    else if (list) data = records.map((r: { model?: unknown; Model?: unknown }) => { const text = r.model ?? r.Model; if (typeof text !== 'string') throw new Error('schema'); return { text, value: text }; });
    else data = records;
   }
-  return NextResponse.json({ data, source: action === 'vin' ? 'https://vpic.nhtsa.dot.gov/api/' : source.toString(), fetchedAt: new Date().toISOString(), cacheNote: privateVin ? 'VIN bez zapisu w cache aplikacji.' : 'Odpowiedź dostawcy może pochodzić z cache do 24 godzin.' }, { headers: { 'Cache-Control': 'no-store' } });
+  return NextResponse.json({ data, source: action === 'vin' ? 'https://vpic.nhtsa.dot.gov/api/' : source.toString(), fetchedAt: new Date().toISOString(), cacheNote: 'Dane pobrano na żywo z NHTSA lub EPA przy tym zapytaniu.' }, { headers: { 'Cache-Control': 'no-store' } });
  } catch { return bad('Nie udało się pobrać lub odczytać danych dostawcy. To nie oznacza braku wyników. Spróbuj ponownie.', 502); }
 }
 export async function GET(request: Request) { return handle(new URL(request.url).searchParams); }
