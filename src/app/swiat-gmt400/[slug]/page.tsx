@@ -3,6 +3,10 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { stories } from '../../../lib/gmt400-stories';
 type Props = { params: Promise<{ slug: string }> };
+// Strona w pełni statyczna (bez ISR); nieznany slug to 404.
+export const dynamic = 'force-static';
+export const revalidate = false;
+export const dynamicParams = false;
 export function generateStaticParams() { return stories.map(story => ({ slug: story.slug })); }
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
