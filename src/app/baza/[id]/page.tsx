@@ -26,7 +26,8 @@ import RecentTracker from '../../RecentTracker';
 import { recentTypeLabel } from '../../../lib/recent-viewed';
 import ContextualAffiliate from '../../ui/ContextualAffiliate';
 import StructuredData from './StructuredData';
-import { getKnowledgeIdBySlug, getKnowledgeSlug, isNotionId } from '../../../lib/knowledge-slugs';
+import { getKnowledgeIdBySlug, getKnowledgeSlug, getKnowledgeSlugs, isNotionId } from '../../../lib/knowledge-slugs';
+import { getListEntries } from '../../../lib/notion-entries';
 
 const SECTION_OF: Record<string, Crumb> = {
   'Usterka': { href: '/usterki', label: 'Usterki' },
@@ -113,6 +114,35 @@ const lead = (entry: { Opis: string; Objawy: string }): string => {
   return source.length > 180 ? `${source.slice(0, 177).trimEnd()}…` : source;
 };
 type Props = { params: Promise<{ id: string }> };
+
+// Strona w pełni statyczna: Notion jest czytany tylko w buildzie, bez ISR/rewalidacji w runtime.
+// Nowe wpisy pojawiają się po kolejnym deployu (rejestr slugów + lista z Notion); nieznane adresy to 404.
+export const dynamic = 'force-static';
+export const revalidate = false;
+export const dynamicParams = false;
+
+const hyphenatedId = (id: string) => `${id.slice(0, 8)}-${id.slice(8, 12)}-${id.slice(12, 16)}-${id.slice(16, 20)}-${id.slice(20)}`;
+
+/** Slugi z rejestru oraz ID Notion (32 znaki i z myślnikami), żeby stare adresy /baza/<uuid> nadal przekierowywały na slug. */
+export async function generateStaticParams(): Promise<{ id: string }[]> {
+  const entries = await getListEntries();
+  const active = entries === null ? null : new Set(entries.map(entry => cleanId(entry.id)));
+  const params = new Set<string>();
+  const addId = (id: string) => {
+    const raw = cleanId(id);
+    params.add(raw);
+    if (/^[a-f0-9]{32}$/.test(raw)) params.add(hyphenatedId(raw));
+  };
+  for (const { id, slug } of getKnowledgeSlugs()) {
+    // Przy awarii Notion zachowujemy cały rejestr; w przeciwnym razie pomijamy wpisy usunięte lub zastąpione.
+    if (active && !active.has(cleanId(id))) continue;
+    params.add(slug);
+    addId(id);
+  }
+  for (const entry of entries ?? []) addId(entry.id);
+  return [...params].map(id => ({ id }));
+}
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { entry, slug } = await resolveEntry((await params).id);
   if (!entry) return { title: 'Nie znaleziono materiału — GMT400', robots: { index: false, follow: false } };
