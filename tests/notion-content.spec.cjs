@@ -33,12 +33,14 @@ test('child page links use inline anchors for relative, absolute and mixed ID fo
       { plain_text: 'Względny', href: `/baza/${childId}` },
       { plain_text: 'Absolutny', href: `https://www.gmt400.pl/baza/${canonicalId}` },
       { plain_text: 'Mieszany', href: `https://gmt400.pl/baza/414D7BF1-C139-819C-ACCA-ECA7D3DABA7B` },
+      { plain_text: 'Produkcyjny mieszany', href: `https://www.gmt400.pl/baza/414d7bf1-C139-819caccaeca7d3daba7b` },
+      { plain_text: 'Względny produkcyjny mieszany', href: `/baza/414d7bf1-c139-819caccaeca7d3daba7b` },
       { plain_text: 'Nieistniejący', href: `/baza/00000000-0000-0000-0000-000000000000` },
     ] } },
     { id: canonicalId, type: 'child_page', child_page: { title: 'Dane fabryczne' }, children: [] },
   ];
   const html = renderToStaticMarkup(React.createElement(NotionContent, { blocks }));
-  expect((html.match(new RegExp(anchor.replace(/[-]/g, '\\-'), 'g')) || []).length).toBe(3);
+  expect((html.match(new RegExp(anchor.replace(/[-]/g, '\\-'), 'g')) || []).length).toBe(5);
   expect(html).toContain(`href="${anchor}"`);
   expect(html).toContain(`href="/baza/00000000-0000-0000-0000-000000000000"`);
   expect(html).toContain(`id="${anchor.slice(1)}"`);

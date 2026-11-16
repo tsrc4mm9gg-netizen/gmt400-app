@@ -42,7 +42,7 @@ function normalizeNotionId(value: string): string | null {
 }
 function getChildPageIdFromUrl(value: unknown): string | null {
   if (typeof value !== 'string') return null;
-  const match = value.match(/(?:^|\/)(?:baza\/)([0-9a-f]{32}|[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})(?:[/?#]|$)/i);
+  const match = value.match(/(?:^|\/)(?:baza\/)([0-9a-f-]{32,36})(?:[/?#]|$)/i);
   return match ? normalizeNotionId(match[1]) : null;
 }
 function Rich({ parts = [], childPageIds }: { parts?: any[]; childPageIds?: Set<string> }): ReactNode {
