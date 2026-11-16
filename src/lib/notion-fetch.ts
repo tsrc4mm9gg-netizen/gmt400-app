@@ -1,5 +1,6 @@
 // Wspólny klient Notion API: ponawia żądania przy 429 (limit zapytań), 5xx i przekroczeniu czasu.
-// Notion ogranicza ruch do ~3 zapytań/s na integrację, więc pojedyncze 429 przy ISR/rewalidacji jest normalne.
+// Notion ogranicza ruch do ~3 zapytań/s na integrację, więc pojedyncze 429 podczas buildu jest normalne.
+// Treści z Notion są czytane wyłącznie podczas buildu (strony statyczne). Brak rewalidacji w runtime = brak ISR Writes.
 export const NOTION_VERSION = '2022-06-28';
 
 const RETRY_STATUS = new Set([429, 500, 502, 503, 504]);
@@ -14,7 +15,8 @@ export class NotionUnavailableError extends Error {
 
 type NotionInit = Omit<RequestInit, 'headers' | 'signal'> & {
   token: string;
-  revalidate?: number;
+  /** @deprecated Ignorowane: odpowiedzi Notion są cache'owane na stałe w buildzie (revalidate: false). Zachowane dla zgodności wywołań. */
+  revalidate?: number | false;
   attempts?: number;
   timeoutMs?: number;
   sleep?: (ms: number) => Promise<void>;
@@ -43,7 +45,8 @@ export async function notionFetch(
   url: string,
   {
     token,
-    revalidate = 300,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    revalidate: _deprecatedRevalidate,
     attempts = 5,
     timeoutMs = 15000,
     sleep: sleepFn = sleep,
@@ -60,7 +63,8 @@ export async function notionFetch(
           'Notion-Version': NOTION_VERSION,
           ...(init.body ? { 'Content-Type': 'application/json' } : {}),
         },
-        next: { revalidate },
+        // Stały cache z buildu; żadna odpowiedź Notion nie planuje rewalidacji (ISR) w runtime.
+        next: { revalidate: false },
         signal: AbortSignal.timeout(timeoutMs),
       });
       if (!RETRY_STATUS.has(response.status) || attempt === attempts - 1) return response;
