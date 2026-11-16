@@ -21,7 +21,6 @@ jobs:
         with:
           node-version: '24'
       - run: npm ci --ignore-scripts
-      - run: npm install --no-save --package-lock=false --ignore-scripts @playwright/test@1.61.0
       - name: Install browser dependencies and engines
         timeout-minutes: 8
         run: npx playwright install --with-deps chromium webkit
