@@ -9,6 +9,10 @@ import { getListEntries } from '@/lib/notion-entries'
 const BASE = 'https://www.gmt400.pl'
 const UPDATED = new Date()
 
+// Sitemap generowana statycznie w buildzie (bez ISR).
+export const dynamic = 'force-static'
+export const revalidate = false
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const staticRoutes: MetadataRoute.Sitemap = [
     { url: BASE, lastModified: UPDATED, changeFrequency: 'weekly', priority: 1 },

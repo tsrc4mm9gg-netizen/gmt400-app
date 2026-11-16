@@ -24,7 +24,7 @@ test('NHTSA lists use separate recall and complaint issue types', async () => {
  await mocked(() => ok({ results: [{ model: 'C1500 SUBURBAN' }] }), async calls => {
   for (const [action, issue] of [['recallModels', 'r'], ['complaintModels', 'c']]) {
    const response = await GET(req({ action, year: '1999', make: 'Chevrolet' })); const body = await response.json(); const call = calls.at(-1);
-   expect(response.status).toBe(200); expect(body.data).toEqual([{ text: 'C1500 SUBURBAN', value: 'C1500 SUBURBAN' }]); expect(call.url.hostname).toBe('api.nhtsa.gov'); expect(call.url.pathname).toBe('/products/vehicle/models'); expect(call.url.searchParams.get('issueType')).toBe(issue); expect(call.url.searchParams.get('modelYear')).toBe('1999'); expect(call.options.next.revalidate).toBe(86400);
+   expect(response.status).toBe(200); expect(body.data).toEqual([{ text: 'C1500 SUBURBAN', value: 'C1500 SUBURBAN' }]); expect(call.url.hostname).toBe('api.nhtsa.gov'); expect(call.url.pathname).toBe('/products/vehicle/models'); expect(call.url.searchParams.get('issueType')).toBe(issue); expect(call.url.searchParams.get('modelYear')).toBe('1999'); expect(call.options.cache).toBe('no-store'); expect(call.options.next).toBeUndefined();
   }
  });
 });

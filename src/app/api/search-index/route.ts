@@ -2,8 +2,9 @@ import { NextResponse } from 'next/server';
 import { getListEntries, LIST_REVALIDATE_SECONDS } from '../../../lib/notion-entries';
 import { buildSearchIndex } from '../../../lib/search-index';
 
-// Lekki indeks do wyszukiwarki w nagłówku. Odświeżany co 15 min (ISR); bez Notion — kody OBD, poradniki, modele i strony (partial).
-export const revalidate = 900;
+// Lekki indeks do wyszukiwarki w nagłówku. Generowany statycznie w buildzie (bez ISR); bez Notion — kody OBD, poradniki, modele i strony (partial).
+export const dynamic = 'force-static';
+export const revalidate = false;
 
 export async function GET() {
   const entries = await getListEntries();

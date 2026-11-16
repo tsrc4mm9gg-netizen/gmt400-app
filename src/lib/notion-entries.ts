@@ -3,12 +3,20 @@ import { notionFetch } from './notion-fetch';
 import { withoutSuperseded } from './superseded.mjs';
 import { knowledgeHref } from './knowledge-slugs';
 
-/** Baza wiedzy GMT400 w Notion — jedno źródło dla /api/notion i stron renderowanych na serwerze (ISR). */
+/** Baza wiedzy GMT400 w Notion — jedno źródło dla /api/notion i stron generowanych statycznie podczas buildu. */
 export const DATABASE_ID = '746973771d604f1e8276502851176af2';
-/** Co ile sekund strony list (/usterki, /diy, /modele, /poradniki, /baza) odświeżają się na serwerze. */
+/** Czas (s) w nagłówku Cache-Control CDN dla /api/search-index. Nie steruje rewalidacją ISR: dane z Notion są pobierane tylko w buildzie. */
 export const LIST_REVALIDATE_SECONDS = 900;
 /** Adres API Notion; zmieniany tylko w testach lokalnych (atrapa serwera), na produkcji zawsze api.notion.com. */
 const NOTION_API = process.env.NOTION_API_BASE || 'https://api.notion.com';
+
+/**
+ * Build produkcyjny na Vercelu: gdy Notion nie odpowiada, build ma się przerwać (zostaje poprzedni deployment),
+ * zamiast zamrozić pustą wersję stron do kolejnego deployu. Lokalnie i w CI zachowanie bez zmian (fallback w przeglądarce).
+ */
+export function isStrictNotionBuild(): boolean {
+  return process.env.NEXT_PHASE === 'phase-production-build' && process.env.VERCEL === '1';
+}
 
 export type NotionEntry = {
   Nazwa: string; Typ: string; Model: string; Modele: string[]; Opis: string; Objawy: string; Rozwiązanie: string; Lata: string; id: string;
@@ -42,8 +50,8 @@ function getValues(prop: any): string[] {
   return text ? text.split(/[;\n]+/).map(value => value.trim()).filter(Boolean) : [];
 }
 
-/** Kompletna lista wpisów (bez oznaczonych jako zastąpione) albo wyjątek — nigdy lista częściowa. */
-export async function fetchAllEntries(token: string, revalidate = 300): Promise<NotionEntry[]> {
+/** Kompletna lista wpisów (bez oznaczonych jako zastąpione) albo wyjątek — nigdy lista częściowa. Parametr revalidate jest ignorowany (patrz notionFetch). */
+export async function fetchAllEntries(token: string, revalidate: number | false = false): Promise<NotionEntry[]> {
   let allResults: any[] = [];
   let startCursor: string | undefined;
   let hasMore = true;
@@ -85,11 +93,11 @@ export async function fetchAllEntries(token: string, revalidate = 300): Promise<
   }));
 }
 
-/** Lista dla stron serwerowych: null, gdy Notion jest niedostępny (strona wtedy sama pobiera dane w przeglądarce). */
+/** Lista dla stron statycznych: null, gdy Notion jest niedostępny (strona wtedy sama pobiera dane w przeglądarce). Na buildzie Vercel błąd przerywa build. */
 export const getListEntries = cache(async (): Promise<NotionEntry[] | null> => {
   const token = process.env.NOTION_TOKEN;
   if (!token) return null;
-  try { return await fetchAllEntries(token, LIST_REVALIDATE_SECONDS); } catch { return null; }
+  try { return await fetchAllEntries(token); } catch (error) { if (isStrictNotionBuild()) throw error; return null; }
 });
 
 /** Dane strukturalne ItemList: kanoniczne slugi z rejestru, UUID tylko jako fallback. */

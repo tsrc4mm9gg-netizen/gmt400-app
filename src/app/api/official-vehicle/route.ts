@@ -36,7 +36,8 @@ async function handle(p: URLSearchParams, privateVin = false) {
     list = true;
    } else return bad('Nieznane działanie.');
   }
-  const response = await fetch(source, { headers: { Accept: 'application/json' }, signal: AbortSignal.timeout(12000), ...(privateVin ? { cache: 'no-store' as const } : { next: { revalidate: 86400 } }) });
+  // Bez cache danych Vercela (data cache = ISR Writes) — zarówno dla VIN (POST), jak i list/rekordów (GET).
+  const response = await fetch(source, { headers: { Accept: 'application/json' }, signal: AbortSignal.timeout(12000), cache: 'no-store' });
   if (!response.ok) return bad('Dostawca danych zwrócił HTTP ' + response.status + '. Spróbuj ponownie później.', 502);
   const raw = await response.json();
   let data: unknown;
