@@ -35,7 +35,12 @@ export async function readNotionBlocks(id: string, token: string): Promise<any[]
   }
   return read(id, 0);
 }
-function Rich({ parts = [] }: { parts?: any[] }): ReactNode {
+function getChildPageIdFromUrl(value: unknown): string | null {
+  if (typeof value !== 'string') return null;
+  const match = value.match(/\/baza\/([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})(?:[/?#]|$)/i);
+  return match ? match[1] : null;
+}
+function Rich({ parts = [], childPageIds }: { parts?: any[]; childPageIds?: Set<string> }): ReactNode {
   return parts.map((part, index) => {
     let value: ReactNode = part.plain_text || part.text?.content || part.equation?.expression || '';
     if (part.annotations?.code) value = <code>{value}</code>;
@@ -44,13 +49,20 @@ function Rich({ parts = [] }: { parts?: any[] }): ReactNode {
     if (part.annotations?.strikethrough) value = <s>{value}</s>;
     if (part.annotations?.underline) value = <u>{value}</u>;
     const href = safeUrl(part.href || part.text?.link?.url);
-    return <span key={index}>{href ? <a href={href} className="text-silver-400 underline [overflow-wrap:anywhere]" rel="noopener noreferrer">{value}</a> : value}</span>;
+    const childPageId = href ? getChildPageIdFromUrl(href) : null;
+    const resolvedHref = childPageId && childPageIds?.has(childPageId) ? `#notion-child-${childPageId}` : href;
+    return <span key={index}>{resolvedHref ? <a href={resolvedHref} className="text-silver-400 underline [overflow-wrap:anywhere]" rel={resolvedHref.startsWith('#') ? undefined : 'noopener noreferrer'}>{value}</a> : value}</span>;
   });
 }
 export function NotionContent({ blocks }: { blocks: any[] }): ReactNode {
+  const childPageIds = new Set(
+    blocks
+      .filter((block) => block.type === 'child_page' && typeof block.id === 'string')
+      .map((block) => block.id),
+  );
   return blocks.map((block, index) => {
     const data = block[block.type] || {};
-    const rich = <Rich parts={data.rich_text} />;
+    const rich = <Rich parts={data.rich_text} childPageIds={childPageIds} />;
     let content: ReactNode;
     switch (block.type) {
       case 'paragraph': content = <p className="whitespace-pre-wrap leading-relaxed">{rich}</p>; break;
@@ -63,11 +75,19 @@ export function NotionContent({ blocks }: { blocks: any[] }): ReactNode {
       case 'divider': content = <hr className="border-white/20" />; break;
       case 'to_do': content = <p>{data.checked ? '☑' : '☐'} {rich}</p>; break;
       case 'image': { const src = safeUrl(data.file?.url || data.external?.url); const caption = (data.caption || []).map((part: any) => part.plain_text || part.text?.content || '').join(''); content = src ? <MaterialImage src={src} caption={caption} /> : <p>Ilustracja ma niedostępny adres.</p>; break; }
-      case 'table': content = <div className="overflow-x-auto"><table className="w-full border-collapse text-sm"><tbody>{(block.children || []).map((row: any) => <tr key={row.id}>{(row.table_row?.cells || []).map((cell: any[], column: number) => <td key={column} className="border border-white/20 p-2"><Rich parts={cell} /></td>)}</tr>)}</tbody></table></div>; break;
+      case 'table': content = <div className="overflow-x-auto"><table className="w-full border-collapse text-sm"><tbody>{(block.children || []).map((row: any) => <tr key={row.id}>{(row.table_row?.cells || []).map((cell: any[], column: number) => <td key={column} className="border border-white/20 p-2"><Rich parts={cell} childPageIds={childPageIds} /></td>)}</tr>)}</tbody></table></div>; break;
       case 'column_list': case 'column': content = null; break;
       case 'toggle': content = <p className="font-semibold">{rich}</p>; break;
       case 'bookmark': case 'link_preview': case 'embed': case 'video': case 'file': case 'pdf': { const href = safeUrl(data.url || data.file?.url || data.external?.url); content = href ? <a href={href} className="text-silver-400 underline [overflow-wrap:anywhere]" rel="noopener noreferrer">{data.name || 'Otwórz załącznik lub materiał źródłowy'}</a> : <p>Załącznik ma niedostępny adres.</p>; break; }
-      case 'child_page': content = <NotionContent blocks={block.children || []} />; break;
+      case 'child_page': content = (
+        <section
+          id={`notion-child-${block.id}`}
+          tabIndex={-1}
+          className="scroll-mt-24 outline-none"
+        >
+          <NotionContent blocks={block.children || []} />
+        </section>
+      ); break;
       default: content = <p className="text-sm text-neutral-400">Element Notion „{block.type}” nie jest jeszcze obsługiwany w tym widoku.</p>;
     }
     const shouldRenderChildren = block.type !== 'table' && block.type !== 'child_page' && block.children?.length > 0;
