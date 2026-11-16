@@ -48,7 +48,8 @@ test('API /api/vin-hits: VIN przez POST, bez cache odpowiedzi, timeouty, błąd 
   assert.doesNotMatch(src, /export async function GET/);
   assert.match(src, /'Cache-Control': 'no-store'/);
   assert.match(src, /AbortSignal\.timeout\(TIMEOUT_MS\)/);
-  assert.match(src, /revalidate: DAY/);
+  assert.match(src, /AbortSignal\.timeout\(TIMEOUT_MS\), cache: 'no-store'/, 'fetch do NHTSA bez cache danych Vercela');
+  assert.doesNotMatch(src, /next: \{ revalidate/, 'brak revalidate w fetch (ISR Writes)');
   assert.match(src, /return \{ count: null/);
   assert.match(src, /res\.status === 400 && Array\.isArray\(list\) && list\.length === 0 && raw\?\.Count === 0/, 'pusty 400 z NHTSA = 0, inne błędy = nieznane');
   assert.doesNotMatch(src, /google\.com|bidfax|poctra|autoastat|cararam|carfax|autocheck|vinaudit|nicb/i, 'serwer nie odpytuje stron bez legalnego API');

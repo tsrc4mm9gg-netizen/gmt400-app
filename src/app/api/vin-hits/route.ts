@@ -5,17 +5,17 @@ import { selectNhtsaModels, uniqueCount } from '@/lib/vin-hits.mjs';
 /**
  * Liczniki dla sekcji „Zdjęcia i historia tego VIN”.
  * VIN przychodzi metodą POST (nie trafia do URL ani do cache). Na zewnątrz wysyłamy tylko markę, rocznik i nazwę
- * modelu (NHTSA) — te odpowiedzi cache'ujemy 24 h. Błąd/timeout źródła → count: null („sprawdź”), nigdy 0.
+ * modelu (NHTSA); odpowiedzi nie są cache'owane po stronie aplikacji (cache: 'no-store', bez zapisów do data cache Vercela).
+ * Błąd/timeout źródła → count: null („sprawdź”), nigdy 0.
  */
 export const maxDuration = 20;
 const TIMEOUT_MS = 4500;
-const DAY = 86400;
 const json = (body: unknown, status = 200) => NextResponse.json(body, { status, headers: { 'Cache-Control': 'no-store' } });
 
 async function nhtsa(path: string, params: Record<string, string>) {
   const url = new URL('https://api.nhtsa.gov/' + path);
   url.search = new URLSearchParams(params).toString();
-  const res = await fetch(url, { headers: { Accept: 'application/json' }, signal: AbortSignal.timeout(TIMEOUT_MS), next: { revalidate: DAY } });
+  const res = await fetch(url, { headers: { Accept: 'application/json' }, signal: AbortSignal.timeout(TIMEOUT_MS), cache: 'no-store' });
   const raw = await res.json().catch(() => null);
   const list = raw?.results ?? raw?.Results;
   // recallsByVehicle odpowiada HTTP 400 z {"Count":0,"Message":"Results returned successfully","results":[]}, gdy nie ma kampanii —
