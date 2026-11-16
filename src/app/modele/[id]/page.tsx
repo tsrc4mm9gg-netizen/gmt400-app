@@ -14,6 +14,11 @@ import RecentTracker from '../../RecentTracker';
 
 type Props = { params: Promise<{ id: string }> };
 
+// Strona w pełni statyczna (bez ISR); nieznany id to 404.
+export const dynamic = 'force-static';
+export const revalidate = false;
+export const dynamicParams = false;
+
 const DESCRIPTIONS: Record<string, string> = {
   'tahoe-4d': 'Pięciodrzwiowy SUV na ramie GMT400, wprowadzony na rok modelowy 1995. Napęd 4x2 lub 4x4, głównie V8 5.7.',
   'tahoe-2d': 'Trzydrzwiowy SUV: K5 Blazer (1992–1994), od 1995 jako Tahoe 2-drzwi. Jedyna wersja z opcjonalnym 6.5 turbodieslem w 4WD.',

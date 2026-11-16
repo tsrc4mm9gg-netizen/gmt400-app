@@ -3,9 +3,25 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import Breadcrumbs from '../../ui/Breadcrumbs';
 import { findObdCode, getRelatedObdCodes, OBD_CODES } from '@/lib/obd-codes';
+import { SYMPTOMS } from '@/lib/diagnosis';
+
+// Strona w pełni statyczna (bez ISR). Nieznany kod spoza listy poniżej to 404.
+export const dynamic = 'force-static';
+export const revalidate = false;
+export const dynamicParams = false;
+
+// Kody linkowane z /diagnoza (SYMPTOM_PARTS), które nie mają karty w OBD_CODES — dalej pokazują stronę „brak karty kodu”.
+const LINKED_WITHOUT_CARD = ['P0174', 'P0758'];
 
 export function generateStaticParams() {
-  return OBD_CODES.map(({ code }) => ({ code: code.toLowerCase() }));
+  const codes = new Set(OBD_CODES.map(({ code }) => code.toLowerCase()));
+  // Kody linkowane z kreatora diagnozy (src/lib/diagnosis.ts), również bez karty.
+  for (const symptom of SYMPTOMS) for (const cause of symptom.causes) for (const link of cause.links) {
+    const match = 'href' in link ? /^\/kody-obd\/([pbcu][0-3][0-9a-f]{3})$/i.exec(link.href) : null;
+    if (match) codes.add(match[1].toLowerCase());
+  }
+  for (const code of LINKED_WITHOUT_CARD) codes.add(code.toLowerCase());
+  return [...codes].map(code => ({ code }));
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ code: string }> }): Promise<Metadata> {
