@@ -8,8 +8,9 @@ export const metadata: Metadata = {
   alternates: { canonical: 'https://www.gmt400.pl/baza' },
 };
 
-// ISR (15 min): domyślna zakładka „Modele” jest w HTML; gdy Notion nie odpowiada, strona pobiera dane w przeglądarce.
-export const revalidate = 900;
+// Strona statyczna (build): domyślna zakładka „Modele” jest w HTML; gdy Notion nie odpowiada w buildzie, strona pobiera dane w przeglądarce.
+export const dynamic = 'force-static';
+export const revalidate = false;
 
 export default async function BazaPage() {
   return <Encyclopedia initialItems={await getListEntries()} />;

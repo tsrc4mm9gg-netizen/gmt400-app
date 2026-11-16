@@ -12,8 +12,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!Object.hasOwn(TITLES, section)) return { title: 'Nie znaleziono kategorii — GMT400', robots: { index: false, follow: false } };
   return { title: `${TITLES[section]} — GMT400`, alternates: { canonical: `https://www.gmt400.pl/${section}` } };
 }
-// ISR: lista poradników jest w HTML (dla wyszukiwarek), odświeżana co 15 min.
-export const revalidate = 900;
+// Strona statyczna (build): lista poradników jest w HTML (dla wyszukiwarek). Bez ISR; nieznane sekcje to 404.
+export const dynamic = 'force-static';
+export const revalidate = false;
+export const dynamicParams = false;
 async function Category({ params }: Props) {
   const { section } = await params;
   if (!Object.hasOwn(TITLES, section)) notFound();

@@ -22,7 +22,8 @@ export const metadata: Metadata = {
   },
 };
 
-export const revalidate = 900;
+export const dynamic = 'force-static';
+export const revalidate = false;
 
 const TIPS = [
   { title: 'Tahoe vs Suburban', tip: 'Tahoe jest krótszy (2- lub 4-drzwiowy), Suburban dłuższy z więcej miejscem. Oba dzielą większość części mechanicznych.' },
