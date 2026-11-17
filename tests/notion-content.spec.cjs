@@ -24,3 +24,24 @@ test('renderer retains text, formatting and image captions without executable li
   const html = renderToStaticMarkup(React.createElement(NotionContent, { blocks }));
   expect(html).toContain('&lt;script&gt;'); expect(html).toContain('<strong>'); expect(html).toContain('Podpis ilustracji'); expect(html).toContain('https://example.com/diagram.png'); expect(html).not.toContain('javascript:'); expect(html).not.toContain('<script>'); expect(safeUrl('data:text/html,bad')).toBe(null);
 });
+test('child page links use inline anchors for relative, absolute and mixed ID formats', () => {
+  const childId = '414d7bf1c139819caccaeca7d3daba7b';
+  const canonicalId = '414d7bf1-c139-819c-acca-eca7d3daba7b';
+  const anchor = `#notion-child-${canonicalId}`;
+  const blocks = [
+    { id: 'intro', type: 'paragraph', paragraph: { rich_text: [
+      { plain_text: 'Względny', href: `/baza/${childId}` },
+      { plain_text: 'Absolutny', href: `https://www.gmt400.pl/baza/${canonicalId}` },
+      { plain_text: 'Mieszany', href: `https://gmt400.pl/baza/414D7BF1-C139-819C-ACCA-ECA7D3DABA7B` },
+      { plain_text: 'Produkcyjny mieszany', href: `https://www.gmt400.pl/baza/414d7bf1-C139-819caccaeca7d3daba7b` },
+      { plain_text: 'Względny produkcyjny mieszany', href: `/baza/414d7bf1-c139-819caccaeca7d3daba7b` },
+      { plain_text: 'Nieistniejący', href: `/baza/00000000-0000-0000-0000-000000000000` },
+    ] } },
+    { id: canonicalId, type: 'child_page', child_page: { title: 'Dane fabryczne' }, children: [] },
+  ];
+  const html = renderToStaticMarkup(React.createElement(NotionContent, { blocks }));
+  expect((html.match(new RegExp(anchor.replace(/[-]/g, '\\-'), 'g')) || []).length).toBe(5);
+  expect(html).toContain(`href="${anchor}"`);
+  expect(html).toContain(`href="/baza/00000000-0000-0000-0000-000000000000"`);
+  expect(html).toContain(`id="${anchor.slice(1)}"`);
+});
