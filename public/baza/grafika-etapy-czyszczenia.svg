@@ -1,0 +1,82 @@
+<svg role="img" aria-label="CSFI - kolejność etapów czyszczenia poppetów" xmlns="http://www.w3.org/2000/svg" width="900" height="835" viewBox="0 0 1240 1150" font-family="system-ui,-apple-system,'Segoe UI',Roboto,'DejaVu Sans',sans-serif">
+<!-- Własny rysunek wektorowy gmt400.pl; bez kopiowania ilustracji Haynes/GM. -->
+<title>CSFI - kolejność etapów czyszczenia poppetów</title>
+  <rect x="0" y="0" width="1240" height="1150" rx="24" fill="#0A0A0A" stroke="#262626" stroke-width="1.5"/>
+
+  <text x="620" y="54" text-anchor="middle" font-size="27" font-weight="700" fill="#EDEDED">Kolejność etapów - czyszczenie poppetów CSFI</text>
+  <text x="620" y="80" text-anchor="middle" font-size="13.5" fill="#9C9C9C">Skrót procedury z modułu 05, wg GM TSB 00-06-04-003B · szczegóły w opisach etapów</text>
+
+  <!-- uwaga wstepna -->
+  <rect x="60" y="100" width="1120" height="58" rx="12" fill="#1A1206" stroke="#E77000"/>
+  <text x="78" y="124" font-size="12.5" font-weight="700" fill="#E77000">Przed startem:</text>
+  <text x="195" y="124" font-size="12.5" fill="#EDEDED">zimny silnik, wentylacja, brak źródeł zapłonu, rękawice nitrylowe i okulary ochronne.</text>
+  <text x="78" y="145" font-size="12.5" fill="#EDEDED">Układ paliwowy auta odseparowany od roztworu - Top Engine Cleaner może uszkodzić pompę paliwa (TSB).</text>
+
+  <!-- os czasu -->
+  <line x1="100" y1="228" x2="100" y2="948" stroke="#E77000" stroke-width="3"/>
+
+  <!-- ETAP 1 -->
+  <circle cx="100" cy="228" r="20" fill="#E77000"/>
+  <text x="100" y="234" text-anchor="middle" font-size="17" font-weight="700" fill="#000000">1</text>
+  <rect x="140" y="178" width="1040" height="100" rx="14" fill="#111111" stroke="#2A2A2A"/>
+  <text x="172" y="214" font-size="17" font-weight="700" fill="#EDEDED">Etap 1 - przygotowanie i demontaż</text>
+  <text x="172" y="238" font-size="12.5" fill="#9C9C9C">Poluzuj korek wlewu; zdejmij PCV, kolanko, wąż serwa, złącze korpusu i kable 1/3/5/7;</text>
+  <text x="172" y="258" font-size="12.5" fill="#9C9C9C">spuść ciśnienie na porcie serwisowym (osłoń szmatą); wyjmij rury - o-ringi i dystans zostają w korpusie.</text>
+
+  <!-- ETAP 2 -->
+  <circle cx="100" cy="348" r="20" fill="#E77000"/>
+  <text x="100" y="354" text-anchor="middle" font-size="17" font-weight="700" fill="#000000">2</text>
+  <rect x="140" y="298" width="1040" height="100" rx="14" fill="#111111" stroke="#2A2A2A"/>
+  <text x="172" y="334" font-size="17" font-weight="700" fill="#EDEDED">Etap 2 - test i rozpychanie poppetów</text>
+  <text x="172" y="358" font-size="12.5" fill="#9C9C9C">Adaptery J 44466-12/-13 na korpus i -11/-13 na rurę; J 41413 + regulator J 44466-10; tester J 39021 na złącze korpusu;</text>
+  <text x="172" y="378" font-size="12.5" fill="#9C9C9C">wzbudzaj każdy wtryskiwacz osobno: brak spadku ciśnienia = zablokowany poppet; powtarzaj do skutku.</text>
+
+  <!-- ETAP 2b -->
+  <circle cx="100" cy="468" r="20" fill="#E77000"/>
+  <text x="100" y="474" text-anchor="middle" font-size="15" font-weight="700" fill="#000000">2b</text>
+  <rect x="140" y="418" width="1040" height="100" rx="14" fill="#111111" stroke="#2A2A2A"/>
+  <text x="172" y="454" font-size="17" font-weight="700" fill="#EDEDED">Etap 2b - przygotowanie do pracy na roztworze</text>
+  <text x="172" y="478" font-size="12.5" fill="#9C9C9C">Odłącz J 41413 (zawór stacji, spuść ciśnienie z J 44466-10) i zdejmij J 39021; załóż złącze korpusu,</text>
+  <text x="172" y="498" font-size="12.5" fill="#9C9C9C">wąż serwa, kable 1/3/5/7, kolanko i PCV; podłącz J 35800-A do portu serwisowego na J 44466-12.</text>
+
+  <!-- ETAP 3 -->
+  <circle cx="100" cy="588" r="20" fill="#E77000"/>
+  <text x="100" y="594" text-anchor="middle" font-size="17" font-weight="700" fill="#000000">3</text>
+  <rect x="140" y="538" width="1040" height="100" rx="14" fill="#111111" stroke="#2A2A2A"/>
+  <text x="172" y="574" font-size="17" font-weight="700" fill="#EDEDED">Etap 3 - czyszczenie roztworem</text>
+  <text x="172" y="598" font-size="12.5" fill="#9C9C9C">24 ml Top Engine Cleaner (P/N 1050002) + benzyna bezołowiowa w J 35800-A; powietrze warsztatowe 75 psi;</text>
+  <text x="172" y="618" font-size="12.5" fill="#9C9C9C">uruchom silnik i zostaw na biegu jałowym, aż pojemnik się opróżni i silnik zgaśnie.</text>
+
+  <!-- ETAP 3b -->
+  <circle cx="100" cy="708" r="20" fill="#E77000"/>
+  <text x="100" y="714" text-anchor="middle" font-size="15" font-weight="700" fill="#000000">3b</text>
+  <rect x="140" y="658" width="1040" height="100" rx="14" fill="#111111" stroke="#2A2A2A"/>
+  <text x="172" y="694" font-size="17" font-weight="700" fill="#EDEDED">Etap 3b - ponowny demontaż przed montażem</text>
+  <text x="172" y="718" font-size="12.5" fill="#9C9C9C">Zdejmij PCV, kolanko, wąż serwa i kable 1/3/5/7; spuść resztkowe ciśnienie z J 44466-12;</text>
+  <text x="172" y="738" font-size="12.5" fill="#9C9C9C">zdejmij adaptery J 44466-13/-12 z korpusu i -13/-11 z rury - dopiero potem montaż.</text>
+
+  <!-- ETAP 4 -->
+  <circle cx="100" cy="828" r="20" fill="#E77000"/>
+  <text x="100" y="834" text-anchor="middle" font-size="17" font-weight="700" fill="#000000">4</text>
+  <rect x="140" y="778" width="1040" height="100" rx="14" fill="#111111" stroke="#2A2A2A"/>
+  <text x="172" y="814" font-size="17" font-weight="700" fill="#EDEDED">Etap 4 - montaż</text>
+  <text x="172" y="838" font-size="12.5" fill="#9C9C9C">Rury z kompletem o-ring / podkładka / dystans; nakrętki 3 N·m; śruba 6 N·m z klejem P/N 12345382;</text>
+  <text x="172" y="858" font-size="12.5" fill="#9C9C9C">wąż serwa, kolanko, PCV, kable 1/3/5/7 - przed uruchomieniem sprawdź złącze korpusu, serwo i kable.</text>
+
+  <!-- ETAP 5 -->
+  <circle cx="100" cy="948" r="20" fill="#E77000"/>
+  <text x="100" y="954" text-anchor="middle" font-size="17" font-weight="700" fill="#000000">5</text>
+  <rect x="140" y="898" width="1040" height="100" rx="14" fill="#111111" stroke="#2A2A2A"/>
+  <text x="172" y="934" font-size="17" font-weight="700" fill="#EDEDED">Etap 5 - po pracy</text>
+  <text x="172" y="958" font-size="12.5" fill="#9C9C9C">Płyn do wtrysków P/N 12345104 (1 uncja na galon paliwa w baku); kontrola szczelności;</text>
+  <text x="172" y="978" font-size="12.5" fill="#9C9C9C">kody Tech 2; zalecenie zmiany marki paliwa.</text>
+
+  <!-- decyzja po etapie 5 -->
+  <path d="M100 968 L100 1028" stroke="#E77000" stroke-width="3" fill="none"/>
+  <path d="M100 1040 l-8 -14 l16 0 z" fill="#E77000"/>
+  <rect x="140" y="1024" width="1040" height="64" rx="14" fill="#1A1206" stroke="#E77000" stroke-width="1.5"/>
+  <text x="172" y="1050" font-size="13.5" font-weight="700" fill="#E77000">Objaw wrócił po czyszczeniu?</text>
+  <text x="172" y="1072" font-size="12.5" fill="#EDEDED">Konwersja na MFI - tylko przy nawrocie usterki lub na życzenie właściciela; czyszczenie to naprawa preferowana (TSB).</text>
+
+  <text x="620" y="1122" text-anchor="middle" font-size="11" fill="#6B6B6B">gmt400.pl · Źródło: GM TSB 00-06-04-003B (01.2003), kopia tekstu: s10forum.com · rysunek schematyczny</text>
+</svg>
