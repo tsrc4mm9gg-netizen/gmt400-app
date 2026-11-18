@@ -1,0 +1,77 @@
+<svg role="img" aria-label="CSFI - dwa osobne etapy podłączenia narzędzi" xmlns="http://www.w3.org/2000/svg" width="900" height="726" viewBox="0 0 1240 1000" font-family="system-ui, sans-serif">
+<!-- Własny rysunek wektorowy gmt400.pl; bez kopiowania ilustracji Haynes/GM. -->
+<title>CSFI - dwa osobne etapy podłączenia narzędzi</title>
+<rect x="0" y="0" width="1240" height="1000" rx="24" fill="#0A0A0A" stroke="#262626"/>
+<defs><marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#E77000"/></marker></defs>
+<text x="620" y="48" font-size="28" fill="#EDEDED" font-weight="700" text-anchor="middle">Czyszczenie CSFI - dwa osobne układy narzędzi</text>
+<text x="620" y="78" font-size="16" fill="#9C9C9C" font-weight="400" text-anchor="middle">Schemat logiczny V8 wg modułu 05 i kopii TSB 00-06-04-003B; nie jest instrukcją montażową.</text>
+<rect x="40" y="104" width="1160" height="80" rx="14" fill="#1A1206" stroke="#E77000"/>
+<text x="60" y="134" font-size="20" fill="#E77000" font-weight="700" text-anchor="start">Układ paliwowy pojazdu odseparuj od roztworu czyszczącego.</text>
+<text x="60" y="163" font-size="17" fill="#EDEDED" font-weight="400" text-anchor="start">Top Engine Cleaner może uszkodzić pompę paliwa. Pełna procedura i bezpieczeństwo: moduł 05.</text>
+<text x="50" y="229" font-size="23" fill="#EDEDED" font-weight="700" text-anchor="start">1. Odblokowanie poppetów - silnik nie pracuje</text>
+<rect x="50" y="253" width="230" height="100" rx="14" fill="#1A1206" stroke="#E77000"/>
+<text x="66" y="282" font-size="19" fill="#E77000" font-weight="700" text-anchor="start">J 41413</text>
+<text x="66" y="308" font-size="15" fill="#EDEDED" font-weight="400" text-anchor="start">stacja EVAP</text>
+<text x="66" y="329" font-size="15" fill="#EDEDED" font-weight="400" text-anchor="start">źródło ciśnienia</text>
+<rect x="330" y="253" width="230" height="100" rx="14" fill="#1A1206" stroke="#E77000"/>
+<text x="346" y="282" font-size="19" fill="#E77000" font-weight="700" text-anchor="start">J 44466-10</text>
+<text x="346" y="308" font-size="15" fill="#EDEDED" font-weight="400" text-anchor="start">regulator + manometr</text>
+<text x="346" y="329" font-size="15" fill="#EDEDED" font-weight="400" text-anchor="start">co najmniej 150 psi</text>
+<rect x="610" y="253" width="250" height="100" rx="14" fill="#1A1206" stroke="#E77000"/>
+<text x="626" y="282" font-size="19" fill="#E77000" font-weight="700" text-anchor="start">J 44466-12</text>
+<text x="626" y="308" font-size="15" fill="#EDEDED" font-weight="400" text-anchor="start">adapter na korpusie</text>
+<text x="626" y="329" font-size="15" fill="#EDEDED" font-weight="400" text-anchor="start">+ port serwisowy</text>
+<rect x="910" y="253" width="280" height="100" rx="14" fill="#1A1206" stroke="#E77000"/>
+<text x="926" y="282" font-size="19" fill="#E77000" font-weight="700" text-anchor="start">Korpus CSFI V8</text>
+<text x="926" y="308" font-size="15" fill="#EDEDED" font-weight="400" text-anchor="start">8 wtryskiwaczy w korpusie</text>
+<text x="926" y="329" font-size="15" fill="#EDEDED" font-weight="400" text-anchor="start">+ rurki z poppetami</text>
+<path d="M280 303 L325 303" fill="none" stroke="#E77000" stroke-width="3" marker-end="url(#arr)"/>
+<path d="M560 303 L605 303" fill="none" stroke="#E77000" stroke-width="3" marker-end="url(#arr)"/>
+<path d="M860 303 L905 303" fill="none" stroke="#E77000" stroke-width="3" marker-end="url(#arr)"/>
+<rect x="50" y="387" width="230" height="100" rx="14" fill="#1A1206" stroke="#E77000"/>
+<text x="66" y="416" font-size="19" fill="#E77000" font-weight="700" text-anchor="start">J 39021</text>
+<text x="66" y="442" font-size="15" fill="#EDEDED" font-weight="400" text-anchor="start">tester wtryskiwaczy</text>
+<text x="66" y="463" font-size="15" fill="#EDEDED" font-weight="400" text-anchor="start">przełącznik: 0,5 A</text>
+<rect x="330" y="387" width="230" height="100" rx="14" fill="#1A1206" stroke="#E77000"/>
+<text x="346" y="416" font-size="19" fill="#E77000" font-weight="700" text-anchor="start">J 39021-210</text>
+<text x="346" y="442" font-size="15" fill="#EDEDED" font-weight="400" text-anchor="start">skrzynka adaptera</text>
+<text x="346" y="463" font-size="15" fill="#EDEDED" font-weight="400" text-anchor="start">testera</text>
+<rect x="610" y="387" width="250" height="100" rx="14" fill="#1A1206" stroke="#E77000"/>
+<text x="626" y="416" font-size="19" fill="#E77000" font-weight="700" text-anchor="start">J 39021-302</text>
+<text x="626" y="442" font-size="15" fill="#EDEDED" font-weight="400" text-anchor="start">adapter V8</text>
+<text x="626" y="463" font-size="15" fill="#EDEDED" font-weight="400" text-anchor="start">V6: J 39021-301</text>
+<rect x="910" y="387" width="280" height="100" rx="14" fill="#1A1206" stroke="#E77000"/>
+<text x="926" y="416" font-size="19" fill="#E77000" font-weight="700" text-anchor="start">Złącze korpusu</text>
+<text x="926" y="442" font-size="15" fill="#EDEDED" font-weight="400" text-anchor="start">każdy wtryskiwacz osobno</text>
+<text x="926" y="463" font-size="15" fill="#EDEDED" font-weight="400" text-anchor="start">spadek ciśnienia = działa</text>
+<path d="M280 437 L325 437" fill="none" stroke="#E77000" stroke-width="3" marker-end="url(#arr)"/>
+<path d="M560 437 L605 437" fill="none" stroke="#E77000" stroke-width="3" marker-end="url(#arr)"/>
+<path d="M860 437 L905 437" fill="none" stroke="#E77000" stroke-width="3" marker-end="url(#arr)"/>
+<text x="50" y="521" font-size="17" fill="#9C9C9C" font-weight="400" text-anchor="start">Rura pojazdu: odseparowana adapterami J 44466-11/-13; na korpusie J 44466-12/-13.</text>
+<rect x="40" y="547" width="1160" height="74" rx="14" fill="#1A1206" stroke="#E77000"/>
+<text x="60" y="577" font-size="17" fill="#E77000" font-weight="700" text-anchor="start">Zanim przejdziesz dalej: zamknij stację, spuść ciśnienie i odłącz J 41413/J 44466-10.</text>
+<text x="60" y="603" font-size="17" fill="#EDEDED" font-weight="400" text-anchor="start">Zdejmij tester J 39021 i przywróć połączenia wymagane do pracy silnika zgodnie z modułem 05.</text>
+<text x="50" y="665" font-size="23" fill="#EDEDED" font-weight="700" text-anchor="start">2. Czyszczenie roztworem - silnik na biegu jałowym</text>
+<rect x="50" y="692" width="230" height="100" rx="14" fill="#1A1206" stroke="#E77000"/>
+<text x="66" y="721" font-size="19" fill="#E77000" font-weight="700" text-anchor="start">Powietrze warsztatowe</text>
+<text x="66" y="747" font-size="15" fill="#EDEDED" font-weight="400" text-anchor="start">do regulatora na górze</text>
+<text x="66" y="768" font-size="15" fill="#EDEDED" font-weight="400" text-anchor="start">pojemnika J 35800-A</text>
+<rect x="330" y="692" width="300" height="100" rx="14" fill="#1A1206" stroke="#E77000"/>
+<text x="346" y="721" font-size="19" fill="#E77000" font-weight="700" text-anchor="start">J 35800-A - 75 psi</text>
+<text x="346" y="747" font-size="15" fill="#EDEDED" font-weight="400" text-anchor="start">24 ml TEC P/N 1050002;</text>
+<text x="346" y="768" font-size="15" fill="#EDEDED" font-weight="400" text-anchor="start">dopełnij benzyną bezołowiową</text>
+<rect x="680" y="692" width="250" height="100" rx="14" fill="#1A1206" stroke="#E77000"/>
+<text x="696" y="721" font-size="19" fill="#E77000" font-weight="700" text-anchor="start">J 44466-12</text>
+<text x="696" y="747" font-size="15" fill="#EDEDED" font-weight="400" text-anchor="start">port serwisowy</text>
+<text x="696" y="768" font-size="15" fill="#EDEDED" font-weight="400" text-anchor="start">adaptera na korpusie</text>
+<rect x="980" y="692" width="210" height="100" rx="14" fill="#1A1206" stroke="#E77000"/>
+<text x="996" y="721" font-size="19" fill="#E77000" font-weight="700" text-anchor="start">Korpus CSFI</text>
+<text x="996" y="747" font-size="15" fill="#EDEDED" font-weight="400" text-anchor="start">praca do opróżnienia</text>
+<text x="996" y="768" font-size="15" fill="#EDEDED" font-weight="400" text-anchor="start">pojemnika i zgaśnięcia</text>
+<path d="M280 742 L325 742" fill="none" stroke="#E77000" stroke-width="3" marker-end="url(#arr)"/>
+<path d="M630 742 L675 742" fill="none" stroke="#E77000" stroke-width="3" marker-end="url(#arr)"/>
+<path d="M930 742 L975 742" fill="none" stroke="#E77000" stroke-width="3" marker-end="url(#arr)"/>
+<text x="50" y="842" font-size="21" fill="#E77000" font-weight="700" text-anchor="start">Nie podłączaj obu źródeł naraz. To dwa różne etapy, a nie wspólny obwód.</text>
+<text x="50" y="879" font-size="17" fill="#9C9C9C" font-weight="400" text-anchor="start">Kształty, położenie i prowadzenie przewodów są umowne. Stosuj pełną procedurę dla auta.</text>
+<text x="620" y="953" font-size="15" fill="#9C9C9C" font-weight="400" text-anchor="middle">gmt400.pl · Własny rysunek poglądowy · GM TSB 00-06-04-003B, kopia tekstu s10forum.com</text>
+</svg>

@@ -130,6 +130,11 @@ const FIG = {
   bleed: svg('hamulce-odpowietrzanie-kolejnosc.svg', 'Kolejność odpowietrzania kół układu hamulcowego i schemat kroków', 1184, 'Kolejność odpowietrzania hamulców — własny rysunek.', 'Haynes 1988–98, rozdz. 9 §15 (9-18…9-19)'),
   headlights: svg('reflektory-ustawienie-sciana.svg', 'Schemat ustawienia reflektorów na ścianie: oś auta, osie reflektorów, pozioma taśma i strefa jasności świateł mijania 5 cm niżej i 5 cm w prawo', 1172, 'Ustawienie reflektorów na ścianie — własny rysunek poglądowy (przesunięcia wyolbrzymione).', 'Haynes 1988–98, rozdz. 12 §8 (12-3…12-5)'),
   rpo: svg('rpo-vin-jak-odczytac.svg', 'Schemat 17 znaków VIN z zaznaczonym 8. (silnik) i 10. (rok) znakiem, tabele kodów roku, silnika i RPO oraz miejsca etykiety w aucie', 1797, 'Jak odczytać silnik, rok i RPO — własny rysunek.', 'instrukcje obsługi GM 1994–99, GM Heritage Center, 49 CFR § 565.15'),
+  csfiMfi: svg('grafika-a-csfi-vs-mfi.svg', "CSFI V8: osiem wtryskiwaczy w centralnym korpusie i poppety; MFI: wtryskiwacze przy portach", 581, "CSFI i MFI - własny rysunek poglądowy V8, nie w skali.", "GM TSB 00-06-04-003B (kopia tekstu s10forum.com); opis CSFI w module 02."),
+  korpusCsfi: svg('grafika-b-korpus-csfi.svg', "Korpus CSFI V8, zasilanie, powrót, regulator i osiem rurek z poppetami, bez numerów pozycji", 581, "Korpus CSFI - własny rysunek poglądowy, bez numerów pozycji; rozmieszczenie umowne.", "GM TSB 00-06-04-003B (kopia tekstu s10forum.com); moduł 02."),
+  narzedzia: svg('grafika-c-podlaczenie-narzedzi.svg', "Dwa osobne etapy podłączenia narzędzi CSFI: odblokowanie poppetów i praca na roztworze", 726, "Narzędzia CSFI - własny rysunek poglądowy. Dwa oddzielne etapy; pełna procedura w module 05.", "GM TSB 00-06-04-003B (kopia tekstu s10forum.com); moduł 05."),
+  pinout: svg('grafika-d-pinout-wtryskiwaczy.svg', "Tabela dziesięciu pinów A-H, J i K złącza wtryskiwaczy CSFI GM 12065425 dla Tahoe 5.7 z 1999 roku", 668, "Pinout CSFI - własny rysunek poglądowy według tabeli w module 06. Nie przedstawia fizycznego układu pinów; pewność średnia, zweryfikuj miernikiem.", "Dokumentacja serwisowa GM 1999 (kopia online), tabela modułu 06; autentyczność kopii niezależnie niezweryfikowana."),
+  etapy: svg('grafika-etapy-czyszczenia.svg', "Kolejność etapów czyszczenia poppetów CSFI, z etapami przejściowymi 2b i 3b", 835, "Czyszczenie poppetów - własny rysunek poglądowy kolejności. Skrót, nie zastępuje pełnej procedury w module 05.", "GM TSB 00-06-04-003B (kopia tekstu s10forum.com); moduł 05."),
 };
 
 const P = '406d7bf1c139';
@@ -180,6 +185,10 @@ const entries: Record<string, EntryMedia> = {
   [P + '815daeeed0472900e313']: { tile: null, figures: [FIG.bleed], schematics: [] },
   // E17a — reflektory: wymiana i ustawienie
   [P + '817a8ac7cdfbdc51ba26']: { tile: null, figures: [FIG.headlights], schematics: [] },
+  '41bd7bf1c13981b5834ac78a52723f75': { tile: null, figures: [FIG.csfiMfi], schematics: [] },
+  '41bd7bf1c13981eea2d8dabbb9733962': { tile: null, figures: [FIG.korpusCsfi], schematics: [] },
+  '41bd7bf1c13981afb0f9f125eef359c2': { tile: null, figures: [FIG.etapy, FIG.narzedzia], schematics: [] },
+  '41bd7bf1c139817fb0b5d300d41641ee': { tile: null, figures: [FIG.pinout], schematics: [] },
 };
 
 export const ENTRY_MEDIA: Readonly<Record<string, EntryMedia>> = entries;

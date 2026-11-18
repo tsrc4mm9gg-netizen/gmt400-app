@@ -1,0 +1,69 @@
+<svg role="img" aria-label="CSFI - tabela pinów złącza GM 12065425" xmlns="http://www.w3.org/2000/svg" width="900" height="668" viewBox="0 0 1240 920" font-family="system-ui, sans-serif">
+<!-- Własny rysunek wektorowy gmt400.pl; bez kopiowania ilustracji Haynes/GM. -->
+<title>CSFI - tabela pinów złącza GM 12065425</title>
+<rect x="0" y="0" width="1240" height="920" rx="24" fill="#0A0A0A" stroke="#262626"/>
+<text x="620" y="49" font-size="29" fill="#EDEDED" font-weight="700" text-anchor="middle">CSFI V8 - pinout złącza wtryskiwaczy</text>
+<text x="620" y="80" font-size="18" fill="#9C9C9C" font-weight="400" text-anchor="middle">Tahoe 5.7 V8 (1999) · GM 12065425 · 10-pin M/P 150 · czarne</text>
+<rect x="40" y="105" width="1160" height="83" rx="14" fill="#1A1206" stroke="#E77000"/>
+<text x="60" y="137" font-size="21" fill="#E77000" font-weight="700" text-anchor="start">Tabela logiczna. Nie przedstawia widoku od strony pinów ani przewodów.</text>
+<text x="60" y="168" font-size="18" fill="#EDEDED" font-weight="400" text-anchor="start">Fizyczna geometria wtyku niepotwierdzona. Pewność ŚREDNIA - zweryfikuj miernikiem przed użyciem.</text>
+<text x="65" y="229" font-size="16" fill="#9C9C9C" font-weight="700" text-anchor="start">PIN</text>
+<text x="180" y="229" font-size="16" fill="#9C9C9C" font-weight="700" text-anchor="start">PRZEWÓD</text>
+<text x="450" y="229" font-size="16" fill="#9C9C9C" font-weight="700" text-anchor="start">OBWÓD</text>
+<text x="630" y="229" font-size="16" fill="#9C9C9C" font-weight="700" text-anchor="start">FUNKCJA</text>
+<rect x="50" y="249" width="1140" height="43" rx="5" fill="#161616" stroke="#161616"/>
+<text x="65" y="278" font-size="21" fill="#E77000" font-weight="700" text-anchor="start">A</text>
+<text x="180" y="278" font-size="20" fill="#EDEDED" font-weight="400" text-anchor="start">BLK</text>
+<text x="450" y="278" font-size="20" fill="#EDEDED" font-weight="400" text-anchor="start">1744</text>
+<text x="630" y="278" font-size="19" fill="#EDEDED" font-weight="400" text-anchor="start">Sterowanie wtryskiwacza cyl. 1</text>
+<rect x="50" y="294" width="1140" height="43" rx="5" fill="#111111" stroke="#161616"/>
+<text x="65" y="323" font-size="21" fill="#E77000" font-weight="700" text-anchor="start">B</text>
+<text x="180" y="323" font-size="20" fill="#EDEDED" font-weight="400" text-anchor="start">DK BLU/WHT</text>
+<text x="450" y="323" font-size="20" fill="#EDEDED" font-weight="400" text-anchor="start">878</text>
+<text x="630" y="323" font-size="19" fill="#EDEDED" font-weight="400" text-anchor="start">Sterowanie wtryskiwacza cyl. 8</text>
+<rect x="50" y="339" width="1140" height="43" rx="5" fill="#161616" stroke="#161616"/>
+<text x="65" y="368" font-size="21" fill="#E77000" font-weight="700" text-anchor="start">C</text>
+<text x="180" y="368" font-size="20" fill="#EDEDED" font-weight="400" text-anchor="start">LT BLU/BLK</text>
+<text x="450" y="368" font-size="20" fill="#EDEDED" font-weight="400" text-anchor="start">844</text>
+<text x="630" y="368" font-size="19" fill="#EDEDED" font-weight="400" text-anchor="start">Sterowanie wtryskiwacza cyl. 4</text>
+<rect x="50" y="384" width="1140" height="43" rx="5" fill="#111111" stroke="#161616"/>
+<text x="65" y="413" font-size="21" fill="#E77000" font-weight="700" text-anchor="start">D</text>
+<text x="180" y="413" font-size="20" fill="#EDEDED" font-weight="400" text-anchor="start">PNK/BLK</text>
+<text x="450" y="413" font-size="20" fill="#EDEDED" font-weight="400" text-anchor="start">1746</text>
+<text x="630" y="413" font-size="19" fill="#EDEDED" font-weight="400" text-anchor="start">Sterowanie wtryskiwacza cyl. 3</text>
+<rect x="50" y="429" width="1140" height="43" rx="5" fill="#161616" stroke="#161616"/>
+<text x="65" y="458" font-size="21" fill="#E77000" font-weight="700" text-anchor="start">E</text>
+<text x="180" y="458" font-size="20" fill="#EDEDED" font-weight="400" text-anchor="start">YEL/BLK</text>
+<text x="450" y="458" font-size="20" fill="#EDEDED" font-weight="400" text-anchor="start">846</text>
+<text x="630" y="458" font-size="19" fill="#EDEDED" font-weight="400" text-anchor="start">Sterowanie wtryskiwacza cyl. 6</text>
+<rect x="50" y="474" width="1140" height="43" rx="5" fill="#111111" stroke="#161616"/>
+<text x="65" y="503" font-size="21" fill="#E77000" font-weight="700" text-anchor="start">F</text>
+<text x="180" y="503" font-size="20" fill="#EDEDED" font-weight="400" text-anchor="start">BLK/WHT</text>
+<text x="450" y="503" font-size="20" fill="#EDEDED" font-weight="400" text-anchor="start">845</text>
+<text x="630" y="503" font-size="19" fill="#EDEDED" font-weight="400" text-anchor="start">Sterowanie wtryskiwacza cyl. 5</text>
+<rect x="50" y="519" width="1140" height="43" rx="5" fill="#161616" stroke="#161616"/>
+<text x="65" y="548" font-size="21" fill="#E77000" font-weight="700" text-anchor="start">G</text>
+<text x="180" y="548" font-size="20" fill="#EDEDED" font-weight="400" text-anchor="start">RED/BLK</text>
+<text x="450" y="548" font-size="20" fill="#EDEDED" font-weight="400" text-anchor="start">877</text>
+<text x="630" y="548" font-size="19" fill="#EDEDED" font-weight="400" text-anchor="start">Sterowanie wtryskiwacza cyl. 7</text>
+<rect x="50" y="564" width="1140" height="43" rx="5" fill="#111111" stroke="#161616"/>
+<text x="65" y="593" font-size="21" fill="#E77000" font-weight="700" text-anchor="start">H</text>
+<text x="180" y="593" font-size="20" fill="#EDEDED" font-weight="400" text-anchor="start">LT GRN/BLK</text>
+<text x="450" y="593" font-size="20" fill="#EDEDED" font-weight="400" text-anchor="start">1745</text>
+<text x="630" y="593" font-size="19" fill="#EDEDED" font-weight="400" text-anchor="start">Sterowanie wtryskiwacza cyl. 2</text>
+<rect x="50" y="609" width="1140" height="43" rx="5" fill="#161616" stroke="#161616"/>
+<text x="65" y="638" font-size="21" fill="#E77000" font-weight="700" text-anchor="start">J</text>
+<text x="180" y="638" font-size="20" fill="#EDEDED" font-weight="400" text-anchor="start">PNK</text>
+<text x="450" y="638" font-size="20" fill="#EDEDED" font-weight="400" text-anchor="start">439</text>
+<text x="630" y="638" font-size="19" fill="#EDEDED" font-weight="400" text-anchor="start">Zasilanie zapłonowe (po bezpieczniku)</text>
+<rect x="50" y="654" width="1140" height="43" rx="5" fill="#111111" stroke="#161616"/>
+<text x="65" y="683" font-size="21" fill="#E77000" font-weight="700" text-anchor="start">K</text>
+<text x="180" y="683" font-size="20" fill="#EDEDED" font-weight="400" text-anchor="start">PNK</text>
+<text x="450" y="683" font-size="20" fill="#EDEDED" font-weight="400" text-anchor="start">439</text>
+<text x="630" y="683" font-size="19" fill="#EDEDED" font-weight="400" text-anchor="start">Zasilanie zapłonowe (po bezpieczniku)</text>
+<text x="60" y="744" font-size="17" fill="#9C9C9C" font-weight="400" text-anchor="start">W tabeli modułu 06 pin K występuje raz. W kopii FSM odnotowano powtórzenie tego wiersza.</text>
+<text x="60" y="782" font-size="18" fill="#E77000" font-weight="700" text-anchor="start">Nie przenoś danych między rocznikami i modelami ani na 2-pinowe złącza zestawu MFI.</text>
+<text x="60" y="830" font-size="18" fill="#EDEDED" font-weight="400" text-anchor="start">Źródło: dokumentacja serwisowa GM 1999 (kopia online), tabela modułu 06.</text>
+<text x="60" y="857" font-size="17" fill="#9C9C9C" font-weight="400" text-anchor="start">Autentyczność kopii nie została niezależnie zweryfikowana. To nie jest rysunek GM.</text>
+<text x="620" y="895" font-size="15" fill="#9C9C9C" font-weight="400" text-anchor="middle">gmt400.pl · Własny rysunek poglądowy · tylko złącze wtryskiwaczy GM 12065425</text>
+</svg>

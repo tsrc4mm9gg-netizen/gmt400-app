@@ -1,0 +1,114 @@
+<svg role="img" aria-label="Korpus CSFI V8 - schemat poglądowy bez numerów pozycji" xmlns="http://www.w3.org/2000/svg" width="900" height="581" viewBox="0 0 1240 800" font-family="system-ui,-apple-system,'Segoe UI',Roboto,'DejaVu Sans',sans-serif">
+<!-- Własny rysunek wektorowy gmt400.pl; bez kopiowania ilustracji Haynes/GM. -->
+<title>Korpus CSFI V8 - schemat poglądowy bez numerów pozycji</title>
+  <defs>
+    <marker id="arrB" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#E77000"/>
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="1240" height="800" rx="24" fill="#0A0A0A" stroke="#262626" stroke-width="1.5"/>
+
+  <text x="620" y="50" text-anchor="middle" font-size="27" font-weight="700" fill="#EDEDED">Korpus dozujący CSFI - budowa</text>
+  <text x="620" y="76" text-anchor="middle" font-size="14" font-weight="700" fill="#E77000">Schemat poglądowy, bez numerów pozycji</text>
+  <text x="620" y="96" text-anchor="middle" font-size="12" fill="#9C9C9C">kształty i rozmieszczenie umowne, nie w skali</text>
+
+  <!-- zlacze elektryczne -->
+  <text x="620" y="150" text-anchor="middle" font-size="13" font-weight="700" fill="#EDEDED">Złącze elektryczne centralne</text>
+  <text x="620" y="168" text-anchor="middle" font-size="11.5" fill="#9C9C9C">8 obwodów sterowania wtryskiwaczy + zasilanie zapłonowe (szczegóły: rysunek D)</text>
+  <rect x="560" y="184" width="120" height="26" rx="6" fill="#1C1C1C" stroke="#8A8A8A"/>
+
+  <!-- rury zasilania / powrotu -->
+  <path d="M240 470 L414 470" stroke="#E77000" stroke-width="3" fill="none" marker-end="url(#arrB)"/>
+  <path d="M414 505 L246 505" stroke="#E77000" stroke-width="3" fill="none" marker-end="url(#arrB)"/>
+  <text x="240" y="458" font-size="12" font-weight="700" fill="#EDEDED">rura zasilania</text>
+  <text x="240" y="530" font-size="12" font-weight="700" fill="#EDEDED">rura powrotu</text>
+  <text x="240" y="552" font-size="11" fill="#9C9C9C">przy demontażu: o-ringi,</text>
+  <text x="240" y="568" font-size="11" fill="#9C9C9C">podkładka i dystans zostają</text>
+  <text x="240" y="584" font-size="11" fill="#9C9C9C">w korpusie (TSB)</text>
+
+  <!-- rurki z poppetami: lewa strona -->
+  <g stroke="#8A8A8A" stroke-width="2.5" fill="none">
+    <path d="M420 330 L132 226"/>
+    <path d="M420 345 L132 288"/>
+    <path d="M420 360 L132 350"/>
+    <path d="M420 375 L132 412"/>
+    <path d="M820 330 L1108 226"/>
+    <path d="M820 345 L1108 288"/>
+    <path d="M820 360 L1108 350"/>
+    <path d="M820 375 L1108 412"/>
+  </g>
+
+  <!-- porty / cylindry -->
+  <g fill="#1C1C1C" stroke="#4A4A4A">
+    <rect x="60" y="210" width="70" height="30" rx="8"/>
+    <rect x="60" y="272" width="70" height="30" rx="8"/>
+    <rect x="60" y="334" width="70" height="30" rx="8"/>
+    <rect x="60" y="396" width="70" height="30" rx="8"/>
+    <rect x="1110" y="210" width="70" height="30" rx="8"/>
+    <rect x="1110" y="272" width="70" height="30" rx="8"/>
+    <rect x="1110" y="334" width="70" height="30" rx="8"/>
+    <rect x="1110" y="396" width="70" height="30" rx="8"/>
+  </g>
+  <g font-size="13" fill="#9C9C9C" text-anchor="middle">
+    <text x="95" y="230">cyl. 1</text>
+    <text x="95" y="292">cyl. 3</text>
+    <text x="95" y="354">cyl. 5</text>
+    <text x="95" y="416">cyl. 7</text>
+    <text x="1145" y="230">cyl. 2</text>
+    <text x="1145" y="292">cyl. 4</text>
+    <text x="1145" y="354">cyl. 6</text>
+    <text x="1145" y="416">cyl. 8</text>
+  </g>
+
+  <!-- poppety -->
+  <g fill="#E77000">
+    <path d="M136 221 l7 7 -7 7 -7 -7 z"/>
+    <path d="M136 283 l7 7 -7 7 -7 -7 z"/>
+    <path d="M136 345 l7 7 -7 7 -7 -7 z"/>
+    <path d="M136 407 l7 7 -7 7 -7 -7 z"/>
+    <path d="M1104 221 l7 7 -7 7 -7 -7 z"/>
+    <path d="M1104 283 l7 7 -7 7 -7 -7 z"/>
+    <path d="M1104 345 l7 7 -7 7 -7 -7 z"/>
+    <path d="M1104 407 l7 7 -7 7 -7 -7 z"/>
+  </g>
+
+  <!-- korpus -->
+  <rect x="420" y="210" width="400" height="330" rx="16" fill="#1C1C1C" stroke="#EDEDED" stroke-width="1.5"/>
+  <text x="620" y="238" text-anchor="middle" font-size="15" font-weight="700" fill="#EDEDED">Korpus dozujący CSFI</text>
+
+  <!-- 8 wtryskiwaczy w korpusie -->
+  <g>
+    <rect x="456" y="258" width="74" height="38" rx="6" fill="#E77000"/><text x="493" y="282" text-anchor="middle" font-size="12" font-weight="700" fill="#000000">wtr. 1</text>
+    <rect x="538" y="258" width="74" height="38" rx="6" fill="#E77000"/><text x="575" y="282" text-anchor="middle" font-size="12" font-weight="700" fill="#000000">wtr. 3</text>
+    <rect x="620" y="258" width="74" height="38" rx="6" fill="#E77000"/><text x="657" y="282" text-anchor="middle" font-size="12" font-weight="700" fill="#000000">wtr. 5</text>
+    <rect x="702" y="258" width="74" height="38" rx="6" fill="#E77000"/><text x="739" y="282" text-anchor="middle" font-size="12" font-weight="700" fill="#000000">wtr. 7</text>
+    <rect x="456" y="302" width="74" height="38" rx="6" fill="#E77000"/><text x="493" y="326" text-anchor="middle" font-size="12" font-weight="700" fill="#000000">wtr. 2</text>
+    <rect x="538" y="302" width="74" height="38" rx="6" fill="#E77000"/><text x="575" y="326" text-anchor="middle" font-size="12" font-weight="700" fill="#000000">wtr. 4</text>
+    <rect x="620" y="302" width="74" height="38" rx="6" fill="#E77000"/><text x="657" y="326" text-anchor="middle" font-size="12" font-weight="700" fill="#000000">wtr. 6</text>
+    <rect x="702" y="302" width="74" height="38" rx="6" fill="#E77000"/><text x="739" y="326" text-anchor="middle" font-size="12" font-weight="700" fill="#000000">wtr. 8</text>
+  </g>
+
+  <!-- regulator -->
+  <rect x="456" y="400" width="200" height="34" rx="8" fill="#1A1206" stroke="#E77000"/>
+  <text x="556" y="422" text-anchor="middle" font-size="12" font-weight="700" fill="#E77000">regulator ciśnienia</text>
+  <text x="556" y="452" text-anchor="middle" font-size="10.5" fill="#9C9C9C">w korpusie, przy rurce powrotnej</text>
+
+  <!-- wspornik -->
+  <rect x="460" y="540" width="320" height="26" rx="8" fill="#141414" stroke="#4A4A4A"/>
+  <text x="620" y="592" text-anchor="middle" font-size="12" font-weight="700" fill="#EDEDED">Wspornik korpusu (klamra) na dolnym kolektorze</text>
+  <text x="620" y="610" text-anchor="middle" font-size="11.5" fill="#9C9C9C">przy konwersji na MFI wymieniany na nowy (TSB)</text>
+
+  <!-- callout poppet -->
+  <path d="M150 440 L130 646" stroke="#E77000" stroke-width="1.5" fill="none"/>
+  <rect x="60" y="644" width="560" height="64" rx="12" fill="#1A1206" stroke="#E77000"/>
+  <text x="78" y="670" font-size="13" font-weight="700" fill="#E77000">8× rurka nylonowa z zaworkiem poppet (kula + gniazdo)</text>
+  <text x="78" y="692" font-size="12.5" fill="#EDEDED">Osady na poppetach - główna przyczyna usterek wg TSB</text>
+
+  <!-- callout MFI -->
+  <rect x="660" y="644" width="520" height="64" rx="12" fill="#111111" stroke="#2A2A2A"/>
+  <text x="678" y="670" font-size="13" font-weight="700" fill="#EDEDED">Po konwersji na MFI</text>
+  <text x="678" y="692" font-size="12.5" fill="#9C9C9C">wtryskiwacze przy portach, bez poppetów - patrz rysunek A</text>
+
+  <text x="620" y="758" text-anchor="middle" font-size="11" fill="#6B6B6B">gmt400.pl · Źródło: GM TSB 00-06-04-003B (01.2003), kopia tekstu: s10forum.com · rysunek schematyczny</text>
+</svg>
