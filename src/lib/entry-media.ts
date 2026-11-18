@@ -98,7 +98,7 @@ const ENGINE_43: MediaFigure = {
   alt: 'Silnik Chevrolet 4.3 L V6 w komorze silnika, widok z góry',
   width: 960,
   height: 720,
-  caption: 'Silnik Chevrolet 4.3 L V6 GM (egzemplarz z komory silnika S-10 Blazer wg opisu na Commons) — zdjęcie poglądowe; głowice i pokrywy zaworów wyglądają podobnie w 4.3 w GMT400, ale sprawdź w swoim aucie / manualu.',
+  caption: 'Silnik 4.3 L V6 GM (egzemplarz z komory silnika S-10 Blazer wg opisu na Commons) — zdjęcie poglądowe; głowice i pokrywy zaworów wyglądają podobnie w 4.3 w GMT400, ale sprawdź w swoim aucie / manualu.',
   credit: {
     author: 'Musashi hai',
     licence: 'CC BY-SA 3.0',
