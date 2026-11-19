@@ -1,5 +1,6 @@
 import type { NextConfig } from "next";
 import { withSentryConfig } from '@sentry/nextjs';
+import supersededRedirects from './data/superseded-redirects.json';
 
 const nextConfig: NextConfig = {
   // Osobny katalog buildu dla CI: drugi build z atrapą Notion (testy SSR list) obok zwykłego bez danych (test błędu pobierania).
@@ -17,6 +18,7 @@ const nextConfig: NextConfig = {
       { source: '/baza/problemy-z-rozrusznikiem-gmt400', destination: '/baza/rozrusznik-klika-i-nie-kreci-kreci-wolno-albo-nie-wylacza-sie-diagnostyka-spadko', permanent: true },
       { source: '/baza/3fad7bf1c1398100b7e0cd224833baf9', destination: '/baza/rozrusznik-klika-i-nie-kreci-kreci-wolno-albo-nie-wylacza-sie-diagnostyka-spadko', permanent: true },
       { source: '/baza/3fad7bf1-c139-8100-b7e0-cd224833baf9', destination: '/baza/rozrusznik-klika-i-nie-kreci-kreci-wolno-albo-nie-wylacza-sie-diagnostyka-spadko', permanent: true },
+      ...supersededRedirects,
     ];
   },
   async headers() {
