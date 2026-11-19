@@ -13,6 +13,11 @@ export const dynamicParams = false;
 // Kody linkowane z /diagnoza (SYMPTOM_PARTS), które nie mają karty w OBD_CODES — dalej pokazują stronę „brak karty kodu”.
 const LINKED_WITHOUT_CARD = ['P0174', 'P0758'];
 
+const MISSING_CODE_ENTRY: Record<string, string> = {
+  P0128: '/baza/kody-p0128-p0449-p0455-p0505-p0562-p0700-p0730-p0751-p1626-czego-nie-ma-w-tabela',
+  P0442: '/baza/kody-p0440-p0442-p0446-p0452-p1441-uklad-evap-testy-i-progi-gm-mode-6-1999-5-7-l',
+};
+
 export function generateStaticParams() {
   const codes = new Set(OBD_CODES.map(({ code }) => code.toLowerCase()));
   // Kody linkowane z kreatora diagnozy (src/lib/diagnosis.ts), również bez karty.
@@ -21,6 +26,7 @@ export function generateStaticParams() {
     if (match) codes.add(match[1].toLowerCase());
   }
   for (const code of LINKED_WITHOUT_CARD) codes.add(code.toLowerCase());
+  for (const code of Object.keys(MISSING_CODE_ENTRY)) codes.add(code.toLowerCase());
   return [...codes].map(code => ({ code }));
 }
 
@@ -50,7 +56,7 @@ export async function generateMetadata({ params }: { params: Promise<{ code: str
 
 const VALID_CODE = /^[pbcu][0-3][0-9a-f]{3}$/i;
 
-function MissingCode({ code }: { code: string }) {
+function MissingCode({ code, entryHref }: { code: string; entryHref?: string }) {
   return (
     <div className="mx-auto max-w-3xl px-4 py-8">
       <Breadcrumbs className="mb-4" items={[{ href: '/kody-obd', label: 'Kody OBD' }, { label: code }]} />
@@ -62,6 +68,9 @@ function MissingCode({ code }: { code: string }) {
         <div className="mt-4 flex flex-wrap gap-3">
           <Link href={`/szukaj?q=${encodeURIComponent(code)}`} className="inline-flex min-h-11 items-center rounded bg-silver-600 px-4 font-semibold text-neutral-950">Szukaj {code} w bazie</Link>
           <Link href="/kody-obd" className="inline-flex min-h-11 items-center rounded border border-white/20 px-4 text-neutral-100">Lista kodów</Link>
+          {entryHref && (
+            <Link href={entryHref} className="inline-flex min-h-11 items-center rounded border border-white/20 px-4 text-neutral-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-silver-500">Czytaj wpis w bazie wiedzy</Link>
+          )}
         </div>
       </section>
     </div>
@@ -79,7 +88,7 @@ export default async function ObdCodePage({ params }: { params: Promise<{ code: 
   const item = findObdCode(code);
   if (!item) {
     if (!VALID_CODE.test(code)) notFound();
-    return <MissingCode code={code.toUpperCase()} />;
+    return <MissingCode code={code.toUpperCase()} entryHref={MISSING_CODE_ENTRY[code.toUpperCase()]} />;
   }
   const relatedCodes = getRelatedObdCodes(item.code, 3);
   const severity = severityVisual[item.severity];
