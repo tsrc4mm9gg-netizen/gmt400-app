@@ -44,9 +44,15 @@ test('fetch failure is distinct from empty data and retry works', async ({ page 
   const serverHtml = await (await page.request.get(`${BASE}/poradniki`)).text();
   const hasInitialItems = /href="\/baza\/[0-9a-f-]{36}"/.test(serverHtml);
   if (hasInitialItems) {
+    const headingHtml = serverHtml.match(/<h2[^>]*>([\s\S]*?)<\/h2>/i);
+    const entryHref = headingHtml?.[1]?.match(/href="(\/baza\/[0-9a-f-]{36})"/i)?.[1];
+    const entryTitle = headingHtml?.[1]?.replace(/<[^>]*>/g, '').replace(/\s+/g, ' ').trim();
+    if (!entryHref || !entryTitle) throw new Error('Nie udało się odczytać pierwszego wpisu wyrenderowanego przez serwer');
     await page.route('**/api/notion', route => route.fulfill({ status: 503, json: { error: 'test' } }));
     await page.goto(`${BASE}/poradniki`);
-    await expect(page.getByRole('heading', { name: 'TEST PORADA', exact: true })).toBeVisible();
+    const serverEntry = page.getByRole('link', { name: entryTitle, exact: true });
+    await expect(serverEntry).toBeVisible();
+    await expect(serverEntry).toHaveAttribute('href', entryHref);
     await expect(page.getByRole('alert').filter({ hasText: 'Nie udało się pobrać treści' })).toHaveCount(0);
     return;
   }
