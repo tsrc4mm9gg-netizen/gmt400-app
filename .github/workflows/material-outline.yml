@@ -69,7 +69,7 @@ jobs:
           const passed=Object.values(stages).every(value=>value==='success')&&!parseError&&!(raw.errors||[]).length&&coverage.every(item=>item.outline===5&&item.renderer===3)&&raw.stats?.expected===tests.length&&raw.stats?.unexpected===0&&raw.stats?.skipped===0&&raw.stats?.flaky===0&&tests.every(test=>test.status==='expected');
           fs.mkdirSync('.diagnostics',{recursive:true});fs.writeFileSync('.diagnostics/material-outline-report.json',JSON.stringify({auditorCodeSha:process.env.GITHUB_SHA,runId:process.env.GITHUB_RUN_ID,checkedAt:new Date().toISOString(),passed,scope:'Synthetic local article interactions in Chromium and Linux WebKit plus existing Notion renderer tests. Candidate integration only; no Notion writes, no production article or physical iPhone certification.',stages,coverage,parseError,stats:raw.stats||{},runnerErrors:raw.errors||[],tests},null,2)+'\n');
           NODE
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         if: always()
         with:
           name: material-outline-${{ github.run_id }}
