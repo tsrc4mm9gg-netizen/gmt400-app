@@ -42,7 +42,14 @@ test('category search and clearing query restore visible entries', async ({ page
 test('fetch failure is distinct from empty data and retry works', async ({ page }) => {
   // Gdy serwer wyrenderował listę (ISR, initialItems), błąd odświeżania w tle jest celowo cichy — lista zostaje widoczna.
   const serverHtml = await (await page.request.get(`${BASE}/poradniki`)).text();
-  test.skip(/href="\/baza\/[0-9a-f-]{36}"/.test(serverHtml), 'serwer wyrenderował wpisy (initialItems) — komunikat błędu dotyczy tylko trybu bez danych z serwera');
+  const hasInitialItems = /href="\/baza\/[0-9a-f-]{36}"/.test(serverHtml);
+  if (hasInitialItems) {
+    await page.route('**/api/notion', route => route.fulfill({ status: 503, json: { error: 'test' } }));
+    await page.goto(`${BASE}/poradniki`);
+    await expect(page.getByRole('heading', { name: 'TEST PORADA', exact: true })).toBeVisible();
+    await expect(page.getByRole('alert').filter({ hasText: 'Nie udało się pobrać treści' })).toHaveCount(0);
+    return;
+  }
   let requests = 0;
   await page.route('**/api/notion', route => {
     requests++;
