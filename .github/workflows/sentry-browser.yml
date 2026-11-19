@@ -9,7 +9,7 @@ permissions:
 jobs:
   browser-capture:
     runs-on: ubuntu-24.04
-    timeout-minutes: 20
+    timeout-minutes: 30
     env:
       NEXT_PUBLIC_SENTRY_DSN: http://ci@127.0.0.1:4319/1
       NEXT_PUBLIC_SENTRY_ENABLED: 'true'
@@ -21,8 +21,14 @@ jobs:
         with:
           node-version: '24'
       - run: npm ci --ignore-scripts
+      - name: Cache Playwright browsers
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright-${{ hashFiles('package-lock.json') }}
+          restore-keys: ${{ runner.os }}-playwright-
       - name: Install browser dependencies and engines
-        timeout-minutes: 8
+        timeout-minutes: 15
         run: npx playwright install --with-deps chromium webkit
       - name: Generate CI-only error fixture
         run: node scripts/test-sentry-browser.cjs prepare
