@@ -28,7 +28,7 @@ jobs:
           key: ${{ runner.os }}-playwright-${{ hashFiles('package-lock.json') }}
           restore-keys: ${{ runner.os }}-playwright-
       - name: Install browser dependencies and engines
-        timeout-minutes: 15
+        timeout-minutes: 30
         run: npx playwright install --with-deps chromium webkit
       - name: Generate CI-only error fixture
         run: node scripts/test-sentry-browser.cjs prepare
