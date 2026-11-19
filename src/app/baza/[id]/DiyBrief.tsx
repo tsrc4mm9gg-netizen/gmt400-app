@@ -1,6 +1,6 @@
 import { extractDiyBrief, blocksToBriefText } from '../../../lib/diy-brief.mjs';
 
-type Entry = { Typ: string; Opis?: string; Objawy?: string; Rozwiązanie?: string };
+type Entry = { Typ: string; Lata?: string; Opis?: string; Objawy?: string; Rozwiązanie?: string };
 
 const safeHref = (url: string) => (/^https?:\/\//i.test(url) ? url : null);
 
@@ -9,6 +9,9 @@ export default function DiyBrief({ entry, blocks }: { entry: Entry; blocks: any[
   const brief = extractDiyBrief(entry, blocksToBriefText(blocks));
   const showLists = brief.tools.length > 0 || brief.parts.length > 0;
   const hasSource = brief.sources.length > 0;
+  const yearsNote = entry.Lata?.trim()
+    ? `Wpis opisuje GMT400 z lat ${entry.Lata}.`
+    : 'Wpis opisuje typowe GMT400.';
   return <>
     {brief.applies && brief.safety.length > 0 && <section data-testid="diy-safety" aria-labelledby="diy-safety-h" className="rounded-2xl border border-white/15 border-l-4 border-l-danger-600 bg-neutral-950 p-4">
       <h2 id="diy-safety-h" className="flex items-center gap-2 text-lg font-semibold text-white"><span aria-hidden="true">⚠</span> Zanim zaczniesz — uwagi z treści wpisu</h2>
@@ -25,7 +28,7 @@ export default function DiyBrief({ entry, blocks }: { entry: Entry; blocks: any[
     {brief.applies && !showLists && brief.isProcedure && <p data-testid="diy-no-list" className="text-sm text-neutral-500">Brak listy narzędzi i części w tym wpisie — sprawdź kroki poniżej.</p>}
     <aside data-testid="entry-verify" aria-label="Źródła i weryfikacja" className="rounded-2xl border border-silver-600/50 bg-silver-600/10 p-4">
       <h2 className="text-lg font-semibold text-silver-300"><span aria-hidden="true">✓ </span>Sprawdź w swoim aucie / manualu</h2>
-      <p className="mt-1 text-sm text-neutral-200">Wpis opisuje typowe GMT400 z lat 1988–1998. Numery części, momenty dokręcania i kolejność kroków zależą od rocznika, silnika, napędu i skrzyni — zanim zaczniesz, porównaj je z manualem swojego auta. Dopasowanie do profilu opiera się na metadanych i nie potwierdza poprawności technicznej.</p>
+      <p className="mt-1 text-sm text-neutral-200">{yearsNote} Numery części, momenty dokręcania i kolejność kroków zależą od rocznika, silnika, napędu i skrzyni — zanim zaczniesz, porównaj je z manualem swojego auta. Dopasowanie do profilu opiera się na metadanych i nie potwierdza poprawności technicznej.</p>
       <div data-testid="entry-sources" className="mt-3 border-t border-white/10 pt-3">
         <h3 className="text-sm font-semibold uppercase tracking-wide text-silver-400">Źródła</h3>
         {hasSource
