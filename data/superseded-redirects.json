@@ -1,0 +1,2382 @@
+[
+  {
+    "source": "/baza/4l60e-cewki-solenoidy-i-kody",
+    "destination": "/baza/skrzynia-4l60-e-4l80-e-usterki-kody-dtc-i-diagnostyka-gmt400-1993-2000",
+    "permanent": true
+  },
+  {
+    "source": "/baza/4l60e-wymiana-atf-i-filtra",
+    "destination": "/baza/4l60-e-wymiana-atf-i-filtra-oraz-kontrola-poziomu-procedura-gm-sm-1996-c-k-sm-19",
+    "permanent": true
+  },
+  {
+    "source": "/baza/4l80e-roznice-wzgledem-4l60e",
+    "destination": "/baza/skrzynia-4l80-e-mt1-dane-przelozenia-kolejnosc-solenoidow-rezystancje-i-zachowan",
+    "permanent": true
+  },
+  {
+    "source": "/baza/6-5l-problemy-z-pompa-wtryskowa",
+    "destination": "/baza/6-5l-diesel-nie-odpala-gasnie-falujace-obroty-pompa-wtryskowa-czujnik-optyczny-s",
+    "permanent": true
+  },
+  {
+    "source": "/baza/6-5l-turbo-diesel-uklad-smarowania",
+    "destination": "/baza/6-5-turbo-diesel-uklad-smarowania-test-cisnienia-oleju-test-sprezania-cisnienie",
+    "permanent": true
+  },
+  {
+    "source": "/baza/atra-biuletyn-583-kody-elektryczne-4l60e-4l80e",
+    "destination": "/baza/skrzynia-4l60-e-solenoidy-a-b-pcs-tcc-tryb-awaryjny-wtyczka-i-biuletyn-atra-583",
+    "permanent": true
+  },
+  {
+    "source": "/baza/chevrolet-c-k-1500",
+    "destination": "/baza/chevrolet-gmc-c-k-1500-2500-3500-1988-99-wymiary-masy-silniki-skrzynie-hamulce-i",
+    "permanent": true
+  },
+  {
+    "source": "/baza/chevrolet-c-k-1500-extended-cab",
+    "destination": "/baza/chevrolet-gmc-c-k-1500-2500-3500-1988-99-wymiary-masy-silniki-skrzynie-hamulce-i",
+    "permanent": true
+  },
+  {
+    "source": "/baza/chevrolet-c-k-1500-regular-cab",
+    "destination": "/baza/chevrolet-gmc-c-k-1500-2500-3500-1988-99-wymiary-masy-silniki-skrzynie-hamulce-i",
+    "permanent": true
+  },
+  {
+    "source": "/baza/chevrolet-c-k-1500-regular-cab-pelny-opis",
+    "destination": "/baza/chevrolet-gmc-c-k-1500-2500-3500-1988-99-wymiary-masy-silniki-skrzynie-hamulce-i",
+    "permanent": true
+  },
+  {
+    "source": "/baza/chevrolet-c-k-2500",
+    "destination": "/baza/chevrolet-gmc-c-k-1500-2500-3500-1988-99-wymiary-masy-silniki-skrzynie-hamulce-i",
+    "permanent": true
+  },
+  {
+    "source": "/baza/chevrolet-c-k-2500-extended-cab",
+    "destination": "/baza/chevrolet-gmc-c-k-1500-2500-3500-1988-99-wymiary-masy-silniki-skrzynie-hamulce-i",
+    "permanent": true
+  },
+  {
+    "source": "/baza/chevrolet-c-k-2500-regular-cab",
+    "destination": "/baza/chevrolet-gmc-c-k-1500-2500-3500-1988-99-wymiary-masy-silniki-skrzynie-hamulce-i",
+    "permanent": true
+  },
+  {
+    "source": "/baza/chevrolet-c-k-3500",
+    "destination": "/baza/chevrolet-gmc-c-k-1500-2500-3500-1988-99-wymiary-masy-silniki-skrzynie-hamulce-i",
+    "permanent": true
+  },
+  {
+    "source": "/baza/chevrolet-c-k-3500-dually",
+    "destination": "/baza/chevrolet-gmc-c-k-1500-2500-3500-1988-99-wymiary-masy-silniki-skrzynie-hamulce-i",
+    "permanent": true
+  },
+  {
+    "source": "/baza/chevrolet-k5-blazer-pelnowymiarowy",
+    "destination": "/baza/chevrolet-k5-blazer-k1500-1992-94-wymiary-masy-silniki-skrzynie-i-osie-wg-gm-199",
+    "permanent": true
+  },
+  {
+    "source": "/baza/chevrolet-suburban-1500",
+    "destination": "/baza/chevrolet-suburban-c-k-1500-i-2500-1992-99-wymiary-masy-silniki-skrzynie-hamulce",
+    "permanent": true
+  },
+  {
+    "source": "/baza/chevrolet-suburban-1500-4-drzwi",
+    "destination": "/baza/chevrolet-suburban-c-k-1500-i-2500-1992-99-wymiary-masy-silniki-skrzynie-hamulce",
+    "permanent": true
+  },
+  {
+    "source": "/baza/chevrolet-suburban-1500-pelny-opis",
+    "destination": "/baza/chevrolet-suburban-c-k-1500-i-2500-1992-99-wymiary-masy-silniki-skrzynie-hamulce",
+    "permanent": true
+  },
+  {
+    "source": "/baza/chevrolet-suburban-2500",
+    "destination": "/baza/chevrolet-suburban-c-k-1500-i-2500-1992-99-wymiary-masy-silniki-skrzynie-hamulce",
+    "permanent": true
+  },
+  {
+    "source": "/baza/chevrolet-suburban-2500-3fad7bf1c13981ceaa08d296a18c12f6",
+    "destination": "/baza/chevrolet-suburban-c-k-1500-i-2500-1992-99-wymiary-masy-silniki-skrzynie-hamulce",
+    "permanent": true
+  },
+  {
+    "source": "/baza/chevrolet-tahoe-2-drzwi",
+    "destination": "/baza/chevrolet-tahoe-2-drzwiowy-c-k1500-1995-99-wymiary-masy-silnik-5-7-hamulce-holow",
+    "permanent": true
+  },
+  {
+    "source": "/baza/chevrolet-tahoe-2-drzwi-3fad7bf1c13981c4ab4de6d53a327793",
+    "destination": "/baza/chevrolet-tahoe-2-drzwiowy-c-k1500-1995-99-wymiary-masy-silnik-5-7-hamulce-holow",
+    "permanent": true
+  },
+  {
+    "source": "/baza/chevrolet-tahoe-2-drzwi-4x4",
+    "destination": "/baza/chevrolet-tahoe-2-drzwiowy-c-k1500-1995-99-wymiary-masy-silnik-5-7-hamulce-holow",
+    "permanent": true
+  },
+  {
+    "source": "/baza/chevrolet-tahoe-2-drzwi-4x4-pelny-opis",
+    "destination": "/baza/chevrolet-tahoe-2-drzwiowy-c-k1500-1995-99-wymiary-masy-silnik-5-7-hamulce-holow",
+    "permanent": true
+  },
+  {
+    "source": "/baza/chevrolet-tahoe-4-drzwi",
+    "destination": "/baza/chevrolet-tahoe-4-drzwiowy-c-k1500-1995-99-wymiary-masy-holowanie-silnik-5-7-ham",
+    "permanent": true
+  },
+  {
+    "source": "/baza/chevrolet-tahoe-4-drzwi-2",
+    "destination": "/baza/chevrolet-tahoe-4-drzwiowy-c-k1500-1995-99-wymiary-masy-holowanie-silnik-5-7-ham",
+    "permanent": true
+  },
+  {
+    "source": "/baza/chevrolet-tahoe-4-drzwi-pelny-opis",
+    "destination": "/baza/chevrolet-tahoe-4-drzwiowy-c-k1500-1995-99-wymiary-masy-holowanie-silnik-5-7-ham",
+    "permanent": true
+  },
+  {
+    "source": "/baza/cisnienie-opon-gmt400-podstawowe-wartosci",
+    "destination": "/baza/cisnienie-w-oponach-gmt400-gdzie-jest-wartosc-naklejka-certification-co-znaczy-z",
+    "permanent": true
+  },
+  {
+    "source": "/baza/czyszczenie-i-regeneracja-zaworu-iac-diy",
+    "destination": "/baza/zawor-iac-i-przepustnica-vortec-1996-2000-czyszczenie-i-wymiana-procedura-gm",
+    "permanent": true
+  },
+  {
+    "source": "/baza/czyszczenie-przepustnicy-vortec-tipy",
+    "destination": "/baza/zawor-iac-i-przepustnica-vortec-1996-2000-czyszczenie-i-wymiana-procedura-gm",
+    "permanent": true
+  },
+  {
+    "source": "/baza/czyszczenie-zaworu-egr-tipy",
+    "destination": "/baza/zawor-egr-liniowy-5-0-5-7-wymiana-i-obchodzenie-sie-momenty-10-25-n-m-sm-gm-1999",
+    "permanent": true
+  },
+  {
+    "source": "/baza/dekoder-vin-gmt400-podstawy",
+    "destination": "/baza/kody-rpo-i-silnikow-gmt400-wg-roku-modelowego-tabela-silnik-skrzynia-most-skrzyn",
+    "permanent": true
+  },
+  {
+    "source": "/baza/diagnostyka-kodow-evap-praktyczny-poradnik",
+    "destination": "/baza/diagnostyka-ukladu-evap-pary-paliwa-w-gmt400-jak-dziala-uklad-od-czego-zaczac-i",
+    "permanent": true
+  },
+  {
+    "source": "/baza/diagnostyka-kodow-skrzyni-4l60e-praktyczny-przewodnik",
+    "destination": "/baza/skrzynie-4l60-e-4l80-e-co-sprawdzic-przed-remontem-lista-kontrolna-od-najtanszeg",
+    "permanent": true
+  },
+  {
+    "source": "/baza/diagnostyka-problemow-z-4x4-np241c-np243c-nv246-praktyczny-poradnik",
+    "destination": "/baza/naped-4x4-nie-wlacza-sie-wyskakuje-z-4h-4l-przycisk-nie-przelacza-skrzynia-rozdz",
+    "permanent": true
+  },
+  {
+    "source": "/baza/gmc-sierra-1500",
+    "destination": "/baza/chevrolet-gmc-c-k-1500-2500-3500-1988-99-wymiary-masy-silniki-skrzynie-hamulce-i",
+    "permanent": true
+  },
+  {
+    "source": "/baza/gmc-sierra-1500-odpowiednik-c-k",
+    "destination": "/baza/chevrolet-gmc-c-k-1500-2500-3500-1988-99-wymiary-masy-silniki-skrzynie-hamulce-i",
+    "permanent": true
+  },
+  {
+    "source": "/baza/gmc-sierra-2500",
+    "destination": "/baza/chevrolet-gmc-c-k-1500-2500-3500-1988-99-wymiary-masy-silniki-skrzynie-hamulce-i",
+    "permanent": true
+  },
+  {
+    "source": "/baza/gmc-sierra-2500-3500",
+    "destination": "/baza/chevrolet-gmc-c-k-1500-2500-3500-1988-99-wymiary-masy-silniki-skrzynie-hamulce-i",
+    "permanent": true
+  },
+  {
+    "source": "/baza/gmc-suburban-1992-1999",
+    "destination": "/baza/chevrolet-suburban-c-k-1500-i-2500-1992-99-wymiary-masy-silniki-skrzynie-hamulce",
+    "permanent": true
+  },
+  {
+    "source": "/baza/gmc-yukon-2-drzwi",
+    "destination": "/baza/gmc-yukon-2-i-4-drzwiowy-1995-99-blizniak-tahoe-co-wiemy-z-dokumentow-a-czego-br",
+    "permanent": true
+  },
+  {
+    "source": "/baza/gmc-yukon-2-drzwi-4-drzwi",
+    "destination": "/baza/gmc-yukon-2-i-4-drzwiowy-1995-99-blizniak-tahoe-co-wiemy-z-dokumentow-a-czego-br",
+    "permanent": true
+  },
+  {
+    "source": "/baza/gmc-yukon-4-drzwi",
+    "destination": "/baza/gmc-yukon-2-i-4-drzwiowy-1995-99-blizniak-tahoe-co-wiemy-z-dokumentow-a-czego-br",
+    "permanent": true
+  },
+  {
+    "source": "/baza/gmc-yukon-4-drzwi-2",
+    "destination": "/baza/gmc-yukon-2-i-4-drzwiowy-1995-99-blizniak-tahoe-co-wiemy-z-dokumentow-a-czego-br",
+    "permanent": true
+  },
+  {
+    "source": "/baza/gmc-yukon-xl-odpowiednik-suburban",
+    "destination": "/baza/chevrolet-suburban-c-k-1500-i-2500-1992-99-wymiary-masy-silniki-skrzynie-hamulce",
+    "permanent": true
+  },
+  {
+    "source": "/baza/gmc-yukon-xl-suburban-gmc",
+    "destination": "/baza/chevrolet-suburban-c-k-1500-i-2500-1992-99-wymiary-masy-silniki-skrzynie-hamulce",
+    "permanent": true
+  },
+  {
+    "source": "/baza/harmonogram-serwisowy-gmt400-podstawowy",
+    "destination": "/baza/harmonogram-przegladow-wg-instrukcji-gm-1995-1999-benzyna-v8-i-diesel-6-5-krotki",
+    "permanent": true
+  },
+  {
+    "source": "/baza/hydra-matic-4l60-e-przewodnik-technika",
+    "destination": "/baza/skrzynia-4l60-e-solenoidy-a-b-pcs-tcc-tryb-awaryjny-wtyczka-i-biuletyn-atra-583",
+    "permanent": true
+  },
+  {
+    "source": "/baza/identyfikacja-skrzyni-rozdzielczej-gmt400",
+    "destination": "/baza/skrzynia-rozdzielcza-np241-np241hd-np243-jak-odczytac-numer-np-i-czemu-np231-233",
+    "permanent": true
+  },
+  {
+    "source": "/baza/import-gmt400-do-polski-formalnosci",
+    "destination": "/dla-wlasciciela/import",
+    "permanent": true
+  },
+  {
+    "source": "/baza/jak-rozpoznac-skrzynie-rozdzielcza-new-process",
+    "destination": "/baza/skrzynia-rozdzielcza-np-nv241-w-4x4-regulacja-drazka-uszczelniacz-demontaz-kolej",
+    "permanent": true
+  },
+  {
+    "source": "/baza/jak-sprawdzic-cisnienie-paliwa-diy",
+    "destination": "/baza/cisnienie-paliwa-tbi-csfi-sfi-wartosci-i-test-instrukcja-serwisowa-gm-1996-i-199",
+    "permanent": true
+  },
+  {
+    "source": "/baza/jak-sprawdzic-i-wyczyscic-przepustnice-diy",
+    "destination": "/baza/zawor-iac-i-przepustnica-vortec-1996-2000-czyszczenie-i-wymiana-procedura-gm",
+    "permanent": true
+  },
+  {
+    "source": "/baza/jak-sprawdzic-i-wyczyscic-zawor-egr-diy",
+    "destination": "/baza/zawor-egr-liniowy-5-0-5-7-wymiana-i-obchodzenie-sie-momenty-10-25-n-m-sm-gm-1999",
+    "permanent": true
+  },
+  {
+    "source": "/baza/jak-sprawdzic-i-wymienic-czujnik-ckp",
+    "destination": "/baza/czujniki-polozenia-walu-korbowego-ckp-i-walka-rozrzadu-cmp-5-0-5-7-wymiana-momen",
+    "permanent": true
+  },
+  {
+    "source": "/baza/jak-sprawdzic-i-wymienic-czujnik-ect",
+    "destination": "/baza/czujnik-temperatury-plynu-ect-i-czujnik-polozenia-przepustnicy-tps-wymiana-i-mom",
+    "permanent": true
+  },
+  {
+    "source": "/baza/jak-sprawdzic-i-wymienic-czujniki-abs",
+    "destination": "/baza/czujnik-predkosci-pojazdu-vss-skrzyni-4l60-e-i-czujniki-predkosci-kol-abs-wymian",
+    "permanent": true
+  },
+  {
+    "source": "/baza/jak-sprawdzic-i-wymienic-termostat-gmt400",
+    "destination": "/baza/termostat-i-pompa-wody-5-0-5-7-7-4-wymiana-i-odpowietrzenie-procedura-gm",
+    "permanent": true
+  },
+  {
+    "source": "/baza/jak-sprawdzic-pompe-wtryskowa-6-5l",
+    "destination": "/baza/6-5-turbo-diesel-uklad-smarowania-test-cisnienia-oleju-test-sprezania-cisnienie",
+    "permanent": true
+  },
+  {
+    "source": "/baza/jak-sprawdzic-poziom-i-stan-atf-pelny-poradnik",
+    "destination": "/baza/4l60-e-wymiana-atf-i-filtra-oraz-kontrola-poziomu-procedura-gm-sm-1996-c-k-sm-19",
+    "permanent": true
+  },
+  {
+    "source": "/baza/jak-sprawdzic-uszczelki-kolektora-vortec-bez-demontazu",
+    "destination": "/baza/wymiana-uszczelek-kolektora-dolotowego-v6-v8-4-3-5-0-5-7-7-4-kolejnosc-prac-wg-h",
+    "permanent": true
+  },
+  {
+    "source": "/baza/jak-wymienic-alternator-w-gmt400-diy",
+    "destination": "/baza/alternator-generator-cs-130d-cs-144-wymiana-momenty-50-i-8-n-m-sm-gm-1999",
+    "permanent": true
+  },
+  {
+    "source": "/baza/jak-wymienic-amortyzatory-przednie-gmt400",
+    "destination": "/baza/amortyzatory-wymiana-przod-tyl-wymog-zgodnosci-dlugosci-i-momenty-sm-gm-1999",
+    "permanent": true
+  },
+  {
+    "source": "/baza/jak-wymienic-cewki-zaplonowe-vortec",
+    "destination": "/baza/uklad-zaplonowy-hei-1988-95-i-edi-1996-2000-test-iskry-diagnostyka-modulu-cewki",
+    "permanent": true
+  },
+  {
+    "source": "/baza/jak-wymienic-czujnik-poziomu-paliwa",
+    "destination": "/baza/pompa-paliwa-czujnik-poziomu-w-zbiorniku-wymiana-procedura-gm",
+    "permanent": true
+  },
+  {
+    "source": "/baza/jak-wymienic-czujnik-tps-diy",
+    "destination": "/baza/czujnik-temperatury-plynu-ect-i-czujnik-polozenia-przepustnicy-tps-wymiana-i-mom",
+    "permanent": true
+  },
+  {
+    "source": "/baza/jak-wymienic-czujnik-vss-w-gmt400",
+    "destination": "/baza/czujnik-predkosci-pojazdu-vss-skrzyni-4l60-e-i-czujniki-predkosci-kol-abs-wymian",
+    "permanent": true
+  },
+  {
+    "source": "/baza/jak-wymienic-filtr-paliwa-krok-po-kroku",
+    "destination": "/baza/filtr-paliwa-benzyna-liniowy-i-diesel-6-5l-interwal-50-000-km-numery-momenty-pro",
+    "permanent": true
+  },
+  {
+    "source": "/baza/jak-wymienic-pasek-klinowy-instrukcja",
+    "destination": "/baza/pasek-napedu-osprzetu-wieloklinowy-5-0-5-7-i-6-5l-wymiana-kontrola-procedura-gm",
+    "permanent": true
+  },
+  {
+    "source": "/baza/jak-wymienic-pompe-paliwa-w-gmt400",
+    "destination": "/baza/pompa-paliwa-czujnik-poziomu-w-zbiorniku-wymiana-procedura-gm",
+    "permanent": true
+  },
+  {
+    "source": "/baza/jak-wymienic-pompe-wspomagania-gmt400",
+    "destination": "/baza/plyn-i-pompa-wspomagania-kierownicy-poziom-odpowietrzanie-momenty-pompy-5-0-5-7",
+    "permanent": true
+  },
+  {
+    "source": "/baza/jak-wymienic-sworznie-wahaczy-przednich",
+    "destination": "/baza/przeguby-kulowe-sworznie-wahaczy-kontrola-luzu-i-wymiana-procedura-gm",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-12",
+    "destination": "/baza/kody-obd-i-1988-95-odczyt-kodu-12-zworka-aldl-kasowanie-i-lista-kodow-13-87-z-pr",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-12-tryb-diagnostyczny-obd-i",
+    "destination": "/baza/kody-obd-i-1988-95-odczyt-kodu-12-zworka-aldl-kasowanie-i-lista-kodow-13-87-z-pr",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0102-czujnik-przeplywu-powietrza-maf",
+    "destination": "/baza/kody-p0101-p0102-p0103-czujnik-maf-progi-i-warunki-testu-gm-mode-6-1999-5-7-l",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0102-maf-rozwiazanie-tipy",
+    "destination": "/baza/kody-p0101-p0102-p0103-czujnik-maf-progi-i-warunki-testu-gm-mode-6-1999-5-7-l",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0102-maf-rozwiazanie-tipy-2",
+    "destination": "/baza/kody-p0101-p0102-p0103-czujnik-maf-progi-i-warunki-testu-gm-mode-6-1999-5-7-l",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0102-maf-szczegoly",
+    "destination": "/baza/kody-p0101-p0102-p0103-czujnik-maf-progi-i-warunki-testu-gm-mode-6-1999-5-7-l",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0113-czujnik-temperatury-powietrza-dolotowego-iat",
+    "destination": "/baza/kody-p0112-p0113-p0117-p0118-p0125-czujniki-iat-i-ect-progi-i-warunki-testu-gm-m",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0113-iat-rozwiazanie-tipy",
+    "destination": "/baza/kody-p0112-p0113-p0117-p0118-p0125-czujniki-iat-i-ect-progi-i-warunki-testu-gm-m",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0113-iat-szczegoly",
+    "destination": "/baza/kody-p0112-p0113-p0117-p0118-p0125-czujniki-iat-i-ect-progi-i-warunki-testu-gm-m",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0117-czujnik-temperatury-plynu-ect",
+    "destination": "/baza/kody-p0112-p0113-p0117-p0118-p0125-czujniki-iat-i-ect-progi-i-warunki-testu-gm-m",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0117-ect-rozwiazanie-tipy",
+    "destination": "/baza/kody-p0112-p0113-p0117-p0118-p0125-czujniki-iat-i-ect-progi-i-warunki-testu-gm-m",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0117-ect-rozwiazanie-tipy-2",
+    "destination": "/baza/kody-p0112-p0113-p0117-p0118-p0125-czujniki-iat-i-ect-progi-i-warunki-testu-gm-m",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0117-ect-szczegoly",
+    "destination": "/baza/kody-p0112-p0113-p0117-p0118-p0125-czujniki-iat-i-ect-progi-i-warunki-testu-gm-m",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0121-czujnik-tps-zakres",
+    "destination": "/baza/kody-p0121-p0122-p0123-czujnik-polozenia-przepustnicy-tp-progi-i-warunki-testu-g",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0121-tps-zakres-rozwiazanie-tipy",
+    "destination": "/baza/kody-p0121-p0122-p0123-czujnik-polozenia-przepustnicy-tp-progi-i-warunki-testu-g",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0121-tps-zakres-szczegoly",
+    "destination": "/baza/kody-p0121-p0122-p0123-czujnik-polozenia-przepustnicy-tp-progi-i-warunki-testu-g",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0122-czujnik-polozenia-przepustnicy-tps",
+    "destination": "/baza/kody-p0121-p0122-p0123-czujnik-polozenia-przepustnicy-tp-progi-i-warunki-testu-g",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0122-tps-rozwiazanie-tipy",
+    "destination": "/baza/kody-p0121-p0122-p0123-czujnik-polozenia-przepustnicy-tp-progi-i-warunki-testu-g",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0122-tps-rozwiazanie-tipy-2",
+    "destination": "/baza/kody-p0121-p0122-p0123-czujnik-polozenia-przepustnicy-tp-progi-i-warunki-testu-g",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0122-tps-szczegoly",
+    "destination": "/baza/kody-p0121-p0122-p0123-czujnik-polozenia-przepustnicy-tp-progi-i-warunki-testu-g",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0128-termostat",
+    "destination": "/baza/kody-p0128-p0449-p0455-p0505-p0562-p0700-p0730-p0751-p1626-czego-nie-ma-w-tabela",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0128-termostat-rozwiazanie-tipy",
+    "destination": "/baza/kody-p0128-p0449-p0455-p0505-p0562-p0700-p0730-p0751-p1626-czego-nie-ma-w-tabela",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0128-termostat-rozwiazanie-tipy-2",
+    "destination": "/baza/kody-p0128-p0449-p0455-p0505-p0562-p0700-p0730-p0751-p1626-czego-nie-ma-w-tabela",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0128-termostat-szczegoly",
+    "destination": "/baza/kody-p0128-p0449-p0455-p0505-p0562-p0700-p0730-p0751-p1626-czego-nie-ma-w-tabela",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0128-termostat-szczegoly-2",
+    "destination": "/baza/kody-p0128-p0449-p0455-p0505-p0562-p0700-p0730-p0751-p1626-czego-nie-ma-w-tabela",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0135-grzalka-sondy-lambda",
+    "destination": "/baza/kody-p0131-p0132-p0133-p0135-p1133-sonda-lambda-b1s1-progi-i-testy-gm-mode-6-199",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0135-grzalka-sondy-lambda-rozwiazanie-tipy",
+    "destination": "/baza/kody-p0131-p0132-p0133-p0135-p1133-sonda-lambda-b1s1-progi-i-testy-gm-mode-6-199",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0135-grzalka-sondy-rozwiazanie-tipy-2",
+    "destination": "/baza/kody-p0131-p0132-p0133-p0135-p1133-sonda-lambda-b1s1-progi-i-testy-gm-mode-6-199",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0135-grzalka-sondy-szczegoly",
+    "destination": "/baza/kody-p0131-p0132-p0133-p0135-p1133-sonda-lambda-b1s1-progi-i-testy-gm-mode-6-199",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0135-grzalka-sondy-szczegoly-2",
+    "destination": "/baza/kody-p0131-p0132-p0133-p0135-p1133-sonda-lambda-b1s1-progi-i-testy-gm-mode-6-199",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0171-p0174-zbyt-uboga-mieszanka",
+    "destination": "/baza/kody-p0171-p0172-p0174-p0175-mieszanka-za-uboga-za-bogata-progi-i-warunki-gm-mod",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0171-uboga-mieszanka-rozwiazanie-tipy",
+    "destination": "/baza/kody-p0171-p0172-p0174-p0175-mieszanka-za-uboga-za-bogata-progi-i-warunki-gm-mod",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0171-uboga-mieszanka-rozwiazanie-tipy-2",
+    "destination": "/baza/kody-p0171-p0172-p0174-p0175-mieszanka-za-uboga-za-bogata-progi-i-warunki-gm-mod",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0171-uboga-mieszanka-szczegoly",
+    "destination": "/baza/kody-p0171-p0172-p0174-p0175-mieszanka-za-uboga-za-bogata-progi-i-warunki-gm-mod",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0172-bogata-mieszanka-rozwiazanie-tipy",
+    "destination": "/baza/kody-p0171-p0172-p0174-p0175-mieszanka-za-uboga-za-bogata-progi-i-warunki-gm-mod",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0172-bogata-mieszanka-szczegoly",
+    "destination": "/baza/kody-p0171-p0172-p0174-p0175-mieszanka-za-uboga-za-bogata-progi-i-warunki-gm-mod",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0172-bogata-mieszanka-szczegoly-2",
+    "destination": "/baza/kody-p0171-p0172-p0174-p0175-mieszanka-za-uboga-za-bogata-progi-i-warunki-gm-mod",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0172-p0175-zbyt-bogata-mieszanka",
+    "destination": "/baza/kody-p0171-p0172-p0174-p0175-mieszanka-za-uboga-za-bogata-progi-i-warunki-gm-mod",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0174-uboga-mieszanka-bank-2",
+    "destination": "/baza/kody-p0171-p0172-p0174-p0175-mieszanka-za-uboga-za-bogata-progi-i-warunki-gm-mod",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0174-uboga-mieszanka-bank-2-rozwiazanie-tipy",
+    "destination": "/baza/kody-p0171-p0172-p0174-p0175-mieszanka-za-uboga-za-bogata-progi-i-warunki-gm-mod",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0175-bogata-mieszanka-bank-2",
+    "destination": "/baza/kody-p0171-p0172-p0174-p0175-mieszanka-za-uboga-za-bogata-progi-i-warunki-gm-mod",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0175-bogata-mieszanka-bank-2-rozwiazanie-tipy",
+    "destination": "/baza/kody-p0171-p0172-p0174-p0175-mieszanka-za-uboga-za-bogata-progi-i-warunki-gm-mod",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0251-pompa-diesel-rozwiazanie-tipy",
+    "destination": "/baza/diesel-6-5-l-l56-1999-kody-p0251-p0335-p0370-p0216-p1214-p1218-turbo-egr-swiece",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0251-pompa-diesel-szczegoly-2",
+    "destination": "/baza/diesel-6-5-l-l56-1999-kody-p0251-p0335-p0370-p0216-p1214-p1218-turbo-egr-swiece",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0251-pompa-wtryskowa-diesel",
+    "destination": "/baza/diesel-6-5-l-l56-1999-kody-p0251-p0335-p0370-p0216-p1214-p1218-turbo-egr-swiece",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0251-sterowanie-pompa-wtryskowa-diesel",
+    "destination": "/baza/diesel-6-5-l-l56-1999-kody-p0251-p0335-p0370-p0216-p1214-p1218-turbo-egr-swiece",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0300-wypadanie-zaplonu",
+    "destination": "/baza/kody-p0300-p0308-p0420-i-p0325-jak-pcm-ocenia-wypadanie-zaplonow-katalizator-i-c",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0300-wypadanie-zaplonu-ogolne",
+    "destination": "/baza/kody-p0300-p0308-p0420-i-p0325-jak-pcm-ocenia-wypadanie-zaplonow-katalizator-i-c",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0300-wypadanie-zaplonu-rozwiazanie-tipy",
+    "destination": "/baza/kody-p0300-p0308-p0420-i-p0325-jak-pcm-ocenia-wypadanie-zaplonow-katalizator-i-c",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0300-wypadanie-zaplonu-rozwiazanie-tipy-2",
+    "destination": "/baza/kody-p0300-p0308-p0420-i-p0325-jak-pcm-ocenia-wypadanie-zaplonow-katalizator-i-c",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0300-wypadanie-zaplonu-szczegoly-2",
+    "destination": "/baza/kody-p0300-p0308-p0420-i-p0325-jak-pcm-ocenia-wypadanie-zaplonow-katalizator-i-c",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0301-cylinder-1-rozwiazanie-tipy",
+    "destination": "/baza/kody-p0300-p0308-p0420-i-p0325-jak-pcm-ocenia-wypadanie-zaplonow-katalizator-i-c",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0301-cylinder-1-rozwiazanie-tipy-2",
+    "destination": "/baza/kody-p0300-p0308-p0420-i-p0325-jak-pcm-ocenia-wypadanie-zaplonow-katalizator-i-c",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0301-cylinder-1-szczegoly-2",
+    "destination": "/baza/kody-p0300-p0308-p0420-i-p0325-jak-pcm-ocenia-wypadanie-zaplonow-katalizator-i-c",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0301-wypadanie-na-cylindrze-1",
+    "destination": "/baza/kody-p0300-p0308-p0420-i-p0325-jak-pcm-ocenia-wypadanie-zaplonow-katalizator-i-c",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0301p0308-wypadanie-zaplonu-na-cylindrze",
+    "destination": "/baza/kody-p0300-p0308-p0420-i-p0325-jak-pcm-ocenia-wypadanie-zaplonow-katalizator-i-c",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0302-cylinder-2-rozwiazanie-tipy",
+    "destination": "/baza/kody-p0300-p0308-p0420-i-p0325-jak-pcm-ocenia-wypadanie-zaplonow-katalizator-i-c",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0302-cylinder-2-szczegoly-2",
+    "destination": "/baza/kody-p0300-p0308-p0420-i-p0325-jak-pcm-ocenia-wypadanie-zaplonow-katalizator-i-c",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0302-wypadanie-na-cylindrze-2",
+    "destination": "/baza/kody-p0300-p0308-p0420-i-p0325-jak-pcm-ocenia-wypadanie-zaplonow-katalizator-i-c",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0303-cylinder-3-rozwiazanie-tipy",
+    "destination": "/baza/kody-p0300-p0308-p0420-i-p0325-jak-pcm-ocenia-wypadanie-zaplonow-katalizator-i-c",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0303-cylinder-3-szczegoly",
+    "destination": "/baza/kody-p0300-p0308-p0420-i-p0325-jak-pcm-ocenia-wypadanie-zaplonow-katalizator-i-c",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0303-wypadanie-na-cylindrze-3",
+    "destination": "/baza/kody-p0300-p0308-p0420-i-p0325-jak-pcm-ocenia-wypadanie-zaplonow-katalizator-i-c",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0304-cylinder-4-rozwiazanie-tipy",
+    "destination": "/baza/kody-p0300-p0308-p0420-i-p0325-jak-pcm-ocenia-wypadanie-zaplonow-katalizator-i-c",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0304-cylinder-4-szczegoly",
+    "destination": "/baza/kody-p0300-p0308-p0420-i-p0325-jak-pcm-ocenia-wypadanie-zaplonow-katalizator-i-c",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0304-wypadanie-na-cylindrze-4",
+    "destination": "/baza/kody-p0300-p0308-p0420-i-p0325-jak-pcm-ocenia-wypadanie-zaplonow-katalizator-i-c",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0305-cylinder-5-rozwiazanie-tipy",
+    "destination": "/baza/kody-p0300-p0308-p0420-i-p0325-jak-pcm-ocenia-wypadanie-zaplonow-katalizator-i-c",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0305-cylinder-5-szczegoly",
+    "destination": "/baza/kody-p0300-p0308-p0420-i-p0325-jak-pcm-ocenia-wypadanie-zaplonow-katalizator-i-c",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0305-wypadanie-na-cylindrze-5",
+    "destination": "/baza/kody-p0300-p0308-p0420-i-p0325-jak-pcm-ocenia-wypadanie-zaplonow-katalizator-i-c",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0306-cylinder-6-rozwiazanie-tipy",
+    "destination": "/baza/kody-p0300-p0308-p0420-i-p0325-jak-pcm-ocenia-wypadanie-zaplonow-katalizator-i-c",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0306-cylinder-6-szczegoly",
+    "destination": "/baza/kody-p0300-p0308-p0420-i-p0325-jak-pcm-ocenia-wypadanie-zaplonow-katalizator-i-c",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0306-wypadanie-na-cylindrze-6",
+    "destination": "/baza/kody-p0300-p0308-p0420-i-p0325-jak-pcm-ocenia-wypadanie-zaplonow-katalizator-i-c",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0307-cylinder-7-rozwiazanie-tipy",
+    "destination": "/baza/kody-p0300-p0308-p0420-i-p0325-jak-pcm-ocenia-wypadanie-zaplonow-katalizator-i-c",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0307-cylinder-7-szczegoly",
+    "destination": "/baza/kody-p0300-p0308-p0420-i-p0325-jak-pcm-ocenia-wypadanie-zaplonow-katalizator-i-c",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0307-wypadanie-na-cylindrze-7",
+    "destination": "/baza/kody-p0300-p0308-p0420-i-p0325-jak-pcm-ocenia-wypadanie-zaplonow-katalizator-i-c",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0308-cylinder-8-rozwiazanie-tipy",
+    "destination": "/baza/kody-p0300-p0308-p0420-i-p0325-jak-pcm-ocenia-wypadanie-zaplonow-katalizator-i-c",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0308-cylinder-8-szczegoly",
+    "destination": "/baza/kody-p0300-p0308-p0420-i-p0325-jak-pcm-ocenia-wypadanie-zaplonow-katalizator-i-c",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0308-wypadanie-na-cylindrze-8",
+    "destination": "/baza/kody-p0300-p0308-p0420-i-p0325-jak-pcm-ocenia-wypadanie-zaplonow-katalizator-i-c",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0335-ckp-rozwiazanie-tipy",
+    "destination": "/baza/kody-p0128-p0449-p0455-p0505-p0562-p0700-p0730-p0751-p1626-czego-nie-ma-w-tabela",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0335-ckp-szczegoly",
+    "destination": "/baza/kody-p0128-p0449-p0455-p0505-p0562-p0700-p0730-p0751-p1626-czego-nie-ma-w-tabela",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0335-ckp-szczegoly-2",
+    "destination": "/baza/kody-p0128-p0449-p0455-p0505-p0562-p0700-p0730-p0751-p1626-czego-nie-ma-w-tabela",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0335-czujnik-polozenia-walu-korbowego-ckp",
+    "destination": "/baza/kody-p0128-p0449-p0455-p0505-p0562-p0700-p0730-p0751-p1626-czego-nie-ma-w-tabela",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0340-cmp-rozwiazanie-tipy",
+    "destination": "/baza/kody-p0336-p0337-p0340-czujnik-walu-i-walka-rozrzadu-progi-i-warunki-gm-mode-6-1",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0340-cmp-szczegoly",
+    "destination": "/baza/kody-p0336-p0337-p0340-czujnik-walu-i-walka-rozrzadu-progi-i-warunki-gm-mode-6-1",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0340-cmp-szczegoly-2",
+    "destination": "/baza/kody-p0336-p0337-p0340-czujnik-walu-i-walka-rozrzadu-progi-i-warunki-gm-mode-6-1",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0340-czujnik-polozenia-walka-rozrzadu-cmp",
+    "destination": "/baza/kody-p0336-p0337-p0340-czujnik-walu-i-walka-rozrzadu-progi-i-warunki-gm-mode-6-1",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0401-egr-rozwiazanie-tipy",
+    "destination": "/baza/kody-p0401-p0404-p0405-p1404-egr-progi-i-warunki-testu-gm-mode-6-1999-5-7-l",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0401-egr-rozwiazanie-tipy-2",
+    "destination": "/baza/kody-p0401-p0404-p0405-p1404-egr-progi-i-warunki-testu-gm-mode-6-1999-5-7-l",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0401-egr-szczegoly",
+    "destination": "/baza/kody-p0401-p0404-p0405-p1404-egr-progi-i-warunki-testu-gm-mode-6-1999-5-7-l",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0401-egr-szczegoly-2",
+    "destination": "/baza/kody-p0401-p0404-p0405-p1404-egr-progi-i-warunki-testu-gm-mode-6-1999-5-7-l",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0401-uklad-egr",
+    "destination": "/baza/kody-p0401-p0404-p0405-p1404-egr-progi-i-warunki-testu-gm-mode-6-1999-5-7-l",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0420-katalizator",
+    "destination": "/baza/kody-p0300-p0308-p0420-i-p0325-jak-pcm-ocenia-wypadanie-zaplonow-katalizator-i-c",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0420-katalizator-bank-1-szczegoly-2",
+    "destination": "/baza/kody-p0300-p0308-p0420-i-p0325-jak-pcm-ocenia-wypadanie-zaplonow-katalizator-i-c",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0420-katalizator-rozwiazanie-tipy",
+    "destination": "/baza/kody-p0300-p0308-p0420-i-p0325-jak-pcm-ocenia-wypadanie-zaplonow-katalizator-i-c",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0420-katalizator-rozwiazanie-tipy-2",
+    "destination": "/baza/kody-p0300-p0308-p0420-i-p0325-jak-pcm-ocenia-wypadanie-zaplonow-katalizator-i-c",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0420-katalizator-szczegoly",
+    "destination": "/baza/kody-p0300-p0308-p0420-i-p0325-jak-pcm-ocenia-wypadanie-zaplonow-katalizator-i-c",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0440-evap-ogolny-rozwiazanie-tipy",
+    "destination": "/baza/kody-p0440-p0442-p0446-p0452-p1441-uklad-evap-testy-i-progi-gm-mode-6-1999-5-7-l",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0440-evap-ogolny-szczegoly",
+    "destination": "/baza/kody-p0440-p0442-p0446-p0452-p1441-uklad-evap-testy-i-progi-gm-mode-6-1999-5-7-l",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0440-evap-rozwiazanie-tipy-2",
+    "destination": "/baza/kody-p0440-p0442-p0446-p0452-p1441-uklad-evap-testy-i-progi-gm-mode-6-1999-5-7-l",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0440-evap-szczegoly-2",
+    "destination": "/baza/kody-p0440-p0442-p0446-p0452-p1441-uklad-evap-testy-i-progi-gm-mode-6-1999-5-7-l",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0440-uklad-evap-ogolny",
+    "destination": "/baza/kody-p0440-p0442-p0446-p0452-p1441-uklad-evap-testy-i-progi-gm-mode-6-1999-5-7-l",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0442-mala-nieszczelnosc-evap",
+    "destination": "/baza/kody-p0440-p0442-p0446-p0452-p1441-uklad-evap-testy-i-progi-gm-mode-6-1999-5-7-l",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0442-mala-nieszczelnosc-evap-rozwiazanie-tipy",
+    "destination": "/baza/kody-p0440-p0442-p0446-p0452-p1441-uklad-evap-testy-i-progi-gm-mode-6-1999-5-7-l",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0442-mala-nieszczelnosc-evap-rozwiazanie-tipy-2",
+    "destination": "/baza/kody-p0440-p0442-p0446-p0452-p1441-uklad-evap-testy-i-progi-gm-mode-6-1999-5-7-l",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0442-nieszczelnosc-ukladu-evap",
+    "destination": "/baza/kody-p0440-p0442-p0446-p0452-p1441-uklad-evap-testy-i-progi-gm-mode-6-1999-5-7-l",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0446-zawor-evap-rozwiazanie-tipy",
+    "destination": "/baza/kody-p0440-p0442-p0446-p0452-p1441-uklad-evap-testy-i-progi-gm-mode-6-1999-5-7-l",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0446-zawor-evap-szczegoly",
+    "destination": "/baza/kody-p0440-p0442-p0446-p0452-p1441-uklad-evap-testy-i-progi-gm-mode-6-1999-5-7-l",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0446-zawor-odpowietrzajacy-evap",
+    "destination": "/baza/kody-p0440-p0442-p0446-p0452-p1441-uklad-evap-testy-i-progi-gm-mode-6-1999-5-7-l",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0449-zawor-evap-rozwiazanie-tipy",
+    "destination": "/baza/kody-p0128-p0449-p0455-p0505-p0562-p0700-p0730-p0751-p1626-czego-nie-ma-w-tabela",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0449-zawor-evap-rozwiazanie-tipy-2",
+    "destination": "/baza/kody-p0128-p0449-p0455-p0505-p0562-p0700-p0730-p0751-p1626-czego-nie-ma-w-tabela",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0449-zawor-evap-szczegoly",
+    "destination": "/baza/kody-p0128-p0449-p0455-p0505-p0562-p0700-p0730-p0751-p1626-czego-nie-ma-w-tabela",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0449-zawor-odpowietrzajacy-evap",
+    "destination": "/baza/kody-p0128-p0449-p0455-p0505-p0562-p0700-p0730-p0751-p1626-czego-nie-ma-w-tabela",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0455-duza-nieszczelnosc-evap",
+    "destination": "/baza/kody-p0128-p0449-p0455-p0505-p0562-p0700-p0730-p0751-p1626-czego-nie-ma-w-tabela",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0455-duza-nieszczelnosc-evap-rozwiazanie-tipy",
+    "destination": "/baza/kody-p0128-p0449-p0455-p0505-p0562-p0700-p0730-p0751-p1626-czego-nie-ma-w-tabela",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0455-duza-nieszczelnosc-evap-rozwiazanie-tipy-2",
+    "destination": "/baza/kody-p0128-p0449-p0455-p0505-p0562-p0700-p0730-p0751-p1626-czego-nie-ma-w-tabela",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0455-duza-nieszczelnosc-evap-szczegoly",
+    "destination": "/baza/kody-p0128-p0449-p0455-p0505-p0562-p0700-p0730-p0751-p1626-czego-nie-ma-w-tabela",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0463-czujnik-poziomu-paliwa",
+    "destination": "/baza/kody-obd-ii-1996-2000-pelna-lista-p0xxx-p1xxx-dla-gmt400-pogrupowana-tematycznie",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0463-poziom-paliwa-rozwiazanie-tipy",
+    "destination": "/baza/kody-obd-ii-1996-2000-pelna-lista-p0xxx-p1xxx-dla-gmt400-pogrupowana-tematycznie",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0463-poziom-paliwa-szczegoly",
+    "destination": "/baza/kody-obd-ii-1996-2000-pelna-lista-p0xxx-p1xxx-dla-gmt400-pogrupowana-tematycznie",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0500-czujnik-predkosci-pojazdu-vss",
+    "destination": "/baza/kody-p0500-p0506-p0507-p0601-p0604-vss-bieg-jalowy-iac-i-pamiec-pcm-progi-gm-mod",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0500-vss-rozwiazanie-tipy",
+    "destination": "/baza/kody-p0500-p0506-p0507-p0601-p0604-vss-bieg-jalowy-iac-i-pamiec-pcm-progi-gm-mod",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0500-vss-rozwiazanie-tipy-2",
+    "destination": "/baza/kody-p0500-p0506-p0507-p0601-p0604-vss-bieg-jalowy-iac-i-pamiec-pcm-progi-gm-mod",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0500-vss-szczegoly",
+    "destination": "/baza/kody-p0500-p0506-p0507-p0601-p0604-vss-bieg-jalowy-iac-i-pamiec-pcm-progi-gm-mod",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0500-vss-szczegoly-2",
+    "destination": "/baza/kody-p0500-p0506-p0507-p0601-p0604-vss-bieg-jalowy-iac-i-pamiec-pcm-progi-gm-mod",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0505-iac-rozwiazanie-tipy",
+    "destination": "/baza/kody-p0128-p0449-p0455-p0505-p0562-p0700-p0730-p0751-p1626-czego-nie-ma-w-tabela",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0505-iac-rozwiazanie-tipy-2",
+    "destination": "/baza/kody-p0128-p0449-p0455-p0505-p0562-p0700-p0730-p0751-p1626-czego-nie-ma-w-tabela",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0505-iac-szczegoly",
+    "destination": "/baza/kody-p0128-p0449-p0455-p0505-p0562-p0700-p0730-p0751-p1626-czego-nie-ma-w-tabela",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0505-uklad-wolnych-obrotow-iac",
+    "destination": "/baza/kody-p0128-p0449-p0455-p0505-p0562-p0700-p0730-p0751-p1626-czego-nie-ma-w-tabela",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0507-wysokie-obroty-rozwiazanie-tipy",
+    "destination": "/baza/kody-p0500-p0506-p0507-p0601-p0604-vss-bieg-jalowy-iac-i-pamiec-pcm-progi-gm-mod",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0507-wysokie-obroty-szczegoly",
+    "destination": "/baza/kody-p0500-p0506-p0507-p0601-p0604-vss-bieg-jalowy-iac-i-pamiec-pcm-progi-gm-mod",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0507-wysokie-obroty-wolne",
+    "destination": "/baza/kody-p0500-p0506-p0507-p0601-p0604-vss-bieg-jalowy-iac-i-pamiec-pcm-progi-gm-mod",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0562-niskie-napiecie-rozwiazanie-tipy",
+    "destination": "/baza/kody-p0128-p0449-p0455-p0505-p0562-p0700-p0730-p0751-p1626-czego-nie-ma-w-tabela",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0562-niskie-napiecie-rozwiazanie-tipy-2",
+    "destination": "/baza/kody-p0128-p0449-p0455-p0505-p0562-p0700-p0730-p0751-p1626-czego-nie-ma-w-tabela",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0562-niskie-napiecie-szczegoly",
+    "destination": "/baza/kody-p0128-p0449-p0455-p0505-p0562-p0700-p0730-p0751-p1626-czego-nie-ma-w-tabela",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0562-niskie-napiecie-szczegoly-2",
+    "destination": "/baza/kody-p0128-p0449-p0455-p0505-p0562-p0700-p0730-p0751-p1626-czego-nie-ma-w-tabela",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0562-niskie-napiecie-ukladu",
+    "destination": "/baza/kody-p0128-p0449-p0455-p0505-p0562-p0700-p0730-p0751-p1626-czego-nie-ma-w-tabela",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0700-usterka-skrzyni-ogolny",
+    "destination": "/baza/kody-p0128-p0449-p0455-p0505-p0562-p0700-p0730-p0751-p1626-czego-nie-ma-w-tabela",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0700-usterka-skrzyni-ogolny-rozwiazanie-tipy",
+    "destination": "/baza/kody-p0128-p0449-p0455-p0505-p0562-p0700-p0730-p0751-p1626-czego-nie-ma-w-tabela",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0711-czujnik-temperatury-atf",
+    "destination": "/baza/skrzynia-4l80-e-kody-p0711-p0712-p0713-p0218-p0502-p0503-p0716-p0717-p1810-p0741",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0711-temperatura-atf-rozwiazanie-tipy",
+    "destination": "/baza/skrzynia-4l80-e-kody-p0711-p0712-p0713-p0218-p0502-p0503-p0716-p0717-p1810-p0741",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0711-temperatura-atf-szczegoly",
+    "destination": "/baza/skrzynia-4l80-e-kody-p0711-p0712-p0713-p0218-p0502-p0503-p0716-p0717-p1810-p0741",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0730-nieprawidlowe-przelozenie-rozwiazanie-tipy",
+    "destination": "/baza/kody-p0128-p0449-p0455-p0505-p0562-p0700-p0730-p0751-p1626-czego-nie-ma-w-tabela",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0730-nieprawidlowe-przelozenie-skrzyni",
+    "destination": "/baza/kody-p0128-p0449-p0455-p0505-p0562-p0700-p0730-p0751-p1626-czego-nie-ma-w-tabela",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0730-przelozenie-skrzyni-rozwiazanie-tipy-2",
+    "destination": "/baza/kody-p0128-p0449-p0455-p0505-p0562-p0700-p0730-p0751-p1626-czego-nie-ma-w-tabela",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0730-przelozenie-skrzyni-szczegoly",
+    "destination": "/baza/kody-p0128-p0449-p0455-p0505-p0562-p0700-p0730-p0751-p1626-czego-nie-ma-w-tabela",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0740-cewka-tcc",
+    "destination": "/baza/skrzynia-4l60-e-solenoidy-a-b-pcs-tcc-tryb-awaryjny-wtyczka-i-biuletyn-atra-583",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0740-sprzeglo-hydrokinetyczne-tcc",
+    "destination": "/baza/skrzynia-4l60-e-solenoidy-a-b-pcs-tcc-tryb-awaryjny-wtyczka-i-biuletyn-atra-583",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0740-tcc-rozwiazanie-tipy",
+    "destination": "/baza/skrzynia-4l60-e-solenoidy-a-b-pcs-tcc-tryb-awaryjny-wtyczka-i-biuletyn-atra-583",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0740-tcc-rozwiazanie-tipy-2",
+    "destination": "/baza/skrzynia-4l60-e-solenoidy-a-b-pcs-tcc-tryb-awaryjny-wtyczka-i-biuletyn-atra-583",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0740-tcc-szczegoly-2",
+    "destination": "/baza/skrzynia-4l60-e-solenoidy-a-b-pcs-tcc-tryb-awaryjny-wtyczka-i-biuletyn-atra-583",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0751-cewka-1-2-wydajnosc",
+    "destination": "/baza/kody-p0128-p0449-p0455-p0505-p0562-p0700-p0730-p0751-p1626-czego-nie-ma-w-tabela",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0751-cewka-1-2-wydajnosc-3fad7bf1c1398192bc7ddd3c3dc610d2",
+    "destination": "/baza/kody-p0128-p0449-p0455-p0505-p0562-p0700-p0730-p0751-p1626-czego-nie-ma-w-tabela",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0751-cewka-1-2-wydajnosc-rozwiazanie-tipy-2",
+    "destination": "/baza/kody-p0128-p0449-p0455-p0505-p0562-p0700-p0730-p0751-p1626-czego-nie-ma-w-tabela",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0751-cewka-1-2-wydajnosc-szczegoly-2",
+    "destination": "/baza/kody-p0128-p0449-p0455-p0505-p0562-p0700-p0730-p0751-p1626-czego-nie-ma-w-tabela",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0753-cewka-1-2-4l60e",
+    "destination": "/baza/skrzynia-4l60-e-solenoidy-a-b-pcs-tcc-tryb-awaryjny-wtyczka-i-biuletyn-atra-583",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0753-cewka-1-2-elektryczna",
+    "destination": "/baza/skrzynia-4l60-e-solenoidy-a-b-pcs-tcc-tryb-awaryjny-wtyczka-i-biuletyn-atra-583",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0753-cewka-1-2-rozwiazanie-tipy",
+    "destination": "/baza/skrzynia-4l60-e-solenoidy-a-b-pcs-tcc-tryb-awaryjny-wtyczka-i-biuletyn-atra-583",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0753-cewka-1-2-rozwiazanie-tipy-2",
+    "destination": "/baza/skrzynia-4l60-e-solenoidy-a-b-pcs-tcc-tryb-awaryjny-wtyczka-i-biuletyn-atra-583",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0753-cewka-1-2-szczegoly-2",
+    "destination": "/baza/skrzynia-4l60-e-solenoidy-a-b-pcs-tcc-tryb-awaryjny-wtyczka-i-biuletyn-atra-583",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0756-cewka-2-3-wydajnosc",
+    "destination": "/baza/skrzynia-4l80-e-kody-p0711-p0712-p0713-p0218-p0502-p0503-p0716-p0717-p1810-p0741",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0756-cewka-2-3-wydajnosc-rozwiazanie-tipy",
+    "destination": "/baza/skrzynia-4l80-e-kody-p0711-p0712-p0713-p0218-p0502-p0503-p0716-p0717-p1810-p0741",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0756-cewka-2-3-wydajnosc-rozwiazanie-tipy-2",
+    "destination": "/baza/skrzynia-4l80-e-kody-p0711-p0712-p0713-p0218-p0502-p0503-p0716-p0717-p1810-p0741",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0758-cewka-2-3-4l60e",
+    "destination": "/baza/skrzynia-4l60-e-solenoidy-a-b-pcs-tcc-tryb-awaryjny-wtyczka-i-biuletyn-atra-583",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0758-cewka-2-3-elektryczna",
+    "destination": "/baza/skrzynia-4l60-e-solenoidy-a-b-pcs-tcc-tryb-awaryjny-wtyczka-i-biuletyn-atra-583",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0758-cewka-2-3-rozwiazanie-tipy",
+    "destination": "/baza/skrzynia-4l60-e-solenoidy-a-b-pcs-tcc-tryb-awaryjny-wtyczka-i-biuletyn-atra-583",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0758-cewka-2-3-rozwiazanie-tipy-2",
+    "destination": "/baza/skrzynia-4l60-e-solenoidy-a-b-pcs-tcc-tryb-awaryjny-wtyczka-i-biuletyn-atra-583",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0758-cewka-2-3-szczegoly-2",
+    "destination": "/baza/skrzynia-4l60-e-solenoidy-a-b-pcs-tcc-tryb-awaryjny-wtyczka-i-biuletyn-atra-583",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0785-cewka-3-2",
+    "destination": "/baza/skrzynia-4l60-e-solenoidy-a-b-pcs-tcc-tryb-awaryjny-wtyczka-i-biuletyn-atra-583",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0785-cewka-3-2-rozwiazanie-tipy",
+    "destination": "/baza/skrzynia-4l60-e-solenoidy-a-b-pcs-tcc-tryb-awaryjny-wtyczka-i-biuletyn-atra-583",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p0785-cewka-3-2-szczegoly",
+    "destination": "/baza/skrzynia-4l60-e-solenoidy-a-b-pcs-tcc-tryb-awaryjny-wtyczka-i-biuletyn-atra-583",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p1133-sonda-lambda-wydajnosc",
+    "destination": "/baza/kody-p0131-p0132-p0133-p0135-p1133-sonda-lambda-b1s1-progi-i-testy-gm-mode-6-199",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p1133-sonda-lambda-wydajnosc-rozwiazanie-tipy",
+    "destination": "/baza/kody-p0131-p0132-p0133-p0135-p1133-sonda-lambda-b1s1-progi-i-testy-gm-mode-6-199",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p1133-sonda-lambda-wydajnosc-szczegoly",
+    "destination": "/baza/kody-p0131-p0132-p0133-p0135-p1133-sonda-lambda-b1s1-progi-i-testy-gm-mode-6-199",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p1404-egr-pozycja-rozwiazanie-tipy",
+    "destination": "/baza/kody-p0401-p0404-p0405-p1404-egr-progi-i-warunki-testu-gm-mode-6-1999-5-7-l",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p1404-egr-pozycja-szczegoly",
+    "destination": "/baza/kody-p0401-p0404-p0405-p1404-egr-progi-i-warunki-testu-gm-mode-6-1999-5-7-l",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p1404-zawor-egr-pozycja",
+    "destination": "/baza/kody-p0401-p0404-p0405-p1404-egr-progi-i-warunki-testu-gm-mode-6-1999-5-7-l",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p1441-evap-przeplyw-rozwiazanie-tipy",
+    "destination": "/baza/kody-p0440-p0442-p0446-p0452-p1441-uklad-evap-testy-i-progi-gm-mode-6-1999-5-7-l",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p1441-evap-przeplyw-szczegoly",
+    "destination": "/baza/kody-p0440-p0442-p0446-p0452-p1441-uklad-evap-testy-i-progi-gm-mode-6-1999-5-7-l",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p1441-uklad-evap-przeplyw",
+    "destination": "/baza/kody-p0440-p0442-p0446-p0452-p1441-uklad-evap-testy-i-progi-gm-mode-6-1999-5-7-l",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p1626-komunikacja-skrzyni-rozwiazanie-tipy",
+    "destination": "/baza/kody-p0128-p0449-p0455-p0505-p0562-p0700-p0730-p0751-p1626-czego-nie-ma-w-tabela",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p1626-komunikacja-skrzyni-szczegoly",
+    "destination": "/baza/kody-p0128-p0449-p0455-p0505-p0562-p0700-p0730-p0751-p1626-czego-nie-ma-w-tabela",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p1626-komunikacja-skrzyni-szczegoly-2",
+    "destination": "/baza/kody-p0128-p0449-p0455-p0505-p0562-p0700-p0730-p0751-p1626-czego-nie-ma-w-tabela",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p1626-komunikacja-z-modulem-skrzyni",
+    "destination": "/baza/kody-p0128-p0449-p0455-p0505-p0562-p0700-p0730-p0751-p1626-czego-nie-ma-w-tabela",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p1810-czujnik-zakresu-skrzyni-prndl",
+    "destination": "/baza/skrzynia-4l80-e-kody-p0711-p0712-p0713-p0218-p0502-p0503-p0716-p0717-p1810-p0741",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p1810-prndl-rozwiazanie-tipy",
+    "destination": "/baza/skrzynia-4l80-e-kody-p0711-p0712-p0713-p0218-p0502-p0503-p0716-p0717-p1810-p0741",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p1810-prndl-rozwiazanie-tipy-2",
+    "destination": "/baza/skrzynia-4l80-e-kody-p0711-p0712-p0713-p0218-p0502-p0503-p0716-p0717-p1810-p0741",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p1810-prndl-szczegoly",
+    "destination": "/baza/skrzynia-4l80-e-kody-p0711-p0712-p0713-p0218-p0502-p0503-p0716-p0717-p1810-p0741",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p1810-prndl-szczegoly-2",
+    "destination": "/baza/skrzynia-4l80-e-kody-p0711-p0712-p0713-p0218-p0502-p0503-p0716-p0717-p1810-p0741",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p1860-4l60e-tcc-pwm-solenoid",
+    "destination": "/baza/skrzynia-4l60-e-solenoidy-a-b-pcs-tcc-tryb-awaryjny-wtyczka-i-biuletyn-atra-583",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p1860-cewka-tcc-pwm",
+    "destination": "/baza/skrzynia-4l60-e-solenoidy-a-b-pcs-tcc-tryb-awaryjny-wtyczka-i-biuletyn-atra-583",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p1860-szczegoly-tcc",
+    "destination": "/baza/skrzynia-4l60-e-solenoidy-a-b-pcs-tcc-tryb-awaryjny-wtyczka-i-biuletyn-atra-583",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p1860-tcc-pwm-rozwiazanie-tipy",
+    "destination": "/baza/skrzynia-4l60-e-solenoidy-a-b-pcs-tcc-tryb-awaryjny-wtyczka-i-biuletyn-atra-583",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p1860-tcc-pwm-rozwiazanie-tipy-2",
+    "destination": "/baza/skrzynia-4l60-e-solenoidy-a-b-pcs-tcc-tryb-awaryjny-wtyczka-i-biuletyn-atra-583",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kod-p1860-tcc-pwm-szczegoly-2",
+    "destination": "/baza/skrzynia-4l60-e-solenoidy-a-b-pcs-tcc-tryb-awaryjny-wtyczka-i-biuletyn-atra-583",
+    "permanent": true
+  },
+  {
+    "source": "/baza/kody-rpo-najwazniejsze",
+    "destination": "/baza/kody-rpo-i-silnikow-gmt400-wg-roku-modelowego-tabela-silnik-skrzynia-most-skrzyn",
+    "permanent": true
+  },
+  {
+    "source": "/baza/momenty-dokrecania-kolektor-dolotowy-vortec",
+    "destination": "/baza/wymiana-uszczelek-kolektora-dolotowego-v6-v8-4-3-5-0-5-7-7-4-kolejnosc-prac-wg-h",
+    "permanent": true
+  },
+  {
+    "source": "/baza/np241c-np243c-nv246-identyfikacja-i-serwis",
+    "destination": "/baza/skrzynia-rozdzielcza-np241-np241hd-np243-jak-odczytac-numer-np-i-czemu-np231-233",
+    "permanent": true
+  },
+  {
+    "source": "/baza/np241c-np243c-nv246-przelozenia-i-zastosowanie",
+    "destination": "/baza/skrzynia-rozdzielcza-np241-np241hd-np243-jak-odczytac-numer-np-i-czemu-np231-233",
+    "permanent": true
+  },
+  {
+    "source": "/baza/numery-czesci-filtry-i-plyny",
+    "destination": "/baza/pojemnosci-i-czesci-serwisowe-gmt400-wg-gm-1995-1999-olej-plyn-chlodzacy-zbiorni",
+    "permanent": true
+  },
+  {
+    "source": "/baza/p0440-evap-system",
+    "destination": "/baza/diagnostyka-ukladu-evap-pary-paliwa-w-gmt400-jak-dziala-uklad-od-czego-zaczac-i",
+    "permanent": true
+  },
+  {
+    "source": "/baza/p0740-p0753-p0758-brak-zmiany-biegow-4l60e",
+    "destination": "/baza/skrzynia-4l60-e-solenoidy-a-b-pcs-tcc-tryb-awaryjny-wtyczka-i-biuletyn-atra-583",
+    "permanent": true
+  },
+  {
+    "source": "/baza/pelna-procedura-wymiany-oleju-w-mostach-4x4",
+    "destination": "/baza/wymiana-oleju-w-mostach-przod-ifs-4x4-i-tyl-8-6-9-5-10-5-11-cala-procedura-gm",
+    "permanent": true
+  },
+  {
+    "source": "/baza/pelna-wymiana-atf-w-4l60e-krok-po-kroku",
+    "destination": "/baza/4l60-e-wymiana-atf-i-filtra-oraz-kontrola-poziomu-procedura-gm-sm-1996-c-k-sm-19",
+    "permanent": true
+  },
+  {
+    "source": "/baza/pelna-wymiana-oleju-w-skrzyni-4l80e-diy",
+    "destination": "/baza/skrzynia-4l80-e-wymiana-atf-i-filtra-kontrola-poziomu-pojemnosc-i-momenty-sm-gm",
+    "permanent": true
+  },
+  {
+    "source": "/baza/problemy-z-4l60e-diagnostyka",
+    "destination": "/baza/skrzynia-4l60-e-4l80-e-usterki-kody-dtc-i-diagnostyka-gmt400-1993-2000",
+    "permanent": true
+  },
+  {
+    "source": "/baza/problemy-z-alternatorem-gmt400",
+    "destination": "/baza/ladowanie-alternator-kontrolka-za-niskie-lub-za-wysokie-napiecie-halas-diagnosty",
+    "permanent": true
+  },
+  {
+    "source": "/baza/problemy-z-alternatorem-gmt400-tipy",
+    "destination": "/baza/ladowanie-alternator-kontrolka-za-niskie-lub-za-wysokie-napiecie-halas-diagnosty",
+    "permanent": true
+  },
+  {
+    "source": "/baza/problemy-z-pompa-wody-vortec",
+    "destination": "/baza/przegrzewanie-sie-silnika-ubytek-plynu-chlodzacego-i-wycieki-z-ukladu-chlodzenia",
+    "permanent": true
+  },
+  {
+    "source": "/baza/problemy-z-pompa-wody-vortec-tipy",
+    "destination": "/baza/przegrzewanie-sie-silnika-ubytek-plynu-chlodzacego-i-wycieki-z-ukladu-chlodzenia",
+    "permanent": true
+  },
+  {
+    "source": "/baza/problemy-z-pompa-wtryskowa-6-5l-tipy",
+    "destination": "/baza/6-5l-diesel-nie-odpala-gasnie-falujace-obroty-pompa-wtryskowa-czujnik-optyczny-s",
+    "permanent": true
+  },
+  {
+    "source": "/baza/problemy-z-przelaczaniem-4x4-np241c-np243c-nv246",
+    "destination": "/baza/naped-4x4-nie-wlacza-sie-wyskakuje-z-4h-4l-przycisk-nie-przelacza-skrzynia-rozdz",
+    "permanent": true
+  },
+  {
+    "source": "/baza/problemy-z-rozrusznikiem-gmt400",
+    "destination": "/baza/rozrusznik-klika-i-nie-kreci-kreci-wolno-albo-nie-wylacza-sie-diagnostyka-spadko",
+    "permanent": true
+  },
+  {
+    "source": "/baza/problemy-z-rozrusznikiem-gmt400-tipy",
+    "destination": "/baza/rozrusznik-klika-i-nie-kreci-kreci-wolno-albo-nie-wylacza-sie-diagnostyka-spadko",
+    "permanent": true
+  },
+  {
+    "source": "/baza/problemy-z-ukladem-4x4-np241c-np243c-nv246-tipy",
+    "destination": "/baza/naped-4x4-nie-wlacza-sie-wyskakuje-z-4h-4l-przycisk-nie-przelacza-skrzynia-rozdz",
+    "permanent": true
+  },
+  {
+    "source": "/baza/problemy-z-ukladem-abs-czujniki",
+    "destination": "/baza/abs-kontrolka-swieci-kody-czujnikow-kol-c0221-i-inne-dzialanie-w-deszczu-diagnos",
+    "permanent": true
+  },
+  {
+    "source": "/baza/problemy-z-ukladem-abs-czujniki-szczegoly",
+    "destination": "/baza/abs-kontrolka-swieci-kody-czujnikow-kol-c0221-i-inne-dzialanie-w-deszczu-diagnos",
+    "permanent": true
+  },
+  {
+    "source": "/baza/problemy-z-ukladem-abs-gmt400",
+    "destination": "/baza/abs-kontrolka-swieci-kody-czujnikow-kol-c0221-i-inne-dzialanie-w-deszczu-diagnos",
+    "permanent": true
+  },
+  {
+    "source": "/baza/problemy-z-ukladem-abs-gmt400-tipy",
+    "destination": "/baza/abs-kontrolka-swieci-kody-czujnikow-kol-c0221-i-inne-dzialanie-w-deszczu-diagnos",
+    "permanent": true
+  },
+  {
+    "source": "/baza/problemy-z-ukladem-abs-modul",
+    "destination": "/baza/abs-kontrolka-swieci-kody-czujnikow-kol-c0221-i-inne-dzialanie-w-deszczu-diagnos",
+    "permanent": true
+  },
+  {
+    "source": "/baza/problemy-z-ukladem-abs-modul-szczegoly",
+    "destination": "/baza/abs-kontrolka-swieci-kody-czujnikow-kol-c0221-i-inne-dzialanie-w-deszczu-diagnos",
+    "permanent": true
+  },
+  {
+    "source": "/baza/problemy-z-ukladem-chlodzenia-chlodnica",
+    "destination": "/baza/przegrzewanie-sie-silnika-ubytek-plynu-chlodzacego-i-wycieki-z-ukladu-chlodzenia",
+    "permanent": true
+  },
+  {
+    "source": "/baza/problemy-z-ukladem-chlodzenia-chlodnica-szczegoly",
+    "destination": "/baza/przegrzewanie-sie-silnika-ubytek-plynu-chlodzacego-i-wycieki-z-ukladu-chlodzenia",
+    "permanent": true
+  },
+  {
+    "source": "/baza/problemy-z-ukladem-chlodzenia-gmt400",
+    "destination": "/baza/przegrzewanie-sie-silnika-ubytek-plynu-chlodzacego-i-wycieki-z-ukladu-chlodzenia",
+    "permanent": true
+  },
+  {
+    "source": "/baza/problemy-z-ukladem-chlodzenia-gmt400-tipy",
+    "destination": "/baza/przegrzewanie-sie-silnika-ubytek-plynu-chlodzacego-i-wycieki-z-ukladu-chlodzenia",
+    "permanent": true
+  },
+  {
+    "source": "/baza/problemy-z-ukladem-chlodzenia-pompa-wody",
+    "destination": "/baza/przegrzewanie-sie-silnika-ubytek-plynu-chlodzacego-i-wycieki-z-ukladu-chlodzenia",
+    "permanent": true
+  },
+  {
+    "source": "/baza/problemy-z-ukladem-chlodzenia-pompa-wody-szczegoly",
+    "destination": "/baza/przegrzewanie-sie-silnika-ubytek-plynu-chlodzacego-i-wycieki-z-ukladu-chlodzenia",
+    "permanent": true
+  },
+  {
+    "source": "/baza/problemy-z-ukladem-chlodzenia-termostat",
+    "destination": "/baza/przegrzewanie-sie-silnika-ubytek-plynu-chlodzacego-i-wycieki-z-ukladu-chlodzenia",
+    "permanent": true
+  },
+  {
+    "source": "/baza/problemy-z-ukladem-chlodzenia-wentylator",
+    "destination": "/baza/przegrzewanie-sie-silnika-ubytek-plynu-chlodzacego-i-wycieki-z-ukladu-chlodzenia",
+    "permanent": true
+  },
+  {
+    "source": "/baza/problemy-z-ukladem-hamulcowym-przewody",
+    "destination": "/baza/zardzewiale-przewody-hamulcowe-typowa-usterka",
+    "permanent": true
+  },
+  {
+    "source": "/baza/problemy-z-ukladem-hamulcowym-przewody-szczegoly",
+    "destination": "/baza/zardzewiale-przewody-hamulcowe-typowa-usterka",
+    "permanent": true
+  },
+  {
+    "source": "/baza/problemy-z-ukladem-hamulcowym-tarcze",
+    "destination": "/baza/pulsacja-bicie-przy-hamowaniu-tarcze-bicie-boczne-roznica-grubosci-kiedy-przetac",
+    "permanent": true
+  },
+  {
+    "source": "/baza/problemy-z-ukladem-hamulcowym-tarcze-szczegoly",
+    "destination": "/baza/pulsacja-bicie-przy-hamowaniu-tarcze-bicie-boczne-roznica-grubosci-kiedy-przetac",
+    "permanent": true
+  },
+  {
+    "source": "/baza/problemy-z-ukladem-hamulcowym-tarcze-tipy",
+    "destination": "/baza/pulsacja-bicie-przy-hamowaniu-tarcze-bicie-boczne-roznica-grubosci-kiedy-przetac",
+    "permanent": true
+  },
+  {
+    "source": "/baza/problemy-z-ukladem-kierowniczym-gmt400",
+    "destination": "/baza/uklad-kierowniczy-luzy-sciaganie-i-plywanie-ciezka-praca-buczenie-lub-pienienie",
+    "permanent": true
+  },
+  {
+    "source": "/baza/problemy-z-ukladem-kierowniczym-gmt400-tipy",
+    "destination": "/baza/uklad-kierowniczy-luzy-sciaganie-i-plywanie-ciezka-praca-buczenie-lub-pienienie",
+    "permanent": true
+  },
+  {
+    "source": "/baza/problemy-z-ukladem-kierowniczym-koncowki",
+    "destination": "/baza/uklad-kierowniczy-luzy-sciaganie-i-plywanie-ciezka-praca-buczenie-lub-pienienie",
+    "permanent": true
+  },
+  {
+    "source": "/baza/problemy-z-ukladem-kierowniczym-pompa",
+    "destination": "/baza/uklad-kierowniczy-luzy-sciaganie-i-plywanie-ciezka-praca-buczenie-lub-pienienie",
+    "permanent": true
+  },
+  {
+    "source": "/baza/problemy-z-ukladem-kierowniczym-pompa-szczegoly",
+    "destination": "/baza/uklad-kierowniczy-luzy-sciaganie-i-plywanie-ciezka-praca-buczenie-lub-pienienie",
+    "permanent": true
+  },
+  {
+    "source": "/baza/problemy-z-ukladem-kierowniczym-przekladnia",
+    "destination": "/baza/uklad-kierowniczy-luzy-sciaganie-i-plywanie-ciezka-praca-buczenie-lub-pienienie",
+    "permanent": true
+  },
+  {
+    "source": "/baza/problemy-z-ukladem-kierowniczym-przekladnia-szczegoly",
+    "destination": "/baza/uklad-kierowniczy-luzy-sciaganie-i-plywanie-ciezka-praca-buczenie-lub-pienienie",
+    "permanent": true
+  },
+  {
+    "source": "/baza/problemy-z-ukladem-klimatyzacji-gmt400",
+    "destination": "/baza/klimatyzacja-nie-chlodzi-sprezarka-sie-nie-zalacza-halas-diagnostyka-krok-po-kro",
+    "permanent": true
+  },
+  {
+    "source": "/baza/problemy-z-ukladem-klimatyzacji-gmt400-tipy",
+    "destination": "/baza/klimatyzacja-nie-chlodzi-sprezarka-sie-nie-zalacza-halas-diagnostyka-krok-po-kro",
+    "permanent": true
+  },
+  {
+    "source": "/baza/problemy-z-ukladem-klimatyzacji-szczegoly",
+    "destination": "/baza/klimatyzacja-nie-chlodzi-sprezarka-sie-nie-zalacza-halas-diagnostyka-krok-po-kro",
+    "permanent": true
+  },
+  {
+    "source": "/baza/problemy-z-ukladem-napedowym-4x4",
+    "destination": "/baza/naped-4x4-nie-wlacza-sie-wyskakuje-z-4h-4l-przycisk-nie-przelacza-skrzynia-rozdz",
+    "permanent": true
+  },
+  {
+    "source": "/baza/problemy-z-ukladem-napedowym-4x4-szczegoly",
+    "destination": "/baza/naped-4x4-nie-wlacza-sie-wyskakuje-z-4h-4l-przycisk-nie-przelacza-skrzynia-rozdz",
+    "permanent": true
+  },
+  {
+    "source": "/baza/problemy-z-ukladem-napedowym-4x4-tipy",
+    "destination": "/baza/naped-4x4-nie-wlacza-sie-wyskakuje-z-4h-4l-przycisk-nie-przelacza-skrzynia-rozdz",
+    "permanent": true
+  },
+  {
+    "source": "/baza/problemy-z-ukladem-napedowym-waly",
+    "destination": "/baza/waly-napedowe-i-krzyzaki-stuk-ok-16-km-h-halas-krzyzakow-wibracje-wyciek-przy-pr",
+    "permanent": true
+  },
+  {
+    "source": "/baza/problemy-z-ukladem-napedowym-waly-szczegoly",
+    "destination": "/baza/waly-napedowe-i-krzyzaki-stuk-ok-16-km-h-halas-krzyzakow-wibracje-wyciek-przy-pr",
+    "permanent": true
+  },
+  {
+    "source": "/baza/problemy-z-ukladem-paliwowym-pompa",
+    "destination": "/baza/pompa-paliwa-i-cisnienie-dlugi-rozruch-przerywanie-gasniecie-na-zimno-wycie-pomp",
+    "permanent": true
+  },
+  {
+    "source": "/baza/problemy-z-ukladem-paliwowym-pompa-szczegoly",
+    "destination": "/baza/pompa-paliwa-i-cisnienie-dlugi-rozruch-przerywanie-gasniecie-na-zimno-wycie-pomp",
+    "permanent": true
+  },
+  {
+    "source": "/baza/problemy-z-ukladem-paliwowym-tbi",
+    "destination": "/baza/pompa-paliwa-i-cisnienie-dlugi-rozruch-przerywanie-gasniecie-na-zimno-wycie-pomp",
+    "permanent": true
+  },
+  {
+    "source": "/baza/problemy-z-ukladem-paliwowym-tbi-szczegoly",
+    "destination": "/baza/pompa-paliwa-i-cisnienie-dlugi-rozruch-przerywanie-gasniecie-na-zimno-wycie-pomp",
+    "permanent": true
+  },
+  {
+    "source": "/baza/problemy-z-ukladem-wydechowym-gmt400",
+    "destination": "/baza/wydech-nieszczelnosc-halas-drgania-zatkany-katalizator-diagnostyka-krok-po-kroku",
+    "permanent": true
+  },
+  {
+    "source": "/baza/problemy-z-ukladem-wydechowym-gmt400-tipy",
+    "destination": "/baza/wydech-nieszczelnosc-halas-drgania-zatkany-katalizator-diagnostyka-krok-po-kroku",
+    "permanent": true
+  },
+  {
+    "source": "/baza/problemy-z-ukladem-wydechowym-katalizator",
+    "destination": "/baza/wydech-nieszczelnosc-halas-drgania-zatkany-katalizator-diagnostyka-krok-po-kroku",
+    "permanent": true
+  },
+  {
+    "source": "/baza/problemy-z-ukladem-wydechowym-katalizator-szczegoly",
+    "destination": "/baza/wydech-nieszczelnosc-halas-drgania-zatkany-katalizator-diagnostyka-krok-po-kroku",
+    "permanent": true
+  },
+  {
+    "source": "/baza/problemy-z-ukladem-wydechowym-rdza",
+    "destination": "/baza/wydech-nieszczelnosc-halas-drgania-zatkany-katalizator-diagnostyka-krok-po-kroku",
+    "permanent": true
+  },
+  {
+    "source": "/baza/problemy-z-ukladem-wydechowym-tlumiki",
+    "destination": "/baza/wydech-nieszczelnosc-halas-drgania-zatkany-katalizator-diagnostyka-krok-po-kroku",
+    "permanent": true
+  },
+  {
+    "source": "/baza/problemy-z-ukladem-zaplonowym-cewki-szczegoly",
+    "destination": "/baza/zaplon-kopulka-palec-przewody-cewka-przerywanie-szarpanie-brak-odpalenia-tbi-198",
+    "permanent": true
+  },
+  {
+    "source": "/baza/problemy-z-ukladem-zaplonowym-cewki-vortec",
+    "destination": "/baza/zaplon-kopulka-palec-przewody-cewka-przerywanie-szarpanie-brak-odpalenia-tbi-198",
+    "permanent": true
+  },
+  {
+    "source": "/baza/problemy-z-ukladem-zaplonowym-przewody",
+    "destination": "/baza/zaplon-kopulka-palec-przewody-cewka-przerywanie-szarpanie-brak-odpalenia-tbi-198",
+    "permanent": true
+  },
+  {
+    "source": "/baza/problemy-z-ukladem-zaplonowym-przewody-szczegoly",
+    "destination": "/baza/zaplon-kopulka-palec-przewody-cewka-przerywanie-szarpanie-brak-odpalenia-tbi-198",
+    "permanent": true
+  },
+  {
+    "source": "/baza/problemy-z-ukladem-zaplonowym-tbi",
+    "destination": "/baza/zaplon-kopulka-palec-przewody-cewka-przerywanie-szarpanie-brak-odpalenia-tbi-198",
+    "permanent": true
+  },
+  {
+    "source": "/baza/problemy-z-ukladem-zaplonowym-tbi-szczegoly",
+    "destination": "/baza/zaplon-kopulka-palec-przewody-cewka-przerywanie-szarpanie-brak-odpalenia-tbi-198",
+    "permanent": true
+  },
+  {
+    "source": "/baza/problemy-z-ukladem-zaplonowym-tbi-tipy",
+    "destination": "/baza/zaplon-kopulka-palec-przewody-cewka-przerywanie-szarpanie-brak-odpalenia-tbi-198",
+    "permanent": true
+  },
+  {
+    "source": "/baza/problemy-z-ukladem-zaplonowym-vortec",
+    "destination": "/baza/zaplon-kopulka-palec-przewody-cewka-przerywanie-szarpanie-brak-odpalenia-tbi-198",
+    "permanent": true
+  },
+  {
+    "source": "/baza/problemy-z-ukladem-zaplonowym-vortec-tipy",
+    "destination": "/baza/zaplon-kopulka-palec-przewody-cewka-przerywanie-szarpanie-brak-odpalenia-tbi-198",
+    "permanent": true
+  },
+  {
+    "source": "/baza/problemy-z-ukladem-zawieszenia-amortyzatory",
+    "destination": "/baza/zawieszenie-przednie-sworznie-wahaczy-amortyzatory-laczniki-stabilizatora-stuki",
+    "permanent": true
+  },
+  {
+    "source": "/baza/problemy-z-ukladem-zawieszenia-amortyzatory-szczegoly",
+    "destination": "/baza/zawieszenie-przednie-sworznie-wahaczy-amortyzatory-laczniki-stabilizatora-stuki",
+    "permanent": true
+  },
+  {
+    "source": "/baza/problemy-z-ukladem-zawieszenia-stabilizatory",
+    "destination": "/baza/zawieszenie-przednie-sworznie-wahaczy-amortyzatory-laczniki-stabilizatora-stuki",
+    "permanent": true
+  },
+  {
+    "source": "/baza/problemy-z-ukladem-zawieszenia-sworznie",
+    "destination": "/baza/zawieszenie-przednie-sworznie-wahaczy-amortyzatory-laczniki-stabilizatora-stuki",
+    "permanent": true
+  },
+  {
+    "source": "/baza/problemy-z-ukladem-zawieszenia-tuleje",
+    "destination": "/baza/zawieszenie-przednie-sworznie-wahaczy-amortyzatory-laczniki-stabilizatora-stuki",
+    "permanent": true
+  },
+  {
+    "source": "/baza/problemy-z-ukladem-zawieszenia-tuleje-szczegoly",
+    "destination": "/baza/zawieszenie-przednie-sworznie-wahaczy-amortyzatory-laczniki-stabilizatora-stuki",
+    "permanent": true
+  },
+  {
+    "source": "/baza/problemy-z-zawieszeniem-przednim-gmt400",
+    "destination": "/baza/zawieszenie-przednie-sworznie-wahaczy-amortyzatory-laczniki-stabilizatora-stuki",
+    "permanent": true
+  },
+  {
+    "source": "/baza/problemy-z-zawieszeniem-przednim-gmt400-tipy",
+    "destination": "/baza/zawieszenie-przednie-sworznie-wahaczy-amortyzatory-laczniki-stabilizatora-stuki",
+    "permanent": true
+  },
+  {
+    "source": "/baza/punkty-masy-gmt400-lokalizacje",
+    "destination": "/baza/punkty-masy-gmt400-gdzie-sa-sm-1996-c-k-jak-sprawdzic-mase-i-zasada-bez-podklade",
+    "permanent": true
+  },
+  {
+    "source": "/baza/regeneracja-skrzyni-rozdzielczej-np241c-np243c-nv246-tipy",
+    "destination": "/baza/skrzynia-rozdzielcza-np-nv241-w-4x4-regulacja-drazka-uszczelniacz-demontaz-kolej",
+    "permanent": true
+  },
+  {
+    "source": "/baza/regulacja-wolnych-obrotow-tbi-tipy",
+    "destination": "/baza/wtrysk-paliwa-tbi-central-sfi-mpfi-kontrola-krok-po-kroku-i-wymiana-korpusu-wtry",
+    "permanent": true
+  },
+  {
+    "source": "/baza/silnik-4-3l-v6-l35-lf6",
+    "destination": "/baza/silnik-gmt400-dane-fabryczne-4-3-l35-5-0-l30-5-7-l31-7-4-l29-6-5-td-l56-l65-poje",
+    "permanent": true
+  },
+  {
+    "source": "/baza/silnik-5-0l-tbi-l03-l30",
+    "destination": "/baza/silnik-gmt400-dane-fabryczne-4-3-l35-5-0-l30-5-7-l31-7-4-l29-6-5-td-l56-l65-poje",
+    "permanent": true
+  },
+  {
+    "source": "/baza/silnik-5-7l-vortec-l31",
+    "destination": "/baza/silnik-gmt400-dane-fabryczne-4-3-l35-5-0-l30-5-7-l31-7-4-l29-6-5-td-l56-l65-poje",
+    "permanent": true
+  },
+  {
+    "source": "/baza/silnik-5-7l-vortec-l31-1996",
+    "destination": "/baza/silnik-gmt400-dane-fabryczne-4-3-l35-5-0-l30-5-7-l31-7-4-l29-6-5-td-l56-l65-poje",
+    "permanent": true
+  },
+  {
+    "source": "/baza/silnik-6-5l-turbo-diesel-l56-l65",
+    "destination": "/baza/silnik-gmt400-dane-fabryczne-4-3-l35-5-0-l30-5-7-l31-7-4-l29-6-5-td-l56-l65-poje",
+    "permanent": true
+  },
+  {
+    "source": "/baza/silnik-7-4l-big-block-l29-l19",
+    "destination": "/baza/silnik-gmt400-dane-fabryczne-4-3-l35-5-0-l30-5-7-l31-7-4-l29-6-5-td-l56-l65-poje",
+    "permanent": true
+  },
+  {
+    "source": "/baza/skrzynia-4l60e-slizganie-brak-biegow",
+    "destination": "/baza/skrzynia-4l60-e-4l80-e-usterki-kody-dtc-i-diagnostyka-gmt400-1993-2000",
+    "permanent": true
+  },
+  {
+    "source": "/baza/skrzynia-4l80e",
+    "destination": "/baza/skrzynia-4l80-e-mt1-dane-przelozenia-kolejnosc-solenoidow-rezystancje-i-zachowan",
+    "permanent": true
+  },
+  {
+    "source": "/baza/skrzynia-rozdzielcza-np241-np243",
+    "destination": "/baza/skrzynia-rozdzielcza-np241-np241hd-np243-jak-odczytac-numer-np-i-czemu-np231-233",
+    "permanent": true
+  },
+  {
+    "source": "/baza/skrzynia-rozdzielcza-np241c-np243c-nv246",
+    "destination": "/baza/skrzynia-rozdzielcza-np241-np241hd-np243-jak-odczytac-numer-np-i-czemu-np231-233",
+    "permanent": true
+  },
+  {
+    "source": "/baza/specyfikacje-silnikow-gmt400-tabela",
+    "destination": "/baza/moc-i-moment-silnikow-gmt400-wg-gm-tabele-1993-2000-technical-guide-product-info",
+    "permanent": true
+  },
+  {
+    "source": "/baza/sprawdzenie-cisnienia-paliwa-gmt400-tipy",
+    "destination": "/baza/cisnienie-paliwa-tbi-csfi-sfi-wartosci-i-test-instrukcja-serwisowa-gm-1996-i-199",
+    "permanent": true
+  },
+  {
+    "source": "/baza/sprawdzenie-cisnienia-w-oponach-gmt400-tipy",
+    "destination": "/baza/cisnienie-w-oponach-gmt400-gdzie-jest-wartosc-naklejka-certification-co-znaczy-z",
+    "permanent": true
+  },
+  {
+    "source": "/baza/sprawdzenie-ladowania-alternatora-tipy",
+    "destination": "/baza/alternator-i-rozrusznik-test-napiecia-12-4-14-7-v-8-5-v-przy-rozruchu-diagnostyk",
+    "permanent": true
+  },
+  {
+    "source": "/baza/sprawdzenie-poziomu-atf-w-4l60e-tipy",
+    "destination": "/baza/4l60-e-wymiana-atf-i-filtra-oraz-kontrola-poziomu-procedura-gm-sm-1996-c-k-sm-19",
+    "permanent": true
+  },
+  {
+    "source": "/baza/tahoe-2-drzwi",
+    "destination": "/baza/chevrolet-tahoe-2-drzwiowy-c-k1500-1995-99-wymiary-masy-silnik-5-7-hamulce-holow",
+    "permanent": true
+  },
+  {
+    "source": "/baza/uklad-chlodzenia-gmt400-schemat-i-serwis",
+    "destination": "/baza/uklad-chlodzenia-chlodnica-zbiornik-wyrownawczy-wentylator-ze-sprzeglem-termosta",
+    "permanent": true
+  },
+  {
+    "source": "/baza/uklad-hamulcowy-gmt400-schemat",
+    "destination": "/baza/klocki-tarcze-i-zaciski-hamulcowe-wymiana-momenty-docieranie-plyn-dot-3-sm-gm-19",
+    "permanent": true
+  },
+  {
+    "source": "/baza/usterka-czujnika-map-maf",
+    "destination": "/baza/czujniki-map-maf-iat-i-ect-sprawdzenie-woltomierzem-5-v-12-v-4-9-g-s-tabela-opor",
+    "permanent": true
+  },
+  {
+    "source": "/baza/uszczelki-kolektora-dolotowego-vortec",
+    "destination": "/baza/wymiana-uszczelek-kolektora-dolotowego-v6-v8-4-3-5-0-5-7-7-4-kolejnosc-prac-wg-h",
+    "permanent": true
+  },
+  {
+    "source": "/baza/uszczelki-kolektora-dolotowego-vortec-l31",
+    "destination": "/baza/wymiana-uszczelek-kolektora-dolotowego-v6-v8-4-3-5-0-5-7-7-4-kolejnosc-prac-wg-h",
+    "permanent": true
+  },
+  {
+    "source": "/baza/uszczelki-kolektora-dolotowego-vortec-objawy-i-naprawa",
+    "destination": "/baza/wymiana-uszczelek-kolektora-dolotowego-v6-v8-4-3-5-0-5-7-7-4-kolejnosc-prac-wg-h",
+    "permanent": true
+  },
+  {
+    "source": "/baza/wymiana-amortyzatorow-gmt400",
+    "destination": "/baza/amortyzatory-wymiana-przod-tyl-wymog-zgodnosci-dlugosci-i-momenty-sm-gm-1999",
+    "permanent": true
+  },
+  {
+    "source": "/baza/wymiana-amortyzatorow-gmt400-tipy",
+    "destination": "/baza/amortyzatory-wymiana-przod-tyl-wymog-zgodnosci-dlugosci-i-momenty-sm-gm-1999",
+    "permanent": true
+  },
+  {
+    "source": "/baza/wymiana-atf-w-4l60e",
+    "destination": "/baza/4l60-e-wymiana-atf-i-filtra-oraz-kontrola-poziomu-procedura-gm-sm-1996-c-k-sm-19",
+    "permanent": true
+  },
+  {
+    "source": "/baza/wymiana-atf-w-4l60e-pelna-procedura",
+    "destination": "/baza/4l60-e-wymiana-atf-i-filtra-oraz-kontrola-poziomu-procedura-gm-sm-1996-c-k-sm-19",
+    "permanent": true
+  },
+  {
+    "source": "/baza/wymiana-cewek-w-4l60e-diy",
+    "destination": "/baza/skrzynia-4l60-e-solenoidy-a-b-pcs-tcc-tryb-awaryjny-wtyczka-i-biuletyn-atra-583",
+    "permanent": true
+  },
+  {
+    "source": "/baza/wymiana-czujnika-cmp-instrukcja",
+    "destination": "/baza/czujniki-polozenia-walu-korbowego-ckp-i-walka-rozrzadu-cmp-5-0-5-7-wymiana-momen",
+    "permanent": true
+  },
+  {
+    "source": "/baza/wymiana-czujnika-maf-instrukcja",
+    "destination": "/baza/czujniki-map-maf-iat-i-ect-sprawdzenie-woltomierzem-5-v-12-v-4-9-g-s-tabela-opor",
+    "permanent": true
+  },
+  {
+    "source": "/baza/wymiana-filtra-i-plynu-4l60e-procedura",
+    "destination": "/baza/4l60-e-wymiana-atf-i-filtra-oraz-kontrola-poziomu-procedura-gm-sm-1996-c-k-sm-19",
+    "permanent": true
+  },
+  {
+    "source": "/baza/wymiana-filtra-paliwa-gmt400",
+    "destination": "/baza/filtr-paliwa-benzyna-liniowy-i-diesel-6-5l-interwal-50-000-km-numery-momenty-pro",
+    "permanent": true
+  },
+  {
+    "source": "/baza/wymiana-filtra-paliwa-gmt400-tipy",
+    "destination": "/baza/filtr-paliwa-benzyna-liniowy-i-diesel-6-5l-interwal-50-000-km-numery-momenty-pro",
+    "permanent": true
+  },
+  {
+    "source": "/baza/wymiana-klockow-hamulcowych-tipy",
+    "destination": "/baza/klocki-tarcze-i-zaciski-hamulcowe-wymiana-momenty-docieranie-plyn-dot-3-sm-gm-19",
+    "permanent": true
+  },
+  {
+    "source": "/baza/wymiana-koncowek-drazkow-kierowniczych-diy",
+    "destination": "/baza/koncowki-drazkow-kierowniczych-wymiana-momenty-54-62-n-m-zbieznosc-po-wymianie-s",
+    "permanent": true
+  },
+  {
+    "source": "/baza/wymiana-oleju-i-filtra-4l60e-pelna-instrukcja",
+    "destination": "/baza/4l60-e-wymiana-atf-i-filtra-oraz-kontrola-poziomu-procedura-gm-sm-1996-c-k-sm-19",
+    "permanent": true
+  },
+  {
+    "source": "/baza/wymiana-oleju-mostow-gmt400",
+    "destination": "/baza/wymiana-oleju-w-mostach-przod-ifs-4x4-i-tyl-8-6-9-5-10-5-11-cala-procedura-gm",
+    "permanent": true
+  },
+  {
+    "source": "/baza/wymiana-oleju-silnikowego-gmt400",
+    "destination": "/baza/wymiana-oleju-silnikowego-i-filtra-vortec-5-0-5-7-7-4-i-diesel-6-5-interwal-poje",
+    "permanent": true
+  },
+  {
+    "source": "/baza/wymiana-oleju-silnikowego-gmt400-tipy",
+    "destination": "/baza/wymiana-oleju-silnikowego-i-filtra-vortec-5-0-5-7-7-4-i-diesel-6-5-interwal-poje",
+    "permanent": true
+  },
+  {
+    "source": "/baza/wymiana-oleju-silnikowego-pelna-procedura",
+    "destination": "/baza/wymiana-oleju-silnikowego-i-filtra-vortec-5-0-5-7-7-4-i-diesel-6-5-interwal-poje",
+    "permanent": true
+  },
+  {
+    "source": "/baza/wymiana-oleju-silnikowego-szczegoly",
+    "destination": "/baza/wymiana-oleju-silnikowego-i-filtra-vortec-5-0-5-7-7-4-i-diesel-6-5-interwal-poje",
+    "permanent": true
+  },
+  {
+    "source": "/baza/wymiana-oleju-silnikowego-szczegoly-2",
+    "destination": "/baza/wymiana-oleju-silnikowego-i-filtra-vortec-5-0-5-7-7-4-i-diesel-6-5-interwal-poje",
+    "permanent": true
+  },
+  {
+    "source": "/baza/wymiana-oleju-silnikowego-tipy-2",
+    "destination": "/baza/wymiana-oleju-silnikowego-i-filtra-vortec-5-0-5-7-7-4-i-diesel-6-5-interwal-poje",
+    "permanent": true
+  },
+  {
+    "source": "/baza/wymiana-oleju-w-4l60e-szczegoly-2",
+    "destination": "/baza/4l60-e-wymiana-atf-i-filtra-oraz-kontrola-poziomu-procedura-gm-sm-1996-c-k-sm-19",
+    "permanent": true
+  },
+  {
+    "source": "/baza/wymiana-oleju-w-4l80e-szczegoly-2",
+    "destination": "/baza/skrzynia-4l80-e-wymiana-atf-i-filtra-kontrola-poziomu-pojemnosc-i-momenty-sm-gm",
+    "permanent": true
+  },
+  {
+    "source": "/baza/wymiana-oleju-w-4l80e-szczegoly-3",
+    "destination": "/baza/skrzynia-4l80-e-wymiana-atf-i-filtra-kontrola-poziomu-pojemnosc-i-momenty-sm-gm",
+    "permanent": true
+  },
+  {
+    "source": "/baza/wymiana-oleju-w-mostach-4x4",
+    "destination": "/baza/wymiana-oleju-w-mostach-przod-ifs-4x4-i-tyl-8-6-9-5-10-5-11-cala-procedura-gm",
+    "permanent": true
+  },
+  {
+    "source": "/baza/wymiana-oleju-w-mostach-4x4-szczegoly",
+    "destination": "/baza/wymiana-oleju-w-mostach-przod-ifs-4x4-i-tyl-8-6-9-5-10-5-11-cala-procedura-gm",
+    "permanent": true
+  },
+  {
+    "source": "/baza/wymiana-oleju-w-mostach-4x4-szczegoly-2",
+    "destination": "/baza/wymiana-oleju-w-mostach-przod-ifs-4x4-i-tyl-8-6-9-5-10-5-11-cala-procedura-gm",
+    "permanent": true
+  },
+  {
+    "source": "/baza/wymiana-oleju-w-mostach-gmt400-tipy",
+    "destination": "/baza/wymiana-oleju-w-mostach-przod-ifs-4x4-i-tyl-8-6-9-5-10-5-11-cala-procedura-gm",
+    "permanent": true
+  },
+  {
+    "source": "/baza/wymiana-oleju-w-mostach-ogolna",
+    "destination": "/baza/wymiana-oleju-w-mostach-przod-ifs-4x4-i-tyl-8-6-9-5-10-5-11-cala-procedura-gm",
+    "permanent": true
+  },
+  {
+    "source": "/baza/wymiana-oleju-w-mostach-ogolna-szczegoly",
+    "destination": "/baza/wymiana-oleju-w-mostach-przod-ifs-4x4-i-tyl-8-6-9-5-10-5-11-cala-procedura-gm",
+    "permanent": true
+  },
+  {
+    "source": "/baza/wymiana-oleju-w-mostach-przednich-4x4",
+    "destination": "/baza/wymiana-oleju-w-mostach-przod-ifs-4x4-i-tyl-8-6-9-5-10-5-11-cala-procedura-gm",
+    "permanent": true
+  },
+  {
+    "source": "/baza/wymiana-oleju-w-mostach-przednich-szczegoly",
+    "destination": "/baza/wymiana-oleju-w-mostach-przod-ifs-4x4-i-tyl-8-6-9-5-10-5-11-cala-procedura-gm",
+    "permanent": true
+  },
+  {
+    "source": "/baza/wymiana-oleju-w-mostach-przednich-szczegoly-2",
+    "destination": "/baza/wymiana-oleju-w-mostach-przod-ifs-4x4-i-tyl-8-6-9-5-10-5-11-cala-procedura-gm",
+    "permanent": true
+  },
+  {
+    "source": "/baza/wymiana-oleju-w-mostach-przednich-szczegoly-3",
+    "destination": "/baza/wymiana-oleju-w-mostach-przod-ifs-4x4-i-tyl-8-6-9-5-10-5-11-cala-procedura-gm",
+    "permanent": true
+  },
+  {
+    "source": "/baza/wymiana-oleju-w-mostach-przednich-tipy",
+    "destination": "/baza/wymiana-oleju-w-mostach-przod-ifs-4x4-i-tyl-8-6-9-5-10-5-11-cala-procedura-gm",
+    "permanent": true
+  },
+  {
+    "source": "/baza/wymiana-oleju-w-mostach-tylnych",
+    "destination": "/baza/wymiana-oleju-w-mostach-przod-ifs-4x4-i-tyl-8-6-9-5-10-5-11-cala-procedura-gm",
+    "permanent": true
+  },
+  {
+    "source": "/baza/wymiana-oleju-w-mostach-tylnych-pelna-instrukcja",
+    "destination": "/baza/wymiana-oleju-w-mostach-przod-ifs-4x4-i-tyl-8-6-9-5-10-5-11-cala-procedura-gm",
+    "permanent": true
+  },
+  {
+    "source": "/baza/wymiana-oleju-w-mostach-tylnych-szczegoly",
+    "destination": "/baza/wymiana-oleju-w-mostach-przod-ifs-4x4-i-tyl-8-6-9-5-10-5-11-cala-procedura-gm",
+    "permanent": true
+  },
+  {
+    "source": "/baza/wymiana-oleju-w-mostach-tylnych-szczegoly-2",
+    "destination": "/baza/wymiana-oleju-w-mostach-przod-ifs-4x4-i-tyl-8-6-9-5-10-5-11-cala-procedura-gm",
+    "permanent": true
+  },
+  {
+    "source": "/baza/wymiana-oleju-w-mostach-tylnych-szczegoly-3",
+    "destination": "/baza/wymiana-oleju-w-mostach-przod-ifs-4x4-i-tyl-8-6-9-5-10-5-11-cala-procedura-gm",
+    "permanent": true
+  },
+  {
+    "source": "/baza/wymiana-oleju-w-mostach-tylnych-tipy",
+    "destination": "/baza/wymiana-oleju-w-mostach-przod-ifs-4x4-i-tyl-8-6-9-5-10-5-11-cala-procedura-gm",
+    "permanent": true
+  },
+  {
+    "source": "/baza/wymiana-oleju-w-np241c-np243c-nv246-szczegoly",
+    "destination": "/baza/wymiana-oleju-w-skrzyni-rozdzielczej-np241-nv243-nv246-procedura-gm",
+    "permanent": true
+  },
+  {
+    "source": "/baza/wymiana-oleju-w-np241c-np243c-nv246-szczegoly-2",
+    "destination": "/baza/wymiana-oleju-w-skrzyni-rozdzielczej-np241-nv243-nv246-procedura-gm",
+    "permanent": true
+  },
+  {
+    "source": "/baza/wymiana-oleju-w-np241c-np243c-nv246-szczegoly-3",
+    "destination": "/baza/wymiana-oleju-w-skrzyni-rozdzielczej-np241-nv243-nv246-procedura-gm",
+    "permanent": true
+  },
+  {
+    "source": "/baza/wymiana-oleju-w-np241c-np243c-nv246-tipy",
+    "destination": "/baza/wymiana-oleju-w-skrzyni-rozdzielczej-np241-nv243-nv246-procedura-gm",
+    "permanent": true
+  },
+  {
+    "source": "/baza/wymiana-oleju-w-reduktorze-skrzynia-rozdzielcza",
+    "destination": "/baza/wymiana-oleju-w-skrzyni-rozdzielczej-np241-nv243-nv246-procedura-gm",
+    "permanent": true
+  },
+  {
+    "source": "/baza/wymiana-oleju-w-reduktorze-szczegoly",
+    "destination": "/baza/wymiana-oleju-w-skrzyni-rozdzielczej-np241-nv243-nv246-procedura-gm",
+    "permanent": true
+  },
+  {
+    "source": "/baza/wymiana-oleju-w-skrzyni-4l60e",
+    "destination": "/baza/4l60-e-wymiana-atf-i-filtra-oraz-kontrola-poziomu-procedura-gm-sm-1996-c-k-sm-19",
+    "permanent": true
+  },
+  {
+    "source": "/baza/wymiana-oleju-w-skrzyni-4l60e-szczegoly",
+    "destination": "/baza/4l60-e-wymiana-atf-i-filtra-oraz-kontrola-poziomu-procedura-gm-sm-1996-c-k-sm-19",
+    "permanent": true
+  },
+  {
+    "source": "/baza/wymiana-oleju-w-skrzyni-4l60e-tipy",
+    "destination": "/baza/4l60-e-wymiana-atf-i-filtra-oraz-kontrola-poziomu-procedura-gm-sm-1996-c-k-sm-19",
+    "permanent": true
+  },
+  {
+    "source": "/baza/wymiana-oleju-w-skrzyni-4l80e",
+    "destination": "/baza/skrzynia-4l80-e-wymiana-atf-i-filtra-kontrola-poziomu-pojemnosc-i-momenty-sm-gm",
+    "permanent": true
+  },
+  {
+    "source": "/baza/wymiana-oleju-w-skrzyni-4l80e-szczegoly",
+    "destination": "/baza/skrzynia-4l80-e-wymiana-atf-i-filtra-kontrola-poziomu-pojemnosc-i-momenty-sm-gm",
+    "permanent": true
+  },
+  {
+    "source": "/baza/wymiana-oleju-w-skrzyni-4l80e-tipy",
+    "destination": "/baza/skrzynia-4l80-e-wymiana-atf-i-filtra-kontrola-poziomu-pojemnosc-i-momenty-sm-gm",
+    "permanent": true
+  },
+  {
+    "source": "/baza/wymiana-oleju-w-skrzyni-manualnej",
+    "destination": "/baza/oleje-w-skrzyni-manualnej-nvg-3500-4500-skrzyni-rozdzielczej-i-mostach-typy-poje",
+    "permanent": true
+  },
+  {
+    "source": "/baza/wymiana-oleju-w-skrzyni-manualnej-szczegoly",
+    "destination": "/baza/oleje-w-skrzyni-manualnej-nvg-3500-4500-skrzyni-rozdzielczej-i-mostach-typy-poje",
+    "permanent": true
+  },
+  {
+    "source": "/baza/wymiana-oleju-w-skrzyni-manualnej-szczegoly-2",
+    "destination": "/baza/oleje-w-skrzyni-manualnej-nvg-3500-4500-skrzyni-rozdzielczej-i-mostach-typy-poje",
+    "permanent": true
+  },
+  {
+    "source": "/baza/wymiana-oleju-w-skrzyni-manualnej-szczegoly-3",
+    "destination": "/baza/oleje-w-skrzyni-manualnej-nvg-3500-4500-skrzyni-rozdzielczej-i-mostach-typy-poje",
+    "permanent": true
+  },
+  {
+    "source": "/baza/wymiana-oleju-w-skrzyni-manualnej-tipy",
+    "destination": "/baza/oleje-w-skrzyni-manualnej-nvg-3500-4500-skrzyni-rozdzielczej-i-mostach-typy-poje",
+    "permanent": true
+  },
+  {
+    "source": "/baza/wymiana-oleju-w-skrzyni-rozdzielczej",
+    "destination": "/baza/wymiana-oleju-w-skrzyni-rozdzielczej-np241-nv243-nv246-procedura-gm",
+    "permanent": true
+  },
+  {
+    "source": "/baza/wymiana-oleju-w-skrzyni-rozdzielczej-np241c-np243c-nv246",
+    "destination": "/baza/wymiana-oleju-w-skrzyni-rozdzielczej-np241-nv243-nv246-procedura-gm",
+    "permanent": true
+  },
+  {
+    "source": "/baza/wymiana-oleju-w-skrzyni-rozdzielczej-np241c-np243c-nv246-3fad7bf1c13981b885f0d27f3c2f7a9b",
+    "destination": "/baza/wymiana-oleju-w-skrzyni-rozdzielczej-np241-nv243-nv246-procedura-gm",
+    "permanent": true
+  },
+  {
+    "source": "/baza/wymiana-oleju-w-skrzyni-rozdzielczej-np241c-np243c-nv246-diy",
+    "destination": "/baza/wymiana-oleju-w-skrzyni-rozdzielczej-np241-nv243-nv246-procedura-gm",
+    "permanent": true
+  },
+  {
+    "source": "/baza/wymiana-oleju-w-skrzyni-rozdzielczej-ogolna",
+    "destination": "/baza/wymiana-oleju-w-skrzyni-rozdzielczej-np241-nv243-nv246-procedura-gm",
+    "permanent": true
+  },
+  {
+    "source": "/baza/wymiana-oleju-w-skrzyni-rozdzielczej-szczegoly",
+    "destination": "/baza/wymiana-oleju-w-skrzyni-rozdzielczej-np241-nv243-nv246-procedura-gm",
+    "permanent": true
+  },
+  {
+    "source": "/baza/wymiana-oleju-w-skrzyni-rozdzielczej-szczegoly-2",
+    "destination": "/baza/wymiana-oleju-w-skrzyni-rozdzielczej-np241-nv243-nv246-procedura-gm",
+    "permanent": true
+  },
+  {
+    "source": "/baza/wymiana-oleju-w-skrzyni-rozdzielczej-szczegoly-3",
+    "destination": "/baza/wymiana-oleju-w-skrzyni-rozdzielczej-np241-nv243-nv246-procedura-gm",
+    "permanent": true
+  },
+  {
+    "source": "/baza/wymiana-oleju-w-skrzyni-rozdzielczej-tipy-2",
+    "destination": "/baza/wymiana-oleju-w-skrzyni-rozdzielczej-np241-nv243-nv246-procedura-gm",
+    "permanent": true
+  },
+  {
+    "source": "/baza/wymiana-paska-klinowego-gmt400-tipy",
+    "destination": "/baza/pasek-napedu-osprzetu-wieloklinowy-5-0-5-7-i-6-5l-wymiana-kontrola-procedura-gm",
+    "permanent": true
+  },
+  {
+    "source": "/baza/wymiana-paska-klinowego-wieloklinowego",
+    "destination": "/baza/pasek-napedu-osprzetu-wieloklinowy-5-0-5-7-i-6-5l-wymiana-kontrola-procedura-gm",
+    "permanent": true
+  },
+  {
+    "source": "/baza/wymiana-paska-wieloklinowego-vortec",
+    "destination": "/baza/pasek-napedu-osprzetu-wieloklinowy-5-0-5-7-i-6-5l-wymiana-kontrola-procedura-gm",
+    "permanent": true
+  },
+  {
+    "source": "/baza/wymiana-paska-wieloklinowego-vortec-pelna-instrukcja",
+    "destination": "/baza/pasek-napedu-osprzetu-wieloklinowy-5-0-5-7-i-6-5l-wymiana-kontrola-procedura-gm",
+    "permanent": true
+  },
+  {
+    "source": "/baza/wymiana-plynu-chlodniczego-gmt400",
+    "destination": "/baza/plyn-chlodniczy-dex-cool-wymiana-mieszanka-50-50-pojemnosc-ukladu-i-interwal-wg",
+    "permanent": true
+  },
+  {
+    "source": "/baza/wymiana-plynu-chlodniczego-gmt400-3fad7bf1c13981ea9a0ad0b7b48e3301",
+    "destination": "/baza/plyn-chlodniczy-dex-cool-wymiana-mieszanka-50-50-pojemnosc-ukladu-i-interwal-wg",
+    "permanent": true
+  },
+  {
+    "source": "/baza/wymiana-plynu-chlodniczego-gmt400-tipy",
+    "destination": "/baza/plyn-chlodniczy-dex-cool-wymiana-mieszanka-50-50-pojemnosc-ukladu-i-interwal-wg",
+    "permanent": true
+  },
+  {
+    "source": "/baza/wymiana-plynu-chlodniczego-pelna-instrukcja",
+    "destination": "/baza/plyn-chlodniczy-dex-cool-wymiana-mieszanka-50-50-pojemnosc-ukladu-i-interwal-wg",
+    "permanent": true
+  },
+  {
+    "source": "/baza/wymiana-plynu-chlodniczego-szczegoly",
+    "destination": "/baza/plyn-chlodniczy-dex-cool-wymiana-mieszanka-50-50-pojemnosc-ukladu-i-interwal-wg",
+    "permanent": true
+  },
+  {
+    "source": "/baza/wymiana-plynu-chlodniczego-szczegoly-2",
+    "destination": "/baza/plyn-chlodniczy-dex-cool-wymiana-mieszanka-50-50-pojemnosc-ukladu-i-interwal-wg",
+    "permanent": true
+  },
+  {
+    "source": "/baza/wymiana-plynu-chlodniczego-tipy-2",
+    "destination": "/baza/plyn-chlodniczy-dex-cool-wymiana-mieszanka-50-50-pojemnosc-ukladu-i-interwal-wg",
+    "permanent": true
+  },
+  {
+    "source": "/baza/wymiana-plynu-hamulcowego",
+    "destination": "/baza/przewody-hamulcowe-sztywne-wymiana-i-odpowietrzanie-procedura-gm",
+    "permanent": true
+  },
+  {
+    "source": "/baza/wymiana-plynu-hamulcowego-gmt400-tipy",
+    "destination": "/baza/przewody-hamulcowe-sztywne-wymiana-i-odpowietrzanie-procedura-gm",
+    "permanent": true
+  },
+  {
+    "source": "/baza/wymiana-plynu-hamulcowego-i-odpowietrzanie-diy",
+    "destination": "/baza/przewody-hamulcowe-sztywne-wymiana-i-odpowietrzanie-procedura-gm",
+    "permanent": true
+  },
+  {
+    "source": "/baza/wymiana-plynu-hamulcowego-szczegoly",
+    "destination": "/baza/przewody-hamulcowe-sztywne-wymiana-i-odpowietrzanie-procedura-gm",
+    "permanent": true
+  },
+  {
+    "source": "/baza/wymiana-plynu-w-skrzyni-automatycznej-pelna",
+    "destination": "/baza/4l60-e-wymiana-atf-i-filtra-oraz-kontrola-poziomu-procedura-gm-sm-1996-c-k-sm-19",
+    "permanent": true
+  },
+  {
+    "source": "/baza/wymiana-plynu-wspomagania-kierownicy",
+    "destination": "/baza/plyn-i-pompa-wspomagania-kierownicy-poziom-odpowietrzanie-momenty-pompy-5-0-5-7",
+    "permanent": true
+  },
+  {
+    "source": "/baza/wymiana-plynu-wspomagania-kierownicy-pelna-instrukcja",
+    "destination": "/baza/plyn-i-pompa-wspomagania-kierownicy-poziom-odpowietrzanie-momenty-pompy-5-0-5-7",
+    "permanent": true
+  },
+  {
+    "source": "/baza/wymiana-plynu-wspomagania-kierownicy-tipy",
+    "destination": "/baza/plyn-i-pompa-wspomagania-kierownicy-poziom-odpowietrzanie-momenty-pompy-5-0-5-7",
+    "permanent": true
+  },
+  {
+    "source": "/baza/wymiana-plynu-wspomagania-szczegoly",
+    "destination": "/baza/plyn-i-pompa-wspomagania-kierownicy-poziom-odpowietrzanie-momenty-pompy-5-0-5-7",
+    "permanent": true
+  },
+  {
+    "source": "/baza/wymiana-pompy-paliwa-instrukcja",
+    "destination": "/baza/pompa-paliwa-czujnik-poziomu-w-zbiorniku-wymiana-procedura-gm",
+    "permanent": true
+  },
+  {
+    "source": "/baza/wymiana-pompy-wody-vortec-diy",
+    "destination": "/baza/termostat-i-pompa-wody-5-0-5-7-7-4-wymiana-i-odpowietrzenie-procedura-gm",
+    "permanent": true
+  },
+  {
+    "source": "/baza/wymiana-przewodow-hamulcowych-korozja",
+    "destination": "/baza/przewody-hamulcowe-sztywne-wymiana-i-odpowietrzanie-procedura-gm",
+    "permanent": true
+  },
+  {
+    "source": "/baza/wymiana-rozrusznika-gmt400-krok-po-kroku",
+    "destination": "/baza/alternator-i-rozrusznik-test-napiecia-12-4-14-7-v-8-5-v-przy-rozruchu-diagnostyk",
+    "permanent": true
+  },
+  {
+    "source": "/baza/wymiana-swiec-zaplonowych-vortec",
+    "destination": "/baza/swiece-zaplonowe-vortec-5-0-5-7-7-4-wymiana-typ-ac-41-932-przerwa-1-52-mm-moment",
+    "permanent": true
+  },
+  {
+    "source": "/baza/wymiana-swiec-zaplonowych-vortec-pelna-instrukcja",
+    "destination": "/baza/swiece-zaplonowe-vortec-5-0-5-7-7-4-wymiana-typ-ac-41-932-przerwa-1-52-mm-moment",
+    "permanent": true
+  },
+  {
+    "source": "/baza/wymiana-swiec-zaplonowych-vortec-tipy",
+    "destination": "/baza/swiece-zaplonowe-vortec-5-0-5-7-7-4-wymiana-typ-ac-41-932-przerwa-1-52-mm-moment",
+    "permanent": true
+  },
+  {
+    "source": "/baza/wymiana-swiec-zarowych-6-5l-diesel-diy",
+    "destination": "/baza/swiece-zarowe-diesla-6-5l-wymiana-narzedzie-j-39083-moment-17-n-m-sm-gm-1999",
+    "permanent": true
+  },
+  {
+    "source": "/baza/wymiana-swiec-zarowych-6-5l-tipy",
+    "destination": "/baza/swiece-zarowe-diesla-6-5l-wymiana-narzedzie-j-39083-moment-17-n-m-sm-gm-1999",
+    "permanent": true
+  },
+  {
+    "source": "/baza/wymiana-swiec-zarowych-diesel-6-5l",
+    "destination": "/baza/swiece-zarowe-diesla-6-5l-wymiana-narzedzie-j-39083-moment-17-n-m-sm-gm-1999",
+    "permanent": true
+  },
+  {
+    "source": "/baza/wymiana-swiec-zarowych-szczegoly",
+    "destination": "/baza/swiece-zarowe-diesla-6-5l-wymiana-narzedzie-j-39083-moment-17-n-m-sm-gm-1999",
+    "permanent": true
+  },
+  {
+    "source": "/baza/wymiana-tarcz-i-klockow-hamulcowych",
+    "destination": "/baza/klocki-tarcze-i-zaciski-hamulcowe-wymiana-momenty-docieranie-plyn-dot-3-sm-gm-19",
+    "permanent": true
+  },
+  {
+    "source": "/baza/wymiana-tarczy-hamulcowej-przedniej-diy",
+    "destination": "/baza/klocki-tarcze-i-zaciski-hamulcowe-wymiana-momenty-docieranie-plyn-dot-3-sm-gm-19",
+    "permanent": true
+  },
+  {
+    "source": "/baza/wymiana-termostatu-i-pompy-wody-zestaw-diy",
+    "destination": "/baza/termostat-i-pompa-wody-5-0-5-7-7-4-wymiana-i-odpowietrzenie-procedura-gm",
+    "permanent": true
+  },
+  {
+    "source": "/baza/wymiana-tulei-wahaczy-tipy-diy",
+    "destination": "/baza/zawieszenie-gmt400-tabela-momentow-n-m-2wd-4wd-tyl-sworznie-sprezyna-drazek-skre",
+    "permanent": true
+  },
+  {
+    "source": "/baza/wymiana-uszczelek-kolektora-dolotowego-instrukcja",
+    "destination": "/baza/wymiana-uszczelek-kolektora-dolotowego-v6-v8-4-3-5-0-5-7-7-4-kolejnosc-prac-wg-h",
+    "permanent": true
+  },
+  {
+    "source": "/baza/wymiana-uszczelek-kolektora-dolotowego-vortec-l31-diy",
+    "destination": "/baza/wymiana-uszczelek-kolektora-dolotowego-v6-v8-4-3-5-0-5-7-7-4-kolejnosc-prac-wg-h",
+    "permanent": true
+  },
+  {
+    "source": "/baza/wymiana-uszczelek-kolektora-vortec-l31-pelna-procedura",
+    "destination": "/baza/wymiana-uszczelek-kolektora-dolotowego-v6-v8-4-3-5-0-5-7-7-4-kolejnosc-prac-wg-h",
+    "permanent": true
+  }
+]
