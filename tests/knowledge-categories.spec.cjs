@@ -42,7 +42,20 @@ test('category search and clearing query restore visible entries', async ({ page
 test('fetch failure is distinct from empty data and retry works', async ({ page }) => {
   // Gdy serwer wyrenderował listę (ISR, initialItems), błąd odświeżania w tle jest celowo cichy — lista zostaje widoczna.
   const serverHtml = await (await page.request.get(`${BASE}/poradniki`)).text();
-  test.skip(/href="\/baza\/[0-9a-f-]{36}"/.test(serverHtml), 'serwer wyrenderował wpisy (initialItems) — komunikat błędu dotyczy tylko trybu bez danych z serwera');
+  const hasInitialItems = /href="\/baza\/[0-9a-f-]{36}"/.test(serverHtml);
+  if (hasInitialItems) {
+    const headingHtml = serverHtml.match(/<h2[^>]*>([\s\S]*?)<\/h2>/i);
+    const entryHref = headingHtml?.[1]?.match(/href="(\/baza\/[0-9a-f-]{36})"/i)?.[1];
+    const entryTitle = headingHtml?.[1]?.replace(/<[^>]*>/g, '').replace(/\s+/g, ' ').trim();
+    if (!entryHref || !entryTitle) throw new Error('Nie udało się odczytać pierwszego wpisu wyrenderowanego przez serwer');
+    await page.route('**/api/notion', route => route.fulfill({ status: 503, json: { error: 'test' } }));
+    await page.goto(`${BASE}/poradniki`);
+    const serverEntry = page.getByRole('link', { name: entryTitle, exact: true });
+    await expect(serverEntry).toBeVisible();
+    await expect(serverEntry).toHaveAttribute('href', entryHref);
+    await expect(page.getByRole('alert').filter({ hasText: 'Nie udało się pobrać treści' })).toHaveCount(0);
+    return;
+  }
   let requests = 0;
   await page.route('**/api/notion', route => {
     requests++;
