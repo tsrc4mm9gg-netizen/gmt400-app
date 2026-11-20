@@ -26,6 +26,13 @@ function decide(env = process.env) {
     try { git('fetch', '--quiet', '--depth=50', 'origin', previous); git('cat-file', '-e', `${previous}^{commit}`); }
     catch { return ['build', `previous deployment ${previous} not available in clone`]; }
   }
+
+  let head = env.VERCEL_GIT_COMMIT_SHA;
+  if (!head) {
+    try { head = git('rev-parse', 'HEAD'); } catch { return ['build', 'cannot resolve HEAD commit'] }
+  }
+  if (head === previous) return ['build', 'redeploy of the same commit'];
+
   const files = git('diff', '--name-only', previous, 'HEAD').split('\n').filter(Boolean);
   const relevant = files.filter(file => !NON_DEPLOY.some(rule => rule.test(file)));
   if (relevant.length) return ['build', `changes since last deployment include app files: ${relevant.slice(0, 10).join(', ')}`];
