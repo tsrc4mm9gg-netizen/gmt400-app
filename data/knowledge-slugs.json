@@ -3172,12 +3172,24 @@
     "slug": "wnetrze-gmt400-05-faq"
   },
   {
+    "id": "41ed7bf1c13981049710ef5404a80ca5",
+    "slug": "zamiennosc-gmt400-01-zasady-i-rozpoznanie-rocznika"
+  },
+  {
     "id": "41ed7bf1c1398132af4cd18d9e3cdf78",
     "slug": "tuning-gmt400-03-strojenie-skrzyni-4l60e"
   },
   {
+    "id": "41ed7bf1c13981389639f76f062d4092",
+    "slug": "zamiennosc-gmt400-02-nadwozie-i-blacharka"
+  },
+  {
     "id": "41ed7bf1c139813abee2ec494c60b8c4",
     "slug": "tuning-gmt400-04-kroki-i-bezpieczenstwo"
+  },
+  {
+    "id": "41ed7bf1c139815189f9de87f26d38ad",
+    "slug": "zamiennosc-gmt400-05-faq-czy-ta-czesc-pasuje-i-luki"
   },
   {
     "id": "41ed7bf1c1398151acabe4517cf1514c",
@@ -3190,6 +3202,14 @@
   {
     "id": "41ed7bf1c1398189ae45e5ea85d17d25",
     "slug": "tuning-gmt400-02-narzedzia-i-koszty"
+  },
+  {
+    "id": "41ed7bf1c139818dbb98de944ac7d78c",
+    "slug": "zamiennosc-gmt400-03-skrzynia-4l60e-zamiennosc-rocznikowa"
+  },
+  {
+    "id": "41ed7bf1c13981c6952acc097c3e8eba",
+    "slug": "zamiennosc-gmt400-04-skrzynia-rozdzielcza-i-osie"
   },
   {
     "id": "41ed7bf1c13981c8a1c4ec6b9a873d10",
