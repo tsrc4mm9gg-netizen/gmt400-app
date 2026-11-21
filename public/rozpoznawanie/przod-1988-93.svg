@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520" role="img" aria-labelledby="tytul opis">
+  <title id="tytul">Przód GMT400 1988–1993 — schemat atrapy</title>
+  <desc id="opis">Uproszczony rysunek przedniej części GMT400 z lat 1988–1993. Pokazuje prostokątną atrapę z pionowymi żebrami. Rysunek nie przedstawia lamp ani nie rozstrzyga ich wyglądu.</desc>
+  <rect width="800" height="520" fill="#f5f6f7"/>
+  <g fill="none" stroke="#1f2328" stroke-width="3" stroke-linejoin="round">
+    <path d="M120 300 L150 170 L650 170 L680 300 Z" fill="#e4e7ea"/>
+    <path d="M150 170 Q400 140 650 170" />
+    <rect x="120" y="300" width="560" height="120" rx="8" fill="#dcdfe3"/>
+    <rect x="250" y="205" width="300" height="85" rx="4" fill="#cfd3d8"/>
+    <g stroke-width="2">
+      <path d="M270 205 V290 M290 205 V290 M310 205 V290 M330 205 V290 M350 205 V290 M370 205 V290 M390 205 V290 M410 205 V290 M430 205 V290 M450 205 V290 M470 205 V290 M490 205 V290 M510 205 V290 M530 205 V290"/>
+    </g>
+    <path d="M120 420 H680" stroke-width="4"/>
+    <path d="M160 420 V455 M640 420 V455" stroke-width="2"/>
+  </g>
+  <g font-family="system-ui, sans-serif" fill="#1f2328">
+    <text x="400" y="60" text-anchor="middle" font-size="30" font-weight="700">Przód GMT400 · 1988–1993</text>
+    <text x="400" y="92" text-anchor="middle" font-size="18" fill="#4b5563">Atrapa: prostokątna, pionowe żebra</text>
+    <text x="400" y="352" text-anchor="middle" font-size="17" fill="#374151">Atrapa chłodnicy</text>
+    <text x="400" y="500" text-anchor="middle" font-size="15" fill="#4b5563">Schemat poglądowy, nie zdjęcie</text>
+  </g>
+</svg>
