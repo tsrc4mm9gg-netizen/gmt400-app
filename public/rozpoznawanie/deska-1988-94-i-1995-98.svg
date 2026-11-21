@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 560" role="img" aria-labelledby="tytul opis">
+  <title id="tytul">Deska rozdzielcza GMT400 — porównanie 1988–1994 i 1995–1998</title>
+  <desc id="opis">Dwa panele obok siebie. Po lewej prostokątny kształt deski z lat 1988–1994. Po prawej zaokrąglony kształt deski z lat 1995–1998. Rysunek pokazuje wyłącznie kształt deski.</desc>
+  <rect width="1100" height="560" fill="#f5f6f7"/>
+  <g font-family="system-ui, sans-serif" fill="#1f2328">
+    <text x="550" y="52" text-anchor="middle" font-size="30" font-weight="700">Deska rozdzielcza GMT400 — kształt</text>
+    <text x="550" y="84" text-anchor="middle" font-size="18" fill="#4b5563">Prostokątny vs zaokrąglony panel</text>
+  </g>
+  <g fill="none" stroke="#1f2328" stroke-width="3" stroke-linejoin="round">
+    <rect x="60" y="140" width="460" height="300" rx="6" fill="#e4e7ea"/>
+    <path d="M60 220 H520" />
+    <path d="M60 360 H520" />
+    <rect x="110" y="250" width="150" height="80" rx="4" fill="#cfd3d8"/>
+    <rect x="330" y="250" width="140" height="80" rx="4" fill="#cfd3d8"/>
+    <path d="M580 440 V300 Q580 240 640 240 H940 Q1000 240 1000 300 V440 Z" fill="#e4e7ea"/>
+    <path d="M580 330 H1000" />
+    <path d="M580 390 H1000" />
+    <rect x="630" y="270" width="130" height="45" rx="22" fill="#cfd3d8"/>
+    <rect x="820" y="270" width="130" height="45" rx="22" fill="#cfd3d8"/>
+  </g>
+  <g font-family="system-ui, sans-serif" fill="#1f2328" text-anchor="middle">
+    <text x="290" y="490" font-size="22" font-weight="700">1988–1994</text>
+    <text x="290" y="518" font-size="16" fill="#4b5563">prostokątny kształt deski</text>
+    <text x="790" y="490" font-size="22" font-weight="700">1995–1998</text>
+    <text x="790" y="518" font-size="16" fill="#4b5563">zaokrąglony kształt deski</text>
+    <text x="550" y="548" font-size="15" fill="#4b5563">Schemat poglądowy, nie zdjęcie</text>
+  </g>
+</svg>
