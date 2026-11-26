@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Własny rysunek wektorowy gmt400.pl (bez grafik AI, bez kopiowania ilustracji CHARM/GM). Uproszczenie opisu z dokumentacji serwisowej, nie schemat instalacji. Rysunek poglądowy, nie w skali. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1290" width="900" height="1290" role="img" aria-label="Szyby elektryczne: zasilanie, masa i połączenia przełączników z silnikami, schemat poglądowy">
+<title>Szyby elektryczne: zasilanie, masa i połączenia przełączników z silnikami, schemat poglądowy</title>
+<defs><pattern id="g" width="30" height="30" patternUnits="userSpaceOnUse"><circle cx="15" cy="15" r="1.2" fill="#1f1f24"/></pattern>
+<marker id="ao" markerUnits="userSpaceOnUse" markerWidth="14" markerHeight="14" refX="12" refY="7" orient="auto"><path d="M0,0 L14,7 L0,14 z" fill="#f59e0b"/></marker>
+<marker id="ar" markerUnits="userSpaceOnUse" markerWidth="14" markerHeight="14" refX="12" refY="7" orient="auto"><path d="M0,0 L14,7 L0,14 z" fill="#d4d4d8"/></marker></defs>
+<rect width="900" height="1290" fill="#0d0d0f"/><rect width="900" height="1290" fill="url(#g)"/>
+<g font-family="DejaVu Sans, Arial, sans-serif">
+<rect x="0" y="0" width="900" height="8" fill="#a1a1aa"/>
+<text x="870" y="40" font-size="16" fill="#a3a3a3" text-anchor="end">gmt400.pl · schemat poglądowy</text>
+<text x="30" y="76" font-size="29" fill="#f5f5f5" font-weight="bold">Szyby elektryczne: zasilanie, masa, silniki</text>
+<text x="30" y="112" font-size="19" fill="#d4d4d8">Uproszczony opis z dokumentacji CHARM (SZ1, SZ2, SZ4–SZ7).</text>
+<text x="30" y="138" font-size="19" fill="#d4d4d8">To nie jest schemat instalacji. Wariant odniesienia: Suburban 5.7, 1999.</text>
+<line x1="30" y1="160" x2="870" y2="160" stroke="#3f3f46" stroke-width="2"/>
+<text x="30" y="196" font-size="17" font-weight="bold" fill="#f59e0b" text-anchor="start">TOR ZASILANIA</text>
+<rect x="30" y="210" width="840" height="70" rx="10" fill="#18181b" stroke="#f59e0b" stroke-width="2.5"/>
+<text x="450.0" y="238" font-size="17" font-weight="bold" fill="#f5f5f5" text-anchor="middle">Bezpiecznik automatyczny PWR WDO</text>
+<text x="450.0" y="261" font-size="15" fill="#d4d4d8" text-anchor="middle">zasilanie z zapłonu (RUN)</text>
+<line x1="450" y1="280" x2="450" y2="326" stroke="#f59e0b" stroke-width="4" marker-end="url(#ao)"/>
+<text x="466" y="308" font-size="16" fill="#fbbf24">343 (żółty)</text>
+<rect x="30" y="330" width="840" height="120" rx="10" fill="#18181b" stroke="#a1a1aa" stroke-width="2.5"/>
+<text x="450.0" y="358" font-size="17" font-weight="bold" fill="#f5f5f5" text-anchor="middle">Przełącznik główny kierowcy (lewe przednie drzwi)</text>
+<text x="450.0" y="381" font-size="15" fill="#d4d4d8" text-anchor="middle">steruje wszystkimi szybami</text>
+<text x="450.0" y="404" font-size="15" fill="#d4d4d8" text-anchor="middle">w środku: blokada okien (wyłącza przełączniki pasażerów)</text>
+<text x="450.0" y="427" font-size="15" fill="#d4d4d8" text-anchor="middle">masa: przewód 150 (czarny) do punktu G202</text>
+<line x1="165" y1="450" x2="165" y2="560" stroke="#f59e0b" stroke-width="4" marker-end="url(#ao)"/>
+<line x1="450" y1="450" x2="450" y2="560" stroke="#f59e0b" stroke-width="4" marker-end="url(#ao)"/>
+<line x1="735" y1="450" x2="735" y2="560" stroke="#f59e0b" stroke-width="4" marker-end="url(#ao)"/>
+<text x="179" y="534" font-size="15" fill="#fbbf24">1307 (granatowy)</text>
+<text x="464" y="534" font-size="15" fill="#fbbf24">1307</text>
+<text x="749" y="534" font-size="15" fill="#fbbf24">1307</text>
+<rect x="30" y="564" width="270" height="118" rx="10" fill="#18181b" stroke="#a1a1aa" stroke-width="2.5"/>
+<text x="165.0" y="592" font-size="17" font-weight="bold" fill="#f5f5f5" text-anchor="middle">Przełącznik RF</text>
+<text x="165.0" y="615" font-size="15" fill="#d4d4d8" text-anchor="middle">prawy przedni</text>
+<text x="165.0" y="638" font-size="15" fill="#d4d4d8" text-anchor="middle">pary do przełącznika głównego:</text>
+<text x="165.0" y="661" font-size="15" fill="#d4d4d8" text-anchor="middle">167 i 166</text>
+<rect x="315" y="564" width="270" height="118" rx="10" fill="#18181b" stroke="#a1a1aa" stroke-width="2.5"/>
+<text x="450.0" y="592" font-size="17" font-weight="bold" fill="#f5f5f5" text-anchor="middle">Przełącznik RR</text>
+<text x="450.0" y="615" font-size="15" fill="#d4d4d8" text-anchor="middle">prawy tylny</text>
+<text x="450.0" y="638" font-size="15" fill="#d4d4d8" text-anchor="middle">pary do przełącznika głównego:</text>
+<text x="450.0" y="661" font-size="15" fill="#d4d4d8" text-anchor="middle">170 i 171</text>
+<rect x="600" y="564" width="270" height="118" rx="10" fill="#18181b" stroke="#a1a1aa" stroke-width="2.5"/>
+<text x="735.0" y="592" font-size="17" font-weight="bold" fill="#f5f5f5" text-anchor="middle">Przełącznik LR</text>
+<text x="735.0" y="615" font-size="15" fill="#d4d4d8" text-anchor="middle">lewy tylny</text>
+<text x="735.0" y="638" font-size="15" fill="#d4d4d8" text-anchor="middle">pary do przełącznika głównego:</text>
+<text x="735.0" y="661" font-size="15" fill="#d4d4d8" text-anchor="middle">169 i 168</text>
+<line x1="165" y1="682" x2="165" y2="780" stroke="#d4d4d8" stroke-width="3" stroke-dasharray="6 5" marker-end="url(#ar)"/>
+<line x1="450" y1="682" x2="450" y2="780" stroke="#d4d4d8" stroke-width="3" stroke-dasharray="6 5" marker-end="url(#ar)"/>
+<line x1="735" y1="682" x2="735" y2="780" stroke="#d4d4d8" stroke-width="3" stroke-dasharray="6 5" marker-end="url(#ar)"/>
+<text x="179" y="762" font-size="15" fill="#a3a3a3">666 i 667</text>
+<text x="464" y="762" font-size="15" fill="#a3a3a3">670 i 671</text>
+<text x="749" y="762" font-size="15" fill="#a3a3a3">nie odczytano</text>
+<rect x="30" y="784" width="270" height="104" rx="10" fill="#18181b" stroke="#a1a1aa" stroke-width="2.5"/>
+<text x="165.0" y="812" font-size="17" font-weight="bold" fill="#f5f5f5" text-anchor="middle">Silnik RF</text>
+<text x="165.0" y="835" font-size="15" fill="#d4d4d8" text-anchor="middle">kierunek zależy</text>
+<text x="165.0" y="858" font-size="15" fill="#d4d4d8" text-anchor="middle">od polaryzacji napięcia</text>
+<rect x="315" y="784" width="270" height="104" rx="10" fill="#18181b" stroke="#a1a1aa" stroke-width="2.5"/>
+<text x="450.0" y="812" font-size="17" font-weight="bold" fill="#f5f5f5" text-anchor="middle">Silnik RR</text>
+<text x="450.0" y="835" font-size="15" fill="#d4d4d8" text-anchor="middle">kierunek zależy</text>
+<text x="450.0" y="858" font-size="15" fill="#d4d4d8" text-anchor="middle">od polaryzacji napięcia</text>
+<rect x="600" y="784" width="270" height="104" rx="10" fill="#18181b" stroke="#a1a1aa" stroke-width="2.5"/>
+<text x="735.0" y="812" font-size="17" font-weight="bold" fill="#f5f5f5" text-anchor="middle">Silnik LR</text>
+<text x="735.0" y="835" font-size="15" fill="#d4d4d8" text-anchor="middle">kierunek zależy</text>
+<text x="735.0" y="858" font-size="15" fill="#d4d4d8" text-anchor="middle">od polaryzacji napięcia</text>
+<line x1="30" y1="916" x2="870" y2="916" stroke="#3f3f46" stroke-width="2"/>
+<text x="30" y="946" font-size="16" fill="#e4e4e7">Silnik lewej przedniej szyby jest zasilany z przełącznika głównego</text>
+<text x="30" y="972" font-size="16" fill="#e4e4e7">(przewody 164 i 165, SZ2) i nie jest na rysunku.</text>
+<text x="30" y="1004" font-size="16" fill="#a3a3a3">Linie przerywane to pary przewodów, nie kierunek przepływu prądu.</text>
+<rect x="30" y="1040" width="840" height="220" rx="10" fill="#1c1917" stroke="#f59e0b" stroke-width="2.5"/>
+<text x="54" y="1078" font-size="17" font-weight="bold" fill="#f59e0b" text-anchor="start">UWAGA</text>
+<text x="54" y="1112" font-size="16" fill="#e4e4e7">Numery przewodów i kolory dotyczą wariantu odniesienia.</text>
+<text x="54" y="1140" font-size="16" fill="#e4e4e7">Inne roczniki i konfiguracje: do weryfikacji.</text>
+<text x="54" y="1168" font-size="16" fill="#e4e4e7">Diagnostyka tylko po System Check producenta (patrz opis na stronie).</text>
+<text x="54" y="1196" font-size="16" fill="#e4e4e7">Materiał pomocniczy dla warsztatu, nie instrukcja naprawy.</text>
+<text x="54" y="1224" font-size="16" fill="#e4e4e7">Podczas prób nie wkładaj rąk do drzwi (uwaga własna).</text>
+<text x="179" y="488" font-size="15" font-weight="bold" fill="#d4d4d8">PRZEŁĄCZNIKI POJEDYNCZE</text>
+<text x="179" y="510" font-size="14" fill="#a3a3a3">zasilanie z blokady okien</text>
+<text x="179" y="712" font-size="15" font-weight="bold" fill="#d4d4d8">SILNIKI SZYB</text>
+<text x="179" y="732" font-size="14" fill="#a3a3a3">każdy z wyłącznikiem termicznym</text>
+</g></svg>
