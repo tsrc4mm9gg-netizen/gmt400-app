@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Własny rysunek wektorowy gmt400.pl, wersja czytelna na telefonie (bez grafik AI, bez kopiowania ilustracji CHARM/GM). Kolory i numery przewodów z opisu i tabel serwisowych CHARM dla wariantu odniesienia. To nie jest schemat instalacji. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 4276" width="420" height="4276" role="img" aria-label="Szyby elektryczne: kolory i numery przewodów, skąd dokąd biegną, schemat poglądowy">
+<title>Szyby elektryczne: kolory i numery przewodów, schemat poglądowy</title>
+<defs><pattern id="g" width="30" height="30" patternUnits="userSpaceOnUse"><circle cx="15" cy="15" r="1.2" fill="#1f1f24"/></pattern></defs>
+<rect width="420" height="4276" fill="#0d0d0f"/><rect width="420" height="4276" fill="url(#g)"/>
+<g font-family="DejaVu Sans, Arial, sans-serif">
+<rect x="0" y="0" width="420" height="6" fill="#a1a1aa"/>
+<text x="400" y="32" font-size="14" font-weight="normal" fill="#a3a3a3" text-anchor="end">gmt400.pl · schemat poglądowy</text>
+<text x="20" y="70" font-size="26" font-weight="bold" fill="#f5f5f5" text-anchor="start">Szyby elektryczne:</text>
+<text x="20" y="100" font-size="26" font-weight="bold" fill="#f5f5f5" text-anchor="start">przewody i kolory</text>
+<text x="20" y="130" font-size="15" font-weight="normal" fill="#d4d4d8" text-anchor="start">Skąd dokąd biegną przewody, jaki mają</text>
+<text x="20" y="151" font-size="15" font-weight="normal" fill="#d4d4d8" text-anchor="start">numer i kolor. Czytaj od góry (skąd)</text>
+<text x="20" y="172" font-size="15" font-weight="normal" fill="#d4d4d8" text-anchor="start">do dołu (dokąd).</text>
+<text x="20" y="197" font-size="15" font-weight="normal" fill="#d4d4d8" text-anchor="start">Wariant: Suburban 5.7 VIN R, 1999, 4</text>
+<text x="20" y="218" font-size="15" font-weight="normal" fill="#d4d4d8" text-anchor="start">drzwi. Wg dokumentacji CHARM.</text>
+<text x="20" y="243" font-size="14" font-weight="normal" fill="#a3a3a3" text-anchor="start">Każdy przewód ma numer i nazwę koloru,</text>
+<text x="20" y="264" font-size="14" font-weight="normal" fill="#a3a3a3" text-anchor="start">kolor nie jest jedynym znakiem.</text>
+<line x1="20" y1="289" x2="400" y2="289" stroke="#3f3f46" stroke-width="2"/>
+<text x="20" y="321" font-size="17" font-weight="bold" fill="#f59e0b" text-anchor="start">1. ZASILANIE I MASA (wspólne dla</text>
+<text x="20" y="344" font-size="17" font-weight="bold" fill="#f59e0b" text-anchor="start">wszystkich szyb)</text>
+<rect x="20" y="375" width="380" height="56" rx="9" fill="#18181b" stroke="#f59e0b" stroke-width="2"/>
+<text x="210.0" y="401.0" font-size="16" font-weight="bold" fill="#f5f5f5" text-anchor="middle">Bezpiecznik PWR WDO</text>
+<text x="210.0" y="420.0" font-size="14" font-weight="normal" fill="#d4d4d8" text-anchor="middle">zasilanie z zapłonu (RUN)</text>
+<line x1="60" y1="431" x2="60" y2="531" stroke="#6b6b75" stroke-width="6" stroke-linecap="round"/><line x1="60" y1="431" x2="60" y2="531" stroke="#facc15" stroke-width="3.4" stroke-linecap="round"/>
+<text x="76" y="461" font-size="16" font-weight="bold" fill="#f5f5f5" text-anchor="start">343 · żółty</text>
+<text x="76" y="483" font-size="14" font-weight="normal" fill="#d4d4d8" text-anchor="start">bezpiecznik → przełącznik</text>
+<text x="76" y="502" font-size="14" font-weight="normal" fill="#d4d4d8" text-anchor="start">główny, wtyk C1, styk L</text>
+<rect x="20" y="531" width="380" height="70" rx="9" fill="#18181b" stroke="#a1a1aa" stroke-width="2"/>
+<text x="210.0" y="564.0" font-size="16" font-weight="bold" fill="#f5f5f5" text-anchor="middle">Przełącznik główny kierowcy</text>
+<text x="210.0" y="583.0" font-size="14" font-weight="normal" fill="#d4d4d8" text-anchor="middle">lewe przednie drzwi, w środku blokada okien</text>
+<line x1="60" y1="601" x2="60" y2="709" stroke="#6b6b75" stroke-width="6" stroke-linecap="round"/><line x1="60" y1="601" x2="60" y2="709" stroke="#1d4ed8" stroke-width="3.4" stroke-linecap="round"/>
+<text x="76" y="631" font-size="16" font-weight="bold" fill="#f5f5f5" text-anchor="start">1307 · granatowy</text>
+<text x="76" y="653" font-size="14" font-weight="normal" fill="#d4d4d8" text-anchor="start">z blokady okien (w</text>
+<text x="76" y="672" font-size="14" font-weight="normal" fill="#d4d4d8" text-anchor="start">przełączniku głównym) →</text>
+<text x="76" y="691" font-size="14" font-weight="normal" fill="#d4d4d8" text-anchor="start">przełączniki pasażerów</text>
+<rect x="20" y="709" width="380" height="48" rx="9" fill="#18181b" stroke="#a1a1aa" stroke-width="2"/>
+<text x="210.0" y="739.0" font-size="16" font-weight="bold" fill="#f5f5f5" text-anchor="middle">Przełączniki pojedyncze RF, RR, LR</text>
+<rect x="20" y="791" width="380" height="56" rx="9" fill="#18181b" stroke="#a1a1aa" stroke-width="2"/>
+<text x="210.0" y="817.0" font-size="16" font-weight="bold" fill="#f5f5f5" text-anchor="middle">Przełącznik główny</text>
+<text x="210.0" y="836.0" font-size="14" font-weight="normal" fill="#d4d4d8" text-anchor="middle">wtyk C2, styk C</text>
+<line x1="60" y1="847" x2="60" y2="917" stroke="#b4b4bd" stroke-width="6" stroke-linecap="round"/><line x1="60" y1="847" x2="60" y2="917" stroke="#111111" stroke-width="3.4" stroke-linecap="round"/>
+<text x="76" y="887" font-size="16" font-weight="bold" fill="#f5f5f5" text-anchor="start">150 · czarny</text>
+<rect x="20" y="917" width="380" height="48" rx="9" fill="#18181b" stroke="#a1a1aa" stroke-width="2"/>
+<text x="210.0" y="947.0" font-size="16" font-weight="bold" fill="#f5f5f5" text-anchor="middle">Masa G202 (punkt masy)</text>
+<text x="20" y="991" font-size="14" font-weight="normal" fill="#fbbf24" text-anchor="start">UWAGA: wtyk masy 150. Opis układu, tabela</text>
+<text x="20" y="1011" font-size="14" font-weight="normal" fill="#fbbf24" text-anchor="start">dla jednej szyby i tabela złączy podają</text>
+<text x="20" y="1031" font-size="14" font-weight="normal" fill="#fbbf24" text-anchor="start">C2, styk C. Jedna tabela diagnostyczna</text>
+<text x="20" y="1051" font-size="14" font-weight="normal" fill="#fbbf24" text-anchor="start">(gdy nie działa żadna szyba) podaje w</text>
+<text x="20" y="1071" font-size="14" font-weight="normal" fill="#fbbf24" text-anchor="start">jednym kroku C1, styk C, a w tabeli złączy</text>
+<text x="20" y="1091" font-size="14" font-weight="normal" fill="#fbbf24" text-anchor="start">na C1 styk C jest przewód 195 (przekaźnik</text>
+<text x="20" y="1111" font-size="14" font-weight="normal" fill="#fbbf24" text-anchor="start">zamków), masa 150 jest tam na styku F.</text>
+<text x="20" y="1131" font-size="14" font-weight="normal" fill="#fbbf24" text-anchor="start">Rozbieżność w źródle, DO WERYFIKACJI.</text>
+<line x1="20" y1="1161" x2="400" y2="1161" stroke="#3f3f46" stroke-width="2"/>
+<text x="20" y="1195" font-size="17" font-weight="bold" fill="#f59e0b" text-anchor="start">2. LEWE PRZEDNIE (LF): przełącznik</text>
+<text x="20" y="1218" font-size="17" font-weight="bold" fill="#f59e0b" text-anchor="start">główny prosto do silnika</text>
+<rect x="20" y="1249" width="380" height="56" rx="9" fill="#18181b" stroke="#a1a1aa" stroke-width="2"/>
+<text x="210.0" y="1275.0" font-size="16" font-weight="bold" fill="#f5f5f5" text-anchor="middle">Przełącznik główny</text>
+<text x="210.0" y="1294.0" font-size="14" font-weight="normal" fill="#d4d4d8" text-anchor="middle">kierowcy</text>
+<line x1="170" y1="1305" x2="170" y2="1395" stroke="#6b6b75" stroke-width="6" stroke-linecap="round"/><line x1="170" y1="1305" x2="170" y2="1395" stroke="#1d4ed8" stroke-width="3.4" stroke-linecap="round"/>
+<text x="158" y="1348.0" font-size="16" font-weight="bold" fill="#f5f5f5" text-anchor="end">164</text>
+<text x="158" y="1366.0" font-size="15" font-weight="bold" fill="#f5f5f5" text-anchor="end">granatowy</text>
+<line x1="255" y1="1305" x2="255" y2="1395" stroke="#6b6b75" stroke-width="6" stroke-linecap="round"/><line x1="255" y1="1305" x2="255" y2="1395" stroke="#92400e" stroke-width="3.4" stroke-linecap="round"/>
+<text x="267" y="1348.0" font-size="16" font-weight="bold" fill="#f5f5f5" text-anchor="start">165</text>
+<text x="267" y="1366.0" font-size="15" font-weight="bold" fill="#f5f5f5" text-anchor="start">brązowy</text>
+<rect x="20" y="1395" width="380" height="56" rx="9" fill="#18181b" stroke="#a1a1aa" stroke-width="2"/>
+<text x="210.0" y="1421.0" font-size="16" font-weight="bold" fill="#f5f5f5" text-anchor="middle">Silnik LF</text>
+<text x="210.0" y="1440.0" font-size="14" font-weight="normal" fill="#d4d4d8" text-anchor="middle">lewa przednia szyba</text>
+<text x="20" y="1477" font-size="14" font-weight="normal" fill="#d4d4d8" text-anchor="start">Wtyk C2 przełącznika głównego: 164 na</text>
+<text x="20" y="1497" font-size="14" font-weight="normal" fill="#d4d4d8" text-anchor="start">styku A, 165 na styku E (tabela złączy).</text>
+<text x="20" y="1521" font-size="14" font-weight="normal" fill="#d4d4d8" text-anchor="start">Zasilanie szyby w górę lub w dół zmienia</text>
+<text x="20" y="1541" font-size="14" font-weight="normal" fill="#d4d4d8" text-anchor="start">polaryzację na tych dwóch przewodach.</text>
+<text x="20" y="1587" font-size="17" font-weight="bold" fill="#f59e0b" text-anchor="start">RF: prawe przednie</text>
+<rect x="20" y="1618" width="380" height="52" rx="9" fill="#18181b" stroke="#a1a1aa" stroke-width="2"/>
+<text x="210.0" y="1650.0" font-size="16" font-weight="bold" fill="#f5f5f5" text-anchor="middle">Przełącznik główny</text>
+<line x1="170" y1="1670" x2="170" y2="1760" stroke="#6b6b75" stroke-width="6" stroke-linecap="round"/><line x1="170" y1="1670" x2="170" y2="1760" stroke="#d2b48c" stroke-width="3.4" stroke-linecap="round"/>
+<text x="158" y="1713.0" font-size="16" font-weight="bold" fill="#f5f5f5" text-anchor="end">167</text>
+<text x="158" y="1731.0" font-size="15" font-weight="bold" fill="#f5f5f5" text-anchor="end">beżowy</text>
+<line x1="255" y1="1670" x2="255" y2="1760" stroke="#6b6b75" stroke-width="6" stroke-linecap="round"/><line x1="255" y1="1670" x2="255" y2="1760" stroke="#7dd3fc" stroke-width="3.4" stroke-linecap="round"/>
+<text x="267" y="1713.0" font-size="16" font-weight="bold" fill="#f5f5f5" text-anchor="start">166</text>
+<text x="267" y="1731.0" font-size="15" font-weight="bold" fill="#f5f5f5" text-anchor="start">jasnoniebieski</text>
+<rect x="20" y="1760" width="380" height="52" rx="9" fill="#18181b" stroke="#a1a1aa" stroke-width="2"/>
+<text x="210.0" y="1792.0" font-size="16" font-weight="bold" fill="#f5f5f5" text-anchor="middle">Przełącznik RF</text>
+<line x1="170" y1="1812" x2="170" y2="1902" stroke="#6b6b75" stroke-width="6" stroke-linecap="round"/><line x1="170" y1="1812" x2="170" y2="1902" stroke="#1d4ed8" stroke-width="3.4" stroke-linecap="round"/>
+<text x="158" y="1855.0" font-size="16" font-weight="bold" fill="#f5f5f5" text-anchor="end">666</text>
+<text x="158" y="1873.0" font-size="15" font-weight="bold" fill="#f5f5f5" text-anchor="end">granatowy</text>
+<line x1="255" y1="1812" x2="255" y2="1902" stroke="#6b6b75" stroke-width="6" stroke-linecap="round"/><line x1="255" y1="1812" x2="255" y2="1902" stroke="#92400e" stroke-width="3.4" stroke-linecap="round"/>
+<text x="267" y="1855.0" font-size="16" font-weight="bold" fill="#f5f5f5" text-anchor="start">667</text>
+<text x="267" y="1873.0" font-size="15" font-weight="bold" fill="#f5f5f5" text-anchor="start">brązowy</text>
+<rect x="20" y="1902" width="380" height="52" rx="9" fill="#18181b" stroke="#a1a1aa" stroke-width="2"/>
+<text x="210.0" y="1934.0" font-size="16" font-weight="bold" fill="#f5f5f5" text-anchor="middle">Silnik RF</text>
+<text x="20" y="1980" font-size="14" font-weight="normal" fill="#d4d4d8" text-anchor="start">Przewody główny → przełącznik RF: 167 i</text>
+<text x="20" y="2000" font-size="14" font-weight="normal" fill="#d4d4d8" text-anchor="start">166 (CHARM tabele B i RF).</text>
+<text x="20" y="2024" font-size="14" font-weight="normal" fill="#d4d4d8" text-anchor="start">Przewody przełącznik RF → silnik: 666 i</text>
+<text x="20" y="2044" font-size="14" font-weight="normal" fill="#d4d4d8" text-anchor="start">667 (CHARM tabela RF).</text>
+<text x="20" y="2098" font-size="17" font-weight="bold" fill="#f59e0b" text-anchor="start">RR: prawe tylne</text>
+<rect x="20" y="2129" width="380" height="52" rx="9" fill="#18181b" stroke="#a1a1aa" stroke-width="2"/>
+<text x="210.0" y="2161.0" font-size="16" font-weight="bold" fill="#f5f5f5" text-anchor="middle">Przełącznik główny</text>
+<line x1="170" y1="2181" x2="170" y2="2271" stroke="#6b6b75" stroke-width="6" stroke-linecap="round"/><line x1="170" y1="2181" x2="170" y2="2271" stroke="#86efac" stroke-width="3.4" stroke-linecap="round"/>
+<text x="158" y="2224.0" font-size="16" font-weight="bold" fill="#f5f5f5" text-anchor="end">170</text>
+<text x="158" y="2242.0" font-size="15" font-weight="bold" fill="#f5f5f5" text-anchor="end">jasnozielony</text>
+<line x1="255" y1="2181" x2="255" y2="2271" stroke="#6b6b75" stroke-width="6" stroke-linecap="round"/><line x1="255" y1="2181" x2="255" y2="2271" stroke="#a855f7" stroke-width="3.4" stroke-linecap="round"/>
+<text x="267" y="2224.0" font-size="16" font-weight="bold" fill="#f5f5f5" text-anchor="start">171</text>
+<text x="267" y="2242.0" font-size="15" font-weight="bold" fill="#f5f5f5" text-anchor="start">fioletowy</text>
+<rect x="20" y="2271" width="380" height="52" rx="9" fill="#18181b" stroke="#a1a1aa" stroke-width="2"/>
+<text x="210.0" y="2303.0" font-size="16" font-weight="bold" fill="#f5f5f5" text-anchor="middle">Przełącznik RR</text>
+<line x1="170" y1="2323" x2="170" y2="2413" stroke="#6b6b75" stroke-width="6" stroke-linecap="round"/><line x1="170" y1="2323" x2="170" y2="2413" stroke="#1d4ed8" stroke-width="3.4" stroke-linecap="round"/>
+<text x="158" y="2366.0" font-size="16" font-weight="bold" fill="#f5f5f5" text-anchor="end">670</text>
+<text x="158" y="2384.0" font-size="15" font-weight="bold" fill="#f5f5f5" text-anchor="end">granatowy</text>
+<line x1="255" y1="2323" x2="255" y2="2413" stroke="#6b6b75" stroke-width="6" stroke-linecap="round"/><line x1="255" y1="2323" x2="255" y2="2413" stroke="#92400e" stroke-width="3.4" stroke-linecap="round"/>
+<text x="267" y="2366.0" font-size="16" font-weight="bold" fill="#f5f5f5" text-anchor="start">671</text>
+<text x="267" y="2384.0" font-size="15" font-weight="bold" fill="#f5f5f5" text-anchor="start">brązowy</text>
+<rect x="20" y="2413" width="380" height="52" rx="9" fill="#18181b" stroke="#a1a1aa" stroke-width="2"/>
+<text x="210.0" y="2445.0" font-size="16" font-weight="bold" fill="#f5f5f5" text-anchor="middle">Silnik RR</text>
+<text x="20" y="2491" font-size="14" font-weight="normal" fill="#d4d4d8" text-anchor="start">Wg opisu CHARM: 170 do styku H wtyku C2 i</text>
+<text x="20" y="2511" font-size="14" font-weight="normal" fill="#d4d4d8" text-anchor="start">styku E przełącznika RR, 171 do styku H</text>
+<text x="20" y="2531" font-size="14" font-weight="normal" fill="#d4d4d8" text-anchor="start">wtyku C1 i styku A przełącznika RR.</text>
+<text x="20" y="2555" font-size="14" font-weight="normal" fill="#d4d4d8" text-anchor="start">Silnik: 670 i 671 (opis CHARM).</text>
+<text x="20" y="2609" font-size="17" font-weight="bold" fill="#f59e0b" text-anchor="start">LR: lewe tylne</text>
+<rect x="20" y="2640" width="380" height="52" rx="9" fill="#18181b" stroke="#a1a1aa" stroke-width="2"/>
+<text x="210.0" y="2672.0" font-size="16" font-weight="bold" fill="#f5f5f5" text-anchor="middle">Przełącznik główny</text>
+<line x1="170" y1="2692" x2="170" y2="2782" stroke="#6b6b75" stroke-width="6" stroke-linecap="round"/><line x1="170" y1="2692" x2="170" y2="2782" stroke="#a855f7" stroke-width="3.4" stroke-linecap="round"/>
+<text x="158" y="2735.0" font-size="16" font-weight="bold" fill="#f5f5f5" text-anchor="end">169</text>
+<text x="158" y="2753.0" font-size="15" font-weight="bold" fill="#f5f5f5" text-anchor="end">fioletowy</text>
+<line x1="255" y1="2692" x2="255" y2="2782" stroke="#6b6b75" stroke-width="6" stroke-linecap="round"/><line x1="255" y1="2692" x2="255" y2="2782" stroke="#86efac" stroke-width="3.4"/><line x1="255" y1="2692" x2="255" y2="2782" stroke="#15803d" stroke-width="3.4" stroke-dasharray="9 9"/>
+<text x="267" y="2723.0" font-size="16" font-weight="bold" fill="#f5f5f5" text-anchor="start">168*</text>
+<text x="267" y="2741.0" font-size="15" font-weight="bold" fill="#f5f5f5" text-anchor="start">jasno- lub</text>
+<text x="267" y="2759.0" font-size="15" font-weight="bold" fill="#f5f5f5" text-anchor="start">ciemnozielony</text>
+<rect x="20" y="2782" width="380" height="52" rx="9" fill="#18181b" stroke="#a1a1aa" stroke-width="2"/>
+<text x="210.0" y="2814.0" font-size="16" font-weight="bold" fill="#f5f5f5" text-anchor="middle">Przełącznik LR</text>
+<line x1="170" y1="2834" x2="170" y2="2924" stroke="#6b6b75" stroke-width="6" stroke-linecap="round"/><line x1="170" y1="2834" x2="170" y2="2924" stroke="#1d4ed8" stroke-width="3.4" stroke-linecap="round"/>
+<text x="158" y="2877.0" font-size="16" font-weight="bold" fill="#f5f5f5" text-anchor="end">668</text>
+<text x="158" y="2895.0" font-size="15" font-weight="bold" fill="#f5f5f5" text-anchor="end">granatowy</text>
+<line x1="255" y1="2834" x2="255" y2="2924" stroke="#6b6b75" stroke-width="6" stroke-linecap="round"/><line x1="255" y1="2834" x2="255" y2="2924" stroke="#92400e" stroke-width="3.4" stroke-linecap="round"/>
+<text x="267" y="2877.0" font-size="16" font-weight="bold" fill="#f5f5f5" text-anchor="start">669</text>
+<text x="267" y="2895.0" font-size="15" font-weight="bold" fill="#f5f5f5" text-anchor="start">brązowy</text>
+<rect x="20" y="2924" width="380" height="52" rx="9" fill="#18181b" stroke="#a1a1aa" stroke-width="2"/>
+<text x="210.0" y="2956.0" font-size="16" font-weight="bold" fill="#f5f5f5" text-anchor="middle">Silnik LR</text>
+<text x="20" y="3002" font-size="14" font-weight="normal" fill="#d4d4d8" text-anchor="start">Przewody główny → przełącznik LR: 169 i</text>
+<text x="20" y="3022" font-size="14" font-weight="normal" fill="#d4d4d8" text-anchor="start">168 (tabela B; 169 na wtyku C1 styk K, 168</text>
+<text x="20" y="3042" font-size="14" font-weight="normal" fill="#d4d4d8" text-anchor="start">na wtyku C2 styk G).</text>
+<text x="20" y="3066" font-size="14" font-weight="normal" fill="#d4d4d8" text-anchor="start">Silnik LR: 668 (granatowy, w górę) i 669</text>
+<text x="20" y="3086" font-size="14" font-weight="normal" fill="#d4d4d8" text-anchor="start">(brązowy, w dół) wg tabeli złączy silnika.</text>
+<text x="20" y="3110" font-size="14" font-weight="normal" fill="#d4d4d8" text-anchor="start">* Przewód 168 ma w źródłach dwa kolory:</text>
+<text x="20" y="3130" font-size="14" font-weight="normal" fill="#d4d4d8" text-anchor="start">jasnozielony (LT GRN) w tabelach</text>
+<text x="20" y="3150" font-size="14" font-weight="normal" fill="#d4d4d8" text-anchor="start">diagnostycznych CHARM 1999, ciemnozielony</text>
+<text x="20" y="3170" font-size="14" font-weight="normal" fill="#d4d4d8" text-anchor="start">(DK GRN) w tabeli złączy 1999 (C2 styk G,</text>
+<text x="20" y="3190" font-size="14" font-weight="normal" fill="#d4d4d8" text-anchor="start">styk E przełącznika LR). Dlatego linia</text>
+<text x="20" y="3210" font-size="14" font-weight="normal" fill="#d4d4d8" text-anchor="start">jest na przemian jasna i ciemna: taki lub</text>
+<text x="20" y="3230" font-size="14" font-weight="normal" fill="#d4d4d8" text-anchor="start">taki. Nie ustalono, który kolor ma wariant</text>
+<text x="20" y="3250" font-size="14" font-weight="normal" fill="#d4d4d8" text-anchor="start">odniesienia. To rozbieżność dokumentów,</text>
+<text x="20" y="3270" font-size="14" font-weight="normal" fill="#d4d4d8" text-anchor="start">nie dowód, że oba kolory występują w</text>
+<text x="20" y="3290" font-size="14" font-weight="normal" fill="#d4d4d8" text-anchor="start">aucie.</text>
+<text x="20" y="3314" font-size="14" font-weight="normal" fill="#d4d4d8" text-anchor="start">UWAGA: styk D przełącznika LR (zasilanie</text>
+<text x="20" y="3334" font-size="14" font-weight="normal" fill="#d4d4d8" text-anchor="start">silnika w dół) ma w tabeli złączy 1999</text>
+<text x="20" y="3354" font-size="14" font-weight="normal" fill="#d4d4d8" text-anchor="start">numer 169, taki sam jak styk A, a silnik</text>
+<text x="20" y="3374" font-size="14" font-weight="normal" fill="#d4d4d8" text-anchor="start">ma 669. Wpis to 169 lub 669, źródła nie</text>
+<text x="20" y="3394" font-size="14" font-weight="normal" fill="#d4d4d8" text-anchor="start">rozstrzygają. Nie ustalono, który numer</text>
+<text x="20" y="3414" font-size="14" font-weight="normal" fill="#d4d4d8" text-anchor="start">jest właściwy.</text>
+<line x1="20" y1="3454" x2="400" y2="3454" stroke="#3f3f46" stroke-width="2"/>
+<text x="20" y="3482" font-size="17" font-weight="bold" fill="#f59e0b" text-anchor="start">LEGENDA KOLORÓW (skróty CHARM)</text>
+<line x1="20" y1="3523" x2="62" y2="3523" stroke="#6b6b75" stroke-width="6" stroke-linecap="round"/><line x1="20" y1="3523" x2="62" y2="3523" stroke="#facc15" stroke-width="3.4" stroke-linecap="round"/>
+<text x="76" y="3528" font-size="16" font-weight="normal" fill="#f5f5f5" text-anchor="start">YEL = żółty</text>
+<line x1="20" y1="3555" x2="62" y2="3555" stroke="#6b6b75" stroke-width="6" stroke-linecap="round"/><line x1="20" y1="3555" x2="62" y2="3555" stroke="#1d4ed8" stroke-width="3.4" stroke-linecap="round"/>
+<text x="76" y="3560" font-size="16" font-weight="normal" fill="#f5f5f5" text-anchor="start">DK BLU = granatowy</text>
+<line x1="20" y1="3587" x2="62" y2="3587" stroke="#6b6b75" stroke-width="6" stroke-linecap="round"/><line x1="20" y1="3587" x2="62" y2="3587" stroke="#92400e" stroke-width="3.4" stroke-linecap="round"/>
+<text x="76" y="3592" font-size="16" font-weight="normal" fill="#f5f5f5" text-anchor="start">BRN = brązowy</text>
+<line x1="20" y1="3619" x2="62" y2="3619" stroke="#b4b4bd" stroke-width="6" stroke-linecap="round"/><line x1="20" y1="3619" x2="62" y2="3619" stroke="#111111" stroke-width="3.4" stroke-linecap="round"/>
+<text x="76" y="3624" font-size="16" font-weight="normal" fill="#f5f5f5" text-anchor="start">BLK = czarny</text>
+<line x1="20" y1="3651" x2="62" y2="3651" stroke="#6b6b75" stroke-width="6" stroke-linecap="round"/><line x1="20" y1="3651" x2="62" y2="3651" stroke="#86efac" stroke-width="3.4" stroke-linecap="round"/>
+<text x="76" y="3656" font-size="16" font-weight="normal" fill="#f5f5f5" text-anchor="start">LT GRN = jasnozielony</text>
+<line x1="20" y1="3683" x2="62" y2="3683" stroke="#6b6b75" stroke-width="6" stroke-linecap="round"/><line x1="20" y1="3683" x2="62" y2="3683" stroke="#15803d" stroke-width="3.4" stroke-linecap="round"/>
+<text x="76" y="3688" font-size="16" font-weight="normal" fill="#f5f5f5" text-anchor="start">DK GRN = ciemnozielony</text>
+<line x1="20" y1="3715" x2="62" y2="3715" stroke="#6b6b75" stroke-width="6" stroke-linecap="round"/><line x1="20" y1="3715" x2="62" y2="3715" stroke="#a855f7" stroke-width="3.4" stroke-linecap="round"/>
+<text x="76" y="3720" font-size="16" font-weight="normal" fill="#f5f5f5" text-anchor="start">PPL = fioletowy</text>
+<line x1="20" y1="3747" x2="62" y2="3747" stroke="#6b6b75" stroke-width="6" stroke-linecap="round"/><line x1="20" y1="3747" x2="62" y2="3747" stroke="#d2b48c" stroke-width="3.4" stroke-linecap="round"/>
+<text x="76" y="3752" font-size="16" font-weight="normal" fill="#f5f5f5" text-anchor="start">TAN = beżowy</text>
+<line x1="20" y1="3779" x2="62" y2="3779" stroke="#6b6b75" stroke-width="6" stroke-linecap="round"/><line x1="20" y1="3779" x2="62" y2="3779" stroke="#7dd3fc" stroke-width="3.4" stroke-linecap="round"/>
+<text x="76" y="3784" font-size="16" font-weight="normal" fill="#f5f5f5" text-anchor="start">LT BLU = jasnoniebieski</text>
+<text x="20" y="3818" font-size="14" font-weight="normal" fill="#d4d4d8" text-anchor="start">Przewody są jednokolorowe, bez pasków.</text>
+<text x="20" y="3838" font-size="14" font-weight="normal" fill="#d4d4d8" text-anchor="start">Wyjątek w zapisie: linia 168 na przemian</text>
+<text x="20" y="3858" font-size="14" font-weight="normal" fill="#d4d4d8" text-anchor="start">jasna i ciemna znaczy, że źródła podają</text>
+<text x="20" y="3878" font-size="14" font-weight="normal" fill="#d4d4d8" text-anchor="start">dwa różne kolory, a nie przewód paskowany.</text>
+<rect x="20" y="3916" width="380" height="336" rx="9" fill="#1c1917" stroke="#f59e0b" stroke-width="2"/>
+<text x="38" y="3948" font-size="17" font-weight="bold" fill="#f59e0b" text-anchor="start">UWAGA</text>
+<text x="38" y="3974" font-size="14" font-weight="normal" fill="#e4e4e7" text-anchor="start">To nie jest pełny schemat instalacji</text>
+<text x="38" y="3994" font-size="14" font-weight="normal" fill="#e4e4e7" text-anchor="start">ani rysunek planszy producenta.</text>
+<text x="38" y="4022" font-size="14" font-weight="normal" fill="#e4e4e7" text-anchor="start">Numery i kolory dotyczą wariantu</text>
+<text x="38" y="4042" font-size="14" font-weight="normal" fill="#e4e4e7" text-anchor="start">odniesienia. Inne roczniki: do</text>
+<text x="38" y="4062" font-size="14" font-weight="normal" fill="#e4e4e7" text-anchor="start">weryfikacji.</text>
+<text x="38" y="4090" font-size="14" font-weight="normal" fill="#e4e4e7" text-anchor="start">Przy pracy na aucie opieraj się na</text>
+<text x="38" y="4110" font-size="14" font-weight="normal" fill="#e4e4e7" text-anchor="start">schemacie producenta dla swojego VIN.</text>
+<text x="38" y="4138" font-size="14" font-weight="normal" fill="#e4e4e7" text-anchor="start">Diagnostyka tylko po System Check</text>
+<text x="38" y="4158" font-size="14" font-weight="normal" fill="#e4e4e7" text-anchor="start">producenta, materiał pomocniczy dla</text>
+<text x="38" y="4178" font-size="14" font-weight="normal" fill="#e4e4e7" text-anchor="start">warsztatu.</text>
+<text x="38" y="4206" font-size="14" font-weight="normal" fill="#e4e4e7" text-anchor="start">Podczas prób nie wkładaj rąk do drzwi</text>
+<text x="38" y="4226" font-size="14" font-weight="normal" fill="#e4e4e7" text-anchor="start">(uwaga własna).</text>
+</g></svg>
