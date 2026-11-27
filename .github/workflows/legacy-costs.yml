@@ -69,7 +69,7 @@ jobs:
           const passed = ['INTEGRATE','BUILD','TESTS'].every(key => process.env[key] === 'success') && !parseError && !(raw.errors || []).length && tests.length >= 8 && raw.stats?.expected === tests.length && raw.stats?.unexpected === 0 && raw.stats?.skipped === 0 && raw.stats?.flaky === 0;
           fs.mkdirSync('.diagnostics',{recursive:true}); fs.writeFileSync('.diagnostics/legacy-costs-report.json',JSON.stringify({auditorCodeSha:process.env.GITHUB_SHA,runId:process.env.GITHUB_RUN_ID,checkedAt:new Date().toISOString(),passed,scope:'Candidate main-page import integration, local build and Chromium tests with mocked Notion. Manual customs/VAT inputs, not automated tax assessment or production certification.',parseError,stats:raw.stats || {},tests},null,2)+'\n');
           NODE
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         if: always()
         with:
           name: legacy-costs-${{ github.run_id }}

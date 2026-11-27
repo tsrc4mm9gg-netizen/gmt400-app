@@ -74,7 +74,7 @@ jobs:
         env:
           STEP_RESULTS: ${{ toJSON(steps) }}
         run: node scripts/report-current-verification.cjs material-text
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         if: always()
         with:
           name: candidate-material-text-${{ github.run_id }}-${{ github.run_attempt }}

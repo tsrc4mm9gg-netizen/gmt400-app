@@ -43,7 +43,7 @@ jobs:
           const report={codeSha:process.env.GITHUB_SHA,runId:process.env.GITHUB_RUN_ID,checkedAt:new Date().toISOString(),scope:'Local Chromium with mocked fixtures; navigation geometry, styles, profile launcher and category counters; not live Safari.',passed,build:process.env.BUILD_RESULT,browser:process.env.BROWSER_RESULT,stats,parseError,runnerErrors:raw.errors||[],failures:tests.filter(t=>t.status!=='expected')};
           fs.mkdirSync('.diagnostics',{recursive:true});fs.writeFileSync('.diagnostics/navigation-layout-report.json',JSON.stringify(report,null,2));console.log(JSON.stringify(report,null,2));fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY,'Navigation verification: '+(passed?'PASS':'FAIL')+'\nCommit: '+report.codeSha+'\nReport stored in Actions artifacts, not committed.\n');
           NODE
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         if: always()
         with:
           name: navigation-layout-${{ github.run_id }}-${{ github.run_attempt }}

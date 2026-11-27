@@ -29,7 +29,7 @@ jobs:
           node -e 'const r=require("./npm-production-audit.json");if(r.error||!r.metadata||!r.vulnerabilities)throw new Error("Invalid production audit report");const v=r.metadata.vulnerabilities;if(v.high>0||v.critical>0)process.exit(1);'
       - name: Store production audit evidence
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: production-audit-${{ github.run_id }}
           path: npm-production-audit.json

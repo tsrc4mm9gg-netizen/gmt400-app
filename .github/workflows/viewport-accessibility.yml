@@ -65,7 +65,7 @@ jobs:
           lines.push('','Szczegóły i zrzuty w artefakcie viewport-accessibility. Przy błędzie uruchomienia testów sprawdź etap TOOLING lub SERVER oraz dołączone logi.');
           fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY,lines.join('\n')+'\n');
           NODE
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         if: always()
         with:
           name: viewport-accessibility-${{ github.run_id }}-${{ github.run_attempt }}
