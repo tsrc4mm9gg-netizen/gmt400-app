@@ -103,12 +103,13 @@ export default function FlowRunner({ flow }: { flow: Flow }) {
   if (mode === 'wybór') {
     const engines = [...new Set(flow.scope.flatMap(s => s.engines ?? []))];
     const transmissions = [...new Set(flow.scope.flatMap(s => s.transmissions ?? []))];
-    const field = (key: keyof Override, label: string, options: string[], withOther = false) => (
+    const ENGINE_LABEL: Record<string, string> = { L31: 'L31 (Vortec 5.7, 8. znak VIN: R)' };
+    const field = (key: keyof Override, label: string, options: string[], withOther = false, labels: Record<string, string> = {}) => (
       <label className="block text-sm text-neutral-200" key={key}>
         <span className="mb-1 block font-semibold text-white">{label}</span>
         <select className={select} data-testid={`flow-field-${key}`} value={profile ? (profile[key] as string) : ''} onChange={e => setOverride(o => ({ ...o, [key]: e.target.value }))}>
           <option value="">Wybierz</option>
-          {options.map(o => <option key={o} value={o}>{o}</option>)}
+          {options.map(o => <option key={o} value={o}>{labels[o] ?? o}</option>)}
           {withOther && <option value={OTHER}>Inny / nie wiem</option>}
         </select>
       </label>
@@ -123,7 +124,8 @@ export default function FlowRunner({ flow }: { flow: Flow }) {
           {field('model', 'Model', ALL_MODELS)}
           {field('year', 'Rok', YEARS)}
           {field('drive', 'Napęd', ['2WD', '4WD'])}
-          {engines.length > 0 && field('engine', 'Silnik', engines, true)}
+          {engines.length > 0 && field('engine', 'Silnik', engines, true, ENGINE_LABEL)}
+          {engines.length > 0 && <p className="-mt-1 text-xs text-neutral-400" data-testid="flow-engine-hint">Ścieżka dotyczy silnika 5.7 Vortec oznaczonego L31. Jeśli w Twoim VIN-ie 8. znak to R, wybierz L31.</p>}
           {transmissions.length > 0 && field('transmission', 'Skrzynia', transmissions, true)}
         </div>
         <p className="mt-3 text-sm font-semibold text-white" data-testid="flow-coverage">
@@ -188,10 +190,16 @@ export default function FlowRunner({ flow }: { flow: Flow }) {
               {node.answers.map(a => <button key={a.id} type="button" className={btn} data-testid={`flow-answer-${a.id}`} onClick={() => choose(a.id)}>{a.label}</button>)}
             </div>
           )}
-          {node.sources.length > 0 && (
-            <ul className="mt-3 list-none space-y-1 !p-0 text-xs text-neutral-400" data-testid="flow-sources">
-              {node.sources.map(s => <li key={s.url}>Źródło: {s.label} ({s.kind}, stosowalność {s.applicability})</li>)}
-            </ul>
+          {(node.details || node.sources.length > 0) && (
+            <details className="mt-3 text-xs text-neutral-400" data-testid="flow-details">
+              <summary className="cursor-pointer font-semibold text-neutral-300">Szczegóły i źródło</summary>
+              {node.details && <p className="mt-2 !mb-0">{node.details}</p>}
+              {node.sources.length > 0 && (
+                <ul className="mt-2 list-none space-y-1 !p-0" data-testid="flow-sources">
+                  {node.sources.map(s => <li key={s.url}>Źródło: {s.label} ({s.kind}, stosowalność {s.applicability})</li>)}
+                </ul>
+              )}
+            </details>
           )}
         </>
       )}

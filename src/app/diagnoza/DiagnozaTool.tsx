@@ -223,7 +223,8 @@ export default function DiagnozaTool({ initialMeta }: { initialMeta: MetaMap | n
           </div>
 
           {flow && <FlowRunner flow={flow} />}
-          {!flow && (<>
+          <>
+          {flow && <p className="mt-6 !mb-0 text-sm font-bold text-white" data-testid="legacy-heading">Dotychczasowa lista możliwych przyczyn (bez prowadzenia krok po kroku)</p>}
           <div className="mt-4 space-y-4" data-testid="questions">
             {symptom.questions.map(q => (
               <div key={q.id} role="group" aria-labelledby={`q-${q.id}`} data-testid={`question-${q.id}`} className="min-w-0 rounded-3xl border border-white/15 bg-neutral-900 p-4">
@@ -254,7 +255,7 @@ export default function DiagnozaTool({ initialMeta }: { initialMeta: MetaMap | n
           </ol>
           {ranked.length === 0 && <p className="mt-3 rounded-3xl border border-dashed border-white/20 p-4 text-sm text-neutral-300">Dla takich odpowiedzi nie mamy jeszcze przyczyn w bazie. Zmień odpowiedź lub <Link href="/szukaj" className="underline">użyj wyszukiwarki</Link>.</p>}
 
-          </>)}
+          </>
 
           {symptom.gaps.length > 0 && (
             <aside data-testid="gaps" className="mt-4 rounded-3xl border border-dashed border-white/25 bg-neutral-950 p-4">
