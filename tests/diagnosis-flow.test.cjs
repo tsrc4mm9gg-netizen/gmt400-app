@@ -1,3 +1,6 @@
+// Mechanizm ścieżek diagnostycznych (src/lib/diagnosis-flow.ts): walidator, dopasowanie wersji, brak odblokowania przez deklarację.
+// UWAGA: wszystkie ścieżki w tym pliku to DANE TESTOWE. To nie jest instrukcja diagnostyczna dla użytkownika.
+const test = require('node:test');
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const ts = require('typescript');
@@ -10,42 +13,110 @@ function load(file, req = () => ({})) {
 }
 const F = load('src/lib/diagnosis-flow.ts');
 
-// ---- Dane testowe: minimalna ścieżka zgodna z walidatorem ----
-const SRC = { label: 'Test', url: 'https://example.com/test', kind: 'dokument', applicability: 'uniwersalna' };
-const car = (over = {}) => ({ brand: 'Chevrolet', platform: 'Suburban', model: 'Suburban 1500', year: '1999', engine: 'L31', drive: '4WD', transmission: '', rpoCodes: [], ...over });
+const SRC = { label: 'DANE TESTOWE', url: 'https://example.com/test', kind: 'kopia dokumentu', applicability: 'ustalona', applicabilityNote: 'DANE TESTOWE: stosowalność ustalona (dane testowe)', scope: 'DANE TESTOWE', vehicleScope: [{ models: ['Suburban 1500'], yearFrom: 1999, yearTo: 1999, drives: ['4WD'] }] };
+const car = (over = {}) => ({ brand: 'Chevrolet', platform: 'Suburban', model: 'Suburban 1500', year: '1999', engine: '5.7L', drive: '4WD', transmission: 'automatyczna', rpoCodes: [], ...over });
 const base = () => ({
-  id: 'test', symptomId: 'nie-odpala', title: 'Test', scope: [{ models: ['Suburban 1500'], yearFrom: 1999, yearTo: 1999, engines: ['L31'], drives: ['4WD'] }], start: 'q0',
+  id: 'test-flow', symptomId: 'nie-odpala', title: 'DANE TESTOWE', start: 'q0',
+  scope: [{ models: ['Suburban 1500'], yearFrom: 1999, yearTo: 1999, drives: ['4WD'] }],
   nodes: {
-    q0: { id: 'q0', kind: 'question', neutral: true, versionIndependent: true, title: 'Q', text: 'Pytanie', sources: [], parts: [], answers: [{ id: 'a', label: 'A', next: 'c1' }] },
-    c1: { id: 'c1', kind: 'check', level: 'każdy', title: 'C1', text: 'Sprawdź', sources: [SRC], parts: [], answers: [{ id: 'tak', label: 'Tak', next: 'r1' }, { id: 'nie', label: 'Nie', next: 'r2', stop: true }] },
-    r1: { id: 'r1', kind: 'result', outcome: 'konieczny-kolejny-test', title: 'R1', text: 'Wynik', sources: [SRC], parts: [], excluded: [], notChecked: ['x'] },
-    r2: { id: 'r2', kind: 'result', outcome: 'nierozstrzygnięte', title: 'R2', text: 'Stop', sources: [SRC], parts: [], excluded: [], notChecked: ['x'] },
+    q0: { id: 'q0', kind: 'question', neutral: true, title: 'DANE TESTOWE: pytanie', text: 'DANE TESTOWE', sources: [], parts: [], answers: [{ id: 'a', label: 'A', next: 'c1' }] },
+    c1: { id: 'c1', kind: 'check', level: 'każdy', title: 'DANE TESTOWE: sprawdzenie', text: 'DANE TESTOWE', sources: [SRC], parts: [], answers: [{ id: 'ok', label: 'OK', next: 'r1' }],
+      requires: [{ key: 'skrzynia', label: 'Skrzynia', profileField: 'transmission', options: [{ id: 'automatyczna', label: 'Automatyczna' }, { id: 'manualna', label: 'Manualna' }] }] },
+    r1: { id: 'r1', kind: 'result', outcome: 'konieczny-kolejny-test', title: 'DANE TESTOWE: wynik', text: 'DANE TESTOWE', sources: [SRC], parts: [], excluded: [], notChecked: ['DANE TESTOWE'] },
   },
 });
 
-test('walidator: poprawna ścieżka przechodzi bez błędów', () => {
+test('poprawna ścieżka testowa przechodzi walidację', () => {
   assert.deepEqual(F.validateFlow(base()), []);
 });
-test('walidator: brak startu, pętla, nieznany następca i brak odpowiedzi są wykrywane', () => {
-  const a = base(); delete a.start; assert.ok(F.validateFlow(a).some(e => /start/.test(e)));
-  const b = base(); b.nodes.q0.answers[0].next = 'q0'; assert.ok(F.validateFlow(b).some(e => /pętl|cykl/i.test(e)));
-  const c = base(); c.nodes.q0.answers[0].next = 'nie-ma'; assert.ok(F.validateFlow(c).some(e => /nie-ma/.test(e)));
-  const d = base(); delete d.nodes.c1.answers; assert.ok(F.validateFlow(d).some(e => /answers/.test(e)));
+
+test('twierdzenie diagnostyczne bez źródła jest odrzucone, neutralna etykieta UI bez źródła jest dozwolona', () => {
+  const ok = base();
+  assert.deepEqual(F.validateFlow(ok), [], 'neutralne pytanie bez źródła');
+  const noSourceCheck = base(); noSourceCheck.nodes.c1.sources = [];
+  assert.ok(F.validateFlow(noSourceCheck).some(e => /bez źródła/.test(e)));
+  const noSourceResult = base(); noSourceResult.nodes.r1.sources = [];
+  assert.ok(F.validateFlow(noSourceResult).some(e => /bez źródła/.test(e)));
+  const nonNeutralQuestion = base(); delete nonNeutralQuestion.nodes.q0.neutral;
+  assert.ok(F.validateFlow(nonNeutralQuestion).some(e => /bez źródła/.test(e)));
 });
-test('walidator: wynik bez notChecked, część w etapie 1 i wykluczenie są odrzucane', () => {
-  const a = base(); delete a.nodes.r1.notChecked; assert.ok(F.validateFlow(a).some(e => /notChecked/.test(e)));
-  const b = base(); b.nodes.r1.parts = [{ name: 'x' }]; assert.ok(F.validateFlow(b).some(e => /parts/.test(e)));
-  const c = base(); c.nodes.c1.answers[0].excludes = ['x']; assert.ok(F.validateFlow(c).some(e => /excludes/.test(e)));
+
+test('wynik diagnostyczny jest osobną osią od źródła', () => {
+  const bad = base(); bad.nodes.r1.outcome = 'potwierdzone-w-źródle';
+  assert.ok(F.validateFlow(bad).some(e => /nieznany wynik diagnostyczny/.test(e)));
+  const asKind = base(); asKind.nodes.r1.outcome = 'oryginał producenta';
+  assert.ok(F.validateFlow(asKind).some(e => /nieznany wynik diagnostyczny/.test(e)));
+  const strength = base(); strength.nodes.c1.sources = [{ ...SRC, strength: 'wskazanie-przyczyny' }];
+  assert.ok(F.validateFlow(strength).some(e => /nieznane pole/.test(e)));
+  const noStatus = base(); noStatus.nodes.c1.sources = [{ ...SRC, applicability: undefined }];
+  assert.ok(F.validateFlow(noStatus).some(e => /stosowalności/.test(e)));
+  for (const o of F.DIAGNOSTIC_OUTCOMES) { const f = base(); f.nodes.r1.outcome = o; if (o === 'nierozstrzygnięte') f.nodes.r1.sources = []; assert.deepEqual(F.validateFlow(f), [], o); }
 });
-test('walidator: stosowalność „ustalona” bez zakresu wersji aut jest odrzucana', () => {
-  const g = base(); g.nodes.c1.sources = [{ ...SRC, vehicleScope: [] }];
-  assert.ok(F.validateFlow(g).some(e => /vehicleScope/.test(e)));
+
+test('pole parts musi być puste w etapie 1', () => {
+  const f = base(); f.nodes.c1.parts = [{ name: 'DANE TESTOWE' }];
+  assert.ok(F.validateFlow(f).some(e => /parts/.test(e)));
+});
+
+test('graf: nieistniejący następny węzeł, węzeł nieosiągalny i pętla są odrzucone', () => {
+  const dead = base(); dead.nodes.c1.answers[0].next = 'brak';
+  assert.ok(F.validateFlow(dead).some(e => /nieistniejącego/.test(e)));
+  const orphan = base(); orphan.nodes.x = { ...orphan.nodes.r1, id: 'x' };
+  assert.ok(F.validateFlow(orphan).some(e => /nieosiągalny/.test(e)));
+  const loop = base(); loop.nodes.c1.answers.push({ id: 'again', label: 'Jeszcze raz', next: 'q0' });
+  assert.ok(F.validateFlow(loop).some(e => /pętl/.test(e)));
+});
+
+test('komunikat bezpieczeństwa wymaga źródła; widoczna jest tylko parafraza źródła, nie propozycja', () => {
+  const f = base(); f.nodes.c1.safety = { text: 'DANE TESTOWE', form: 'propozycja do akceptacji' };
+  assert.deepEqual(F.validateFlow(f), []);
+  assert.equal(F.visibleSafety(f.nodes.c1), null);
+  f.nodes.c1.safety.form = 'parafraza źródła';
+  assert.equal(F.visibleSafety(f.nodes.c1), 'DANE TESTOWE');
+  const noSrc = base(); noSrc.nodes.q0.safety = { text: 'DANE TESTOWE', form: 'parafraza źródła' };
+  assert.ok(F.validateFlow(noSrc).some(e => /bezpieczeństwa bez źródła/.test(e)));
+});
+
+test('dopasowanie wersji: nieznana dana nigdy nie daje „pasuje”, błędna wersja daje „brak”', () => {
+  const flow = base();
+  assert.deepEqual(F.matchVehicle(car(), flow), { status: 'pasuje', missing: [] });
+  assert.equal(F.matchVehicle(car({ year: '' }), flow).status, 'częściowo');
+  assert.deepEqual(F.matchVehicle(car({ year: '' }), flow).missing, ['rok']);
+  assert.equal(F.matchVehicle(car({ drive: '' }), flow).status, 'częściowo');
+  assert.equal(F.matchVehicle(car({ year: '1998' }), flow).status, 'brak');
+  assert.equal(F.matchVehicle(car({ drive: '2WD' }), flow).status, 'brak');
+  assert.equal(F.matchVehicle(null, flow).status, 'częściowo');
+});
+
+test('wymagana dana: z profilu tylko przy dokładnym trafieniu w opcję, w przeciwnym razie pytanie; nieznana dana blokuje tylko zależne sprawdzenie', () => {
+  const flow = base();
+  const check = flow.nodes.c1;
+  assert.deepEqual(F.nodeAvailability(check, car(), {}, flow), { available: true });
+  const unknown = F.nodeAvailability(check, car({ transmission: '' }), {}, flow);
+  assert.equal(unknown.available, false);
+  assert.equal(unknown.reason, 'brak-danych');
+  assert.equal(unknown.missing[0].key, 'skrzynia');
+  assert.equal(F.nodeAvailability(check, car({ transmission: 'CVT?' }), {}, flow).available, false);
+  assert.equal(F.nodeAvailability(check, car({ transmission: '' }), { skrzynia: 'manualna' }, flow).available, true);
+  assert.equal(F.nodeAvailability(check, car({ transmission: '' }), { skrzynia: 'wymyślona' }, flow).available, false);
+  assert.equal(F.nodeAvailability(flow.nodes.q0, car({ transmission: '' }), {}, flow).available, true, 'obserwacje wspólne zostają dostępne');
+});
+
+test('brak pasującej wersji: test niedostępny, a deklaracja doświadczenia niczego nie odblokowuje', () => {
+  const flow = base();
+  const wrong = car({ year: '1996' });
+  for (const declared of [undefined, false, true]) {
+    const r = F.nodeAvailability(flow.nodes.c1, wrong, { skrzynia: 'automatyczna' }, flow, declared);
+    assert.equal(r.available, false);
+    assert.equal(r.reason, 'brak-pasującego-źródła');
+  }
 });
 
 test('przejścia: następny węzeł według odpowiedzi, wynik nie ma następnika', () => {
-  assert.equal(F.nextNodeId(base().nodes.q0, 'a'), 'c1');
-  assert.equal(F.nextNodeId(base().nodes.c1, 'tak'), 'r1');
-  assert.equal(F.nextNodeId(base().nodes.r1, 'a'), null);
+  const flow = base();
+  assert.equal(F.nextNodeId(flow.nodes.q0, 'a'), 'c1');
+  assert.equal(F.nextNodeId(flow.nodes.q0, 'nieznana'), null);
+  assert.equal(F.nextNodeId(flow.nodes.r1, 'a'), null);
 });
 
 test('rejestr produkcyjny ma jedną ścieżkę (nie-odpala-kreci), pozostałe objawy bez ścieżki', () => {
@@ -55,7 +126,129 @@ test('rejestr produkcyjny ma jedną ścieżkę (nie-odpala-kreci), pozostałe ob
   for (const s of D.SYMPTOMS) assert.equal(R.flowForSymptom(s.id) !== undefined, s.id === R.FLOWS[0].symptomId, s.id);
 });
 
-// ===== Ścieżka produkcyjna: nie-odpala-kreci-5-7-1999 =====
+// ---- Bramki runtime (dane testowe): stosowalność źródła, wersja auta, niezależność od wersji, unieważnianie, stop, wykluczenia ----
+const unestablished = () => ({ ...SRC, applicability: 'nieustalona', applicabilityNote: 'DANE TESTOWE: nieustalona' });
+
+test('źródło o nieustalonej stosowalności blokuje krok i wynik z twierdzeniem (runtime, nie tylko etykieta)', () => {
+  const flow = base();
+  flow.nodes.c1.sources = [unestablished()];
+  const r = F.nodeAvailability(flow.nodes.c1, car(), { skrzynia: 'automatyczna' }, flow);
+  assert.equal(r.available, false);
+  assert.equal(r.reason, 'źródło-bez-ustalonej-stosowalności');
+  flow.nodes.r1.sources = [unestablished()];
+  assert.equal(F.nodeAvailability(flow.nodes.r1, car(), {}, flow).available, false);
+  // jedno źródło o ustalonej stosowalności wystarcza do odblokowania tylko gdy faktycznie istnieje
+  flow.nodes.c1.sources = [unestablished(), SRC];
+  assert.equal(F.nodeAvailability(flow.nodes.c1, car(), { skrzynia: 'automatyczna' }, flow).available, true);
+  // ścieżka zatrzymuje się przed zablokowanym krokiem: nie da się go „przejść” odpowiedziami z adresu
+  flow.nodes.c1.sources = [unestablished()];
+  const replay = F.replayPath(flow, car(), { skrzynia: 'automatyczna' }, ['a', 'ok']);
+  assert.equal(replay.currentId, 'c1');
+  assert.deepEqual(replay.path.map(p => p.answerId), ['a']);
+});
+
+test('bez profilu auta żaden krok nie jest dostępny, chyba że jawnie niezależny od wersji', () => {
+  const flow = base();
+  for (const id of ['q0', 'c1', 'r1']) {
+    const r = F.nodeAvailability(flow.nodes[id], null, {}, flow);
+    assert.equal(r.available, false, id);
+    assert.equal(r.reason, 'brak-wersji', id);
+  }
+  flow.nodes.q0.versionIndependent = true;
+  assert.deepEqual(F.validateFlow(flow), []);
+  assert.equal(F.nodeAvailability(flow.nodes.q0, null, {}, flow).available, true);
+  assert.equal(F.nodeAvailability(flow.nodes.c1, null, {}, flow).available, false);
+  assert.equal(F.flowHasVersionIndependent(flow), true);
+});
+
+test('niezależność od wersji dopuszczalna tylko dla neutralnego pytania bez wniosków', () => {
+  const f1 = base(); f1.nodes.c1.versionIndependent = true;
+  assert.ok(F.validateFlow(f1).some(e => /tylko pytanie/.test(e)));
+  const f2 = base(); f2.nodes.q0.versionIndependent = true; delete f2.nodes.q0.neutral; f2.nodes.q0.sources = [SRC];
+  assert.ok(F.validateFlow(f2).some(e => /niezależne od wersji/.test(e)));
+  const f3 = base(); f3.nodes.q0.versionIndependent = true; f3.nodes.q0.answers[0].excludes = ['DANE TESTOWE'];
+  assert.ok(F.validateFlow(f3).some(e => /niezależne od wersji/.test(e)));
+});
+
+test('częściowe dane wersji (np. brak roku) blokują krok zależny od wersji', () => {
+  const flow = base();
+  const r = F.nodeAvailability(flow.nodes.q0, car({ year: '' }), {}, flow);
+  assert.equal(r.available, false);
+  assert.equal(r.reason, 'brak-danych-wersji');
+  assert.deepEqual(r.missingVersion, ['rok']);
+});
+
+test('zmiana wersji unieważnia ścieżkę: odtworzenie odpowiedzi dla innej wersji zatrzymuje się na starcie', () => {
+  const flow = base();
+  const ok = F.replayPath(flow, car(), { skrzynia: 'automatyczna' }, ['a', 'ok']);
+  assert.deepEqual(ok.path.map(p => p.answerId), ['a', 'ok']);
+  assert.equal(ok.currentId, 'r1');
+  const other = F.replayPath(flow, car({ drive: '2WD' }), { skrzynia: 'automatyczna' }, ['a', 'ok']);
+  assert.deepEqual(other.path, []);
+  assert.equal(other.currentId, 'q0');
+  const none = F.replayPath(flow, null, {}, ['a', 'ok']);
+  assert.deepEqual(none.path, []);
+  // nieznana odpowiedź z adresu jest odrzucona
+  assert.deepEqual(F.replayPath(flow, car(), {}, ['zmyślona']).path, []);
+});
+
+test('stop: odpowiedź zatrzymująca wymaga komunikatu ze źródłem; propozycja nie jest widoczna, parafraza tak; ścieżka kończy się', () => {
+  const flow = base();
+  flow.nodes.c1.answers.push({ id: 'stop', label: 'DANE TESTOWE: stop', next: '', stop: true });
+  assert.ok(F.validateFlow(flow).some(e => /komunikatu stop/.test(e)));
+  flow.nodes.c1.stop = { text: 'DANE TESTOWE: stop', form: 'propozycja do akceptacji' };
+  assert.deepEqual(F.validateFlow(flow), []);
+  assert.equal(F.visibleStop(flow.nodes.c1), null);
+  flow.nodes.c1.stop.form = 'parafraza źródła';
+  assert.equal(F.visibleStop(flow.nodes.c1), 'DANE TESTOWE: stop');
+  const r = F.replayPath(flow, car(), { skrzynia: 'automatyczna' }, ['a', 'stop', 'ok']);
+  assert.equal(r.stopped, true);
+  assert.deepEqual(r.path.map(p => p.answerId), ['a', 'stop']);
+  const noSrc = base(); noSrc.nodes.q0.stop = { text: 'x', form: 'parafraza źródła' };
+  assert.ok(F.validateFlow(noSrc).some(e => /stop bez źródła/.test(e)));
+});
+
+test('wykluczenia: zbierane z odpowiedzi na ścieżce, wymagają źródła, unieważniane razem ze ścieżką', () => {
+  const flow = base();
+  flow.nodes.c1.answers[0].excludes = ['DANE TESTOWE: A', 'DANE TESTOWE: B'];
+  assert.deepEqual(F.validateFlow(flow), []);
+  const r = F.replayPath(flow, car(), { skrzynia: 'automatyczna' }, ['a', 'ok']);
+  assert.deepEqual(F.collectExclusions(flow, r.path), ['DANE TESTOWE: A', 'DANE TESTOWE: B']);
+  const other = F.replayPath(flow, car({ drive: '2WD' }), { skrzynia: 'automatyczna' }, ['a', 'ok']);
+  assert.deepEqual(F.collectExclusions(flow, other.path), []);
+  const noSrc = base(); noSrc.nodes.q0.answers[0].excludes = ['x'];
+  assert.ok(F.validateFlow(noSrc).some(e => /wykluczenie bez źródła/.test(e)));
+});
+
+test('źródło z flagą „ustalona” dla INNEGO auta nie odblokowuje kroku (zakres źródła vs bieżąca wersja)', () => {
+  const flow = base();
+  const other = (over) => ({ ...SRC, vehicleScope: [{ models: ['Suburban 1500'], yearFrom: 1999, yearTo: 1999, drives: ['4WD'], ...over }] });
+  const cases = [{ drives: ['2WD'] }, { yearFrom: 1995, yearTo: 1996 }, { models: ['C1500'] }];
+  for (const over of cases) {
+    flow.nodes.c1.sources = [other(over)]; flow.nodes.r1.sources = [other(over)];
+    const r = F.nodeAvailability(flow.nodes.c1, car(), { skrzynia: 'automatyczna' }, flow);
+    assert.equal(r.available, false, JSON.stringify(over));
+    assert.equal(r.reason, 'źródło-dla-innej-wersji');
+    assert.equal(F.nodeAvailability(flow.nodes.r1, car(), {}, flow).available, false);
+    assert.equal(F.replayPath(flow, car(), { skrzynia: 'automatyczna' }, ['a', 'ok']).currentId, 'c1');
+  }
+  // źródło z zakresem wymagającym silnika: nieznany silnik w aucie = brak dopasowania źródła
+  flow.nodes.c1.sources = [other({ engines: ['5.7L'] })];
+  assert.equal(F.nodeAvailability(flow.nodes.c1, car({ engine: '' }), { skrzynia: 'automatyczna' }, flow).available, false);
+  assert.equal(F.nodeAvailability(flow.nodes.c1, car({ engine: '5.7L' }), { skrzynia: 'automatyczna' }, flow).available, true);
+  // jedno źródło pasujące wystarcza, źródło dla innego auta obok niego nie szkodzi
+  flow.nodes.c1.sources = [other({ drives: ['2WD'] }), SRC];
+  assert.equal(F.nodeAvailability(flow.nodes.c1, car(), { skrzynia: 'automatyczna' }, flow).available, true);
+});
+
+test('walidator: stosowalność „ustalona” bez zakresu wersji aut jest odrzucona', () => {
+  const f = base(); f.nodes.c1.sources = [{ ...SRC, vehicleScope: undefined }];
+  assert.ok(F.validateFlow(f).some(e => /vehicleScope/.test(e)));
+  const g = base(); g.nodes.c1.sources = [{ ...SRC, vehicleScope: [] }];
+  assert.ok(F.validateFlow(g).some(e => /vehicleScope/.test(e)));
+});
+
+// ===== Ścieżka produkcyjna: nie-odpala-kreci-5-7-1999 (Suburban 1500 1999, 5.7 L31) =====
 const REAL = load('src/lib/flows/nie-odpala-kreci-5-7-1999.ts').FLOW_NIE_ODPALA_KRECI;
 const realCar = (over = {}) => car({ engine: 'L31', ...over });
 const walkReal = (answers, profile = realCar()) => { const r = F.replayPath(REAL, profile, {}, answers); return { r, n: REAL.nodes[r.currentId] }; };
@@ -69,23 +262,15 @@ test('ścieżka nie-odpala: walidator bez błędów i bez wskazań przyczyn, cz�
     for (const a of n.answers || []) assert.equal(a.excludes, undefined, n.id);
   }
 });
-test('ścieżka nie-odpala: dopasowanie wersji (L31, 1999; Suburban 1500/2500, Tahoe i Yukon 2/4-drzwiowe; 2WD i 4WD)', () => {
-  for (const model of ['Suburban 1500', 'Suburban 2500', 'Tahoe 2-door', 'Tahoe 4-door', 'Yukon 2-door', 'Yukon 4-door'])
-    for (const d of ['2WD', '4WD']) assert.equal(F.matchVehicle(realCar({ model, drive: d }), REAL).status, 'pasuje', model + ' ' + d);
-  for (const o of [{ year: '1998' }, { engine: 'L29' }, { engine: '5.7L' }]) assert.equal(F.matchVehicle(realCar(o), REAL).status, 'brak', JSON.stringify(o));
+test('ścieżka nie-odpala: dopasowanie wersji (L31, 1999, Suburban 1500, 2WD i 4WD)', () => {
+  for (const d of ['2WD', '4WD']) for (const m of ['Suburban 1500', 'Suburban 2500', 'Tahoe 2-door', 'Tahoe 4-door', 'Yukon 2-door', 'Yukon 4-door']) assert.equal(F.matchVehicle(realCar({ model: m, drive: d }), REAL).status, 'pasuje', m + ' ' + d);
+  for (const o of [{ year: '1998' }, { year: '2000' }, { model: 'C1500' }, { engine: 'L29' }, { engine: '5.7L' }]) assert.equal(F.matchVehicle(realCar(o), REAL).status, 'brak');
+  assert.equal(walkReal(['normalnie', 'tak', 'slychac', 'nie']).r.currentId, 'r_obd_ccnr');
   assert.notEqual(F.matchVehicle(realCar({ engine: '' }), REAL).status, 'pasuje');
   assert.notEqual(F.matchVehicle(null, REAL).status, 'pasuje');
 });
 test('ścieżka nie-odpala: owner robi tylko warunki i nasłuch, reszta to wynik warsztatu', () => {
   for (const n of Object.values(REAL.nodes)) if (n.kind === 'check' && !['c1', 'c2'].includes(n.id)) assert.equal(n.level, 'warsztat', n.id);
-});
-test('ścieżka nie-odpala: węzeł c1a leży między c2 i c3; „tak” → c3, „nie” → r_obd_ccnr', () => {
-  assert.equal(REAL.nodes.c2.answers.find(a => a.id === 'slychac').next, 'c1a');
-  assert.equal(REAL.nodes.c2.answers.find(a => a.id === 'nie-wiem').next, 'c1a');
-  assert.equal(REAL.nodes.c1a.answers.find(a => a.id === 'tak').next, 'c3');
-  assert.equal(REAL.nodes.c1a.answers.find(a => a.id === 'nie').next, 'r_obd_ccnr');
-  assert.equal(walkReal(['normalnie', 'tak', 'slychac', 'tak']).r.currentId, 'c3');
-  assert.equal(walkReal(['normalnie', 'tak', 'slychac', 'nie']).r.currentId, 'r_obd_ccnr');
 });
 test('ścieżka nie-odpala: gałęzie kroków 1-8 CCNR', () => {
   assert.equal(walkReal(['normalnie', 'tak', 'cisza']).r.currentId, 'r_pompa');
@@ -103,6 +288,7 @@ test('ścieżka nie-odpala: krok 7 CCNR poza zakresem prowadzi do FSD, w zakresi
   assert.match(REAL.nodes.c6.details, /nie jest tym samym co kroki 2 i 3/);
 });
 test('ścieżka nie-odpala: trasy tabeli Fuel System Diagnosis (kroki źródła)', () => {
+  // trasa = lista par węzeł:odpowiedź od wejścia f1; test sprawdza, że kolejne węzły zgadzają się z grafem
   const routes = [
     ['f1:nie', 'r_obd'],
     ['f1:tak f2:tak f3:tak f5:tak f27:tak', 'r_f28'],
