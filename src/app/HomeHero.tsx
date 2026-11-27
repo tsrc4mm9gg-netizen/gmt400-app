@@ -94,6 +94,7 @@ export default function HomeHero() {
           <Link
             key={action.href}
             href={action.href}
+            data-testid={action.href === '/diagnoza' ? 'home-diagnoza' : undefined}
             className="flex flex-col items-center rounded-xl border border-white/10 bg-neutral-900 p-4 text-center hover:border-silver-500/50"
           >
             <svg className="mb-2 h-6 w-6 text-silver-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
