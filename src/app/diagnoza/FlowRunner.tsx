@@ -116,7 +116,7 @@ export default function FlowRunner({ flow }: { flow: Flow }) {
     );
     const source = !profile ? 'Nie ustawiono auta w garażu. Wybierz wersję ręcznie.' : Object.keys(override).length ? 'Wersja wybrana ręcznie. To nie jest weryfikacja auta.' : 'Dane z garażu, do potwierdzenia. To nie jest weryfikacja auta.';
     return (
-      <section aria-label="Potwierdź auto" data-testid="flow-confirm" className="mt-4 rounded-3xl border border-white/15 bg-neutral-900 p-4">
+      <section aria-label="Potwierdź auto" data-testid="flow-confirm" className="mt-4 rounded-3xl border border-white/15 bg-neutral-900 p-4 pb-28">
         <h2 ref={headingRef} tabIndex={-1} className="!m-0 text-lg font-bold text-white">Potwierdź auto</h2>
         <p className="mt-2 text-sm text-neutral-200" data-testid="flow-vehicle">{profile ? summary(profile) : 'Brak wybranej wersji auta.'}</p>
         <p className="mt-1 text-xs text-neutral-400">{source}</p>
@@ -145,7 +145,7 @@ export default function FlowRunner({ flow }: { flow: Flow }) {
   const unavailable = availability && !availability.available ? availability : null;
 
   return (
-    <section aria-label={flow.title} data-testid="flow-step" className="mt-4 rounded-3xl border border-white/15 bg-neutral-900 p-4">
+    <section aria-label={flow.title} data-testid="flow-step" className="mt-4 rounded-3xl border border-white/15 bg-neutral-900 p-4 pb-28">
       <h2 ref={headingRef} tabIndex={-1} className="!m-0 text-lg font-bold text-white" data-testid="flow-title">
         {replay.stopped ? 'Zatrzymaj się na tym kroku' : unavailable ? (unavailable.reason === 'brak-danych' ? 'Potrzebna dana do kroku' : 'Krok niedostępny') : node.title}
       </h2>
