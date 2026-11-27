@@ -103,19 +103,20 @@ export default function FlowRunner({ flow }: { flow: Flow }) {
   if (mode === 'wybór') {
     const engines = [...new Set(flow.scope.flatMap(s => s.engines ?? []))];
     const transmissions = [...new Set(flow.scope.flatMap(s => s.transmissions ?? []))];
-    const field = (key: keyof Override, label: string, options: string[], withOther = false) => (
+    const ENGINE_LABEL: Record<string, string> = { L31: 'L31 (Vortec 5.7, 8. znak VIN: R)' };
+    const field = (key: keyof Override, label: string, options: string[], withOther = false, labels: Record<string, string> = {}) => (
       <label className="block text-sm text-neutral-200" key={key}>
         <span className="mb-1 block font-semibold text-white">{label}</span>
         <select className={select} data-testid={`flow-field-${key}`} value={profile ? (profile[key] as string) : ''} onChange={e => setOverride(o => ({ ...o, [key]: e.target.value }))}>
           <option value="">Wybierz</option>
-          {options.map(o => <option key={o} value={o}>{o}</option>)}
+          {options.map(o => <option key={o} value={o}>{labels[o] ?? o}</option>)}
           {withOther && <option value={OTHER}>Inny / nie wiem</option>}
         </select>
       </label>
     );
     const source = !profile ? 'Nie ustawiono auta w garażu. Wybierz wersję ręcznie.' : Object.keys(override).length ? 'Wersja wybrana ręcznie. To nie jest weryfikacja auta.' : 'Dane z garażu, do potwierdzenia. To nie jest weryfikacja auta.';
     return (
-      <section aria-label="Potwierdź auto" data-testid="flow-confirm" className="mt-4 rounded-3xl border border-white/15 bg-neutral-900 p-4">
+      <section aria-label="Potwierdź auto" data-testid="flow-confirm" className="mt-4 rounded-3xl border border-white/15 bg-neutral-900 p-4 pb-28">
         <h2 ref={headingRef} tabIndex={-1} className="!m-0 text-lg font-bold text-white">Potwierdź auto</h2>
         <p className="mt-2 text-sm text-neutral-200" data-testid="flow-vehicle">{profile ? summary(profile) : 'Brak wybranej wersji auta.'}</p>
         <p className="mt-1 text-xs text-neutral-400">{source}</p>
@@ -123,7 +124,8 @@ export default function FlowRunner({ flow }: { flow: Flow }) {
           {field('model', 'Model', ALL_MODELS)}
           {field('year', 'Rok', YEARS)}
           {field('drive', 'Napęd', ['2WD', '4WD'])}
-          {engines.length > 0 && field('engine', 'Silnik', engines, true)}
+          {engines.length > 0 && field('engine', 'Silnik', engines, true, ENGINE_LABEL)}
+          {engines.length > 0 && <p className="-mt-1 text-xs text-neutral-400" data-testid="flow-engine-hint">Ścieżka dotyczy silnika 5.7 Vortec oznaczonego L31. Jeśli w Twoim VIN-ie 8. znak to R, wybierz L31.</p>}
           {transmissions.length > 0 && field('transmission', 'Skrzynia', transmissions, true)}
         </div>
         <p className="mt-3 text-sm font-semibold text-white" data-testid="flow-coverage">
@@ -143,7 +145,7 @@ export default function FlowRunner({ flow }: { flow: Flow }) {
   const unavailable = availability && !availability.available ? availability : null;
 
   return (
-    <section aria-label={flow.title} data-testid="flow-step" className="mt-4 rounded-3xl border border-white/15 bg-neutral-900 p-4">
+    <section aria-label={flow.title} data-testid="flow-step" className="mt-4 rounded-3xl border border-white/15 bg-neutral-900 p-4 pb-28">
       <h2 ref={headingRef} tabIndex={-1} className="!m-0 text-lg font-bold text-white" data-testid="flow-title">
         {replay.stopped ? 'Zatrzymaj się na tym kroku' : unavailable ? (unavailable.reason === 'brak-danych' ? 'Potrzebna dana do kroku' : 'Krok niedostępny') : node.title}
       </h2>
@@ -188,10 +190,16 @@ export default function FlowRunner({ flow }: { flow: Flow }) {
               {node.answers.map(a => <button key={a.id} type="button" className={btn} data-testid={`flow-answer-${a.id}`} onClick={() => choose(a.id)}>{a.label}</button>)}
             </div>
           )}
-          {node.sources.length > 0 && (
-            <ul className="mt-3 list-none space-y-1 !p-0 text-xs text-neutral-400" data-testid="flow-sources">
-              {node.sources.map(s => <li key={s.url}>Źródło: {s.label} ({s.kind}, stosowalność {s.applicability})</li>)}
-            </ul>
+          {(node.details || node.sources.length > 0) && (
+            <details className="mt-3 text-xs text-neutral-400" data-testid="flow-details">
+              <summary className="cursor-pointer font-semibold text-neutral-300">Szczegóły i źródło</summary>
+              {node.details && <p className="mt-2 !mb-0">{node.details}</p>}
+              {node.sources.length > 0 && (
+                <ul className="mt-2 list-none space-y-1 !p-0" data-testid="flow-sources">
+                  {node.sources.map(s => <li key={s.url}>Źródło: {s.label} ({s.kind}, stosowalność {s.applicability})</li>)}
+                </ul>
+              )}
+            </details>
           )}
         </>
       )}

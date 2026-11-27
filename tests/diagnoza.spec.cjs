@@ -185,6 +185,8 @@ test('strona główna: wyraźny kafel „Co się dzieje z moim autem?” prowadz
   const tile = page.getByTestId('home-diagnoza');
   await expect(tile).toBeVisible();
   expect((await tile.boundingBox()).height).toBeGreaterThanOrEqual(44);
+  // Przycisk VIN jest w zwiniętym akordeonie „Dane serwisowe” (HomeStart); otwieramy go, aby sprawdzić działanie CTA.
+  await page.getByRole('button', { name: 'Dane serwisowe' }).click();
   await hydrated(page.getByTestId('home-vin-cta'));
   await tile.click();
   await expect(page).toHaveURL(BASE + '/diagnoza');

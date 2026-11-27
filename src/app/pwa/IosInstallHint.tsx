@@ -1,13 +1,16 @@
 'use client';
 import { useEffect, useState } from 'react';
+import { usePathname } from 'next/navigation';
 
 const KEY = 'gmt400_ios_install_hint_v1';
 
-/** Jednorazowa, dyskretna podpowiedź „Dodaj do ekranu początkowego” — tylko iPhone/iPad w Safari, gdy strona nie działa jako aplikacja. */
+/** Jednorazowa, dyskretna podpowiedź „Dodaj do ekranu początkowego” — tylko iPhone/iPad w Safari, gdy strona nie działa jako aplikacja. Nie pokazuje się na /diagnoza, żeby nie zasłaniać odpowiedzi w ścieżce. */
 export default function IosInstallHint() {
+  const pathname = usePathname();
   const [show, setShow] = useState(false);
   useEffect(() => {
     try {
+      if (pathname === '/diagnoza') return;
       if (localStorage.getItem(KEY)) return;
       const ua = navigator.userAgent;
       const ios = /iPhone|iPad|iPod/.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
@@ -17,8 +20,8 @@ export default function IosInstallHint() {
       const t = window.setTimeout(() => setShow(true), 2500);
       return () => window.clearTimeout(t);
     } catch { /* brak localStorage — nie pokazujemy */ }
-  }, []);
-  if (!show) return null;
+  }, [pathname]);
+  if (pathname === '/diagnoza' || !show) return null;
   const close = () => { try { localStorage.setItem(KEY, String(Date.now())); } catch { /* nic */ } setShow(false); };
   return (
     <div

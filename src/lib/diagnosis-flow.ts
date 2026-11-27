@@ -53,6 +53,8 @@ type NodeBase = {
   /** Zawsze pusta w etapie 1. */
   parts: unknown[];
   safety?: FlowSafety;
+  /** Krótkie szczegóły i uwagi o źródle, pokazywane w rozwijanej sekcji (nie w głównej treści kroku). */
+  details?: string;
   /** Komunikat zatrzymania (stop), pokazywany po odpowiedzi z `stop: true`. Wymaga źródła. */
   stop?: FlowSafety;
 };
