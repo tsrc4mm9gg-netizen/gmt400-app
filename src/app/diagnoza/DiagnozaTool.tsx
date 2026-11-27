@@ -5,6 +5,8 @@ import Link from 'next/link';
 import { IconTile } from '../ui/CategoryIcon';
 import { SYMPTOMS, rankCauses, type Answers, type Cause, type DiagLink, type Symptom } from '../../lib/diagnosis';
 import { buildMeta, type EntryMeta, type MetaMap } from '../../lib/diagnosis-meta';
+import { flowForSymptom } from '../../lib/diagnosis-flows';
+import FlowRunner from './FlowRunner';
 
 const TYPE_LABEL: Record<string, string> = { Usterka: 'Usterka', Porada: 'DIY / porada', 'Kod błędu': 'Kod błędu' };
 const PATH = '/diagnoza';
@@ -162,6 +164,7 @@ export default function DiagnozaTool({ initialMeta }: { initialMeta: MetaMap | n
 
   const symptom: Symptom | undefined = useMemo(() => SYMPTOMS.find(s => s.id === symptomId), [symptomId]);
   const ranked = useMemo(() => (symptom ? rankCauses(symptom, answers) : []), [symptom, answers]);
+  const flow = symptom ? flowForSymptom(symptom.id) : undefined;
   const metaState: 'ok' | 'loading' | 'error' = meta ? 'ok' : metaError ? 'error' : 'loading';
 
   const choose = useCallback((id: string | null) => {
@@ -219,6 +222,8 @@ export default function DiagnozaTool({ initialMeta }: { initialMeta: MetaMap | n
             <button type="button" data-testid="symptom-change" onClick={() => choose(null)} className="min-h-11 shrink-0 rounded-xl border border-white/20 bg-neutral-950 px-4 text-sm font-semibold text-silver-100 transition hover:border-silver-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-silver-500">Zmień</button>
           </div>
 
+          {flow && <FlowRunner flow={flow} />}
+          {!flow && (<>
           <div className="mt-4 space-y-4" data-testid="questions">
             {symptom.questions.map(q => (
               <div key={q.id} role="group" aria-labelledby={`q-${q.id}`} data-testid={`question-${q.id}`} className="min-w-0 rounded-3xl border border-white/15 bg-neutral-900 p-4">
@@ -249,9 +254,11 @@ export default function DiagnozaTool({ initialMeta }: { initialMeta: MetaMap | n
           </ol>
           {ranked.length === 0 && <p className="mt-3 rounded-3xl border border-dashed border-white/20 p-4 text-sm text-neutral-300">Dla takich odpowiedzi nie mamy jeszcze przyczyn w bazie. Zmień odpowiedź lub <Link href="/szukaj" className="underline">użyj wyszukiwarki</Link>.</p>}
 
+          </>)}
+
           {symptom.gaps.length > 0 && (
             <aside data-testid="gaps" className="mt-4 rounded-3xl border border-dashed border-white/25 bg-neutral-950 p-4">
-              <p className="!mb-1 text-sm font-bold text-white">Brak wpisu w bazie</p>
+              <p className="!mb-1 text-sm font-bold text-white">{flow ? 'Luki dotychczasowej diagnozy (poza tą ścieżką)' : 'Brak wpisu w bazie'}</p>
               <ul className="list-disc space-y-1 pl-5 text-sm text-neutral-300">{symptom.gaps.map(g => <li key={g}>{g}</li>)}</ul>
               <p className="mt-2 !mb-0 text-xs text-neutral-400">Nie zgadujemy przyczyn bez źródła — ta luka jest zapisana do uzupełnienia.</p>
             </aside>
