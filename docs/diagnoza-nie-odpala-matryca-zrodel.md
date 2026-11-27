@@ -44,10 +44,29 @@ Wszystkie 12 wariantów poniżej ma status „odczytane, treść zgodna z refere
 - W `c1` wskazano, że uwaga o drugim zbiorniku pochodzi z tabeli Fuel System Diagnosis, krok 10.
 - Rozszerzono `VERSION` i tablice źródeł o 12 wariantów.
 
+## Treści do ponownego użycia po sprawdzeniu stosowalności
+
+- [Porady właściciela](https://www.gmt400.pl/porady-wlasciciela): ECM-B — istnieje opis sprawdzenia oraz reakcji na powtórne przepalenie, bez podnoszenia amperażu. Wpis deklaruje C/K 1996–1999 i Tahoe/Suburban 1999; przypisy wymieniają C/K 1996, 1997, 1998 oraz Tahoe/Suburban 1999. Nie przyjmować C/K 1999 ani GMC bez osobnej weryfikacji. Wynik warsztatowej kompresji oprzeć na przywołanym GM Service Manual C/K 1998 dla odpowiedniego 4.3/5.0/5.7; nie przenosić do 7.4 ani diesla. SECURITY tylko przy potwierdzonym wyposażeniu, bez obejść.
+- [Benzyna — lista Haynes](https://www.gmt400.pl/baza/silnik-benzynowy-nie-odpala-gasnie-nierowny-bieg-jalowy-szarpie-brak-mocy-strzal): dla pickupów 1988–1998 wskazuje tematy zasilania paliwem, iskry i mechaniki. Nie potwierdza kolejności, parametrów ani naprawy dla konkretnego profilu; nie przenosić ogólnej rady o regulacji zapłonu na Tahoe 1999 VIN R.
+- [Diesel 6.5 — usterki i kody](https://www.gmt400.pl/baza/6-5l-diesel-nie-odpala-gasnie-falujace-obroty-pompa-wtryskowa-czujnik-optyczny-s): jakość i dopływ paliwa, obecność powietrza, wiązka, czujnik optyczny i sterownik pompy. Rozdzielić wczesne kody 17/18/35/36 od P0251/P0370/P1214/P1216; sprawdzić diagram DTC dla dokładnej kalibracji. Kod sam nie uzasadnia wymiany pompy ani sterownika.
+- [Dotychczasowa diagnoza](https://www.gmt400.pl/diagnoza): P0300/P0335 i katalogowe części to tropy, nie dowód przyczyny ani kompatybilności. Nie kopiować szeroko opisanego ciśnienia Vortec do drzewa bez określenia wersji i warunków pomiaru.
+- `src/app/diy/wymiana-pompy-paliwa/page.tsx`: odczytano kod repozytorium; odczyt publicznego adresu nie powiódł się. Ogólny poradnik opisuje demontaż zbiornika i kontrolę szczelności, ale nie daje procedury wariantu ani bezpośredniego, potwierdzonego produktu. Nie przenosić metody udarowej przy zbiorniku. Prace przy paliwie zlecić warsztatowi, z uprzednim obniżeniem ciśnienia według procedury wariantu.
+
+## Kryterium wejścia do drzewa
+
+Dla każdej realnej kombinacji oddzielnie odnotować adres i opis źródła, zakres odczytanych tabel, wynik porównania tekstu i obrazów oraz dowód typu układu. Do czasu pełnego odczytu nie włączać nowej ścieżki; nieodczytana tabela to nie dowód braku źródła. Potwierdzony wynik ma w drzewie wyjaśniać przyczynę, warunkową naprawę i kontrolę po naprawie; link pozostaje dodatkiem. Bez potwierdzonej przyczyny — następne sprawdzenie lub jawne nierozstrzygnięcie. Bez potwierdzonego dopasowania — nie ustalono części.
+
+## Pozostałe modele, roczniki i diesle
+
+| Zakres | Dowód i stan odczytu | Brak / dalsza weryfikacja |
+| --- | --- | --- |
+| Chevrolet/GMC C/K, Sierra oraz Suburban 2500 poza 1999 5.7 VIN R | Indeksy 1999 pokazują m.in. pickupy oznaczone Truck oraz Suburban 2500 z różnymi VIN silnika. Pozostałe lata niezinwentaryzowane w tej rundzie. | Mapować nazwy katalogowe i roczniki na dokładne warianty serwisowe; odczytać CCNR oraz osobne tabele paliwa i zapłonu. Wpisy 4.8 VIN V, 5.3 VIN T i 6.0 VIN U w indeksach 1999 nie są podstawą do poszerzania wyboru ani stosowania procedur GMT400. |
+| Pozostałe roczniki Tahoe/Yukon/Suburban (1988–1998, 2000) | Nieodczytane w tej rundzie; brak odczytu nie oznacza braku źródła. | Dla każdego rocznika i silnika osobno: wariant serwisowy, CCNR, FSD, porównanie treści i obrazów, typ układu. |
+| Diesle, w tym 6.5 VIN F i VIN S | Indeksy 1999 rozróżniają warianty. Wpis GMT400.pl o pompie i kodach miesza materiał z różnych biuletynów i roczników, nie tworząc kompletnej tabeli dla każdego napędu/modelu. | Ustalić VIN/RPO, typ pompy i układ świec żarowych z dokumentu wariantu; zebrać oddzielnie procedurę braku rozruchu, zasilania i wtrysku; nie stosować kroków benzynowych. |
+
 ## Czego nie odczytano / pozostałe braki
 
 - Procedury, do których odsyła źródło: Theft Deterrent, Enhanced Ignition System Diagnosis, Fuel Injector Circuit Diagnosis, Fuel Pump Relay Circuit Diagnosis, Driveability Symptoms, tabele DTC — nieodczytane; w drzewie oznaczone jako „ta ścieżka jeszcze nie zawiera”.
 - Dobór części: brak potwierdzonego dopasowania; pole `parts` pozostaje puste.
-- Pozostałe roczniki (1988–1998, 2000), silniki 4.3, 5.0, 7.4 i diesle — nieodczytane; indeksy to nie tabele.
 - Treść dla GMC porównano skrótami w tej samej kopii CHARM; brak niezależnego źródła.
-- Test `tests/diagnosis-flow.test.cjs`: nie został zaktualizowany w tym commicie (odnosi się do starych identyfikatorów kroków i zakresu Suburban 1500); wymaga osobnej aktualizacji.
+- Test `tests/diagnosis-flow.test.cjs`: zaktualizowany w tym commicie do nowego zakresu i węzła `c1a`; wyników nie raportujemy, bo testy uruchamia Wasza strona.

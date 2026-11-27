@@ -1,367 +1,246 @@
-// Mechanizm ścieżek diagnostycznych (src/lib/diagnosis-flow.ts): walidator, dopasowanie wersji, brak odblokowania przez deklarację.
-// UWAGA: wszystkie ścieżki w tym pliku to DANE TESTOWE. To nie jest instrukcja diagnostyczna dla użytkownika.
-const test = require('node:test');
-const assert = require('node:assert/strict');
-const fs = require('node:fs');
-const ts = require('typescript');
+// Narzędzie /diagnoza „Co się dzieje z moim autem?”: wybór objawu → pytania → lista przyczyn z linkami do wpisów.
+// Chromium + WebKit, telefon 390×844 i komputer 1280×800 (dodatkowo sprawdzamy szerokość 768).
+const { test, expect } = require('@playwright/test');
+const path = require('node:path');
+const { hydrated } = require('./helpers/hydration.cjs');
+const BASE = process.env.UX_BASE || 'http://127.0.0.1:3100';
+const NODATA_BASE = process.env.NODATA_BASE || 'http://127.0.0.1:3100';
+const FIXTURE = path.join(__dirname, 'fixtures', 'notion-diagnoza.json');
+const SYMPTOM_IDS = ['nie-odpala', 'szarpie-gasnie', 'check-engine', 'wycieki', 'halasy', 'hamulce', 'skrzynia', 'klima-ogrzewanie', 'elektryka', 'przegrzewanie', 'paliwo-dym'];
 
-function load(file, req = () => ({})) {
-  const mod = { exports: {} };
-  const js = ts.transpileModule(fs.readFileSync(file, 'utf8'), { compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2020 } }).outputText;
-  new Function('exports', 'module', 'require', js)(mod.exports, mod, req);
-  return mod.exports;
+async function guard(page, { notion = 'fixture' } = {}) {
+  const errors = [];
+  const benign = message => /[?&]_rsc=.*access control checks/.test(message);
+  page.on('pageerror', error => { if (!benign(error.message)) errors.push('pageerror: ' + error.message); });
+  page.on('console', message => { if (message.type() === 'error' && !/Failed to load resource/.test(message.text()) && !benign(message.text())) errors.push('console: ' + message.text()); });
+  await page.context().route(url => url.pathname.startsWith('/api/notion'), route => notion === 'fixture'
+    ? route.fulfill({ path: FIXTURE, contentType: 'application/json' })
+    : route.fulfill({ status: 502, contentType: 'application/json', body: '{"error":"test"}' }));
+  return errors;
 }
-const F = load('src/lib/diagnosis-flow.ts');
+async function noHorizontalScroll(page) {
+  expect(await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth)).toBeLessThanOrEqual(1);
+}
+async function open(page, query = '') {
+  await page.goto(BASE + '/diagnoza' + query);
+  await expect(page.getByTestId('diagnoza-tool')).toBeVisible();
+  await hydrated(page.getByTestId('diagnoza-tool').locator('button').first());
+}
 
-const SRC = { label: 'DANE TESTOWE', url: 'https://example.com/test', kind: 'kopia dokumentu', applicability: 'ustalona', applicabilityNote: 'DANE TESTOWE: stosowalność ustalona (dane testowe)', scope: 'DANE TESTOWE', vehicleScope: [{ models: ['Suburban 1500'], yearFrom: 1999, yearTo: 1999, drives: ['4WD'] }] };
-const car = (over = {}) => ({ brand: 'Chevrolet', platform: 'Suburban', model: 'Suburban 1500', year: '1999', engine: '5.7L', drive: '4WD', transmission: 'automatyczna', rpoCodes: [], ...over });
-const base = () => ({
-  id: 'test-flow', symptomId: 'nie-odpala', title: 'DANE TESTOWE', start: 'q0',
-  scope: [{ models: ['Suburban 1500'], yearFrom: 1999, yearTo: 1999, drives: ['4WD'] }],
-  nodes: {
-    q0: { id: 'q0', kind: 'question', neutral: true, title: 'DANE TESTOWE: pytanie', text: 'DANE TESTOWE', sources: [], parts: [], answers: [{ id: 'a', label: 'A', next: 'c1' }] },
-    c1: { id: 'c1', kind: 'check', level: 'każdy', title: 'DANE TESTOWE: sprawdzenie', text: 'DANE TESTOWE', sources: [SRC], parts: [], answers: [{ id: 'ok', label: 'OK', next: 'r1' }],
-      requires: [{ key: 'skrzynia', label: 'Skrzynia', profileField: 'transmission', options: [{ id: 'automatyczna', label: 'Automatyczna' }, { id: 'manualna', label: 'Manualna' }] }] },
-    r1: { id: 'r1', kind: 'result', outcome: 'konieczny-kolejny-test', title: 'DANE TESTOWE: wynik', text: 'DANE TESTOWE', sources: [SRC], parts: [], excluded: [], notChecked: ['DANE TESTOWE'] },
-  },
+test('/diagnoza: 11 kategorii objawów + „Inny objaw”, jeden H1, tytuł i canonical', async ({ page }) => {
+  const errors = await guard(page);
+  await open(page);
+  await expect(page.locator('h1')).toHaveCount(1);
+  await expect(page.locator('h1')).toHaveText('Co się dzieje z moim autem?');
+  await expect(page).toHaveTitle(/Diagnoza objawów GMT400/);
+  await expect(page.locator('link[rel=canonical]')).toHaveAttribute('href', 'https://www.gmt400.pl/diagnoza');
+  for (const id of SYMPTOM_IDS) {
+    const tile = page.getByTestId('symptom-' + id);
+    await expect(tile).toBeVisible();
+    expect((await tile.boundingBox()).height).toBeGreaterThanOrEqual(44);
+  }
+  await expect(page.getByTestId('symptom-other')).toHaveAttribute('href', '/szukaj');
+  await expect(page.locator('[data-testid^=symptom-]:not([data-testid=symptom-other]):not([data-testid=symptom-picker]):not([data-testid=symptom-panel]):not([data-testid=symptom-selected]):not([data-testid=symptom-change])')).toHaveCount(11);
+  await noHorizontalScroll(page);
+  expect(errors).toEqual([]);
 });
 
-test('poprawna ścieżka testowa przechodzi walidację', () => {
-  assert.deepEqual(F.validateFlow(base()), []);
+test('/diagnoza: nie odpala → diesel → rozrusznik: lista przyczyn, dopasowanie, linki do /baza/[id]', async ({ page }) => {
+  const errors = await guard(page);
+  await open(page);
+  await page.getByTestId('symptom-nie-odpala').click();
+  await expect(page.getByTestId('symptom-selected')).toHaveText('Nie odpala');
+  await expect(page).toHaveURL(/\/diagnoza\?objaw=nie-odpala$/);
+  await expect(page.getByTestId('question-silnik')).toBeVisible();
+  const before = Number((await page.getByTestId('results-count').innerText()).replace(/\D/g, ''));
+  expect(before).toBeGreaterThanOrEqual(5);
+
+  const diesel = page.getByTestId('option-silnik-diesel');
+  await diesel.click();
+  await expect(diesel).toHaveAttribute('aria-pressed', 'true');
+  await expect(page).toHaveURL(/silnik=diesel/);
+  const afterDiesel = Number((await page.getByTestId('results-count').innerText()).replace(/\D/g, ''));
+  expect(afterDiesel).toBeLessThan(before); // przyczyny „tylko benzyna” znikają
+
+  const q = page.getByTestId('question-rozrusznik');
+  await q.locator('button').first().click();
+  await expect(page.locator('[data-testid=cause-list] [data-testid=cause-match]').first()).toContainText('Pasuje:');
+  // pierwsza przyczyna to ta pasująca do odpowiedzi
+  const firstCause = page.locator('[data-testid=cause-list] > li').first();
+  await expect(firstCause.getByTestId('cause-match')).toHaveCount(1);
+  await expect(firstCause).toContainText(/sprawdź w swoim aucie \/ manualu/i);
+  const hrefs = await page.getByTestId('cause-link').evaluateAll(as => as.map(a => a.getAttribute('href')));
+  expect(hrefs.length).toBeGreaterThan(3);
+  expect(hrefs.some(h => /^\/baza\/[0-9a-f-]{36}$/.test(h))).toBe(true);
+  // tytuły wpisów z Notion i tagi model/lata są widoczne w wierszach linków
+  await expect(firstCause.getByTestId('cause-link').first()).toContainText(/Model:/);
+  await expect(page.getByText('Ładowanie wpisu…')).toHaveCount(0);
+  await noHorizontalScroll(page);
+  expect(errors).toEqual([]);
 });
 
-test('twierdzenie diagnostyczne bez źródła jest odrzucone, neutralna etykieta UI bez źródła jest dozwolona', () => {
-  const ok = base();
-  assert.deepEqual(F.validateFlow(ok), [], 'neutralne pytanie bez źródła');
-  const noSourceCheck = base(); noSourceCheck.nodes.c1.sources = [];
-  assert.ok(F.validateFlow(noSourceCheck).some(e => /bez źródła/.test(e)));
-  const noSourceResult = base(); noSourceResult.nodes.r1.sources = [];
-  assert.ok(F.validateFlow(noSourceResult).some(e => /bez źródła/.test(e)));
-  const nonNeutralQuestion = base(); delete nonNeutralQuestion.nodes.q0.neutral;
-  assert.ok(F.validateFlow(nonNeutralQuestion).some(e => /bez źródła/.test(e)));
+test('/diagnoza: link do wpisu otwiera /baza/[id]; „Zmień” i przycisk wstecz wracają do wyboru objawu', async ({ page }) => {
+  await guard(page);
+  await open(page);
+  await page.getByTestId('symptom-wycieki').click();
+  await expect(page.getByTestId('symptom-panel')).toBeVisible();
+  await page.getByTestId('symptom-change').click();
+  await expect(page.getByTestId('symptom-picker')).toBeVisible();
+  await page.goBack();
+  await expect(page.getByTestId('symptom-panel')).toBeVisible();
+  await expect(page.getByTestId('symptom-selected')).toHaveText('Wycieki');
+  await page.goBack();
+  await expect(page.getByTestId('symptom-picker')).toBeVisible();
+  await page.goForward();
+  const link = page.getByTestId('cause-link').first();
+  const href = await link.getAttribute('href');
+  await link.click();
+  await expect(page).toHaveURL(BASE + href);
 });
 
-test('wynik diagnostyczny jest osobną osią od źródła', () => {
-  const bad = base(); bad.nodes.r1.outcome = 'potwierdzone-w-źródle';
-  assert.ok(F.validateFlow(bad).some(e => /nieznany wynik diagnostyczny/.test(e)));
-  const asKind = base(); asKind.nodes.r1.outcome = 'oryginał producenta';
-  assert.ok(F.validateFlow(asKind).some(e => /nieznany wynik diagnostyczny/.test(e)));
-  const strength = base(); strength.nodes.c1.sources = [{ ...SRC, strength: 'wskazanie-przyczyny' }];
-  assert.ok(F.validateFlow(strength).some(e => /nieznane pole/.test(e)));
-  const noStatus = base(); noStatus.nodes.c1.sources = [{ ...SRC, applicability: undefined }];
-  assert.ok(F.validateFlow(noStatus).some(e => /stosowalności/.test(e)));
-  for (const o of F.DIAGNOSTIC_OUTCOMES) { const f = base(); f.nodes.r1.outcome = o; if (o === 'nierozstrzygnięte') f.nodes.r1.sources = []; assert.deepEqual(F.validateFlow(f), [], o); }
+test('/diagnoza: głęboki link ?objaw=…&odpowiedzi odtwarza stan; błędna wartość jest ignorowana', async ({ page }) => {
+  const errors = await guard(page);
+  await open(page, '?objaw=hamulce&objaw2=x');
+  await expect(page.getByTestId('symptom-selected')).toHaveText('Hamulce');
+  await page.goto(BASE + '/diagnoza?objaw=hamulce&kiedy=nie-ma-takiej');
+  await expect(page.getByTestId('symptom-selected')).toHaveText('Hamulce');
+  await expect(page.locator('[aria-pressed=true]')).toHaveCount(0);
+  await page.goto(BASE + '/diagnoza?objaw=nie-ma');
+  await expect(page.getByTestId('symptom-picker')).toBeVisible();
+  expect(errors).toEqual([]);
 });
 
-test('pole parts musi być puste w etapie 1', () => {
-  const f = base(); f.nodes.c1.parts = [{ name: 'DANE TESTOWE' }];
-  assert.ok(F.validateFlow(f).some(e => /parts/.test(e)));
+test('/diagnoza: każdy z 11 objawów daje listę przyczyn z linkami; luka treści jest jawnie oznaczona', async ({ page }) => {
+  const errors = await guard(page);
+  await open(page);
+  for (const id of SYMPTOM_IDS) {
+    await page.getByTestId('symptom-' + id).click();
+    await expect(page.locator('[data-testid=cause-list] > li').first()).toBeVisible();
+    expect(await page.locator('[data-testid=cause-list] > li').count(), id).toBeGreaterThanOrEqual(3);
+    expect(await page.getByTestId('cause-link').count(), id).toBeGreaterThanOrEqual(3);
+    await expect(page.getByText('Ładowanie wpisu…')).toHaveCount(0);
+    await noHorizontalScroll(page);
+    await page.getByTestId('symptom-change').click();
+  }
+  await page.getByTestId('symptom-check-engine').click();
+  await expect(page.getByTestId('gaps')).toContainText('Brak wpisu w bazie');
+  expect(errors).toEqual([]);
 });
 
-test('graf: nieistniejący następny węzeł, węzeł nieosiągalny i pętla są odrzucone', () => {
-  const dead = base(); dead.nodes.c1.answers[0].next = 'brak';
-  assert.ok(F.validateFlow(dead).some(e => /nieistniejącego/.test(e)));
-  const orphan = base(); orphan.nodes.x = { ...orphan.nodes.r1, id: 'x' };
-  assert.ok(F.validateFlow(orphan).some(e => /nieosiągalny/.test(e)));
-  const loop = base(); loop.nodes.c1.answers.push({ id: 'again', label: 'Jeszcze raz', next: 'q0' });
-  assert.ok(F.validateFlow(loop).some(e => /pętl/.test(e)));
+test('/diagnoza: gdy Notion nie odpowiada, przyczyny nadal się pokazują z ogólnymi linkami do bazy (bez błędu strony)', async ({ page }) => {
+  // Scenariusz awarii wymaga serwera BEZ danych Notion po stronie SSR (zwykły build, port 3100) — wtedy przeglądarka sama pobiera /api/notion.
+  await guard(page, { notion: 'fail' });
+  await page.goto(NODATA_BASE + '/diagnoza?objaw=nie-odpala');
+  await expect(page.getByTestId('diagnoza-tool')).toBeVisible();
+  await hydrated(page.getByTestId('diagnoza-tool').locator('button').first());
+  const list = page.getByTestId('cause-list');
+  await expect(list).toBeVisible();
+  await expect(page.getByText('Wpis w bazie wiedzy').first()).toBeVisible({ timeout: 20000 });
+  await expect(list.locator('> li').first()).toBeVisible();
 });
 
-test('komunikat bezpieczeństwa wymaga źródła; widoczna jest tylko parafraza źródła, nie propozycja', () => {
-  const f = base(); f.nodes.c1.safety = { text: 'DANE TESTOWE', form: 'propozycja do akceptacji' };
-  assert.deepEqual(F.validateFlow(f), []);
-  assert.equal(F.visibleSafety(f.nodes.c1), null);
-  f.nodes.c1.safety.form = 'parafraza źródła';
-  assert.equal(F.visibleSafety(f.nodes.c1), 'DANE TESTOWE');
-  const noSrc = base(); noSrc.nodes.q0.safety = { text: 'DANE TESTOWE', form: 'parafraza źródła' };
-  assert.ok(F.validateFlow(noSrc).some(e => /bezpieczeństwa bez źródła/.test(e)));
+test('/diagnoza: szerokość 768 — bez poziomego przewijania, kafelki w siatce', async ({ page }) => {
+  await guard(page);
+  await page.setViewportSize({ width: 768, height: 1024 });
+  await open(page);
+  await noHorizontalScroll(page);
+  await page.getByTestId('symptom-elektryka').click();
+  await expect(page.getByTestId('cause-list')).toBeVisible();
+  await noHorizontalScroll(page);
+  const boxes = await page.getByTestId('cause-list').locator('> li').evaluateAll(els => els.map(e => { const r = e.getBoundingClientRect(); return [r.left, r.right]; }));
+  for (const [l, r] of boxes) { expect(l).toBeGreaterThanOrEqual(0); expect(r).toBeLessThanOrEqual(768); }
 });
 
-test('dopasowanie wersji: nieznana dana nigdy nie daje „pasuje”, błędna wersja daje „brak”', () => {
-  const flow = base();
-  assert.deepEqual(F.matchVehicle(car(), flow), { status: 'pasuje', missing: [] });
-  assert.equal(F.matchVehicle(car({ year: '' }), flow).status, 'częściowo');
-  assert.deepEqual(F.matchVehicle(car({ year: '' }), flow).missing, ['rok']);
-  assert.equal(F.matchVehicle(car({ drive: '' }), flow).status, 'częściowo');
-  assert.equal(F.matchVehicle(car({ year: '1998' }), flow).status, 'brak');
-  assert.equal(F.matchVehicle(car({ drive: '2WD' }), flow).status, 'brak');
-  assert.equal(F.matchVehicle(null, flow).status, 'częściowo');
-});
-
-test('wymagana dana: z profilu tylko przy dokładnym trafieniu w opcję, w przeciwnym razie pytanie; nieznana dana blokuje tylko zależne sprawdzenie', () => {
-  const flow = base();
-  const check = flow.nodes.c1;
-  assert.deepEqual(F.nodeAvailability(check, car(), {}, flow), { available: true });
-  const unknown = F.nodeAvailability(check, car({ transmission: '' }), {}, flow);
-  assert.equal(unknown.available, false);
-  assert.equal(unknown.reason, 'brak-danych');
-  assert.equal(unknown.missing[0].key, 'skrzynia');
-  assert.equal(F.nodeAvailability(check, car({ transmission: 'CVT?' }), {}, flow).available, false);
-  assert.equal(F.nodeAvailability(check, car({ transmission: '' }), { skrzynia: 'manualna' }, flow).available, true);
-  assert.equal(F.nodeAvailability(check, car({ transmission: '' }), { skrzynia: 'wymyślona' }, flow).available, false);
-  assert.equal(F.nodeAvailability(flow.nodes.q0, car({ transmission: '' }), {}, flow).available, true, 'obserwacje wspólne zostają dostępne');
-});
-
-test('brak pasującej wersji: test niedostępny, a deklaracja doświadczenia niczego nie odblokowuje', () => {
-  const flow = base();
-  const wrong = car({ year: '1996' });
-  for (const declared of [undefined, false, true]) {
-    const r = F.nodeAvailability(flow.nodes.c1, wrong, { skrzynia: 'automatyczna' }, flow, declared);
-    assert.equal(r.available, false);
-    assert.equal(r.reason, 'brak-pasującego-źródła');
+test('/diagnoza: paleta — brak czerwieni, bursztynu i żółci w kolorach elementów', async ({ page }) => {
+  await guard(page);
+  await open(page, '?objaw=przegrzewanie');
+  await expect(page.getByTestId('cause-list')).toBeVisible();
+  for (const url of ['/diagnoza', '/diagnoza?objaw=przegrzewanie']) {
+    await page.goto(BASE + url);
+    await expect(page.getByTestId('diagnoza-tool')).toBeVisible();
+    const bad = await page.evaluate(() => {
+      const parse = value => { const m = value.match(/rgba?\(([\d.]+)[ ,]+([\d.]+)[ ,]+([\d.]+)(?:[ ,/]+([\d.]+))?/); return m ? [+m[1], +m[2], +m[3], m[4] === undefined ? 1 : +m[4]] : null; };
+      const found = [];
+      for (const el of document.querySelector('[data-testid=diagnoza-tool]').querySelectorAll('*')) {
+        const cs = getComputedStyle(el);
+        for (const prop of ['color', 'backgroundColor', 'borderTopColor', 'outlineColor']) {
+          const c = parse(cs[prop]); if (!c || c[3] < 0.2) continue;
+          const [r, g, b] = c.slice(0, 3).map(v => v / 255);
+          const max = Math.max(r, g, b), min = Math.min(r, g, b), d = max - min;
+          if (max < 0.25 || d / (max || 1) < 0.3) continue; // grafit / srebro / biel
+          let h = d === 0 ? 0 : max === r ? ((g - b) / d) % 6 : max === g ? (b - r) / d + 2 : (r - g) / d + 4;
+          h = (h * 60 + 360) % 360;
+          if (h < 65 || h > 340) found.push(`${el.tagName}.${prop}=${cs[prop]}`);
+        }
+      }
+      return found;
+    });
+    expect(bad).toEqual([]);
   }
 });
 
-test('przejścia: następny węzeł według odpowiedzi, wynik nie ma następnika', () => {
-  const flow = base();
-  assert.equal(F.nextNodeId(flow.nodes.q0, 'a'), 'c1');
-  assert.equal(F.nextNodeId(flow.nodes.q0, 'nieznana'), null);
-  assert.equal(F.nextNodeId(flow.nodes.r1, 'a'), null);
+test('strona główna: wyraźny kafel „Co się dzieje z moim autem?” prowadzi do /diagnoza', async ({ page }) => {
+  await guard(page);
+  await page.goto(BASE + '/');
+  const tile = page.getByTestId('home-diagnoza');
+  await expect(tile).toBeVisible();
+  expect((await tile.boundingBox()).height).toBeGreaterThanOrEqual(44);
+  // Przycisk VIN jest w zwiniętym akordeonie „Dane serwisowe” (HomeStart); otwieramy go, aby sprawdzić działanie CTA.
+  await page.getByRole('button', { name: 'Dane serwisowe' }).click();
+  await hydrated(page.getByTestId('home-vin-cta'));
+  await tile.click();
+  await expect(page).toHaveURL(BASE + '/diagnoza');
+  await expect(page.getByTestId('symptom-picker')).toBeVisible();
+  await noHorizontalScroll(page);
 });
 
-test('rejestr produkcyjny ma jedną ścieżkę (nie-odpala-kreci), pozostałe objawy bez ścieżki', () => {
-  const R = load('src/lib/diagnosis-flows.ts', () => ({ FLOW_NIE_ODPALA_KRECI: load('src/lib/flows/nie-odpala-kreci-5-7-1999.ts', () => F).FLOW_NIE_ODPALA_KRECI }));
-  assert.equal(R.FLOWS.length, 1);
-  const D = load('src/lib/diagnosis.ts');
-  for (const s of D.SYMPTOMS) assert.equal(R.flowForSymptom(s.id) !== undefined, s.id === R.FLOWS[0].symptomId, s.id);
+test('/diagnoza: „karta kroku” — przyczyna rozwija się po kliknięciu, 2–4 kroki z wpisu, link do pełnego wpisu', async ({ page }) => {
+  const errors = await guard(page);
+  await open(page, '?objaw=klima-ogrzewanie');
+  const cards = page.getByTestId('cause-list').locator('> li');
+  const count = await cards.count();
+  expect(count).toBeGreaterThanOrEqual(3);
+  await expect(cards.first().locator('details[data-testid=cause-card]')).toHaveJSProperty('open', true); // tylko pierwsza otwarta
+  await expect(cards.nth(1).locator('details[data-testid=cause-card]')).toHaveJSProperty('open', false);
+  // znajdź przyczynę z krokami; zamknięta przyczyna ukrywa kroki, kliknięcie je pokazuje
+  let target = -1;
+  for (let i = 1; i < count && target < 0; i++) if (await cards.nth(i).getByTestId('step-list').count()) target = i;
+  expect(target, 'klima/ogrzewanie powinno mieć co najmniej jedną przyczynę z krokami z wpisu').toBeGreaterThan(0);
+  const card = cards.nth(target);
+  await expect(card.getByTestId('step-list').first()).toBeHidden();
+  await card.getByTestId('cause-toggle').click();
+  const list = card.getByTestId('step-list').first();
+  await expect(list).toBeVisible();
+  const n = await list.locator('ol > li').count();
+  expect(n).toBeGreaterThanOrEqual(2);
+  expect(n).toBeLessThanOrEqual(4);
+  for (const text of await list.locator('ol > li').allInnerTexts()) { expect(text.trim().length).toBeGreaterThan(7); expect(text.length).toBeLessThanOrEqual(140); }
+  const full = list.getByTestId('step-full-link');
+  await expect(full).toContainText('Pełny wpis');
+  expect(await full.getAttribute('href')).toMatch(/^\/baza\/[0-9a-f-]{36}$/);
+  await noHorizontalScroll(page);
+  await card.getByTestId('cause-toggle').click();
+  await expect(list).toBeHidden();
+  // wpis bez ponumerowanych kroków pokazuje tylko link (bez wymyślonych kroków)
+  const linkCount = await page.getByTestId('cause-link').count();
+  const stepBlocks = await page.getByTestId('step-list').count();
+  expect(linkCount).toBeGreaterThan(stepBlocks);
+  expect(errors).toEqual([]);
 });
 
-// ---- Bramki runtime (dane testowe): stosowalność źródła, wersja auta, niezależność od wersji, unieważnianie, stop, wykluczenia ----
-const unestablished = () => ({ ...SRC, applicability: 'nieustalona', applicabilityNote: 'DANE TESTOWE: nieustalona' });
-
-test('źródło o nieustalonej stosowalności blokuje krok i wynik z twierdzeniem (runtime, nie tylko etykieta)', () => {
-  const flow = base();
-  flow.nodes.c1.sources = [unestablished()];
-  const r = F.nodeAvailability(flow.nodes.c1, car(), { skrzynia: 'automatyczna' }, flow);
-  assert.equal(r.available, false);
-  assert.equal(r.reason, 'źródło-bez-ustalonej-stosowalności');
-  flow.nodes.r1.sources = [unestablished()];
-  assert.equal(F.nodeAvailability(flow.nodes.r1, car(), {}, flow).available, false);
-  // jedno źródło o ustalonej stosowalności wystarcza do odblokowania tylko gdy faktycznie istnieje
-  flow.nodes.c1.sources = [unestablished(), SRC];
-  assert.equal(F.nodeAvailability(flow.nodes.c1, car(), { skrzynia: 'automatyczna' }, flow).available, true);
-  // ścieżka zatrzymuje się przed zablokowanym krokiem: nie da się go „przejść” odpowiedziami z adresu
-  flow.nodes.c1.sources = [unestablished()];
-  const replay = F.replayPath(flow, car(), { skrzynia: 'automatyczna' }, ['a', 'ok']);
-  assert.equal(replay.currentId, 'c1');
-  assert.deepEqual(replay.path.map(p => p.answerId), ['a']);
-});
-
-test('bez profilu auta żaden krok nie jest dostępny, chyba że jawnie niezależny od wersji', () => {
-  const flow = base();
-  for (const id of ['q0', 'c1', 'r1']) {
-    const r = F.nodeAvailability(flow.nodes[id], null, {}, flow);
-    assert.equal(r.available, false, id);
-    assert.equal(r.reason, 'brak-wersji', id);
+test('/diagnoza: karta kroku po zmianie odpowiedzi — otwarta jest tylko najlepsza przyczyna, a zwijanie nie psuje układu (390/768/1280)', async ({ page }) => {
+  const errors = await guard(page);
+  for (const width of [390, 768, 1280]) {
+    await page.setViewportSize({ width, height: 900 });
+    await open(page, '?objaw=skrzynia&typ=automat&rodzaj=slizga');
+    await expect(page.getByTestId('cause-list').locator('> li').first()).toBeVisible();
+    const open1 = await page.locator('details[data-testid=cause-card][open]').count();
+    expect(open1).toBe(1);
+    await page.getByTestId('cause-toggle').nth(1).click();
+    await expect(page.locator('details[data-testid=cause-card][open]')).toHaveCount(2);
+    await noHorizontalScroll(page);
+    const boxes = await page.getByTestId('cause-list').locator('> li').evaluateAll(els => els.map(e => { const r = e.getBoundingClientRect(); return [r.left, r.right]; }));
+    for (const [l, r] of boxes) { expect(l).toBeGreaterThanOrEqual(0); expect(r).toBeLessThanOrEqual(width + 1); }
   }
-  flow.nodes.q0.versionIndependent = true;
-  assert.deepEqual(F.validateFlow(flow), []);
-  assert.equal(F.nodeAvailability(flow.nodes.q0, null, {}, flow).available, true);
-  assert.equal(F.nodeAvailability(flow.nodes.c1, null, {}, flow).available, false);
-  assert.equal(F.flowHasVersionIndependent(flow), true);
-});
-
-test('niezależność od wersji dopuszczalna tylko dla neutralnego pytania bez wniosków', () => {
-  const f1 = base(); f1.nodes.c1.versionIndependent = true;
-  assert.ok(F.validateFlow(f1).some(e => /tylko pytanie/.test(e)));
-  const f2 = base(); f2.nodes.q0.versionIndependent = true; delete f2.nodes.q0.neutral; f2.nodes.q0.sources = [SRC];
-  assert.ok(F.validateFlow(f2).some(e => /niezależne od wersji/.test(e)));
-  const f3 = base(); f3.nodes.q0.versionIndependent = true; f3.nodes.q0.answers[0].excludes = ['DANE TESTOWE'];
-  assert.ok(F.validateFlow(f3).some(e => /niezależne od wersji/.test(e)));
-});
-
-test('częściowe dane wersji (np. brak roku) blokują krok zależny od wersji', () => {
-  const flow = base();
-  const r = F.nodeAvailability(flow.nodes.q0, car({ year: '' }), {}, flow);
-  assert.equal(r.available, false);
-  assert.equal(r.reason, 'brak-danych-wersji');
-  assert.deepEqual(r.missingVersion, ['rok']);
-});
-
-test('zmiana wersji unieważnia ścieżkę: odtworzenie odpowiedzi dla innej wersji zatrzymuje się na starcie', () => {
-  const flow = base();
-  const ok = F.replayPath(flow, car(), { skrzynia: 'automatyczna' }, ['a', 'ok']);
-  assert.deepEqual(ok.path.map(p => p.answerId), ['a', 'ok']);
-  assert.equal(ok.currentId, 'r1');
-  const other = F.replayPath(flow, car({ drive: '2WD' }), { skrzynia: 'automatyczna' }, ['a', 'ok']);
-  assert.deepEqual(other.path, []);
-  assert.equal(other.currentId, 'q0');
-  const none = F.replayPath(flow, null, {}, ['a', 'ok']);
-  assert.deepEqual(none.path, []);
-  // nieznana odpowiedź z adresu jest odrzucona
-  assert.deepEqual(F.replayPath(flow, car(), {}, ['zmyślona']).path, []);
-});
-
-test('stop: odpowiedź zatrzymująca wymaga komunikatu ze źródłem; propozycja nie jest widoczna, parafraza tak; ścieżka kończy się', () => {
-  const flow = base();
-  flow.nodes.c1.answers.push({ id: 'stop', label: 'DANE TESTOWE: stop', next: '', stop: true });
-  assert.ok(F.validateFlow(flow).some(e => /komunikatu stop/.test(e)));
-  flow.nodes.c1.stop = { text: 'DANE TESTOWE: stop', form: 'propozycja do akceptacji' };
-  assert.deepEqual(F.validateFlow(flow), []);
-  assert.equal(F.visibleStop(flow.nodes.c1), null);
-  flow.nodes.c1.stop.form = 'parafraza źródła';
-  assert.equal(F.visibleStop(flow.nodes.c1), 'DANE TESTOWE: stop');
-  const r = F.replayPath(flow, car(), { skrzynia: 'automatyczna' }, ['a', 'stop', 'ok']);
-  assert.equal(r.stopped, true);
-  assert.deepEqual(r.path.map(p => p.answerId), ['a', 'stop']);
-  const noSrc = base(); noSrc.nodes.q0.stop = { text: 'x', form: 'parafraza źródła' };
-  assert.ok(F.validateFlow(noSrc).some(e => /stop bez źródła/.test(e)));
-});
-
-test('wykluczenia: zbierane z odpowiedzi na ścieżce, wymagają źródła, unieważniane razem ze ścieżką', () => {
-  const flow = base();
-  flow.nodes.c1.answers[0].excludes = ['DANE TESTOWE: A', 'DANE TESTOWE: B'];
-  assert.deepEqual(F.validateFlow(flow), []);
-  const r = F.replayPath(flow, car(), { skrzynia: 'automatyczna' }, ['a', 'ok']);
-  assert.deepEqual(F.collectExclusions(flow, r.path), ['DANE TESTOWE: A', 'DANE TESTOWE: B']);
-  const other = F.replayPath(flow, car({ drive: '2WD' }), { skrzynia: 'automatyczna' }, ['a', 'ok']);
-  assert.deepEqual(F.collectExclusions(flow, other.path), []);
-  const noSrc = base(); noSrc.nodes.q0.answers[0].excludes = ['x'];
-  assert.ok(F.validateFlow(noSrc).some(e => /wykluczenie bez źródła/.test(e)));
-});
-
-test('źródło z flagą „ustalona” dla INNEGO auta nie odblokowuje kroku (zakres źródła vs bieżąca wersja)', () => {
-  const flow = base();
-  const other = (over) => ({ ...SRC, vehicleScope: [{ models: ['Suburban 1500'], yearFrom: 1999, yearTo: 1999, drives: ['4WD'], ...over }] });
-  const cases = [{ drives: ['2WD'] }, { yearFrom: 1995, yearTo: 1996 }, { models: ['C1500'] }];
-  for (const over of cases) {
-    flow.nodes.c1.sources = [other(over)]; flow.nodes.r1.sources = [other(over)];
-    const r = F.nodeAvailability(flow.nodes.c1, car(), { skrzynia: 'automatyczna' }, flow);
-    assert.equal(r.available, false, JSON.stringify(over));
-    assert.equal(r.reason, 'źródło-dla-innej-wersji');
-    assert.equal(F.nodeAvailability(flow.nodes.r1, car(), {}, flow).available, false);
-    assert.equal(F.replayPath(flow, car(), { skrzynia: 'automatyczna' }, ['a', 'ok']).currentId, 'c1');
-  }
-  // źródło z zakresem wymagającym silnika: nieznany silnik w aucie = brak dopasowania źródła
-  flow.nodes.c1.sources = [other({ engines: ['5.7L'] })];
-  assert.equal(F.nodeAvailability(flow.nodes.c1, car({ engine: '' }), { skrzynia: 'automatyczna' }, flow).available, false);
-  assert.equal(F.nodeAvailability(flow.nodes.c1, car({ engine: '5.7L' }), { skrzynia: 'automatyczna' }, flow).available, true);
-  // jedno źródło pasujące wystarcza, źródło dla innego auta obok niego nie szkodzi
-  flow.nodes.c1.sources = [other({ drives: ['2WD'] }), SRC];
-  assert.equal(F.nodeAvailability(flow.nodes.c1, car(), { skrzynia: 'automatyczna' }, flow).available, true);
-});
-
-test('walidator: stosowalność „ustalona” bez zakresu wersji aut jest odrzucona', () => {
-  const f = base(); f.nodes.c1.sources = [{ ...SRC, vehicleScope: undefined }];
-  assert.ok(F.validateFlow(f).some(e => /vehicleScope/.test(e)));
-  const g = base(); g.nodes.c1.sources = [{ ...SRC, vehicleScope: [] }];
-  assert.ok(F.validateFlow(g).some(e => /vehicleScope/.test(e)));
-});
-
-// ===== Ścieżka produkcyjna: nie-odpala-kreci-5-7-1999 (Suburban 1500 1999, 5.7 L31) =====
-const REAL = load('src/lib/flows/nie-odpala-kreci-5-7-1999.ts').FLOW_NIE_ODPALA_KRECI;
-const realCar = (over = {}) => car({ engine: 'L31', ...over });
-const walkReal = (answers, profile = realCar()) => { const r = F.replayPath(REAL, profile, {}, answers); return { r, n: REAL.nodes[r.currentId] }; };
-const PRE = ['normalnie', 'tak', 'slychac', 'nieaktywny', 'oba-ok', 'jest'];
-
-test('ścieżka nie-odpala: walidator bez błędów i bez wskazań przyczyn, części i wykluczeń', () => {
-  assert.deepEqual(F.validateFlow(REAL), []);
-  for (const n of Object.values(REAL.nodes)) {
-    assert.deepEqual(n.parts, [], n.id);
-    if (n.kind === 'result') assert.notEqual(n.outcome, 'wskazanie-przyczyny', n.id);
-    for (const a of n.answers || []) assert.equal(a.excludes, undefined, n.id);
-  }
-});
-test('ścieżka nie-odpala: dopasowanie wersji (L31, 1999, Suburban 1500, 2WD i 4WD)', () => {
-  for (const d of ['2WD', '4WD']) assert.equal(F.matchVehicle(realCar({ drive: d }), REAL).status, 'pasuje');
-  for (const o of [{ year: '1998' }, { model: 'Suburban 2500' }, { engine: 'L29' }, { engine: '5.7L' }]) assert.equal(F.matchVehicle(realCar(o), REAL).status, 'brak');
-  assert.notEqual(F.matchVehicle(realCar({ engine: '' }), REAL).status, 'pasuje');
-  assert.notEqual(F.matchVehicle(null, REAL).status, 'pasuje');
-});
-test('ścieżka nie-odpala: owner robi tylko warunki i nasłuch, reszta to wynik warsztatu', () => {
-  for (const n of Object.values(REAL.nodes)) if (n.kind === 'check' && !['c1', 'c2'].includes(n.id)) assert.equal(n.level, 'warsztat', n.id);
-});
-test('ścieżka nie-odpala: gałęzie kroków 1-8 CCNR', () => {
-  assert.equal(walkReal(['normalnie', 'tak', 'cisza']).r.currentId, 'r_pompa');
-  assert.equal(walkReal(['normalnie', 'tak', 'slychac', 'aktywny']).r.currentId, 'r_vtd');
-  assert.equal(walkReal(['normalnie', 'tak', 'slychac', 'nieaktywny', 'tp']).r.currentId, 'r_tp');
-  assert.equal(walkReal(['normalnie', 'tak', 'slychac', 'nieaktywny', 'ect']).r.currentId, 'r_ect');
-  assert.equal(walkReal(['normalnie', 'tak', 'slychac', 'nieaktywny', 'oba-ok', 'brak']).r.currentId, 'r_zaplon');
-  for (const a of [['normalnie', 'tak', 'slychac', 'brak'], ['normalnie', 'tak', 'slychac', 'nieaktywny', 'brak'], [...PRE.slice(0, 5), 'brak-wyniku'], [...PRE, 'brak-wyniku']]) assert.equal(walkReal(a).r.currentId, 'r_warsztat');
-  assert.equal(walkReal([...PRE, 'w-zakresie', 'miga']).r.currentId, 'r_dalej');
-  assert.equal(walkReal([...PRE, 'w-zakresie', 'nie-miga']).r.currentId, 'r_wtrysk');
-});
-test('ścieżka nie-odpala: krok 7 CCNR poza zakresem prowadzi do FSD, w zakresie do kroku 8; nie jest utożsamiany z FSD krok 3', () => {
-  assert.equal(walkReal([...PRE, 'poza']).r.currentId, 'f1');
-  assert.equal(walkReal([...PRE, 'w-zakresie']).r.currentId, 'c8');
-  assert.match(REAL.nodes.c6.details, /nie jest tym samym co kroki 2 i 3/);
-});
-test('ścieżka nie-odpala: trasy tabeli Fuel System Diagnosis (kroki źródła)', () => {
-  // trasa = lista par węzeł:odpowiedź od wejścia f1; test sprawdza, że kolejne węzły zgadzają się z grafem
-  const routes = [
-    ['f1:nie', 'r_obd'],
-    ['f1:tak f2:tak f3:tak f5:tak f27:tak', 'r_f28'],
-    ['f1:tak f2:tak f3:tak f5:tak f27:nie', 'f12'],
-    ['f1:tak f2:tak f3:tak f5:nie f26:tak', 'r_f26'],
-    ['f1:tak f2:tak f3:tak f5:nie f26:nie f27:tak', 'r_f28'],
-    ['f1:tak f2:tak f3:nie f4:tak', 'f12'],
-    ['f1:tak f2:tak f3:nie f4:nie f6:tak', 'r_f25'],
-    ['f1:tak f2:tak f3:nie f4:nie f6:nie f7:tak', 'r_regulator'],
-    ['f1:tak f2:tak f3:nie f4:nie f6:nie f7:nie', 'r_f29'],
-    ['f1:tak f2:nie f8:nie f9:nie', 'r_przekaznik'],
-    ['f1:tak f2:nie f8:nie f9:tak f10:tak', 'r_f11'],
-    ['f1:tak f2:nie f8:nie f9:tak f10:nie', 'f12'],
-    ['f1:tak f2:nie f8:tak f13:tak f14:tak', 'r_f16'],
-    ['f1:tak f2:nie f8:tak f13:tak f14:nie f17:tak', 'r_f18'],
-    ['f1:tak f2:nie f8:tak f13:tak f14:nie f17:nie', 'r_regulator'],
-    ['f1:tak f2:nie f8:tak f13:nie f15:tak f19:tak', 'r_f20'],
-    ['f1:tak f2:nie f8:tak f13:nie f15:tak f19:nie f21:tak', 'r_regulator'],
-    ['f1:tak f2:nie f8:tak f13:nie f15:tak f19:nie f21:nie f23:tak', 'r_f24'],
-    ['f1:tak f2:nie f8:tak f13:nie f15:tak f19:nie f21:nie f23:nie', 'f12'],
-    ['f1:tak f2:nie f8:tak f13:nie f15:nie f30:tak', 'r_dtc'],
-    ['f1:tak f2:nie f8:tak f13:nie f15:nie f30:nie', 'r_ok'],
-  ];
-  for (const [path, expected] of routes) {
-    const steps = path.split(' ').map(p => p.split(':'));
-    const ids = steps.map(([, a]) => a);
-    const r = F.replayPath(REAL, realCar(), {}, [...PRE, 'poza', ...ids]);
-    assert.equal(r.currentId, expected, path);
-    let id = 'f1';
-    for (const [node, ans] of steps) { assert.equal(id, node, path); id = F.nextNodeId(REAL.nodes[node], ans); }
-    assert.equal(id, expected, path);
-  }
-});
-test('ścieżka nie-odpala: praca przy paliwie ma ostrzeżenie, stop i odpowiedź "nie robię"; nie ma poleceń wykonania dla właściciela', () => {
-  for (const id of ['c6', 'f2', 'f3', 'f4', 'f7', 'f8', 'f13', 'f14', 'f15', 'f21', 'f26']) {
-    const n = REAL.nodes[id];
-    assert.ok(n.safety && n.safety.form === 'parafraza źródła', id);
-    assert.ok(n.stop && n.stop.text, id);
-    assert.ok(n.answers.some(a => a.stop), id);
-  }
-  const r = F.replayPath(REAL, realCar(), {}, [...PRE, 'poza', 'tak', 'nie-robie']);
-  assert.equal(r.stopped, true); assert.equal(r.currentId, 'f2');
-});
-test('ścieżka nie-odpala: liczby ciśnienia tylko tam, gdzie źródło podaje je jako wartości kroku; brak wymyślonej tolerancji lub czasu', () => {
-  for (const n of Object.values(REAL.nodes)) assert.doesNotMatch(n.text + (n.details || ''), /\+\/-|±|dopuszczalny spadek wynosi/i, n.id);
-  assert.match(REAL.nodes.f3.details, /nie podaje czasu utrzymania ani dopuszczalnego spadku/);
-  assert.match(REAL.nodes.c6.details, /nie określa, czy pompa pracuje/);
-});
-test('ścieżka nie-odpala: każdy węzeł osiągalny z q0 i każdy wynik ma notChecked', () => {
-  const seen = new Set(); const go = id => { if (seen.has(id)) return; seen.add(id); for (const a of REAL.nodes[id].answers || []) if (!a.stop) go(a.next); }; go(REAL.start);
-  assert.deepEqual(Object.keys(REAL.nodes).filter(k => !seen.has(k)), []);
-  for (const n of Object.values(REAL.nodes)) if (n.kind === 'result') assert.ok(n.notChecked.length > 0, n.id);
-});
-
-test('ścieżka nie-odpala: treść kroku to pytanie o wynik, bez listy czynności pomiaru (opis w szczegółach), z ostrzeżeniem przy paliwie', () => {
-  const steps = /wypuszczen|odłączon|opróżnion|\bowin|ściereczk|włączyć kilka razy|zamknięci[ea] zaworu|uruchomieni[ea] silnika na/i;
-  for (const n of Object.values(REAL.nodes)) {
-    assert.doesNotMatch(n.text, steps, n.id);
-    assert.ok(n.text.length <= 420, n.id + ' tekst za długi: ' + n.text.length);
-    if (n.safety) assert.doesNotMatch(n.safety.text, /ściereczk|pojemnik/i, n.id);
-  }
-  assert.match(REAL.nodes.f2.text, /Czy ciśnienie/);
-  assert.ok(REAL.nodes.f2.safety && REAL.nodes.f2.stop);
-  assert.match(REAL.nodes.f2.details, /Ścieżka nie opisuje wykonania pomiaru/);
-});
-test('ścieżka nie-odpala: silnik L31 ma czytelną etykietę w wyborze wersji (kod L31 bez zgadywania z tekstu)', () => {
-  const runner = fs.readFileSync('src/app/diagnoza/FlowRunner.tsx', 'utf8');
-  assert.match(runner, /L31: 'L31 \(Vortec 5\.7, 8\. znak VIN: R\)'/);
-  assert.match(runner, /value=\{o\}>\{labels\[o\] \?\? o\}/);
-  assert.match(runner, /Jeśli w Twoim VIN-ie 8\. znak to R, wybierz L31/);
-  assert.deepEqual(REAL.scope[0].engines, ['L31']);
-});
-test('ścieżka nie-odpala: dotychczasowa lista przyczyn zostaje widoczna pod ścieżką (nie jest chowana)', () => {
-  const tool = fs.readFileSync('src/app/diagnoza/DiagnozaTool.tsx', 'utf8');
-  assert.doesNotMatch(tool, /\{!flow && \(<>/);
-  assert.match(tool, /data-testid="legacy-heading"/);
+  expect(errors).toEqual([]);
 });
